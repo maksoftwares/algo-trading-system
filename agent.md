@@ -2067,3 +2067,79 @@ selected 40th-percentile training-score threshold.
   mechanically reachable, but not yet with positive marginal expectancy at the
   current broker minimum and account risk budget. V50 remains the protected
   Core; no Python, EA, demo/live, or broker authority is granted.
+
+## V53-V55 One-Trade-Per-Day Risk Diagnostics - 2026-07-20
+
+The health-gated add-on portfolio combined unchanged V50 with V7 swing, V8
+retest, and V25 chop candidates behind shared add-on concurrency and daily
+limits.
+
+- V53 reached exactly `1.000` final-year trades/weekday with USD `2,402.46`
+  combined net, PF `2.435`, and USD `146.31` final closed DD. It failed only
+  because development-2 closed DD was USD `303.10`, USD `3.10` above the locked
+  USD `300` ceiling. Decision: `V53_ONE_TRADE_PER_DAY_HISTORICAL_GATE_FAIL_TERMINAL`.
+- V54 tightened the hard circuit to USD `225/180`. Development-2 DD fell to USD
+  `295.44`, but 21 final-window candidates were suspended and frequency fell to
+  `0.927/day`. Decision: `V54_ONE_TRADE_PER_DAY_HISTORICAL_GATE_FAIL_TERMINAL`.
+- V55 replaced deletion with half-risk sizing. It restored exactly `1.000/day`
+  and final PF `2.435`, but development-2 DD was USD `311.92`. More importantly,
+  fractional sizing is not broker-expressible for trades already at the 0.01-lot
+  minimum. Decision: `V55_ONE_TRADE_PER_DAY_HISTORICAL_GATE_FAIL_TERMINAL`.
+
+V53 contract/result SHA-256 values are
+`1d4ffd4e69a9839e2068e21f4cd213be0d59aa7f6da358b6e053bf02ccc667c1` and
+`23043684765726e54df389aa5ca2073dab53536bf3a2f4bb25da88e4b36908a6`.
+V54 values are
+`c44dacba9d621b97bf4c50c2820082bd4e600f88b06b5cad6fe7514b13fe1bef` and
+`cf3ed3155825349d6605cfd89a99880cdaef4e854ab6bb8500111448e7c6cc7d`.
+V55 values are
+`fefa9e63db9127acaa6f4107749baf773b3b7f7e0603b09f477e6097561fc113` and
+`f165847a2f8806e2e4c45d155007e92d728366ca32c03791be12592cf23a7a7d`.
+
+## V56-V57 One-Trade-Per-Day Historical Pass - 2026-07-20
+
+An exposed fixed-family search evaluated `4,989` unique interpretable rules
+after the established causal 100-completed-trade health gate. Six passed the
+development-2, confirmation, and final economic screens. The selected
+high-frequency rule is pure `BREAK`, `SWING_2R_36H`, and H4 ADX above 30.
+
+- The candidate has `168/145/189` health-gated trades across development-2,
+  confirmation, and final, with PF `1.549/1.732/1.350`. All three windows stay
+  positive after removing their five largest winners.
+- It excludes 31 underlying events already eligible for V7 or V8, so those are
+  not counted again through a second sleeve.
+- V56 preserved the fixed V54 ledger and passed, but self-review found that its
+  replayed base decisions used a counterfactual shadow equity path. V56 remains
+  valid capacity evidence and is superseded for shared-account design.
+- V57 sends all unchanged base and breakout candidates through one causal
+  account governor using the actual combined closed-equity path. It uses the
+  original 0.01-lot-equivalent actions, two add-on positions, USD `45`
+  concurrent add-on initial risk, two add-on entries per UTC date, and the hard
+  USD `225/180` drawdown circuit.
+- V57 development-2: `694` trades, `1.332/day`, USD `1,025.42` net, PF `1.565`,
+  USD `275.38` closed DD, and USD `704.83` after removing five winners.
+- V57 confirmation: `501` trades, `1.920/day`, USD `1,641.99` net, PF `1.836`,
+  USD `206.17` closed DD, and USD `1,066.77` after removing five winners.
+- V57 final year: `377` trades, `1.444/day`, USD `2,580.27` net, PF `1.977`, USD
+  `158.19` closed DD, 91.7% positive months, and USD `1,156.15` after removing
+  five winners.
+- Recent three/six months remain above the first target: `1.062/1.202` trades
+  per weekday, USD `372.31/1,706.65` net, PF `1.656/2.289`, and USD
+  `109.16/110.06` closed DD.
+- Across the full available 2016-07-18 to 2026-07-01 ledger, frequency is
+  `0.935/day`; the one-trade/day claim applies to each required recent window,
+  not the early health-gate warm-up era.
+
+V57 decision: `V57_ONE_TRADE_PER_DAY_HISTORICAL_GATE_PASS`. Contract SHA-256:
+`c9e0511ce15f9c5b221263b0291fee9741468cf192c2f35d6f57badffa515fb4`;
+result SHA-256:
+`982cea4420eb79a5953c3be6a98d3bb19fdff3429ddf3b04d54d3294ec29a2d3`.
+Ruff, formatting, focused tests, source hashes, implementation hashes, and the
+fresh locked reproduction pass.
+
+This is an exposed historical milestone, not demo/live authority. Final-year
+add-on concurrency is capped at two, but the unchanged five-specialist Core can
+overlap to seven open positions. USD `158.19` is therefore verified closed
+drawdown, not complete whole-account floating-equity drawdown. MT5 parity,
+prospective shadow evidence, and full intratrade equity reconstruction remain
+mandatory before execution or before starting the two-trades/day phase.

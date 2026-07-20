@@ -1,0 +1,29 @@
+{
+  "artifacts": {
+    "contract_lock": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-health-portfolio-v53\\outputs\\ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_CONTRACT_LOCK.json",
+      "sha256": "7997afad1b0ae2ad494f45f04d2d6b693327f8999b83a437f4c3715b5ff126c3"
+    },
+    "decisions": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-health-portfolio-v53\\outputs\\ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_DECISIONS.parquet",
+      "sha256": "3277f1001521cb4aa6032b06f9823cb2fc2777b39bf9a52f8ebe6015fea17600"
+    },
+    "result_json": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-health-portfolio-v53\\outputs\\ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_RESULT.json",
+      "sha256": "a45ebf438699c71c6469e54981d3f5693df9524ec597b89bc600984de6d1806c"
+    },
+    "result_markdown": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-health-portfolio-v53\\outputs\\ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_RESULT.md",
+      "sha256": "648f8c9ccf486421665b50065163cc454d061b0b5de03922aadebac1d9d4911a"
+    },
+    "trades": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-health-portfolio-v53\\outputs\\ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_TRADES.parquet",
+      "sha256": "464a8c1ee340d17b465f23f943c9fa104fc45102fb8c28c04a80643b6dca1685"
+    },
+    "windows": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-health-portfolio-v53\\outputs\\ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_WINDOWS.csv",
+      "sha256": "cf3143e2c19e94bcb4b779872f80e1a561b0b2fa00a4011af117094eed2afc6c"
+    }
+  },
+  "schema_version": "xauusd_one_trade_per_day_health_portfolio_v53_manifest"
+}

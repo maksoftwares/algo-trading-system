@@ -1,0 +1,24 @@
+{
+  "advancing_attempt_count": 0,
+  "attempt_count": 1000,
+  "attempt_digest": "087eaf899f0d4beab24edac3e5b0f81dd25363fdbb42408e9121e9096c35b653",
+  "authorization": {
+    "broker_action_authorized": false,
+    "claims_untouched_holdout": false,
+    "ea_consumption_authorized": false,
+    "parameter_search_count": 1000,
+    "python_predictions_authorized": false,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false
+  },
+  "decision": "EXPANSION_V1_REJECTED",
+  "final_attempt": null,
+  "final_exam": null,
+  "internal_test_pass_count": 0,
+  "interpretation": "None of the 1,000 locked attempts simultaneously recovered stable edge and the required frequency in the selection period. The Core remains intact; V1 must not be tuned after outcome.",
+  "recent_tail": null,
+  "schema_version": "xauusd_high_frequency_expansion_v1",
+  "selected_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "selected_trade_rows": 0,
+  "selection_pass_count": 0
+}

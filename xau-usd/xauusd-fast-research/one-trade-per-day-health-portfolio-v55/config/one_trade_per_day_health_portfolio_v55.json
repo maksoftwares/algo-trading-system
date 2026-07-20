@@ -1,0 +1,30 @@
+{
+  "schema_version": "xauusd_one_trade_per_day_health_portfolio_v55",
+  "base_config_path": "xau-usd/xauusd-fast-research/one-trade-per-day-health-portfolio-v53/config/one_trade_per_day_health_portfolio_v53.json",
+  "base_config_sha256": "19f69e470e86e45118f2423e7f5833fbcb2aaa8b1f4007fb40233f87ad7197fc",
+  "account_overrides": {
+    "drawdown_derisk_start_usd": 225.0,
+    "drawdown_full_risk_resume_usd": 180.0,
+    "drawdown_risk_multiplier": 0.5
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V55_CONTRACT_LOCK.json",
+    "decisions": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V55_DECISIONS.parquet",
+    "trades": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V55_TRADES.parquet",
+    "windows": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V55_WINDOWS.csv",
+    "result_json": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V55_RESULT.json",
+    "result_markdown": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V55_RESULT.md",
+    "manifest": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V55_MANIFEST.json"
+  },
+  "research_controls": {
+    "claims_pristine_holdout": false,
+    "same_version_post_outcome_tuning_authorized": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

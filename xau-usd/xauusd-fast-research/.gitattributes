@@ -1,0 +1,8 @@
+**/outputs/** -text whitespace=-trailing-space
+high-frequency-expansion-v1/** -text whitespace=-trailing-space,-blank-at-eof
+pullback-swing-replication-v7/** -text whitespace=-trailing-space,-blank-at-eof
+one-trade-per-day-health-portfolio-v53/** -text whitespace=-trailing-space,-blank-at-eof
+one-trade-per-day-health-portfolio-v54/** -text whitespace=-trailing-space,-blank-at-eof
+one-trade-per-day-health-portfolio-v55/** -text whitespace=-trailing-space,-blank-at-eof
+one-trade-per-day-break-overlay-v56/** -text whitespace=-trailing-space,-blank-at-eof
+one-trade-per-day-unified-portfolio-v57/** -text whitespace=-trailing-space,-blank-at-eof

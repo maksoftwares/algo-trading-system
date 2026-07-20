@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "candidate_trades": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-break-overlay-v56\\outputs\\ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_CANDIDATES.parquet",
+      "sha256": "c7061057eb6af822942df84df8a9e4bef0bf7d459dee6df0c268e41a91d1a7d5"
+    },
+    "contract_lock": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-break-overlay-v56\\outputs\\ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_CONTRACT_LOCK.json",
+      "sha256": "61d045a12b773705d488b14e9fc76f7296e95f162fec548ea8ca17223ec2be6c"
+    },
+    "decisions": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-break-overlay-v56\\outputs\\ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_DECISIONS.parquet",
+      "sha256": "2dff5383e9d5173764914d86c1beadf2af25822708445f27bebada18d6f0dffc"
+    },
+    "result_json": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-break-overlay-v56\\outputs\\ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_RESULT.json",
+      "sha256": "2c2b2fe013578b5bd9c424c6bc8d3205d94ddb3f81fa14cc56695958bf95470d"
+    },
+    "result_markdown": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-break-overlay-v56\\outputs\\ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_RESULT.md",
+      "sha256": "478f35141da4ca228663e507775731e7213b60b95610234e1009ffd1155a5d59"
+    },
+    "trades": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-break-overlay-v56\\outputs\\ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_TRADES.parquet",
+      "sha256": "ed29afb5723454c7b7581048e89377c74ffdaa49ac7fb3782d83de0391d54306"
+    },
+    "windows": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-break-overlay-v56\\outputs\\ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_WINDOWS.csv",
+      "sha256": "79d3455a6168e1cd0a9d1ebe0f24a1cd4443645940350361b6314473b6f2fe12"
+    }
+  },
+  "schema_version": "xauusd_one_trade_per_day_break_overlay_v56_manifest"
+}

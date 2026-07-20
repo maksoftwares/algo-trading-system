@@ -1,0 +1,21 @@
+{
+  "files": {
+    "PULLBACK_SWING_REPLICATION_V7_METRICS.csv": {
+      "bytes": 992,
+      "sha256": "4c39bcf53e2f3881d2b3f000e57157b650654ca676930037c7b0cc83898e83e5"
+    },
+    "PULLBACK_SWING_REPLICATION_V7_RESULT.json": {
+      "bytes": 3763,
+      "sha256": "934bca497fc41461b5418708c89f5be062efd741edcf60923fb68253d865cbd5"
+    },
+    "PULLBACK_SWING_REPLICATION_V7_RESULT.md": {
+      "bytes": 1210,
+      "sha256": "c0a63f2095337df5c7a762fac98f460ff69e70febed1ac81b3d94c6835127a0c"
+    },
+    "PULLBACK_SWING_REPLICATION_V7_TRADES.parquet": {
+      "bytes": 672529,
+      "sha256": "313eaea3e3417604ba3e57a95368ce653f4630566bb47a41f6c72579d850f314"
+    }
+  },
+  "schema_version": "xauusd_pullback_swing_replication_v7"
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "xauusd_one_trade_per_day_break_overlay_v56",
+  "base_config_path": "xau-usd/xauusd-fast-research/one-trade-per-day-health-portfolio-v53/config/one_trade_per_day_health_portfolio_v53.json",
+  "base_config_sha256": "19f69e470e86e45118f2423e7f5833fbcb2aaa8b1f4007fb40233f87ad7197fc",
+  "additional_sources": {
+    "v54_trades": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-health-portfolio-v54/outputs/ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V54_TRADES.parquet",
+      "sha256": "2d15e87eea5a507b3e8920d705cd9149790af5037bc21e67386b182fe8db8e35"
+    },
+    "v54_result": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-health-portfolio-v54/outputs/ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V54_RESULT.json",
+      "sha256": "87652a1a7a6252ae8e5f9a9986d47703f1ae21327d9a8bb6e9a150fc4806e77f"
+    }
+  },
+  "overlay_sleeve": {
+    "sleeve_id": "V56_BREAK_SWING_H4ADX_HIGH",
+    "mechanism": "BREAK",
+    "action_id": "SWING_2R_36H",
+    "h4_adx_bucket": "HIGH",
+    "shadow_window": 100,
+    "minimum_shadow_profit_factor": 1.0,
+    "maximum_risk_usd": 30.0,
+    "maximum_open_positions": 1,
+    "maximum_entries_per_utc_date": 2,
+    "duplicate_event_sleeves": ["V7_SWING_HEALTH", "V8_RETEST_HEALTH"]
+  },
+  "account_overrides": {
+    "drawdown_suspend_usd": 225.0,
+    "drawdown_resume_usd": 180.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_CONTRACT_LOCK.json",
+    "candidate_trades": "ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_CANDIDATES.parquet",
+    "decisions": "ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_DECISIONS.parquet",
+    "trades": "ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_TRADES.parquet",
+    "windows": "ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_WINDOWS.csv",
+    "result_json": "ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_RESULT.json",
+    "result_markdown": "ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_RESULT.md",
+    "manifest": "ONE_TRADE_PER_DAY_BREAK_OVERLAY_V56_MANIFEST.json"
+  },
+  "research_controls": {
+    "claims_pristine_holdout": false,
+    "selected_after_exposed_family_search": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

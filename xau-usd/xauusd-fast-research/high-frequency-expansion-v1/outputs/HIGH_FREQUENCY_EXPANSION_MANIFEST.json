@@ -1,0 +1,25 @@
+{
+  "action_digest": "8281302da5340bcf1d55bcdd366695347da1cc922cb4eeaef22df62ece6dce61",
+  "action_parquet_sha256": "a5a765fa70da99e7162377ac893546b4195d9e43bdad1cd19cb4006314c7c21a",
+  "attempt_count": 1000,
+  "attempt_digest": "087eaf899f0d4beab24edac3e5b0f81dd25363fdbb42408e9121e9096c35b653",
+  "candidate_source_sha256": {
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_a1_xau_r2_control_prehistory_201601_202112_20260701/A1XauM5Momentum_A1_XAU_R2_CONTROL_PREHISTORY_201601_202112_XAUUSD_M5_r2_impulse_retest_body45_signals.csv": "8be783371db2b1265ff29441c250a886d18529b3f4db9793f4b4848eddc0aeb6",
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_orrev_step4_design_201601_202112_20260701/A1XauM5Momentum_OWNER_GOAL_ORREV_STEP4_DESIGN_201601_202112_XAUUSD_M5_orrev_london_firm_stop15_signals.csv": "3717cfd102e488699c09cb5f92c1c816f18339f83ab680857eb10e1d53647b2a",
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_orrev_step4_exam_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_ORREV_STEP4_EXAM_202207_202606_XAUUSD_M5_orrev_london_firm_stop15_signals.csv": "543d3c4dd2a7f3c9477b2c6b7ec839f2b10f0dbdbab672c6a2bd520ec92a9124",
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r2_continuation_short_v1_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R2_CONTINUATION_SHORT_V1_EXACT_202207_202606_XAUUSD_M5_r2_impulse_retest_body45_signals.csv": "dbcc5df65a563d96f07c263c59435204555b2f02fc6f9baf2299f54535bb990f",
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_rr2_profit_lock_design_201601_202112_20260701/A1XauM5Momentum_OWNER_GOAL_RR2_PROFIT_LOCK_DESIGN_201601_202112_XAUUSD_M5_rr2_lock100_010_signals.csv": "b64815bb659d16304c5daa4a51ad8963c0ac8e63c52b6465795afb33f502a274",
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_rr2_profit_lock_exam_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_RR2_PROFIT_LOCK_EXAM_202207_202606_XAUUSD_M5_rr2_lock100_010_signals.csv": "8ddffe7bd5e71c2282586908175ec5fbb6557bc0ab90680bf1877594a7f5ff23"
+  },
+  "config_sha256": "673a6a744beeec5504d58a031e66002504c580c3e20edf403531e0b8893ce075",
+  "dataset_code_sha256": "92eefaeaf93597cbf0d0485be2fd0ce623e1200382738e9f28d28faeb0fc94a5",
+  "evaluation_code_sha256": "f293d0ad16bd37db4025d7172ab7412a9f3b3718e24ac5803426f00dfbbdf791",
+  "event_digest": "6847573c62270d1f3d9226e110f27ac260feb373a0104c9c2e9c42d194d46eb3",
+  "event_parquet_sha256": "2f4b91727cde5783da2be274e6da93650416dba106db8b21426a41fae8c60d33",
+  "feature_cache_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "preregistration_sha256": "f48ce0427fbb26d6368df28772809a84e3169a11ec3cd37ce0267ee01858ca27",
+  "result_json_sha256": "392904f18e2a8523492377c35ca5fd5b598d8b46a4687976d6964c99da843e6b",
+  "run_search_sha256": "eeee0a819a767ca415614c6b302f7677c2343e18793be548ec93aa8bb5288c74",
+  "selected_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "selected_trade_parquet_sha256": "46b9655dd97c40a5bd566479faeeefb6790652977e32c02a7eb689353cdf8322"
+}

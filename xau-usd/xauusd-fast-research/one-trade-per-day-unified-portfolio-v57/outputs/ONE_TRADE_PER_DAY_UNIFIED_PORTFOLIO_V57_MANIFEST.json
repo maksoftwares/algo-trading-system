@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "candidate_trades": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-unified-portfolio-v57\\outputs\\ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_CANDIDATES.parquet",
+      "sha256": "05a30d5ba24fefe728e39bb4d85c38d2f82d35cdfb45eb0dc59e71ef26badad9"
+    },
+    "contract_lock": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-unified-portfolio-v57\\outputs\\ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_CONTRACT_LOCK.json",
+      "sha256": "24365fe12fb513427ea7fdece7340f1a48dec6121b79c74df5267f4a473f5179"
+    },
+    "decisions": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-unified-portfolio-v57\\outputs\\ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_DECISIONS.parquet",
+      "sha256": "226d61b9c6412b8651cdf60fba8e01bceed40f29bf18e0a7d546d61a3549afbe"
+    },
+    "result_json": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-unified-portfolio-v57\\outputs\\ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_RESULT.json",
+      "sha256": "ac647ba1cc9561fb8a8ea54896fb7775fde0bf46a565e547ad20a5b3f6a13658"
+    },
+    "result_markdown": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-unified-portfolio-v57\\outputs\\ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_RESULT.md",
+      "sha256": "9bd374dcafcbab69e30a6c49d4f10cfbc6aef3f29b0987f480ed287b0efb7fc6"
+    },
+    "trades": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-unified-portfolio-v57\\outputs\\ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_TRADES.parquet",
+      "sha256": "c4b97c7cd9ac72aa5d97f6a2a969baebc3144e43c808106f144c37d834e8d295"
+    },
+    "windows": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-unified-portfolio-v57\\outputs\\ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_WINDOWS.csv",
+      "sha256": "d964ad7256efbccc1e13ec5e065845597b3f762ee59bd2ffd70852f2398bfccb"
+    }
+  },
+  "schema_version": "xauusd_one_trade_per_day_unified_portfolio_v57_manifest"
+}

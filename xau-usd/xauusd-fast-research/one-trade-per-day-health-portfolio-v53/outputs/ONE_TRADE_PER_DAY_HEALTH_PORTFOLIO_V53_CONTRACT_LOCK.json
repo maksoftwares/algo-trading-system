@@ -1,0 +1,14 @@
+{
+  "config_sha256": "19f69e470e86e45118f2423e7f5833fbcb2aaa8b1f4007fb40233f87ad7197fc",
+  "contract_sha256": "1d4ffd4e69a9839e2068e21f4cd213be0d59aa7f6da358b6e053bf02ccc667c1",
+  "policy_sha256": "8d156347c72a588e1dd7985854b7c0dce8c71b8954621672cfa7bb4855922577",
+  "schema_version": "xauusd_one_trade_per_day_health_portfolio_v53_contract_lock",
+  "source_hashes": {
+    "expansion_actions": "a5a765fa70da99e7162377ac893546b4195d9e43bdad1cd19cb4006314c7c21a",
+    "normalized_core": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372",
+    "v25_trades": "1db6bbe6db9f317cee543a8e3cba9c6b82f078d5b0298cbde380d0f2db6e0fd9",
+    "v50_decisions": "4567f2a74c3dbf49c4e2ebb2bbe67785844967a5d73afaad0cb3d2d9923f1315",
+    "v50_result": "d450961595cdb8b3abd1bd0ccbdc9ff110aba89dbe7d2cbb052e0f3d140a218f",
+    "v7_trades": "313eaea3e3417604ba3e57a95368ce653f4630566bb47a41f6c72579d850f314"
+  }
+}

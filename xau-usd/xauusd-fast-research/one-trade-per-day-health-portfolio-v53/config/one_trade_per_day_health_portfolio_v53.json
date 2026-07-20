@@ -1,0 +1,107 @@
+{
+  "schema_version": "xauusd_one_trade_per_day_health_portfolio_v53",
+  "cutoff_exclusive_utc": "2026-07-01T00:00:00Z",
+  "sources": {
+    "normalized_core": {
+      "path": "xau-usd/xauusd-fast-research/five-specialist-window-report-v1/outputs/FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+      "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+    },
+    "v50_decisions": {
+      "path": "xau-usd/xauusd-fast-research/historical-core-single-exposure-risk-v50/outputs/HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_DECISIONS.csv",
+      "sha256": "4567f2a74c3dbf49c4e2ebb2bbe67785844967a5d73afaad0cb3d2d9923f1315"
+    },
+    "v50_result": {
+      "path": "xau-usd/xauusd-fast-research/historical-core-single-exposure-risk-v50/outputs/HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_RESULT.json",
+      "sha256": "d450961595cdb8b3abd1bd0ccbdc9ff110aba89dbe7d2cbb052e0f3d140a218f"
+    },
+    "v7_trades": {
+      "path": "xau-usd/xauusd-fast-research/pullback-swing-replication-v7/outputs/PULLBACK_SWING_REPLICATION_V7_TRADES.parquet",
+      "sha256": "313eaea3e3417604ba3e57a95368ce653f4630566bb47a41f6c72579d850f314"
+    },
+    "expansion_actions": {
+      "path": "xau-usd/xauusd-fast-research/high-frequency-expansion-v1/outputs/HIGH_FREQUENCY_EXPANSION_ACTION_LABELS.parquet",
+      "sha256": "a5a765fa70da99e7162377ac893546b4195d9e43bdad1cd19cb4006314c7c21a"
+    },
+    "v25_trades": {
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-rawtick-v25/outputs/CHOP_FAILED_REVERSION_RAWTICK_V25_TRADES.parquet",
+      "sha256": "1db6bbe6db9f317cee543a8e3cba9c6b82f078d5b0298cbde380d0f2db6e0fd9"
+    }
+  },
+  "v50_policy": {
+    "policy_id": "V50_SINGLE_POSITION",
+    "target_specialist_id": "R1_UPTREND",
+    "target_source_strategy": "h4_d1_long_best_box2_atr80"
+  },
+  "sleeves": {
+    "v7": {
+      "sleeve_id": "V7_SWING_HEALTH",
+      "shadow_window": 100,
+      "minimum_shadow_profit_factor": 1.0,
+      "maximum_risk_usd": 30.0
+    },
+    "v8": {
+      "sleeve_id": "V8_RETEST_HEALTH",
+      "mechanism": "RETEST",
+      "action_id": "INTRADAY_1P5R_12H",
+      "h1adx": "MID",
+      "atrstate": "HIGH",
+      "shadow_window": 100,
+      "minimum_shadow_profit_factor": 1.0,
+      "maximum_risk_usd": 20.0,
+      "maximum_open_positions": 1,
+      "maximum_entries_per_utc_date": 2
+    },
+    "v25": {
+      "sleeve_id": "V25_CHOP",
+      "maximum_risk_usd": 30.0
+    }
+  },
+  "account": {
+    "maximum_addon_open_positions": 2,
+    "maximum_addon_concurrent_initial_risk_usd": 45.0,
+    "maximum_addon_entries_per_utc_date": 2,
+    "drawdown_suspend_usd": 240.0,
+    "drawdown_resume_usd": 200.0,
+    "maximum_combined_closed_drawdown_usd": 300.0,
+    "maximum_final_addon_closed_drawdown_usd": 150.0
+  },
+  "windows": {
+    "reverse": ["2016-07-18T00:00:00Z", "2019-01-01T00:00:00Z"],
+    "development_1": ["2019-01-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "required_windows": ["development_2", "confirmation", "final"],
+    "minimum_combined_trades_per_weekday": 1.0,
+    "minimum_addon_profit_factor": 1.15,
+    "minimum_combined_profit_factor": 1.5,
+    "minimum_addon_net_usd": 0.0,
+    "minimum_combined_net_usd": 0.0,
+    "minimum_winner_removed_net_usd": 0.0,
+    "minimum_final_combined_positive_month_share": 0.5,
+    "top_winners_removed": 5
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_CONTRACT_LOCK.json",
+    "decisions": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_DECISIONS.parquet",
+    "trades": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_TRADES.parquet",
+    "windows": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_WINDOWS.csv",
+    "result_json": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_RESULT.json",
+    "result_markdown": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_RESULT.md",
+    "manifest": "ONE_TRADE_PER_DAY_HEALTH_PORTFOLIO_V53_MANIFEST.json"
+  },
+  "research_controls": {
+    "claims_pristine_holdout": false,
+    "same_version_post_outcome_tuning_authorized": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}
+

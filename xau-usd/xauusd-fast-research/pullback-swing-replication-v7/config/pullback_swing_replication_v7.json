@@ -1,0 +1,59 @@
+{
+  "schema_version": "xauusd_pullback_swing_replication_v7",
+  "sources": {
+    "action_ledger": "../high-frequency-expansion-v1/outputs/HIGH_FREQUENCY_EXPANSION_ACTION_LABELS.parquet",
+    "action_sha256": "a5a765fa70da99e7162377ac893546b4195d9e43bdad1cd19cb4006314c7c21a",
+    "action_expected_rows": 69235,
+    "core_ledger": "../five-specialist-window-report-v1/outputs/FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+    "core_sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372",
+    "core_expected_rows": 1249
+  },
+  "rule": {
+    "excluded_regime": "UNSAFE_SHOCK",
+    "action_id": "SWING_2R_36H",
+    "h1_adx_exclusive_minimum": 20.0,
+    "h1_adx_inclusive_maximum": 30.0,
+    "maximum_directional_return_1h_atr": -0.25,
+    "maximum_open_positions": 1,
+    "maximum_entries_per_utc_date": 2
+  },
+  "windows": {
+    "REVERSE_REPLICATION": ["2016-07-18T00:00:00Z", "2019-01-01T00:00:00Z"],
+    "DEVELOPMENT_1": ["2019-01-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+    "DEVELOPMENT_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "CONFIRMATION_KNOWN": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "FINAL_KNOWN": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "replication_gates": {
+    "minimum_trades": 80,
+    "minimum_frequency": 0.12,
+    "minimum_profit_factor": 1.2,
+    "maximum_closed_drawdown_usd": 120.0,
+    "top_winners_removed": 5,
+    "minimum_positive_month_share": 0.6,
+    "minimum_direction_trades": 25,
+    "bootstrap_resamples": 20000,
+    "bootstrap_seed": 770031,
+    "bootstrap_lower_quantile": 0.025
+  },
+  "independence": {
+    "core_entry_separation_minutes": 60
+  },
+  "outputs": {
+    "directory": "outputs",
+    "trades": "PULLBACK_SWING_REPLICATION_V7_TRADES.parquet",
+    "metrics": "PULLBACK_SWING_REPLICATION_V7_METRICS.csv",
+    "result_json": "PULLBACK_SWING_REPLICATION_V7_RESULT.json",
+    "result_markdown": "PULLBACK_SWING_REPLICATION_V7_RESULT.md",
+    "manifest": "PULLBACK_SWING_REPLICATION_V7_MANIFEST.json"
+  },
+  "authorization": {
+    "research_only": true,
+    "same_version_tuning_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}
