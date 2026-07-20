@@ -29,6 +29,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | Tokenized-gold and cross-venue divergence | PAXG and Capital-Dukascopy campaigns | No robust causal economic lane | No lag/threshold reuse on exposed history |
 | Capital quote exhaustion reversal | V30 | 5.9/day, base PF 0.7171, stress PF 0.5907 | Terminal; no tuning or mirror |
 | Capital quote absorption release | V31 | 5.4/day, base PF 0.4924, stress PF 0.3816 | Terminal; no tuning or mirror |
+| Joint DXY, Treasury, and silver raw-tick consensus | V82 | Calibration coverage failed: only 6 full February 2019 weekdays because the bond feed had long zero/partial-session gaps | Terminal before economics; do not reuse USTBONDTRUSD as a continuous intraday clock |
 
 ## What Is Actually Missing
 
@@ -341,6 +342,26 @@ catch-up, one fixed direction inversion, fast transmission-retracement, and
 completed-overreaction fade. V81 may not be mirrored, retuned, or rescued;
 future work requires a materially different causal variable. V59/V60 remain
 immutable and outside this rejection.
+
+## V82 Joint Macro-Consensus Coverage Result
+
+V82 preregistered a new joint event requiring DXY, Treasury-bond, and silver
+ticks to agree on gold direction. January 2019 exposed only nine jointly complete
+weekdays because USTBONDTRUSD had no session quotes before January 21. The one
+allowed prelock coverage correction moved calibration to February and prohibited
+a second boundary change. February contained only six jointly complete weekdays;
+the bond source alternated between full sessions, partial sessions, and long
+zero-quote gaps.
+
+The selector reported `5/6 = 0.833333/day`, split three long and two short, but
+that denominator is too small to establish density and is rejected under the
+coverage correction. No post-entry XAU path or economic outcome was opened and
+no contract was locked.
+
+Decision: `V82_CALIBRATION_COVERAGE_FAIL_TERMINAL`. V82 ends before economic
+testing. The raw USTBONDTRUSD feed cannot be reused as a continuous intraday
+event clock without a separately validated source foundation. V59/V60 remain
+immutable and outside this engineering stop.
 
 ## Routes Not Counted As Solutions
 

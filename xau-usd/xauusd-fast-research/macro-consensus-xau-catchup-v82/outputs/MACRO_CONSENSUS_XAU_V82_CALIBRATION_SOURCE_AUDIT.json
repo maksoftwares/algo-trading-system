@@ -1,0 +1,99 @@
+{
+  "audit_sha256": "95d88b3d7c5b522f29423be2a93bbbddcce035424ab2b282585496ffc624d0e2",
+  "campaign_id": "macro-consensus-xau-catchup-v82",
+  "decision": "V82_CALIBRATION_SOURCE_AUDIT_PASS",
+  "declared_bytes": 90633816,
+  "declared_hours": 2688,
+  "declared_ticks": 4242231,
+  "economic_outcomes_opened": false,
+  "first_month": "2019-02",
+  "instrument_evidence": {
+    "DOLLARIDXUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-DOLLARIDXUSD.json",
+      "sha256": "b596ab8a33b3c2bf41e042e4d92e01d9e71220ae40793eb5d6530c2039339bec"
+    },
+    "USTBONDTRUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-USTBONDTRUSD.json",
+      "sha256": "b75bcc2b0f0e0b722d47004456da6af8a25978664647a9eee3c4ac9bc169ebee"
+    },
+    "XAGUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-XAGUSD.json",
+      "sha256": "26ff827b0dfba416668d4da3afc7682af4a389faea7d78140ce4319eb2d063e9"
+    },
+    "XAUUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-XAUUSD.json",
+      "sha256": "60e292320bc49ad124276cd6e432eede5f4ef525ca9969088670652b6e14af33"
+    }
+  },
+  "last_month": "2019-02",
+  "month_manifest_count": 4,
+  "month_manifests": [
+    {
+      "declared_bytes": 7250033,
+      "declared_ticks": 291474,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD\\year=2019\\month=02\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "14a0e981896c64b687fb9c0b9c5d7c2b09a1e2bb0a79fec0ba048c0af7c08c64",
+      "hours": 672,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD\\year=2019\\month=02\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "74cb37d333c44041daf432164112466c07e09230d66dcfe7732fec9f93dac5ef",
+      "month": "2019-02",
+      "symbol": "DOLLARIDXUSD"
+    },
+    {
+      "declared_bytes": 34407119,
+      "declared_ticks": 1784750,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD\\year=2019\\month=02\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "20e6c1e7128e660d59b93fbc07216e44deabdf050e8d746194c62df615dc3f05",
+      "hours": 672,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD\\year=2019\\month=02\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "3e47edcd1a8087533488747cb5a02859ffe5fe9045139136c3a69a1ce67b9c38",
+      "month": "2019-02",
+      "symbol": "USTBONDTRUSD"
+    },
+    {
+      "declared_bytes": 11282170,
+      "declared_ticks": 426602,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAGUSD\\year=2019\\month=02\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "f2c36b5cd98b6e9bbd88ba47bfd93db1936e6d8dd366eb0807ed207241fc3c84",
+      "hours": 672,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAGUSD\\year=2019\\month=02\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "3565cc4d8e6573db989eee2a3f9fd7f19c660005ff42a32a8edb05288ecc0fd2",
+      "month": "2019-02",
+      "symbol": "XAGUSD"
+    },
+    {
+      "declared_bytes": 37694494,
+      "declared_ticks": 1739405,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=02\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "dfbb8f1ed56446417c1a37bc2233099c1e12b4725b986a01aa685d0ace6c7b79",
+      "hours": 672,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=02\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "cd42c9f419c62b6d3758316ef5e079f23b7f520568bfdf997909c9fd9ca380a2",
+      "month": "2019-02",
+      "symbol": "XAUUSD"
+    }
+  ],
+  "paid_data_used": false,
+  "runtime_raw_file_hash_verification_required": true,
+  "schema_version": "xauusd_macro_consensus_xau_catchup_v82_calibration_source_audit",
+  "scope": "calibration",
+  "storage_root": "C:\\DukascopyTickDataFoundationV1",
+  "symbols": {
+    "DOLLARIDXUSD": {
+      "price_scale": 3,
+      "source_code": "DOLLAR.IDX-USD"
+    },
+    "USTBONDTRUSD": {
+      "price_scale": 3,
+      "source_code": "USTBOND.TR-USD"
+    },
+    "XAGUSD": {
+      "price_scale": 3,
+      "source_code": "XAG-USD"
+    },
+    "XAUUSD": {
+      "price_scale": 3,
+      "source_code": "XAU-USD"
+    }
+  }
+}
