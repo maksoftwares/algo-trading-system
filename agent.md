@@ -1220,3 +1220,27 @@ underlying R1 pullback rule. MT5 remains replication evidence for this exact EA,
 not the preferred research-quality feed. Prospective validation, confirmation,
 shared-account economics, R4/R5 same-period coverage, and the 3-4 trades/day
 frequency proof remain open.
+
+### July 20 Forward Boundary Handoff
+
+The untouched forward interval opened successfully. The prospective EA created
+all four July 20 ledgers at `2026-07-20T00:00:03Z`; the first readable XAUUSD
+tick is `2026-07-20T00:00:05.812Z`. Tick and heartbeat rows contain
+`dry_run=true`, `trade_permission=false`, `broker_action_allowed=false`, and
+`python_execution_authorized=false`.
+
+- R1 box sidecar: `ACTIVE_READ_ONLY_SHADOW`, fresh M5 history through
+  `2026-07-20T00:00:00Z`, decision `ABSTAIN_D1_TREND`, zero candidates.
+- V28 R2/R3 sidecar: `ACTIVE_READ_ONLY_CANDIDATE_SHADOW`, 232,027 M5 rows,
+  19,312 feature rows, zero candidates, no economics opened.
+- V29 R1 pullback sidecar: `ACTIVE_READ_ONLY_CANDIDATE_SHADOW`; it froze the
+  first forward decision at exactly `2026-07-20T00:00:00Z` as
+  `NO_SIGNAL/no_m15_independent_candidate`, with one immutable decision row and
+  zero candidates.
+- Locked V24.1 evaluator: `V24_1_CONTINUE_SEALED_FORWARD_COLLECTION`, `0/20`
+  complete eligible weekdays, no economics opened.
+- Locked V26 evaluator: `V26_CONTINUE_SEALED_FORWARD_COLLECTION`, `0/20`
+  complete eligible weekdays, no economics opened.
+
+This proves collection started; it does not prove edge or frequency. The first
+economic decision remains sealed until 20 complete eligible weekdays exist.
