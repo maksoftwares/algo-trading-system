@@ -1,0 +1,106 @@
+{
+  "schema_version": "xauusd_dxy_xau_eventtime_antisignal_v75",
+  "campaign_id": "dxy-xau-eventtime-antisignal-v75",
+  "inherited_v74": {
+    "contract_path": "xau-usd/xauusd-fast-research/dxy-xau-eventtime-catchup-v74/outputs/DXY_XAU_V74_CONTRACT_LOCK.json",
+    "contract_file_sha256": "ef3d0b948eb621be22751a99c06ded8dabd4f84badd18e9d2b350cd5fa770f2e",
+    "source_audit_path": "xau-usd/xauusd-fast-research/dxy-xau-eventtime-catchup-v74/outputs/DXY_XAU_V74_SOURCE_AUDIT.json",
+    "source_audit_sha256": "f44da7c4efcd5562797c911d6c77150e1f952abbef29a397318c5a3d7638e708",
+    "development_audit_path": "xau-usd/xauusd-fast-research/dxy-xau-eventtime-catchup-v74/outputs/DXY_XAU_V74_DEVELOPMENT_AUDIT.json",
+    "development_audit_sha256": "965e1c7d01cc73480a8c24a2c8010f5f3e6fec1ab295a91c6ce53a15d39c693e",
+    "inverse_module_path": "xau-usd/xauusd-fast-research/dxy-xau-eventtime-catchup-v74/src/inverse_lead.py",
+    "inverse_module_sha256": "085e274d2d089f8d8729bdeab62a50eea641ccb99e1b70840425b95b06d8e314",
+    "exposed_end_exclusive": "2022-07-01T00:00:00Z",
+    "invert_direction_exactly_once": true
+  },
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "symbols": {
+      "DOLLARIDXUSD": {"source_code": "DOLLAR.IDX-USD", "price_scale": 3},
+      "XAUUSD": {"source_code": "XAU-USD", "price_scale": 3}
+    },
+    "payment_authorized": false
+  },
+  "spot_source": {
+    "symbol": "XAUUSD",
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "m5_feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "m5_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "m5_bar_width_ms": 300000
+  },
+  "candidate_rule": {
+    "family": "DXY_SHOCK_XAU_EVENTTIME_ANTISIGNAL",
+    "session_start_utc": "07:00",
+    "session_end_utc": "18:00",
+    "maximum_baseline_staleness_ms": 1000,
+    "maximum_current_xau_staleness_ms": 1000,
+    "minimum_session_coverage_minutes": 600,
+    "minimum_dxy_quotes": 500,
+    "minimum_xau_quotes": 1000,
+    "maximum_candidates_per_utc_date": 1
+  },
+  "splits": {
+    "development": ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+    "confirmation": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "validation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "exam": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "execution": {
+    "maximum_entry_delay_ms": 1000,
+    "timeout_exit_grace_ms": 10000,
+    "ounces": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "maximum_initial_risk_usd": 50.0
+  },
+  "families": {
+    "DXY_SHOCK_XAU_EVENTTIME_ANTISIGNAL": {
+      "atr_stop_multiple": 0.5,
+      "spread_stop_multiple": 4.0,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "maximum_hold_minutes": 15
+    }
+  },
+  "gates": {
+    "minimum_resolved_trades": {
+      "development": 150,
+      "confirmation": 150,
+      "validation": 150,
+      "exam": 150
+    },
+    "minimum_trades_per_full_weekday": 0.65,
+    "maximum_trades_per_full_weekday": 1.0,
+    "minimum_base_profit_factor": 1.3,
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_profitable_day_share": 0.45,
+    "minimum_positive_month_share": 0.6,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.05,
+    "maximum_closed_trade_drawdown_usd": 150.0,
+    "top_winners_removed": 5,
+    "bootstrap": {
+      "block_weekdays": 5,
+      "resamples": 10000,
+      "seed": 740074,
+      "maximum_one_sided_pvalue": 0.01
+    }
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "DXY_XAU_V75_CONTRACT_LOCK.json"
+  },
+  "research_controls": {
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "paid_data_authorized": false,
+    "broker_action_authorized": false
+  }
+}
