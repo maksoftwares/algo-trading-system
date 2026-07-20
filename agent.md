@@ -1387,3 +1387,47 @@ Its mirror, thresholds, hold, stop, and target may not be selected from these
 outcomes. V32/V33 authorize no training or execution. The untouched V24.1/V26
 forward collection and same-period Core reconstruction remain the authoritative
 active evidence paths.
+
+## V34 Capital R4 Chop Forward Adapter - 2026-07-20
+
+`capital-r4-chop-forward-v34` closes the R4 same-period candidate-clock
+engineering gap without changing the frozen V26 rules. The adapter imports all
+three V26 component masks and parameters directly. It uses read-only Capital MT5
+M5 history for long indicator context and replaces only quality-passed completed
+M5 buckets with OHLC and signed-tick fields reconstructed from the prospective
+Capital bid/ask quote ledger.
+
+The quote aggregation reproduces the original Dukascopy semantics, including
+resetting the first price change in each M5 bucket so cross-bucket jumps cannot
+leak into tick imbalance. A signal requires three contiguous quality-passed live
+M5 buckets. Unavailable Capital book volume is not fabricated and is not consumed
+by any frozen R4 mask.
+
+- Transport contract SHA-256:
+  `9fa530dc59595d43873c890b82699fbbba36e00c1db34f1fe9ee4540ff7caeea`.
+- Rule dependency SHA-256:
+  `d14634f35004e9691e05b2153885e44a2531175af9f7f7a2f7f2091f152c6d58`.
+- Frozen V26 contract SHA-256 remains
+  `6294d575c93bc70d3720773bd0056dee7dcd4509e3e36f31b38409c46428f650`.
+- Historical feature parity: all 19 signal-used fields matched over 708,538
+  rows.
+- Historical candidate parity: 948 raw signals, 588 valid component candidates,
+  67 priority duplicates removed, and exactly 521 unique candidates. Generated
+  and frozen canonical stream SHA-256 values both equal
+  `ab23adb10a65538f0a4ac5013f32d858f4ca02e9b5ceeff0413f9161302dba01`.
+- Focused tests: 5 passed, including Git/Windows line-ending-independent rule
+  hashing. Ruff: passed.
+- First real Capital cycle on account `1033669`: 209,875 unique quotes, 143
+  completed quote M5 bars, 141 quality-passed bars, 137 contiguous 15-minute
+  fields, latest regime `CHOP`, and zero candidates. Zero is a valid abstention,
+  not a failed cycle.
+- Persistent hidden collector: parent PID `37864`, Python child PID `39176`.
+  Runtime directory:
+  `C:\MT5PortableProspectiveCollector\MQL5\Files\r4_chop_shadow_v34`.
+
+V34 was necessarily locked after the July 20 forward boundary, so it is recorded
+as a post-boundary transport adapter rather than a new preregistration of economic
+edge. No post-boundary outcome, P/L, label, exit, win rate, or return was opened
+while implementing it. It emits append-only candidate facts only and has no
+broker-action path. R5 current-input coverage, same-period shared-account
+outcomes, and the 3-4 trades/day proof remain open.

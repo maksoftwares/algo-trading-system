@@ -1,0 +1,96 @@
+{
+  "broker_action_authorized": false,
+  "contract_sha256": "9fa530dc59595d43873c890b82699fbbba36e00c1db34f1fe9ee4540ff7caeea",
+  "created_at_utc": "2026-07-20T01:49:02.188573Z",
+  "demo_authorized": false,
+  "ea_consumption_authorized": false,
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "frozen_r4_contract_file_sha256": "fc3730a5a2fc3304447578659003df04c6f454758df91e48b0e45cc8f1ed938e",
+  "frozen_r4_contract_sha256": "6294d575c93bc70d3720773bd0056dee7dcd4509e3e36f31b38409c46428f650",
+  "frozen_r4_rules_precede_forward_boundary": true,
+  "historical_candidate_parity": {
+    "candidate_artifact_canonical_sha256": "ab23adb10a65538f0a4ac5013f32d858f4ca02e9b5ceeff0413f9161302dba01",
+    "candidate_audit": {
+      "duplicate_candidates_removed": 67,
+      "total_raw_signals": 948,
+      "unique_candidates": 521,
+      "valid_component_candidates": 588
+    },
+    "candidate_canonical_sha256": "ab23adb10a65538f0a4ac5013f32d858f4ca02e9b5ceeff0413f9161302dba01",
+    "candidate_rows": 521,
+    "feature_columns_checked": [
+      "bar_start_utc",
+      "bar_end_utc",
+      "return_3",
+      "return_12",
+      "tick_imbalance_15m",
+      "spread_ratio",
+      "hour_utc_custom",
+      "regime",
+      "m15_state_age_m5",
+      "risk_atr",
+      "z_192",
+      "z_delta_192",
+      "variance_ratio_4_192",
+      "mean_slope_atr_192",
+      "z_384",
+      "z_delta_384",
+      "variance_ratio_4_384",
+      "return_acf_1_384",
+      "mean_slope_atr_384"
+    ],
+    "feature_parity": {
+      "bar_end_utc": true,
+      "bar_start_utc": true,
+      "hour_utc_custom": true,
+      "m15_state_age_m5": true,
+      "mean_slope_atr_192": true,
+      "mean_slope_atr_384": true,
+      "regime": true,
+      "return_12": true,
+      "return_3": true,
+      "return_acf_1_384": true,
+      "risk_atr": true,
+      "spread_ratio": true,
+      "tick_imbalance_15m": true,
+      "variance_ratio_4_192": true,
+      "variance_ratio_4_384": true,
+      "z_192": true,
+      "z_384": true,
+      "z_delta_192": true,
+      "z_delta_384": true
+    },
+    "feature_rows": 708538,
+    "signal_parity": {
+      "39427": {
+        "direction_equal": true,
+        "independent_signal_sha256": "bf86b730cab024852064f001ee31aa4728547333b0b8a992a982f8b3be639132",
+        "mask_equal": true,
+        "reference_signal_sha256": "bf86b730cab024852064f001ee31aa4728547333b0b8a992a982f8b3be639132"
+      },
+      "39888": {
+        "direction_equal": true,
+        "independent_signal_sha256": "7ee7f8edbd4bffb5fe61f434ddc78e7d14e10c639c4c5189f840a8c32b1bfc31",
+        "mask_equal": true,
+        "reference_signal_sha256": "7ee7f8edbd4bffb5fe61f434ddc78e7d14e10c639c4c5189f840a8c32b1bfc31"
+      },
+      "40193": {
+        "direction_equal": true,
+        "independent_signal_sha256": "5908ae9d716511fce640839ea0ea76ebf285aadd0d68c06a5eaa21c991176818",
+        "mask_equal": true,
+        "reference_signal_sha256": "5908ae9d716511fce640839ea0ea76ebf285aadd0d68c06a5eaa21c991176818"
+      }
+    }
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "post_boundary_economic_outcomes_opened": false,
+  "post_boundary_tick_files_present_at_adapter_lock": [
+    "xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260720.csv"
+  ],
+  "python_predictions_authorized": false,
+  "rule_dependency_sha256": "d14634f35004e9691e05b2153885e44a2531175af9f7f7a2f7f2091f152c6d58",
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_capital_r4_chop_forward_v34_contract_lock",
+  "transport_adapter_locked_after_forward_boundary": true
+}
