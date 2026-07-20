@@ -2558,3 +2558,24 @@ Decision: `V73_DEVELOPMENT_FAIL_TERMINAL`. Confirmation, validation, and exam
 remain sealed. V72/V73 retire both directional interpretations of the fixed raw
 silver event family. No same-family mirror, threshold, response, timing, exit,
 cost, or quota rescue is permitted. V59/V60 remain immutable and accepted.
+
+## V74 Raw DXY Event-Time Catch-Up - 2026-07-20
+
+V74 tested a raw one-to-twenty-second DXY lead and expected inverse XAU response.
+The source audit covered `180` frozen symbol-months, `131,424` hourly rows, and
+`447,967,303` declared ticks through June 2026. Outcome-blind January 2019
+calibration registered `1,000` policies and selected
+`H01000__DM010__IN005__RR000__QC02` at `18/22 = 0.818182/day`, exactly nine long
+and nine short. Contract SHA-256:
+`8e0ec9b0dd27282f9186976d97bd709d919764b34f0478a218aaa82ee78ca28d`.
+
+Development resolved `710` trades over `871` eligible weekdays
+(`0.815155/day`), with `368` longs and `342` shorts. Base/stress net was USD
+`-462.04/-516.71`; base/stress PF was `0.3904/0.3519`; first/second-half stress
+PF was `0.3230/0.3822`; no month was positive; winner-removed stress net was USD
+`-541.04`; stressed DD was USD `517.76`; and bootstrap p-value was `1.0`.
+
+Decision: `V74_DEVELOPMENT_FAIL_TERMINAL`. Later stages remain sealed. Do not
+tune V74. One fixed direction inversion may start on the untouched July 2022
+period; no additional DXY threshold, timing, response, exit, cost, or quota reuse
+is permitted. V59/V60 remain immutable and accepted.

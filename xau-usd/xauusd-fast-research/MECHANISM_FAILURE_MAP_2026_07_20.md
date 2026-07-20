@@ -159,6 +159,29 @@ directions and all associated threshold or exit rescues are retired.
 
 ## Routes Not Counted As Solutions
 
+## V74 Raw DXY-to-XAU Event-Time Result
+
+V74 tested a new raw event-time input: a DXY quote shock followed by the expected
+inverse XAU catch-up. Its source audit covered `180` frozen symbol-months,
+`131,424` hourly rows, and `447,967,303` declared ticks through June 2026.
+Outcome-blind calibration selected a one-second, 1.0 bps DXY move, 0.5 bps
+innovation, zero-response, two-quote policy at `18/22 = 0.818182/day`, with nine
+long and nine short candidates.
+
+Development resolved `710` trades over `871` eligible weekdays
+(`0.815155/day`), split `368` long and `342` short. Base/stress net was USD
+`-462.04/-516.71`; base/stress PF was `0.3904/0.3519`; first/second-half stress
+PF was `0.3230/0.3822`; no month was positive; winner-removed stress net was USD
+`-541.04`; stressed DD was USD `517.76`; and bootstrap p-value was `1.0`.
+
+Decision: `V74_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`8e0ec9b0dd27282f9186976d97bd709d919764b34f0478a218aaa82ee78ca28d`.
+Later stages remain sealed. No event threshold or execution rescue is allowed.
+One fixed direction inversion may begin only on the unopened July 2022 period;
+after that test, the raw DXY family is terminal in both directions.
+
+## Routes Not Counted As Solutions
+
 ## V72 Raw XAG-to-XAU Event-Time Catch-Up Result
 
 V72 introduced a materially new causal input: raw, synchronized Dukascopy
