@@ -1,0 +1,109 @@
+{
+  "schema_version": "xauusd_xag_xau_eventtime_antisignal_v73",
+  "campaign_id": "xag-xau-eventtime-antisignal-v73",
+  "inherited_v72": {
+    "contract_path": "xau-usd/xauusd-fast-research/xag-xau-eventtime-catchup-v72/outputs/XAG_XAU_V72_CONTRACT_LOCK.json",
+    "contract_file_sha256": "e61b24dcb84bc6922fd941eba9709a52f0105d7f8b2b3e8a45039f101a5f045b",
+    "source_audit_path": "xau-usd/xauusd-fast-research/xag-xau-eventtime-catchup-v72/outputs/XAG_XAU_V72_SOURCE_AUDIT.json",
+    "source_audit_sha256": "e81a41d7b516a25b65cccd40011c909cd8983c2f84fb9cd55a751a3669216eb9",
+    "development_audit_path": "xau-usd/xauusd-fast-research/xag-xau-eventtime-catchup-v72/outputs/XAG_XAU_V72_DEVELOPMENT_AUDIT.json",
+    "development_audit_sha256": "8e4828067d529628d8f9f7bf048071426329f25b94728a6f68f5fb2cc95371e7",
+    "catchup_module_path": "xau-usd/xauusd-fast-research/xag-xau-eventtime-catchup-v72/src/catchup.py",
+    "catchup_module_sha256": "3f93b55068daa51316766f4a961b5cb7d02b94030b139c930d432462a37e9f4c",
+    "exposed_end_exclusive": "2021-07-01T00:00:00Z",
+    "invert_direction_exactly_once": true
+  },
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "symbols": {
+      "XAGUSD": {"source_code": "XAG-USD", "price_scale": 3},
+      "XAUUSD": {"source_code": "XAU-USD", "price_scale": 3}
+    },
+    "exam_first_month": "2024-07",
+    "exam_last_month": "2026-06",
+    "payment_authorized": false
+  },
+  "spot_source": {
+    "symbol": "XAUUSD",
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "m5_feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "m5_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "m5_bar_width_ms": 300000
+  },
+  "candidate_rule": {
+    "family": "XAG_SHOCK_XAU_EVENTTIME_ANTISIGNAL",
+    "session_start_utc": "07:00",
+    "session_end_utc": "18:00",
+    "maximum_baseline_staleness_ms": 1000,
+    "maximum_current_xau_staleness_ms": 1000,
+    "minimum_session_coverage_minutes": 600,
+    "minimum_xag_quotes": 500,
+    "minimum_xau_quotes": 1000,
+    "maximum_candidates_per_utc_date": 1
+  },
+  "splits": {
+    "development": ["2021-07-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "confirmation": ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+    "validation": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "exam": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "execution": {
+    "maximum_entry_delay_ms": 1000,
+    "timeout_exit_grace_ms": 10000,
+    "ounces": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "maximum_initial_risk_usd": 50.0
+  },
+  "families": {
+    "XAG_SHOCK_XAU_EVENTTIME_ANTISIGNAL": {
+      "atr_stop_multiple": 0.5,
+      "spread_stop_multiple": 4.0,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "maximum_hold_minutes": 15
+    }
+  },
+  "gates": {
+    "minimum_resolved_trades": {
+      "development": 150,
+      "confirmation": 150,
+      "validation": 150,
+      "exam": 300
+    },
+    "minimum_trades_per_full_weekday": 0.65,
+    "maximum_trades_per_full_weekday": 1.0,
+    "minimum_base_profit_factor": 1.3,
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_profitable_day_share": 0.45,
+    "minimum_positive_month_share": 0.6,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.05,
+    "maximum_closed_trade_drawdown_usd": 150.0,
+    "top_winners_removed": 5,
+    "bootstrap": {
+      "block_weekdays": 5,
+      "resamples": 10000,
+      "seed": 720072,
+      "maximum_one_sided_pvalue": 0.01
+    }
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "XAG_XAU_V73_CONTRACT_LOCK.json",
+    "exam_source_audit": "XAG_XAU_V73_EXAM_SOURCE_AUDIT.json"
+  },
+  "research_controls": {
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "paid_data_authorized": false,
+    "broker_action_authorized": false
+  }
+}
