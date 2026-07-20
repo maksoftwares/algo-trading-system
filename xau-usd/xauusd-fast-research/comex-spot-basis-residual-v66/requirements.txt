@@ -1,0 +1,5 @@
+databento>=0.62
+numpy>=2.0
+pandas>=2.2
+pyarrow>=17
+pytest>=8

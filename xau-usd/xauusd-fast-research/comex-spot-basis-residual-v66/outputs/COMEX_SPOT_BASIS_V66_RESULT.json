@@ -1,0 +1,30 @@
+{
+  "schema_version": "xauusd_comex_spot_basis_residual_v66",
+  "variant_count": 288,
+  "survivor_count": 0,
+  "survivor_variant_ids": [],
+  "outcome_cache_rows": 55392,
+  "instrument_map_sha256": "3d8fa5d7c8de752a9f1cbd13454d56339a12abb0dbbe4f67764b3675b4f45cf7",
+  "data_evidence": {
+    "comex_cache": "C:\\ComexGoldFuturesFoundationV1\\research\\comex-auction-profile-v1\\m5_auction_profile_20220701_20260701.parquet",
+    "comex_sha256": "a35b7911e1eabdf9fea13507380597c8e54a6e53e6271a1f47118ba4a1dee6cd",
+    "spot_cache": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+    "spot_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "aligned_rows": 47783,
+    "spot_execution_rows": 637656,
+    "sessions": 773,
+    "instruments": 16,
+    "first_available_utc": "2022-07-01 12:25:00+00:00",
+    "last_available_utc": "2025-06-30 17:30:00+00:00"
+  },
+  "research_controls": {
+    "bounded_variant_count": 288,
+    "selection_uses_final_year": false,
+    "final_year_exposed_elsewhere": true,
+    "absolute_basis_mechanism_new_to_campaign": true,
+    "research_only": true,
+    "network_data_acquisition_authorized": false,
+    "paid_data_authorized": false,
+    "execution_authorized": false
+  }
+}

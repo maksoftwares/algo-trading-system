@@ -1,0 +1,81 @@
+{
+  "schema_version": "xauusd_comex_spot_basis_residual_v66",
+  "selection_cutoff_exclusive_utc": "2025-07-01T00:00:00Z",
+  "spot_source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+  },
+  "comex_source": {
+    "cache": "C:/ComexGoldFuturesFoundationV1/research/comex-auction-profile-v1/m5_auction_profile_20220701_20260701.parquet",
+    "cache_sha256": "a35b7911e1eabdf9fea13507380597c8e54a6e53e6271a1f47118ba4a1dee6cd",
+    "raw_job_directory": "C:/ComexGoldFuturesFoundationV1/raw/GLBX-20260717-5MX758XBAQ",
+    "download_manifest": "C:/ComexGoldFuturesFoundationV1/manifests/downloaded_and_hashed_20260717T082157Z.json",
+    "download_manifest_sha256": "5abfaa2de812671938a48b5b88b83c7a45acdc85093effa61890a45ee2a428e6",
+    "symbol": "GC.v.0"
+  },
+  "parameter_grid": {
+    "action_modes": ["CATCHUP", "FADE"],
+    "basis_lookback_bars": [24, 72],
+    "basis_z_threshold": [1.5, 2.0, 2.5],
+    "widening_bars": [1, 3],
+    "minimum_return_gap_atr": [0.1, 0.25],
+    "stop_atr": [0.5, 0.75],
+    "target_r": [1.0, 1.5, 2.0]
+  },
+  "features": {
+    "mad_scale": 1.4826,
+    "minimum_scaled_mad_price": 0.05,
+    "require_futures_driven_widening": true,
+    "require_same_session_widening": true
+  },
+  "execution": {
+    "maximum_entry_gap_minutes": 10,
+    "maximum_spread_price": 0.75,
+    "maximum_spread_r": 0.15,
+    "ticket_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "maximum_hold_bars": 12,
+    "cooldown_bars": 6,
+    "maximum_open_positions_per_variant": 1,
+    "maximum_entries_per_variant_utc_day": 2,
+    "same_bar_priority": "STOP_FIRST"
+  },
+  "windows": {
+    "development_1": ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+    "development_2": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "minimum_trades": {
+      "development_1": 30,
+      "development_2": 30,
+      "confirmation": 25
+    },
+    "minimum_trades_per_weekday": 0.1,
+    "minimum_stress_profit_factor": 1.15,
+    "minimum_average_stress_r": 0.03,
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_positive_month_share": 0.4,
+    "top_winners_removed": 5
+  },
+  "outputs": {
+    "directory": "outputs",
+    "instrument_map": "COMEX_SPOT_BASIS_V66_INSTRUMENT_MAP.csv",
+    "metrics": "COMEX_SPOT_BASIS_V66_METRICS.csv",
+    "survivor_trades": "COMEX_SPOT_BASIS_V66_SURVIVOR_TRADES.parquet",
+    "result": "COMEX_SPOT_BASIS_V66_RESULT.json"
+  },
+  "research_controls": {
+    "bounded_variant_count": 288,
+    "selection_uses_final_year": false,
+    "final_year_exposed_elsewhere": true,
+    "absolute_basis_mechanism_new_to_campaign": true,
+    "research_only": true,
+    "network_data_acquisition_authorized": false,
+    "paid_data_authorized": false,
+    "execution_authorized": false
+  }
+}

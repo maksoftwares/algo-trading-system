@@ -2330,3 +2330,41 @@ The accepted first milestone remains V59/V60: final-year `1.395/day`, USD
 conservative buffered floating DD under extra fee stress. V65 shows that simply
 compressing the box-breakout clock raises activity without preserving the edge;
 the next additive study must change the economic mechanism.
+
+## V66 Roll-Safe COMEX-Spot Basis Residual - 2026-07-20
+
+V66 tested the remaining absolute futures-minus-spot basis hypothesis without
+making a network request or paid-data operation. It restored raw COMEX
+instrument identity from immutable DBN metadata, restricted rolling centers and
+MAD scales to prior bars from the same instrument, and used the complete
+Dukascopy M5 stream for broker-side entries, stops, targets, and holding exits.
+
+- The bounded manifest contained `288` preregistered catch-up and fade policies.
+- Selection used `47,783` synchronized completed bars, `773` sessions, and `16`
+  raw COMEX instruments through `2025-06-30`. The final year was not loaded.
+- Zero policies passed development-1, development-2, and confirmation.
+- Sparse catch-up policies sometimes showed high PF but had only one to nine
+  trades in a year. The maximum minimum-window frequency was `0.146/day`, and
+  those denser variants failed economics.
+- The best fade minimum-window stressed PF was only `0.621`.
+- Decision: `V66_NO_PREFINAL_SURVIVOR`. V59/V60 remain unchanged.
+- Result SHA-256:
+  `582ac00a75e33363c9cd5d0bfb4e9c2d029b49a4f0fcd881241de86964fc9892`.
+- Metrics SHA-256:
+  `861d7ef0afa13e308a6e4d7ab053cd9a95106371ed03c263699fcab933368dcb`.
+
+Self-review also rejected a proposed continuation add-on before implementation.
+The project failure map correctly states that pyramiding changes frozen Core
+risk and splits one economic opportunity into correlated tickets; it cannot be
+claimed as independent frequency or new ML labels.
+
+### Untouched forward status
+
+The V24.1 microburst and V26 gap-restart watchers are running and reading the
+Capital demo quote stream. As of approximately `2026-07-20T12:28Z`, each had
+generated four sealed candidates from about 197,000 unique-millisecond quotes.
+The day was still incomplete, so eligible full weekdays remained zero and no
+economic outcome was opened. V27 and V42 correctly remain fail-closed pending
+component validation. These collectors are now the only genuinely unexposed
+high-density evidence path; they require complete forward weekdays and may not
+be accelerated by retrospective tuning.
