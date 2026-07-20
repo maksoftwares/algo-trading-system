@@ -1,0 +1,137 @@
+{
+  "schema_version": "xauusd_fx_consensus_eventtime_v78",
+  "campaign_id": "fx-consensus-xau-eventtime-v78",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "symbols": {
+      "EURUSD": {"source_code": "EUR-USD", "price_scale": 5},
+      "USDJPY": {"source_code": "USD-JPY", "price_scale": 3},
+      "XAUUSD": {"source_code": "XAU-USD", "price_scale": 3}
+    },
+    "first_month": "2018-07",
+    "last_month": "2024-06",
+    "instrument_evidence": {
+      "EURUSD": "source-evidence/instrument-EURUSD.json",
+      "USDJPY": "source-evidence/instrument-USDJPY.json"
+    },
+    "payment_authorized": false
+  },
+  "locked_dependencies": {
+    "raw_store": {
+      "path": "xau-usd/xauusd-fast-research/xag-xau-eventtime-catchup-v72/src/catchup.py",
+      "sha256": "3f93b55068daa51316766f4a961b5cb7d02b94030b139c930d432462a37e9f4c"
+    },
+    "spot_labels": {
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/spot_labels.py",
+      "sha256": "76a51dcf5798b410df3e254de97e7205c3e6806cfe26132d87632e0b804607b8"
+    },
+    "stage_metrics": {
+      "path": "xau-usd/xauusd-fast-research/comex-size-segment-flow-v32/src/size_segment_flow.py",
+      "sha256": "a84181b77874cb80e5e8db59644c061464f87e223366c6ccfcc354e0438d4d49"
+    }
+  },
+  "spot_source": {
+    "symbol": "XAUUSD",
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "m5_feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "m5_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "m5_bar_width_ms": 300000
+  },
+  "candidate_rule": {
+    "family": "FX_DOLLAR_CONSENSUS_XAU_EVENTTIME_CATCHUP",
+    "event_clock_symbol": "EURUSD",
+    "session_start_utc": "07:00",
+    "session_end_utc": "18:00",
+    "maximum_baseline_staleness_ms": 1000,
+    "maximum_current_source_staleness_ms": 1000,
+    "maximum_current_xau_staleness_ms": 1000,
+    "minimum_session_coverage_minutes": 600,
+    "minimum_eurusd_quotes": 1000,
+    "minimum_usdjpy_quotes": 1000,
+    "minimum_xau_quotes": 1000,
+    "maximum_candidates_per_utc_date": 1
+  },
+  "calibration": {
+    "start": "2018-07-01T00:00:00Z",
+    "end": "2018-09-01T00:00:00Z",
+    "horizon_ms_grid": [1000, 2000, 5000, 10000, 20000],
+    "minimum_leg_move_bps_grid": [0.05, 0.10, 0.15, 0.20, 0.25],
+    "minimum_consensus_sum_bps_grid": [0.10, 0.20, 0.30, 0.40, 0.50],
+    "maximum_signed_xau_response_ratio_grid": [0.0, 0.25, 0.5, 0.75],
+    "minimum_source_quote_count_grid": [2, 5],
+    "minimum_candidates_per_full_weekday": 0.65,
+    "maximum_candidates_per_full_weekday": 1.0,
+    "minimum_active_day_share": 0.65,
+    "minimum_direction_share": 0.2,
+    "target_candidates_per_full_weekday": 0.8
+  },
+  "splits": {
+    "development": ["2018-09-01T00:00:00Z", "2021-07-01T00:00:00Z"],
+    "confirmation": ["2021-07-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "validation": ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+    "exam": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"]
+  },
+  "execution": {
+    "maximum_entry_delay_ms": 1000,
+    "timeout_exit_grace_ms": 10000,
+    "ounces": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "maximum_initial_risk_usd": 50.0
+  },
+  "families": {
+    "FX_DOLLAR_CONSENSUS_XAU_EVENTTIME_CATCHUP": {
+      "atr_stop_multiple": 0.5,
+      "spread_stop_multiple": 4.0,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "maximum_hold_minutes": 15
+    }
+  },
+  "gates": {
+    "minimum_resolved_trades": {
+      "development": 450,
+      "confirmation": 150,
+      "validation": 150,
+      "exam": 150
+    },
+    "minimum_trades_per_full_weekday": 0.65,
+    "maximum_trades_per_full_weekday": 1.0,
+    "minimum_base_profit_factor": 1.3,
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_profitable_day_share": 0.45,
+    "minimum_positive_month_share": 0.6,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.05,
+    "maximum_closed_trade_drawdown_usd": 150.0,
+    "top_winners_removed": 5,
+    "bootstrap": {
+      "block_weekdays": 5,
+      "resamples": 30000,
+      "seed": 780078,
+      "maximum_one_sided_pvalue": 0.0025
+    }
+  },
+  "outputs": {
+    "directory": "outputs",
+    "source_audit": "FX_CONSENSUS_XAU_V78_SOURCE_AUDIT.json",
+    "calibration_features": "FX_CONSENSUS_XAU_V78_CALIBRATION_FEATURES.parquet",
+    "calibration_grid": "FX_CONSENSUS_XAU_V78_CALIBRATION_GRID.csv",
+    "calibration_audit": "FX_CONSENSUS_XAU_V78_CALIBRATION_AUDIT.json",
+    "contract_lock": "FX_CONSENSUS_XAU_V78_CONTRACT_LOCK.json"
+  },
+  "research_controls": {
+    "calibration_outcomes_opened": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "paid_data_authorized": false,
+    "broker_action_authorized": false
+  }
+}
