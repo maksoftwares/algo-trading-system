@@ -217,6 +217,23 @@ Later stages remain sealed. No event threshold or execution rescue is allowed.
 One fixed direction inversion may begin only on the unopened July 2022 period;
 after that test, the raw Treasury-bond family is terminal in both directions.
 
+## V77 Fixed Treasury-Bond Anti-Signal Result
+
+V77 performed the one allowed directional falsification of V76. It inherited
+the exact locked event policy and execution, inverted direction once, and began
+only after V76's exposed cutoff. Fresh development resolved `228` trades over
+`253` weekdays (`0.901186/day`), with `109` longs and `119` shorts. Base/stress
+net was USD `-188.78/-204.96`; base/stress PF was `0.2677/0.2406`;
+first/second-half stress PF was `0.2031/0.2776`; no month was positive;
+winner-removed stress net was USD `-216.73`; stressed DD was USD `210.51`; and
+bootstrap p-value was `1.0`.
+
+Decision: `V77_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`51450419d51bb4b5bc983f313269b1f7980dcf14c6b6adf2c232f8c095d2b3af`.
+All later stages remain sealed. V76/V77 show that this raw Treasury-bond event is
+not a hidden reversible edge under the locked tradable geometry. Both directions
+and all associated threshold, timing, or exit rescues are retired.
+
 ## V72 Raw XAG-to-XAU Event-Time Catch-Up Result
 
 V72 introduced a materially new causal input: raw, synchronized Dukascopy
