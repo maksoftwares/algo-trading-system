@@ -234,6 +234,27 @@ All later stages remain sealed. V76/V77 show that this raw Treasury-bond event i
 not a hidden reversible edge under the locked tradable geometry. Both directions
 and all associated threshold, timing, or exit rescues are retired.
 
+## V78 Raw FX Dollar-Consensus Event-Time Result
+
+V78 tested a materially different joint input: EURUSD and USDJPY had to agree on
+dollar direction before an XAU event-time catch-up candidate existed. Its source
+audit covered `216` frozen symbol-months, `157,824` hourly rows, and `608,967,406`
+declared ticks through June 2024. Outcome-blind calibration registered `1,000`
+policies and selected a strict one-second consensus policy at `37/44 =
+0.840909/day`, with 21 long and 16 short candidates.
+
+Development resolved `613` trades over `723` eligible weekdays
+(`0.847856/day`), split `322` long and `291` short. Base/stress net was USD
+`-406.33/-452.66`; base/stress PF was `0.3394/0.3023`; first/second-half stress
+PF was `0.2499/0.3410`; no month was positive; winner-removed stress net was USD
+`-474.61`; stressed DD was USD `454.91`; and bootstrap p-value was `1.0`.
+
+Decision: `V78_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`92dea393027f32e6d9e0e05220033fd63aa777f027b9f1c650ec6bb9485db091`.
+Later stages remain sealed. No event threshold or execution rescue is allowed.
+One fixed direction inversion may begin only on the unopened July 2021 period;
+after that test, the raw FX-consensus family is terminal in both directions.
+
 ## V72 Raw XAG-to-XAU Event-Time Catch-Up Result
 
 V72 introduced a materially new causal input: raw, synchronized Dukascopy

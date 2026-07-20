@@ -2639,3 +2639,25 @@ Decision: `V77_DEVELOPMENT_FAIL_TERMINAL`. Confirmation, validation, and exam
 remain sealed. V76/V77 retire both directional interpretations of the fixed raw
 Treasury-bond event family. No same-family mirror, threshold, response, timing,
 exit, cost, or quota rescue is permitted. V59/V60 remain immutable and accepted.
+
+## V78 Raw FX Dollar-Consensus Event-Time - 2026-07-20
+
+V78 required synchronized EURUSD and USDJPY moves to agree on dollar direction
+before a causal XAU candidate existed. The source audit covered `216` frozen
+symbol-months, `157,824` hourly rows, and `608,967,406` declared ticks through
+June 2024. Outcome-blind July-August 2018 calibration registered `1,000` policies
+and selected `H01000__LM025__CS050__RR000__QC05` at `37/44 = 0.840909/day`, with
+21 long and 16 short candidates. Contract SHA-256:
+`92dea393027f32e6d9e0e05220033fd63aa777f027b9f1c650ec6bb9485db091`.
+
+Development resolved `613` trades over `723` eligible weekdays
+(`0.847856/day`), with `322` longs and `291` shorts. Base/stress net was USD
+`-406.33/-452.66`; base/stress PF was `0.3394/0.3023`; first/second-half stress
+PF was `0.2499/0.3410`; positive-day share was `21.58%`; no month was positive;
+winner-removed stress net was USD `-474.61`; stressed DD was USD `454.91`; and
+bootstrap p-value was `1.0`.
+
+Decision: `V78_DEVELOPMENT_FAIL_TERMINAL`. Later stages remain sealed. Do not
+tune V78. One fixed direction inversion may start on the untouched July 2021
+period; no additional FX-consensus threshold, timing, response, exit, cost, or
+quota reuse is permitted. V59/V60 remain immutable and accepted.
