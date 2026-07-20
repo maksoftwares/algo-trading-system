@@ -118,6 +118,26 @@
       "maximum_one_sided_pvalue": 0.00125
     }
   },
+  "shared_portfolio_gates": {
+    "baseline": "V59_V60_BYTE_IDENTICAL",
+    "required_windows": {
+      "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+      "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+      "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+    },
+    "minimum_accepted_trades_per_full_weekday": 2.0,
+    "minimum_base_profit_factor": 1.5,
+    "minimum_stress_profit_factor": 1.35,
+    "minimum_positive_month_share": 0.6,
+    "top_winners_removed": 5,
+    "minimum_winner_removed_stress_net_usd": 0.0,
+    "maximum_shared_closed_trade_drawdown_usd": 500.0,
+    "maximum_shared_buffered_stress_floating_drawdown_usd": 600.0,
+    "maximum_worst_day_stress_loss_usd": 150.0,
+    "maximum_worst_five_day_stress_loss_usd": 250.0,
+    "maximum_absolute_daily_pnl_correlation": 0.5,
+    "blocked_or_conflicted_entries_count_as_frequency": false
+  },
   "outputs": {
     "directory": "outputs",
     "calibration_source_audit": "FX_BREADTH_XAU_V81_CALIBRATION_SOURCE_AUDIT.json",

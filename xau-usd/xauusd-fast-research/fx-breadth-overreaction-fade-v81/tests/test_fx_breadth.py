@@ -164,3 +164,8 @@ def test_source_audits_are_sliced_on_registered_stage_boundaries() -> None:
     assert source_audit_output_path(config, "exam").name == (
         "FX_BREADTH_XAU_V81_EXAM_SOURCE_AUDIT.json"
     )
+    shared = config["shared_portfolio_gates"]
+    assert shared["minimum_accepted_trades_per_full_weekday"] == 2.0
+    assert shared["minimum_base_profit_factor"] == 1.5
+    assert shared["maximum_shared_buffered_stress_floating_drawdown_usd"] == 600.0
+    assert not shared["blocked_or_conflicted_entries_count_as_frequency"]
