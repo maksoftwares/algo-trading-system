@@ -1,0 +1,200 @@
+{
+  "broker_action_authorized": false,
+  "calibration_audit": {
+    "bytes": 7071,
+    "path": "outputs/DXY_XAU_V74_CALIBRATION_AUDIT.json",
+    "sha256": "35cb5dd90db4016e90d334184d58ed71ee5aed55b7f5e05d04858795178441e5"
+  },
+  "calibration_features": {
+    "bytes": 6406385,
+    "path": "outputs/DXY_XAU_V74_CALIBRATION_FEATURES.parquet",
+    "sha256": "5c1fd7b2099bf9bfc1feaaecdc93312fc9fafa5d360e310b88cc02548158a0e9"
+  },
+  "calibration_grid": {
+    "bytes": 102565,
+    "path": "outputs/DXY_XAU_V74_CALIBRATION_GRID.csv",
+    "sha256": "f34b8bd5a5596807c19f56fa522ed74ebefbbf47b87744b6e998ddedbbc15908"
+  },
+  "calibration_outcomes_opened": false,
+  "candidate_rule": {
+    "family": "DXY_LEAD_XAU_INVERSE_EVENTTIME_CATCHUP",
+    "maximum_baseline_staleness_ms": 1000,
+    "maximum_candidates_per_utc_date": 1,
+    "maximum_current_xau_staleness_ms": 1000,
+    "minimum_dxy_quotes": 500,
+    "minimum_session_coverage_minutes": 600,
+    "minimum_xau_quotes": 1000,
+    "session_end_utc": "18:00",
+    "session_start_utc": "07:00"
+  },
+  "completed_m5_atr": {
+    "bytes": 104974475,
+    "path": "m5_bidask_features_v1.parquet",
+    "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+  },
+  "confirmation_outcomes_present_at_lock": false,
+  "contract_sha256": "8e0ec9b0dd27282f9186976d97bd709d919764b34f0478a218aaa82ee78ca28d",
+  "demo_authorized": false,
+  "dependencies": [
+    {
+      "bytes": 20512,
+      "path": "xau-usd/xauusd-fast-research/xag-xau-eventtime-catchup-v72/src/catchup.py",
+      "sha256": "3f93b55068daa51316766f4a961b5cb7d02b94030b139c930d432462a37e9f4c"
+    },
+    {
+      "bytes": 13216,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/spot_labels.py",
+      "sha256": "76a51dcf5798b410df3e254de97e7205c3e6806cfe26132d87632e0b804607b8"
+    },
+    {
+      "bytes": 19419,
+      "path": "xau-usd/xauusd-fast-research/comex-size-segment-flow-v32/src/size_segment_flow.py",
+      "sha256": "a84181b77874cb80e5e8db59644c061464f87e223366c6ccfcc354e0438d4d49"
+    }
+  ],
+  "development_outcomes_present_at_lock": false,
+  "ea_consumption_authorized": false,
+  "exam_outcomes_present_at_lock": false,
+  "execution": {
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_delay_ms": 1000,
+    "maximum_initial_risk_usd": 50.0,
+    "ounces": 1.0,
+    "stress_slippage_r": 0.05,
+    "ticket_cost_usd": 0.3,
+    "timeout_exit_grace_ms": 10000
+  },
+  "families": {
+    "DXY_LEAD_XAU_INVERSE_EVENTTIME_CATCHUP": {
+      "atr_stop_multiple": 0.5,
+      "maximum_hold_minutes": 15,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "spread_stop_multiple": 4.0
+    }
+  },
+  "gates": {
+    "bootstrap": {
+      "block_weekdays": 5,
+      "maximum_one_sided_pvalue": 0.01,
+      "resamples": 10000,
+      "seed": 740074
+    },
+    "maximum_closed_trade_drawdown_usd": 150.0,
+    "maximum_trades_per_full_weekday": 1.0,
+    "minimum_base_profit_factor": 1.3,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.05,
+    "minimum_positive_month_share": 0.6,
+    "minimum_profitable_day_share": 0.45,
+    "minimum_resolved_trades": {
+      "confirmation": 150,
+      "development": 500,
+      "exam": 300,
+      "validation": 150
+    },
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_trades_per_full_weekday": 0.65,
+    "top_winners_removed": 5
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 324,
+      "path": "README.md",
+      "sha256": "7a2f07c5fd8749fea229b6b3beb7cb925eebf31fa86d87edc0a9eb328e658bfd"
+    },
+    {
+      "bytes": 2446,
+      "path": "PREREGISTRATION.md",
+      "sha256": "6c46d4b4be2937bf1a7201f54ce78e8f52aa1e372d6940d5803b6e81a50010dd"
+    },
+    {
+      "bytes": 60,
+      "path": "requirements.txt",
+      "sha256": "948152c91e8e127aac9ad5043bea0b0028c784b19951a2187d1c7f2518204c2f"
+    },
+    {
+      "bytes": 4850,
+      "path": "config/dxy_xau_eventtime_catchup_v74.json",
+      "sha256": "a0b518b553974fa61ddf03758d004a398b8f217534f5bb3403d5d0e22eff5d9a"
+    },
+    {
+      "bytes": 51,
+      "path": "src/__init__.py",
+      "sha256": "a92aad301eff51dda8d2d7ddfc1c18538ad19a5601b2363988e7646fcf229a7f"
+    },
+    {
+      "bytes": 11292,
+      "path": "src/inverse_lead.py",
+      "sha256": "085e274d2d089f8d8729bdeab62a50eea641ccb99e1b70840425b95b06d8e314"
+    },
+    {
+      "bytes": 3260,
+      "path": "run_source_audit.py",
+      "sha256": "9ae9b3064cae2f9915b606e058e10f220ce7c0a5468eb4229f33cf95b3430a5d"
+    },
+    {
+      "bytes": 6404,
+      "path": "run_calibration.py",
+      "sha256": "56dd84d5069d1603f1ff8cd5b7c8a672e1bb064b614857130cf400026e22d003"
+    },
+    {
+      "bytes": 5294,
+      "path": "lock_contract.py",
+      "sha256": "d890fcd13fe4d169853175ec1fa1f35b469a48d4fab894f19d26a034836113b3"
+    },
+    {
+      "bytes": 6974,
+      "path": "run_stage.py",
+      "sha256": "b9bb22ca4cef7a9f88cd41c0b123287bd12c50cd6d1b6225587b151538b8d5bf"
+    },
+    {
+      "bytes": 257,
+      "path": "tests/conftest.py",
+      "sha256": "7308473be57317fb29fa58fd2c0e060a60917de7c2366cc3c6ad9b5164b9c7cd"
+    },
+    {
+      "bytes": 3081,
+      "path": "tests/test_inverse_lead.py",
+      "sha256": "7eac44a38e4944ff35bedc4d5e4b2de862332d1e52e2602135a76465de06c012"
+    }
+  ],
+  "paid_data_authorized": false,
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_dxy_xau_v74_contract_lock",
+  "selected_policy": {
+    "horizon_ms": 1000,
+    "maximum_signed_xau_response_ratio": 0.0,
+    "minimum_absolute_dxy_move_bps": 1.0,
+    "minimum_directional_innovation_bps": 0.5,
+    "minimum_dxy_quote_count": 2,
+    "policy_id": "H01000__DM010__IN005__RR000__QC02"
+  },
+  "source_audit": {
+    "bytes": 108721,
+    "path": "outputs/DXY_XAU_V74_SOURCE_AUDIT.json",
+    "sha256": "f44da7c4efcd5562797c911d6c77150e1f952abbef29a397318c5a3d7638e708"
+  },
+  "splits": {
+    "confirmation": [
+      "2022-07-01T00:00:00Z",
+      "2023-07-01T00:00:00Z"
+    ],
+    "development": [
+      "2019-02-01T00:00:00Z",
+      "2022-07-01T00:00:00Z"
+    ],
+    "exam": [
+      "2024-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ],
+    "validation": [
+      "2023-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ]
+  },
+  "validation_outcomes_present_at_lock": false
+}
