@@ -1633,3 +1633,45 @@ V39 records route decisions only. It does not attach a candidate outcome,
 evaluate forward profitability, tune the router, train a model, or authorize any
 EA/demo/live action. The untouched validation and confirmation boundaries remain
 the admission gate.
+
+## V40 R1-R4 Core Causal Outcome Resolver - 2026-07-20
+
+`capital-core-causal-outcome-resolver-v40` now closes the remaining same-period
+individual-label gap for V28 R2/R3, V29 R1 pullback, and V34 R4 without changing
+any frozen candidate collector or strategy rule.
+
+- Contract SHA-256:
+  `5968e3f6c43b1bb01be93ba7ecce76b1ad2ea42c4c1389bd7c82803b49d4e9fa`.
+- V28 historical parity: 658 candidates, 379 component trades, 236 exact rebuilt
+  composite trades, and frozen component attempts `11142`, `11266`, `12183`,
+  `12222`, and `12389`.
+- V29 historical parity: all 413 accepted MT5 orders paired to all 413 closed
+  trades with zero entry-price error, maximum stop-rounding error `0.005`,
+  maximum 2R target-rounding error `0.0028491`, only stop/target exits, peak
+  seven concurrent positions, and peak nine entries per UTC day. The frozen
+  eight-position and twelve-entry limits remain unchanged; no time exit was
+  invented.
+- V34 historical parity: 521 candidates, 125 trades, frozen attempts `39427`,
+  `39888`, and `40193`, exact one-position/cooldown behavior, and peak two
+  entries per UTC day.
+- V28 resolves executable stops or fixed horizons per component. V29 resolves
+  only executable stops or locked 2R targets and keeps open positions pending.
+  V34 resolves executable stops, locked 2R targets, or its 12-hour horizon with
+  the frozen shared-position, cooldown, priority, and daily-cap policy.
+- Candidate and resolution ledgers have independent persisted append-only prefix
+  hashes. Source contract changes, prefix mutation/truncation, malformed quotes,
+  candidate schema drift, or enabled authority fails closed.
+- Focused tests: 10 passed. Integrated V28/V29/V34/V38/V39/V40 tests: 41 passed.
+  Ruff and format checks passed.
+- First persistent cycle: `ACTIVE_READ_ONLY_CAUSAL_RESOLVER`, synchronized with
+  all three source clocks, zero candidates, zero resolutions, no aggregate
+  economics, and all authority flags false. Stderr is empty.
+- Persistent hidden parent PID: `13644`; current Python child PID: `7252`;
+  poll interval: 300 seconds.
+- Runtime directory:
+  `C:\MT5PortableProspectiveCollector\MQL5\Files\core_outcomes_v40`.
+
+V40 may append individual causal labels only. It does not route the R2/R3
+composites into a shared account, combine R1-R5 with V24.1/V26, publish aggregate
+P/L, train a model, tune a strategy, or authorize EA/demo/live action. A locked
+same-period shared-account evaluator remains the next engineering dependency.

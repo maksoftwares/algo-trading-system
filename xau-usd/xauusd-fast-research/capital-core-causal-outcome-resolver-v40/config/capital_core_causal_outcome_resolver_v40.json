@@ -1,0 +1,144 @@
+{
+  "schema_version": "xauusd_capital_core_causal_outcome_resolver_v40",
+  "source": {
+    "tick_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files",
+    "tick_filename_glob": "xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_*.csv",
+    "tick_schema_version": "xau_prospective_tick_v1",
+    "account_login": 1033669,
+    "account_server": "Capital.ComMena-Demo",
+    "symbol": "XAUUSD"
+  },
+  "frozen_identity": {
+    "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+    "v28": {
+      "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/core_shadow_v28",
+      "candidate_filename": "r2_r3_candidates.jsonl",
+      "status_filename": "runtime_status.json",
+      "contract_lock": "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/outputs/CAPITAL_CORE_SHADOW_V28_CONTRACT_LOCK.json",
+      "contract_sha256": "b197323782a289b7c59734c55ef97485a86d0eb5da0bfc229ea8025e56ded974",
+      "rule_dependency_sha256": "fa0fdf85c6d630c9c1306ecb1b5ac78c11c7db4e91a931b408dbbe1b13324e60",
+      "component_attempts": [11142, 11266, 12183, 12222, 12389],
+      "historical_candidate_rows": 658,
+      "historical_component_trade_rows": 379
+    },
+    "v29": {
+      "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r1_pullback_shadow_v29",
+      "candidate_filename": "r1_pullback_candidates.jsonl",
+      "status_filename": "runtime_status.json",
+      "contract_lock": "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/outputs/CAPITAL_R1_PULLBACK_V29_CONTRACT_LOCK.json",
+      "contract_sha256": "80efb0907d2742e47f9e871f25cfacef485853f60f973145461b5655d4db43fb",
+      "rule_dependency_sha256": "5de2d9fb972f04cc90d458622fe9fe33d55cb4238d3857f3f9177c9e742d1456",
+      "historical_candidate_rows": 413,
+      "historical_trade_rows": 413
+    },
+    "v34": {
+      "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r4_chop_shadow_v34",
+      "candidate_filename": "r4_candidates.jsonl",
+      "status_filename": "runtime_status.json",
+      "contract_lock": "xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/outputs/CAPITAL_R4_CHOP_FORWARD_V34_CONTRACT_LOCK.json",
+      "contract_sha256": "9fa530dc59595d43873c890b82699fbbba36e00c1db34f1fe9ee4540ff7caeea",
+      "rule_dependency_sha256": "d14634f35004e9691e05b2153885e44a2531175af9f7f7a2f7f2091f152c6d58",
+      "component_attempts": [39427, 39888, 40193],
+      "historical_candidate_rows": 521,
+      "historical_trade_rows": 125
+    }
+  },
+  "execution": {
+    "common": {
+      "ounces_at_lot_size": 1.0,
+      "ticket_cost_usd": 0.30,
+      "holding_cost_per_24h_usd": 0.35,
+      "stress_slippage_r": 0.05,
+      "maximum_research_risk_usd": 50.0,
+      "maximum_entry_spread_r": 0.15
+    },
+    "v28": {
+      "maximum_entry_gap_minutes": 10,
+      "maximum_horizon_gap_minutes": 5760,
+      "maximum_trades_per_component_utc_day": 4,
+      "exit_mode": "EXECUTABLE_STOP_OR_FIXED_HORIZON"
+    },
+    "v29": {
+      "maximum_entry_gap_minutes": 1,
+      "point_size": 0.01,
+      "target_r": 2.0,
+      "maximum_open_positions": 8,
+      "maximum_trades_per_utc_day": 12,
+      "exit_mode": "EXECUTABLE_STOP_OR_LOCKED_TARGET_NO_HORIZON"
+    },
+    "v34": {
+      "maximum_entry_gap_minutes": 5,
+      "maximum_horizon_gap_minutes": 5,
+      "cooldown_minutes": 5,
+      "maximum_trades_per_utc_day": 4,
+      "exit_mode": "EXECUTABLE_STOP_OR_LOCKED_TARGET_OR_FIXED_HORIZON"
+    }
+  },
+  "data_quality": {
+    "maximum_timestamp_disagreement_ms": 1,
+    "maximum_spread_field_error": 0.011,
+    "require_dry_run_true": true,
+    "require_all_authority_flags_false": true
+  },
+  "forward": {
+    "poll_seconds": 300,
+    "validation_full_weekdays": 20,
+    "confirmation_full_weekdays": 20
+  },
+  "historical": {
+    "v28_candidates": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet",
+    "v28_component_trades": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPONENT_TRADES.parquet",
+    "v28_composite_trades": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPOSITE_TRADES.parquet",
+    "v34_candidates": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_CANDIDATES.parquet",
+    "v34_trades": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_TRADES.parquet",
+    "v29_orders": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_orders.csv",
+    "v29_trades": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_trades.csv"
+  },
+  "contract_dependencies": [
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/config/capital_core_same_period_shadow_v28.json",
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/src/core_shadow.py",
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/run_shadow.py",
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/outputs/CAPITAL_CORE_SHADOW_V28_CONTRACT_LOCK.json",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/config/capital_r1_pullback_forward_v29.json",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/src/pullback.py",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/run_shadow.py",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/outputs/CAPITAL_R1_PULLBACK_V29_CONTRACT_LOCK.json",
+    "xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/config/capital_r4_chop_forward_v34.json",
+    "xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/src/chop_forward.py",
+    "xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/run_shadow.py",
+    "xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/outputs/CAPITAL_R4_CHOP_FORWARD_V34_CONTRACT_LOCK.json",
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/config/regime_composite_rawtick_v1.json",
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/src/composite.py",
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet",
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPONENT_TRADES.parquet",
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPOSITE_TRADES.parquet",
+    "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/config/chop_three_mechanism_rawtick_v26.json",
+    "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/src/confirmation.py",
+    "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_CANDIDATES.parquet",
+    "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_TRADES.parquet",
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/src/resolver.py",
+    "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_orders.csv",
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_trades.csv"
+  ],
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "CAPITAL_CORE_CAUSAL_OUTCOME_RESOLVER_V40_CONTRACT_LOCK.json",
+    "historical_semantic_parity": "CAPITAL_CORE_CAUSAL_OUTCOME_RESOLVER_V40_HISTORICAL_SEMANTIC_PARITY.json",
+    "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/core_outcomes_v40",
+    "runtime_status": "runtime_status.json"
+  },
+  "research_controls": {
+    "append_only_candidate_facts": true,
+    "append_only_resolutions": true,
+    "prospective_individual_outcomes_recorded": true,
+    "aggregate_economics_opened": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

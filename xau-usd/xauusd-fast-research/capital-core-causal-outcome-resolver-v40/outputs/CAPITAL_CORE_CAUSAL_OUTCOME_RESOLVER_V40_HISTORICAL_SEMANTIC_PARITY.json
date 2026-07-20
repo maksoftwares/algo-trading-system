@@ -1,0 +1,49 @@
+{
+  "aggregate_economics_opened": false,
+  "broker_action_authorized": false,
+  "contract_sha256": "5968e3f6c43b1bb01be93ba7ecce76b1ad2ea42c4c1389bd7c82803b49d4e9fa",
+  "schema_version": "xauusd_capital_core_causal_outcome_semantic_parity_v40",
+  "semantic_parity_passed": true,
+  "v28": {
+    "candidate_rows": 658,
+    "component_attempts": [
+      11142,
+      11266,
+      12183,
+      12222,
+      12389
+    ],
+    "component_trade_rows": 379,
+    "composite_rebuild_exact": true,
+    "composite_trade_rows": 236,
+    "execution_semantics_exact": true,
+    "pass": true,
+    "trade_candidate_ids_are_known": true
+  },
+  "v29": {
+    "accepted_deals_pair_to_trades": true,
+    "accepted_order_rows": 413,
+    "all_exits_are_stop_or_target": true,
+    "maximum_concurrent_positions": 7,
+    "maximum_entry_price_error": 0.0,
+    "maximum_stop_price_error": 0.005000000000036309,
+    "maximum_target_r_error": 0.0028490028490004704,
+    "maximum_trades_per_utc_day": 9,
+    "pass": true,
+    "trade_rows": 413
+  },
+  "v34": {
+    "candidate_rows": 521,
+    "component_attempts": [
+      39427,
+      39888,
+      40193
+    ],
+    "execution_semantics_exact": true,
+    "maximum_trades_per_utc_day": 2,
+    "pass": true,
+    "shared_position_and_cooldown_hold": true,
+    "trade_candidate_ids_are_known": true,
+    "trade_rows": 125
+  }
+}

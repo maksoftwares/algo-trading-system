@@ -1,0 +1,164 @@
+{
+  "aggregate_economics_opened": false,
+  "broker_action_authorized": false,
+  "contract_sha256": "5968e3f6c43b1bb01be93ba7ecce76b1ad2ea42c4c1389bd7c82803b49d4e9fa",
+  "dependencies": {
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/config/capital_core_same_period_shadow_v28.json": {
+      "bytes": 3879,
+      "sha256": "6a60e303d93f2d8a16e8a70d5a2a36b829f3c007291cf42118d08ca9a298a084"
+    },
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/outputs/CAPITAL_CORE_SHADOW_V28_CONTRACT_LOCK.json": {
+      "bytes": 2083,
+      "sha256": "b81bcbd3b0eedb6999d2e043380ebd8ff038749afac75f068c561e2568743a77"
+    },
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/run_shadow.py": {
+      "bytes": 7053,
+      "sha256": "7908b6d7d508fdffb12f52ce2452412ec5ea347a9be92b8847455b8b60aec1d5"
+    },
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/src/core_shadow.py": {
+      "bytes": 11909,
+      "sha256": "682bd2b62d526fa9dd0c45805e7a490cbf6bb9cfa35b62d95c6c9f9cb0633bfc"
+    },
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/config/capital_r1_pullback_forward_v29.json": {
+      "bytes": 4397,
+      "sha256": "ddce21cbc4343d3ec350c243da6d2747f50c3719551c00d9f923bf05e76b89ef"
+    },
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/outputs/CAPITAL_R1_PULLBACK_V29_CONTRACT_LOCK.json": {
+      "bytes": 5652,
+      "sha256": "7b3aaa63653533322fcae5e043fb3cccc1797a3b4c074b7a6edc1d6c56720e19"
+    },
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/run_shadow.py": {
+      "bytes": 10522,
+      "sha256": "f69b13fb025e8e986dd96174187467b5b80fd3c8fbe7f1d468b683771fb46eb1"
+    },
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/src/pullback.py": {
+      "bytes": 18417,
+      "sha256": "22a414c99fd8d8d2ae0f23799f854fdc008b2a87b1112d3eafb3db6c291d8306"
+    },
+    "xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/config/capital_r4_chop_forward_v34.json": {
+      "bytes": 4283,
+      "sha256": "4999f687f81673118e90111146669c4bffaefafcccb20da2ef279c9ff67f7af8"
+    },
+    "xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/outputs/CAPITAL_R4_CHOP_FORWARD_V34_CONTRACT_LOCK.json": {
+      "bytes": 3660,
+      "sha256": "c8c2c24e19680e2c8c9575e2c44b08e8d0be0b650a233ffbc8f045c4d9b7c1a9"
+    },
+    "xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/run_shadow.py": {
+      "bytes": 8565,
+      "sha256": "eece75f4f99a799a55210a1449613f7b5eebfa2ed5a89d62161e18b129578c5d"
+    },
+    "xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/src/chop_forward.py": {
+      "bytes": 18076,
+      "sha256": "a2b8fe0efc6866cdf329c4e1ef4e7a4195aa926d19a07751f01699da9e4fec01"
+    },
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/src/resolver.py": {
+      "bytes": 39695,
+      "sha256": "47e92cc2fe8fdb262311f6ae5ff63e95b32274d256809ea2ba4e514784384571"
+    },
+    "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/config/chop_three_mechanism_rawtick_v26.json": {
+      "bytes": 7205,
+      "sha256": "06e8465a83bcae0895042aebbc5f5c594f8f60639cca9d0438f1580f43c0c128"
+    },
+    "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_CANDIDATES.parquet": {
+      "bytes": 45985,
+      "sha256": "26b8c6e75957f3b33b966aa82bf05f4a21d41b4365a86543a8ad8391f1d084e4"
+    },
+    "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_TRADES.parquet": {
+      "bytes": 40405,
+      "sha256": "f0dc5ccf622e1b9086031c26d174d3585f7e15f6e31401d6e06a8d08864cb793"
+    },
+    "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/src/confirmation.py": {
+      "bytes": 18379,
+      "sha256": "151b807b596f111c2df1355e6c0c1d1c592bcddda34d5710df0b3f98f7535d88"
+    },
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/config/regime_composite_rawtick_v1.json": {
+      "bytes": 5242,
+      "sha256": "3fd96a536850e0c94c070a99ec1d8dd923529854af7662403d7d2c831b6bf8dd"
+    },
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet": {
+      "bytes": 45928,
+      "sha256": "3a8b1d1812ca46f9a89d24e41cf3580b19d7ea5a5e1744a3c052a9d0339eb99b"
+    },
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPONENT_TRADES.parquet": {
+      "bytes": 74959,
+      "sha256": "c12e9f748e9cc0d189e5ead782b68614d683b2f1249a45c4cdd6c7132302be90"
+    },
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPOSITE_TRADES.parquet": {
+      "bytes": 57268,
+      "sha256": "1616087181e0faa5d50883a44938bfd3e3665e33e7eee06d48a25b2c8900c93c"
+    },
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/src/composite.py": {
+      "bytes": 11584,
+      "sha256": "0c4e362103ff620f0652ed49c263657bdc19986e75184af7c91bbfb84bd7c467"
+    },
+    "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5": {
+      "bytes": 185177,
+      "sha256": "43c5795a3c0206447446f488ee38e23006bf59a0df1575fc81744294c0ba1a53"
+    },
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_orders.csv": {
+      "bytes": 777903,
+      "sha256": "8482016a012efcbb61470b8936815e0277234612d25e1bc2e084306f8338a749"
+    },
+    "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_trades.csv": {
+      "bytes": 78418,
+      "sha256": "91976d2bd3d1a373eb95b5d43efe7a4cad848e64baca69e88db2fc2240312aa6"
+    }
+  },
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "package_files": {
+    ".gitattributes": {
+      "bytes": 121,
+      "sha256": "8e523f5787e3fcbed90961929940878dbad6dd206006eae315671bafb56f6360"
+    },
+    ".gitignore": {
+      "bytes": 51,
+      "sha256": "5cc022ce0a8f43cb87cc5ca1ab6da14bde2dbc4b0b571299e4c0cdff2e7e98c4"
+    },
+    "PREREGISTRATION.md": {
+      "bytes": 2779,
+      "sha256": "bfd58e528ad37522729a40891610a00ea42cbfef648e91fbc772ef013d5d6015"
+    },
+    "README.md": {
+      "bytes": 636,
+      "sha256": "bb64f12b3de88a788c62db7eb1cd2a22107a97023658390fdc6ff4d2a1b548eb"
+    },
+    "config/capital_core_causal_outcome_resolver_v40.json": {
+      "bytes": 8920,
+      "sha256": "43571f57389272be4257e46a0b1b3cf774b990a37c628018480c9c6cdc96700a"
+    },
+    "lock_contract.py": {
+      "bytes": 1991,
+      "sha256": "6567814138920baacab3996f8c6a74a506aa4bf8726b1aa0d8deb560d0ed73b3"
+    },
+    "requirements.txt": {
+      "bytes": 21,
+      "sha256": "d932106411c00b96f329d90c30043419fe8892bbccb59d7deaaeb28d7d172176"
+    },
+    "run_resolver.py": {
+      "bytes": 9143,
+      "sha256": "54a73eeb1e8e2c429b6e35e29035875b2b2ad21f50c4d3f23f3c20f26587bce3"
+    },
+    "src/__init__.py": {
+      "bytes": 76,
+      "sha256": "94d3569b8b4b3bd191f1b967f1f2b38bcf19229cec3cd571f7d0ff074e6bc20f"
+    },
+    "src/resolver.py": {
+      "bytes": 39324,
+      "sha256": "f00a58e0115b837bf46d5e974eafad0f5218226cf1074dfa394fab320d6332c7"
+    },
+    "tests/test_resolver.py": {
+      "bytes": 11701,
+      "sha256": "5ef580b597236950320b38e203efa8aa0eb17fe081226d4b03fb6441c41e25f6"
+    },
+    "verify_historical_semantics.py": {
+      "bytes": 10075,
+      "sha256": "d6d2e08cb00a7a6d6f70860f7529af5f1a5028350d41a66b9c02db199afad593"
+    }
+  },
+  "schema_version": "xauusd_capital_core_causal_outcome_resolver_v40",
+  "source_contracts": {
+    "v28": "b197323782a289b7c59734c55ef97485a86d0eb5da0bfc229ea8025e56ded974",
+    "v29": "80efb0907d2742e47f9e871f25cfacef485853f60f973145461b5655d4db43fb",
+    "v34": "9fa530dc59595d43873c890b82699fbbba36e00c1db34f1fe9ee4540ff7caeea"
+  }
+}
