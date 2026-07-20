@@ -1,0 +1,92 @@
+from __future__ import annotations
+
+import json
+import os
+from pathlib import Path
+import sys
+from typing import Any
+
+
+ROOT = Path(__file__).resolve().parent
+V72_SRC = ROOT.parent / "xag-xau-eventtime-catchup-v72" / "src"
+for source in (ROOT / "src", V72_SRC):
+    sys.path.insert(0, str(source))
+
+from catchup import (  # noqa: E402
+    canonical_hash,
+    load_json,
+    month_keys,
+    sha256_file,
+    validate_month_manifest,
+)
+
+
+CONFIG = ROOT / "config" / "ustbond_xau_eventtime_catchup_v76.json"
+
+
+def run_source_audit() -> dict[str, Any]:
+    config = load_json(CONFIG)
+    output = ROOT / str(config["outputs"]["directory"])
+    path = output / str(config["outputs"]["source_audit"])
+    if path.exists():
+        raise FileExistsError("V76 source audit already exists")
+    source = config["source"]
+    storage = Path(
+        os.environ.get(
+            str(source["storage_environment_variable"]),
+            str(source["default_storage_root"]),
+        )
+    ).resolve()
+    evidence_path = storage / str(source["instrument_evidence"])
+    evidence = load_json(evidence_path)
+    if (
+        evidence.get("code") != "USTBOND.TR-USD"
+        or evidence.get("name") != "USTBOND.TR/USD"
+        or int(evidence.get("priceScale", -1)) != 3
+        or not any(row.get("period") == "TICK" for row in evidence.get("histories", []))
+    ):
+        raise ValueError("V76 official Treasury-bond instrument evidence is invalid")
+    manifests: list[dict[str, Any]] = []
+    for symbol, spec in source["symbols"].items():
+        for year, month in month_keys(source["first_month"], source["last_month"]):
+            _, row = validate_month_manifest(storage, symbol, spec, year, month)
+            manifests.append(row)
+    audit: dict[str, Any] = {
+        "schema_version": "xauusd_ustbond_xau_v76_source_audit",
+        "campaign_id": config["campaign_id"],
+        "decision": "V76_SOURCE_AUDIT_PASS",
+        "storage_root": str(storage),
+        "symbols": source["symbols"],
+        "first_month": source["first_month"],
+        "last_month": source["last_month"],
+        "instrument_evidence": str(evidence_path),
+        "instrument_evidence_sha256": sha256_file(evidence_path),
+        "month_manifests": manifests,
+        "month_manifest_count": len(manifests),
+        "declared_hours": sum(int(row["hours"]) for row in manifests),
+        "declared_bytes": sum(int(row["declared_bytes"]) for row in manifests),
+        "declared_ticks": sum(int(row["declared_ticks"]) for row in manifests),
+        "runtime_raw_file_hash_verification_required": True,
+        "paid_data_used": False,
+        "economic_outcomes_opened": False,
+    }
+    audit["audit_sha256"] = canonical_hash(audit, "audit_sha256")
+    output.mkdir(parents=True, exist_ok=True)
+    path.write_bytes((json.dumps(audit, indent=2, sort_keys=True) + "\n").encode())
+    print(
+        json.dumps(
+            {
+                "decision": audit["decision"],
+                "months": audit["month_manifest_count"],
+                "hours": audit["declared_hours"],
+                "ticks": audit["declared_ticks"],
+                "audit_sha256": audit["audit_sha256"],
+            },
+            indent=2,
+        )
+    )
+    return audit
+
+
+if __name__ == "__main__":
+    run_source_audit()
