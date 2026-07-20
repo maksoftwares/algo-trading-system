@@ -318,6 +318,30 @@ direction inversion, nor this predeclared fast transmission-retracement clock
 creates positive expectancy from the locked FX-consensus event. This mechanism
 and its timing, thresholds, direction, exits, costs, and quota are retired.
 
+## V81 FX Breadth Overreaction-Fade Result
+
+V81 required EURUSD, GBPUSD, and USDJPY to agree on USD direction while XAUUSD
+had already overreacted in the expected inverse-dollar direction, then faded the
+completed XAUUSD response. Outcome-blind July-August 2018 calibration registered
+exactly 1,000 policies and selected a one-second, 0.25 bps minimum-per-leg,
+0.75 bps summed-breadth, 1.50 signed-response-ratio, five-quote policy at
+`40/44 = 0.909091/day`, split 19 long and 21 short.
+
+Fresh development from September 2018 through June 2021 resolved `646` trades
+over `723` eligible weekdays (`0.893499/day`), split 321 long and 325 short.
+Base/stress net was USD `-451.31/-500.67`; base/stress PF was
+`0.2567/0.2223`; first/second-half stress PF was `0.1953/0.2406`; no month was
+positive; winner-removed stress net was USD `-513.43`; stressed DD was USD
+`500.67`; and bootstrap p-value was `1.0`.
+
+Decision: `V81_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`0df6e9791dd0aea289187c27b114eaeca48be0fb5f50157e0103993776716aca`.
+All later stages remain sealed. V78-V81 now reject immediate FX-consensus
+catch-up, one fixed direction inversion, fast transmission-retracement, and
+completed-overreaction fade. V81 may not be mirrored, retuned, or rescued;
+future work requires a materially different causal variable. V59/V60 remain
+immutable and outside this rejection.
+
 ## Routes Not Counted As Solutions
 
 - Splitting one position into several tickets does not create independent
