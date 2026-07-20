@@ -1,0 +1,24 @@
+{
+  "contract_sha256": "f43c7e259950f41bdf3a28c391ac503812f893d4bb6ec64c055f05c85502faf2",
+  "files": {
+    "BREAK_SWING_RANKER_PORTFOLIO_V52_RESULT.json": {
+      "bytes": 28317,
+      "sha256": "bd3b8003ac9bd933c2b8b1a9c43cc603c9db7a0c6b90b6d4868aa122a238fb52"
+    },
+    "BREAK_SWING_RANKER_PORTFOLIO_V52_RESULT.md": {
+      "bytes": 1759,
+      "sha256": "3c33f5540f5e76ecf0c5a3c40fb93eba3f51356a4c74e8a382534d0cb9c01c38"
+    },
+    "BREAK_SWING_RANKER_PORTFOLIO_V52_TRADES.parquet": {
+      "bytes": 116775,
+      "sha256": "bca081537fde20dca21d1fc26cca9728966e2b5e3a50b9114334a6bcdd53cbb7"
+    },
+    "BREAK_SWING_RANKER_PORTFOLIO_V52_WINDOWS.csv": {
+      "bytes": 3702,
+      "sha256": "0507662b1b8c22237f6bc3e255baca96772712d18a6b56676d3412f0df5a7d00"
+    }
+  },
+  "manifest_sha256": "68fd878102ba75b8a4dcb8c4430d04935ca32d366ddd252232d91db6127c512e",
+  "result_sha256": "d3db59a63fb167108d18e89779f78dc01d2921919a5b173dd70afbef53d87878",
+  "schema_version": "xauusd_break_swing_ranker_portfolio_v52"
+}

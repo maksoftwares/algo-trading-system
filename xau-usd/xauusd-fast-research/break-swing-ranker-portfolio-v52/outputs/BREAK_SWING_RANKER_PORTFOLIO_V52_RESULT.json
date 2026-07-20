@@ -1,0 +1,687 @@
+{
+  "contract_sha256": "f43c7e259950f41bdf3a28c391ac503812f893d4bb6ec64c055f05c85502faf2",
+  "decision": "V52_BREAK_SWING_RANKER_GATE_FAIL_TERMINAL",
+  "failed_checks": {
+    "final_exam": [
+      "minimum_addon_profit_factor",
+      "addon_winner_removal_positive",
+      "maximum_combined_closed_drawdown"
+    ],
+    "recent_tail": [
+      "minimum_addon_profit_factor",
+      "minimum_addon_net",
+      "addon_winner_removal_positive"
+    ],
+    "validation": [
+      "minimum_combined_positive_month_share"
+    ]
+  },
+  "historical_milestone_achieved": false,
+  "interpretation": "The fixed-action quarterly ranker failed at least one locked later-period frequency, marginal expectancy, stability, or drawdown gate. V52 is terminal and V50 remains the protected Core.",
+  "limitations": {
+    "claims_pristine_holdout": false,
+    "execution_authorized": false,
+    "whole_account_floating_drawdown_proven": false
+  },
+  "research_controls": {
+    "broker_action_authorized": false,
+    "claims_pristine_holdout": false,
+    "demo_authorized": false,
+    "development_quantiles_observed": 5,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "model_training_authorized": true,
+    "predecessor_attempts_observed": 1000,
+    "python_predictions_authorized": false,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false
+  },
+  "result_sha256": "d3db59a63fb167108d18e89779f78dc01d2921919a5b173dd70afbef53d87878",
+  "schema_version": "xauusd_break_swing_ranker_portfolio_v52",
+  "source_audit": {
+    "expansion_action_ledger": {
+      "bytes": 21612320,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\high-frequency-expansion-v1\\outputs\\HIGH_FREQUENCY_EXPANSION_ACTION_LABELS.parquet",
+      "sha256": "a5a765fa70da99e7162377ac893546b4195d9e43bdad1cd19cb4006314c7c21a"
+    },
+    "normalized_core_ledger": {
+      "bytes": 80507,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\five-specialist-window-report-v1\\outputs\\FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+      "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+    },
+    "v50_result": {
+      "bytes": 7261,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\historical-core-single-exposure-risk-v50\\outputs\\HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_RESULT.json",
+      "sha256": "d450961595cdb8b3abd1bd0ccbdc9ff110aba89dbe7d2cbb052e0f3d140a218f"
+    },
+    "v51_research_helper": {
+      "bytes": 20646,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\one-trade-per-day-portfolio-v51\\src\\research.py",
+      "sha256": "041443c0d91a9bc01d14c3c35841508ca2d9112946c3eaf7c47e8da16fb38651"
+    }
+  },
+  "stages": [
+    {
+      "addon": {
+        "active_weekday_share": 0.4528061224489796,
+        "average_pnl_dollars": 0.47123722089565456,
+        "best_weekday_dollars": 14.727279271416704,
+        "closed_drawdown_dollars": 157.8752418105155,
+        "first_half_net_dollars": -48.16255632823844,
+        "maximum_risk_usd": 7.747220970796168,
+        "net_pnl_dollars": 167.28921341795737,
+        "positive_month_share": 0.4444444444444444,
+        "profit_factor": 1.1770600493690846,
+        "second_half_net_dollars": 215.45176974619585,
+        "top_winners_removed_net_dollars": 41.3649803494005,
+        "trades": 355,
+        "trades_per_weekday": 0.4528061224489796,
+        "weekdays": 784,
+        "win_rate": 0.4309859154929577,
+        "worst_weekday_dollars": -8.23407064156752
+      },
+      "checks": {},
+      "combined": {
+        "active_weekday_share": 0.5433673469387755,
+        "average_pnl_dollars": 0.5996552950435327,
+        "best_weekday_dollars": 36.08678210522286,
+        "closed_drawdown_dollars": 169.7277033163838,
+        "first_half_net_dollars": -39.05785044384609,
+        "maximum_risk_usd": 21.708815281139437,
+        "net_pnl_dollars": 338.20558640455243,
+        "positive_month_share": 0.5555555555555556,
+        "profit_factor": 1.260098968094808,
+        "second_half_net_dollars": 377.26343684839867,
+        "top_winners_removed_net_dollars": 113.46635056392398,
+        "trades": 564,
+        "trades_per_weekday": 0.7193877551020408,
+        "weekdays": 784,
+        "win_rate": 0.4237588652482269,
+        "worst_weekday_dollars": -16.070701573704333
+      },
+      "core": {
+        "active_weekday_share": 0.20918367346938777,
+        "average_pnl_dollars": 0.8177816889310772,
+        "best_weekday_dollars": 33.36564173159515,
+        "closed_drawdown_dollars": 36.781119010248965,
+        "first_half_net_dollars": 9.104705884392315,
+        "maximum_risk_usd": 21.708815281139437,
+        "net_pnl_dollars": 170.91637298659512,
+        "positive_month_share": 0.5555555555555556,
+        "profit_factor": 1.480805139297299,
+        "second_half_net_dollars": 161.81166710220282,
+        "top_winners_removed_net_dollars": -53.580055442504914,
+        "trades": 209,
+        "trades_per_weekday": 0.26658163265306123,
+        "weekdays": 784,
+        "win_rate": 0.41148325358851673,
+        "worst_weekday_dollars": -24.23034975360065
+      },
+      "end_exclusive_utc": "2022-01-01T00:00:00+00:00",
+      "gate_pass": null,
+      "overlap": {
+        "addon_entries_while_core_open": 33,
+        "core_entries_while_addon_open": 23,
+        "maximum_concurrent_positions": 2,
+        "maximum_open_initial_risk_dollars": 23.599335609623395
+      },
+      "quarterly_models": [
+        {
+          "block_end_exclusive_utc": "2019-04-01T00:00:00+00:00",
+          "candidate_rows": 5,
+          "fit_rows": 262,
+          "refit_time_utc": "2019-01-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.9746794344808963,
+          "score_threshold": 0.34714223432295405,
+          "threshold_rows": 262
+        },
+        {
+          "block_end_exclusive_utc": "2019-07-01T00:00:00+00:00",
+          "candidate_rows": 55,
+          "fit_rows": 267,
+          "refit_time_utc": "2019-04-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.15806183930439802,
+          "score_threshold": 0.3230720206673755,
+          "threshold_rows": 267
+        },
+        {
+          "block_end_exclusive_utc": "2019-10-01T00:00:00+00:00",
+          "candidate_rows": 213,
+          "fit_rows": 322,
+          "refit_time_utc": "2019-07-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.038009866782034996,
+          "score_threshold": 0.15187355300084884,
+          "threshold_rows": 322
+        },
+        {
+          "block_end_exclusive_utc": "2020-01-01T00:00:00+00:00",
+          "candidate_rows": 66,
+          "fit_rows": 535,
+          "refit_time_utc": "2019-10-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.16579057787205628,
+          "score_threshold": -0.16762232135293953,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2020-04-01T00:00:00+00:00",
+          "candidate_rows": 252,
+          "fit_rows": 603,
+          "refit_time_utc": "2020-01-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.020215768357950116,
+          "score_threshold": -0.14651269109813858,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2020-07-01T00:00:00+00:00",
+          "candidate_rows": 199,
+          "fit_rows": 855,
+          "refit_time_utc": "2020-04-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.12975594194160614,
+          "score_threshold": 0.1395199103866714,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2020-10-01T00:00:00+00:00",
+          "candidate_rows": 534,
+          "fit_rows": 1055,
+          "refit_time_utc": "2020-07-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.03552530333998801,
+          "score_threshold": 0.06236242019554356,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2021-01-01T00:00:00+00:00",
+          "candidate_rows": 352,
+          "fit_rows": 1592,
+          "refit_time_utc": "2020-10-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.06709079501694243,
+          "score_threshold": -0.22415664067316043,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2021-04-01T00:00:00+00:00",
+          "candidate_rows": 414,
+          "fit_rows": 1946,
+          "refit_time_utc": "2021-01-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.025516755836840547,
+          "score_threshold": 0.08325563967175983,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2021-07-01T00:00:00+00:00",
+          "candidate_rows": 218,
+          "fit_rows": 2360,
+          "refit_time_utc": "2021-04-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.06352779627056337,
+          "score_threshold": 0.5760682511990768,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2021-10-01T00:00:00+00:00",
+          "candidate_rows": 197,
+          "fit_rows": 2579,
+          "refit_time_utc": "2021-07-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.08115888343380481,
+          "score_threshold": 0.10242596533972616,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2022-01-01T00:00:00+00:00",
+          "candidate_rows": 183,
+          "fit_rows": 2777,
+          "refit_time_utc": "2021-10-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.12303347811494607,
+          "score_threshold": -0.09458701363969019,
+          "threshold_rows": 500
+        }
+      ],
+      "stage": "development",
+      "start_utc": "2019-01-01T00:00:00+00:00"
+    },
+    {
+      "addon": {
+        "active_weekday_share": 0.5009596928982726,
+        "average_pnl_dollars": 1.6373141966547962,
+        "best_weekday_dollars": 14.352797353090077,
+        "closed_drawdown_dollars": 89.975714851848,
+        "first_half_net_dollars": 208.17793772260794,
+        "maximum_risk_usd": 8.10001205891131,
+        "net_pnl_dollars": 427.33900532690177,
+        "positive_month_share": 0.5416666666666666,
+        "profit_factor": 1.7593679813285519,
+        "second_half_net_dollars": 219.1610676042938,
+        "top_winners_removed_net_dollars": 306.5706935933508,
+        "trades": 261,
+        "trades_per_weekday": 0.5009596928982726,
+        "weekdays": 521,
+        "win_rate": 0.524904214559387,
+        "worst_weekday_dollars": -8.848762661857055
+      },
+      "checks": {
+        "addon_winner_removal_positive": true,
+        "buffered_closed_drawdown_within_15_percent": true,
+        "combined_winner_removal_positive": true,
+        "maximum_addon_drawdown": true,
+        "maximum_addon_risk": true,
+        "maximum_combined_closed_drawdown": true,
+        "minimum_addon_frequency": true,
+        "minimum_addon_net": true,
+        "minimum_addon_profit_factor": true,
+        "minimum_addon_trades": true,
+        "minimum_combined_frequency": true,
+        "minimum_combined_net": true,
+        "minimum_combined_positive_month_share": false,
+        "minimum_combined_profit_factor": true,
+        "minimum_combined_trades": true,
+        "minimum_first_half_combined_net": true,
+        "minimum_second_half_combined_net": true
+      },
+      "combined": {
+        "active_weekday_share": 0.6161228406909789,
+        "average_pnl_dollars": 1.9077924752754962,
+        "best_weekday_dollars": 150.10696410747119,
+        "closed_drawdown_dollars": 161.6976008848564,
+        "first_half_net_dollars": 220.85088570135872,
+        "maximum_risk_usd": 10.722408833680714,
+        "net_pnl_dollars": 1177.1079572449812,
+        "positive_month_share": 0.4583333333333333,
+        "profit_factor": 1.7410551945677475,
+        "second_half_net_dollars": 956.2570715436225,
+        "top_winners_removed_net_dollars": 682.2118201630365,
+        "trades": 617,
+        "trades_per_weekday": 1.1842610364683301,
+        "weekdays": 521,
+        "win_rate": 0.4846029173419773,
+        "worst_weekday_dollars": -67.72
+      },
+      "core": {
+        "active_weekday_share": 0.32437619961612285,
+        "average_pnl_dollars": 2.106092561567639,
+        "best_weekday_dollars": 154.10383910747117,
+        "closed_drawdown_dollars": 252.67618853790165,
+        "first_half_net_dollars": 12.672947978750823,
+        "maximum_risk_usd": 10.722408833680714,
+        "net_pnl_dollars": 749.7689519180794,
+        "positive_month_share": 0.4166666666666667,
+        "profit_factor": 1.731007439573738,
+        "second_half_net_dollars": 737.0960039393286,
+        "top_winners_removed_net_dollars": 254.8728148361346,
+        "trades": 356,
+        "trades_per_weekday": 0.6833013435700576,
+        "weekdays": 521,
+        "win_rate": 0.4550561797752809,
+        "worst_weekday_dollars": -72.84
+      },
+      "end_exclusive_utc": "2024-07-01T00:00:00+00:00",
+      "gate_pass": false,
+      "overlap": {
+        "addon_entries_while_core_open": 99,
+        "core_entries_while_addon_open": 30,
+        "maximum_concurrent_positions": 8,
+        "maximum_open_initial_risk_dollars": 16.442750135679013
+      },
+      "quarterly_models": [
+        {
+          "block_end_exclusive_utc": "2022-10-01T00:00:00+00:00",
+          "candidate_rows": 221,
+          "fit_rows": 2962,
+          "refit_time_utc": "2022-07-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.08117221610928962,
+          "score_threshold": -0.08286988986325435,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2023-01-01T00:00:00+00:00",
+          "candidate_rows": 252,
+          "fit_rows": 3183,
+          "refit_time_utc": "2022-10-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.16220820236278044,
+          "score_threshold": -0.1103808984854538,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2023-04-01T00:00:00+00:00",
+          "candidate_rows": 354,
+          "fit_rows": 3435,
+          "refit_time_utc": "2023-01-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.03092499043682021,
+          "score_threshold": -0.0859802507992509,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2023-07-01T00:00:00+00:00",
+          "candidate_rows": 253,
+          "fit_rows": 3789,
+          "refit_time_utc": "2023-04-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.1009911562584581,
+          "score_threshold": 0.5262602607950918,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2023-10-01T00:00:00+00:00",
+          "candidate_rows": 95,
+          "fit_rows": 4044,
+          "refit_time_utc": "2023-07-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.07327178941801392,
+          "score_threshold": -0.022227517317769823,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2024-01-01T00:00:00+00:00",
+          "candidate_rows": 263,
+          "fit_rows": 4140,
+          "refit_time_utc": "2023-10-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.13200893243306747,
+          "score_threshold": -0.07968203356286079,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2024-04-01T00:00:00+00:00",
+          "candidate_rows": 201,
+          "fit_rows": 4404,
+          "refit_time_utc": "2024-01-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.02770292109344928,
+          "score_threshold": -0.04415413832777536,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2024-07-01T00:00:00+00:00",
+          "candidate_rows": 547,
+          "fit_rows": 4606,
+          "refit_time_utc": "2024-04-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.026954751609625096,
+          "score_threshold": 0.4143370074560914,
+          "threshold_rows": 500
+        }
+      ],
+      "stage": "validation",
+      "start_utc": "2022-07-01T00:00:00+00:00"
+    },
+    {
+      "addon": {
+        "active_weekday_share": 0.5823754789272031,
+        "average_pnl_dollars": 0.37757103066208114,
+        "best_weekday_dollars": 15.189661887795804,
+        "closed_drawdown_dollars": 134.5896617554141,
+        "first_half_net_dollars": 216.69745502052842,
+        "maximum_risk_usd": 8.14764601813298,
+        "net_pnl_dollars": 114.78159332127267,
+        "positive_month_share": 0.4166666666666667,
+        "profit_factor": 1.1141905657786224,
+        "second_half_net_dollars": -101.91586169925567,
+        "top_winners_removed_net_dollars": -32.961955296505124,
+        "trades": 304,
+        "trades_per_weekday": 0.5823754789272031,
+        "weekdays": 522,
+        "win_rate": 0.40789473684210525,
+        "worst_weekday_dollars": -8.908347969976854
+      },
+      "checks": {
+        "addon_winner_removal_positive": false,
+        "buffered_closed_drawdown_within_15_percent": true,
+        "combined_winner_removal_positive": true,
+        "maximum_addon_drawdown": true,
+        "maximum_addon_risk": true,
+        "maximum_combined_closed_drawdown": false,
+        "minimum_addon_frequency": true,
+        "minimum_addon_net": true,
+        "minimum_addon_profit_factor": false,
+        "minimum_addon_trades": true,
+        "minimum_combined_frequency": true,
+        "minimum_combined_net": true,
+        "minimum_combined_positive_month_share": true,
+        "minimum_combined_profit_factor": true,
+        "minimum_combined_trades": true,
+        "minimum_first_half_combined_net": true,
+        "minimum_second_half_combined_net": true
+      },
+      "combined": {
+        "active_weekday_share": 0.6704980842911877,
+        "average_pnl_dollars": 4.926397209901496,
+        "best_weekday_dollars": 387.46748757619,
+        "closed_drawdown_dollars": 311.6108661057126,
+        "first_half_net_dollars": 1399.6916961566394,
+        "maximum_risk_usd": 44.19064332455849,
+        "net_pnl_dollars": 3295.759733424101,
+        "positive_month_share": 0.7916666666666666,
+        "profit_factor": 2.0410352009186203,
+        "second_half_net_dollars": 1896.0680372674615,
+        "top_winners_removed_net_dollars": 1273.1981348297772,
+        "trades": 669,
+        "trades_per_weekday": 1.2816091954022988,
+        "weekdays": 522,
+        "win_rate": 0.4304932735426009,
+        "worst_weekday_dollars": -123.05000000000001
+      },
+      "core": {
+        "active_weekday_share": 0.3103448275862069,
+        "average_pnl_dollars": 8.715008603021445,
+        "best_weekday_dollars": 387.46748757619,
+        "closed_drawdown_dollars": 212.14063237367964,
+        "first_half_net_dollars": 1182.9942411361108,
+        "maximum_risk_usd": 44.19064332455849,
+        "net_pnl_dollars": 3180.9781401028276,
+        "positive_month_share": 0.7916666666666666,
+        "profit_factor": 2.4722165621819143,
+        "second_half_net_dollars": 1997.983898966717,
+        "top_winners_removed_net_dollars": 1158.4165415085042,
+        "trades": 365,
+        "trades_per_weekday": 0.6992337164750958,
+        "weekdays": 522,
+        "win_rate": 0.44931506849315067,
+        "worst_weekday_dollars": -123.05000000000001
+      },
+      "end_exclusive_utc": "2026-07-01T00:00:00+00:00",
+      "gate_pass": false,
+      "overlap": {
+        "addon_entries_while_core_open": 160,
+        "core_entries_while_addon_open": 33,
+        "maximum_concurrent_positions": 7,
+        "maximum_open_initial_risk_dollars": 44.19064332455849
+      },
+      "quarterly_models": [
+        {
+          "block_end_exclusive_utc": "2024-10-01T00:00:00+00:00",
+          "candidate_rows": 574,
+          "fit_rows": 5153,
+          "refit_time_utc": "2024-07-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.04419230799736994,
+          "score_threshold": -0.1565397841518087,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2025-01-01T00:00:00+00:00",
+          "candidate_rows": 649,
+          "fit_rows": 5727,
+          "refit_time_utc": "2024-10-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.22247910875647098,
+          "score_threshold": -0.1392583254828273,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2025-04-01T00:00:00+00:00",
+          "candidate_rows": 561,
+          "fit_rows": 6377,
+          "refit_time_utc": "2025-01-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.0005621677023487101,
+          "score_threshold": 0.6400384957500946,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2025-07-01T00:00:00+00:00",
+          "candidate_rows": 667,
+          "fit_rows": 6938,
+          "refit_time_utc": "2025-04-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.1290393786636921,
+          "score_threshold": 0.6605902718475342,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2025-10-01T00:00:00+00:00",
+          "candidate_rows": 768,
+          "fit_rows": 7606,
+          "refit_time_utc": "2025-07-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.24171056624054363,
+          "score_threshold": -0.08913242637467006,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2026-01-01T00:00:00+00:00",
+          "candidate_rows": 366,
+          "fit_rows": 8375,
+          "refit_time_utc": "2025-10-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.12252322196443605,
+          "score_threshold": -0.09537958244189157,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2026-04-01T00:00:00+00:00",
+          "candidate_rows": 71,
+          "fit_rows": 8742,
+          "refit_time_utc": "2026-01-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.09012483337702185,
+          "score_threshold": -0.08692025267483597,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2026-07-01T00:00:00+00:00",
+          "candidate_rows": 135,
+          "fit_rows": 8813,
+          "refit_time_utc": "2026-04-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.03232623278079666,
+          "score_threshold": -0.08988152696343914,
+          "threshold_rows": 500
+        }
+      ],
+      "stage": "final_exam",
+      "start_utc": "2024-07-01T00:00:00+00:00"
+    },
+    {
+      "addon": {
+        "active_weekday_share": 0.5057471264367817,
+        "average_pnl_dollars": -0.7720898613579975,
+        "best_weekday_dollars": 15.189661887795804,
+        "closed_drawdown_dollars": 122.60946955814504,
+        "first_half_net_dollars": -83.30866541153,
+        "maximum_risk_usd": 8.14764601813298,
+        "net_pnl_dollars": -101.91586169925567,
+        "positive_month_share": 0.4166666666666667,
+        "profit_factor": 0.8238911586283936,
+        "second_half_net_dollars": -18.607196287725664,
+        "top_winners_removed_net_dollars": -177.02840025744365,
+        "trades": 132,
+        "trades_per_weekday": 0.5057471264367817,
+        "weekdays": 261,
+        "win_rate": 0.3181818181818182,
+        "worst_weekday_dollars": -8.908347969976854
+      },
+      "checks": {
+        "addon_winner_removal_positive": false,
+        "buffered_closed_drawdown_within_15_percent": true,
+        "combined_winner_removal_positive": true,
+        "maximum_addon_drawdown": true,
+        "maximum_addon_risk": true,
+        "maximum_combined_closed_drawdown": true,
+        "minimum_addon_frequency": true,
+        "minimum_addon_net": false,
+        "minimum_addon_profit_factor": false,
+        "minimum_addon_trades": true,
+        "minimum_combined_frequency": true,
+        "minimum_combined_net": true,
+        "minimum_combined_positive_month_share": true,
+        "minimum_combined_profit_factor": true,
+        "minimum_combined_trades": true,
+        "minimum_first_half_combined_net": true,
+        "minimum_second_half_combined_net": true
+      },
+      "combined": {
+        "active_weekday_share": 0.5823754789272031,
+        "average_pnl_dollars": 7.022474212101709,
+        "best_weekday_dollars": 387.46748757619,
+        "closed_drawdown_dollars": 163.96287493625618,
+        "first_half_net_dollars": 665.7152865746117,
+        "maximum_risk_usd": 44.19064332455849,
+        "net_pnl_dollars": 1896.0680372674615,
+        "positive_month_share": 0.8333333333333334,
+        "profit_factor": 2.2193762361586478,
+        "second_half_net_dollars": 1230.35275069285,
+        "top_winners_removed_net_dollars": 471.9453089054474,
+        "trades": 270,
+        "trades_per_weekday": 1.0344827586206897,
+        "weekdays": 261,
+        "win_rate": 0.4111111111111111,
+        "worst_weekday_dollars": -92.0152828754032
+      },
+      "core": {
+        "active_weekday_share": 0.2567049808429119,
+        "average_pnl_dollars": 14.478144195410994,
+        "best_weekday_dollars": 387.46748757619,
+        "closed_drawdown_dollars": 106.71191810695882,
+        "first_half_net_dollars": 749.0239519861416,
+        "maximum_risk_usd": 44.19064332455849,
+        "net_pnl_dollars": 1997.983898966717,
+        "positive_month_share": 1.0,
+        "profit_factor": 3.046612153030779,
+        "second_half_net_dollars": 1248.9599469805758,
+        "top_winners_removed_net_dollars": 573.8611706047031,
+        "trades": 138,
+        "trades_per_weekday": 0.5287356321839081,
+        "weekdays": 261,
+        "win_rate": 0.5,
+        "worst_weekday_dollars": -83.28
+      },
+      "end_exclusive_utc": "2026-07-01T00:00:00+00:00",
+      "gate_pass": false,
+      "overlap": {
+        "addon_entries_while_core_open": 38,
+        "core_entries_while_addon_open": 8,
+        "maximum_concurrent_positions": 7,
+        "maximum_open_initial_risk_dollars": 44.19064332455849
+      },
+      "quarterly_models": [
+        {
+          "block_end_exclusive_utc": "2025-10-01T00:00:00+00:00",
+          "candidate_rows": 768,
+          "fit_rows": 7606,
+          "refit_time_utc": "2025-07-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.24171056624054363,
+          "score_threshold": -0.08913242637467006,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2026-01-01T00:00:00+00:00",
+          "candidate_rows": 366,
+          "fit_rows": 8375,
+          "refit_time_utc": "2025-10-01T00:00:00+00:00",
+          "score_outcome_spearman": -0.12252322196443605,
+          "score_threshold": -0.09537958244189157,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2026-04-01T00:00:00+00:00",
+          "candidate_rows": 71,
+          "fit_rows": 8742,
+          "refit_time_utc": "2026-01-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.09012483337702185,
+          "score_threshold": -0.08692025267483597,
+          "threshold_rows": 500
+        },
+        {
+          "block_end_exclusive_utc": "2026-07-01T00:00:00+00:00",
+          "candidate_rows": 135,
+          "fit_rows": 8813,
+          "refit_time_utc": "2026-04-01T00:00:00+00:00",
+          "score_outcome_spearman": 0.03232623278079666,
+          "score_threshold": -0.08988152696343914,
+          "threshold_rows": 500
+        }
+      ],
+      "stage": "recent_tail",
+      "start_utc": "2025-07-01T00:00:00+00:00"
+    }
+  ],
+  "v50_core_verification": {
+    "decision": "V50_SINGLE_R1_EXPOSURE_RISK_GATE_PASS",
+    "result_sha256": "602bee9ec80812f365cc39ba18696b12c23ca1b2bdecebc03cd2e7928f73ba15"
+  }
+}

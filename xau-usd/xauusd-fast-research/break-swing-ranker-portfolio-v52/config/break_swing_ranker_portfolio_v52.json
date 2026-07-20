@@ -1,0 +1,135 @@
+{
+  "schema_version": "xauusd_break_swing_ranker_portfolio_v52",
+  "sources": {
+    "expansion_action_ledger": {
+      "path": "xau-usd/xauusd-fast-research/high-frequency-expansion-v1/outputs/HIGH_FREQUENCY_EXPANSION_ACTION_LABELS.parquet",
+      "sha256": "a5a765fa70da99e7162377ac893546b4195d9e43bdad1cd19cb4006314c7c21a"
+    },
+    "normalized_core_ledger": {
+      "path": "xau-usd/xauusd-fast-research/five-specialist-window-report-v1/outputs/FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+      "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+    },
+    "v50_result": {
+      "path": "xau-usd/xauusd-fast-research/historical-core-single-exposure-risk-v50/outputs/HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_RESULT.json",
+      "sha256": "d450961595cdb8b3abd1bd0ccbdc9ff110aba89dbe7d2cbb052e0f3d140a218f"
+    },
+    "v51_research_helper": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-portfolio-v51/src/research.py",
+      "sha256": "041443c0d91a9bc01d14c3c35841508ca2d9112946c3eaf7c47e8da16fb38651"
+    }
+  },
+  "v50_core_policy": {
+    "target_specialist_id": "R1_UPTREND",
+    "target_source_strategy": "h4_d1_long_best_box2_atr80",
+    "maximum_concurrent_target_positions": 1,
+    "maximum_target_entries_per_utc_day": 1,
+    "required_v50_decision": "V50_SINGLE_R1_EXPOSURE_RISK_GATE_PASS",
+    "required_v50_result_sha256": "602bee9ec80812f365cc39ba18696b12c23ca1b2bdecebc03cd2e7928f73ba15"
+  },
+  "model": {
+    "learning_rate": 0.03,
+    "max_iter": 120,
+    "max_leaf_nodes": 7,
+    "min_samples_leaf": 50,
+    "l2_regularization": 1.0,
+    "max_bins": 127,
+    "random_state": 314218,
+    "minimum_fit_rows": 100,
+    "target_clip_min_r": -1.5,
+    "target_clip_max_r": 2.25
+  },
+  "addon_policy": {
+    "family": "PURE_BREAK_AND_RUN",
+    "action_id": "SWING_2R_36H",
+    "require_current_account_feasible": true,
+    "maximum_risk_usd_at_0p01_lot": 8.165487,
+    "refit_months": 3,
+    "threshold_training_rows": 500,
+    "training_score_quantile": 0.4,
+    "minimum_model_score": 0.0,
+    "maximum_trades_per_utc_weekday": 1,
+    "maximum_concurrent_positions": 1,
+    "weekdays_only": true,
+    "reject_unsafe_shock": true
+  },
+  "windows": {
+    "development": ["2019-01-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+    "validation": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "final_exam": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "recent_tail": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "account_reference": {
+    "equity_dollars": 2998.45,
+    "reference_lot": 0.01,
+    "broker_minimum_lot": 0.01,
+    "maximum_equity_drawdown_fraction": 0.15,
+    "capital_safety_buffer_multiple": 1.25,
+    "maximum_combined_closed_drawdown_dollars": 300.0
+  },
+  "gates": {
+    "validation": {
+      "minimum_addon_trades": 180,
+      "minimum_addon_trades_per_weekday": 0.4,
+      "minimum_addon_profit_factor": 1.15,
+      "minimum_addon_net_dollars": 0.0,
+      "maximum_addon_closed_drawdown_dollars": 175.0,
+      "minimum_combined_trades": 450,
+      "minimum_combined_trades_per_weekday": 1.0,
+      "minimum_combined_profit_factor": 1.5,
+      "minimum_combined_net_dollars": 0.0,
+      "minimum_combined_positive_month_share": 0.55,
+      "minimum_each_half_combined_net_dollars": 0.0,
+      "top_winners_removed": 10
+    },
+    "final_exam": {
+      "minimum_addon_trades": 180,
+      "minimum_addon_trades_per_weekday": 0.4,
+      "minimum_addon_profit_factor": 1.15,
+      "minimum_addon_net_dollars": 0.0,
+      "maximum_addon_closed_drawdown_dollars": 175.0,
+      "minimum_combined_trades": 450,
+      "minimum_combined_trades_per_weekday": 1.0,
+      "minimum_combined_profit_factor": 1.5,
+      "minimum_combined_net_dollars": 0.0,
+      "minimum_combined_positive_month_share": 0.55,
+      "minimum_each_half_combined_net_dollars": 0.0,
+      "top_winners_removed": 10
+    },
+    "recent_tail": {
+      "minimum_addon_trades": 90,
+      "minimum_addon_trades_per_weekday": 0.4,
+      "minimum_addon_profit_factor": 1.15,
+      "minimum_addon_net_dollars": 0.0,
+      "maximum_addon_closed_drawdown_dollars": 125.0,
+      "minimum_combined_trades": 225,
+      "minimum_combined_trades_per_weekday": 1.0,
+      "minimum_combined_profit_factor": 1.5,
+      "minimum_combined_net_dollars": 0.0,
+      "minimum_combined_positive_month_share": 0.5,
+      "minimum_each_half_combined_net_dollars": 0.0,
+      "top_winners_removed": 5
+    }
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "BREAK_SWING_RANKER_PORTFOLIO_V52_CONTRACT_LOCK.json",
+    "selected_trades": "BREAK_SWING_RANKER_PORTFOLIO_V52_TRADES.parquet",
+    "window_metrics": "BREAK_SWING_RANKER_PORTFOLIO_V52_WINDOWS.csv",
+    "result_json": "BREAK_SWING_RANKER_PORTFOLIO_V52_RESULT.json",
+    "result_markdown": "BREAK_SWING_RANKER_PORTFOLIO_V52_RESULT.md",
+    "manifest": "BREAK_SWING_RANKER_PORTFOLIO_V52_MANIFEST.json"
+  },
+  "research_controls": {
+    "development_quantiles_observed": 5,
+    "predecessor_attempts_observed": 1000,
+    "same_version_post_outcome_tuning_authorized": false,
+    "claims_pristine_holdout": false,
+    "research_only": true,
+    "model_training_authorized": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

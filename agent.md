@@ -2006,3 +2006,64 @@ R1 box position and one new R1 box entry per UTC day.
   audit pass. Whole-account execution remains fail-closed because historical
   intratrade marks are unavailable for every specialist; V42 prospective
   shared-account confirmation is still mandatory.
+
+## V51 One-Trade-Per-Day Portfolio - 2026-07-20
+
+`one-trade-per-day-portfolio-v51` tested the strongest development-period
+high-frequency ranker as a separate, account-feasible add-on beside unchanged
+V50. The exact policy was locked before its later ranked outcomes were opened.
+
+- V51 corrected a predecessor defect by enforcing the existing
+  `current_account_feasible` label and USD `8.165487` maximum initial risk at
+  0.01 lot.
+- Validation reached `1.624` combined trades/weekday, USD `1,145.69` net, PF
+  `1.636`, and USD `196.31` closed DD, but missed the positive-month gate.
+- Final reached `1.738/day`, but the add-on lost USD `235.04`, had PF `0.862`,
+  and USD `532.50` DD. Combined DD was USD `313.60`.
+- Recent tail reached `1.307/day`; the add-on lost USD `422.02`, PF was `0.545`,
+  and add-on DD was USD `422.02`. The profitable V50 Core masked that loss in
+  the combined result, so frequency alone was not accepted.
+- Failure attribution: pure `BREAK_AND_RUN` generated `462/542` final add-on
+  trades and lost USD `308.41`; the model chose the 12-hour action for
+  `496/542` trades.
+- Decision: `V51_ONE_TRADE_PER_DAY_HISTORICAL_GATE_FAIL_TERMINAL`. Contract
+  SHA-256: `5509ee0437281befee5546e22b536893331fb56f312f9abc4e2b8fd6f5489e4d`;
+  result SHA-256:
+  `e85aa72f36967a87d95d5f1969ce3c5b53cc3a39368da8a9f1769922fd1f7d29`.
+- Seven focused tests and Ruff pass. No same-version repair or execution is
+  authorized.
+
+## V52 Fixed Break-Swing Ranker - 2026-07-20
+
+`break-swing-ranker-portfolio-v52` removed V51's action-selection freedom. It
+fixed pure break-and-run to the 36-hour swing action, retrained a shallow Python
+ranker quarterly using only completed prior trades, and used a development-
+selected 40th-percentile training-score threshold.
+
+- Validation: `1.184` combined trades/weekday, USD `1,177.11` net, PF `1.741`,
+  USD `161.70` closed DD. Add-on PF was `1.759`; only the combined
+  positive-month gate failed.
+- Final: `1.282/day`, USD `3,295.76` combined net, PF `2.041`; add-on PF fell to
+  `1.114`, add-on winner-removal net failed, and combined DD was USD `311.61`.
+- Recent tail: `1.034/day`, USD `1,896.07` combined net, PF `2.219`, USD
+  `163.96` combined closed DD. The add-on itself lost USD `101.92`, PF was
+  `0.824`, and winner-removal net failed. This is not an acceptable frequency
+  pass because the new trades had negative marginal expectancy.
+- A fixed no-ML swing diagnostic confirmed the constraint. At one open
+  position and one entry/day, the account-feasible latest-year subset was
+  negative. The unbounded 0.01-lot set made USD `251.84` at `0.920/day`, but
+  risk ranged to USD `41.08`, all profit came from rows above the current risk
+  budget, and net after removing the top five winners was USD `-45.52`.
+- Decision: `V52_BREAK_SWING_RANKER_GATE_FAIL_TERMINAL`. Contract SHA-256:
+  `f43c7e259950f41bdf3a28c391ac503812f893d4bb6ec64c055f05c85502faf2`;
+  result SHA-256:
+  `d3db59a63fb167108d18e89779f78dc01d2921919a5b173dd70afbef53d87878`.
+- Post-run audit found that the exploratory 408-trade development description
+  included multi-tag break rows, while the sealed contract correctly required
+  pure break rows and produced 355 development trades. V52 is therefore also
+  marked with a development-selection provenance mismatch. The locked policy,
+  contract, and failed outcomes remain unchanged; this cannot rescue V52.
+- Four focused tests and Ruff pass. V52 proves that one-trade/day frequency is
+  mechanically reachable, but not yet with positive marginal expectancy at the
+  current broker minimum and account risk budget. V50 remains the protected
+  Core; no Python, EA, demo/live, or broker authority is granted.

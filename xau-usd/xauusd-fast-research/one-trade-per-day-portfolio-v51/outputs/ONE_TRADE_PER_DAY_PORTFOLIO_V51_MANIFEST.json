@@ -1,0 +1,24 @@
+{
+  "contract_sha256": "5509ee0437281befee5546e22b536893331fb56f312f9abc4e2b8fd6f5489e4d",
+  "files": {
+    "ONE_TRADE_PER_DAY_PORTFOLIO_V51_RESULT.json": {
+      "bytes": 19806,
+      "sha256": "2b87032170b80e40ed8262fc5fbff48129f3e6cb58946ec09a30d0198e4fbd0f"
+    },
+    "ONE_TRADE_PER_DAY_PORTFOLIO_V51_RESULT.md": {
+      "bytes": 2093,
+      "sha256": "120715f1e61d75f885e0cee52afda62bc1d2c7880871e8295c896404d6818359"
+    },
+    "ONE_TRADE_PER_DAY_PORTFOLIO_V51_TRADES.parquet": {
+      "bytes": 167992,
+      "sha256": "2e4fb5d2c6ae0145ccf92b3b6dc2fc6aeb2fef00dcea14d61105b95544458e8f"
+    },
+    "ONE_TRADE_PER_DAY_PORTFOLIO_V51_WINDOWS.csv": {
+      "bytes": 3713,
+      "sha256": "bee2564dc058b6df4a5997e7e869636d371996a0664be34db6acd05bf339841e"
+    }
+  },
+  "manifest_sha256": "cb07bc9fd44d13545fbac7fc1cef67fea5d63441e648359081c0329b41a0664e",
+  "result_sha256": "e85aa72f36967a87d95d5f1969ce3c5b53cc3a39368da8a9f1769922fd1f7d29",
+  "schema_version": "xauusd_one_trade_per_day_portfolio_v51"
+}
