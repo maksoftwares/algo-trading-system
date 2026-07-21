@@ -1,0 +1,45 @@
+{
+  "attempt_first": 129001,
+  "attempt_last": 130000,
+  "conditional_predecessor": {
+    "v97_terminal_reason": "V97_DISCOVERY_FAIL_TERMINAL"
+  },
+  "contract_sha256": "6ade01632eada6df466f3fa3878e652fb5517d9ffba1ca5fb64136b40ba2cb4d",
+  "created_utc": "2026-07-21T15:40:12.1375285Z",
+  "decision": "V98_ENGINEERING_INVALIDATED_TERMINAL",
+  "deployment_model_training_authorized": false,
+  "discovery_outcomes_opened": true,
+  "economic_metrics_produced": false,
+  "execution_authorized": false,
+  "failure": {
+    "exception": "ValueError: V98 calibration target is outside candidate support",
+    "failure_point": "first Discovery evaluation before policy metrics or trade-ledger output",
+    "reason": "The locked grid assumed every execution profile could support score-density targets from 0.9 through 1.8 trades per weekday. Side-correct next-bar spread and risk feasibility reduced executable calibration support below those targets for multiple profiles and folds.",
+    "stderr_log_path": "C:\\DukascopyGrowthRiskFoundationV1\\logs\\V98_DISCOVERY_RUN.stderr.log",
+    "stderr_log_sha256": "9f9b5a14c3fa3d6504a8e64cc09d99555123e9defc1139d20f2b540c66b79d6d"
+  },
+  "immutable_response": {
+    "confirmation_opened": false,
+    "final_opened": false,
+    "rerun_authorized": false,
+    "same_version_patch_authorized": false
+  },
+  "latest_completed_stage": "none",
+  "marker_sha256": "1f20b832910dcb6e461d8ebe86a83d1ef51244166e9f261b1bf247ca34429591",
+  "registered_policy_count": 1000,
+  "research_model_fitting_authorized": true,
+  "research_only": true,
+  "schema_version": "xauusd_causal_event_nearmiss_ranker_v98_result",
+  "support_diagnostic": {
+    "opened_only_after_v98_was_terminally_invalidated": true,
+    "profiles": [
+      {"profile": [0.6, 1.0, 1], "minimum_calibration_unique_per_weekday": 0.0909},
+      {"profile": [0.8, 1.25, 2], "minimum_calibration_unique_per_weekday": 0.4545},
+      {"profile": [1.0, 1.5, 3], "minimum_calibration_unique_per_weekday": 1.2273},
+      {"profile": [1.0, 2.0, 6], "minimum_calibration_unique_per_weekday": 0.9091},
+      {"profile": [1.2, 2.0, 12], "minimum_calibration_unique_per_weekday": 0.1818}
+    ],
+    "used_to_modify_v98": false
+  },
+  "v59_v60_modified": false
+}

@@ -1,0 +1,32 @@
+{
+  "artifacts": {
+    "CAUSAL_EVENT_NEARMISS_RANKER_V98_CONTRACT_LOCK.json": {
+      "bytes": 3554,
+      "sha256": "33149b63d7dde47a47b80a919207e8218515eae699cc13a9e2727c559342ae88"
+    },
+    "CAUSAL_EVENT_NEARMISS_RANKER_V98_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 378,
+      "sha256": "1f20b832910dcb6e461d8ebe86a83d1ef51244166e9f261b1bf247ca34429591"
+    },
+    "CAUSAL_EVENT_NEARMISS_RANKER_V98_POLICY_MANIFEST.csv": {
+      "bytes": 213125,
+      "sha256": "bb9aa18959239b8e61adcdabf31260104a71ada9e470e1978636a6e5938c4916"
+    },
+    "CAUSAL_EVENT_NEARMISS_RANKER_V98_RESULT.json": {
+      "bytes": 2236,
+      "sha256": "f8317827c821e4f73c4fed0484cf4ef6e71be535113bb57901698f49ab458f24"
+    },
+    "CAUSAL_EVENT_NEARMISS_RANKER_V98_RESULT.md": {
+      "bytes": 901,
+      "sha256": "7811882fb116370d78736372a89e6079f2870b07f780535ece106c83b7571185"
+    },
+    "CAUSAL_EVENT_NEARMISS_RANKER_V98_SIGNAL_CENSUS.json": {
+      "bytes": 1738,
+      "sha256": "47c5f019fbae28510ada547c11214e29cabc60f08fb214c81cb6a8972bbb461b"
+    }
+  },
+  "contract_sha256": "6ade01632eada6df466f3fa3878e652fb5517d9ffba1ca5fb64136b40ba2cb4d",
+  "deployment_model_training_authorized": false,
+  "execution_authorized": false,
+  "research_model_fitting_authorized": true
+}
