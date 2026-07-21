@@ -1,0 +1,16 @@
+{
+  "advancement_sha256": "3acc9acfcafb36295145409da56c37043338fe68ae3e1f415cbc0cdf03acb446",
+  "contract_sha256": "a54eb46a4c766271557ba6e6d9093f1e7d8936d447e25b22424e71c6251e027e",
+  "created_utc": "2026-07-21T16:06:37.214198+00:00",
+  "deployment_model_training_authorized": false,
+  "execution_authorized": false,
+  "metrics_sha256": "fbee2f648e82a06bc0e90cb455186b37eea98a07903a87a6ad0cab09a9a92567",
+  "policy_manifest_sha256": "af8188ca0c63f57121bd119cf9a559e6e461fa0fc857175f73a97b804a9afa85",
+  "research_model_fitting_authorized": true,
+  "schema_version": "xauusd_executable_event_nearmiss_ranker_v99_advancement",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "trades_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+}

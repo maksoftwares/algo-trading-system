@@ -1,0 +1,44 @@
+{
+  "artifacts": {
+    "EXECUTABLE_EVENT_NEARMISS_RANKER_V99_CONTRACT_LOCK.json": {
+      "bytes": 3767,
+      "sha256": "90e5a0c53898e169ea97d7b2d41a2523512fed49cb84fd173ebd98440f635903"
+    },
+    "EXECUTABLE_EVENT_NEARMISS_RANKER_V99_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 841,
+      "sha256": "4fd8545b144dc8319e16dc95d7a50fe3d87b29642d874967eb284dd42ece3d0d"
+    },
+    "EXECUTABLE_EVENT_NEARMISS_RANKER_V99_DISCOVERY_METRICS.csv": {
+      "bytes": 2156300,
+      "sha256": "fbee2f648e82a06bc0e90cb455186b37eea98a07903a87a6ad0cab09a9a92567"
+    },
+    "EXECUTABLE_EVENT_NEARMISS_RANKER_V99_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 382,
+      "sha256": "e3e760253c849221b216d8e59258526147bda21c14f20c14a885a5e286e00ae5"
+    },
+    "EXECUTABLE_EVENT_NEARMISS_RANKER_V99_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "EXECUTABLE_EVENT_NEARMISS_RANKER_V99_POLICY_MANIFEST.csv": {
+      "bytes": 234025,
+      "sha256": "af8188ca0c63f57121bd119cf9a559e6e461fa0fc857175f73a97b804a9afa85"
+    },
+    "EXECUTABLE_EVENT_NEARMISS_RANKER_V99_RESULT.json": {
+      "bytes": 5206,
+      "sha256": "79096f56640e99b1ee10794615f8735f8432c1df44633b9651af9d9e2a5a0316"
+    },
+    "EXECUTABLE_EVENT_NEARMISS_RANKER_V99_RESULT.md": {
+      "bytes": 767,
+      "sha256": "2cc7191c47316b8c67f8ce173e96f5ce3cce94a432f06ce89dc2288dae32f7bf"
+    },
+    "EXECUTABLE_EVENT_NEARMISS_RANKER_V99_SIGNAL_CENSUS.json": {
+      "bytes": 2626,
+      "sha256": "e47bcf17ae45a7fbcfe8c3fe14ce42872256357bae52f28b6bf4d3689ae837fe"
+    }
+  },
+  "contract_sha256": "a54eb46a4c766271557ba6e6d9093f1e7d8936d447e25b22424e71c6251e027e",
+  "deployment_model_training_authorized": false,
+  "execution_authorized": false,
+  "research_model_fitting_authorized": true
+}

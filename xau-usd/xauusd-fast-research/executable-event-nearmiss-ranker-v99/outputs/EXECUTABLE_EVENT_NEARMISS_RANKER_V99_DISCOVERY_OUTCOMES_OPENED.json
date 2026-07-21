@@ -1,0 +1,9 @@
+{
+  "contract_sha256": "a54eb46a4c766271557ba6e6d9093f1e7d8936d447e25b22424e71c6251e027e",
+  "deployment_model_training_authorized": false,
+  "execution_authorized": false,
+  "opened_utc": "2026-07-21T15:51:37.415657+00:00",
+  "research_model_fitting_authorized": true,
+  "schema_version": "xauusd_executable_event_nearmiss_ranker_v99_stage_open",
+  "stage": "discovery"
+}
