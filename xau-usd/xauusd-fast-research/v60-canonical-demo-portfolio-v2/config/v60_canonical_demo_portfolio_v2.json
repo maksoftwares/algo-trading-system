@@ -1,0 +1,233 @@
+{
+  "schema_version": "xauusd_v60_canonical_demo_portfolio_v2",
+  "account": {
+    "terminal_exe": "C:/MT5PortableTier1BestEA/terminal64.exe",
+    "expected_login": 1033030,
+    "expected_server": "Capital.ComMena-Demo",
+    "required_server_marker": "Demo",
+    "required_account_currency": "AED",
+    "usd_to_account_currency": 3.6725,
+    "symbol": "XAUUSD",
+    "fixed_lot": 0.01,
+    "expected_ounces_at_fixed_lot": 1.0,
+    "deviation_points": 80
+  },
+  "risk": {
+    "maximum_core_open_positions": 10,
+    "maximum_addon_open_positions": 2,
+    "maximum_account_xau_positions": 12,
+    "maximum_addon_concurrent_initial_risk_usd": 45.0,
+    "maximum_addon_entries_per_utc_day": 2,
+    "closed_drawdown_suspend_usd": 225.0,
+    "closed_drawdown_resume_usd": 180.0,
+    "combined_closed_drawdown_hard_stop_usd": 300.0,
+    "floating_drawdown_hard_stop_usd": 449.7675,
+    "maximum_daily_entries": 12
+  },
+  "runtime": {
+    "directory": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2",
+    "poll_seconds": 5,
+    "feed_poll_seconds": 60,
+    "slow_feed_poll_seconds": 300,
+    "maximum_feed_status_age_seconds": 180,
+    "entry_halt_files": [
+      "C:/MT5PortableTier1BestEA/MQL5/Files/tier1_bestea_kill_switch.txt",
+      "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_halt.txt"
+    ],
+    "maximum_tick_age_seconds": 30,
+    "state_filename": "state.json",
+    "events_filename": "events.jsonl",
+    "status_filename": "status.json",
+    "feed_status_filename": "feed_status.json",
+    "execution_enabled": true
+  },
+  "feeds": {
+    "activation_utc": "2026-07-21T00:00:00Z",
+    "terminal_files_directory": "C:/MT5PortableTier1BestEA/MQL5/Files",
+    "tick_filename_glob": "xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_*.csv",
+    "sensor_logs": {
+      "BREAK_AND_RUN": "v60_v2_break_and_run_signal_log.csv",
+      "DOWNSIDE_IMPULSE_RETEST": "v60_v2_downside_retest_signal_log.csv",
+      "OPENING_RANGE_REVERSAL": "v60_v2_opening_reversal_signal_log.csv"
+    },
+    "historical_action_labels": "xau-usd/xauusd-fast-research/high-frequency-expansion-v1/outputs/HIGH_FREQUENCY_EXPANSION_ACTION_LABELS.parquet",
+    "historical_v7_trades": "xau-usd/xauusd-fast-research/pullback-swing-replication-v7/outputs/PULLBACK_SWING_REPLICATION_V7_TRADES.parquet",
+    "v25_config": "xau-usd/xauusd-fast-research/chop-failed-reversion-rawtick-v25/config/chop_failed_reversion_rawtick_v25.json"
+  },
+  "sources": [
+    {
+      "source_id": "R1_BOX",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/r1_box/r1_candidates.jsonl",
+      "specialist_id": "R1_UPTREND_LONG_V1",
+      "sleeve_type": "CORE",
+      "magic": 961101,
+      "time_field": "signal_time_utc",
+      "stop_mode": "DISTANCE",
+      "target_r_default": 2.0,
+      "maximum_entry_gap_minutes": 10,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 2,
+      "maximum_entries_per_utc_day": 1
+    },
+    {
+      "source_id": "R1_PULLBACK",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/r1_pullback/r1_pullback_candidates.jsonl",
+      "specialist_id": "R1_PULLBACK_LONG_V2_M15_SESSION_09_15",
+      "sleeve_type": "CORE",
+      "magic": 961102,
+      "time_field": "decision_time_utc",
+      "stop_mode": "POINTS",
+      "target_r_default": 2.0,
+      "maximum_entry_gap_minutes": 10,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 8,
+      "maximum_entries_per_utc_day": 12
+    },
+    {
+      "source_id": "R2_DOWNTREND",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/r2_r3/r2_r3_candidates.jsonl",
+      "specialist_id": "R2_DOWNTREND",
+      "sleeve_type": "CORE",
+      "magic": 961201,
+      "time_field": "scheduled_entry_time_utc",
+      "stop_mode": "ATR",
+      "target_r_default": null,
+      "maximum_entry_gap_minutes": 10,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 4,
+      "maximum_entries_per_utc_day": 4
+    },
+    {
+      "source_id": "R3_COMPRESSION",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/r2_r3/r2_r3_candidates.jsonl",
+      "specialist_id": "R3_COMPRESSION",
+      "sleeve_type": "CORE",
+      "magic": 961301,
+      "time_field": "scheduled_entry_time_utc",
+      "stop_mode": "ATR",
+      "target_r_default": null,
+      "maximum_entry_gap_minutes": 10,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 4,
+      "maximum_entries_per_utc_day": 4
+    },
+    {
+      "source_id": "R4_CHOP",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/r4/r4_candidates.jsonl",
+      "specialist_id": "R4_CHOP",
+      "sleeve_type": "CORE",
+      "magic": 961401,
+      "time_field": "scheduled_entry_time_utc",
+      "stop_mode": "ATR",
+      "target_r_default": 2.0,
+      "maximum_entry_gap_minutes": 5,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 1,
+      "maximum_entries_per_utc_day": 4
+    },
+    {
+      "source_id": "R5_TRANSITION",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/r5_router/r5_causally_routed_candidates.jsonl",
+      "specialist_id": "R5_TRANSITION",
+      "sleeve_type": "CORE",
+      "magic": 961501,
+      "time_field": "scheduled_entry_time",
+      "stop_mode": "ATR",
+      "target_r_default": null,
+      "maximum_entry_gap_minutes": 10,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 4,
+      "maximum_entries_per_utc_day": 4,
+      "allowed_origin_attempts": [23925],
+      "required_risk_weight": 1.0
+    },
+    {
+      "source_id": "V7_SWING_HEALTH",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/addons/addon_candidates.jsonl",
+      "specialist_id": "V7_SWING_HEALTH",
+      "sleeve_type": "ADDON",
+      "magic": 967007,
+      "time_field": "scheduled_entry_time_utc",
+      "stop_mode": "ATR",
+      "target_r_default": 2.0,
+      "maximum_entry_gap_minutes": 10,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 1,
+      "maximum_entries_per_utc_day": 2,
+      "maximum_risk_usd": 30.0
+    },
+    {
+      "source_id": "V8_RETEST_HEALTH",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/addons/addon_candidates.jsonl",
+      "specialist_id": "V8_RETEST_HEALTH",
+      "sleeve_type": "ADDON",
+      "magic": 968008,
+      "time_field": "scheduled_entry_time_utc",
+      "stop_mode": "ATR",
+      "target_r_default": 1.5,
+      "maximum_entry_gap_minutes": 10,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 1,
+      "maximum_entries_per_utc_day": 2,
+      "maximum_risk_usd": 20.0
+    },
+    {
+      "source_id": "V25_CHOP",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/addons/addon_candidates.jsonl",
+      "specialist_id": "V25_CHOP",
+      "sleeve_type": "ADDON",
+      "magic": 962525,
+      "time_field": "scheduled_entry_time_utc",
+      "stop_mode": "ATR",
+      "target_r_default": 2.0,
+      "maximum_entry_gap_minutes": 5,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 1,
+      "maximum_entries_per_utc_day": 4,
+      "maximum_risk_usd": 30.0
+    },
+    {
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/addons/addon_candidates.jsonl",
+      "specialist_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "sleeve_type": "ADDON",
+      "magic": 965757,
+      "time_field": "scheduled_entry_time_utc",
+      "stop_mode": "ATR",
+      "target_r_default": 2.0,
+      "maximum_entry_gap_minutes": 10,
+      "maximum_spread_r": 0.15,
+      "maximum_open_positions": 1,
+      "maximum_entries_per_utc_day": 2,
+      "maximum_risk_usd": 30.0
+    }
+  ],
+  "preflight": {
+    "chart_profile_directory": "C:/MT5PortableTier1BestEA/MQL5/Profiles/Charts/Default",
+    "forbidden_chart_terms": [
+      "Phase2ExperimentalDemoExecutor",
+      "A3MlPredictionObserver",
+      "InpMlShadowReadEnabled=true"
+    ],
+    "required_experts": [
+      "AccountEquityGuardianShadow",
+      "Account1DailyProfitFloorGuardian",
+      "XauProspectiveTelemetryCollector",
+      "A1XauM5MomentumContinuationExecutor"
+    ],
+    "required_sensor_run_ids": [
+      "V60_V2_BREAK_AND_RUN_SENSOR",
+      "V60_V2_DOWNSIDE_RETEST_SENSOR",
+      "V60_V2_OPENING_REVERSAL_SENSOR"
+    ]
+  },
+  "authorization": {
+    "owner_authorized_at_utc": "2026-07-21T00:00:00Z",
+    "demo_authorized": true,
+    "broker_action_authorized": true,
+    "live_authorized": false,
+    "ml_runtime_authorized": false,
+    "ml_shadow_authorized": false,
+    "full_v59_v60_forward_parity_required": true
+  }
+}

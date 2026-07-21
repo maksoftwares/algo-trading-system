@@ -2702,3 +2702,93 @@ Decision: `V80_DEVELOPMENT_FAIL_TERMINAL`. Validation remains sealed. Do not
 tune or rescue V80. V78-V80 retire the locked FX-consensus source event under
 immediate, mirrored, and fast transmission-retracement interpretations. V59/V60
 remain immutable and accepted; the forward collectors continue independently.
+
+## V60 Core Demo Execution On A2 - 2026-07-21
+
+The owner explicitly authorized broker-action demo execution on A2 account
+`1033030` and waived a shadow-only waiting period. A new additive execution
+package is present at
+`xau-usd/xauusd-fast-research/v60-core-demo-executor-v1`. It consumes only the
+parity-checked prospective candidate streams for the five frozen Core
+specialists and sends fixed `0.01` lot XAUUSD orders through
+`C:\MT5PortableTier1BestEA\terminal64.exe`.
+
+- Runtime: `C:\MT5PortableTier1BestEA\MQL5\Files\v60_core_demo_v1`.
+- Status: `status.json`; persistent deduplication/risk state: `state.json`;
+  append-only decisions and broker results: `events.jsonl`.
+- Account guard: exact login `1033030`, exact server
+  `Capital.ComMena-Demo`, and required `Demo` marker. Live is always refused.
+- Core magics: R1 box `960101`, R1 pullback `960102`, R2 `960201`, R3
+  `960301`, R4 `960401`, and R5 `960501`.
+- R5 accepts only attempt `23925` with exact risk weight `1.0`; fractional
+  broker-inexpressible V59 rows remain rejected.
+- V60 controls: maximum ten Core positions, USD `225/180` closed-drawdown
+  suspend/resume hysteresis, and USD `449.7675` whole-account floating hard
+  stop for new entries. Every order carries a broker-side stop; target/horizon
+  behavior follows the candidate family.
+- Activation equity was USD `3,599.04`. Activation contained zero XAUUSD
+  positions, zero pending orders, and zero prospective Core candidates.
+- The process was launched hidden with `start_executor.ps1`; use that launcher
+  again after restart because it refuses a duplicate running process.
+- Focused tests: `5 passed`; Ruff and Python compilation pass. A real broker
+  `order_check` accepted the intended `0.01` lot request under FOK filling.
+
+This is actual demo broker-action readiness, not shadow-only. It is explicitly
+the **five-specialist Core**, not the full V59/V60 combined portfolio: the four
+V59 add-on sleeves (`V7_SWING_HEALTH`, `V8_RETEST_HEALTH`, `V25_CHOP`, and
+`V57_BREAK_SWING_H4ADX_HIGH`) still lack complete causal forward adapters and
+must not be claimed as attached.
+
+## V60 Full Canonical Demo Portfolio On Account 1033030 - 2026-07-21
+
+The Core-only package above is superseded. Do not start
+`v60-core-demo-executor-v1`. The active package is
+`xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2`, covering six
+Core streams across the five regime owners plus the four canonical V59 add-on
+sleeves. It uses deterministic rules only. ML runtime, model handoff, ranker,
+prediction observer, and ML shadow are all unauthorized and absent from the
+active chart profile.
+
+- Exact account: `1033030`, `Capital.ComMena-Demo`, currency `AED`.
+- Terminal: `C:\MT5PortableTier1BestEA\terminal64.exe /portable`; current PID
+  at handoff was `41384`. It is the only MT5 terminal process.
+- Runtime: `C:\MT5PortableTier1BestEA\MQL5\Files\v60_canonical_demo_v2`.
+- Status: `status.json`; feed status: `feed_status.json`; persistent state:
+  `state.json`; decisions/orders: `events.jsonl`.
+- Healthy status is `ACTIVE_DEMO_BROKER_ACTION`; execution is enabled and live
+  authorization remains false.
+- Start/restart with
+  `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\start_portfolio.ps1`
+  from the package directory. This starts one `run_feeds.py` process and one
+  `run_portfolio.py` process hidden and refuses duplicate launchers.
+- Current launcher/worker PIDs at handoff were feed `2856/42544` and executor
+  `34604/27756`. PIDs are informational and will change after restart.
+- The `Default` MT5 profile has six charts: `AccountEquityGuardianShadow`,
+  `Account1DailyProfitFloorGuardian`, `XauProspectiveTelemetryCollector`, and
+  three observer-only `A1XauM5MomentumContinuationExecutor` sensors with run
+  IDs `V60_V2_BREAK_AND_RUN_SENSOR`, `V60_V2_DOWNSIDE_RETEST_SENSOR`, and
+  `V60_V2_OPENING_REVERSAL_SENSOR`.
+- Both legacy `Phase2ExperimentalDemoExecutor` charts and all ML-shadow flags
+  were removed. New collector/sensor charts have `expertmode=0` and
+  `InpAllowDemoTrading=false` where applicable.
+- Terminal-wide Algo Trading is enabled for the Python executor. Use
+  `set_terminal_algo_trading.ps1` only while the verified terminal is stopped;
+  it backs up `Config\common.ini` before a change.
+- Account balance/equity was `3627.19 AED`, correctly treated as approximately
+  `987.66 USD` using `3.6725 AED/USD`. The old Core-v1 note that called the AED
+  figure USD was incorrect and must not be reused.
+- XAUUSD contract size is `100`; fixed `0.01` lot therefore equals one ounce.
+  Broker `order_check` passed long and short geometry under FOK filling. No test
+  order was sent and activation had zero XAUUSD positions.
+- All eight required feed groups are healthy: R1 box, R1 pullback, R2/R3, R4,
+  R5 components, R5 causal resolver, R5 causal router, and add-ons. V25 used
+  `779,250` recent broker ticks with `549` quality M5 rows at activation.
+- Historical selector parity is exact for V7, V8, and V57; V25 frozen identity,
+  origin attempt `39583`, and geometry are verified. Deployment tests were
+  `13 passed`; the four frozen source suites added `16 passed`.
+- Risk controls include guardian halt-file enforcement, fixed `0.01` lot,
+  maximum two add-on positions, USD `45` add-on concurrent initial risk,
+  maximum two add-on entries per UTC day, USD `225/180` drawdown hysteresis,
+  USD `300` combined closed-drawdown hard stop, USD `449.7675` whole-account
+  floating hard stop, and emergency closure of canonical positions at either
+  hard stop. The armed MT5 daily guardian additionally enforces its AED rules.
