@@ -1,0 +1,82 @@
+{
+  "attempt_first": 131001,
+  "attempt_last": 132000,
+  "candidate_rows": 7089,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-21T16:24:13.769786+00:00",
+  "databento_used": false,
+  "discovery_end": "2024-07-01T00:00:00+00:00",
+  "discovery_start": "2022-07-01T00:00:00+00:00",
+  "family_horizon_rows": {
+    "SPOT_RETIRED_CLOCKS__SPOT_BREAK_AND_RUN|180": 2059,
+    "SPOT_RETIRED_CLOCKS__SPOT_BREAK_AND_RUN|60": 2145,
+    "SPOT_RETIRED_CLOCKS__SPOT_DOWNSIDE_IMPULSE_RETEST|180": 1364,
+    "SPOT_RETIRED_CLOCKS__SPOT_DOWNSIDE_IMPULSE_RETEST|60": 1521
+  },
+  "mechanics": {
+    "BREAK_180": {
+      "policies": 200,
+      "raw_discovery_signals": 2059
+    },
+    "BREAK_60": {
+      "policies": 200,
+      "raw_discovery_signals": 2145
+    },
+    "MIXED_60": {
+      "policies": 200,
+      "raw_discovery_signals": 3666
+    },
+    "RETEST_180": {
+      "policies": 200,
+      "raw_discovery_signals": 1364
+    },
+    "RETEST_60": {
+      "policies": 200,
+      "raw_discovery_signals": 1521
+    }
+  },
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "pools": [
+    {
+      "families": [
+        "SPOT_RETIRED_CLOCKS__SPOT_BREAK_AND_RUN"
+      ],
+      "horizon_minutes": 60,
+      "pool_id": "BREAK_60"
+    },
+    {
+      "families": [
+        "SPOT_RETIRED_CLOCKS__SPOT_BREAK_AND_RUN"
+      ],
+      "horizon_minutes": 180,
+      "pool_id": "BREAK_180"
+    },
+    {
+      "families": [
+        "SPOT_RETIRED_CLOCKS__SPOT_DOWNSIDE_IMPULSE_RETEST"
+      ],
+      "horizon_minutes": 60,
+      "pool_id": "RETEST_60"
+    },
+    {
+      "families": [
+        "SPOT_RETIRED_CLOCKS__SPOT_DOWNSIDE_IMPULSE_RETEST"
+      ],
+      "horizon_minutes": 180,
+      "pool_id": "RETEST_180"
+    },
+    {
+      "families": [
+        "SPOT_RETIRED_CLOCKS__SPOT_BREAK_AND_RUN",
+        "SPOT_RETIRED_CLOCKS__SPOT_DOWNSIDE_IMPULSE_RETEST"
+      ],
+      "horizon_minutes": 60,
+      "pool_id": "MIXED_60"
+    }
+  ],
+  "post_entry_values_opened_for_lock": false,
+  "schema_version": "xauusd_causal_health_gated_event_sleeves_v100_signal_census",
+  "strategy_scoring_performed": false,
+  "unique_episode_ids": 3666
+}
