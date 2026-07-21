@@ -31,6 +31,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | Capital quote absorption release | V31 | 5.4/day, base PF 0.4924, stress PF 0.3816 | Terminal; no tuning or mirror |
 | Joint DXY, Treasury, and silver raw-tick consensus | V82 | Calibration coverage failed: only 6 full February 2019 weekdays because the bond feed had long zero/partial-session gaps | Terminal before economics; do not reuse USTBONDTRUSD as a continuous intraday clock |
 | Joint DXY and silver raw-tick consensus | V83 | 0.821/day but base/stress PF 0.401/0.359, zero positive months, USD 352.23 stressed DD | Terminal; no mirror, threshold, timing, response, or exit rescue |
+| Scheduling-only expansion of V59/V60 | V85 | Even accepting every distinct V57 add-on reaches only 1.280/day in development and 1.667/day in final | Mechanically insufficient; new event IDs are required |
 
 ## What Is Actually Missing
 
@@ -403,6 +404,25 @@ All later stages remain sealed. Cross-asset co-activation generated the desired
 density but did not create continuation expectancy. V84 cannot be mirrored,
 retuned, or rescued; future work requires a different causal variable. V59/V60
 remain immutable.
+
+## V85 Existing-Reservoir Capacity Result
+
+V85 tested whether two trades per weekday could be reached by admitting every
+currently rejected, broker-executable V57 add-on while preserving the
+byte-identical V59 Core. This was an intentionally optimistic count bound: it
+ignored overlap, concurrent risk, drawdown suspension, economics, margin, and
+the daily add-on cap. Fractional R5 rows remained excluded because they cannot
+be expressed at the broker's 0.01 minimum lot.
+
+Development 2 increased only from `1.142/day` to a mechanical maximum of
+`1.280/day`, still 375 trades short. Confirmation could just reach `2.019/day`.
+The final year increased only from `1.395/day` to `1.667/day`, still 87 trades
+short. Therefore no scheduling or account-governor relaxation can solve the
+two-trade target across all required windows from the existing reservoir.
+
+Decision: `V85_EXISTING_RESERVOIR_INSUFFICIENT_FOR_TWO_PER_DAY`. V59/V60 remain
+byte-identical. Future work needs genuinely new events with causally knowable
+direction; rejected V57 rows cannot be outcome-selected into a new policy.
 
 ## Routes Not Counted As Solutions
 

@@ -1,0 +1,25 @@
+{
+  "artifacts": {
+    "rejection_reasons": {
+      "bytes": 353,
+      "path": "xau-usd/xauusd-fast-research/two-trade-capacity-audit-v85/outputs/TWO_TRADE_CAPACITY_V85_REJECTION_REASONS.csv",
+      "sha256": "096df240275af091135c835a36d3773148919468608b6f5398f19ef73c0364e7"
+    },
+    "result_json": {
+      "bytes": 4429,
+      "path": "xau-usd/xauusd-fast-research/two-trade-capacity-audit-v85/outputs/TWO_TRADE_CAPACITY_V85_RESULT.json",
+      "sha256": "1d57200d14074ca964ba448f421759e0ed337b6c9dbb159dfb87f14293fdee82"
+    },
+    "result_markdown": {
+      "bytes": 571,
+      "path": "xau-usd/xauusd-fast-research/two-trade-capacity-audit-v85/outputs/TWO_TRADE_CAPACITY_V85_RESULT.md",
+      "sha256": "6f76f4fa09c2aa7f1fe65b8136be3a269deefa18018d64eb09532c339fb86fa1"
+    },
+    "windows": {
+      "bytes": 1085,
+      "path": "xau-usd/xauusd-fast-research/two-trade-capacity-audit-v85/outputs/TWO_TRADE_CAPACITY_V85_WINDOWS.csv",
+      "sha256": "1eb958854260270688060d7192305229f35585952794174b46ce3205e5565aaf"
+    }
+  },
+  "schema_version": "xauusd_two_trade_capacity_audit_v85_manifest"
+}
