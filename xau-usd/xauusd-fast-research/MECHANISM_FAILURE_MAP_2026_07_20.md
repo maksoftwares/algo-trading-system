@@ -31,6 +31,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | Capital quote absorption release | V31 | 5.4/day, base PF 0.4924, stress PF 0.3816 | Terminal; no tuning or mirror |
 | Joint DXY, Treasury, and silver raw-tick consensus | V82 | Calibration coverage failed: only 6 full February 2019 weekdays because the bond feed had long zero/partial-session gaps | Terminal before economics; do not reuse USTBONDTRUSD as a continuous intraday clock |
 | Joint DXY and silver raw-tick consensus | V83 | 0.821/day but base/stress PF 0.401/0.359, zero positive months, USD 352.23 stressed DD | Terminal; no mirror, threshold, timing, response, or exit rescue |
+| Cross-asset volatility then delayed XAU breakout | V86 | 0.828/day but base/stress PF 0.444/0.411, zero positive months, USD 443.48 stressed DD | Terminal; delayed confirmation did not create expectancy, so no mirror, threshold, timing, or exit rescue |
 | Scheduling-only expansion of V59/V60 | V85 | Even accepting every distinct V57 add-on reaches only 1.280/day in development and 1.667/day in final | Mechanically insufficient; new event IDs are required |
 
 ## What Is Actually Missing
@@ -423,6 +424,27 @@ two-trade target across all required windows from the existing reservoir.
 Decision: `V85_EXISTING_RESERVOIR_INSUFFICIENT_FOR_TWO_PER_DAY`. V59/V60 remain
 byte-identical. Future work needs genuinely new events with causally knowable
 direction; rejected V57 rows cannot be outcome-selected into a new policy.
+
+## V86 Cross-Asset Volatility Pending Breakout Result
+
+V86 tested whether cross-asset volatility could be detected while XAUUSD
+remained quiet, with entry delayed until the first later XAUUSD breakout. The
+January 2019 outcome-blind calibration selected a 20-second, 0.75 bps DXY,
+3.00 bps silver, maximum 0.10 bps initial XAUUSD, and 2.00 bps breakout policy
+at `18/22 = 0.818182/day`, split 8 long and 10 short.
+
+Fresh development resolved 509 trades over 615 eligible weekdays
+(`0.827642/day`), split 249 long and 260 short. Base/stress net was USD
+`-399.72/-442.24`; base/stress PF was `0.4439/0.4112`; both halves lost with
+stress PF `0.3995/0.4224`; no month was positive; winner-removed stress net was
+USD `-469.30`; stressed DD was USD `443.48`; and bootstrap p-value was `1.0`.
+
+Decision: `V86_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`fe332c21a62d10cda3b1b75ce7202394ca5bf5ae36af1ee9476185aa3002a7e1`.
+All later stages remain sealed. Delayed XAUUSD confirmation did not convert
+cross-asset volatility into positive continuation expectancy. V86 cannot be
+mirrored, retuned, or rescued; future work requires a different causal
+mechanism. V59/V60 remain immutable.
 
 ## Routes Not Counted As Solutions
 
