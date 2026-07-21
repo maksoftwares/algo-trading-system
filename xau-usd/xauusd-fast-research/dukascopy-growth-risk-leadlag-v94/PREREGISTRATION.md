@@ -27,7 +27,8 @@ V94 uses official Dukascopy M5 source bars for `USA500.IDX/USD`,
 
 Every feature is available at the signal-bar close. Entry is the immediately
 following contiguous XAU M5 open. Missing bars reject entry; no partially formed
-bar is used.
+bar is used. Source freshness is measured from the last actual tick, with only
+the preregistered one-, three-, or five-minute maximum staleness accepted.
 
 ## Attempts And Firewall
 

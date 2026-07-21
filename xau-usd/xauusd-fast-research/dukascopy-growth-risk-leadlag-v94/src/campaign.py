@@ -71,7 +71,7 @@ def parameter_space(mechanic: str) -> list[dict[str, Any]]:
         source_lookback=(288, 576, 1152),
         source_threshold_z=(0.6, 0.9, 1.2, 1.5, 1.8),
         minimum_tick_count=(5, 20),
-        maximum_source_staleness_minutes=(0,),
+        maximum_source_staleness_minutes=(1, 3, 5),
         session=SESSIONS,
     )
     def combine(specific: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -160,6 +160,7 @@ def prepare_source_m5(
         required.update(
             {
                 f"{prefix}_available_timestamp_ms",
+                f"{prefix}_source_last_timestamp_ms",
                 f"{prefix}_tick_count",
                 *(f"{prefix}_return_{name}" for name in HORIZON_NAMES.values()),
             }
@@ -188,12 +189,17 @@ def prepare_source_m5(
         available = pd.to_datetime(
             result[f"{prefix}_available_timestamp_ms"], unit="ms", utc=True
         )
+        source_last = pd.to_datetime(
+            result[f"{prefix}_source_last_timestamp_ms"], unit="ms", utc=True
+        )
         result[f"{prefix}_staleness_minutes"] = (
-            result["bar_end_utc"] - available
+            result["bar_end_utc"] - source_last
         ).dt.total_seconds() / 60.0
         observed = available.notna()
-        if (available.loc[observed] > result.loc[observed, "bar_end_utc"]).any():
-            raise ValueError(f"Future {prefix} M5 source joined to decision")
+        if not available.loc[observed].eq(result.loc[observed, "bar_end_utc"]).all():
+            raise ValueError(f"Noncausal {prefix} M5 availability boundary")
+        if (source_last.loc[observed] >= available.loc[observed]).any():
+            raise ValueError(f"Noncausal {prefix} source tick availability")
 
     lookbacks = tuple(map(int, config["features"]["source_normalization_lookbacks"]))
     for horizon, name in HORIZON_NAMES.items():

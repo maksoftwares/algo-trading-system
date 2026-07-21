@@ -54,8 +54,25 @@ def test_source_h1_uses_only_completed_m5_rows() -> None:
     assert result.loc[0, "spx_source_last_available_utc"] == pd.Timestamp(
         "2024-01-02T13:10:00Z"
     )
-    assert result.loc[0, "spx_staleness_minutes"] == 50.0
+    assert result.loc[0, "spx_source_last_tick_utc"] == pd.Timestamp(
+        "2024-01-02T13:09:00Z"
+    )
+    assert result.loc[0, "spx_staleness_minutes"] == 51.0
     assert result.loc[0, "copper_active_m5"] == 2
+
+
+def test_source_h1_rejects_tick_at_or_after_availability() -> None:
+    frame = source_m5()
+    frame.loc[0, "spx_source_last_timestamp_ms"] = frame.loc[
+        0, "spx_available_timestamp_ms"
+    ]
+    config = {"features": {"source_normalization_lookbacks": [2]}}
+    try:
+        prepare_source_h1(frame, config)
+    except ValueError as exc:
+        assert "Noncausal spx" in str(exc)
+    else:
+        raise AssertionError("noncausal source tick was accepted")
 
 
 def test_causal_ridge_prediction_never_uses_current_or_future_target() -> None:

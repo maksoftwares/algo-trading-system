@@ -14,6 +14,8 @@ gates.
 V93 uses official Dukascopy M5 source bars for `USA500.IDX/USD`,
 `COPPER.CMD/USD`, and `USD/CNH`. No V61-V92 campaign tested this three-source
 growth/risk state. Collection and source validation contain no XAU outcomes.
+Source freshness is measured from the last actual source tick, and an H1 event
+is rejected when any required leg is more than 15 minutes stale.
 
 ## Registered Mechanics
 

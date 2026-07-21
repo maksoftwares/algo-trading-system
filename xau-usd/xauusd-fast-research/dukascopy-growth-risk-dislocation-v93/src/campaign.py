@@ -162,6 +162,11 @@ def _aggregate_source_prefix(source_m5: pd.DataFrame, prefix: str) -> pd.DataFra
     selected["available_utc"] = pd.to_datetime(
         selected[f"{prefix}_available_timestamp_ms"], unit="ms", utc=True
     )
+    selected["source_last_tick_utc"] = pd.to_datetime(
+        selected[f"{prefix}_source_last_timestamp_ms"], unit="ms", utc=True
+    )
+    if (selected["source_last_tick_utc"] >= selected["available_utc"]).any():
+        raise ValueError(f"Noncausal {prefix} source tick availability")
     selected["h1_open_utc"] = selected["bar_open_utc"].dt.floor("h")
     grouped = selected.groupby("h1_open_utc", sort=True, observed=True)
     result = grouped.agg(
@@ -173,6 +178,7 @@ def _aggregate_source_prefix(source_m5: pd.DataFrame, prefix: str) -> pd.DataFra
             f"{prefix}_tick_count": (f"{prefix}_tick_count", "sum"),
             f"{prefix}_active_m5": ("bar_open_timestamp_ms", "size"),
             f"{prefix}_source_last_available_utc": ("available_utc", "max"),
+            f"{prefix}_source_last_tick_utc": ("source_last_tick_utc", "max"),
         }
     ).reset_index()
     result["bar_end_utc"] = result["h1_open_utc"] + pd.Timedelta(hours=1)
@@ -181,7 +187,7 @@ def _aggregate_source_prefix(source_m5: pd.DataFrame, prefix: str) -> pd.DataFra
     ).any():
         raise ValueError(f"Future {prefix} M5 bar entered completed H1 state")
     result[f"{prefix}_staleness_minutes"] = (
-        result["bar_end_utc"] - result[f"{prefix}_source_last_available_utc"]
+        result["bar_end_utc"] - result[f"{prefix}_source_last_tick_utc"]
     ).dt.total_seconds() / 60.0
     return result.drop(columns=["h1_open_utc"])
 

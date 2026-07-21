@@ -35,6 +35,9 @@ def source_frame(rows: int = 1_400) -> pd.DataFrame:
         frame[f"{prefix}_available_timestamp_ms"] = (
             opens + pd.Timedelta(minutes=5)
         ).as_unit("ms").astype("int64")
+        frame[f"{prefix}_source_last_timestamp_ms"] = (
+            opens + pd.Timedelta(minutes=4)
+        ).as_unit("ms").astype("int64")
         frame[f"{prefix}_tick_count"] = 100
         for name in HORIZON_NAMES.values():
             frame[f"{prefix}_return_{name}"] = values[prefix]
@@ -56,7 +59,7 @@ def policy_params() -> dict:
         "source_lookback": 12,
         "source_threshold_z": 0.5,
         "minimum_tick_count": 5,
-        "maximum_source_staleness_minutes": 0,
+        "maximum_source_staleness_minutes": 5,
         "session": "ALL",
         "maximum_response_atr": 0.75,
         "minimum_opposite_response_atr": 0.5,
@@ -70,7 +73,7 @@ def policy_params() -> dict:
 def test_source_m5_is_available_only_at_completed_bar_close() -> None:
     result = prepare_source_m5(source_frame(100), config())
     assert result.loc[0, "bar_end_utc"] == pd.Timestamp("2022-01-03T00:05:00Z")
-    assert result.loc[0, "spx_staleness_minutes"] == 0.0
+    assert result.loc[0, "spx_staleness_minutes"] == 1.0
     assert result.loc[0, "copper_tick_count"] == 100
 
 
@@ -80,9 +83,18 @@ def test_source_preparation_rejects_future_availability() -> None:
     try:
         prepare_source_m5(frame, config())
     except ValueError as exc:
-        assert "Future spx" in str(exc)
+        assert "Noncausal spx" in str(exc)
     else:
         raise AssertionError("future source availability was accepted")
+
+
+def test_source_preparation_rejects_tick_at_availability() -> None:
+    frame = source_frame(100)
+    frame.loc[0, "spx_source_last_timestamp_ms"] = frame.loc[
+        0, "spx_available_timestamp_ms"
+    ]
+    with pytest.raises(ValueError, match="Noncausal spx source tick"):
+        prepare_source_m5(frame, config())
 
 
 def test_source_event_gate_needs_no_xau_column() -> None:
@@ -137,7 +149,7 @@ def test_registered_mechanics_emit_only_declared_directions() -> None:
     )
     for prefix in ("spx", "copper", "usdcnh"):
         frame[f"{prefix}_tick_count"] = 100
-        frame[f"{prefix}_staleness_minutes"] = 0.0
+        frame[f"{prefix}_staleness_minutes"] = 1.0
     params = policy_params()
     for mechanic in MECHANICS:
         mask, direction = signal_mask_direction(frame, mechanic, params)
