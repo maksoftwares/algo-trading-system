@@ -18,8 +18,8 @@
     "default_storage_root": "C:/DukascopyGrowthRiskFoundationV1",
     "feature_cache": "curated/growth_risk_m5_v1.parquet",
     "feature_manifest": "curated/growth_risk_m5_v1.manifest.json",
-    "feature_sha256": "TO_BE_LOCKED_AFTER_SOURCE_BUILD",
-    "manifest_sha256": "TO_BE_LOCKED_AFTER_SOURCE_BUILD",
+    "feature_sha256": "c1b03f03c19af300dc378f892e8d538b7c5a4a05e66e09572de896b1359a16c3",
+    "manifest_sha256": "874363b2f866172a01954f538d05063d3ede9ab232b51163d21bfbb281215b28",
     "start_utc": "2022-01-01T00:00:00Z",
     "end_exclusive_utc": "2026-07-01T00:00:00Z",
     "source_package": "multi-asset/data-foundation/dukascopy-growth-risk-pulse-v1"
