@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
-from collections import deque
 from itertools import product
 import json
 from pathlib import Path
@@ -17,11 +16,11 @@ ROOT = Path(__file__).resolve().parents[1]
 RESEARCH_ROOT = ROOT.parent
 PREFIXES = ("spx", "copper", "usdcnh")
 MECHANICS = (
-    "RISK_PULSE_CATCHUP",
-    "GROWTH_PULSE_CATCHUP",
-    "CROSSASSET_GATED_BREAKOUT",
-    "ROLLING_BETA_RESIDUAL",
-    "ROLLING_BETA_CONTINUATION",
+    "RISK_SIGN_REVERSAL",
+    "GROWTH_SIGN_REVERSAL",
+    "RISK_GROWTH_CONVERGENCE",
+    "RISK_GROWTH_DIVERGENCE",
+    "RISK_STATE_ACCELERATION",
 )
 SESSIONS = ("ALL", "ASIA", "LONDON", "NY")
 EXECUTION_PROFILES = (
@@ -48,7 +47,7 @@ def _load_module(name: str, path: Path) -> Any:
 
 
 V89 = _load_module(
-    "dukascopy_growth_risk_v93_v89_metrics",
+    "dukascopy_growth_risk_v95_v89_metrics",
     RESEARCH_ROOT / "cboe-gvz-routed-intraday-v89" / "src" / "campaign.py",
 )
 BASE = V89.BASE
@@ -70,7 +69,9 @@ def parameter_space(mechanic: str) -> list[dict[str, Any]]:
     common = _space(
         source_horizon=(1, 3, 6),
         source_lookback=(120, 240, 480),
-        source_threshold_z=(0.6, 0.9, 1.2, 1.5, 1.8),
+        current_threshold_z=(0.4, 0.8, 1.2),
+        prior_threshold_z=(0.4, 0.8, 1.2),
+        transition_lag_hours=(1, 3, 6),
         minimum_active_m5=(6, 9),
         maximum_source_staleness_minutes=(15,),
         session=SESSIONS,
@@ -91,32 +92,35 @@ def parameter_space(mechanic: str) -> list[dict[str, Any]]:
             )
         return rows
 
-    if mechanic in {"RISK_PULSE_CATCHUP", "GROWTH_PULSE_CATCHUP"}:
+    if mechanic in {"RISK_SIGN_REVERSAL", "GROWTH_SIGN_REVERSAL"}:
         return combine(_space(
             maximum_response_atr=(0.0, 0.25, 0.50, 0.75),
-            model_lookback=(240,),
-            ridge_penalty=(0.1,),
-            minimum_prediction_atr=(0.0,),
+            acceleration_ratio=(1.0,),
             channel_bars=(6,),
             breakout_buffer_atr=(0.0,),
         ))
-    if mechanic == "CROSSASSET_GATED_BREAKOUT":
+    if mechanic == "RISK_GROWTH_CONVERGENCE":
+        return combine(_space(
+            maximum_response_atr=(0.25, 0.50, 0.75, 1.0),
+            acceleration_ratio=(1.0,),
+            channel_bars=(6,),
+            breakout_buffer_atr=(0.0,),
+        ))
+    if mechanic == "RISK_GROWTH_DIVERGENCE":
         return combine(_space(
             maximum_response_atr=(1.0,),
-            model_lookback=(240,),
-            ridge_penalty=(0.1,),
-            minimum_prediction_atr=(0.0,),
+            acceleration_ratio=(1.0,),
             channel_bars=(3, 6, 12),
             breakout_buffer_atr=(0.0, 0.05, 0.10),
         ))
-    return combine(_space(
-        maximum_response_atr=(0.25, 0.50, 0.75, 1.0),
-        model_lookback=(240, 480),
-        ridge_penalty=(0.1, 1.0),
-        minimum_prediction_atr=(0.10, 0.20, 0.35, 0.50),
-        channel_bars=(6,),
-        breakout_buffer_atr=(0.0,),
-    ))
+    if mechanic == "RISK_STATE_ACCELERATION":
+        return combine(_space(
+            maximum_response_atr=(0.25, 0.50, 0.75, 1.0),
+            acceleration_ratio=(1.2, 1.5, 2.0),
+            channel_bars=(6,),
+            breakout_buffer_atr=(0.0,),
+        ))
+    raise KeyError(mechanic)
 
 
 def _causal_z(values: pd.Series, lookback: int) -> pd.Series:
@@ -244,47 +248,6 @@ def prepare_source_h1(
     return result
 
 
-def _causal_ridge_prediction(
-    features: np.ndarray,
-    target: np.ndarray,
-    lookback: int,
-    penalty: float,
-) -> np.ndarray:
-    width = features.shape[1]
-    xtx = np.zeros((width, width), dtype=float)
-    xty = np.zeros(width, dtype=float)
-    history: deque[tuple[np.ndarray | None, float]] = deque()
-    valid_count = 0
-    result = np.full(len(target), np.nan, dtype=float)
-    minimum = max(120, lookback // 2)
-    for index in range(len(target)):
-        current = features[index]
-        if valid_count >= minimum and np.isfinite(current).all():
-            beta = np.linalg.solve(xtx + penalty * np.eye(width), xty)
-            result[index] = float(current @ beta)
-
-        y = float(target[index])
-        if np.isfinite(current).all() and math_isfinite(y):
-            stored: np.ndarray | None = current.copy()
-            xtx += np.outer(stored, stored)
-            xty += stored * y
-            valid_count += 1
-        else:
-            stored = None
-        history.append((stored, y))
-        if len(history) > lookback:
-            old_x, old_y = history.popleft()
-            if old_x is not None:
-                xtx -= np.outer(old_x, old_x)
-                xty -= old_x * old_y
-                valid_count -= 1
-    return result
-
-
-def math_isfinite(value: float) -> bool:
-    return bool(np.isfinite(value))
-
-
 def prepare_features(
     h1: pd.DataFrame, source_m5: pd.DataFrame, config: Mapping[str, Any]
 ) -> pd.DataFrame:
@@ -317,34 +280,8 @@ def prepare_features(
             frame["mid_low"].shift(1).rolling(bars, min_periods=bars).min()
         ).where(contiguous)
     source_h1 = prepare_source_h1(source_m5, config)
-    frame = frame.merge(source_h1, on="bar_end_utc", how="left", validate="one_to_one")
-    lookbacks = tuple(map(int, config["features"]["source_normalization_lookbacks"]))
-    beta_lookbacks = tuple(map(int, config["features"]["beta_lookbacks"]))
-    penalties = tuple(map(float, config["features"]["ridge_penalties"]))
-    target = frame["body_atr"].to_numpy(dtype=float)
-    for horizon in (1, 3, 6):
-        for source_lookback in lookbacks:
-            matrix = frame[
-                [f"{prefix}_z_{horizon}h_{source_lookback}" for prefix in PREFIXES]
-            ].to_numpy(dtype=float)
-            for model_lookback in beta_lookbacks:
-                for penalty in penalties:
-                    name = _prediction_column(
-                        horizon, source_lookback, model_lookback, penalty
-                    )
-                    frame[name] = _causal_ridge_prediction(
-                        matrix, target, model_lookback, penalty
-                    )
-    return frame
-
-
-def _prediction_column(
-    horizon: int, source_lookback: int, model_lookback: int, penalty: float
-) -> str:
-    penalty_code = str(penalty).replace(".", "p")
-    return (
-        f"ridge_prediction_h{horizon}_s{source_lookback}_"
-        f"m{model_lookback}_r{penalty_code}"
+    return frame.merge(
+        source_h1, on="bar_end_utc", how="left", validate="one_to_one"
     )
 
 
@@ -361,23 +298,64 @@ def source_event_mask_direction(
 ) -> tuple[pd.Series, pd.Series]:
     horizon = int(params["source_horizon"])
     lookback = int(params["source_lookback"])
-    threshold = float(params["source_threshold_z"])
-    score_name = (
-        "growth_score" if mechanic == "GROWTH_PULSE_CATCHUP" else "risk_score"
-    )
-    score = frame[f"{score_name}_{horizon}h_{lookback}"]
-    if mechanic.startswith("ROLLING_BETA"):
-        event_strength = frame[f"source_energy_{horizon}h_{lookback}"]
+    current_threshold = float(params["current_threshold_z"])
+    prior_threshold = float(params["prior_threshold_z"])
+    lag = int(params["transition_lag_hours"])
+    risk = frame[f"risk_score_{horizon}h_{lookback}"]
+    growth = frame[f"growth_score_{horizon}h_{lookback}"]
+    prior_risk = risk.shift(lag)
+    prior_growth = growth.shift(lag)
+    contiguous = _contiguous_lag(frame, lag)
+
+    if mechanic in {"RISK_SIGN_REVERSAL", "GROWTH_SIGN_REVERSAL"}:
+        score = growth if mechanic == "GROWTH_SIGN_REVERSAL" else risk
+        prior = prior_growth if mechanic == "GROWTH_SIGN_REVERSAL" else prior_risk
+        direction = pd.Series(np.sign(score.fillna(0.0)).astype(int), index=frame.index)
+        prior_direction = pd.Series(
+            np.sign(prior.fillna(0.0)).astype(int), index=frame.index
+        )
+        mask = score.abs().ge(current_threshold)
+        mask &= prior.abs().ge(prior_threshold)
+        mask &= direction.ne(0) & direction.eq(-prior_direction)
+    elif mechanic == "RISK_GROWTH_CONVERGENCE":
+        risk_direction = np.sign(risk.fillna(0.0)).astype(int)
+        growth_direction = np.sign(growth.fillna(0.0)).astype(int)
+        prior_risk_direction = np.sign(prior_risk.fillna(0.0)).astype(int)
+        prior_growth_direction = np.sign(prior_growth.fillna(0.0)).astype(int)
+        direction = pd.Series(risk_direction, index=frame.index)
+        mask = risk.abs().ge(current_threshold) & growth.abs().ge(current_threshold)
+        mask &= prior_risk.abs().ge(prior_threshold)
+        mask &= prior_growth.abs().ge(prior_threshold)
+        mask &= risk_direction.eq(growth_direction) & risk_direction.ne(0)
+        mask &= prior_risk_direction.eq(-prior_growth_direction)
+    elif mechanic == "RISK_GROWTH_DIVERGENCE":
+        risk_direction = np.sign(risk.fillna(0.0)).astype(int)
+        growth_direction = np.sign(growth.fillna(0.0)).astype(int)
+        prior_risk_direction = np.sign(prior_risk.fillna(0.0)).astype(int)
+        prior_growth_direction = np.sign(prior_growth.fillna(0.0)).astype(int)
+        direction = pd.Series(risk_direction, index=frame.index)
+        mask = risk.abs().ge(current_threshold) & growth.abs().ge(current_threshold)
+        mask &= prior_risk.abs().ge(prior_threshold)
+        mask &= prior_growth.abs().ge(prior_threshold)
+        mask &= risk_direction.eq(-growth_direction) & risk_direction.ne(0)
+        mask &= prior_risk_direction.eq(prior_growth_direction)
+    elif mechanic == "RISK_STATE_ACCELERATION":
+        direction = pd.Series(np.sign(risk.fillna(0.0)).astype(int), index=frame.index)
+        prior_direction = pd.Series(
+            np.sign(prior_risk.fillna(0.0)).astype(int), index=frame.index
+        )
+        mask = risk.abs().ge(current_threshold)
+        mask &= prior_risk.abs().ge(prior_threshold)
+        mask &= risk.abs().ge(
+            prior_risk.abs() * float(params["acceleration_ratio"])
+        )
+        mask &= direction.eq(prior_direction) & direction.ne(0)
     else:
-        event_strength = score.abs()
-    direction = pd.Series(
-        np.sign(score.fillna(0.0)).astype(int), index=frame.index
-    )
-    mask = event_strength.ge(threshold) & direction.ne(0)
+        raise KeyError(mechanic)
+
+    mask &= contiguous
     required_prefixes = (
-        ("copper", "usdcnh")
-        if mechanic == "GROWTH_PULSE_CATCHUP"
-        else PREFIXES
+        ("copper", "usdcnh") if mechanic == "GROWTH_SIGN_REVERSAL" else PREFIXES
     )
     for prefix in required_prefixes:
         mask &= frame[f"{prefix}_active_m5"].ge(int(params["minimum_active_m5"]))
@@ -395,10 +373,10 @@ def signal_mask_direction(
     horizon = int(params["source_horizon"])
     response = frame[f"impulse_{horizon}_atr"]
     maximum_response = float(params["maximum_response_atr"])
-    if mechanic in {"RISK_PULSE_CATCHUP", "GROWTH_PULSE_CATCHUP"}:
+    if mechanic in {"RISK_SIGN_REVERSAL", "GROWTH_SIGN_REVERSAL"}:
         direction = source_direction
         mask &= (direction * response).le(maximum_response)
-    elif mechanic == "CROSSASSET_GATED_BREAKOUT":
+    elif mechanic == "RISK_GROWTH_DIVERGENCE":
         bars = int(params["channel_bars"])
         buffer = float(params["breakout_buffer_atr"]) * frame["atr14"]
         long_break = frame["mid_close"].ge(frame[f"prior_high_{bars}"] + buffer)
@@ -408,31 +386,12 @@ def signal_mask_direction(
             index=frame.index,
         )
         mask &= direction.eq(source_direction) & direction.ne(0)
+    elif mechanic in {"RISK_GROWTH_CONVERGENCE", "RISK_STATE_ACCELERATION"}:
+        direction = source_direction
+        signed_body = direction * frame["body_atr"]
+        mask &= signed_body.ge(0.0) & signed_body.le(maximum_response)
     else:
-        prediction = frame[
-            _prediction_column(
-                horizon,
-                int(params["source_lookback"]),
-                int(params["model_lookback"]),
-                float(params["ridge_penalty"]),
-            )
-        ]
-        minimum = float(params["minimum_prediction_atr"])
-        if mechanic == "ROLLING_BETA_RESIDUAL":
-            residual = prediction - frame["body_atr"]
-            direction = pd.Series(
-                np.sign(residual.fillna(0.0)).astype(int), index=frame.index
-            )
-            mask &= residual.abs().ge(minimum) & direction.ne(0)
-        elif mechanic == "ROLLING_BETA_CONTINUATION":
-            direction = pd.Series(
-                np.sign(prediction.fillna(0.0)).astype(int), index=frame.index
-            )
-            signed_body = direction * frame["body_atr"]
-            mask &= prediction.abs().ge(minimum) & direction.ne(0)
-            mask &= signed_body.ge(0.0) & signed_body.le(maximum_response)
-        else:
-            raise KeyError(mechanic)
+        raise KeyError(mechanic)
     return mask.fillna(False), direction
 
 
@@ -487,13 +446,13 @@ def generate_manifest(
                 break
         if admitted != policies_per_mechanic:
             raise ValueError(
-                f"Only {admitted} source-eligible V93 policies for {mechanic}; "
+                f"Only {admitted} source-eligible V95 policies for {mechanic}; "
                 f"required {policies_per_mechanic}"
             )
     manifest = pd.DataFrame(rows)
     expected = len(MECHANICS) * policies_per_mechanic
     if len(manifest) != expected or manifest["policy_id"].duplicated().any():
-        raise ValueError("Invalid V93 policy manifest")
+        raise ValueError("Invalid V95 policy manifest")
     return manifest
 
 

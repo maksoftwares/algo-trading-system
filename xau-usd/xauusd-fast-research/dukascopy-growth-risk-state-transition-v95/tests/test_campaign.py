@@ -5,11 +5,12 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from lock_contract import expected_months
+import run_research
 from src.campaign import (
     MECHANICS,
-    _causal_ridge_prediction,
     _contiguous_lag,
     generate_manifest,
     parameter_space,
@@ -91,79 +92,80 @@ def test_contiguous_lag_rejects_missing_h1_bar() -> None:
     assert _contiguous_lag(frame, 1).tolist() == [False, True, False]
 
 
-def test_causal_ridge_prediction_never_uses_current_or_future_target() -> None:
-    features = np.array(
-        [[index, index * 0.5, -index * 0.25] for index in range(300)], dtype=float
-    )
-    target = np.linspace(-1.0, 1.0, 300)
-    altered = target.copy()
-    altered[250:] = 1_000_000.0
-    first = _causal_ridge_prediction(features, target, 240, 0.1)
-    second = _causal_ridge_prediction(features, altered, 240, 0.1)
-    assert np.allclose(first[:251], second[:251], equal_nan=True)
-
-
-def test_source_event_gate_does_not_require_any_xau_column() -> None:
+def transition_frame(
+    prior_risk: float,
+    current_risk: float,
+    prior_growth: float,
+    current_growth: float,
+) -> pd.DataFrame:
     frame = pd.DataFrame(
         {
-            "risk_score_1h_120": [2.0, -2.0],
-            "growth_score_1h_120": [2.0, -2.0],
-            "source_energy_1h_120": [2.0, 2.0],
+            "bar_end_utc": pd.to_datetime(
+                ["2024-01-02T12:00:00Z", "2024-01-02T13:00:00Z"]
+            ),
+            "risk_score_1h_120": [prior_risk, current_risk],
+            "growth_score_1h_120": [prior_growth, current_growth],
             "session_slot": ["LONDON", "NY"],
         }
     )
     for prefix in ("spx", "copper", "usdcnh"):
         frame[f"{prefix}_active_m5"] = 12
-        frame[f"{prefix}_staleness_minutes"] = 0.0
-    params = {
-        "source_horizon": 1,
-        "source_lookback": 120,
-        "source_threshold_z": 1.0,
-        "minimum_active_m5": 6,
-        "maximum_source_staleness_minutes": 15,
-        "session": "ALL",
-    }
-    for mechanic in MECHANICS:
-        mask, direction = source_event_mask_direction(frame, mechanic, params)
-        assert mask.all()
-        assert direction.tolist() == [1, -1]
+        frame[f"{prefix}_staleness_minutes"] = 1.0
+    return frame
 
 
-def test_registered_signal_mechanics_emit_only_long_or_short() -> None:
-    frame = pd.DataFrame(
-        {
-            "risk_score_1h_120": [2.0, -2.0],
-            "growth_score_1h_120": [2.0, -2.0],
-            "source_energy_1h_120": [2.0, 2.0],
-            "session_slot": ["LONDON", "NY"],
-            "impulse_1_atr": [0.0, 0.0],
-            "body_atr": [0.1, -0.1],
-            "mid_close": [101.0, 99.0],
-            "prior_high_6": [100.0, 100.0],
-            "prior_low_6": [100.0, 100.0],
-            "atr14": [1.0, 1.0],
-            "ridge_prediction_h1_s120_m240_r0p1": [0.5, -0.5],
-        }
-    )
-    for prefix in ("spx", "copper", "usdcnh"):
-        frame[f"{prefix}_active_m5"] = 12
-        frame[f"{prefix}_staleness_minutes"] = 0.0
-    params = {
+def transition_params() -> dict:
+    return {
         "source_horizon": 1,
         "source_lookback": 120,
-        "source_threshold_z": 1.0,
+        "current_threshold_z": 0.4,
+        "prior_threshold_z": 0.4,
+        "transition_lag_hours": 1,
         "minimum_active_m5": 6,
         "maximum_source_staleness_minutes": 15,
         "session": "ALL",
         "maximum_response_atr": 0.75,
-        "model_lookback": 240,
-        "ridge_penalty": 0.1,
-        "minimum_prediction_atr": 0.1,
+        "acceleration_ratio": 1.5,
         "channel_bars": 6,
         "breakout_buffer_atr": 0.0,
     }
-    for mechanic in MECHANICS:
+
+
+def test_source_event_gate_does_not_require_any_xau_column() -> None:
+    params = transition_params()
+    cases = {
+        "RISK_SIGN_REVERSAL": (2.0, -2.0, 0.6, 0.6),
+        "GROWTH_SIGN_REVERSAL": (0.6, 0.6, 2.0, -2.0),
+        "RISK_GROWTH_CONVERGENCE": (2.0, 2.0, -2.0, 2.0),
+        "RISK_GROWTH_DIVERGENCE": (2.0, 2.0, 2.0, -2.0),
+        "RISK_STATE_ACCELERATION": (0.6, 1.2, 0.6, 0.6),
+    }
+    for mechanic, values in cases.items():
+        frame = transition_frame(*values)
+        mask, direction = source_event_mask_direction(frame, mechanic, params)
+        assert mask.iloc[1]
+        assert direction.iloc[1] in {-1, 1}
+
+
+def test_registered_signal_mechanics_emit_only_long_or_short() -> None:
+    params = transition_params()
+    cases = {
+        "RISK_SIGN_REVERSAL": (2.0, -2.0, 0.6, 0.6),
+        "GROWTH_SIGN_REVERSAL": (0.6, 0.6, 2.0, -2.0),
+        "RISK_GROWTH_CONVERGENCE": (2.0, 2.0, -2.0, 2.0),
+        "RISK_GROWTH_DIVERGENCE": (2.0, 2.0, 2.0, -2.0),
+        "RISK_STATE_ACCELERATION": (0.6, 1.2, 0.6, 0.6),
+    }
+    for mechanic, values in cases.items():
+        frame = transition_frame(*values)
+        frame["impulse_1_atr"] = 0.0
+        frame["body_atr"] = [0.0, 0.1]
+        frame["mid_close"] = [100.0, 101.0]
+        frame["prior_high_6"] = 100.0
+        frame["prior_low_6"] = 100.0
+        frame["atr14"] = 1.0
         mask, direction = signal_mask_direction(frame, mechanic, params)
+        assert mask.iloc[1]
         assert set(direction.loc[mask].unique()).issubset({-1, 1})
 
 
@@ -175,7 +177,7 @@ def test_policy_spaces_are_bounded_and_contain_execution_geometry() -> None:
 
 
 def test_manifest_is_sequential_unique_and_constructed_from_source_only() -> None:
-    rows = 1_200
+    rows = 2_400
     frame = pd.DataFrame(
         {
             "bar_end_utc": pd.date_range(
@@ -184,12 +186,12 @@ def test_manifest_is_sequential_unique_and_constructed_from_source_only() -> Non
             "session_slot": np.resize(["ASIA", "LONDON", "NY"], rows),
         }
     )
-    alternating = np.resize([3.0, -3.0], rows)
+    risk = np.resize([0.5, 2.0, -2.0, -0.5, -2.0, 2.0, 0.5, 2.0], rows)
+    growth = np.resize([-0.5, 2.0, 2.0, -0.5, -2.0, -2.0, 0.5, 2.0], rows)
     for horizon in (1, 3, 6):
         for lookback in (120, 240, 480):
-            frame[f"risk_score_{horizon}h_{lookback}"] = alternating
-            frame[f"growth_score_{horizon}h_{lookback}"] = alternating
-            frame[f"source_energy_{horizon}h_{lookback}"] = 3.0
+            frame[f"risk_score_{horizon}h_{lookback}"] = risk
+            frame[f"growth_score_{horizon}h_{lookback}"] = growth
     for prefix in ("spx", "copper", "usdcnh"):
         frame[f"{prefix}_active_m5"] = 12
         frame[f"{prefix}_staleness_minutes"] = 0.0
@@ -198,28 +200,28 @@ def test_manifest_is_sequential_unique_and_constructed_from_source_only() -> Non
         frame,
         pd.Timestamp("2022-07-01T00:00:00Z"),
         pd.Timestamp("2023-01-01T00:00:00Z"),
-        attempt_first=124001,
+        attempt_first=126001,
         policies_per_mechanic=2,
         minimum_raw_signals=60,
     )
 
     assert len(manifest) == 10
-    assert manifest["attempt_no"].tolist() == list(range(124001, 124011))
+    assert manifest["attempt_no"].tolist() == list(range(126001, 126011))
     assert manifest["policy_id"].is_unique
     assert manifest.groupby("mechanic").size().eq(2).all()
 
 
 def test_windows_and_attempts_target_two_per_day_not_v60_milestone() -> None:
     config = json.loads(
-        (ROOT / "config" / "dukascopy_growth_risk_dislocation_v93.json").read_text()
+        (ROOT / "config" / "dukascopy_growth_risk_state_transition_v95.json").read_text()
     )
     assert config["windows"]["discovery"] == [
         "2022-07-01T00:00:00Z",
         "2024-07-01T00:00:00Z",
     ]
     assert config["shared_account"]["minimum_combined_trades_per_weekday"] == 2.0
-    assert config["research_controls"]["attempt_first"] == 124001
-    assert config["research_controls"]["attempt_last"] == 125000
+    assert config["research_controls"]["attempt_first"] == 126001
+    assert config["research_controls"]["attempt_last"] == 127000
     assert config["research_controls"]["registered_policy_count"] == 1000
     assert config["research_controls"]["v59_v60_modification_authorized"] is False
 
@@ -228,3 +230,40 @@ def test_expected_months_requires_exact_consecutive_source_range() -> None:
     assert expected_months(
         "2022-01-01T00:00:00Z", "2022-04-01T00:00:00Z"
     ) == ["2022-01", "2022-02", "2022-03"]
+
+
+def test_v95_requires_artifact_bound_terminal_v94_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    result_path = tmp_path / "V94_RESULT.json"
+    shared_path = tmp_path / "V94_SHARED.json"
+    manifest_path = tmp_path / "V94_ARTIFACT_MANIFEST.json"
+    result = {
+        "attempt_first": 125001,
+        "attempt_last": 126000,
+        "registered_policy_count": 1000,
+        "contract_sha256": "locked-v94",
+        "decision": "V94_DISCOVERY_FAIL_TERMINAL",
+    }
+    result_path.write_text(json.dumps(result), encoding="utf-8")
+    manifest = {
+        "contract_sha256": "locked-v94",
+        "artifacts": {
+            result_path.name: {"sha256": run_research._sha256(result_path)}
+        },
+    }
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    monkeypatch.setattr(run_research, "V94_RESULT_PATH", result_path)
+    monkeypatch.setattr(run_research, "V94_SHARED_RESULT_PATH", shared_path)
+    monkeypatch.setattr(run_research, "V94_ARTIFACT_MANIFEST_PATH", manifest_path)
+    evidence = run_research._verify_v94_terminal_failure()
+    assert evidence["v94_terminal_reason"] == "V94_DISCOVERY_FAIL_TERMINAL"
+
+    result["decision"] = "V94_DISCOVERY_PASS_ADVANCE"
+    result_path.write_text(json.dumps(result), encoding="utf-8")
+    manifest["artifacts"][result_path.name]["sha256"] = run_research._sha256(
+        result_path
+    )
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="remains sealed"):
+        run_research._verify_v94_terminal_failure()
