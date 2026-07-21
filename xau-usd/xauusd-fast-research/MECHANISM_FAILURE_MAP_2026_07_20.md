@@ -383,6 +383,27 @@ Decision: `V83_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
 All later stages remain sealed. V83 cannot be mirrored, retuned, or rescued;
 future work requires a different causal variable. V59/V60 remain immutable.
 
+## V84 Cross-Asset Volatility XAU Momentum Result
+
+V84 removed external direction voting and used absolute DXY and silver movement
+only to identify cross-asset volatility. The sign of causally known XAUUSD
+movement set the proposed continuation direction. Outcome-blind January 2019
+calibration selected a five-second, 0.75 bps DXY, 5.00 bps silver, 2.00 bps
+XAUUSD, two-quote policy at `18/22 = 0.818182/day`, split 10 long and 8 short.
+
+Fresh development resolved 567 trades over 615 eligible weekdays
+(`0.921951/day`), split 274 long and 293 short. Base/stress net was USD
+`-492.34/-540.01`; base/stress PF was `0.3080/0.2773`; both halves lost with
+stress PF `0.3056/0.2518`; no month was positive; winner-removed stress net was
+USD `-558.89`; stressed DD was USD `540.01`; and bootstrap p-value was `1.0`.
+
+Decision: `V84_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`fcdba968158636560548ca3d673648859e769b297d650f5bc1fe990987f117f4`.
+All later stages remain sealed. Cross-asset co-activation generated the desired
+density but did not create continuation expectancy. V84 cannot be mirrored,
+retuned, or rescued; future work requires a different causal variable. V59/V60
+remain immutable.
+
 ## Routes Not Counted As Solutions
 
 - Splitting one position into several tickets does not create independent
