@@ -33,6 +33,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | Joint DXY and silver raw-tick consensus | V83 | 0.821/day but base/stress PF 0.401/0.359, zero positive months, USD 352.23 stressed DD | Terminal; no mirror, threshold, timing, response, or exit rescue |
 | Cross-asset volatility then delayed XAU breakout | V86 | 0.828/day but base/stress PF 0.444/0.411, zero positive months, USD 443.48 stressed DD | Terminal; delayed confirmation did not create expectancy, so no mirror, threshold, timing, or exit rescue |
 | Dukascopy continuous quote-microburst continuation | V87 | 0.917/day but base/stress PF 0.100/0.060, zero positive months, USD 554.98 stressed DD | Terminal; no direction mirror, threshold, timing, hold, or quota rescue |
+| Dukascopy 2-5 second liquidity-gap restart continuation | V88 | 1.282/day but base/stress PF 0.111/0.070, zero positive months, USD 768.00 stressed DD | Terminal; fixed V26 replication cannot be mirrored, retimed, or rescued |
 | Scheduling-only expansion of V59/V60 | V85 | Even accepting every distinct V57 add-on reaches only 1.280/day in development and 1.667/day in final | Mechanically insufficient; new event IDs are required |
 
 ## What Is Actually Missing
@@ -465,6 +466,24 @@ Decision: `V87_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
 All later stages remain sealed. Continuous one-sided quote bursts did not retain
 enough two-minute continuation to clear spread and costs. V87 cannot be
 mirrored, retuned, or rescued. V59/V60 and Capital V24.1 remain unchanged.
+
+## V88 Dukascopy Gap-Restart Continuation Result
+
+V88 replicated the fixed Capital V26 event constructor on verified Dukascopy
+XAUUSD history. January 2019 source-only calibration produced 19 candidates over
+22 weekdays (`0.863636/day`), active on 16 days and split 5 long and 14 short.
+
+Fresh development resolved 791 trades over 617 eligible weekdays
+(`1.282010/day`), split 372 long and 419 short. Base/stress net was USD
+`-609.80/-768.00`; base/stress PF was `0.1107/0.0697`; both halves lost with
+stress PF `0.0844/0.0551`; no month was positive; winner-removed stress net was
+USD `-784.26`; stressed DD was USD `768.00`; and bootstrap p-value was `1.0`.
+
+Decision: `V88_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`11727feef5b69fabdcd17dfec81e72eccf55c60906167302689e666403632601`.
+All later stages remain sealed. A short quote silence did not convert restart
+bursts into continuation expectancy after spread and costs. V88 cannot be
+mirrored, retuned, or rescued. V59/V60 and Capital V26 remain unchanged.
 
 ## Routes Not Counted As Solutions
 
