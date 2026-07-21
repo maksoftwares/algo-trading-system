@@ -1,0 +1,40 @@
+{
+  "attempt_first": 121001,
+  "attempt_last": 122000,
+  "contract_sha256": "b572f51b910eebf5998dcd2dbb455ade6bc4c4fc7ae0c89ee91d3d29d159d3bd",
+  "created_utc": "2026-07-21T02:06:10.236171+00:00",
+  "databento_use_authorized": false,
+  "execution_authorized": false,
+  "files": {
+    "PREREGISTRATION.md": "0d10372ef3d7be56f047a931c6d27ccb23511312bd7d90293f2af928c0569bcb",
+    "SHARED_PORTFOLIO_PRECOMMITMENT.md": "03b99aeb3a2446bc732edc93d61acd9cbd4fd903c77b354943218dbcc6673623",
+    "config/spdr_gld_flow_routed_intraday_v90.json": "c193a00a9ed05d875f9a24e127b9109b469354072a1d23865c5ff5075e8a9844",
+    "external/dukascopy_feature_cache": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "external/dukascopy_feature_manifest": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85",
+    "external/spdr_gld_historical_archive": "e714af540aa43bfe7b479f12d9925f4117ace900af5821d1805a96cf3a887479",
+    "lock_contract.py": "8fed85bbfee525b331be6d46fd6f24cafe08777f179db60edc2b66b4909814c6",
+    "requirements.txt": "32b6a48826117e9cc4e788ede6951e623b1ec626b5e7b61643a9bc13249ceee6",
+    "run_research.py": "53ce52bd3601f2a9dc0f9859bd90e72afb99c012da1f410777b19ade318c6a88",
+    "src/campaign.py": "d2af7b99f4404e13d7988b46c46eb381155e7ccb1d3fb5435e71803feeef27b2",
+    "upstream/base_simulator.py": "ad657ca37562de37410403d79d62755a02ca55c25f66b0f2783e8c7d00cff30b",
+    "upstream/dukascopy_data_source.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+  },
+  "outcomes_opened": false,
+  "paid_data_authorized": false,
+  "policy_manifest_sha256": "b5a129168da294cfea8fb9d5f389a09e08f7c14f6101ad0f97d0c9c690b1df4f",
+  "registered_policy_count": 1000,
+  "schema_version": "xauusd_spdr_gld_flow_v90_contract_lock",
+  "signal_census_sha256": "16621a1fba9ebdd2ef086cdc4acb3ffe2ec90246f66480cd54e87aed13aa0c53",
+  "source_evidence": {
+    "databento_used": false,
+    "gld_first_date": "2004-11-18",
+    "gld_last_date": "2026-07-17",
+    "gld_valid_rows": 5447,
+    "gld_workbook_rows": 5652,
+    "paid_data_request_made": false,
+    "raw_archive_committed": false,
+    "same_day_gld_holdings_use": false
+  },
+  "training_authorized": false,
+  "v59_v60_modification_authorized": false
+}

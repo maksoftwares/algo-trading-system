@@ -1,0 +1,46 @@
+{
+  "attempt_first": 121001,
+  "attempt_last": 122000,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-21T02:06:10.233261+00:00",
+  "databento_used": false,
+  "discovery_end": "2019-01-01T00:00:00+00:00",
+  "discovery_start": "2016-07-01T00:00:00+00:00",
+  "mechanics": {
+    "FLOW_ALIGNED_BREAKOUT": {
+      "maximum_raw_signals": 983,
+      "median_raw_signals": 343.5,
+      "minimum_raw_signals": 220,
+      "policies": 200
+    },
+    "FLOW_ALIGNED_PULLBACK": {
+      "maximum_raw_signals": 829,
+      "median_raw_signals": 321.0,
+      "minimum_raw_signals": 220,
+      "policies": 200
+    },
+    "FLOW_DIVERGENCE_REVERSAL": {
+      "maximum_raw_signals": 996,
+      "median_raw_signals": 353.5,
+      "minimum_raw_signals": 220,
+      "policies": 200
+    },
+    "FLOW_SHOCK_MOMENTUM": {
+      "maximum_raw_signals": 1700,
+      "median_raw_signals": 503.0,
+      "minimum_raw_signals": 224,
+      "policies": 200
+    },
+    "PERSISTENT_FLOW_TREND": {
+      "maximum_raw_signals": 1917,
+      "median_raw_signals": 738.0,
+      "minimum_raw_signals": 378,
+      "policies": 200
+    }
+  },
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "post_entry_quotes_opened": false,
+  "schema_version": "xauusd_spdr_gld_flow_v90_signal_census",
+  "strategy_scoring_performed": false
+}
