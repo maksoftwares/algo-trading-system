@@ -18,7 +18,7 @@ the disk space of expanded JSON. Curated M5 bars contain source features only.
 uv run --with httpx --with pandas --with numpy python acquire.py --symbol USA500IDXUSD
 uv run --with httpx --with pandas --with numpy python acquire.py --symbol COPPERCMDUSD
 uv run --with httpx --with pandas --with numpy python acquire.py --symbol USDCNH
-uv run --with pandas --with numpy --with pyarrow python build.py
+uv run --with httpx --with pandas --with numpy --with pyarrow python build.py
 uv run --with pytest --with pandas --with numpy pytest -q
 ```
 
