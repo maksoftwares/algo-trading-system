@@ -1,0 +1,38 @@
+{
+  "attempt_first": 120001,
+  "attempt_last": 121000,
+  "contract_sha256": "ed47723bcd3be92a7bd9115898fe1e61790d1f568d8fdbf160bcb94c2f2c94c0",
+  "created_utc": "2026-07-21T01:46:54.508336+00:00",
+  "databento_use_authorized": false,
+  "execution_authorized": false,
+  "files": {
+    "PREREGISTRATION.md": "3799daceb678a29caa94fc782c9563dbd1c366b7e2b3f13e1e68d4ae301233b2",
+    "SHARED_PORTFOLIO_PRECOMMITMENT.md": "4016685c9800352d68dd4cfa9861c495c08d1de3e74619cf8b7befb29060c216",
+    "config/cboe_gvz_routed_intraday_v89.json": "2ce7112d1cb5c92ac1e36105fe6162c73f47b6cedef22102b2c8f71c406321ac",
+    "external/cboe_gvz_history": "a6ed25ef614ac60dc4a1a8dbff39589cbe7bab17f860e85e6961af946d86d0a7",
+    "external/dukascopy_feature_cache": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "external/dukascopy_feature_manifest": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85",
+    "lock_contract.py": "5ff17fd01d8c95ceb1dbcfe9b283b85f3dc74e12313c92063b44dc08d15893b5",
+    "requirements.txt": "a242a49fc48a301e0bcfe296d0aff9f3923b69ab85603290bf2a21c89d9cd2aa",
+    "run_research.py": "6966a8e3467f51af3f52b5b3df84cb2aa1354d1010901395a23db1c70d9dd542",
+    "src/campaign.py": "7abf78b55a4eb8959ff768405f5d3d4bb6dd102e5d779065c2210c31044ccbec",
+    "upstream/base_simulator.py": "ad657ca37562de37410403d79d62755a02ca55c25f66b0f2783e8c7d00cff30b",
+    "upstream/dukascopy_data_source.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+  },
+  "outcomes_opened": false,
+  "paid_data_authorized": false,
+  "policy_manifest_sha256": "9cfc209b3467c8fb6238c3636b765ac0a1430a5214b9c981cef661190acf9237",
+  "registered_policy_count": 1000,
+  "schema_version": "xauusd_cboe_gvz_v89_contract_lock",
+  "signal_census_sha256": "ce1e49f0abd1c195787deaa253f6f1af5049265498bc014dc3cb0e0747ab1805",
+  "source_evidence": {
+    "databento_used": false,
+    "gvz_first_date": "2009-09-18",
+    "gvz_last_date": "2026-07-20",
+    "gvz_rows": 4231,
+    "paid_data_request_made": false,
+    "same_day_gvz_use": false
+  },
+  "training_authorized": false,
+  "v59_v60_modification_authorized": false
+}

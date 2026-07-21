@@ -1,0 +1,46 @@
+{
+  "attempt_first": 120001,
+  "attempt_last": 121000,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-21T01:46:54.506442+00:00",
+  "databento_used": false,
+  "discovery_end": "2019-01-01T00:00:00+00:00",
+  "discovery_start": "2016-07-01T00:00:00+00:00",
+  "mechanics": {
+    "GVZ_FALLING_REVERSION": {
+      "maximum_raw_signals": 1161,
+      "median_raw_signals": 404.0,
+      "minimum_raw_signals": 260,
+      "policies": 200
+    },
+    "GVZ_HIGH_BREAKOUT": {
+      "maximum_raw_signals": 743,
+      "median_raw_signals": 335.5,
+      "minimum_raw_signals": 260,
+      "policies": 200
+    },
+    "GVZ_LOW_REVERSION": {
+      "maximum_raw_signals": 1569,
+      "median_raw_signals": 449.5,
+      "minimum_raw_signals": 260,
+      "policies": 200
+    },
+    "GVZ_PREMIUM_EXPANSION": {
+      "maximum_raw_signals": 1046,
+      "median_raw_signals": 372.0,
+      "minimum_raw_signals": 260,
+      "policies": 200
+    },
+    "GVZ_RISING_BREAKOUT": {
+      "maximum_raw_signals": 938,
+      "median_raw_signals": 404.5,
+      "minimum_raw_signals": 263,
+      "policies": 200
+    }
+  },
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "post_entry_quotes_opened": false,
+  "schema_version": "xauusd_cboe_gvz_v89_signal_census",
+  "strategy_scoring_performed": false
+}
