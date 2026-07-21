@@ -1,0 +1,42 @@
+{
+  "audit_sha256": "45e7434e211d85325258e929b8f0f94a5a0887a8a770c12b98f4ff6227f94c9f",
+  "campaign_id": "dukascopy-quote-microburst-continuation-v87",
+  "decision": "V87_CALIBRATION_SOURCE_AUDIT_PASS",
+  "declared_bytes": 45888323,
+  "declared_hours": 744,
+  "declared_ticks": 2118620,
+  "economic_outcomes_opened": false,
+  "first_month": "2019-01",
+  "instrument_evidence": {
+    "XAUUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-XAUUSD.json",
+      "sha256": "60e292320bc49ad124276cd6e432eede5f4ef525ca9969088670652b6e14af33"
+    }
+  },
+  "last_month": "2019-01",
+  "month_manifest_count": 1,
+  "month_manifests": [
+    {
+      "declared_bytes": 45888323,
+      "declared_ticks": 2118620,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=01\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "80b45a11f1f985ffdd6e822b9da79d78e877a1cfa006ecc075740dd88a549106",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=01\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "fd80ae2b6ec8e6baa30a957516a6eaf908a5971783aa3992d366c5437a3add94",
+      "month": "2019-01",
+      "symbol": "XAUUSD"
+    }
+  ],
+  "paid_data_used": false,
+  "runtime_raw_file_hash_verification_required": true,
+  "schema_version": "xauusd_dukascopy_quote_microburst_continuation_v87_calibration_source_audit",
+  "scope": "calibration",
+  "storage_root": "C:\\DukascopyTickDataFoundationV1",
+  "symbols": {
+    "XAUUSD": {
+      "price_scale": 3,
+      "source_code": "XAU-USD"
+    }
+  }
+}
