@@ -112,6 +112,8 @@ def contract_paths(config: Mapping[str, Any]) -> dict[str, Path]:
         "lock_contract.py": ROOT / "lock_contract.py",
         "run_research.py": ROOT / "run_research.py",
         "run_shared_audit.py": ROOT / "run_shared_audit.py",
+        "tests/test_campaign.py": ROOT / "tests" / "test_campaign.py",
+        "tests/test_shared_audit.py": ROOT / "tests" / "test_shared_audit.py",
         "upstream/dukascopy_data_source.py": (ROOT / source["data_source"]).resolve(),
         "upstream/base_simulator.py": (
             ROOT / config["base_simulator"]["path"]
@@ -123,6 +125,7 @@ def contract_paths(config: Mapping[str, Any]) -> dict[str, Path]:
         "external/growth_risk_feature_manifest": growth_risk_storage
         / growth_risk["feature_manifest"],
         "growth_risk_source/SOURCE_CONTRACT.md": source_package / "SOURCE_CONTRACT.md",
+        "growth_risk_source/README.md": source_package / "README.md",
         "growth_risk_source/config.json": source_package
         / "config"
         / "dukascopy_growth_risk_pulse_v1.json",

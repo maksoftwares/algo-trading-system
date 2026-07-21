@@ -10,6 +10,7 @@ from lock_contract import expected_months
 from src.campaign import (
     MECHANICS,
     _causal_ridge_prediction,
+    generate_manifest,
     parameter_space,
     prepare_source_h1,
     signal_mask_direction,
@@ -138,6 +139,41 @@ def test_policy_spaces_are_bounded_and_contain_execution_geometry() -> None:
         space = parameter_space(mechanic)
         assert 1_000 < len(space) <= 200_000
         assert {"stop_atr", "target_r", "hold_hours"}.issubset(space[0])
+
+
+def test_manifest_is_sequential_unique_and_constructed_from_source_only() -> None:
+    rows = 1_200
+    frame = pd.DataFrame(
+        {
+            "bar_end_utc": pd.date_range(
+                "2022-07-01T01:00:00Z", periods=rows, freq="h"
+            ),
+            "session_slot": np.resize(["ASIA", "LONDON", "NY"], rows),
+        }
+    )
+    alternating = np.resize([3.0, -3.0], rows)
+    for horizon in (1, 3, 6):
+        for lookback in (120, 240, 480):
+            frame[f"risk_score_{horizon}h_{lookback}"] = alternating
+            frame[f"growth_score_{horizon}h_{lookback}"] = alternating
+            frame[f"source_energy_{horizon}h_{lookback}"] = 3.0
+    for prefix in ("spx", "copper", "usdcnh"):
+        frame[f"{prefix}_active_m5"] = 12
+        frame[f"{prefix}_staleness_minutes"] = 0.0
+
+    manifest = generate_manifest(
+        frame,
+        pd.Timestamp("2022-07-01T00:00:00Z"),
+        pd.Timestamp("2023-01-01T00:00:00Z"),
+        attempt_first=124001,
+        policies_per_mechanic=2,
+        minimum_raw_signals=60,
+    )
+
+    assert len(manifest) == 10
+    assert manifest["attempt_no"].tolist() == list(range(124001, 124011))
+    assert manifest["policy_id"].is_unique
+    assert manifest.groupby("mechanic").size().eq(2).all()
 
 
 def test_windows_and_attempts_target_two_per_day_not_v60_milestone() -> None:
