@@ -1,0 +1,50 @@
+{
+  "attempt_first": 131001,
+  "attempt_last": 132000,
+  "conditional_predecessor": {
+    "v99_contract_sha256": "a54eb46a4c766271557ba6e6d9093f1e7d8936d447e25b22424e71c6251e027e",
+    "v99_result_sha256": "79096f56640e99b1ee10794615f8735f8432c1df44633b9651af9d9e2a5a0316",
+    "v99_terminal_reason": "V99_DISCOVERY_FAIL_TERMINAL"
+  },
+  "contract_sha256": "99cecc0a6b47b2139b0e80465653824e9022786006d64c6232015c1544bcafa3",
+  "data_evidence": {
+    "databento_used": false,
+    "episode_action_rows": 37033,
+    "episode_ids": 19233,
+    "family_horizon_rows": {
+      "SPOT_RETIRED_CLOCKS__SPOT_BREAK_AND_RUN|180": 11897,
+      "SPOT_RETIRED_CLOCKS__SPOT_BREAK_AND_RUN|60": 12688,
+      "SPOT_RETIRED_CLOCKS__SPOT_DOWNSIDE_IMPULSE_RETEST|180": 5903,
+      "SPOT_RETIRED_CLOCKS__SPOT_DOWNSIDE_IMPULSE_RETEST|60": 6545
+    },
+    "historical_outcomes_previously_exposed": true,
+    "paid_data_request_made": false
+  },
+  "decision": "V100_DISCOVERY_FAIL_PROGRAM_STOP",
+  "execution_authorized": false,
+  "latest_completed_stage": "discovery",
+  "model_training_authorized": false,
+  "program_version_ceiling": 100,
+  "registered_policy_count": 1000,
+  "research_only": true,
+  "schema_version": "xauusd_causal_health_gated_event_sleeves_v100",
+  "stages": {
+    "discovery": {
+      "advanced_mechanics": [],
+      "advanced_policy_count": 0,
+      "advanced_policy_ids": [],
+      "advancement_sha256": "accc130a8c01f46870b74266b5423d7ecb26f0d07c35601f53fe60679a92994f",
+      "best_average_stress_r": 5.026714898243921,
+      "best_stress_pf": 107.71279438251682,
+      "best_trades_per_weekday": 0.6353166986564299,
+      "completed_utc": "2026-07-21T16:25:49.057356+00:00",
+      "gate_pass_policy_count": 0,
+      "incoming_policy_count": 1000,
+      "lowest_fdr_qvalue": 1.8411765947659148e-09,
+      "metrics_sha256": "8ef829aa0256ea3483c097a508d3bd6ef53625cdd207ae1d98e9bcf25bc4d18e",
+      "selected_trade_rows": 0,
+      "trades_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    }
+  },
+  "v59_v60_modified": false
+}

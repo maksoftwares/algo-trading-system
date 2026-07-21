@@ -1,0 +1,44 @@
+{
+  "artifacts": {
+    "CAUSAL_HEALTH_GATED_EVENT_SLEEVES_V100_CONTRACT_LOCK.json": {
+      "bytes": 3408,
+      "sha256": "620d89753125600ea40833087b2a699e8cbf8df806bf7572b07836ab3d837701"
+    },
+    "CAUSAL_HEALTH_GATED_EVENT_SLEEVES_V100_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 786,
+      "sha256": "4f68c30c9eb2340b47f658adff2275926995c79829384ea973b0e6a367963332"
+    },
+    "CAUSAL_HEALTH_GATED_EVENT_SLEEVES_V100_DISCOVERY_METRICS.csv": {
+      "bytes": 1448606,
+      "sha256": "8ef829aa0256ea3483c097a508d3bd6ef53625cdd207ae1d98e9bcf25bc4d18e"
+    },
+    "CAUSAL_HEALTH_GATED_EVENT_SLEEVES_V100_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 327,
+      "sha256": "1c6915985334b9fc49a3f642bd07ca1916a7acf98178ba4960fa61194a3a6d37"
+    },
+    "CAUSAL_HEALTH_GATED_EVENT_SLEEVES_V100_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "CAUSAL_HEALTH_GATED_EVENT_SLEEVES_V100_POLICY_MANIFEST.csv": {
+      "bytes": 198824,
+      "sha256": "c1d3e4642ca5d5c96bfd84c6a0670a558402385cf13fc2a8ce739a15ad952f4b"
+    },
+    "CAUSAL_HEALTH_GATED_EVENT_SLEEVES_V100_RESULT.json": {
+      "bytes": 2106,
+      "sha256": "45907840bc79b3118c0844a3b5d853a6455635e884f3d13995b15360e9f603c0"
+    },
+    "CAUSAL_HEALTH_GATED_EVENT_SLEEVES_V100_RESULT.md": {
+      "bytes": 704,
+      "sha256": "5c0e8ab72e634e563bdd0f8ceec9917304a9cc8ae28b7816dedb71cc4714708d"
+    },
+    "CAUSAL_HEALTH_GATED_EVENT_SLEEVES_V100_SIGNAL_CENSUS.json": {
+      "bytes": 2221,
+      "sha256": "407a8ebd1d8d0eb3bd9551e72d66fe249859dd96e092330924fc8a846c95a48f"
+    }
+  },
+  "contract_sha256": "99cecc0a6b47b2139b0e80465653824e9022786006d64c6232015c1544bcafa3",
+  "execution_authorized": false,
+  "model_training_authorized": false,
+  "program_version_ceiling": 100
+}

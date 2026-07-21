@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "99cecc0a6b47b2139b0e80465653824e9022786006d64c6232015c1544bcafa3",
+  "execution_authorized": false,
+  "model_training_authorized": false,
+  "opened_utc": "2026-07-21T16:25:04.249407+00:00",
+  "schema_version": "xauusd_causal_health_gated_event_sleeves_v100_stage_open",
+  "stage": "discovery"
+}

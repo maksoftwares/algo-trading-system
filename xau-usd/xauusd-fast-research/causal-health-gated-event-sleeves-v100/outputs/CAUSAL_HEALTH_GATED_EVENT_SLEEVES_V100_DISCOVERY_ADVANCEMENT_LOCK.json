@@ -1,0 +1,15 @@
+{
+  "advancement_sha256": "accc130a8c01f46870b74266b5423d7ecb26f0d07c35601f53fe60679a92994f",
+  "contract_sha256": "99cecc0a6b47b2139b0e80465653824e9022786006d64c6232015c1544bcafa3",
+  "created_utc": "2026-07-21T16:25:49.036375+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "8ef829aa0256ea3483c097a508d3bd6ef53625cdd207ae1d98e9bcf25bc4d18e",
+  "model_training_authorized": false,
+  "policy_manifest_sha256": "c1d3e4642ca5d5c96bfd84c6a0670a558402385cf13fc2a8ce739a15ad952f4b",
+  "schema_version": "xauusd_causal_health_gated_event_sleeves_v100_advancement",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "trades_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+}
