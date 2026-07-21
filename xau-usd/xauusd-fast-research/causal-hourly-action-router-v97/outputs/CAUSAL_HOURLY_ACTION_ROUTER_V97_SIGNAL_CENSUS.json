@@ -1,0 +1,46 @@
+{
+  "attempt_first": 128001,
+  "attempt_last": 129000,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-21T15:09:50.962940+00:00",
+  "databento_used": false,
+  "discovery_end": "2024-07-01T00:00:00+00:00",
+  "discovery_start": "2022-07-01T00:00:00+00:00",
+  "mechanics": {
+    "ALL_CAUSAL_STATE": {
+      "maximum_raw_signals": 9235,
+      "median_raw_signals": 9235.0,
+      "minimum_raw_signals": 9235,
+      "policies": 200
+    },
+    "CROSSASSET_STATE": {
+      "maximum_raw_signals": 9235,
+      "median_raw_signals": 9235.0,
+      "minimum_raw_signals": 9235,
+      "policies": 200
+    },
+    "MICROSTRUCTURE_STATE": {
+      "maximum_raw_signals": 9235,
+      "median_raw_signals": 9235.0,
+      "minimum_raw_signals": 9235,
+      "policies": 200
+    },
+    "PRICE_CROSSASSET_STATE": {
+      "maximum_raw_signals": 9235,
+      "median_raw_signals": 9235.0,
+      "minimum_raw_signals": 9235,
+      "policies": 200
+    },
+    "PRICE_STATE": {
+      "maximum_raw_signals": 9235,
+      "median_raw_signals": 9235.0,
+      "minimum_raw_signals": 9235,
+      "policies": 200
+    }
+  },
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "post_entry_quotes_opened": false,
+  "schema_version": "xauusd_causal_hourly_action_router_v97_signal_census",
+  "strategy_scoring_performed": false
+}
