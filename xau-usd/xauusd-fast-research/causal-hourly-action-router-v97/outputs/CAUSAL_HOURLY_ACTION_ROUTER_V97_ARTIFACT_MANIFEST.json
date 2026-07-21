@@ -1,0 +1,44 @@
+{
+  "artifacts": {
+    "CAUSAL_HOURLY_ACTION_ROUTER_V97_CONTRACT_LOCK.json": {
+      "bytes": 4384,
+      "sha256": "851bc57af7d9b49431d24563a854efd778abf649eec06090d931572811311f97"
+    },
+    "CAUSAL_HOURLY_ACTION_ROUTER_V97_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 836,
+      "sha256": "e92ac94482feb286a9652ac8d44f554f741c9d7bb84751656ed0c3e57b1085f4"
+    },
+    "CAUSAL_HOURLY_ACTION_ROUTER_V97_DISCOVERY_METRICS.csv": {
+      "bytes": 2223061,
+      "sha256": "b3b33225cf30dc862ff20c82c8617b7dbf51473d11946c23aaa652a2c8bf9497"
+    },
+    "CAUSAL_HOURLY_ACTION_ROUTER_V97_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 377,
+      "sha256": "39d7cd0eda3b5f0fc455bfef27858b73def518efd371ea18e58befc733ce0ad6"
+    },
+    "CAUSAL_HOURLY_ACTION_ROUTER_V97_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "CAUSAL_HOURLY_ACTION_ROUTER_V97_POLICY_MANIFEST.csv": {
+      "bytes": 295825,
+      "sha256": "3dd34f1f19d6a262123d92d3b97189867531fdfcd0dcf492eefa0b759173f777"
+    },
+    "CAUSAL_HOURLY_ACTION_ROUTER_V97_RESULT.json": {
+      "bytes": 5142,
+      "sha256": "88c1784aab90678fcc6db7a4506684f4536bd3f62ee6d33796ea911986519d14"
+    },
+    "CAUSAL_HOURLY_ACTION_ROUTER_V97_RESULT.md": {
+      "bytes": 765,
+      "sha256": "2802ee092746699139e3a7110abb11f1019662fbea8855a99ce18df5606a45b6"
+    },
+    "CAUSAL_HOURLY_ACTION_ROUTER_V97_SIGNAL_CENSUS.json": {
+      "bytes": 1373,
+      "sha256": "a00eee2176834367309f96dc27a2dbd4454cd396b47a0775a64820ad8b9df5c7"
+    }
+  },
+  "contract_sha256": "6cc972489b10797afa3aacba3a2d382d5fbc98bd3500fccf4ff7eccb0986e4e4",
+  "deployment_model_training_authorized": false,
+  "execution_authorized": false,
+  "research_model_fitting_authorized": true
+}

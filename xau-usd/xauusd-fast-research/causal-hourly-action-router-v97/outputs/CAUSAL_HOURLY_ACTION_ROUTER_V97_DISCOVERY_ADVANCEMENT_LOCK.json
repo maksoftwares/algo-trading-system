@@ -1,0 +1,16 @@
+{
+  "advancement_sha256": "9956f2ac7abca8fc48efc567ca5462761b6b5503cf10f5346be3354f3d766571",
+  "contract_sha256": "6cc972489b10797afa3aacba3a2d382d5fbc98bd3500fccf4ff7eccb0986e4e4",
+  "created_utc": "2026-07-21T15:12:43.675658+00:00",
+  "deployment_model_training_authorized": false,
+  "execution_authorized": false,
+  "metrics_sha256": "b3b33225cf30dc862ff20c82c8617b7dbf51473d11946c23aaa652a2c8bf9497",
+  "policy_manifest_sha256": "3dd34f1f19d6a262123d92d3b97189867531fdfcd0dcf492eefa0b759173f777",
+  "research_model_fitting_authorized": true,
+  "schema_version": "xauusd_causal_hourly_action_router_v97_advancement",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "trades_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+}

@@ -1,0 +1,9 @@
+{
+  "contract_sha256": "6cc972489b10797afa3aacba3a2d382d5fbc98bd3500fccf4ff7eccb0986e4e4",
+  "deployment_model_training_authorized": false,
+  "execution_authorized": false,
+  "opened_utc": "2026-07-21T15:10:44.194337+00:00",
+  "research_model_fitting_authorized": true,
+  "schema_version": "xauusd_causal_hourly_action_router_v97_stage_open",
+  "stage": "discovery"
+}
