@@ -1,0 +1,95 @@
+{
+  "attempt_first": 130001,
+  "attempt_last": 131000,
+  "candidate_rows": 37843,
+  "candidate_type_rows": {
+    "COMPRESSION_EXPANSION": 10163,
+    "FAILED_RANGE_BREAK": 4631,
+    "IMPULSE_RETEST": 8981,
+    "RANGE_BREAK_CONTINUATION": 5777,
+    "TREND_PULLBACK_RESUME": 8291
+  },
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-21T15:50:47.059277+00:00",
+  "databento_used": false,
+  "discovery_end": "2024-07-01T00:00:00+00:00",
+  "discovery_start": "2022-07-01T00:00:00+00:00",
+  "event_pools": [
+    [
+      "RANGE_BREAK_CONTINUATION",
+      "TREND_PULLBACK_RESUME",
+      "COMPRESSION_EXPANSION",
+      "IMPULSE_RETEST",
+      "FAILED_RANGE_BREAK"
+    ],
+    [
+      "RANGE_BREAK_CONTINUATION",
+      "TREND_PULLBACK_RESUME",
+      "COMPRESSION_EXPANSION",
+      "IMPULSE_RETEST"
+    ],
+    [
+      "RANGE_BREAK_CONTINUATION",
+      "COMPRESSION_EXPANSION",
+      "IMPULSE_RETEST",
+      "FAILED_RANGE_BREAK"
+    ],
+    [
+      "RANGE_BREAK_CONTINUATION",
+      "TREND_PULLBACK_RESUME",
+      "COMPRESSION_EXPANSION",
+      "FAILED_RANGE_BREAK"
+    ],
+    [
+      "RANGE_BREAK_CONTINUATION",
+      "COMPRESSION_EXPANSION",
+      "IMPULSE_RETEST"
+    ]
+  ],
+  "locked_execution_profile": {
+    "hold_hours": 3,
+    "stop_atr": 1.0,
+    "target_r": 1.5
+  },
+  "long_candidate_times": 16176,
+  "mechanics": {
+    "ALL_EVENT_STATE": {
+      "maximum_raw_signals": 27811,
+      "median_raw_signals": 27811.0,
+      "minimum_raw_signals": 27811,
+      "policies": 200
+    },
+    "MICRO_EVENT_STATE": {
+      "maximum_raw_signals": 27811,
+      "median_raw_signals": 27811.0,
+      "minimum_raw_signals": 27811,
+      "policies": 200
+    },
+    "PRICE_EVENT_STATE": {
+      "maximum_raw_signals": 27811,
+      "median_raw_signals": 27811.0,
+      "minimum_raw_signals": 27811,
+      "policies": 200
+    },
+    "PRICE_MICRO_EVENT_STATE": {
+      "maximum_raw_signals": 27811,
+      "median_raw_signals": 27811.0,
+      "minimum_raw_signals": 27811,
+      "policies": 200
+    },
+    "PRICE_TIME_EVENT_STATE": {
+      "maximum_raw_signals": 27811,
+      "median_raw_signals": 27811.0,
+      "minimum_raw_signals": 27811,
+      "policies": 200
+    }
+  },
+  "minimum_observed_v98_calibration_support_per_weekday": 1.2273,
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "post_entry_quotes_opened": false,
+  "schema_version": "xauusd_executable_event_nearmiss_ranker_v99_signal_census",
+  "short_candidate_times": 15870,
+  "strategy_scoring_performed": false,
+  "unique_candidate_times": 27811
+}
