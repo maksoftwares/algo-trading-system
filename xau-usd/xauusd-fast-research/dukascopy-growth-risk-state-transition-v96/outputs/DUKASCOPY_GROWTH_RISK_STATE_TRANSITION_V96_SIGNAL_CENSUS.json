@@ -1,0 +1,40 @@
+{
+  "attempt_first": 127001,
+  "attempt_last": 128000,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-21T14:40:53.273197+00:00",
+  "databento_used": false,
+  "discovery_end": "2024-07-01T00:00:00+00:00",
+  "discovery_start": "2022-07-01T00:00:00+00:00",
+  "mechanics": {
+    "GROWTH_SIGN_REVERSAL": {
+      "maximum_raw_signals": 1380,
+      "median_raw_signals": 291.0,
+      "minimum_raw_signals": 141,
+      "policies": 250
+    },
+    "GROWTH_STATE_ACCELERATION": {
+      "maximum_raw_signals": 1197,
+      "median_raw_signals": 226.0,
+      "minimum_raw_signals": 140,
+      "policies": 250
+    },
+    "RISK_SIGN_REVERSAL": {
+      "maximum_raw_signals": 1406,
+      "median_raw_signals": 261.0,
+      "minimum_raw_signals": 140,
+      "policies": 250
+    },
+    "RISK_STATE_ACCELERATION": {
+      "maximum_raw_signals": 1044,
+      "median_raw_signals": 211.5,
+      "minimum_raw_signals": 140,
+      "policies": 250
+    }
+  },
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "post_entry_quotes_opened": false,
+  "schema_version": "xauusd_dukascopy_growth_risk_v96_signal_census",
+  "strategy_scoring_performed": false
+}
