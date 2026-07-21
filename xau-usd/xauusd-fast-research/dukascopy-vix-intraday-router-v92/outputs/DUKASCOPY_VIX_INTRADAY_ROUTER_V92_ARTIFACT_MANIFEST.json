@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "DUKASCOPY_VIX_INTRADAY_ROUTER_V92_CONTRACT_LOCK.json": {
+      "bytes": 3792,
+      "sha256": "f06607eedf2e0297e0e0464560c4655723f3d6222449126fbf6c77c2f520b3f5"
+    },
+    "DUKASCOPY_VIX_INTRADAY_ROUTER_V92_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 759,
+      "sha256": "8a48dd12e7bdc9a41ed0abf8a9478facfeb60cb86bb5ec6253446446f8301d64"
+    },
+    "DUKASCOPY_VIX_INTRADAY_ROUTER_V92_DISCOVERY_METRICS.csv": {
+      "bytes": 1415402,
+      "sha256": "7885dbe53e6ac4e722af29cc7ae1fefda4562389bf1c7b914ee467c2b72b5d04"
+    },
+    "DUKASCOPY_VIX_INTRADAY_ROUTER_V92_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 300,
+      "sha256": "66f375dade42adb70566b6b37d34d02e01e700ec5376870c569ee6c5ad75e7bd"
+    },
+    "DUKASCOPY_VIX_INTRADAY_ROUTER_V92_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "DUKASCOPY_VIX_INTRADAY_ROUTER_V92_POLICY_MANIFEST.csv": {
+      "bytes": 357930,
+      "sha256": "885624db3bb3dfae03f6dd70ff19cf114a740d219e443ed2e2a5ee4d386d2c19"
+    },
+    "DUKASCOPY_VIX_INTRADAY_ROUTER_V92_RESULT.json": {
+      "bytes": 4764,
+      "sha256": "04dfe84f7bbb498479d2eb5ff9038599aec6df3c05cfaeaddad3509959b01144"
+    },
+    "DUKASCOPY_VIX_INTRADAY_ROUTER_V92_RESULT.md": {
+      "bytes": 728,
+      "sha256": "4c3762ecd4640c666a75134e8c9364467bf153d6305d5ec60c57cb2f9cb256f9"
+    },
+    "DUKASCOPY_VIX_INTRADAY_ROUTER_V92_SIGNAL_CENSUS.json": {
+      "bytes": 1365,
+      "sha256": "37fc41ddb923ae4e123282612299315c83bb07154f9855c055d8b416e215ecd4"
+    }
+  },
+  "contract_sha256": "a9891c5db6b99ef4faf94c1381a4c57d3bb8d77a42f10b99c13a9cb4c18e33eb",
+  "execution_authorized": false,
+  "training_authorized": false
+}

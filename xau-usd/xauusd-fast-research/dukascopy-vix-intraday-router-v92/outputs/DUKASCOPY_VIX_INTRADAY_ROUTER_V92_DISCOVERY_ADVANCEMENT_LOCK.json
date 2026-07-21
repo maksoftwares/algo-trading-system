@@ -1,0 +1,15 @@
+{
+  "advancement_sha256": "b8a55b905335896d1fdbaa13e49fe2d43ee49bc260d7f6fa73780ff5449daf75",
+  "contract_sha256": "a9891c5db6b99ef4faf94c1381a4c57d3bb8d77a42f10b99c13a9cb4c18e33eb",
+  "created_utc": "2026-07-21T09:09:34.320406+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "7885dbe53e6ac4e722af29cc7ae1fefda4562389bf1c7b914ee467c2b72b5d04",
+  "policy_manifest_sha256": "885624db3bb3dfae03f6dd70ff19cf114a740d219e443ed2e2a5ee4d386d2c19",
+  "schema_version": "xauusd_dukascopy_vix_v92_advancement",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "trades_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+  "training_authorized": false
+}
