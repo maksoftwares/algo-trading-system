@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "SGE_DEMAND_PRESSURE_INTRADAY_V91_CONTRACT_LOCK.json": {
+      "bytes": 2550,
+      "sha256": "377f0a1cc0026818c3cec45ee470794ce41c1f8fb60e1e39bd020fddf1e7e8c8"
+    },
+    "SGE_DEMAND_PRESSURE_INTRADAY_V91_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 677,
+      "sha256": "d81095b35c53abf1be9bb001e8fa370d757290c5c5c67846fbf2514b9bd5d03d"
+    },
+    "SGE_DEMAND_PRESSURE_INTRADAY_V91_DISCOVERY_METRICS.csv": {
+      "bytes": 1324081,
+      "sha256": "fefc658e3c977c3effd4dde42e483528dcf506d789e07f345f1b326393a8aced"
+    },
+    "SGE_DEMAND_PRESSURE_INTRADAY_V91_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 306,
+      "sha256": "82e7752c11d20dbba54ae0588901482d1961d51c1661d2f8ac307c2f7498d2e9"
+    },
+    "SGE_DEMAND_PRESSURE_INTRADAY_V91_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "SGE_DEMAND_PRESSURE_INTRADAY_V91_POLICY_MANIFEST.csv": {
+      "bytes": 267147,
+      "sha256": "f576af335ea5a26cf88b0745c54d4576e1e04cf2453547896d2dc52a34108691"
+    },
+    "SGE_DEMAND_PRESSURE_INTRADAY_V91_RESULT.json": {
+      "bytes": 4824,
+      "sha256": "5ae29390ff09b154dbdc8d576f198a88d1000041d4e9b934c1695dc2f265cecf"
+    },
+    "SGE_DEMAND_PRESSURE_INTRADAY_V91_RESULT.md": {
+      "bytes": 909,
+      "sha256": "9c267deb2a211639963d6760b7d0bc9a0c7af721323c0a958c70ad977ea7a693"
+    },
+    "SGE_DEMAND_PRESSURE_INTRADAY_V91_SIGNAL_CENSUS.json": {
+      "bytes": 1384,
+      "sha256": "2df613c56f309cef9712cd3f77d308a8cc4166d2fac20ec85635fe4290d0f984"
+    }
+  },
+  "contract_sha256": "3026be62207c71d8e5601168a2c64d965d5d1b44654e43fbdfadf59db8d85741",
+  "execution_authorized": false,
+  "training_authorized": false
+}

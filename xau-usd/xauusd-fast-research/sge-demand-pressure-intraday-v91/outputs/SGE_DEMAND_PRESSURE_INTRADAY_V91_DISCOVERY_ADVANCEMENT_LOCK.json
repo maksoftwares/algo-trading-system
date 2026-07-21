@@ -1,0 +1,14 @@
+{
+  "advancement_sha256": "634fd5d49923db6ccf4a94b90bf48daa6292ee565fd4ce73b1e092bbb726c26f",
+  "contract_sha256": "3026be62207c71d8e5601168a2c64d965d5d1b44654e43fbdfadf59db8d85741",
+  "created_utc": "2026-07-21T05:53:31.170527+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "fefc658e3c977c3effd4dde42e483528dcf506d789e07f345f1b326393a8aced",
+  "policy_manifest_sha256": "f576af335ea5a26cf88b0745c54d4576e1e04cf2453547896d2dc52a34108691",
+  "schema_version": "xauusd_sge_demand_pressure_v91_advancement",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "training_authorized": false
+}
