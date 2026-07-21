@@ -1,0 +1,20 @@
+{
+  "schema_version": "dukascopy_vol_index_foundation_v1",
+  "storage_environment_variable": "DUKASCOPY_VOL_INDEX_DATA_ROOT",
+  "default_storage_root": "C:/DukascopyVolIndexFoundationV1",
+  "symbol": "VOLIDXUSD",
+  "source_code": "VOL.IDX-USD",
+  "pip_size": 0.1,
+  "price_scale": 2,
+  "start_utc": "2023-01-01T00:00:00Z",
+  "end_exclusive_utc": "2026-07-01T00:00:00Z",
+  "maximum_concurrency": 16,
+  "maximum_invalid_quote_fraction_per_hour": 0.1,
+  "official_origin": "https://jetta.dukascopy.com/v1",
+  "curated_file": "curated/volidx_m5_v1.parquet",
+  "curated_manifest": "curated/volidx_m5_v1.manifest.json",
+  "paid_data_authorized": false,
+  "xau_outcomes_authorized": false,
+  "strategy_scoring_authorized": false,
+  "broker_action_authorized": false
+}
