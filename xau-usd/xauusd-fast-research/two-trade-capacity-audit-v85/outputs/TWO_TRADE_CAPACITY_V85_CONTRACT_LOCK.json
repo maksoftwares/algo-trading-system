@@ -1,0 +1,127 @@
+{
+  "capacity_result_opened_before_lock": false,
+  "contract_sha256": "4f082649446e38665af577998b8b3485e6a0119efb593a38c7b602cb52f37943",
+  "expected": {
+    "accepted_addons": 1379,
+    "candidate_rows": 1685,
+    "combined_rows": 2194,
+    "core_rows": 815,
+    "fractional_r5_rows_excluded": 320,
+    "v59_decision": "V59_BROKER_EXPRESSIBLE_ONE_TRADE_PER_DAY_GATE_PASS",
+    "v60_decision": "V60_WHOLE_ACCOUNT_FLOATING_EQUITY_GATE_PASS"
+  },
+  "package_files": [
+    {
+      "bytes": 556,
+      "path": "README.md",
+      "sha256": "5ddc74dfc0e140b012725989c023c1fd70082a2590392cd4c9a8de156acfd2e9"
+    },
+    {
+      "bytes": 1740,
+      "path": "PREREGISTRATION.md",
+      "sha256": "54596c68a2d22c67cf0ba413cfb2b6a25c79e7a9418cd31101412fab938060de"
+    },
+    {
+      "bytes": 38,
+      "path": "requirements.txt",
+      "sha256": "27e538f6f8ec2855a81902c50f73c17e83daeea4c7c07fda0b69116469d4e53f"
+    },
+    {
+      "bytes": 3078,
+      "path": "config/two_trade_capacity_audit_v85.json",
+      "sha256": "a75b062f855f07e9e3a17152aa3dd6c7d08552d89bc51240e5c4ccc122c8d632"
+    },
+    {
+      "bytes": 54,
+      "path": "src/__init__.py",
+      "sha256": "710eef651c3779d409343bba0b8d69c176aad45fa5be848704a1d87d24d4b37b"
+    },
+    {
+      "bytes": 5619,
+      "path": "src/capacity.py",
+      "sha256": "232eeeba31713f0cbaf754b361fdd03b09c332cadec7c7c4b087579736692101"
+    },
+    {
+      "bytes": 3322,
+      "path": "lock_contract.py",
+      "sha256": "1d8cefafcf7e14a6b8ec3a49b25063397aa084eb5dbdc6a3431ddeab70d8eaa3"
+    },
+    {
+      "bytes": 5490,
+      "path": "run_audit.py",
+      "sha256": "e4f63f376be85c5510b5fe627c9d4f6ef1c12ea913df7bebfdfb112fe1dca40d"
+    },
+    {
+      "bytes": 153,
+      "path": "tests/conftest.py",
+      "sha256": "36c6b37cf299d7c314a07cb1b8ecd12bc17af9cc7293b6f65de416641e8256d7"
+    },
+    {
+      "bytes": 2731,
+      "path": "tests/test_capacity.py",
+      "sha256": "c5f1e85815b3177028a61c1a905b4287199f479d0ce2b50fb8996f83a98ab516"
+    }
+  ],
+  "required_windows": {
+    "confirmation": [
+      "2024-07-01T00:00:00Z",
+      "2025-07-01T00:00:00Z"
+    ],
+    "development_2": [
+      "2022-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "final": [
+      "2025-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  },
+  "research_controls": {
+    "broker_action_authorized": false,
+    "capacity_upper_bound_only": true,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "fractional_r5_counted": false,
+    "live_authorized": false,
+    "model_training_authorized": false,
+    "outcome_selected_candidates": false,
+    "python_predictions_authorized": false,
+    "same_version_tuning_authorized": false,
+    "v59_v60_byte_identical": true
+  },
+  "schema_version": "xauusd_two_trade_capacity_audit_v85_contract_lock",
+  "source_files": [
+    {
+      "bytes": 11600,
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_RESULT.json",
+      "sha256": "de6c1e050f431d7b396018f078fd7992c98328140a2d7c259ce17198e7970cac"
+    },
+    {
+      "bytes": 96280,
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_CORE.parquet",
+      "sha256": "46c8ce5d90431581d6d16b03f210fae6955d707b8bc2d605b74bb5c84906987b"
+    },
+    {
+      "bytes": 67210,
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_ADDON_DECISIONS.parquet",
+      "sha256": "4a1f5496fca9bcef93e05e735e4c796975d7f7afee3ddc28bb0f6f6f6ce0551d"
+    },
+    {
+      "bytes": 129587,
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_TRADES.parquet",
+      "sha256": "532de14e93955e1a3d4284475e692c1749e98df042c5891bb8350f856ef12724"
+    },
+    {
+      "bytes": 92305,
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-unified-portfolio-v57/outputs/ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_CANDIDATES.parquet",
+      "sha256": "05a30d5ba24fefe728e39bb4d85c38d2f82d35cdfb45eb0dc59e71ef26badad9"
+    },
+    {
+      "bytes": 4950,
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_RESULT.json",
+      "sha256": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095"
+    }
+  ],
+  "target_trades_per_weekday": 2.0,
+  "v59_v60_modified": false
+}
