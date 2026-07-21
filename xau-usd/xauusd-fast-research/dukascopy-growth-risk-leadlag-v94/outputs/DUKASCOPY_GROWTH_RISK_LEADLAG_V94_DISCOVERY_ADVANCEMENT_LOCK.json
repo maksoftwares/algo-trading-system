@@ -1,0 +1,15 @@
+{
+  "advancement_sha256": "485fc6e92109591d1abaf15ed6fc308430ea8140ae8c8c04bad61dda509dffe0",
+  "contract_sha256": "88854ca75b67c85433fe0988cd2560a04af7ee20ce2a7df51a7b8da0771b1acb",
+  "created_utc": "2026-07-21T14:26:05.691043+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "58be45918ca5aedfab71cf8c72833dbb18e95752cf4ae3a631d6a3fbd020a2ec",
+  "policy_manifest_sha256": "45fddc428924f35505e069b3fc3b8a45b23a0560c14a2436017204aab57bb2c9",
+  "schema_version": "xauusd_dukascopy_growth_risk_v94_advancement",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "trades_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+  "training_authorized": false
+}

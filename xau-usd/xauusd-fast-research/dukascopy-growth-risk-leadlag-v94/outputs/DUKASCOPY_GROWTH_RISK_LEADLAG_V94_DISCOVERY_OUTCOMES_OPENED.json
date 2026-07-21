@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "88854ca75b67c85433fe0988cd2560a04af7ee20ce2a7df51a7b8da0771b1acb",
+  "execution_authorized": false,
+  "opened_utc": "2026-07-21T14:08:56.319185+00:00",
+  "schema_version": "xauusd_dukascopy_growth_risk_v94_stage_open",
+  "stage": "discovery",
+  "training_authorized": false
+}
