@@ -1,0 +1,282 @@
+{
+  "broker_action_authorized": false,
+  "calibration_audit": {
+    "bytes": 8740,
+    "path": "outputs/PENDING_BREAKOUT_V86_CALIBRATION_AUDIT.json",
+    "sha256": "e0b5fbf4d74e7c8f62d450af4210d1573deaa209b7e0219e968a9a49cae0c28d"
+  },
+  "calibration_features": {
+    "bytes": 2423643,
+    "path": "outputs/PENDING_BREAKOUT_V86_CALIBRATION_FEATURES.parquet",
+    "sha256": "6e5732e025c2d03731c69e291124b45b0c7e7b0a2f39c90da5de7ab47abcbf88"
+  },
+  "calibration_grid": {
+    "bytes": 121536,
+    "path": "outputs/PENDING_BREAKOUT_V86_CALIBRATION_GRID.csv",
+    "sha256": "7a9b776732790dfecdc608c9475a41b15e1473527bc78b2780e129193669c234"
+  },
+  "calibration_outcomes_opened": false,
+  "calibration_source_audit": {
+    "bytes": 3385,
+    "path": "outputs/PENDING_BREAKOUT_V86_CALIBRATION_SOURCE_AUDIT.json",
+    "sha256": "96ced3cb1bba5a5a416d4a336aaf23abfccf875d111fa39861361de6414af39d"
+  },
+  "candidate_rule": {
+    "event_clock_symbol": "DOLLARIDXUSD",
+    "family": "CROSSASSET_VOLATILITY_PENDING_XAU_BREAKOUT",
+    "maximum_baseline_staleness_ms": 2000,
+    "maximum_candidates_per_utc_date": 1,
+    "maximum_current_source_staleness_ms": 2000,
+    "maximum_current_xau_staleness_ms": 1000,
+    "minimum_quotes_by_symbol": {
+      "dxy": 500,
+      "xag": 500,
+      "xau": 1000
+    },
+    "minimum_session_coverage_minutes": 600,
+    "minimum_source_quote_count": 2,
+    "session_end_utc": "18:00",
+    "session_start_utc": "07:00",
+    "trigger_window_ms": 60000
+  },
+  "completed_m5_atr": {
+    "bytes": 104974475,
+    "path": "m5_bidask_features_v1.parquet",
+    "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+  },
+  "confirmation_outcomes_present_at_lock": false,
+  "contract_sha256": "fe332c21a62d10cda3b1b75ce7202394ca5bf5ae36af1ee9476185aa3002a7e1",
+  "demo_authorized": false,
+  "dependencies": [
+    {
+      "bytes": 33998,
+      "path": "multi-asset/data-foundation/dukascopy-ticks-v1/src/dukascopy_tick_foundation/foundation.py",
+      "sha256": "d43980eb2d8ac5d262706380d483a36c21884981beb2b7f7de87269adcc1baba"
+    },
+    {
+      "bytes": 20512,
+      "path": "xau-usd/xauusd-fast-research/xag-xau-eventtime-catchup-v72/src/catchup.py",
+      "sha256": "3f93b55068daa51316766f4a961b5cb7d02b94030b139c930d432462a37e9f4c"
+    },
+    {
+      "bytes": 13216,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/spot_labels.py",
+      "sha256": "76a51dcf5798b410df3e254de97e7205c3e6806cfe26132d87632e0b804607b8"
+    },
+    {
+      "bytes": 19419,
+      "path": "xau-usd/xauusd-fast-research/comex-size-segment-flow-v32/src/size_segment_flow.py",
+      "sha256": "a84181b77874cb80e5e8db59644c061464f87e223366c6ccfcc354e0438d4d49"
+    }
+  ],
+  "development_outcomes_present_at_lock": false,
+  "development_source_audit": {
+    "bytes": 53404,
+    "path": "outputs/PENDING_BREAKOUT_V86_DEVELOPMENT_SOURCE_AUDIT.json",
+    "sha256": "19be194193f56f7d1c588538ad450a8f5aa72ed3d29a2856ee7121620b44aaa8"
+  },
+  "ea_consumption_authorized": false,
+  "exam_outcomes_present_at_lock": false,
+  "execution": {
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_delay_ms": 1000,
+    "maximum_initial_risk_usd": 50.0,
+    "ounces": 1.0,
+    "stress_slippage_r": 0.05,
+    "ticket_cost_usd": 0.3,
+    "timeout_exit_grace_ms": 10000
+  },
+  "families": {
+    "CROSSASSET_VOLATILITY_PENDING_XAU_BREAKOUT": {
+      "atr_stop_multiple": 0.75,
+      "maximum_hold_minutes": 60,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 2.0,
+      "spread_stop_multiple": 4.0
+    }
+  },
+  "forward_confirmation_outcomes_present_at_lock": false,
+  "forward_final_outcomes_present_at_lock": false,
+  "gates": {
+    "bootstrap": {
+      "block_weekdays": 5,
+      "maximum_one_sided_pvalue": 0.00125,
+      "resamples": 40000,
+      "seed": 860086
+    },
+    "maximum_closed_trade_drawdown_usd": 250.0,
+    "maximum_trades_per_full_weekday": 1.0,
+    "minimum_base_profit_factor": 1.3,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.1,
+    "minimum_positive_month_share": 0.6,
+    "minimum_profitable_day_share": 0.45,
+    "minimum_resolved_trades": {
+      "confirmation": 150,
+      "development": 400,
+      "exam": 150,
+      "forward_confirmation": 150,
+      "forward_final": 150,
+      "validation": 150
+    },
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_trades_per_full_weekday": 0.65,
+    "top_winners_removed": 5
+  },
+  "instrument_evidence": {
+    "DOLLARIDXUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-DOLLARIDXUSD.json",
+      "sha256": "b596ab8a33b3c2bf41e042e4d92e01d9e71220ae40793eb5d6530c2039339bec"
+    },
+    "XAGUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-XAGUSD.json",
+      "sha256": "26ff827b0dfba416668d4da3afc7682af4a389faea7d78140ce4319eb2d063e9"
+    },
+    "XAUUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-XAUUSD.json",
+      "sha256": "60e292320bc49ad124276cd6e432eede5f4ef525ca9969088670652b6e14af33"
+    }
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 501,
+      "path": "README.md",
+      "sha256": "bb29b214d3d62c8e0b818a5bbea64d7f9d3e743e0543859270ca809a6f397353"
+    },
+    {
+      "bytes": 2553,
+      "path": "PREREGISTRATION.md",
+      "sha256": "6da3fb7f5d5d24f7486f2a528ba4237afa216db7aa9c49a81ba9bd2a38989215"
+    },
+    {
+      "bytes": 623,
+      "path": "PRELOCK_STAGED_SOURCE_AMENDMENT.md",
+      "sha256": "45b410b606f4547627ff282feb06fa705936ecc07e94f3314180fce632470580"
+    },
+    {
+      "bytes": 815,
+      "path": "SHARED_PORTFOLIO_PRECOMMITMENT.md",
+      "sha256": "8cc57d276a56743b94638580bb30559a228f2a41560fddfe46831748f26d4fe5"
+    },
+    {
+      "bytes": 61,
+      "path": "requirements.txt",
+      "sha256": "6feb3321ff3a9e523275bd2f3e0677b8cd06a28fa81fe1d3b4de6ca2bd861978"
+    },
+    {
+      "bytes": 7014,
+      "path": "config/crossasset_volatility_pending_breakout_v86.json",
+      "sha256": "be909ec4c528f6697f98beb464345ed7f098046cd0d64dffe06fe65146417f13"
+    },
+    {
+      "bytes": 79,
+      "path": "src/__init__.py",
+      "sha256": "117f339077adba4544e704b23313613d887f4910c79002597bd2d35954aa2e0b"
+    },
+    {
+      "bytes": 15483,
+      "path": "src/pending_breakout.py",
+      "sha256": "bc7f8864ce64c6e0b4f9d8f09cbf493da6071c7982b41e47cb3fa05d972c2a93"
+    },
+    {
+      "bytes": 6997,
+      "path": "run_source_audit.py",
+      "sha256": "c855198c509a5f3f001409371c07f0a45846e01e20dd06890c596d0066b9c685"
+    },
+    {
+      "bytes": 7144,
+      "path": "run_calibration.py",
+      "sha256": "0f91442b6764ac6d5338c4bcff68b9ef4cdb074f3a2a6ef1b0f0412ecf20053a"
+    },
+    {
+      "bytes": 7800,
+      "path": "lock_contract.py",
+      "sha256": "d71b91d194d2573fb5490ce604002cd79fa554ca90253825cc46e5cdd18eb9a7"
+    },
+    {
+      "bytes": 9068,
+      "path": "run_stage.py",
+      "sha256": "c14dbcf6e4b04f17b472a790017fe6af5427101b5bfecf36c0362ccf8565a168"
+    },
+    {
+      "bytes": 226,
+      "path": "tests/conftest.py",
+      "sha256": "95d27adf97d41898dda95dc75b2c090bbcff8ec500fc030cd3e74ba25cddff41"
+    },
+    {
+      "bytes": 6512,
+      "path": "tests/test_pending_breakout.py",
+      "sha256": "06ccd58765f9dc7207690ac4189685f9c7c78d7f266d7749f59ad8f7e6f57a36"
+    }
+  ],
+  "paid_data_authorized": false,
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_crossasset_volatility_pending_breakout_v86_contract_lock",
+  "selected_policy": {
+    "breakout_move_bps": 2.0,
+    "horizon_ms": 20000,
+    "maximum_initial_xau_move_bps": 0.1,
+    "minimum_dxy_move_bps": 0.75,
+    "minimum_xag_move_bps": 3.0,
+    "policy_id": "H20000__DX075__AG300__XI010__BO200"
+  },
+  "shared_portfolio_gates": {
+    "baseline": "V59_V60_BYTE_IDENTICAL",
+    "blocked_or_conflicted_entries_count_as_frequency": false,
+    "maximum_absolute_daily_pnl_correlation": 0.5,
+    "maximum_shared_buffered_stress_floating_drawdown_usd": 600.0,
+    "maximum_shared_closed_trade_drawdown_usd": 500.0,
+    "maximum_worst_day_stress_loss_usd": 150.0,
+    "maximum_worst_five_day_stress_loss_usd": 250.0,
+    "minimum_accepted_trades_per_full_weekday": 2.0,
+    "minimum_base_profit_factor": 1.5,
+    "minimum_positive_month_share": 0.6,
+    "minimum_stress_profit_factor": 1.35,
+    "minimum_winner_removed_stress_net_usd": 0.0,
+    "required_windows": {
+      "confirmation": [
+        "2024-07-01T00:00:00Z",
+        "2025-07-01T00:00:00Z"
+      ],
+      "development_2": [
+        "2022-07-01T00:00:00Z",
+        "2024-07-01T00:00:00Z"
+      ],
+      "final": [
+        "2025-07-01T00:00:00Z",
+        "2026-07-01T00:00:00Z"
+      ]
+    },
+    "top_winners_removed": 5
+  },
+  "splits": {
+    "confirmation": [
+      "2021-07-01T00:00:00Z",
+      "2022-07-01T00:00:00Z"
+    ],
+    "development": [
+      "2019-02-01T00:00:00Z",
+      "2021-07-01T00:00:00Z"
+    ],
+    "exam": [
+      "2023-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "forward_confirmation": [
+      "2024-07-01T00:00:00Z",
+      "2025-07-01T00:00:00Z"
+    ],
+    "forward_final": [
+      "2025-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ],
+    "validation": [
+      "2022-07-01T00:00:00Z",
+      "2023-07-01T00:00:00Z"
+    ]
+  },
+  "validation_outcomes_present_at_lock": false
+}
