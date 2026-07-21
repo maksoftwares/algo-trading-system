@@ -9,7 +9,7 @@ hourly responses are validated, hashed in monthly acquisition manifests, and
 made read-only before the curated cache is built.
 
 ```powershell
-uv run --with pandas --with pyarrow python acquire.py
+uv run --with pandas --with httpx python acquire.py
 uv run --with pandas --with pyarrow python build.py
 ```
 

@@ -1,0 +1,6 @@
+numpy>=2.0,<3
+pandas>=2.2,<4
+pyarrow>=18,<24
+scipy>=1.14,<2
+pytest>=8,<10
+ruff>=0.9,<1
