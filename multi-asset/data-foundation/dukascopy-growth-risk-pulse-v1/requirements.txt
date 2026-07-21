@@ -1,0 +1,5 @@
+httpx>=0.28,<1
+numpy>=2,<3
+pandas>=2.2,<4
+pyarrow>=18,<24
+pytest>=8,<10

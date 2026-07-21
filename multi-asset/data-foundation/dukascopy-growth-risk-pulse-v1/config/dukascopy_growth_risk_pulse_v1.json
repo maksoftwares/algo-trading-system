@@ -1,0 +1,39 @@
+{
+  "schema_version": "dukascopy_growth_risk_pulse_foundation_v1",
+  "storage_environment_variable": "DUKASCOPY_GROWTH_RISK_DATA_ROOT",
+  "default_storage_root": "C:/DukascopyGrowthRiskFoundationV1",
+  "start_utc": "2022-01-01T00:00:00Z",
+  "end_exclusive_utc": "2026-07-01T00:00:00Z",
+  "maximum_concurrency": 16,
+  "official_origin": "https://jetta.dukascopy.com/v1",
+  "curated_file": "curated/growth_risk_m5_v1.parquet",
+  "curated_manifest": "curated/growth_risk_m5_v1.manifest.json",
+  "instruments": [
+    {
+      "symbol": "USA500IDXUSD",
+      "prefix": "spx",
+      "source_code": "USA500.IDX-USD",
+      "pip_size": 0.01,
+      "price_scale": 3
+    },
+    {
+      "symbol": "COPPERCMDUSD",
+      "prefix": "copper",
+      "source_code": "COPPER.CMD-USD",
+      "pip_size": 0.001,
+      "price_scale": 4
+    },
+    {
+      "symbol": "USDCNH",
+      "prefix": "usdcnh",
+      "source_code": "USD-CNH",
+      "pip_size": 0.0001,
+      "price_scale": 5
+    }
+  ],
+  "paid_data_authorized": false,
+  "databento_use_authorized": false,
+  "xau_outcomes_authorized": false,
+  "strategy_scoring_authorized": false,
+  "broker_action_authorized": false
+}
