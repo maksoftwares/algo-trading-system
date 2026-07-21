@@ -1,0 +1,46 @@
+{
+  "attempt_first": 125001,
+  "attempt_last": 126000,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-21T13:32:48.650518+00:00",
+  "databento_used": false,
+  "discovery_end": "2024-07-01T00:00:00+00:00",
+  "discovery_start": "2022-07-01T00:00:00+00:00",
+  "mechanics": {
+    "M5_BREADTH_CONTINUATION": {
+      "maximum_raw_signals": 39802,
+      "median_raw_signals": 4253.0,
+      "minimum_raw_signals": 620,
+      "policies": 200
+    },
+    "M5_GROWTH_PULSE_CATCHUP": {
+      "maximum_raw_signals": 50261,
+      "median_raw_signals": 6873.0,
+      "minimum_raw_signals": 1768,
+      "policies": 200
+    },
+    "M5_PULSE_EXHAUSTION_FADE": {
+      "maximum_raw_signals": 42939,
+      "median_raw_signals": 5387.0,
+      "minimum_raw_signals": 690,
+      "policies": 200
+    },
+    "M5_RISK_PULSE_CATCHUP": {
+      "maximum_raw_signals": 45130,
+      "median_raw_signals": 5939.5,
+      "minimum_raw_signals": 710,
+      "policies": 200
+    },
+    "M5_SEQUENCE_BREAKOUT": {
+      "maximum_raw_signals": 44382,
+      "median_raw_signals": 5919.0,
+      "minimum_raw_signals": 699,
+      "policies": 200
+    }
+  },
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "post_entry_quotes_opened": false,
+  "schema_version": "xauusd_dukascopy_growth_risk_v94_signal_census",
+  "strategy_scoring_performed": false
+}

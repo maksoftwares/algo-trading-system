@@ -1,0 +1,19 @@
+{
+  "schema_version": "xauusd_dukascopy_growth_risk_v95_preoutcome_lock_failure_v1",
+  "created_utc": "2026-07-21T13:54:41.0256313Z",
+  "campaign": "dukascopy-growth-risk-state-transition-v95",
+  "status": "TERMINAL_PREOUTCOME_LOCK_FAILURE",
+  "failure_stage": "SOURCE_ONLY_POLICY_MANIFEST_ADMISSION",
+  "failed_mechanic": "RISK_GROWTH_CONVERGENCE",
+  "source_eligible_policy_count": 0,
+  "required_policy_count": 200,
+  "exception": "Only 0 source-eligible V95 policies for RISK_GROWTH_CONVERGENCE; required 200",
+  "growth_risk_feature_sha256": "c1b03f03c19af300dc378f892e8d538b7c5a4a05e66e09572de896b1359a16c3",
+  "growth_risk_manifest_sha256": "874363b2f866172a01954f538d05063d3ede9ab232b51163d21bfbb281215b28",
+  "outcomes_opened": false,
+  "xau_bars_opened_for_policy_admission": false,
+  "strategy_scoring_performed": false,
+  "thresholds_changed_after_failure": false,
+  "execution_authorized": false,
+  "disposition": "RETIRED_WITHOUT_OUTCOME_EVALUATION"
+}
