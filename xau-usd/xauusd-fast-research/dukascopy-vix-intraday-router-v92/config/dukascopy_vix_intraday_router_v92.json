@@ -18,8 +18,8 @@
     "default_storage_root": "C:/DukascopyVolIndexFoundationV1",
     "feature_cache": "curated/volidx_m5_v1.parquet",
     "feature_manifest": "curated/volidx_m5_v1.manifest.json",
-    "feature_sha256": "PENDING_SOURCE_BUILD",
-    "manifest_sha256": "PENDING_SOURCE_BUILD",
+    "feature_sha256": "492efe088e5750f86a1b040ade51b3c80da2ec7721cf6f7643c94c0f3dbdf9e5",
+    "manifest_sha256": "58cb468bd909cfecabff40dd04337eaa71a6619b8c17852238271832d8b3ee9f",
     "source_package": "multi-asset/data-foundation/dukascopy-vol-index-v1"
   },
   "base_simulator": {

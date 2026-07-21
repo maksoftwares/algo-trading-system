@@ -1,0 +1,46 @@
+{
+  "attempt_first": 123001,
+  "attempt_last": 124000,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-21T09:07:01.248297+00:00",
+  "databento_used": false,
+  "discovery_end": "2024-07-01T00:00:00+00:00",
+  "discovery_start": "2023-01-01T00:00:00+00:00",
+  "mechanics": {
+    "VIX_DIVERGENCE_REJECTION": {
+      "maximum_raw_signals": 315,
+      "median_raw_signals": 156.0,
+      "minimum_raw_signals": 120,
+      "policies": 200
+    },
+    "VIX_NORMALIZATION_TREND": {
+      "maximum_raw_signals": 291,
+      "median_raw_signals": 150.5,
+      "minimum_raw_signals": 120,
+      "policies": 200
+    },
+    "VIX_SAFE_HAVEN_CATCHUP": {
+      "maximum_raw_signals": 558,
+      "median_raw_signals": 184.0,
+      "minimum_raw_signals": 120,
+      "policies": 200
+    },
+    "VIX_SHOCK_BREAKOUT": {
+      "maximum_raw_signals": 827,
+      "median_raw_signals": 218.5,
+      "minimum_raw_signals": 120,
+      "policies": 200
+    },
+    "VIX_XAU_COEXPANSION": {
+      "maximum_raw_signals": 466,
+      "median_raw_signals": 179.0,
+      "minimum_raw_signals": 120,
+      "policies": 200
+    }
+  },
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "post_entry_quotes_opened": false,
+  "schema_version": "xauusd_dukascopy_vix_v92_signal_census",
+  "strategy_scoring_performed": false
+}
