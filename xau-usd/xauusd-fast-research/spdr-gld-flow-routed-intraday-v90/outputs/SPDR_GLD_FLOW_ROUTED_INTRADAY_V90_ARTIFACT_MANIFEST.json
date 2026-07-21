@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "SPDR_GLD_FLOW_ROUTED_INTRADAY_V90_CONTRACT_LOCK.json": {
+      "bytes": 2280,
+      "sha256": "99f06e252390a848b1a30f71d4b7edc9066355ddf2879123633f30541dc593a1"
+    },
+    "SPDR_GLD_FLOW_ROUTED_INTRADAY_V90_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 671,
+      "sha256": "ef2d1192951870990355d2fcbdadbc4d8098763a22298985e11cda50f0c4ecc4"
+    },
+    "SPDR_GLD_FLOW_ROUTED_INTRADAY_V90_DISCOVERY_METRICS.csv": {
+      "bytes": 1304172,
+      "sha256": "5ea75e2cc8f2b85d432daec50d462eb2e58d85cb447c4600c2bccec05376c267"
+    },
+    "SPDR_GLD_FLOW_ROUTED_INTRADAY_V90_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 300,
+      "sha256": "0a1e5e212dfe9e1a4efbf7191a141fd77ade7e7cb9f9763226d456db922206eb"
+    },
+    "SPDR_GLD_FLOW_ROUTED_INTRADAY_V90_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "SPDR_GLD_FLOW_ROUTED_INTRADAY_V90_POLICY_MANIFEST.csv": {
+      "bytes": 245417,
+      "sha256": "b5a129168da294cfea8fb9d5f389a09e08f7c14f6101ad0f97d0c9c690b1df4f"
+    },
+    "SPDR_GLD_FLOW_ROUTED_INTRADAY_V90_RESULT.json": {
+      "bytes": 4829,
+      "sha256": "1677c68e0ca04af9cf92f94ed08a85e3ef8b70a95f5b8172e64f63f69bd2ceae"
+    },
+    "SPDR_GLD_FLOW_ROUTED_INTRADAY_V90_RESULT.md": {
+      "bytes": 909,
+      "sha256": "6e54cfe2699e5bf758f36daa4003b1aa076e45e73c395c957ea8cb2e247a67ea"
+    },
+    "SPDR_GLD_FLOW_ROUTED_INTRADAY_V90_SIGNAL_CENSUS.json": {
+      "bytes": 1367,
+      "sha256": "16621a1fba9ebdd2ef086cdc4acb3ffe2ec90246f66480cd54e87aed13aa0c53"
+    }
+  },
+  "contract_sha256": "b572f51b910eebf5998dcd2dbb455ade6bc4c4fc7ae0c89ee91d3d29d159d3bd",
+  "execution_authorized": false,
+  "training_authorized": false
+}

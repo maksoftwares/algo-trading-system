@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "b572f51b910eebf5998dcd2dbb455ade6bc4c4fc7ae0c89ee91d3d29d159d3bd",
+  "execution_authorized": false,
+  "opened_utc": "2026-07-21T02:07:27.478673+00:00",
+  "schema_version": "xauusd_spdr_gld_flow_v90_stage_open",
+  "stage": "discovery",
+  "training_authorized": false
+}

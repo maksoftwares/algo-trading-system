@@ -35,6 +35,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | Dukascopy continuous quote-microburst continuation | V87 | 0.917/day but base/stress PF 0.100/0.060, zero positive months, USD 554.98 stressed DD | Terminal; no direction mirror, threshold, timing, hold, or quota rescue |
 | Dukascopy 2-5 second liquidity-gap restart continuation | V88 | 1.282/day but base/stress PF 0.111/0.070, zero positive months, USD 768.00 stressed DD | Terminal; fixed V26 replication cannot be mirrored, retimed, or rescued |
 | Prior-day Cboe GVZ routed H1 breakout/reversion | V89 | Densest policy reached 1.017/day at stress PF 0.551; best PF with at least 220 trades was 0.795 | Terminal; no GVZ threshold, session, direction, exit, or quota rescue on exposed outcomes |
+| Prior-day SPDR GLD holdings-flow routed H1 actions | V90 | Densest policy reached 1.138/day at stress PF 0.558; best PF with at least 220 trades was 0.849 | Terminal; no GLD flow horizon, threshold, session, direction, exit, or quota rescue on exposed outcomes |
 | Scheduling-only expansion of V59/V60 | V85 | Even accepting every distinct V57 add-on reaches only 1.280/day in development and 1.667/day in final | Mechanically insufficient; new event IDs are required |
 
 ## What Is Actually Missing
@@ -507,6 +508,29 @@ Decision: `V89_DISCOVERY_FAIL_TERMINAL`. Contract SHA-256:
 `ed47723bcd3be92a7bd9115898fe1e61790d1f568d8fdbf160bcb94c2f2c94c0`.
 Replication and every modern window remain sealed. V89 cannot be mirrored,
 retuned, re-sessioned, re-exited, or quota-filled. V59/V60 remain immutable.
+
+## V90 SPDR GLD Flow-Routed Intraday Result
+
+V90 introduced the official SPDR GLD daily historical archive as a new
+directional investor-flow input. Every trust holdings observation was delayed by
+one calendar day; completed H1 XAUUSD structure supplied confirmation, and
+side-correct M5 prices resolved entries and exits. Exactly 1,000 policies covered
+flow-aligned breakouts, pullback resumptions, divergence reversals, persistent
+flow trends, and abnormal-flow momentum.
+
+Discovery rejected every policy. The densest policy produced `742` trades over
+`652` calendar weekdays (`1.138037/day`) but lost `-189.30R` at stress PF
+`0.5579`. The best PF among policies with at least 220 trades was only `0.8494`,
+with `246` trades and `-24.60R`. Eleven policies were net positive and four
+reached PF 1.20, but all were sparse or unstable. The smallest unadjusted weekly
+p-value was `0.07910`; the smallest FDR q-value was `1.0`. No policy passed all
+non-FDR gates either.
+
+Decision: `V90_DISCOVERY_FAIL_TERMINAL`. Contract SHA-256:
+`b572f51b910eebf5998dcd2dbb455ade6bc4c4fc7ae0c89ee91d3d29d159d3bd`.
+Replication and every modern window remain sealed. V90 cannot be mirrored,
+retuned, re-sessioned, re-exited, or quota-filled. The external archive remains
+local and uncommitted. V59/V60 remain immutable.
 
 ## Routes Not Counted As Solutions
 
