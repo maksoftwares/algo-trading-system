@@ -1,0 +1,46 @@
+{
+  "attempt_first": 122001,
+  "attempt_last": 123000,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-21T05:49:46.523729+00:00",
+  "databento_used": false,
+  "discovery_end": "2019-01-01T00:00:00+00:00",
+  "discovery_start": "2016-07-01T00:00:00+00:00",
+  "mechanics": {
+    "CASH_MOMENTUM_BREAKOUT": {
+      "maximum_raw_signals": 1033,
+      "median_raw_signals": 423.0,
+      "minimum_raw_signals": 221,
+      "policies": 200
+    },
+    "CASH_VOLUME_PRESSURE": {
+      "maximum_raw_signals": 1343,
+      "median_raw_signals": 459.5,
+      "minimum_raw_signals": 220,
+      "policies": 200
+    },
+    "DEFERRED_BASIS_REVERSION": {
+      "maximum_raw_signals": 1323,
+      "median_raw_signals": 372.0,
+      "minimum_raw_signals": 221,
+      "policies": 200
+    },
+    "DEFERRED_OI_EXPANSION": {
+      "maximum_raw_signals": 1052,
+      "median_raw_signals": 423.0,
+      "minimum_raw_signals": 220,
+      "policies": 200
+    },
+    "DELIVERY_DIRECTION_PRESSURE": {
+      "maximum_raw_signals": 1280,
+      "median_raw_signals": 414.0,
+      "minimum_raw_signals": 225,
+      "policies": 200
+    }
+  },
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "post_entry_quotes_opened": false,
+  "schema_version": "xauusd_sge_demand_pressure_v91_signal_census",
+  "strategy_scoring_performed": false
+}

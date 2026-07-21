@@ -1,0 +1,43 @@
+{
+  "attempt_first": 122001,
+  "attempt_last": 123000,
+  "contract_sha256": "3026be62207c71d8e5601168a2c64d965d5d1b44654e43fbdfadf59db8d85741",
+  "created_utc": "2026-07-21T05:49:46.526130+00:00",
+  "databento_use_authorized": false,
+  "execution_authorized": false,
+  "files": {
+    "PREREGISTRATION.md": "d1f98359f3ae5e127071d96cc13b80f47f6484edc1aa833968e9e8801152f290",
+    "SHARED_PORTFOLIO_PRECOMMITMENT.md": "37715a11d88d59bd4b8876fc5501e3e784e549076fa5d109269e7ab049ed00e6",
+    "SOURCE_PLAN.md": "f01517ed6e662248b94526aed1508fd2fe2f1a47c5b23449c4fe71f84c4e0f43",
+    "SOURCE_RESULT.md": "c2cb8a7b0b699891a4e94b33a708a07ea28f43ab68cdeae0f5fcbbda76e8d7af",
+    "config/sge_demand_pressure_intraday_v91.json": "c4eac07725856d69fdd57f21b4a5463e2a7357675696686e91ff046a30e121d4",
+    "external/dukascopy_feature_cache": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "external/dukascopy_feature_manifest": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85",
+    "external/sge_daily_contracts": "5a388b154b8836a7b18ba90815377b17aa2ada96949fbadb01cf0ec79062bcb3",
+    "external/sge_daily_manifest": "91c0dc7eee6c56fe1e4780efb2b88a91dc55723251b66cd58882748a58794922",
+    "lock_contract.py": "2ca841d1bb5e6c4b490be5209f621f6b1ed50804efa86bb7708114c6a1b6b494",
+    "requirements.txt": "bf59c9592a625bc09ce8a65b015f52d745db88339b15f9bdce5d9b84f70f1049",
+    "run_research.py": "2c46a4de367c05f56c31105c02f5bbf7e87343d7b2ccef431956b019262d6078",
+    "src/campaign.py": "c73eeb1e72c663a3a796ebf31e12fea6bcefe08b77ba411c49215ba244b9c8ee",
+    "upstream/base_simulator.py": "ad657ca37562de37410403d79d62755a02ca55c25f66b0f2783e8c7d00cff30b",
+    "upstream/dukascopy_data_source.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+  },
+  "outcomes_opened": false,
+  "paid_data_authorized": false,
+  "policy_manifest_sha256": "f576af335ea5a26cf88b0745c54d4576e1e04cf2453547896d2dc52a34108691",
+  "registered_policy_count": 1000,
+  "schema_version": "xauusd_sge_demand_pressure_v91_contract_lock",
+  "signal_census_sha256": "2df613c56f309cef9712cd3f77d308a8cc4166d2fac20ec85635fe4290d0f984",
+  "source_evidence": {
+    "databento_used": false,
+    "paid_data_request_made": false,
+    "raw_archive_committed": false,
+    "same_day_sge_use": false,
+    "sge_first_date": "2016-07-01",
+    "sge_last_date": "2026-06-30",
+    "sge_rows": 32353,
+    "sge_unique_dates": 2423
+  },
+  "training_authorized": false,
+  "v59_v60_modification_authorized": false
+}
