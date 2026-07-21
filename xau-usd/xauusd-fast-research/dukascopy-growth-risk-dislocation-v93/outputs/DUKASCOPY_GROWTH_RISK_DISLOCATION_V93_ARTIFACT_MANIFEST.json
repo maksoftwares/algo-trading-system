@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "DUKASCOPY_GROWTH_RISK_DISLOCATION_V93_CONTRACT_LOCK.json": {
+      "bytes": 4226,
+      "sha256": "48f8196e7a34cf2621fa493be030e5a6da27bcd9ecff3d635bcd1852ca5e833b"
+    },
+    "DUKASCOPY_GROWTH_RISK_DISLOCATION_V93_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 767,
+      "sha256": "74bdd0ee77ea92166c72a8a7ba8a4ac348ec8381eab7a55a766edf381e87fe80"
+    },
+    "DUKASCOPY_GROWTH_RISK_DISLOCATION_V93_DISCOVERY_METRICS.csv": {
+      "bytes": 1635318,
+      "sha256": "59fa5af82e064b88eff47aa3c302a71a9f0bdcd42299894d601d1c8de14d44b0"
+    },
+    "DUKASCOPY_GROWTH_RISK_DISLOCATION_V93_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 308,
+      "sha256": "a51536b6ec2b40e849c9a085b5d1c2c2effa2f5036bdd6b21ad9f731d80ab604"
+    },
+    "DUKASCOPY_GROWTH_RISK_DISLOCATION_V93_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "DUKASCOPY_GROWTH_RISK_DISLOCATION_V93_POLICY_MANIFEST.csv": {
+      "bytes": 425098,
+      "sha256": "79ff279eaf4bfb9bc61089cb5e0a075910145236bddabd2e1d4e65a927029fbc"
+    },
+    "DUKASCOPY_GROWTH_RISK_DISLOCATION_V93_RESULT.json": {
+      "bytes": 4790,
+      "sha256": "53e596f51754f9a87268fa38a5549c2f295ec3ddec4157bfb708fc4649fd4682"
+    },
+    "DUKASCOPY_GROWTH_RISK_DISLOCATION_V93_RESULT.md": {
+      "bytes": 738,
+      "sha256": "d7abb8ba59c23c7fd457e9540568292d9adc596f4adda10c3921ef55d1a101f9"
+    },
+    "DUKASCOPY_GROWTH_RISK_DISLOCATION_V93_SIGNAL_CENSUS.json": {
+      "bytes": 1383,
+      "sha256": "1b361a2eec526170545b2ad8ae5da311dcc5b338da1d253518fb5039e67abd8e"
+    }
+  },
+  "contract_sha256": "5113fbc4c0d9740d6adea88eabe6bf7da200632e0cd8fa5da2478e4c6ef22b85",
+  "execution_authorized": false,
+  "training_authorized": false
+}

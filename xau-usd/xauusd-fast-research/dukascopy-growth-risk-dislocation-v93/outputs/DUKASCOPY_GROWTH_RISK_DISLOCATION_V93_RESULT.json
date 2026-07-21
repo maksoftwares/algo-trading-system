@@ -1,0 +1,126 @@
+{
+  "attempt_first": 124001,
+  "attempt_last": 125000,
+  "contract_sha256": "5113fbc4c0d9740d6adea88eabe6bf7da200632e0cd8fa5da2478e4c6ef22b85",
+  "data_evidence": {
+    "databento_used": false,
+    "dukascopy_growth_risk_path": "C:\\DukascopyGrowthRiskFoundationV1\\curated\\growth_risk_m5_v1.parquet",
+    "dukascopy_growth_risk_sha256": "c1b03f03c19af300dc378f892e8d538b7c5a4a05e66e09572de896b1359a16c3",
+    "dukascopy_xau": {
+      "end_utc": "2026-07-01T00:00:00+00:00",
+      "feature_cache": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+      "feature_manifest": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.manifest.json",
+      "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+      "manifest": {
+        "columns": [
+          "timestamp_ms",
+          "xau_tick_count",
+          "xau_mid_tick_open",
+          "xau_mid_tick_close",
+          "tick_signed_move",
+          "tick_move_count",
+          "tick_realized_variance",
+          "tick_spread_mean",
+          "tick_spread_last",
+          "tick_spread_max",
+          "tick_book_imbalance_mean",
+          "tick_book_imbalance_last",
+          "tick_microprice_edge_mean",
+          "tick_microprice_edge_last",
+          "price_efficiency_5m",
+          "bid_open",
+          "bid_high",
+          "bid_low",
+          "bid_close",
+          "ask_open",
+          "ask_high",
+          "ask_low",
+          "ask_close",
+          "mid_open",
+          "mid_high",
+          "mid_low",
+          "mid_close",
+          "atr",
+          "atr_ratio",
+          "quote_intensity_ratio",
+          "tick_imbalance_5m",
+          "tick_imbalance_15m",
+          "body_fraction",
+          "close_location",
+          "date_utc",
+          "hour_utc"
+        ],
+        "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+        "monthly_caches_reused": 0,
+        "monthly_caches_total": 120,
+        "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+        "reused": false,
+        "rows": 708538,
+        "schema_version": "a3_ml_dukascopy_confirmed_event_m5_cache_v1",
+        "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738"
+      },
+      "rows": 708538,
+      "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+      "start_utc": "2016-07-01T00:00:00+00:00",
+      "timeframes": {
+        "H1": {
+          "end": "2026-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 76,
+          "rows": 59003,
+          "start": "2016-07-01T00:00:00+00:00"
+        },
+        "H4": {
+          "end": "2026-06-30T20:00:00+00:00",
+          "incomplete_buckets_dropped": 3176,
+          "rows": 12810,
+          "start": "2016-07-01T00:00:00+00:00"
+        },
+        "M15": {
+          "end": "2026-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 40,
+          "rows": 236161,
+          "start": "2016-07-01T00:00:00+00:00"
+        },
+        "M30": {
+          "end": "2026-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 52,
+          "rows": 118065,
+          "start": "2016-07-01T00:00:00+00:00"
+        },
+        "M5": {
+          "end": "2026-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 0,
+          "rows": 708538,
+          "start": "2016-07-01T00:00:00+00:00"
+        }
+      }
+    },
+    "paid_data_request_made": false
+  },
+  "decision": "V93_DISCOVERY_FAIL_TERMINAL",
+  "execution_authorized": false,
+  "latest_completed_stage": "discovery",
+  "registered_policy_count": 1000,
+  "research_only": true,
+  "schema_version": "xauusd_dukascopy_growth_risk_dislocation_v93",
+  "stages": {
+    "discovery": {
+      "advanced_mechanics": [],
+      "advanced_policy_count": 0,
+      "advanced_policy_ids": [],
+      "advancement_sha256": "d3880770817cba18528f589ffc8e3cc7f1297e60d75806ae9e29e737222e0c6c",
+      "best_average_stress_r": 1.907329935602235,
+      "best_stress_pf": "Infinity",
+      "best_trades_per_weekday": 1.9424184261036468,
+      "completed_utc": "2026-07-21T14:02:48.019936+00:00",
+      "gate_pass_policy_count": 0,
+      "incoming_policy_count": 1000,
+      "lowest_fdr_qvalue": 1.0,
+      "metrics_sha256": "59fa5af82e064b88eff47aa3c302a71a9f0bdcd42299894d601d1c8de14d44b0",
+      "selected_trade_rows": 0,
+      "trades_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    }
+  },
+  "training_authorized": false,
+  "v59_v60_modified": false
+}
