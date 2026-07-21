@@ -34,6 +34,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | Cross-asset volatility then delayed XAU breakout | V86 | 0.828/day but base/stress PF 0.444/0.411, zero positive months, USD 443.48 stressed DD | Terminal; delayed confirmation did not create expectancy, so no mirror, threshold, timing, or exit rescue |
 | Dukascopy continuous quote-microburst continuation | V87 | 0.917/day but base/stress PF 0.100/0.060, zero positive months, USD 554.98 stressed DD | Terminal; no direction mirror, threshold, timing, hold, or quota rescue |
 | Dukascopy 2-5 second liquidity-gap restart continuation | V88 | 1.282/day but base/stress PF 0.111/0.070, zero positive months, USD 768.00 stressed DD | Terminal; fixed V26 replication cannot be mirrored, retimed, or rescued |
+| Prior-day Cboe GVZ routed H1 breakout/reversion | V89 | Densest policy reached 1.017/day at stress PF 0.551; best PF with at least 220 trades was 0.795 | Terminal; no GVZ threshold, session, direction, exit, or quota rescue on exposed outcomes |
 | Scheduling-only expansion of V59/V60 | V85 | Even accepting every distinct V57 add-on reaches only 1.280/day in development and 1.667/day in final | Mechanically insufficient; new event IDs are required |
 
 ## What Is Actually Missing
@@ -484,6 +485,28 @@ Decision: `V88_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
 All later stages remain sealed. A short quote silence did not convert restart
 bursts into continuation expectancy after spread and costs. V88 cannot be
 mirrored, retuned, or rescued. V59/V60 and Capital V26 remain unchanged.
+
+## V89 Cboe GVZ-Routed Intraday Result
+
+V89 introduced the official daily Cboe Gold ETF Volatility Index as a new
+option-implied state input. Every index close was delayed by one calendar day;
+completed H1 XAUUSD structure supplied direction, and side-correct M5 prices
+resolved entries and exits. Exactly 1,000 policies covered high/rising GVZ
+breakouts, low/falling GVZ reversions, and implied-minus-realized volatility
+premium expansion.
+
+Discovery rejected every policy. The densest policy produced `663` trades over
+`652` calendar weekdays (`1.016871/day`) but lost `-166.20R` at stress PF
+`0.5505`. The best PF among policies with at least 220 trades was only `0.7954`,
+with `224` trades and `-31.97R`. Nine policies were net positive and four reached
+PF 1.20, but all were sparse or unstable. The smallest unadjusted weekly p-value
+was `0.10933`; the smallest FDR q-value was `1.0`. No policy passed all non-FDR
+gates either.
+
+Decision: `V89_DISCOVERY_FAIL_TERMINAL`. Contract SHA-256:
+`ed47723bcd3be92a7bd9115898fe1e61790d1f568d8fdbf160bcb94c2f2c94c0`.
+Replication and every modern window remain sealed. V89 cannot be mirrored,
+retuned, re-sessioned, re-exited, or quota-filled. V59/V60 remain immutable.
 
 ## Routes Not Counted As Solutions
 

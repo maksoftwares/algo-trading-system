@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "ed47723bcd3be92a7bd9115898fe1e61790d1f568d8fdbf160bcb94c2f2c94c0",
+  "execution_authorized": false,
+  "opened_utc": "2026-07-21T01:47:52.605312+00:00",
+  "schema_version": "xauusd_cboe_gvz_v89_stage_open",
+  "stage": "discovery",
+  "training_authorized": false
+}

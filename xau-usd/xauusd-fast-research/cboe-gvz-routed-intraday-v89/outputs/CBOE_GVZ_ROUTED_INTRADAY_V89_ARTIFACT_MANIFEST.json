@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "CBOE_GVZ_ROUTED_INTRADAY_V89_CONTRACT_LOCK.json": {
+      "bytes": 2175,
+      "sha256": "ace3aa24c0aff10d78a91737d662886a40476df42f96c63bd86d900f792d0e08"
+    },
+    "CBOE_GVZ_ROUTED_INTRADAY_V89_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 666,
+      "sha256": "3c438cd7756f42dd4d66d0187f36905568b570ddcf8409184d3c78d7efe2b30a"
+    },
+    "CBOE_GVZ_ROUTED_INTRADAY_V89_DISCOVERY_METRICS.csv": {
+      "bytes": 1377852,
+      "sha256": "c8d1243d96fa096eac2bae383020d8a46ce59b7d65510ebe76b98f6713c45482"
+    },
+    "CBOE_GVZ_ROUTED_INTRADAY_V89_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 295,
+      "sha256": "eb9acc45823aa094edb2f26cf5a3cc0b5493cf5cb5bd915ac9c0fd106218bd38"
+    },
+    "CBOE_GVZ_ROUTED_INTRADAY_V89_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "CBOE_GVZ_ROUTED_INTRADAY_V89_POLICY_MANIFEST.csv": {
+      "bytes": 321730,
+      "sha256": "9cfc209b3467c8fb6238c3636b765ac0a1430a5214b9c981cef661190acf9237"
+    },
+    "CBOE_GVZ_ROUTED_INTRADAY_V89_RESULT.json": {
+      "bytes": 4777,
+      "sha256": "c3a7935d4ef72476af8e8d6d6f1877c3f0625632d1821c33f4c8215aedf86de4"
+    },
+    "CBOE_GVZ_ROUTED_INTRADAY_V89_RESULT.md": {
+      "bytes": 891,
+      "sha256": "c9cec9bebf9aabd636d5e99dfbd248b79fbd1041d21b820f96336d46d70245af"
+    },
+    "CBOE_GVZ_ROUTED_INTRADAY_V89_SIGNAL_CENSUS.json": {
+      "bytes": 1352,
+      "sha256": "ce1e49f0abd1c195787deaa253f6f1af5049265498bc014dc3cb0e0747ab1805"
+    }
+  },
+  "contract_sha256": "ed47723bcd3be92a7bd9115898fe1e61790d1f568d8fdbf160bcb94c2f2c94c0",
+  "execution_authorized": false,
+  "training_authorized": false
+}

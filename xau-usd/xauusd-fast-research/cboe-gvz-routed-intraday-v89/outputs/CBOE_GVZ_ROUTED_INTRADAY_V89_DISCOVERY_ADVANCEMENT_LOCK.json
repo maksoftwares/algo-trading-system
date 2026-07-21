@@ -1,0 +1,14 @@
+{
+  "advancement_sha256": "aa3906780a8e84c46f6b61933aa3aa07750c31f70f13de1de0464ca3439cea7b",
+  "contract_sha256": "ed47723bcd3be92a7bd9115898fe1e61790d1f568d8fdbf160bcb94c2f2c94c0",
+  "created_utc": "2026-07-21T01:50:15.863191+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "c8d1243d96fa096eac2bae383020d8a46ce59b7d65510ebe76b98f6713c45482",
+  "policy_manifest_sha256": "9cfc209b3467c8fb6238c3636b765ac0a1430a5214b9c981cef661190acf9237",
+  "schema_version": "xauusd_cboe_gvz_v89_advancement",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "training_authorized": false
+}
