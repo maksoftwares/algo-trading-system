@@ -1,0 +1,166 @@
+{
+  "schema_version": "xauusd_cboe_gvz_routed_intraday_v89",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "expected_rows": 708538,
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "data_source": "../independent-specialists-v1/src/data.py",
+    "data_source_sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+  },
+  "gvz_source": {
+    "path": "C:/CboeGoldVolatilityFoundationV1/raw/GVZ_History.csv",
+    "sha256": "a6ed25ef614ac60dc4a1a8dbff39589cbe7bab17f860e85e6961af946d86d0a7",
+    "expected_rows": 4231,
+    "first_date": "2009-09-18",
+    "downloaded_through": "2026-07-20",
+    "source_url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/GVZ_History.csv",
+    "same_day_use_authorized": false,
+    "availability_lag_days": 1
+  },
+  "base_simulator": {
+    "path": "../cftc-options-positioning-mechanics-v1/src/campaign.py",
+    "sha256": "ad657ca37562de37410403d79d62755a02ca55c25f66b0f2783e8c7d00cff30b"
+  },
+  "windows": {
+    "discovery": ["2016-07-01T00:00:00Z", "2019-01-01T00:00:00Z"],
+    "replication": ["2019-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "segments": {
+    "discovery": [
+      ["2016-07-01T00:00:00Z", "2017-05-01T00:00:00Z"],
+      ["2017-05-01T00:00:00Z", "2018-03-01T00:00:00Z"],
+      ["2018-03-01T00:00:00Z", "2019-01-01T00:00:00Z"]
+    ],
+    "replication": [
+      ["2019-01-01T00:00:00Z", "2020-03-01T00:00:00Z"],
+      ["2020-03-01T00:00:00Z", "2021-05-01T00:00:00Z"],
+      ["2021-05-01T00:00:00Z", "2022-07-01T00:00:00Z"]
+    ],
+    "development_2": [
+      ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+      ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"]
+    ],
+    "confirmation": [
+      ["2024-07-01T00:00:00Z", "2025-01-01T00:00:00Z"],
+      ["2025-01-01T00:00:00Z", "2025-07-01T00:00:00Z"]
+    ],
+    "final": [
+      ["2025-07-01T00:00:00Z", "2026-01-01T00:00:00Z"],
+      ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+    ]
+  },
+  "features": {
+    "h1_atr_period": 14,
+    "gvz_lookbacks": [20, 60, 120],
+    "maximum_gvz_staleness_days": 7,
+    "realized_volatility_hours": 120,
+    "realized_volatility_minimum_hours": 72,
+    "intraday_baseline_hours": 120,
+    "intraday_baseline_minimum_hours": 60
+  },
+  "execution": {
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "current_account_risk_usd": 8.165487,
+    "ounces_at_lot_size": 1.0,
+    "extra_execution_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "cooldown_hours": 1,
+    "maximum_trades_per_policy_utc_day": 2,
+    "maximum_trades_per_session_slot": 1
+  },
+  "gates": {
+    "discovery": {
+      "minimum_trades": 220,
+      "minimum_trades_per_source_day": 0.34,
+      "minimum_stress_pf": 1.20,
+      "minimum_average_stress_r": 0.04,
+      "minimum_positive_month_share": 0.55,
+      "maximum_closed_drawdown_r": 30.0,
+      "top_winners_removed": 5,
+      "minimum_profitable_segments": 3,
+      "minimum_worst_segment_pf": 1.0,
+      "maximum_fdr_qvalue": 0.10,
+      "maximum_advancers_per_mechanic": 1
+    },
+    "replication": {
+      "minimum_trades": 300,
+      "minimum_trades_per_source_day": 0.34,
+      "minimum_stress_pf": 1.18,
+      "minimum_average_stress_r": 0.04,
+      "minimum_positive_month_share": 0.55,
+      "maximum_closed_drawdown_r": 28.0,
+      "top_winners_removed": 5,
+      "minimum_profitable_segments": 3,
+      "minimum_worst_segment_pf": 1.0,
+      "maximum_fdr_qvalue": 0.10,
+      "maximum_advancers_per_mechanic": 1
+    },
+    "development_2": {
+      "minimum_trades": 235,
+      "minimum_trades_per_source_day": 0.45,
+      "minimum_stress_pf": 1.18,
+      "minimum_average_stress_r": 0.04,
+      "minimum_positive_month_share": 0.55,
+      "maximum_closed_drawdown_r": 24.0,
+      "top_winners_removed": 5,
+      "minimum_profitable_segments": 2,
+      "minimum_worst_segment_pf": 1.0,
+      "maximum_fdr_qvalue": 0.10,
+      "maximum_advancers_per_mechanic": 1
+    },
+    "confirmation": {
+      "minimum_trades": 105,
+      "minimum_trades_per_source_day": 0.40,
+      "minimum_stress_pf": 1.20,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_month_share": 0.58,
+      "maximum_closed_drawdown_r": 18.0,
+      "top_winners_removed": 3,
+      "minimum_profitable_segments": 2,
+      "minimum_worst_segment_pf": 1.0,
+      "maximum_fdr_qvalue": 0.10,
+      "maximum_advancers_per_mechanic": 1
+    },
+    "final": {
+      "minimum_trades": 118,
+      "minimum_trades_per_source_day": 0.45,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_month_share": 0.58,
+      "maximum_closed_drawdown_r": 18.0,
+      "top_winners_removed": 3,
+      "minimum_profitable_segments": 2,
+      "minimum_worst_segment_pf": 1.0,
+      "maximum_fdr_qvalue": 0.10,
+      "maximum_advancers_per_mechanic": 1
+    }
+  },
+  "research_controls": {
+    "attempt_first": 120001,
+    "attempt_last": 121000,
+    "registered_policy_count": 1000,
+    "policies_per_mechanic": 200,
+    "minimum_raw_discovery_signals": 260,
+    "same_version_post_outcome_tuning_authorized": false,
+    "reuse_of_failed_clock_or_crossasset_families_authorized": false,
+    "v59_v60_modification_authorized": false,
+    "research_only": true,
+    "paid_data_authorized": false,
+    "databento_use_authorized": false,
+    "broker_action_authorized": false,
+    "python_predictions_authorized": false,
+    "model_training_authorized": false,
+    "ea_consumption_authorized": false
+  }
+}
