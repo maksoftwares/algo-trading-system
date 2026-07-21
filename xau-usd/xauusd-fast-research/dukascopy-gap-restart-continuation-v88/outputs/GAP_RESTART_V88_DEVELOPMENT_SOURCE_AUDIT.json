@@ -1,0 +1,350 @@
+{
+  "audit_sha256": "b35f8cf835b9f370469364ce8b3803b78aeb68d0b04a0607bec511bd578bbb32",
+  "campaign_id": "dukascopy-gap-restart-continuation-v88",
+  "decision": "V88_DEVELOPMENT_SOURCE_AUDIT_PASS",
+  "declared_bytes": 2627015504,
+  "declared_hours": 21144,
+  "declared_ticks": 120566269,
+  "economic_outcomes_opened": false,
+  "first_month": "2019-02",
+  "instrument_evidence": {
+    "XAUUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-XAUUSD.json",
+      "sha256": "60e292320bc49ad124276cd6e432eede5f4ef525ca9969088670652b6e14af33"
+    }
+  },
+  "last_month": "2021-06",
+  "month_manifest_count": 29,
+  "month_manifests": [
+    {
+      "declared_bytes": 37694494,
+      "declared_ticks": 1739405,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=02\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "dfbb8f1ed56446417c1a37bc2233099c1e12b4725b986a01aa685d0ace6c7b79",
+      "hours": 672,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=02\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "cd42c9f419c62b6d3758316ef5e079f23b7f520568bfdf997909c9fd9ca380a2",
+      "month": "2019-02",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 50735747,
+      "declared_ticks": 2354110,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=03\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "debe7737ebaabcfd248f96c52e5c7f63b2e5e5fa2a6c1914bd973bfcc9809c6c",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=03\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "35021e488ec9ebd58eca1d954f62b019a3b5132138cef10ebb7f03d2e936799f",
+      "month": "2019-03",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 42123638,
+      "declared_ticks": 1948157,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=04\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "35cfa3eb997e745f65bf6131931a6ffb94ec02b6f4bf8e24857c1cfb80b6a33b",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=04\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "1cb28513832832c2d7f9ec098bf7dd11c4aa3ce040d5b877312774c089eb0501",
+      "month": "2019-04",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 56472124,
+      "declared_ticks": 2615221,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=05\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "4e7497e9643523e74ed434d24a3d264509d76d9ef7bdd10a82107e76118a32ca",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=05\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "8b646ffb8543bbdaf24529b7ec88967d3df55dc50b9808fae351791df30f8ed4",
+      "month": "2019-05",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 75932484,
+      "declared_ticks": 3508252,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=06\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "0daf867e0a4c3e7231b4375b03251b9e4a91dc7f9f52cf9d46f8e696180c0353",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=06\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "18e50a063b6401a78bfe68469742b9ba7bb020aeb75104d5dd4bd93a4c79b40a",
+      "month": "2019-06",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 77857392,
+      "declared_ticks": 3586221,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=07\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "33a1f6efb7abab19d9775e6b21bd9570f93d536b6c2fe1f2213734176081cbb4",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=07\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "f9f84f0c065e3b29ab64e2f2d9a7849a305ec478a24149eca587210a39f45860",
+      "month": "2019-07",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 102819156,
+      "declared_ticks": 4734995,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=08\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "9fab5c28ac6caf5f5a849caaf3ea6fd97f613de7021da47fd74ebe5d0759c66d",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=08\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "226d18ed1d242c92c52f2fd147ad84d81e59c0446c97970d2f26b761f6720b21",
+      "month": "2019-08",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 88033127,
+      "declared_ticks": 4060599,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=09\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "5962a7d98f47a13b765bd5a7370529063a681e6139a1c8a774f5cb6ec6337631",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=09\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "6a44ecbee2d7dab78de1bb61bb5e7f4db63e7fd2b55300d3695b812856065586",
+      "month": "2019-09",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 99480942,
+      "declared_ticks": 4607249,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=10\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "f853b63c3ec986ddbf330091392ffd40215854101d8508fb2c351638fb1dcc6a",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=10\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "2e19272c9a9ab48ea92f4ca091cb97ead8cae94571663201d09afca3ba001c2d",
+      "month": "2019-10",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 64372625,
+      "declared_ticks": 2970095,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=11\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "7155daf6e43b32ed5ede88d72ae9a37ff05157007c02cde15757d0f0d76d2380",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=11\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "5af32b0a4dd29cd8c6181c9f8fcdff1fec066d66c5b066d0168ecfd3fbf4ba92",
+      "month": "2019-11",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 55660916,
+      "declared_ticks": 2569935,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=12\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "5d7703fc8b930780623e000d0526980b0e82f8c8e3acdee7815efbe9b814c004",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=12\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "4b998dc83c15e28837958a3143ce7918b7ba9a9ab04fd24acf88e2596c8b3a63",
+      "month": "2019-12",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 87075443,
+      "declared_ticks": 4020833,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=01\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "b884c3f274e18e54ebbd6f48b9b3a139566ab971a358b4a415eb109ecb4ce952",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=01\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "81dcdeb4860d7d484137beceb18bde389eeac6673831d2c22a6d1633e5d8cfd1",
+      "month": "2020-01",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 101128714,
+      "declared_ticks": 4658254,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=02\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "1c485731e28584566b9d062a03701bdfaa59b2174353e521b9197b799fc01912",
+      "hours": 696,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=02\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "c2cb8dd32809f0fcf99719b40b2e1ff101ad289b243203e6fc48ad926a79297e",
+      "month": "2020-02",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 145870314,
+      "declared_ticks": 6631554,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=03\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "cc42bba02d2576f91b761480132d93ee21f5058a87d088862bfdc9328b6183e7",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=03\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "f209610a36171989becc5d8fce2b83ecbc66164f9cce8a3d1f8e23e55b278a78",
+      "month": "2020-03",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 83020546,
+      "declared_ticks": 3750430,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=04\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "40ffae31219b8d932d87ab77733df691f172e73e0e8f7578b83e0b7665e490b1",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=04\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "5b38585d30b210760b09988a8ed93417abd81a976f18e4377f0b5e34d041b13e",
+      "month": "2020-04",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 91363430,
+      "declared_ticks": 4179413,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=05\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "6792fb5f176a0c90b1cc40af7945d00faf8c20eb1989248dac1da322a7170335",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=05\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "07f3a047490aa259b8bfea195afffc22ac12178d6c7616b183a98ebdbc1c8829",
+      "month": "2020-05",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 99323577,
+      "declared_ticks": 4552144,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=06\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "4e1a3e918a3ecc6caba6a67ba8457faae067dd2a3107b8ebe77e8210b10e1b7f",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=06\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "b46b0d72cea3193eaa3e5687d1835023275bdcac43a682bce389cc36b84d0b79",
+      "month": "2020-06",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 103035036,
+      "declared_ticks": 4726565,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=07\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "4068dde0f8d7c57fa88113eb13a9e65723286ed1aeedcd2fb1142e5acd84f64c",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=07\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "0135348f98f039a8d959a6f21d656ca4ffa69f58a969a90c9cef97faf770bf52",
+      "month": "2020-07",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 131301421,
+      "declared_ticks": 5984021,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=08\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "7bc663f4878537e612ebd2260ca1614bdcdd814c6ac46b2dba66058287a1347d",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=08\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "8af137703ca700ecf6d288b22eab81c3164ca8964d1bf7a7793a27f73fe80377",
+      "month": "2020-08",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 112709804,
+      "declared_ticks": 5147813,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=09\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "d6156e2eee92179064c78a902ac5865210b8b897b9baa2beca6a9fff7748b935",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=09\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "70a25dccb6b4f259803cdc364d40960d63a248e947452b33f5dfa94801b2dcbc",
+      "month": "2020-09",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 92914209,
+      "declared_ticks": 4248307,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=10\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "9792fec4a43aa1c0e4654c07af77ace67b92fb71ec3096b7e11a92a5f2a66e75",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=10\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "ca53de0a6749ff08a031aa38f80a8ed8723cbae20261b767b8802a68ff5e9446",
+      "month": "2020-10",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 93026100,
+      "declared_ticks": 4258398,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=11\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "cf6a8fd3390eecdf4afa5cd880b727812203926bd54d7761e951e069e098f0ed",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=11\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "75cdc865d613aba881a5f864d5c9970a38e8570fb5fb3827ac81980ec26dbd69",
+      "month": "2020-11",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 80263806,
+      "declared_ticks": 3669438,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=12\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "c74cd570f52ba87922adb480bf91eb8865993450e07f66790f21c331eefc25d5",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2020\\month=12\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "5bf9dae7f20d0a250a0ff92558c89835fb1e1cda77714f50892ef685d3241665",
+      "month": "2020-12",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 103232233,
+      "declared_ticks": 4751517,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=01\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "08e6428ec5b59e8d8123ddc193ca4c525a39f70e062258152cba14b2a9b8d353",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=01\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "7791a0dd994e36d9666f94e6cd9937f29d236a051d34c741f7f7ca2e32f8d51b",
+      "month": "2021-01",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 114436438,
+      "declared_ticks": 5262811,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=02\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "d69adacc310bb56df108cb71dc9c5129fb848671c1be86f7bdaa4cd5e1281d20",
+      "hours": 672,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=02\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "787b7116b4e56570d95188b6ace8d3fd763f046e0477bee4946258c3edd4cc88",
+      "month": "2021-02",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 140314562,
+      "declared_ticks": 6482901,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=03\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "ea97f5b170b469582d0a6d90fc5e79e235aa1a837a976df96cd5625ea7c82980",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=03\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "2aa49a9548b3e04ea8b4595bba73665e8912fbb74104fa4ac1dbe83e94fc3f57",
+      "month": "2021-03",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 94403938,
+      "declared_ticks": 4327365,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=04\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "9d1cd340c43bfdbfab74a1676b08ba68aa2b23c23a9a67b28e1960221de11c78",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=04\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "b9e96318feefa4250c554afd97cefb9c408e8557c01d811da1fbe227131bdada",
+      "month": "2021-04",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 103064402,
+      "declared_ticks": 4709319,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=05\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "c1774acc56ce60bce5aabca48c36e8a39607a5eb94f1633880719ae207f23da4",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=05\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "b46f90d5d0fde33c2ee5d7bd6e2acb4c854131ded0b2a791d8e7510683029669",
+      "month": "2021-05",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 99348886,
+      "declared_ticks": 4510947,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=06\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "3651e73897f2c34c45e208aa10c46edf89fba06d47ed72fa8cadefd5dfe7e6a8",
+      "hours": 720,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2021\\month=06\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "07a64da2ecd1a2d7188d90337daf68cdb097ed474e9e97574191666cecdfed3c",
+      "month": "2021-06",
+      "symbol": "XAUUSD"
+    }
+  ],
+  "paid_data_used": false,
+  "runtime_raw_file_hash_verification_required": true,
+  "schema_version": "xauusd_dukascopy_gap_restart_continuation_v88_development_source_audit",
+  "scope": "development",
+  "storage_root": "C:\\DukascopyTickDataFoundationV1",
+  "symbols": {
+    "XAUUSD": {
+      "price_scale": 3,
+      "source_code": "XAU-USD"
+    }
+  }
+}
