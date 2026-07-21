@@ -1,0 +1,67 @@
+{
+  "schema_version": "xauusd_two_trade_capacity_audit_v85",
+  "campaign_id": "two-trade-capacity-audit-v85",
+  "sources": {
+    "v59_result": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_RESULT.json",
+      "sha256": "de6c1e050f431d7b396018f078fd7992c98328140a2d7c259ce17198e7970cac"
+    },
+    "v59_core": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_CORE.parquet",
+      "sha256": "46c8ce5d90431581d6d16b03f210fae6955d707b8bc2d605b74bb5c84906987b"
+    },
+    "v59_decisions": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_ADDON_DECISIONS.parquet",
+      "sha256": "4a1f5496fca9bcef93e05e735e4c796975d7f7afee3ddc28bb0f6f6f6ce0551d"
+    },
+    "v59_trades": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_TRADES.parquet",
+      "sha256": "532de14e93955e1a3d4284475e692c1749e98df042c5891bb8350f856ef12724"
+    },
+    "v57_candidates": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-unified-portfolio-v57/outputs/ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_CANDIDATES.parquet",
+      "sha256": "05a30d5ba24fefe728e39bb4d85c38d2f82d35cdfb45eb0dc59e71ef26badad9"
+    },
+    "v60_result": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_RESULT.json",
+      "sha256": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095"
+    }
+  },
+  "expected": {
+    "core_rows": 815,
+    "candidate_rows": 1685,
+    "accepted_addons": 1379,
+    "combined_rows": 2194,
+    "fractional_r5_rows_excluded": 320,
+    "v59_decision": "V59_BROKER_EXPRESSIBLE_ONE_TRADE_PER_DAY_GATE_PASS",
+    "v60_decision": "V60_WHOLE_ACCOUNT_FLOATING_EQUITY_GATE_PASS"
+  },
+  "target_trades_per_weekday": 2.0,
+  "required_windows": {
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "TWO_TRADE_CAPACITY_V85_CONTRACT_LOCK.json",
+    "windows": "TWO_TRADE_CAPACITY_V85_WINDOWS.csv",
+    "rejection_reasons": "TWO_TRADE_CAPACITY_V85_REJECTION_REASONS.csv",
+    "result_json": "TWO_TRADE_CAPACITY_V85_RESULT.json",
+    "result_markdown": "TWO_TRADE_CAPACITY_V85_RESULT.md",
+    "manifest": "TWO_TRADE_CAPACITY_V85_MANIFEST.json"
+  },
+  "research_controls": {
+    "v59_v60_byte_identical": true,
+    "capacity_upper_bound_only": true,
+    "outcome_selected_candidates": false,
+    "fractional_r5_counted": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}
