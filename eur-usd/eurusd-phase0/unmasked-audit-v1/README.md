@@ -18,10 +18,26 @@ zero-order M30 bar telemetry run for episode labeling, a matched V1/unmasked
 comparison, cost stresses, calendar and broker-time buckets, an episode branch
 decision, source/EX5/compiler evidence, and a hash manifest.
 
+The independent reviewer decision request is:
+
+```text
+REVIEWER_DECISION_REQUEST_2026_07_23.md
+```
+
+It records the weak 3/6/12-month economics, the discovered contract defects,
+and 56 explicit questions that must be resolved before code repair or another
+performance experiment.
+
 Run the derived audit after the exact MT5 and bar-export outputs exist:
 
 ```powershell
 python eur-usd/eurusd-phase0/unmasked-audit-v1/run_unmasked_audit.py
+```
+
+Rebuild the exact recent-window analysis from the enriched trade ledger:
+
+```powershell
+python eur-usd/eurusd-phase0/unmasked-audit-v1/build_recent_window_analysis.py
 ```
 
 After staging the complete packet, freeze checkout-stable SHA256 values from

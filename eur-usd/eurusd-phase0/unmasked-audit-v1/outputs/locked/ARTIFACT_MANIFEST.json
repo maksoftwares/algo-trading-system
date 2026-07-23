@@ -10,8 +10,18 @@
     },
     {
       "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/README.md",
-      "bytes": 1395,
-      "sha256": "2ed86ee8ba5a1f485f9e5fe51397883eaa920f43e93150698dd8db1284edc436"
+      "bytes": 1847,
+      "sha256": "96307b590597fcb8f090874b9930b8eb498c21c9fb9bfb6ed939047d6bd087ff"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/REVIEWER_DECISION_REQUEST_2026_07_23.md",
+      "bytes": 15986,
+      "sha256": "063db8445a07ae393f422c26d24e254cbdac8555037de585c7c78c80498ecb75"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/build_recent_window_analysis.py",
+      "bytes": 10158,
+      "sha256": "73e00c1fc4adbadbbb7d2664dbf21cdbc2a3d504bfb3e7243c4b835c9052d557"
     },
     {
       "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/build_trial_inventory.py",
@@ -234,6 +244,21 @@
       "sha256": "aad6a42fdaa405acf3e940dd265cce923ef6b31727603143671fa481a14c1bfd"
     },
     {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/EURUSD_V1_UNMASKED_RECENT_WINDOWS.csv",
+      "bytes": 1076,
+      "sha256": "128affc252afcf50dbfd2b92b3329da65e21aa5de375eb017c24f54ee4d10880"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/EURUSD_V1_UNMASKED_RECENT_WINDOWS.json",
+      "bytes": 3276,
+      "sha256": "7e4a7aba536bd2e230a740a45352ea91c7576bb656c24712c9c770f9bf10ebdc"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/EURUSD_V1_UNMASKED_RECENT_WINDOWS.md",
+      "bytes": 1843,
+      "sha256": "60160e7b5e44b5d9bfb179a00354b1c6a04d61be551c3ce7328fe6ee6db8545e"
+    },
+    {
       "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/MATCHED_SIGNAL_ATTEMPT_DIFF.csv",
       "bytes": 273082,
       "sha256": "01053dd7d8adf7737fac0fbc296c374be8834ed505ea5aaf8ecc57e889ded194"
@@ -347,6 +372,11 @@
       "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/run_unmasked_audit.py",
       "bytes": 27929,
       "sha256": "f17c70cd2428c84d5764cf119dd6b94d86c9c68b12f153cd03a74eb8b4fc5af7"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/tests/test_recent_window_analysis.py",
+      "bytes": 1478,
+      "sha256": "df02ef33565552b45dd42cd5435d3025705e533ed0a508b236efbd0813c0d028"
     },
     {
       "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/tests/test_unmasked_audit.py",
