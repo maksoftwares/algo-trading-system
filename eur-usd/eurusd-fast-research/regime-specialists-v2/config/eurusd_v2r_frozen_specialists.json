@@ -1,0 +1,36 @@
+{
+  "campaign_id": "EURUSD_V2R_FROZEN_COMPRESSION_SPECIALISTS",
+  "frozen_after_information": "TRAIN_ONLY_2016_07_TO_2020_07",
+  "classifier_config": "eurusd_regime_specialists_v2r_train_hunt.json",
+  "specialists": [
+    {
+      "specialist_id": "EURV2R_COMPRESSION_BREAKOUT_SHORT",
+      "family": "v1_compression_breakout",
+      "owned_regime": "compression",
+      "source_candidate": "EURHUNT01_0596",
+      "archetype": "compression_breakout_short",
+      "direction": "short",
+      "threshold": 0.95,
+      "stop_atr": 1.5,
+      "target_r": 0.75,
+      "max_hold_bars": 24,
+      "parameter_sha256": "0691c88ae446fe2a72939cb0575f3f9d4a4657e8991fd4db971682e25b211a57"
+    },
+    {
+      "specialist_id": "EURV2R_FRANKFURT_LONDON_SHORT",
+      "family": "session_expansion",
+      "owned_regime": "compression",
+      "source_candidate": "EURSESSIONV2R_0341",
+      "profile": "FRANKFURT_LONDON",
+      "reference_hours": [0, 1, 2, 3, 4, 5],
+      "decision_hours": [6, 7, 8, 9, 10, 11],
+      "direction": "short",
+      "buffer_atr": 0.0,
+      "body_min": 0.35,
+      "stop_atr": 1.25,
+      "target_r": 2.0,
+      "max_hold_bars": 12,
+      "parameter_sha256": "1d99f7458edb234a55d7becd49be62595f93cfbb3d7883fde284515d5f9a4e43"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+specialist_id,owned_regime,source_candidate,archetype,direction,threshold,stop_atr,target_r,max_hold_bars,parameter_sha256
+EURV2_TREND_UP,trend_up,EURHUNT01_0300,range_breakout_long,long,0.2,1.5,2.0,18,a55260084eb1087799900b1530b1e8a6b9bd31c4cfabc1d8ad0431bebee51856
+EURV2_TREND_DOWN,trend_down,EURHUNT01_0170,trend_pullback_short,short,0.3,1.0,2.0,24,33ddf8ed83793f726681b528631023c480b017e9c93994849f24f617f0527bf9
+EURV2_COMPRESSION_UP,compression,EURHUNT01_0478,compression_breakout_long,long,0.85,1.5,1.25,24,189a68beeba5dd45c7d2d756ab904d05747a44875c7af4d9d4fdc42e3dda259a
+EURV2_COMPRESSION_DOWN,compression,EURHUNT01_0575,compression_breakout_short,short,0.85,1.25,2.0,24,457893e8d38864352e4b68f77ed60d433514846121ae483c87670c2a7e1fc888
+EURV2_CHOP_ROTATION,chop,EURHUNT01_0900,failed_break_reversion_long,long,0.2,1.5,2.0,12,10e4363758f4bec5f9f94b2d28490445052dd5c0aed626d2749a0538d7601ae1

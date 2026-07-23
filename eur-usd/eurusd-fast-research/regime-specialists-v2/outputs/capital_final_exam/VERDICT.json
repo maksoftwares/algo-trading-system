@@ -1,0 +1,9 @@
+{
+  "schema_version": "eurusd_capital_final_exam_v1",
+  "campaign_id": "EURUSD_CAPITAL_V2_CHOP_ASIA_LONDON_SHORT_FINAL_EXAM",
+  "frozen_exam_sha256": "65fa3aedaff1785182a63157efe34e11752899762034db23394f8f33a7f45810",
+  "exam_pass": false,
+  "mt5_real_tick_replication_required": false,
+  "demo_rehearsal_ready": false,
+  "verdict": "CAPITAL_EXAM_FAIL_STOP"
+}

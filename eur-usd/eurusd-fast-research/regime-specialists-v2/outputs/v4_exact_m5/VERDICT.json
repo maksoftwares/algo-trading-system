@@ -1,0 +1,9 @@
+{
+  "exact_m5_gate_pass": false,
+  "exact_m5_economic_gates_pass": true,
+  "frequency_shortfall_only": true,
+  "mt5_replication_required_for_ordering_demo": true,
+  "shadow_demo_candidate": true,
+  "ordering_demo_ready": false,
+  "verdict": "LOW_FREQUENCY_SHADOW_DEMO_CANDIDATE"
+}

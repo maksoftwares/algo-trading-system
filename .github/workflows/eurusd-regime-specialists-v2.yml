@@ -1,0 +1,29 @@
+name: EURUSD regime specialists V2
+
+on:
+  push:
+    paths:
+      - "eur-usd/eurusd-fast-research/regime-specialists-v2/**"
+      - ".github/workflows/eurusd-regime-specialists-v2.yml"
+  pull_request:
+    paths:
+      - "eur-usd/eurusd-fast-research/regime-specialists-v2/**"
+      - ".github/workflows/eurusd-regime-specialists-v2.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: eur-usd/eurusd-fast-research/regime-specialists-v2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: eur-usd/eurusd-fast-research/regime-specialists-v2/requirements.txt
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q
+      - run: python generate_manifest.py
+      - run: git diff --exit-code -- ARTIFACT_MANIFEST.csv

@@ -1,0 +1,10 @@
+{
+  "schema_version": "eurusd_capital_v2_development_v1",
+  "campaign_id": "EURUSD_CAPITAL_NATIVE_V2_DEVELOPMENT",
+  "source_sha256": "49608db1c09dd7db73200225abf9ca8aca4311a3d2bf8c30b572eacf52ba228a",
+  "prequalified_candidates_opened": 15,
+  "four_block_passes": 2,
+  "selected_lanes": 1,
+  "information_opened": "CAPITAL_2016_07_TO_2024_07",
+  "exam_2024_2026_opened": false
+}

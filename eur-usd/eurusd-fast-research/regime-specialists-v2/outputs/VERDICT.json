@@ -1,0 +1,21 @@
+{
+  "campaign_id": "EURUSD_REGIME_SPECIALISTS_V2",
+  "architecture": "MUTUALLY_EXCLUSIVE_H4_REGIMES_WITH_INDEPENDENT_SPECIALISTS",
+  "source_cache_sha256": "24d0328f28b0e6036e0072bf2ef3ab195b0659a3d2b83bb2c7095b330a3025b0",
+  "source_raw_hour_files": 87646,
+  "source_nonempty_h1_rows": 62320,
+  "quarantined_intervals": [
+    [
+      "2024-10-09T23:00:00Z",
+      "2024-10-10T01:00:00Z"
+    ]
+  ],
+  "attempts_v1_prior": 1000,
+  "attempts_v2": 5,
+  "qualified_specialists": [],
+  "portfolio_opened": false,
+  "m5_replication_opened": false,
+  "mt5_replication_opened": false,
+  "demo_rehearsal_ready": false,
+  "verdict": "NO_V2_SPECIALIST_PORTFOLIO_STOP"
+}

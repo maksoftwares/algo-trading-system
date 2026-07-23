@@ -1,0 +1,2 @@
+specialist_id,owned_regime,source_candidate,stage,status,trades,wins,win_rate,net_pips,pnl_usd_001_lot,stress_net_r,average_r,stress_profit_factor,positive_active_month_share,maximum_drawdown_r,removed_profit_factor,gate_pass
+EURV4_ASIA_LONDON_COMPRESSION_SHORT,compression,EURSESSIONV2R_0161,final_exam,OPENED,27,13,0.48148148148148145,152.5444071462911,15.25444071462911,7.024270234511115,0.260158156833745,1.5020000813037617,0.5714285714285714,5.198803238859872,1.079877953927116,False

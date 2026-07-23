@@ -1,0 +1,3 @@
+specialist_id,owned_regime,source_candidate,stage,status,trades,wins,win_rate,net_pips,pnl_usd_001_lot,stress_net_r,average_r,stress_profit_factor,positive_active_month_share,maximum_drawdown_r,removed_profit_factor,gate_pass
+EURV3_ASIA_LONDON_COMPRESSION_SHORT,compression,EURSESSIONV2R_0161,internal,OPENED,34,17,0.5,138.60290318162268,13.860290318162269,5.776359255530664,0.16989291928031366,1.3576342822746468,0.4,5.222912871880513,0.7483546089145117,False
+EURV3_ASIA_LONDON_COMPRESSION_SHORT,compression,EURSESSIONV2R_0161,exam,SEALED_PREDECESSOR_FAILED,,,,,,,,,,,,False

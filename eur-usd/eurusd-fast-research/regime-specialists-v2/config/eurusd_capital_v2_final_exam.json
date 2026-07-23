@@ -1,0 +1,31 @@
+{
+  "campaign_id": "EURUSD_CAPITAL_V2_CHOP_ASIA_LONDON_SHORT_FINAL_EXAM",
+  "source_sha256": "49608db1c09dd7db73200225abf9ca8aca4311a3d2bf8c30b572eacf52ba228a",
+  "frozen_after_information": "CAPITAL_2016_07_TO_2024_07",
+  "candidate": {
+    "specialist_id": "EURCAPV2_CHOP_ASIA_LONDON_SHORT",
+    "owned_regime": "chop",
+    "source_candidate": "CAP_SESSION_0132",
+    "family": "session_expansion",
+    "profile": "ASIA_LONDON",
+    "reference_hours": [0, 1, 2, 3, 4, 5],
+    "decision_hours": [6, 7, 8, 9],
+    "direction": "short",
+    "buffer_atr": 0.0,
+    "body_min": 0.35,
+    "stop_atr": 1.75,
+    "target_r": 1.25,
+    "max_hold_bars": 12,
+    "parameter_sha256": "c968afc8c772ea3fe84b544b83519387976423ab69a19420b44875f14eed0ba5"
+  },
+  "exam_window": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+  "exam_gate": {
+    "minimum_trades": 60,
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_average_r": 0.05,
+    "minimum_positive_active_month_share": 0.55,
+    "maximum_drawdown_r": 15.0,
+    "top_winners_removed": 5,
+    "minimum_removed_profit_factor": 1.0
+  }
+}

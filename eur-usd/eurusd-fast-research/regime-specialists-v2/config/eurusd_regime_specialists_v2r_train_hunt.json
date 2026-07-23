@@ -1,0 +1,50 @@
+{
+  "campaign_id": "EURUSD_REGIME_SPECIALISTS_V2R_TRAIN_HUNT",
+  "train_window": ["2016-07-01T00:00:00Z", "2020-07-01T00:00:00Z"],
+  "classifier": {
+    "timeframe": "H4",
+    "atr_period": 14,
+    "adx_period": 14,
+    "ema_period": 50,
+    "slope_bars": 6,
+    "efficiency_lookback": 24,
+    "range_lookback": 24,
+    "volatility_baseline_bars": 504,
+    "trend_adx_min": 18.0,
+    "trend_efficiency_min": 0.25,
+    "trend_slope_atr_min": 0.1,
+    "compression_adx_max": 26.0,
+    "compression_atr_ratio_max": 0.9,
+    "compression_width_atr_max": 6.0,
+    "chop_adx_max": 30.0,
+    "chop_efficiency_max": 0.5,
+    "chop_displacement_atr_max": 2.5,
+    "chop_width_atr_min": 1.0,
+    "chop_width_atr_max": 10.0,
+    "unsafe_atr_percentile": 0.95,
+    "unsafe_gap_atr": 1.5
+  },
+  "ownership": {
+    "trend_up": ["trend_pullback_long", "range_breakout_long"],
+    "trend_down": ["trend_pullback_short", "range_breakout_short"],
+    "compression": ["compression_breakout_long", "compression_breakout_short"],
+    "chop": ["zscore_reversion_long", "zscore_reversion_short", "failed_break_reversion_long", "failed_break_reversion_short"]
+  },
+  "selection_lanes": [
+    {"lane": "TREND_UP", "regime": "trend_up", "directions": ["long"]},
+    {"lane": "TREND_DOWN", "regime": "trend_down", "directions": ["short"]},
+    {"lane": "COMPRESSION_UP", "regime": "compression", "directions": ["long"]},
+    {"lane": "COMPRESSION_DOWN", "regime": "compression", "directions": ["short"]},
+    {"lane": "CHOP_LONG", "regime": "chop", "directions": ["long"]},
+    {"lane": "CHOP_SHORT", "regime": "chop", "directions": ["short"]}
+  ],
+  "selection_gate": {
+    "minimum_trades": 80,
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_average_r": 0.02,
+    "minimum_positive_active_month_share": 0.5,
+    "maximum_drawdown_r": 30.0,
+    "top_winners_removed": 10,
+    "minimum_removed_profit_factor": 1.0
+  }
+}

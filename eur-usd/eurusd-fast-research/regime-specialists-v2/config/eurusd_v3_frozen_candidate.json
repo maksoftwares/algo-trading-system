@@ -1,0 +1,40 @@
+{
+  "campaign_id": "EURUSD_V3_ASIA_LONDON_COMPRESSION_SHORT",
+  "frozen_after_information": "2016_07_TO_2022_07_DEVELOPMENT",
+  "candidate": {
+    "specialist_id": "EURV3_ASIA_LONDON_COMPRESSION_SHORT",
+    "source_candidate": "EURSESSIONV2R_0161",
+    "family": "session_expansion",
+    "owned_regime": "compression",
+    "profile": "ASIA_LONDON",
+    "reference_hours": [0, 1, 2, 3, 4, 5],
+    "decision_hours": [6, 7, 8, 9],
+    "direction": "short",
+    "buffer_atr": 0.0,
+    "body_min": 0.55,
+    "stop_atr": 1.75,
+    "target_r": 2.0,
+    "max_hold_bars": 12,
+    "parameter_sha256": "795fcb85a82802ce23097ae01e72f7397588e4947c8a1db15f14ac5cc467bb1f"
+  },
+  "gates": {
+    "internal": {
+      "minimum_trades": 30,
+      "minimum_stress_profit_factor": 1.2,
+      "minimum_average_r": 0.04,
+      "minimum_positive_active_month_share": 0.55,
+      "maximum_drawdown_r": 18.0,
+      "top_winners_removed": 5,
+      "minimum_removed_profit_factor": 1.0
+    },
+    "exam": {
+      "minimum_trades": 30,
+      "minimum_stress_profit_factor": 1.25,
+      "minimum_average_r": 0.05,
+      "minimum_positive_active_month_share": 0.55,
+      "maximum_drawdown_r": 15.0,
+      "top_winners_removed": 5,
+      "minimum_removed_profit_factor": 1.0
+    }
+  }
+}

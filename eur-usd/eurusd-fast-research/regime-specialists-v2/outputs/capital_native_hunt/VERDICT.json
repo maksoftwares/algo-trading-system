@@ -1,0 +1,10 @@
+{
+  "campaign_id": "EURUSD_CAPITAL_NATIVE_REGIME_HUNT_V1",
+  "source_sha256": "49608db1c09dd7db73200225abf9ca8aca4311a3d2bf8c30b572eacf52ba228a",
+  "source_rows": 61917,
+  "candidate_attempts": 1864,
+  "development_passes": 15,
+  "selected_regime_direction_lanes": 2,
+  "information_opened": "CAPITAL_2016_07_TO_2022_07",
+  "internal_2022_2024_opened": false
+}

@@ -1,0 +1,46 @@
+{
+  "campaign_id": "EURUSD_CAPITAL_NATIVE_FROZEN_V1",
+  "source_sha256": "49608db1c09dd7db73200225abf9ca8aca4311a3d2bf8c30b572eacf52ba228a",
+  "frozen_after_information": "CAPITAL_2016_07_TO_2022_07",
+  "specialists": [
+    {
+      "specialist_id": "EURCAP_CHOP_ASIA_LONDON_SHORT",
+      "family": "session_expansion",
+      "owned_regime": "chop",
+      "source_candidate": "CAP_SESSION_0162",
+      "profile": "ASIA_LONDON",
+      "reference_hours": [0, 1, 2, 3, 4, 5],
+      "decision_hours": [6, 7, 8, 9],
+      "direction": "short",
+      "buffer_atr": 0.0,
+      "body_min": 0.55,
+      "stop_atr": 1.75,
+      "target_r": 2.0,
+      "max_hold_bars": 12,
+      "parameter_sha256": "7e50c0936850cbe80033cb77e3a1ba47151bd2e1ce139e66842dba5ea7ec704d"
+    },
+    {
+      "specialist_id": "EURCAP_COMPRESSION_BREAKOUT_LONG",
+      "family": "v1_archetype",
+      "owned_regime": "compression",
+      "source_candidate": "EURHUNT01_0496",
+      "archetype": "compression_breakout_long",
+      "direction": "long",
+      "threshold": 0.95,
+      "stop_atr": 1.5,
+      "target_r": 0.75,
+      "max_hold_bars": 24,
+      "parameter_sha256": "c271bf440285d684016b588e1c041792312696996cb7da41ad6076a326250329"
+    }
+  ],
+  "internal_window": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+  "internal_gate": {
+    "minimum_trades": 35,
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_average_r": 0.04,
+    "minimum_positive_active_month_share": 0.55,
+    "maximum_drawdown_r": 18.0,
+    "top_winners_removed": 5,
+    "minimum_removed_profit_factor": 1.0
+  }
+}

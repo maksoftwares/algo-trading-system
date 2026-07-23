@@ -1,0 +1,13 @@
+ShadowMode=false
+EnableDemoOrders=true
+FixedLots=0.01
+MagicNumber=26072341
+BrokerUtcOffsetHours=0
+MaximumSpreadPips=2.0
+MaximumHoldH1Bars=12
+DeviationPoints=10
+SignalLogName=EURUSD_V4_DEMO_SIGNALS.csv
+OwnedRegimeMode=1
+BodyMinimum=0.35
+StopAtrMultiple=1.75
+TargetRMultiple=1.25

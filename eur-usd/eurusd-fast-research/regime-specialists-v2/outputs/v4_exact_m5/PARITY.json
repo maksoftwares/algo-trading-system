@@ -1,0 +1,13 @@
+{
+  "eligible_h1_signals": 27,
+  "missing_exact_entry_bar": 0,
+  "spread_rejections": 0,
+  "overlap_rejections": 0,
+  "invalid_atr_rejections": 0,
+  "h1_screen_trades": 27,
+  "exact_m5_trades": 27,
+  "common_entry_timestamps": 27,
+  "h1_only_entry_timestamps": 0,
+  "m5_only_entry_timestamps": 0,
+  "m5_cache_sha256": "c347517be57f8147b5461d5d5ccd3c7ea6f683516a54050f06ea103e50cc0a61"
+}

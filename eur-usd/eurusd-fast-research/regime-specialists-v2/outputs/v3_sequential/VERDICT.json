@@ -1,0 +1,10 @@
+{
+  "campaign_id": "EURUSD_V3_ASIA_LONDON_COMPRESSION_SHORT",
+  "frozen_candidate_sha256": "e6c3aeb77e7c4e7c30449865600b0ca89c3c97a5aa6a7e99cb08f048433a3105",
+  "internal_pass": false,
+  "exam_opened": false,
+  "exam_pass": false,
+  "exact_m5_replication_required": false,
+  "demo_rehearsal_ready": false,
+  "verdict": "NO_V3_QUALIFIER_STOP"
+}

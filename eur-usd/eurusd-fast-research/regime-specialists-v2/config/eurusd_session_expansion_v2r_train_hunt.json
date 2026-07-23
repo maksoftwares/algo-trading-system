@@ -1,0 +1,28 @@
+{
+  "campaign_id": "EURUSD_SESSION_EXPANSION_V2R_TRAIN_HUNT",
+  "train_window": ["2016-07-01T00:00:00Z", "2020-07-01T00:00:00Z"],
+  "profiles": [
+    {"profile": "ASIA_LONDON", "reference_hours": [0, 1, 2, 3, 4, 5], "decision_hours": [6, 7, 8, 9]},
+    {"profile": "FRANKFURT_LONDON", "reference_hours": [0, 1, 2, 3, 4, 5], "decision_hours": [6, 7, 8, 9, 10, 11]},
+    {"profile": "LONDON_NY", "reference_hours": [6, 7, 8, 9, 10, 11], "decision_hours": [12, 13, 14, 15]},
+    {"profile": "NY_AFTERNOON", "reference_hours": [12, 13, 14], "decision_hours": [15, 16, 17, 18]}
+  ],
+  "buffers_atr": [0.0, 0.1],
+  "minimum_body_fractions": [0.35, 0.55],
+  "stop_atr_values": [0.75, 1.25, 1.75],
+  "target_r_values": [0.75, 1.25, 2.0],
+  "regime_ownership": {
+    "long": ["trend_up", "compression", "chop"],
+    "short": ["trend_down", "compression", "chop"]
+  },
+  "maximum_hold_bars": 12,
+  "selection_gate": {
+    "minimum_trades": 80,
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_average_r": 0.02,
+    "minimum_positive_active_month_share": 0.5,
+    "maximum_drawdown_r": 30.0,
+    "top_winners_removed": 10,
+    "minimum_removed_profit_factor": 1.0
+  }
+}

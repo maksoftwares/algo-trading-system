@@ -1,0 +1,9 @@
+{
+  "campaign_id": "EURUSD_V4_FINAL_EXAM_ASIA_LONDON_COMPRESSION_SHORT",
+  "frozen_exam_sha256": "2e140c80c26b82baa1becc81b922f97b2ce05a45c8a537de49774578d8a235e6",
+  "exam_pass": false,
+  "exact_m5_replication_required": false,
+  "mt5_replication_required": false,
+  "demo_rehearsal_ready": false,
+  "verdict": "FINAL_EXAM_FAIL_STOP"
+}

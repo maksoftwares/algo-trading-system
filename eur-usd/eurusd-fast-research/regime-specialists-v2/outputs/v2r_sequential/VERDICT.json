@@ -1,0 +1,9 @@
+{
+  "campaign_id": "EURUSD_V2R_FROZEN_COMPRESSION_SPECIALISTS",
+  "frozen_specialist_sha256": "066f679f2e52025b4817e5e2bcc62420b1ecb676467a02acae1ad5357644007f",
+  "qualified_specialists": [],
+  "exact_m5_replication_required": false,
+  "mt5_replication_required": false,
+  "demo_rehearsal_ready": false,
+  "verdict": "NO_SEQUENTIAL_QUALIFIER_STOP"
+}
