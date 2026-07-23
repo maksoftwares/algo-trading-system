@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_phase0_mt5_parity_manifest_v1",
-  "frozen_at_utc": "2026-07-23T08:52:06Z",
+  "frozen_at_utc": "2026-07-23T09:19:18Z",
   "boundary": {
     "active_terminal_process_used": false,
     "strategy_tester_launched": true,
@@ -59,23 +59,23 @@
     },
     "trade_csv": {
       "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80_trades.csv",
-      "sha256": "8ddfbf25ac903c87366a3b5f2be08676bd986d4f5079167346d6a543337342b3",
-      "bytes": 124760
+      "sha256": "b0227c190ae15be102c4a87a9f1c2b58029dc519c9a03e4f64bd2a3d4d46d7a4",
+      "bytes": 123928
     },
     "signal_log": {
       "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80_signal_log.csv",
-      "sha256": "f7503df544ef05ddaee72f8dcd887cb683350fdc95d8ac288435e63219ba115f",
-      "bytes": 718873
+      "sha256": "8e07734f3744e4fe37abc6fb911f17cb7ae0f32b6aae063375040a618b677890",
+      "bytes": 715915
     },
     "order_log": {
       "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80_order_log.csv",
-      "sha256": "6bd5e04c107658490d804fc93c80d3a57192516c750e03c5e40eb10c9328b756",
-      "bytes": 757919
+      "sha256": "1ec8968e604c5b880c461071750de27c19bb50069ba50f81c7096086adcbe5da",
+      "bytes": 754961
     },
     "startup_log": {
       "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80_startup_log.csv",
-      "sha256": "d866ca374c65921c669273c2ea33f50a804e99e751a19d1d5bed0a174a6b867e",
-      "bytes": 306
+      "sha256": "167dd4902665bbffe5960d8d7333564511ddca1c99065b3e0c87feb1c22d7212",
+      "bytes": 304
     }
   }
 }

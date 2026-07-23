@@ -23,8 +23,8 @@
     "ea_source_sha256": "40fb7ac41516eea28dc1803a6c8feb6305ea6b7f44b61e0519eff244a1298031",
     "locked_ex5_sha256": "d314a492e4bfbf31a3b1dd9d53992ed72d891788366a49fd284d43fd364f8f22",
     "preset_sha256": "6ce02470c419771b3b6684178d0a450e97d6655522d71bc58010647f0f3ec363",
-    "trade_csv_sha256": "8ddfbf25ac903c87366a3b5f2be08676bd986d4f5079167346d6a543337342b3",
-    "inherited_trade_csv_sha256": "8ddfbf25ac903c87366a3b5f2be08676bd986d4f5079167346d6a543337342b3"
+    "trade_csv_sha256": "b0227c190ae15be102c4a87a9f1c2b58029dc519c9a03e4f64bd2a3d4d46d7a4",
+    "inherited_trade_csv_sha256": "b0227c190ae15be102c4a87a9f1c2b58029dc519c9a03e4f64bd2a3d4d46d7a4"
   },
   "mt5_economics": {
     "period": {
