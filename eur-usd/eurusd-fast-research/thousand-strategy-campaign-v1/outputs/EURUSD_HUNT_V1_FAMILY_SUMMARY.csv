@@ -1,0 +1,11 @@
+archetype,stage_gate_pass_rows,both_window_gate_pass_candidates,best_minimum_trade_stress_pf
+trend_pullback_long,0,0,1.0727681845887582
+trend_pullback_short,1,0,1.21437107010004
+range_breakout_long,3,0,1.238801878976482
+range_breakout_short,5,0,1.228509185552599
+compression_breakout_long,2,0,1.3828075007339127
+compression_breakout_short,3,0,1.3913176629938069
+zscore_reversion_long,0,0,1.0000330128870418
+zscore_reversion_short,0,0,0.9774803422183205
+failed_break_reversion_long,6,0,1.2693606764998921
+failed_break_reversion_short,0,0,0.9659882439560467

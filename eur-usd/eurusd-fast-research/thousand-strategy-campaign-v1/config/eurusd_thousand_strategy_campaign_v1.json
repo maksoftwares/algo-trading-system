@@ -1,0 +1,61 @@
+{
+  "schema_version": "eurusd_thousand_strategy_campaign_v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "symbol": "EURUSD",
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "external_cache": "research/eurusd-thousand-strategy-campaign-v1/EURUSD_H1_BIDASK.csv.gz",
+    "external_cache_metadata": "research/eurusd-thousand-strategy-campaign-v1/EURUSD_H1_BIDASK.metadata.json"
+  },
+  "windows": {
+    "discovery_fit": ["2016-07-01T00:00:00Z", "2018-07-01T00:00:00Z"],
+    "discovery_confirm": ["2018-07-01T00:00:00Z", "2020-07-01T00:00:00Z"],
+    "validation_quarantine": ["2020-07-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "internal_test_quarantine": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "exam_quarantine": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "feature_contract": {
+    "atr_period": 14,
+    "ema_fast_period": 20,
+    "ema_slow_period": 80,
+    "ema_slope_bars": 6,
+    "range_lookback": 20,
+    "zscore_lookback": 20,
+    "efficiency_lookback": 24,
+    "volatility_baseline_bars": 120
+  },
+  "execution": {
+    "pip_size": 0.0001,
+    "entry_exit_slippage_pips_each": 0.2,
+    "primary_stress_extra_pips_roundtrip": 0.5,
+    "maximum_entry_spread_pips": 2.0,
+    "same_bar_priority": "STOP_FIRST",
+    "position_mutex": "ONE_PER_VARIANT"
+  },
+  "selection": {
+    "attempts": 1000,
+    "archetypes": 10,
+    "variants_per_archetype": 100,
+    "maximum_finalists_per_archetype": 3,
+    "false_discovery_rate": 0.10
+  },
+  "discovery_gates": {
+    "minimum_trades": 60,
+    "minimum_stress_profit_factor": 1.10,
+    "minimum_stress_net_pips": 0.0,
+    "minimum_positive_active_month_share": 0.50,
+    "minimum_top5_removed_profit_factor": 1.00
+  },
+  "research_controls": {
+    "open_only_discovery_windows": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "h1_screen_can_authorize_strategy": false,
+    "mt5_run_authorized": false,
+    "ea_implementation_authorized": false,
+    "reviewer_submission_authorized": false,
+    "chart_demo_live_shadow_authorized": false,
+    "broker_action_authorized": false
+  }
+}

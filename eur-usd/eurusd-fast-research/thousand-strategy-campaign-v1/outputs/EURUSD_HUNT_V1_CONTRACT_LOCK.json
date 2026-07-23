@@ -1,0 +1,16 @@
+{
+  "schema_version": "eurusd_thousand_strategy_campaign_v1_contract_lock",
+  "config_sha256": "2384cbb232d79e12be2dd1c9e97a7b8edef1fb170da06b5eecda49eb4eaee106",
+  "candidate_manifest_sha256": "d5808fe632eb0ad92f3c1102cf0d63a32db3f3ed468bf734a22c21553339d89b",
+  "attempts": 1000,
+  "research_controls": {
+    "open_only_discovery_windows": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "h1_screen_can_authorize_strategy": false,
+    "mt5_run_authorized": false,
+    "ea_implementation_authorized": false,
+    "reviewer_submission_authorized": false,
+    "chart_demo_live_shadow_authorized": false,
+    "broker_action_authorized": false
+  }
+}

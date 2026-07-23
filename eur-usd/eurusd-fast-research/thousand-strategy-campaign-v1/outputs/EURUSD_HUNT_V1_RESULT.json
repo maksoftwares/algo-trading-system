@@ -1,0 +1,106 @@
+{
+  "schema_version": "eurusd_thousand_strategy_campaign_v1_result",
+  "status": "NO_DISCOVERY_SURVIVOR_STOP_V1",
+  "candidate_manifest_sha256": "d5808fe632eb0ad92f3c1102cf0d63a32db3f3ed468bf734a22c21553339d89b",
+  "attempts": 1000,
+  "archetypes": 10,
+  "source": {
+    "schema_version": "eurusd_h1_bidask_cache_v1",
+    "symbol": "EURUSD",
+    "frozen_month_manifest_digest": "dae128ac54fca7478b26a8950d4734e52551a41e3886c79dfc3bed8bc9834c05",
+    "frozen_months": 119,
+    "raw_hour_files": 87646,
+    "nonempty_h1_rows": 62320,
+    "start_utc": "2016-07-01T00:00:00+00:00",
+    "end_utc": "2026-06-30T23:00:00+00:00",
+    "cache_sha256": "24d0328f28b0e6036e0072bf2ef3ab195b0659a3d2b83bb2c7095b330a3025b0",
+    "cache_bytes": 1532162,
+    "expected_months": 120,
+    "missing_frozen_months": [
+      "2024-10"
+    ],
+    "missing_opened_discovery_months": []
+  },
+  "opened_windows": [
+    "discovery_fit",
+    "discovery_confirm"
+  ],
+  "quarantined_windows": [
+    "validation_quarantine",
+    "internal_test_quarantine",
+    "exam_quarantine"
+  ],
+  "stage_gate_pass_rows": 20,
+  "both_window_and_fdr_survivors": 0,
+  "shortlist": [],
+  "family_summary": [
+    {
+      "archetype": "trend_pullback_long",
+      "stage_gate_pass_rows": 0,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 1.0727681845887582
+    },
+    {
+      "archetype": "trend_pullback_short",
+      "stage_gate_pass_rows": 1,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 1.21437107010004
+    },
+    {
+      "archetype": "range_breakout_long",
+      "stage_gate_pass_rows": 3,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 1.238801878976482
+    },
+    {
+      "archetype": "range_breakout_short",
+      "stage_gate_pass_rows": 5,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 1.228509185552599
+    },
+    {
+      "archetype": "compression_breakout_long",
+      "stage_gate_pass_rows": 2,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 1.3828075007339127
+    },
+    {
+      "archetype": "compression_breakout_short",
+      "stage_gate_pass_rows": 3,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 1.3913176629938069
+    },
+    {
+      "archetype": "zscore_reversion_long",
+      "stage_gate_pass_rows": 0,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 1.0000330128870418
+    },
+    {
+      "archetype": "zscore_reversion_short",
+      "stage_gate_pass_rows": 0,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 0.9774803422183205
+    },
+    {
+      "archetype": "failed_break_reversion_long",
+      "stage_gate_pass_rows": 6,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 1.2693606764998921
+    },
+    {
+      "archetype": "failed_break_reversion_short",
+      "stage_gate_pass_rows": 0,
+      "both_window_gate_pass_candidates": 0,
+      "best_minimum_trade_stress_pf": 0.9659882439560467
+    }
+  ],
+  "boundary": {
+    "h1_screen_only": true,
+    "strategy_authorized": false,
+    "ea_created": false,
+    "mt5_run": false,
+    "reviewer_involved": false,
+    "chart_demo_live_shadow_touched": false
+  }
+}

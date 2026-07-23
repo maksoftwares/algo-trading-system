@@ -1,0 +1,116 @@
+{
+  "schema_version": "eurusd_hunt_v1_artifact_manifest",
+  "status": "NO_DISCOVERY_SURVIVOR_STOP_V1",
+  "artifacts": [
+    {
+      "path": ".gitattributes",
+      "bytes": 21,
+      "sha256": "f0ee6d9135f4e26f8d108b43af33e1e1093fa96e2d6fc2540e1c08dc9d458d4d"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 28,
+      "sha256": "a51104264729e7b362ea8c739de0ada29ba6e4f6047580ec3a3fd330ad20fd47"
+    },
+    {
+      "path": "config/eurusd_thousand_strategy_campaign_v1.json",
+      "bytes": 2218,
+      "sha256": "2384cbb232d79e12be2dd1c9e97a7b8edef1fb170da06b5eecda49eb4eaee106"
+    },
+    {
+      "path": "diagnose_results.py",
+      "bytes": 7388,
+      "sha256": "3ae46f612d7781de3bee15439458fdeb25e954b576b57d6248a5314714740660"
+    },
+    {
+      "path": "generate_manifest.py",
+      "bytes": 1128,
+      "sha256": "a7919242207b1d08ea21ec2f149d7a9ea538f235d81861e1504065df345834e2"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_CANDIDATE_GATE_CENSUS.csv",
+      "bytes": 487569,
+      "sha256": "3ce725be6ce033c49b2d5456079bcc8b4a0e1a2181c68cf0ef3af1d00d9b31aa"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_CANDIDATE_MANIFEST.csv",
+      "bytes": 130524,
+      "sha256": "a84061116adf27052ff02603008a8f0f507f83fa9cc67bb480955ea5c4ee1387"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_CONTRACT_LOCK.json",
+      "bytes": 666,
+      "sha256": "f692037b0c03c9e1489ec793b64dedeb5b022991a48d1332cc5755d6c33af6a4"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_DISCOVERY_METRICS.csv",
+      "bytes": 601144,
+      "sha256": "b65ccb62a926cd487251e5e4d24026fd0a85a6d0e9e2688f496146bb80edc069"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_FAMILY_SUMMARY.csv",
+      "bytes": 567,
+      "sha256": "f8c644eebc11f65ef92ac1dace703bbe7a01cc9d5aaba1c6b8c063d086ef9d12"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_GATE_DIAGNOSTIC.json",
+      "bytes": 28678,
+      "sha256": "16b21744cb47d87ffadd2c618774b22be7cc2f721bab1ea3cb6af8a432c348b9"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_RESULT.json",
+      "bytes": 3307,
+      "sha256": "7375d3b3186fcea5742d1ced55cab986efa952bf124e14ec5cb03cd3fb533a17"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_RESULT.md",
+      "bytes": 1130,
+      "sha256": "dd6051ad18e6de36a445f2a0186bdca25758fe53433c90197896715c7f9bdb58"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_SHORTLIST.csv",
+      "bytes": 257,
+      "sha256": "dd88b4c0b3708358bb1e675013a9c56a16dd0e579545a3fb13b38b2ec8424792"
+    },
+    {
+      "path": "outputs/EURUSD_HUNT_V1_SHORTLIST_TRADES.csv",
+      "bytes": 145,
+      "sha256": "73664bb29fb63c7d7eb769eb6ff86b63d82ff932b166ce45db6e6f518a6138d6"
+    },
+    {
+      "path": "PREREGISTRATION.md",
+      "bytes": 2899,
+      "sha256": "fa49e933d526159e4ece7fe48b4b0c7c2ffa73cb2e78a2f3f7f26ab966f44723"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1225,
+      "sha256": "2a9258f2c75cf1a2c0eedd6665e8d21019fb0f5c1c0c49590f4a3f7960cbffaa"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 36,
+      "sha256": "ec10dad5cafabfbfa857388d03177619f07394ce451b28b761c8651ec56f8ffa"
+    },
+    {
+      "path": "run_campaign.py",
+      "bytes": 6158,
+      "sha256": "04ac8d1d562acae979db1ee984d3982ea7557f436bd45f344ba97bc8243b132c"
+    },
+    {
+      "path": "src/__init__.py",
+      "bytes": 51,
+      "sha256": "a0686acf70ef0acee5e5c598fda249ffc7ff329d543a97896d3e0cdd27199c8a"
+    },
+    {
+      "path": "src/campaign.py",
+      "bytes": 26886,
+      "sha256": "057695dccaab189097c4cc2b0303c8374d431e2e0ee8e66d2fda3e7bb419a42d"
+    },
+    {
+      "path": "tests/test_campaign.py",
+      "bytes": 5122,
+      "sha256": "91a80447d52b3ce04ed8e3b3e67832f09ffe2985224e1d0a4e3783438e700469"
+    }
+  ]
+}

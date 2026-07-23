@@ -1,0 +1,1 @@
+candidate_id,attempt,archetype,direction,threshold,stop_atr,target_r,max_hold_bars,sha256,fit_trades,fit_stress_pf,confirm_trades,confirm_stress_pf,weakest_discovery_stress_pf,worst_one_sided_p_value,bh_adjusted_p_value,both_stage_gates_pass,fdr_gate_pass
