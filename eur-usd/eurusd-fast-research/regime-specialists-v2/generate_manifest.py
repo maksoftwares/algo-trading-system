@@ -12,9 +12,11 @@ EXCLUDED_PARTS = {"__pycache__", ".pytest_cache"}
 
 def main() -> None:
     rows = []
-    for path in sorted(ROOT.rglob("*")):
-        if not path.is_file() or path == OUTPUT:
-            continue
+    paths = [path for path in ROOT.rglob("*") if path.is_file() and path != OUTPUT]
+    for path in sorted(
+        paths,
+        key=lambda value: value.relative_to(ROOT).as_posix().casefold(),
+    ):
         relative = path.relative_to(ROOT)
         if any(part in EXCLUDED_PARTS for part in relative.parts):
             continue
