@@ -307,6 +307,8 @@ def write_outputs(report: dict[str, Any]) -> tuple[Path, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     json_path = output_dir / "EURUSD_PHASE0_EVIDENCE_AUDIT.json"
     md_path = output_dir / "EURUSD_PHASE0_EVIDENCE_AUDIT.md"
-    json_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    md_path.write_text(markdown_report(report), encoding="utf-8")
+    with json_path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(report, indent=2) + "\n")
+    with md_path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(markdown_report(report))
     return json_path, md_path
