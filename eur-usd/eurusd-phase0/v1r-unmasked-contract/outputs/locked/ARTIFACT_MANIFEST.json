@@ -1,0 +1,258 @@
+{
+  "schema_version": "eurusd_v1r_contract_artifact_manifest_v1",
+  "hash_basis": "Git index blob bytes; stable after clean checkout",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+  "status": "STAGE0_PARITY_PASS_RECLAIM_NOT_RUN",
+  "artifacts": [
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/.gitattributes",
+      "bytes": 60,
+      "sha256": "57f80b0a8181031003d5b8d90b1bda72d8ec792b4f19d4ab92daa1ff50a13eb4"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/CONTRACT.md",
+      "bytes": 3161,
+      "sha256": "16d614de8256f10619141aa604e1d0452fc0c0021bd90599f40c7170a8be1fe1"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/README.md",
+      "bytes": 1709,
+      "sha256": "960ac282cdf3853b7d02f2dcf9b4a2f4ad7f33614ee16e34d2f958c4fd2715bd"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/build_stage0_parity.py",
+      "bytes": 18718,
+      "sha256": "a9e78b1d25e6eacc26346ca5bf9ab08e78c628356d7ff24120ba4d5738c05892"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/config/v1r_contract.json",
+      "bytes": 980,
+      "sha256": "b7a3e26fa4210c5007a7e89a82d4a21a53b93704c9206fbd90dca9e5c94536b0"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/evidence/INDEPENDENT_REVIEWER_RESPONSE_2026_07_23.md",
+      "bytes": 54402,
+      "sha256": "fc5730478d9f83c139bdfeccf4a9d991a3b55307b666cfcb8d21f76624a98c9c"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/evidence/REVIEW_DECISION_BINDING.md",
+      "bytes": 1039,
+      "sha256": "b7e95c3d81b71cee1a283b09baf88d238e8dd579378bb9b688004d85e7d5222a"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/evidence/TRIAL_REGISTRY.csv",
+      "bytes": 1594,
+      "sha256": "78c882d28bb994ab2756beddd589f900f2ccdf9e55c51b3ba86927b71424acc9"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/freeze_git_manifest.py",
+      "bytes": 1562,
+      "sha256": "588a5ad86cba9cd4e00dc4a248bc77cec86db7f98a5a15925998dc42e77cd78d"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/mt5/Experts/EurUsdM30RsiBbCloseFadeLongV1R.mq5",
+      "bytes": 36235,
+      "sha256": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/mt5/Presets/EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT.set",
+      "bytes": 1010,
+      "sha256": "780626d393c2454e81b19b01b6e24f9883ffa40700f5504942a5b97d91771414"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/CANONICAL_MISMATCHES.csv",
+      "bytes": 50,
+      "sha256": "38fe02681b67edd3b02a4a8dc8f557d9a5d507673cc0376a600d5f1ef2f99bc1"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/ENTRY_SESSION_METRICS.csv",
+      "bytes": 334,
+      "sha256": "bf70db4aafb85c281a2251915c5ed23320f71f5956aeb564b585a0e3a33af670"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/EXECUTION_RECONCILIATION.json",
+      "bytes": 789,
+      "sha256": "a3d8c398d669cd76dd066ac62084f09671b9f5b1e693f7ed3300a130c3fb8d0f"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/EXIT_TIME_MONTH_METRICS.csv",
+      "bytes": 2620,
+      "sha256": "bc40c94b05fb8af3cb91a7cb325a88a3fc9be21e87553425f05ac45e12fccbeb"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/EXIT_TIME_YEAR_METRICS.csv",
+      "bytes": 363,
+      "sha256": "14302df1ad6f6bd233f6e407db41cea30085bb43e35382851e61fa94ba3331d3"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/STAGE0_PARITY_RESULT.json",
+      "bytes": 7753,
+      "sha256": "5a8fe0f7c06849f62d5223f528dcc79319641360abfca6af56c8fdbf8a53bb24"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/STAGE0_PARITY_RESULT.md",
+      "bytes": 1928,
+      "sha256": "7b16b1f914f60c6393f46ff7238dd90ba2d95c6970e3e8fc785360a6dd86dcd8"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/STOP_COMPONENT_COUNTS.csv",
+      "bytes": 38,
+      "sha256": "990d153fdd3cfad455c849e9aa4e589e19ad1769c2f7f36a39a73ec4e48eab1e"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/SYMBOL_SPECIFICATION.json",
+      "bytes": 1475,
+      "sha256": "5561797c8d631b4d463346bbbcc33ec12e167f276db49000c893ec3254b83f5f"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/COMPILED_INPUT_SCHEMA.json",
+      "bytes": 5835,
+      "sha256": "d97dd53b57c4069b6a69880301c42ceb60e9f1cfe78cd7551ebcb98135c823f9"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/EurUsdM30RsiBbCloseFadeLongV1R.ex5",
+      "bytes": 76094,
+      "sha256": "6785d975e9a8e60350dace8a475ed624791c66f20228443b3a0e288cc087733f"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/SOURCE_EX5_CHAIN.json",
+      "bytes": 5625,
+      "sha256": "095bd3db8a8e6d73cfc5491fa845355e3520738ad20f288111ee21e9c9c53fe2"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/compile_EurUsdM30RsiBbCloseFadeLongV1R_20260723T123628Z.log",
+      "bytes": 6930,
+      "sha256": "0da803307107f33f06bb2afd84ff04ebde564059ea78c2919b8873f4b1138791"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/04bb2c47b1b0_StdLibErr.mqh",
+      "bytes": 673,
+      "sha256": "852c19e13062cb0fa82ac14f2552adc4f0cce340647bebee90bbccd7f95e7eeb"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/96e678162453_Trade.mqh",
+      "bytes": 67833,
+      "sha256": "9cf286802c1ec2d442522f93f3d391886b31131f87114cb95002acab79ef351a"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/9d6fb4e7d875_DealInfo.mqh",
+      "bytes": 15883,
+      "sha256": "a8a5873db9504cfe97287e67de03387dd4ebe638b85244a0f1773088be0b0a9b"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/d0e479578ef9_OrderInfo.mqh",
+      "bytes": 21534,
+      "sha256": "c0a1e00fe7c12e6bd9d02dc88ceb122f0e54db0105e7c792b0f0dbb161f600f4"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/dd720b755c7f_PositionInfo.mqh",
+      "bytes": 15454,
+      "sha256": "38a64ef7ac3b9e576257d5240bf6919751796535ba0e08a49336540142fc39ee"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/dfad4fdb6d1b_Object.mqh",
+      "bytes": 2003,
+      "sha256": "c1126baa9bd4d39897b03f6bfb03667fa60b390828a132878072f947590dac8f"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/e88f6be45046_HistoryOrderInfo.mqh",
+      "bytes": 19546,
+      "sha256": "ff77d63927b57f3fc59aba75f25aca648622a7006fb9475bdd1bb1622d753a1b"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/source/EurUsdM30RsiBbCloseFadeLongV1R.mq5",
+      "bytes": 36235,
+      "sha256": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_EXACT_MT5_RESULT.json",
+      "bytes": 15835,
+      "sha256": "a0aa86b5bad0e2ec010e02399ad6d6c5f0d99a6f5ebc11b90cd5b76f084068b5"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_TRADE_LEDGER.csv",
+      "bytes": 179435,
+      "sha256": "66bc88cd4d464785ff666ec357536d03f752bc88a9929a24d6c00dcbdb046257"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT-holding.png",
+      "bytes": 22684,
+      "sha256": "d222ea6add997c71a130cc113c941530f7f74dc7afcb0f8b2d5a96ff96189d4b"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT-hst.png",
+      "bytes": 43967,
+      "sha256": "fc15164eb0f0e090a48041e19c9dfb51a9db3dc990d8751b5117471fa42386fb"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT-mfemae.png",
+      "bytes": 39986,
+      "sha256": "8741c3149c2f5764367f70966d164cce5768fc966d6113eb3a06951bdcc0449a"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT.htm",
+      "bytes": 2319998,
+      "sha256": "0550779e4adc8ad0abb88e613877dd4c43346498a176bd3f50893aee9f93008a"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT.ini",
+      "bytes": 1478,
+      "sha256": "47adf46123fef238e784b0b5633e879dd283b7ad70655e2a10d04441ddff3958"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT.png",
+      "bytes": 14711,
+      "sha256": "f3faa3fd1b724cff448580cffe70559b12e0ccdbc1b89ce1d3c345faa9e8c0b5"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_environment_log.csv",
+      "bytes": 3389,
+      "sha256": "70e844e02c10e0237c228281a8e0274cffbc2a16e19edf803bfece468b0596eb"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_execution_log.csv",
+      "bytes": 1641106,
+      "sha256": "4513524792a5b262ad75ce02b69bd2b89e2a52dfb99b4976837f4551129a8381"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_management_log.csv",
+      "bytes": 44,
+      "sha256": "c2db09cff6208cb5dbb6b2c7df72a972465db1741c4416fa13f6b7d2d66fe7d3"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_order_log.csv",
+      "bytes": 778392,
+      "sha256": "71a7fd50539026a4a801df803c5b7b7c6082a286b8c5b7b80d0ec83f7d3d0996"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_signal_log.csv",
+      "bytes": 792849,
+      "sha256": "71d40c5cad62bae928deeadfaa606fd86a488cb37a10370318093cedb0a081f8"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_startup_log.csv",
+      "bytes": 375,
+      "sha256": "c1a34cacb6e35639aec58fc396454c991267d9a0d782a419186d7593b0651518"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_state_log.csv",
+      "bytes": 8468977,
+      "sha256": "a93caa3c94c7f094309e38eb660fbbc4bdf8a84ae50eff32e40d6e23da060d3d"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_transaction_log.csv",
+      "bytes": 1597937,
+      "sha256": "735954cc6c767b400956761467010a019b90fe986ebe3896ca077b234cd8b7bf"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/run_v1r_baseline.py",
+      "bytes": 20451,
+      "sha256": "cd831a7d435fd380164d6997a9e610ef67517f7de3aa9160f523e40e30ec0b1c"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/tests/test_v1r_contract.py",
+      "bytes": 3829,
+      "sha256": "e0cbbbbb455db6442e51b9fd86db68c69ab93035c7cbad814f216641f6b15208"
+    }
+  ]
+}

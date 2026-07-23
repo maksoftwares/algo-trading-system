@@ -1,0 +1,338 @@
+{
+  "schema_version": "eurusd_v1r_exact_mt5_result_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+  "status": "STAGE0_MT5_RUN_COMPLETE_PARITY_NOT_YET_ADJUDICATED",
+  "boundary": {
+    "strategy_tester_only": true,
+    "chart_demo_live_touched": false,
+    "reclaim_implemented": false,
+    "reclaim_run": false,
+    "model": "Model=0 Every tick; may contain generated ticks",
+    "from_inclusive": "2022.07.01",
+    "to_exclusive": "2026.07.02"
+  },
+  "clean_run": {
+    "stale_artifacts_removed": [
+      "C:\\MT5A1M5MomentumBacktest\\Reports\\EURUSD_V1R_UNMASKED_CONTRACT.htm",
+      "C:\\MT5A1M5MomentumBacktest\\Reports\\EURUSD_V1R_UNMASKED_CONTRACT.png",
+      "C:\\MT5A1M5MomentumBacktest\\Reports\\EURUSD_V1R_UNMASKED_CONTRACT-holding.png",
+      "C:\\MT5A1M5MomentumBacktest\\Reports\\EURUSD_V1R_UNMASKED_CONTRACT-mfemae.png",
+      "C:\\MT5A1M5MomentumBacktest\\Reports\\EURUSD_V1R_UNMASKED_CONTRACT-hst.png",
+      "C:\\MT5A1M5MomentumBacktest\\Config\\EURUSD_V1R_UNMASKED_CONTRACT.ini",
+      "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Files\\eurusd_v1r_environment_log.csv",
+      "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Files\\eurusd_v1r_execution_log.csv",
+      "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Files\\eurusd_v1r_management_log.csv",
+      "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Files\\eurusd_v1r_order_log.csv",
+      "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Files\\eurusd_v1r_signal_log.csv",
+      "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Files\\eurusd_v1r_startup_log.csv",
+      "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Files\\eurusd_v1r_state_log.csv",
+      "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Files\\eurusd_v1r_transaction_log.csv"
+    ],
+    "compile": {
+      "prior_ex5_existed": true,
+      "ex5_absent_before_compile": true,
+      "metaeditor_process_returncode": 1,
+      "source_hash_before_copy": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+      "source_hash_after_copy": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+      "ex5_hash_after_compile": "6785d975e9a8e60350dace8a475ed624791c66f20228443b3a0e288cc087733f",
+      "compile_zero_errors_zero_warnings": true,
+      "command": [
+        "C:\\MT5A1M5MomentumBacktest\\MetaEditor64.exe",
+        "/compile:C:\\MT5A1M5MomentumBacktest\\MQL5\\Experts\\EurUsdM30RsiBbCloseFadeLongV1R.mq5",
+        "/log:C:\\MT5A1M5MomentumBacktest\\Logs\\compile_EurUsdM30RsiBbCloseFadeLongV1R_20260723T123628Z.log"
+      ]
+    },
+    "tester": {
+      "returncode": 0,
+      "started_at_utc": "2026-07-23T12:36:30Z",
+      "elapsed_seconds": 43.57,
+      "command": [
+        "C:\\MT5A1M5MomentumBacktest\\terminal64.exe",
+        "/portable",
+        "/config:C:\\MT5A1M5MomentumBacktest\\Config\\EURUSD_V1R_UNMASKED_CONTRACT.ini"
+      ]
+    }
+  },
+  "input_contract": {
+    "declared_input_count": 34,
+    "unknown_ini_keys": [],
+    "missing_ini_keys": [],
+    "ini_leverage": "1:50",
+    "report_leverage": "1:50"
+  },
+  "environment": {
+    "account_server": "Capital.ComMena-Demo",
+    "account_currency": "USD",
+    "account_leverage": "50",
+    "account_margin_mode": "2",
+    "terminal_build": "5833",
+    "mql_program_path": "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Experts\\EurUsdM30RsiBbCloseFadeLongV1R.ex5",
+    "tester_model_annotation": "Model=0 may contain generated ticks; native-real-tick coverage not established",
+    "server_time": "2022.07.01 00:00:00",
+    "gmt_time": "2022.07.01 00:00:00",
+    "gmt_offset_seconds": "0",
+    "daylight_savings_seconds": "0",
+    "symbol_digits": "5",
+    "symbol_point": "0.0000100000",
+    "contract_size": "100000.00000000",
+    "tick_size": "0.0000100000",
+    "tick_value_profit": "1.00000000",
+    "tick_value_loss": "1.00000000",
+    "volume_min": "0.01000000",
+    "volume_max": "100.00000000",
+    "volume_step": "0.01000000",
+    "stops_level_points": "30",
+    "freeze_level_points": "0",
+    "spread_float": "true",
+    "trade_mode": "4",
+    "margin_calc_mode": "0",
+    "swap_mode": "1",
+    "swap_long": "-11.09212748",
+    "currency_base": "EUR",
+    "currency_profit": "USD",
+    "currency_margin": "EUR"
+  },
+  "deal_ledger": {
+    "trades": 1145,
+    "wins": 659,
+    "losses": 486,
+    "net_usd": 77.26,
+    "gross_profit_usd": 779.61,
+    "gross_loss_usd": 702.35,
+    "profit_factor_unrounded": 1.1100021356873353
+  },
+  "mt5_report_metrics": {
+    "History Quality": "99%",
+    "Bars": "294987",
+    "Ticks": "83131012",
+    "Total Net Profit": "77.26",
+    "Gross Profit": "779.61",
+    "Balance Drawdown Maximal": "25.30 (2.49%)",
+    "Equity Drawdown Maximal": "27.56 (2.68%)",
+    "Gross Loss": "-702.35",
+    "Balance Drawdown Relative": "2.49% (25.30)",
+    "Equity Drawdown Relative": "2.70% (27.52)",
+    "Profit Factor": "1.11",
+    "Expected Payoff": "0.07",
+    "Recovery Factor": "2.80",
+    "Sharpe Ratio": "2.54",
+    "Total Trades": "1145",
+    "Short Trades (won %)": "0 (0.00%)",
+    "Long Trades (won %)": "1145 (57.55%)",
+    "Total Deals": "2290",
+    "Profit Trades (% of total)": "659 (57.55%)",
+    "Loss Trades (% of total)": "486 (42.45%)"
+  },
+  "activity": {
+    "signals": 2957,
+    "decisions": 2957,
+    "state_rows": 49238,
+    "execution_rows": 5253,
+    "transaction_rows": 8015
+  },
+  "source_chain": {
+    "schema_version": "eurusd_v1r_source_ex5_chain_v1",
+    "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+    "compile_proof": {
+      "prior_ex5_existed": true,
+      "ex5_absent_before_compile": true,
+      "metaeditor_process_returncode": 1,
+      "source_hash_before_copy": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+      "source_hash_after_copy": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+      "ex5_hash_after_compile": "6785d975e9a8e60350dace8a475ed624791c66f20228443b3a0e288cc087733f",
+      "compile_zero_errors_zero_warnings": true,
+      "command": [
+        "C:\\MT5A1M5MomentumBacktest\\MetaEditor64.exe",
+        "/compile:C:\\MT5A1M5MomentumBacktest\\MQL5\\Experts\\EurUsdM30RsiBbCloseFadeLongV1R.mq5",
+        "/log:C:\\MT5A1M5MomentumBacktest\\Logs\\compile_EurUsdM30RsiBbCloseFadeLongV1R_20260723T123628Z.log"
+      ]
+    },
+    "repository_source": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/mt5/Experts/EurUsdM30RsiBbCloseFadeLongV1R.mq5",
+      "bytes": 36235,
+      "sha256": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864"
+    },
+    "tester_source": {
+      "path": "MQL5/Experts/EurUsdM30RsiBbCloseFadeLongV1R.mq5",
+      "bytes": 36235,
+      "sha256": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864"
+    },
+    "frozen_source": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/source/EurUsdM30RsiBbCloseFadeLongV1R.mq5",
+      "bytes": 36235,
+      "sha256": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864"
+    },
+    "frozen_ex5": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/EurUsdM30RsiBbCloseFadeLongV1R.ex5",
+      "bytes": 76094,
+      "sha256": "6785d975e9a8e60350dace8a475ed624791c66f20228443b3a0e288cc087733f"
+    },
+    "frozen_compile_log": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/compile_EurUsdM30RsiBbCloseFadeLongV1R_20260723T123628Z.log",
+      "bytes": 6930,
+      "sha256": "0da803307107f33f06bb2afd84ff04ebde564059ea78c2919b8873f4b1138791"
+    },
+    "includes": [
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\Trade.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/96e678162453_Trade.mqh",
+          "bytes": 69541,
+          "sha256": "96e6781624534377fe7971cba52cca3d62d1b030bc10d5e4ebf3ed8c541399ed"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Object.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/dfad4fdb6d1b_Object.mqh",
+          "bytes": 2036,
+          "sha256": "dfad4fdb6d1bf47cf43fcbc2882e52979459f17a776f75f250a7c32d0623ab35"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\StdLibErr.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/04bb2c47b1b0_StdLibErr.mqh",
+          "bytes": 683,
+          "sha256": "04bb2c47b1b04dceb052e6dba1f85e0330c53abc602f341e2ea95ea1498ab28b"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\OrderInfo.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/d0e479578ef9_OrderInfo.mqh",
+          "bytes": 22087,
+          "sha256": "d0e479578ef91d2ef1b07ae63d28ae54e15cebb914dd10e5d4510c269a9ca999"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\HistoryOrderInfo.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/e88f6be45046_HistoryOrderInfo.mqh",
+          "bytes": 20018,
+          "sha256": "e88f6be450462a045470315887ef751a4510da65a5115325dc88542743fc52f8"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\PositionInfo.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/dd720b755c7f_PositionInfo.mqh",
+          "bytes": 15820,
+          "sha256": "dd720b755c7f23dcc109fc81bcf0772b907411d545e4a1117421737bb9ff6897"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\DealInfo.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/9d6fb4e7d875_DealInfo.mqh",
+          "bytes": 16313,
+          "sha256": "9d6fb4e7d8754eaee761e43943dc49cdc3a32793ee8438119d939ea7bad71880"
+        }
+      }
+    ],
+    "compiler": {
+      "metaeditor": {
+        "path": "MetaEditor64.exe",
+        "bytes": 109408696,
+        "sha256": "2c0c8e9e5c1239e30e8a908d9205cdb01b9cdfcf876752e43bd7a755cce58ad3"
+      },
+      "terminal": {
+        "path": "terminal64.exe",
+        "bytes": 109817504,
+        "sha256": "a36f4bac0fdc2c53cd75bdf0e32e627660dd8d9c1eb1e9f3834acfbce93df165"
+      }
+    }
+  },
+  "artifacts": {
+    "report": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT.htm",
+      "bytes": 2319998,
+      "sha256": "0550779e4adc8ad0abb88e613877dd4c43346498a176bd3f50893aee9f93008a"
+    },
+    "tester_ini": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT.ini",
+      "bytes": 1478,
+      "sha256": "47adf46123fef238e784b0b5633e879dd283b7ad70655e2a10d04441ddff3958"
+    },
+    "trade_ledger": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_TRADE_LEDGER.csv",
+      "bytes": 180581,
+      "sha256": "ebb174a0bf3e4ee2b00dbf96aa90d3b059632e63e47df8204b021b03a61d8fff"
+    },
+    "htm": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT.htm",
+      "bytes": 2319998,
+      "sha256": "0550779e4adc8ad0abb88e613877dd4c43346498a176bd3f50893aee9f93008a"
+    },
+    "ini": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT.ini",
+      "bytes": 1478,
+      "sha256": "47adf46123fef238e784b0b5633e879dd283b7ad70655e2a10d04441ddff3958"
+    },
+    "EURUSD_V1R_UNMASKED_CONTRACT.png": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT.png",
+      "bytes": 14711,
+      "sha256": "f3faa3fd1b724cff448580cffe70559b12e0ccdbc1b89ce1d3c345faa9e8c0b5"
+    },
+    "EURUSD_V1R_UNMASKED_CONTRACT-holding.png": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT-holding.png",
+      "bytes": 22684,
+      "sha256": "d222ea6add997c71a130cc113c941530f7f74dc7afcb0f8b2d5a96ff96189d4b"
+    },
+    "EURUSD_V1R_UNMASKED_CONTRACT-mfemae.png": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT-mfemae.png",
+      "bytes": 39986,
+      "sha256": "8741c3149c2f5764367f70966d164cce5768fc966d6113eb3a06951bdcc0449a"
+    },
+    "EURUSD_V1R_UNMASKED_CONTRACT-hst.png": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/EURUSD_V1R_UNMASKED_CONTRACT-hst.png",
+      "bytes": 43967,
+      "sha256": "fc15164eb0f0e090a48041e19c9dfb51a9db3dc990d8751b5117471fa42386fb"
+    },
+    "InpEnvironmentLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_environment_log.csv",
+      "bytes": 3420,
+      "sha256": "316751b6ad5706cec164ec8bf4225ee996a10e4e2f603b34906879db58834098"
+    },
+    "InpExecutionLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_execution_log.csv",
+      "bytes": 1646360,
+      "sha256": "199af4ca2750d3c935c4d0f7246d447d3c132f6cd1f79bc62fcf23823ed4bd4d"
+    },
+    "InpManagementLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_management_log.csv",
+      "bytes": 45,
+      "sha256": "b8cf07f87ced1e26e86685f694c330ec7c582b82b02cbf36bf9698e478c989c3"
+    },
+    "InpOrderLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_order_log.csv",
+      "bytes": 781350,
+      "sha256": "f483c1c5efe5a902bd6a72e4ced6283b6de483599885cec786cc612d4b244ffb"
+    },
+    "InpSignalLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_signal_log.csv",
+      "bytes": 795807,
+      "sha256": "2bbbade555a49b7489cd3028bb7b089789e8ab6938adc2366d27ccba7c018561"
+    },
+    "InpStartupLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_startup_log.csv",
+      "bytes": 377,
+      "sha256": "65aee72203e5827042d1b92de86b3457975749a9ff08c46d344b3edd0f15de80"
+    },
+    "InpStateLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_state_log.csv",
+      "bytes": 8518216,
+      "sha256": "9fc63e72de8a10b093e77705ced1669a7e0e10f6c80ca84cf9a2288dc988ce45"
+    },
+    "InpTransactionLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/mt5/eurusd_v1r_transaction_log.csv",
+      "bytes": 1605953,
+      "sha256": "ea3675b6bef9d6d053d07450212188c3a554e1c10255890f855040c768636e21"
+    },
+    "compiled_input_schema": {
+      "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/COMPILED_INPUT_SCHEMA.json",
+      "bytes": 5835,
+      "sha256": "d97dd53b57c4069b6a69880301c42ceb60e9f1cfe78cd7551ebcb98135c823f9"
+    }
+  }
+}

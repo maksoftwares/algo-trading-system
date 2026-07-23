@@ -1,0 +1,28 @@
+{
+  "schema_version": "eurusd_v1r_execution_reconciliation_v1",
+  "request_results": 1148,
+  "confirmed_entry_deals": 1145,
+  "failed_requests": 3,
+  "geometry_rows": 1148,
+  "actual_entry_sl_tp_complete": 1145,
+  "requested_actual_sl_exact": 1145,
+  "requested_actual_tp_exact": 1145,
+  "ledger_entry_exit_deals": 2290,
+  "transaction_log_deals": 2290,
+  "missing_ledger_deals_in_transactions": [],
+  "stop_ceiling_rejections": 0,
+  "order_actions": {
+    "ORDER_SEND_OK": 1145,
+    "GUARD_BLOCK": 1809,
+    "ORDER_SEND_FAIL": 3
+  },
+  "order_reasons": {
+    "entered": 1145,
+    "own_position_exists": 310,
+    "direction_mode_block": 1498,
+    "order_send_failed": 3,
+    "spread_too_high": 1
+  },
+  "minimum_free_margin_usd": 964.82,
+  "minimum_positive_margin_level_pct": 4484.8472
+}

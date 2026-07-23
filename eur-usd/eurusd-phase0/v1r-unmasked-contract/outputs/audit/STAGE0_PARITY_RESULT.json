@@ -1,0 +1,257 @@
+{
+  "schema_version": "eurusd_v1r_stage0_parity_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+  "status": "STAGE0_PARITY_PASS_RECLAIM_NOT_RUN",
+  "all_gates_pass": true,
+  "gates": {
+    "candidate_specific_identity": true,
+    "compile_zero_errors_zero_warnings": true,
+    "source_copy_hash_exact": true,
+    "source_ex5_chain_frozen": true,
+    "input_schema_exact": true,
+    "ini_leverage_1_50": true,
+    "report_leverage_1_50": true,
+    "environment_leverage_50": true,
+    "symbol_specification_complete": true,
+    "startup_fail_closed": true,
+    "signal_count_2957": true,
+    "decision_count_2957": true,
+    "trade_count_1145": true,
+    "aggregate_metric_parity": true,
+    "canonical_signal_decision_trade_parity": true,
+    "order_action_parity": true,
+    "failed_attempts_preserved": true,
+    "fill_defined_by_entry_deal": true,
+    "requested_actual_geometry_complete": true,
+    "requested_actual_sl_exact": true,
+    "requested_actual_tp_exact": true,
+    "all_entry_exit_deals_in_transaction_log": true,
+    "stop_component_attribution_complete": true,
+    "stop_ceiling_inventory_complete": true,
+    "positive_free_margin": true,
+    "mt5_net_exact": true,
+    "mt5_gross_exact": true,
+    "mt5_equity_drawdown_exact": true,
+    "reclaim_not_implemented_or_run": true,
+    "tester_only_boundary": true
+  },
+  "canonical_mismatches": 0,
+  "benchmark": {
+    "trades": 1145,
+    "wins": 659,
+    "losses": 486,
+    "net_usd": 77.26,
+    "gross_profit_usd": 779.61,
+    "gross_loss_usd": 702.35,
+    "profit_factor_unrounded": 1.1100021356873353
+  },
+  "v1r": {
+    "trades": 1145,
+    "wins": 659,
+    "losses": 486,
+    "net_usd": 77.26,
+    "gross_profit_usd": 779.61,
+    "gross_loss_usd": 702.35,
+    "profit_factor_unrounded": 1.1100021356873353
+  },
+  "report_metrics": {
+    "History Quality": "99%",
+    "Bars": "294987",
+    "Ticks": "83131012",
+    "Total Net Profit": "77.26",
+    "Gross Profit": "779.61",
+    "Balance Drawdown Maximal": "25.30 (2.49%)",
+    "Equity Drawdown Maximal": "27.56 (2.68%)",
+    "Gross Loss": "-702.35",
+    "Balance Drawdown Relative": "2.49% (25.30)",
+    "Equity Drawdown Relative": "2.70% (27.52)",
+    "Profit Factor": "1.11",
+    "Expected Payoff": "0.07",
+    "Recovery Factor": "2.80",
+    "Sharpe Ratio": "2.54",
+    "Total Trades": "1145",
+    "Short Trades (won %)": "0 (0.00%)",
+    "Long Trades (won %)": "1145 (57.55%)",
+    "Total Deals": "2290",
+    "Profit Trades (% of total)": "659 (57.55%)",
+    "Loss Trades (% of total)": "486 (42.45%)"
+  },
+  "startup": {
+    "startup_row": {
+      "timestamp_broker": "2022.07.01 00:00:00",
+      "run_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+      "server": "Capital.ComMena-Demo",
+      "account": "1025742",
+      "symbol": "EURUSD",
+      "magic": "26723003",
+      "is_tester": "true",
+      "signal_mode": "0",
+      "direction_mode": "1",
+      "risk_reward": "0.80",
+      "latch_bar_open": "2022.06.30 23:30:00",
+      "account_leverage": "50",
+      "status": "INIT_OK_LATCH_ARMED",
+      "detail": "tester_only; previous completed bar not evaluated"
+    },
+    "first_three_state_events": [
+      {
+        "decision_tick_broker": "2022.07.01 00:00:00",
+        "run_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+        "symbol": "EURUSD",
+        "event": "INIT_LATCH_ARMED",
+        "current_bar_open": "2022.06.30 23:30:00",
+        "processed_bar_open": "",
+        "detail": "fail_closed_until_next_native_transition"
+      },
+      {
+        "decision_tick_broker": "2022.07.01 00:00:00",
+        "run_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+        "symbol": "EURUSD",
+        "event": "STARTUP_TRANSITION_SKIPPED",
+        "current_bar_open": "2022.07.01 00:00:00",
+        "processed_bar_open": "2022.06.30 23:30:00",
+        "detail": "fail_closed_no_preinitialization_bar_evaluation"
+      },
+      {
+        "decision_tick_broker": "2022.07.01 00:30:00",
+        "run_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+        "symbol": "EURUSD",
+        "event": "NATIVE_BAR_TRANSITION",
+        "current_bar_open": "2022.07.01 00:30:00",
+        "processed_bar_open": "2022.07.01 00:00:00",
+        "detail": "evaluate_completed_shift_1"
+      }
+    ]
+  },
+  "execution_reconciliation": {
+    "schema_version": "eurusd_v1r_execution_reconciliation_v1",
+    "request_results": 1148,
+    "confirmed_entry_deals": 1145,
+    "failed_requests": 3,
+    "geometry_rows": 1148,
+    "actual_entry_sl_tp_complete": 1145,
+    "requested_actual_sl_exact": 1145,
+    "requested_actual_tp_exact": 1145,
+    "ledger_entry_exit_deals": 2290,
+    "transaction_log_deals": 2290,
+    "missing_ledger_deals_in_transactions": [],
+    "stop_ceiling_rejections": 0,
+    "order_actions": {
+      "ORDER_SEND_OK": 1145,
+      "GUARD_BLOCK": 1809,
+      "ORDER_SEND_FAIL": 3
+    },
+    "order_reasons": {
+      "entered": 1145,
+      "own_position_exists": 310,
+      "direction_mode_block": 1498,
+      "order_send_failed": 3,
+      "spread_too_high": 1
+    },
+    "minimum_free_margin_usd": 964.82,
+    "minimum_positive_margin_level_pct": 4484.8472
+  },
+  "environment_missing_keys": [],
+  "corrected_exit_time_years": [
+    {
+      "bucket": "2022",
+      "trades": 125,
+      "wins": 69,
+      "losses": 56,
+      "net_usd": 6.01,
+      "gross_profit_usd": 120.15,
+      "gross_loss_usd": 114.14,
+      "profit_factor_unrounded": 1.0526546346591905
+    },
+    {
+      "bucket": "2023",
+      "trades": 293,
+      "wins": 179,
+      "losses": 114,
+      "net_usd": 28.63,
+      "gross_profit_usd": 208.92,
+      "gross_loss_usd": 180.29,
+      "profit_factor_unrounded": 1.1587997115757946
+    },
+    {
+      "bucket": "2024",
+      "trades": 308,
+      "wins": 168,
+      "losses": 140,
+      "net_usd": -3.88,
+      "gross_profit_usd": 162.07,
+      "gross_loss_usd": 165.95,
+      "profit_factor_unrounded": 0.9766194636938837
+    },
+    {
+      "bucket": "2025",
+      "trades": 239,
+      "wins": 141,
+      "losses": 98,
+      "net_usd": 34.58,
+      "gross_profit_usd": 181.25,
+      "gross_loss_usd": 146.67,
+      "profit_factor_unrounded": 1.2357673689234336
+    },
+    {
+      "bucket": "2026",
+      "trades": 180,
+      "wins": 102,
+      "losses": 78,
+      "net_usd": 11.92,
+      "gross_profit_usd": 107.22,
+      "gross_loss_usd": 95.3,
+      "profit_factor_unrounded": 1.1250786988457502
+    }
+  ],
+  "corrected_entry_sessions": [
+    {
+      "bucket": "00:00-05:59",
+      "trades": 178,
+      "wins": 114,
+      "losses": 64,
+      "net_usd": 32.79,
+      "gross_profit_usd": 89.47,
+      "gross_loss_usd": 56.68,
+      "profit_factor_unrounded": 1.5785109386026817
+    },
+    {
+      "bucket": "06:00-11:59",
+      "trades": 463,
+      "wins": 248,
+      "losses": 215,
+      "net_usd": -27.19,
+      "gross_profit_usd": 243.07,
+      "gross_loss_usd": 270.26,
+      "profit_factor_unrounded": 0.8993931769407237
+    },
+    {
+      "bucket": "12:00-17:59",
+      "trades": 435,
+      "wins": 256,
+      "losses": 179,
+      "net_usd": 57.26,
+      "gross_profit_usd": 381.21,
+      "gross_loss_usd": 323.95,
+      "profit_factor_unrounded": 1.1767556721716315
+    },
+    {
+      "bucket": "18:00-23:59",
+      "trades": 69,
+      "wins": 41,
+      "losses": 28,
+      "net_usd": 14.4,
+      "gross_profit_usd": 65.86,
+      "gross_loss_usd": 51.46,
+      "profit_factor_unrounded": 1.2798289933929266
+    }
+  ],
+  "boundary": {
+    "retrospective_development_only": true,
+    "reclaim_source_created": false,
+    "reclaim_run": false,
+    "demo_live_chart_touched": false,
+    "dsr_status": "NOT_ASSESSABLE",
+    "native_real_tick_coverage": "NOT_ESTABLISHED_MODEL0_MAY_GENERATE_TICKS"
+  }
+}
