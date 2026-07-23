@@ -1,0 +1,393 @@
+{
+  "generated_at_local": "2026-07-04 01:23:35",
+  "source": {
+    "mt5_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_FULL_2022_2026_M15_RSI_EXTREME_LONG_RR0P8.json",
+    "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_FULL_2022_2026_M15_RSI_EXTREME_LONG_RR0P8_EURUSD_M5_rsi_extreme_fade_m15_long_rr0p80\\ForexFreqScout_FULL_2022_2026_M15_RSI_EXTREME_LONG_RR0P8_EURUSD_M5_rsi_extreme_fade_m15_long_rr0p80_trades.csv",
+    "mt5_html_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_FULL_2022_2026_M15_RSI_EXTREME_LONG_RR0P8_EURUSD_M5_rsi_extreme_fade_m15_long_rr0p80\\ForexFreqScout_FULL_2022_2026_M15_RSI_EXTREME_LONG_RR0P8_EURUSD_M5_rsi_extreme_fade_m15_long_rr0p80.htm",
+    "tester_config": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_FULL_2022_2026_M15_RSI_EXTREME_LONG_RR0P8_EURUSD_M5_rsi_extreme_fade_m15_long_rr0p80\\ForexFreqScout_FULL_2022_2026_M15_RSI_EXTREME_LONG_RR0P8_EURUSD_M5_rsi_extreme_fade_m15_long_rr0p80.ini",
+    "symbol": "EURUSD",
+    "variant": "rsi_extreme_fade_m15_long_rr0p80",
+    "description": "M5 RSI 30/70 extreme faded toward mean. Signal timeframe=M15. Direction=long. RiskReward=0.80.",
+    "from": "2022-07-01",
+    "to": "2026-07-02",
+    "basis": "actual MT5 Strategy Tester export from isolated tester root; fixed 0.01 lots; no hour/session tuning applied"
+  },
+  "verdict": "WATCHLIST_ONLY_MT5_FREQUENCY_EDGE",
+  "full": {
+    "trades": 1524,
+    "wins": 873,
+    "losses": 651,
+    "scratches": 0,
+    "win_rate_pct": 57.28,
+    "net_profit": 97.94,
+    "gross_profit": 830.82,
+    "gross_loss": -732.88,
+    "profit_factor": 1.1336,
+    "avg_profit": 0.0643,
+    "median_profit": 0.49
+  },
+  "splits": {
+    "oos_2022_2024": {
+      "trades": 785,
+      "wins": 454,
+      "losses": 331,
+      "scratches": 0,
+      "win_rate_pct": 57.83,
+      "net_profit": 33.28,
+      "gross_profit": 430.06,
+      "gross_loss": -396.78,
+      "profit_factor": 1.0839,
+      "avg_profit": 0.0424,
+      "median_profit": 0.46,
+      "from": "2022-07-01",
+      "to": "2024-06-30"
+    },
+    "current_2024_2026": {
+      "trades": 739,
+      "wins": 419,
+      "losses": 320,
+      "scratches": 0,
+      "win_rate_pct": 56.7,
+      "net_profit": 64.66,
+      "gross_profit": 400.76,
+      "gross_loss": -336.1,
+      "profit_factor": 1.1924,
+      "avg_profit": 0.0875,
+      "median_profit": 0.52,
+      "from": "2024-07-01",
+      "to": "2026-07-02"
+    }
+  },
+  "drawdown": {
+    "max_drawdown_usd_from_trade_curve": 40.19,
+    "max_drawdown_pct_of_1000_start": 4.02,
+    "max_drawdown_start": "2025-07-14 06:44:04",
+    "max_drawdown_end": "2026-06-19 05:27:34",
+    "ending_curve_profit": 97.94,
+    "equity_curve_points": 1524
+  },
+  "streaks": {
+    "max_consecutive_wins": 12,
+    "max_consecutive_losses": 10,
+    "worst_consecutive_loss_sum": -21.18,
+    "worst_consecutive_loss_streak_end": "2023-03-15 14:50:40"
+  },
+  "monthly": {
+    "total_periods": 49,
+    "active_periods": 49,
+    "zero_trade_periods": 0,
+    "positive_active_periods": 28,
+    "negative_active_periods": 21,
+    "positive_active_pct": 57.14,
+    "worst_period": {
+      "trades": 27,
+      "wins": 13,
+      "losses": 14,
+      "scratches": 0,
+      "win_rate_pct": 48.15,
+      "net_profit": -12.02,
+      "gross_profit": 14.66,
+      "gross_loss": -26.68,
+      "profit_factor": 0.5495,
+      "avg_profit": -0.4452,
+      "median_profit": -0.64,
+      "period": "2023-03"
+    },
+    "best_period": {
+      "trades": 38,
+      "wins": 30,
+      "losses": 8,
+      "scratches": 0,
+      "win_rate_pct": 78.95,
+      "net_profit": 17.28,
+      "gross_profit": 28.82,
+      "gross_loss": -11.54,
+      "profit_factor": 2.4974,
+      "avg_profit": 0.4547,
+      "median_profit": 0.62,
+      "period": "2023-02"
+    }
+  },
+  "weekly": {
+    "total_periods": 210,
+    "active_periods": 206,
+    "zero_trade_periods": 4,
+    "positive_active_periods": 129,
+    "negative_active_periods": 77,
+    "positive_active_pct": 62.62,
+    "worst_period": {
+      "trades": 8,
+      "wins": 1,
+      "losses": 7,
+      "scratches": 0,
+      "win_rate_pct": 12.5,
+      "net_profit": -14.39,
+      "gross_profit": 2.41,
+      "gross_loss": -16.8,
+      "profit_factor": 0.1435,
+      "avg_profit": -1.7988,
+      "median_profit": -2.36,
+      "period": "2023-W11"
+    },
+    "best_period": {
+      "trades": 14,
+      "wins": 13,
+      "losses": 1,
+      "scratches": 0,
+      "win_rate_pct": 92.86,
+      "net_profit": 11.76,
+      "gross_profit": 13.37,
+      "gross_loss": -1.61,
+      "profit_factor": 8.3043,
+      "avg_profit": 0.84,
+      "median_profit": 1.02,
+      "period": "2024-W40"
+    }
+  },
+  "top_winner_removal": {
+    "remove_1": {
+      "trades": 1523,
+      "wins": 872,
+      "losses": 651,
+      "scratches": 0,
+      "win_rate_pct": 57.26,
+      "net_profit": 94.2,
+      "gross_profit": 827.08,
+      "gross_loss": -732.88,
+      "profit_factor": 1.1285,
+      "avg_profit": 0.0619,
+      "median_profit": 0.49,
+      "removed_count": 1,
+      "removed_profit": 3.74,
+      "largest_removed_trade": {
+        "profit": 3.74,
+        "entry_time": "2025-04-09 18:15:00",
+        "exit_time": "2025-04-09 18:41:35"
+      }
+    },
+    "remove_5": {
+      "trades": 1519,
+      "wins": 868,
+      "losses": 651,
+      "scratches": 0,
+      "win_rate_pct": 57.14,
+      "net_profit": 81.8,
+      "gross_profit": 814.68,
+      "gross_loss": -732.88,
+      "profit_factor": 1.1116,
+      "avg_profit": 0.0539,
+      "median_profit": 0.48,
+      "removed_count": 5,
+      "removed_profit": 16.14,
+      "largest_removed_trade": {
+        "profit": 3.74,
+        "entry_time": "2025-04-09 18:15:00",
+        "exit_time": "2025-04-09 18:41:35"
+      }
+    },
+    "remove_10": {
+      "trades": 1514,
+      "wins": 863,
+      "losses": 651,
+      "scratches": 0,
+      "win_rate_pct": 57.0,
+      "net_profit": 67.76,
+      "gross_profit": 800.64,
+      "gross_loss": -732.88,
+      "profit_factor": 1.0925,
+      "avg_profit": 0.0448,
+      "median_profit": 0.48,
+      "removed_count": 10,
+      "removed_profit": 30.18,
+      "largest_removed_trade": {
+        "profit": 3.74,
+        "entry_time": "2025-04-09 18:15:00",
+        "exit_time": "2025-04-09 18:41:35"
+      }
+    }
+  },
+  "rolling": {
+    "250_trade": {
+      "window_trades": 250,
+      "windows": 1275,
+      "positive_windows": 767,
+      "positive_windows_pct": 60.16,
+      "min_profit_factor_window": {
+        "trades": 250,
+        "wins": 120,
+        "losses": 130,
+        "scratches": 0,
+        "win_rate_pct": 48.0,
+        "net_profit": -38.2,
+        "gross_profit": 103.57,
+        "gross_loss": -141.77,
+        "profit_factor": 0.7305,
+        "avg_profit": -0.1528,
+        "median_profit": -0.51,
+        "start_entry_time": "2025-07-10 13:30:00",
+        "end_exit_time": "2026-03-06 12:11:05"
+      },
+      "worst_net_window": {
+        "trades": 250,
+        "wins": 120,
+        "losses": 130,
+        "scratches": 0,
+        "win_rate_pct": 48.0,
+        "net_profit": -38.2,
+        "gross_profit": 103.57,
+        "gross_loss": -141.77,
+        "profit_factor": 0.7305,
+        "avg_profit": -0.1528,
+        "median_profit": -0.51,
+        "start_entry_time": "2025-07-10 13:30:00",
+        "end_exit_time": "2026-03-06 12:11:05"
+      },
+      "best_net_window": {
+        "trades": 250,
+        "wins": 169,
+        "losses": 81,
+        "scratches": 0,
+        "win_rate_pct": 67.6,
+        "net_profit": 96.87,
+        "gross_profit": 193.99,
+        "gross_loss": -97.12,
+        "profit_factor": 1.9974,
+        "avg_profit": 0.3875,
+        "median_profit": 0.77,
+        "start_entry_time": "2024-09-25 17:15:00",
+        "end_exit_time": "2025-07-07 07:33:02"
+      }
+    },
+    "500_trade": {
+      "window_trades": 500,
+      "windows": 1025,
+      "positive_windows": 836,
+      "positive_windows_pct": 81.56,
+      "min_profit_factor_window": {
+        "trades": 500,
+        "wins": 268,
+        "losses": 232,
+        "scratches": 0,
+        "win_rate_pct": 53.6,
+        "net_profit": -28.64,
+        "gross_profit": 217.94,
+        "gross_loss": -246.58,
+        "profit_factor": 0.8839,
+        "avg_profit": -0.0573,
+        "median_profit": 0.37,
+        "start_entry_time": "2023-03-07 15:30:00",
+        "end_exit_time": "2024-06-11 09:12:30"
+      },
+      "worst_net_window": {
+        "trades": 500,
+        "wins": 268,
+        "losses": 232,
+        "scratches": 0,
+        "win_rate_pct": 53.6,
+        "net_profit": -28.64,
+        "gross_profit": 217.94,
+        "gross_loss": -246.58,
+        "profit_factor": 0.8839,
+        "avg_profit": -0.0573,
+        "median_profit": 0.37,
+        "start_entry_time": "2023-03-07 15:30:00",
+        "end_exit_time": "2024-06-11 09:12:30"
+      },
+      "best_net_window": {
+        "trades": 500,
+        "wins": 303,
+        "losses": 197,
+        "scratches": 0,
+        "win_rate_pct": 60.6,
+        "net_profit": 91.38,
+        "gross_profit": 284.35,
+        "gross_loss": -192.97,
+        "profit_factor": 1.4735,
+        "avg_profit": 0.1828,
+        "median_profit": 0.5,
+        "start_entry_time": "2024-02-28 04:45:00",
+        "end_exit_time": "2025-07-14 06:44:04"
+      }
+    }
+  },
+  "direction_check": {
+    "directions": [
+      "LONG"
+    ],
+    "long_only": true
+  },
+  "hourly_untuned": {
+    "negative_hours": [
+      {
+        "trades": 57,
+        "wins": 26,
+        "losses": 31,
+        "scratches": 0,
+        "win_rate_pct": 45.61,
+        "net_profit": -7.49,
+        "gross_profit": 15.98,
+        "gross_loss": -23.47,
+        "profit_factor": 0.6809,
+        "avg_profit": -0.1314,
+        "median_profit": -0.4,
+        "period": "01"
+      },
+      {
+        "trades": 160,
+        "wins": 85,
+        "losses": 75,
+        "scratches": 0,
+        "win_rate_pct": 53.12,
+        "net_profit": -7.2,
+        "gross_profit": 64.11,
+        "gross_loss": -71.31,
+        "profit_factor": 0.899,
+        "avg_profit": -0.045,
+        "median_profit": 0.41,
+        "period": "07"
+      },
+      {
+        "trades": 18,
+        "wins": 8,
+        "losses": 10,
+        "scratches": 0,
+        "win_rate_pct": 44.44,
+        "net_profit": -6.33,
+        "gross_profit": 8.61,
+        "gross_loss": -14.94,
+        "profit_factor": 0.5763,
+        "avg_profit": -0.3517,
+        "median_profit": -0.62,
+        "period": "21"
+      }
+    ],
+    "best_hour": {
+      "trades": 70,
+      "wins": 41,
+      "losses": 29,
+      "scratches": 0,
+      "win_rate_pct": 58.57,
+      "net_profit": 12.58,
+      "gross_profit": 54.74,
+      "gross_loss": -42.16,
+      "profit_factor": 1.2984,
+      "avg_profit": 0.1797,
+      "median_profit": 0.89,
+      "period": "15"
+    },
+    "worst_hour": {
+      "trades": 57,
+      "wins": 26,
+      "losses": 31,
+      "scratches": 0,
+      "win_rate_pct": 45.61,
+      "net_profit": -7.49,
+      "gross_profit": 15.98,
+      "gross_loss": -23.47,
+      "profit_factor": 0.6809,
+      "avg_profit": -0.1314,
+      "median_profit": -0.4,
+      "period": "01"
+    }
+  }
+}
