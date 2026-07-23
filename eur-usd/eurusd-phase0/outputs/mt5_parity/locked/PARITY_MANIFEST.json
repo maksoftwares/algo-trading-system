@@ -1,0 +1,81 @@
+{
+  "schema_version": "eurusd_phase0_mt5_parity_manifest_v1",
+  "frozen_at_utc": "2026-07-23T09:19:18Z",
+  "boundary": {
+    "active_terminal_process_used": false,
+    "strategy_tester_launched": true,
+    "live_or_demo_chart_touched": false,
+    "order_or_position_touched_outside_tester": false,
+    "python_price_backtest_used_for_result": false
+  },
+  "candidate": {
+    "id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1",
+    "variant": "rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80",
+    "from_date": "2022.07.01",
+    "to_date": "2026.07.02"
+  },
+  "parity_result": {
+    "trades": 831,
+    "net_profit_usd": 101.82,
+    "profit_factor": 1.2,
+    "equity_drawdown": "30.85 (2.95%)",
+    "compile_zero_errors_zero_warnings": true
+  },
+  "artifacts": {
+    "source": {
+      "path": "forex-research/mt5/Experts/ForexMeanReversionScout.mq5",
+      "sha256": "40fb7ac41516eea28dc1803a6c8feb6305ea6b7f44b61e0519eff244a1298031",
+      "bytes": 20807
+    },
+    "ex5": {
+      "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/locked/ForexMeanReversionScout.ex5",
+      "sha256": "d314a492e4bfbf31a3b1dd9d53992ed72d891788366a49fd284d43fd364f8f22",
+      "bytes": 58756
+    },
+    "compile_log": {
+      "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/locked/compile_ForexMeanReversionScout.log",
+      "sha256": "c556cdcd7bb68db3045a335c6775cb506fb7d865e8037d889e39d84e31ee3bda",
+      "bytes": 6886
+    },
+    "preset": {
+      "path": "eur-usd/eurusd-phase0/mt5/Presets/EURUSD_M30_RSI_BB_FADE_V1_RESEARCH_ONLY.set",
+      "sha256": "6ce02470c419771b3b6684178d0a450e97d6655522d71bc58010647f0f3ec363",
+      "bytes": 776
+    },
+    "run_json": {
+      "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/FOREX_MT5_FREQUENCY_SCOUT_EURUSD_PHASE0_PARITY_V1.json",
+      "sha256": "296b60c52eda2a6878ed750f7eba33e77c14f25777f88c90ea5e372ae57e3529",
+      "bytes": 12591
+    },
+    "tester_config": {
+      "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80.ini",
+      "sha256": "92f52e78537dc3329a5937272c6f39c10d39f5584f0c67ebb3ad3a0c6234f267",
+      "bytes": 2359
+    },
+    "mt5_report": {
+      "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80.htm",
+      "sha256": "b76dd3689d8c7fbde9c2789b4f73dbc50c7a45cdb5b65d86afabbe46a0f10970",
+      "bytes": 1730572
+    },
+    "trade_csv": {
+      "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80_trades.csv",
+      "sha256": "b0227c190ae15be102c4a87a9f1c2b58029dc519c9a03e4f64bd2a3d4d46d7a4",
+      "bytes": 123928
+    },
+    "signal_log": {
+      "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80_signal_log.csv",
+      "sha256": "8e07734f3744e4fe37abc6fb911f17cb7ae0f32b6aae063375040a618b677890",
+      "bytes": 715915
+    },
+    "order_log": {
+      "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80_order_log.csv",
+      "sha256": "1ec8968e604c5b880c461071750de27c19bb50069ba50f81c7096086adcbe5da",
+      "bytes": 754961
+    },
+    "startup_log": {
+      "path": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80_startup_log.csv",
+      "sha256": "167dd4902665bbffe5960d8d7333564511ddca1c99065b3e0c87feb1c22d7212",
+      "bytes": 304
+    }
+  }
+}
