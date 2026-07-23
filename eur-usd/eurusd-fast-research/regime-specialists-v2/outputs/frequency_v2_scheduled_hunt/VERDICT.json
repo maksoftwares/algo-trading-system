@@ -1,0 +1,89 @@
+{
+  "schema_version": "eurusd_frequency_v2_scheduled_hunt_v1",
+  "source_sha256": "eacc532a5f0001ea66c80a558bd4cffe7ced5704bf9d9d4770cb2f783269bea0",
+  "active_days": {
+    "development": 1868,
+    "validation": 623
+  },
+  "candidate_count": 1920,
+  "development_pass_count": 18,
+  "validation_opened_count": 16,
+  "validation_pass_count": 9,
+  "selected_priority": [
+    "EURF2_2166",
+    "EURF2_2744",
+    "EURF2_3707",
+    "EURF2_2895"
+  ],
+  "selected_specialists": [
+    {
+      "candidate_id": "EURF2_2166",
+      "family": "scheduled_momentum",
+      "regime": "trend_down",
+      "direction": "dynamic",
+      "threshold": 6.0,
+      "stop_atr": 1.25,
+      "target_r": 0.6,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.0,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_2744",
+      "family": "scheduled_reversal",
+      "regime": "trend_up",
+      "direction": "dynamic",
+      "threshold": 18.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.0,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_3707",
+      "family": "scheduled_ema_fade",
+      "regime": "trend_down",
+      "direction": "dynamic",
+      "threshold": 12.0,
+      "stop_atr": 0.75,
+      "target_r": 0.9,
+      "max_hold_bars": 16,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_2895",
+      "family": "scheduled_reversal",
+      "regime": "trend_down",
+      "direction": "dynamic",
+      "threshold": 18.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 16,
+      "lookback": 16,
+      "body_min": 0.25,
+      "session": "all"
+    }
+  ],
+  "distinct_regimes": 2,
+  "validation_portfolio_metrics": {
+    "trades": 165,
+    "trades_per_active_day": 0.26484751203852325,
+    "wins": 107,
+    "win_rate": 0.6484848484848484,
+    "net_r": 24.16004609435945,
+    "average_r": 0.14642452178399668,
+    "net_pips": 238.27855389436326,
+    "profit_factor": 1.4445382714999884,
+    "maximum_drawdown_r": 5.192002798472089,
+    "positive_active_month_share": 0.6086956521739131,
+    "top_5pct_removed_profit_factor": 1.2965595954381766
+  },
+  "validation_gate_pass": false,
+  "exam_opened": false,
+  "verdict": "SCHEDULED_GENERATION_FAILED_CONTINUE_RESEARCH"
+}

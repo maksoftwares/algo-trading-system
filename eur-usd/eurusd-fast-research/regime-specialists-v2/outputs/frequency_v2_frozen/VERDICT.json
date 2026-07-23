@@ -1,0 +1,82 @@
+{
+  "schema_version": "eurusd_frequency_v2_frozen_result_v1",
+  "portfolio_id": "EURUSD_FREQUENCY_V2_REGIME_PORTFOLIO",
+  "selection_status": "ADAPTIVE_VALIDATION_SELECTED_DEMO_RESEARCH_ONLY",
+  "config_sha256": "67034fc8fcb802ad3188752f74a379dd9213376d922cb48510bacd4b7b4ebec5",
+  "source_sha256": "eacc532a5f0001ea66c80a558bd4cffe7ced5704bf9d9d4770cb2f783269bea0",
+  "history_quality_pct": 99,
+  "maximum_open_positions": 1,
+  "maximum_trades_per_active_day": 2,
+  "distinct_regimes": 4,
+  "stages": {
+    "validation": {
+      "metrics": {
+        "trades": 659,
+        "trades_per_active_day": 1.057784911717496,
+        "wins": 411,
+        "win_rate": 0.6236722306525038,
+        "net_r": 67.279381877858,
+        "average_r": 0.10209314397247041,
+        "net_pips": 758.5842682307209,
+        "profit_factor": 1.301587858906832,
+        "maximum_drawdown_r": 9.8916651914713,
+        "positive_active_month_share": 0.75,
+        "top_5pct_removed_profit_factor": 1.1693448512424562,
+        "stage": "validation",
+        "active_days": 623
+      },
+      "contributors": {
+        "EURF2_2895": 22,
+        "EURF2_2166": 51,
+        "EURF2_3707": 40,
+        "EURF2_2744": 46,
+        "EURF2_6534": 102,
+        "EURF2_5697": 92,
+        "EURF2_4096": 75,
+        "EURF2_6734": 61,
+        "EURF2_6800": 50,
+        "EURF2_4975": 42,
+        "EURF2_4495": 19,
+        "EURF2_5039": 59
+      },
+      "gate_pass": true
+    },
+    "adaptive_demo_exam": {
+      "metrics": {
+        "trades": 613,
+        "trades_per_active_day": 0.9967479674796748,
+        "wins": 295,
+        "win_rate": 0.4812398042414356,
+        "net_r": -96.01708577016629,
+        "average_r": -0.1566347239317558,
+        "net_pips": -740.9683202123274,
+        "profit_factor": 0.6803265135814636,
+        "maximum_drawdown_r": 96.32812977101287,
+        "positive_active_month_share": 0.08333333333333333,
+        "top_5pct_removed_profit_factor": 0.5881496015351975,
+        "stage": "adaptive_demo_exam",
+        "active_days": 615
+      },
+      "contributors": {
+        "EURF2_2895": 18,
+        "EURF2_2166": 56,
+        "EURF2_3707": 28,
+        "EURF2_2744": 51,
+        "EURF2_6534": 80,
+        "EURF2_5697": 85,
+        "EURF2_4096": 52,
+        "EURF2_6734": 64,
+        "EURF2_6800": 54,
+        "EURF2_4975": 28,
+        "EURF2_4495": 34,
+        "EURF2_5039": 63
+      },
+      "gate_pass": false
+    }
+  },
+  "validation_gate_pass": true,
+  "adaptive_demo_exam_gate_pass": false,
+  "mt5_real_tick_replication_opened": false,
+  "demo_ready": false,
+  "verdict": "FROZEN_PORTFOLIO_FAILED_CONTINUE_RESEARCH"
+}

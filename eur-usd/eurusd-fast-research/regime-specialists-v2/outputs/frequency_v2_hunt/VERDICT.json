@@ -1,0 +1,33 @@
+{
+  "schema_version": "eurusd_frequency_v2_hunt_v1",
+  "source": "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Files\\EURUSD_M15_CAPITAL_BROKER_201607_202607.csv",
+  "source_sha256": "eacc532a5f0001ea66c80a558bd4cffe7ced5704bf9d9d4770cb2f783269bea0",
+  "source_rows": 247585,
+  "history_quality_pct": 99,
+  "active_days": {
+    "development": 1868,
+    "validation": 623
+  },
+  "candidate_count": 1260,
+  "development_pass_count": 5,
+  "validation_pass_count": 0,
+  "selected_priority": [],
+  "selected_specialists": [],
+  "distinct_regimes": 0,
+  "validation_portfolio_metrics": {
+    "trades": 0,
+    "trades_per_active_day": 0.0,
+    "wins": 0,
+    "win_rate": 0.0,
+    "net_r": 0.0,
+    "average_r": 0.0,
+    "net_pips": 0.0,
+    "profit_factor": 0.0,
+    "maximum_drawdown_r": 0.0,
+    "positive_active_month_share": 0.0,
+    "top_5pct_removed_profit_factor": 0.0
+  },
+  "validation_gate_pass": false,
+  "exam_opened": false,
+  "verdict": "FREQUENCY_OR_QUALITY_GATE_FAILED_CONTINUE_RESEARCH"
+}

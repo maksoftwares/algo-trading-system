@@ -1,0 +1,141 @@
+{
+  "schema_version": "eurusd_frequency_v2_asymmetric_hunt_v1",
+  "source_sha256": "eacc532a5f0001ea66c80a558bd4cffe7ced5704bf9d9d4770cb2f783269bea0",
+  "active_days": {
+    "development": 1868,
+    "validation": 623
+  },
+  "candidate_count": 3072,
+  "development_pass_count": 116,
+  "validation_opened_count": 57,
+  "validation_pass_count": 24,
+  "generation_2_seed_ids": [
+    "EURF2_2895",
+    "EURF2_2166",
+    "EURF2_3707",
+    "EURF2_2744"
+  ],
+  "selected_priority": [
+    "EURF2_2895",
+    "EURF2_2166",
+    "EURF2_3707",
+    "EURF2_2744",
+    "EURF2_6534",
+    "EURF2_5697",
+    "EURF2_4096",
+    "EURF2_6734",
+    "EURF2_6800",
+    "EURF2_4975",
+    "EURF2_4493"
+  ],
+  "added_specialists": [
+    {
+      "candidate_id": "EURF2_6534",
+      "family": "scheduled_down_fade",
+      "regime": "chop",
+      "direction": "dynamic",
+      "threshold": 21.0,
+      "stop_atr": 1.25,
+      "target_r": 0.6,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.0,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_5697",
+      "family": "scheduled_down_follow",
+      "regime": "chop",
+      "direction": "dynamic",
+      "threshold": 15.0,
+      "stop_atr": 0.75,
+      "target_r": 0.6,
+      "max_hold_bars": 16,
+      "lookback": 4,
+      "body_min": 0.0,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_4096",
+      "family": "scheduled_up_follow",
+      "regime": "chop",
+      "direction": "dynamic",
+      "threshold": 6.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 32,
+      "lookback": 16,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_6734",
+      "family": "scheduled_down_fade",
+      "regime": "transition",
+      "direction": "dynamic",
+      "threshold": 15.0,
+      "stop_atr": 1.25,
+      "target_r": 0.6,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_6800",
+      "family": "scheduled_down_fade",
+      "regime": "transition",
+      "direction": "dynamic",
+      "threshold": 21.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_4975",
+      "family": "scheduled_up_fade",
+      "regime": "chop",
+      "direction": "dynamic",
+      "threshold": 18.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 16,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_4493",
+      "family": "scheduled_up_follow",
+      "regime": "transition",
+      "direction": "dynamic",
+      "threshold": 21.0,
+      "stop_atr": 1.25,
+      "target_r": 0.6,
+      "max_hold_bars": 16,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    }
+  ],
+  "distinct_regimes": 4,
+  "validation_portfolio_metrics": {
+    "trades": 619,
+    "trades_per_active_day": 0.9935794542536116,
+    "wins": 392,
+    "win_rate": 0.6332794830371568,
+    "net_r": 66.51445873769805,
+    "average_r": 0.1074546990915962,
+    "net_pips": 791.4021943158089,
+    "profit_factor": 1.3308688094439407,
+    "maximum_drawdown_r": 10.055689241940385,
+    "positive_active_month_share": 0.8333333333333334,
+    "top_5pct_removed_profit_factor": 1.1930061926511828
+  },
+  "validation_gate_pass": false,
+  "exam_opened": false,
+  "verdict": "ASYMMETRIC_GENERATION_FAILED_CONTINUE_RESEARCH"
+}

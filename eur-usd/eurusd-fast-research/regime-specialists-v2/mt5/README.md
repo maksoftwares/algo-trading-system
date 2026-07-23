@@ -17,3 +17,23 @@ Research status: controlled demo-rehearsal candidate. The final Capital.com
 real-tick Strategy Tester run produced 62 trades, 53.23% wins, PF 1.45, +$22.85
 at 0.01 lot, and 0.11% maximal balance drawdown. This does not authorize live
 trading.
+
+## Frequency V2 overlay
+
+`ForexMeanReversionScout.ex5` is the frequency sleeve. Its source is
+`forex-research/mt5/Experts/ForexMeanReversionScout.mq5`. The V2 version:
+
+- defaults to shadow mode with demo orders disabled;
+- rejects non-demo accounts outside Strategy Tester;
+- supports a login allow-list and demo-server marker;
+- owns at most one position per magic number;
+- applies the frozen completed-H4 trend classifier before adding 0.01 lots;
+- compiles with zero errors and zero warnings.
+
+Attach it to EURUSD M5 using
+`EURUSD_FREQUENCY_V2_M15_SHADOW_DEMO.set`. Run the frozen chop control on a
+separate EURUSD H1 chart. Their different magic numbers allow at most two
+concurrent positions.
+
+The owner-authorized template is intentionally unusable until its account
+placeholder is replaced. It must never be used on a live account.

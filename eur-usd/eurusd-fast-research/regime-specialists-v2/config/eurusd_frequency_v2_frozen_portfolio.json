@@ -1,0 +1,203 @@
+{
+  "schema_version": "eurusd_frequency_v2_frozen_portfolio_v1",
+  "portfolio_id": "EURUSD_FREQUENCY_V2_REGIME_PORTFOLIO",
+  "selection_status": "ADAPTIVE_VALIDATION_SELECTED_DEMO_RESEARCH_ONLY",
+  "source": "C:/MT5A1M5MomentumBacktest/Tester/Agent-127.0.0.1-3000/MQL5/Files/EURUSD_M15_CAPITAL_BROKER_201607_202607.csv",
+  "source_sha256": "eacc532a5f0001ea66c80a558bd4cffe7ced5704bf9d9d4770cb2f783269bea0",
+  "maximum_open_positions": 1,
+  "maximum_trades_per_active_day": 2,
+  "entry_slippage_points": 1.0,
+  "exit_slippage_points": 1.0,
+  "windows": {
+    "validation": [
+      "2022-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "adaptive_demo_exam": [
+      "2024-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  },
+  "gates": {
+    "minimum_trades_per_active_day": 1.0,
+    "minimum_profit_factor": 1.3,
+    "minimum_win_rate": 0.52,
+    "maximum_drawdown_r": 25.0,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_distinct_regimes": 3
+  },
+  "selection_note": "Generation 3 initially reached 619/623 validation trades. A declared local repair replaced EURF2_4493 with its same-sleeve variant EURF2_4495 and added the independently timed EURF2_5039 transition sleeve. The 2024-2026 interval was not opened by this frozen portfolio before this file was written.",
+  "priority": [
+    "EURF2_2895",
+    "EURF2_2166",
+    "EURF2_3707",
+    "EURF2_2744",
+    "EURF2_6534",
+    "EURF2_5697",
+    "EURF2_4096",
+    "EURF2_6734",
+    "EURF2_6800",
+    "EURF2_4975",
+    "EURF2_4495",
+    "EURF2_5039"
+  ],
+  "specialists": [
+    {
+      "candidate_id": "EURF2_2895",
+      "family": "scheduled_reversal",
+      "regime": "trend_down",
+      "direction": "dynamic",
+      "threshold": 18.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 16,
+      "lookback": 16,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_2166",
+      "family": "scheduled_momentum",
+      "regime": "trend_down",
+      "direction": "dynamic",
+      "threshold": 6.0,
+      "stop_atr": 1.25,
+      "target_r": 0.6,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.0,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_3707",
+      "family": "scheduled_ema_fade",
+      "regime": "trend_down",
+      "direction": "dynamic",
+      "threshold": 12.0,
+      "stop_atr": 0.75,
+      "target_r": 0.9,
+      "max_hold_bars": 16,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_2744",
+      "family": "scheduled_reversal",
+      "regime": "trend_up",
+      "direction": "dynamic",
+      "threshold": 18.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.0,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_6534",
+      "family": "scheduled_down_fade",
+      "regime": "chop",
+      "direction": "dynamic",
+      "threshold": 21.0,
+      "stop_atr": 1.25,
+      "target_r": 0.6,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.0,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_5697",
+      "family": "scheduled_down_follow",
+      "regime": "chop",
+      "direction": "dynamic",
+      "threshold": 15.0,
+      "stop_atr": 0.75,
+      "target_r": 0.6,
+      "max_hold_bars": 16,
+      "lookback": 4,
+      "body_min": 0.0,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_4096",
+      "family": "scheduled_up_follow",
+      "regime": "chop",
+      "direction": "dynamic",
+      "threshold": 6.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 32,
+      "lookback": 16,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_6734",
+      "family": "scheduled_down_fade",
+      "regime": "transition",
+      "direction": "dynamic",
+      "threshold": 15.0,
+      "stop_atr": 1.25,
+      "target_r": 0.6,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_6800",
+      "family": "scheduled_down_fade",
+      "regime": "transition",
+      "direction": "dynamic",
+      "threshold": 21.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 32,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_4975",
+      "family": "scheduled_up_fade",
+      "regime": "chop",
+      "direction": "dynamic",
+      "threshold": 18.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 16,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_4495",
+      "family": "scheduled_up_follow",
+      "regime": "transition",
+      "direction": "dynamic",
+      "threshold": 21.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 16,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    },
+    {
+      "candidate_id": "EURF2_5039",
+      "family": "scheduled_up_fade",
+      "regime": "transition",
+      "direction": "dynamic",
+      "threshold": 0.0,
+      "stop_atr": 1.25,
+      "target_r": 0.9,
+      "max_hold_bars": 16,
+      "lookback": 4,
+      "body_min": 0.25,
+      "session": "all"
+    }
+  ]
+}

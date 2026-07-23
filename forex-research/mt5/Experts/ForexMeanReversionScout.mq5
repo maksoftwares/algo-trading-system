@@ -26,6 +26,18 @@ input string                  InpRunId                   = "FOREX_MEAN_REVERSION
 input string                  InpTargetSymbol            = "EURUSD";
 input ENUM_TIMEFRAMES         InpSignalTimeframe         = PERIOD_M5;
 input long                    InpMagicNumber             = 26070601;
+input bool                    InpShadowMode              = true;
+input bool                    InpEnableDemoOrders        = false;
+input long                    InpAllowedAccountLogin     = 0;
+input string                  InpExpectedServerMarker    = "Demo";
+input bool                    InpUseH4TrendRiskOverlay   = false;
+input double                  InpH4TrendAdditionalLots   = 0.01;
+input double                  InpH4TrendAdxMinimum       = 22.0;
+input double                  InpH4TrendEfficiencyMin    = 0.32;
+input double                  InpH4TrendSlopeAtrMin      = 0.18;
+input int                     InpH4VolatilityBaseline    = 504;
+input double                  InpH4UnsafeAtrPercentile   = 0.95;
+input double                  InpH4UnsafeGapAtr          = 1.50;
 input MeanReversionSignalMode InpSignalMode              = MR_BB_CLOSE_FADE;
 input DirectionMode           InpDirectionMode           = DIR_BOTH;
 input double                  InpFixedLots               = 0.01;
@@ -56,6 +68,9 @@ CTrade   g_trade;
 int      g_atr_handle = INVALID_HANDLE;
 int      g_bands_handle = INVALID_HANDLE;
 int      g_rsi_handle = INVALID_HANDLE;
+int      g_h4_atr_handle = INVALID_HANDLE;
+int      g_h4_adx_handle = INVALID_HANDLE;
+int      g_h4_ema_handle = INVALID_HANDLE;
 datetime g_last_m5_bar = 0;
 datetime g_last_trade_time = 0;
 string   g_trade_day = "";
@@ -226,6 +241,62 @@ bool CopyOne(const int handle, const int buffer_index, const int shift, double &
       return false;
    value = buffer[0];
    return value != EMPTY_VALUE;
+  }
+
+bool H4TrendRiskOverlayActive()
+  {
+   if(!InpUseH4TrendRiskOverlay)
+      return false;
+   double atr = 0.0;
+   double adx = 0.0;
+   double ema_now = 0.0;
+   double ema_past = 0.0;
+   if(!CopyOne(g_h4_atr_handle, 0, 1, atr) ||
+      !CopyOne(g_h4_adx_handle, 0, 1, adx) ||
+      !CopyOne(g_h4_ema_handle, 0, 1, ema_now) ||
+      !CopyOne(g_h4_ema_handle, 0, 7, ema_past) ||
+      atr <= 0.0)
+      return false;
+
+   const double close_now = iClose(InpTargetSymbol, PERIOD_H4, 1);
+   const double close_past = iClose(InpTargetSymbol, PERIOD_H4, 25);
+   if(close_now <= 0.0 || close_past <= 0.0)
+      return false;
+   double path = 0.0;
+   for(int shift = 1; shift <= 24; shift++)
+     {
+      const double current_close = iClose(InpTargetSymbol, PERIOD_H4, shift);
+      const double previous_close = iClose(InpTargetSymbol, PERIOD_H4, shift + 1);
+      if(current_close <= 0.0 || previous_close <= 0.0)
+         return false;
+      path += MathAbs(current_close - previous_close);
+     }
+   if(path <= 0.0)
+      return false;
+   const double efficiency = MathAbs(close_now - close_past) / path;
+   const double slope_atr = (ema_now - ema_past) / atr;
+
+   double atr_history[];
+   ArrayResize(atr_history, InpH4VolatilityBaseline);
+   if(CopyBuffer(g_h4_atr_handle, 0, 2, InpH4VolatilityBaseline, atr_history) !=
+      InpH4VolatilityBaseline)
+      return false;
+   ArraySort(atr_history);
+   int percentile_index = (int)MathFloor(
+      InpH4UnsafeAtrPercentile * (InpH4VolatilityBaseline - 1)
+   );
+   percentile_index = MathMax(0, MathMin(InpH4VolatilityBaseline - 1, percentile_index));
+   const double atr_p95 = atr_history[percentile_index];
+   const double h4_open = iOpen(InpTargetSymbol, PERIOD_H4, 1);
+   const double prior_close = iClose(InpTargetSymbol, PERIOD_H4, 2);
+   if(h4_open <= 0.0 || prior_close <= 0.0)
+      return false;
+   const double gap_atr = MathAbs(h4_open - prior_close) / atr;
+   const bool unsafe = atr >= atr_p95 || gap_atr >= InpH4UnsafeGapAtr;
+   if(unsafe || adx < InpH4TrendAdxMinimum || efficiency < InpH4TrendEfficiencyMin)
+      return false;
+   return slope_atr >= InpH4TrendSlopeAtrMin ||
+          slope_atr <= -InpH4TrendSlopeAtrMin;
   }
 
 double RecentHigh(const int start_shift, const int count)
@@ -478,6 +549,11 @@ void EvaluateCompletedM5Bar()
       LogOrder("GUARD_BLOCK", direction, "spread_too_high", 0.0, bid, ask, spread_points, 0.0, 0.0, 0.0, 0, "", 0, 0, 0.0);
       return;
      }
+   if(!MQLInfoInteger(MQL_TESTER) && (InpShadowMode || !InpEnableDemoOrders))
+     {
+      LogOrder("SHADOW_SIGNAL", direction, "demo_orders_disabled", 0.0, bid, ask, spread_points, 0.0, 0.0, 0.0, 0, "", 0, 0, 0.0);
+      return;
+     }
    if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED) || !MQLInfoInteger(MQL_TRADE_ALLOWED) || !AccountInfoInteger(ACCOUNT_TRADE_ALLOWED))
      {
       LogOrder("GUARD_BLOCK", direction, "terminal_or_account_trading_disabled", 0.0, bid, ask, spread_points, 0.0, 0.0, 0.0, 0, "", 0, 0, 0.0);
@@ -509,7 +585,10 @@ void EvaluateCompletedM5Bar()
       LogOrder("GUARD_BLOCK", direction, "stop_ceiling_exceeded", 0.0, bid, ask, spread_points, sl, tp, stop_points, 0, "", 0, 0, 0.0);
       return;
      }
-   const double lots = NormalizeVolume(InpFixedLots);
+   double requested_lots = InpFixedLots;
+   if(H4TrendRiskOverlayActive())
+      requested_lots += InpH4TrendAdditionalLots;
+   const double lots = NormalizeVolume(requested_lots);
    if(lots <= 0.0)
      {
       LogOrder("GUARD_BLOCK", direction, "invalid_lots", 0.0, bid, ask, spread_points, sl, tp, stop_points, 0, "", 0, 0, 0.0);
@@ -533,8 +612,28 @@ int OnInit()
   {
    if(!MQLInfoInteger(MQL_TESTER))
      {
-      LogStartup("INIT_FAILED_NOT_TESTER", "Strategy Tester only.");
-      return INIT_FAILED;
+      if(AccountInfoInteger(ACCOUNT_TRADE_MODE) != ACCOUNT_TRADE_MODE_DEMO)
+        {
+         LogStartup("INIT_FAILED_NOT_DEMO", "Only Strategy Tester or a demo account is allowed.");
+         return INIT_FAILED;
+        }
+      if(InpExpectedServerMarker != "" &&
+         StringFind(AccountInfoString(ACCOUNT_SERVER), InpExpectedServerMarker) < 0)
+        {
+         LogStartup("INIT_FAILED_SERVER", "Demo server marker mismatch.");
+         return INIT_FAILED;
+        }
+      if(InpAllowedAccountLogin > 0 &&
+         AccountInfoInteger(ACCOUNT_LOGIN) != InpAllowedAccountLogin)
+        {
+         LogStartup("INIT_FAILED_LOGIN", "Account login is not allow-listed.");
+         return INIT_FAILED;
+        }
+      if(!InpShadowMode && !InpEnableDemoOrders)
+        {
+         LogStartup("INIT_FAILED_ORDER_SWITCH", "Non-shadow mode requires explicit demo-order enablement.");
+         return INIT_FAILED;
+        }
      }
    if(_Symbol != InpTargetSymbol)
      {
@@ -549,14 +648,28 @@ int OnInit()
    g_atr_handle = iATR(InpTargetSymbol, InpSignalTimeframe, InpAtrPeriod);
    g_bands_handle = iBands(InpTargetSymbol, InpSignalTimeframe, InpBandsPeriod, 0, InpBandsDeviation, PRICE_CLOSE);
    g_rsi_handle = iRSI(InpTargetSymbol, InpSignalTimeframe, InpRsiPeriod, PRICE_CLOSE);
+   if(InpUseH4TrendRiskOverlay)
+     {
+      g_h4_atr_handle = iATR(InpTargetSymbol, PERIOD_H4, 14);
+      g_h4_adx_handle = iADX(InpTargetSymbol, PERIOD_H4, 14);
+      g_h4_ema_handle = iMA(InpTargetSymbol, PERIOD_H4, 50, 0, MODE_EMA, PRICE_CLOSE);
+     }
    if(g_atr_handle == INVALID_HANDLE || g_bands_handle == INVALID_HANDLE || g_rsi_handle == INVALID_HANDLE)
      {
       LogStartup("INIT_FAILED_INDICATOR_HANDLE", "atr_bands_or_rsi_invalid");
       return INIT_FAILED;
      }
+   if(InpUseH4TrendRiskOverlay &&
+      (g_h4_atr_handle == INVALID_HANDLE ||
+       g_h4_adx_handle == INVALID_HANDLE ||
+       g_h4_ema_handle == INVALID_HANDLE))
+     {
+      LogStartup("INIT_FAILED_H4_OVERLAY_HANDLE", "h4_atr_adx_or_ema_invalid");
+      return INIT_FAILED;
+     }
    g_trade.SetExpertMagicNumber(InpMagicNumber);
    g_trade.SetDeviationInPoints(InpDeviationPoints);
-   LogStartup("INIT_OK", "tester_only");
+   LogStartup("INIT_OK", MQLInfoInteger(MQL_TESTER) ? "tester" : (InpShadowMode ? "shadow_demo" : "ordering_demo"));
    return INIT_SUCCEEDED;
   }
 
@@ -568,6 +681,12 @@ void OnDeinit(const int reason)
       IndicatorRelease(g_bands_handle);
    if(g_rsi_handle != INVALID_HANDLE)
       IndicatorRelease(g_rsi_handle);
+   if(g_h4_atr_handle != INVALID_HANDLE)
+      IndicatorRelease(g_h4_atr_handle);
+   if(g_h4_adx_handle != INVALID_HANDLE)
+      IndicatorRelease(g_h4_adx_handle);
+   if(g_h4_ema_handle != INVALID_HANDLE)
+      IndicatorRelease(g_h4_ema_handle);
   }
 
 void OnTick()
