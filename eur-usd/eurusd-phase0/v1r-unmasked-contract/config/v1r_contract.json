@@ -1,0 +1,36 @@
+{
+  "schema_version": "eurusd_v1r_unmasked_contract_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+  "status": "STAGE0_PARITY_PASS_RECLAIM_NOT_RUN",
+  "parent": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1_UNMASKED_AUDIT",
+  "test": {
+    "symbol": "EURUSD",
+    "chart_period": "M5",
+    "signal_timeframe": "M30",
+    "from_inclusive": "2022.07.01",
+    "to_exclusive": "2026.07.02",
+    "model": 0,
+    "deposit_usd": 1000,
+    "leverage": 50,
+    "use_local_agents": true,
+    "use_remote_agents": false,
+    "use_cloud_agents": false
+  },
+  "parity_target": {
+    "signals": 2957,
+    "decisions": 2957,
+    "trades": 1145,
+    "wins": 659,
+    "losses": 486,
+    "net_usd": 77.26,
+    "gross_profit_usd": 779.61,
+    "gross_loss_usd": 702.35,
+    "mt5_equity_drawdown_maximal_usd": 27.56
+  },
+  "boundary": {
+    "strategy_tester_only": true,
+    "reclaim_implemented": false,
+    "reclaim_run": false,
+    "demo_or_live_authorized": false
+  }
+}

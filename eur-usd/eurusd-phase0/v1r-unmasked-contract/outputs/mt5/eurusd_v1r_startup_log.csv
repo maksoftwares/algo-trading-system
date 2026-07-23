@@ -1,0 +1,2 @@
+timestamp_broker,run_id,server,account,symbol,magic,is_tester,signal_mode,direction_mode,risk_reward,latch_bar_open,account_leverage,status,detail
+2022.07.01 00:00:00,EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT,Capital.ComMena-Demo,1025742,EURUSD,26723003,true,0,1,0.80,2022.06.30 23:30:00,50,INIT_OK_LATCH_ARMED,tester_only; previous completed bar not evaluated
