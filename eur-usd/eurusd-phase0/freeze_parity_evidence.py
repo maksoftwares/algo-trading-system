@@ -73,7 +73,8 @@ def main() -> int:
         "artifacts": {name: artifact(path) for name, path in paths.items()},
     }
     manifest_path = LOCK_ROOT / "PARITY_MANIFEST.json"
-    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    with manifest_path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(manifest, indent=2) + "\n")
     print(manifest_path)
     return 0
 
