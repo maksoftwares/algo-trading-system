@@ -13,6 +13,9 @@ REPO = ROOT.parents[2]
 OLD_ROOT = REPO / "eur-usd" / "eurusd-phase0" / "unmasked-audit-v1"
 NEW_MT5 = ROOT / "outputs" / "mt5"
 AUDIT = ROOT / "outputs" / "audit"
+LOCKED = ROOT / "outputs" / "locked"
+SOURCE_CHAIN = LOCKED / "SOURCE_EX5_CHAIN.json"
+ARTIFACT_MANIFEST = LOCKED / "ARTIFACT_MANIFEST.json"
 OLD_LEDGER = OLD_ROOT / "outputs" / "audit" / "UNMASKED_TRADE_LEDGER_ENRICHED.csv"
 NEW_LEDGER = NEW_MT5 / "EURUSD_V1R_TRADE_LEDGER.csv"
 NEW_SUMMARY = NEW_MT5 / "EURUSD_V1R_EXACT_MT5_RESULT.json"
@@ -211,6 +214,84 @@ def reason(row: dict[str, str]) -> str:
     return order_detail(row["deal_and_reason"])["reason"]
 
 
+def validate_source_ex5_chain(
+    chain: dict[str, Any], manifest: dict[str, Any]
+) -> dict[str, Any]:
+    manifest_by_path = {
+        artifact["path"]: artifact for artifact in manifest.get("artifacts", [])
+    }
+    compile_proof = chain["compile_proof"]
+    source_hashes = {
+        "compile_source_after_copy": compile_proof["source_hash_after_copy"],
+        "tester_source": chain["tester_source"]["sha256"],
+        "frozen_source": chain["frozen_source"]["sha256"],
+        "repository_source": chain["repository_source"]["sha256"],
+    }
+    source_hashes_equal = len(set(source_hashes.values())) == 1
+    ex5_hashes_equal = (
+        compile_proof["ex5_hash_after_compile"] == chain["frozen_ex5"]["sha256"]
+    )
+
+    chain_artifacts = [
+        ("repository_source", chain["repository_source"]),
+        ("frozen_source", chain["frozen_source"]),
+        ("frozen_ex5", chain["frozen_ex5"]),
+        ("frozen_compile_log", chain["frozen_compile_log"]),
+        *[
+            (f"include_{index}", include["frozen"])
+            for index, include in enumerate(chain["includes"], start=1)
+        ],
+    ]
+    comparisons = []
+    for label, artifact in chain_artifacts:
+        manifest_artifact = manifest_by_path.get(artifact["path"])
+        comparisons.append(
+            {
+                "label": label,
+                "path": artifact["path"],
+                "present_in_manifest": manifest_artifact is not None,
+                "chain_bytes": artifact["bytes"],
+                "manifest_bytes": (
+                    manifest_artifact["bytes"] if manifest_artifact else None
+                ),
+                "bytes_equal": (
+                    manifest_artifact is not None
+                    and artifact["bytes"] == manifest_artifact["bytes"]
+                ),
+                "chain_sha256": artifact["sha256"],
+                "manifest_sha256": (
+                    manifest_artifact["sha256"] if manifest_artifact else None
+                ),
+                "sha256_equal": (
+                    manifest_artifact is not None
+                    and artifact["sha256"] == manifest_artifact["sha256"]
+                ),
+            }
+        )
+
+    all_chain_artifacts_match_manifest = bool(comparisons) and all(
+        comparison["present_in_manifest"]
+        and comparison["bytes_equal"]
+        and comparison["sha256_equal"]
+        for comparison in comparisons
+    )
+    return {
+        "passed": (
+            bool(chain["includes"])
+            and source_hashes_equal
+            and ex5_hashes_equal
+            and all_chain_artifacts_match_manifest
+        ),
+        "source_hashes": source_hashes,
+        "source_hashes_equal": source_hashes_equal,
+        "compile_ex5_sha256": compile_proof["ex5_hash_after_compile"],
+        "frozen_ex5_sha256": chain["frozen_ex5"]["sha256"],
+        "ex5_hashes_equal": ex5_hashes_equal,
+        "all_chain_artifacts_match_manifest": all_chain_artifacts_match_manifest,
+        "artifact_comparisons": comparisons,
+    }
+
+
 def main() -> int:
     AUDIT.mkdir(parents=True, exist_ok=True)
     old_signals = read_csv(one(OLD_ROOT / "outputs" / "mt5", "*_signal_log.csv"))
@@ -226,6 +307,11 @@ def main() -> int:
     environment_rows = read_csv(NEW_MT5 / "eurusd_v1r_environment_log.csv")
     environment = {row["key"]: row["value"] for row in environment_rows}
     summary = json.loads(NEW_SUMMARY.read_text(encoding="utf-8"))
+    source_chain = json.loads(SOURCE_CHAIN.read_text(encoding="utf-8"))
+    artifact_manifest = json.loads(ARTIFACT_MANIFEST.read_text(encoding="utf-8"))
+    source_chain_validation = validate_source_ex5_chain(
+        source_chain, artifact_manifest
+    )
 
     mismatches = []
     mismatches.extend(compare_rows("signal", old_signals, new_signals, SIGNAL_FIELDS))
@@ -297,9 +383,8 @@ def main() -> int:
         ],
         "source_copy_hash_exact": summary["clean_run"]["compile"]["source_hash_before_copy"]
         == summary["clean_run"]["compile"]["source_hash_after_copy"],
-        "source_ex5_chain_frozen": bool(summary["source_chain"]["includes"])
-        and summary["source_chain"]["frozen_source"]["sha256"]
-        == summary["source_chain"]["repository_source"]["sha256"],
+        "source_ex5_chain_frozen": summary["source_chain"] == source_chain
+        and source_chain_validation["passed"],
         "input_schema_exact": summary["input_contract"]["declared_input_count"] == 34
         and not summary["input_contract"]["unknown_ini_keys"]
         and not summary["input_contract"]["missing_ini_keys"],
@@ -423,6 +508,7 @@ def main() -> int:
             "first_three_state_events": state[:3],
         },
         "execution_reconciliation": reconciliation,
+        "source_ex5_chain_validation": source_chain_validation,
         "environment_missing_keys": environment_missing,
         "corrected_exit_time_years": years,
         "corrected_entry_sessions": sessions,

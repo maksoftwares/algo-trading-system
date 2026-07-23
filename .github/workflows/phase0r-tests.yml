@@ -15,7 +15,9 @@ jobs:
           python-version: "3.11"
 
       - name: Install test tools
-        run: python -m pip install --upgrade pip pytest
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e "xau-usd/xauusd-phase0r[dev]"
 
       - name: Run Phase 0R tests
         env:

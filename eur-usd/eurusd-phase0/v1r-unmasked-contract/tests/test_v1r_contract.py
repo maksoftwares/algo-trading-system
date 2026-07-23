@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import copy
 import importlib.util
 import json
 import sys
@@ -20,6 +21,7 @@ def load_script(name: str, filename: str):
 
 
 RUNNER = load_script("eurusd_v1r_runner", "run_v1r_baseline.py")
+PARITY = load_script("eurusd_v1r_parity", "build_stage0_parity.py")
 
 
 def test_declared_and_executed_inputs_are_exact() -> None:
@@ -103,3 +105,45 @@ def test_source_ex5_chain_is_complete() -> None:
     assert chain["repository_source"]["sha256"] == chain["frozen_source"]["sha256"]
     assert chain["includes"]
     assert chain["frozen_ex5"]["bytes"] > 0
+
+
+def test_source_chain_artifacts_match_git_blob_manifest() -> None:
+    locked = ROOT / "outputs" / "locked"
+    chain = json.loads((locked / "SOURCE_EX5_CHAIN.json").read_text(encoding="utf-8"))
+    manifest = json.loads(
+        (locked / "ARTIFACT_MANIFEST.json").read_text(encoding="utf-8")
+    )
+
+    validation = PARITY.validate_source_ex5_chain(chain, manifest)
+
+    assert validation["passed"] is True
+    assert validation["source_hashes_equal"] is True
+    assert validation["ex5_hashes_equal"] is True
+    assert validation["all_chain_artifacts_match_manifest"] is True
+    assert all(
+        comparison["present_in_manifest"]
+        and comparison["bytes_equal"]
+        and comparison["sha256_equal"]
+        for comparison in validation["artifact_comparisons"]
+    )
+
+
+def test_source_chain_validator_rejects_any_manifest_mismatch() -> None:
+    locked = ROOT / "outputs" / "locked"
+    chain = json.loads((locked / "SOURCE_EX5_CHAIN.json").read_text(encoding="utf-8"))
+    manifest = json.loads(
+        (locked / "ARTIFACT_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    mismatched_manifest = copy.deepcopy(manifest)
+    include_path = chain["includes"][0]["frozen"]["path"]
+    include_entry = next(
+        artifact
+        for artifact in mismatched_manifest["artifacts"]
+        if artifact["path"] == include_path
+    )
+    include_entry["sha256"] = "0" * 64
+
+    validation = PARITY.validate_source_ex5_chain(chain, mismatched_manifest)
+
+    assert validation["passed"] is False
+    assert validation["all_chain_artifacts_match_manifest"] is False

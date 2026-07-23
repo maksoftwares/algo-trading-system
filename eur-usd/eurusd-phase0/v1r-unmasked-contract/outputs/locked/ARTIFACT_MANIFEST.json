@@ -6,8 +6,8 @@
   "artifacts": [
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/.gitattributes",
-      "bytes": 60,
-      "sha256": "57f80b0a8181031003d5b8d90b1bda72d8ec792b4f19d4ab92daa1ff50a13eb4"
+      "bytes": 97,
+      "sha256": "07c4a400e39b02751e10e2a7aa1ee3364304de21a0c87bd651d69e88d417c4d9"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/CONTRACT.md",
@@ -21,8 +21,8 @@
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/build_stage0_parity.py",
-      "bytes": 18718,
-      "sha256": "a9e78b1d25e6eacc26346ca5bf9ab08e78c628356d7ff24120ba4d5738c05892"
+      "bytes": 22111,
+      "sha256": "9a3cf1fddc491cb816e27b37ae858068c6bbd0ee23677c47cf523291702aa485"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/config/v1r_contract.json",
@@ -86,8 +86,8 @@
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/STAGE0_PARITY_RESULT.json",
-      "bytes": 7753,
-      "sha256": "5a8fe0f7c06849f62d5223f528dcc79319641360abfca6af56c8fdbf8a53bb24"
+      "bytes": 14162,
+      "sha256": "3aa65136391e1a6c4f81c2dd0b89513edb5ddfb13393094f8880509b1a88ab3b"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/audit/STAGE0_PARITY_RESULT.md",
@@ -126,38 +126,38 @@
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/04bb2c47b1b0_StdLibErr.mqh",
-      "bytes": 673,
-      "sha256": "852c19e13062cb0fa82ac14f2552adc4f0cce340647bebee90bbccd7f95e7eeb"
+      "bytes": 683,
+      "sha256": "04bb2c47b1b04dceb052e6dba1f85e0330c53abc602f341e2ea95ea1498ab28b"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/96e678162453_Trade.mqh",
-      "bytes": 67833,
-      "sha256": "9cf286802c1ec2d442522f93f3d391886b31131f87114cb95002acab79ef351a"
+      "bytes": 69541,
+      "sha256": "96e6781624534377fe7971cba52cca3d62d1b030bc10d5e4ebf3ed8c541399ed"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/9d6fb4e7d875_DealInfo.mqh",
-      "bytes": 15883,
-      "sha256": "a8a5873db9504cfe97287e67de03387dd4ebe638b85244a0f1773088be0b0a9b"
+      "bytes": 16313,
+      "sha256": "9d6fb4e7d8754eaee761e43943dc49cdc3a32793ee8438119d939ea7bad71880"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/d0e479578ef9_OrderInfo.mqh",
-      "bytes": 21534,
-      "sha256": "c0a1e00fe7c12e6bd9d02dc88ceb122f0e54db0105e7c792b0f0dbb161f600f4"
+      "bytes": 22087,
+      "sha256": "d0e479578ef91d2ef1b07ae63d28ae54e15cebb914dd10e5d4510c269a9ca999"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/dd720b755c7f_PositionInfo.mqh",
-      "bytes": 15454,
-      "sha256": "38a64ef7ac3b9e576257d5240bf6919751796535ba0e08a49336540142fc39ee"
+      "bytes": 15820,
+      "sha256": "dd720b755c7f23dcc109fc81bcf0772b907411d545e4a1117421737bb9ff6897"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/dfad4fdb6d1b_Object.mqh",
-      "bytes": 2003,
-      "sha256": "c1126baa9bd4d39897b03f6bfb03667fa60b390828a132878072f947590dac8f"
+      "bytes": 2036,
+      "sha256": "dfad4fdb6d1bf47cf43fcbc2882e52979459f17a776f75f250a7c32d0623ab35"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/e88f6be45046_HistoryOrderInfo.mqh",
-      "bytes": 19546,
-      "sha256": "ff77d63927b57f3fc59aba75f25aca648622a7006fb9475bdd1bb1622d753a1b"
+      "bytes": 20018,
+      "sha256": "e88f6be450462a045470315887ef751a4510da65a5115325dc88542743fc52f8"
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/source/EurUsdM30RsiBbCloseFadeLongV1R.mq5",
@@ -251,8 +251,8 @@
     },
     {
       "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/tests/test_v1r_contract.py",
-      "bytes": 3829,
-      "sha256": "e0cbbbbb455db6442e51b9fd86db68c69ab93035c7cbad814f216641f6b15208"
+      "bytes": 5488,
+      "sha256": "4a5a51097bec926dbde96be15dbccab2e42593e83a6ffed28271a29bc24e75cd"
     }
   ]
 }

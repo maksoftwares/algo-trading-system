@@ -151,6 +151,143 @@
     "minimum_free_margin_usd": 964.82,
     "minimum_positive_margin_level_pct": 4484.8472
   },
+  "source_ex5_chain_validation": {
+    "passed": true,
+    "source_hashes": {
+      "compile_source_after_copy": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+      "tester_source": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+      "frozen_source": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+      "repository_source": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864"
+    },
+    "source_hashes_equal": true,
+    "compile_ex5_sha256": "6785d975e9a8e60350dace8a475ed624791c66f20228443b3a0e288cc087733f",
+    "frozen_ex5_sha256": "6785d975e9a8e60350dace8a475ed624791c66f20228443b3a0e288cc087733f",
+    "ex5_hashes_equal": true,
+    "all_chain_artifacts_match_manifest": true,
+    "artifact_comparisons": [
+      {
+        "label": "repository_source",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/mt5/Experts/EurUsdM30RsiBbCloseFadeLongV1R.mq5",
+        "present_in_manifest": true,
+        "chain_bytes": 36235,
+        "manifest_bytes": 36235,
+        "bytes_equal": true,
+        "chain_sha256": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+        "manifest_sha256": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+        "sha256_equal": true
+      },
+      {
+        "label": "frozen_source",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/source/EurUsdM30RsiBbCloseFadeLongV1R.mq5",
+        "present_in_manifest": true,
+        "chain_bytes": 36235,
+        "manifest_bytes": 36235,
+        "bytes_equal": true,
+        "chain_sha256": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+        "manifest_sha256": "1d366aac1ba2a12d8966ba74519b998f247b7dd3b235ff7b423c235a2b254864",
+        "sha256_equal": true
+      },
+      {
+        "label": "frozen_ex5",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/EurUsdM30RsiBbCloseFadeLongV1R.ex5",
+        "present_in_manifest": true,
+        "chain_bytes": 76094,
+        "manifest_bytes": 76094,
+        "bytes_equal": true,
+        "chain_sha256": "6785d975e9a8e60350dace8a475ed624791c66f20228443b3a0e288cc087733f",
+        "manifest_sha256": "6785d975e9a8e60350dace8a475ed624791c66f20228443b3a0e288cc087733f",
+        "sha256_equal": true
+      },
+      {
+        "label": "frozen_compile_log",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/compile_EurUsdM30RsiBbCloseFadeLongV1R_20260723T123628Z.log",
+        "present_in_manifest": true,
+        "chain_bytes": 6930,
+        "manifest_bytes": 6930,
+        "bytes_equal": true,
+        "chain_sha256": "0da803307107f33f06bb2afd84ff04ebde564059ea78c2919b8873f4b1138791",
+        "manifest_sha256": "0da803307107f33f06bb2afd84ff04ebde564059ea78c2919b8873f4b1138791",
+        "sha256_equal": true
+      },
+      {
+        "label": "include_1",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/96e678162453_Trade.mqh",
+        "present_in_manifest": true,
+        "chain_bytes": 69541,
+        "manifest_bytes": 69541,
+        "bytes_equal": true,
+        "chain_sha256": "96e6781624534377fe7971cba52cca3d62d1b030bc10d5e4ebf3ed8c541399ed",
+        "manifest_sha256": "96e6781624534377fe7971cba52cca3d62d1b030bc10d5e4ebf3ed8c541399ed",
+        "sha256_equal": true
+      },
+      {
+        "label": "include_2",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/dfad4fdb6d1b_Object.mqh",
+        "present_in_manifest": true,
+        "chain_bytes": 2036,
+        "manifest_bytes": 2036,
+        "bytes_equal": true,
+        "chain_sha256": "dfad4fdb6d1bf47cf43fcbc2882e52979459f17a776f75f250a7c32d0623ab35",
+        "manifest_sha256": "dfad4fdb6d1bf47cf43fcbc2882e52979459f17a776f75f250a7c32d0623ab35",
+        "sha256_equal": true
+      },
+      {
+        "label": "include_3",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/04bb2c47b1b0_StdLibErr.mqh",
+        "present_in_manifest": true,
+        "chain_bytes": 683,
+        "manifest_bytes": 683,
+        "bytes_equal": true,
+        "chain_sha256": "04bb2c47b1b04dceb052e6dba1f85e0330c53abc602f341e2ea95ea1498ab28b",
+        "manifest_sha256": "04bb2c47b1b04dceb052e6dba1f85e0330c53abc602f341e2ea95ea1498ab28b",
+        "sha256_equal": true
+      },
+      {
+        "label": "include_4",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/d0e479578ef9_OrderInfo.mqh",
+        "present_in_manifest": true,
+        "chain_bytes": 22087,
+        "manifest_bytes": 22087,
+        "bytes_equal": true,
+        "chain_sha256": "d0e479578ef91d2ef1b07ae63d28ae54e15cebb914dd10e5d4510c269a9ca999",
+        "manifest_sha256": "d0e479578ef91d2ef1b07ae63d28ae54e15cebb914dd10e5d4510c269a9ca999",
+        "sha256_equal": true
+      },
+      {
+        "label": "include_5",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/e88f6be45046_HistoryOrderInfo.mqh",
+        "present_in_manifest": true,
+        "chain_bytes": 20018,
+        "manifest_bytes": 20018,
+        "bytes_equal": true,
+        "chain_sha256": "e88f6be450462a045470315887ef751a4510da65a5115325dc88542743fc52f8",
+        "manifest_sha256": "e88f6be450462a045470315887ef751a4510da65a5115325dc88542743fc52f8",
+        "sha256_equal": true
+      },
+      {
+        "label": "include_6",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/dd720b755c7f_PositionInfo.mqh",
+        "present_in_manifest": true,
+        "chain_bytes": 15820,
+        "manifest_bytes": 15820,
+        "bytes_equal": true,
+        "chain_sha256": "dd720b755c7f23dcc109fc81bcf0772b907411d545e4a1117421737bb9ff6897",
+        "manifest_sha256": "dd720b755c7f23dcc109fc81bcf0772b907411d545e4a1117421737bb9ff6897",
+        "sha256_equal": true
+      },
+      {
+        "label": "include_7",
+        "path": "eur-usd/eurusd-phase0/v1r-unmasked-contract/outputs/locked/includes/9d6fb4e7d875_DealInfo.mqh",
+        "present_in_manifest": true,
+        "chain_bytes": 16313,
+        "manifest_bytes": 16313,
+        "bytes_equal": true,
+        "chain_sha256": "9d6fb4e7d8754eaee761e43943dc49cdc3a32793ee8438119d939ea7bad71880",
+        "manifest_sha256": "9d6fb4e7d8754eaee761e43943dc49cdc3a32793ee8438119d939ea7bad71880",
+        "sha256_equal": true
+      }
+    ]
+  },
   "environment_missing_keys": [],
   "corrected_exit_time_years": [
     {
