@@ -1,0 +1,58 @@
+{
+  "schema_version": "eurusd_phase0_research_strategy_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1",
+  "authorization": {
+    "research_only": true,
+    "strategy_tester_only": true,
+    "shadow_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  },
+  "implementation": {
+    "ea_source": "forex-research/mt5/Experts/ForexMeanReversionScout.mq5",
+    "ea_source_sha256": "40fb7ac41516eea28dc1803a6c8feb6305ea6b7f44b61e0519eff244a1298031",
+    "locked_ex5": "eur-usd/eurusd-phase0/outputs/mt5_parity/locked/ForexMeanReversionScout.ex5",
+    "locked_ex5_sha256": "d314a492e4bfbf31a3b1dd9d53992ed72d891788366a49fd284d43fd364f8f22",
+    "parity_manifest": "eur-usd/eurusd-phase0/outputs/mt5_parity/locked/PARITY_MANIFEST.json",
+    "preset": "eur-usd/eurusd-phase0/mt5/Presets/EURUSD_M30_RSI_BB_FADE_V1_RESEARCH_ONLY.set"
+  },
+  "evidence": {
+    "mt5_run_json": "eur-usd/eurusd-phase0/outputs/mt5_parity/FOREX_MT5_FREQUENCY_SCOUT_EURUSD_PHASE0_PARITY_V1.json",
+    "robustness_json": "eur-usd/eurusd-phase0/evidence/INHERITED_M30_RSI_BB_ROBUSTNESS_2026_07_04.json",
+    "inherited_trade_csv_glob": "eur-usd/eurusd-phase0/evidence/INHERITED_M30_RSI_BB_TRADE_LEDGER.csv",
+    "trade_csv_glob": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/*_trades.csv"
+  },
+  "strategy": {
+    "symbol": "EURUSD",
+    "signal_timeframe": "M30",
+    "execution_chart": "M5",
+    "direction": "LONG_ONLY",
+    "fixed_lot": 0.01,
+    "bands_period": 20,
+    "bands_deviation": 2.0,
+    "rsi_period": 14,
+    "rsi_oversold": 35.0,
+    "atr_period": 14,
+    "stop_atr_multiple": 1.4,
+    "stop_floor_points": 30,
+    "stop_ceiling_points": 700,
+    "risk_reward": 0.8,
+    "blocked_entry_hours": [6, 7, 10, 13],
+    "maximum_spread_points": 100,
+    "maximum_entries_per_day": 20,
+    "maximum_owned_positions": 1
+  },
+  "working_research_gates": {
+    "minimum_trades": 500,
+    "minimum_mt5_profit_factor": 1.15,
+    "maximum_mt5_equity_drawdown_pct": 5.0,
+    "require_positive_mt5_net": true,
+    "require_positive_both_chronological_splits": true,
+    "require_positive_top10_removed": true,
+    "require_source_hash_match": true,
+    "require_ex5_hash_match": true,
+    "require_zero_warning_compile": true,
+    "require_tester_only_guard": true
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": "eurusd_phase0_evidence_audit_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1",
+  "status": "WORKING_RESEARCH_STRATEGY_FORWARD_NOT_AUTHORIZED",
+  "authorization": {
+    "research_only": true,
+    "strategy_tester_only": true,
+    "shadow_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  },
+  "artifacts": {
+    "config": "eur-usd/eurusd-phase0/config/eurusd_m30_rsi_bb_fade_v1.json",
+    "ea_source": "forex-research/mt5/Experts/ForexMeanReversionScout.mq5",
+    "locked_ex5": "eur-usd/eurusd-phase0/outputs/mt5_parity/locked/ForexMeanReversionScout.ex5",
+    "parity_manifest": "eur-usd/eurusd-phase0/outputs/mt5_parity/locked/PARITY_MANIFEST.json",
+    "preset": "eur-usd/eurusd-phase0/mt5/Presets/EURUSD_M30_RSI_BB_FADE_V1_RESEARCH_ONLY.set",
+    "mt5_run_json": "eur-usd/eurusd-phase0/outputs/mt5_parity/FOREX_MT5_FREQUENCY_SCOUT_EURUSD_PHASE0_PARITY_V1.json",
+    "robustness_json": "eur-usd/eurusd-phase0/evidence/INHERITED_M30_RSI_BB_ROBUSTNESS_2026_07_04.json",
+    "trade_csv": "eur-usd/eurusd-phase0/outputs/mt5_parity/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80/ForexFreqScout_EURUSD_PHASE0_PARITY_V1_EURUSD_M5_rsi_bb_close_fade_m30_long_blockh6_7_10_13_rr0p80_trades.csv",
+    "inherited_trade_csv": "eur-usd/eurusd-phase0/evidence/INHERITED_M30_RSI_BB_TRADE_LEDGER.csv",
+    "ea_source_sha256": "40fb7ac41516eea28dc1803a6c8feb6305ea6b7f44b61e0519eff244a1298031",
+    "locked_ex5_sha256": "d314a492e4bfbf31a3b1dd9d53992ed72d891788366a49fd284d43fd364f8f22",
+    "preset_sha256": "6ce02470c419771b3b6684178d0a450e97d6655522d71bc58010647f0f3ec363",
+    "trade_csv_sha256": "8ddfbf25ac903c87366a3b5f2be08676bd986d4f5079167346d6a543337342b3",
+    "inherited_trade_csv_sha256": "8ddfbf25ac903c87366a3b5f2be08676bd986d4f5079167346d6a543337342b3"
+  },
+  "mt5_economics": {
+    "period": {
+      "from": "2022.07.01",
+      "to": "2026.07.02"
+    },
+    "history_quality": "99%",
+    "trades": 831,
+    "win_rate_pct": 59.33,
+    "net_profit_usd": 101.82,
+    "profit_factor": 1.2,
+    "expected_payoff_usd": 0.12,
+    "equity_drawdown_maximal": "30.85 (2.95%)",
+    "equity_drawdown_pct": 2.95,
+    "order_send_failures": 3
+  },
+  "parsed_trade_diagnostics": {
+    "trade_rows": 831,
+    "price_profit_net_usd": 114.8,
+    "mt5_net_minus_price_profit_usd": -12.98,
+    "profit_factor": 1.2325,
+    "maximum_closed_drawdown_usd": 27.85,
+    "top10_winners_removed_net_usd": 80.99,
+    "positive_months": 34,
+    "active_months": 49,
+    "year_net_usd": {
+      "2022": 25.0,
+      "2023": 22.67,
+      "2024": 13.2,
+      "2025": 42.32,
+      "2026": 11.61
+    },
+    "worst_250_trades": {
+      "width": 250,
+      "start_index": 122,
+      "net": -3.62,
+      "profit_factor": 0.9765
+    }
+  },
+  "chronological_splits": {
+    "design_2022_2024": {
+      "trades": 405,
+      "profit_factor": 1.1585,
+      "mt5_profit_factor": 1.13,
+      "pnl": 40.57,
+      "win_rate_pct": 58.52,
+      "avg_pnl": 0.1002
+    },
+    "current_2024_2026": {
+      "trades": 426,
+      "profit_factor": 1.3123,
+      "mt5_profit_factor": 1.29,
+      "pnl": 74.23,
+      "win_rate_pct": 60.09,
+      "avg_pnl": 0.1742
+    }
+  },
+  "working_research_gates": {
+    "actual_mt5_strategy_tester": true,
+    "minimum_trades": true,
+    "minimum_mt5_profit_factor": true,
+    "positive_mt5_net": true,
+    "maximum_mt5_equity_drawdown": true,
+    "positive_both_chronological_splits": true,
+    "positive_top10_removed": true,
+    "source_hash_match": true,
+    "ex5_hash_match": true,
+    "zero_warning_compile": true,
+    "exact_trade_ledger_parity": true,
+    "tester_only_guard": true,
+    "completed_bar_signal": true,
+    "preset_research_identity": true
+  },
+  "promotion_blockers": [
+    "The selected entry-hour mask is retrospective development evidence.",
+    "No locked prospective shadow sample exists.",
+    "Repository Capital.com bar exports are not current or promotion-grade Bid/Ask evidence.",
+    "No combined XAUUSD/EURUSD shared-risk or USD-factor exposure test exists."
+  ]
+}
