@@ -1,0 +1,357 @@
+{
+  "schema_version": "eurusd_v1_unmasked_artifact_manifest_v1",
+  "hash_basis": "Git index blob bytes; stable after clean checkout",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1_UNMASKED_AUDIT",
+  "artifacts": [
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/PREREGISTRATION.md",
+      "bytes": 3717,
+      "sha256": "c5643aa45e2013533a81c38613cc7864be5a5c9429b3462dd9bfacf8f32592e1"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/README.md",
+      "bytes": 1395,
+      "sha256": "2ed86ee8ba5a1f485f9e5fe51397883eaa920f43e93150698dd8db1284edc436"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/build_trial_inventory.py",
+      "bytes": 3369,
+      "sha256": "b12ca22307ef15907e6f5a9a4209d5d20fdd8dc7b52ad49289c51a145a96bf27"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/config/eurusd_m30_rsi_bb_fade_v1_unmasked_audit.json",
+      "bytes": 1568,
+      "sha256": "84c934803285d21ca8a00cfef8f5ec0fd58fc828763f47804a7f24eab1ca3625"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/MULTIPLICITY_NOTE.md",
+      "bytes": 882,
+      "sha256": "1d115c746cbfb645d08aeedcb427b2fe4ccce9b7060716edc50a73a9a6821ffd"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/PRIOR_REPORT_INVENTORY.csv",
+      "bytes": 6545,
+      "sha256": "2b5cc76ceef61ba7ffd7d89534fe2c0328d0e173518fcdbe8346b66a722203f3"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/PRIOR_TRIAL_RESULT_INVENTORY.csv",
+      "bytes": 51794,
+      "sha256": "1c5c623b1002d030f177223483ac1bf64f36ee3d25735aa85dca8bad6a7c55db"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/TRIAL_REGISTRY.csv",
+      "bytes": 1399,
+      "sha256": "0c3d4f2a1c835993b6ad48c600315956b9f90ce5ae87f076542bc7865c143e26"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_CURRENT_2024_2026_EXTRA_MAJORS_MEANREV_M30_SHORT_FOLLOWUP.json",
+      "bytes": 76627,
+      "sha256": "5c812910ebc4c1629cc43223344f1b5174231c1faf3ed063c52e754b32f57acb"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT.json",
+      "bytes": 52407,
+      "sha256": "2da36422ac796adab469154b5f8a0d91bce22ff50db4327e89b886c186350ccd"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_CURRENT_2024_2026_M15_MEAN_REVERSION.json",
+      "bytes": 153216,
+      "sha256": "3f75daac4ea070d321730be5fd19b2c035e55729ce0c900fb177060bafe4ef3e"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_CURRENT_2024_2026_M30_MEANREV_DIRECTION_FREQ_FIRST.json",
+      "bytes": 456503,
+      "sha256": "c2fab4e1c8558706a6087ff7d61e39c6bcfdf249f666b7486d899da33158f749"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_CURRENT_2024_2026_M5_MEANREV_EURUSD_DIRECTION_SPLIT.json",
+      "bytes": 52147,
+      "sha256": "9d6240a8e155cdc513e624ebf9f4aa4b6341b802ace2f1144221f4587bd34028"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_CURRENT_2024_2026_M5_MEAN_REVERSION.json",
+      "bytes": 152855,
+      "sha256": "9d51db61b31b5e835a8d374248531a12d3c48e8b5b076a79afebf5c4c654f5ec"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_FULL_2020_2026_GBPUSD_BB_WICK_RECLAIM_M30_RAW_EDGE.json",
+      "bytes": 14369,
+      "sha256": "685e309ce4a40511be882882283360a64aeb411c01a3dfb12f9318ac16a5db55"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_FULL_2020_2026_USDCAD_M30_RSI_EXTREME_SHORT_RAW_EXTENSION.json",
+      "bytes": 14361,
+      "sha256": "88a1f8784ee246d9211b8b1c1bdb3ea44043501de40f4b98321135a19949a673"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_FULL_2022_2026_M15_RSI_EXTREME_LONG_RR0P8.json",
+      "bytes": 14372,
+      "sha256": "4b495f1cc42466b7a43a986e62b285e0354019282a616f9616b49b397a22fd2f"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_FULL_2022_2026_M30_MEANREV_EURUSD_LONG_RAW_EDGE.json",
+      "bytes": 27172,
+      "sha256": "315ad091017045ad29e50ca446b3045a775cc514738796cdd36b152218168e15"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_OOS_2022_2024_M15_MEANREV_EURUSD_LONG.json",
+      "bytes": 26509,
+      "sha256": "928172da5c8d76f8149c5c02e0a9561fb5f52480ebbefd954680a125ea8d3784"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_OOS_2022_2024_M15_RSI_EXTREME_LONG_RR.json",
+      "bytes": 64065,
+      "sha256": "53b0c1df7928bb9a4dd0de4bc655e8738259062ec8441689bf099f50939df33f"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_OOS_2022_2024_M30_MEANREV_EURUSD_LONG_RAW_EDGE.json",
+      "bytes": 26738,
+      "sha256": "13d2e3797faf937b0db914ded329f4b6ad9d70bce3e59dee50fe3b80deb5077b"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_CURRENT_2024_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+      "bytes": 26628,
+      "sha256": "d46b53d2dcd535fdbab27448f26b659872faa2ff2f7ca4dbb6db9a906ad008ce"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_CURRENT_2024_2026_M30_RSI_BB_LONG_BLOCKH6_7_10_13_RR0P8.json",
+      "bytes": 26120,
+      "sha256": "c243258e689ceb5a6f800195f61f5f28f8efec2b24beccc817be081cb34192bc"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_FULL_2022_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+      "bytes": 26596,
+      "sha256": "83803efbd21580c26bd9e263c00d7c13a7890620d22a721107e9e113da865b8e"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_FULL_2022_2026_M30_RSI_BB_LONG_BLOCKH6_7_10_13_RR0P8.json",
+      "bytes": 26084,
+      "sha256": "46dcd51c42e12443a43aa35a5587439021650316c7444c48c32d102f6a2bbd92"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_OOS_2022_2024_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+      "bytes": 26432,
+      "sha256": "a4dddd47255ead1ab9520fc70c2f529a53e473564f2995ac719cca5ea78d1850"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_PRE2020_2018_2019_GBPUSD_BB_WICK_RECLAIM_M30_RAW_EDGE.json",
+      "bytes": 14594,
+      "sha256": "74283800d8268b8afc5ec54615513b35085d6561fac0412222cb13e03d96cb42"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_RECENT12_2025_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+      "bytes": 13942,
+      "sha256": "4087f60f17d47e3e02772c28145b9721fb24f24f6df56a5aa7d98cd3695abef2"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_RECENT12_2025_2026_M30_RSI_BB_LONG_BLOCKH6_7_10_13_RR0P8.json",
+      "bytes": 13646,
+      "sha256": "71759cc49784f3296a854af962b78495aeef558035d2b1833d6aa9a7eb13f99b"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_SMOKE_MEANREV_EURUSD_BB_CLOSE.json",
+      "bytes": 14196,
+      "sha256": "2dd64237707c573ff72cb77557449ba3e76f8848fac6f10eea1ee0e54c0c8e36"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_SMOKE_MEANREV_EURUSD_M15_RSI_EXTREME.json",
+      "bytes": 14371,
+      "sha256": "d6928c2e4a9db402bb240fe69e043588f785e0391926b46c2db1c203f3f1537e"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_TUNE_CURRENT_2024_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+      "bytes": 14104,
+      "sha256": "0cc7cb65788d26574ab127130a6fa530efe04a8335f6b04524f5d699616743cf"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_TUNE_CURRENT_2024_2026_M15_RSI_EXTREME_LONG_RR.json",
+      "bytes": 64869,
+      "sha256": "f091f2f0e434b151b39e64fbf7318d5dc04375db735598f9c8015fe3ec3faf8c"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_TUNE_CURRENT_2024_2026_M30_RSI_BB_LONG_BLOCKH6_7_10_13_RR0P8.json",
+      "bytes": 13833,
+      "sha256": "5b06c94c6075aa2085731c562420b4321d31f91aeca903042d20f69d7d12268f"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_TUNE_DESIGN_2022_2024_M30_RSI_BB_LONG_BLOCKH6_7_10_13_RR0P8.json",
+      "bytes": 13502,
+      "sha256": "b9ea7735a8a770e3d1aa88abb31c92a2ec33ad69c7650cd72ae32a5c3436787a"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_TUNE_FULL_2022_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+      "bytes": 14079,
+      "sha256": "1c41abd141f055c21d663108bef5432fc43c2b6fe456b033c8af0c464d08167b"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_TUNE_FULL_2022_2026_M30_RSI_BB_LONG_BLOCKH6_7_10_13_RR0P8.json",
+      "bytes": 13803,
+      "sha256": "cafafab03b2cd2f574e4c8955614cc439d9d44ec65322e5f5b6bd66a61026a22"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_FREQUENCY_SCOUT_TUNE_OOS_2022_2024_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+      "bytes": 14017,
+      "sha256": "1fee97a5f4c9b88c864fde55c6dc5e56b26615c44daa55ba4b56048d3ac37c51"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8_TUNING_ROBUSTNESS_2026_07_04.json",
+      "bytes": 12171,
+      "sha256": "c75d92b130361e0a930e57d3b65ac90238ede686441827aaf6de0046c392d6c1"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_M15_RSI_EXTREME_LONG_RR0P8_ROBUSTNESS_2026_07_04.json",
+      "bytes": 11476,
+      "sha256": "c7b1b76465112ba50051109ab4b2e9e534aa704c5bc6e98a9095236c9dfb9b58"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/evidence/prior_trial_reports/FOREX_MT5_M30_RSI_BB_LONG_BLOCKH6_7_10_13_RR0P8_TUNING_ROBUSTNESS_2026_07_04.json",
+      "bytes": 3052,
+      "sha256": "e149f6fad1775d6e4e7b284f32a75419272c094b87bf4bb872a2a6cdd477e10f"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/freeze_git_manifest.py",
+      "bytes": 1394,
+      "sha256": "d5f962b8bad61dae42e6ee873932962a4d2a396b28d6354296b2fc9d3b64e786"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/mt5/Experts/EurUsdM30BarAuditExporter.mq5",
+      "bytes": 2793,
+      "sha256": "0f4a89bd5df25808d1c1aee4df1a7e873131116ca42b068b25f6b1bdb97e963d"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/mt5/Presets/EURUSD_M30_RSI_BB_FADE_V1_UNMASKED_AUDIT.set",
+      "bytes": 796,
+      "sha256": "98205b4bf9a22deab172328841fa0dc53b8bf9687f2e4313620bc520cc57e375"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/EURUSD_V1_UNMASKED_AUDIT_RESULT.json",
+      "bytes": 30647,
+      "sha256": "c39e68c97d7949a25bf6324152275066d0167b459dcc22631b60c58e171c1e80"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/EURUSD_V1_UNMASKED_AUDIT_RESULT.md",
+      "bytes": 3996,
+      "sha256": "aad6a42fdaa405acf3e940dd265cce923ef6b31727603143671fa481a14c1bfd"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/MATCHED_SIGNAL_ATTEMPT_DIFF.csv",
+      "bytes": 273082,
+      "sha256": "01053dd7d8adf7737fac0fbc296c374be8834ed505ea5aaf8ecc57e889ded194"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/MATCHED_TRADE_DIFF.csv",
+      "bytes": 101656,
+      "sha256": "e6c554b2379d737c7f550920472ee47a365dde44a016eaaccee06227452e784c"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/TRADES_ADDED_BY_UNMASKING.csv",
+      "bytes": 45302,
+      "sha256": "59f152eaa7c46364c09b07849887eb4f942a6d0ce7eaab5d0cdecc61d6863786"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/audit/UNMASKED_TRADE_LEDGER_ENRICHED.csv",
+      "bytes": 145956,
+      "sha256": "f7f9e779d69d26323812b3f9e5709243d4803a4f018b2e51c63bd9db92629917"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/bar_audit/EURUSD_V1_UNMASKED_M30_BAR_AUDIT.htm",
+      "bytes": 23618,
+      "sha256": "ca0443ed8eaffa5426c03447204c8a8b1b5663ea1e9e7a6df40df674b5fb642d"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/bar_audit/EURUSD_V1_UNMASKED_M30_BAR_AUDIT.ini",
+      "bytes": 546,
+      "sha256": "b8a42cc39418d898e8e5e20cf2cc806d5dc664476bcad8d80ef91c081c7db878"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/bar_audit/EurUsdM30BarAuditExporter.ex5",
+      "bytes": 10608,
+      "sha256": "8d5dc8109f0b5a3273b256e2b129dacf733d7d164b8ff000b8f15c8a121a0833"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/bar_audit/compile_EurUsdM30BarAuditExporter_20260723101850.log",
+      "bytes": 3040,
+      "sha256": "77fe94fa8ca6170d5007a78e44f9f0172f39f37712b76e52397c52e84bd6eb73"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/bar_audit/eurusd_v1_unmasked_m30_bar_audit.csv",
+      "bytes": 4726754,
+      "sha256": "172a8dd5f499236ca66abe37d16825ec405fb16558a6453335fe4a1b344aa8f6"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/locked/ForexMeanReversionScout.ex5",
+      "bytes": 59788,
+      "sha256": "4c52c7d32f0883c7a3c789d474d315618e3cea0a1bd449a62ccc5716bb32cee4"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/locked/compile_ForexMeanReversionScout.log",
+      "bytes": 6886,
+      "sha256": "ac5b599106abfa5f77339138509a521d7423fcfabcc0c4d85737d6e555f2a4b5"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/FOREX_MT5_FREQUENCY_SCOUT_EURUSD_V1_UNMASKED_AUDIT_2026_07_23.json",
+      "bytes": 13723,
+      "sha256": "6a495988bb9bd52651a6bad7871426b90a5a67cf86a40bfd24d1a4216c39498f"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/FOREX_MT5_FREQUENCY_SCOUT_EURUSD_V1_UNMASKED_AUDIT_2026_07_23.md",
+      "bytes": 1880,
+      "sha256": "d22a46cc08e1fd7197d78ac2a79dcf837be06220e8f701cb429bbf7b14754d8e"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80.htm",
+      "bytes": 2374436,
+      "sha256": "e45ebccbb617d333650f2926d189a524bd5d0b00e48326910fe39069723ae673"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80.ini",
+      "bytes": 2307,
+      "sha256": "e9b9826b2682aea66d1880143d3c39d146bc752b2c60ddcd1cc80ec9c0b87ca9"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80_management_log.csv",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80_order_log.csv",
+      "bytes": 778356,
+      "sha256": "70ead7ab70ddc28a270e842d6557a552c253b2d477f154e639d0e90998fd0dab"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80_signal_log.csv",
+      "bytes": 733657,
+      "sha256": "1886d105337644f73ce5522b52b88999521a347cbd6baa90963dcabdb1b7bcb3"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80_startup_log.csv",
+      "bytes": 310,
+      "sha256": "39b5d9af7e5d8eff5cadf50eba35bff2dff920efb28aadb1cacfe2eb1f3a07fc"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80_summary.json",
+      "bytes": 10686,
+      "sha256": "c8bd21d72c633257c8f83fdf08077a3eb7f0205f4cafee636b375a513dda687c"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/outputs/mt5/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80/ForexFreqScout_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_M5_rsi_bb_close_fade_m30_long_all_hours_rr0p80_trades.csv",
+      "bytes": 171092,
+      "sha256": "fe182b0287f321ad7ab9c37bac30ee5b0a6f5576945bc076aecd370701478149"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/run_m30_bar_export.py",
+      "bytes": 4479,
+      "sha256": "200025c66aefd1069a19ca4c621b66c6fc7c2718fb5f242a4792c9a8577bd0a2"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/run_unmasked_audit.py",
+      "bytes": 27929,
+      "sha256": "f17c70cd2428c84d5764cf119dd6b94d86c9c68b12f153cd03a74eb8b4fc5af7"
+    },
+    {
+      "path": "eur-usd/eurusd-phase0/unmasked-audit-v1/tests/test_unmasked_audit.py",
+      "bytes": 1020,
+      "sha256": "e6caa3d09c23e49e5f0d536538ef9b46349aa85b40f6b8fb0a2ec6b6bf178d5e"
+    }
+  ]
+}

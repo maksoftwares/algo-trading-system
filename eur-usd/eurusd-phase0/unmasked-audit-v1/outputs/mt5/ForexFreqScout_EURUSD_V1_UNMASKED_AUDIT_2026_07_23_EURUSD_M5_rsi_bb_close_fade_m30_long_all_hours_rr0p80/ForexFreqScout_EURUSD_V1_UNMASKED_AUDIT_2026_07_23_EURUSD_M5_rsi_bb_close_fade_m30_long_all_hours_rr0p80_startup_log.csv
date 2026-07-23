@@ -1,0 +1,2 @@
+timestamp_broker,run_id,server,account,symbol,magic,is_tester,signal_mode,direction_mode,risk_reward,status,detail
+2022.07.01 00:00:00,MT5_FREQ_EURUSD_V1_UNMASKED_AUDIT_2026_07_23_EURUSD_rsi_bb_close_fade_m30_long_all_hours_rr0p80,Capital.ComMena-Demo,1025742,EURUSD,26070400,true,0,1,0.80,INIT_OK,tester_only

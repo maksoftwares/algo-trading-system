@@ -1,0 +1,1440 @@
+{
+  "generated_at_utc": "2026-07-03T21:15:51Z",
+  "status": "MT5_FREQUENCY_SCOUT_COMPLETE_RESEARCH_ONLY",
+  "scope": {
+    "ea": "ForexMeanReversionScout",
+    "source_ea": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\mt5\\Experts\\ForexMeanReversionScout.mq5",
+    "from_date": "2024.07.01",
+    "to_date": "2026.07.02",
+    "tag": "CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT",
+    "symbols": [
+      "EURUSD"
+    ],
+    "period": "M5",
+    "terminal_sandbox": "C:\\MT5A1M5MomentumBacktest",
+    "tester_model": "MT5 Strategy Tester Model=0 every tick",
+    "frequency_first": true,
+    "tuning_attempted": false,
+    "currency": "USD"
+  },
+  "compile_log": "C:\\MT5A1M5MomentumBacktest\\Logs\\compile_ForexMeanReversionScout_forex_freq_20260703211501.log",
+  "results": [
+    {
+      "symbol": "EURUSD",
+      "variant": "rsi_bb_close_fade_m15_long",
+      "description": "M5 Bollinger close outside band faded with RSI 35/65 confirmation. Signal timeframe=M15. Direction=long.",
+      "elapsed_seconds": 9.73,
+      "status": "FREQUENT_RAW_EDGE_TUNING_CANDIDATE",
+      "summary": {
+        "overall": {
+          "trades": 1034,
+          "wins": 588,
+          "losses": 446,
+          "win_rate_pct": 56.87,
+          "pnl": 45.15,
+          "gross_profit": 493.14,
+          "gross_loss": 447.99,
+          "profit_factor": 1.1008,
+          "avg_pnl": 0.0437
+        },
+        "direction": {
+          "LONG": {
+            "trades": 1034,
+            "wins": 588,
+            "losses": 446,
+            "win_rate_pct": 56.87,
+            "pnl": 45.15,
+            "gross_profit": 493.14,
+            "gross_loss": 447.99,
+            "profit_factor": 1.1008,
+            "avg_pnl": 0.0437
+          }
+        },
+        "entry_hour": {
+          "0": {
+            "trades": 44,
+            "wins": 24,
+            "losses": 20,
+            "win_rate_pct": 54.55,
+            "pnl": 2.63,
+            "gross_profit": 14.9,
+            "gross_loss": 12.27,
+            "profit_factor": 1.2143,
+            "avg_pnl": 0.0598
+          },
+          "1": {
+            "trades": 48,
+            "wins": 25,
+            "losses": 23,
+            "win_rate_pct": 52.08,
+            "pnl": -5.61,
+            "gross_profit": 12.25,
+            "gross_loss": 17.86,
+            "profit_factor": 0.6859,
+            "avg_pnl": -0.1169
+          },
+          "10": {
+            "trades": 34,
+            "wins": 23,
+            "losses": 11,
+            "win_rate_pct": 67.65,
+            "pnl": 6.71,
+            "gross_profit": 19.77,
+            "gross_loss": 13.06,
+            "profit_factor": 1.5138,
+            "avg_pnl": 0.1974
+          },
+          "11": {
+            "trades": 41,
+            "wins": 23,
+            "losses": 18,
+            "win_rate_pct": 56.1,
+            "pnl": 4.46,
+            "gross_profit": 20.59,
+            "gross_loss": 16.13,
+            "profit_factor": 1.2765,
+            "avg_pnl": 0.1088
+          },
+          "12": {
+            "trades": 70,
+            "wins": 44,
+            "losses": 26,
+            "win_rate_pct": 62.86,
+            "pnl": 10.8,
+            "gross_profit": 38.55,
+            "gross_loss": 27.75,
+            "profit_factor": 1.3892,
+            "avg_pnl": 0.1543
+          },
+          "13": {
+            "trades": 81,
+            "wins": 43,
+            "losses": 38,
+            "win_rate_pct": 53.09,
+            "pnl": -5.62,
+            "gross_profit": 40.81,
+            "gross_loss": 46.43,
+            "profit_factor": 0.879,
+            "avg_pnl": -0.0694
+          },
+          "14": {
+            "trades": 67,
+            "wins": 43,
+            "losses": 24,
+            "win_rate_pct": 64.18,
+            "pnl": 15.1,
+            "gross_profit": 47.36,
+            "gross_loss": 32.26,
+            "profit_factor": 1.4681,
+            "avg_pnl": 0.2254
+          },
+          "15": {
+            "trades": 54,
+            "wins": 31,
+            "losses": 23,
+            "win_rate_pct": 57.41,
+            "pnl": 5.36,
+            "gross_profit": 36.51,
+            "gross_loss": 31.15,
+            "profit_factor": 1.1721,
+            "avg_pnl": 0.0993
+          },
+          "16": {
+            "trades": 35,
+            "wins": 21,
+            "losses": 14,
+            "win_rate_pct": 60.0,
+            "pnl": 3.17,
+            "gross_profit": 24.35,
+            "gross_loss": 21.18,
+            "profit_factor": 1.1497,
+            "avg_pnl": 0.0906
+          },
+          "17": {
+            "trades": 19,
+            "wins": 14,
+            "losses": 5,
+            "win_rate_pct": 73.68,
+            "pnl": 6.67,
+            "gross_profit": 16.46,
+            "gross_loss": 9.79,
+            "profit_factor": 1.6813,
+            "avg_pnl": 0.3511
+          },
+          "18": {
+            "trades": 23,
+            "wins": 11,
+            "losses": 12,
+            "win_rate_pct": 47.83,
+            "pnl": -6.16,
+            "gross_profit": 12.05,
+            "gross_loss": 18.21,
+            "profit_factor": 0.6617,
+            "avg_pnl": -0.2678
+          },
+          "19": {
+            "trades": 21,
+            "wins": 12,
+            "losses": 9,
+            "win_rate_pct": 57.14,
+            "pnl": 1.17,
+            "gross_profit": 13.03,
+            "gross_loss": 11.86,
+            "profit_factor": 1.0987,
+            "avg_pnl": 0.0557
+          },
+          "2": {
+            "trades": 41,
+            "wins": 26,
+            "losses": 15,
+            "win_rate_pct": 63.41,
+            "pnl": 5.07,
+            "gross_profit": 16.34,
+            "gross_loss": 11.27,
+            "profit_factor": 1.4499,
+            "avg_pnl": 0.1237
+          },
+          "20": {
+            "trades": 9,
+            "wins": 6,
+            "losses": 3,
+            "win_rate_pct": 66.67,
+            "pnl": 0.88,
+            "gross_profit": 3.67,
+            "gross_loss": 2.79,
+            "profit_factor": 1.3154,
+            "avg_pnl": 0.0978
+          },
+          "21": {
+            "trades": 21,
+            "wins": 10,
+            "losses": 11,
+            "win_rate_pct": 47.62,
+            "pnl": -7.64,
+            "gross_profit": 9.74,
+            "gross_loss": 17.38,
+            "profit_factor": 0.5604,
+            "avg_pnl": -0.3638
+          },
+          "22": {
+            "trades": 19,
+            "wins": 12,
+            "losses": 7,
+            "win_rate_pct": 63.16,
+            "pnl": 5.35,
+            "gross_profit": 12.06,
+            "gross_loss": 6.71,
+            "profit_factor": 1.7973,
+            "avg_pnl": 0.2816
+          },
+          "23": {
+            "trades": 16,
+            "wins": 6,
+            "losses": 10,
+            "win_rate_pct": 37.5,
+            "pnl": -3.68,
+            "gross_profit": 5.09,
+            "gross_loss": 8.77,
+            "profit_factor": 0.5804,
+            "avg_pnl": -0.23
+          },
+          "3": {
+            "trades": 22,
+            "wins": 12,
+            "losses": 10,
+            "win_rate_pct": 54.55,
+            "pnl": -0.52,
+            "gross_profit": 6.11,
+            "gross_loss": 6.63,
+            "profit_factor": 0.9216,
+            "avg_pnl": -0.0236
+          },
+          "4": {
+            "trades": 16,
+            "wins": 9,
+            "losses": 7,
+            "win_rate_pct": 56.25,
+            "pnl": 1.54,
+            "gross_profit": 5.51,
+            "gross_loss": 3.97,
+            "profit_factor": 1.3879,
+            "avg_pnl": 0.0963
+          },
+          "5": {
+            "trades": 32,
+            "wins": 20,
+            "losses": 12,
+            "win_rate_pct": 62.5,
+            "pnl": 2.98,
+            "gross_profit": 10.71,
+            "gross_loss": 7.73,
+            "profit_factor": 1.3855,
+            "avg_pnl": 0.0931
+          },
+          "6": {
+            "trades": 82,
+            "wins": 37,
+            "losses": 45,
+            "win_rate_pct": 45.12,
+            "pnl": -11.31,
+            "gross_profit": 19.81,
+            "gross_loss": 31.12,
+            "profit_factor": 0.6366,
+            "avg_pnl": -0.1379
+          },
+          "7": {
+            "trades": 113,
+            "wins": 61,
+            "losses": 52,
+            "win_rate_pct": 53.98,
+            "pnl": -0.47,
+            "gross_profit": 42.47,
+            "gross_loss": 42.94,
+            "profit_factor": 0.9891,
+            "avg_pnl": -0.0042
+          },
+          "8": {
+            "trades": 89,
+            "wins": 51,
+            "losses": 38,
+            "win_rate_pct": 57.3,
+            "pnl": 8.06,
+            "gross_profit": 45.06,
+            "gross_loss": 37.0,
+            "profit_factor": 1.2178,
+            "avg_pnl": 0.0906
+          },
+          "9": {
+            "trades": 37,
+            "wins": 24,
+            "losses": 13,
+            "win_rate_pct": 64.86,
+            "pnl": 6.21,
+            "gross_profit": 19.94,
+            "gross_loss": 13.73,
+            "profit_factor": 1.4523,
+            "avg_pnl": 0.1678
+          }
+        }
+      },
+      "mt5_report_metrics": {
+        "History Quality": "98%",
+        "Bars": "145930",
+        "Ticks": "34901452",
+        "Total Net Profit": "40.42",
+        "Gross Profit": "490.72",
+        "Balance Drawdown Maximal": "30.65 (2.87%)",
+        "Equity Drawdown Maximal": "31.05 (2.91%)",
+        "Gross Loss": "-450.30",
+        "Balance Drawdown Relative": "2.87% (30.65)",
+        "Equity Drawdown Relative": "2.91% (31.05)",
+        "Profit Factor": "1.09",
+        "Expected Payoff": "0.04",
+        "Recovery Factor": "1.30",
+        "Sharpe Ratio": "2.93",
+        "Total Trades": "1034",
+        "Short Trades (won %)": "0 (0.00%)",
+        "Long Trades (won %)": "1034 (56.87%)",
+        "Total Deals": "2068",
+        "Profit Trades (% of total)": "588 (56.87%)",
+        "Loss Trades (% of total)": "446 (43.13%)"
+      },
+      "activity": {
+        "signal_rows": 2726,
+        "order_rows": 2726,
+        "order_actions": {
+          "GUARD_BLOCK": 1677,
+          "ORDER_SEND_OK": 1034,
+          "ORDER_SEND_FAIL": 15
+        },
+        "guard_reasons_top": {
+          "": 1677,
+          "invalid stops": 15,
+          "done at 1.15267": 3,
+          "done at 1.08176": 2,
+          "done at 1.08832": 2,
+          "done at 1.08767": 2,
+          "done at 1.08447": 2,
+          "done at 1.08103": 2
+        }
+      },
+      "artifacts": {
+        "mt5_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long.htm",
+        "tester_config": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long.ini",
+        "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long_trades.csv",
+        "startup_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long_startup_log.csv",
+        "signal_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long_signal_log.csv",
+        "order_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long_order_log.csv",
+        "management_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long_management_log.csv",
+        "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_long_summary.json"
+      }
+    },
+    {
+      "symbol": "EURUSD",
+      "variant": "rsi_bb_close_fade_m15_short",
+      "description": "M5 Bollinger close outside band faded with RSI 35/65 confirmation. Signal timeframe=M15. Direction=short.",
+      "elapsed_seconds": 13.77,
+      "status": "FREQUENT_BUT_THIN_EDGE_WATCH",
+      "summary": {
+        "overall": {
+          "trades": 1034,
+          "wins": 571,
+          "losses": 463,
+          "win_rate_pct": 55.22,
+          "pnl": 2.28,
+          "gross_profit": 488.51,
+          "gross_loss": 486.23,
+          "profit_factor": 1.0047,
+          "avg_pnl": 0.0022
+        },
+        "direction": {
+          "SHORT": {
+            "trades": 1034,
+            "wins": 571,
+            "losses": 463,
+            "win_rate_pct": 55.22,
+            "pnl": 2.28,
+            "gross_profit": 488.51,
+            "gross_loss": 486.23,
+            "profit_factor": 1.0047,
+            "avg_pnl": 0.0022
+          }
+        },
+        "entry_hour": {
+          "0": {
+            "trades": 48,
+            "wins": 24,
+            "losses": 24,
+            "win_rate_pct": 50.0,
+            "pnl": -8.31,
+            "gross_profit": 14.03,
+            "gross_loss": 22.34,
+            "profit_factor": 0.628,
+            "avg_pnl": -0.1731
+          },
+          "1": {
+            "trades": 53,
+            "wins": 30,
+            "losses": 23,
+            "win_rate_pct": 56.6,
+            "pnl": 0.45,
+            "gross_profit": 17.34,
+            "gross_loss": 16.89,
+            "profit_factor": 1.0266,
+            "avg_pnl": 0.0085
+          },
+          "10": {
+            "trades": 35,
+            "wins": 17,
+            "losses": 18,
+            "win_rate_pct": 48.57,
+            "pnl": -1.45,
+            "gross_profit": 19.28,
+            "gross_loss": 20.73,
+            "profit_factor": 0.9301,
+            "avg_pnl": -0.0414
+          },
+          "11": {
+            "trades": 29,
+            "wins": 19,
+            "losses": 10,
+            "win_rate_pct": 65.52,
+            "pnl": 7.51,
+            "gross_profit": 17.34,
+            "gross_loss": 9.83,
+            "profit_factor": 1.764,
+            "avg_pnl": 0.259
+          },
+          "12": {
+            "trades": 48,
+            "wins": 28,
+            "losses": 20,
+            "win_rate_pct": 58.33,
+            "pnl": 5.49,
+            "gross_profit": 30.17,
+            "gross_loss": 24.68,
+            "profit_factor": 1.2224,
+            "avg_pnl": 0.1144
+          },
+          "13": {
+            "trades": 81,
+            "wins": 50,
+            "losses": 31,
+            "win_rate_pct": 61.73,
+            "pnl": 14.8,
+            "gross_profit": 52.98,
+            "gross_loss": 38.18,
+            "profit_factor": 1.3876,
+            "avg_pnl": 0.1827
+          },
+          "14": {
+            "trades": 84,
+            "wins": 49,
+            "losses": 35,
+            "win_rate_pct": 58.33,
+            "pnl": 7.27,
+            "gross_profit": 53.4,
+            "gross_loss": 46.13,
+            "profit_factor": 1.1576,
+            "avg_pnl": 0.0865
+          },
+          "15": {
+            "trades": 48,
+            "wins": 26,
+            "losses": 22,
+            "win_rate_pct": 54.17,
+            "pnl": -4.99,
+            "gross_profit": 29.95,
+            "gross_loss": 34.94,
+            "profit_factor": 0.8572,
+            "avg_pnl": -0.104
+          },
+          "16": {
+            "trades": 26,
+            "wins": 17,
+            "losses": 9,
+            "win_rate_pct": 65.38,
+            "pnl": 6.95,
+            "gross_profit": 19.21,
+            "gross_loss": 12.26,
+            "profit_factor": 1.5669,
+            "avg_pnl": 0.2673
+          },
+          "17": {
+            "trades": 18,
+            "wins": 8,
+            "losses": 10,
+            "win_rate_pct": 44.44,
+            "pnl": -5.64,
+            "gross_profit": 7.69,
+            "gross_loss": 13.33,
+            "profit_factor": 0.5769,
+            "avg_pnl": -0.3133
+          },
+          "18": {
+            "trades": 16,
+            "wins": 7,
+            "losses": 9,
+            "win_rate_pct": 43.75,
+            "pnl": -3.81,
+            "gross_profit": 7.45,
+            "gross_loss": 11.26,
+            "profit_factor": 0.6616,
+            "avg_pnl": -0.2381
+          },
+          "19": {
+            "trades": 18,
+            "wins": 12,
+            "losses": 6,
+            "win_rate_pct": 66.67,
+            "pnl": 8.89,
+            "gross_profit": 16.86,
+            "gross_loss": 7.97,
+            "profit_factor": 2.1154,
+            "avg_pnl": 0.4939
+          },
+          "2": {
+            "trades": 28,
+            "wins": 16,
+            "losses": 12,
+            "win_rate_pct": 57.14,
+            "pnl": 0.06,
+            "gross_profit": 9.12,
+            "gross_loss": 9.06,
+            "profit_factor": 1.0066,
+            "avg_pnl": 0.0021
+          },
+          "20": {
+            "trades": 8,
+            "wins": 3,
+            "losses": 5,
+            "win_rate_pct": 37.5,
+            "pnl": -2.21,
+            "gross_profit": 3.58,
+            "gross_loss": 5.79,
+            "profit_factor": 0.6183,
+            "avg_pnl": -0.2762
+          },
+          "21": {
+            "trades": 13,
+            "wins": 5,
+            "losses": 8,
+            "win_rate_pct": 38.46,
+            "pnl": 0.02,
+            "gross_profit": 7.15,
+            "gross_loss": 7.13,
+            "profit_factor": 1.0028,
+            "avg_pnl": 0.0015
+          },
+          "22": {
+            "trades": 22,
+            "wins": 10,
+            "losses": 12,
+            "win_rate_pct": 45.45,
+            "pnl": -7.82,
+            "gross_profit": 6.73,
+            "gross_loss": 14.55,
+            "profit_factor": 0.4625,
+            "avg_pnl": -0.3555
+          },
+          "23": {
+            "trades": 32,
+            "wins": 18,
+            "losses": 14,
+            "win_rate_pct": 56.25,
+            "pnl": -4.63,
+            "gross_profit": 12.06,
+            "gross_loss": 16.69,
+            "profit_factor": 0.7226,
+            "avg_pnl": -0.1447
+          },
+          "3": {
+            "trades": 19,
+            "wins": 11,
+            "losses": 8,
+            "win_rate_pct": 57.89,
+            "pnl": -1.38,
+            "gross_profit": 5.16,
+            "gross_loss": 6.54,
+            "profit_factor": 0.789,
+            "avg_pnl": -0.0726
+          },
+          "4": {
+            "trades": 20,
+            "wins": 13,
+            "losses": 7,
+            "win_rate_pct": 65.0,
+            "pnl": 3.81,
+            "gross_profit": 8.29,
+            "gross_loss": 4.48,
+            "profit_factor": 1.8504,
+            "avg_pnl": 0.1905
+          },
+          "5": {
+            "trades": 29,
+            "wins": 19,
+            "losses": 10,
+            "win_rate_pct": 65.52,
+            "pnl": 3.13,
+            "gross_profit": 10.36,
+            "gross_loss": 7.23,
+            "profit_factor": 1.4329,
+            "avg_pnl": 0.1079
+          },
+          "6": {
+            "trades": 85,
+            "wins": 46,
+            "losses": 39,
+            "win_rate_pct": 54.12,
+            "pnl": 1.51,
+            "gross_profit": 30.35,
+            "gross_loss": 28.84,
+            "profit_factor": 1.0524,
+            "avg_pnl": 0.0178
+          },
+          "7": {
+            "trades": 112,
+            "wins": 53,
+            "losses": 59,
+            "win_rate_pct": 47.32,
+            "pnl": -13.74,
+            "gross_profit": 36.29,
+            "gross_loss": 50.03,
+            "profit_factor": 0.7254,
+            "avg_pnl": -0.1227
+          },
+          "8": {
+            "trades": 106,
+            "wins": 60,
+            "losses": 46,
+            "win_rate_pct": 56.6,
+            "pnl": 3.32,
+            "gross_profit": 48.56,
+            "gross_loss": 45.24,
+            "profit_factor": 1.0734,
+            "avg_pnl": 0.0313
+          },
+          "9": {
+            "trades": 56,
+            "wins": 30,
+            "losses": 26,
+            "win_rate_pct": 53.57,
+            "pnl": -6.95,
+            "gross_profit": 25.16,
+            "gross_loss": 32.11,
+            "profit_factor": 0.7836,
+            "avg_pnl": -0.1241
+          }
+        }
+      },
+      "mt5_report_metrics": {
+        "History Quality": "98%",
+        "Bars": "145930",
+        "Ticks": "34901452",
+        "Total Net Profit": "3.21",
+        "Gross Profit": "489.14",
+        "Balance Drawdown Maximal": "59.24 (5.65%)",
+        "Equity Drawdown Maximal": "60.67 (5.78%)",
+        "Gross Loss": "-485.93",
+        "Balance Drawdown Relative": "5.65% (59.24)",
+        "Equity Drawdown Relative": "5.78% (60.67)",
+        "Profit Factor": "1.01",
+        "Expected Payoff": "0.00",
+        "Recovery Factor": "0.05",
+        "Sharpe Ratio": "0.22",
+        "Total Trades": "1034",
+        "Short Trades (won %)": "1034 (55.22%)",
+        "Long Trades (won %)": "0 (0.00%)",
+        "Total Deals": "2068",
+        "Profit Trades (% of total)": "571 (55.22%)",
+        "Loss Trades (% of total)": "463 (44.78%)"
+      },
+      "activity": {
+        "signal_rows": 2726,
+        "order_rows": 2726,
+        "order_actions": {
+          "ORDER_SEND_OK": 1034,
+          "GUARD_BLOCK": 1667,
+          "ORDER_SEND_FAIL": 25
+        },
+        "guard_reasons_top": {
+          "": 1667,
+          "invalid stops": 23,
+          "done at 1.08240": 2,
+          "done at 1.08680": 2,
+          "done at 1.08364": 2,
+          "done at 1.11716": 2,
+          "done at 1.11809": 2,
+          "done at 1.12056": 2
+        }
+      },
+      "artifacts": {
+        "mt5_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short.htm",
+        "tester_config": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short.ini",
+        "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short_trades.csv",
+        "startup_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short_startup_log.csv",
+        "signal_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short_signal_log.csv",
+        "order_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short_order_log.csv",
+        "management_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short_management_log.csv",
+        "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_bb_close_fade_m15_short_summary.json"
+      }
+    },
+    {
+      "symbol": "EURUSD",
+      "variant": "rsi_extreme_fade_m15_short",
+      "description": "M5 RSI 30/70 extreme faded toward mean. Signal timeframe=M15. Direction=short.",
+      "elapsed_seconds": 9.48,
+      "status": "FREQUENT_BUT_NEGATIVE_SKIP_TUNING",
+      "summary": {
+        "overall": {
+          "trades": 779,
+          "wins": 414,
+          "losses": 365,
+          "win_rate_pct": 53.15,
+          "pnl": -46.91,
+          "gross_profit": 384.28,
+          "gross_loss": 431.19,
+          "profit_factor": 0.8912,
+          "avg_pnl": -0.0602
+        },
+        "direction": {
+          "SHORT": {
+            "trades": 779,
+            "wins": 414,
+            "losses": 365,
+            "win_rate_pct": 53.15,
+            "pnl": -46.91,
+            "gross_profit": 384.28,
+            "gross_loss": 431.19,
+            "profit_factor": 0.8912,
+            "avg_pnl": -0.0602
+          }
+        },
+        "entry_hour": {
+          "0": {
+            "trades": 31,
+            "wins": 16,
+            "losses": 15,
+            "win_rate_pct": 51.61,
+            "pnl": -5.42,
+            "gross_profit": 10.2,
+            "gross_loss": 15.62,
+            "profit_factor": 0.653,
+            "avg_pnl": -0.1748
+          },
+          "1": {
+            "trades": 32,
+            "wins": 18,
+            "losses": 14,
+            "win_rate_pct": 56.25,
+            "pnl": 1.83,
+            "gross_profit": 11.68,
+            "gross_loss": 9.85,
+            "profit_factor": 1.1858,
+            "avg_pnl": 0.0572
+          },
+          "10": {
+            "trades": 29,
+            "wins": 15,
+            "losses": 14,
+            "win_rate_pct": 51.72,
+            "pnl": -1.35,
+            "gross_profit": 18.37,
+            "gross_loss": 19.72,
+            "profit_factor": 0.9315,
+            "avg_pnl": -0.0466
+          },
+          "11": {
+            "trades": 27,
+            "wins": 16,
+            "losses": 11,
+            "win_rate_pct": 59.26,
+            "pnl": 1.98,
+            "gross_profit": 14.32,
+            "gross_loss": 12.34,
+            "profit_factor": 1.1605,
+            "avg_pnl": 0.0733
+          },
+          "12": {
+            "trades": 39,
+            "wins": 25,
+            "losses": 14,
+            "win_rate_pct": 64.1,
+            "pnl": 4.95,
+            "gross_profit": 24.1,
+            "gross_loss": 19.15,
+            "profit_factor": 1.2585,
+            "avg_pnl": 0.1269
+          },
+          "13": {
+            "trades": 58,
+            "wins": 31,
+            "losses": 27,
+            "win_rate_pct": 53.45,
+            "pnl": -0.99,
+            "gross_profit": 36.59,
+            "gross_loss": 37.58,
+            "profit_factor": 0.9737,
+            "avg_pnl": -0.0171
+          },
+          "14": {
+            "trades": 61,
+            "wins": 36,
+            "losses": 25,
+            "win_rate_pct": 59.02,
+            "pnl": 6.74,
+            "gross_profit": 40.66,
+            "gross_loss": 33.92,
+            "profit_factor": 1.1987,
+            "avg_pnl": 0.1105
+          },
+          "15": {
+            "trades": 46,
+            "wins": 23,
+            "losses": 23,
+            "win_rate_pct": 50.0,
+            "pnl": -12.58,
+            "gross_profit": 29.37,
+            "gross_loss": 41.95,
+            "profit_factor": 0.7001,
+            "avg_pnl": -0.2735
+          },
+          "16": {
+            "trades": 33,
+            "wins": 21,
+            "losses": 12,
+            "win_rate_pct": 63.64,
+            "pnl": 8.44,
+            "gross_profit": 25.46,
+            "gross_loss": 17.02,
+            "profit_factor": 1.4959,
+            "avg_pnl": 0.2558
+          },
+          "17": {
+            "trades": 19,
+            "wins": 9,
+            "losses": 10,
+            "win_rate_pct": 47.37,
+            "pnl": -4.68,
+            "gross_profit": 9.61,
+            "gross_loss": 14.29,
+            "profit_factor": 0.6725,
+            "avg_pnl": -0.2463
+          },
+          "18": {
+            "trades": 22,
+            "wins": 11,
+            "losses": 11,
+            "win_rate_pct": 50.0,
+            "pnl": -1.67,
+            "gross_profit": 12.27,
+            "gross_loss": 13.94,
+            "profit_factor": 0.8802,
+            "avg_pnl": -0.0759
+          },
+          "19": {
+            "trades": 13,
+            "wins": 5,
+            "losses": 8,
+            "win_rate_pct": 38.46,
+            "pnl": -3.68,
+            "gross_profit": 5.36,
+            "gross_loss": 9.04,
+            "profit_factor": 0.5929,
+            "avg_pnl": -0.2831
+          },
+          "2": {
+            "trades": 22,
+            "wins": 14,
+            "losses": 8,
+            "win_rate_pct": 63.64,
+            "pnl": 3.68,
+            "gross_profit": 11.35,
+            "gross_loss": 7.67,
+            "profit_factor": 1.4798,
+            "avg_pnl": 0.1673
+          },
+          "20": {
+            "trades": 10,
+            "wins": 2,
+            "losses": 8,
+            "win_rate_pct": 20.0,
+            "pnl": -10.16,
+            "gross_profit": 2.61,
+            "gross_loss": 12.77,
+            "profit_factor": 0.2044,
+            "avg_pnl": -1.016
+          },
+          "21": {
+            "trades": 8,
+            "wins": 3,
+            "losses": 5,
+            "win_rate_pct": 37.5,
+            "pnl": 1.07,
+            "gross_profit": 5.87,
+            "gross_loss": 4.8,
+            "profit_factor": 1.2229,
+            "avg_pnl": 0.1338
+          },
+          "22": {
+            "trades": 21,
+            "wins": 8,
+            "losses": 13,
+            "win_rate_pct": 38.1,
+            "pnl": -8.4,
+            "gross_profit": 6.65,
+            "gross_loss": 15.05,
+            "profit_factor": 0.4419,
+            "avg_pnl": -0.4
+          },
+          "23": {
+            "trades": 22,
+            "wins": 12,
+            "losses": 10,
+            "win_rate_pct": 54.55,
+            "pnl": -1.95,
+            "gross_profit": 8.56,
+            "gross_loss": 10.51,
+            "profit_factor": 0.8145,
+            "avg_pnl": -0.0886
+          },
+          "3": {
+            "trades": 16,
+            "wins": 9,
+            "losses": 7,
+            "win_rate_pct": 56.25,
+            "pnl": -0.74,
+            "gross_profit": 4.59,
+            "gross_loss": 5.33,
+            "profit_factor": 0.8612,
+            "avg_pnl": -0.0463
+          },
+          "4": {
+            "trades": 16,
+            "wins": 12,
+            "losses": 4,
+            "win_rate_pct": 75.0,
+            "pnl": 5.36,
+            "gross_profit": 8.45,
+            "gross_loss": 3.09,
+            "profit_factor": 2.7346,
+            "avg_pnl": 0.335
+          },
+          "5": {
+            "trades": 18,
+            "wins": 11,
+            "losses": 7,
+            "win_rate_pct": 61.11,
+            "pnl": 2.49,
+            "gross_profit": 7.68,
+            "gross_loss": 5.19,
+            "profit_factor": 1.4798,
+            "avg_pnl": 0.1383
+          },
+          "6": {
+            "trades": 50,
+            "wins": 26,
+            "losses": 24,
+            "win_rate_pct": 52.0,
+            "pnl": -3.59,
+            "gross_profit": 16.07,
+            "gross_loss": 19.66,
+            "profit_factor": 0.8174,
+            "avg_pnl": -0.0718
+          },
+          "7": {
+            "trades": 67,
+            "wins": 27,
+            "losses": 40,
+            "win_rate_pct": 40.3,
+            "pnl": -13.81,
+            "gross_profit": 19.83,
+            "gross_loss": 33.64,
+            "profit_factor": 0.5895,
+            "avg_pnl": -0.2061
+          },
+          "8": {
+            "trades": 72,
+            "wins": 38,
+            "losses": 34,
+            "win_rate_pct": 52.78,
+            "pnl": -8.09,
+            "gross_profit": 33.91,
+            "gross_loss": 42.0,
+            "profit_factor": 0.8074,
+            "avg_pnl": -0.1124
+          },
+          "9": {
+            "trades": 47,
+            "wins": 26,
+            "losses": 21,
+            "win_rate_pct": 55.32,
+            "pnl": -6.34,
+            "gross_profit": 20.72,
+            "gross_loss": 27.06,
+            "profit_factor": 0.7657,
+            "avg_pnl": -0.1349
+          }
+        }
+      },
+      "mt5_report_metrics": {
+        "History Quality": "98%",
+        "Bars": "145930",
+        "Ticks": "34901452",
+        "Total Net Profit": "-46.03",
+        "Gross Profit": "384.78",
+        "Balance Drawdown Maximal": "82.46 (8.00%)",
+        "Equity Drawdown Maximal": "83.21 (8.08%)",
+        "Gross Loss": "-430.81",
+        "Balance Drawdown Relative": "8.00% (82.46)",
+        "Equity Drawdown Relative": "8.08% (83.21)",
+        "Profit Factor": "0.89",
+        "Expected Payoff": "-0.06",
+        "Recovery Factor": "-0.55",
+        "Sharpe Ratio": "-3.59",
+        "Total Trades": "779",
+        "Short Trades (won %)": "779 (53.15%)",
+        "Long Trades (won %)": "0 (0.00%)",
+        "Total Deals": "1558",
+        "Profit Trades (% of total)": "414 (53.15%)",
+        "Loss Trades (% of total)": "365 (46.85%)"
+      },
+      "activity": {
+        "signal_rows": 2579,
+        "order_rows": 2579,
+        "order_actions": {
+          "ORDER_SEND_OK": 779,
+          "GUARD_BLOCK": 1792,
+          "ORDER_SEND_FAIL": 8
+        },
+        "guard_reasons_top": {
+          "": 1792,
+          "invalid stops": 7,
+          "done at 1.11716": 2,
+          "done at 1.11454": 2,
+          "done at 1.12056": 2,
+          "done at 1.05078": 2,
+          "done at 1.15550": 2,
+          "done at 1.14005": 2
+        }
+      },
+      "artifacts": {
+        "mt5_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short.htm",
+        "tester_config": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short.ini",
+        "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short_trades.csv",
+        "startup_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short_startup_log.csv",
+        "signal_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short_signal_log.csv",
+        "order_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short_order_log.csv",
+        "management_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short_management_log.csv",
+        "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_short_summary.json"
+      }
+    },
+    {
+      "symbol": "EURUSD",
+      "variant": "rsi_extreme_fade_m15_long",
+      "description": "M5 RSI 30/70 extreme faded toward mean. Signal timeframe=M15. Direction=long.",
+      "elapsed_seconds": 16.13,
+      "status": "FREQUENT_RAW_EDGE_TUNING_CANDIDATE",
+      "summary": {
+        "overall": {
+          "trades": 739,
+          "wins": 419,
+          "losses": 320,
+          "win_rate_pct": 56.7,
+          "pnl": 64.66,
+          "gross_profit": 400.76,
+          "gross_loss": 336.1,
+          "profit_factor": 1.1924,
+          "avg_pnl": 0.0875
+        },
+        "direction": {
+          "LONG": {
+            "trades": 739,
+            "wins": 419,
+            "losses": 320,
+            "win_rate_pct": 56.7,
+            "pnl": 64.66,
+            "gross_profit": 400.76,
+            "gross_loss": 336.1,
+            "profit_factor": 1.1924,
+            "avg_pnl": 0.0875
+          }
+        },
+        "entry_hour": {
+          "0": {
+            "trades": 17,
+            "wins": 11,
+            "losses": 6,
+            "win_rate_pct": 64.71,
+            "pnl": 7.35,
+            "gross_profit": 11.24,
+            "gross_loss": 3.89,
+            "profit_factor": 2.8895,
+            "avg_pnl": 0.4324
+          },
+          "1": {
+            "trades": 22,
+            "wins": 8,
+            "losses": 14,
+            "win_rate_pct": 36.36,
+            "pnl": -9.03,
+            "gross_profit": 4.18,
+            "gross_loss": 13.21,
+            "profit_factor": 0.3164,
+            "avg_pnl": -0.4105
+          },
+          "10": {
+            "trades": 29,
+            "wins": 19,
+            "losses": 10,
+            "win_rate_pct": 65.52,
+            "pnl": 7.05,
+            "gross_profit": 19.17,
+            "gross_loss": 12.12,
+            "profit_factor": 1.5817,
+            "avg_pnl": 0.2431
+          },
+          "11": {
+            "trades": 28,
+            "wins": 16,
+            "losses": 12,
+            "win_rate_pct": 57.14,
+            "pnl": 5.01,
+            "gross_profit": 16.28,
+            "gross_loss": 11.27,
+            "profit_factor": 1.4445,
+            "avg_pnl": 0.1789
+          },
+          "12": {
+            "trades": 55,
+            "wins": 34,
+            "losses": 21,
+            "win_rate_pct": 61.82,
+            "pnl": 5.25,
+            "gross_profit": 28.79,
+            "gross_loss": 23.54,
+            "profit_factor": 1.223,
+            "avg_pnl": 0.0955
+          },
+          "13": {
+            "trades": 51,
+            "wins": 29,
+            "losses": 22,
+            "win_rate_pct": 56.86,
+            "pnl": 1.96,
+            "gross_profit": 28.82,
+            "gross_loss": 26.86,
+            "profit_factor": 1.073,
+            "avg_pnl": 0.0384
+          },
+          "14": {
+            "trades": 52,
+            "wins": 34,
+            "losses": 18,
+            "win_rate_pct": 65.38,
+            "pnl": 14.37,
+            "gross_profit": 38.73,
+            "gross_loss": 24.36,
+            "profit_factor": 1.5899,
+            "avg_pnl": 0.2763
+          },
+          "15": {
+            "trades": 40,
+            "wins": 22,
+            "losses": 18,
+            "win_rate_pct": 55.0,
+            "pnl": 3.33,
+            "gross_profit": 28.04,
+            "gross_loss": 24.71,
+            "profit_factor": 1.1348,
+            "avg_pnl": 0.0832
+          },
+          "16": {
+            "trades": 25,
+            "wins": 16,
+            "losses": 9,
+            "win_rate_pct": 64.0,
+            "pnl": 5.54,
+            "gross_profit": 19.78,
+            "gross_loss": 14.24,
+            "profit_factor": 1.389,
+            "avg_pnl": 0.2216
+          },
+          "17": {
+            "trades": 20,
+            "wins": 10,
+            "losses": 10,
+            "win_rate_pct": 50.0,
+            "pnl": 3.43,
+            "gross_profit": 13.63,
+            "gross_loss": 10.2,
+            "profit_factor": 1.3363,
+            "avg_pnl": 0.1715
+          },
+          "18": {
+            "trades": 16,
+            "wins": 7,
+            "losses": 9,
+            "win_rate_pct": 43.75,
+            "pnl": -1.5,
+            "gross_profit": 9.69,
+            "gross_loss": 11.19,
+            "profit_factor": 0.866,
+            "avg_pnl": -0.0938
+          },
+          "19": {
+            "trades": 18,
+            "wins": 12,
+            "losses": 6,
+            "win_rate_pct": 66.67,
+            "pnl": 3.3,
+            "gross_profit": 11.11,
+            "gross_loss": 7.81,
+            "profit_factor": 1.4225,
+            "avg_pnl": 0.1833
+          },
+          "2": {
+            "trades": 21,
+            "wins": 13,
+            "losses": 8,
+            "win_rate_pct": 61.9,
+            "pnl": 0.85,
+            "gross_profit": 10.58,
+            "gross_loss": 9.73,
+            "profit_factor": 1.0874,
+            "avg_pnl": 0.0405
+          },
+          "20": {
+            "trades": 15,
+            "wins": 12,
+            "losses": 3,
+            "win_rate_pct": 80.0,
+            "pnl": 7.91,
+            "gross_profit": 13.48,
+            "gross_loss": 5.57,
+            "profit_factor": 2.4201,
+            "avg_pnl": 0.5273
+          },
+          "21": {
+            "trades": 15,
+            "wins": 7,
+            "losses": 8,
+            "win_rate_pct": 46.67,
+            "pnl": -4.86,
+            "gross_profit": 7.86,
+            "gross_loss": 12.72,
+            "profit_factor": 0.6179,
+            "avg_pnl": -0.324
+          },
+          "22": {
+            "trades": 15,
+            "wins": 11,
+            "losses": 4,
+            "win_rate_pct": 73.33,
+            "pnl": 7.78,
+            "gross_profit": 11.86,
+            "gross_loss": 4.08,
+            "profit_factor": 2.9069,
+            "avg_pnl": 0.5187
+          },
+          "23": {
+            "trades": 16,
+            "wins": 9,
+            "losses": 7,
+            "win_rate_pct": 56.25,
+            "pnl": 2.63,
+            "gross_profit": 9.97,
+            "gross_loss": 7.34,
+            "profit_factor": 1.3583,
+            "avg_pnl": 0.1644
+          },
+          "3": {
+            "trades": 22,
+            "wins": 10,
+            "losses": 12,
+            "win_rate_pct": 45.45,
+            "pnl": 0.68,
+            "gross_profit": 8.84,
+            "gross_loss": 8.16,
+            "profit_factor": 1.0833,
+            "avg_pnl": 0.0309
+          },
+          "4": {
+            "trades": 21,
+            "wins": 11,
+            "losses": 10,
+            "win_rate_pct": 52.38,
+            "pnl": -0.92,
+            "gross_profit": 5.72,
+            "gross_loss": 6.64,
+            "profit_factor": 0.8614,
+            "avg_pnl": -0.0438
+          },
+          "5": {
+            "trades": 22,
+            "wins": 8,
+            "losses": 14,
+            "win_rate_pct": 36.36,
+            "pnl": -2.03,
+            "gross_profit": 6.33,
+            "gross_loss": 8.36,
+            "profit_factor": 0.7572,
+            "avg_pnl": -0.0923
+          },
+          "6": {
+            "trades": 46,
+            "wins": 26,
+            "losses": 20,
+            "win_rate_pct": 56.52,
+            "pnl": 2.02,
+            "gross_profit": 15.48,
+            "gross_loss": 13.46,
+            "profit_factor": 1.1501,
+            "avg_pnl": 0.0439
+          },
+          "7": {
+            "trades": 75,
+            "wins": 37,
+            "losses": 38,
+            "win_rate_pct": 49.33,
+            "pnl": -4.13,
+            "gross_profit": 27.62,
+            "gross_loss": 31.75,
+            "profit_factor": 0.8699,
+            "avg_pnl": -0.0551
+          },
+          "8": {
+            "trades": 64,
+            "wins": 36,
+            "losses": 28,
+            "win_rate_pct": 56.25,
+            "pnl": 4.2,
+            "gross_profit": 34.65,
+            "gross_loss": 30.45,
+            "profit_factor": 1.1379,
+            "avg_pnl": 0.0656
+          },
+          "9": {
+            "trades": 34,
+            "wins": 21,
+            "losses": 13,
+            "win_rate_pct": 61.76,
+            "pnl": 4.47,
+            "gross_profit": 18.91,
+            "gross_loss": 14.44,
+            "profit_factor": 1.3096,
+            "avg_pnl": 0.1315
+          }
+        }
+      },
+      "mt5_report_metrics": {
+        "History Quality": "98%",
+        "Bars": "145930",
+        "Ticks": "34901452",
+        "Total Net Profit": "59.38",
+        "Gross Profit": "398.45",
+        "Balance Drawdown Maximal": "43.38 (3.95%)",
+        "Equity Drawdown Maximal": "43.74 (3.98%)",
+        "Gross Loss": "-339.07",
+        "Balance Drawdown Relative": "3.95% (43.38)",
+        "Equity Drawdown Relative": "3.98% (43.74)",
+        "Profit Factor": "1.18",
+        "Expected Payoff": "0.08",
+        "Recovery Factor": "1.36",
+        "Sharpe Ratio": "5.09",
+        "Total Trades": "739",
+        "Short Trades (won %)": "0 (0.00%)",
+        "Long Trades (won %)": "739 (56.70%)",
+        "Total Deals": "1478",
+        "Profit Trades (% of total)": "419 (56.70%)",
+        "Loss Trades (% of total)": "320 (43.30%)"
+      },
+      "activity": {
+        "signal_rows": 2579,
+        "order_rows": 2579,
+        "order_actions": {
+          "GUARD_BLOCK": 1837,
+          "ORDER_SEND_OK": 739,
+          "ORDER_SEND_FAIL": 3
+        },
+        "guard_reasons_top": {
+          "": 1837,
+          "invalid stops": 3,
+          "done at 1.08447": 2,
+          "done at 1.13972": 2,
+          "done at 1.16818": 2,
+          "done at 1.17748": 2,
+          "done at 1.17133": 2,
+          "done at 1.16239": 2
+        }
+      },
+      "artifacts": {
+        "mt5_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long.htm",
+        "tester_config": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long.ini",
+        "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long_trades.csv",
+        "startup_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long_startup_log.csv",
+        "signal_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long_signal_log.csv",
+        "order_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long_order_log.csv",
+        "management_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long_management_log.csv",
+        "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long\\ForexFreqScout_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT_EURUSD_M5_rsi_extreme_fade_m15_long_summary.json"
+      }
+    }
+  ],
+  "boundary": {
+    "active_terminal_process_used": false,
+    "strategy_tester_launched": true,
+    "live_or_demo_chart_touched": false,
+    "order_or_position_touched_outside_tester": false,
+    "python_price_backtest_used_for_result": false
+  },
+  "next_step": {
+    "status": "TUNE_TOP_FREQUENT_RAW_EDGE_NEXT",
+    "symbol": "EURUSD",
+    "variant": "rsi_bb_close_fade_m15_long",
+    "reason": "Highest trade-count raw-edge candidate cleared the frequency-first screen."
+  },
+  "artifacts": {
+    "report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT.md",
+    "report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_CURRENT_2024_2026_M15_MEANREV_EURUSD_DIRECTION_SPLIT.json"
+  }
+}
