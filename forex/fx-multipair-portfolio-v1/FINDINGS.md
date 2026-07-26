@@ -157,11 +157,30 @@ minimum position for the account. Deploying it would need roughly a $10,000
 balance to bring the 4-leg sleeve to ~0.4x leverage, which is the notional the
 `evaluate_carry_sleeve.py` figures assume.
 
-Note on scope: this reading came from account **1025742** via a terminal whose data
-path is `C:\MT5A1M5MomentumBacktest`, not the gold production account 1033030 in
-`C:\MT5PortableTier1BestEA`, which was deliberately left alone. Spread and swap
-figures are server-side symbol properties on the same `Capital.ComMena-Demo`
-server and so apply to both; the equity figure is specific to 1025742.
+Both available demo accounts were then checked read-only, and neither can hold it:
+
+| Account | Terminal | Equity | 4-leg sleeve leverage | Spot 1-sigma vs equity |
+|---|---|---|---|---|
+| 1025742 | `MT5A1M5MomentumBacktest` | 1,408 AED ≈ **$383** | **10.4x** | 70% |
+| 1033030 | `MT5PortableTier1BestEA` | 3,609 AED ≈ **$983** | **4.07x** | **27%** |
+
+Account 1033030 is the **live gold demo**. Putting FX carry on it would consume
+margin the XAUUSD system needs, mix FX P&L into that system's prospective
+evidence, and risk tripping its guardians and drawdown breakers — for +8.55% of
+equity per year of expected accrual against 27% of equity in annual spot
+volatility. The existing EURUSD contract already lists a *"shared-account risk and
+USD-factor overlap test with XAUUSD"* as a mandatory promotion blocker, and at
+$983 with gold already trading there is no room to pass it.
+
+Reducing to a single leg (long USDJPY, 0.01 lot) fits at ~1.0x leverage but
+returns +2.1%/yr against ~10% equity volatility — a coin flip with a small
+positive drift, still competing with gold for margin. That is not a system, and
+it is not worth putting a working lane at risk for.
+
+**Conclusion: carry is rejected a third time, on deployability.** Too small an
+edge (R6a), too large a minimum position for the balances available, and the only
+adequately-funded account is one where the downside is damaging the system that
+already works.
 
 ## The structural problem
 
