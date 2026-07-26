@@ -68,18 +68,69 @@ So the same drift both **increases the halt rate** and **decreases profit per
 trade**. Neither shows up as a bug; both show up as "the system trades less and
 earns less than expected."
 
+## VERIFICATION: the runtime evidence does **not** support the consequences above
+
+The check listed first below was run rather than left as a suggestion, and it
+came back negative. Recording that plainly, because an untested claim about a
+live system is worth less than nothing.
+
+Read from `C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2`
+(read-only): the current `executor_stdout.log` plus both rotated predecessors —
+**29,116 status records** in total — and `events.jsonl`.
+
+| Check | Predicted | **Observed** |
+|---|---|---|
+| Guardian halts | more frequent | **0 of 29,116 records** had an active entry-halt file |
+| Order rejections from `deviation_points` | more frequent | **0** requotes, `PRICE_OFF`, `PRICE_CHANGED` or invalid-price events |
+| Order fills | — | 3 fills, all `retcode 10009` (success) |
+| Status | — | `ACTIVE_DEMO_BROKER_ACTION` on 10,719 of 10,720 current records |
+
+`events.jsonl` shows the system trading normally on 2026-07-22/23: three
+`ORDER_FILLED` events from the `V57_BREAK_SWING_H4ADX` and `V7_SWING_HEALTH`
+add-on sleeves, all filled successfully, plus one `CANDIDATE_REJECTED` (a
+strategy-level decline, not a broker rejection). Balance moved $987.66 → $982.84,
+a $4.82 (0.49%) loss.
+
+**Conclusion: consequences 1 and 2 above are refuted for the period observed.**
+Nothing is halting and nothing is being rejected.
+
+Two honest qualifications on the negative result itself:
+
+- The **current** log spans 2026-07-26 01:23–16:25 UTC, a Sunday with the market
+  closed, so its zero-trade count carries no information. The trading evidence
+  comes from `events.jsonl` and the rotated logs.
+- Three fills is a small sample. This shows the failure modes are *not currently
+  occurring*; it does not prove they cannot occur under stress.
+
+## What survives, and what does not
+
+**Refuted:** the claim that halts and order rejections are happening now.
+
+**Still arithmetically true, but latent:** the breakers are genuinely much tighter
+in volatility-adjusted terms than when they were set — the floating-drawdown stop
+sits 4.28 daily ranges from a flat book today versus 23.64 in 2023. That has not
+bitten because equity is essentially flat (down 0.49%), so nothing has approached
+a threshold. The exposure is what happens during a *real* drawdown: the breakers
+will bind roughly 5.5x sooner in volatility-adjusted terms than they were designed
+to, and they will do it the first time the system has a genuinely bad run.
+
+**Unaffected by the verification:** consequence 3, that per-sleeve
+`maximum_risk_usd` of $20–30 is now 0.19–0.29 daily ranges versus 1.05–1.58 in
+2023. This is not a failure mode that shows up in logs — it is simply smaller
+positions relative to opportunity than intended, visible only as lower profit per
+trade.
+
 ## Suggested checks, in order
 
-1. **Count actual halts and order rejections** in the recent runtime logs and
-   compare against the pre-2025 rate. This is the cheapest confirmation, and it
-   either supports or kills the whole hypothesis immediately.
+1. ~~Count halts and order rejections~~ — **done, negative.** See above.
 2. **Re-express the drawdown breakers in ATR or daily-range units** rather than
-   fixed USD, so they hold their intended meaning as volatility moves.
-3. **Re-check `deviation_points`** against the current distribution of price
-   movement over the decision-to-fill interval.
-4. **Re-check per-sleeve `maximum_risk_usd`** against both current volatility and
-   the account's $983 equity — note the floating-drawdown stop is already 46% of
-   equity, so raising risk without also revisiting that breaker would be unsafe.
+   fixed USD, so they hold their intended meaning as volatility moves. This is the
+   live exposure: latent, not currently firing.
+3. **Re-check per-sleeve `maximum_risk_usd`** against current volatility and the
+   account's $983 equity — but note the floating-drawdown stop is already 46% of
+   equity, so raising risk without revisiting that breaker would be unsafe.
+4. **`deviation_points`** needs no action on this evidence. Revisit only if fills
+   start failing.
 
 ## Caveats
 
