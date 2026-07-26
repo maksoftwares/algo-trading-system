@@ -122,6 +122,38 @@ the favourable sides is genuinely positive-expectancy — and still not enough:
 68.6% historical drawdown.** Rejected as deployable, but on measurement rather
 than assumption.
 
+## A second, independent blocker: the account is too small to hold the sleeve
+
+Even granting carry its +2.10%/yr, it cannot be sized safely on the demo account
+I can read. Measured live:
+
+| Quantity | Value |
+|---|---|
+| Account 1025742 equity | 1,408 AED ≈ **$383** |
+| Broker minimum lot | 0.01 |
+| Notional per minimum-lot leg | **$1,000** |
+| Leverage on equity, **one** leg | **2.6x** |
+| Leverage on equity, 4-leg sleeve | **10.4x** |
+| One-leg accrual | +$20.95/yr = **+5.5% of equity** |
+| One-leg spot 1-sigma | $100/yr = **26% of equity** |
+
+The minimum lot is a floor, so this cannot be sized down. A single carry leg is
+already 2.6x leverage on equity, and the diversified 4-leg version — the only form
+in which carry's leg correlations of −0.29 to +0.50 actually reduce risk — is
+10.4x. That turns a Sharpe-0.31 premium into a position with genuine ruin risk on
+this balance.
+
+So carry fails twice, for unrelated reasons: too small an edge, and too large a
+minimum position for the account. Deploying it would need roughly a $10,000
+balance to bring the 4-leg sleeve to ~0.4x leverage, which is the notional the
+`evaluate_carry_sleeve.py` figures assume.
+
+Note on scope: this reading came from account **1025742** via a terminal whose data
+path is `C:\MT5A1M5MomentumBacktest`, not the gold production account 1033030 in
+`C:\MT5PortableTier1BestEA`, which was deliberately left alone. Spread and swap
+figures are server-side symbol properties on the same `Capital.ComMena-Demo`
+server and so apply to both; the equity figure is specific to 1025742.
+
 ## The structural problem
 
 Three factors compound:
