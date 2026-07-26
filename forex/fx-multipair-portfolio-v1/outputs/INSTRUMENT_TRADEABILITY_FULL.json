@@ -1,0 +1,187 @@
+{
+  "metric": "median daily range (points) / round-trip cost (points)",
+  "ranked": [
+    {
+      "cost_pts": 34.0,
+      "daily_range_pts": 7197.0,
+      "ratio": 211.7,
+      "spread_pts": 30.0,
+      "symbol": "XAUUSD"
+    },
+    {
+      "cost_pts": 47.0,
+      "daily_range_pts": 3425.0,
+      "ratio": 72.9,
+      "spread_pts": 43.0,
+      "symbol": "AMD"
+    },
+    {
+      "cost_pts": 21.0,
+      "daily_range_pts": 1432.0,
+      "ratio": 68.2,
+      "spread_pts": 17.0,
+      "symbol": "MSFT"
+    },
+    {
+      "cost_pts": 39.0,
+      "daily_range_pts": 1966.0,
+      "ratio": 50.4,
+      "spread_pts": 35.0,
+      "symbol": "USDDKK"
+    },
+    {
+      "cost_pts": 178.0,
+      "daily_range_pts": 6667.0,
+      "ratio": 37.5,
+      "spread_pts": 174.0,
+      "symbol": "USDNOK"
+    },
+    {
+      "cost_pts": 16.0,
+      "daily_range_pts": 585.0,
+      "ratio": 36.6,
+      "spread_pts": 12.0,
+      "symbol": "NVDA"
+    },
+    {
+      "cost_pts": 17.0,
+      "daily_range_pts": 614.0,
+      "ratio": 36.1,
+      "spread_pts": 13.0,
+      "symbol": "INTC"
+    },
+    {
+      "cost_pts": 5004.0,
+      "daily_range_pts": 174165.0,
+      "ratio": 34.8,
+      "spread_pts": 5000.0,
+      "symbol": "BTCUSD"
+    },
+    {
+      "cost_pts": 10.0,
+      "daily_range_pts": 337.0,
+      "ratio": 33.7,
+      "spread_pts": 6.0,
+      "symbol": "AUDUSD"
+    },
+    {
+      "cost_pts": 17.0,
+      "daily_range_pts": 560.0,
+      "ratio": 32.9,
+      "spread_pts": 13.0,
+      "symbol": "GBPUSD"
+    },
+    {
+      "cost_pts": 11.0,
+      "daily_range_pts": 342.0,
+      "ratio": 31.1,
+      "spread_pts": 7.0,
+      "symbol": "EURUSD"
+    },
+    {
+      "cost_pts": 214.0,
+      "daily_range_pts": 6536.0,
+      "ratio": 30.5,
+      "spread_pts": 210.0,
+      "symbol": "USDMXN"
+    },
+    {
+      "cost_pts": 16.0,
+      "daily_range_pts": 463.0,
+      "ratio": 28.9,
+      "spread_pts": 12.0,
+      "symbol": "USDJPY"
+    },
+    {
+      "cost_pts": 499.0,
+      "daily_range_pts": 13802.0,
+      "ratio": 27.7,
+      "spread_pts": 495.0,
+      "symbol": "USDZAR"
+    },
+    {
+      "cost_pts": 18.0,
+      "daily_range_pts": 379.0,
+      "ratio": 21.1,
+      "spread_pts": 14.0,
+      "symbol": "USDCHF"
+    },
+    {
+      "cost_pts": 24.0,
+      "daily_range_pts": 459.0,
+      "ratio": 19.1,
+      "spread_pts": 20.0,
+      "symbol": "USDCAD"
+    },
+    {
+      "cost_pts": 20.0,
+      "daily_range_pts": 303.0,
+      "ratio": 15.1,
+      "spread_pts": 16.0,
+      "symbol": "NZDUSD"
+    },
+    {
+      "cost_pts": 105.0,
+      "daily_range_pts": 871.0,
+      "ratio": 8.3,
+      "spread_pts": 101.0,
+      "symbol": "USDCNH"
+    },
+    {
+      "cost_pts": 44.0,
+      "daily_range_pts": 284.0,
+      "ratio": 6.5,
+      "spread_pts": 40.0,
+      "symbol": "USDSGD"
+    },
+    {
+      "cost_pts": 251.0,
+      "daily_range_pts": 1569.0,
+      "ratio": 6.3,
+      "spread_pts": 247.0,
+      "symbol": "USDPLN"
+    },
+    {
+      "cost_pts": 560.0,
+      "daily_range_pts": 3373.0,
+      "ratio": 6.0,
+      "spread_pts": 556.0,
+      "symbol": "USDHUF"
+    },
+    {
+      "cost_pts": 215.0,
+      "daily_range_pts": 837.0,
+      "ratio": 3.9,
+      "spread_pts": 211.0,
+      "symbol": "USDCZK"
+    },
+    {
+      "cost_pts": 1504.0,
+      "daily_range_pts": 5024.0,
+      "ratio": 3.3,
+      "spread_pts": 1500.0,
+      "symbol": "USDTRY"
+    },
+    {
+      "cost_pts": 73.0,
+      "daily_range_pts": 235.0,
+      "ratio": 3.2,
+      "spread_pts": 69.0,
+      "symbol": "USDHKD"
+    },
+    {
+      "cost_pts": 2076.0,
+      "daily_range_pts": 5853.0,
+      "ratio": 2.8,
+      "spread_pts": 2072.0,
+      "symbol": "USDSEK"
+    }
+  ],
+  "schema_version": "fx_instrument_tradeability_full_v1",
+  "symbols_measured": 25,
+  "symbols_on_server": 232,
+  "window": {
+    "end": "2026-07-25T00:00:00",
+    "start": "2026-07-20T00:00:00"
+  }
+}

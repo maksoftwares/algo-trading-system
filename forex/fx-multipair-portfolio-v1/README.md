@@ -22,9 +22,18 @@ term mean reversion in signed tick flow, t = −9.3 / −7.8 / −6.3 across thr
 pairs using real order-book depth — is worth **1.6 points**. And carry, the only
 income needing no signal, nets ≈+0.5%/yr against a 68.6% historical drawdown.
 
+**The closing finding answers the question behind the goal.** Ranking every
+tradeable symbol on the account by `median daily range / round-trip cost` — the
+ratio all ten rejections reduce to — puts **XAUUSD first at 211.7x**, with nothing
+above it and the best FX major (AUDUSD) at 33.7x, **6.3x worse**. Gold does not
+work because of a better mechanism; it works because it is the most tradeable
+instrument available here. That also gives a screening rule: measure range/cost
+*before* searching for a strategy, and treat anything below ~50x as unlikely to
+support one at retail cost.
+
 What *is* delivered: a tested substrate for evaluating FX hypotheses quickly,
-measured broker costs replacing a decade of assumption, and a quantified
-explanation of why the existing Forex lane never passed.
+measured broker costs replacing a decade of assumption, an instrument-ranking
+rule, and a quantified explanation of why the existing Forex lane never passed.
 
 ## Layout
 
@@ -78,6 +87,7 @@ Broker measurement needs the MT5 module, which requires Python 3.12 (the
 python measure_broker_costs.py         # symbol specs + real swap rates
 python measure_broker_spread_ticks.py  # real spread from broker tick history
 python evaluate_carry_sleeve.py        # the one positive-expectancy position set
+python rank_instrument_tradeability.py # range/cost ranking across instruments
 python -m pytest tests -q
 ```
 

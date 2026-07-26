@@ -263,6 +263,54 @@ Reusable infrastructure, all tested and reproducible:
 Anyone continuing this work can test a new FX hypothesis in minutes instead of
 rebuilding the substrate.
 
+## Why gold supports a system and Forex does not — the number behind everything
+
+Every one of the ten rejections reduced to the same inequality: cost was
+comparable to, or larger than, the predictable component of returns. That
+component scales with how far an instrument moves; the broker's spread is fixed.
+So one measured ratio decides whether an instrument is workable *before* any
+strategy question arises:
+
+    opportunity_to_cost = median daily range (points) / round-trip cost (points)
+
+Measured across every tradeable symbol on the account with usable tick history
+(25 of 232 subscribed), one trading week, liquid hours:
+
+| Rank | Symbol | Spread (pts) | Daily range (pts) | **Range / cost** |
+|---:|---|---:|---:|---:|
+| **1** | **XAUUSD** | 30 | 7,197 | **211.7** |
+| 2 | AMD | 43 | 3,425 | 72.9 |
+| 3 | MSFT | 17 | 1,432 | 68.2 |
+| 4 | USDDKK | 35 | 1,966 | 50.4 |
+| 5 | USDNOK | 174 | 6,667 | 37.5 |
+| 9 | AUDUSD | 6 | 337 | 33.7 |
+| 10 | GBPUSD | 13 | 560 | 32.9 |
+| 11 | EURUSD | 7 | 342 | 31.1 |
+| 13 | USDJPY | 12 | 463 | 28.9 |
+| 23 | USDTRY | 1,500 | 5,024 | 3.3 |
+
+**Gold ranks first, and nothing on the account ranks above it.** It offers 211.7
+units of daily movement per unit of transaction cost; the best FX major offers
+33.7 — **6.3x worse**. EURUSD's tight 0.7-pip spread is irrelevant next to the
+fact that it only moves 342 points a day.
+
+This is the honest answer to the question behind the original goal. The gold
+system does not exist because of a better mechanism; it exists because gold is
+the single most tradeable instrument available here by a factor of three over the
+next candidate and six over the best currency pair. Asking Forex to reproduce it
+is asking a 33x instrument to behave like a 212x one.
+
+It also converts the result into a reusable screening rule: **measure
+range/cost before searching for a strategy.** Below roughly 50x, a
+retail-cost strategy search on that instrument is likely to fail no matter how
+good the idea is — which is exactly what R1–R10 demonstrate over ten independent
+attempts on instruments in the 15–41x band.
+
+Caveat: only 25 symbols carried usable tick history in this terminal, so indices
+and energy were not measurable here. The two equities ranking 2nd and 3rd (AMD
+72.9x, MSFT 68.2x) come with overnight gap risk and limited trading hours that
+this ratio does not capture, and are not a recommendation.
+
 ## Recommended next steps, in value order
 
 The cheap decisive experiments have now been run. What remains needs either a

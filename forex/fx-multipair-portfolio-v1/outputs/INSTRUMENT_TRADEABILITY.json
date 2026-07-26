@@ -1,0 +1,108 @@
+{
+  "metric": "median daily range (points) / round-trip cost (points)",
+  "ranked": [
+    {
+      "median_daily_range_points": 7402.0,
+      "opportunity_to_cost": 217.7,
+      "round_trip_cost_points": 34.0,
+      "spread_points": 30.0,
+      "symbol": "XAUUSD",
+      "ticks_sampled": 4220241
+    },
+    {
+      "median_daily_range_points": 689.0,
+      "opportunity_to_cost": 40.6,
+      "round_trip_cost_points": 17.0,
+      "spread_points": 13.0,
+      "symbol": "GBPUSD",
+      "ticks_sampled": 1074617
+    },
+    {
+      "median_daily_range_points": 408.0,
+      "opportunity_to_cost": 37.1,
+      "round_trip_cost_points": 11.0,
+      "spread_points": 7.0,
+      "symbol": "EURUSD",
+      "ticks_sampled": 750940
+    },
+    {
+      "median_daily_range_points": 7877.0,
+      "opportunity_to_cost": 36.5,
+      "round_trip_cost_points": 216.0,
+      "spread_points": 212.0,
+      "symbol": "USDMXN",
+      "ticks_sampled": 2654190
+    },
+    {
+      "median_daily_range_points": 351.0,
+      "opportunity_to_cost": 35.1,
+      "round_trip_cost_points": 10.0,
+      "spread_points": 6.0,
+      "symbol": "AUDUSD",
+      "ticks_sampled": 662883
+    },
+    {
+      "median_daily_range_points": 167695.0,
+      "opportunity_to_cost": 33.5,
+      "round_trip_cost_points": 5004.0,
+      "spread_points": 5000.0,
+      "symbol": "BTCUSD",
+      "ticks_sampled": 4197873
+    },
+    {
+      "median_daily_range_points": 526.0,
+      "opportunity_to_cost": 32.9,
+      "round_trip_cost_points": 16.0,
+      "spread_points": 12.0,
+      "symbol": "USDJPY",
+      "ticks_sampled": 656362
+    },
+    {
+      "median_daily_range_points": 13802.0,
+      "opportunity_to_cost": 27.4,
+      "round_trip_cost_points": 504.0,
+      "spread_points": 500.0,
+      "symbol": "USDZAR",
+      "ticks_sampled": 2930283
+    },
+    {
+      "median_daily_range_points": 439.0,
+      "opportunity_to_cost": 24.4,
+      "round_trip_cost_points": 18.0,
+      "spread_points": 14.0,
+      "symbol": "USDCHF",
+      "ticks_sampled": 834262
+    },
+    {
+      "median_daily_range_points": 483.0,
+      "opportunity_to_cost": 20.1,
+      "round_trip_cost_points": 24.0,
+      "spread_points": 20.0,
+      "symbol": "USDCAD",
+      "ticks_sampled": 633026
+    },
+    {
+      "median_daily_range_points": 303.0,
+      "opportunity_to_cost": 15.1,
+      "round_trip_cost_points": 20.0,
+      "spread_points": 16.0,
+      "symbol": "NZDUSD",
+      "ticks_sampled": 775777
+    },
+    {
+      "median_daily_range_points": 1002.0,
+      "opportunity_to_cost": 9.6,
+      "round_trip_cost_points": 104.0,
+      "spread_points": 100.0,
+      "symbol": "USDCNH",
+      "ticks_sampled": 1263913
+    }
+  ],
+  "rationale": "every rejection reduced to cost vs available movement; this ranks that ratio",
+  "schema_version": "fx_instrument_tradeability_v1",
+  "slippage_points_assumed": 4.0,
+  "window": {
+    "end": "2026-07-25T00:00:00",
+    "start": "2026-07-13T00:00:00"
+  }
+}
