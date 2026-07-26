@@ -1,0 +1,97 @@
+{
+  "features": [
+    "depth_imbalance",
+    "micro_dev_points",
+    "quote_asym",
+    "signed_flow",
+    "rv_points",
+    "spread_mean_points",
+    "spread_max_points",
+    "tick_count",
+    "depth_total",
+    "hour",
+    "vol_trailing",
+    "flow_trailing",
+    "imbalance_trailing"
+  ],
+  "horizon_bars": 12,
+  "model": {
+    "early_stopping": "False",
+    "l2_regularization": "1.0",
+    "learning_rate": "0.05",
+    "max_depth": "3",
+    "max_iter": "300",
+    "min_samples_leaf": "200",
+    "random_state": "0"
+  },
+  "results": {
+    "EURUSD": {
+      "cost_points": 11.0,
+      "design": {
+        "best_abs_edge_points": 19.09,
+        "bottom_mean_points": -19.09,
+        "bottom_t": -7.85,
+        "n_top": 3429,
+        "top_mean_points": 17.58,
+        "top_t": 9.67
+      },
+      "test_rows": 186628,
+      "train_rows": 411376,
+      "validation": {
+        "best_abs_edge_points": 3.69,
+        "bottom_mean_points": 1.71,
+        "bottom_t": 0.39,
+        "n_top": 1556,
+        "top_mean_points": 3.69,
+        "top_t": 1.04
+      },
+      "validation_clears_cost": false
+    },
+    "GBPUSD": {
+      "cost_points": 17.0,
+      "design": {
+        "best_abs_edge_points": 32.1,
+        "bottom_mean_points": -32.1,
+        "bottom_t": -9.34,
+        "n_top": 3428,
+        "top_mean_points": 28.12,
+        "top_t": 8.48
+      },
+      "test_rows": 186544,
+      "train_rows": 411316,
+      "validation": {
+        "best_abs_edge_points": 4.84,
+        "bottom_mean_points": 4.84,
+        "bottom_t": 0.76,
+        "n_top": 1555,
+        "top_mean_points": 4.08,
+        "top_t": 0.97
+      },
+      "validation_clears_cost": false
+    },
+    "USDJPY": {
+      "cost_points": 16.0,
+      "design": {
+        "best_abs_edge_points": 20.79,
+        "bottom_mean_points": -19.69,
+        "bottom_t": -7.79,
+        "n_top": 3428,
+        "top_mean_points": 20.79,
+        "top_t": 8.2
+      },
+      "test_rows": 186542,
+      "train_rows": 411326,
+      "validation": {
+        "best_abs_edge_points": 7.04,
+        "bottom_mean_points": 7.04,
+        "bottom_t": 1.09,
+        "n_top": 1555,
+        "top_mean_points": -3.95,
+        "top_t": -0.61
+      },
+      "validation_clears_cost": false
+    }
+  },
+  "schema_version": "fx_micro_ml_v1",
+  "verdict": "R11_REJECTED_ML_BELOW_COST"
+}

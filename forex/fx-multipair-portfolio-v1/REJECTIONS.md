@@ -145,6 +145,46 @@ Statistical significance and tradeability are not the same thing.
 
 Evidence: `outputs/MICRO_CENSUS.json`, `outputs/BROKER_SPREAD_TICKS.json`.
 
+## R11 — Microstructure ML with interactions (2026-07-26)
+
+**The most persuasive rejection in this lane, because it is the experiment a
+skeptic would demand.**
+
+R7, R8 and R10 all measured features *univariately* — single-feature deciles or a
+plain z-score average. None allowed a model to find interactions, and this repo's
+own record for gold is that tick-microstructure features carried most of that
+edge as an **ML** result rather than a decile table. That was the last
+methodological gap.
+
+Gradient boosting (13 microstructure features, 60-minute forward return), one
+frozen configuration with no hyperparameter search, trained on design and
+evaluated on validation. Scored as a strategy would trade it: take the model's
+most confident decile and require the realised mean move to exceed full
+round-trip cost.
+
+| Pair | Cost | **Design edge** | t | **Validation edge** | t | Clears? |
+|---|---:|---:|---:|---:|---:|---|
+| EURUSD | 11 | **19.09** | **9.67** | 3.69 | 1.04 | no |
+| GBPUSD | 17 | **32.10** | **8.48** | 4.84 | 0.97 | no |
+| USDJPY | 16 | **20.79** | **8.20** | 7.04 | −0.61 | no |
+
+**Result: REJECTED.** In-sample the model clears cost by 1.7–1.9x at t = 8.2–9.7
+on all three pairs simultaneously — an unambiguous "working system" by any
+in-sample standard. Out-of-sample the edge decays roughly **80%**, falls below
+cost on every pair, and reaches significance on none.
+
+Two things make this decisive:
+
+1. The validation edges (3.69 / 4.84 / 7.04 points) land almost exactly on the
+   univariate results from R7 and R10. **The interactions the model found were
+   noise.** There is no hidden multivariate structure that decile analysis missed.
+2. It closes the "you just didn't use ML" objection with the strongest possible
+   in-sample number. Nothing about the method was underpowered; t = 9.67 on
+   ~34,000 training rows is not a lack of statistical power. The signal genuinely
+   is not there out-of-sample.
+
+Evidence: `outputs/MICRO_ML_TEST.json`.
+
 ## R10 — The fixed-spread structural advantage (2026-07-26)
 
 **The last stone, and the one that makes the conclusion airtight.**

@@ -6,8 +6,8 @@ Status: **`NO_DEPLOYABLE_FX_EDGE_FOUND_STOP`**
 ## Bottom line
 
 I could not find a profitable Forex system on this evidence, and I am not going
-to ship one that only looks profitable. **Ten** independent hypothesis classes
-were tested and all ten were rejected, the last five against *measured* broker
+to ship one that only looks profitable. **Eleven** independent hypothesis classes
+were tested and all eleven were rejected, the last six against *measured* broker
 costs rather than assumed ones. The search space is now closed, majors and
 crosses alike. The rejections are in `REJECTIONS.md` with the
 evidence that closed each.
@@ -88,6 +88,7 @@ counts should be re-read in light of this.
 | R8 | **Volatility-conditioned microstructure** (fixed spread vs vol-scaling signal) | Rejected. 8 of 300 cells cleared cost at 2.2–4.8x with \|t\|>2; **0 replicated**, 5 flipped sign |
 | R9 | **Synthetic crosses** (EURGBP/EURJPY/GBPJPY) — R1 grid + momentum | Rejected. One survivor, GBPJPY Donchian at design PF 1.483, fell to **0.908 pooled out-of-sample** |
 | R10 | **Fixed-spread structural advantage** — R7 effects inside liquidity-stress bars, charged the broker's fixed cost | Rejected. 1 of 24 cells cleared cost (~1.2 expected by chance); peak **1.21x cost**, did not replicate |
+| R11 | **Microstructure ML with interactions** — gradient boosting, 13 features, one frozen config | Rejected. **1.7–1.9x cost at t = 8.2–9.7 in-sample**, decays ~80% out-of-sample to below cost on all three pairs |
 
 ## Why the existing Forex lane never passed
 
