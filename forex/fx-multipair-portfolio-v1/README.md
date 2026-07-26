@@ -156,3 +156,37 @@ and R9 checks, because both near-misses passed everything short of a holdout:
    plateau in-sample and still fell from PF 1.483 to 0.908 out-of-sample.
 4. **Re-run the identical measurement on untouched data.** This is the only check
    that caught either one.
+
+## CORRECTION (2026-07-26): the ECN recommendation was wrong
+
+Earlier revisions of this document and the README recommended moving to a
+raw-spread ECN account, claiming it would "roughly halve EURUSD cost" and was
+"the only change that reopens FX". **That was an arithmetic error.** It compared
+ECN's raw *spread* against Capital.com's spread and omitted ECN's *commission*.
+
+On EURUSD one point is $1.00 per 1.0 lot, so a $7/lot round-trip commission is
+7 points of cost, not a rounding detail:
+
+| Venue | Spread | Commission | All-in |
+|---|---:|---:|---:|
+| **Capital.com (measured)** | 7.0 pts | 0.0 | **7.0** |
+| Typical retail ECN (0.1 pip + $3.50/side) | 1.0 | 7.0 | **8.0** |
+| High-volume ECN tier | 1.0 | 5.0 | 6.0 |
+| Institutional / prime | 0.5 | 1.0 | 1.5 |
+
+**Capital.com is already at or below typical retail ECN pricing for EURUSD.**
+Switching brokers is not an improvement and should not be done on the strength of
+the earlier advice.
+
+Moreover, even at institutional pricing the effects measured here do not clear
+cost out-of-sample: the R10 validation effect (4.73 points) reaches only 0.86x a
+1.5-point institutional cost. Cheaper execution does not rescue them.
+
+**Consequence for the conclusion.** The lane's recommendation list previously had
+three items; the ECN item is withdrawn. What remains is that the constraint is not
+execution cost but *signal* — none of the eleven method classes found one that
+survives out-of-sample, and the honest next step is a data question (order flow,
+positioning, a 20+ currency universe for carry) rather than a venue question.
+
+This does not weaken R1-R11. Every one of them was already scored at or below
+7 points of spread, which this correction confirms is the realistic retail floor.
