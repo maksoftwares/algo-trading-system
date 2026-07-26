@@ -1,0 +1,2336 @@
+{
+  "horizons": {
+    "1d": {
+      "all=all": {
+        "EURUSD": {
+          "mean_atr": 0.13287,
+          "n": 1428,
+          "t": 0.39
+        },
+        "GBPUSD": {
+          "mean_atr": 0.07948,
+          "n": 1427,
+          "t": 0.23
+        },
+        "USDJPY": {
+          "mean_atr": 0.05294,
+          "n": 1428,
+          "t": 0.15
+        }
+      },
+      "hour=0": {
+        "EURUSD": {
+          "mean_atr": 0.94303,
+          "n": 463,
+          "t": 1.49
+        },
+        "GBPUSD": {
+          "mean_atr": 0.72851,
+          "n": 278,
+          "t": 0.8
+        },
+        "USDJPY": {
+          "mean_atr": 0.24717,
+          "n": 90,
+          "t": 0.15
+        }
+      },
+      "hour=1": {
+        "EURUSD": {
+          "mean_atr": 1.26439,
+          "n": 182,
+          "t": 1.31
+        },
+        "GBPUSD": {
+          "mean_atr": -0.0692,
+          "n": 125,
+          "t": -0.07
+        },
+        "USDJPY": {
+          "mean_atr": 4.26445,
+          "n": 40,
+          "t": 2.05
+        }
+      },
+      "hour=10": {
+        "GBPUSD": {
+          "mean_atr": 0.07407,
+          "n": 87,
+          "t": 0.04
+        }
+      },
+      "hour=11": {
+        "GBPUSD": {
+          "mean_atr": 1.44111,
+          "n": 37,
+          "t": 0.65
+        },
+        "USDJPY": {
+          "mean_atr": -0.42143,
+          "n": 115,
+          "t": -0.32
+        }
+      },
+      "hour=12": {
+        "USDJPY": {
+          "mean_atr": 1.59882,
+          "n": 37,
+          "t": 0.63
+        }
+      },
+      "hour=15": {
+        "EURUSD": {
+          "mean_atr": -1.0091,
+          "n": 204,
+          "t": -1.33
+        },
+        "GBPUSD": {
+          "mean_atr": -1.05496,
+          "n": 170,
+          "t": -1.23
+        }
+      },
+      "hour=16": {
+        "EURUSD": {
+          "mean_atr": -0.3128,
+          "n": 279,
+          "t": -0.43
+        },
+        "GBPUSD": {
+          "mean_atr": 0.99773,
+          "n": 89,
+          "t": 0.76
+        }
+      },
+      "hour=17": {
+        "EURUSD": {
+          "mean_atr": -1.23939,
+          "n": 39,
+          "t": -0.62
+        }
+      },
+      "hour=18": {
+        "USDJPY": {
+          "mean_atr": 0.98285,
+          "n": 340,
+          "t": 1.48
+        }
+      },
+      "hour=19": {
+        "USDJPY": {
+          "mean_atr": -0.09282,
+          "n": 182,
+          "t": -0.09
+        }
+      },
+      "hour=2": {
+        "EURUSD": {
+          "mean_atr": null,
+          "n": 2,
+          "t": null
+        },
+        "GBPUSD": {
+          "mean_atr": -1.18471,
+          "n": 59,
+          "t": -0.58
+        },
+        "USDJPY": {
+          "mean_atr": -0.06057,
+          "n": 201,
+          "t": -0.07
+        }
+      },
+      "hour=20": {
+        "GBPUSD": {
+          "mean_atr": -0.11114,
+          "n": 94,
+          "t": -0.09
+        }
+      },
+      "hour=21": {
+        "GBPUSD": {
+          "mean_atr": 0.30482,
+          "n": 115,
+          "t": 0.27
+        }
+      },
+      "hour=22": {
+        "GBPUSD": {
+          "mean_atr": null,
+          "n": 14,
+          "t": null
+        }
+      },
+      "hour=23": {
+        "GBPUSD": {
+          "mean_atr": null,
+          "n": 21,
+          "t": null
+        }
+      },
+      "hour=3": {
+        "GBPUSD": {
+          "mean_atr": 0.80418,
+          "n": 83,
+          "t": 0.57
+        },
+        "USDJPY": {
+          "mean_atr": -1.18338,
+          "n": 275,
+          "t": -1.44
+        }
+      },
+      "hour=4": {
+        "GBPUSD": {
+          "mean_atr": 0.56472,
+          "n": 80,
+          "t": 0.37
+        },
+        "USDJPY": {
+          "mean_atr": -1.13999,
+          "n": 40,
+          "t": -0.57
+        }
+      },
+      "hour=5": {
+        "EURUSD": {
+          "mean_atr": -0.24878,
+          "n": 55,
+          "t": -0.16
+        },
+        "GBPUSD": {
+          "mean_atr": 1.99281,
+          "n": 40,
+          "t": 1.26
+        },
+        "USDJPY": {
+          "mean_atr": null,
+          "n": 1,
+          "t": null
+        }
+      },
+      "hour=6": {
+        "EURUSD": {
+          "mean_atr": -1.58218,
+          "n": 52,
+          "t": -0.83
+        },
+        "GBPUSD": {
+          "mean_atr": -2.00859,
+          "n": 55,
+          "t": -1.11
+        }
+      },
+      "hour=7": {
+        "GBPUSD": {
+          "mean_atr": 0.9576,
+          "n": 52,
+          "t": 0.47
+        }
+      },
+      "hour=8": {
+        "EURUSD": {
+          "mean_atr": -0.38192,
+          "n": 115,
+          "t": -0.3
+        },
+        "USDJPY": {
+          "mean_atr": -1.73637,
+          "n": 55,
+          "t": -0.94
+        }
+      },
+      "hour=9": {
+        "EURUSD": {
+          "mean_atr": -0.23976,
+          "n": 37,
+          "t": -0.11
+        },
+        "GBPUSD": {
+          "mean_atr": null,
+          "n": 28,
+          "t": null
+        },
+        "USDJPY": {
+          "mean_atr": 0.42937,
+          "n": 52,
+          "t": 0.21
+        }
+      },
+      "momentum_1d_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.32639,
+          "n": 1428,
+          "t": 0.97
+        },
+        "GBPUSD": {
+          "mean_atr": 0.30717,
+          "n": 1427,
+          "t": 0.88
+        },
+        "USDJPY": {
+          "mean_atr": -0.16602,
+          "n": 1428,
+          "t": -0.47
+        }
+      },
+      "momentum_1d_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.41104,
+          "n": 1322,
+          "t": 1.18
+        },
+        "GBPUSD": {
+          "mean_atr": 0.26078,
+          "n": 1333,
+          "t": 0.72
+        },
+        "USDJPY": {
+          "mean_atr": -0.0747,
+          "n": 1338,
+          "t": -0.21
+        }
+      },
+      "momentum_1d_huge=signed": {
+        "EURUSD": {
+          "mean_atr": 0.28521,
+          "n": 1242,
+          "t": 0.81
+        },
+        "GBPUSD": {
+          "mean_atr": 0.24809,
+          "n": 1253,
+          "t": 0.67
+        },
+        "USDJPY": {
+          "mean_atr": -0.05729,
+          "n": 1235,
+          "t": -0.15
+        }
+      },
+      "momentum_1h_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.35702,
+          "n": 1428,
+          "t": 1.06
+        },
+        "GBPUSD": {
+          "mean_atr": -0.67901,
+          "n": 1427,
+          "t": -1.94
+        },
+        "USDJPY": {
+          "mean_atr": 0.02246,
+          "n": 1428,
+          "t": 0.06
+        }
+      },
+      "momentum_1h_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.08362,
+          "n": 872,
+          "t": 0.2
+        },
+        "GBPUSD": {
+          "mean_atr": -0.86546,
+          "n": 683,
+          "t": -1.66
+        },
+        "USDJPY": {
+          "mean_atr": 0.55213,
+          "n": 769,
+          "t": 1.14
+        }
+      },
+      "momentum_1h_huge=signed": {
+        "EURUSD": {
+          "mean_atr": -0.57264,
+          "n": 479,
+          "t": -1.03
+        },
+        "GBPUSD": {
+          "mean_atr": -1.96767,
+          "n": 338,
+          "t": -2.77
+        },
+        "USDJPY": {
+          "mean_atr": 0.71744,
+          "n": 384,
+          "t": 1.0
+        }
+      },
+      "momentum_3d_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.01126,
+          "n": 1426,
+          "t": 0.03
+        },
+        "GBPUSD": {
+          "mean_atr": 0.30983,
+          "n": 1425,
+          "t": 0.88
+        },
+        "USDJPY": {
+          "mean_atr": -0.29947,
+          "n": 1426,
+          "t": -0.84
+        }
+      },
+      "momentum_3d_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.01027,
+          "n": 1370,
+          "t": 0.03
+        },
+        "GBPUSD": {
+          "mean_atr": 0.20007,
+          "n": 1375,
+          "t": 0.56
+        },
+        "USDJPY": {
+          "mean_atr": -0.21051,
+          "n": 1383,
+          "t": -0.58
+        }
+      },
+      "momentum_3d_huge=signed": {
+        "EURUSD": {
+          "mean_atr": 0.03528,
+          "n": 1327,
+          "t": 0.1
+        },
+        "GBPUSD": {
+          "mean_atr": 0.11675,
+          "n": 1321,
+          "t": 0.32
+        },
+        "USDJPY": {
+          "mean_atr": -0.23211,
+          "n": 1346,
+          "t": -0.63
+        }
+      },
+      "momentum_4h_any=signed": {
+        "EURUSD": {
+          "mean_atr": -0.20821,
+          "n": 1428,
+          "t": -0.62
+        },
+        "GBPUSD": {
+          "mean_atr": 0.00747,
+          "n": 1427,
+          "t": 0.02
+        },
+        "USDJPY": {
+          "mean_atr": 0.46633,
+          "n": 1428,
+          "t": 1.31
+        }
+      },
+      "momentum_4h_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.04134,
+          "n": 1081,
+          "t": 0.11
+        },
+        "GBPUSD": {
+          "mean_atr": -0.02437,
+          "n": 1050,
+          "t": -0.06
+        },
+        "USDJPY": {
+          "mean_atr": 0.58601,
+          "n": 1129,
+          "t": 1.47
+        }
+      },
+      "momentum_4h_high_vol=signed": {
+        "EURUSD": {
+          "mean_atr": -0.0933,
+          "n": 527,
+          "t": -0.2
+        },
+        "GBPUSD": {
+          "mean_atr": -0.28955,
+          "n": 465,
+          "t": -0.53
+        },
+        "USDJPY": {
+          "mean_atr": 0.3799,
+          "n": 479,
+          "t": 0.67
+        }
+      },
+      "momentum_4h_huge=signed": {
+        "EURUSD": {
+          "mean_atr": 0.01835,
+          "n": 774,
+          "t": 0.04
+        },
+        "GBPUSD": {
+          "mean_atr": -0.023,
+          "n": 756,
+          "t": -0.05
+        },
+        "USDJPY": {
+          "mean_atr": 0.33013,
+          "n": 867,
+          "t": 0.73
+        }
+      },
+      "momentum_4h_low_vol=signed": {
+        "EURUSD": {
+          "mean_atr": -0.12212,
+          "n": 440,
+          "t": -0.17
+        },
+        "GBPUSD": {
+          "mean_atr": -0.26553,
+          "n": 447,
+          "t": -0.38
+        },
+        "USDJPY": {
+          "mean_atr": 0.79813,
+          "n": 456,
+          "t": 1.13
+        }
+      },
+      "month_edge=edge": {
+        "EURUSD": {
+          "mean_atr": 0.79242,
+          "n": 136,
+          "t": 0.75
+        },
+        "GBPUSD": {
+          "mean_atr": 1.01229,
+          "n": 137,
+          "t": 0.9
+        },
+        "USDJPY": {
+          "mean_atr": -0.20552,
+          "n": 136,
+          "t": -0.16
+        }
+      },
+      "month_edge=middle": {
+        "EURUSD": {
+          "mean_atr": 0.06344,
+          "n": 1292,
+          "t": 0.18
+        },
+        "GBPUSD": {
+          "mean_atr": -0.01958,
+          "n": 1290,
+          "t": -0.05
+        },
+        "USDJPY": {
+          "mean_atr": 0.08015,
+          "n": 1292,
+          "t": 0.22
+        }
+      },
+      "revert_from_1d_mean_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.18562,
+          "n": 1428,
+          "t": 0.55
+        },
+        "GBPUSD": {
+          "mean_atr": -0.29405,
+          "n": 1427,
+          "t": -0.84
+        },
+        "USDJPY": {
+          "mean_atr": -0.23451,
+          "n": 1428,
+          "t": -0.66
+        }
+      },
+      "revert_from_1d_mean_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.08697,
+          "n": 1272,
+          "t": 0.25
+        },
+        "GBPUSD": {
+          "mean_atr": -0.16788,
+          "n": 1262,
+          "t": -0.47
+        },
+        "USDJPY": {
+          "mean_atr": -0.00531,
+          "n": 1254,
+          "t": -0.01
+        }
+      },
+      "weekday=0": {
+        "EURUSD": {
+          "mean_atr": -0.35161,
+          "n": 286,
+          "t": -0.6
+        },
+        "GBPUSD": {
+          "mean_atr": -1.02141,
+          "n": 285,
+          "t": -1.54
+        },
+        "USDJPY": {
+          "mean_atr": 0.8657,
+          "n": 286,
+          "t": 1.21
+        }
+      },
+      "weekday=1": {
+        "EURUSD": {
+          "mean_atr": 0.59863,
+          "n": 285,
+          "t": 0.76
+        },
+        "GBPUSD": {
+          "mean_atr": 1.11887,
+          "n": 285,
+          "t": 1.29
+        },
+        "USDJPY": {
+          "mean_atr": 0.92166,
+          "n": 285,
+          "t": 1.18
+        }
+      },
+      "weekday=2": {
+        "EURUSD": {
+          "mean_atr": 0.32392,
+          "n": 285,
+          "t": 0.39
+        },
+        "GBPUSD": {
+          "mean_atr": 0.80684,
+          "n": 285,
+          "t": 1.06
+        },
+        "USDJPY": {
+          "mean_atr": -0.88552,
+          "n": 285,
+          "t": -1.03
+        }
+      },
+      "weekday=3": {
+        "EURUSD": {
+          "mean_atr": -0.93209,
+          "n": 287,
+          "t": -1.17
+        },
+        "GBPUSD": {
+          "mean_atr": -0.6567,
+          "n": 287,
+          "t": -0.75
+        },
+        "USDJPY": {
+          "mean_atr": 0.13233,
+          "n": 287,
+          "t": 0.16
+        }
+      },
+      "weekday=4": {
+        "EURUSD": {
+          "mean_atr": 1.03468,
+          "n": 285,
+          "t": 1.38
+        },
+        "GBPUSD": {
+          "mean_atr": 0.22475,
+          "n": 264,
+          "t": 0.29
+        },
+        "USDJPY": {
+          "mean_atr": -0.77286,
+          "n": 285,
+          "t": -0.99
+        }
+      },
+      "weekday=6": {
+        "GBPUSD": {
+          "mean_atr": null,
+          "n": 21,
+          "t": null
+        }
+      }
+    },
+    "1h": {
+      "all=all": {
+        "EURUSD": {
+          "mean_atr": 0.00269,
+          "n": 34276,
+          "t": 0.19
+        },
+        "GBPUSD": {
+          "mean_atr": -0.00027,
+          "n": 34269,
+          "t": -0.02
+        },
+        "USDJPY": {
+          "mean_atr": 0.00251,
+          "n": 34274,
+          "t": 0.17
+        }
+      },
+      "hour=0": {
+        "EURUSD": {
+          "mean_atr": -0.06689,
+          "n": 1431,
+          "t": -1.3
+        },
+        "GBPUSD": {
+          "mean_atr": -0.11344,
+          "n": 1431,
+          "t": -2.56
+        },
+        "USDJPY": {
+          "mean_atr": -0.07439,
+          "n": 1431,
+          "t": -0.88
+        }
+      },
+      "hour=1": {
+        "EURUSD": {
+          "mean_atr": 0.17843,
+          "n": 1431,
+          "t": 3.54
+        },
+        "GBPUSD": {
+          "mean_atr": 0.13357,
+          "n": 1431,
+          "t": 2.9
+        },
+        "USDJPY": {
+          "mean_atr": -0.23831,
+          "n": 1431,
+          "t": -3.48
+        }
+      },
+      "hour=10": {
+        "EURUSD": {
+          "mean_atr": -0.0982,
+          "n": 1427,
+          "t": -1.31
+        },
+        "GBPUSD": {
+          "mean_atr": 0.04803,
+          "n": 1427,
+          "t": 0.52
+        },
+        "USDJPY": {
+          "mean_atr": 0.04305,
+          "n": 1427,
+          "t": 0.75
+        }
+      },
+      "hour=11": {
+        "EURUSD": {
+          "mean_atr": 0.05039,
+          "n": 1427,
+          "t": 0.57
+        },
+        "GBPUSD": {
+          "mean_atr": -0.06243,
+          "n": 1427,
+          "t": -0.7
+        },
+        "USDJPY": {
+          "mean_atr": 0.02336,
+          "n": 1427,
+          "t": 0.29
+        }
+      },
+      "hour=12": {
+        "EURUSD": {
+          "mean_atr": -0.08232,
+          "n": 1427,
+          "t": -0.74
+        },
+        "GBPUSD": {
+          "mean_atr": -0.02991,
+          "n": 1427,
+          "t": -0.31
+        },
+        "USDJPY": {
+          "mean_atr": 0.00155,
+          "n": 1427,
+          "t": 0.02
+        }
+      },
+      "hour=13": {
+        "EURUSD": {
+          "mean_atr": 0.09612,
+          "n": 1427,
+          "t": 0.9
+        },
+        "GBPUSD": {
+          "mean_atr": 0.04849,
+          "n": 1427,
+          "t": 0.49
+        },
+        "USDJPY": {
+          "mean_atr": -0.08779,
+          "n": 1427,
+          "t": -0.83
+        }
+      },
+      "hour=14": {
+        "EURUSD": {
+          "mean_atr": -0.12475,
+          "n": 1427,
+          "t": -1.26
+        },
+        "GBPUSD": {
+          "mean_atr": 0.03127,
+          "n": 1427,
+          "t": 0.35
+        },
+        "USDJPY": {
+          "mean_atr": 0.05727,
+          "n": 1427,
+          "t": 0.62
+        }
+      },
+      "hour=15": {
+        "EURUSD": {
+          "mean_atr": -0.03963,
+          "n": 1427,
+          "t": -0.5
+        },
+        "GBPUSD": {
+          "mean_atr": 0.03049,
+          "n": 1427,
+          "t": 0.39
+        },
+        "USDJPY": {
+          "mean_atr": 0.05511,
+          "n": 1427,
+          "t": 0.72
+        }
+      },
+      "hour=16": {
+        "EURUSD": {
+          "mean_atr": 0.04209,
+          "n": 1427,
+          "t": 0.67
+        },
+        "GBPUSD": {
+          "mean_atr": 0.08449,
+          "n": 1427,
+          "t": 1.38
+        },
+        "USDJPY": {
+          "mean_atr": -0.02734,
+          "n": 1427,
+          "t": -0.45
+        }
+      },
+      "hour=17": {
+        "EURUSD": {
+          "mean_atr": 0.01108,
+          "n": 1427,
+          "t": 0.15
+        },
+        "GBPUSD": {
+          "mean_atr": -0.03541,
+          "n": 1427,
+          "t": -0.59
+        },
+        "USDJPY": {
+          "mean_atr": 0.09599,
+          "n": 1427,
+          "t": 1.26
+        }
+      },
+      "hour=18": {
+        "EURUSD": {
+          "mean_atr": 0.00931,
+          "n": 1427,
+          "t": 0.15
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02366,
+          "n": 1427,
+          "t": 0.45
+        },
+        "USDJPY": {
+          "mean_atr": -0.0119,
+          "n": 1427,
+          "t": -0.19
+        }
+      },
+      "hour=19": {
+        "EURUSD": {
+          "mean_atr": 0.01355,
+          "n": 1427,
+          "t": 0.3
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02004,
+          "n": 1427,
+          "t": 0.47
+        },
+        "USDJPY": {
+          "mean_atr": 0.10477,
+          "n": 1427,
+          "t": 2.18
+        }
+      },
+      "hour=2": {
+        "EURUSD": {
+          "mean_atr": 0.16772,
+          "n": 1431,
+          "t": 4.07
+        },
+        "GBPUSD": {
+          "mean_atr": 0.10538,
+          "n": 1431,
+          "t": 2.78
+        },
+        "USDJPY": {
+          "mean_atr": 0.01543,
+          "n": 1431,
+          "t": 0.3
+        }
+      },
+      "hour=20": {
+        "EURUSD": {
+          "mean_atr": 0.02462,
+          "n": 1427,
+          "t": 0.46
+        },
+        "GBPUSD": {
+          "mean_atr": -0.05526,
+          "n": 1427,
+          "t": -1.11
+        },
+        "USDJPY": {
+          "mean_atr": -0.01357,
+          "n": 1427,
+          "t": -0.24
+        }
+      },
+      "hour=21": {
+        "EURUSD": {
+          "mean_atr": 0.13516,
+          "n": 1423,
+          "t": 3.71
+        },
+        "GBPUSD": {
+          "mean_atr": 0.122,
+          "n": 1419,
+          "t": 2.11
+        },
+        "USDJPY": {
+          "mean_atr": -0.11017,
+          "n": 1423,
+          "t": -1.47
+        }
+      },
+      "hour=22": {
+        "EURUSD": {
+          "mean_atr": 0.10489,
+          "n": 1425,
+          "t": 3.2
+        },
+        "GBPUSD": {
+          "mean_atr": 0.05111,
+          "n": 1423,
+          "t": 1.52
+        },
+        "USDJPY": {
+          "mean_atr": 0.01214,
+          "n": 1424,
+          "t": 0.21
+        }
+      },
+      "hour=23": {
+        "EURUSD": {
+          "mean_atr": 0.02084,
+          "n": 1429,
+          "t": 0.43
+        },
+        "GBPUSD": {
+          "mean_atr": 0.00854,
+          "n": 1429,
+          "t": 0.19
+        },
+        "USDJPY": {
+          "mean_atr": 0.00675,
+          "n": 1429,
+          "t": 0.09
+        }
+      },
+      "hour=3": {
+        "EURUSD": {
+          "mean_atr": -0.08245,
+          "n": 1431,
+          "t": -2.3
+        },
+        "GBPUSD": {
+          "mean_atr": -0.02792,
+          "n": 1431,
+          "t": -0.9
+        },
+        "USDJPY": {
+          "mean_atr": 0.00284,
+          "n": 1431,
+          "t": 0.06
+        }
+      },
+      "hour=4": {
+        "EURUSD": {
+          "mean_atr": 0.00668,
+          "n": 1431,
+          "t": 0.16
+        },
+        "GBPUSD": {
+          "mean_atr": -0.04343,
+          "n": 1431,
+          "t": -1.15
+        },
+        "USDJPY": {
+          "mean_atr": 0.07047,
+          "n": 1431,
+          "t": 1.31
+        }
+      },
+      "hour=5": {
+        "EURUSD": {
+          "mean_atr": -0.07854,
+          "n": 1431,
+          "t": -1.36
+        },
+        "GBPUSD": {
+          "mean_atr": 0.0123,
+          "n": 1431,
+          "t": 0.22
+        },
+        "USDJPY": {
+          "mean_atr": 0.11534,
+          "n": 1431,
+          "t": 2.09
+        }
+      },
+      "hour=6": {
+        "EURUSD": {
+          "mean_atr": -0.03442,
+          "n": 1431,
+          "t": -0.41
+        },
+        "GBPUSD": {
+          "mean_atr": -0.25511,
+          "n": 1431,
+          "t": -2.92
+        },
+        "USDJPY": {
+          "mean_atr": 0.08515,
+          "n": 1430,
+          "t": 1.19
+        }
+      },
+      "hour=7": {
+        "EURUSD": {
+          "mean_atr": 0.01333,
+          "n": 1431,
+          "t": 0.14
+        },
+        "GBPUSD": {
+          "mean_atr": -0.07618,
+          "n": 1430,
+          "t": -0.77
+        },
+        "USDJPY": {
+          "mean_atr": -0.02261,
+          "n": 1431,
+          "t": -0.31
+        }
+      },
+      "hour=8": {
+        "EURUSD": {
+          "mean_atr": -0.08852,
+          "n": 1427,
+          "t": -1.03
+        },
+        "GBPUSD": {
+          "mean_atr": -0.00275,
+          "n": 1427,
+          "t": -0.03
+        },
+        "USDJPY": {
+          "mean_atr": -0.0475,
+          "n": 1427,
+          "t": -0.73
+        }
+      },
+      "hour=9": {
+        "EURUSD": {
+          "mean_atr": -0.11375,
+          "n": 1427,
+          "t": -1.55
+        },
+        "GBPUSD": {
+          "mean_atr": -0.02258,
+          "n": 1427,
+          "t": -0.27
+        },
+        "USDJPY": {
+          "mean_atr": 0.00445,
+          "n": 1427,
+          "t": 0.08
+        }
+      },
+      "momentum_1d_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.02246,
+          "n": 34276,
+          "t": 1.56
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02023,
+          "n": 34269,
+          "t": 1.43
+        },
+        "USDJPY": {
+          "mean_atr": 0.03602,
+          "n": 34274,
+          "t": 2.51
+        }
+      },
+      "momentum_1d_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.02032,
+          "n": 32022,
+          "t": 1.37
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02333,
+          "n": 31951,
+          "t": 1.58
+        },
+        "USDJPY": {
+          "mean_atr": 0.03248,
+          "n": 31950,
+          "t": 2.17
+        }
+      },
+      "momentum_1d_huge=signed": {
+        "EURUSD": {
+          "mean_atr": 0.02375,
+          "n": 29779,
+          "t": 1.55
+        },
+        "GBPUSD": {
+          "mean_atr": 0.0282,
+          "n": 29776,
+          "t": 1.85
+        },
+        "USDJPY": {
+          "mean_atr": 0.03298,
+          "n": 29674,
+          "t": 2.11
+        }
+      },
+      "momentum_1h_any=signed": {
+        "EURUSD": {
+          "mean_atr": -0.03482,
+          "n": 34276,
+          "t": -2.42
+        },
+        "GBPUSD": {
+          "mean_atr": -0.02339,
+          "n": 34269,
+          "t": -1.65
+        },
+        "USDJPY": {
+          "mean_atr": -0.00233,
+          "n": 34274,
+          "t": -0.16
+        }
+      },
+      "momentum_1h_big=signed": {
+        "EURUSD": {
+          "mean_atr": -0.06446,
+          "n": 19803,
+          "t": -3.13
+        },
+        "GBPUSD": {
+          "mean_atr": -0.01954,
+          "n": 19210,
+          "t": -0.94
+        },
+        "USDJPY": {
+          "mean_atr": -0.01523,
+          "n": 20363,
+          "t": -0.76
+        }
+      },
+      "momentum_1h_huge=signed": {
+        "EURUSD": {
+          "mean_atr": -0.07725,
+          "n": 10795,
+          "t": -2.5
+        },
+        "GBPUSD": {
+          "mean_atr": -0.00478,
+          "n": 10458,
+          "t": -0.15
+        },
+        "USDJPY": {
+          "mean_atr": 0.01441,
+          "n": 11054,
+          "t": 0.48
+        }
+      },
+      "momentum_3d_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.01901,
+          "n": 34228,
+          "t": 1.32
+        },
+        "GBPUSD": {
+          "mean_atr": 0.00832,
+          "n": 34221,
+          "t": 0.59
+        },
+        "USDJPY": {
+          "mean_atr": 0.039,
+          "n": 34226,
+          "t": 2.72
+        }
+      },
+      "momentum_3d_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.01728,
+          "n": 33081,
+          "t": 1.18
+        },
+        "GBPUSD": {
+          "mean_atr": 0.00932,
+          "n": 33021,
+          "t": 0.65
+        },
+        "USDJPY": {
+          "mean_atr": 0.03484,
+          "n": 33088,
+          "t": 2.39
+        }
+      },
+      "momentum_3d_huge=signed": {
+        "EURUSD": {
+          "mean_atr": 0.01626,
+          "n": 31923,
+          "t": 1.09
+        },
+        "GBPUSD": {
+          "mean_atr": 0.01027,
+          "n": 31805,
+          "t": 0.7
+        },
+        "USDJPY": {
+          "mean_atr": 0.0348,
+          "n": 31893,
+          "t": 2.35
+        }
+      },
+      "momentum_4h_any=signed": {
+        "EURUSD": {
+          "mean_atr": -0.02737,
+          "n": 34276,
+          "t": -1.9
+        },
+        "GBPUSD": {
+          "mean_atr": 0.0051,
+          "n": 34269,
+          "t": 0.36
+        },
+        "USDJPY": {
+          "mean_atr": 0.02333,
+          "n": 34274,
+          "t": 1.63
+        }
+      },
+      "momentum_4h_big=signed": {
+        "EURUSD": {
+          "mean_atr": -0.03701,
+          "n": 27050,
+          "t": -2.23
+        },
+        "GBPUSD": {
+          "mean_atr": 0.00088,
+          "n": 26581,
+          "t": 0.05
+        },
+        "USDJPY": {
+          "mean_atr": 0.02188,
+          "n": 27201,
+          "t": 1.33
+        }
+      },
+      "momentum_4h_high_vol=signed": {
+        "EURUSD": {
+          "mean_atr": -0.02894,
+          "n": 11321,
+          "t": -1.24
+        },
+        "GBPUSD": {
+          "mean_atr": -0.01689,
+          "n": 11313,
+          "t": -0.7
+        },
+        "USDJPY": {
+          "mean_atr": 0.02731,
+          "n": 11308,
+          "t": 1.07
+        }
+      },
+      "momentum_4h_huge=signed": {
+        "EURUSD": {
+          "mean_atr": -0.03345,
+          "n": 20515,
+          "t": -1.7
+        },
+        "GBPUSD": {
+          "mean_atr": 0.01141,
+          "n": 20019,
+          "t": 0.58
+        },
+        "USDJPY": {
+          "mean_atr": 0.0132,
+          "n": 21018,
+          "t": 0.68
+        }
+      },
+      "momentum_4h_low_vol=signed": {
+        "EURUSD": {
+          "mean_atr": -0.04761,
+          "n": 11322,
+          "t": -1.8
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02596,
+          "n": 11309,
+          "t": 1.01
+        },
+        "USDJPY": {
+          "mean_atr": 0.03654,
+          "n": 11308,
+          "t": 1.42
+        }
+      },
+      "month_edge=edge": {
+        "EURUSD": {
+          "mean_atr": -0.00849,
+          "n": 3285,
+          "t": -0.18
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02879,
+          "n": 3285,
+          "t": 0.63
+        },
+        "USDJPY": {
+          "mean_atr": -0.0168,
+          "n": 3283,
+          "t": -0.3
+        }
+      },
+      "month_edge=middle": {
+        "EURUSD": {
+          "mean_atr": 0.00387,
+          "n": 30991,
+          "t": 0.26
+        },
+        "GBPUSD": {
+          "mean_atr": -0.00335,
+          "n": 30984,
+          "t": -0.22
+        },
+        "USDJPY": {
+          "mean_atr": 0.00455,
+          "n": 30991,
+          "t": 0.31
+        }
+      },
+      "revert_from_1d_mean_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.01286,
+          "n": 34276,
+          "t": 0.89
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02721,
+          "n": 34269,
+          "t": 1.92
+        },
+        "USDJPY": {
+          "mean_atr": 0.02175,
+          "n": 34274,
+          "t": 1.52
+        }
+      },
+      "revert_from_1d_mean_big=signed": {
+        "EURUSD": {
+          "mean_atr": -0.0013,
+          "n": 30153,
+          "t": -0.09
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02824,
+          "n": 30203,
+          "t": 1.87
+        },
+        "USDJPY": {
+          "mean_atr": 0.02682,
+          "n": 29864,
+          "t": 1.73
+        }
+      },
+      "weekday=0": {
+        "EURUSD": {
+          "mean_atr": 0.04079,
+          "n": 6850,
+          "t": 1.49
+        },
+        "GBPUSD": {
+          "mean_atr": 0.00101,
+          "n": 6847,
+          "t": 0.04
+        },
+        "USDJPY": {
+          "mean_atr": 0.02805,
+          "n": 6848,
+          "t": 1.02
+        }
+      },
+      "weekday=1": {
+        "EURUSD": {
+          "mean_atr": -0.00288,
+          "n": 6848,
+          "t": -0.09
+        },
+        "GBPUSD": {
+          "mean_atr": 0.00691,
+          "n": 6848,
+          "t": 0.21
+        },
+        "USDJPY": {
+          "mean_atr": 0.00061,
+          "n": 6849,
+          "t": 0.02
+        }
+      },
+      "weekday=2": {
+        "EURUSD": {
+          "mean_atr": -0.01436,
+          "n": 6852,
+          "t": -0.41
+        },
+        "GBPUSD": {
+          "mean_atr": 0.0311,
+          "n": 6851,
+          "t": 0.96
+        },
+        "USDJPY": {
+          "mean_atr": 0.02978,
+          "n": 6852,
+          "t": 0.81
+        }
+      },
+      "weekday=3": {
+        "EURUSD": {
+          "mean_atr": -0.02489,
+          "n": 6884,
+          "t": -0.75
+        },
+        "GBPUSD": {
+          "mean_atr": -0.01468,
+          "n": 6886,
+          "t": -0.43
+        },
+        "USDJPY": {
+          "mean_atr": 0.00953,
+          "n": 6885,
+          "t": 0.31
+        }
+      },
+      "weekday=4": {
+        "EURUSD": {
+          "mean_atr": 0.01427,
+          "n": 6089,
+          "t": 0.4
+        },
+        "GBPUSD": {
+          "mean_atr": -0.04521,
+          "n": 6088,
+          "t": -1.32
+        },
+        "USDJPY": {
+          "mean_atr": -0.07411,
+          "n": 6089,
+          "t": -2.1
+        }
+      },
+      "weekday=6": {
+        "EURUSD": {
+          "mean_atr": 0.02036,
+          "n": 753,
+          "t": 0.34
+        },
+        "GBPUSD": {
+          "mean_atr": 0.13304,
+          "n": 749,
+          "t": 2.28
+        },
+        "USDJPY": {
+          "mean_atr": 0.09481,
+          "n": 751,
+          "t": 1.04
+        }
+      }
+    },
+    "4h": {
+      "all=all": {
+        "EURUSD": {
+          "mean_atr": 0.00666,
+          "n": 8569,
+          "t": 0.11
+        },
+        "GBPUSD": {
+          "mean_atr": 0.00022,
+          "n": 8567,
+          "t": 0.0
+        },
+        "USDJPY": {
+          "mean_atr": 0.00816,
+          "n": 8568,
+          "t": 0.14
+        }
+      },
+      "hour=0": {
+        "EURUSD": {
+          "mean_atr": 0.18218,
+          "n": 858,
+          "t": 1.65
+        },
+        "GBPUSD": {
+          "mean_atr": 0.14925,
+          "n": 543,
+          "t": 1.16
+        },
+        "USDJPY": {
+          "mean_atr": -0.29036,
+          "n": 222,
+          "t": -0.86
+        }
+      },
+      "hour=1": {
+        "EURUSD": {
+          "mean_atr": 0.68653,
+          "n": 314,
+          "t": 2.53
+        },
+        "GBPUSD": {
+          "mean_atr": 0.16147,
+          "n": 310,
+          "t": 0.9
+        },
+        "USDJPY": {
+          "mean_atr": -0.49591,
+          "n": 94,
+          "t": -0.59
+        }
+      },
+      "hour=10": {
+        "EURUSD": {
+          "mean_atr": -1.53949,
+          "n": 52,
+          "t": -1.38
+        },
+        "GBPUSD": {
+          "mean_atr": -0.15547,
+          "n": 214,
+          "t": -0.29
+        },
+        "USDJPY": {
+          "mean_atr": -0.38339,
+          "n": 540,
+          "t": -1.21
+        }
+      },
+      "hour=11": {
+        "EURUSD": {
+          "mean_atr": -0.39428,
+          "n": 204,
+          "t": -0.77
+        },
+        "GBPUSD": {
+          "mean_atr": -0.01247,
+          "n": 363,
+          "t": -0.03
+        },
+        "USDJPY": {
+          "mean_atr": 0.25673,
+          "n": 574,
+          "t": 0.81
+        }
+      },
+      "hour=12": {
+        "EURUSD": {
+          "mean_atr": -0.0834,
+          "n": 857,
+          "t": -0.3
+        },
+        "GBPUSD": {
+          "mean_atr": 0.01389,
+          "n": 542,
+          "t": 0.05
+        },
+        "USDJPY": {
+          "mean_atr": 0.29977,
+          "n": 221,
+          "t": 0.54
+        }
+      },
+      "hour=13": {
+        "EURUSD": {
+          "mean_atr": -0.02159,
+          "n": 314,
+          "t": -0.05
+        },
+        "GBPUSD": {
+          "mean_atr": 0.79121,
+          "n": 308,
+          "t": 2.27
+        },
+        "USDJPY": {
+          "mean_atr": 1.05957,
+          "n": 92,
+          "t": 1.57
+        }
+      },
+      "hour=14": {
+        "EURUSD": {
+          "mean_atr": -0.02063,
+          "n": 52,
+          "t": -0.02
+        },
+        "GBPUSD": {
+          "mean_atr": -0.08641,
+          "n": 214,
+          "t": -0.22
+        },
+        "USDJPY": {
+          "mean_atr": 0.27998,
+          "n": 540,
+          "t": 1.18
+        }
+      },
+      "hour=15": {
+        "EURUSD": {
+          "mean_atr": 0.26567,
+          "n": 204,
+          "t": 0.83
+        },
+        "GBPUSD": {
+          "mean_atr": -0.11474,
+          "n": 363,
+          "t": -0.48
+        },
+        "USDJPY": {
+          "mean_atr": -0.04552,
+          "n": 574,
+          "t": -0.21
+        }
+      },
+      "hour=16": {
+        "EURUSD": {
+          "mean_atr": 0.08238,
+          "n": 857,
+          "t": 0.5
+        },
+        "GBPUSD": {
+          "mean_atr": 0.15105,
+          "n": 542,
+          "t": 0.86
+        },
+        "USDJPY": {
+          "mean_atr": 0.04432,
+          "n": 221,
+          "t": 0.16
+        }
+      },
+      "hour=17": {
+        "EURUSD": {
+          "mean_atr": 0.21033,
+          "n": 314,
+          "t": 0.8
+        },
+        "GBPUSD": {
+          "mean_atr": 0.13039,
+          "n": 308,
+          "t": 0.59
+        },
+        "USDJPY": {
+          "mean_atr": 0.59503,
+          "n": 92,
+          "t": 0.96
+        }
+      },
+      "hour=18": {
+        "EURUSD": {
+          "mean_atr": -0.4027,
+          "n": 52,
+          "t": -0.72
+        },
+        "GBPUSD": {
+          "mean_atr": -0.03135,
+          "n": 214,
+          "t": -0.15
+        },
+        "USDJPY": {
+          "mean_atr": 0.0429,
+          "n": 540,
+          "t": 0.27
+        }
+      },
+      "hour=19": {
+        "EURUSD": {
+          "mean_atr": 0.06688,
+          "n": 204,
+          "t": 0.47
+        },
+        "GBPUSD": {
+          "mean_atr": 0.32428,
+          "n": 363,
+          "t": 1.47
+        },
+        "USDJPY": {
+          "mean_atr": -0.01147,
+          "n": 573,
+          "t": -0.08
+        }
+      },
+      "hour=2": {
+        "EURUSD": {
+          "mean_atr": -0.29213,
+          "n": 55,
+          "t": -0.78
+        },
+        "GBPUSD": {
+          "mean_atr": -0.23313,
+          "n": 215,
+          "t": -1.12
+        },
+        "USDJPY": {
+          "mean_atr": 0.64705,
+          "n": 541,
+          "t": 4.0
+        }
+      },
+      "hour=20": {
+        "EURUSD": {
+          "mean_atr": 0.21676,
+          "n": 857,
+          "t": 2.25
+        },
+        "GBPUSD": {
+          "mean_atr": 0.09598,
+          "n": 541,
+          "t": 0.71
+        },
+        "USDJPY": {
+          "mean_atr": -0.27183,
+          "n": 221,
+          "t": -0.91
+        }
+      },
+      "hour=21": {
+        "EURUSD": {
+          "mean_atr": 0.19195,
+          "n": 313,
+          "t": 0.97
+        },
+        "GBPUSD": {
+          "mean_atr": -0.1149,
+          "n": 306,
+          "t": -0.61
+        },
+        "USDJPY": {
+          "mean_atr": -1.1738,
+          "n": 92,
+          "t": -1.97
+        }
+      },
+      "hour=22": {
+        "EURUSD": {
+          "mean_atr": 1.05613,
+          "n": 52,
+          "t": 2.51
+        },
+        "GBPUSD": {
+          "mean_atr": -0.06219,
+          "n": 214,
+          "t": -0.34
+        },
+        "USDJPY": {
+          "mean_atr": -0.19673,
+          "n": 540,
+          "t": -0.93
+        }
+      },
+      "hour=23": {
+        "EURUSD": {
+          "mean_atr": 0.37784,
+          "n": 204,
+          "t": 1.71
+        },
+        "GBPUSD": {
+          "mean_atr": 0.14985,
+          "n": 363,
+          "t": 1.02
+        },
+        "USDJPY": {
+          "mean_atr": -0.44185,
+          "n": 573,
+          "t": -1.95
+        }
+      },
+      "hour=3": {
+        "EURUSD": {
+          "mean_atr": -0.36758,
+          "n": 204,
+          "t": -0.95
+        },
+        "GBPUSD": {
+          "mean_atr": -0.19359,
+          "n": 363,
+          "t": -0.85
+        },
+        "USDJPY": {
+          "mean_atr": -0.01345,
+          "n": 574,
+          "t": -0.08
+        }
+      },
+      "hour=4": {
+        "EURUSD": {
+          "mean_atr": -0.10822,
+          "n": 858,
+          "t": -0.59
+        },
+        "GBPUSD": {
+          "mean_atr": -0.03216,
+          "n": 543,
+          "t": -0.15
+        },
+        "USDJPY": {
+          "mean_atr": 0.39771,
+          "n": 222,
+          "t": 1.31
+        }
+      },
+      "hour=5": {
+        "EURUSD": {
+          "mean_atr": 0.25768,
+          "n": 314,
+          "t": 0.75
+        },
+        "GBPUSD": {
+          "mean_atr": -0.31721,
+          "n": 310,
+          "t": -0.91
+        },
+        "USDJPY": {
+          "mean_atr": 0.95513,
+          "n": 94,
+          "t": 1.96
+        }
+      },
+      "hour=6": {
+        "EURUSD": {
+          "mean_atr": -0.21391,
+          "n": 55,
+          "t": -0.27
+        },
+        "GBPUSD": {
+          "mean_atr": -0.46719,
+          "n": 215,
+          "t": -0.87
+        },
+        "USDJPY": {
+          "mean_atr": 0.06298,
+          "n": 540,
+          "t": 0.29
+        }
+      },
+      "hour=7": {
+        "EURUSD": {
+          "mean_atr": -0.95908,
+          "n": 204,
+          "t": -2.1
+        },
+        "GBPUSD": {
+          "mean_atr": -0.49198,
+          "n": 363,
+          "t": -1.3
+        },
+        "USDJPY": {
+          "mean_atr": -0.30858,
+          "n": 575,
+          "t": -1.43
+        }
+      },
+      "hour=8": {
+        "EURUSD": {
+          "mean_atr": -0.07444,
+          "n": 857,
+          "t": -0.35
+        },
+        "GBPUSD": {
+          "mean_atr": 0.16466,
+          "n": 542,
+          "t": 0.48
+        },
+        "USDJPY": {
+          "mean_atr": -0.24412,
+          "n": 221,
+          "t": -0.66
+        }
+      },
+      "hour=9": {
+        "EURUSD": {
+          "mean_atr": -0.83493,
+          "n": 314,
+          "t": -2.43
+        },
+        "GBPUSD": {
+          "mean_atr": -0.47868,
+          "n": 308,
+          "t": -1.29
+        },
+        "USDJPY": {
+          "mean_atr": 0.81727,
+          "n": 92,
+          "t": 1.79
+        }
+      },
+      "momentum_1d_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.03472,
+          "n": 8569,
+          "t": 0.59
+        },
+        "GBPUSD": {
+          "mean_atr": 0.03722,
+          "n": 8567,
+          "t": 0.65
+        },
+        "USDJPY": {
+          "mean_atr": 0.04957,
+          "n": 8568,
+          "t": 0.85
+        }
+      },
+      "momentum_1d_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.05352,
+          "n": 8011,
+          "t": 0.89
+        },
+        "GBPUSD": {
+          "mean_atr": 0.04204,
+          "n": 7998,
+          "t": 0.7
+        },
+        "USDJPY": {
+          "mean_atr": 0.0446,
+          "n": 7980,
+          "t": 0.74
+        }
+      },
+      "momentum_1d_huge=signed": {
+        "EURUSD": {
+          "mean_atr": 0.04346,
+          "n": 7456,
+          "t": 0.7
+        },
+        "GBPUSD": {
+          "mean_atr": 0.05671,
+          "n": 7446,
+          "t": 0.91
+        },
+        "USDJPY": {
+          "mean_atr": 0.02927,
+          "n": 7421,
+          "t": 0.47
+        }
+      },
+      "momentum_1h_any=signed": {
+        "EURUSD": {
+          "mean_atr": -0.15249,
+          "n": 8569,
+          "t": -2.6
+        },
+        "GBPUSD": {
+          "mean_atr": 0.00104,
+          "n": 8567,
+          "t": 0.02
+        },
+        "USDJPY": {
+          "mean_atr": 0.00347,
+          "n": 8568,
+          "t": 0.06
+        }
+      },
+      "momentum_1h_big=signed": {
+        "EURUSD": {
+          "mean_atr": -0.1499,
+          "n": 4980,
+          "t": -1.82
+        },
+        "GBPUSD": {
+          "mean_atr": -0.03627,
+          "n": 4701,
+          "t": -0.43
+        },
+        "USDJPY": {
+          "mean_atr": -0.04254,
+          "n": 5093,
+          "t": -0.55
+        }
+      },
+      "momentum_1h_huge=signed": {
+        "EURUSD": {
+          "mean_atr": -0.19958,
+          "n": 2660,
+          "t": -1.61
+        },
+        "GBPUSD": {
+          "mean_atr": 0.1339,
+          "n": 2510,
+          "t": 1.07
+        },
+        "USDJPY": {
+          "mean_atr": -0.06805,
+          "n": 2747,
+          "t": -0.62
+        }
+      },
+      "momentum_3d_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.04142,
+          "n": 8557,
+          "t": 0.71
+        },
+        "GBPUSD": {
+          "mean_atr": 0.03504,
+          "n": 8555,
+          "t": 0.61
+        },
+        "USDJPY": {
+          "mean_atr": 0.08843,
+          "n": 8556,
+          "t": 1.52
+        }
+      },
+      "momentum_3d_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.04198,
+          "n": 8272,
+          "t": 0.7
+        },
+        "GBPUSD": {
+          "mean_atr": 0.03969,
+          "n": 8277,
+          "t": 0.68
+        },
+        "USDJPY": {
+          "mean_atr": 0.09203,
+          "n": 8251,
+          "t": 1.55
+        }
+      },
+      "momentum_3d_huge=signed": {
+        "EURUSD": {
+          "mean_atr": 0.02599,
+          "n": 7988,
+          "t": 0.43
+        },
+        "GBPUSD": {
+          "mean_atr": 0.04444,
+          "n": 7952,
+          "t": 0.75
+        },
+        "USDJPY": {
+          "mean_atr": 0.09715,
+          "n": 7976,
+          "t": 1.61
+        }
+      },
+      "momentum_4h_any=signed": {
+        "EURUSD": {
+          "mean_atr": -0.10433,
+          "n": 8569,
+          "t": -1.78
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02098,
+          "n": 8567,
+          "t": 0.36
+        },
+        "USDJPY": {
+          "mean_atr": 0.02306,
+          "n": 8568,
+          "t": 0.4
+        }
+      },
+      "momentum_4h_big=signed": {
+        "EURUSD": {
+          "mean_atr": -0.14937,
+          "n": 6774,
+          "t": -2.21
+        },
+        "GBPUSD": {
+          "mean_atr": 0.04067,
+          "n": 6673,
+          "t": 0.6
+        },
+        "USDJPY": {
+          "mean_atr": -0.00543,
+          "n": 6825,
+          "t": -0.08
+        }
+      },
+      "momentum_4h_high_vol=signed": {
+        "EURUSD": {
+          "mean_atr": -0.15364,
+          "n": 2829,
+          "t": -1.75
+        },
+        "GBPUSD": {
+          "mean_atr": -0.00447,
+          "n": 2825,
+          "t": -0.05
+        },
+        "USDJPY": {
+          "mean_atr": 0.07413,
+          "n": 2835,
+          "t": 0.77
+        }
+      },
+      "momentum_4h_huge=signed": {
+        "EURUSD": {
+          "mean_atr": -0.14345,
+          "n": 5104,
+          "t": -1.8
+        },
+        "GBPUSD": {
+          "mean_atr": 0.09563,
+          "n": 5039,
+          "t": 1.2
+        },
+        "USDJPY": {
+          "mean_atr": -0.02272,
+          "n": 5272,
+          "t": -0.31
+        }
+      },
+      "momentum_4h_low_vol=signed": {
+        "EURUSD": {
+          "mean_atr": -0.07161,
+          "n": 2840,
+          "t": -0.64
+        },
+        "GBPUSD": {
+          "mean_atr": 0.06275,
+          "n": 2839,
+          "t": 0.56
+        },
+        "USDJPY": {
+          "mean_atr": 0.19623,
+          "n": 2829,
+          "t": 1.81
+        }
+      },
+      "month_edge=edge": {
+        "EURUSD": {
+          "mean_atr": 0.0228,
+          "n": 820,
+          "t": 0.12
+        },
+        "GBPUSD": {
+          "mean_atr": 0.13081,
+          "n": 824,
+          "t": 0.71
+        },
+        "USDJPY": {
+          "mean_atr": -0.07842,
+          "n": 819,
+          "t": -0.39
+        }
+      },
+      "month_edge=middle": {
+        "EURUSD": {
+          "mean_atr": 0.00495,
+          "n": 7749,
+          "t": 0.08
+        },
+        "GBPUSD": {
+          "mean_atr": -0.01368,
+          "n": 7743,
+          "t": -0.23
+        },
+        "USDJPY": {
+          "mean_atr": 0.01731,
+          "n": 7749,
+          "t": 0.29
+        }
+      },
+      "revert_from_1d_mean_any=signed": {
+        "EURUSD": {
+          "mean_atr": 0.01217,
+          "n": 8569,
+          "t": 0.21
+        },
+        "GBPUSD": {
+          "mean_atr": 0.04898,
+          "n": 8567,
+          "t": 0.85
+        },
+        "USDJPY": {
+          "mean_atr": 0.03937,
+          "n": 8568,
+          "t": 0.68
+        }
+      },
+      "revert_from_1d_mean_big=signed": {
+        "EURUSD": {
+          "mean_atr": 0.01723,
+          "n": 7521,
+          "t": 0.28
+        },
+        "GBPUSD": {
+          "mean_atr": 0.08369,
+          "n": 7517,
+          "t": 1.36
+        },
+        "USDJPY": {
+          "mean_atr": 0.06467,
+          "n": 7486,
+          "t": 1.04
+        }
+      },
+      "weekday=0": {
+        "EURUSD": {
+          "mean_atr": 0.13396,
+          "n": 1711,
+          "t": 1.21
+        },
+        "GBPUSD": {
+          "mean_atr": -0.0233,
+          "n": 1710,
+          "t": -0.2
+        },
+        "USDJPY": {
+          "mean_atr": 0.14711,
+          "n": 1714,
+          "t": 1.24
+        }
+      },
+      "weekday=1": {
+        "EURUSD": {
+          "mean_atr": -0.00879,
+          "n": 1714,
+          "t": -0.07
+        },
+        "GBPUSD": {
+          "mean_atr": 0.02436,
+          "n": 1712,
+          "t": 0.18
+        },
+        "USDJPY": {
+          "mean_atr": 0.06943,
+          "n": 1711,
+          "t": 0.54
+        }
+      },
+      "weekday=2": {
+        "EURUSD": {
+          "mean_atr": -0.00659,
+          "n": 1712,
+          "t": -0.05
+        },
+        "GBPUSD": {
+          "mean_atr": 0.13913,
+          "n": 1714,
+          "t": 1.07
+        },
+        "USDJPY": {
+          "mean_atr": 0.01825,
+          "n": 1714,
+          "t": 0.13
+        }
+      },
+      "weekday=3": {
+        "EURUSD": {
+          "mean_atr": -0.124,
+          "n": 1721,
+          "t": -0.91
+        },
+        "GBPUSD": {
+          "mean_atr": -0.04845,
+          "n": 1722,
+          "t": -0.35
+        },
+        "USDJPY": {
+          "mean_atr": 0.0588,
+          "n": 1721,
+          "t": 0.47
+        }
+      },
+      "weekday=4": {
+        "EURUSD": {
+          "mean_atr": 0.01952,
+          "n": 1649,
+          "t": 0.14
+        },
+        "GBPUSD": {
+          "mean_atr": -0.11149,
+          "n": 1575,
+          "t": -0.82
+        },
+        "USDJPY": {
+          "mean_atr": -0.18453,
+          "n": 1488,
+          "t": -1.31
+        }
+      },
+      "weekday=6": {
+        "EURUSD": {
+          "mean_atr": 0.57187,
+          "n": 62,
+          "t": 1.67
+        },
+        "GBPUSD": {
+          "mean_atr": 0.15316,
+          "n": 134,
+          "t": 0.6
+        },
+        "USDJPY": {
+          "mean_atr": -0.72234,
+          "n": 220,
+          "t": -2.16
+        }
+      }
+    }
+  },
+  "note": "exploratory, design window only; t-stats on non-overlapping samples",
+  "schema_version": "fx_edge_census_v1",
+  "window": {
+    "end_exclusive": "2022-01-01",
+    "start": "2016-07-01"
+  }
+}

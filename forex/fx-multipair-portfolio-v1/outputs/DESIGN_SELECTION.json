@@ -1,0 +1,63 @@
+{
+  "costs": {
+    "EURUSD": {
+      "slippage_points": 2.0,
+      "spread_markup_points": 9.0,
+      "stop_slippage_points": 2.0
+    },
+    "GBPUSD": {
+      "slippage_points": 2.0,
+      "spread_markup_points": 9.0,
+      "stop_slippage_points": 2.0
+    },
+    "USDJPY": {
+      "slippage_points": 2.0,
+      "spread_markup_points": 10.0,
+      "stop_slippage_points": 2.0
+    }
+  },
+  "families": {
+    "asia_fade": {
+      "reason": "no grid point satisfied all-pairs PF>1 with min trades",
+      "selected": null
+    },
+    "donchian_h4": {
+      "reason": "no grid point satisfied all-pairs PF>1 with min trades",
+      "selected": null
+    },
+    "london_breakout": {
+      "reason": "no grid point satisfied all-pairs PF>1 with min trades",
+      "selected": null
+    }
+  },
+  "grid": {
+    "atr_mult": [
+      1.0,
+      1.5,
+      2.0,
+      3.0
+    ],
+    "context_mult": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "rr": [
+      1.2,
+      1.5,
+      2.0,
+      2.5
+    ]
+  },
+  "schema_version": "fx_design_selection_v1",
+  "selection_rule": "max median PF across pairs; all pairs PF>1; >=60 trades/pair; plateau>=2 neighbours",
+  "stop_floor_points": {
+    "EURUSD": 160.0,
+    "GBPUSD": 220.0,
+    "USDJPY": 180.0
+  },
+  "window": {
+    "end_exclusive": "2022-01-01",
+    "start": "2016-07-01"
+  }
+}

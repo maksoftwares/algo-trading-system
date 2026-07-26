@@ -1,0 +1,244 @@
+{
+  "panel": {
+    "currencies": [
+      "EUR",
+      "GBP",
+      "AUD",
+      "NZD",
+      "JPY",
+      "CAD",
+      "CHF"
+    ],
+    "first": "1999-01-31",
+    "last": "2026-07-31",
+    "months": 331
+  },
+  "results": {
+    "CARRY_top1bot1": {
+      "annual_return_pct": 3.507,
+      "annual_vol_pct": 11.431,
+      "max_drawdown_pct": 60.6,
+      "months": 330,
+      "sharpe": 0.307,
+      "subperiod_annual_pct": {
+        "1999-2007": 10.81,
+        "2008-2014": -1.8,
+        "2015-2020": -0.86,
+        "2021-2026": 3.08
+      },
+      "t": 1.609
+    },
+    "CARRY_top2_accrual_only": {
+      "annual_return_pct": 3.478,
+      "annual_vol_pct": 0.447,
+      "max_drawdown_pct": 0.0,
+      "months": 330,
+      "sharpe": 7.779,
+      "subperiod_annual_pct": {
+        "1999-2007": 4.28,
+        "2008-2014": 3.63,
+        "2015-2020": 2.36,
+        "2021-2026": 3.19
+      },
+      "t": 40.795
+    },
+    "CARRY_top2_spot_only": {
+      "annual_return_pct": 0.077,
+      "annual_vol_pct": 8.862,
+      "max_drawdown_pct": 55.64,
+      "months": 330,
+      "sharpe": 0.009,
+      "subperiod_annual_pct": {
+        "1999-2007": 4.16,
+        "2008-2014": -3.89,
+        "2015-2020": -2.95,
+        "2021-2026": 1.74
+      },
+      "t": 0.046
+    },
+    "CARRY_top2bot2": {
+      "annual_return_pct": 3.555,
+      "annual_vol_pct": 8.847,
+      "max_drawdown_pct": 44.99,
+      "months": 330,
+      "sharpe": 0.402,
+      "subperiod_annual_pct": {
+        "1999-2007": 8.45,
+        "2008-2014": -0.26,
+        "2015-2020": -0.59,
+        "2021-2026": 4.93
+      },
+      "t": 2.107
+    },
+    "CARRY_top3bot3": {
+      "annual_return_pct": 1.991,
+      "annual_vol_pct": 7.237,
+      "max_drawdown_pct": 36.23,
+      "months": 330,
+      "sharpe": 0.275,
+      "subperiod_annual_pct": {
+        "1999-2007": 5.33,
+        "2008-2014": 0.61,
+        "2015-2020": -3.09,
+        "2021-2026": 3.83
+      },
+      "t": 1.443
+    },
+    "TSMOM_12m": {
+      "annual_return_pct": 0.772,
+      "annual_vol_pct": 6.432,
+      "max_drawdown_pct": 33.27,
+      "months": 319,
+      "sharpe": 0.12,
+      "subperiod_annual_pct": {
+        "1999-2007": 4.65,
+        "2008-2014": -1.36,
+        "2015-2020": 0.0,
+        "2021-2026": -1.29
+      },
+      "t": 0.619
+    },
+    "TSMOM_1m": {
+      "annual_return_pct": 0.367,
+      "annual_vol_pct": 5.622,
+      "max_drawdown_pct": 34.02,
+      "months": 330,
+      "sharpe": 0.065,
+      "subperiod_annual_pct": {
+        "1999-2007": 2.86,
+        "2008-2014": 0.45,
+        "2015-2020": -1.0,
+        "2021-2026": -2.25
+      },
+      "t": 0.342
+    },
+    "TSMOM_3m": {
+      "annual_return_pct": 0.633,
+      "annual_vol_pct": 5.972,
+      "max_drawdown_pct": 33.2,
+      "months": 328,
+      "sharpe": 0.106,
+      "subperiod_annual_pct": {
+        "1999-2007": 1.37,
+        "2008-2014": 4.66,
+        "2015-2020": -3.69,
+        "2021-2026": -0.93
+      },
+      "t": 0.554
+    },
+    "TSMOM_6m": {
+      "annual_return_pct": 0.361,
+      "annual_vol_pct": 6.056,
+      "max_drawdown_pct": 33.45,
+      "months": 325,
+      "sharpe": 0.06,
+      "subperiod_annual_pct": {
+        "1999-2007": 2.04,
+        "2008-2014": 2.07,
+        "2015-2020": 0.38,
+        "2021-2026": -4.35
+      },
+      "t": 0.31
+    },
+    "VALUE_rev_36m": {
+      "annual_return_pct": 0.26,
+      "annual_vol_pct": 7.391,
+      "max_drawdown_pct": 25.66,
+      "months": 331,
+      "sharpe": 0.035,
+      "subperiod_annual_pct": {
+        "1999-2007": -0.7,
+        "2008-2014": -0.25,
+        "2015-2020": 4.43,
+        "2021-2026": -2.03
+      },
+      "t": 0.185
+    },
+    "VALUE_rev_60m": {
+      "annual_return_pct": 1.659,
+      "annual_vol_pct": 7.695,
+      "max_drawdown_pct": 18.58,
+      "months": 331,
+      "sharpe": 0.216,
+      "subperiod_annual_pct": {
+        "1999-2007": 1.0,
+        "2008-2014": 4.28,
+        "2015-2020": 2.33,
+        "2021-2026": -1.28
+      },
+      "t": 1.132
+    },
+    "XSMOM_12m": {
+      "annual_return_pct": -1.041,
+      "annual_vol_pct": 8.217,
+      "max_drawdown_pct": 54.17,
+      "months": 331,
+      "sharpe": -0.127,
+      "subperiod_annual_pct": {
+        "1999-2007": -0.66,
+        "2008-2014": -0.91,
+        "2015-2020": -3.74,
+        "2021-2026": 1.08
+      },
+      "t": -0.665
+    },
+    "XSMOM_1m": {
+      "annual_return_pct": -0.455,
+      "annual_vol_pct": 8.502,
+      "max_drawdown_pct": 36.91,
+      "months": 331,
+      "sharpe": -0.053,
+      "subperiod_annual_pct": {
+        "1999-2007": -0.71,
+        "2008-2014": 3.81,
+        "2015-2020": -3.77,
+        "2021-2026": -1.82
+      },
+      "t": -0.281
+    },
+    "XSMOM_3m": {
+      "annual_return_pct": -1.136,
+      "annual_vol_pct": 8.838,
+      "max_drawdown_pct": 74.24,
+      "months": 331,
+      "sharpe": -0.128,
+      "subperiod_annual_pct": {
+        "1999-2007": -0.94,
+        "2008-2014": 3.96,
+        "2015-2020": -7.83,
+        "2021-2026": -0.65
+      },
+      "t": -0.675
+    },
+    "XSMOM_6m": {
+      "annual_return_pct": -2.736,
+      "annual_vol_pct": 8.299,
+      "max_drawdown_pct": 89.24,
+      "months": 331,
+      "sharpe": -0.33,
+      "subperiod_annual_pct": {
+        "1999-2007": -3.21,
+        "2008-2014": -0.86,
+        "2015-2020": -6.65,
+        "2021-2026": -0.11
+      },
+      "t": -1.731
+    },
+    "carry_decomposition_note": "The accrual leg carries essentially all of the return and none of the risk; the spot leg carries all the risk and no return. On a retail MT5 account the accrual arrives as broker swap, marked up against the client, so the component that is the edge is the component the broker keeps.",
+    "dollar_factor": {
+      "annual_return_pct": 0.111,
+      "annual_vol_pct": 7.62,
+      "max_drawdown_pct": 42.44,
+      "months": 331,
+      "sharpe": 0.015,
+      "subperiod_annual_pct": {
+        "1999-2007": 2.75,
+        "2008-2014": -1.19,
+        "2015-2020": -0.21,
+        "2021-2026": -2.16
+      },
+      "t": 0.076
+    }
+  },
+  "schema_version": "fx_premia_census_v1"
+}

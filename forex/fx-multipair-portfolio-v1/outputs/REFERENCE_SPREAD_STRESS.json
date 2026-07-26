@@ -1,0 +1,90 @@
+{
+  "dukascopy_spread_sweep": [
+    {
+      "ambiguous_bars": 2,
+      "avg_stop_points": 157.2,
+      "effective_spread_points": 3.0,
+      "markup_points": 0.0,
+      "max_closed_drawdown_usd": 27.01,
+      "median_bars_held": 14,
+      "net_usd": 54.1,
+      "profit_factor": 1.0826,
+      "trades": 980,
+      "win_rate_pct": 57.55
+    },
+    {
+      "ambiguous_bars": 2,
+      "avg_stop_points": 156.9,
+      "effective_spread_points": 6.0,
+      "markup_points": 3.0,
+      "max_closed_drawdown_usd": 29.47,
+      "median_bars_held": 14,
+      "net_usd": 23.06,
+      "profit_factor": 1.0341,
+      "trades": 987,
+      "win_rate_pct": 56.13
+    },
+    {
+      "ambiguous_bars": 2,
+      "avg_stop_points": 156.9,
+      "effective_spread_points": 10.0,
+      "markup_points": 7.0,
+      "max_closed_drawdown_usd": 51.08,
+      "median_bars_held": 14,
+      "net_usd": -7.18,
+      "profit_factor": 0.9897,
+      "trades": 990,
+      "win_rate_pct": 54.75
+    },
+    {
+      "ambiguous_bars": 3,
+      "avg_stop_points": 156.8,
+      "effective_spread_points": 13.0,
+      "markup_points": 10.0,
+      "max_closed_drawdown_usd": 66.42,
+      "median_bars_held": 14,
+      "net_usd": -33.44,
+      "profit_factor": 0.9526,
+      "trades": 985,
+      "win_rate_pct": 53.5
+    },
+    {
+      "ambiguous_bars": 2,
+      "avg_stop_points": 156.9,
+      "effective_spread_points": 18.0,
+      "markup_points": 15.0,
+      "max_closed_drawdown_usd": 83.18,
+      "median_bars_held": 15,
+      "net_usd": -64.43,
+      "profit_factor": 0.9107,
+      "trades": 983,
+      "win_rate_pct": 52.29
+    },
+    {
+      "ambiguous_bars": 1,
+      "avg_stop_points": 156.7,
+      "effective_spread_points": 23.0,
+      "markup_points": 20.0,
+      "max_closed_drawdown_usd": 119.01,
+      "median_bars_held": 15,
+      "net_usd": -113.36,
+      "profit_factor": 0.8503,
+      "trades": 997,
+      "win_rate_pct": 49.95
+    }
+  ],
+  "inherited_mt5_reference": {
+    "feed": "Capital.com via MT5 Strategy Tester",
+    "net_usd": 101.82,
+    "profit_factor": 1.2,
+    "trades": 831,
+    "win_rate_pct": 59.33
+  },
+  "purpose": "engine sanity plus spread-sensitivity diagnosis; not an MT5 parity claim",
+  "schema_version": "fx_reference_spread_stress_v1",
+  "symbol": "EURUSD",
+  "window": {
+    "end_exclusive": "2026-07-01",
+    "start": "2022-07-01"
+  }
+}

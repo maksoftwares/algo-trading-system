@@ -273,3 +273,9 @@ xau-usd/xauusd-phase1/outputs/reports/**
 .~lock.*#
 _tmp_*.py
 _tmp_*.js
+
+# Small reviewer-facing FX multi-pair research evidence is intentionally committed.
+!forex/fx-multipair-portfolio-v1/outputs/
+forex/fx-multipair-portfolio-v1/outputs/**
+!forex/fx-multipair-portfolio-v1/outputs/*.json
+!forex/fx-multipair-portfolio-v1/outputs/DESIGN_GRID.csv

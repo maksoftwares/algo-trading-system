@@ -1,0 +1,127 @@
+# Recorded rejections
+
+Append-only. Every hypothesis this lane closes is written here with the evidence
+that closed it, so it is not silently retried later.
+
+## R1 — Uniform bar-geometry families across majors (2026-07-26)
+
+**Hypothesis (PREREGISTRATION.md §3):** one low-parameter mechanism applied
+identically to EURUSD/GBPUSD/USDJPY yields a cross-sectionally diversified
+portfolio that survives retail spread.
+
+**Families tested:** `london_breakout` (Asia range broken after London opens),
+`donchian_h4` (30-H4-bar channel break), `asia_fade` (1.5-ATR M30 excursion
+faded inside Asia hours).
+
+**Grid:** 48 points each (`rr` × `atr_mult` × `context_mult`), design window
+2016-07-01 .. 2021-12-31, all three pairs, identical parameters per pair.
+
+**Result: REJECTED.** Not one of 48 grid points, in any family, had PF > 1.0 on
+all three pairs. Best median PF across pairs was 0.998 (`london_breakout`,
+rr 1.5, atr_mult 3.0).
+
+**Why it is a real rejection and not a cost artefact.** Rerunning at *zero*
+cost leaves PF at 0.87–1.07, mean ≈ 0.97:
+
+| Family | Zero-cost PF range | Cost as % of stop |
+|---|---|---|
+| `london_breakout` | 0.931 – 1.038 | 6.3 – 6.7% |
+| `donchian_h4` | 0.868 – 0.955 | 2.7 – 3.2% |
+| `asia_fade` | 0.934 – 1.070 | 8.0 – 8.6% |
+
+`donchian_h4` is the decisive case: cost is only ~3% of its stop, so it is
+essentially cost-free, and it is still PF 0.87–0.96. These geometries carry no
+exploitable edge on majors — cost merely converts a coin flip into a loser.
+
+Evidence: `outputs/DESIGN_GRID.csv`, `outputs/DESIGN_SELECTION.json`.
+
+**Conclusion carried forward.** Raw OHLC geometry on liquid majors is
+efficient at these horizons. Do not retry breakout/channel/fade variants on bar
+geometry alone; any further hypothesis must add an information source that bar
+geometry does not contain.
+
+## R3 — Intraday conditioning census: no cross-pair predictability (2026-07-26)
+
+**Tested:** 49 conditioner buckets × 3 horizons (1h, 4h, 1d) × 3 pairs on the
+design window — hour-of-day, weekday, month-end, momentum at 1h/4h/1d/3d
+lookbacks × 3 magnitude bands, reversion from a 1-day mean, and volatility-
+regime interactions. t-statistics on non-overlapping samples.
+
+**Result: REJECTED.** Momentum and mean-reversion conditioners are noise
+(|t| ≤ 2.6, no sign agreement, means ≈ 0). Not one bucket had |t| > 2 on all
+three pairs at the 4h or 1d horizon. The only structure with real magnitude was
+hour-of-day, which R4 then tested and killed.
+
+Evidence: `outputs/EDGE_CENSUS.json`.
+
+## R4 — Tokyo-hour short-USD drift (2026-07-26)
+
+**The strongest in-sample effect found anywhere in this lane, and it failed.**
+
+Hour 01:00–02:00 UTC showed all three pairs significant with a single coherent
+economic reading — EURUSD and GBPUSD up, USDJPY down, i.e. USD systematically
+weakening in early Tokyo. Design window: +8.5 points/hour for the basket,
+**positive in 6 of 6 years**, hour 02:00 adding +4.0 more, also 6/6.
+
+Traded literally (enter 01:00 UTC, exit 03:00 UTC, long EURUSD + long GBPUSD +
+short USDJPY), measured gross of any retail markup:
+
+| Window | Basket | t |
+|---|---|---|
+| Design 2016-07 .. 2022-01 | **+23.39 pts** | +2.77 |
+| Validation 2022-01 .. 2024-07 | **−21.25 pts** | −1.38 |
+| Final exam 2024-07 .. 2026-07 | **−30.82 pts** | −1.77 |
+
+**Result: REJECTED.** The sign reversed in *both* out-of-sample windows, and it
+loses even at zero added spread. Six consecutive positive in-sample years
+carried no predictive content whatsoever.
+
+The holdout was consumed here deliberately: one pre-specified hypothesis, tested
+once, reported as-is. That is what it was reserved for.
+
+## R5 — Cross-sectional price-only FX premia, 7 majors, 1999–2026 (2026-07-26)
+
+**Tested:** 331 months of currency excess returns for EUR/GBP/AUD/NZD/JPY/CAD/
+CHF vs USD. Time-series momentum (1/3/6/12m), cross-sectional momentum
+(1/3/6/12m, top2−bottom2), long-run value reversal (36m, 60m), and the dollar
+factor.
+
+**Result: REJECTED.** Everything is indistinguishable from zero: TSMOM Sharpe
++0.06 to +0.12 (t ≤ 0.62), XSMOM *negative* at every lookback, value reversal
+the best at Sharpe +0.22 (t = 1.13) and negative 2021–2026, dollar factor
+Sharpe +0.01. Consistent with the published finding that G10 FX momentum
+largely disappeared after 2008.
+
+## R6 — FX carry: real but not retail-capturable (2026-07-26)
+
+**Tested:** carry on the same 7-major panel using OECD 3-month interbank rates
+from FRED, signal lagged one month, total return = spot + interest differential.
+
+**Result: real premium, rejected as a retail deliverable.** Top2−bottom2 carry
+returns +3.56%/yr, Sharpe 0.40, t = 2.11 — the only genuine edge this lane
+found. But the decomposition is decisive:
+
+| Component | Annual | Sharpe | Max drawdown |
+|---|---|---|---|
+| Interest differential only | **+3.48%** | 7.78 | **0.0%** |
+| Spot only | **+0.08%** | 0.01 | **55.6%** |
+
+100% of the return is interest accrual and 0% is spot, while spot carries all
+the risk. On a retail MT5 account that accrual arrives as broker **swap**, which
+is marked up against the client on both sides, so the component that *is* the
+edge is precisely the component the broker keeps. Combined with a 45% strategy
+drawdown, this is not a demo-ready proposition without verified swap rates
+showing favourable pass-through.
+
+## R2 — Inherited EURUSD M30 RSI/Bollinger fade at retail cost (2026-07-26)
+
+**Result: REJECTED as a deployable candidate.** PF 1.083 at Dukascopy raw
+spread (0.3 pips) falls to 0.990 at a 1.0-pip retail spread and 0.850 at 2.3
+pips. The mechanism is its 0.8R target: breakeven win rate is 55.5% before cost
+and 60.8% after, against an actual 57.5%.
+
+This also means the inherited MT5 figure of PF 1.20 was measured at an
+optimistically tight tester spread and should not be treated as a retail-
+achievable result.
+
+Evidence: `outputs/REFERENCE_SPREAD_STRESS.json`.

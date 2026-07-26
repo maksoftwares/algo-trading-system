@@ -1,0 +1,117 @@
+{
+  "cost_basis": "raw Dukascopy spread already paid; gross of retail markup",
+  "hypothesis": "USD weakens systematically in 01:00-03:00 UTC (early Tokyo)",
+  "partitions": {
+    "design": {
+      "basket": {
+        "breakeven_extra_markup_points_per_leg": 23.39,
+        "mean_points": 23.39,
+        "n": 1431,
+        "t": 2.77,
+        "win_pct": 51.1
+      },
+      "per_leg": {
+        "EURUSD": {
+          "breakeven_extra_markup_points_per_leg": 10.84,
+          "mean_points": 10.84,
+          "n": 1432,
+          "t": 3.97,
+          "win_pct": 52.0
+        },
+        "GBPUSD": {
+          "breakeven_extra_markup_points_per_leg": 0.87,
+          "mean_points": 0.87,
+          "n": 1432,
+          "t": 0.25,
+          "win_pct": 49.6
+        },
+        "USDJPY": {
+          "breakeven_extra_markup_points_per_leg": 11.59,
+          "mean_points": 11.59,
+          "n": 1431,
+          "t": 2.71,
+          "win_pct": 52.4
+        }
+      },
+      "window": {
+        "end_exclusive": "2022-01-01",
+        "start": "2016-07-01"
+      }
+    },
+    "final_exam": {
+      "basket": {
+        "breakeven_extra_markup_points_per_leg": -30.82,
+        "mean_points": -30.82,
+        "n": 519,
+        "t": -1.77,
+        "win_pct": 45.5
+      },
+      "per_leg": {
+        "EURUSD": {
+          "breakeven_extra_markup_points_per_leg": -7.0,
+          "mean_points": -7.0,
+          "n": 519,
+          "t": -1.61,
+          "win_pct": 46.8
+        },
+        "GBPUSD": {
+          "breakeven_extra_markup_points_per_leg": -12.15,
+          "mean_points": -12.15,
+          "n": 520,
+          "t": -2.49,
+          "win_pct": 44.4
+        },
+        "USDJPY": {
+          "breakeven_extra_markup_points_per_leg": -11.7,
+          "mean_points": -11.7,
+          "n": 520,
+          "t": -1.06,
+          "win_pct": 45.8
+        }
+      },
+      "window": {
+        "end_exclusive": "2026-07-01",
+        "start": "2024-07-01"
+      }
+    },
+    "validation": {
+      "basket": {
+        "breakeven_extra_markup_points_per_leg": -21.25,
+        "mean_points": -21.25,
+        "n": 648,
+        "t": -1.38,
+        "win_pct": 48.5
+      },
+      "per_leg": {
+        "EURUSD": {
+          "breakeven_extra_markup_points_per_leg": 0.86,
+          "mean_points": 0.86,
+          "n": 649,
+          "t": 0.2,
+          "win_pct": 48.7
+        },
+        "GBPUSD": {
+          "breakeven_extra_markup_points_per_leg": -4.75,
+          "mean_points": -4.75,
+          "n": 648,
+          "t": -0.86,
+          "win_pct": 47.7
+        },
+        "USDJPY": {
+          "breakeven_extra_markup_points_per_leg": -17.45,
+          "mean_points": -17.45,
+          "n": 649,
+          "t": -1.86,
+          "win_pct": 44.7
+        }
+      },
+      "window": {
+        "end_exclusive": "2024-07-01",
+        "start": "2022-01-01"
+      }
+    }
+  },
+  "rule": "enter 01:00 UTC M5 open, exit 03:00 UTC M5 open; long EURUSD, long GBPUSD, short USDJPY",
+  "schema_version": "fx_tokyo_holdout_test_v1",
+  "verdict": "REJECTED_SIGN_REVERSED_OUT_OF_SAMPLE"
+}
