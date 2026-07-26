@@ -6,15 +6,24 @@ Status: **`NO_DEPLOYABLE_FX_EDGE_FOUND_STOP`**
 ## Bottom line
 
 I could not find a profitable Forex system on this evidence, and I am not going
-to ship one that only looks profitable. **Eight** independent hypothesis classes
-were tested and all eight were rejected, the last three against *measured* broker
-costs rather than assumed ones. The rejections are in `REJECTIONS.md` with the
+to ship one that only looks profitable. **Nine** independent hypothesis classes
+were tested and all nine were rejected, the last four against *measured* broker
+costs rather than assumed ones. The search space is now closed, majors and
+crosses alike. The rejections are in `REJECTIONS.md` with the
 evidence that closed each.
 
-R8 is the one to read: a volatility-conditioned microstructure edge at **2.2x to
-4.8x measured cost with t up to 2.8** was available to ship, and **0 of its 8
-cells replicated** on new data. It was multiple-testing noise from a 300-cell
-search.
+Two near-misses are the ones to read, because both would have shipped:
+
+- **R8**: a volatility-conditioned microstructure edge at **2.2x to 4.8x measured
+  cost, t up to 2.8**. Of its 8 cells, **0 replicated** on new data and 5 flipped
+  sign. Multiple-testing noise from a 300-cell search.
+- **R9**: GBPJPY Donchian at design **PF 1.483** — cost only 1.6% of risk, so not
+  a cost artefact, and mechanistically coherent (trend works on the trending
+  cross, fails on range-bound EURGBP). Pooled out-of-sample **PF 0.908**,
+  ex-top-5% **0.749**. It passed the parameter-plateau test cleanly and collapsed
+  anyway, which is the sharper lesson: **in-sample robustness does not predict
+  out-of-sample validity.** Neither effect size, nor t-statistic, nor plateau
+  breadth substitutes for untouched data.
 
 This is a negative result, but a *load-bearing* one: it quantifies why the
 existing Forex lane never passed, closes the search space with numbers rather
@@ -69,6 +78,7 @@ counts should be re-read in light of this.
 | R6a | Carry re-tested on **measured broker swap** | Favourable-side pass-through is real (91–96% on JPY pairs) but nets only ≈+0.5%/yr vs 68.6% drawdown |
 | R7 | **Tick microstructure / order flow** — depth imbalance, microprice, quote asymmetry | Rejected. Best decile spread ~6 pts vs 22–34 pts required. Highly significant (t −9.3) but 1.6 pts wide |
 | R8 | **Volatility-conditioned microstructure** (fixed spread vs vol-scaling signal) | Rejected. 8 of 300 cells cleared cost at 2.2–4.8x with \|t\|>2; **0 replicated**, 5 flipped sign |
+| R9 | **Synthetic crosses** (EURGBP/EURJPY/GBPJPY) — R1 grid + momentum | Rejected. One survivor, GBPJPY Donchian at design PF 1.483, fell to **0.908 pooled out-of-sample** |
 
 ## Why the existing Forex lane never passed
 

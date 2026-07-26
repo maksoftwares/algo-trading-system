@@ -5,11 +5,15 @@ carries **no** demo authority, no live authority, no chart attachment, no preset
 and no broker-action file. It does not touch any MT5 runtime, terminal, profile
 or the XAUUSD lane.
 
-**Read [`FINDINGS.md`](FINDINGS.md) first.** Eight hypothesis classes were tested
-against the goal of a profitable, higher-frequency Forex system; all eight were
+**Read [`FINDINGS.md`](FINDINGS.md) first.** Nine hypothesis classes were tested
+against the goal of a profitable, higher-frequency Forex system; all nine were
 rejected, and each is recorded in [`REJECTIONS.md`](REJECTIONS.md) with the
-evidence that closed it. Read **R8** for the near-miss that mattered: an edge at
-4.8x measured cost that vanished entirely on replication.
+evidence that closed it. Majors and crosses are both closed.
+
+Read **R8** and **R9** for the two near-misses that would have shipped: an edge at
+4.8x measured cost that vanished entirely on replication, and GBPJPY Donchian at
+design PF 1.483 that fell to 0.908 out-of-sample *after* passing a parameter
+plateau test.
 
 The result reduces to one measured inequality: **the bid-ask spread is wider than
 the entire predictable component of FX returns.** EURUSD trades at a fixed 0.70
@@ -61,6 +65,9 @@ python build_micro_features.py       # order-book depth features (~453s)
 python run_micro_census.py           # microstructure vs measured cost -> R7
 python run_vol_conditioned_census.py # 300-cell vol-conditioned search -> R8
 python run_vol_replication_test.py   # replication that rejected R8
+python build_crosses.py              # synthetic EURGBP/EURJPY/GBPJPY bid/ask bars
+python run_cross_search.py           # R1 grid + momentum on crosses -> R9
+python validate_gbpjpy_donchian.py   # full discipline on the one survivor
 ```
 
 Broker measurement needs the MT5 module, which requires Python 3.12 (the
@@ -119,14 +126,21 @@ on the other (GBPJPY long ~96% pass-through, EURUSD long ~0%).
 
 ## What not to retry
 
-`REJECTIONS.md` closes eight classes: bar-geometry breakout/channel/fade families
+`REJECTIONS.md` closes nine classes: bar-geometry breakout/channel/fade families
 on majors, the inherited EURUSD RSI/Bollinger fade, intraday momentum/reversion
 conditioning, the Tokyo-hour USD drift, price-only cross-sectional momentum and
 value, carry (both on interbank rates and on measured broker swap), tick
-microstructure/order flow, and volatility-conditioned microstructure.
+microstructure/order flow, volatility-conditioned microstructure, and the
+synthetic crosses including their one surviving candidate.
 
-Before writing up any future candidate — here or in the XAU lane — run the R8
-replication step: count the cells searched, compare the hit rate against chance,
-distrust scattered parameters and flipped signs, and re-run the identical
-measurement on untouched data. R8 offered an edge at 4.8x measured cost with
-t = 2.8 and **none of it replicated**.
+Before writing up any future candidate — here or in the XAU lane — apply the R8
+and R9 checks, because both near-misses passed everything short of a holdout:
+
+1. **Count the cells searched** and compare the hit rate against chance. R8's 8
+   hits from 300 cells were *fewer* than the ~15 expected at 5%.
+2. **Distrust scattered parameters and flipped signs.** R8's winning volatility
+   quintiles were Q2/Q3/Q4/Q5 with no monotone pattern.
+3. **Do not trust a parameter plateau.** R9's GBPJPY Donchian had a genuinely broad
+   plateau in-sample and still fell from PF 1.483 to 0.908 out-of-sample.
+4. **Re-run the identical measurement on untouched data.** This is the only check
+   that caught either one.

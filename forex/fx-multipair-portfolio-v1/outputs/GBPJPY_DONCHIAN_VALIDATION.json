@@ -1,0 +1,147 @@
+{
+  "checks": {
+    "cost_stress_2x": {
+      "design": {
+        "net_usd": 83655.98,
+        "pf": 1.4887
+      },
+      "final_exam": {
+        "net_usd": -8022.08,
+        "pf": 0.9139
+      },
+      "validation": {
+        "net_usd": -13431.26,
+        "pf": 0.8987
+      }
+    },
+    "out_of_sample": {
+      "design": {
+        "active_days": 238,
+        "ambiguous_bars": 0,
+        "avg_loss_usd": -1610.403,
+        "avg_stop_points": 1790.0,
+        "avg_win_usd": 1892.4399,
+        "expectancy_usd": 343.6622,
+        "max_closed_drawdown_pct": 165.51,
+        "max_closed_drawdown_usd": 16551.0,
+        "median_bars_held": 875,
+        "months_active": 66,
+        "months_positive": 43,
+        "months_positive_pct": 65.2,
+        "net_usd": 83166.26,
+        "pf_excluding_best_5pct": 1.223,
+        "profit_factor": 1.4826,
+        "timeout_pct": 13.6,
+        "trades": 242,
+        "trades_per_active_day": 1.017,
+        "win_rate_pct": 55.79
+      },
+      "final_exam": {
+        "active_days": 77,
+        "ambiguous_bars": 0,
+        "avg_loss_usd": -2113.9434,
+        "avg_stop_points": 2365.1,
+        "avg_win_usd": 2580.9524,
+        "expectancy_usd": -101.8452,
+        "max_closed_drawdown_pct": 263.947,
+        "max_closed_drawdown_usd": 26394.73,
+        "median_bars_held": 1137,
+        "months_active": 24,
+        "months_positive": 9,
+        "months_positive_pct": 37.5,
+        "net_usd": -7842.08,
+        "pf_excluding_best_5pct": 0.7609,
+        "profit_factor": 0.9157,
+        "timeout_pct": 16.9,
+        "trades": 77,
+        "trades_per_active_day": 1.0,
+        "win_rate_pct": 42.86
+      },
+      "validation": {
+        "active_days": 109,
+        "ambiguous_bars": 0,
+        "avg_loss_usd": -2237.0542,
+        "avg_stop_points": 2206.8,
+        "avg_win_usd": 2249.6971,
+        "expectancy_usd": -113.8594,
+        "max_closed_drawdown_pct": 393.614,
+        "max_closed_drawdown_usd": 39361.45,
+        "median_bars_held": 801,
+        "months_active": 30,
+        "months_positive": 15,
+        "months_positive_pct": 50.0,
+        "net_usd": -12752.26,
+        "pf_excluding_best_5pct": 0.7397,
+        "profit_factor": 0.9034,
+        "timeout_pct": 8.0,
+        "trades": 112,
+        "trades_per_active_day": 1.028,
+        "win_rate_pct": 47.32
+      }
+    },
+    "plateau": {
+      "atr_mult=1.5": {
+        "pf": 1.2721,
+        "trades": 295
+      },
+      "atr_mult=2.0": {
+        "pf": 1.2738,
+        "trades": 286
+      },
+      "atr_mult=3.0": {
+        "pf": 1.4826,
+        "trades": 242
+      },
+      "rr=1.2": {
+        "pf": 1.4826,
+        "trades": 242
+      },
+      "rr=1.5": {
+        "pf": 1.3525,
+        "trades": 206
+      },
+      "rr=2.0": {
+        "pf": 1.281,
+        "trades": 181
+      }
+    },
+    "pooled_out_of_sample": {
+      "active_days": 186,
+      "ambiguous_bars": 0,
+      "avg_loss_usd": -2184.4632,
+      "avg_stop_points": 2271.3,
+      "avg_win_usd": 2376.8067,
+      "expectancy_usd": -108.9647,
+      "max_closed_drawdown_pct": 433.095,
+      "max_closed_drawdown_usd": 43309.46,
+      "median_bars_held": 846,
+      "months_active": 54,
+      "months_positive": 24,
+      "months_positive_pct": 44.4,
+      "net_usd": -20594.33,
+      "pf_excluding_best_5pct": 0.7485,
+      "profit_factor": 0.9085,
+      "timeout_pct": 11.6,
+      "trades": 189,
+      "trades_per_active_day": 1.016,
+      "win_rate_pct": 45.5
+    }
+  },
+  "criteria": {
+    "final_exam_pf_above_1_10": false,
+    "plateau_not_a_spike": true,
+    "pooled_ex_top5_above_1_00": false,
+    "pooled_oos_pf_above_1_15": false,
+    "survives_2x_cost_oos": false,
+    "validation_pf_above_1_10": false
+  },
+  "frozen_params": {
+    "atr_mult": 3.0,
+    "context_mult": 0.5,
+    "rr": 1.2
+  },
+  "schema_version": "fx_gbpjpy_donchian_validation_v1",
+  "symbol": "GBPJPY",
+  "synthetic": true,
+  "verdict": "GBPJPY_DONCHIAN_REJECTED"
+}

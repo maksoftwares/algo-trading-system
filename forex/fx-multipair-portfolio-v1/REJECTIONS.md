@@ -145,6 +145,57 @@ Statistical significance and tradeability are not the same thing.
 
 Evidence: `outputs/MICRO_CENSUS.json`, `outputs/BROKER_SPREAD_TICKS.json`.
 
+## R9 — Synthetic crosses, including the one candidate that reached validation (2026-07-26)
+
+**The last gap, now closed.** EURGBP / EURJPY / GBPJPY are tradeable on the
+account, are less efficient than USD majors, and have genuinely different
+dynamics — the JPY crosses trend, EURGBP ranges. R1–R8 never touched them because
+the terminal holds no tick history for them, so `build_crosses.py` constructs them
+arbitrage-exactly from the majors (747k M5 bars each, zero negative spreads).
+Costs are the legs' summed measured spreads, which is pessimistic versus a direct
+broker quote: EURGBP 24, EURJPY 23, GBPJPY 29 points round trip.
+
+Ran the identical R1 family grid (3 families × 48 points), each best point also
+rerun at zero cost, plus a multi-day momentum census.
+
+**Result: REJECTED.** Of nine cross/family combinations, one survived the design
+screen — and it was the best-looking candidate this entire lane produced:
+
+**GBPJPY `donchian_h4`**, design PF **1.483** costed and **1.470** at zero cost,
+242 trades, 55.8% win rate, 1790-point stops. Cost is only ~1.6% of risk, so it
+was not a cost artefact, and trend-following working on the highest-volatility
+trending cross while failing on range-bound EURGBP is mechanistically coherent
+rather than arbitrary. It looked like the system.
+
+Frozen parameters, then every check that killed earlier candidates:
+
+| Window | Trades | WR | PF | ex-top-5% PF |
+|---|---|---|---|---|
+| Design 2016-07 .. 2022-01 | 242 | 55.8% | **1.483** | 1.223 |
+| Validation 2022-01 .. 2024-07 | 112 | 47.3% | **0.903** | 0.740 |
+| Final exam 2024-07 .. 2026-07 | 77 | 42.9% | **0.916** | 0.761 |
+| **Pooled out-of-sample** | 189 | 45.5% | **0.908** | **0.749** |
+
+Five of six criteria failed: validation PF, final-exam PF, pooled OOS PF, pooled
+ex-top-5%, and survival at 2x cost.
+
+**The one criterion it passed is the instructive part.** The *plateau* test passed
+cleanly — neighbouring grid points also worked (rr 1.2/1.5/2.0 → PF
+1.483/1.353/1.281; atr_mult 1.5/2.0/3.0 → 1.272/1.274/1.483). It was a genuine
+broad plateau in-sample, not a spike. And it still collapsed out-of-sample.
+
+So in-sample robustness checks do **not** predict out-of-sample validity. A
+plateau shows a result is not a numerical accident; it says nothing about whether
+the relationship persists. Only untouched data answers that. This is worth pairing
+with R8: neither effect size, nor t-statistic, nor parameter-plateau breadth
+substitutes for a holdout.
+
+Multi-day momentum on crosses was also negative (t = −2.79 / −2.15 / −2.69, i.e.
+mildly *anti*-predictive), matching the majors in R5.
+
+Evidence: `outputs/CROSS_SEARCH.json`, `outputs/CROSS_GRID.csv`,
+`outputs/GBPJPY_DONCHIAN_VALIDATION.json`, `outputs/CROSSES_MANIFEST.json`.
+
 ## R8 — Volatility-conditioned microstructure (2026-07-26)
 
 **The most seductive false positive in this lane. Worth reading before proposing

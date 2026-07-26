@@ -51,7 +51,46 @@ INSTRUMENTS: dict[str, dict[str, object]] = {
         "quote_ccy": "JPY",
         "contract_size": 100_000.0,
     },
+    # Synthetic crosses built by build_crosses.py from the majors above.
+    #
+    # quote_ccy is declared "USD" deliberately. Converting their real quote
+    # currency (GBP / JPY) to USD needs the *GBPUSD* or *USDJPY* rate, not the
+    # cross's own price, so dividing by the cross price would be wrong. A constant
+    # point value is used instead: profit factor, win rate and R-multiples — the
+    # only metrics these are screened on — are invariant to a constant scaling of
+    # point value. Absolute USD amounts for crosses therefore carry a fixed factor
+    # (~1/1.27 for EURGBP, ~150/price for the JPY crosses) and are not reported.
+    "EURGBP": {
+        "source_code": "EUR-GBP",
+        "pip_size": 0.0001,
+        "point_size": 0.00001,
+        "price_scale": 5,
+        "quote_ccy": "USD",
+        "contract_size": 100_000.0,
+        "synthetic": True,
+    },
+    "EURJPY": {
+        "source_code": "EUR-JPY",
+        "pip_size": 0.01,
+        "point_size": 0.001,
+        "price_scale": 3,
+        "quote_ccy": "USD",
+        "contract_size": 100_000.0,
+        "synthetic": True,
+    },
+    "GBPJPY": {
+        "source_code": "GBP-JPY",
+        "pip_size": 0.01,
+        "point_size": 0.001,
+        "price_scale": 3,
+        "quote_ccy": "USD",
+        "contract_size": 100_000.0,
+        "synthetic": True,
+    },
 }
+
+MAJORS = ("EURUSD", "GBPUSD", "USDJPY")
+SYNTHETIC_CROSSES = ("EURGBP", "EURJPY", "GBPJPY")
 
 BAR_COLUMNS = (
     "timestamp_ms",

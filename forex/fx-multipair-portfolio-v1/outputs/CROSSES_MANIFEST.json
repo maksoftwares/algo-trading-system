@@ -1,0 +1,55 @@
+{
+  "construction": "arbitrage-exact quote sides; intrabar extremes are outer bounds",
+  "crosses": {
+    "EURGBP": {
+      "assumed_spread_pips": 2.0,
+      "assumed_spread_points": 20.0,
+      "bars": 747389,
+      "first_utc": "2016-07-01T00:00:00.000Z",
+      "last_utc": "2026-06-30T23:55:00.000Z",
+      "legs": [
+        "EURUSD",
+        "GBPUSD"
+      ],
+      "negative_spread_bars": 0,
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURGBP_M5_BIDASK.parquet",
+      "point": 1e-05,
+      "sha256": "0671ac86131ae822e80cfbed18d46fc7ff2db72129b90c74052f9471ca83cd72",
+      "synthetic_spread_points_median": 8.0
+    },
+    "EURJPY": {
+      "assumed_spread_pips": 1.9,
+      "assumed_spread_points": 19.0,
+      "bars": 747487,
+      "first_utc": "2016-07-01T00:00:00.000Z",
+      "last_utc": "2026-06-30T23:55:00.000Z",
+      "legs": [
+        "EURUSD",
+        "USDJPY"
+      ],
+      "negative_spread_bars": 0,
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURJPY_M5_BIDASK.parquet",
+      "point": 0.001,
+      "sha256": "4b62fbf3b5c54c4728af53517fe6debfbd4380247c106fd149b1e78f4e536762",
+      "synthetic_spread_points_median": 9.0
+    },
+    "GBPJPY": {
+      "assumed_spread_pips": 2.5,
+      "assumed_spread_points": 25.0,
+      "bars": 747357,
+      "first_utc": "2016-07-01T00:00:00.000Z",
+      "last_utc": "2026-06-30T23:55:00.000Z",
+      "legs": [
+        "GBPUSD",
+        "USDJPY"
+      ],
+      "negative_spread_bars": 0,
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\GBPJPY_M5_BIDASK.parquet",
+      "point": 0.001,
+      "sha256": "667e12ac6f205106b5f8835bfa9cc3eaedc8c0df172a4fc7046433a27711bbc1",
+      "synthetic_spread_points_median": 17.0
+    }
+  },
+  "schema_version": "fx_synthetic_crosses_v1",
+  "spread_assumption": "sum of the legs' measured spreads (pessimistic vs a direct quote)"
+}
