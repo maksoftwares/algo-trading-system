@@ -1,0 +1,122 @@
+{
+  "absolute_controls": [
+    {
+      "daily_ranges_now": 0.008,
+      "daily_ranges_then": 0.042,
+      "parameter": "account.deviation_points",
+      "unit": "pts",
+      "usd_equivalent": 0.8,
+      "value": 80
+    },
+    {
+      "daily_ranges_now": 0.035,
+      "daily_ranges_then": 0.193,
+      "parameter": "account.usd_to_account_currency",
+      "unit": "usd",
+      "usd_equivalent": 3.67,
+      "value": 3.6725
+    },
+    {
+      "daily_ranges_now": 1.712,
+      "daily_ranges_then": 9.459,
+      "parameter": "risk.closed_drawdown_resume_usd",
+      "unit": "usd",
+      "usd_equivalent": 180.0,
+      "value": 180.0
+    },
+    {
+      "daily_ranges_now": 2.14,
+      "daily_ranges_then": 11.823,
+      "parameter": "risk.closed_drawdown_suspend_usd",
+      "unit": "usd",
+      "usd_equivalent": 225.0,
+      "value": 225.0
+    },
+    {
+      "daily_ranges_now": 2.853,
+      "daily_ranges_then": 15.765,
+      "parameter": "risk.combined_closed_drawdown_hard_stop_usd",
+      "unit": "usd",
+      "usd_equivalent": 300.0,
+      "value": 300.0
+    },
+    {
+      "daily_ranges_now": 4.277,
+      "daily_ranges_then": 23.635,
+      "parameter": "risk.floating_drawdown_hard_stop_usd",
+      "unit": "usd",
+      "usd_equivalent": 449.77,
+      "value": 449.7675
+    },
+    {
+      "daily_ranges_now": 0.428,
+      "daily_ranges_then": 2.365,
+      "parameter": "risk.maximum_addon_concurrent_initial_risk_usd",
+      "unit": "usd",
+      "usd_equivalent": 45.0,
+      "value": 45.0
+    },
+    {
+      "daily_ranges_now": 0.285,
+      "daily_ranges_then": 1.576,
+      "parameter": "sources.[5].maximum_risk_usd",
+      "unit": "usd",
+      "usd_equivalent": 30.0,
+      "value": 30.0
+    },
+    {
+      "daily_ranges_now": 0.19,
+      "daily_ranges_then": 1.051,
+      "parameter": "sources.[6].maximum_risk_usd",
+      "unit": "usd",
+      "usd_equivalent": 20.0,
+      "value": 20.0
+    },
+    {
+      "daily_ranges_now": 0.285,
+      "daily_ranges_then": 1.576,
+      "parameter": "sources.[7].maximum_risk_usd",
+      "unit": "usd",
+      "usd_equivalent": 30.0,
+      "value": 30.0
+    },
+    {
+      "daily_ranges_now": 0.285,
+      "daily_ranges_then": 1.576,
+      "parameter": "sources.[8].maximum_risk_usd",
+      "unit": "usd",
+      "usd_equivalent": 30.0,
+      "value": 30.0
+    }
+  ],
+  "access": "READ_ONLY_no_runtime_preset_or_broker_state_touched",
+  "account_equity_usd": 983.0,
+  "config": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\v60-canonical-demo-portfolio-v2\\config\\v60_canonical_demo_portfolio_v2.json",
+  "dimensionless_controls_count": 7,
+  "dimensionless_note": "R-multiple targets self-scale with stop distance; no revision implied",
+  "finding": "Gold's daily range is 5.53x wider than in 2023. Every USD drawdown breaker and point deviation tolerance in the config is a fixed number chosen under the old regime, so each is now a proportionally much tighter constraint and will bind far more often than intended.",
+  "gold_daily_range_usd_by_year": {
+    "2019": {
+      "daily_range_usd": 11.57,
+      "median_price": 1318.0
+    },
+    "2021": {
+      "daily_range_usd": 19.34,
+      "median_price": 1750.0
+    },
+    "2023": {
+      "daily_range_usd": 19.03,
+      "median_price": 1942.0
+    },
+    "2025": {
+      "daily_range_usd": 33.2,
+      "median_price": 3125.0
+    },
+    "2026": {
+      "daily_range_usd": 105.15,
+      "median_price": 4464.0
+    }
+  },
+  "schema_version": "xau_calibration_audit_v2",
+  "volatility_scale_2023_to_2026": 5.525
+}
