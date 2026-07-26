@@ -1,0 +1,96 @@
+{
+  "checks": {
+    "all_months_present": true,
+    "canonical_join_keys_unique": true,
+    "exact_one_to_one_trade_join": true,
+    "joined_trade_count_matches": true,
+    "ledger_join_keys_unique": true,
+    "ledger_trade_count_matches": true,
+    "ml_pnl_reconciles": true,
+    "nonpass_rows_have_no_prediction": true,
+    "pass_rows_have_frozen_predictions": true,
+    "predicted_rows_use_available_model": true,
+    "predicted_rows_use_frozen_v11_action": true,
+    "raw_equals_retained_plus_vetoed": true,
+    "raw_pnl_reconciles": true,
+    "raw_trade_count_matches": true
+  },
+  "counts": {
+    "ml_retained_trades": 225,
+    "ml_vetoed_trades": 138,
+    "model_abstained_retained_trades": 67,
+    "model_scored_trades": 296,
+    "raw_trades": 363
+  },
+  "delta": {
+    "closed_trade_drawdown_usd": -52.889283141957776,
+    "ml_minus_raw_pnl_usd": -189.9586616764277,
+    "profit_factor": 0.5145977619449034,
+    "trade_retention": 0.6198347107438017,
+    "win_rate_percentage_points": 3.3094582185491275
+  },
+  "input_sha256": {
+    "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45",
+    "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_OUT_OF_TIME_PREDICTIONS.parquet": "060dcd0e4e03e025dd4d4ce4426f6c1f32ac7e304549692d9d9909b7e6c78202",
+    "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf"
+  },
+  "limitations": [
+    "This is a historical research calculation, not a profit promise.",
+    "Historical outcomes were exposed during model development; prospective confirmation remains mandatory.",
+    "The overlay vetoes exact already-routed V60 trades. It does not re-admit candidates that historical routing rejected after an ML veto frees capacity.",
+    "ML remains unauthorized for MT5 shadowing, demo filtering, live trading, sizing, or broker action."
+  ],
+  "methodology": {
+    "missing_feature_action": "MODEL_ABSTAIN_RETAIN_ALL",
+    "model_policy": "FROZEN_EXPECTED_R_V10_WITH_V11_AVAILABILITY",
+    "overlay_position": "POST_FROZEN_V60_ROUTING",
+    "pnl_basis": "FEE_STRESSED_FIXED_0P01_LOT_USD",
+    "population": "EXACT_HISTORICALLY_ROUTED_V60_TRADES_WITHOUT_R5",
+    "prediction_fold": "F2025",
+    "runtime_or_demo_authorized": false
+  },
+  "ml_v11_overlay": {
+    "average_pnl_usd": 10.15488121912625,
+    "closed_trade_drawdown_usd": 155.52507121017334,
+    "gross_loss_usd": -1563.5702138246802,
+    "gross_profit_usd": 3848.418488128086,
+    "net_pnl_usd": 2284.848274303406,
+    "profit_factor": 2.461301995971382,
+    "realized_exit_drawdown_usd": 138.87258046731813,
+    "trades": 225,
+    "win_rate": 0.4711111111111111
+  },
+  "period": {
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "entry_month_basis": true,
+    "start_inclusive_utc": "2025-07-01T00:00:00Z"
+  },
+  "profitable_months": {
+    "ml_v11_overlay": 10,
+    "raw": 10
+  },
+  "raw": {
+    "average_pnl_usd": 6.817649961376953,
+    "closed_trade_drawdown_usd": 208.4143543521311,
+    "gross_loss_usd": -2614.128940201418,
+    "gross_profit_usd": 5088.935876181252,
+    "net_pnl_usd": 2474.8069359798337,
+    "profit_factor": 1.9467042340264786,
+    "realized_exit_drawdown_usd": 152.88940082371732,
+    "trades": 363,
+    "win_rate": 0.4380165289256198
+  },
+  "schema_version": "xauusd_v60_ml_v11_last_12_months_comparison_v1",
+  "status": "PASS",
+  "vetoed": {
+    "average_pnl_usd": 1.3765120411335348,
+    "closed_trade_drawdown_usd": 249.72509984503955,
+    "gross_loss_usd": -1050.5587263767377,
+    "gross_profit_usd": 1240.5173880531654,
+    "net_pnl_usd": 189.9586616764278,
+    "profit_factor": 1.1808167948226695,
+    "realized_exit_drawdown_usd": 249.72509984503958,
+    "trades": 138,
+    "win_rate": 0.38405797101449274
+  }
+}

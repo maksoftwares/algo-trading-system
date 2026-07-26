@@ -1,0 +1,192 @@
+{
+  "acceptance": {
+    "all_required": true,
+    "checks": {
+      "maximum_drawdown_ratio_to_baseline": true,
+      "maximum_selected_weight_coverage": true,
+      "maximum_single_family_selected_weight_fraction": true,
+      "minimum_ev_lift_bootstrap_lower_r": true,
+      "minimum_ev_lift_r": true,
+      "minimum_family_selected_mean_r": true,
+      "minimum_latest_fold_mean_r": true,
+      "minimum_latest_fold_profit_factor": true,
+      "minimum_latest_fold_weight_coverage": true,
+      "minimum_positive_folds": true,
+      "minimum_profit_factor_bootstrap_lower": true,
+      "minimum_selected_candidates_per_weekday": true,
+      "minimum_selected_mean_bootstrap_lower_r": true,
+      "minimum_selected_profit_factor": true,
+      "minimum_selected_rows": true,
+      "minimum_selected_weight_coverage": true,
+      "minimum_selected_weighted_mean_r": true,
+      "minimum_weighted_score_auc": true
+    },
+    "decision": "EXPECTED_R_V10_HISTORICAL_GATE_PASS_FORWARD_CONFIRMATION_REQUIRED",
+    "passed": true,
+    "passed_checks": 18,
+    "required_checks": 18,
+    "runtime_authorized": false,
+    "schema_version": "xauusd_expected_r_v10_acceptance"
+  },
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "ml_shadow_authorized": false,
+    "offline_model_fit_authorized": true,
+    "offline_scoring_authorized": true,
+    "python_serving_authorized": false,
+    "research_only": true,
+    "runtime_change_authorized": false
+  },
+  "bootstrap": {
+    "confidence": 0.95,
+    "intervals": {
+      "baseline_weighted_mean_r": {
+        "lower": 0.15681430456994214,
+        "median": 0.25150243186976695,
+        "upper": 0.3437998460001496
+      },
+      "selected_mean_lift_r": {
+        "lower": 0.009446433297113897,
+        "median": 0.05761483727181049,
+        "upper": 0.1094539434556549
+      },
+      "selected_profit_factor": {
+        "lower": 1.3102645164690707,
+        "median": 1.5270812810443553,
+        "upper": 1.7663522635049178
+      },
+      "selected_weight_coverage": {
+        "lower": 0.6588815758949118,
+        "median": 0.6876922126063173,
+        "upper": 0.7158848430919951
+      },
+      "selected_weighted_mean_r": {
+        "lower": 0.19579209837694625,
+        "median": 0.3099233590003487,
+        "upper": 0.4201584342334893
+      }
+    },
+    "resamples": 5000,
+    "schema_version": "xauusd_expected_r_v10_weekly_bootstrap",
+    "seed": 6072301,
+    "weekly_blocks": 296
+  },
+  "canonical_rows": 3752,
+  "decision": "EXPECTED_R_V10_HISTORICAL_GATE_PASS_FORWARD_CONFIRMATION_REQUIRED",
+  "definition_contract_sha256": "cee3154af687944880ff15d3e96761cf4e55a24cc29100fc925d99c42224ef42",
+  "design_feature_count": 369,
+  "development_selection_disclosed": true,
+  "final_research_model": {
+    "calibration_end_exclusive_utc": "2026-07-01T00:00:00+00:00",
+    "calibration_rows": 172,
+    "calibration_start_utc": "2026-01-01T00:00:00+00:00",
+    "definition_contract_sha256": "cee3154af687944880ff15d3e96761cf4e55a24cc29100fc925d99c42224ef42",
+    "families": [
+      "R1_UPTREND",
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "R5_TRANSITION",
+      "V25_CHOP",
+      "V57_BREAK_SWING_H4ADX_HIGH",
+      "V7_SWING_HEALTH",
+      "V8_RETEST_HEALTH"
+    ],
+    "fit_decision_before_utc": "2026-01-01T00:00:00+00:00",
+    "fit_label_end_before_utc": "2026-01-01T00:00:00+00:00",
+    "fit_losers": 1581,
+    "fit_rows": 2851,
+    "fit_winners": 1270,
+    "numeric_features": [
+      "direction_sign",
+      "planned_stop_atr",
+      "planned_stop_price",
+      "stop_floor_price",
+      "target_r_filled",
+      "target_absent_flag",
+      "log1p_observation_cap_minutes",
+      "barrier_only_flag",
+      "utc_hour_sin",
+      "utc_hour_cos",
+      "utc_weekday_sin",
+      "utc_weekday_cos",
+      "xau_spread_last_atr",
+      "xau_spread_mean_30s_atr",
+      "xau_spread_max_5m_atr",
+      "xau_quote_age_seconds",
+      "xau_tick_count_log1p_30s",
+      "xau_tick_count_log1p_5m",
+      "xau_quote_intensity_ratio_15m_60m",
+      "dir_xau_return_30s_atr",
+      "dir_xau_return_5m_atr",
+      "dir_xau_return_15m_atr",
+      "dir_xau_return_60m_atr",
+      "dir_xau_return_4h_atr",
+      "dir_xau_return_24h_atr",
+      "xau_range_5m_atr",
+      "xau_range_15m_atr",
+      "xau_range_60m_atr",
+      "xau_realized_variance_5m_atr2",
+      "xau_realized_variance_15m_atr2",
+      "xau_realized_variance_60m_atr2",
+      "xau_efficiency_5m",
+      "xau_efficiency_15m",
+      "xau_efficiency_60m",
+      "dir_xau_tick_imbalance_5m",
+      "dir_xau_tick_imbalance_15m"
+    ],
+    "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_FINAL_RESEARCH_MODEL.joblib",
+    "pooled_threshold": 0.008160326626288822,
+    "research_only": true,
+    "runtime_authorized": false,
+    "schema_version": "xauusd_expected_r_v10_final_research_model",
+    "sha256": "a334d911c316844f3e44bbc7f8adbb4d69c6f326b00e24d4a8e55ba5f964973b"
+  },
+  "fit_includes_winners_and_losers": true,
+  "folds": [
+    "F2020",
+    "F2021",
+    "F2022",
+    "F2023",
+    "F2024",
+    "F2025"
+  ],
+  "historical_outcomes_already_exposed": true,
+  "ml_shadow_or_execution_activated": false,
+  "numeric_feature_count": 36,
+  "out_of_time_rows": 2368,
+  "pooled": {
+    "baseline": {
+      "candidates_per_weekday": 1.5169762972453555,
+      "episodes": 2275,
+      "rows": 2368,
+      "weight": 2275.0,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_r": 0.25098570664138625,
+      "weighted_profit_factor": 1.4142405281207302,
+      "weighted_r_sum": 570.9924826091537,
+      "weighted_win_rate": 0.4646153846153846
+    },
+    "drawdown_ratio_to_baseline": 0.7223707133874416,
+    "selected": {
+      "candidates_per_weekday": 1.0390775144138373,
+      "episodes": 1569,
+      "rows": 1622,
+      "weight": 1564.8333333333333,
+      "weighted_max_drawdown_r": 53.954961878343994,
+      "weighted_mean_r": 0.30908144481762456,
+      "weighted_profit_factor": 1.5247906039628754,
+      "weighted_r_sum": 483.6609475654461,
+      "weighted_win_rate": 0.4801363297475769
+    },
+    "selected_mean_lift_r": 0.05809573817623831,
+    "selected_weight_coverage": 0.6878388278388278,
+    "weighted_score_auc": 0.5336763476545879
+  },
+  "runtime_changed": false,
+  "schema_version": "xauusd_expected_r_v10_result",
+  "xau_feature_pass_rows": 3024
+}

@@ -1,0 +1,312 @@
+{
+  "schema_version": "xauusd_causal_candidate_quality_step_2_metadata_audit_v1",
+  "campaign_id": "causal-candidate-quality-ml-v1",
+  "stage": "STEP_2_METADATA_ONLY_DATA_AND_CANDIDATE_AUDIT",
+  "created_utc": "2026-07-21T22:00:00Z",
+  "step_1_contract": {
+    "path": "config/causal_candidate_quality_ml_v1.json",
+    "lock_path": "outputs/CAUSAL_CANDIDATE_QUALITY_ML_V1_CONTRACT_LOCK.json"
+  },
+  "audit_controls": {
+    "economic_outcomes_authorized": false,
+    "counterfactual_label_build_authorized": false,
+    "feature_build_authorized": false,
+    "model_training_authorized": false,
+    "threshold_fitting_authorized": false,
+    "portfolio_simulation_authorized": false,
+    "runtime_change_authorized": false,
+    "forbidden_read_columns": [
+      "base_net_r",
+      "stress_net_r",
+      "net_r",
+      "pnl_usd",
+      "pnl_usd_0p01_equiv",
+      "stress_pnl_usd",
+      "portfolio_pnl_usd",
+      "mfe_r",
+      "mae_r",
+      "exit_time",
+      "exit_time_utc",
+      "exit_price",
+      "profit_factor",
+      "win",
+      "winner"
+    ]
+  },
+  "candidate_sources": [
+    {
+      "source_id": "CANONICAL_R1_UPTREND",
+      "adapter": "R1_TAGGED_BOOK",
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_CURRENT_CANDIDATE_REGIME_ATTRIBUTION_20260709_TAGGED_TRADES.csv",
+      "sha256": "40a3f2c8f3f53cded9c54e90d300089200c7692dbfc0f9e174e24d30e4dc997f",
+      "format": "csv",
+      "columns": [
+        "source_id",
+        "component",
+        "entry_time",
+        "direction",
+        "book",
+        "drop_reason",
+        "duplicate_of_source_id"
+      ],
+      "filter": {
+        "book": "R1_current_long_book"
+      },
+      "expected_candidates": 558,
+      "population": "CANONICAL",
+      "lineage_status": "COMPLETED_TRADE_SOURCE_ONLY"
+    },
+    {
+      "source_id": "CANONICAL_R2_DOWNTREND",
+      "adapter": "REGIME_COMPOSITE_CANDIDATES",
+      "path": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet",
+      "sha256": "3a8b1d1812ca46f9a89d24e41cf3580b19d7ea5a5e1744a3c052a9d0339eb99b",
+      "format": "parquet",
+      "columns": [
+        "candidate_id",
+        "composite_id",
+        "origin_attempt",
+        "origin_variant_id",
+        "regime_owner",
+        "mechanic",
+        "signal_time",
+        "scheduled_entry_time",
+        "direction",
+        "stop_atr",
+        "hold_hours"
+      ],
+      "filter": {
+        "composite_id": "R2_DOWNTREND_FAILED_RALLY_DUAL_MODE_V1"
+      },
+      "expected_candidates": 168,
+      "population": "CANONICAL",
+      "lineage_status": "PRE_ENTRY_CANDIDATE_LEDGER"
+    },
+    {
+      "source_id": "CANONICAL_R3_COMPRESSION",
+      "adapter": "REGIME_COMPOSITE_CANDIDATES",
+      "path": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet",
+      "sha256": "3a8b1d1812ca46f9a89d24e41cf3580b19d7ea5a5e1744a3c052a9d0339eb99b",
+      "format": "parquet",
+      "columns": [
+        "candidate_id",
+        "composite_id",
+        "origin_attempt",
+        "origin_variant_id",
+        "regime_owner",
+        "mechanic",
+        "signal_time",
+        "scheduled_entry_time",
+        "direction",
+        "stop_atr",
+        "hold_hours"
+      ],
+      "filter": {
+        "composite_id": "R3_COMPRESSION_RELEASE_TRI_MODE_V1"
+      },
+      "expected_candidates": 490,
+      "population": "CANONICAL",
+      "lineage_status": "PRE_ENTRY_CANDIDATE_LEDGER"
+    },
+    {
+      "source_id": "CANONICAL_R4_CHOP",
+      "adapter": "R4_CANDIDATES",
+      "path": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_CANDIDATES.parquet",
+      "sha256": "26b8c6e75957f3b33b966aa82bf05f4a21d41b4365a86543a8ad8391f1d084e4",
+      "format": "parquet",
+      "columns": [
+        "candidate_id",
+        "origin_attempt",
+        "origin_variant_id",
+        "regime_owner",
+        "mechanic",
+        "geometry_id",
+        "signal_time",
+        "scheduled_entry_time",
+        "direction",
+        "stop_atr",
+        "target_r",
+        "hold_hours"
+      ],
+      "expected_candidates": 521,
+      "population": "CANONICAL",
+      "lineage_status": "PRE_ENTRY_CANDIDATE_LEDGER"
+    },
+    {
+      "source_id": "CANONICAL_R5_TRANSITION",
+      "adapter": "R5_ROUTER_SELECTED_METADATA",
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet",
+      "sha256": "a55cc7f7ec2088870b7b956c7148dcad01cad016a8ae6151720a60d13e586c9e",
+      "format": "parquet",
+      "columns": [
+        "candidate_id",
+        "origin_attempt",
+        "origin_variant_id",
+        "regime_owner",
+        "mechanic",
+        "geometry_id",
+        "signal_time",
+        "scheduled_entry_time",
+        "direction",
+        "attempt_no",
+        "component_attempt_no",
+        "risk_weight",
+        "router_id",
+        "router_mechanic"
+      ],
+      "filter": {
+        "attempt_no": 27135
+      },
+      "expected_candidates": 330,
+      "population": "CANONICAL",
+      "lineage_status": "POST_SELECTION_TRADE_LEDGER_ONLY"
+    },
+    {
+      "source_id": "CANONICAL_V57_ADDONS",
+      "adapter": "V57_ADDON_CANDIDATES",
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-unified-portfolio-v57/outputs/ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_CANDIDATES.parquet",
+      "sha256": "05a30d5ba24fefe728e39bb4d85c38d2f82d35cdfb45eb0dc59e71ef26badad9",
+      "format": "parquet",
+      "columns": [
+        "trade_id",
+        "sleeve_id",
+        "signal_time",
+        "entry_time",
+        "direction"
+      ],
+      "expected_candidates": 1685,
+      "expected_by_family": {
+        "V25_CHOP": 131,
+        "V57_BREAK_SWING_H4ADX_HIGH": 687,
+        "V7_SWING_HEALTH": 587,
+        "V8_RETEST_HEALTH": 280
+      },
+      "population": "CANONICAL",
+      "lineage_status": "PRE_ACCOUNT_GOVERNOR_POST_HEALTH_GATE"
+    }
+  ],
+  "decision_audits": [
+    {
+      "source_id": "R1_SINGLE_POSITION_DECISIONS",
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-native-core-v58/outputs/ONE_TRADE_PER_DAY_NATIVE_CORE_V58_R1_DECISIONS.parquet",
+      "sha256": "0015131a8e6c3ef128a06b1aa0735c7717c278e3c4810b468e45fe171555df92",
+      "columns": ["trade_id", "entry_time", "accepted", "decision_reason"],
+      "expected_rows": 145
+    },
+    {
+      "source_id": "V59_ADDON_ACCOUNT_DECISIONS",
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_ADDON_DECISIONS.parquet",
+      "sha256": "4a1f5496fca9bcef93e05e735e4c796975d7f7afee3ddc28bb0f6f6f6ce0551d",
+      "columns": ["trade_id", "sleeve_id", "entry_time", "accepted", "decision_reason"],
+      "expected_rows": 1685
+    }
+  ],
+  "action_inventories": [
+    {
+      "source_id": "RESEARCH_NEGATIVE_SPOT_ACTIONS",
+      "population": "RESEARCH_NEGATIVE",
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v4/outputs/COMPLETE_CANDIDATE_ACTION_LABELS_V4.parquet",
+      "sha256": "53605ee426d10334a3b0ddbc38ee15374943ff547e6921532369a224f0f7ccf8",
+      "columns": ["event_id", "signal_time", "feature_time", "direction", "regime", "action_id"],
+      "expected_rows": 73116
+    },
+    {
+      "source_id": "COMEX_RESEARCH_ACTIONS",
+      "population": "COMEX_RESEARCH",
+      "path": "xau-usd/xauusd-fast-research/comex-short-horizon-expansion-v5/outputs/COMEX_SHORT_HORIZON_V5_ACTIONS.parquet",
+      "sha256": "19e945e705150a258fdc3201c8c025b7d973eb7b409a2dd2654db11cae94f505",
+      "columns": ["event_id", "decision_time", "signal_time", "direction", "regime", "action_id"],
+      "expected_rows": 44418
+    }
+  ],
+  "source_evidence": [
+    {
+      "source_id": "DUKASCOPY_XAU_BID_ASK",
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/outputs/MICROBURST_V25_SOURCE_MANIFEST.json",
+      "sha256": "85d7ba4d842bbc1790cee23c994afd3143ce632cdcc7a225b10a70a215929285",
+      "role": "PRIMARY_HISTORICAL_FEATURE_AND_LABEL_PROXY"
+    },
+    {
+      "source_id": "DATABENTO_COMEX_GC_TRADES",
+      "path": "C:/ComexGoldFuturesFoundationV1/manifests/downloaded_and_hashed_20260717T082157Z.json",
+      "sha256": "5abfaa2de812671938a48b5b88b83c7a45acdc85093effa61890a45ee2a428e6",
+      "role": "CONDITIONAL_RESEARCH_ONLY_FEATURE_ABLATION"
+    },
+    {
+      "source_id": "CAPITAL_DUKASCOPY_TRANSFER",
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-crossvenue-foundation-v22-1/outputs/CROSSVENUE_V22_1_SOURCE_MANIFEST.json",
+      "sha256": "c6584f80aa20315c69f6b78094148c5ba09f0721c44770b94890f737ec42d4b2",
+      "role": "SHORT_HISTORY_COST_AND_BASIS_TRANSFER"
+    },
+    {
+      "source_id": "C_TO_D_MIGRATION",
+      "path": "D:/AlgoTradingData/migration/manifest.json",
+      "sha256": "6e9a9e37348b28de7583cbb3981036592f1d8bbd5bded09feea002eba67f90a6",
+      "role": "PHYSICAL_STORAGE_PROVENANCE"
+    }
+  ],
+  "feature_availability": [
+    {
+      "block": "DETERMINISTIC_CANDIDATE_AND_REGIME",
+      "fields": ["family", "direction", "regime", "stop_geometry", "target_geometry", "maximum_hold", "decision_time"],
+      "status": "PARTIAL",
+      "reason": "Several canonical sources lack a pre-policy candidate ledger, complete action geometry, or a distinct decision clock."
+    },
+    {
+      "block": "PLUS_XAU_MICROSTRUCTURE_AND_COST",
+      "fields": ["spread", "returns", "realized_variance", "range", "efficiency", "quote_intensity", "staleness"],
+      "status": "RAW_SOURCE_AVAILABLE_NOT_MATERIALIZED",
+      "reason": "Ten years of XAUUSD bid/ask ticks are hashed, but candidate-time aggregates and source availability clocks are not built."
+    },
+    {
+      "block": "PLUS_COMPLETED_CROSS_ASSET_STATE",
+      "fields": ["forex_context", "xag_context", "dollar_consensus", "bond_proxy", "completed_h1_h4_d1"],
+      "status": "RAW_SOURCE_AVAILABLE_NORMALIZATION_UNVERIFIED",
+      "reason": "Local Dukascopy histories exist, but a common causal availability and direction-normalization contract is not yet proven."
+    },
+    {
+      "block": "PLUS_COMEX_RESEARCH_ABLATION",
+      "fields": ["trade_count", "volume", "aggressor_imbalance", "intensity", "roll_state", "futures_spot_gap"],
+      "status": "HISTORICAL_RESEARCH_ONLY_NOT_MATERIALIZED",
+      "reason": "The trades archive is present for 2022-07 through 2026-06; live delivery latency is not verified and no order-book fields are authorized."
+    },
+    {
+      "block": "CAPITAL_COST_TRANSFER",
+      "fields": ["capital_spread", "capital_dukascopy_basis", "staleness", "broker_cost_stress"],
+      "status": "SHORT_HISTORY_ONLY",
+      "reason": "The frozen source manifest covers 34 Capital files from 2026-05-27 through 2026-06-30 with one missing date."
+    }
+  ],
+  "episode_diagnostics": {
+    "structural_proxy": "EXACT_DECISION_TIME_AND_DIRECTION",
+    "conservative_anchor_hours": 36,
+    "transitive_time_chaining": false,
+    "weights_locked": false,
+    "reason_weights_not_locked": "Required causal clocks and planned maximum holds are incomplete for the canonical population."
+  },
+  "expected": {
+    "canonical_candidates": 3752,
+    "v59_v60_accepted_trades": 2194,
+    "r5_candidates": 330,
+    "r5_broker_executable": 10,
+    "r5_broker_ineligible": 320,
+    "addon_candidates": 1685,
+    "addon_accepted": 1379,
+    "spot_action_rows": 73116,
+    "comex_action_rows": 44418
+  },
+  "outputs": {
+    "directory": "outputs/step_2",
+    "candidate_registry": "STEP_2_CANDIDATE_REGISTRY.parquet",
+    "source_inventory": "STEP_2_SOURCE_INVENTORY.json",
+    "candidate_registry_counts": "STEP_2_CANDIDATE_REGISTRY_COUNTS.json",
+    "action_multiplicity": "STEP_2_ACTION_MULTIPLICITY.json",
+    "timestamp_audit": "STEP_2_TIMESTAMP_AND_AVAILABILITY_AUDIT.json",
+    "duplicate_episode_census": "STEP_2_DUPLICATE_AND_EPISODE_CENSUS.json",
+    "feature_availability_matrix": "STEP_2_FEATURE_AVAILABILITY_MATRIX.json",
+    "effective_sample_plan": "STEP_2_OUTCOME_BLIND_EFFECTIVE_SAMPLE_PLAN.json",
+    "result_json": "STEP_2_RESULT.json",
+    "result_markdown": "STEP_2_RESULT.md",
+    "artifact_manifest": "STEP_2_ARTIFACT_MANIFEST.json"
+  }
+}

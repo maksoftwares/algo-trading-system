@@ -1,0 +1,8 @@
+{
+  "model_fitted_before_supersession": false,
+  "reason": "PRE_MODEL_PREFLIGHT_BOUND_IMPLEMENTATION_AND_FIXED_SPLIT_MERGE",
+  "runtime_changed": false,
+  "schema_version": "xauusd_step_4_prelock_supersession_v1",
+  "superseded_lock_sha256": "c4a67c9d6cf26c9721bb784e59a626eabce4c173313c7ccb31812b24486e3926",
+  "test_predictions_opened_before_supersession": false
+}

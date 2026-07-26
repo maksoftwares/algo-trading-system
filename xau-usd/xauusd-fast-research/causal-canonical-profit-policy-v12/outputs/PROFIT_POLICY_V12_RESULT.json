@@ -1,0 +1,169 @@
+{
+  "acceptance": {
+    "all_required": true,
+    "checks": {
+      "maximum_drawdown_ratio_to_baseline": true,
+      "minimum_latest_fold_normalized_usd_vs_baseline": false,
+      "minimum_latest_fold_normalized_usd_vs_v11": true,
+      "minimum_profit_delta_bootstrap_lower_usd": false,
+      "minimum_recent_window_profit_wins_vs_v11": true,
+      "minimum_selected_profit_factor": true,
+      "minimum_selected_rows": true,
+      "minimum_selected_weighted_mean_r": true,
+      "minimum_total_normalized_usd_vs_baseline": true,
+      "minimum_total_normalized_usd_vs_v11": true
+    },
+    "decision": "PROFIT_POLICY_V12_HISTORICAL_GATE_FAIL",
+    "passed": false,
+    "passed_checks": 8,
+    "required_checks": 10,
+    "runtime_authorized": false,
+    "schema_version": "xauusd_profit_policy_v12_acceptance"
+  },
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "ml_shadow_authorized": false,
+    "offline_scoring_authorized": true,
+    "python_serving_authorized": false,
+    "research_only": true,
+    "runtime_change_authorized": false
+  },
+  "bootstrap": {
+    "confidence": 0.95,
+    "intervals": {
+      "baseline_normalized_usd_sum": {
+        "lower": 4369.849855729735,
+        "median": 8687.645709290331,
+        "upper": 13966.694020265037
+      },
+      "baseline_weighted_r_sum": {
+        "lower": 347.1279510291897,
+        "median": 572.9795483415992,
+        "upper": 795.224469122807
+      },
+      "selected_normalized_usd_sum": {
+        "lower": 4381.781202468276,
+        "median": 8731.874217419128,
+        "upper": 14034.939354011492
+      },
+      "selected_profit_delta_r": {
+        "lower": -31.368034661597516,
+        "median": -2.853334217547115,
+        "upper": 23.412724893051607
+      },
+      "selected_profit_delta_usd": {
+        "lower": -242.59238736051856,
+        "median": 30.787999558161573,
+        "upper": 268.1252526738601
+      },
+      "selected_profit_factor": {
+        "lower": 1.2511366919916742,
+        "median": 1.4317591140908033,
+        "upper": 1.6194543050969867
+      },
+      "selected_weighted_r_sum": {
+        "lower": 347.0591781477026,
+        "median": 568.7184253949843,
+        "upper": 790.3045431190034
+      }
+    },
+    "resamples": 5000,
+    "schema_version": "xauusd_profit_policy_v12_weekly_bootstrap",
+    "seed": 6072303,
+    "weekly_blocks": 296
+  },
+  "decision": "PROFIT_POLICY_V12_HISTORICAL_GATE_FAIL",
+  "definition_contract_sha256": "7d12460900a68d9289cc4a31e4d9f79e027b79ee4798a06f4a4df947dbffa1a0",
+  "development_selection_disclosed": true,
+  "final_research_policy": {
+    "calibration_rows": 172,
+    "chosen_quantile": 0.0,
+    "chosen_threshold": -0.3474003613573576,
+    "definition_contract_sha256": "7d12460900a68d9289cc4a31e4d9f79e027b79ee4798a06f4a4df947dbffa1a0",
+    "research_only": true,
+    "runtime_authorized": false,
+    "schema_version": "xauusd_profit_policy_v12_final_research_policy",
+    "selection_reason": "RETAIN_ALL_INSUFFICIENT_CALIBRATION_USD_IMPROVEMENT",
+    "v10_final_model_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_FINAL_RESEARCH_MODEL.joblib",
+    "v10_final_model_sha256": "a334d911c316844f3e44bbc7f8adbb4d69c6f326b00e24d4a8e55ba5f964973b"
+  },
+  "historical_outcomes_already_exposed": true,
+  "ml_shadow_or_execution_activated": false,
+  "out_of_time_rows": 2368,
+  "pooled": {
+    "baseline": {
+      "candidates_per_weekday": 1.5169762972453555,
+      "episodes": 2275,
+      "normalized_weighted_max_drawdown_usd": 634.9522562619632,
+      "normalized_weighted_profit_factor": 1.8264202331286419,
+      "normalized_weighted_usd_sum": 8828.689749327852,
+      "rows": 2368,
+      "weight": 2275.0,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_r": 0.25098570664138625,
+      "weighted_profit_factor": 1.4142405281207302,
+      "weighted_r_sum": 570.9924826091537,
+      "weighted_win_rate": 0.4646153846153846
+    },
+    "drawdown_ratio_to_baseline": 1.0,
+    "selected": {
+      "candidates_per_weekday": 1.4638052530429213,
+      "episodes": 2194,
+      "normalized_weighted_max_drawdown_usd": 610.4678331050018,
+      "normalized_weighted_profit_factor": 1.8667417182620136,
+      "normalized_weighted_usd_sum": 8856.574704800172,
+      "rows": 2285,
+      "weight": 2194.0,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_r": 0.25883757750292624,
+      "weighted_profit_factor": 1.4292700269811505,
+      "weighted_r_sum": 567.8896450414202,
+      "weighted_win_rate": 0.46718322698268006
+    },
+    "selected_mean_lift_r": 0.007851870861539989,
+    "selected_profit_delta_r": -3.102837567733559,
+    "selected_profit_delta_usd": 27.884955472320144,
+    "selected_weight_coverage": 0.9643956043956043
+  },
+  "profit_delta_vs_v11_usd": 481.6506854641957,
+  "runtime_changed": false,
+  "schema_version": "xauusd_profit_policy_v12_result",
+  "v11_pooled": {
+    "baseline": {
+      "candidates_per_weekday": 1.5169762972453555,
+      "episodes": 2275,
+      "normalized_weighted_max_drawdown_usd": 634.9522562619632,
+      "normalized_weighted_profit_factor": 1.8264202331286419,
+      "normalized_weighted_usd_sum": 8828.689749327852,
+      "rows": 2368,
+      "weight": 2275.0,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_r": 0.25098570664138625,
+      "weighted_profit_factor": 1.4142405281207302,
+      "weighted_r_sum": 570.9924826091537,
+      "weighted_win_rate": 0.4646153846153846
+    },
+    "drawdown_ratio_to_baseline": 0.7223707133874436,
+    "selected": {
+      "candidates_per_weekday": 1.1582319026265215,
+      "episodes": 1739,
+      "normalized_weighted_max_drawdown_usd": 547.5592560750274,
+      "normalized_weighted_profit_factor": 2.05837686520409,
+      "normalized_weighted_usd_sum": 8374.924019335976,
+      "rows": 1808,
+      "weight": 1734.8333333333335,
+      "weighted_max_drawdown_r": 53.954961878344136,
+      "weighted_mean_r": 0.3155698855804521,
+      "weighted_profit_factor": 1.540228095506976,
+      "weighted_r_sum": 547.4611565011544,
+      "weighted_win_rate": 0.4822749543664136
+    },
+    "selected_mean_lift_r": 0.06458417893906587,
+    "selected_profit_delta_r": -23.531326107999348,
+    "selected_profit_delta_usd": -453.76572999187556,
+    "selected_weight_coverage": 0.7625641025641027
+  }
+}

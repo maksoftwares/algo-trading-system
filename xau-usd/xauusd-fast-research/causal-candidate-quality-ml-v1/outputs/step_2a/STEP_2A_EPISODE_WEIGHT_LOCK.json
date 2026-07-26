@@ -1,0 +1,20 @@
+{
+  "candidate_rows": 3752,
+  "conservative_kish_effective_rows": 1179.9632229237886,
+  "conservative_nontransitive_episodes": 639,
+  "conservative_weight_sum": 639.0,
+  "maximum_conservative_episode_size": 211,
+  "maximum_structural_episode_size": 3,
+  "nontransitive_anchor_end_is_not_extended_by_later_candidates": true,
+  "primary_weight": "INVERSE_STRUCTURAL_EPISODE_MULTIPLICITY",
+  "r1_barrier_observation_cap_days": 90,
+  "r1_cap_is_censoring_only_not_a_forced_trade_exit": true,
+  "schema_version": "xauusd_step_2a_episode_weight_lock_v1",
+  "sensitivity_weight": "INVERSE_CONSERVATIVE_EPISODE_MULTIPLICITY",
+  "serial_effective_size": null,
+  "serial_effective_size_status": "DEFERRED_UNTIL_LABELS_EXIST",
+  "structural_episodes": 3489,
+  "structural_kish_effective_rows": 3600.9823990533946,
+  "structural_weight_sum": 3489.0,
+  "weights_locked_before_economic_labels": true
+}

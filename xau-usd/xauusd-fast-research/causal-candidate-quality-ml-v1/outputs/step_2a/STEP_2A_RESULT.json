@@ -1,0 +1,79 @@
+{
+  "canonical_candidates": 3752,
+  "canonical_complete_action_rows": 3752,
+  "canonical_complete_clock_rows": 3752,
+  "canonical_evidence": {
+    "broker_executable_rows": 3432,
+    "canonical_rows": 3752,
+    "complete_action_rows": 3752,
+    "complete_clock_rows": 3752,
+    "historically_portfolio_accepted": 2194,
+    "historically_specialist_accepted": 2934
+  },
+  "checks": {
+    "all_canonical_actions_complete": true,
+    "all_canonical_clocks_complete": true,
+    "archive_catalog_nonempty": true,
+    "canonical_count_reconciles": true,
+    "clock_audit_passes": true,
+    "episode_weights_locked": true,
+    "geometry_audit_passes": true,
+    "historical_acceptance_reconciles": true,
+    "journey_actions_reconcile": true,
+    "r5_prepolicy_reconciles": true
+  },
+  "conservative_episodes": 639,
+  "counterfactual_labels_built": false,
+  "created_utc": "2026-07-21T22:38:10Z",
+  "decision": "STEP_2A_METADATA_REPAIR_COMPLETE",
+  "economic_outcomes_opened": false,
+  "feature_values_built": false,
+  "historically_portfolio_accepted": 2194,
+  "journey_action_rows": 117534,
+  "journey_archive_files": 115,
+  "journey_candidate_directions": 51722,
+  "journey_evidence": {
+    "action_rows": 117534,
+    "all_actions_complete": true,
+    "all_clocks_causal": true,
+    "by_source": {
+      "COMEX_RESEARCH_ACTIONS": {
+        "action_count_distribution": {
+          "1": 9446,
+          "2": 6560,
+          "3": 7284
+        },
+        "action_rows": 44418,
+        "candidate_directions": 23290,
+        "structural_events": 11645
+      },
+      "RESEARCH_NEGATIVE_SPOT_ACTIONS": {
+        "action_count_distribution": {
+          "1": 2753,
+          "2": 6674,
+          "3": 19005
+        },
+        "action_rows": 73116,
+        "candidate_directions": 28432,
+        "structural_events": 28432
+      }
+    },
+    "candidate_directions": 51722,
+    "direct_primary_model_ingestion_authorized": false,
+    "rejection_is_loss": false,
+    "sibling_action_weight_sum": 51722.0,
+    "structural_events": 40077,
+    "unique_action_rows": 117534
+  },
+  "ml_execution_authorized": false,
+  "model_fitted": false,
+  "next_authorized_work": "STEP_2B_DATASET_AND_FEATURE_CONTRACT_LOCK",
+  "portfolio_simulated": false,
+  "r1_guard_decisions": 3951,
+  "r5_prepolicy_candidates": 799,
+  "runtime_changed": false,
+  "schema_version": "xauusd_causal_candidate_quality_step_2a_result_v1",
+  "stage": "STEP_2A_METADATA_REPAIR_AND_CANDIDATE_ADAPTERS",
+  "structural_episodes": 3489,
+  "threshold_fitted": false
+}

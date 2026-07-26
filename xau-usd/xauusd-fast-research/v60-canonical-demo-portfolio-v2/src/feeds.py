@@ -140,6 +140,56 @@ def run_r4(config: Mapping[str, Any]) -> dict[str, Any]:
     return module.run_cycle(REPO_ROOT, package)
 
 
+def run_core_outcomes(config: Mapping[str, Any]) -> dict[str, Any]:
+    package = RESEARCH_ROOT / "capital-core-causal-outcome-resolver-v40"
+    previous_resolver = sys.modules.pop("resolver", None)
+    try:
+        module = _load_module(
+            "v60_v2_core_outcome_runner", package / "run_resolver.py"
+        )
+        original = module.load_config
+
+        def load_config(_path: Path | None = None) -> dict[str, Any]:
+            path = (
+                package
+                / "config"
+                / "capital_core_causal_outcome_resolver_v40.json"
+            )
+            value = deepcopy(original(path))
+            value["source"].update(
+                {
+                    "tick_directory": str(
+                        config["feeds"]["terminal_files_directory"]
+                    ),
+                    "tick_filename_glob": str(
+                        config["feeds"]["tick_filename_glob"]
+                    ),
+                    "account_login": int(config["account"]["expected_login"]),
+                    "account_server": str(config["account"]["expected_server"]),
+                }
+            )
+            transports = {
+                "v28": "r2_r3",
+                "v29": "r1_pullback",
+                "v34": "r4",
+            }
+            for stream, transport in transports.items():
+                value["frozen_identity"][stream]["runtime_directory"] = str(
+                    _transport(config, transport)
+                )
+            value["outputs"]["runtime_directory"] = str(
+                _transport(config, "core_outcomes")
+            )
+            return value
+
+        module.load_config = load_config
+        return module.run_cycle(REPO_ROOT, package)
+    finally:
+        sys.modules.pop("resolver", None)
+        if previous_resolver is not None:
+            sys.modules["resolver"] = previous_resolver
+
+
 def run_r5_components(config: Mapping[str, Any]) -> dict[str, Any]:
     package = RESEARCH_ROOT / "capital-r5-transition-forward-v35"
     module = _load_module("v60_v2_r5_components_runner", package / "run_shadow.py")
@@ -229,6 +279,8 @@ def run_core_feeds(config: Mapping[str, Any], *, include_slow: bool = True) -> d
         ("R1_PULLBACK", run_r1_pullback),
         ("R2_R3", run_r2_r3),
         ("R4", run_r4),
+        ("CORE_OUTCOMES", run_core_outcomes),
+        ("ADDONS", lambda value: run_addon_feeds(value, include_v25=include_slow)),
     ]
     if include_slow:
         runners.extend(
@@ -238,7 +290,6 @@ def run_core_feeds(config: Mapping[str, Any], *, include_slow: bool = True) -> d
                 ("R5_ROUTER", run_r5_router),
             ]
         )
-    runners.append(("ADDONS", lambda value: run_addon_feeds(value, include_v25=include_slow)))
     results: dict[str, Any] = {}
     checked_at = datetime.now(UTC).isoformat().replace("+00:00", "Z")
     for name, runner in runners:

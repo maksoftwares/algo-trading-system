@@ -1,0 +1,287 @@
+{
+  "aggregate_economics_present_at_lock": false,
+  "broker_action_authorized": false,
+  "candidate_population": {
+    "absence_reason": "NOT_IN_V60_EXECUTABLE_SOURCE_SET",
+    "absent_frozen_family": "R5_TRANSITION",
+    "expected_model_families": [
+      "R1_UPTREND",
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "R5_TRANSITION",
+      "V25_CHOP",
+      "V57_BREAK_SWING_H4ADX_HIGH",
+      "V7_SWING_HEALTH",
+      "V8_RETEST_HEALTH"
+    ],
+    "expected_source_ids": [
+      "R1_BOX",
+      "R1_PULLBACK",
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "V7_SWING_HEALTH",
+      "V8_RETEST_HEALTH",
+      "V25_CHOP",
+      "V57_BREAK_SWING_H4ADX_HIGH"
+    ],
+    "point_size": 0.01,
+    "portfolio_policy": {
+      "addon_source_ids": [
+        "V7_SWING_HEALTH",
+        "V8_RETEST_HEALTH",
+        "V25_CHOP",
+        "V57_BREAK_SWING_H4ADX_HIGH"
+      ],
+      "maximum_account_concurrent_initial_risk_fraction": 0.06,
+      "maximum_account_concurrent_initial_risk_usd": 60.0,
+      "maximum_account_xau_positions": 12,
+      "maximum_addon_concurrent_initial_risk_usd": 45.0,
+      "maximum_addon_entries_per_utc_day": 2,
+      "maximum_addon_open_positions": 2,
+      "maximum_core_open_positions": 10,
+      "maximum_daily_entries": 12,
+      "maximum_directional_concurrent_initial_risk_fraction": 0.06,
+      "maximum_directional_concurrent_initial_risk_usd": 60.0,
+      "reference_activation_equity_usd": 987.6623553437713,
+      "same_direction_post_loss_cooldown_minutes_by_source": {
+        "V57_BREAK_SWING_H4ADX_HIGH": 120
+      }
+    },
+    "source_to_family": {
+      "R1_BOX": "R1_UPTREND",
+      "R1_PULLBACK": "R1_UPTREND",
+      "R2_DOWNTREND": "R2_DOWNTREND",
+      "R3_COMPRESSION": "R3_COMPRESSION",
+      "R4_CHOP": "R4_CHOP",
+      "V25_CHOP": "V25_CHOP",
+      "V57_BREAK_SWING_H4ADX_HIGH": "V57_BREAK_SWING_H4ADX_HIGH",
+      "V7_SWING_HEALTH": "V7_SWING_HEALTH",
+      "V8_RETEST_HEALTH": "V8_RETEST_HEALTH"
+    },
+    "v60_config_path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+    "v60_config_sha256": "053bbb0e0d0f8e365f8b93b8a7d61376c6762c861ad1ec2c1b3d796d3089a9df",
+    "v60_executor_path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/src/executor.py"
+  },
+  "confidence": {
+    "lower_confidence_quantile": 0.05,
+    "random_seed": 20260726,
+    "weekly_block_bootstrap_iterations": 2000
+  },
+  "contract_sha256": "12a28b26a428bd94d4169a88835e19af90d611acf6061ec3ef5a67c10c18571d",
+  "costs": {
+    "holding_cost_per_24h_usd": 0.35,
+    "ounces_at_0p01_lot": 1.0,
+    "stress_slippage_r": 0.05,
+    "ticket_cost_usd": 0.3
+  },
+  "created_at_utc": "2026-07-26T21:00:44.021169Z",
+  "demo_authorized": false,
+  "dependencies": [
+    {
+      "bytes": 34735,
+      "path": "xau-usd/xauusd-fast-research/capital-r2-r4-prospective-confirmation-v47/src/evaluator.py",
+      "sha256": "662dec73bec92a427722c784f40b5de26ee09badb0e617ed064f60f925e6d353"
+    },
+    {
+      "bytes": 39695,
+      "path": "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/src/resolver.py",
+      "sha256": "47e92cc2fe8fdb262311f6ae5ff63e95b32274d256809ea2ba4e514784384571"
+    },
+    {
+      "bytes": 604,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_FINAL_RESEARCH_POLICY.json",
+      "sha256": "3c59ebc85da15b571be3980e5dbf4804e8a9d5b4501a315689105ef4d1661873"
+    },
+    {
+      "bytes": 5573,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_FINAL_RESEARCH_MODEL.joblib",
+      "sha256": "a334d911c316844f3e44bbc7f8adbb4d69c6f326b00e24d4a8e55ba5f964973b"
+    },
+    {
+      "bytes": 16330,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+      "sha256": "2ea01130ab139fc6795909724ae375ad03cf69e3e17b09bd66b8905446a66f0a"
+    },
+    {
+      "bytes": 11140,
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "053bbb0e0d0f8e365f8b93b8a7d61376c6762c861ad1ec2c1b3d796d3089a9df"
+    },
+    {
+      "bytes": 12783,
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/src/executor.py",
+      "sha256": "17b0ca68bcdfb65fe45167740c39e67016012543991f239696d4bad6beeba2cc"
+    }
+  ],
+  "ea_consumption_authorized": false,
+  "feature_geometry": {
+    "entry_maximum_gap_minutes_by_family": {
+      "R1_UPTREND": 5,
+      "R2_DOWNTREND": 10,
+      "R3_COMPRESSION": 10,
+      "R4_CHOP": 5,
+      "V25_CHOP": 5,
+      "V57_BREAK_SWING_H4ADX_HIGH": 10,
+      "V7_SWING_HEALTH": 10,
+      "V8_RETEST_HEALTH": 10
+    },
+    "horizon_maximum_gap_minutes_by_family": {
+      "R2_DOWNTREND": 5760,
+      "R3_COMPRESSION": 5760,
+      "R4_CHOP": 5,
+      "V25_CHOP": 5,
+      "V57_BREAK_SWING_H4ADX_HIGH": 4320,
+      "V7_SWING_HEALTH": 4320,
+      "V8_RETEST_HEALTH": 4320
+    },
+    "r1_barrier_observation_cap_minutes": 129600,
+    "stop_floor_price_by_family": {
+      "R1_UPTREND": 0.0,
+      "R2_DOWNTREND": 0.0,
+      "R3_COMPRESSION": 0.0,
+      "R4_CHOP": 0.0,
+      "V25_CHOP": 0.0,
+      "V57_BREAK_SWING_H4ADX_HIGH": 3.5,
+      "V7_SWING_HEALTH": 3.5,
+      "V8_RETEST_HEALTH": 3.0
+    }
+  },
+  "forward_start_inclusive_utc": "2026-07-27T00:00:00Z",
+  "gates": {
+    "confirmation": {
+      "largest_selected_winners_removed": 2,
+      "maximum_drawdown_ratio_to_baseline": 1.0,
+      "maximum_selection_coverage": 0.85,
+      "minimum_bootstrap_mean_uplift_r_lower": 0.0,
+      "minimum_bootstrap_selected_mean_stress_r_lower": 0.0,
+      "minimum_bootstrap_selected_profit_factor_lower": 1.05,
+      "minimum_mean_uplift_r": 0.02,
+      "minimum_model_score_coverage": 0.85,
+      "minimum_positive_baseline_net_retention": 0.8,
+      "minimum_selected_mean_stress_r": 0.05,
+      "minimum_selected_minus_rejected_mean_r": 0.05,
+      "minimum_selected_profit_factor": 1.2,
+      "minimum_selected_routed_candidates": 60,
+      "minimum_selected_rows_per_routed_family": 8,
+      "minimum_selection_coverage": 0.55,
+      "minimum_trimmed_selected_net_r": 0.0
+    },
+    "validation": {
+      "largest_selected_winners_removed": 1,
+      "maximum_drawdown_ratio_to_baseline": 1.25,
+      "maximum_selection_coverage": 0.85,
+      "minimum_bootstrap_mean_uplift_r_lower": -0.05,
+      "minimum_bootstrap_selected_mean_stress_r_lower": -0.05,
+      "minimum_bootstrap_selected_profit_factor_lower": 0.9,
+      "minimum_mean_uplift_r": 0.0,
+      "minimum_model_score_coverage": 0.8,
+      "minimum_positive_baseline_net_retention": 0.7,
+      "minimum_selected_mean_stress_r": 0.0,
+      "minimum_selected_minus_rejected_mean_r": 0.0,
+      "minimum_selected_profit_factor": 1.0,
+      "minimum_selected_routed_candidates": 20,
+      "minimum_selected_rows_per_routed_family": 3,
+      "minimum_selection_coverage": 0.5,
+      "minimum_trimmed_selected_net_r": 0.0
+    }
+  },
+  "historical_model_refit_authorized": false,
+  "live_authorized": false,
+  "ml_shadow_authorized": false,
+  "model": {
+    "actual_fit_rows": 2851,
+    "availability_policy_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_FINAL_RESEARCH_POLICY.json",
+    "availability_policy_sha256": "3c59ebc85da15b571be3980e5dbf4804e8a9d5b4501a315689105ef4d1661873",
+    "domain_shift_is_part_of_confirmation": true,
+    "expected_definition_contract_sha256": "cee3154af687944880ff15d3e96761cf4e55a24cc29100fc925d99c42224ef42",
+    "expected_r_module_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+    "expected_r_module_sha256": "2ea01130ab139fc6795909724ae375ad03cf69e3e17b09bd66b8905446a66f0a",
+    "feature_source_domain": "CAPITAL_COM_MENA_DEMO_1033030",
+    "minimum_fit_rows": 1000,
+    "model_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_FINAL_RESEARCH_MODEL.joblib",
+    "model_sha256": "a334d911c316844f3e44bbc7f8adbb4d69c6f326b00e24d4a8e55ba5f964973b",
+    "training_feature_domain": "DUKASCOPY_XAUUSD"
+  },
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 78,
+      "path": ".gitignore",
+      "sha256": "304bd39ded87ed2527fff7a3c1f7349c08841d7f77b2f6a04bea37a766ebc7a3"
+    },
+    {
+      "bytes": 823,
+      "path": "README.md",
+      "sha256": "8fcf82bfbb088e795fded09913a234e4583642b1c806801a3744cea035056b38"
+    },
+    {
+      "bytes": 2166,
+      "path": "PREREGISTRATION.md",
+      "sha256": "bce0ca4438d0b990fc026787f24f046d3c27d46f96bfc3ed415bacd320c61437"
+    },
+    {
+      "bytes": 118,
+      "path": "requirements.txt",
+      "sha256": "ba4207f3525742472666f3c6d23f3d3f801c54a51d80097620d2d21740430456"
+    },
+    {
+      "bytes": 9467,
+      "path": "config/expected_r_prospective_v13.json",
+      "sha256": "b1e5e9fe27c0290130bacec09545f42fe163e30a2a810afa718f47da00ac1c5b"
+    },
+    {
+      "bytes": 54,
+      "path": "src/__init__.py",
+      "sha256": "dbaa656c9df3773ab5228d30d060a345dda1665079f7d71f3104e02b4d0e5fca"
+    },
+    {
+      "bytes": 78952,
+      "path": "src/evaluator.py",
+      "sha256": "5edcf964e306e246e081c763b0097ca2782a14ef7b4a0a3f4d98fee1a02282ed"
+    },
+    {
+      "bytes": 4874,
+      "path": "lock_contract.py",
+      "sha256": "12baabcf28c99cd26f63d44ef0c70ba97b196105b741498f346c772e5cd79882"
+    },
+    {
+      "bytes": 2435,
+      "path": "run_evaluation.py",
+      "sha256": "2aed76e08a64f5d5f0687649fccb63f9f564f7264c269d5ff20a56a7efe63100"
+    },
+    {
+      "bytes": 478,
+      "path": "verify.py",
+      "sha256": "5abdfa483a16b990f5ec9e81d920a82484db3971528fd4de644f0594f654c8ab"
+    },
+    {
+      "bytes": 154,
+      "path": "tests/conftest.py",
+      "sha256": "35499151475a5336720bb199669d691e7d8cb1451249d18b68339d2bcabe56fc"
+    },
+    {
+      "bytes": 7348,
+      "path": "tests/test_evaluator.py",
+      "sha256": "b7e2f440f7386073a6a4df544d492b357c3516a9bd9f99d3bbc4f4a14c9fa11f"
+    }
+  ],
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_expected_r_prospective_v13_contract",
+  "stages": {
+    "confirmation": {
+      "maximum_eligible_weekdays": 520,
+      "minimum_eligible_weekdays": 40,
+      "minimum_resolved_scored_candidates": 120,
+      "minimum_scored_families": 6
+    },
+    "validation": {
+      "maximum_eligible_weekdays": 260,
+      "minimum_eligible_weekdays": 20,
+      "minimum_resolved_scored_candidates": 40,
+      "minimum_scored_families": 5
+    }
+  }
+}

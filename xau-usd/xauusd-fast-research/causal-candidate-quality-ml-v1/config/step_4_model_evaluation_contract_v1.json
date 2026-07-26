@@ -1,0 +1,221 @@
+{
+  "schema_version": "xauusd_causal_candidate_quality_step_4_model_evaluation_v1",
+  "campaign_id": "causal-candidate-quality-ml-v1",
+  "stage": "STEP_4_MODEL_FIT_AND_LOCKED_WALK_FORWARD_EVALUATION",
+  "created_utc": "2026-07-22T11:00:00Z",
+  "controls": {
+    "model_training_authorized": true,
+    "probability_calibration_authorized": true,
+    "threshold_fitting_authorized": true,
+    "untouched_test_evaluation_authorized": true,
+    "hyperparameter_search_authorized": false,
+    "comex_features_authorized": false,
+    "databento_api_access_authorized": false,
+    "new_data_acquisition_authorized": false,
+    "journey_rows_enter_primary_fit": false,
+    "portfolio_simulation_authorized": false,
+    "runtime_change_authorized": false,
+    "shadow_or_demo_activation_authorized": false
+  },
+  "bound_inputs": {
+    "step_2b_contract": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/config/step_2b_dataset_feature_contract_v1.json",
+      "sha256": "f1cafa6375db1597e9721397bb6c2f7e54b25ead9016df6fdc670a94584317de"
+    },
+    "step_2b_lock": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b/STEP_2B_DATASET_FEATURE_CONTRACT_LOCK.json",
+      "sha256": "0dce2c3825fae87534db503194b02ea21e6b695a5dcab95369ee0a1adabe9cad"
+    },
+    "step_3_dataset": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet",
+      "sha256": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45"
+    },
+    "step_3_splits": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_SPLIT_ASSIGNMENTS.parquet",
+      "sha256": "0ba856a55666af55243d104ada4195b0850f522cfd608a4c623e07630137d3fc"
+    },
+    "step_3_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_RESULT.json",
+      "sha256": "41f005792e81a8d2783a2528247ea886a6463a74f9648c0384725a8fc98e379d"
+    },
+    "step_3_artifact_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_ARTIFACT_MANIFEST.json",
+      "sha256": "5dbbdc8189524b18a230eebe8011dcf6b64e0a7eb502f8e24ec4b4bd7562bedc"
+    },
+    "step_3_journey_labels": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_JOURNEY_ACTION_LABELS.parquet",
+      "sha256": "a09653c4e9af1b7e0b70c7ec8fdf4a396046667c2fbade6d88259ed0581303ad"
+    }
+  },
+  "population": {
+    "primary": "STEP_3_CANONICAL_DATASET_ONLY",
+    "target": "stress_net_r_positive",
+    "economic_outcome": "stress_net_r",
+    "fit_weight": "structural_weight",
+    "identity": "candidate_id",
+    "episode": "structural_episode_id",
+    "clock": "decision_time",
+    "journey_role": "SEPARATE_LABEL_DISTRIBUTION_DIAGNOSTIC_ONLY",
+    "historical_policy_fields_are_features": false
+  },
+  "outer_evaluation": {
+    "source": "STEP_3_SPLIT_ASSIGNMENTS",
+    "fold_ids": ["F2020", "F2021", "F2022", "F2023", "F2024", "F2025"],
+    "fit_assignment": "FIT",
+    "threshold_assignment": "CALIBRATION",
+    "evaluation_assignment": "TEST",
+    "structural_episode_siblings_same_assignment": true,
+    "test_reuse_for_selection_authorized": false,
+    "random_or_shuffled_split_authorized": false
+  },
+  "probability_calibration": {
+    "method": "PLATT_SIGMOID_ON_RAW_LOGIT",
+    "source": "CHRONOLOGICAL_TRAILING_EPISODES_INSIDE_OUTER_FIT",
+    "trailing_episode_fraction": 0.2,
+    "minimum_base_fit_rows": 100,
+    "minimum_calibrator_rows": 20,
+    "purge_base_rows_with_label_end_at_or_after_calibrator_start": true,
+    "platt_c": 1000000.0,
+    "platt_max_iter": 2000,
+    "clip_probability": 1e-06
+  },
+  "preprocessing": {
+    "categorical_features": ["family_id", "broad_mechanic", "stop_mode", "target_mode"],
+    "categorical_encoder": "ONE_HOT_HANDLE_UNKNOWN_IGNORE_DENSE",
+    "numeric_imputer": "FIT_ONLY_MEDIAN",
+    "linear_numeric_scaler": "FIT_ONLY_STANDARD_SCALER",
+    "tree_numeric_scaler": "NONE",
+    "reject_infinite_values": true,
+    "unknown_category_action": "ENCODE_ALL_ZERO",
+    "feature_selection_from_outcomes": false
+  },
+  "models": {
+    "primary_model_id": "HGB_B12_PRIMARY",
+    "specifications": [
+      {
+        "model_id": "HGB_B12_PRIMARY",
+        "role": "PRIMARY_CONFIRMATORY",
+        "estimator": "HIST_GRADIENT_BOOSTING_CLASSIFIER",
+        "feature_blocks": ["B1_DETERMINISTIC_CANDIDATE_AND_REGIME", "B2_PLUS_XAU_MICROSTRUCTURE_AND_COST"],
+        "eligibility": "XAU_FEATURE_STATUS_PASS",
+        "parameters": {
+          "learning_rate": 0.03,
+          "max_iter": 200,
+          "max_leaf_nodes": 15,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.5,
+          "max_bins": 63,
+          "early_stopping": false,
+          "random_state": 60104
+        }
+      },
+      {
+        "model_id": "LOGIT_B12_CHALLENGER",
+        "role": "LINEAR_CHALLENGER",
+        "estimator": "LOGISTIC_REGRESSION",
+        "feature_blocks": ["B1_DETERMINISTIC_CANDIDATE_AND_REGIME", "B2_PLUS_XAU_MICROSTRUCTURE_AND_COST"],
+        "eligibility": "XAU_FEATURE_STATUS_PASS",
+        "parameters": {
+          "C": 0.1,
+          "solver": "lbfgs",
+          "max_iter": 2000,
+          "random_state": 60104
+        }
+      },
+      {
+        "model_id": "HGB_B1_ABLATION",
+        "role": "DETERMINISTIC_FEATURE_ABLATION",
+        "estimator": "HIST_GRADIENT_BOOSTING_CLASSIFIER",
+        "feature_blocks": ["B1_DETERMINISTIC_CANDIDATE_AND_REGIME"],
+        "eligibility": "RESOLVED_CANONICAL",
+        "parameters": {
+          "learning_rate": 0.03,
+          "max_iter": 200,
+          "max_leaf_nodes": 15,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.5,
+          "max_bins": 63,
+          "early_stopping": false,
+          "random_state": 60104
+        }
+      },
+      {
+        "model_id": "HGB_B123_CROSSASSET_ABLATION",
+        "role": "CROSSASSET_ABLATION_NOT_PRIMARY_RESCUE",
+        "estimator": "HIST_GRADIENT_BOOSTING_CLASSIFIER",
+        "feature_blocks": ["B1_DETERMINISTIC_CANDIDATE_AND_REGIME", "B2_PLUS_XAU_MICROSTRUCTURE_AND_COST", "B3_PLUS_COMPLETED_CROSS_ASSET_STATE"],
+        "eligibility": "XAU_AND_CROSSASSET_STATUS_PASS",
+        "parameters": {
+          "learning_rate": 0.03,
+          "max_iter": 200,
+          "max_leaf_nodes": 15,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.5,
+          "max_bins": 63,
+          "early_stopping": false,
+          "random_state": 60104
+        }
+      }
+    ]
+  },
+  "threshold_policy": {
+    "source": "OUTER_CALIBRATION_ONLY",
+    "candidate_probability_thresholds": [0.0, 0.45, 0.475, 0.5, 0.525, 0.55, 0.575, 0.6, 0.625, 0.65, 0.675, 0.7],
+    "minimum_selected_rows": 30,
+    "minimum_selected_fraction": 0.5,
+    "utility": "STRUCTURAL_WEIGHTED_MEAN_STRESS_R_MINUS_ONE_STANDARD_ERROR",
+    "tie_break_order": ["HIGHER_SELECTED_FRACTION", "LOWER_THRESHOLD"],
+    "test_outcomes_may_change_threshold": false
+  },
+  "metrics": {
+    "probability": ["WEIGHTED_ROC_AUC", "WEIGHTED_AVERAGE_PRECISION", "WEIGHTED_BRIER", "WEIGHTED_LOG_LOSS", "WEIGHTED_ECE_10_FIXED_BINS"],
+    "economic_candidate_quality": ["SELECTED_ROWS", "SELECTED_EPISODES", "COVERAGE", "WEIGHTED_MEAN_STRESS_R", "WEIGHTED_PROFIT_FACTOR", "WEIGHTED_R_SUM", "WEIGHTED_MAX_DRAWDOWN_R", "WIN_RATE", "RAW_CANDIDATES_PER_WEEKDAY", "STRUCTURAL_EPISODES_PER_WEEKDAY"],
+    "comparators": ["ALL_ELIGIBLE_CANDIDATES", "CONSTANT_FIT_PRIOR_PROBABILITY"],
+    "attribution": ["OUTER_FOLD", "FAMILY_ID", "DIRECTION"],
+    "pnl_or_drawdown_claim": "CANDIDATE_QUALITY_ONLY_NOT_SHARED_ACCOUNT_PNL"
+  },
+  "bootstrap": {
+    "resamples": 10000,
+    "seed": 60104,
+    "block_weekdays": 5,
+    "scope": "POOLED_PRIMARY_OUT_OF_TIME_TEST_PREDICTIONS",
+    "confidence": 0.95,
+    "statistics": ["WEIGHTED_ROC_AUC", "SELECTED_WEIGHTED_MEAN_STRESS_R", "SELECTED_MINUS_BASELINE_WEIGHTED_MEAN_STRESS_R"]
+  },
+  "acceptance_gates": {
+    "scope": "HGB_B12_PRIMARY_ONLY",
+    "all_required": true,
+    "pooled_weighted_roc_auc_minimum": 0.52,
+    "pooled_weighted_roc_auc_ci_lower_strictly_above": 0.5,
+    "selected_weighted_mean_stress_r_ci_lower_strictly_above": 0.0,
+    "selected_minus_baseline_mean_stress_r_ci_lower_strictly_above": 0.0,
+    "selected_weighted_profit_factor_minimum": 1.2,
+    "pooled_selected_fraction_minimum": 0.5,
+    "minimum_fold_selected_fraction": 0.35,
+    "minimum_positive_selected_ev_folds": 4,
+    "selected_weighted_max_drawdown_not_worse_than_baseline": true,
+    "weighted_ece_maximum": 0.1,
+    "minimum_selected_rows": 500,
+    "maximum_single_family_selected_weight_fraction": 0.7
+  },
+  "decision_policy": {
+    "pass": "MODEL_EVIDENCE_GATE_PASS_NO_RUNTIME_AUTHORIZATION",
+    "fail": "MODEL_EVIDENCE_GATE_FAIL",
+    "pass_does_not_authorize": ["MT5_ATTACHMENT", "SHADOW_MODE", "DEMO_EXECUTION", "LIVE_EXECUTION", "PORTFOLIO_SIZING"]
+  },
+  "outputs": {
+    "directory": "outputs/step_4",
+    "contract_lock": "STEP_4_MODEL_EVALUATION_CONTRACT_LOCK.json",
+    "fold_predictions": "STEP_4_OUT_OF_TIME_PREDICTIONS.parquet",
+    "fold_metrics": "STEP_4_FOLD_METRICS.parquet",
+    "thresholds": "STEP_4_CALIBRATION_THRESHOLDS.parquet",
+    "pooled_metrics": "STEP_4_POOLED_METRICS.json",
+    "bootstrap": "STEP_4_PRIMARY_BOOTSTRAP.json",
+    "journey_diagnostic": "STEP_4_JOURNEY_LABEL_DIAGNOSTIC.json",
+    "acceptance": "STEP_4_ACCEPTANCE_GATES.json",
+    "result_json": "STEP_4_RESULT.json",
+    "result_markdown": "STEP_4_RESULT.md",
+    "artifact_manifest": "STEP_4_ARTIFACT_MANIFEST.json",
+    "model_directory": "models"
+  }
+}

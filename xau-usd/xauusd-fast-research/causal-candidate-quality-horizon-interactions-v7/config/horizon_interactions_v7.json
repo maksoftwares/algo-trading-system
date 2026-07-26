@@ -1,0 +1,198 @@
+{
+  "schema_version": "xauusd_causal_candidate_quality_horizon_interactions_v7",
+  "inputs": {
+    "v4_action_dataset": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_ACTION_DATASET.parquet",
+      "sha256": "1c481738ffd137de1fb4c64f526758040728f6065563f907bc928bb1a8008611"
+    },
+    "v4_split_assignments": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_SPLIT_ASSIGNMENTS.parquet",
+      "sha256": "4ab4902d363824edb82909e75a283b6c54bff26684239b1b66303f7bd41bcea5"
+    },
+    "v4_event_registry": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_EVENT_REGISTRY.parquet",
+      "sha256": "69a728850585776698901fc0f01cdfdf1355653cd3e7b7599ca59ea1ba1cd8b3"
+    },
+    "v4_population_audit": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_POPULATION_AUDIT.json",
+      "sha256": "c53a14b1ef754fbc802ac2cdc0cdbd5689e6a84d7f378fd4be73dae27c52a9c9"
+    },
+    "v4_artifact_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_ARTIFACT_MANIFEST.json",
+      "sha256": "3431a4ae2d5909e8fc45808e60d86b60070e662179d55c27e05ad7ddbeccb052"
+    },
+    "v4_dataset_config": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/config/expanded_candidate_dataset_v4.json",
+      "sha256": "65406d81de9d5dd55ed10955f74e34f2c51f5d8f999d4123c9e9096de6afb65d"
+    },
+    "reference_adaptive_v5_config": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-adaptive-models-v5/config/adaptive_models_v5.json",
+      "sha256": "a0efa951e34036596bf4e8bab33b9b725ebb9b8dc407cb440d021b90982f4415"
+    },
+    "reference_adaptive_v5_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-adaptive-models-v5/outputs/ADAPTIVE_V5_RESULT.json",
+      "sha256": "b2fb95e160fbde11072f41328f506048b1d042de94392a7e08484a7ffef7630b"
+    },
+    "reference_adaptive_v5_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-adaptive-models-v5/outputs/ADAPTIVE_V5_ARTIFACT_MANIFEST.json",
+      "sha256": "178a4ba6daf7d964880d30c5f24a00f24df5b95c50785a8ae56b9df25e455011"
+    }
+  },
+  "expected": {
+    "action_rows": 73116,
+    "event_rows": 29419,
+    "structural_episodes": 15172,
+    "base_model_feature_sha256": "0c62a55514964e50f2450ffbc0320d14508a2d452e14547e22dc2317ca6bd4b7",
+    "event_feature_count": 52,
+    "interaction_feature_count": 104,
+    "model_feature_count": 162,
+    "model_feature_sha256": "69b603863b3ac3156669bb0c1b4c1f12dc317eccb46533314cecab578de7d5f6",
+    "folds": ["F2021", "F2022", "F2023", "F2024", "F2025", "F2026"],
+    "calibration_policy_rows": 216,
+    "chosen_models": 18
+  },
+  "adaptation_contract": {
+    "reference_version": "ADAPTIVE_V5",
+    "only_feature_augmentation_authorized": true,
+    "expected_shared_model_code_sha256": "2a936be073581fff3ae7458a98c24da43ae57bd6822c93792d5e280f1e169fce"
+  },
+  "interaction_contract": {
+    "reference_action": "FAST_1R_4H",
+    "interaction_actions": [
+      {"name": "intraday", "indicator": "action_intraday"},
+      {"name": "swing", "indicator": "action_swing"}
+    ],
+    "excluded_action_descriptors": [
+      "action_stop_atr",
+      "action_target_r",
+      "action_hold_hours",
+      "action_fast",
+      "action_intraday",
+      "action_swing"
+    ],
+    "interaction_rule": "EVERY_NON_ACTION_BASE_FEATURE_TIMES_EACH_NON_REFERENCE_ACTION_INDICATOR",
+    "manual_feature_selection": false
+  },
+  "lane_ownership": {
+    "priority": ["DOWNSIDE_IMPULSE_RETEST", "OPENING_RANGE_REVERSAL", "BREAK_AND_RUN"],
+    "flag_columns": {
+      "DOWNSIDE_IMPULSE_RETEST": "mechanism_downside_impulse_retest",
+      "OPENING_RANGE_REVERSAL": "mechanism_opening_range_reversal",
+      "BREAK_AND_RUN": "mechanism_break_and_run"
+    }
+  },
+  "exclusions": {
+    "regimes": ["UNSAFE_SHOCK"],
+    "missing_actions_are_imputed": false,
+    "current_account_feasibility_is_a_model_feature": false
+  },
+  "target": {
+    "fit_column": "stress_net_r",
+    "evaluation_column": "stress_net_r",
+    "clip_min_r": -3.0,
+    "clip_max_r": 2.5
+  },
+  "ridge_model": {
+    "model_id": "RIDGE_ALPHA_20",
+    "kind": "RIDGE",
+    "parameters": {"alpha": 20.0, "fit_intercept": true}
+  },
+  "training_variants": [
+    {"variant_id": "EXPANDING", "kind": "EXPANDING"},
+    {"variant_id": "ROLLING_36M", "kind": "ROLLING", "lookback_months": 36},
+    {
+      "variant_id": "RECENCY_H12M",
+      "kind": "RECENCY_WEIGHTED",
+      "half_life_months": 12,
+      "minimum_recency_weight": 0.01,
+      "normalize_weight_sum": true
+    },
+    {
+      "variant_id": "REGIME_LOCAL",
+      "kind": "REGIME_LOCAL",
+      "minimum_regime_action_rows": 650,
+      "minimum_regime_events": 200,
+      "fallback": "EXPANDING_GLOBAL"
+    }
+  ],
+  "action_tie_order": ["FAST_1R_4H", "INTRADAY_1P5R_12H", "SWING_2R_36H"],
+  "retention_quantiles": [0.0, 0.2, 0.4],
+  "calibration_gates": {
+    "minimum_fit_action_rows": 650,
+    "minimum_calibration_events": 400,
+    "minimum_selected_events": 240,
+    "minimum_selected_fraction": 0.55,
+    "maximum_selected_fraction": 0.9,
+    "minimum_selected_mean_stress_r": 0.0,
+    "minimum_selected_profit_factor": 1.0,
+    "minimum_baseline_r_retention": 0.75,
+    "selection_drawdown_penalty": 0.1
+  },
+  "acceptance_gates": {
+    "minimum_evaluated_folds": 6,
+    "minimum_calibration_passed_folds": 6,
+    "minimum_test_events": 3500,
+    "minimum_selected_events": 1900,
+    "minimum_selected_fraction": 0.55,
+    "maximum_selected_fraction": 0.9,
+    "minimum_selected_events_per_weekday": 0.5,
+    "minimum_selected_mean_stress_r": 0.03,
+    "minimum_selected_profit_factor": 1.15,
+    "minimum_selected_mean_ci_lower_r": 0.0,
+    "minimum_common_event_action_uplift_ci_lower_r": 0.0,
+    "minimum_total_policy_delta_ci_lower_r_per_episode": -0.03,
+    "minimum_baseline_r_retention": 0.8,
+    "maximum_drawdown_ratio_to_baseline": 1.0,
+    "minimum_positive_folds": 4,
+    "minimum_weighted_test_auc": 0.53,
+    "minimum_latest_fold_mean_stress_r": 0.0,
+    "minimum_latest_fold_profit_factor": 1.05,
+    "minimum_latest_fold_common_event_uplift_r": 0.0,
+    "top_winners_removed": 20
+  },
+  "incremental_gates_vs_v5": {
+    "minimum_selected_mean_stress_r_delta": 0.0,
+    "minimum_selected_profit_factor_delta": 0.0,
+    "minimum_selected_events_per_weekday_ratio": 0.9,
+    "minimum_latest_fold_mean_stress_r_delta": 0.0
+  },
+  "bootstrap": {
+    "resamples": 5000,
+    "confidence": 0.95,
+    "block": "UTC_WEEK",
+    "seed": 26072203
+  },
+  "outputs": {
+    "directory": "outputs",
+    "models_directory": "models",
+    "contract_lock": "HORIZON_V7_CONTRACT_LOCK.json",
+    "interaction_inventory": "HORIZON_V7_INTERACTION_INVENTORY.json",
+    "availability": "HORIZON_V7_AVAILABILITY.parquet",
+    "calibration_policies": "HORIZON_V7_CALIBRATION_POLICIES.parquet",
+    "predictions": "HORIZON_V7_OUT_OF_TIME_PREDICTIONS.parquet",
+    "selected_events": "HORIZON_V7_SELECTED_EVENTS.parquet",
+    "baseline_events": "HORIZON_V7_BASELINE_EVENTS.parquet",
+    "event_comparison": "HORIZON_V7_EVENT_COMPARISON.parquet",
+    "fold_metrics": "HORIZON_V7_FOLD_METRICS.parquet",
+    "family_metrics": "HORIZON_V7_FAMILY_METRICS.json",
+    "bootstrap_result": "HORIZON_V7_BOOTSTRAP.json",
+    "acceptance": "HORIZON_V7_ACCEPTANCE.json",
+    "result_json": "HORIZON_V7_RESULT.json",
+    "result_md": "HORIZON_V7_RESULT.md",
+    "comparison_v5": "HORIZON_V7_VS_ADAPTIVE_V5_COMPARISON.json",
+    "manifest": "HORIZON_V7_ARTIFACT_MANIFEST.json"
+  },
+  "authorization": {
+    "offline_model_fit_authorized": true,
+    "offline_threshold_fit_authorized": true,
+    "research_only": true,
+    "portfolio_simulation_authorized": false,
+    "python_serving_authorized": false,
+    "ml_shadow_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  },
+  "historical_outcomes_already_exposed": true
+}

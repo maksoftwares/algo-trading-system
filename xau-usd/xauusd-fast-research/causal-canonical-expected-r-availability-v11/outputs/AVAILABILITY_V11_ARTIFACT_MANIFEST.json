@@ -1,0 +1,85 @@
+{
+  "artifacts": {
+    "AVAILABILITY_V11_ACCEPTANCE.json": {
+      "bytes": 1266,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_ACCEPTANCE.json",
+      "sha256": "f4bc6ba59b87bfb7e1bb84bf4495e4602baf14c27e729fafc94a14e689471f29"
+    },
+    "AVAILABILITY_V11_BOOTSTRAP.json": {
+      "bytes": 942,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_BOOTSTRAP.json",
+      "sha256": "665cb67afe2e316ad49b9b736a145cf963ef94bc1e79c800bd87cd755bfcfa7e"
+    },
+    "AVAILABILITY_V11_CONTRACT_LOCK.json": {
+      "bytes": 2783,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_CONTRACT_LOCK.json",
+      "sha256": "cd508271bc1a390bb6c40910d68b7fe524e23bf6e930b4a4cb2e929509873f23"
+    },
+    "AVAILABILITY_V11_FAMILY_METRICS.parquet": {
+      "bytes": 17956,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_FAMILY_METRICS.parquet",
+      "sha256": "7360db57cb84d0c84bddaf9d35be83e49ca0a74ea98211473b962cece654336c"
+    },
+    "AVAILABILITY_V11_FINAL_RESEARCH_POLICY.json": {
+      "bytes": 604,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_FINAL_RESEARCH_POLICY.json",
+      "sha256": "3c59ebc85da15b571be3980e5dbf4804e8a9d5b4501a315689105ef4d1661873"
+    },
+    "AVAILABILITY_V11_FOLD_METRICS.parquet": {
+      "bytes": 18224,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_FOLD_METRICS.parquet",
+      "sha256": "fe695d9a04cd97a717e715f603c895027da79fd2ed82c798ef9ef32433fc77d2"
+    },
+    "AVAILABILITY_V11_OUT_OF_TIME_PREDICTIONS.parquet": {
+      "bytes": 339939,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_OUT_OF_TIME_PREDICTIONS.parquet",
+      "sha256": "060dcd0e4e03e025dd4d4ce4426f6c1f32ac7e304549692d9d9909b7e6c78202"
+    },
+    "AVAILABILITY_V11_RESULT.json": {
+      "bytes": 4975,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_RESULT.json",
+      "sha256": "89f39dacd34c3f01d7d811746833671476ed24f592e612709e2821655045988b"
+    },
+    "AVAILABILITY_V11_RESULT.md": {
+      "bytes": 395,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_RESULT.md",
+      "sha256": "be51288f8bf061af001d03a474f2848f8ec8ea3b0171b195ba506ca29f641ea3"
+    }
+  },
+  "definition_contract_sha256": "676e657ac5af3eb7beead0e26d5caef2b06142c537f2034f23eec5c6ae8f4279",
+  "inputs": {
+    "v10_contract_lock": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_CONTRACT_LOCK.json",
+      "sha256": "dfd18fe06fe116c5543767cc8b840f0803dc9755a27a1437865bc99130e2bac7"
+    },
+    "v10_expected_r_source": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+      "sha256": "2ea01130ab139fc6795909724ae375ad03cf69e3e17b09bd66b8905446a66f0a"
+    },
+    "v10_family_metrics": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_FAMILY_METRICS.parquet",
+      "sha256": "4d5fe2bc5a5faef4a31157c1f4be562aaa708b15ee7e489ed56302ff9d9372be"
+    },
+    "v10_final_model": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_FINAL_RESEARCH_MODEL.joblib",
+      "sha256": "a334d911c316844f3e44bbc7f8adbb4d69c6f326b00e24d4a8e55ba5f964973b"
+    },
+    "v10_fold_metrics": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_FOLD_METRICS.parquet",
+      "sha256": "9d3c0c38ef508ca025779cd908b861ffa6b4b35eb170e160a47d5f2b383c3ee9"
+    },
+    "v10_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_ARTIFACT_MANIFEST.json",
+      "sha256": "baf02217463edbf7eee72c8aa10412c14f48fc59ef9c1ec46868818b61515d62"
+    },
+    "v10_predictions": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_OUT_OF_TIME_PREDICTIONS.parquet",
+      "sha256": "3eac76f276b1e330d45108c55f9ef7ae5882bccbb24085b25869598fe25c01e2"
+    },
+    "v10_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_RESULT.json",
+      "sha256": "dc4483e3b6f4f16fb0cd558f3ef354e3885c297dd4a4edbfc2bc8ee6dd784f61"
+    }
+  },
+  "schema_version": "xauusd_expected_r_availability_v11_manifest"
+}

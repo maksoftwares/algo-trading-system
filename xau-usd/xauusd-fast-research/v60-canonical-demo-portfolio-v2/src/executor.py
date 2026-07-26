@@ -30,6 +30,7 @@ class Candidate:
     maximum_spread_r: float
     maximum_open_positions: int
     maximum_entries_per_utc_day: int
+    same_direction_post_loss_cooldown_minutes: int
     initial_risk_usd: float
     event_id: str | None
     raw: Mapping[str, Any]
@@ -193,6 +194,9 @@ def normalize_candidate(
         maximum_spread_r=float(source["maximum_spread_r"]),
         maximum_open_positions=int(source["maximum_open_positions"]),
         maximum_entries_per_utc_day=int(source["maximum_entries_per_utc_day"]),
+        same_direction_post_loss_cooldown_minutes=int(
+            source.get("same_direction_post_loss_cooldown_minutes", 0)
+        ),
         initial_risk_usd=initial_risk_usd,
         event_id=(None if row.get("event_id") in (None, "") else str(row["event_id"])),
         raw=row,
@@ -251,14 +255,28 @@ def refresh_drawdown_state(
     )
     drawdown = float(state["peak_closed_pnl_usd"]) - float(closed_pnl)
     state["closed_drawdown_usd"] = drawdown
-    if not bool(state["drawdown_suspended"]) and drawdown >= float(
-        risk["closed_drawdown_suspend_usd"]
-    ):
+    suspend = effective_risk_threshold_usd(
+        state, risk, "closed_drawdown_suspend_usd"
+    )
+    resume = effective_risk_threshold_usd(
+        state, risk, "closed_drawdown_resume_usd"
+    )
+    if not bool(state["drawdown_suspended"]) and drawdown >= suspend:
         state["drawdown_suspended"] = True
-    elif bool(state["drawdown_suspended"]) and drawdown <= float(
-        risk["closed_drawdown_resume_usd"]
-    ):
+    elif bool(state["drawdown_suspended"]) and drawdown <= resume:
         state["drawdown_suspended"] = False
+
+
+def effective_risk_threshold_usd(
+    state: Mapping[str, Any], risk: Mapping[str, Any], absolute_key: str
+) -> float:
+    absolute = _finite_positive(risk[absolute_key], absolute_key)
+    fraction_key = absolute_key.removesuffix("_usd") + "_fraction"
+    fraction = _finite_positive(risk[fraction_key], fraction_key)
+    activation_equity = _finite_positive(
+        state["activation_equity_usd"], "activation_equity_usd"
+    )
+    return min(absolute, activation_equity * fraction)
 
 
 def floating_drawdown(state: Mapping[str, Any], equity: float) -> float:

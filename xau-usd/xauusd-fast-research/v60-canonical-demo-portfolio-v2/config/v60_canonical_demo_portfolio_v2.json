@@ -5,6 +5,7 @@
     "expected_login": 1033030,
     "expected_server": "Capital.ComMena-Demo",
     "required_server_marker": "Demo",
+    "required_trade_mode": "DEMO",
     "required_account_currency": "AED",
     "usd_to_account_currency": 3.6725,
     "symbol": "XAUUSD",
@@ -18,18 +19,32 @@
     "maximum_account_xau_positions": 12,
     "maximum_addon_concurrent_initial_risk_usd": 45.0,
     "maximum_addon_entries_per_utc_day": 2,
+    "maximum_account_concurrent_initial_risk_usd": 60.0,
+    "maximum_account_concurrent_initial_risk_fraction": 0.06,
+    "maximum_directional_concurrent_initial_risk_usd": 60.0,
+    "maximum_directional_concurrent_initial_risk_fraction": 0.06,
     "closed_drawdown_suspend_usd": 225.0,
+    "closed_drawdown_suspend_fraction": 0.075,
     "closed_drawdown_resume_usd": 180.0,
+    "closed_drawdown_resume_fraction": 0.06,
     "combined_closed_drawdown_hard_stop_usd": 300.0,
+    "combined_closed_drawdown_hard_stop_fraction": 0.10,
     "floating_drawdown_hard_stop_usd": 449.7675,
+    "floating_drawdown_hard_stop_fraction": 0.15,
     "maximum_daily_entries": 12
+  },
+  "deployment_parity": {
+    "artifact_path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_CANONICAL_DEMO_DEPLOYMENT_PARITY_V1.json",
+    "artifact_sha256": "0265c09ea0461233927828759899f8564ffc4e8899b1e3eb57deb8e84453a41d"
   },
   "runtime": {
     "directory": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2",
     "poll_seconds": 5,
     "feed_poll_seconds": 60,
     "slow_feed_poll_seconds": 300,
+    "feed_heartbeat_seconds": 30,
     "maximum_feed_status_age_seconds": 180,
+    "maximum_feed_cycle_seconds": 1200,
     "entry_halt_files": [
       "C:/MT5PortableTier1BestEA/MQL5/Files/tier1_bestea_kill_switch.txt",
       "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_halt.txt"
@@ -67,7 +82,8 @@
       "maximum_entry_gap_minutes": 10,
       "maximum_spread_r": 0.15,
       "maximum_open_positions": 2,
-      "maximum_entries_per_utc_day": 1
+      "maximum_entries_per_utc_day": 1,
+      "maximum_risk_usd": 45.0
     },
     {
       "source_id": "R1_PULLBACK",
@@ -81,7 +97,8 @@
       "maximum_entry_gap_minutes": 10,
       "maximum_spread_r": 0.15,
       "maximum_open_positions": 8,
-      "maximum_entries_per_utc_day": 12
+      "maximum_entries_per_utc_day": 12,
+      "maximum_risk_usd": 45.0
     },
     {
       "source_id": "R2_DOWNTREND",
@@ -95,7 +112,8 @@
       "maximum_entry_gap_minutes": 10,
       "maximum_spread_r": 0.15,
       "maximum_open_positions": 4,
-      "maximum_entries_per_utc_day": 4
+      "maximum_entries_per_utc_day": 4,
+      "maximum_risk_usd": 45.0
     },
     {
       "source_id": "R3_COMPRESSION",
@@ -109,7 +127,8 @@
       "maximum_entry_gap_minutes": 10,
       "maximum_spread_r": 0.15,
       "maximum_open_positions": 4,
-      "maximum_entries_per_utc_day": 4
+      "maximum_entries_per_utc_day": 4,
+      "maximum_risk_usd": 45.0
     },
     {
       "source_id": "R4_CHOP",
@@ -123,23 +142,8 @@
       "maximum_entry_gap_minutes": 5,
       "maximum_spread_r": 0.15,
       "maximum_open_positions": 1,
-      "maximum_entries_per_utc_day": 4
-    },
-    {
-      "source_id": "R5_TRANSITION",
-      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/r5_router/r5_causally_routed_candidates.jsonl",
-      "specialist_id": "R5_TRANSITION",
-      "sleeve_type": "CORE",
-      "magic": 961501,
-      "time_field": "scheduled_entry_time",
-      "stop_mode": "ATR",
-      "target_r_default": null,
-      "maximum_entry_gap_minutes": 10,
-      "maximum_spread_r": 0.15,
-      "maximum_open_positions": 4,
       "maximum_entries_per_utc_day": 4,
-      "allowed_origin_attempts": [23925],
-      "required_risk_weight": 1.0
+      "maximum_risk_usd": 45.0
     },
     {
       "source_id": "V7_SWING_HEALTH",
@@ -199,6 +203,7 @@
       "maximum_spread_r": 0.15,
       "maximum_open_positions": 1,
       "maximum_entries_per_utc_day": 2,
+      "same_direction_post_loss_cooldown_minutes": 120,
       "maximum_risk_usd": 30.0
     }
   ],
@@ -209,21 +214,78 @@
       "A3MlPredictionObserver",
       "InpMlShadowReadEnabled=true"
     ],
-    "required_experts": [
-      "AccountEquityGuardianShadow",
-      "Account1DailyProfitFloorGuardian",
-      "XauProspectiveTelemetryCollector",
-      "A1XauM5MomentumContinuationExecutor"
-    ],
-    "required_sensor_run_ids": [
-      "V60_V2_BREAK_AND_RUN_SENSOR",
-      "V60_V2_DOWNSIDE_RETEST_SENSOR",
-      "V60_V2_OPENING_REVERSAL_SENSOR"
+    "expected_charts": [
+      {
+        "id": "EQUITY_GUARDIAN_SHADOW",
+        "expert": "AccountEquityGuardianShadow",
+        "inputs": {
+          "InpAllowNonDemoAccounts": "false",
+          "InpAllowedAccountLogin": "1033030"
+        }
+      },
+      {
+        "id": "TELEMETRY",
+        "expert": "XauProspectiveTelemetryCollector",
+        "inputs": {
+          "InpRunId": "V60_V2_TELEMETRY_1033030",
+          "InpDryRunOnly": "true",
+          "InpAllowedAccountLoginsCsv": "1033030"
+        }
+      },
+      {
+        "id": "DAILY_GUARDIAN",
+        "expert": "Account1DailyProfitFloorGuardian",
+        "inputs": {
+          "InpRunId": "A2_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621",
+          "InpDryRunOnly": "false",
+          "InpCloseActionAllowed": "true",
+          "InpAllowedAccountLogin": "1033030",
+          "InpOwnerAuthorizationToken": "A2_DAILY_PROFIT_LOSS_GUARDIAN_OWNER_AUTHORIZED_20260621",
+          "InpRequiredOwnerAuthorizationToken": "A2_DAILY_PROFIT_LOSS_GUARDIAN_OWNER_AUTHORIZED_20260621",
+          "InpDailyLossStopEnabled": "true",
+          "InpDailyLossStopAed": "-100.0",
+          "InpHaltEntriesWhenArmed": "true",
+          "InpEntryHaltFileName": "tier1_bestea_kill_switch.txt"
+        }
+      },
+      {
+        "id": "BREAK_AND_RUN_SENSOR",
+        "expert": "A1XauM5MomentumContinuationExecutor",
+        "inputs": {
+          "InpRunId": "V60_V2_BREAK_AND_RUN_SENSOR",
+          "InpAllowDemoTrading": "false",
+          "InpAllowNonDemoAccounts": "false",
+          "InpAllowedAccountLogin": "1033030"
+        }
+      },
+      {
+        "id": "DOWNSIDE_RETEST_SENSOR",
+        "expert": "A1XauM5MomentumContinuationExecutor",
+        "inputs": {
+          "InpRunId": "V60_V2_DOWNSIDE_RETEST_SENSOR",
+          "InpAllowDemoTrading": "false",
+          "InpAllowNonDemoAccounts": "false",
+          "InpAllowedAccountLogin": "1033030"
+        }
+      },
+      {
+        "id": "OPENING_REVERSAL_SENSOR",
+        "expert": "A1XauM5MomentumContinuationExecutor",
+        "inputs": {
+          "InpRunId": "V60_V2_OPENING_REVERSAL_SENSOR",
+          "InpAllowDemoTrading": "false",
+          "InpAllowNonDemoAccounts": "false",
+          "InpAllowedAccountLogin": "1033030"
+        }
+      }
     ]
   },
   "authorization": {
     "owner_authorized_at_utc": "2026-07-21T00:00:00Z",
+    "demo_balance_waiver_authorized_at_utc": "2026-07-22T08:37:32Z",
     "demo_authorized": true,
+    "minimum_balance_requirement_enabled": false,
+    "demo_balance_eligibility_waived": true,
     "broker_action_authorized": true,
     "live_authorized": false,
     "ml_runtime_authorized": false,

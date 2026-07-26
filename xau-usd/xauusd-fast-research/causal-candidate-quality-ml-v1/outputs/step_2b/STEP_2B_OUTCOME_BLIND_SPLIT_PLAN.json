@@ -1,0 +1,280 @@
+{
+  "actual_label_interval_purge_required_in_step_3": true,
+  "candidate_rows": 3752,
+  "data_start_inclusive_utc": "2010-01-01T00:00:00+00:00",
+  "development_cutoff_exclusive_utc": "2026-07-01T00:00:00+00:00",
+  "economic_outcomes_opened": false,
+  "folds": [
+    {
+      "actual_label_end_purge_status": "DEFERRED_UNTIL_STEP_3_LABELS",
+      "calibration_by_family": {
+        "R3_COMPRESSION": 28,
+        "R4_CHOP": 11,
+        "R5_TRANSITION": 21,
+        "V25_CHOP": 9,
+        "V57_BREAK_SWING_H4ADX_HIGH": 26,
+        "V7_SWING_HEALTH": 26,
+        "V8_RETEST_HEALTH": 19
+      },
+      "calibration_start": "2020-01-01T00:00:00+00:00",
+      "fit_by_family": {
+        "R2_DOWNTREND": 120,
+        "R3_COMPRESSION": 243,
+        "R4_CHOP": 240,
+        "R5_TRANSITION": 22,
+        "V25_CHOP": 43,
+        "V8_RETEST_HEALTH": 34
+      },
+      "fold_id": "F2020",
+      "outcome_blind_counts": {
+        "calibration": 140,
+        "fit": 702,
+        "test": 476
+      },
+      "planned_interval_purged_from_calibration": 1,
+      "planned_interval_purged_from_fit": 0,
+      "test_by_family": {
+        "R2_DOWNTREND": 8,
+        "R3_COMPRESSION": 66,
+        "R4_CHOP": 37,
+        "R5_TRANSITION": 49,
+        "V25_CHOP": 17,
+        "V57_BREAK_SWING_H4ADX_HIGH": 148,
+        "V7_SWING_HEALTH": 129,
+        "V8_RETEST_HEALTH": 22
+      },
+      "test_end_exclusive": "2021-07-01T00:00:00+00:00",
+      "test_start": "2020-07-01T00:00:00+00:00"
+    },
+    {
+      "actual_label_end_purge_status": "DEFERRED_UNTIL_STEP_3_LABELS",
+      "calibration_by_family": {
+        "R2_DOWNTREND": 5,
+        "R3_COMPRESSION": 12,
+        "R4_CHOP": 31,
+        "R5_TRANSITION": 24,
+        "V25_CHOP": 10,
+        "V57_BREAK_SWING_H4ADX_HIGH": 78,
+        "V7_SWING_HEALTH": 75,
+        "V8_RETEST_HEALTH": 22
+      },
+      "calibration_start": "2021-01-01T00:00:00+00:00",
+      "fit_by_family": {
+        "R2_DOWNTREND": 123,
+        "R3_COMPRESSION": 325,
+        "R4_CHOP": 257,
+        "R5_TRANSITION": 68,
+        "V25_CHOP": 59,
+        "V57_BREAK_SWING_H4ADX_HIGH": 94,
+        "V7_SWING_HEALTH": 78,
+        "V8_RETEST_HEALTH": 54
+      },
+      "fold_id": "F2021",
+      "outcome_blind_counts": {
+        "calibration": 257,
+        "fit": 1058,
+        "test": 289
+      },
+      "planned_interval_purged_from_calibration": 2,
+      "planned_interval_purged_from_fit": 2,
+      "test_by_family": {
+        "R2_DOWNTREND": 9,
+        "R3_COMPRESSION": 63,
+        "R4_CHOP": 35,
+        "R5_TRANSITION": 56,
+        "V25_CHOP": 13,
+        "V57_BREAK_SWING_H4ADX_HIGH": 30,
+        "V7_SWING_HEALTH": 53,
+        "V8_RETEST_HEALTH": 30
+      },
+      "test_end_exclusive": "2022-07-01T00:00:00+00:00",
+      "test_start": "2021-07-01T00:00:00+00:00"
+    },
+    {
+      "actual_label_end_purge_status": "DEFERRED_UNTIL_STEP_3_LABELS",
+      "calibration_by_family": {
+        "R2_DOWNTREND": 6,
+        "R3_COMPRESSION": 47,
+        "R4_CHOP": 8,
+        "R5_TRANSITION": 35,
+        "V25_CHOP": 5
+      },
+      "calibration_start": "2022-01-01T00:00:00+00:00",
+      "fit_by_family": {
+        "R2_DOWNTREND": 131,
+        "R3_COMPRESSION": 353,
+        "R4_CHOP": 315,
+        "R5_TRANSITION": 112,
+        "V25_CHOP": 77,
+        "V57_BREAK_SWING_H4ADX_HIGH": 204,
+        "V7_SWING_HEALTH": 207,
+        "V8_RETEST_HEALTH": 106
+      },
+      "fold_id": "F2022",
+      "outcome_blind_counts": {
+        "calibration": 101,
+        "fit": 1505,
+        "test": 506
+      },
+      "planned_interval_purged_from_calibration": 1,
+      "planned_interval_purged_from_fit": 1,
+      "test_by_family": {
+        "R1_UPTREND": 122,
+        "R2_DOWNTREND": 9,
+        "R3_COMPRESSION": 3,
+        "R4_CHOP": 86,
+        "R5_TRANSITION": 74,
+        "V25_CHOP": 16,
+        "V57_BREAK_SWING_H4ADX_HIGH": 79,
+        "V7_SWING_HEALTH": 66,
+        "V8_RETEST_HEALTH": 51
+      },
+      "test_end_exclusive": "2023-07-01T00:00:00+00:00",
+      "test_start": "2022-07-01T00:00:00+00:00"
+    },
+    {
+      "actual_label_end_purge_status": "DEFERRED_UNTIL_STEP_3_LABELS",
+      "calibration_by_family": {
+        "R1_UPTREND": 53,
+        "R2_DOWNTREND": 3,
+        "R3_COMPRESSION": 3,
+        "R4_CHOP": 48,
+        "R5_TRANSITION": 36,
+        "V25_CHOP": 7,
+        "V57_BREAK_SWING_H4ADX_HIGH": 49,
+        "V7_SWING_HEALTH": 59,
+        "V8_RETEST_HEALTH": 29
+      },
+      "calibration_start": "2023-01-01T00:00:00+00:00",
+      "fit_by_family": {
+        "R2_DOWNTREND": 143,
+        "R3_COMPRESSION": 400,
+        "R4_CHOP": 361,
+        "R5_TRANSITION": 186,
+        "V25_CHOP": 91,
+        "V57_BREAK_SWING_H4ADX_HIGH": 232,
+        "V7_SWING_HEALTH": 215,
+        "V8_RETEST_HEALTH": 128
+      },
+      "fold_id": "F2023",
+      "outcome_blind_counts": {
+        "calibration": 287,
+        "fit": 1756,
+        "test": 443
+      },
+      "planned_interval_purged_from_calibration": 20,
+      "planned_interval_purged_from_fit": 51,
+      "test_by_family": {
+        "R1_UPTREND": 101,
+        "R2_DOWNTREND": 7,
+        "R3_COMPRESSION": 20,
+        "R4_CHOP": 48,
+        "R5_TRANSITION": 48,
+        "V25_CHOP": 11,
+        "V57_BREAK_SWING_H4ADX_HIGH": 81,
+        "V7_SWING_HEALTH": 87,
+        "V8_RETEST_HEALTH": 40
+      },
+      "test_end_exclusive": "2024-07-01T00:00:00+00:00",
+      "test_start": "2023-07-01T00:00:00+00:00"
+    },
+    {
+      "actual_label_end_purge_status": "DEFERRED_UNTIL_STEP_3_LABELS",
+      "calibration_by_family": {
+        "R1_UPTREND": 32,
+        "R3_COMPRESSION": 20,
+        "R4_CHOP": 22,
+        "R5_TRANSITION": 17,
+        "V25_CHOP": 7,
+        "V57_BREAK_SWING_H4ADX_HIGH": 39,
+        "V7_SWING_HEALTH": 42,
+        "V8_RETEST_HEALTH": 15
+      },
+      "calibration_start": "2024-01-01T00:00:00+00:00",
+      "fit_by_family": {
+        "R1_UPTREND": 127,
+        "R2_DOWNTREND": 153,
+        "R3_COMPRESSION": 403,
+        "R4_CHOP": 435,
+        "R5_TRANSITION": 253,
+        "V25_CHOP": 102,
+        "V57_BREAK_SWING_H4ADX_HIGH": 325,
+        "V7_SWING_HEALTH": 319,
+        "V8_RETEST_HEALTH": 182
+      },
+      "fold_id": "F2024",
+      "outcome_blind_counts": {
+        "calibration": 194,
+        "fit": 2299,
+        "test": 645
+      },
+      "planned_interval_purged_from_calibration": 13,
+      "planned_interval_purged_from_fit": 51,
+      "test_by_family": {
+        "R1_UPTREND": 219,
+        "R2_DOWNTREND": 9,
+        "R3_COMPRESSION": 17,
+        "R4_CHOP": 19,
+        "R5_TRANSITION": 42,
+        "V25_CHOP": 7,
+        "V57_BREAK_SWING_H4ADX_HIGH": 137,
+        "V7_SWING_HEALTH": 150,
+        "V8_RETEST_HEALTH": 45
+      },
+      "test_end_exclusive": "2025-07-01T00:00:00+00:00",
+      "test_start": "2024-07-01T00:00:00+00:00"
+    },
+    {
+      "actual_label_end_purge_status": "DEFERRED_UNTIL_STEP_3_LABELS",
+      "calibration_by_family": {
+        "R1_UPTREND": 86,
+        "R2_DOWNTREND": 4,
+        "R3_COMPRESSION": 14,
+        "R4_CHOP": 6,
+        "R5_TRANSITION": 21,
+        "V25_CHOP": 4,
+        "V57_BREAK_SWING_H4ADX_HIGH": 63,
+        "V7_SWING_HEALTH": 75,
+        "V8_RETEST_HEALTH": 22
+      },
+      "calibration_start": "2025-01-01T00:00:00+00:00",
+      "fit_by_family": {
+        "R1_UPTREND": 308,
+        "R2_DOWNTREND": 158,
+        "R3_COMPRESSION": 424,
+        "R4_CHOP": 470,
+        "R5_TRANSITION": 291,
+        "V25_CHOP": 112,
+        "V57_BREAK_SWING_H4ADX_HIGH": 436,
+        "V7_SWING_HEALTH": 434,
+        "V8_RETEST_HEALTH": 220
+      },
+      "fold_id": "F2025",
+      "outcome_blind_counts": {
+        "calibration": 295,
+        "fit": 2853,
+        "test": 550
+      },
+      "planned_interval_purged_from_calibration": 10,
+      "planned_interval_purged_from_fit": 44,
+      "test_by_family": {
+        "R1_UPTREND": 116,
+        "R2_DOWNTREND": 6,
+        "R3_COMPRESSION": 50,
+        "R4_CHOP": 45,
+        "R5_TRANSITION": 18,
+        "V25_CHOP": 15,
+        "V57_BREAK_SWING_H4ADX_HIGH": 186,
+        "V7_SWING_HEALTH": 76,
+        "V8_RETEST_HEALTH": 38
+      },
+      "test_end_exclusive": "2026-07-01T00:00:00+00:00",
+      "test_start": "2025-07-01T00:00:00+00:00"
+    }
+  ],
+  "mode": "PURGED_EXPANDING_WALK_FORWARD",
+  "planned_interval_purge_applied": true,
+  "random_or_shuffled_split_authorized": false,
+  "schema_version": "xauusd_step_2b_outcome_blind_split_plan_v1",
+  "structural_episodes": 3489
+}

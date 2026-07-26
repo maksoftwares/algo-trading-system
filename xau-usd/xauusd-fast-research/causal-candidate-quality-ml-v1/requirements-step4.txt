@@ -1,0 +1,3 @@
+-r requirements-step3.txt
+joblib==1.5.3
+scikit-learn==1.8.0

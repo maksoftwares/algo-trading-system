@@ -1,0 +1,230 @@
+{
+  "schema_version": "xauusd_causal_candidate_quality_step_2a_metadata_repair_v1",
+  "campaign_id": "causal-candidate-quality-ml-v1",
+  "stage": "STEP_2A_METADATA_REPAIR_AND_CANDIDATE_ADAPTERS",
+  "created_utc": "2026-07-21T22:38:10Z",
+  "controls": {
+    "economic_outcomes_authorized": false,
+    "counterfactual_label_build_authorized": false,
+    "feature_value_build_authorized": false,
+    "model_training_authorized": false,
+    "threshold_fitting_authorized": false,
+    "portfolio_simulation_authorized": false,
+    "runtime_change_authorized": false,
+    "rejection_is_loss": false,
+    "archive_rows_are_independent_training_rows": false,
+    "forbidden_read_columns": [
+      "base_net_r",
+      "stress_net_r",
+      "net_r",
+      "gross_r",
+      "pnl_usd",
+      "pnl_usd_0p01_equiv",
+      "stress_pnl_usd",
+      "portfolio_pnl_usd",
+      "mfe_r",
+      "mae_r",
+      "exit_time",
+      "exit_time_utc",
+      "exit_price",
+      "profit_factor",
+      "win",
+      "winner"
+    ]
+  },
+  "bound_inputs": {
+    "step_2_config": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/config/step_2_metadata_audit_v1.json",
+      "sha256": "496599137579ac7d8456a71ca8d1b6e97741636b3af89cb15cc4c8530f4d0647"
+    },
+    "step_2_registry": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2/STEP_2_CANDIDATE_REGISTRY.parquet",
+      "sha256": "e870003d9f6d06d59ad3e3aed4a87a6906a579e1d31550ce5ab77956fc2ad9ab"
+    },
+    "v60_runtime_contract": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "346b139fcd81d00a8afe295fa2fc6688be0411a5abad4797dc0e72396aefd010"
+    },
+    "dukascopy_feature_manifest": {
+      "path": "C:/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  },
+  "r1": {
+    "tagged_candidates": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_CURRENT_CANDIDATE_REGIME_ATTRIBUTION_20260709_TAGGED_TRADES.csv",
+      "sha256": "40a3f2c8f3f53cded9c54e90d300089200c7692dbfc0f9e174e24d30e4dc997f"
+    },
+    "components": [
+      {
+        "component_id": "h4_d1_long_best_box2_atr80",
+        "signals": {
+          "path": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_regime_router_v1_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_REGIME_ROUTER_V1_EXACT_202207_202606_XAUUSD_M5_router_v1_r1_long_box2_prevhealth_signals.csv",
+          "sha256": "b53ee54afacfae9a5dceb74a2a16b8297b9aad1c3b582fdc2d77302d344afc3c"
+        },
+        "orders": {
+          "path": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_regime_router_v1_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_REGIME_ROUTER_V1_EXACT_202207_202606_XAUUSD_M5_router_v1_r1_long_box2_prevhealth_orders.csv",
+          "sha256": "e337af7d3e5698f623db5e428f9b987edc5f25c2138cad901a4e54ba6b58b44b"
+        },
+        "expected_canonical_candidates": 145,
+        "confirmation_timeframe_minutes": 240,
+        "stop_mode": "NATIVE_PRETRADE_POINTS",
+        "target_r": 2.0,
+        "maximum_hold_mode": "BARRIER_ONLY_NO_TIME_STOP"
+      },
+      {
+        "component_id": "r1_h1_pullback_long_v1",
+        "signals": {
+          "path": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_signals.csv",
+          "sha256": "2ea28ff551bc1c1c071aa3ca1862447c10c483de70ffcc981797a2b403c355bd"
+        },
+        "orders": {
+          "path": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_orders.csv",
+          "sha256": "8482016a012efcbb61470b8936815e0277234612d25e1bc2e084306f8338a749"
+        },
+        "expected_canonical_candidates": 413,
+        "confirmation_timeframe_minutes": 15,
+        "stop_mode": "NATIVE_PRETRADE_POINTS",
+        "target_r": 2.0,
+        "maximum_hold_mode": "BARRIER_ONLY_NO_TIME_STOP"
+      }
+    ],
+    "timestamp_basis": "MT5_TESTER_UTC_LIKE_VALIDATED_AGAINST_DUKASCOPY",
+    "nominal_server_timezone": "Europe/Helsinki",
+    "maximum_direct_utc_median_bid_error": 0.5,
+    "minimum_shifted_to_direct_median_error_ratio": 5.0,
+    "barrier_label_observation_cap_days": 90,
+    "portfolio_decisions": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-native-core-v58/outputs/ONE_TRADE_PER_DAY_NATIVE_CORE_V58_R1_DECISIONS.parquet",
+      "sha256": "0015131a8e6c3ef128a06b1aa0735c7717c278e3c4810b468e45fe171555df92"
+    }
+  },
+  "canonical_acceptance_sources": [
+    {
+      "source_ids": ["CANONICAL_R2_DOWNTREND", "CANONICAL_R3_COMPRESSION"],
+      "path": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPOSITE_TRADES.parquet",
+      "sha256": "1616087181e0faa5d50883a44938bfd3e3665e33e7eee06d48a25b2c8900c93c",
+      "columns": ["candidate_id", "composite_id"]
+    },
+    {
+      "source_ids": ["CANONICAL_R4_CHOP"],
+      "path": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_TRADES.parquet",
+      "sha256": "f0dc5ccf622e1b9086031c26d174d3585f7e15f6e31401d6e06a8d08864cb793",
+      "columns": ["candidate_id"]
+    },
+    {
+      "source_ids": ["CANONICAL_V57_ADDONS"],
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_ADDON_DECISIONS.parquet",
+      "sha256": "4a1f5496fca9bcef93e05e735e4c796975d7f7afee3ddc28bb0f6f6f6ce0551d",
+      "columns": ["trade_id", "sleeve_id", "entry_time", "accepted", "decision_reason"]
+    }
+  ],
+  "r5_prepolicy": {
+    "candidates": {
+      "path": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_CANDIDATES.parquet",
+      "sha256": "25742cdf86c4634e447c6aed59c8251ead09f5e04f7a80a173eb9c518ef1742f",
+      "expected_rows": 799
+    },
+    "selected": {
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet",
+      "sha256": "a55cc7f7ec2088870b7b956c7148dcad01cad016a8ae6151720a60d13e586c9e",
+      "attempt_no": 27135,
+      "expected_rows": 330,
+      "expected_broker_executable_rows": 10
+    }
+  },
+  "family_geometry": {
+    "V7_SWING_HEALTH": {
+      "stop_mode": "ATR_WITH_PRICE_FLOOR",
+      "stop_atr": 2.25,
+      "stop_floor_price": 3.5,
+      "target_mode": "R_MULTIPLE",
+      "target_r": 2.0,
+      "maximum_hold_minutes": 2160
+    },
+    "V8_RETEST_HEALTH": {
+      "stop_mode": "ATR_WITH_PRICE_FLOOR",
+      "stop_atr": 1.5,
+      "stop_floor_price": 3.0,
+      "target_mode": "R_MULTIPLE",
+      "target_r": 1.5,
+      "maximum_hold_minutes": 720
+    },
+    "V25_CHOP": {
+      "stop_mode": "ATR",
+      "stop_atr": 1.0,
+      "stop_floor_price": null,
+      "target_mode": "R_MULTIPLE",
+      "target_r": 2.0,
+      "maximum_hold_minutes": 720
+    },
+    "V57_BREAK_SWING_H4ADX_HIGH": {
+      "stop_mode": "ATR_WITH_PRICE_FLOOR",
+      "stop_atr": 2.25,
+      "stop_floor_price": 3.5,
+      "target_mode": "R_MULTIPLE",
+      "target_r": 2.0,
+      "maximum_hold_minutes": 2160
+    }
+  },
+  "journey_action_sources": [
+    {
+      "source_id": "RESEARCH_NEGATIVE_SPOT_ACTIONS",
+      "population": "RESEARCH_NEGATIVE",
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v4/outputs/COMPLETE_CANDIDATE_ACTION_LABELS_V4.parquet",
+      "sha256": "53605ee426d10334a3b0ddbc38ee15374943ff547e6921532369a224f0f7ccf8",
+      "expected_rows": 73116,
+      "clock_adapter": "SPOT_FEATURE_SIGNAL_ENTRY"
+    },
+    {
+      "source_id": "COMEX_RESEARCH_ACTIONS",
+      "population": "COMEX_RESEARCH",
+      "path": "xau-usd/xauusd-fast-research/comex-short-horizon-expansion-v5/outputs/COMEX_SHORT_HORIZON_V5_ACTIONS.parquet",
+      "sha256": "19e945e705150a258fdc3201c8c025b7d973eb7b409a2dd2654db11cae94f505",
+      "expected_rows": 44418,
+      "clock_adapter": "COMEX_DECISION_TO_ENTRY"
+    }
+  ],
+  "journey_archive_catalog": {
+    "root": "xau-usd/xauusd-fast-research",
+    "case_insensitive_filename_regex": "(trades|trade_ledger).*\\.(parquet|csv)$",
+    "role": "PROVENANCE_ONLY_UNTIL_SEMANTIC_DEDUP_ADAPTER",
+    "direct_model_ingestion_authorized": false
+  },
+  "episode_policy": {
+    "structural_identity": "SOURCE_EVENT_OR_EXACT_DECISION_TIME",
+    "conservative_grouping": "NONTRANSITIVE_ANCHORED_MAXIMUM_OBSERVATION_INTERVAL",
+    "primary_weight": "INVERSE_STRUCTURAL_EPISODE_MULTIPLICITY",
+    "sensitivity_weight": "INVERSE_CONSERVATIVE_EPISODE_MULTIPLICITY",
+    "serial_effective_size_requires_labels": true
+  },
+  "expected": {
+    "canonical_candidates": 3752,
+    "canonical_complete_clocks": 3752,
+    "canonical_complete_actions": 3752,
+    "historically_portfolio_accepted": 2194,
+    "r1_canonical_candidates": 558,
+    "r5_prepolicy_candidates": 799,
+    "r5_selected_candidates": 330,
+    "journey_action_rows": 117534,
+    "spot_candidate_directions": 28432,
+    "comex_candidate_directions": 23290
+  },
+  "outputs": {
+    "directory": "outputs/step_2a",
+    "canonical_registry": "STEP_2A_CANONICAL_CANDIDATE_REGISTRY.parquet",
+    "r1_guard_registry": "STEP_2A_R1_GUARD_DECISION_REGISTRY.parquet",
+    "r5_prepolicy_registry": "STEP_2A_R5_PREPOLICY_REGISTRY.parquet",
+    "journey_action_registry": "STEP_2A_JOURNEY_ACTION_REGISTRY.parquet",
+    "journey_candidate_registry": "STEP_2A_JOURNEY_CANDIDATE_REGISTRY.parquet",
+    "journey_archive_catalog": "STEP_2A_JOURNEY_ARCHIVE_CATALOG.json",
+    "clock_audit": "STEP_2A_CLOCK_AUDIT.json",
+    "geometry_audit": "STEP_2A_GEOMETRY_AUDIT.json",
+    "acceptance_audit": "STEP_2A_ACCEPTANCE_AUDIT.json",
+    "episode_weight_lock": "STEP_2A_EPISODE_WEIGHT_LOCK.json",
+    "source_manifest": "STEP_2A_SOURCE_MANIFEST.json",
+    "result_json": "STEP_2A_RESULT.json",
+    "result_markdown": "STEP_2A_RESULT.md",
+    "artifact_manifest": "STEP_2A_ARTIFACT_MANIFEST.json"
+  }
+}

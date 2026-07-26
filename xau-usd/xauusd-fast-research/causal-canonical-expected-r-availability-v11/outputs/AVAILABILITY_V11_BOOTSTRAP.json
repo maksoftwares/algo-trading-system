@@ -1,0 +1,34 @@
+{
+  "confidence": 0.95,
+  "intervals": {
+    "baseline_weighted_mean_r": {
+      "lower": 0.15124100146499053,
+      "median": 0.2503987656787846,
+      "upper": 0.34493162640332575
+    },
+    "selected_mean_lift_r": {
+      "lower": 0.023251367098750024,
+      "median": 0.0641257965949359,
+      "upper": 0.10723438691641846
+    },
+    "selected_profit_factor": {
+      "lower": 1.334339021158416,
+      "median": 1.5394095690437188,
+      "upper": 1.7619766192752333
+    },
+    "selected_weight_coverage": {
+      "lower": 0.7318852596714894,
+      "median": 0.7625177532111829,
+      "upper": 0.7904349764072217
+    },
+    "selected_weighted_mean_r": {
+      "lower": 0.2076751421563555,
+      "median": 0.31481430191746307,
+      "upper": 0.41903370522993116
+    }
+  },
+  "resamples": 5000,
+  "schema_version": "xauusd_expected_r_availability_v11_bootstrap",
+  "seed": 6072302,
+  "weekly_blocks": 296
+}

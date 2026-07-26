@@ -1,0 +1,44 @@
+{
+  "decision": "STEP_4_MODEL_EVALUATION_CONTRACT_LOCKED",
+  "definition": {
+    "bound_inputs": {
+      "step_2b_contract": "f1cafa6375db1597e9721397bb6c2f7e54b25ead9016df6fdc670a94584317de",
+      "step_2b_lock": "0dce2c3825fae87534db503194b02ea21e6b695a5dcab95369ee0a1adabe9cad",
+      "step_3_artifact_manifest": "5dbbdc8189524b18a230eebe8011dcf6b64e0a7eb502f8e24ec4b4bd7562bedc",
+      "step_3_dataset": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45",
+      "step_3_journey_labels": "a09653c4e9af1b7e0b70c7ec8fdf4a396046667c2fbade6d88259ed0581303ad",
+      "step_3_result": "41f005792e81a8d2783a2528247ea886a6463a74f9648c0384725a8fc98e379d",
+      "step_3_splits": "0ba856a55666af55243d104ada4195b0850f522cfd608a4c623e07630137d3fc"
+    },
+    "comex_features_authorized": false,
+    "config_sha256": "59342137663b1bd0523e0f3cfff6daaa392bc1a57f723ff30531fd156c5b24a7",
+    "databento_api_access_authorized": false,
+    "feature_counts": {
+      "HGB_B123_CROSSASSET_ABLATION": 48,
+      "HGB_B12_PRIMARY": 40,
+      "HGB_B1_ABLATION": 16,
+      "LOGIT_B12_CHALLENGER": 40
+    },
+    "implementation_sha256": {
+      "run_step_4.py": "e4cc71041c32934a61a35c74e2005d450ce4e14f1ee26e07660883ada52451a1",
+      "src/step_3_common.py": "bd64152bdc86aa72cf2d6e052557f8e92efb493f0e2c3dfcee15be3cf9ab751c",
+      "src/step_4_bootstrap.py": "eeea3e3ca6d8077b85ff304add72d81c8708826d902b44a2579763fc1b23d482",
+      "src/step_4_metrics.py": "ff1fa31515bbc25187cb18bcec00da0dbf8505d2d9a3880272126eaa03c4d8fa",
+      "src/step_4_model.py": "cffc6c332c69a93ff4905f0eb5d1d5dadd05a80bd97ed66073630712aebe65b7",
+      "src/step_4_runner.py": "d7d30bae594aa498f4c72f22f7b4a3d83c61a573c2b4bcba0fe07b4184c6a9cb"
+    },
+    "preregistration_sha256": "b852511e531f9ddd8d43f4e553e04dc8ac8fee7821702c67a9882409a955ade6",
+    "primary_model_id": "HGB_B12_PRIMARY",
+    "requirements_sha256": "ab43bb62dd93e6c91e0c0d3297995d0d859b1e7fa53490980df3f037eddfe580",
+    "scikit_learn_version": "1.8.0"
+  },
+  "definition_contract_sha256": "fffae17f6162b1092b672f81259cfe969ec08b0d45d114a8e1fc6cacfd3d39e8",
+  "economic_outcomes_already_opened_in_step_3": true,
+  "locked_utc": "2026-07-22T07:20:59.020157+00:00",
+  "model_fitted": false,
+  "next_action": "RUN_LOCKED_STEP_4_EVALUATION",
+  "runtime_changed": false,
+  "schema_version": "xauusd_step_4_model_evaluation_contract_lock_v1",
+  "supersedes_lock_sha256": "c4a67c9d6cf26c9721bb784e59a626eabce4c173313c7ccb31812b24486e3926",
+  "test_predictions_opened": false
+}

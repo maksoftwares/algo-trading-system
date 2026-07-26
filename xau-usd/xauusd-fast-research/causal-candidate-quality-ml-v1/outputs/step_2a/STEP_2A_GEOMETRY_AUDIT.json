@@ -1,0 +1,133 @@
+{
+  "canonical_by_family": {
+    "R1_UPTREND": {
+      "complete": 558,
+      "maximum_hold_modes": [
+        "BARRIER_ONLY_NO_TIME_STOP"
+      ],
+      "rows": 558,
+      "stop_modes": [
+        "NATIVE_PRETRADE_POINTS"
+      ],
+      "target_modes": [
+        "R_MULTIPLE"
+      ]
+    },
+    "R2_DOWNTREND": {
+      "complete": 168,
+      "maximum_hold_modes": [
+        "FIXED"
+      ],
+      "rows": 168,
+      "stop_modes": [
+        "ATR"
+      ],
+      "target_modes": [
+        "NONE"
+      ]
+    },
+    "R3_COMPRESSION": {
+      "complete": 490,
+      "maximum_hold_modes": [
+        "FIXED"
+      ],
+      "rows": 490,
+      "stop_modes": [
+        "ATR"
+      ],
+      "target_modes": [
+        "NONE"
+      ]
+    },
+    "R4_CHOP": {
+      "complete": 521,
+      "maximum_hold_modes": [
+        "FIXED"
+      ],
+      "rows": 521,
+      "stop_modes": [
+        "ATR"
+      ],
+      "target_modes": [
+        "R_MULTIPLE"
+      ]
+    },
+    "R5_TRANSITION": {
+      "complete": 330,
+      "maximum_hold_modes": [
+        "FIXED"
+      ],
+      "rows": 330,
+      "stop_modes": [
+        "ATR"
+      ],
+      "target_modes": [
+        "R_MULTIPLE"
+      ]
+    },
+    "V25_CHOP": {
+      "complete": 131,
+      "maximum_hold_modes": [
+        "FIXED"
+      ],
+      "rows": 131,
+      "stop_modes": [
+        "ATR"
+      ],
+      "target_modes": [
+        "R_MULTIPLE"
+      ]
+    },
+    "V57_BREAK_SWING_H4ADX_HIGH": {
+      "complete": 687,
+      "maximum_hold_modes": [
+        "FIXED"
+      ],
+      "rows": 687,
+      "stop_modes": [
+        "ATR_WITH_PRICE_FLOOR"
+      ],
+      "target_modes": [
+        "R_MULTIPLE"
+      ]
+    },
+    "V7_SWING_HEALTH": {
+      "complete": 587,
+      "maximum_hold_modes": [
+        "FIXED"
+      ],
+      "rows": 587,
+      "stop_modes": [
+        "ATR_WITH_PRICE_FLOOR"
+      ],
+      "target_modes": [
+        "R_MULTIPLE"
+      ]
+    },
+    "V8_RETEST_HEALTH": {
+      "complete": 280,
+      "maximum_hold_modes": [
+        "FIXED"
+      ],
+      "rows": 280,
+      "stop_modes": [
+        "ATR_WITH_PRICE_FLOOR"
+      ],
+      "target_modes": [
+        "R_MULTIPLE"
+      ]
+    }
+  },
+  "canonical_complete_rows": 3752,
+  "canonical_rows": 3752,
+  "journey_action_rows": 117534,
+  "journey_complete_rows": 117534,
+  "r1_barrier_cap_changes_trade_exit": false,
+  "r1_barrier_cap_role": "LABEL_CENSORING_AND_PRELABEL_PURGE_ONLY",
+  "r1_guard_complete_rows": 3951,
+  "r1_guard_rows": 3951,
+  "r5_prepolicy_complete_rows": 799,
+  "r5_prepolicy_rows": 799,
+  "schema_version": "xauusd_step_2a_geometry_audit_v1",
+  "status": "PASS"
+}

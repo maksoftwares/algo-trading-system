@@ -1,0 +1,51 @@
+{
+  "acceptance_sha256": "4e5205dccaec72fbe48a1f55b81b9c9f452c6ad920a074dbe32e9d6398e50682",
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "ml_shadow_authorized": false,
+    "offline_scoring_authorized": true,
+    "python_serving_authorized": false,
+    "research_only": true,
+    "runtime_change_authorized": false
+  },
+  "bootstrap_sha256": "7a4328bc2a73b0855788278e2ae7f72e6705712b0c32ab53a2f4fb6bb6d0c0b9",
+  "config_sha256": "8ad9446682f6996b17f07feccc574e13f18237be1c0abb435e87831484a3362e",
+  "definition_contract_sha256": "7d12460900a68d9289cc4a31e4d9f79e027b79ee4798a06f4a4df947dbffa1a0",
+  "implementation": {
+    "policy": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-profit-policy-v12/policy.py",
+      "sha256": "f8400eba4fa06c06a9bee7c29a7e7817ec78316bc6059ed33f612a871c122a00"
+    },
+    "run_evaluation": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-profit-policy-v12/run_evaluation.py",
+      "sha256": "27db810c34fa793ab8a88a8f8716fa22ef596f01ef7817ae538419035909144c"
+    },
+    "verify": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-profit-policy-v12/verify.py",
+      "sha256": "032e52584d46c607f96bea789252d54aaf9f3d74a32518185dab2288b2edf73e"
+    }
+  },
+  "input_sha256": {
+    "canonical_dataset": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45",
+    "split_assignments": "0ba856a55666af55243d104ada4195b0850f522cfd608a4c623e07630137d3fc",
+    "v10_config": "3af418d65876277711b5a480c015275c8df70bfcd84dea467c7499bb2684ae97",
+    "v10_contract_lock": "dfd18fe06fe116c5543767cc8b840f0803dc9755a27a1437865bc99130e2bac7",
+    "v10_manifest": "baf02217463edbf7eee72c8aa10412c14f48fc59ef9c1ec46868818b61515d62",
+    "v10_predictions": "3eac76f276b1e330d45108c55f9ef7ae5882bccbb24085b25869598fe25c01e2",
+    "v11_predictions": "060dcd0e4e03e025dd4d4ce4426f6c1f32ac7e304549692d9d9909b7e6c78202",
+    "v11_result": "89f39dacd34c3f01d7d811746833671476ed24f592e612709e2821655045988b"
+  },
+  "policy_sha256": "7e3f6dfe8537e1dd6c6ea921fd7bec6efb582f5ed3aa17d4afe9c388a6542b7c",
+  "preregistration_sha256": "1c5b72651f87bafe472bb5049c9d44e1a5d775725584cccbfa45d8495787cf7d",
+  "recent_windows_sha256": "ce5150409e30aa28b096fa145d41d4da3741e97927f0291b41bb16b8dee15fc5",
+  "schema_version": "xauusd_causal_canonical_profit_policy_v12",
+  "versions": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "python": "3.14.4",
+    "scikit_learn": "1.9.0"
+  }
+}

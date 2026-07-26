@@ -1,0 +1,253 @@
+{
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "ml_shadow_authorized": false,
+    "offline_model_fit_authorized": true,
+    "offline_threshold_fit_authorized": true,
+    "prospective_scoring_authorized": false,
+    "python_serving_authorized": false,
+    "research_only": true,
+    "runtime_change_authorized": false
+  },
+  "contract_sha256": "7bc6ade920a1091c43973f52fa45776e016fde3064dd2d5e5ed8ba6d588e6d00",
+  "expected": {
+    "canonical_feature_pass_rows": 3024,
+    "canonical_rows": 3752,
+    "expanded_action_rows": 73116,
+    "expanded_resolved_event_rows": 28432,
+    "expanded_source_event_rows": 29419,
+    "expanded_structural_episodes": 15172,
+    "locked_prediction_rows": 2368,
+    "post_overlap_action_rows": 64319,
+    "post_overlap_event_rows": 24835,
+    "post_overlap_failures": 37544,
+    "post_overlap_structural_episodes": 13639,
+    "post_overlap_winners": 26775
+  },
+  "historical_outcomes_already_exposed": true,
+  "inputs": [
+    {
+      "bytes": 1970690,
+      "name": "canonical_dataset",
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet",
+      "sha256": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45"
+    },
+    {
+      "bytes": 211214,
+      "name": "canonical_splits",
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_SPLIT_ASSIGNMENTS.parquet",
+      "sha256": "0ba856a55666af55243d104ada4195b0850f522cfd608a4c623e07630137d3fc"
+    },
+    {
+      "bytes": 25911,
+      "name": "canonical_feature_contract",
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/config/step_2b_dataset_feature_contract_v1.json",
+      "sha256": "f1cafa6375db1597e9721397bb6c2f7e54b25ead9016df6fdc670a94584317de"
+    },
+    {
+      "bytes": 25030501,
+      "name": "expanded_actions",
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_ACTION_DATASET.parquet",
+      "sha256": "1c481738ffd137de1fb4c64f526758040728f6065563f907bc928bb1a8008611"
+    },
+    {
+      "bytes": 5012,
+      "name": "expanded_manifest",
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_ARTIFACT_MANIFEST.json",
+      "sha256": "3431a4ae2d5909e8fc45808e60d86b60070e662179d55c27e05ad7ddbeccb052"
+    },
+    {
+      "bytes": 5851,
+      "name": "v10_config",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/config/canonical_expected_r_v10.json",
+      "sha256": "3af418d65876277711b5a480c015275c8df70bfcd84dea467c7499bb2684ae97"
+    },
+    {
+      "bytes": 16330,
+      "name": "expected_r_module",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+      "sha256": "2ea01130ab139fc6795909724ae375ad03cf69e3e17b09bd66b8905446a66f0a"
+    },
+    {
+      "bytes": 4645,
+      "name": "v12_config",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-profit-policy-v12/config/profit_policy_v12.json",
+      "sha256": "8ad9446682f6996b17f07feccc574e13f18237be1c0abb435e87831484a3362e"
+    },
+    {
+      "bytes": 14376,
+      "name": "profit_policy_module",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-profit-policy-v12/policy.py",
+      "sha256": "f8400eba4fa06c06a9bee7c29a7e7817ec78316bc6059ed33f612a871c122a00"
+    },
+    {
+      "bytes": 10452,
+      "name": "v15_transfer_module",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/src/transfer.py",
+      "sha256": "931d7380a61c6a1107be42fd0360d91034897d96191ef91d145596a385fff886"
+    },
+    {
+      "bytes": 7666,
+      "name": "v15_contract",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/outputs/AUX_TRANSFER_V15_CONTRACT_LOCK.json",
+      "sha256": "0aa65ad9ee524e76cce6b81a4a0f8e4620267a81423dc46b0801e3cdc7851037"
+    },
+    {
+      "bytes": 281242,
+      "name": "v15_predictions",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/outputs/AUX_TRANSFER_V15_OUT_OF_TIME_PREDICTIONS.parquet",
+      "sha256": "22e6d7ff3007e0017bf0cc3250424bb8da3d03a8149600432d1e77f19005eaaf"
+    },
+    {
+      "bytes": 2785,
+      "name": "v15_windows",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/outputs/AUX_TRANSFER_V15_EXACT_V60_WINDOWS.csv",
+      "sha256": "cd33d5fdd9c8f2e4af4ad1654288c673a3f8e0bca482b14404ae41971b417590"
+    },
+    {
+      "bytes": 9767,
+      "name": "v15_result",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/outputs/AUX_TRANSFER_V15_RESULT.json",
+      "sha256": "5574d88e2c1ec53f57c2058396ed98725499d2ffeb11c87af3ac10e87c1a2b6b"
+    },
+    {
+      "bytes": 8281,
+      "name": "v16_contract",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-consensus-v16/outputs/AUX_CONSENSUS_V16_CONTRACT_LOCK.json",
+      "sha256": "6bc6a832e50ca72f5f29cd844e31c12561c3998de6f34cc581861b824d3cc9f1"
+    },
+    {
+      "bytes": 2791,
+      "name": "v16_windows",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-consensus-v16/outputs/AUX_CONSENSUS_V16_EXACT_V60_WINDOWS.csv",
+      "sha256": "cd0b155e3b60bf2f81a9033afa1d9942f1fb4f5800e46f1b79fc724a70e77a9a"
+    },
+    {
+      "bytes": 10131,
+      "name": "v16_result",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-consensus-v16/outputs/AUX_CONSENSUS_V16_RESULT.json",
+      "sha256": "ec2b2b561d99b80b8899d22959905ca6f4a65de12fd84a140e5e411d8501a445"
+    },
+    {
+      "bytes": 9727,
+      "name": "v17_contract",
+      "path": "xau-usd/xauusd-fast-research/causal-v57-auxiliary-calibrator-v17/outputs/V57_AUX_V17_CONTRACT_LOCK.json",
+      "sha256": "94216afc8f6038b52c589d9453efa369ca8b700619578f5090a09d23221adb1f"
+    },
+    {
+      "bytes": 2737,
+      "name": "v17_windows",
+      "path": "xau-usd/xauusd-fast-research/causal-v57-auxiliary-calibrator-v17/outputs/V57_AUX_V17_EXACT_V60_WINDOWS.csv",
+      "sha256": "921d53c6f1dbf4919fe8ba0136f35a111da38d5897777fccc655a403f74c2062"
+    },
+    {
+      "bytes": 11105,
+      "name": "v17_result",
+      "path": "xau-usd/xauusd-fast-research/causal-v57-auxiliary-calibrator-v17/outputs/V57_AUX_V17_RESULT.json",
+      "sha256": "3c3037c54304e56e1eb9d4259e786358f919086a381aaf03b252886390ae44f3"
+    },
+    {
+      "bytes": 206770,
+      "name": "locked_b123_predictions",
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_PREDICTIONS.parquet",
+      "sha256": "317e1a30f8d90bd209ccbecea4d3035c45822fb5fbb4cf8c76db1329db57096d"
+    },
+    {
+      "bytes": 2441,
+      "name": "locked_b123_windows",
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_WINDOWS.csv",
+      "sha256": "9e5b91ede12f74969f755d848dd07cf10a466160ba6a945528f992eb5e7494b0"
+    },
+    {
+      "bytes": 4812,
+      "name": "locked_b123_report",
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_COMPARISON.json",
+      "sha256": "0dd79881ccd33e47d72f7f37dbf601a40466b35e68ab8172b129b530d92e4fb3"
+    },
+    {
+      "bytes": 340892,
+      "name": "v60_ledger",
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet",
+      "sha256": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf"
+    },
+    {
+      "bytes": 11140,
+      "name": "v60_config",
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "053bbb0e0d0f8e365f8b93b8a7d61376c6762c861ad1ec2c1b3d796d3089a9df"
+    },
+    {
+      "bytes": 19769,
+      "name": "v60_replay_module",
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/build_ml_profit_policy_comparison.py",
+      "sha256": "7e748872e05852d17d6f55516cf870ce68020815db23502c603089481dd44227"
+    },
+    {
+      "bytes": 8490,
+      "name": "v60_cooldown_module",
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/build_v57_post_loss_cooldown_impact.py",
+      "sha256": "ca240345d7a65342cff8f820ac8fd3c14a30b5f7a5306e805e749c38feb105b9"
+    },
+    {
+      "bytes": 7891,
+      "name": "v14_contract",
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_PROSPECTIVE_V14_CONTRACT_LOCK.json",
+      "sha256": "61f3560f5ec2a5fd1cd7e67de9be91bbf6e2957f8b6ad3620fa848f0ef4c4d2b"
+    }
+  ],
+  "package_files": [
+    {
+      "bytes": 408,
+      "path": "README.md",
+      "sha256": "6ad5419d6683ffb1909e5ac7306516477c8a1f4bc6e0a31fc7d767251e6b1e17"
+    },
+    {
+      "bytes": 2452,
+      "path": "PREREGISTRATION.md",
+      "sha256": "78e4cd9915f9fe24af64eb4d2bc20bbc5ad1f2e5c16853c580e12b368980b950"
+    },
+    {
+      "bytes": 75,
+      "path": "requirements.txt",
+      "sha256": "51edf5714e36963a7656c4a08dfdfd90d982b14a0deae752eae819184d1c2b23"
+    },
+    {
+      "bytes": 7903,
+      "path": "config/v8_auxiliary_veto_v18.json",
+      "sha256": "fab4961c8e7b828bbcab52daae76cc7445aa8cbc68fd0568a0c198dddf4d3fd3"
+    },
+    {
+      "bytes": 45,
+      "path": "src/__init__.py",
+      "sha256": "a2ae2a70b3b0eca886e87e52b6ea365653f58d60679eb55cf1a44618fee6afff"
+    },
+    {
+      "bytes": 2548,
+      "path": "src/veto.py",
+      "sha256": "9d32578464fac97e2452f114002ae6ea3a08d8b5cdc25480953c162ef092431d"
+    },
+    {
+      "bytes": 40995,
+      "path": "run_evaluation.py",
+      "sha256": "eeafae6c1aa3ede28472b89713e493506974ba5b653ad156372d43931c49c9d1"
+    },
+    {
+      "bytes": 2488,
+      "path": "verify.py",
+      "sha256": "2088cc9b61abe90e1d2cd58e00f9afa8ea125a33cfd02610d00f0c4948573440"
+    },
+    {
+      "bytes": 1654,
+      "path": "tests/test_veto.py",
+      "sha256": "c2f23cba7af6e53cfbc25895f29df02dd545e0718ba6c35ea3397183901bf718"
+    }
+  ],
+  "schema_version": "xauusd_v8_auxiliary_veto_v18_contract",
+  "v14_immutable": true,
+  "v15_immutable": true,
+  "v16_immutable": true,
+  "v17_immutable": true
+}

@@ -1,0 +1,143 @@
+{
+  "schema_version": "xauusd_causal_v57_auxiliary_calibrator_v17",
+  "inputs": {
+    "canonical_dataset": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet",
+    "canonical_splits": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_SPLIT_ASSIGNMENTS.parquet",
+    "canonical_feature_contract": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/config/step_2b_dataset_feature_contract_v1.json",
+    "expanded_actions": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_ACTION_DATASET.parquet",
+    "expanded_manifest": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_ARTIFACT_MANIFEST.json",
+    "v10_config": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/config/canonical_expected_r_v10.json",
+    "expected_r_module": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+    "v12_config": "xau-usd/xauusd-fast-research/causal-canonical-profit-policy-v12/config/profit_policy_v12.json",
+    "profit_policy_module": "xau-usd/xauusd-fast-research/causal-canonical-profit-policy-v12/policy.py",
+    "v15_transfer_module": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/src/transfer.py",
+    "v15_contract": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/outputs/AUX_TRANSFER_V15_CONTRACT_LOCK.json",
+    "v15_predictions": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/outputs/AUX_TRANSFER_V15_OUT_OF_TIME_PREDICTIONS.parquet",
+    "v15_windows": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/outputs/AUX_TRANSFER_V15_EXACT_V60_WINDOWS.csv",
+    "v15_result": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-transfer-v15/outputs/AUX_TRANSFER_V15_RESULT.json",
+    "v16_contract": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-consensus-v16/outputs/AUX_CONSENSUS_V16_CONTRACT_LOCK.json",
+    "v16_windows": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-consensus-v16/outputs/AUX_CONSENSUS_V16_EXACT_V60_WINDOWS.csv",
+    "v16_result": "xau-usd/xauusd-fast-research/causal-canonical-auxiliary-consensus-v16/outputs/AUX_CONSENSUS_V16_RESULT.json",
+    "locked_b123_predictions": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_PREDICTIONS.parquet",
+    "locked_b123_windows": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_WINDOWS.csv",
+    "locked_b123_report": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_COMPARISON.json",
+    "v60_ledger": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet",
+    "v60_config": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+    "v60_replay_module": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/build_ml_profit_policy_comparison.py",
+    "v60_cooldown_module": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/build_v57_post_loss_cooldown_impact.py",
+    "v14_contract": "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_PROSPECTIVE_V14_CONTRACT_LOCK.json"
+  },
+  "expected": {
+    "canonical_rows": 3752,
+    "canonical_feature_pass_rows": 3024,
+    "expanded_action_rows": 73116,
+    "expanded_source_event_rows": 29419,
+    "expanded_resolved_event_rows": 28432,
+    "expanded_structural_episodes": 15172,
+    "post_overlap_action_rows": 64319,
+    "post_overlap_event_rows": 24835,
+    "post_overlap_structural_episodes": 13639,
+    "post_overlap_winners": 26775,
+    "post_overlap_failures": 37544,
+    "locked_prediction_rows": 2368
+  },
+  "canonical_source_blocks": [
+    "B1_DETERMINISTIC_CANDIDATE_AND_REGIME",
+    "B2_PLUS_XAU_MICROSTRUCTURE_AND_COST",
+    "B3_PLUS_COMPLETED_CROSS_ASSET_STATE"
+  ],
+  "folds": [
+    {"fold_id": "F2020", "calibration_start_utc": "2020-01-01T00:00:00Z"},
+    {"fold_id": "F2021", "calibration_start_utc": "2021-01-01T00:00:00Z"},
+    {"fold_id": "F2022", "calibration_start_utc": "2022-01-01T00:00:00Z"},
+    {"fold_id": "F2023", "calibration_start_utc": "2023-01-01T00:00:00Z"},
+    {"fold_id": "F2024", "calibration_start_utc": "2024-01-01T00:00:00Z"},
+    {"fold_id": "F2025", "calibration_start_utc": "2025-01-01T00:00:00Z"}
+  ],
+  "transfer": {
+    "minimum_auxiliary_actions": 10000,
+    "minimum_auxiliary_episodes": 2000,
+    "quantile_count": 256,
+    "target_clip_r": [-3.0, 3.0],
+    "ridge_alpha": 30.0,
+    "logistic_c": 0.1,
+    "hgb": {
+      "learning_rate": 0.03,
+      "max_iter": 180,
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 150,
+      "l2_regularization": 8.0,
+      "random_state": 26072715
+    }
+  },
+  "b123_model": {
+    "minimum_fit_rows": 1000,
+    "alpha": 300.0,
+    "family_interaction_scale": 0.25,
+    "target_clip_r": [-3.0, 3.0]
+  },
+  "b123_profit_policy": {
+    "weighted_quantile_grid": [0.0, 0.025, 0.05, 0.075, 0.1, 0.15],
+    "minimum_selected_weight_coverage": 0.85,
+    "minimum_profit_improvement_usd": 10.0,
+    "require_mean_not_worse": true,
+    "require_profit_factor_not_worse": true,
+    "require_drawdown_not_worse": true,
+    "fallback_quantile": 0.0
+  },
+  "specialist": {
+    "family_id": "V57_BREAK_SWING_H4ADX_HIGH",
+    "minimum_fit_rows": 150,
+    "minimum_calibration_rows": 25,
+    "ridge_alpha": 50.0,
+    "target_clip_r": [-3.0, 3.0]
+  },
+  "specialist_policy": {
+    "weighted_quantile_grid": [0.1, 0.15, 0.2],
+    "minimum_selected_weight_coverage": 0.85,
+    "minimum_profit_improvement_usd": 0.0,
+    "require_mean_not_worse": true,
+    "require_profit_factor_not_worse": true,
+    "require_drawdown_not_worse": true,
+    "fallback_action": "V57_RETAIN_ALL_NO_SPECIALIST_EDGE"
+  },
+  "acceptance": {
+    "minimum_all_history_delta_vs_raw_usd": 0.0,
+    "minimum_all_history_delta_vs_locked_b123_usd": 0.0,
+    "minimum_latest_3m_delta_vs_raw_usd": 0.0,
+    "minimum_6m_delta_vs_raw_usd": 0.0,
+    "minimum_12m_delta_vs_raw_usd": 0.0,
+    "minimum_all_history_trade_retention": 0.95,
+    "require_all_history_profit_factor_not_worse": true,
+    "require_all_history_drawdown_not_worse": true
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "V57_AUX_V17_CONTRACT_LOCK.json",
+    "dataset_audit": "V57_AUX_V17_DATASET_AUDIT.json",
+    "predictions": "V57_AUX_V17_OUT_OF_TIME_PREDICTIONS.parquet",
+    "fold_metrics": "V57_AUX_V17_FOLD_METRICS.csv",
+    "threshold_decisions": "V57_AUX_V17_THRESHOLD_DECISIONS.csv",
+    "windows": "V57_AUX_V17_EXACT_V60_WINDOWS.csv",
+    "trade_audit": "V57_AUX_V17_EXACT_V60_TRADE_AUDIT.parquet",
+    "experiment_comparison_csv": "ML_EXPERIMENT_COMPARISON_V17.csv",
+    "experiment_comparison_markdown": "ML_EXPERIMENT_COMPARISON_V17.md",
+    "result_json": "V57_AUX_V17_RESULT.json",
+    "result_markdown": "V57_AUX_V17_RESULT.md",
+    "manifest": "V57_AUX_V17_ARTIFACT_MANIFEST.json"
+  },
+  "authorization": {
+    "offline_model_fit_authorized": true,
+    "offline_threshold_fit_authorized": true,
+    "research_only": true,
+    "prospective_scoring_authorized": false,
+    "python_serving_authorized": false,
+    "ml_shadow_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false,
+    "runtime_change_authorized": false
+  },
+  "historical_outcomes_already_exposed": true
+}

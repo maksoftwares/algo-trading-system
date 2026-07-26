@@ -1,0 +1,121 @@
+{
+  "schema_version": "xauusd_causal_canonical_profit_policy_v12",
+  "inputs": {
+    "v10_contract_lock": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_CONTRACT_LOCK.json",
+      "sha256": "dfd18fe06fe116c5543767cc8b840f0803dc9755a27a1437865bc99130e2bac7"
+    },
+    "v10_predictions": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_OUT_OF_TIME_PREDICTIONS.parquet",
+      "sha256": "3eac76f276b1e330d45108c55f9ef7ae5882bccbb24085b25869598fe25c01e2"
+    },
+    "v10_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_ARTIFACT_MANIFEST.json",
+      "sha256": "baf02217463edbf7eee72c8aa10412c14f48fc59ef9c1ec46868818b61515d62"
+    },
+    "v10_config": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/config/canonical_expected_r_v10.json",
+      "sha256": "3af418d65876277711b5a480c015275c8df70bfcd84dea467c7499bb2684ae97"
+    },
+    "canonical_dataset": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet",
+      "sha256": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45"
+    },
+    "split_assignments": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_SPLIT_ASSIGNMENTS.parquet",
+      "sha256": "0ba856a55666af55243d104ada4195b0850f522cfd608a4c623e07630137d3fc"
+    },
+    "v11_predictions": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_OUT_OF_TIME_PREDICTIONS.parquet",
+      "sha256": "060dcd0e4e03e025dd4d4ce4426f6c1f32ac7e304549692d9d9909b7e6c78202"
+    },
+    "v11_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11/outputs/AVAILABILITY_V11_RESULT.json",
+      "sha256": "89f39dacd34c3f01d7d811746833671476ed24f592e612709e2821655045988b"
+    }
+  },
+  "policy": {
+    "minimum_fit_rows": 1000,
+    "available_action": "CALIBRATION_PROFIT_THRESHOLD",
+    "unavailable_action": "ML_ABSTAIN_RETAIN_ALL",
+    "threshold_scope": "POOLED_GLOBAL_EXPECTED_R_SCORE",
+    "weighted_quantile_grid": [
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8
+    ],
+    "objective": "MAXIMIZE_CALIBRATION_NORMALIZED_0P01_LOT_USD",
+    "minimum_selected_weight_coverage": 0.2,
+    "minimum_profit_improvement_usd": 10.0,
+    "require_mean_not_worse": true,
+    "require_profit_factor_not_worse": true,
+    "require_drawdown_not_worse": true,
+    "fallback_quantile": 0.0,
+    "tie_break": "LOWER_QUANTILE_HIGHER_COVERAGE"
+  },
+  "recent_windows": {
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "months": [
+      3,
+      6,
+      12
+    ]
+  },
+  "bootstrap": {
+    "resamples": 5000,
+    "confidence": 0.95,
+    "block": "UTC_WEEK",
+    "seed": 6072303
+  },
+  "acceptance_gates": {
+    "minimum_total_normalized_usd_vs_baseline": 0.0,
+    "minimum_total_normalized_usd_vs_v11": 0.0,
+    "minimum_profit_delta_bootstrap_lower_usd": 0.0,
+    "minimum_selected_weighted_mean_r": 0.25,
+    "minimum_selected_profit_factor": 1.4,
+    "maximum_drawdown_ratio_to_baseline": 1.0,
+    "minimum_selected_rows": 500,
+    "minimum_latest_fold_normalized_usd_vs_baseline": 0.0,
+    "minimum_latest_fold_normalized_usd_vs_v11": 0.0,
+    "minimum_recent_window_profit_wins_vs_v11": 2
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "PROFIT_POLICY_V12_CONTRACT_LOCK.json",
+    "predictions": "PROFIT_POLICY_V12_OUT_OF_TIME_PREDICTIONS.parquet",
+    "fold_metrics": "PROFIT_POLICY_V12_FOLD_METRICS.parquet",
+    "threshold_decisions": "PROFIT_POLICY_V12_THRESHOLD_DECISIONS.parquet",
+    "recent_windows": "PROFIT_POLICY_V12_RECENT_WINDOWS.parquet",
+    "bootstrap": "PROFIT_POLICY_V12_BOOTSTRAP.json",
+    "acceptance": "PROFIT_POLICY_V12_ACCEPTANCE.json",
+    "final_policy": "PROFIT_POLICY_V12_FINAL_RESEARCH_POLICY.json",
+    "result_json": "PROFIT_POLICY_V12_RESULT.json",
+    "result_markdown": "PROFIT_POLICY_V12_RESULT.md",
+    "manifest": "PROFIT_POLICY_V12_ARTIFACT_MANIFEST.json"
+  },
+  "authorization": {
+    "offline_scoring_authorized": true,
+    "research_only": true,
+    "python_serving_authorized": false,
+    "ml_shadow_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false,
+    "runtime_change_authorized": false
+  }
+}

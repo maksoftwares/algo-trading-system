@@ -4,6 +4,8 @@ import argparse
 import calendar
 import json
 import os
+import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -55,6 +57,24 @@ def hours_in_month(year: int, month: int) -> list[datetime]:
     ]
 
 
+def parse_month(value: str) -> datetime:
+    try:
+        return datetime.strptime(value, "%Y-%m").replace(tzinfo=UTC)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(
+            f"invalid month {value!r}; expected YYYY-MM"
+        ) from exc
+
+
+def next_month(value: datetime) -> datetime:
+    return datetime(
+        value.year + int(value.month == 12),
+        1 if value.month == 12 else value.month + 1,
+        1,
+        tzinfo=UTC,
+    )
+
+
 def instrument_map() -> dict[str, dict[str, object]]:
     return {str(item["symbol"]): item for item in CONFIG["instruments"]}
 
@@ -100,6 +120,9 @@ def acquire_hour(
     spec: dict[str, object],
     hour: datetime,
     client: httpx.Client,
+    request_lock: threading.Lock,
+    minimum_request_interval: float,
+    rate_limit_backoff: float,
 ) -> dict[str, object]:
     symbol = str(spec["symbol"])
     price_scale = int(spec["price_scale"])
@@ -134,7 +157,13 @@ def acquire_hour(
     last_error = ""
     for attempt in (1, 2):
         try:
-            response = client.get(url)
+            with request_lock:
+                if minimum_request_interval:
+                    time.sleep(minimum_request_interval)
+                response = client.get(url)
+            if response.status_code == 429:
+                time.sleep(rate_limit_backoff)
+                raise ValueError("HTTP status 429")
             if response.status_code != 200:
                 raise ValueError(f"HTTP status {response.status_code}")
             raw = response.content
@@ -185,14 +214,27 @@ def acquire_month(
     year: int,
     month: int,
     client: httpx.Client,
+    maximum_concurrency: int,
+    minimum_request_interval: float,
+    rate_limit_backoff: float,
 ) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
+    request_lock = threading.Lock()
     with ThreadPoolExecutor(
-        max_workers=int(CONFIG["maximum_concurrency"]),
+        max_workers=maximum_concurrency,
         thread_name_prefix=str(spec["symbol"]).lower(),
     ) as executor:
         futures = {
-            executor.submit(acquire_hour, root, spec, hour, client): hour
+            executor.submit(
+                acquire_hour,
+                root,
+                spec,
+                hour,
+                client,
+                request_lock,
+                minimum_request_interval,
+                rate_limit_backoff,
+            ): hour
             for hour in hours_in_month(year, month)
         }
         for future in as_completed(futures):
@@ -285,8 +327,13 @@ def validate_and_freeze_month(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--symbol", required=True, choices=sorted(instrument_map()))
-    parser.add_argument("--start-month")
-    parser.add_argument("--end-month")
+    parser.add_argument("--start-month", type=parse_month)
+    parser.add_argument("--end-month", type=parse_month)
+    parser.add_argument(
+        "--concurrency", type=int, default=int(CONFIG["maximum_concurrency"])
+    )
+    parser.add_argument("--minimum-request-interval", type=float, default=0.0)
+    parser.add_argument("--rate-limit-backoff", type=float, default=300.0)
     args = parser.parse_args()
 
     root = Path(
@@ -300,19 +347,17 @@ def main() -> None:
     end = datetime.fromisoformat(
         CONFIG["end_exclusive_utc"].replace("Z", "+00:00")
     )
-    selected = month_keys(start, end)
     if args.start_month:
-        selected = [
-            item
-            for item in selected
-            if f"{item[0]:04d}-{item[1]:02d}" >= args.start_month
-        ]
+        start = args.start_month
     if args.end_month:
-        selected = [
-            item
-            for item in selected
-            if f"{item[0]:04d}-{item[1]:02d}" <= args.end_month
-        ]
+        end = next_month(args.end_month)
+    if start >= end:
+        parser.error("--start-month must not be after --end-month")
+    if args.concurrency < 1:
+        parser.error("--concurrency must be at least 1")
+    if args.minimum_request_interval < 0 or args.rate_limit_backoff < 0:
+        parser.error("request timing values must not be negative")
+    selected = month_keys(start, end)
 
     limits = httpx.Limits(
         max_connections=int(CONFIG["maximum_concurrency"]),
@@ -326,7 +371,16 @@ def main() -> None:
         metadata = freeze_instrument_metadata(root, spec, client)
         print(json.dumps(metadata, sort_keys=True), flush=True)
         for year, month in selected:
-            rows = acquire_month(root, spec, year, month, client)
+            rows = acquire_month(
+                root,
+                spec,
+                year,
+                month,
+                client,
+                args.concurrency,
+                args.minimum_request_interval,
+                args.rate_limit_backoff,
+            )
             summary = validate_and_freeze_month(
                 root, spec, year, month, rows
             )

@@ -1,0 +1,68 @@
+{
+  "artifacts": {
+    "STEP_5_1_ACCEPTANCE_GATES.json": {
+      "bytes": 981,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_ACCEPTANCE_GATES.json",
+      "sha256": "3a0d90812e5390175c0223a04c894ebeb6b5ad1a84b87072afbd2feb5e2f115f"
+    },
+    "STEP_5_1_ACCEPTED_TRADES.parquet": {
+      "bytes": 1644197,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_ACCEPTED_TRADES.parquet",
+      "sha256": "b8af43b591528e6d989de487b96e4da8fd5069fc19286d3346ac6981987154a6"
+    },
+    "STEP_5_1_ACCOUNT_CURRENCY_CONTRACT_LOCK.json": {
+      "bytes": 2760,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_ACCOUNT_CURRENCY_CONTRACT_LOCK.json",
+      "sha256": "cdf20134880a3a5f101c1e59c8c850792418f9ea8cd7b6df3592d86fb8e87b04"
+    },
+    "STEP_5_1_ATTRIBUTION.parquet": {
+      "bytes": 18461,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_ATTRIBUTION.parquet",
+      "sha256": "48cde020b54657cfaeeb9515dd7686f95c1530bcb54a20af95fd405e019cc1ea"
+    },
+    "STEP_5_1_BROKER_SNAPSHOT.json": {
+      "bytes": 1619,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_BROKER_SNAPSHOT.json",
+      "sha256": "b00ed54600b8a55eaff914b1e5d52ff625ea5aa882f0648b802f7d1856504434"
+    },
+    "STEP_5_1_DAILY_METRICS.parquet": {
+      "bytes": 150271,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_DAILY_METRICS.parquet",
+      "sha256": "7843615c5151013ad5a0b2fd670e423958e60ca830f3249d7f973558d2695372"
+    },
+    "STEP_5_1_DECISION_LEDGER.parquet": {
+      "bytes": 397083,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_DECISION_LEDGER.parquet",
+      "sha256": "ad96722a00ab7da4ee2fbb3aff6868ce4269646968c8ea9296d41867d9d82a8e"
+    },
+    "STEP_5_1_PRIMARY_M5_EQUITY_CURVE.parquet": {
+      "bytes": 9385458,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_PRIMARY_M5_EQUITY_CURVE.parquet",
+      "sha256": "1b8c8a882aee6fd30e7c0c1cae74e9d08aa42731afe9dbe5dcd1581d7b1edfba"
+    },
+    "STEP_5_1_RESULT.json": {
+      "bytes": 17614,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_RESULT.json",
+      "sha256": "b9101502f1babdb83abc3dd711be87d0f4721ddf89f397d6fb95c7db51a98bec"
+    },
+    "STEP_5_1_RESULT.md": {
+      "bytes": 1083,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_RESULT.md",
+      "sha256": "8287fc254922a4eb08bd1fbc6643bde3804c22af6c11f3312ec62e431d2697c5"
+    },
+    "STEP_5_1_SIX_MONTH_STABILITY.parquet": {
+      "bytes": 8544,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_SIX_MONTH_STABILITY.parquet",
+      "sha256": "4f18c6a09702686aed79ac8a80c9906e5a1c95e9d8557e6159d561e0380516dd"
+    },
+    "STEP_5_1_WINDOW_METRICS.parquet": {
+      "bytes": 27014,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1/STEP_5_1_WINDOW_METRICS.parquet",
+      "sha256": "edce9e16f749832b4b71f313c788688acdefab00dc867c4c410404c86170e310"
+    }
+  },
+  "contract_lock_sha256": "cdf20134880a3a5f101c1e59c8c850792418f9ea8cd7b6df3592d86fb8e87b04",
+  "decision": "STEP_5_1_AED_PORTFOLIO_GATE_FAIL",
+  "runtime_changed": false,
+  "schema_version": "xauusd_step_5_1_artifact_manifest_v1"
+}

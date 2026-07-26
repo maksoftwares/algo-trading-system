@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 import time
@@ -10,6 +11,7 @@ from typing import Any, Mapping
 
 
 ROOT = Path(__file__).resolve().parent
+REPO_ROOT = ROOT.parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
 from executor import (  # noqa: E402
@@ -22,6 +24,7 @@ from executor import (  # noqa: E402
     close_deadline,
     daily_key,
     due_candidates,
+    effective_risk_threshold_usd,
     floating_drawdown,
     load_state,
     mark_seen,
@@ -37,6 +40,36 @@ from executor import (  # noqa: E402
 CONFIG_PATH = ROOT / "config" / "v60_canonical_demo_portfolio_v2.json"
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def verify_deployment_parity(config: Mapping[str, Any]) -> dict[str, Any]:
+    if not bool(config["authorization"].get("full_v59_v60_forward_parity_required")):
+        raise RuntimeError("Full V59/V60 deployment parity must remain required")
+    settings = config.get("deployment_parity")
+    if not isinstance(settings, Mapping):
+        raise RuntimeError("Deployment parity settings are absent")
+    path = REPO_ROOT / str(settings["artifact_path"])
+    if not path.is_file() or sha256_file(path) != str(settings["artifact_sha256"]):
+        raise RuntimeError("Deployment parity artifact identity changed")
+    artifact = json.loads(path.read_text(encoding="utf-8"))
+    observed_sources = sorted(str(row["source_id"]) for row in config["sources"])
+    if artifact.get("schema_version") != "xauusd_v60_deployment_parity_v1":
+        raise RuntimeError("Deployment parity artifact schema changed")
+    if artifact.get("status") != "PASS":
+        raise RuntimeError("Deployment parity artifact does not pass")
+    if list(artifact.get("executable_source_ids", [])) != observed_sources:
+        raise RuntimeError("Deployment parity source registry changed")
+    if int(artifact.get("historical_trade_rows", 0)) <= 0:
+        raise RuntimeError("Deployment parity has no historical trades")
+    return artifact
+
+
 def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
     config = json.loads(path.read_text(encoding="utf-8"))
     auth = config["authorization"]
@@ -44,6 +77,10 @@ def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
         raise RuntimeError("V60 demo broker action is not authorized")
     if auth.get("live_authorized"):
         raise RuntimeError("V60 demo executor must never have live authorization")
+    if auth.get("minimum_balance_requirement_enabled"):
+        raise RuntimeError("Canonical demo executor must not enforce a minimum balance")
+    if not auth.get("demo_balance_eligibility_waived"):
+        raise RuntimeError("Demo balance eligibility waiver is absent")
     if auth.get("ml_runtime_authorized") or auth.get("ml_shadow_authorized"):
         raise RuntimeError("ML runtime and ML shadow must both remain unauthorized")
     expected = {
@@ -52,7 +89,6 @@ def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
         "R2_DOWNTREND",
         "R3_COMPRESSION",
         "R4_CHOP",
-        "R5_TRANSITION",
         "V7_SWING_HEALTH",
         "V8_RETEST_HEALTH",
         "V25_CHOP",
@@ -61,6 +97,16 @@ def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
     observed = {str(source["source_id"]) for source in config["sources"]}
     if observed != expected:
         raise RuntimeError(f"Canonical source set changed: {sorted(observed)}")
+    cooldowns = {
+        str(source["source_id"]): int(
+            source.get("same_direction_post_loss_cooldown_minutes", 0)
+        )
+        for source in config["sources"]
+        if int(source.get("same_direction_post_loss_cooldown_minutes", 0)) != 0
+    }
+    if cooldowns != {"V57_BREAK_SWING_H4ADX_HIGH": 120}:
+        raise RuntimeError(f"Canonical post-loss cooldowns changed: {cooldowns}")
+    verify_deployment_parity(config)
     return config
 
 
@@ -77,29 +123,64 @@ def _read_chart_text(path: Path) -> str:
     return raw.decode("utf-8", errors="replace")
 
 
+def _chart_settings(path: Path) -> dict[str, Any]:
+    values: dict[str, str] = {}
+    for raw_line in _read_chart_text(path).splitlines():
+        line = raw_line.strip()
+        if line == "name=Main":
+            break
+        if "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        if key == "name" and "expert" not in values:
+            values["expert"] = value
+        elif key.startswith("Inp"):
+            values[key] = value
+    return {"path": str(path), "settings": values}
+
+
 def audit_chart_profile(config: Mapping[str, Any], *, require_ready: bool) -> dict[str, Any]:
     settings = config["preflight"]
     root = Path(settings["chart_profile_directory"])
     charts = sorted(root.glob("*.chr"))
+    chart_rows = [_chart_settings(path) for path in charts]
     combined = "\n".join(_read_chart_text(path) for path in charts)
     forbidden = [term for term in settings["forbidden_chart_terms"] if term in combined]
-    required_experts = {
-        name: f"name={name}" in combined for name in settings["required_experts"]
-    }
-    required_runs = {
-        run_id: f"InpRunId={run_id}" in combined
-        for run_id in settings["required_sensor_run_ids"]
-    }
+    expectations: dict[str, dict[str, Any]] = {}
+    for expected in settings["expected_charts"]:
+        expected_inputs = {
+            str(key): str(value) for key, value in expected.get("inputs", {}).items()
+        }
+        expert = str(expected["expert"])
+        exact = [
+            row
+            for row in chart_rows
+            if row["settings"].get("expert") == expert
+            and all(
+                row["settings"].get(key) == value
+                for key, value in expected_inputs.items()
+            )
+        ]
+        expectations[str(expected["id"])] = {
+            "expert": expert,
+            "required_inputs": expected_inputs,
+            "matching_chart_paths": [row["path"] for row in exact],
+            "ready": len(exact) == 1,
+        }
     if forbidden:
         raise RuntimeError(f"Forbidden legacy/ML chart attachment found: {forbidden}")
-    ready = bool(charts) and all(required_experts.values()) and all(required_runs.values())
+    ready = bool(charts) and bool(expectations) and all(
+        row["ready"] for row in expectations.values()
+    )
     if require_ready and not ready:
-        raise RuntimeError("Canonical deterministic MT5 sensor profile is incomplete")
+        failed = [key for key, value in expectations.items() if not value["ready"]]
+        raise RuntimeError(
+            f"Canonical deterministic MT5 chart profile is incomplete: {failed}"
+        )
     return {
         "chart_count": len(charts),
         "forbidden_terms": forbidden,
-        "required_experts": required_experts,
-        "required_sensor_runs": required_runs,
+        "expected_charts": expectations,
         "ready": ready,
     }
 
@@ -120,28 +201,45 @@ def feed_preflight(config: Mapping[str, Any], *, require_ready: bool) -> dict[st
         raise RuntimeError("Canonical feed status belongs to the wrong account")
     updated = parse_utc(str(status["updated_at_utc"]))
     age_seconds = max(0.0, (utc_now() - updated).total_seconds())
+    cycle_age_seconds = 0.0
+    cycle_within_deadline = True
+    if bool(status.get("cycle_in_progress")):
+        cycle_started = parse_utc(str(status["cycle_started_at_utc"]))
+        cycle_age_seconds = max(0.0, (utc_now() - cycle_started).total_seconds())
+        cycle_within_deadline = cycle_age_seconds <= int(
+            config["runtime"]["maximum_feed_cycle_seconds"]
+        )
     required = {
         "R1_BOX",
         "R1_PULLBACK",
         "R2_R3",
         "R4",
+        "CORE_OUTCOMES",
         "R5_COMPONENTS",
         "R5_RESOLVER",
         "R5_ROUTER",
         "ADDONS",
     }
     observed = set(status.get("feeds", {}))
-    ready = required.issubset(observed) and bool(status.get("all_requested_feeds_ok")) and age_seconds <= int(
-        config["runtime"]["maximum_feed_status_age_seconds"]
+    ready = (
+        required.issubset(observed)
+        and bool(status.get("all_requested_feeds_ok"))
+        and age_seconds
+        <= int(config["runtime"]["maximum_feed_status_age_seconds"])
+        and cycle_within_deadline
     )
     if require_ready and not ready:
         raise RuntimeError(
             f"Canonical feeds are not ready: age={age_seconds:.1f}s "
-            f"all_ok={status.get('all_requested_feeds_ok')}"
+            f"all_ok={status.get('all_requested_feeds_ok')} "
+            f"cycle_age={cycle_age_seconds:.1f}s"
         )
     return {
         "ready": ready,
         "age_seconds": age_seconds,
+        "cycle_age_seconds": cycle_age_seconds,
+        "cycle_in_progress": bool(status.get("cycle_in_progress")),
+        "cycle_within_deadline": cycle_within_deadline,
         "all_requested_feeds_ok": bool(status.get("all_requested_feeds_ok")),
         "ml_used": bool(status.get("ml_used", True)),
         "required_feeds_present": required.issubset(observed),
@@ -168,6 +266,8 @@ def assert_account(
         not in str(account.server).lower()
     ):
         raise RuntimeError("Non-demo server refused")
+    if str(expected["required_trade_mode"]) != "DEMO" or int(account.trade_mode) != 0:
+        raise RuntimeError("Non-demo account trade mode refused")
     if str(account.currency) != str(expected["required_account_currency"]):
         raise RuntimeError(f"Unexpected account currency: {account.currency}")
     if require_trading and (not bool(account.trade_allowed) or not bool(account.trade_expert)):
@@ -210,6 +310,109 @@ def closed_pnl(
         )
     )
     return account_value_usd(account_currency_pnl, config)
+
+
+def recent_same_direction_losses(
+    mt5: Any,
+    config: Mapping[str, Any],
+    state: Mapping[str, Any],
+    positions: list[Any],
+    now: datetime,
+) -> tuple[dict[tuple[str, str], datetime], bool]:
+    cooldown_sources = {
+        int(source["magic"]): str(source["source_id"])
+        for source in config["sources"]
+        if int(source.get("same_direction_post_loss_cooldown_minutes", 0)) > 0
+    }
+    if not cooldown_sources:
+        return {}, True
+    start = parse_utc(state["activated_at_utc"]) - timedelta(minutes=1)
+    deals = mt5.history_deals_get(start, now)
+    if deals is None:
+        return {}, False
+
+    symbol = str(config["account"]["symbol"])
+    entry_in = int(getattr(mt5, "DEAL_ENTRY_IN", 0))
+    entry_out_values = {
+        int(getattr(mt5, "DEAL_ENTRY_OUT", 1)),
+        int(getattr(mt5, "DEAL_ENTRY_OUT_BY", 3)),
+    }
+    buy_type = int(getattr(mt5, "DEAL_TYPE_BUY", 0))
+    active_position_ids = {
+        int(getattr(position, "identifier", getattr(position, "ticket", -1)))
+        for position in positions
+    }
+    origins: dict[int, tuple[str, str]] = {}
+    deal_rows: dict[int, list[Any]] = {}
+    for deal in deals:
+        if str(getattr(deal, "symbol", "")) != symbol:
+            continue
+        position_id = int(getattr(deal, "position_id", 0) or 0)
+        if position_id <= 0:
+            continue
+        deal_rows.setdefault(position_id, []).append(deal)
+        magic = int(getattr(deal, "magic", -1))
+        if (
+            magic in cooldown_sources
+            and int(getattr(deal, "entry", -1)) == entry_in
+        ):
+            direction = (
+                "LONG"
+                if int(getattr(deal, "type", -1)) == buy_type
+                else "SHORT"
+            )
+            origins[position_id] = (cooldown_sources[magic], direction)
+
+    recent: dict[tuple[str, str], datetime] = {}
+    for position_id, key in origins.items():
+        if position_id in active_position_ids:
+            continue
+        lifecycle = deal_rows.get(position_id, [])
+        exits = [
+            deal
+            for deal in lifecycle
+            if int(getattr(deal, "entry", -1)) in entry_out_values
+        ]
+        if not exits:
+            continue
+        net_pnl = sum(
+            float(getattr(deal, "profit", 0.0))
+            + float(getattr(deal, "commission", 0.0))
+            + float(getattr(deal, "swap", 0.0))
+            + float(getattr(deal, "fee", 0.0))
+            for deal in lifecycle
+        )
+        if net_pnl >= 0.0:
+            continue
+        closed_at = max(
+            datetime.fromtimestamp(
+                int(
+                    getattr(
+                        deal,
+                        "time_msc",
+                        int(getattr(deal, "time", 0)) * 1000,
+                    )
+                )
+                / 1000.0,
+                tz=UTC,
+            )
+            for deal in exits
+        )
+        if key not in recent or closed_at > recent[key]:
+            recent[key] = closed_at
+    return recent, True
+
+
+def post_loss_cooldown_active(
+    candidate: Any,
+    recent_losses: Mapping[tuple[str, str], datetime],
+    now: datetime,
+) -> bool:
+    minutes = int(candidate.same_direction_post_loss_cooldown_minutes)
+    if minutes <= 0:
+        return False
+    closed_at = recent_losses.get((candidate.source_id, candidate.direction))
+    return closed_at is not None and now < closed_at + timedelta(minutes=minutes)
 
 
 def broker_geometry_preflight(
@@ -293,17 +496,56 @@ def send_request(mt5: Any, request: dict[str, Any]) -> Any:
     return last
 
 
-def locate_position(mt5: Any, symbol: str, magic: int, comment: str) -> Any | None:
+def locate_position(
+    mt5: Any,
+    symbol: str,
+    magic: int,
+    comment: str,
+    *,
+    before_tickets: set[int] | None = None,
+) -> Any | None:
     candidates = [
         position
         for position in (mt5.positions_get(symbol=symbol) or [])
         if int(getattr(position, "magic", -1)) == magic
     ]
     exact = [p for p in candidates if str(getattr(p, "comment", "")) == comment]
-    pool = exact or candidates
-    return (
-        max(pool, key=lambda item: int(getattr(item, "time_msc", 0))) if pool else None
-    )
+    if len(exact) == 1:
+        return exact[0]
+    if len(exact) > 1:
+        return None
+    if before_tickets is None:
+        return None
+    newly_opened = [
+        position
+        for position in candidates
+        if int(getattr(position, "ticket", -1)) not in before_tickets
+    ]
+    return newly_opened[0] if len(newly_opened) == 1 else None
+
+
+def locate_position_from_deal(
+    mt5: Any, result: Any, symbol: str, magic: int
+) -> Any | None:
+    deal_ticket = int(getattr(result, "deal", 0) or 0)
+    if deal_ticket <= 0:
+        return None
+    now = utc_now()
+    deals = mt5.history_deals_get(now - timedelta(minutes=5), now) or []
+    matching = [
+        deal
+        for deal in deals
+        if int(getattr(deal, "ticket", 0)) == deal_ticket
+        and int(getattr(deal, "magic", -1)) == magic
+        and str(getattr(deal, "symbol", "")) == symbol
+    ]
+    if len(matching) != 1:
+        return None
+    position_id = int(getattr(matching[0], "position_id", 0) or 0)
+    if position_id <= 0:
+        return None
+    positions = mt5.positions_get(ticket=position_id) or []
+    return positions[0] if len(positions) == 1 else None
 
 
 def open_candidate(
@@ -312,7 +554,7 @@ def open_candidate(
     config: Mapping[str, Any],
     symbol_info: Any,
     tick: Any,
-) -> tuple[Any, str, str | None]:
+) -> tuple[Any, str, str | None, Any | None]:
     point = float(symbol_info.point)
     minimum_stop = max(point, float(symbol_info.trade_stops_level) * point)
     price, stop, target = candidate_prices(
@@ -326,6 +568,10 @@ def open_candidate(
         mt5.ORDER_TYPE_BUY if candidate.direction == "LONG" else mt5.ORDER_TYPE_SELL
     )
     comment = candidate_comment(candidate)
+    before_tickets = {
+        int(position.ticket)
+        for position in (mt5.positions_get(symbol=config["account"]["symbol"]) or [])
+    }
     request = {
         "action": mt5.TRADE_ACTION_DEAL,
         "symbol": config["account"]["symbol"],
@@ -340,7 +586,24 @@ def open_candidate(
         "type_time": mt5.ORDER_TIME_GTC,
     }
     result = send_request(mt5, request)
-    return result, comment, close_deadline(candidate, utc_now())
+    position = None
+    if result is not None and int(result.retcode) in SUCCESS_RETCODES:
+        for _ in range(10):
+            position = locate_position(
+                mt5,
+                config["account"]["symbol"],
+                candidate.magic,
+                comment,
+                before_tickets=before_tickets,
+            )
+            if position is not None:
+                break
+            time.sleep(0.1)
+        if position is None:
+            position = locate_position_from_deal(
+                mt5, result, config["account"]["symbol"], candidate.magic
+            )
+    return result, comment, close_deadline(candidate, utc_now()), position
 
 
 def close_position(mt5: Any, position: Any, config: Mapping[str, Any]) -> Any:
@@ -376,7 +639,23 @@ def manage_horizon_exits(
         for p in (mt5.positions_get(symbol=config["account"]["symbol"]) or [])
     }
     for candidate_id, metadata in list(state.get("positions", {}).items()):
-        ticket = int(metadata["ticket"])
+        raw_ticket = metadata.get("ticket")
+        if raw_ticket is None:
+            position = locate_position(
+                mt5,
+                config["account"]["symbol"],
+                int(metadata["magic"]),
+                str(metadata["comment"]),
+            )
+            if position is None:
+                metadata["status"] = "POSITION_IDENTITY_UNRESOLVED"
+                metadata["last_reconciliation_at_utc"] = utc_text(now)
+                continue
+            raw_ticket = int(position.ticket)
+            metadata["ticket"] = raw_ticket
+            metadata["status"] = "OPEN"
+            current[raw_ticket] = position
+        ticket = int(raw_ticket)
         position = current.get(ticket)
         if position is None:
             metadata["status"] = "CLOSED_OR_MISSING"
@@ -398,6 +677,39 @@ def manage_horizon_exits(
         append_event(events_path, event)
         if retcode in SUCCESS_RETCODES:
             metadata["status"] = "HORIZON_CLOSE_SENT"
+
+
+def active_initial_risk(
+    positions: list[Any],
+    state: Mapping[str, Any],
+    symbol_info: Any,
+    mt5: Any,
+) -> tuple[float, dict[str, float]]:
+    metadata_by_ticket = {
+        int(metadata["ticket"]): metadata
+        for metadata in state.get("positions", {}).values()
+        if metadata.get("ticket") is not None
+    }
+    by_direction = {"LONG": 0.0, "SHORT": 0.0}
+    total = 0.0
+    for position in positions:
+        ticket = int(position.ticket)
+        metadata = metadata_by_ticket.get(ticket, {})
+        risk = float(metadata.get("initial_risk_usd", 0.0))
+        if risk <= 0.0:
+            stop = float(getattr(position, "sl", 0.0) or 0.0)
+            opened = float(getattr(position, "price_open", 0.0) or 0.0)
+            if stop > 0.0 and opened > 0.0:
+                ounces = float(symbol_info.trade_contract_size) * float(position.volume)
+                risk = abs(opened - stop) * ounces
+        direction = (
+            "LONG"
+            if int(position.type) == int(mt5.POSITION_TYPE_BUY)
+            else "SHORT"
+        )
+        total += risk
+        by_direction[direction] += risk
+    return total, by_direction
 
 
 def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
@@ -433,20 +745,35 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         manage_horizon_exits(mt5, config, state, events_path, now)
 
     positions = list(mt5.positions_get(symbol=symbol) or [])
+    recent_losses, loss_history_available = recent_same_direction_losses(
+        mt5, config, state, positions, now
+    )
     ours = own_positions(positions, magics, symbol)
     core_positions = own_positions(positions, core_magics, symbol)
     addon_positions = own_positions(positions, addon_magics, symbol)
-    active_tickets = {int(position.ticket) for position in addon_positions}
-    active_addon_risk = sum(
-        float(metadata.get("initial_risk_usd", 0.0))
-        for metadata in state.get("positions", {}).values()
-        if int(metadata.get("ticket", -1)) in active_tickets
+    active_initial_risk_usd, active_direction_risk_usd = active_initial_risk(
+        ours, state, symbol_info, mt5
     )
+    active_addon_risk, _ = active_initial_risk(
+        addon_positions, state, symbol_info, mt5
+    )
+    risk = config["risk"]
+    effective_risk_limits = {
+        key: effective_risk_threshold_usd(state, risk, key)
+        for key in (
+            "closed_drawdown_suspend_usd",
+            "closed_drawdown_resume_usd",
+            "combined_closed_drawdown_hard_stop_usd",
+            "floating_drawdown_hard_stop_usd",
+            "maximum_account_concurrent_initial_risk_usd",
+            "maximum_directional_concurrent_initial_risk_usd",
+        )
+    }
     hard_floating_stop = floating_drawdown(state, equity_usd) >= float(
-        config["risk"]["floating_drawdown_hard_stop_usd"]
+        effective_risk_limits["floating_drawdown_hard_stop_usd"]
     )
     combined_closed_stop = float(state["closed_drawdown_usd"]) >= float(
-        config["risk"]["combined_closed_drawdown_hard_stop_usd"]
+        effective_risk_limits["combined_closed_drawdown_hard_stop_usd"]
     )
     entry_halts = active_entry_halts(config)
     emergency_close_results: list[dict[str, Any]] = []
@@ -473,11 +800,11 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         ours = own_positions(positions, magics, symbol)
         core_positions = own_positions(positions, core_magics, symbol)
         addon_positions = own_positions(positions, addon_magics, symbol)
-        active_tickets = {int(position.ticket) for position in addon_positions}
-        active_addon_risk = sum(
-            float(metadata.get("initial_risk_usd", 0.0))
-            for metadata in state.get("positions", {}).values()
-            if int(metadata.get("ticket", -1)) in active_tickets
+        active_initial_risk_usd, active_direction_risk_usd = active_initial_risk(
+            ours, state, symbol_info, mt5
+        )
+        active_addon_risk, _ = active_initial_risk(
+            addon_positions, state, symbol_info, mt5
         )
     point = float(symbol_info.point)
     processed = 0
@@ -503,6 +830,25 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
             reason = "FLOATING_DRAWDOWN_HARD_STOP"
         elif combined_closed_stop:
             reason = "COMBINED_CLOSED_DRAWDOWN_HARD_STOP"
+        elif (
+            active_initial_risk_usd + candidate.initial_risk_usd
+            > float(
+                effective_risk_limits[
+                    "maximum_account_concurrent_initial_risk_usd"
+                ]
+            )
+        ):
+            reason = "MAXIMUM_ACCOUNT_CONCURRENT_INITIAL_RISK"
+        elif (
+            active_direction_risk_usd[candidate.direction]
+            + candidate.initial_risk_usd
+            > float(
+                effective_risk_limits[
+                    "maximum_directional_concurrent_initial_risk_usd"
+                ]
+            )
+        ):
+            reason = "MAXIMUM_DIRECTIONAL_CONCURRENT_INITIAL_RISK"
         elif candidate.sleeve_type == "CORE" and len(core_positions) >= int(
             config["risk"]["maximum_core_open_positions"]
         ):
@@ -524,6 +870,13 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         ):
             reason = "MAXIMUM_SOURCE_OPEN_POSITIONS"
         elif (
+            candidate.same_direction_post_loss_cooldown_minutes > 0
+            and not loss_history_available
+        ):
+            reason = "POST_LOSS_COOLDOWN_HISTORY_UNAVAILABLE"
+        elif post_loss_cooldown_active(candidate, recent_losses, now):
+            reason = "SAME_DIRECTION_POST_LOSS_COOLDOWN"
+        elif (
             int(state["daily_entries"].get(daily_key(candidate), 0))
             >= candidate.maximum_entries_per_utc_day
         ):
@@ -544,7 +897,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         elif candidate.sleeve_type == "ADDON" and candidate.event_id and any(
             item.get("event_id") == candidate.event_id
             and item.get("sleeve_type") == "ADDON"
-            and item.get("status") == "ORDER_FILLED"
+            and str(item.get("status", "")).startswith("ORDER_FILLED")
             for item in state.get("seen", {}).values()
         ):
             reason = "DUPLICATE_ADDON_EVENT"
@@ -569,7 +922,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
             continue
 
         try:
-            result, comment, deadline = open_candidate(
+            result, comment, deadline, position = open_candidate(
                 mt5, candidate, config, symbol_info, tick
             )
         except ValueError as exc:
@@ -609,23 +962,36 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
             processed += 1
             continue
 
-        position = locate_position(mt5, symbol, candidate.magic, comment)
-        ticket = (
-            int(position.ticket)
-            if position is not None
-            else int(result.order or result.deal)
+        ticket = None if position is None else int(position.ticket)
+        fill_status = (
+            "ORDER_FILLED"
+            if ticket is not None
+            else "ORDER_FILLED_POSITION_UNRESOLVED"
         )
-        mark_seen(state, candidate, "ORDER_FILLED", now, retcode=retcode, ticket=ticket)
+        mark_seen(
+            state,
+            candidate,
+            fill_status,
+            now,
+            retcode=retcode,
+            ticket=ticket,
+            broker_order=int(getattr(result, "order", 0) or 0),
+            broker_deal=int(getattr(result, "deal", 0) or 0),
+        )
         state["positions"][candidate.candidate_id] = {
             "ticket": ticket,
             "magic": candidate.magic,
+            "comment": comment,
             "source_id": candidate.source_id,
             "sleeve_type": candidate.sleeve_type,
+            "direction": candidate.direction,
             "initial_risk_usd": candidate.initial_risk_usd,
             "event_id": candidate.event_id,
             "opened_at_utc": utc_text(now),
             "close_at_utc": deadline,
-            "status": "OPEN",
+            "status": (
+                "OPEN" if ticket is not None else "POSITION_IDENTITY_UNRESOLVED"
+            ),
         }
         key = daily_key(candidate)
         state["daily_entries"][key] = int(state["daily_entries"].get(key, 0)) + 1
@@ -637,15 +1003,19 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         ours = own_positions(positions, magics, symbol)
         core_positions = own_positions(positions, core_magics, symbol)
         addon_positions = own_positions(positions, addon_magics, symbol)
-        active_tickets = {int(position.ticket) for position in addon_positions}
-        active_addon_risk = sum(
-            float(metadata.get("initial_risk_usd", 0.0))
-            for metadata in state.get("positions", {}).values()
-            if int(metadata.get("ticket", -1)) in active_tickets
+        active_initial_risk_usd, active_direction_risk_usd = active_initial_risk(
+            ours, state, symbol_info, mt5
+        )
+        active_addon_risk, _ = active_initial_risk(
+            addon_positions, state, symbol_info, mt5
         )
         processed += 1
 
     atomic_write_json(state_path, state)
+    emergency_close_failures = sum(
+        record["retcode"] not in SUCCESS_RETCODES
+        for record in emergency_close_results
+    )
     status = {
         "schema_version": "xauusd_v60_canonical_demo_status_v2",
         "updated_at_utc": utc_text(now),
@@ -675,13 +1045,24 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "combined_closed_drawdown_hard_stop": combined_closed_stop,
         "active_entry_halt_files": entry_halts,
         "emergency_close_results": emergency_close_results,
+        "emergency_close_failures": emergency_close_failures,
+        "effective_risk_limits_usd": effective_risk_limits,
         "core_open_positions": len(core_positions),
         "addon_open_positions": len(addon_positions),
         "addon_active_initial_risk_usd": active_addon_risk,
+        "account_active_initial_risk_usd": active_initial_risk_usd,
+        "direction_active_initial_risk_usd": active_direction_risk_usd,
         "account_xau_positions": len(positions),
         "seen_candidates": len(state["seen"]),
         "processed_this_cycle": processed,
+        "post_loss_cooldown_history_available": loss_history_available,
+        "recent_same_direction_losses": {
+            f"{source_id}:{direction}": utc_text(closed_at)
+            for (source_id, direction), closed_at in sorted(recent_losses.items())
+        },
         "demo_authorized": True,
+        "minimum_balance_requirement_enabled": False,
+        "demo_balance_eligibility_waived": True,
         "broker_action_authorized": True,
         "execution_enabled": execution_enabled,
         "live_authorized": False,

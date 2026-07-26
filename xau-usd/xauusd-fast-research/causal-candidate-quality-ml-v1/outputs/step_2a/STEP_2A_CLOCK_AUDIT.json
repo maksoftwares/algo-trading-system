@@ -1,0 +1,72 @@
+{
+  "canonical_clock_completeness": {
+    "decision_time": {
+      "missing": 0,
+      "present": 3752
+    },
+    "entry_eligible_time": {
+      "missing": 0,
+      "present": 3752
+    },
+    "feature_cutoff_time": {
+      "missing": 0,
+      "present": 3752
+    },
+    "signal_bar_end": {
+      "missing": 0,
+      "present": 3752
+    },
+    "source_available_at": {
+      "missing": 0,
+      "present": 3752
+    },
+    "source_event_time": {
+      "missing": 0,
+      "present": 3752
+    }
+  },
+  "canonical_complete_rows": 3752,
+  "canonical_ordering_violations": {
+    "decision_after_entry_eligible": 0,
+    "feature_cutoff_after_decision": 0,
+    "signal_bar_end_after_decision": 0,
+    "source_available_after_feature_cutoff": 0
+  },
+  "journey_action_rows": 117534,
+  "journey_ordering_violations": {
+    "decision_after_entry_eligible": 0,
+    "feature_cutoff_after_decision": 0,
+    "signal_bar_end_after_decision": 0,
+    "source_available_after_feature_cutoff": 0
+  },
+  "nearest_time_join_used": false,
+  "r1_timestamp_normalization": {
+    "h4_d1_long_best_box2_atr80": {
+      "direct_utc_feature_matches": 145,
+      "direct_utc_median_absolute_bid_error": 0.3569999999999709,
+      "direct_utc_p95_absolute_bid_error": 7.427000000000033,
+      "guard_rejected_rows": 488,
+      "helsinki_shifted_median_absolute_bid_error": 7.3849999999997635,
+      "order_accepted_rows": 145,
+      "order_send_failed_rows": 0,
+      "shifted_to_direct_median_error_ratio": 20.686274509804946,
+      "timestamp_basis": "MT5_TESTER_UTC_LIKE_VALIDATED_AGAINST_DUKASCOPY",
+      "would_signal_rows": 633
+    },
+    "r1_h1_pullback_long_v1": {
+      "direct_utc_feature_matches": 413,
+      "direct_utc_median_absolute_bid_error": 0.34500000000025466,
+      "direct_utc_p95_absolute_bid_error": 7.921000000000179,
+      "guard_rejected_rows": 2905,
+      "helsinki_shifted_median_absolute_bid_error": 3.4149999999999636,
+      "order_accepted_rows": 413,
+      "order_send_failed_rows": 0,
+      "shifted_to_direct_median_error_ratio": 9.898550724630269,
+      "timestamp_basis": "MT5_TESTER_UTC_LIKE_VALIDATED_AGAINST_DUKASCOPY",
+      "would_signal_rows": 3318
+    }
+  },
+  "required_invariant": "source_available_at <= feature_cutoff_time <= decision_time <= entry_eligible_time",
+  "schema_version": "xauusd_step_2a_clock_audit_v1",
+  "status": "PASS"
+}

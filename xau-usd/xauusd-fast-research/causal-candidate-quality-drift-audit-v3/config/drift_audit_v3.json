@@ -1,0 +1,131 @@
+{
+  "schema_version": "xauusd_action_v3_f2026_drift_audit",
+  "inputs": {
+    "v3_action_dataset": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v3/outputs/V3_ACTION_DATASET.parquet",
+      "sha256": "f3e9d28f7c9e73c8fd343c64a608787febf31fb1d4de636f7d09cc1347f8d1e0"
+    },
+    "v3_split_assignments": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v3/outputs/V3_SPLIT_ASSIGNMENTS.parquet",
+      "sha256": "4ab4902d363824edb82909e75a283b6c54bff26684239b1b66303f7bd41bcea5"
+    },
+    "v3_dataset_config": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v3/config/expanded_candidate_dataset_v3.json",
+      "sha256": "d14514a8759f4cbce3ca252747a71ba688d7b72b63146a0283c327e4cbb718ac"
+    },
+    "action_v3_config": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-action-models-v3/config/action_models_v3.json",
+      "sha256": "864913e6fec57b8632924672476862fa184a1c5cf651fe30ade8c7eeadf43d8b"
+    },
+    "action_v3_contract_lock": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-action-models-v3/outputs/ACTION_V3_CONTRACT_LOCK.json",
+      "sha256": "b7e7b660516a2fd730f1800b980ffecbb2e22d3df78e3af4a89fa98350d8510e"
+    },
+    "action_v3_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-action-models-v3/outputs/ACTION_V3_ARTIFACT_MANIFEST.json",
+      "sha256": "0fb873c4729974a3ee83754b29236659bcd11856f9e03531123eadc661edc11c"
+    },
+    "action_v3_policies": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-action-models-v3/outputs/ACTION_V3_CALIBRATION_POLICIES.parquet",
+      "sha256": "e3f1e36aab1bd85c68480d0b8d588d74e902d68969f77279d580b61af5c622cd"
+    },
+    "action_v3_predictions": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-action-models-v3/outputs/ACTION_V3_OUT_OF_TIME_PREDICTIONS.parquet",
+      "sha256": "ab0abb539afa2950b4012ef8a82425fcc633e143f31e3c2c52d52def884abaa6"
+    },
+    "action_v3_fold_metrics": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-action-models-v3/outputs/ACTION_V3_FOLD_METRICS.parquet",
+      "sha256": "73b77ad123cc7816ec0e0f26314cedbfc23de53840ebe4c96b5a59d0de224984"
+    }
+  },
+  "target_fold": "F2026",
+  "periods": {
+    "REFERENCE": "CALIBRATION",
+    "CURRENT": "TEST"
+  },
+  "expected": {
+    "action_rows": 73116,
+    "model_features": 58,
+    "model_feature_sha256": "0c62a55514964e50f2450ffbc0320d14508a2d452e14547e22dc2317ca6bd4b7",
+    "lanes": [
+      "DOWNSIDE_IMPULSE_RETEST",
+      "OPENING_RANGE_REVERSAL",
+      "BREAK_AND_RUN"
+    ]
+  },
+  "sessions_utc": [
+    {"name": "ASIA", "start_hour": 0, "end_hour": 7},
+    {"name": "LONDON", "start_hour": 7, "end_hour": 12},
+    {"name": "NY_OVERLAP", "start_hour": 12, "end_hour": 17},
+    {"name": "NY_LATE", "start_hour": 17, "end_hour": 22},
+    {"name": "ROLLOVER", "start_hour": 22, "end_hour": 24}
+  ],
+  "categorical_dimensions": [
+    "regime",
+    "session_utc",
+    "direction",
+    "action_availability",
+    "chosen_action"
+  ],
+  "decomposition_dimensions": [
+    "regime",
+    "session_utc",
+    "direction",
+    "action_availability",
+    "chosen_action"
+  ],
+  "numeric_drift": {
+    "quantile_bins": 10,
+    "epsilon": 1e-06,
+    "moderate_absolute_smd": 0.25,
+    "severe_absolute_smd": 0.5,
+    "moderate_psi": 0.1,
+    "severe_psi": 0.25,
+    "severe_feature_count_for_lane_flag": 5
+  },
+  "categorical_drift": {
+    "moderate_total_variation": 0.1,
+    "severe_total_variation": 0.2,
+    "moderate_psi": 0.1,
+    "severe_psi": 0.25
+  },
+  "failure_rules": {
+    "minimum_absolute_coverage_shift": 0.15,
+    "minimum_auc_drop": 0.05,
+    "ranking_collapse_auc": 0.5,
+    "minimum_mean_r_drop": 0.15,
+    "minimum_win_rate_drop": 0.08,
+    "minimum_negative_within_stratum_effect_r": 0.1,
+    "base_edge_maximum_reference_mean_r": 0.0,
+    "base_edge_maximum_current_mean_r": 0.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "DRIFT_V3_CONTRACT_LOCK.json",
+    "feature_metrics": "DRIFT_V3_FEATURE_METRICS.parquet",
+    "categorical_metrics": "DRIFT_V3_CATEGORICAL_METRICS.parquet",
+    "score_metrics": "DRIFT_V3_SCORE_METRICS.parquet",
+    "score_bins": "DRIFT_V3_SCORE_BINS.parquet",
+    "monthly_metrics": "DRIFT_V3_MONTHLY_METRICS.parquet",
+    "label_metrics": "DRIFT_V3_LABEL_METRICS.parquet",
+    "decomposition": "DRIFT_V3_DECOMPOSITION.parquet",
+    "replayed_events": "DRIFT_V3_REPLAYED_EVENTS.parquet",
+    "findings": "DRIFT_V3_FINDINGS.json",
+    "result_json": "DRIFT_V3_RESULT.json",
+    "result_md": "DRIFT_V3_RESULT.md",
+    "manifest": "DRIFT_V3_ARTIFACT_MANIFEST.json"
+  },
+  "authorization": {
+    "research_only": true,
+    "new_model_fit_authorized": false,
+    "threshold_search_authorized": false,
+    "portfolio_simulation_authorized": false,
+    "python_serving_authorized": false,
+    "ml_shadow_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  },
+  "historical_outcomes_already_exposed": true
+}

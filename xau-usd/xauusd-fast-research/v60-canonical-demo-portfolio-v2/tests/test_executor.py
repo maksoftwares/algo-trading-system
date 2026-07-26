@@ -9,6 +9,7 @@ from executor import (
     Candidate,
     candidate_prices,
     due_candidates,
+    effective_risk_threshold_usd,
     normalize_candidate,
     refresh_drawdown_state,
 )
@@ -95,6 +96,7 @@ def test_prices_long_with_broker_side_stop_and_target() -> None:
         maximum_spread_r=0.15,
         maximum_open_positions=2,
         maximum_entries_per_utc_day=1,
+        same_direction_post_loss_cooldown_minutes=0,
         initial_risk_usd=5.0,
         event_id=None,
         raw={},
@@ -120,6 +122,7 @@ def test_prices_reject_excessive_spread() -> None:
         maximum_spread_r=0.15,
         maximum_open_positions=4,
         maximum_entries_per_utc_day=4,
+        same_direction_post_loss_cooldown_minutes=0,
         initial_risk_usd=2.0,
         event_id=None,
         raw={},
@@ -137,15 +140,29 @@ def test_closed_drawdown_suspend_and_resume_hysteresis() -> None:
         "closed_pnl_usd": 100.0,
         "closed_drawdown_usd": 0.0,
         "drawdown_suspended": False,
+        "activation_equity_usd": 3000.0,
     }
     risk = {
         "closed_drawdown_suspend_usd": 225.0,
+        "closed_drawdown_suspend_fraction": 0.075,
         "closed_drawdown_resume_usd": 180.0,
+        "closed_drawdown_resume_fraction": 0.06,
     }
     refresh_drawdown_state(state, equity=3000.0, closed_pnl=-130.0, risk=risk)
     assert state["drawdown_suspended"] is True
     refresh_drawdown_state(state, equity=3000.0, closed_pnl=-79.0, risk=risk)
     assert state["drawdown_suspended"] is False
+
+
+def test_risk_threshold_uses_lower_of_absolute_and_activation_fraction() -> None:
+    state = {"activation_equity_usd": 987.6623553437713}
+    risk = {
+        "floating_drawdown_hard_stop_usd": 449.7675,
+        "floating_drawdown_hard_stop_fraction": 0.15,
+    }
+    assert effective_risk_threshold_usd(
+        state, risk, "floating_drawdown_hard_stop_usd"
+    ) == pytest.approx(148.1493533015657)
 
 
 def test_addon_candidate_carries_initial_risk_and_event_identity() -> None:

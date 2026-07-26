@@ -1,0 +1,10 @@
+{
+  "atr_reference_sha256": "3ce0fc80bc561b6284de3fb4c0f967af3d59ae166987dc2d2ff20fcba08b18f4",
+  "first_bar_start": "2010-01-01T00:00:00+00:00",
+  "last_bar_start": "2026-06-30T23:55:00+00:00",
+  "post2016_cache_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "pre2016_end_exclusive_utc": "2016-07-01T00:00:00+00:00",
+  "rows": 1176817,
+  "schema_version": "xauusd_step_3_m5_atr_reference_v1",
+  "source_corpus_sha256": "f26a3b95df953b1367bb0c58d935b4643691135d9e214f2220b3604fa52c82d1"
+}

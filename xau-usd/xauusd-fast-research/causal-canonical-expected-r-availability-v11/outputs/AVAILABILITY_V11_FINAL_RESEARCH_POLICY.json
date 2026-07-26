@@ -1,0 +1,12 @@
+{
+  "actual_final_fit_rows": 2851,
+  "definition_contract_sha256": "676e657ac5af3eb7beead0e26d5caef2b06142c537f2034f23eec5c6ae8f4279",
+  "minimum_fit_rows": 1000,
+  "model_available": true,
+  "research_only": true,
+  "runtime_authorized": false,
+  "schema_version": "xauusd_expected_r_availability_v11_final_policy",
+  "unavailable_action": "ML_ABSTAIN_RETAIN_ALL",
+  "v10_model_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_FINAL_RESEARCH_MODEL.joblib",
+  "v10_model_sha256": "a334d911c316844f3e44bbc7f8adbb4d69c6f326b00e24d4a8e55ba5f964973b"
+}

@@ -1,0 +1,21 @@
+{
+  "all_required": true,
+  "checks": {
+    "maximum_drawdown_ratio_to_baseline": true,
+    "minimum_latest_fold_normalized_usd_vs_baseline": false,
+    "minimum_latest_fold_normalized_usd_vs_v11": true,
+    "minimum_profit_delta_bootstrap_lower_usd": false,
+    "minimum_recent_window_profit_wins_vs_v11": true,
+    "minimum_selected_profit_factor": true,
+    "minimum_selected_rows": true,
+    "minimum_selected_weighted_mean_r": true,
+    "minimum_total_normalized_usd_vs_baseline": true,
+    "minimum_total_normalized_usd_vs_v11": true
+  },
+  "decision": "PROFIT_POLICY_V12_HISTORICAL_GATE_FAIL",
+  "passed": false,
+  "passed_checks": 8,
+  "required_checks": 10,
+  "runtime_authorized": false,
+  "schema_version": "xauusd_profit_policy_v12_acceptance"
+}

@@ -1,0 +1,30 @@
+{
+  "checks": {
+    "entries_per_weekday_1Y": false,
+    "entries_per_weekday_2Y": false,
+    "entries_per_weekday_5Y": false,
+    "family_concentration_5Y": true,
+    "floating_drawdown_FULL": true,
+    "hard_stop_not_triggered": true,
+    "net_account_10Y": true,
+    "net_account_1Y": false,
+    "net_account_2Y": false,
+    "net_account_5Y": false,
+    "positive_six_month_blocks": false,
+    "profit_factor_10Y": false,
+    "profit_factor_1Y": false,
+    "profit_factor_2Y": false,
+    "profit_factor_5Y": false,
+    "risk_invariants": true,
+    "top_winners_removed_net_10Y": false,
+    "top_winners_removed_net_5Y": false
+  },
+  "decision": "STEP_5_1_AED_PORTFOLIO_GATE_FAIL",
+  "passed_checks": 5,
+  "positive_six_month_block_fraction": 0.15,
+  "primary_policy_id": "AED_NINE_ALL_CANDIDATES_GOVERNED",
+  "required_checks": 18,
+  "research_only": true,
+  "runtime_authorized": false,
+  "schema_version": "xauusd_step_5_1_acceptance_gates_v1"
+}

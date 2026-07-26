@@ -1,0 +1,240 @@
+{
+  "schema_version": "xauusd_step_5_shared_account_portfolio_contract_v1",
+  "campaign_id": "causal-candidate-quality-ml-v1",
+  "stage": "STEP_5_LOCKED_SHARED_ACCOUNT_PORTFOLIO_EVALUATION",
+  "created_utc": "2026-07-22T13:00:00Z",
+  "controls": {
+    "portfolio_simulation_authorized": true,
+    "historical_outcomes_already_exposed": true,
+    "post_result_policy_tuning_authorized": false,
+    "ml_predictions_used": false,
+    "ml_thresholds_used": false,
+    "journey_rows_used": false,
+    "comex_used": false,
+    "databento_api_access_authorized": false,
+    "new_data_acquisition_authorized": false,
+    "runtime_change_authorized": false,
+    "shadow_demo_or_live_authorized": false
+  },
+  "bound_inputs": {
+    "step_3_dataset": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet",
+      "sha256": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45"
+    },
+    "step_3_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_RESULT.json",
+      "sha256": "41f005792e81a8d2783a2528247ea886a6463a74f9648c0384725a8fc98e379d"
+    },
+    "step_3_artifact_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_ARTIFACT_MANIFEST.json",
+      "sha256": "5dbbdc8189524b18a230eebe8011dcf6b64e0a7eb502f8e24ec4b4bd7562bedc"
+    },
+    "step_4_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_4/STEP_4_RESULT.json",
+      "sha256": "5032222e8007c0a3a77112a10207673584be992a8d20d0e91d87ea95a64c1a7e"
+    },
+    "step_4_acceptance": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_4/STEP_4_ACCEPTANCE_GATES.json",
+      "sha256": "835ca408b3a65d0a174d154eaede62cebaab3f1adc36a3e63804201641568f70"
+    },
+    "step_4_artifact_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_4/STEP_4_ARTIFACT_MANIFEST.json",
+      "sha256": "9c9d2e95caf53bad5e5cc28b6562028247d6c32fd16c1dab9e69cad52a82eee3"
+    },
+    "v60_market_contract": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/config/one_trade_per_day_floating_equity_v60.json",
+      "sha256": "358f12f5a4cf272c1e2ef7ea33c7d690732bc97b1aa246bd3d98b642fa3a97bc"
+    }
+  },
+  "population": {
+    "identity": "candidate_id",
+    "episode": "structural_episode_id",
+    "entry_clock": "entry_time",
+    "exit_clock": "label_end_time",
+    "outcome": "stress_net_r",
+    "risk_usd": "initial_risk_usd_0p01",
+    "resolved_status_prefix": "RESOLVED_",
+    "broker_executable_required": true,
+    "historical_policy_field": "historical_portfolio_accepted",
+    "family_priority": [
+      "R1_UPTREND",
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "R5_TRANSITION",
+      "V7_SWING_HEALTH",
+      "V8_RETEST_HEALTH",
+      "V57_BREAK_SWING_H4ADX_HIGH",
+      "V25_CHOP"
+    ],
+    "five_regime_families": [
+      "R1_UPTREND",
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "R5_TRANSITION"
+    ],
+    "expanded_families": [
+      "R1_UPTREND",
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "R5_TRANSITION",
+      "V25_CHOP",
+      "V57_BREAK_SWING_H4ADX_HIGH",
+      "V7_SWING_HEALTH",
+      "V8_RETEST_HEALTH"
+    ],
+    "episode_tie_break": [
+      "family_priority_ascending",
+      "log1p_observation_cap_minutes_ascending",
+      "planned_stop_price_ascending",
+      "candidate_id_ascending"
+    ],
+    "episode_tie_break_uses_outcomes": false
+  },
+  "policies": [
+    {
+      "policy_id": "FIVE_FROZEN_POLICY_AS_RECORDED",
+      "family_scope": "FIVE",
+      "mode": "HISTORICAL_POLICY_AS_RECORDED",
+      "episode_deduplication": false,
+      "account_governor": false,
+      "role": "COMPARATOR"
+    },
+    {
+      "policy_id": "FIVE_ALL_CANDIDATES_GOVERNED",
+      "family_scope": "FIVE",
+      "mode": "ALL_EXECUTABLE_CANDIDATES",
+      "episode_deduplication": true,
+      "account_governor": true,
+      "role": "COMPARATOR"
+    },
+    {
+      "policy_id": "NINE_FROZEN_POLICY_AS_RECORDED",
+      "family_scope": "EXPANDED",
+      "mode": "HISTORICAL_POLICY_AS_RECORDED",
+      "episode_deduplication": false,
+      "account_governor": false,
+      "role": "COMPARATOR"
+    },
+    {
+      "policy_id": "NINE_ALL_CANDIDATES_GOVERNED",
+      "family_scope": "EXPANDED",
+      "mode": "ALL_EXECUTABLE_CANDIDATES",
+      "episode_deduplication": true,
+      "account_governor": true,
+      "role": "PRIMARY"
+    }
+  ],
+  "account": {
+    "starting_equity_usd": 3654.45,
+    "reference_lot": 0.01,
+    "xau_ounces_per_reference_lot": 1.0,
+    "conservative_leverage": 20.0,
+    "maximum_positions": 3,
+    "maximum_positions_per_direction": 2,
+    "maximum_positions_per_family": 1,
+    "maximum_positions_per_broad_mechanic": 1,
+    "maximum_entries_per_utc_date": 4,
+    "maximum_single_trade_initial_risk_fraction": 0.0075,
+    "maximum_aggregate_initial_risk_fraction": 0.015,
+    "maximum_directional_initial_risk_fraction": 0.01,
+    "maximum_margin_fraction": 0.25,
+    "daily_closed_loss_breaker_fraction": 0.02,
+    "closed_drawdown_suspend_fraction": 0.10,
+    "closed_drawdown_resume_fraction": 0.08,
+    "closed_drawdown_hard_stop_fraction": 0.15,
+    "same_timestamp_order": "EXITS_AS_BATCH_BEFORE_ENTRIES",
+    "sizing": "FIXED_0P01_LOT_NO_SCALING",
+    "forced_liquidation_simulated": false
+  },
+  "market_data": {
+    "bar_minutes": 5,
+    "envelope_ordering": "FAVORABLE_THEN_ADVERSE_WITHIN_EACH_M5_BAR",
+    "boundary_bar_policy": "FULL_BAR_EXTREMA_CONSERVATIVE",
+    "modern_m5": {
+      "path": "C:/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+      "expected_rows": 708538
+    },
+    "legacy_bid_m5": {
+      "root": "C:/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5",
+      "pattern": "year=*/month=*/bars.parquet",
+      "expected_files": 78,
+      "expected_rows": 468279
+    },
+    "legacy_ask_m5": {
+      "root": "C:/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5",
+      "pattern": "year=*/month=*/bars.parquet",
+      "expected_files": 78,
+      "expected_rows": 468279
+    }
+  },
+  "evaluation": {
+    "data_start_inclusive_utc": "2010-01-01T00:00:00Z",
+    "cutoff_exclusive_utc": "2026-07-01T00:00:00Z",
+    "windows": {
+      "3M": ["2026-04-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+      "6M": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+      "1Y": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+      "2Y": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+      "3Y": ["2023-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+      "5Y": ["2021-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+      "10Y": ["2016-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+      "FULL": ["2010-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+    },
+    "six_month_stability_start_utc": "2016-07-01T00:00:00Z",
+    "top_winners_removed": 5
+  },
+  "acceptance_gates": {
+    "primary_policy_id": "NINE_ALL_CANDIDATES_GOVERNED",
+    "minimum_profit_factor_by_window": {
+      "1Y": 1.15,
+      "2Y": 1.20,
+      "5Y": 1.25,
+      "10Y": 1.25
+    },
+    "minimum_net_usd_by_window": {
+      "1Y": 0.0,
+      "2Y": 0.0,
+      "5Y": 0.0,
+      "10Y": 0.0
+    },
+    "minimum_entries_per_weekday_by_window": {
+      "1Y": 1.0,
+      "2Y": 1.0,
+      "5Y": 1.0
+    },
+    "maximum_floating_drawdown_fraction": 0.15,
+    "minimum_positive_six_month_block_fraction": 0.65,
+    "minimum_top_winners_removed_net_usd_by_window": {
+      "5Y": 0.0,
+      "10Y": 0.0
+    },
+    "maximum_single_family_entry_fraction_5Y": 0.50,
+    "risk_invariants_required": true,
+    "hard_stop_must_not_trigger": true
+  },
+  "decision_policy": {
+    "pass": "STEP_5_HISTORICAL_PORTFOLIO_GATE_PASS_RESEARCH_ONLY",
+    "fail": "STEP_5_HISTORICAL_PORTFOLIO_GATE_FAIL",
+    "runtime_authorized_on_pass": false,
+    "prospective_confirmation_required": true
+  },
+  "outputs": {
+    "directory": "outputs/step_5",
+    "contract_lock": "STEP_5_SHARED_ACCOUNT_CONTRACT_LOCK.json",
+    "decision_ledger": "STEP_5_DECISION_LEDGER.parquet",
+    "accepted_trades": "STEP_5_ACCEPTED_TRADES.parquet",
+    "window_metrics": "STEP_5_WINDOW_METRICS.parquet",
+    "daily_metrics": "STEP_5_DAILY_METRICS.parquet",
+    "attribution": "STEP_5_ATTRIBUTION.parquet",
+    "six_month_stability": "STEP_5_SIX_MONTH_STABILITY.parquet",
+    "primary_equity_curve": "STEP_5_PRIMARY_M5_EQUITY_CURVE.parquet",
+    "acceptance": "STEP_5_ACCEPTANCE_GATES.json",
+    "result_json": "STEP_5_RESULT.json",
+    "result_markdown": "STEP_5_RESULT.md",
+    "artifact_manifest": "STEP_5_ARTIFACT_MANIFEST.json"
+  }
+}

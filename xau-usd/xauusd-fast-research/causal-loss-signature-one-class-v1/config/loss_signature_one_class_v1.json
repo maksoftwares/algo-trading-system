@@ -1,0 +1,103 @@
+{
+  "schema_version": "xauusd_causal_loss_signature_one_class_v1",
+  "inputs": {
+    "v4_dataset_config": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/config/expanded_candidate_dataset_v4.json",
+      "sha256": "65406d81de9d5dd55ed10955f74e34f2c51f5d8f999d4123c9e9096de6afb65d"
+    },
+    "v4_action_dataset": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_ACTION_DATASET.parquet",
+      "sha256": "1c481738ffd137de1fb4c64f526758040728f6065563f907bc928bb1a8008611"
+    },
+    "v4_split_assignments": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_SPLIT_ASSIGNMENTS.parquet",
+      "sha256": "4ab4902d363824edb82909e75a283b6c54bff26684239b1b66303f7bd41bcea5"
+    },
+    "v4_artifact_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_ARTIFACT_MANIFEST.json",
+      "sha256": "3431a4ae2d5909e8fc45808e60d86b60070e662179d55c27e05ad7ddbeccb052"
+    },
+    "v4_population_audit": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_POPULATION_AUDIT.json",
+      "sha256": "c53a14b1ef754fbc802ac2cdc0cdbd5689e6a84d7f378fd4be73dae27c52a9c9"
+    }
+  },
+  "population": {
+    "rows": 73116,
+    "stressed_failures": 42067,
+    "stressed_winners": 31049,
+    "structural_episodes": 15172,
+    "feature_source": "v4_dataset_config.model_features",
+    "feature_count": 58,
+    "feature_sha256": "0c62a55514964e50f2450ffbc0320d14508a2d452e14547e22dc2317ca6bd4b7",
+    "target": "stress_net_r_positive",
+    "economic_outcome": "stress_net_r",
+    "weight": "structural_weight",
+    "clock": "signal_time",
+    "identity": "candidate_id",
+    "episode": "structural_episode_id"
+  },
+  "folds": ["F2021", "F2022", "F2023", "F2024", "F2025", "F2026"],
+  "training": {
+    "fit_partition": "FIT",
+    "test_partition": "TEST",
+    "fit_rows_allowed": "STRESSED_FAILURES_ONLY",
+    "winner_rows_allowed_in_fit": 0,
+    "calibration_rows_allowed_in_fit_or_threshold": 0,
+    "model": {
+      "kind": "ISOLATION_FOREST",
+      "n_estimators": 400,
+      "max_samples": 4096,
+      "max_features": 1.0,
+      "bootstrap": false,
+      "contamination": "auto",
+      "random_state": 60723,
+      "n_jobs": 1
+    },
+    "loss_similarity": "ISOLATION_FOREST_SCORE_SAMPLES_HIGHER_IS_MORE_LOSS_LIKE",
+    "primary_weighted_loss_quantile": 0.8,
+    "diagnostic_weighted_loss_quantiles": [0.6, 0.7, 0.9]
+  },
+  "bootstrap": {
+    "resamples": 2000,
+    "confidence": 0.95,
+    "seed": 60723,
+    "block": "ISO_CALENDAR_WEEK"
+  },
+  "acceptance_gates": {
+    "pooled_weighted_loss_auc_minimum": 0.55,
+    "pooled_loss_precision_lift_minimum": 0.05,
+    "loss_precision_lift_bootstrap_lower_strictly_above": 0.0,
+    "pooled_loss_recall_minimum": 0.1,
+    "pooled_retained_coverage_minimum": 0.75,
+    "pooled_retained_ev_lift_minimum_r": 0.03,
+    "retained_ev_lift_bootstrap_lower_strictly_above": 0.0,
+    "retained_profit_factor_must_exceed_baseline": true,
+    "minimum_positive_precision_lift_folds": 4,
+    "minimum_positive_retained_ev_lift_folds": 4,
+    "latest_fold_requires_positive_precision_lift": true,
+    "latest_fold_requires_positive_retained_ev_lift": true
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "LOSS_ONLY_V1_CONTRACT_LOCK.json",
+    "predictions": "LOSS_ONLY_V1_OUT_OF_TIME_PREDICTIONS.parquet",
+    "fold_metrics": "LOSS_ONLY_V1_FOLD_METRICS.parquet",
+    "bootstrap": "LOSS_ONLY_V1_BOOTSTRAP.json",
+    "acceptance": "LOSS_ONLY_V1_ACCEPTANCE.json",
+    "result_json": "LOSS_ONLY_V1_RESULT.json",
+    "result_markdown": "LOSS_ONLY_V1_RESULT.md",
+    "manifest": "LOSS_ONLY_V1_ARTIFACT_MANIFEST.json",
+    "model_directory": "models"
+  },
+  "authorization": {
+    "research_only": true,
+    "python_serving_authorized": false,
+    "ml_shadow_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}
+

@@ -1,0 +1,176 @@
+{
+  "aggregate_economics_present_at_lock": false,
+  "broker_action_authorized": false,
+  "contract_sha256": "ed5e6c2d69ac037de878017745d6c366b2a5ffdfab09500a2064bd10d9668d83",
+  "created_at_utc": "2026-07-26T21:58:16.027711Z",
+  "demo_authorized": false,
+  "dependencies": [
+    {
+      "bytes": 1519,
+      "path": "multi-asset/data-foundation/dukascopy-macro-prospective-v1/config/prospective_macro_v1.json",
+      "sha256": "4ae83a8fbf602e3c70cdc1d92d687770335514ff4414e8fc2faacc44e20d8f68"
+    },
+    {
+      "bytes": 5890,
+      "path": "multi-asset/data-foundation/dukascopy-macro-prospective-v1/src/m5.py",
+      "sha256": "c7d8721c740ad88ffb667b91878ec4007905a8390fba9b018bb00136ee6d5cb2"
+    },
+    {
+      "bytes": 10594,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-prospective-v13/outputs/EXPECTED_R_PROSPECTIVE_V13_CONTRACT_LOCK.json",
+      "sha256": "8d91ab134b8bf05326d0fdf9b5428c3cebe7fc681899e0ee30cd2cda2e289c7e"
+    },
+    {
+      "bytes": 78952,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-prospective-v13/src/evaluator.py",
+      "sha256": "5edcf964e306e246e081c763b0097ca2782a14ef7b4a0a3f4d98fee1a02282ed"
+    },
+    {
+      "bytes": 16330,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+      "sha256": "2ea01130ab139fc6795909724ae375ad03cf69e3e17b09bd66b8905446a66f0a"
+    },
+    {
+      "bytes": 3950,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_V14_FINAL_MODEL_MANIFEST.json",
+      "sha256": "d27cb199cd4a67533eab2b3142d48f91624b4b54cc49b0ead593ab5b74297683"
+    },
+    {
+      "bytes": 6271,
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_V14_FINAL_RESEARCH_MODEL.joblib",
+      "sha256": "22b7b5c0eba85a72063aab5ac7eb1706e2eadf2b79afc994717b773bb5b623ba"
+    }
+  ],
+  "ea_consumption_authorized": false,
+  "forward_start_inclusive_utc": "2026-07-27T03:00:00Z",
+  "historical_outcomes_exposed_before_design": true,
+  "live_authorized": false,
+  "macro_source": {
+    "feature_manifest_glob": "prospective-macro-v1/features/MACRO_*_M5_FEATURES_V1.manifest.json",
+    "m5_module_path": "multi-asset/data-foundation/dukascopy-macro-prospective-v1/src/m5.py",
+    "m5_module_sha256": "c7d8721c740ad88ffb667b91878ec4007905a8390fba9b018bb00136ee6d5cb2",
+    "maximum_snapshot_lag_seconds": 7200,
+    "maximum_staleness_seconds": 7200,
+    "required_symbols": [
+      "DOLLARIDXUSD",
+      "USTBONDTRUSD"
+    ],
+    "source_config_path": "multi-asset/data-foundation/dukascopy-macro-prospective-v1/config/prospective_macro_v1.json",
+    "source_config_sha256": "4ae83a8fbf602e3c70cdc1d92d687770335514ff4414e8fc2faacc44e20d8f68",
+    "storage_root": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1"
+  },
+  "ml_shadow_authorized": false,
+  "model": {
+    "actual_fit_rows": 3024,
+    "actual_fit_selected_weight_fraction": 0.9501186239620403,
+    "expected_r_module_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+    "expected_r_module_sha256": "2ea01130ab139fc6795909724ae375ad03cf69e3e17b09bd66b8905446a66f0a",
+    "manifest_path": "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_V14_FINAL_MODEL_MANIFEST.json",
+    "manifest_sha256": "d27cb199cd4a67533eab2b3142d48f91624b4b54cc49b0ead593ab5b74297683",
+    "minimum_fit_rows": 2500,
+    "minimum_fit_selected_weight_fraction": 0.94,
+    "path": "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_V14_FINAL_RESEARCH_MODEL.joblib",
+    "sha256": "22b7b5c0eba85a72063aab5ac7eb1706e2eadf2b79afc994717b773bb5b623ba",
+    "veto_quantile": 0.05
+  },
+  "model_refit_after_boundary_authorized": false,
+  "package_files": [
+    {
+      "bytes": 34,
+      "path": ".gitignore",
+      "sha256": "c30f9bc45238a2e6624722bb4ef666e23f8823fcc9f3bc4fc5277723185fa701"
+    },
+    {
+      "bytes": 1223,
+      "path": "README.md",
+      "sha256": "14665c74ebaa4c3e6ba343cfb95406527d7b49957c8ffda93678d802572b9fb3"
+    },
+    {
+      "bytes": 2418,
+      "path": "PREREGISTRATION.md",
+      "sha256": "33063d551d66dbdf66e684176227ed26456d551e51434f58c52b30d1507e7688"
+    },
+    {
+      "bytes": 117,
+      "path": "requirements.txt",
+      "sha256": "6c9d368e1cd9d3656855c64a5c23d4eddab8341d37ee7c3b2dd2c0a5e0621498"
+    },
+    {
+      "bytes": 7618,
+      "path": "build_final_model.py",
+      "sha256": "b21cca807f7f340017b306d3bc2b63a55da75855d50c61b0cac1a9483c9a34b6"
+    },
+    {
+      "bytes": 5260,
+      "path": "config/macro_expected_r_prospective_v14.json",
+      "sha256": "afc2f0da2384a83d3ffb4f46b5fa1a96fc21471dd075df1cb9d7e146d295d177"
+    },
+    {
+      "bytes": 59,
+      "path": "src/__init__.py",
+      "sha256": "586f3aed4d9e6ec20d5c38970fe250f8d386e74c1c281e8818869173ccec836c"
+    },
+    {
+      "bytes": 21951,
+      "path": "src/evaluator.py",
+      "sha256": "092487d52b7d254a566f84fa8a644a5c99338943c13e1110e5ed626e41e52d50"
+    },
+    {
+      "bytes": 944,
+      "path": "run_evaluation.py",
+      "sha256": "f95985ed04018ba47975cf344c6f3c93182ace525967b66e3e9c2b8a7d014402"
+    },
+    {
+      "bytes": 1048,
+      "path": "verify.py",
+      "sha256": "1650892945a71724eb4fee0455d5d2ca7ebf275e21496ba72b9e38294eba8d4d"
+    },
+    {
+      "bytes": 4322,
+      "path": "lock_contract.py",
+      "sha256": "dc64ca7138dbe9ced729505eb19936536194f3b3b38a3a2beb76b6efb5fa3102"
+    },
+    {
+      "bytes": 180,
+      "path": "tests/conftest.py",
+      "sha256": "d0a5179e44e0206108b1fd09e2ecc8c792aae09903c85a3cd4cbf4aaf2335bd9"
+    },
+    {
+      "bytes": 4148,
+      "path": "tests/test_evaluator.py",
+      "sha256": "b591be44c6e99cd56a11cc438fb5f3c3f2076775a964231c93d25b5835f339a8"
+    }
+  ],
+  "post_outcome_parameter_selection_disclosed": true,
+  "prospective_protocol": {
+    "minimum_eligible_weekdays_confirmation": 40,
+    "minimum_eligible_weekdays_validation": 20,
+    "minimum_frequency_retention": 0.9,
+    "minimum_resolved_candidates_confirmation": 120,
+    "minimum_resolved_candidates_validation": 40,
+    "minimum_scored_families_confirmation": 6,
+    "minimum_scored_families_validation": 5,
+    "missing_or_stale_feature_action": "MODEL_ABSTAIN_RETAIN_ALL",
+    "require_drawdown_not_worse": true,
+    "require_latest_stage_profit_delta_positive": true,
+    "require_profit_factor_not_worse": true,
+    "required_profit_delta_usd": 0.0,
+    "score_comparison": "SCORE_GREATER_THAN_OR_EQUAL_TO_FROZEN_POOLED_THRESHOLD",
+    "upstream_xau_abstention_action": "MODEL_ABSTAIN_RETAIN_ALL",
+    "weekly_bootstrap_profit_delta_lower_required": 0.0
+  },
+  "prospective_research_scoring_authorized": true,
+  "python_serving_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_macro_expected_r_prospective_v14_contract",
+  "upstream": {
+    "v13_contract_file_sha256": "8d91ab134b8bf05326d0fdf9b5428c3cebe7fc681899e0ee30cd2cda2e289c7e",
+    "v13_contract_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-prospective-v13/outputs/EXPECTED_R_PROSPECTIVE_V13_CONTRACT_LOCK.json",
+    "v13_contract_sha256": "12a28b26a428bd94d4169a88835e19af90d611acf6061ec3ef5a67c10c18571d",
+    "v13_evaluator_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-prospective-v13/src/evaluator.py",
+    "v13_evaluator_sha256": "5edcf964e306e246e081c763b0097ca2782a14ef7b4a0a3f4d98fee1a02282ed",
+    "v13_resolution_ledger": "D:/AlgoTradingData/prospective/causal-canonical-expected-r-prospective-v13/resolutions.jsonl",
+    "v13_score_ledger": "D:/AlgoTradingData/prospective/causal-canonical-expected-r-prospective-v13/scores.jsonl",
+    "v13_status": "D:/AlgoTradingData/prospective/causal-canonical-expected-r-prospective-v13/status.json"
+  }
+}

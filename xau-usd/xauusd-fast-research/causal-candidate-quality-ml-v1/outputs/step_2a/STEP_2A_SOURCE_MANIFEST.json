@@ -1,0 +1,24 @@
+{
+  "archive_catalog_digest": "29236837f10858a6acb506ed0da46d9507b666160a4786705ec54cf4869e9045",
+  "economic_outcomes_opened": false,
+  "inputs": {
+    "COMEX_RESEARCH_ACTIONS": "19e945e705150a258fdc3201c8c025b7d973eb7b409a2dd2654db11cae94f505",
+    "RESEARCH_NEGATIVE_SPOT_ACTIONS": "53605ee426d10334a3b0ddbc38ee15374943ff547e6921532369a224f0f7ccf8",
+    "acceptance_0": "1616087181e0faa5d50883a44938bfd3e3665e33e7eee06d48a25b2c8900c93c",
+    "acceptance_1": "f0dc5ccf622e1b9086031c26d174d3585f7e15f6e31401d6e06a8d08864cb793",
+    "acceptance_2": "4a1f5496fca9bcef93e05e735e4c796975d7f7afee3ddc28bb0f6f6f6ce0551d",
+    "h4_d1_long_best_box2_atr80_orders": "e337af7d3e5698f623db5e428f9b987edc5f25c2138cad901a4e54ba6b58b44b",
+    "h4_d1_long_best_box2_atr80_signals": "b53ee54afacfae9a5dceb74a2a16b8297b9aad1c3b582fdc2d77302d344afc3c",
+    "journey_archive_catalog_digest": "29236837f10858a6acb506ed0da46d9507b666160a4786705ec54cf4869e9045",
+    "r1_h1_pullback_long_v1_orders": "8482016a012efcbb61470b8936815e0277234612d25e1bc2e084306f8338a749",
+    "r1_h1_pullback_long_v1_signals": "2ea28ff551bc1c1c071aa3ca1862447c10c483de70ffcc981797a2b403c355bd",
+    "r1_portfolio_decisions": "0015131a8e6c3ef128a06b1aa0735c7717c278e3c4810b468e45fe171555df92",
+    "r1_tagged_candidates": "40a3f2c8f3f53cded9c54e90d300089200c7692dbfc0f9e174e24d30e4dc997f",
+    "r5_prepolicy_candidates": "25742cdf86c4634e447c6aed59c8251ead09f5e04f7a80a173eb9c518ef1742f",
+    "r5_selected": "a55cc7f7ec2088870b7b956c7148dcad01cad016a8ae6151720a60d13e586c9e",
+    "step_2_registry": "e870003d9f6d06d59ad3e3aed4a87a6906a579e1d31550ce5ab77956fc2ad9ab",
+    "step_2a_config": "033f6281d8f1e16db0b37985d67883df4fa0c310c33ddce897e80fbacb049b49",
+    "step_2a_implementation": "bd6c370bab664294f7c602589f5abfd52bc04af3b068e5b56478f244a8a1a6c1"
+  },
+  "schema_version": "xauusd_step_2a_source_manifest_v1"
+}

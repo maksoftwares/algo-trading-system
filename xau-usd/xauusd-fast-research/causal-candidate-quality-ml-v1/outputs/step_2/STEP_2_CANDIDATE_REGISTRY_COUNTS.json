@@ -1,0 +1,76 @@
+{
+  "action_identity_present": 3752,
+  "broker_executable_status": {
+    "FALSE": 320,
+    "FROZEN_0P01_EQUIVALENT_UNVERIFIED": 1685,
+    "HISTORICALLY_EXECUTED_ONLY": 558,
+    "TRUE": 10,
+    "UNKNOWN": 1179
+  },
+  "by_direction": {
+    "LONG": 2043,
+    "SHORT": 1709
+  },
+  "by_family": {
+    "R1_UPTREND": 558,
+    "R2_DOWNTREND": 168,
+    "R3_COMPRESSION": 490,
+    "R4_CHOP": 521,
+    "R5_TRANSITION": 330,
+    "V25_CHOP": 131,
+    "V57_BREAK_SWING_H4ADX_HIGH": 687,
+    "V7_SWING_HEALTH": 587,
+    "V8_RETEST_HEALTH": 280
+  },
+  "by_lineage_status": {
+    "COMPLETED_TRADE_SOURCE_ONLY": 558,
+    "POST_SELECTION_TRADE_LEDGER_ONLY": 330,
+    "PRE_ACCOUNT_GOVERNOR_POST_HEALTH_GATE": 1685,
+    "PRE_ENTRY_CANDIDATE_LEDGER": 1179
+  },
+  "by_source": {
+    "CANONICAL_R1_UPTREND": 558,
+    "CANONICAL_R2_DOWNTREND": 168,
+    "CANONICAL_R3_COMPRESSION": 490,
+    "CANONICAL_R4_CHOP": 521,
+    "CANONICAL_R5_TRANSITION": 330,
+    "CANONICAL_V57_ADDONS": 1685
+  },
+  "candidate_rows": 3752,
+  "complete_action_geometry": 521,
+  "decision_audits": {
+    "R1_SINGLE_POSITION_DECISIONS": {
+      "accepted": 31,
+      "decision_reason_counts": {
+        "ACCEPTED": 31,
+        "MAXIMUM_CONCURRENT_POSITIONS": 114
+      },
+      "rejected": 114,
+      "rows": 145,
+      "unique_trade_ids": 145
+    },
+    "V59_ADDON_ACCOUNT_DECISIONS": {
+      "accepted": 1379,
+      "decision_reason_counts": {
+        "ACCEPTED": 1379,
+        "ACCOUNT_DRAWDOWN_SUSPENDED": 69,
+        "MAXIMUM_ADDON_ENTRIES_PER_UTC_DATE": 236,
+        "MAXIMUM_ADDON_OPEN_POSITIONS": 1
+      },
+      "rejected": 306,
+      "rows": 1685,
+      "unique_trade_ids": 1685
+    }
+  },
+  "duplicate_candidate_ids": 0,
+  "population": "CANONICAL",
+  "reconciliation": {
+    "addon_family_counts_match": true,
+    "total_matches_expected": true,
+    "unique_ids_match_total": true,
+    "v59_addon_decision_ids_match_candidate_ids": true,
+    "v59_v60_accepted_trade_control": 2194
+  },
+  "schema_version": "xauusd_step_2_candidate_registry_counts_v1",
+  "unique_candidate_ids": 3752
+}

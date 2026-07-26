@@ -1,0 +1,360 @@
+{
+  "schema_version": "xauusd_causal_candidate_quality_ml_contract_v1",
+  "campaign_id": "causal-candidate-quality-ml-v1",
+  "stage": "STEP_1_RULE_FREEZE",
+  "created_utc": "2026-07-21T20:19:32Z",
+  "repository_base_commit": "11bd1a791262bda1e2ccbdb6f65e37c7f498cdb1",
+  "baseline": {
+    "portfolio": "V59_V60_CANONICAL",
+    "core_trades": 815,
+    "addon_trades": 1379,
+    "accepted_trades": 2194,
+    "final_year_trades_per_weekday": 1.3946360153256705,
+    "final_year_net_usd": 2537.3451631920416,
+    "final_year_profit_factor": 1.975778534770875,
+    "final_year_closed_drawdown_usd": 152.58940082371737,
+    "base_floating_drawdown_usd": 329.6442066942627,
+    "buffered_floating_drawdown_usd": 412.0552583678284,
+    "maximum_buffered_floating_drawdown_usd": 449.7675,
+    "bound_files": {
+      "v59_result": {
+        "path": "../one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_RESULT.json",
+        "sha256": "de6c1e050f431d7b396018f078fd7992c98328140a2d7c259ce17198e7970cac"
+      },
+      "v59_trades": {
+        "path": "../one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_TRADES.parquet",
+        "sha256": "532de14e93955e1a3d4284475e692c1749e98df042c5891bb8350f856ef12724"
+      },
+      "v60_result": {
+        "path": "../one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_RESULT.json",
+        "sha256": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095"
+      },
+      "v60_price_ledger": {
+        "path": "../one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet",
+        "sha256": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf"
+      },
+      "v60_demo_config": {
+        "path": "../v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+        "sha256": "346b139fcd81d00a8afe295fa2fc6688be0411a5abad4797dc0e72396aefd010"
+      }
+    }
+  },
+  "primary_task": {
+    "name": "POOLED_CANDIDATE_QUALITY_META_LABELER",
+    "supervised_unit": "ONE_UNIQUE_CANDIDATE_WITH_ONE_FROZEN_FAMILY_ACTION",
+    "primary_target": "stress_net_r",
+    "secondary_target": "stress_net_r_positive",
+    "outputs": [
+      "expected_stress_net_r",
+      "probability_stress_net_r_positive",
+      "TAKE_SKIP_ABSTAIN"
+    ],
+    "core_filtering_execution_authorized": false,
+    "entry_generation_authorized": false,
+    "direction_change_authorized": false,
+    "geometry_change_authorized": false,
+    "sizing_authorized": false,
+    "portfolio_override_authorized": false
+  },
+  "populations": {
+    "primary": "CANONICAL",
+    "separate": [
+      "RESEARCH_NEGATIVE",
+      "COMEX_RESEARCH",
+      "PROSPECTIVE_CAPITAL"
+    ],
+    "failed_family_rows_allowed_in_primary": false,
+    "r5_fractional_rows": {
+      "rows": 320,
+      "broker_executable": false,
+      "allowed_for_executable_gates": false
+    }
+  },
+  "evidence": {
+    "historical_development_cutoff_utc": "2026-07-01T00:00:00Z",
+    "history_is_pristine_holdout": false,
+    "prospective_start_requires_final_model_lock": true,
+    "pre_model_lock_forward_data_role": "INFRASTRUCTURE_AND_DATA_QUALITY_ONLY"
+  },
+  "data_policy": {
+    "allowed": [
+      "DUKASCOPY_XAU_BID_ASK",
+      "DUKASCOPY_COMPLETED_FOREX_CONTEXT",
+      "DUKASCOPY_COMPLETED_XAG_CONTEXT",
+      "DUKASCOPY_COMPLETED_DOLLAR_CONSENSUS",
+      "DUKASCOPY_COMPLETED_BOND_PROXY_CONTEXT",
+      "CAPITAL_QUOTE_COST_TRANSFER",
+      "MT5_AND_PYTHON_CANDIDATE_LINEAGE",
+      "NATIVE_POSITION_AND_DEAL_PARITY"
+    ],
+    "conditional_research_only": [
+      "DATABENTO_COMEX_GC_TRADES"
+    ],
+    "forbidden": [
+      "HISTDATA_AS_INDEPENDENT_SOURCE",
+      "COMEX_ORDER_BOOK_FEATURES_FROM_TRADES_SCHEMA",
+      "PAID_OR_FREE_CREDIT_DATA_ACQUISITION",
+      "NEW_DATABENTO_ACCOUNT_OR_API_REQUEST",
+      "FUTURE_SMOOTHED_STATE",
+      "FULL_HISTORY_NORMALIZATION",
+      "NEAREST_TIME_JOIN",
+      "FORMING_BAR_FEATURE",
+      "OUTCOME_DERIVED_FEATURE",
+      "RAW_EVENT_NEURAL_ENCODER_V1"
+    ],
+    "comex_live_delivery_verified": false,
+    "comex_required_for_deployment": false
+  },
+  "causality": {
+    "required_candidate_clocks": [
+      "source_available_at",
+      "signal_bar_end",
+      "decision_time",
+      "feature_cutoff_time",
+      "entry_eligible_time",
+      "label_end_time"
+    ],
+    "invariant": "source_available_at <= feature_cutoff_time <= decision_time <= entry_eligible_time",
+    "allowed_join_modes": [
+      "EXACT",
+      "BACKWARD_ASOF"
+    ]
+  },
+  "labels": {
+    "rejection_is_loss": false,
+    "long_entry_side": "ASK",
+    "long_exit_side": "BID",
+    "short_entry_side": "BID",
+    "short_exit_side": "ASK",
+    "spread_double_charge_prohibited": true,
+    "required": [
+      "base_net_r",
+      "stress_net_r",
+      "stress_net_r_positive",
+      "target_before_stop",
+      "mfe_r",
+      "mae_r",
+      "holding_minutes",
+      "cost_r",
+      "exit_reason",
+      "label_status"
+    ],
+    "fail_closed_conditions": [
+      "MISSING_INITIAL_RISK",
+      "AMBIGUOUS_EVENT_ORDER",
+      "NO_EXECUTABLE_QUOTE",
+      "INCOMPLETE_HOLD_PATH",
+      "CORRUPT_SOURCE"
+    ]
+  },
+  "features": {
+    "maximum_primary_columns": 64,
+    "nested_blocks": [
+      "DETERMINISTIC_CANDIDATE_AND_REGIME",
+      "PLUS_XAU_MICROSTRUCTURE_AND_COST",
+      "PLUS_COMPLETED_CROSS_ASSET_STATE",
+      "PLUS_COMEX_RESEARCH_ABLATION"
+    ],
+    "raw_event_windows_seconds": [
+      30,
+      300,
+      900,
+      3600
+    ],
+    "slow_completed_timeframes": [
+      "H1",
+      "H4",
+      "D1"
+    ],
+    "exact_deployable_source_identity_allowed": true,
+    "forbidden_identifiers": [
+      "candidate_id",
+      "experiment_id",
+      "attempt_id",
+      "result_version",
+      "date_identity",
+      "post_outcome_selection_tag"
+    ],
+    "exact_ordered_list_lock_required_before_label_join": true,
+    "automatic_feature_generation_authorized": false,
+    "feature_selection_from_outcomes_authorized": false
+  },
+  "episodes_and_weights": {
+    "primary_episode": "STRUCTURAL",
+    "conservative_episode_for_inference": true,
+    "unbounded_transitive_time_chain_prohibited": true,
+    "one_primary_action_per_candidate": true,
+    "all_action_siblings_same_split": true,
+    "primary_weight_lock_required_before_labels": true,
+    "mandatory_sensitivity_reports": [
+      "UNWEIGHTED",
+      "CONSERVATIVE_UNIQUENESS_WEIGHTED"
+    ]
+  },
+  "historical_splits": {
+    "mode": "PURGED_EXPANDING_WALK_FORWARD",
+    "outer_test_eras": [
+      ["2020-07-01T00:00:00Z", "2021-07-01T00:00:00Z"],
+      ["2021-07-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+      ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+      ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+      ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+      ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+    ],
+    "calibration_months_immediately_before_test": 6,
+    "label_interval_purge_required": true,
+    "episode_group_purge_required": true,
+    "random_or_shuffled_split_authorized": false,
+    "fold_local_imputation_scaling_and_pretraining_required": true
+  },
+  "model_budget": {
+    "learned_architecture_pairs": {
+      "LINEAR_PAIR": {
+        "classifier": {
+          "family": "LOGISTIC_REGRESSION_L2",
+          "C": 0.05,
+          "solver": "lbfgs",
+          "max_iter": 2000,
+          "class_weight": null,
+          "random_state": 60101
+        },
+        "regressor": {
+          "family": "RIDGE",
+          "alpha": 10.0
+        }
+      },
+      "SHALLOW_HGB_PAIR": {
+        "classifier": {
+          "family": "HIST_GRADIENT_BOOSTING_CLASSIFIER",
+          "learning_rate": 0.05,
+          "max_iter": 100,
+          "max_leaf_nodes": 7,
+          "min_samples_leaf": 50,
+          "l2_regularization": 1.0,
+          "early_stopping": false,
+          "random_state": 60102
+        },
+        "regressor": {
+          "family": "HIST_GRADIENT_BOOSTING_REGRESSOR",
+          "learning_rate": 0.05,
+          "max_iter": 100,
+          "max_leaf_nodes": 7,
+          "min_samples_leaf": 50,
+          "l2_regularization": 1.0,
+          "early_stopping": false,
+          "random_state": 60103
+        }
+      }
+    },
+    "primary_feature_ablations": 3,
+    "registered_primary_pipelines_per_outer_fold": 6,
+    "comex_research_feature_ablations": 1,
+    "registered_comex_pipelines_per_eligible_outer_fold": 2,
+    "registered_total_architecture_feature_combinations": 8,
+    "comex_eligible_outer_test_eras": [
+      ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+      ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+      ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+    ],
+    "comex_can_compete_as_full_history_winner": false,
+    "comex_can_authorize_deployment": false,
+    "null_baselines": [
+      "FOLD_LOCAL_BASE_RATE",
+      "FOLD_LOCAL_MEAN_STRESS_R"
+    ],
+    "hyperparameter_search_authorized": false,
+    "seed_search_authorized": false,
+    "threshold_search_authorized": false,
+    "separate_specialist_models_authorized": false,
+    "same_version_rescue_authorized": false
+  },
+  "decision": {
+    "take_minimum_expected_stress_r": 0.05,
+    "take_probability_threshold": "TRAINING_FOLD_SOURCE_FAMILY_BASE_RATE",
+    "skip_below_expected_stress_r": 0.0,
+    "abstain_on_disagreement": true,
+    "abstain_on_missing_stale_unsupported_or_out_of_domain": true,
+    "daily_quota_authorized": false
+  },
+  "historical_nomination_gates": {
+    "minimum_take_rows_per_outer_era": 50,
+    "minimum_take_per_eligible_weekday": 0.25,
+    "minimum_aggregate_roc_auc": 0.55,
+    "minimum_outer_era_roc_auc": 0.5,
+    "minimum_aggregate_relative_brier_improvement": 0.02,
+    "outer_era_brier_may_be_worse_than_base_rate": false,
+    "maximum_aggregate_expected_calibration_error": 0.05,
+    "minimum_aggregate_expected_r_rank_correlation": 0.0,
+    "expected_r_rank_correlation_strictly_greater": true,
+    "minimum_outer_era_stress_profit_factor": 1.1,
+    "minimum_aggregate_stress_profit_factor": 1.25,
+    "outer_era_stress_net_must_be_positive": true,
+    "aggregate_top_winners_removed": 5,
+    "aggregate_top_winners_removed_net_must_be_positive": true,
+    "minimum_positive_rolling_six_month_share": 0.7,
+    "minimum_selected_direction_rows_for_direction_gate": 50,
+    "selected_direction_stress_net_must_be_positive": true,
+    "maximum_standalone_closed_drawdown_usd": 250.0,
+    "maximum_shared_buffered_floating_drawdown_usd": 449.7675,
+    "v59_v60_trade_identity_required": true,
+    "bootstrap": {
+      "block_weekdays": 5,
+      "confidence": 0.9,
+      "minimum_lower_bound_mean_daily_stress_pnl_usd": 0.0,
+      "lower_bound_strictly_greater": true,
+      "resamples": 10000,
+      "seed": 60104
+    }
+  },
+  "prospective": {
+    "authorized_by_step_1": false,
+    "mode_after_separate_approval": "SEALED_BATCH_SCORING_NO_MT5_ATTACHMENT",
+    "validation": {
+      "minimum_full_weekdays": 20,
+      "minimum_resolved_take_rows": 50,
+      "minimum_stress_profit_factor": 1.1
+    },
+    "confirmation": {
+      "minimum_full_weekdays": 20,
+      "minimum_resolved_take_rows": 50,
+      "minimum_stress_profit_factor": 1.2
+    },
+    "stages_disjoint": true,
+    "positive_stress_net_required": true,
+    "largest_winner_removed_net_positive_required": true,
+    "v59_v60_trade_identity_required": true,
+    "portfolio_hard_stop_breach_allowed": false,
+    "pass_grants_execution": false
+  },
+  "step_1_controls": {
+    "candidate_inventory_opened": false,
+    "economic_labels_opened": false,
+    "features_built": false,
+    "model_fitted": false,
+    "threshold_fitted": false,
+    "portfolio_ml_result_opened": false,
+    "runtime_changed": false,
+    "demo_ml_authorized": false,
+    "live_ml_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_stage": {
+    "name": "STEP_2_METADATA_ONLY_DATA_AND_CANDIDATE_AUDIT",
+    "economic_outcomes_authorized": false,
+    "model_training_authorized": false,
+    "required_outputs": [
+      "SOURCE_INVENTORY",
+      "CANDIDATE_REGISTRY_COUNTS",
+      "ACTION_MULTIPLICITY",
+      "TIMESTAMP_AND_AVAILABILITY_AUDIT",
+      "DUPLICATE_AND_EPISODE_CENSUS",
+      "FEATURE_AVAILABILITY_MATRIX",
+      "OUTCOME_BLIND_EFFECTIVE_SAMPLE_PLAN"
+    ]
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "CAUSAL_CANDIDATE_QUALITY_ML_V1_CONTRACT_LOCK.json"
+  }
+}

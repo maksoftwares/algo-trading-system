@@ -1,0 +1,73 @@
+{
+  "all_history": {
+    "after": {
+      "closed_trade_drawdown_usd": 279.03947729639003,
+      "gross_loss_usd": -8238.777032466616,
+      "gross_profit_usd": 13671.242988139082,
+      "net_pnl_usd": 5432.465955672466,
+      "profit_factor": 1.6593777127678904,
+      "trade_rows": 2153,
+      "win_rate": 0.447282861124013
+    },
+    "before": {
+      "closed_trade_drawdown_usd": 276.8658596833086,
+      "gross_loss_usd": -8378.406246652205,
+      "gross_profit_usd": 13812.797210437968,
+      "net_pnl_usd": 5434.390963785764,
+      "profit_factor": 1.6486186995238152,
+      "trade_rows": 2184,
+      "win_rate": 0.44642857142857145
+    },
+    "effect": {
+      "closed_trade_drawdown_usd": 2.173617613081433,
+      "net_pnl_usd": -1.9250081132977357,
+      "profit_factor": 0.010759013244075133,
+      "trades": -31,
+      "win_rate_percentage_points": 0.08542896954415458
+    }
+  },
+  "final_twelve_months": {
+    "after": {
+      "closed_trade_drawdown_usd": 208.4143543521311,
+      "gross_loss_usd": -2544.1176426220572,
+      "gross_profit_usd": 5046.84089350449,
+      "net_pnl_usd": 2502.7232508824322,
+      "profit_factor": 1.9837293720046052,
+      "trade_rows": 356,
+      "win_rate": 0.4410112359550562
+    },
+    "before": {
+      "closed_trade_drawdown_usd": 208.4143543521311,
+      "gross_loss_usd": -2614.128940201418,
+      "gross_profit_usd": 5088.935876181252,
+      "net_pnl_usd": 2474.8069359798337,
+      "profit_factor": 1.9467042340264786,
+      "trade_rows": 363,
+      "win_rate": 0.4380165289256198
+    },
+    "effect": {
+      "closed_trade_drawdown_usd": 0.0,
+      "net_pnl_usd": 27.916314902598515,
+      "profit_factor": 0.037025137978126565,
+      "trades": -7,
+      "win_rate_percentage_points": 0.2994707029436383
+    },
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "start_inclusive_utc": "2025-07-01T00:00:00Z"
+  },
+  "historical_ledger_path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet",
+  "historical_ledger_sha256": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf",
+  "limitations": [
+    "Fixed-0.01-lot historical fee-stress evidence is not a profit promise.",
+    "The cooldown is evaluated path-dependently using only prior accepted and completed trades.",
+    "The calculation is deterministic and has no ML participation."
+  ],
+  "policy": {
+    "opposite_direction_remains_eligible": true,
+    "other_sources_remain_unchanged": true,
+    "same_direction_post_loss_cooldown_minutes": 120,
+    "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+    "trigger": "PRIOR_ACCEPTED_TRADE_REALIZED_FEE_STRESS_NET_PNL_NEGATIVE"
+  },
+  "schema_version": "xauusd_v60_v57_post_loss_cooldown_impact_v1"
+}

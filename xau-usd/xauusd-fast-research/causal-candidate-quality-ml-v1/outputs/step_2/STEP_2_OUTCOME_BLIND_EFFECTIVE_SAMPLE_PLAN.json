@@ -1,0 +1,31 @@
+{
+  "candidates_with_decision_time": 3194,
+  "candidates_without_decision_time": 558,
+  "conservative_36h_proxy_episodes": 853,
+  "exact_time_direction_proxy_episodes": 2940,
+  "family_concentration_hhi": 0.13298721136928818,
+  "final_effective_size": null,
+  "largest_family": "V57_BREAK_SWING_H4ADX_HIGH",
+  "largest_family_share": 0.18310234541577824,
+  "locked_future_formula": "min(N_structural, N_conservative, N_kish, N_serial)",
+  "nominal_canonical_candidates": 3752,
+  "provisional_effective_upper_bound": 853,
+  "provisional_kish_effective_rows": 1817.8979462736459,
+  "required_reports_after_labels": [
+    "BY_REGIME",
+    "BY_FAMILY",
+    "BY_DIRECTION",
+    "BY_ACTION_GEOMETRY",
+    "BY_CALENDAR_ERA",
+    "PROSPECTIVE_VERSUS_HISTORICAL"
+  ],
+  "schema_version": "xauusd_step_2_outcome_blind_effective_sample_plan_v1",
+  "serial_effective_size": null,
+  "weight_lock_status": "NOT_LOCKED",
+  "why_not_locked": [
+    "The R1 candidate decision clock is missing.",
+    "Planned hold intervals are incomplete for R1, R5, and part of the add-on population.",
+    "Structural anchors are not represented consistently across source families.",
+    "Serial effective size requires chronological episode outcomes or residuals, which Step 2 is forbidden to read."
+  ]
+}

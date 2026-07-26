@@ -1,0 +1,29 @@
+{
+  "baseline_files": {
+    "v59_result": "de6c1e050f431d7b396018f078fd7992c98328140a2d7c259ce17198e7970cac",
+    "v59_trades": "532de14e93955e1a3d4284475e692c1749e98df042c5891bb8350f856ef12724",
+    "v60_demo_config": "346b139fcd81d00a8afe295fa2fc6688be0411a5abad4797dc0e72396aefd010",
+    "v60_price_ledger": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf",
+    "v60_result": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095"
+  },
+  "campaign_id": "causal-candidate-quality-ml-v1",
+  "combined_sha256": "12c7e01147abf52cbf5855a5d3aab377aa1e98b8d56867f336a137bda0d31183",
+  "created_utc": "2026-07-21T20:19:32Z",
+  "economic_outcomes_opened_at_lock": false,
+  "governance_files": {
+    "PREREGISTRATION.md": "a2d6522d46b7b2ad635fb42a6d7e77580138edc097bf9c7b05f9202b03d42773",
+    "README.md": "3c6ff580cfbca7fe032b541c1b158a75bd1eef54fe436991914b728039429ef2",
+    "config/causal_candidate_quality_ml_v1.json": "a6380e06b9b5bfe8d81624773e8982499bfcd1c9529f69a9e6cdc5fb64c263f7",
+    "lock_contract.py": "0d0d5e459b9393c191ef5065dace7ea9b08dd9dc7a39f102066e17d38729c39a",
+    "tests/test_contract.py": "e46d566d5a375264271785bf7b0042cc035194fc614ad05bba707dda7d99aa3e"
+  },
+  "model_fitted_at_lock": false,
+  "next_stage": "STEP_2_METADATA_ONLY_DATA_AND_CANDIDATE_AUDIT",
+  "registered_comex_pipelines_per_eligible_outer_fold": 2,
+  "registered_primary_pipelines_per_outer_fold": 6,
+  "registered_total_architecture_feature_combinations": 8,
+  "repository_base_commit": "11bd1a791262bda1e2ccbdb6f65e37c7f498cdb1",
+  "runtime_changed_at_lock": false,
+  "schema_version": "xauusd_causal_candidate_quality_ml_lock_v1",
+  "stage": "STEP_1_RULE_FREEZE"
+}

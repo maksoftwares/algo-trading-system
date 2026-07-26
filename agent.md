@@ -1,6 +1,6 @@
 # A1 XAUUSD Authoritative Handoff
 
-Updated: `2026-07-20`
+Updated: `2026-07-26`
 
 ## Repository authority
 
@@ -2792,3 +2792,2909 @@ active chart profile.
   USD `300` combined closed-drawdown hard stop, USD `449.7675` whole-account
   floating hard stop, and emergency closure of canonical positions at either
   hard stop. The armed MT5 daily guardian additionally enforces its AED rules.
+
+## Causal Candidate Quality ML Step 1 Rule Freeze - 2026-07-22
+
+Step 1 is frozen under
+`xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1`. The first ML
+task is a candidate-quality meta-labeler: it may rank deterministic specialist
+candidates as `TAKE`, `SKIP`, or `ABSTAIN`, but it may not invent entries,
+change trade geometry or risk, override portfolio controls, or interact with
+the active demo runtime.
+
+- The primary target is expected stressed net R; the secondary target is the
+  probability that stressed net R is positive.
+- Canonical specialist candidates are the primary population. Research
+  negatives, COMEX research rows, and prospective Capital.com rows remain
+  explicitly separate populations.
+- Historical data through `2026-06-30` is development evidence only. It cannot
+  provide prospective proof or authorize execution.
+- The V59/V60 benchmark is byte-bound to five frozen artifacts and remains
+  immutable: `2,194` combined trades, `1.394636` final-year trades per day,
+  USD `2,537.35` final-year net, profit factor `1.975779`, USD `152.59`
+  closed-trade drawdown, and USD `412.06` buffered floating drawdown.
+- The full-history research budget is six fixed model/feature pipelines per
+  outer fold. Two COMEX-inclusive ablations are permitted only in eligible
+  post-2022 folds and can never authorize deployment.
+- Splits, feature clocks, labels, thresholds, costs, drawdown gates, and
+  prospective confirmation rules are preregistered. There is no frequency
+  quota and no threshold search to force trades.
+- Contract lock SHA-256:
+  `12c7e01147abf52cbf5855a5d3aab377aa1e98b8d56867f336a137bda0d31183`.
+  The lock records that no economic outcomes were opened, no model was fitted,
+  and no runtime was changed at lock time.
+- Contract verification has `6 passed` tests. The next stage is a
+  metadata-only data and candidate audit; it must not open economic outcomes
+  or train a model.
+
+## C-to-D Bulk Research Data Migration - 2026-07-22
+
+The bulk historical/research data was physically moved from `C:` to
+`D:\AlgoTradingData\C_DRIVE`. Existing absolute `C:` paths remain valid through
+35 verified NTFS directory junctions, so research code and MT5 tooling do not
+need path rewrites. New writes through one of those old paths are stored on
+`D:` automatically.
+
+- Migrated and verified: 738,275 files totaling 203.13 GB. This includes the
+  Dukascopy, COMEX, tokenized-gold, SGE, CFTC, CBOE, SPDR, and HistData local
+  foundations; Phase 0/Phase 1 and Forex data/outputs; the router-audit output
+  cache; inactive MT5 tester histories/reports; and legacy roaming MetaQuotes
+  history.
+- The active `C:\MT5PortableTier1BestEA` installation and its live `Bases`
+  directory were intentionally not moved.
+- Verification used Robocopy zero-difference checks, exact file counts and
+  byte totals, and non-empty SHA-256 tree hashes for all 35 entries. Two new
+  hourly Dukascopy context files created during verification were quiesced,
+  copied, and individually SHA-256 matched before cutover.
+- The old source names now resolve to targets below
+  `D:\AlgoTradingData\C_DRIVE`. The complete manifest, copy logs, tree hashes,
+  junction checks, deletion audit, and purge results are under
+  `D:\AlgoTradingData\migration`.
+- A nested Phase 0 `outputs\matrix_results` link was caught by the final Git
+  audit. Its 190 tracked files were recovered from an inactive worktree only
+  after all 190 Git blob hashes matched `HEAD`; destination SHA-256 checks pass,
+  and the directory has no staged or unstaged Git diff.
+- The shell safety layer would not remove the final empty rollback directory
+  shells. Thirty-five `*.__codex_c_backup_20260722` directories may therefore
+  remain, but they contain zero items and consume no material space.
+- Free space after migration was approximately 233.46 GB on `C:` and 294.22 GB
+  on `D:`. Do not disconnect, reformat, or rename `D:` while these junctions
+  are in use.
+- Post-migration verification: causal candidate-quality ML contract `6 passed`;
+  V60 portfolio `13 passed`. The deterministic portfolio workers were restarted
+  and are healthy on account `1033030`: `ACTIVE_DEMO_BROKER_ACTION`, execution
+  enabled, all feeds healthy, and both ML runtime and ML shadow unauthorized.
+
+## Causal Candidate Quality ML Step 2 Audit - 2026-07-22
+
+The outcome-blind metadata audit is complete under
+`xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2`.
+Its decision is `STEP_2_METADATA_AUDIT_COMPLETE_REPAIR_REQUIRED`. The audit did
+not open economic outcomes, build labels or features, fit a model or threshold,
+simulate a portfolio, or change the active demo runtime.
+
+- The canonical registry contains `3,752` unique candidates: R1 `558`, R2
+  `168`, R3 `490`, R4 `521`, R5 `330`, V25 `131`, V7 `587`, V8 `280`, and
+  V57 `687`. It has `2,043` long and `1,709` short candidates, no duplicate
+  candidate IDs, and one primary action identity per candidate.
+- V59 add-on policy lineage reconciles exactly to V57 source IDs: `1,685`
+  decisions, `1,379` accepted, and `306` rejected. R1 single-position policy
+  records `145` decisions, `31` accepted, and `114` rejected.
+- All `3,752` candidates have an entry-eligible timestamp and `3,194` have a
+  signal/decision-time proxy. R1 lacks distinct signal/decision clocks for
+  `558` candidates. No row currently has `source_available_at` or
+  `feature_cutoff_time`, so zero rows yet satisfy the complete preregistered
+  pre-label causal-clock contract.
+- R5 is presently a post-selection trade ledger, not a complete pre-policy
+  candidate ledger. Fully explicit action geometry is available for only
+  `521` canonical rows. These are data-contract gaps, not evidence that more
+  raw market history is needed.
+- The duplicate/episode census finds `2,940` exact-time-direction episode
+  proxies. Its more conservative non-transitive 36-hour grouping gives `853`
+  provisional episodes, which is the current outcome-blind effective-sample
+  upper bound. Final episode weights and serial effective size remain unlocked.
+- Separate research populations contain `73,116` spot action rows over
+  `28,432` candidate-directions and `44,418` COMEX action rows over `23,290`
+  candidate-directions. Alternative actions from the same event are siblings,
+  not independent training examples, and remain outside the canonical count.
+- Independent verification recalculated all ten generated artifact hashes with
+  zero failures and confirmed all seven required reports. Verification also
+  passed `11` tests, Ruff format/check, Python compilation, and the unchanged
+  Step 1 lock with all six contract tests.
+- The only authorized next stage is
+  `STEP_2A_METADATA_REPAIR_AND_CANDIDATE_ADAPTERS`: populate and validate causal
+  availability clocks, recover R1 decision timing, reconstruct R5 pre-policy
+  candidate lineage, normalize planned action geometry and hold intervals, and
+  establish stable structural episode anchors. Labels, feature values, and ML
+  fitting remain forbidden until that repair passes.
+
+## Causal Candidate Quality ML Step 2A Repair - 2026-07-22
+
+Step 2A is complete under
+`xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2a`.
+Its decision is `STEP_2A_METADATA_REPAIR_COMPLETE`. The run remained
+outcome-blind: it did not build labels or feature values, fit a model or
+threshold, simulate a portfolio, or change the active demo runtime.
+
+- All `3,752` canonical candidates now have complete causal clocks and frozen
+  action geometry. The clock audit has zero ordering violations and the
+  geometry audit passes for every canonical family.
+- Historical portfolio acceptance reconciles exactly to `2,194` candidates.
+  Acceptance/rejection remains policy evidence, never an economic label.
+- Native R1 reconstruction retains `3,951` pre-trade guard decisions: `558`
+  accepted and `3,393` rejected. All `558` canonical R1 rows reconcile exactly
+  to the original tagged R1 ledger. MT5 tester timestamps are frozen as
+  UTC-like after outcome-blind price-clock discrimination against Dukascopy.
+- The R1 strategies remain barrier-only with no time stop. A 90-day cap is used
+  only to bound label observation and pre-label purging; it is not a forced
+  trade exit.
+- R5 now has its true `799`-row pre-policy population: `330` router-selected,
+  `469` router-rejected, and `10` broker-executable at the frozen account size.
+- The broader journey retains `117,534` registered action rows representing
+  `51,722` unique candidate-directions and `40,077` structural events. Sibling
+  actions are inverse-count weighted and cannot masquerade as independent
+  training examples.
+- Another `115` historical trade-ledger files, `665,878` physical/footer rows,
+  and approximately 48.1 MB are SHA-256 cataloged for provenance. They are not
+  authorized for direct model ingestion until a semantic dedup adapter proves
+  which rows are unique market decisions rather than strategy-version or
+  portfolio derivatives.
+- Canonical weighting is locked before labels: `3,489` exact-decision
+  structural episodes and `639` conservative non-transitive overlap episodes.
+  Serial effective sample size remains deferred until labels exist.
+- A clean rerun reproduced the exact artifact-manifest SHA-256
+  `5a4ceec23a803e0c675379d25d29fe6a7b6b62288fe39fb6204ee5434f6ffe1d`.
+  The next authorized stage is `STEP_2B_DATASET_AND_FEATURE_CONTRACT_LOCK`.
+  It must freeze label replay, causal features, populations, deduplication,
+  splits, weighting, and missing-data policy before any outcome is opened.
+
+## Causal Candidate Quality ML Step 2B Contract - 2026-07-22
+
+Step 2B is complete under
+`xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b`.
+Its decision is `STEP_2B_DATASET_FEATURE_CONTRACT_LOCKED`. The verified
+definition-contract SHA-256 is
+`964eebd668d5291be94d1339d102a55101d0ec561094edbbf9d849c99a4bfc5a`.
+No outcome, feature value, model, threshold, portfolio result, or runtime state
+was opened or changed.
+
+- The primary fit remains all `3,752` canonical candidates, including
+  historically rejected candidates. Rejection is never a loss label and
+  historical policy state is not a predictor.
+- All broader failure evidence remains retained: `117,534` journey action rows,
+  `51,722` unique candidate-directions, and `40,077` source events. Its frozen
+  diagnostic weight sums to one per source event. This library is labeled and
+  reported separately and cannot dominate or rescue the canonical V1 fit.
+- The `115` additional archived trade ledgers remain SHA-cataloged provenance
+  quarantine until source-specific semantic adapters prove row identity. They
+  are not claimed as independent model examples.
+- The earlier ten-year feature-cache boundary was corrected. Complete frozen
+  Dukascopy XAUUSD monthly manifests cover January 2010 through June 2026, so
+  the `241` pre-July-2016 canonical candidates remain eligible for raw bid/ask
+  replay. DOLLARIDXUSD and USTBONDTRUSD are bound from January 2019 through June
+  2026 for causal cross-asset features.
+- The lock verifies `378` monthly manifests and the exact physical presence of
+  `276,024` hourly source files. Monthly aggregate raw-file digests are bound.
+  Incomplete EURUSD, GBPUSD, USDJPY, and XAGUSD histories were removed from V1
+  rather than hidden by multi-year imputation.
+- Label replay is source-side correct: long Ask/Bid, short Bid/Ask, observed
+  stop slippage, locked targets, first quote after fixed horizons, no M5 or
+  nearest-time fallback, no spread double charge, USD `0.30` ticket cost, USD
+  `0.35` holding cost per 24 hours, and an additional `0.05R` stress charge.
+- Source-native initial risk is frozen by family. R1 uses native stop points;
+  R2/R3/R4/R5 use source-emitted pre-trade signal ATR; V7/V8/V25/V57 use the
+  V57 pre-trade risk field at one ounce. R1's 90-day cap is censoring only.
+- The exact ordered feature surface contains `59` raw columns across three
+  primary nested blocks and one COMEX research-only block. IDs, attempts,
+  versions, historical decisions, exact dates/timestamps, outcomes, nearest
+  joins, forming bars, full-history normalization, and outcome-selected
+  features are prohibited.
+- Six purged expanding July-to-July folds are locked. Outcome-blind fit counts
+  are `702`, `1,058`, `1,505`, `1,756`, `2,299`, and `2,853`; calibration counts
+  are `140`, `257`, `101`, `287`, `194`, and `295`; test counts are `476`,
+  `289`, `506`, `443`, `645`, and `550`. Actual label-end purging in Step 3 may
+  only reduce these counts.
+- Verification passes `25` tests, Ruff, Python compilation, artifact hash
+  recalculation, and an idempotent rerun. The artifact-manifest SHA-256 is
+  `a65e2a338e8df2398fe150e93e1323a12dc081c28f6359455cd2621b9b1b57be`.
+- The only authorized next stage is
+  `STEP_3_COUNTERFACTUAL_LABEL_AND_CAUSAL_FEATURE_BUILD`. It may build labels
+  and the locked causal features, but model fitting, threshold fitting,
+  portfolio simulation, ML shadow, demo attachment, and broker action remain
+  forbidden.
+
+## Causal Candidate Quality ML Step 3 Build - 2026-07-22
+
+Step 3 is complete under
+`xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3`.
+Its decision is `STEP_3_COUNTERFACTUAL_LABEL_AND_CAUSAL_FEATURE_BUILD_COMPLETE`.
+The run used the locked Step 2B definition SHA-256
+`964eebd668d5291be94d1339d102a55101d0ec561094edbbf9d849c99a4bfc5a`.
+No model, threshold, portfolio simulation, demo attachment, or runtime change
+was performed.
+
+- All `3,752` canonical candidates received resolved raw bid/ask labels: `1,664`
+  stressed winners and `2,088` stressed failures. This includes all `1,558`
+  historically rejected canonical candidates; `671` of those rejected rows are
+  counterfactual winners, proving that historical rejection was not used as a
+  loss label.
+- The separate journey library contains `117,534` action rows. It has `116,444`
+  resolved labels: `41,442` stressed winners and `75,002` stressed failures.
+  Another `1,090` rows have no quote within the conservative horizon gap and
+  remain explicitly unresolved. Journey rows do not enter or rescue the V1
+  primary fit.
+- The canonical matrix has the exact `59` locked raw feature columns. Mandatory
+  XAU lookbacks pass for `3,024` rows; `728` rows fail closed with
+  `ABSTAIN_MISSING_MANDATORY_XAU`, chiefly around unavailable completed 4h/24h
+  market-closure lookbacks. No missing mandatory value is silently imputed into
+  an executable prediction.
+- Actual label-end purging preserved every locked test count and reduced fit by
+  one row in each of folds F2023, F2024, and F2025. Structural siblings never
+  cross a split.
+- The effective-sample report contains `3,489` resolved structural episodes,
+  Kish effective size `3,600.98`, serial effective size `1,321.94`, and
+  conservative effective size `1,321.94`.
+- The build hash-verified every source file it opened: `66,663` XAUUSD raw
+  hours with `441,309,114` ticks, `60,070` cross-asset raw hours, and `984`
+  COMEX GC daily files. No new or paid data was acquired.
+- Final verification passes `39` package tests, Ruff, Python compilation, all
+  `11` artifact hashes, exact identities and row counts, label/cost/stress
+  formulas, causal clocks, feature order, finite-value checks, and split
+  sibling isolation. The artifact-manifest SHA-256 is
+  `5dbbdc8189524b18a230eebe8011dcf6b64e0a7eb502f8e24ec4b4bd7562bedc`.
+- The next research stage is
+  `STEP_4_MODEL_FIT_AND_LOCKED_WALK_FORWARD_EVALUATION`. It must train only on
+  eligible historical fit rows, calibrate only in the locked calibration
+  windows, evaluate once on each untouched test era, retain abstention, and
+  keep journey evidence separate from the canonical primary fit.
+
+## Causal Candidate Quality ML Step 4 Evaluation - 2026-07-22
+
+Step 4 is complete under
+`xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_4`.
+The locked evidence decision is `MODEL_EVIDENCE_GATE_FAIL`. This is a valid
+research completion, not an implementation failure: the preregistered model was
+fit and tested, and it did not prove incremental value.
+
+- A pre-model packaging audit corrected Step 3's combined table from duplicate
+  `family_id_x`/`family_id_y` fields to one exact locked `family_id`. Step 3 was
+  fully rebuilt and verified before the model contract was locked.
+- The final Step 4 definition-contract SHA-256 is
+  `fffae17f6162b1092b672f81259cfe969ec08b0d45d114a8e1fc6cacfd3d39e8`.
+  It binds the final Step 3 inputs, Python implementation hashes,
+  scikit-learn `1.8.0`, four fixed model specifications, six folds, threshold
+  policy, 10,000-resample bootstrap, and acceptance gates before model fitting.
+- The primary `HGB_B12_PRIMARY` model used the 40 deterministic and XAU causal
+  features. Across six untouched test eras it evaluated `2,368` candidates and
+  `2,275` structural episodes. Weighted ROC AUC is `0.5193`, with five-weekday
+  block-bootstrap 95% interval `0.4922` to `0.5474`.
+- Every primary calibration window chose threshold `0.0`. All `2,368`
+  candidates were retained, so selected-minus-baseline stressed EV is exactly
+  `0.0R`. ML did not identify a defensible filter.
+- The underlying eligible candidate baseline remains positive: weighted mean
+  stressed outcome `0.2510R`, weighted profit factor `1.4142`, weighted R sum
+  `570.99R`, approximately `1.51` raw candidates and `1.45` structural episodes
+  per weekday. The weighted `74.69R` drawdown is a candidate-quality sequence
+  diagnostic, not shared-account P&L or account equity drawdown.
+- Primary per-fold AUCs are `0.4901`, `0.5490`, `0.5233`, `0.4309`, `0.5121`,
+  and `0.5719`. The probability model is unstable across eras and its weighted
+  Brier score `0.2558` is worse than the pooled fold-prior comparator `0.2507`.
+- Logistic B1+B2 AUC is `0.5173`, deterministic-only HGB AUC is `0.4782`, and
+  cross-asset HGB AUC is `0.4626`. These preregistered challengers and ablations
+  cannot rescue the failed primary gate.
+- The primary passed `9/12` checks. It failed minimum pooled AUC, AUC confidence
+  bound above random, and positive confidence-bound improvement over baseline.
+  It therefore has no MT5, shadow, demo, live, sizing, or portfolio authority.
+- Journey labels remained diagnostic only; zero journey rows entered model
+  fitting. COMEX features were excluded, the Databento API was not accessed,
+  no new or paid data was acquired, and runtime was unchanged.
+- Independent verification validates `17` artifact hashes, all locked input and
+  implementation hashes, exact prediction populations, threshold selection,
+  the deterministic 10,000-resample bootstrap, and exact replay of all six
+  serialized primary fold models. The artifact-manifest SHA-256 is
+  `9c9d2e95caf53bad5e5cc28b6562028247d6c32fd16c1dab9e69cad52a82eee3`.
+
+The correct next decision is to keep the specialists unchanged and keep ML
+offline. Further ML research requires a new preregistered version with a real
+new information source or a defensible per-family target; changing thresholds
+or hyperparameters against these test results would be overfitting.
+
+## Shared-Account Portfolio Step 5 Evaluation - 2026-07-22
+
+Step 5 is complete under
+`xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5`.
+Its locked evidence decision is
+`STEP_5_HISTORICAL_PORTFOLIO_GATE_PASS_RESEARCH_ONLY`. This is exposed-history
+research and does not authorize MT5, shadow, demo, live, or runtime changes.
+
+- The definition-contract SHA-256 is
+  `b8d8e29c14f493a54a7965b36cde4126e499c247a37e7f91b3edec0189c15803`.
+  It binds the final Step 3 and Step 4 evidence, all implementation hashes, the
+  four fixed portfolio populations, every account rule, all acceptance gates,
+  and 157 M5 source files before combined portfolio outcomes were opened.
+- Four portfolios were evaluated. The historical-policy comparators preserve
+  as-recorded duplicates for V59/V60 reconciliation. The governed five- and
+  nine-family portfolios use all broker-executable resolved candidates, select
+  one candidate per structural episode with an outcome-blind tie break, and
+  then enforce the locked account governor.
+- The primary `NINE_ALL_CANDIDATES_GOVERNED` portfolio accepted `2,089` trades.
+  Full-history fixed-0.01-lot net P&L is `$3,161.40`, profit factor is `1.4382`,
+  and conservative M5 floating drawdown is `$275.00`, or `7.53%` of the locked
+  `$3,654.45` starting equity.
+- Primary trailing windows are: 3M `77` trades, `1.185/day`, `$338.07`, PF
+  `1.590`, DD `$95.43`; 6M `154`, `1.194/day`, `$1,075.42`, PF `1.862`, DD
+  `$146.59`; 1Y `360`, `1.379/day`, `$1,345.08`, PF `1.574`, DD `$146.59`; 2Y
+  `766`, `1.467/day`, `$1,890.24`, PF `1.503`, DD `$230.76`; 5Y `1,413`,
+  `1.084/day`, `$2,489.57`, PF `1.454`, DD `$275.00`; 10Y `1,989`,
+  `0.763/day`, `$2,934.68`, PF `1.425`, DD `$275.00`.
+- The full 2010-June 2026 frequency is only `0.485/day`. The one-trade-per-day
+  target is therefore supported over the latest five years, not over ten years
+  or the complete history.
+- All `18/18` preregistered gates passed. No hard stop fired. Exact-event state
+  peaked at three open positions, `$44.07` aggregate initial risk, `$32.73`
+  directional risk, and `$517.22` estimated margin; every locked risk invariant
+  held. M5 boundary envelopes conservatively report up to `$45.67` simultaneous
+  initial risk because a full boundary bar can contain a closing and opening
+  position that did not overlap at exact event time.
+- Six-month stability is `13/20`, or `65%`, exactly the locked minimum and below
+  the earlier 70% aspiration. The weakest block began July 2022 at `-$110.17`.
+- Recent profit is not evenly distributed. Over one year, R1 is approximately
+  flat at `$1.56` and V25 loses `$25.85`; V57, V7, V8, and R2 provide most of
+  the positive result. V57 supplies `183/360` one-year trades, so recent family
+  concentration remains an important prospective risk even though the locked
+  five-year concentration gate passes.
+- The primary rejection counts are `660` family-position conflicts, `320`
+  broker-ineligible rows, `257` structural duplicates, `231` mechanism
+  conflicts, `135` oversized single-trade risks, `57` daily-entry-cap blocks,
+  and `3` direction-cap blocks. Historical rejection was never treated as a
+  loss.
+- Independent verification reproduces all four policy decision ledgers, every
+  primary accepted candidate, endpoint P&L, all primary window metrics, the
+  complete `1,176,817`-row M5 equity curve, all 18 gates, and all 11 artifact
+  hashes. The artifact-manifest SHA-256 is
+  `f6aa8a4827da8d09e33af25329b8e3d6cc855906d1210e60252231a71716b672`.
+- ML predictions, ML thresholds, journey rows, COMEX, Databento, new data
+  acquisition, and runtime actions were not used.
+
+The next defensible stage is prospective confirmation of this exact frozen
+portfolio and execution parity on MT5, while separately repairing recent R1 and
+V25 weakness. Do not tune this Step 5 governor against its historical result or
+claim that the ten-year frequency target has been achieved.
+
+## Shared-Account AED Correction Step 5.1 - 2026-07-22
+
+Step 5.1 is complete under
+`xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5_1`.
+Its locked evidence decision is `STEP_5_1_AED_PORTFOLIO_GATE_FAIL`. This
+correction supersedes Step 5's account-specific risk and drawdown claims for
+demo account `1033030`; it does not change any strategy, candidate, fixed lot,
+risk fraction, tie break, reporting window, or acceptance gate.
+
+- A read-only MT5 snapshot proved that account `1033030` is denominated in AED
+  with balance and equity `AED 3,627.19`, while XAUUSD profit currency is USD.
+  It also bound the `0.01` minimum lot, contract size `100`, profit conversion
+  `3.6715 AED/USD`, adverse loss conversion `3.6740 AED/USD`, and zero open
+  positions or orders. No broker action was performed.
+- Step 5 had treated the numeric `3,654.45` starting balance as USD. On the real
+  account, `AED 3,627.19` is only about `USD 987.26` of risk capital. The
+  risk-equivalent AED capital for Step 5's original `USD 3,654.45` assumption
+  would be approximately `AED 13,426.45`; this is a unit-equivalence diagnostic,
+  not a funding or activation recommendation.
+- The correction contract was frozen before rerun. Its definition SHA-256 is
+  `969924a5d42200f2bd5b3af57e9c61a1249ac43e50068dcbc68aeaf3c4bd1d0c`;
+  the final lock-file SHA-256 is
+  `cdf20134880a3a5f101c1e59c8c850792418f9ea8cd7b6df3592d86fb8e87b04`.
+- The corrected primary `AED_NINE_ALL_CANDIDATES_GOVERNED` portfolio accepted
+  `389` trades, earned `AED 879.24`, reported PF `1.2408`, and reached
+  `AED 393.61` M5 floating drawdown, or `10.85%` of starting equity.
+- The primary crossed its frozen 10% closed-drawdown suspension on 17 September
+  2020. With fixed `0.01` lot sizing and no smaller broker volume, the governor
+  has no reduced-size recovery path. It consequently accepted zero trades in
+  the trailing five-, two-, one-, six-month, and three-month windows.
+- Only `5/18` gates passed. The corrected result therefore blocks prospective
+  MT5 parity, EA attachment, shadow execution, and demo activation on this
+  account under the current fixed-lot portfolio. Risk limits were not loosened
+  after the result.
+- Independent verification reproduces the currency arithmetic, all policy
+  decisions, accepted ledgers, account P&L endpoints, all primary metrics, the
+  full `1,176,817`-row M5 equity curve, acceptance decision, and all `12`
+  artifact hashes. A clean rerun retained artifact-manifest SHA-256
+  `dee2b4510425caf11202419c6d69bf1cec24bd16e8db70e42dc2a36b0496b2ad`.
+- All `58` package tests pass. Ruff and Python compilation are clean. ML,
+  COMEX, Databento API access, new data acquisition, runtime changes, and order
+  placement remained offline.
+
+The next decision must solve the minimum-lot/capital mismatch without tuning
+against this failed history: use sufficient risk capital, use a venue that
+supports smaller XAUUSD volume, or preregister a new portfolio that abstains
+whenever the minimum lot exceeds the original risk budget. The corrected gate
+itself does not authorize attachment to account `1033030`.
+
+### Demo minimum-balance waiver - 2026-07-22
+
+The owner explicitly waived minimum-balance eligibility on demo account
+`1033030` so prospective trade collection can continue. The active package is
+still `v60-canonical-demo-portfolio-v2`; the superseded Core-v1 executor must
+not be started. The waiver is encoded as
+`minimum_balance_requirement_enabled=false` and
+`demo_balance_eligibility_waived=true` and is reported in runtime status.
+
+This waiver is demo-only and does not reclassify the failed Step 5.1 historical
+gate as a pass. Exact login/server/currency and MT5 demo trade-mode checks,
+fixed `0.01` lot, spread gates, position and daily-entry limits, drawdown
+suspension, combined/floating hard stops, emergency closure, guardian halt
+files, and the complete live/ML prohibitions remain enforced.
+
+The canonical workers were restarted after the waiver. Runtime status at
+`2026-07-22T08:38:11.899430Z` was `ACTIVE_DEMO_BROKER_ACTION`: feed and chart
+profile preflights were ready, execution was enabled, minimum balance was
+disabled, the demo waiver was visible, and the account had zero XAUUSD
+positions with zero closed or floating drawdown. Live, ML runtime, and ML
+shadow authorization all remained false. Deployment tests pass `14/14`.
+
+## Regime-Specific Candidate Quality Models V2 - 2026-07-22
+
+The offline V2 package is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-regime-models-v2`.
+It leaves the failed pooled V1 model and deterministic demo runtime unchanged.
+Its overall evidence decision is
+`REGIME_V2_FAMILY_GATES_PASSED_DEVELOPMENT_ONLY`.
+
+- The model architecture, 22 causal features, family/fold availability,
+  thresholds, 10,000-resample block bootstrap, and 11 family gates were frozen
+  before fitting. Definition-contract SHA-256 is
+  `375b2fb7ac7808ebe1f92071873cb5dd6bcd481eafc9c1bfa5e84ff26b41639b`;
+  lock-file SHA-256 is
+  `b0cf213a4713b495335fb273ce45f1ace2a3ecf50c703faa9e64b34774ccbe76`.
+- Seven specialist families produced 21 independent fold models. R2 has only
+  128 usable examples and V25 only 101, so both failed closed as
+  `REGIME_MODEL_INSUFFICIENT_EVIDENCE` rather than borrowing another family's
+  test outcomes.
+- R1, R3, R4, R5, V57, and V7 failed at least one locked gate. R1, V57, and V7
+  showed some ranking signal, but their improvement confidence or coverage
+  evidence was insufficient. R3 and R4 ranked poorly; R5's improvement was
+  small and not statistically defensible.
+- `V8_RETEST_HEALTH` alone passed all `11/11` development gates over three
+  purged out-of-time folds and 102 candidates. It selected 60 candidates,
+  achieved weighted AUC `0.6388` with 95% lower bound `0.5297`, improved mean
+  stressed outcome from `0.4801R` to `0.7031R`, improved PF from `2.1883` to
+  `3.3571`, and reduced candidate-sequence drawdown from `7.7286R` to
+  `3.4836R`.
+- V8 remains thin evidence: the 95% lower bound on selected-minus-baseline EV
+  is only `+0.0076R`, and the latest F2025 fold's delta is `-0.0580R`. The model
+  therefore has no runtime, filtering, routing, shadow, demo, live, or sizing
+  authority. Fresh prospective confirmation is mandatory.
+- Independent verification replayed all 21 serialized models, every threshold,
+  prediction and selection, all family metrics, and all bootstraps. It verified
+  31 artifact hashes. A clean rerun reproduced artifact-manifest SHA-256
+  `66d7b783761762234380f36ed62f63733da409fc18eb48244a75a6c87d9e6156`.
+- Package tests pass `3/3`; Ruff and compilation are clean. Journey rows,
+  COMEX, Databento API access, demo outcomes, new data, and runtime were not
+  used.
+
+The next ML step is a separately authorized prospective V8 scorer that records
+predictions without affecting deterministic trading, followed by a locked
+forward evidence gate. Do not connect any V2 model to the demo executor under
+the current authorization.
+
+## Expanded Candidate Quality Dataset V3 - 2026-07-22
+
+The research-only V3 dataset is complete under
+`xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v3`.
+Its decision is `V3_EXPANDED_CANDIDATE_DATASET_COMPLETE_RESEARCH_ONLY`.
+
+- The hash-locked high-frequency ledger now provides `29,419` mechanical
+  events, `28,432` events with resolved actions, and `73,116` resolved
+  event/action labels: `31,049` stressed winners and `42,067` stressed
+  failures. Another `987` events remain explicit in the registry without a
+  completed action label and receive no training weight.
+- Outcome-blind 30-minute clustering produces `15,172` structural episodes.
+  Each resolved event/action row receives inverse action and resolved-event
+  multiplicity weight; weights sum to exactly one per structural episode.
+- The primary population contains three mechanics: break-and-run, downside
+  impulse/retest, and opening-range reversal, each with fast 1R, intraday 1.5R,
+  and swing 2R action choices. The exact model surface contains `58` causal,
+  normalized features. IDs, timestamps, absolute prices, alignment errors,
+  account feasibility, and every outcome field are forbidden as features.
+- Six expanding July-to-July folds from F2021 through F2026 are materialized.
+  Complete structural episodes stay in one partition and fit, calibration, and
+  test labels are purged at their exact partition boundaries.
+- The original `3,752` canonical rows remain a separate benchmark. The
+  `117,534` journey action rows remain quarantine evidence. V3 reports `1,642`
+  event-time/direction overlaps with the canonical benchmark and forbids silent
+  pooling, preventing duplicated observations from inflating evidence.
+- Verification passes Ruff, compilation, manifest/source hash checks, exact
+  row and identity checks, finite feature checks, episode-weight invariants,
+  split purging, and `4/4` package tests. The artifact-manifest SHA-256 is
+  `dc8fa2b81f39041edc00f215b85713fa13bd00dc2347dc37b200e1e6e723a42a`.
+- No model, threshold, portfolio simulation, Python serving, ML shadow, EA,
+  demo/live authorization, runtime setting, terminal, or broker account was
+  changed. The active deterministic gold demo runtime remains separate.
+
+The next authorized ML stage requires a new preregistered per-mechanism and
+per-regime action-ranking contract. It must benchmark against deterministic
+take-all and fixed-action baselines, keep structural episode clustering in all
+statistics, and treat the F2026 history as exposed development data rather than
+a pristine holdout.
+
+### Older XAUUSD acquisition audit - 2026-07-22
+
+A delegated read-only audit corrected the assumed archive boundary. The local
+Dukascopy extension state already contains `78` complete XAUUSD months from
+January 2010 through June 2016; January 2010 has all `744` expected hourly files,
+is marked complete, and has a frozen aggregate SHA-256. This complements the
+later archive through June 2026. No reliable free pre-2010 XAUUSD bid/ask source
+was verified, so no download, partial file, paid request, Databento request, or
+archive mutation was performed. Any future extension must begin with a
+read-only pre-2010 availability probe and must not lower the source-quality
+standard merely to add years.
+
+## Causal Candidate Action Models V3 - 2026-07-22
+
+The research-only Action V3 package is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-action-models-v3`.
+Its evidence decision is `ACTION_MODEL_V3_MODEL_EVIDENCE_GATE_FAIL`; no lane is
+authorized for runtime use.
+
+- The 58-feature surface, disjoint lane ownership, six purged out-of-time
+  folds, ridge and histogram-gradient-boosting models, calibration-only policy
+  selection, UTC-week bootstrap, economic gates, and abstention states were
+  locked before fitting. An initial run stopped before model fitting because
+  the earliest disjoint break-and-run fit had 674 eligible action rows rather
+  than the earlier overlapping-population estimate. The feasibility floor was
+  corrected from 750 to 650 before any calibration or test result was read,
+  then the contract and evaluation were regenerated. Final definition-contract
+  SHA-256 is
+  `b6482c02c464f1d2eb2f431e4547c88b746f86aa5559415dff22732a7f4abbcb`.
+- Eighteen chosen lane/fold models produced `47,457` out-of-time action
+  predictions and `10,220` selected events. These are structurally weighted
+  research candidates; their events-per-weekday values are not executable
+  shared-account trade frequency and must not be added without overlap,
+  concurrency, and portfolio-risk simulation.
+- Downside impulse/retest selected `2,864` events, with weighted mean
+  `+0.1472R`, PF `1.2673`, weighted drawdown `63.61R`, weighted AUC `0.6561`,
+  and a `+0.0556R` bootstrap lower bound on selected mean. It nevertheless
+  failed closed: F2026 retained only `24.28%`, returned `-0.5602R` per selected
+  event with PF `0.3569`, and had `-0.0753R` common-event action uplift.
+- Break-and-run selected `5,421` events, with weighted mean `+0.2166R`, PF
+  `1.3581`, weighted drawdown `120.97R`, weighted AUC `0.5880`, and a
+  `+0.1344R` bootstrap lower bound on selected mean. It also failed: only five
+  calibration folds passed, aggregate coverage was `50.84%`, common-event
+  action-uplift bootstrap lower bound was `-0.0082R`, and F2026 returned
+  `-0.2001R` with PF `0.7373`.
+- Opening-range reversal selected `1,935` events but remained negative at
+  `-0.2433R` per event and PF `0.6937`. None of its calibration folds passed
+  and none of its six test folds was positive.
+- The fixed-action baselines were negative in all three lanes, making the
+  locked positive-baseline retention ratio undefined. This gate therefore
+  failed, but it is not the decisive blocker: latest-fold losses, unstable
+  coverage, calibration failures, and weak action uplift independently reject
+  the models.
+- Independent verification replayed all 18 serialized models, reconciled every
+  prediction and selection, recomputed metrics, bootstrap intervals, and
+  decisions, and verified all manifest hashes. It passed with manifest SHA-256
+  `0fb873c4729974a3ee83754b29236659bcd11856f9e03531123eadc661edc11c`.
+  Package tests pass `4/4`; Ruff and compilation are clean.
+- No EA, Python server, shadow model, demo/live authorization, terminal,
+  account, deterministic strategy, or broker setting changed. The active
+  deterministic demo runtime remains separate.
+
+The next defensible research step is an outcome-blind F2026 drift audit before
+another model iteration. It should measure feature, score, action-availability,
+regime, session, and label-base-rate shifts by lane; determine whether the
+failure is calibration drift or disappearing edge; and preregister any V4
+regime-conditioned policy before fitting. F2026 is now exposed development
+history and cannot be described as a pristine holdout again.
+
+## Action V3 F2026 Drift Audit - 2026-07-22
+
+The locked diagnostic package is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-drift-audit-v3`.
+It compares the frozen F2026 model and threshold on its reference calibration
+year, 2024-07-01 through 2025-07-01, with its current test year, 2025-07-01
+through 2026-07-01. The decision is
+`F2026_DRIFT_AUDIT_COMPLETE_NO_RUNTIME_AUTHORIZATION`.
+
+- Definition-contract SHA-256 is
+  `8904909a6530fdc08404fb54a63c3aaf66fed27b4ce4a7af37cc7fb933e9a4c6`.
+  The audit replayed three frozen models over `20,284` available action rows
+  and `9,144` events, produced `174` locked feature-drift measurements, and
+  reconciled F2026 test scores and selections with the original Action V3
+  ledger.
+- Downside impulse/retest suffered `RANKING_AND_OUTCOME_COLLAPSE`. Coverage
+  fell from `59.95%` to `24.28%`; score PSI was `1.9392`; weighted AUC fell
+  from `0.7215` to `0.4717`; selected mean fell from `+0.2985R` to `-0.5602R`;
+  and PF fell from `1.5899` to `0.3569`.
+- Break-and-run suffered `COVERAGE_AND_OUTCOME_COLLAPSE`. Coverage fell from
+  `60.01%` to `30.28%`; score PSI was `1.0366`; weighted AUC fell from `0.6764`
+  to `0.5220`; selected mean fell from `+0.3868R` to `-0.2001R`; and PF fell
+  from `1.7161` to `0.7373`.
+- Opening-range reversal was classified `BASE_EDGE_ABSENT`. Its selected mean
+  improved from `-0.3742R` to `-0.0167R`, but remained nonpositive in both
+  periods. More ML cannot manufacture a reliable edge from this mechanic; it
+  requires strategy redesign first.
+- Composition was not the main explanation for downside or break-and-run.
+  Across regime, session, direction, action availability, and chosen action,
+  within-stratum deterioration explained nearly all of their `-0.8587R` and
+  `-0.5869R` selected-mean changes. Threshold-only recalibration is therefore
+  not a defensible fix.
+- Independent verification rebuilt all seven metric tables, replayed all three
+  models, and verified every input and artifact hash. Manifest SHA-256 is
+  `cfd3230973697eccbb0afe3a3a2732154571ca5b0fa6445e145c6e22dc0d7bd4`.
+  Package tests pass `4/4`; Ruff and compilation are clean.
+
+### Post-audit timestamp-unit defect
+
+The drift audit exposed a correctness defect in
+`high-frequency-expansion-v1/src/dataset.py`. Pandas 3 supplied
+`datetime64[us, UTC]` integers while the prior-event window durations were in
+nanoseconds. The fields named `prior_events_1h` and `prior_events_4h` therefore
+counted approximately 1,000 and 4,000 hours. The same-direction feature was
+unaffected because its timestamps were already nanoseconds.
+
+The builder now explicitly normalizes timestamps to nanoseconds. A new
+microsecond-dtype boundary test passes. Source SHA-256 is
+`d61e65c2da60b6da1f784dc045908233ca40898e57ae8f5850b06f69abc36edd`.
+The corrected reference/current means are `1.18/1.17` for the intended 1-hour
+count and `3.79/4.04` for the intended 4-hour count, compared with corrupted
+stored means of `554.75/676.90` and `2008.46/2689.59`.
+
+The bug explained about `-0.1345` of the downside model's `-0.2776` mean-score
+shift and `-0.0570` of the break-and-run model's `-0.3124` shift. It was not the
+only problem; price/EMA/spread drift and genuine within-stratum outcome decay
+remain. Frozen V3 artifacts were not rewritten, but they are now ineligible as
+inputs to another model or for runtime promotion. The next step is a new
+versioned rebuild of the complete candidate ledger and expanded causal dataset
+with corrected features, followed by a fresh preregistered evaluation. Do not
+silently update Complete Candidate V4 because its old code hash intentionally
+preserves the original experiment.
+
+No terminal, EA, account, deterministic specialist, model server, shadow
+process, demo/live permission, or broker setting changed.
+
+## Corrected Complete Candidate Dataset V5 - 2026-07-22
+
+The versioned source-ledger rebuild is complete at
+`xau-usd/xauusd-fast-research/complete-candidate-dataset-v5`. Its decision is
+`COMPLETE_CANDIDATE_DATASET_V5_COMPLETE_RESEARCH_ONLY`.
+
+- V5 rebuilt the complete 2016-2026 mechanical candidate universe from the
+  original nine signal logs and the frozen Dukascopy cache. It retained exactly
+  `29,419` events and `73,116` resolved event/action labels, including `1,485`
+  gap events and `3,881` gap action rows.
+- Event identities, action identities, labels, outcomes, prices, timestamps,
+  regimes, and every non-corrected feature match Complete Candidate V4 exactly.
+  The action digest remains
+  `e3ebe4759e4af672a3a73e1202ef1d5d7532e78e2f57729e4dfa5251778f83c0`;
+  the event digest remains
+  `acaba67df169d2f175c052c8bf9253e5280a0186224824a69b1faebfdc619f1b`.
+- Only `prior_events_1h` and `prior_events_4h` changed. An independent checker
+  rebuilt the complete pre-filter signal universe and verified both counts.
+  Corrected maxima are `8` and `15`; the corrected feature digest is
+  `31898d9bbcb5b7913763a03798fb03f8207d9fb1ce17548f8edf4ca799b760d3`.
+- The definition-contract SHA-256 is
+  `38f83de410d4bb46cbb1eaa6a760ebeee679127d23b835b4c8a43651df3bb74f`.
+  Independent verification passed with artifact-manifest SHA-256
+  `70e6192ce243172d59b63621f8399ce642aadfbf3d4e6d429f629f52e57294cb`.
+  Package tests pass `4/4`; Ruff and compilation are clean.
+
+## Corrected Expanded Causal Dataset V4 - 2026-07-22
+
+The downstream research dataset rebuild is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4`.
+Its decision is `V4_CORRECTED_EXPANDED_DATASET_COMPLETE_RESEARCH_ONLY`.
+
+- The locked package consumes Complete Candidate V5 and retains exactly
+  `29,419` events, `73,116` action labels, and `15,172` outcome-blind
+  30-minute structural episodes. Labels comprise `31,049` stressed winners
+  and `42,067` stressed failures.
+- All event and action rows changed in the two corrected activity-density
+  fields. Every other value is exactly equal to Expanded V3, and the `91,032`
+  fold-assignment rows are byte-for-byte unchanged. Split artifact SHA-256 is
+  `4ab4902d363824edb82909e75a283b6c54bff26684239b1b66303f7bd41bcea5`.
+- Across the event registry, corrected `prior_events_1h` has mean `1.1095`,
+  median `1`, 95th percentile `3`, and maximum `8`. Corrected
+  `prior_events_4h` has mean `3.2238`, median `3`, 95th percentile `8`, and
+  maximum `15`.
+- The 58-feature causal surface, forbidden outcome fields, action labels,
+  structural weights, six purged out-of-time folds, canonical benchmark, and
+  journey quarantine policy remain unchanged. Model and threshold fitting,
+  portfolio simulation, serving, ML shadowing, EA consumption, demo, live,
+  and broker actions remain unauthorized.
+- Definition-contract SHA-256 is
+  `07c66d5508503851882d113da6aea284a6360ef04e0b4fab73eb55d2e05f43dc`;
+  lock-file SHA-256 is
+  `3d045cde7159919090c08921457f8963f874186260444ae96437ec612c806b2b`.
+  Independent verification returned
+  `V4_CORRECTED_EXPANDED_DATASET_VERIFICATION_PASS`; artifact-manifest SHA-256
+  is `3431a4ae2d5909e8fc45808e60d86b60070e662179d55c27e05ad7ddbeccb052`.
+  Package tests pass `4/4`; Ruff and compilation are clean.
+
+Expanded V3 and every model trained from its corrupted density fields are
+historical evidence only and are ineligible for promotion. The next ML step is
+a separately preregistered, fresh evaluation trained from Expanded V4. It must
+re-establish out-of-time ranking, economic uplift, latest-fold stability, and
+drawdown evidence from zero; no previous model pass or threshold carries over.
+No terminal, EA, account, deterministic specialist, model server, demo/live
+permission, or broker setting changed during either rebuild.
+
+## Corrected Action Model Replay V4 - 2026-07-22
+
+The research-only corrected-data replay is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-action-models-v4`.
+Its evidence decision is `ACTION_MODEL_V4_MODEL_EVIDENCE_GATE_FAIL`; all three
+lanes fail and no model is authorized for runtime use.
+
+- Action V4 exactly replays the frozen Action V3 experimental methodology on
+  corrected Expanded Dataset V4. Lanes, exclusions, 58 features, targets,
+  model parameters, calibration policy, acceptance gates, six purged folds,
+  bootstrap, and random seeds are identical. Methodology-contract SHA-256 is
+  `e3f8819d4d4a935f1412086a816decd2b70f44e86a2337ffa16164d1f52e8950`.
+  The shared model-mechanics source remains byte-identical to V3 at SHA-256
+  `2a936be073581fff3ae7458a98c24da43ae57bd6822c93792d5e280f1e169fce`.
+- Downside impulse/retest selected `3,188` test events, or `2.037` candidate
+  events per weekday, with mean `+0.0962R`, PF `1.1698`, drawdown `58.54R`, and
+  weighted AUC `0.6566`. Its selected-mean 95% lower bound is `+0.0107R`, but
+  only five calibration folds passed, common-event action-uplift lower bound
+  is `-0.0127R`, and F2026 returned `-0.4377R` with PF `0.4640`.
+- Break-and-run selected `5,600` test events, or `3.578` candidate events per
+  weekday, with mean `+0.1914R`, PF `1.3110`, drawdown `164.20R`, and weighted
+  AUC `0.5888`. Its selected-mean 95% lower bound is `+0.1095R`, but only five
+  calibration folds passed, coverage was `52.52%`, common-event action uplift
+  was negative with 95% interval `[-0.0049R, -0.0004R]`, and F2026 returned
+  `-0.2119R` with PF `0.7240`.
+- Opening-range reversal selected `2,140` test events but remained negative at
+  `-0.2961R`, PF `0.6293`, and drawdown `351.59R`. No calibration fold passed,
+  no test fold was positive, and the selected-mean 95% upper bound remained
+  negative at `-0.2225R`.
+- Correcting the density features changed four of 18 chosen fold policies. It
+  modestly improved downside's latest-fold loss, but reduced its aggregate
+  mean and PF. Break-and-run and opening reversal worsened economically. The
+  result therefore confirms that the timestamp-unit defect was material but
+  was not the main cause of model instability.
+- The reported events-per-weekday figures are structurally weighted research
+  candidate frequency across disjoint historical test folds. They are not
+  executable shared-account trade frequency and cannot be added together as a
+  demo-performance claim.
+- Final definition-contract SHA-256 is
+  `8265347e91e42d0342e00e1c15438487adf105af5075d612a0d5605f6e42e321`;
+  lock-file SHA-256 is
+  `92c01db8da8cf335d5e462c041676aaa1d09d7e077e9074a4497e281729e8842`.
+  Independent verification refitted and replayed all `18` serialized models,
+  reproduced `47,457` out-of-time predictions and `10,928` selected events,
+  recomputed action choices, thresholds, metrics, and 5,000-resample weekly
+  bootstraps, and returned `ACTION_V4_VERIFICATION_PASS`. Artifact-manifest
+  SHA-256 is
+  `b75a58d565dceb796291be23572513caeebc6df24fd07bf002fc4c245021280e`.
+  Package tests pass `5/5`; Ruff and compilation are clean.
+
+This package proves that training can run correctly on the repaired dataset,
+but it does not prove a deployable filter. Do not tune the same thresholds on
+the exposed F2026 losses or connect these models to MT5. The next research
+iteration must change the information or mechanism rather than repeatedly
+refit the same unstable policy: redesign weak candidate mechanics, add
+preregistered regime-local interactions or recency-aware training, evaluate
+them through nested walk-forward development, and reserve genuinely new
+forward observations for promotion evidence. No terminal, EA, account,
+deterministic specialist, model server, demo/live permission, sizing, or broker
+setting changed.
+
+## Adaptive Action Models V5 - 2026-07-22
+
+The research-only adaptive-training comparison is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-adaptive-models-v5`.
+Its evidence decision is `ADAPTIVE_MODEL_V5_MODEL_EVIDENCE_GATE_FAIL`; all
+lanes remain unauthorized for runtime use.
+
+- V5 froze four ridge-alpha-20 training methods before fitting: expanding
+  history, a 36-month rolling window, a normalized 12-month-half-life recency
+  weighting, and regime-local experts with a 650-action/200-event minimum and
+  expanding-global fallback. Candidate population, 58 features, labels,
+  actions, lane ownership, calibration policy, six purged folds, economic
+  gates, and bootstrap remain equal to corrected Action V4.
+- Calibration made substantive use of the comparison: across 18 lane/fold
+  choices it selected expanding eight times, recency-weighted five times,
+  rolling three times, and regime-local twice. The experiment did not collapse
+  to a disguised expanding-only replay.
+- Downside impulse/retest improved modestly versus Action V4. It selected
+  `3,090` events, or `1.974` candidate events per weekday, with mean
+  `+0.1070R`, PF `1.1879`, drawdown `58.54R`, and weighted AUC `0.6558`.
+  Selected-mean 95% lower bound is `+0.0176R`; common-event action-uplift 95%
+  interval is now positive at `[+0.00045R, +0.0933R]`; and all six calibration
+  folds passed. It still fails decisively because F2026 returned `-0.4377R`,
+  PF `0.4640`, and `-0.0984R` common-event uplift.
+- Break-and-run selected `5,580` events, or `3.565` candidate events per
+  weekday, with mean `+0.2010R`, PF `1.3285`, drawdown `161.76R`, and weighted
+  AUC `0.5864`. Its selected-mean 95% lower bound is `+0.1192R`. It still has
+  only five passing calibration folds, aggregate coverage is `52.34%`, and
+  F2026 remained unchanged at `-0.2119R` with PF `0.7240`.
+- Opening-range reversal improved slightly but remained invalid: `2,077`
+  selected events, mean `-0.2726R`, PF `0.6624`, and drawdown `319.66R`. Zero
+  calibration folds and zero test folds were positive. Regime-local training
+  reduced its F2026 loss to `-0.1067R` with PF `0.8542`, still below zero.
+- The negative fixed-action baselines make the frozen baseline-retention ratio
+  undefined, but this is not the decisive rejection reason. Downside and break
+  fail the latest-fold mean/PF gates independently; opening reversal fails its
+  expectancy, PF, stability, and robustness gates independently.
+- Candidate events per weekday are research opportunities across historical
+  disjoint test folds, not executable shared-account frequency or P&L.
+
+Base-method contract SHA-256 is
+`d0f0561eb14d048558e1ddbd87e98923e754943e9235396352571e08b6845fbd`;
+final definition-contract SHA-256 is
+`7db155ac8043d8b5cfc7b16a8abcf75707ea86b7485c9ca45477b16cd4f65510`;
+lock-file SHA-256 is
+`6de2a89683ce0e286e409d83f127ce87165bb63d975cb987f2e21e3b0176e1bb`.
+Independent verification refitted all `72` lane/fold/variant calibration
+models, reconstructed all `216` calibration policies, replayed the `18`
+serialized winners and `47,457` test predictions, and returned
+`ADAPTIVE_V5_VERIFICATION_PASS`. Artifact-manifest SHA-256 is
+`178a4ba6daf7d964880d30c5f24a00f24df5b95c50785a8ae56b9df25e455011`.
+Package tests pass `6/6`; Ruff and compilation are clean.
+
+V5 shows genuine incremental progress in aggregate downside quality, but
+training-window adaptation alone does not solve the current-regime failure.
+Do not select a different V5 variant using F2026 test outcomes and do not
+connect V5 to MT5. The next research change must add independently motivated
+information or stronger candidate mechanics, with F2026 treated only as
+exposed diagnostic history and new forward data reserved for promotion. No
+terminal, EA, account, deterministic specialist, model server, demo/live
+permission, sizing, or broker setting changed.
+
+## Causal Macro Action Models V6 - 2026-07-22
+
+The research-only DXY/Treasury augmentation is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-macro-models-v6`.
+Its evidence decision is `MACRO_MODEL_V6_MODEL_EVIDENCE_GATE_FAIL`; all three
+lanes remain unauthorized for runtime use.
+
+- A source audit rejected the broader XAGUSD/EURUSD/USDJPY feature cache for
+  this iteration because it ends on 2024-06-30 and cannot test F2025/F2026.
+  V6 used only the hash-locked free Dukascopy DOLLARIDXUSD and USTBONDTRUSD
+  M5 cache, which contains `525,099` source rows through 2026-06-30. No paid
+  data or Databento source was used.
+- V6 preserved the V5 population, labels, 58 base features, ridge model, four
+  training variants, calibration policy, six purged folds, economic gates,
+  bootstrap, and random seeds. It added exactly eight direction-adjusted DXY,
+  Treasury, consensus, and disagreement features from completed M15 bars.
+  Joins are backward-only with at most ten minutes of age. Missing values are
+  median-imputed inside each fit pipeline without missingness indicators, so
+  all `73,116` action rows and `28,432` resolved events remain present.
+- Downside impulse/retest improved slightly in aggregate versus V5: `3,073`
+  selected events, `1.964` candidate events per weekday, mean `+0.1104R`, PF
+  `1.1941`, drawdown `63.64R`, and AUC `0.6525`. The selected-mean 95% lower
+  bound is `+0.0209R` and action-uplift lower bound is `+0.0048R`. It still
+  fails because F2026 worsened to `-0.4434R`, PF `0.4587`, and `-0.0996R`
+  action uplift.
+- Break-and-run selected `5,977` events, or `3.819` candidate events per
+  weekday, with mean `+0.1849R`, PF `1.3000`, drawdown `157.27R`, and AUC
+  `0.5827`. F2026 improved modestly to `-0.1934R` and PF `0.7465`, but remains
+  clearly negative. Aggregate mean, PF, and AUC regressed versus V5, and only
+  five calibration folds passed.
+- Opening-range reversal remained invalid: `2,057` selected events, mean
+  `-0.3004R`, PF `0.6251`, drawdown `351.75R`, and AUC `0.5164`. Its F2026
+  loss improved to `-0.0794R` with PF `0.8900`, but no calibration fold and no
+  test fold passed the required profitability evidence.
+- The negative fixed-action baselines again make the inherited retention
+  ratio undefined. This does not drive the result: all lanes independently
+  fail the latest-fold mean and PF gates, and opening also fails aggregate
+  expectancy, PF, AUC, and robustness gates.
+- Candidate-event frequency is diagnostic research frequency, not executable
+  shared-account trades or P&L. No model was attached to MT5.
+
+Definition-contract SHA-256 is
+`713b455bdb87bbf5e552a1644b6fac149ca58b810a775937b7f28931917d0246`;
+lock-file SHA-256 is
+`21ca68ec72ddbf6dd05a784d345efdec8088477c52f5d306f690759aedcf6954`.
+Independent verification refitted all `72` calibration models, reconstructed
+all `216` policies, replayed `18` serialized models and `47,457` out-of-time
+predictions, and returned `MACRO_V6_VERIFICATION_PASS`. Artifact-manifest
+SHA-256 is
+`fedaf9dc50f8fa930ff7c7ef9e56458e6d576756e8d870e2d638059afb32a6fc`.
+Package tests pass `7/7`; Ruff and compilation are clean.
+
+V6 shows that contemporaneous DXY/Treasury context is not the missing fix in
+this linear formulation. The next step is a read-only latest-era failure audit
+of selected and baseline events by lane, regime, action, session, month, and
+macro availability. F2026 is exposed diagnostic history and must not be used
+to retroactively tune V6. No terminal, EA, account, deterministic specialist,
+model server, demo/live permission, sizing, or broker setting changed.
+
+## Causal Horizon Interaction Models V7 - 2026-07-22
+
+The research-only context-dependent action-horizon experiment is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-horizon-interactions-v7`.
+Its evidence decision is `HORIZON_MODEL_V7_MODEL_EVIDENCE_GATE_FAIL`; all
+lanes remain unauthorized for runtime use.
+
+- The latest-era audit exposed a structural limitation in V5/V6: for rows from
+  one event, all market features are identical and only action descriptors
+  change. A pooled linear model therefore gives fast, intraday, and swing
+  actions common market-feature slopes and can vary their scores mainly by
+  fixed action offsets. This prevents general context-dependent horizon
+  selection.
+- V7 preserved V5's corrected population, labels, 58 base features, ridge
+  alpha, four training variants, calibration policy, six purged folds, gates,
+  bootstrap, and seeds. It mechanically multiplied every one of the 52
+  non-action event features by the intraday and swing indicators, with fast as
+  reference. No feature was hand-picked. The final surface has exactly 104
+  interaction features and 162 total features.
+- Downside impulse/retest improved modestly in aggregate and materially in the
+  latest fold. It selected `3,025` events, or `1.933` candidate events per
+  weekday, with mean `+0.1138R`, PF `1.1923`, drawdown `58.44R`, and AUC
+  `0.6415`. F2026 improved from V5's `-0.4377R`/PF `0.4640` to
+  `-0.3344R`/PF `0.5777`, but remained decisively negative; F2026 action
+  uplift was also negative at `-0.1252R`.
+- Break-and-run selected `5,629` events, or `3.597` candidate events per
+  weekday, with mean `+0.1675R`, PF `1.2750`, drawdown `150.10R`, and AUC
+  `0.5853`. F2026 improved only slightly to `-0.1939R` and PF `0.7411`.
+  Aggregate mean/PF regressed versus V5, only five calibration folds passed,
+  and the action-uplift 95% interval was entirely negative at approximately
+  `[-0.0315R, -0.0031R]`.
+- Opening-range reversal remained invalid at `2,180` selected events, mean
+  `-0.3170R`, PF `0.6001`, drawdown `386.83R`, and AUC `0.5226`. F2026
+  improved to `-0.0729R` and PF `0.8962`, but still failed, while aggregate
+  quality and drawdown worsened versus V5.
+- The result shows that horizon interactions address a real limitation but do
+  not solve the main problem. A single absolute-return regression still
+  conflates event tradeability with relative action choice. The next defensible
+  model experiment is a preregistered two-stage design: first estimate whether
+  any allowed action has positive stressed expectancy, then rank relative
+  action advantage only within candidates that pass that event-quality stage.
+- Candidate-event frequency remains diagnostic and is not executable account
+  trade frequency or P&L. V7 was never attached to MT5.
+
+Final definition-contract SHA-256 is
+`17b90018e53758345ce9f2748d3f4f6ede9f982fec757b5651332b7e4b1ad43d`;
+lock-file SHA-256 is
+`910874cab96d8af6f06bcdd064209a48854df3a6918e9e458cc8c66e5703476a`.
+Independent verification refitted all `72` calibration models, reconstructed
+all `216` policies, replayed `18` serialized models and `47,457` out-of-time
+predictions, and returned `HORIZON_V7_VERIFICATION_PASS`. Artifact-manifest
+SHA-256 is
+`7a03c3c328f676028f0685fa72d4005439a37cfcabd6c56df42bdfb311e38990`.
+Package tests pass `8/8`; Ruff and compilation are clean. No terminal, EA,
+account, deterministic specialist, model server, demo/live permission, sizing,
+or broker setting changed.
+
+## Causal Two-Stage Models V8 - 2026-07-22
+
+The preregistered event-quality/action-advantage experiment is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-two-stage-models-v8`.
+Its evidence decision is `TWO_STAGE_MODEL_V8_MODEL_EVIDENCE_GATE_FAIL`; all
+three lanes remain unauthorized for runtime use.
+
+- V8 tested the specific mechanism identified after V7. The event stage uses
+  52 causal non-action features to predict the best available stressed action
+  return. The action stage uses the 58 V5 features plus 104 frozen horizon
+  interactions to predict each action's return advantage over the within-event
+  mean. Both stages use the same calibration-selected training variant per
+  fold; only that variant and the frozen retention quantile can be selected.
+- The target audit covers `73,116` action rows and `28,432` resolved events:
+  `15,578` have at least one positive stressed action and `12,854` do not.
+  The repeated event targets preserve event-level training weight with maximum
+  error `1.39e-17`; no event has inconsistent evaluation weights. Missing
+  actions remain missing and are not imputed.
+- Downside impulse/retest was the only lane with a small aggregate improvement
+  over V5. It selected `3,047` events, or `1.947` candidate events per weekday,
+  with mean `+0.1097R`, PF `1.1866`, drawdown `58.96R`, and event AUC `0.6600`.
+  The action ranker chose a hindsight-best tied action on `46.3%` of weighted
+  events. Aggregate common-event action uplift was `+0.0410R`, but this was
+  `0.0059R` below V5. F2026 remained decisively negative at `-0.3995R`, PF
+  `0.5059`, and `-0.0746R` action uplift.
+- Break-and-run selected `5,610` events, or `3.585` candidate events per
+  weekday, with mean `+0.1336R`, PF `1.2150`, drawdown `214.54R`, and event AUC
+  `0.5978`. Exact best-action accuracy was `66.7%`, but aggregate action uplift
+  was `-0.0346R`. Mean R regressed `0.0674R` and PF regressed `0.1136` versus
+  V5; F2026 was `-0.2440R` with PF `0.6818`.
+- Opening-range reversal remained invalid: `2,100` selected events, mean
+  `-0.3372R`, PF `0.5748`, drawdown `398.01R`, event AUC `0.5378`, and zero
+  passing calibration or positive test folds. F2026 was `-0.1697R`, PF
+  `0.7654`, and `-0.0939R` action uplift.
+- Event detection contains measurable information, particularly for downside,
+  but the two-stage decomposition did not produce stable action selection or
+  survive the latest regime. It is therefore useful diagnostic evidence, not
+  a trained trading model. Candidate-event frequency is not executable shared
+  account frequency or P&L.
+
+Definition-contract SHA-256 is
+`3eb7a4ce52154ca17ec20be28957c250f39dfde59223bf05f4134dae98a0e0a9`;
+lock-file SHA-256 is
+`12eb0585e2a6cafb9f1f2226fd190064e1b351b528dde3ac283b58f89a631aa2`.
+Independent verification refitted all `72` paired calibration policies, or
+`144` constituent stage models, reconstructed all `216` policies, replayed
+`18` serialized paired models and `47,457` out-of-time predictions, and
+returned `TWO_STAGE_V8_VERIFICATION_PASS`. Artifact-manifest SHA-256 is
+`20dce93dad5af52bd6320ca6ee8debaa546b5603786d72d9a06a5e893291d133`.
+Package tests pass `11/11`; Ruff and compilation are clean.
+
+V8 closes the hypothesis that target decomposition alone can repair the
+current ML route. Do not tune V8 against F2026 or attach it to MT5. The next
+research move should target the actual latest-era distribution break and
+candidate mechanics, while preserving unseen forward data for any promotion
+decision. No terminal, EA, account, deterministic specialist, model server,
+demo/live permission, sizing, or broker setting changed.
+
+## Causal Pairwise Models V9 - 2026-07-22
+
+The preregistered binary event-classification and pairwise horizon-ranking
+experiment is complete at
+`xau-usd/xauusd-fast-research/causal-candidate-quality-pairwise-models-v9`.
+Its evidence decision is `PAIRWISE_MODEL_V9_MODEL_EVIDENCE_GATE_FAIL`; all
+three lanes remain unauthorized for runtime use.
+
+- V9 changed the action-learning problem rather than tuning V8. A standardized
+  L2 logistic event classifier predicts whether any available stressed action
+  is positive. A second classifier predicts which action wins in each
+  fast/intraday/swing pair from 162 mechanically differenced features. Mean
+  pairwise win probability chooses the action. Both classifiers share one of
+  the four frozen training variants in each fold.
+- The target audit covers `73,116` action rows, `28,432` resolved events, and
+  `63,689` pair comparisons. There are `15,578` events with a positive best
+  action and `12,854` without one. Pair and repeated-event weights preserve
+  event influence with maximum errors `0` and `1.39e-17`; no outcome tie was
+  present in the real pair ledger.
+- Pairwise ranking worked substantially better than V8's pointwise advantage
+  regression. Hindsight-best tied-action accuracy was `76.7%` for downside,
+  `83.1%` for opening reversal, and `83.6%` for break-and-run. Weighted
+  pairwise AUCs were `0.6055`, `0.5598`, and `0.5518`, respectively. This
+  reduced break-and-run common-event action loss from V8's `-0.0346R` to
+  `-0.0020R` and produced `+0.0206R` uplift for downside and `+0.0525R` for
+  opening reversal.
+- Downside impulse/retest selected `3,000` events, or `1.917` candidate events
+  per weekday, with mean `+0.1022R`, PF `1.1569`, drawdown `58.38R`, and event
+  AUC `0.6633`. It still failed because only five calibration folds passed and
+  F2026 returned `-0.2941R`, PF `0.6331`, despite the action ranker no longer
+  losing value in that fold.
+- Break-and-run selected `5,642` events, or `3.605` candidate events per
+  weekday, with mean `+0.1575R`, PF `1.2531`, drawdown `208.88R`, and event AUC
+  `0.5974`. It also had five passing calibration and positive test folds, but
+  regressed from V5 in aggregate mean/PF and returned `-0.2274R`, PF `0.7045`,
+  in F2026.
+- Opening-range reversal improved versus V5 but remained invalid: `2,062`
+  selected events, mean `-0.2591R`, PF `0.6767`, drawdown `297.35R`, event AUC
+  `0.5433`, zero passing calibration folds, and zero positive test folds.
+  F2026 remained negative at `-0.1209R`, PF `0.8359`.
+- F2026 event AUC fell to approximately `0.486` for downside, `0.531` for
+  break-and-run, and `0.476` for opening reversal. V9 therefore isolates the
+  main blocker: horizon choice is no longer the dominant defect; the immediate
+  candidate events themselves lose predictable edge in the latest era.
+
+Final definition-contract SHA-256 is
+`2f454ea674365fff5a080aaa6f547f3d81829b15156d1ad3a847e4faac1cee01`;
+lock-file SHA-256 is
+`7d9f342c49b4dada8a133925a4d95d3f3cd923ff20ef9c8af67f0f008e663241`.
+Independent verification refitted all `72` paired policies, or `144`
+constituent classifiers, reconstructed all `216` calibration policies,
+replayed `18` serialized paired models, `47,457` action predictions, and
+`39,124` out-of-time pair predictions, and returned
+`PAIRWISE_V9_VERIFICATION_PASS`. Artifact-manifest SHA-256 is
+`a9e534c36b6eeffcc0833bcaf5b4dd376006da67e0400c2dd85224ebf18c1fbe`.
+Package tests pass `10/10`; Ruff and compilation are clean. The final rerun
+uses the scikit-learn 1.8-compatible `l1_ratio=0` spelling for fixed L2
+regularization and is warning-free.
+
+Do not tune V9 on F2026 or attach it to MT5. Another action router is no longer
+the defensible next move. New work must change the causal entry information or
+the candidate mechanics, such as a separately preregistered delayed
+confirmation/retest action, and then rebuild its labels from raw bid/ask paths.
+No terminal, EA, account, deterministic specialist, model server, demo/live
+permission, sizing, or broker setting changed.
+## Causal Delayed Confirmation Actions V10 - 2026-07-22
+
+- Added and locked `xau-usd/xauusd-fast-research/causal-delayed-confirmation-actions-v10` before generating delayed-entry outcomes. Definition contract SHA-256: `bcb4ecebbd633cdcdb36c35e493928f39ac63915060ea8008b12ec67074c3836`.
+- V10 used all 29,419 corrected Complete V5 events and the SHA-verified 708,538-row Dukascopy M5 bid/ask cache. The primary rule required a fixed three-bar directional confirmation within 60 minutes and entered only at the next M5 open. A 15-minute waiting-only control and immediate V5 labels were frozen comparators.
+- The full replay produced 51,014 mechanic events and 126,866 side-specific action labels. Six annual tests used calibration-only action selection and episode-level boundary purging. The independent verifier rebuilt every label and returned `DELAYED_CONFIRMATION_V10_VERIFICATION_PASS`.
+- Decision: `DELAYED_CONFIRMATION_V10_EVIDENCE_GATE_FAIL`.
+- Primary aggregate: 7,158 selected events, 4.573802 events per weekday, +317.5435R, +0.044362R mean, PF 1.068448, 312.4508R maximum drawdown, five positive folds. The weekly-block 95% mean CI was `[-0.009678R, +0.096675R]` and therefore crossed zero.
+- Latest F2026 fold: 1,927 events, 7.383142 events per weekday, -262.4610R, -0.136202R mean, PF 0.816689, and 275.1250R drawdown. The latest fold failed both mean and PF gates.
+- On paired common events, delayed confirmation was materially worse than waiting alone: -0.224867R mean delta with 95% weekly-block CI `[-0.245915R, -0.203488R]`. It was also worse than immediate execution: -0.332139R mean delta with CI `[-0.361548R, -0.303372R]`. Paired drawdown was more than six times each comparator.
+- Lane result: BREAK_AND_RUN remained mildly positive at +0.073249R mean and PF 1.112820, while DOWNSIDE_IMPULSE_RETEST lost -0.075723R per event at PF 0.882306. OPENING_RANGE_REVERSAL never passed the frozen calibration action gate.
+- Interpretation: the fixed confirmation identifies directional movement, but entering after that movement chases exhausted price and destroys too much edge. The attractive immediate comparator is diagnostic only because its event subset is known from future confirmation and cannot be traded at the original time.
+- Next experiment: preserve immediate causal entry and use the unchanged three-bar/15-minute evidence only as early position management. Stops and targets hit before the checkpoint remain binding; still-open trades that fail validation exit at the first executable M5 open after 15 minutes. No V10 threshold will be tuned in the same version.
+- V10 remains offline research only. No Python serving, ML shadow, EA consumption, demo, live, or broker authorization changed. The active V60 demo portfolio was untouched.
+## Causal Early Validation Management V11 - 2026-07-22
+
+- Added `xau-usd/xauusd-fast-research/causal-early-validation-management-v11` as the causal follow-up to V10. The corrected replacement definition contract is `24281c3987dab05212fc45a105e294792037d503a6f8445695673cc728975afe`.
+- The first execution attempt stopped before managed action labels or P&L were built because 16 source signals were not exactly M5-aligned. The frozen preregistration already made non-exact checkpoints unavailable. The implementation was corrected to omit them, documented in `PREOUTCOME_CORRECTION.md`, retested, and replacement-locked before the first economic run.
+- V11 preserved immediate V5 entry, bid/ask spread, protective stop, target, maximum hold, and costs. Any stop/target reached by minute 15 remained binding. Still-open trades passing the unchanged V10 three-bar thresholds retained their original outcome; failures exited at the side-specific minute-15 M5 open.
+- The independent verifier rebuilt 29,297 exact contiguous validation events, 145,840 immediate/managed action labels, and returned `EARLY_VALIDATION_V11_VERIFICATION_PASS`.
+- Decision: `EARLY_VALIDATION_V11_EVIDENCE_GATE_FAIL`.
+- Calibration selected a managed policy only in F2022 and F2026, both for DOWNSIDE_IMPULSE_RETEST. Aggregate managed test result: 900 events, 0.575080 events per weekday, -129.7541R, -0.144171R mean, PF 0.676599, 156.8655R drawdown, and zero positive folds.
+- Latest F2026: 401 events, 1.536398 events per weekday, -36.4126R, -0.090804R mean, PF 0.794367, and 65.2805R drawdown.
+- Paired against the same immediate event/action, V11 changed mean outcome by -0.029199R. The 95% weekly-block CI was `[-0.101209R, +0.041892R]`; it did not establish improvement. Drawdown ratio was 0.998721, only a negligible reduction.
+- State audit across all available actions: 13,558 positions ended before the checkpoint at -0.404552R mean and PF 0.463648; 19,689 validated positions subsequently achieved +0.433357R mean and PF 2.017903; 39,673 failed validations exited at -0.352132R mean and PF 0.046377.
+- Interpretation: validation is economically informative, but waiting to enter is too late and entering every candidate before validation incurs losses that the minute-15 exit does not recover. The defensible next test is to predict the fixed 15-minute validation state from causal features available at the original signal, then evaluate immediate entries selected entirely out of time. Final P&L remains evaluation, not the classifier target.
+- V11 is offline research only. No runtime authorization or V60 demo portfolio file changed.
+## Causal Follow-through Proxy Models V12 - 2026-07-22
+
+- Added and locked `xau-usd/xauusd-fast-research/causal-followthrough-proxy-models-v12`. Definition contract SHA-256: `c3d6af3bb116660da4e4ac3e98c518d19768fda90ca81d473a7970019bc5c3d8`.
+- V12 trained separate lane classifiers to predict the independently verified fixed V11 15-minute validation state from the 52 frozen causal V4 event features. Final P&L was never a fit target. Three frozen temporal variants and four frozen retention quantiles were selected only on each fold's calibration year; immediate action ranking was also calibration-only.
+- A post-outcome verifier amendment normalized `None` versus `NaN` for abstaining policy rows. It changed no model or result and is documented in `POSTOUTCOME_VERIFICATION_CORRECTION.md`. The original definition lock remains authoritative.
+- Independent refit reproduced 16,249 out-of-time event predictions and 3,473 selected trades, returning `FOLLOWTHROUGH_V12_VERIFICATION_PASS`.
+- Decision: `FOLLOWTHROUGH_V12_EVIDENCE_GATE_FAIL`, despite a major improvement over V9-V11.
+- Aggregate: 3,473 selected events, 2.219169 events per weekday, 2,216 structural episodes, +909.0564 weighted R, +0.592495 weighted mean R, PF 2.372072, 26.3412R weighted drawdown, 61.04% weighted win rate, and validation AUC 0.599345. Weekly bootstrap selected mean 95% interval: `[+0.498771R, +0.675978R]`.
+- The selected-minus-baseline weekly bootstrap 95% interval was `[+0.589370R, +0.719388R]`. The unfiltered immediate baseline lost -0.064834R per weighted event at PF 0.907207.
+- F2021-F2025 were all positive with PF from 1.860951 to 3.419908. F2026 alone failed: 426 events, 1.632184 events per weekday, -15.4611 weighted R, -0.102054 mean R, PF 0.858913, and 23.9533R drawdown. Latest validation AUC still passed at 0.547589.
+- BREAK_AND_RUN aggregate: 2,053 events, 1.311821 per weekday, +0.634082 mean R, PF 2.408501. DOWNSIDE_IMPULSE_RETEST: 1,420 events, 0.907348 per weekday, +0.514262 mean R, PF 2.294421. OPENING_RANGE_REVERSAL never passed calibration.
+- In F2026, actually validated selected trades remained profitable at +0.605735R and PF 2.291191; false validations lost -0.385555R at PF 0.532751. The selected set contained only 30.5% actual validations. Score-decile analysis showed the F2026 pass rate did not improve monotonically beyond the eighth decile, so a stricter linear cutoff is not supported.
+- Interpretation: the short-horizon proxy is economically meaningful and learnable enough to create high-frequency edge in five folds, but the linear ranking does not preserve sufficient precision in the latest regime. V13 will isolate one change: a shallow, heavily regularized nonlinear classifier. Target, features, folds, quantiles, action policy, gates, and runtime authorization remain frozen.
+- V12 is not eligible for serving, shadowing, EA use, demo, live, or broker action. V60 demo trading was untouched.
+## Causal Follow-through Nonlinear Models V13 - 2026-07-22
+
+- Added `xau-usd/xauusd-fast-research/causal-followthrough-nonlinear-models-v13` as a one-change adaptation of V12. The target, 52 features, folds, temporal variants, quantiles, action policy, gates, and authorization were inherited unchanged; only the classifier became a shallow regularized histogram gradient boosting model.
+- Definition contract SHA-256: `a6182e5d75b30f85d1e4f0ed6d3805ab04b0af71865c7d18453f3d29c26acad1`.
+- A post-outcome verifier-only correction changed the JSON normalizer call to the pinned economics module. It is documented in `POSTOUTCOME_VERIFICATION_CORRECTION.md`; no model, prediction, metric, or result changed.
+- Independent refit reproduced 16,249 out-of-time predictions and 3,594 selected events, returning `FOLLOWTHROUGH_V13_VERIFICATION_PASS`.
+- Decision: evidence gate fail. The inherited implementation reports the literal status string `FOLLOWTHROUGH_V12_EVIDENCE_GATE_FAIL`; the package and verifier identify the experiment as V13.
+- Aggregate V13: 3,594 events, 2.296486 per weekday, +0.435498 weighted mean R, PF 1.916329, 57.2335R weighted drawdown, and validation AUC 0.589570.
+- F2026: 370 events, 1.417625 per weekday, -0.273462 weighted mean R, PF 0.648405, 51.3437R weighted drawdown, and validation AUC 0.529625.
+- V13 is inferior to V12: lower aggregate mean/PF/AUC, more than double drawdown, and substantially worse latest-fold economics and AUC. Additional nonlinear capacity is rejected as the next route.
+- Next analysis must focus on causal regime/proxy-health detection or genuinely new pre-entry information. Do not expand classifier complexity or simply tighten the unstable linear score tail.
+- No runtime or V60 demo authorization changed.
+
+## Causal Follow-through Health Circuit V14 - 2026-07-22
+
+- Added `xau-usd/xauusd-fast-research/causal-followthrough-health-circuit-v14` as a development-only health overlay on the stronger V12 linear model. Definition contract SHA-256: `a86d8d387bec7c0f0b83e0698f5528fa6b5261c153001c8facff81bf023e0262`.
+- The first execution attempt stopped before reading model predictions because the lightweight package omitted the pinned scikit-learn dependency. The dependency-only correction is documented in `PREOUTCOME_CORRECTION.md`; the replacement contract was locked before any economic output was read.
+- V14 processes V12 would-be selected events chronologically. At each event it observes only validation labels whose fixed 15-minute availability time has passed, measures the standardized residual over the last 100 completed labels, and abstains when the residual is below `-1.5`. Same-timestamp decisions share identical prior state, and blocked events continue to supply later labels.
+- The `-1.5` alarm threshold was selected after all historical outcomes through F2026 were exposed. V14 is therefore development evidence only and cannot be described as an untouched confirmation test.
+- Independent verification replayed all 3,580 chronological decisions and 2,845 allowed events and returned `FOLLOWTHROUGH_HEALTH_V14_VERIFICATION_PASS`.
+- Decision: `FOLLOWTHROUGH_HEALTH_V14_DEVELOPMENT_GATE_FAIL`. Twelve of thirteen locked checks passed; only the latest-fold PF gate failed.
+- Aggregate V14: 2,845 events, 1.817891 per weekday, 1,808 structural episodes, +867.3818 weighted R, +0.674079 weighted mean R, PF 2.698530, 14.2361R weighted drawdown, and 64.31% weighted win rate.
+- Against V12, V14 retained 81.92% of events, improved weighted mean by approximately +0.081584R, and reduced drawdown to 54.05% of V12. The weekly-block 95% health-minus-V12 mean interval was `[+0.046628R, +0.117026R]`.
+- F2026 became slightly positive: 232 events, 0.888889 per weekday, +2.0016 weighted R, +0.025306 mean R, PF 1.037495, and 9.3700R drawdown. The locked PF requirement was at least 1.05, so the result was correctly rejected. Removing the latest fold's 20 largest winners also made its mean negative, reinforcing that the apparent recovery is fragile.
+- Do not tune the V14 threshold on the same exposed history. Preserve V12 and V14 as frozen development candidates and seek genuinely new prospective labels for confirmation, or introduce separately preregistered new causal information. No Python serving, ML shadow, EA consumption, demo, live, broker, or V60 authorization changed.
+
+## Causal Follow-through Lane Health V15 - 2026-07-22
+
+- Added and locked `xau-usd/xauusd-fast-research/causal-followthrough-lane-health-v15` as a one-change exposed-history development test. Definition contract SHA-256: `c41249c5491d76ca3ac0f1efe601379846fb6f82171018c3b30b705f0b147f5b`.
+- V15 inherited the frozen V14 population, V12 model, actions, 15-minute label delay, 100-label window/startup, `-1.5` threshold, folds, economics, and authorization. It changed only the health-state scope from pooled to separate state per model lane. It also preregistered latest-frequency, latest-winner-robustness, and direct V14 comparison gates before the economic run.
+- Independent verification replayed all 3,580 chronological decisions and 3,048 allowed events and returned `FOLLOWTHROUGH_LANE_HEALTH_V15_VERIFICATION_PASS`.
+- Decision: `FOLLOWTHROUGH_LANE_HEALTH_V15_DEVELOPMENT_GATE_FAIL`.
+- Aggregate V15: 3,048 events, 1.947604 per weekday, +0.642393 weighted mean R, PF 2.567619, and 18.1640R weighted drawdown. These remain strong exposed-history development economics but are inferior to V14's mean, PF, and drawdown.
+- F2026 frequency rose to 1.340996 events per weekday, but economics deteriorated to -0.033126R mean, PF 0.952440, -4.1885 weighted R, and 13.4055R drawdown. Removing the 20 largest winners left -0.356788R mean.
+- V15 failed latest mean, latest PF, latest winner robustness, six-positive-fold, V14 drawdown, and V14 mean-delta confidence gates. The pooled V14 state was providing useful cross-lane protection; lane-local monitoring is rejected and must not be tuned on this history.
+- Preserve V14 as the better frozen development candidate, still not an authorization candidate. The next meaningful evidence is new post-`2026-07-01` candidate/market data generated under a frozen acquisition and scoring contract. No runtime or V60 demo authorization changed.
+
+## Post-cutoff Dukascopy XAU evidence - 2026-07-22
+
+- Added `multi-asset/data-foundation/dukascopy-xau-prospective-v1`, a data-only, resumable official-Dukascopy snapshot tool. It caps concurrency at four, excludes the open UTC hour, validates each source payload, uses no paid source, and contains no strategy or broker action.
+- Acquired all 519 completed UTC hours from `2026-07-01T00:00:00Z` through `2026-07-22T15:00:00Z` exclusive into the external `D:` archive: 5,531,969 validated bid/ask ticks and 123,778,402 raw bytes.
+- Raw snapshot manifest: `D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/prospective-v1/manifests/XAUUSD_2026070100_2026072215_PROSPECTIVE_SNAPSHOT.json`; SHA-256 `ed6243f20e08c999b2d8333686fcb3bc3c341c56bf223194722f451d004da88e`.
+- Independent snapshot verification checked contiguous coverage, official URLs, path containment, all 519 file hashes, all decoded payloads, tick counts, and byte totals and returned `DUKASCOPY_XAU_PROSPECTIVE_SNAPSHOT_VERIFICATION_PASS`.
+- Built a separate append-only 4,272-row prospective M5 feature file. Before writing July, the builder reconstructed 276 June 30 bars from raw ticks and matched every frozen base OHLC/microstructure field with maximum absolute error `8.858608291362202e-13`.
+- Prospective M5 file: `D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/prospective-v1/features/XAUUSD_2026070100_2026072215_M5_FEATURES_V1.parquet`; SHA-256 `e957dee3ff09c8a7ae17387306a4f9162928aef64bea9eaa3ee170058f1e9231`.
+- The frozen historical cache was not modified. July has not been used to tune, fit, score, or evaluate V12/V14. The remaining requirement is a frozen generator/export for the same BREAK_AND_RUN, DOWNSIDE_IMPULSE_RETEST, and OPENING_RANGE_REVERSAL candidate families, followed by causal 15-minute labels and one-shot V12/V14 scoring. No ML shadow or runtime authorization changed.
+
+## Post-cutoff MT5 candidate export - 2026-07-22
+
+- Added `xau-usd/xauusd-fast-research/mt5-candidate-prospective-v1` and froze
+  its candidate-only contract before running an isolated Strategy Tester at
+  `C:/MT5A1M5MomentumBacktest`. The active account `1033030` terminal and V60
+  deterministic demo portfolio were not changed.
+- The exact previously parity-tested binaries and sources generated 302
+  `WOULD_SIGNAL` rows from July 1 through July 20 at 100% MT5 history quality:
+  34 downside impulse/retest, 39 opening-range reversal, and 229 break-and-run.
+  Tester P/L was ignored; all economics were rebuilt from Dukascopy bid/ask.
+- Candidate contract SHA-256 is
+  `9280aea6d9566da4d33077b67e2b5bc4134046f3c18162cb1e50356113be07ac`;
+  evidence SHA-256 is
+  `975afa614283a3f719ca272bd1fcc639955eb4eb30c64ffa61540a71028acde6`;
+  manifest SHA-256 is
+  `3d4c8973cff0e4854e831dda1af51bb5ea2d7d4214d59e74b81bc8f3c08d74a5`.
+  Independent verification passed.
+
+## Prospective Follow-through Confirmation V16 - 2026-07-22
+
+- Added and froze
+  `xau-usd/xauusd-fast-research/causal-followthrough-prospective-confirmation-v16`
+  before exposing July outcomes. It reconstructed causal V4 events, V11
+  15-minute labels, the exact frozen F2026 V12 models and policies, and the
+  unchanged pooled V14 health circuit. No model or threshold was refitted.
+- Definition-contract SHA-256 is
+  `46e201e2100cad24d3c2fa9323acd95d992e5f5661df131d8ced6957f74d0426`.
+  Independent reconstruction returned
+  `PROSPECTIVE_CONFIRMATION_V16_VERIFICATION_PASS`.
+- Decision: `PROSPECTIVE_CONFIRMATION_V16_PROVISIONAL_GATE_FAIL`. Of 302 raw
+  candidates, 281 had complete features and 22 were selected across 18
+  structural episodes. Frequency passed at 1.571429 events per observed
+  weekday, but the result was -6.9584R, -0.637740R mean, PF 0.308085, and
+  7.2773R weighted drawdown.
+- Break-and-run supplied 20 selected events and lost -6.5317R at PF 0.3217.
+  Downside supplied two and both lost. Every selected event was in CHOP or
+  TRANSITION_UNKNOWN. Break-and-run validation-score AUC was 0.5102 and V14
+  blocked zero events. July is now exposed development history and may never
+  be called untouched confirmation again.
+- The frozen V12/V14 prospective hypothesis is rejected for this window. No
+  runtime, demo, live, shadow, serving, account, sizing, or broker permission
+  changed.
+
+## Regime-local Follow-through Experts V17 - 2026-07-22
+
+- Added and locked
+  `xau-usd/xauusd-fast-research/causal-followthrough-regime-experts-v17` to
+  test one structural change: separate linear validation models per lane and
+  regime, with no global fallback for cells below 400 fit or 150 calibration
+  events. The V12 target, 52 features, model class, temporal variants,
+  quantiles, and fold-local action rankings remained fixed.
+- Definition-contract SHA-256 is
+  `45bc89f42482b3374cb58e1a1284705db65244eb9fbc85a010a126501c55c6bd`;
+  lock-file SHA-256 is
+  `ece14a0bec845bcf414cc1992bba1b010fa015e7a063b02a2a31cebcea78715f`.
+  A documented verifier-only normalization reconciles `NaN` versus `None` and
+  empty Parquet frames without changing any model or result. Independent
+  recomputation returned `REGIME_EXPERT_V17_VERIFICATION_PASS`.
+- Decision: `REGIME_EXPERT_V17_DEVELOPMENT_GATE_FAIL`. Aggregate historical
+  development remained positive with 2,804 events, 1.791693/day, +0.334973R
+  mean, PF 1.624101, and AUC 0.578184. F2026 failed at 557 events,
+  -0.148216R mean, PF 0.801416, and 40.5741R drawdown. Its CHOP plus
+  TRANSITION_UNKNOWN subset lost -0.332387R at PF 0.593324.
+- Every final July cell abstained because no current lane-regime policy passed
+  pre-cutoff calibration. That avoids another July loss but supplies zero
+  frequency and no deployable model. Regime separation alone is closed.
+  Artifact-manifest SHA-256 is
+  `46c8209bdcc543776e411ae86597a71013b57a3a7ac1db2177b574ab2a472d64`.
+
+## Free Prospective DXY/Treasury Foundation - 2026-07-22
+
+- Added `multi-asset/data-foundation/dukascopy-macro-prospective-v1`. It uses
+  only the official free Dukascopy endpoint, caps concurrency at four, excludes
+  the open UTC hour, forbids Databento and paid sources, and contains no
+  strategy or broker action.
+- Acquired and independently verified 1,038 symbol-hours from July 1 through
+  July 22 15:00 UTC exclusive for DOLLARIDXUSD and USTBONDTRUSD: 204,834 ticks
+  and 5,550,051 raw bytes. Snapshot SHA-256 is
+  `ea7dc6c1e632ab00f67d84a7870cfe0f5212c5e7ba05fd41b7f203b66bdbf1ab`.
+- The M5 builder matched all 266 frozen June 30 historical bars exactly with
+  maximum absolute error 0.0, then wrote 4,077 prospective rows. Feature
+  SHA-256 is
+  `f39a8006897660c72e52dc088431815dc562a105d1a4cd0294bc1646877233f9`;
+  feature-manifest SHA-256 is
+  `7e7ee2cc56d90cd895a6cf06809a032bdbfb77e52ee7fe6b3381cc0830f6e5ea`.
+  A read-only verifier rebuilt the complete feature frame from raw files and
+  passed.
+
+## Macro Follow-through Models V18 - 2026-07-22
+
+- Added and locked
+  `xau-usd/xauusd-fast-research/causal-followthrough-macro-proxy-models-v18`.
+  It changed only the V12 information surface by adding the same eight causal
+  completed-M15 DXY/Treasury pressure features used in V6. Joins are backward
+  with ten-minute maximum staleness; missing history is fixed neutral zero
+  without a missingness indicator.
+- Definition-contract SHA-256 is
+  `5b868f884eef05238a453317e078ed2e9bb66d97decb449e70cb8bf5d3cd2d4a`;
+  lock-file SHA-256 is
+  `3ba6dce121fa0372d56024ee1a2fa9c5d51114abcb88646105af5cda0a8a559d`.
+  Independent refit returned `MACRO_FOLLOWTHROUGH_V18_VERIFICATION_PASS`.
+- Decision: `MACRO_FOLLOWTHROUGH_V18_DEVELOPMENT_GATE_FAIL`. Historical
+  aggregate remained strong but slightly regressed from V12: 3,586 events,
+  2.291374/day, +0.576895R mean, PF 2.354856, and AUC 0.600902. Mean regressed
+  0.015600R and PF regressed 0.017216. F2026 worsened to -0.157079R, PF
+  0.787870, and 31.1288R drawdown.
+- July selected 25 events at 1.785714/day and lost -5.9000R, with -0.532601R
+  mean, PF 0.397976, 6.5377R drawdown, and validation AUC 0.519011. The macro
+  features did not repair current ranking.
+- Post-outcome mechanism diagnostics show why another classifier tweak is not
+  the next move. Every fixed break-and-run action was negative in July, and
+  even its hindsight-best available action averaged -0.0212R. Opening-range
+  reversal happened to be positive in July, but all fixed actions were
+  negative in F2024, F2025, and F2026, so promoting it would be recent-window
+  overfitting. The next research change must redesign candidate/execution
+  mechanics or add genuinely richer pre-entry path information, then reserve
+  new unseen weeks for confirmation.
+- Artifact-manifest SHA-256 is
+  `21dab1f0a2887a7593b79e80bbb5e6460c830be5806e51c5b76b1de10e572802`.
+  No ML runtime, deterministic V60 demo component, terminal, account, sizing,
+  broker setting, or authorization changed.
+
+## Completed-bar Clock Audit - 2026-07-22
+
+- Audited the MT5 candidate clock through the EA, CSV reader, Dukascopy cache
+  loader, feature join, and action-label entry. The raw parquet timestamp is
+  the M5 bar start, while the loader deliberately sets `timestamp_utc` to the
+  bar end. A candidate logged at `T` therefore uses the completed bar ending
+  at `T`, and its simulated action enters the new bar beginning at `T`.
+- The July reconstruction matched all 281 feature-complete candidates to the
+  exact completed bar end. Every source bar began strictly before its signal.
+  Median MT5-versus-Dukascopy signal-close error was $0.165 and maximum error
+  was $0.535. The suspected look-ahead issue was a false alarm caused by
+  initially comparing against the raw bar-start field without applying the
+  loader's documented five-minute completion offset.
+
+## Path Sequence Follow-through Models V19 - 2026-07-22
+
+- Added and locked
+  `xau-usd/xauusd-fast-research/causal-followthrough-path-sequence-models-v19`.
+  It changed only the V12 information surface by adding 13 frozen causal path
+  features from the prior 3-12 completed M5 bars. Sequences reset across data
+  gaps, incomplete history is neutral with an explicit indicator, and an
+  exact completed-bar-end join forbids future bars.
+- Definition-contract SHA-256 is
+  `f34253b8fe25b0c91f0dc51719199c3d6c35268c4769a7d599ef8afe186682d2`.
+  Independent refit returned `PATH_FOLLOWTHROUGH_V19_VERIFICATION_PASS`; all
+  three package tests and Ruff passed.
+- Decision: `PATH_FOLLOWTHROUGH_V19_DEVELOPMENT_GATE_FAIL`. Historical results
+  were 3,500 events, 2.236422/day, +0.556234R weighted mean, PF 2.246017, and
+  AUC 0.599605. Versus V12, mean regressed 0.036260R and PF regressed 0.126055;
+  the AUC gain was only 0.000260.
+- F2026 remained negative at 424 events, 1.624521/day, -0.137729R weighted
+  mean, PF 0.812367, and 27.2339R drawdown. July selected 24 events at
+  1.714286/day and lost -3.3193 weighted R: -0.312810R mean, PF 0.611943,
+  4.0138R drawdown, and validation AUC 0.500099.
+- The combined V12-V19 evidence rejects additional feature-only work on these
+  three high-frequency continuation candidate mechanisms. The next branch
+  must create a genuinely different candidate mechanism for the current
+  chop/transition environment, while V60 deterministic demo operation remains
+  separate and unchanged. No ML runtime, shadow, EA, demo, live, account,
+  sizing, or broker authorization changed.
+
+## Failure Root-Cause Audit V1 and Adverse Rejection Fade V20 - 2026-07-23
+
+- Added and independently verified
+  `xau-usd/xauusd-fast-research/research-failure-root-cause-audit-v1`.
+  The audit ranked candidate-edge decay, training-population mismatch,
+  proxy-target/action mismatch, nonstationary calibration, episode dependence,
+  and research multiplicity as the principal causes. Its decision was
+  `ROOT_CAUSE_AUDIT_COMPLETE_NEW_MECHANISM_REQUIRED`; definition SHA-256 is
+  `79d6d8ec9f06a9a463073207983a0a600bb7490a7b1055066eca14299d0f9a89`.
+- The audit retired more static features, classifier complexity, threshold-only
+  recalibration, static regime experts, immediate bidirectional routing, the
+  old delayed-confirmation design, and forced two-trade-per-day selection.
+- Added and froze
+  `xau-usd/xauusd-fast-research/causal-adverse-rejection-fade-v20` to test the
+  audit's distinct nominated mechanism. It uses only BREAK_AND_RUN and
+  DOWNSIDE_IMPULSE_RETEST events in CHOP or TRANSITION_UNKNOWN, observes exactly
+  three complete M5 bars, requires a fixed strong opposite-direction rejection,
+  and enters the exact opposite direction at the next M5 open. It fits no ML.
+- Pre-outcome loader, ownership-count, M5 alignment, and market-closure repairs
+  are recorded in `PRE_OUTCOME_REPAIR.md`. After payoff generation showed every
+  policy abstained, a report-only empty-frame repair was recorded separately in
+  `POST_OUTCOME_REPAIR.md`. No threshold, policy, gate, or authorization was
+  altered. Final definition SHA-256 is
+  `639cdd985630beedf27db0ce369a089702e7edc59ec7d24b4499057cff03243d`.
+- Decision: `ADVERSE_REJECTION_FADE_V20_EVIDENCE_GATE_FAIL`. The deterministic
+  replay produced 34,603 mechanic events and 84,054 stressed bid/ask action
+  labels. Every one of 36 fold/mechanic/lane policies abstained, leaving zero
+  historical selections and zero July selections.
+- The failure is decisive rather than a sample-size technicality. Historical
+  BREAK_AND_RUN fade means were -0.3440R, -0.3946R, and -0.3907R across the
+  fast, intraday, and swing actions, with PF 0.498-0.530. Historical downside
+  fade means were -0.4976R, -0.4079R, and -0.3700R, with PF 0.311-0.555. Every
+  annual calibration cell had negative mean and PF below one.
+- July BREAK_AND_RUN fast fade was only marginally positive at +0.0242R and PF
+  1.0504 over 39 raw labels; the other July actions and every downside action
+  were negative. It cannot be promoted against uniformly negative historical
+  calibration.
+- Independent full replay returned
+  `ADVERSE_REJECTION_FADE_V20_VERIFICATION_PASS`, reproducing all 34,603 events,
+  84,054 labels, zero selections, artifact hashes, timing, direction reversal,
+  and July cutoff. This exact rejection-fade mechanic is retired and its gates
+  must not be loosened.
+- The next defensible candidate branch must originate from a new market event,
+  not mirror or re-rank the decayed continuation logs. A preregistered
+  session-range liquidity sweep/reclaim generator with its own causal entry and
+  action geometry is the leading hypothesis. V60 deterministic demo operation,
+  account 1033030, MT5 terminals, sizing, and all broker/runtime permissions
+  remain separate and unchanged.
+
+## V60 Demo No-Trade Diagnosis And Feed Heartbeat Repair - 2026-07-23
+
+- Account `1033030` had no broker trades because the canonical executor had
+  received zero candidates since activation. There were no order rejections,
+  open XAUUSD positions, drawdown stops, guardian halts, account mismatches, or
+  terminal disconnections. The observer-only EA logs contained `GUARD_BLOCK`
+  diagnostics and were not broker orders.
+- The full broker-action window after the owner-authorized balance waiver began
+  at `2026-07-22T08:37:32Z`; the apparent elapsed time from initial chart
+  attachment overstated the fully eligible demo observation period.
+- A separate availability defect was found and repaired. The executor required
+  a feed-status age no greater than 180 seconds, while a synchronous R5 refresh
+  had produced feed-update gaps as long as 982 seconds. Since the latest worker
+  restart, this caused approximately 0.90 hours of fail-closed time and 93.0%
+  measured availability. No candidate was present during those intervals, but
+  the mismatch could have delayed a future valid candidate.
+- `run_feeds.py` now publishes a 30-second heartbeat during feed computation.
+  The executor still fails closed when the heartbeat is older than 180 seconds
+  or one computation cycle exceeds 20 minutes. Fast Core feeds and add-ons now
+  run before the slow R5 transition refresh so their append-only candidates are
+  visible without waiting for R5.
+- Feed and executor workers were restarted with persistent `state.json`
+  retained. A six-minute runtime observation crossed the scheduled slow cycle:
+  every sample remained `ACTIVE_DEMO_BROKER_ACTION`, feed age remained bounded,
+  and candidate count stayed zero. Current ML runtime and ML shadow authority
+  remain false; no signal rule, threshold, fixed lot, risk limit, or live
+  authorization changed.
+- Focused verification is `16 passed`; Ruff, Python compilation, and `git diff
+  --check` pass.
+- A final-year historical gap audit found 364 trades across 261 weekdays, with
+  96 zero-trade weekdays (36.8%) and a longest run of 12 consecutive zero-trade
+  weekdays. Therefore a quiet day remains expected behavior even with a fully
+  healthy runtime; the portfolio average of 1.395 trades per weekday is not a
+  daily quota.
+
+## Loss-Signature One-Class Experiment V1 - 2026-07-23
+
+- Added and froze
+  `xau-usd/xauusd-fast-research/causal-loss-signature-one-class-v1` as the
+  requested research-only experiment. Six deterministic Isolation Forests were
+  fitted exclusively on losing FIT rows from Expanded Dataset V4. No winning
+  row entered model fitting, feature preparation, or threshold selection.
+- The population contains 73,116 resolved actions, including 42,067 losses and
+  31,049 winners, with 58 finite causal features. Evaluation used 53,206
+  out-of-time rows across the six purged F2021-F2026 folds.
+- The pooled weighted loss AUC was 0.558681. The frozen veto flagged 14.22% of
+  weighted actions; 69.93% of flagged actions were losses versus a 62.94%
+  baseline loss rate. Loss recall was 15.79%, and winner collateral was 11.54%.
+- Removing flagged actions improved weighted PF from 0.762060 to 0.789998 and
+  reduced the closed-action drawdown statistic from 1,895.96R to 1,410.87R.
+  Retained mean outcome improved by 0.022253R, with a weekly-block-bootstrap
+  95% interval of 0.013710R to 0.030865R.
+- Decision: `LOSS_ONLY_SIGNATURE_NO_RELIABLE_PROGRESS`. Eleven of twelve
+  preregistered checks passed, but the pooled retained-EV gain missed the
+  required 0.030R threshold. The latest F2026 fold was especially weak, with
+  AUC 0.521066 and retained-EV improvement of only 0.004970R.
+- The first verifier invocation exposed only an ambiguous pandas index/column
+  sort. `POST_RUN_REPAIR.md` records the index reset repair. No data, feature,
+  model, threshold, gate, prediction, or metric changed. The package was then
+  re-locked and rerun under definition SHA-256
+  `03f820a9c22094d621afd5d77121cc0d6a29406f6f1a72769b7ae13b46588817`.
+- Independent refitting reproduced every model score, threshold, flag,
+  bootstrap result, and acceptance decision:
+  `LOSS_ONLY_V1_VERIFICATION_PASS`. Four focused tests and Ruff pass. No ML
+  shadow, EA, terminal, demo/live, account, sizing, broker, or runtime setting
+  changed.
+
+## Canonical Expected-R V10 And Availability V11 - 2026-07-23
+
+- Added and froze
+  `xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10`. The model
+  predicts stressed net R rather than direction or win probability. It uses 36
+  causal numeric features, shared global effects, nine family intercepts, and
+  strongly shrunk family-by-feature deviations. Both winners and losers enter
+  fitting; historical decision fields, journey rows, outcomes, identity, COMEX,
+  and demo trades do not enter predictors.
+- Six purged outer tests contain 2,368 candidates. V10 selected 1,622 at
+  1.039078 candidates/weekday. Weighted mean improved from 0.250986R to
+  0.309081R, PF from 1.414241 to 1.524791, and the candidate-sequence drawdown
+  measure from 74.6915R to 53.9550R. Weighted score AUC was 0.533676.
+- The 5,000-week-block bootstrap gave a 95% interval of 0.195792R to
+  0.420158R for selected mean and 0.009446R to 0.109454R for uplift. V10 passed
+  all 18 machine gates and independently reproduced every model, score,
+  threshold, flag, bootstrap interval, acceptance check, and final model:
+  `EXPECTED_R_V10_VERIFICATION_PASS`.
+- The post-outcome audit found an important weakness despite the machine pass:
+  V10 reduced mean outcome in F2020 and F2021, whose fit populations were only
+  548 and 817 rows. It improved every fold from F2022 onward, once fit rows
+  reached 1,162. `POST_OUTCOME_AUDIT.md` records that the preregistration prose
+  was stricter than the machine gate and prevents treating V10 alone as final.
+- Added and separately froze
+  `xau-usd/xauusd-fast-research/causal-canonical-expected-r-availability-v11`.
+  V11 requires at least 1,000 fit rows before ML may filter. Below that floor,
+  ML abstains and retains every deterministic candidate. It changes no V10
+  model, score, family threshold, or outcome.
+- V11 selected 1,808 candidates at 1.158232/weekday. Weighted mean improved
+  from 0.250986R to 0.315570R, PF from 1.414241 to 1.540228, and drawdown from
+  74.6915R to 53.9550R. All active folds improved; the two unavailable folds
+  were unchanged. The latest F2025 fold retained 1.030888 candidates/weekday,
+  0.361416R mean, and PF 1.659109.
+- V11's weekly-bootstrap 95% uplift interval was 0.023251R to 0.107234R, and
+  its selected-PF interval was 1.334339 to 1.761977. It passed all 21 gates and
+  returned `EXPECTED_R_AVAILABILITY_V11_VERIFICATION_PASS`. The final offline
+  model has 2,851 fit rows, including 1,270 winners and 1,581 losers, so the
+  V11 availability gate is active. End-to-end offline scoring also passed.
+- Decision:
+  `EXPECTED_R_V11_WORKING_OFFLINE_MODEL_FORWARD_CONFIRMATION_REQUIRED`.
+  This is the first working, independently verified offline candidate-quality
+  model in the campaign. It is not fresh proof because all historical outcomes
+  were already exposed during development. New prospective outcomes remain
+  mandatory before considering any shadow or execution role.
+- V10 definition SHA-256 is
+  `cee3154af687944880ff15d3e96761cf4e55a24cc29100fc925d99c42224ef42`.
+  V11 definition SHA-256 is
+  `676e657ac5af3eb7beead0e26d5caef2b06142c537f2034f23eec5c6ae8f4279`.
+  No ML shadow, EA, terminal, demo/live, account, sizing, broker, or runtime
+  setting changed.
+
+## R5 Causal Specialist Closure V43-V46 - 2026-07-26
+
+- V43 froze an outcome-blind structural screen of all 1,000 macro/residual
+  transition definitions on independently generated Dukascopy and Capital
+  candidate clocks. It found 473 structurally eligible definitions, fixed 24
+  diverse components without outcomes, and wrote 3,068 outcome-free consensus
+  candidates. Contract SHA-256:
+  `36cc6baba4fae1d8666795742d53d5a99ebc623e839569e207440f0ef31c2a18`.
+- V43 development evaluated 823 component trades. No component survived the
+  preregistered Benjamini-Hochberg false-discovery correction. Attempts 23811
+  and 25116 had the strongest descriptive development evidence, but V44's
+  fixed untouched 2023-2026 confirmation rejected them: 22 portfolio trades,
+  -4.941778R, PF 0.713212, -0.224626R mean, and 8.154514R drawdown. V44
+  contract SHA-256:
+  `d8ff0e6935ab946db78e9d7668c84964ee17881f79080d03f9135debc48fb9c4`.
+- V45 fixed all 22 remaining validation-unopened V43 components and tested a
+  distinct causal policy: both feeds had to clear 0.10R on the first completed
+  M5 bar and the component's latest five fully closed paired shadow outcomes
+  had to be positive with PF at least 1.10. Development failed decisively:
+  82 routed trades, -36.632619R, PF 0.434392, -0.446739R mean, 38.396389R
+  drawdown, and zero positive components. V45 validation remained unopened.
+  Contract SHA-256:
+  `f03037eca28e3b3d780588334ee27d6bdb22deab19a4f595ec80d97e1a69b8f0`.
+- V46 fixed the only remaining development-positive component, attempt 24936,
+  before opening its exact 2023-2026 outcomes. The single-factor resolution
+  specialist produced 20 validation trades, +0.549048R, PF 1.041890,
+  +0.027452R mean, and 5.716435R drawdown. It failed both-feed PF, conservative
+  PF/mean, first-era positivity, and winner-removal robustness; removing the
+  two largest winners left -4.757321R. Contract SHA-256:
+  `1bd65e1a8067ce252e1f50c72557d12d6a784162cb2a88beac63530e20cfe975`.
+- Two additional fixed diagnostics rejected the remaining distinct ideas. An
+  expanding causal nearest-neighbour analogue policy produced 237 walk-forward
+  trades, -1.890935R, PF 0.994349, and 64.030577R drawdown. Strict dual-feed
+  consensus of the independently generated V16 exhaustion signals produced 21
+  matches at 15-minute tolerance, -2.108R, and PF 0.831; a one-hour tolerance
+  remained economically negligible at 25 trades, +1.078R, and PF 1.079, with
+  no matched events in 2016H2-2020.
+- R5 hindsight labels remain an upper bound, not executable evidence. The
+  1,327 classified R5 oracle trades were selected after future paths were
+  visible. Direct causal imitation, mechanism campaigns, ML classification and
+  value routing, health routing, second-source replication, and sealed
+  confirmation have not recovered a stable R5 edge.
+- Current R5 policy is therefore `NO_TRADE_R5_TRANSITION`. This is a valid
+  causal abstention decision, not a failed attempt to fill frequency. Frozen
+  V34 transition definitions may continue read-only prospective collection,
+  but they have no Python-serving, EA, demo, live, sizing, account, or broker
+  authority. Do not tune V43-V46 or relabel their exposed periods as holdout.
+- The V60 executor source registry was reconciled with that decision:
+  `R5_TRANSITION` and its old attempt `23925` were removed from the broker-action
+  source set. The R5 component, outcome, and router feeds remain mandatory
+  read-only research inputs, and a regression test prevents silent
+  reauthorization.
+- The previously dead V40 R1-R4 outcome path was transported into V60 as the
+  required `CORE_OUTCOMES` feed on account `1033030`. It reuses the locked V40
+  causal resolver unchanged, consumes the active R1 pullback/R2/R3/R4 candidate
+  folders plus raw Capital bid/ask files, and writes append-only individual
+  labels below `v60_canonical_demo_v2/feeds/core_outcomes`. Aggregate economics,
+  tuning, ML, EA use, and broker action remain disabled.
+
+## R2-R4 Untouched Capital Confirmation V47 - 2026-07-26
+
+- The strongest remaining non-R5 historical candidates are still R2
+  downtrend, R3 compression, and R4 chop. Their descriptive historical results
+  are R2: 118 trades, +65.99R, PF 1.77, 19.64R drawdown; R3: 118 trades,
+  +44.65R, PF 1.56, 8.33R drawdown; and R4: 125 trades, +41.90R, PF 1.59,
+  8.39R drawdown. These remain candidates, not proof: R2/R3 were nominated
+  after outcomes were visible, and R4's 1,000-policy selection-adjusted
+  significance was 1.0.
+- Added and locked
+  `xau-usd/xauusd-fast-research/capital-r2-r4-prospective-confirmation-v47`.
+  It evaluates the exact frozen R2/R3/R4 rules on new account `1033030`
+  Capital bid/ask data beginning `2026-07-27T00:00:00Z`. Contract SHA-256 is
+  `7f5183ee03b4aec3d062e558527c2e5ebfa45181524ee3959db069e6d8af19e3`;
+  it was created at `2026-07-26T01:37:41.177202Z`, before the boundary, with no
+  aggregate economics present.
+- V47 consumes the transported V40 append-only candidate/outcome ledgers. It
+  does not modify candidates, signals, EAs, account risk, or demo permissions.
+  Every candidate through a stage endpoint must have a final resolution,
+  including non-eligible-day candidates that could alter V28 overlap routing.
+- An eligible Capital day requires at least 100,000 unique quote
+  milliseconds, a start no later than 02:00 UTC, an end no earlier than 22:00
+  UTC, p99 interquote gap no greater than five seconds, duplicate share no
+  greater than 5%, exact account/server/symbol identity, and all execution
+  authority false.
+- Validation uses the first outcome-blind endpoint with at least 20 eligible
+  days, 10 total routed trades, and two trades from each specialist, capped at
+  260 days. It requires positive stressed net, PF at least 1.10, mean at least
+  0.05R, drawdown at most 10R, positive net after removing the largest winner,
+  and positive PF-at-least-1.00 evidence from every specialist.
+- A passing validation opens a disjoint confirmation stage requiring at least
+  40 eligible days, 30 total trades, and five from each specialist, capped at
+  520 days. Confirmation requires PF at least 1.20, mean at least 0.10R,
+  drawdown at most 15R, positive net after removing the two largest winners,
+  and positive PF-at-least-1.05 evidence from every specialist.
+- The first real cycle returned
+  `WAITING_FOR_UNTOUCHED_VALIDATION`: zero post-boundary eligible days, zero
+  trades, zero unresolved candidates, and `aggregate_economics_opened=false`.
+  Seven focused tests, Python compilation, source loading, and contract
+  self-verification pass.
+- The independent hidden V47 watcher started at local `2026-07-26 05:38:32`
+  with launcher PID `28824` and worker PID `21420`. Runtime stdout is
+  `C:/MT5PortableTier1BestEA/MQL5/Files/v47_r2_r4_evaluator.stdout.log`;
+  stderr is the adjacent `.stderr.log` and is empty. It is separate from V60,
+  so a research evaluator failure cannot halt demo execution.
+- V60 remains healthy on account `1033030`: feed launcher/worker PIDs
+  `42008`/`45896`, portfolio launcher/worker PIDs `40444`/`45588`, all nine
+  required feed groups healthy, executor
+  `ACTIVE_DEMO_BROKER_ACTION`, no open XAUUSD position at this checkpoint, and
+  ML runtime/shadow authority false. R5 is absent from the executable source
+  registry and remains read-only research only.
+
+## R4 Pre-2016 Out-of-Era Replication V48 - 2026-07-26
+
+- Added and locked
+  `xau-usd/xauusd-fast-research/r4-pre2016-out-of-era-replication-v48`.
+  It reconstructed the exact V26 R4 three-component policy on 78 frozen
+  Dukascopy monthly raw-tick archives from 2010-01 through 2016-06. Candidate
+  facts were built and hash-locked before outcomes. Contract SHA-256:
+  `ce691c0c4c45db6b626c77d0395de931f8d3a9d1f972f174560adf8d4cc57f0c`.
+- The reconstruction produced 468,279 M5 bars and 429 unique candidates.
+  Exact parity against the independent pre-2016 M5 cache passed for every
+  timestamp and all 12 bid/ask/mid OHLC fields with zero maximum error.
+- The sealed result independently verified but failed the preregistered gates:
+  90 trades, +0.898570R, +0.009984R mean, PF 1.014811, 14.245372R drawdown,
+  and -8.473415R after removing the five largest winners. The 20,000-resample
+  UTC-week bootstrap 90% mean interval was -0.229176R to +0.247832R.
+- Era results were +6.508R/PF 1.502 for 2010-2012, -1.040R/PF 0.955 for
+  2012-2014, and -4.570R/PF 0.815 for 2014-mid-2016. Result SHA-256:
+  `224cf9808bd9aca576a62e86b025e420a0b201b3766258e38c78b9b050b7e172`.
+- Weakness was concentrated in component `40193`, which returned -5.714R and
+  PF 0.813. Components `39888` and `39427` were descriptively positive at
+  +5.282R/PF 1.204 and +1.330R/PF 1.316. Those component observations used
+  V48 outcomes and are development hypotheses, not independent evidence.
+- Decision:
+  `R4_V48_OUT_OF_ERA_REPLICATION_FAIL_NO_SAME_VERSION_TUNING`. The original
+  historical R4 composite is not promoted. No Python-serving, EA, demo, live,
+  sizing, account, broker, or ML authority changed.
+
+## R4 Component Resolution Prospective V49 - 2026-07-26
+
+- Added, preregistered, tested, and locked
+  `xau-usd/xauusd-fast-research/capital-r4-component-resolution-prospective-v49`
+  before the `2026-07-27T00:00:00Z` boundary. Contract SHA-256:
+  `751768282196caf59df44fc0560567d63d6f8dcbdb08f732ed17db6f7bac4ceb`;
+  aggregate economics were absent at lock.
+- The primary branch contains fixed components `39888` and `39427`. It is
+  explicitly disclosed as selected after V48 outcomes and can earn evidence
+  only from new Capital data. The unchanged three-component V26/V34 branch
+  containing `39888`, `40193`, and `39427` is a same-days benchmark and cannot
+  rescue a failing primary branch.
+- V49 independently regenerates the selected candidate stream. It does not
+  merely filter V34 after candidate generation, because V34's component
+  priority deduplication could otherwise hide a simultaneous selected
+  candidate. The selected branch reuses the unchanged V34 feature/rule code
+  and unchanged V40 executable bid/ask outcome, spread, cost, slippage,
+  one-position, cooldown, and daily-cap semantics.
+- Validation uses the first outcome-blind prefix with at least 20 eligible
+  weekdays, five primary trades, and one trade from each selected component,
+  capped at 260 days. It requires PF at least 1.10, mean at least 0.05R,
+  drawdown at most 8R, positive net after the largest winner is removed, and
+  positive PF-at-least-1.00 evidence from both components.
+- A passing validation opens a disjoint confirmation requiring at least 40
+  eligible weekdays, 15 primary trades, and three from each component, capped
+  at 520 days. It requires PF at least 1.20, mean at least 0.10R, drawdown at
+  most 12R, positive net after removing the two largest winners, and positive
+  PF-at-least-1.00 component evidence.
+- Six focused tests, compilation, command-entry smoke testing, Ruff, contract
+  self-verification, correct account `1033030` integration, and independent
+  status verification pass. The initial locked cycle returned
+  `WAITING_FOR_UNTOUCHED_VALIDATION` with zero eligible days, zero candidates,
+  zero resolutions, zero unresolved candidates, and aggregate economics
+  unopened.
+- The hidden V49 watcher is active with launcher PID `37984` and worker PID
+  `40504`. Stdout is
+  `C:/MT5PortableTier1BestEA/MQL5/Files/v49_r4_component_evaluator.stdout.log`;
+  adjacent stderr is empty. It polls every 300 seconds and is separate from
+  V47 and V60.
+- V49 is research only. Same-version tuning, model training, Python
+  predictions, EA consumption, demo/live authorization, and broker action are
+  all false.
+
+## R2/R3 Capital Bar-Portability Diagnostic - 2026-07-26
+
+- Replayed the exact frozen R2/R3 signal definitions on the independent
+  Capital M5 history as a secondary feasibility diagnostic. The source has
+  1,148,599 bars from 2010-01 through 2026-07 with separate bid/ask OHLC and
+  no crossed quotes. Because about 7% of early MT5 bars report zero spread,
+  execution imposed a conservative $0.30 spread floor plus the frozen ticket,
+  holding, and 0.05R slippage stress.
+- This was a bar-level diagnostic after historical outcomes were already
+  exposed. It is not tick-exact, not a new holdout, not a locked confirmation,
+  and cannot authorize trading or replace V47.
+- R2 downtrend did not transport robustly: 109 full-period trades, +16.768R,
+  PF 1.205, 34.608R drawdown, and -35.692R after removing the five largest
+  winners. Its 2018-2022 era was -12.170R/PF 0.390.
+- R3 compression was the strongest unchanged cross-broker result: 101 trades,
+  +27.334R, +0.2706R mean, PF 1.431, 8.430R drawdown, and +0.087R after
+  removing the five largest winners. All four broad eras were positive:
+  +6.218R/PF 1.439, +13.918R/PF 3.209, +1.878R/PF 1.076, and
+  +5.320R/PF 1.293.
+- R3 recent windows remain sparse and mixed: 3M zero trades; 6M four trades,
+  +2.161R/PF 2.015; 1Y eight trades, -0.199R/PF 0.959; 5Y 36 trades,
+  +3.436R/PF 1.144; 10Y 66 trades, +10.587R/PF 1.238.
+- After normalizing both feeds to nanosecond timestamps, Capital R3 candidate
+  events matched frozen Dukascopy events 54.8% at the exact H1 timestamp and
+  71.8% within four hours. R2 matched 37.2% exactly and 59.3% within four
+  hours. The first zero-match diagnostic was invalidated because it compared
+  millisecond and nanosecond integer timestamps without unit normalization.
+- Decision: retain unchanged R3 as the strongest remaining prospective
+  candidate inside V47. Do not promote it from this diagnostic; the negative
+  latest one-year result, weak 2018-2022 PF, winner concentration, MT5 history
+  limitations, and low frequency still require untouched Capital confirmation.
+
+## R4 Causal Reversal Confirmation V50 - 2026-07-26
+
+- Quantified the gap between the 463 hindsight-selected R4 portfolio trades and
+  the frozen V26 R4 candidate stream. Only 5 oracle trades, or 1.1%, had a
+  same-direction V26 candidate within one hour; only 3 had an accepted V26
+  trade. The old R4 mechanisms therefore target a materially different event
+  population, and small threshold changes cannot recover the hindsight set.
+- At 884 hindsight-selected R4 anchors, the direction opposite
+  `ema_distance_atr_12` matched the hindsight side 69.7% of the time, rising
+  with displacement magnitude. This used hindsight-selected rows and was
+  treated only as a development clue.
+- Added and preregistered
+  `xau-usd/xauusd-fast-research/r4-causal-reversal-confirmation-v50`. The
+  single fixed policy requires latest completed H4 R4, a short-EMA displacement
+  above the causal expanding 75th percentile, an immediate completed-M5
+  reversal confirmation, and one candidate per excursion. Direction is
+  opposite displacement; action is the frozen H4 broker-side close.
+- Candidate generation loaded only causal columns and used strictly prior,
+  one-row-shifted expanding thresholds. Before outcomes, it emitted 336
+  candidates from 10,624 R4 decision rows: 169 long and 167 short, spanning
+  2017-05-31 through 2026-07-21. Candidate SHA-256:
+  `0b7947c3f6455290fcff13d4fe897afd2b0485f6f70147ac2d0c95dd70076f45`.
+- A pre-lock run caught and fixed an outcome-blind specification error:
+  `spread_last_atr <= 0.15` is not equivalent to the teacher's actual
+  spread/H4-risk gate. The duplicate approximation was removed before lock;
+  all source decision rows already satisfy the executable action gate.
+- Contract SHA-256:
+  `d071a4c2e70272d2e75fdfead59109a15867842e48b4a3232f36b34e90c49873`.
+  It was locked before outcomes with the candidate facts, policy, tests, gates,
+  sources, and package implementation sealed.
+- The locked evaluation failed after computing economics but before result
+  serialization because pandas timestamps were passed directly to the
+  canonical JSON hash helper. The locked package was not modified.
+  `resume_evaluation.py` applies only the already locked `json_ready`
+  conversion before hashing; `POST_LOCK_EVALUATION_NOTE.md` records this
+  mechanical adapter.
+- V50 failed decisively: 276 portfolio trades, -27.828129R, -0.100827R mean,
+  PF 0.823973, 44.20% win rate, 41.837556R drawdown, and -52.777553R after
+  removing the five largest winners. The 5,000-resample UTC-week bootstrap 90%
+  mean interval was -0.256444R to +0.051716R. Only 4 of 11 partial/full
+  calendar years were positive; latest 365 days were 17 trades, -0.305934R,
+  and PF 0.980984.
+- Result SHA-256:
+  `25afab2d9503d92056f4dcfb5eed1d57e863cac5b120baca638b646622157590`.
+  Four focused tests, compilation, artifact hashes, and metric reproduction
+  pass with `R4_CAUSAL_REVERSAL_V50_VERIFICATION_PASS`.
+- Post-outcome failure diagnosis did not identify a defensible horizon rescue.
+  The same locked event stream lost at reversal H1/H4/H12
+  (-79.127R/-27.828R/-107.103R) and continuation H1/H4/H12
+  (-110.366R/-115.688R/-14.289R). At actual portfolio entries, only 76 of 137
+  strong hindsight rows matched the chosen side, 55.5%, demonstrating that the
+  apparent 69.7% anchor accuracy was created largely by hindsight timing.
+- Decision: `R4_V50_POLICY_FAIL_NO_SAME_VERSION_TUNING`. Do not rescue V50 by
+  selecting its profitable 2023 year, third displacement quartile, or
+  hindsight action subgroup. R4 remains unqualified; V49 continues unchanged
+  untouched prospective collection.
+
+## Dedicated R3 Capital Prospective Confirmation V51 - 2026-07-26
+
+- The unchanged R3 compression composite remains the strongest non-R1
+  portability result. Frozen Dukascopy raw-tick history has 118 trades,
+  +44.650647R, PF 1.557073, 8.333R drawdown, and +8.409R after removing the
+  five largest winners. The separate Capital bar diagnostic has 101 trades,
+  +27.334R, PF 1.431, and 8.430R drawdown, with all four broad eras positive.
+  These are still exposed historical development results.
+- V47 evaluates R2, R3, and R4 together and requires every specialist to be
+  positive. Added and locked
+  `xau-usd/xauusd-fast-research/capital-r3-dedicated-prospective-v51` so an
+  unrelated R2 or R4 failure cannot hide R3's own untouched result.
+- V51 does not change R3. It filters the frozen V28 feed to attempts 12183,
+  12222, and 12389, joins unchanged V40 causal outcomes, and applies the same
+  entry-time/origin-attempt/candidate-ID priority with one R3 position.
+- Contract SHA-256:
+  `c012d01ca8cad1d98dffe663f0afff8ff5c5de7f124d27fb1d748173a38063eb`,
+  created at `2026-07-26T05:18:30.089395Z` before the
+  `2026-07-27T00:00:00Z` boundary with no aggregate economics.
+- Validation requires at least 20 eligible weekdays and five resolved R3
+  trades, capped at 260 days. It requires positive net, PF at least 1.10, mean
+  at least +0.05R, drawdown no greater than 6R, and positive net after removing
+  the largest winner.
+- A passing validation opens disjoint confirmation requiring at least 40
+  eligible weekdays and 12 resolved R3 trades, capped at 520 days. It requires
+  PF at least 1.20, mean at least +0.10R, drawdown no greater than 10R, and
+  positive net after removing the two largest winners.
+- Compilation, the R3 stream-isolation test, contract self-verification, V40
+  identity checks, correct account `1033030`, and an initial real cycle pass.
+  Initial status is `WAITING_FOR_UNTOUCHED_VALIDATION`: zero eligible days,
+  zero trades, zero unresolved R3 candidates, and aggregate economics unopened.
+- The hidden V51 watcher is active with launcher PID `21576` and worker PID
+  `28840`. Stdout is
+  `C:/MT5PortableTier1BestEA/MQL5/Files/v51_r3_evaluator.stdout.log`; adjacent
+  stderr is empty. It polls every 300 seconds and is separate from V47, V49,
+  V60 feed collection, and demo execution.
+- V51 is research only. Same-version tuning, model training, Python
+  predictions, ML shadowing, EA consumption, demo/live authority, and broker
+  action are all false.
+
+## R2 Intraday Rebound Confirmation V53 - 2026-07-26
+
+- Added, preregistered, candidate-locked, evaluated, and independently
+  verified
+  `xau-usd/xauusd-fast-research/r2-intraday-rebound-confirmation-v53`.
+  This was a distinct R2 mechanism rather than another RSI/wick variant:
+  unusually negative short-EMA displacement relative to a strictly-prior R2
+  expanding 75th percentile, followed by a completed upward M5 reversal, one
+  long H4 action per excursion.
+- The outcome-blind stream contained 49 candidates. Before outcomes, the
+  coverage gates were set to 40 trades and 0.015 trades per weekday; all
+  economic gates remained unchanged. Contract SHA-256:
+  `c3be9048f968ae1070a36f703bf19ea2db160de33773a7e8a11146bd4a94dcf0`.
+- V53 failed decisively: 42 portfolio trades, -25.861980R, -0.615761R mean,
+  PF 0.388027, 35.71% win rate, 30.692577R drawdown, and -37.708997R after
+  removing the five largest winners. The 90% UTC-week bootstrap mean interval
+  was entirely negative at -0.990080R to -0.270986R. Only two calendar years
+  were positive, every broad era was negative, and the latest 365 days were
+  four trades, -5.415066R, and PF 0.420221.
+- Result SHA-256:
+  `1d06351d23af478f6a4db0f64977fd492a71e5fa62460a8cd3991a68346c58e4`;
+  trade SHA-256:
+  `6516c00d2726d755291e521ed8b33d821fb696169c2470f32415ef0c1f202c85`.
+  Four focused tests, compilation, artifact hashes, and metric reproduction
+  passed before V54; V53 is retired without same-version tuning.
+- A post-outcome diagnostic found the exact event stream was descriptively
+  better as short continuation, especially at H12. That direction and horizon
+  were explicitly treated as a new contaminated development hypothesis, not
+  a rescue of V53.
+
+## R2 Failed-Rebound Cross-Broker Replication V54 - 2026-07-26
+
+- Added
+  `xau-usd/xauusd-fast-research/r2-failed-rebound-crossbroker-v54` to test the
+  single fixed post-V53 hypothesis on the independent Capital M5 clock:
+  unchanged causal R2 downside-extreme/upward-confirmation events, executed
+  short at the next M5 open and closed at the exact broker-side H12 endpoint.
+  Direction and horizon were selected after Dukascopy V53 outcomes and Capital
+  history had been exposed for other strategies, so this was disclosed as a
+  cross-broker historical replication rather than a pristine holdout.
+- Candidate generation used the frozen canonical regime router, strictly-prior
+  expanding thresholds, the established Capital 36-of-48 H4 validity
+  convention, a $0.30 bid/ask quote floor, risk
+  `max(2.25 * M5 ATR, $3.50)` capped at $50, and a 0.15R entry-spread limit.
+  It could inspect only the scheduled endpoint timestamp, not its price or any
+  P&L.
+- The first outcome-blind clock preflight required every intermediate M5 row
+  and left only 50 candidates. Because this fixed-close action has no stop,
+  target, MFE, MAE, or path rule, an outcome-blind timestamp audit corrected
+  the clock to require the economically relevant immediate entry and exact
+  H12 endpoint. It found 181 of 217 downside events had exact endpoints. No
+  direction, horizon, signal, cost, portfolio, or economic gate changed.
+- The final preflight produced 173 candidates and 125 scheduled one-position
+  portfolio entries. Before outcomes, coverage-only gates were calibrated
+  from 0.04 to 0.025 trades per weekday and from 15 to 10 trades per era
+  because the fixed stream could not attain the originals. The 100-trade,
+  PF 1.20, +0.10R mean, 20R drawdown, winner-removal, ten-positive-year,
+  latest-year, all-era economic, and positive-bootstrap-lower-bound gates were
+  unchanged. Candidate SHA-256:
+  `6d7cdd374051496afe5c1fc4bf0b78e8d3c1c8b5fef4b794332a7d6f1d84cd7a`.
+- Contract SHA-256:
+  `57dcdf0badb620f83d68f0e1a8a0e1bda3ad7680e2153486f5a363f2b459e177`.
+  It locked all code, configuration, sources, dependencies, and candidate
+  facts before exact V54 Capital exits were opened.
+- V54 failed: 125 trades, -6.487900R, -0.051903R mean, PF 0.953988, 37.60%
+  win rate, 73.396271R drawdown, and -57.883168R after removing the five
+  largest winners. The 90% UTC-week bootstrap mean interval was
+  -0.553857R to +0.504524R. Only seven calendar years were positive.
+- Broad eras were unstable: 2010-2012 -4.922R/PF 0.737; 2013-2016
+  +8.692R/PF 1.495; 2017-2020 -13.250R/PF 0.398; and 2021-2026
+  +2.992R/PF 1.036. The latest 365 days were unusually strong at 12 trades,
+  +34.389R, and PF 3.775, but 10 years remained -11.578R/PF 0.891. The
+  recent burst is therefore a regime-local anomaly, not stable evidence.
+- Result SHA-256:
+  `0befe7fc7097dc0aa5d95b91a70fe231e81f3130e08f3aa7b817022371bb60cd`;
+  trade SHA-256:
+  `f948e0938e5843fdd8971427361976400863aea246492a820fd1eb4ef94224d0`.
+  Five focused tests, compilation, contract and artifact hashes, and metric
+  reproduction pass with `R2_FAILED_REBOUND_V54_VERIFICATION_PASS`.
+- Decision:
+  `R2_V54_CROSSBROKER_REPLICATION_FAIL_NO_SAME_VERSION_TUNING`. Do not tune
+  V54 around 2024-2026, omit the failed eras, or promote the recent slice.
+  Model training, predictions, ML shadowing, EA consumption, demo/live
+  authority, account changes, and broker action remain false.
+
+## Dedicated R2 Capital Prospective Confirmation V55 - 2026-07-26
+
+- The strongest unresolved historical R2 object remains the unchanged
+  `R2_DOWNTREND_FAILED_RALLY_DUAL_MODE_V1` composite containing attempts
+  `11142` and `11266`. Its exposed Dukascopy raw-tick history has 118 trades,
+  +65.990257R, PF 1.774286, +0.559239R mean, 19.642422R drawdown, every broad
+  era positive, and +5.622423R after removing the five largest winners.
+- Component `11266` is not independently qualified despite PF 2.107 and all
+  eras positive: it has only 26 trades and becomes -14.467994R after removing
+  five winners. The composite, not that sparse component alone, is the fixed
+  prospective object.
+- Added and locked
+  `xau-usd/xauusd-fast-research/capital-r2-dedicated-prospective-v55` so R3 or
+  R4 cannot hide R2's own untouched result inside V47. V55 does not change
+  R2. It filters the frozen V28 stream to `R2_DOWNTREND`, reuses unchanged V40
+  outcomes, retains attempts `11142` and `11266`, and applies the same
+  entry-time/origin-attempt/candidate-ID priority with one R2 position.
+- Contract SHA-256:
+  `856a191ae6e3a897954b2ef29acf4ecd71e400cf6184803e301e8f31923fa00a`,
+  created at `2026-07-26T05:51:05.620536Z` before the
+  `2026-07-27T00:00:00Z` boundary with aggregate economics absent.
+- Validation requires at least 20 eligible weekdays and five resolved R2
+  trades, capped at 260 days. It requires positive net, PF at least 1.10,
+  mean at least +0.05R, drawdown no greater than 8R, and positive net after
+  removing the largest winner.
+- A passing validation opens disjoint confirmation requiring at least 40
+  eligible weekdays and 12 resolved R2 trades, capped at 520 days. It
+  requires PF at least 1.20, mean at least +0.10R, drawdown no greater than
+  12R, and positive net after removing the two largest winners.
+- The isolation test, compilation, formatting check, locked-orchestration
+  smoke test, contract identity, V40 identity, and initial real cycle pass.
+  Initial status is `WAITING_FOR_UNTOUCHED_VALIDATION`: zero eligible days,
+  zero trades, zero unresolved R2 candidates, and aggregate economics
+  unopened.
+- The independent V55 watcher is active with launcher PID `34112` and worker
+  PID `36496`. Stdout is
+  `C:/MT5PortableTier1BestEA/MQL5/Files/v55_r2_evaluator.stdout.log`; adjacent
+  stderr is empty. The first launch attempt exited before evaluation because
+  Windows split the unquoted repository path; the quoted relaunch is healthy.
+- V55 is research only. Same-version tuning, model training, Python
+  predictions, ML shadowing, EA consumption, demo/live authority, and broker
+  action are all false.
+
+## R3 Compression Overshoot Reversal V56 - 2026-07-26
+
+- Added, preregistered, candidate-locked, evaluated, and independently
+  verified
+  `xau-usd/xauusd-fast-research/r3-compression-overshoot-reversal-v56`.
+  V56 tested a mechanism distinct from the qualified R3 compression-release
+  composite: a strictly-prior expanding 75th-percentile six-bar displacement
+  extreme, body/edge-close confirmation, and one opposite-direction H1 action
+  per R3 excursion.
+- Candidate generation read only causal decision features and the latest
+  completed canonical H4 regime. It rejected oracle, P&L, MFE/MAE, and exit
+  columns. A pre-lock audit found and fixed stale excursion state across R3
+  episode changes; three regression tests cover one-per-excursion behavior,
+  episode resets, and outcome-column rejection.
+- The final outcome-blind ledger contained 221 candidates: 103 long and 118
+  short, spanning 2018-06-13 through 2026-06-05. The pre-outcome H1 clock
+  estimated 178 portfolio trades, with 78/80/20 across the three fixed eras
+  and 13 in the latest year. Candidate SHA-256:
+  `cd7c5a70c82af84eaebd1fe469083c9ec1720c836c86468741b81f44a90e36e8`.
+- Contract SHA-256:
+  `6a378cf4e8f0be275b6ba118272f5e1916fc3948e8b70a0fd83e6c0156fb9e53`.
+  It froze all package files, dependencies, sources, candidate facts, gates,
+  and authority flags before H1 outcomes were opened.
+- V56 failed decisively: 178 trades, -46.128614R, -0.259150R mean, PF
+  0.426089, 31.46% win rate, 56.139479R drawdown, and -57.800274R after
+  removing the five largest winners. The 90% UTC-week bootstrap mean interval
+  was entirely negative at -0.363441R to -0.147095R. Only one calendar year
+  was positive.
+- Every broad era was negative: 2018-2020 -22.525R/PF 0.217; 2021-2023
+  -20.814R/PF 0.374; and 2024-2026 -2.789R/PF 0.848. The latest year had 13
+  trades, -0.410R, PF 0.968, and 10.421R drawdown.
+- Result SHA-256:
+  `8b4a501ac918ed141e843c453804fa6abff6e044ef4d0d7305bf40ebf229ce38`;
+  trade SHA-256:
+  `2cdb5548572cdf15219b6f0925ee75523e0a2b40af3fd18185da1482ec68ae81`.
+  Tests, compilation, contract self-verification, artifact hashes, and metric
+  reproduction pass with
+  `R3_COMPRESSION_OVERSHOOT_V56_VERIFICATION_PASS`.
+- A bounded post-outcome direction/horizon diagnostic found that both H1
+  directions lost. The only positive cell retained the V56 reversal direction
+  for H12: 84 trades, +13.263727R, PF 1.179155, and 16.999714R drawdown.
+  It is not a rescue or valid successor: removing five winners gives
+  -22.460381R, the bootstrap lower bound is -0.343938R, 2021 lost
+  -15.916R, and the latest year lost -2.753573R/PF 0.776.
+- Decision: `R3_V56_POLICY_FAIL_NO_SAME_VERSION_TUNING`. Retire this
+  overshoot lineage. Do not invert it, select H12 from the exposed diagnostic,
+  or filter its losing years. The unchanged V51 prospective evaluator remains
+  the valid path for the already-qualified R3 compression-release composite.
+
+## R1 Counter-Extension V57 - 2026-07-26
+
+- Audited the timing gap between the existing R1 specialists and the hindsight
+  opportunity set. The 558 existing R1 candidates are long-only and match only
+  3 of 179 hindsight R1 portfolio trades within one hour and 14 within four
+  hours. The hindsight set contains 96 longs and 83 shorts.
+- At 309 hindsight R1 anchors, direction opposite
+  `ema_distance_atr_12` matched the hindsight side 67.6% overall and 89.7%
+  above the absolute full-anchor 75th percentile. H12 was the most common
+  hindsight action. This was treated as a contaminated development clue.
+- Added, preregistered, candidate-locked, evaluated, and independently
+  verified `xau-usd/xauusd-fast-research/r1-counterextension-v57`. Its
+  causal policy uses the latest completed R1 H4 state, a strictly-prior
+  expanding 75th-percentile absolute EMA12 extension, one
+  opposite-extension H12 candidate per excursion, and a state reset at each
+  new R1 episode.
+- The outcome-free candidate ledger contained 497 balanced events: 240 long
+  and 257 short from 2017-08-11 through 2026-04-02. It matched 70 of 179
+  hindsight R1 trades within one hour and 116 within four hours. Estimated
+  one-position H12 scheduling produced 144 trades, with 50/46/48 across the
+  fixed eras and 17 in the latest year; every coverage gate was feasible
+  before outcomes.
+- Candidate SHA-256:
+  `af5cd119fc20432a1043a009b38493871406784247bb116a0f9dee2d0d51d78f`.
+  Contract SHA-256:
+  `5039d4fe7d389600bb5bce97acc654e55dc0d13683520b143e00a5cbb69dae14`.
+- V57 failed: 144 trades, -23.922008R, -0.166125R mean, PF 0.869718, 50.00%
+  win rate, 63.438200R drawdown, and -65.024001R after removing the five
+  largest winners. The 90% UTC-week bootstrap mean interval was
+  -0.618912R to +0.276132R. Only four calendar years were positive.
+- Broad eras were unstable: 2017-2020 -0.617R/PF 0.984; 2021-2023
+  +5.650R/PF 1.094; and 2024-2026 -28.956R/PF 0.658. The latest year was
+  descriptively strong at 17 trades, +11.589R, and PF 1.867, but 2024 alone
+  lost -33.183R. Recent-window promotion is prohibited.
+- Result SHA-256:
+  `ba3f3083dacc6b700cff1ba3ae67232643899d146a8b25bf4e51eb591591bf54`;
+  trade SHA-256:
+  `fef9205370b4002fafa600b48c1e804b2d3d70669664d8491ae3f5fdad042586`.
+  Tests, compilation, contract and artifact hashes, and metric reproduction
+  pass with `R1_COUNTEREXTENSION_V57_VERIFICATION_PASS`.
+- A bounded post-outcome matrix tested opposite-extension and with-extension
+  directions at H1/H4/H12, both combined and as standalone long/short
+  specialists. All twelve side/horizon cells lost, and no side was positive
+  in every era. There is no defensible direction, side, or horizon rescue.
+- Decision: `R1_V57_POLICY_FAIL_NO_SAME_VERSION_TUNING`. Retire the
+  displacement counter-extension lineage. Do not select the recent year,
+  omit 2024, split a side, flip direction, or choose another fixed horizon
+  from these exposed outcomes.
+
+## Transition First-Block Capital Replication V58 - 2026-07-26
+
+- Audited the strongest winner-robust sparse transition row from the earlier
+  2,000-policy `chop-transition-mechanisms-v2` campaign. Frozen attempt
+  `16683` had 30 Dukascopy development trades, +27.130568R, PF 3.186837,
+  +0.904352R mean, 2.328642R drawdown, positive net in all four eras, and
+  +4.154450R after removing five winners. It was not qualified because it
+  failed the 60-trade and eight-per-era coverage gates and had a
+  multiple-testing adjusted q-value of 1.0.
+- Added, preregistered, candidate-locked, evaluated, and independently
+  verified
+  `xau-usd/xauusd-fast-research/transition-first-block-capital-replication-v58`.
+  It reproduces the exact unchanged attempt on the independent Capital M5
+  bid/ask history: transition after compression, age at most four H1 bars,
+  four-bar momentum at least 0.60 ATR, body at least 0.30, efficiency at least
+  0.05, impulse direction, 0.80 ATR stop, and six-hour fixed horizon.
+- The package binds the original V2 metrics file and verifies that attempt
+  number, mechanic, and parameters exactly match row `16683`. Candidate
+  generation uses only completed H1/H4 price and planned entry clocks. It
+  does not inspect next-bar quotes, stop paths, exits, returns, MFE/MAE, or
+  P&L.
+- The final outcome-free Capital ledger contained 60 raw candidates and 27
+  conservatively scheduled planned events, 16 long and 11 short, with
+  5/5/7/10 across the original four eras. Candidate SHA-256:
+  `bf30172e6d3496e1fac4c4742ab8dea146ea2bb727d0a6c278a5442b1c59c1c1`.
+- Contract SHA-256:
+  `95bde18ef01a02e282bfc9b95df2a8cd28f16aa0bfc9806159a6050a8e804b97`.
+  It locked package files, all feature/regime dependencies, source hashes,
+  candidate facts, parameters, costs, portfolio rules, gates, and authority
+  flags before Capital entry quotes or future paths were opened.
+- V58 failed: 28 executed trades, -2.046104R, -0.073075R mean, PF 0.893749,
+  35.71% win rate, 11.263921R drawdown, and -10.521024R after removing the
+  three largest winners. The 90% UTC-week bootstrap mean interval was
+  -0.472630R to +0.361485R. Only three of ten active calendar years were
+  positive.
+- Era portability failed: 2010-2014 had six trades, -4.179R/PF 0.176;
+  2014-2018 had no executable trades; 2018-2022 had nine trades,
+  -7.085R/PF 0.236; and 2022-2026 had 13 trades, +9.218R/PF 2.877. The latest
+  year was five trades, +1.288R/PF 1.604, but the latest six months were
+  -0.774R/PF 0.637. Recent-slice promotion is prohibited.
+- Result SHA-256:
+  `efaa7ea0c5fc98434f014f7db6ee963a55716ed7706bc8b0fb73c8f7aa2b9e7a`;
+  trade SHA-256:
+  `555d3863b186381cc66c8513280826b463f62a5245f998d4c9d2470011e8cf4e`.
+  Three focused tests, compilation, contract and source identity, artifact
+  hashes, and metric reproduction pass with
+  `TRANSITION_FIRST_BLOCK_V58_VERIFICATION_PASS`.
+- Decision:
+  `TRANSITION_V58_CROSSBROKER_FAIL_NO_SAME_VERSION_TUNING`. Do not select a
+  different attractive row from the same exposed 2,000-policy screen, omit
+  failed eras, or promote the recent Capital slice. This transition
+  first-block family is not portable enough to qualify.
+
+## R0 Post-Shock Resolution V1 - 2026-07-26
+
+- Audited the remaining R0 opportunity gap after the earlier immediate
+  shock-fade, adaptive post-shock reversal, and chop-normalization failures.
+  Added and preregistered
+  `xau-usd/xauusd-fast-research/r0-postshock-resolution-v1` to test a distinct
+  causal mechanism: remain flat during `UNSAFE_SHOCK`, wait for completed H4
+  resolution into `TREND_UP` or `TREND_DOWN`, then take the first completed H1
+  pullback-and-resumption pair in the resolved direction.
+- The frozen rule permits at most one intervening `TRANSITION_UNKNOWN` run,
+  requires trend resolution within 24 hours of the shock ending, searches
+  only the first 12 completed H1 trend bars, requires a 0.35 resumption body,
+  and uses a fixed 1.50 ATR stop and 12-hour hold. It emits one candidate per
+  post-shock trend run and never trades inside the shock.
+- Candidate generation opened no outcomes and emitted 59 Capital events, 40
+  long and 19 short, with 57 conservatively schedulable under the one-position
+  clock. The broad-era candidate distribution was 11/13/20/15. Candidate
+  SHA-256:
+  `6afe29d7f30b12af4033e516438d791f893a7efe95603414aee201710170b876`.
+- Contract SHA-256:
+  `7aa4cb54b51cc761b98e34a42f7020e08714b364050b0ffded5875fb9bbc5762`.
+  It froze the package, dependencies, Capital source, candidate facts, rule,
+  costs, portfolio constraints, gates, and all-false authority before exact
+  post-entry paths were opened.
+- The one-shot result was descriptively positive but failed robustness: 57
+  trades, +3.007868R, +0.052770R mean, PF 1.106028, 43.86% win rate, and
+  7.467408R drawdown. Removing the five largest winners produced
+  -11.403261R, and the 90% UTC-week bootstrap mean interval was
+  -0.227632R to +0.348074R. Only six of 17 active calendar years were
+  positive.
+- Era stability failed: 2010-2014 +1.254R/PF 1.227; 2014-2018
+  +7.571R/PF 2.538; 2018-2022 -2.780R/PF 0.709; and 2022-2026
+  -3.037R/PF 0.637. The latest year had two trades, both losses, for
+  -2.127587R and PF 0. The last 6 months had one trade at -1.060973R.
+- Result SHA-256:
+  `aa620ab6ea268ea939e32d96b302f81e1eb43d49d9b2498374b9c966c756f25b`;
+  trade SHA-256:
+  `7bf5d0eccf6262ede447bd66c53540a3101e11c72ee7b9486690ebd2672fd7cc`.
+  Three focused tests, contract/source identity, candidate regeneration,
+  trade replay, metric reproduction, and artifact hashes pass with
+  `R0_POSTSHOCK_RESOLUTION_V1_VERIFICATION_PASS`.
+- Decision: `R0_POSTSHOCK_V1_POLICY_FAIL_NO_SAME_VERSION_TUNING`. Retire this
+  exact post-shock trend-resolution lineage. Do not select the profitable
+  2014-2018 era, change its horizon, or filter the exposed losing years.
+  R0 remains an abstain state.
+
+## R1 Dedicated Untouched Capital Evaluation V61 - 2026-07-26
+
+- Closed the missing independent prospective-evaluation path for the frozen
+  V29 R1 pullback specialist. Added, preregistered, tested, locked, and started
+  `xau-usd/xauusd-fast-research/capital-r1-dedicated-prospective-v61`.
+- The exact frozen specialist is
+  `R1_PULLBACK_LONG_V2_M15_SESSION_09_15`: long only in the V29 R1 uptrend
+  state, with V29's unchanged signal, session, spread, cost, and stop rules.
+  V61 consumes the existing append-only V29 candidates and V40 Capital
+  bid/ask resolutions transported by V60 on account `1033030`.
+- V61 retains every V40-executed R1 pullback. It intentionally does not apply
+  the one-position R2/R3 router because the frozen V29 execution contract
+  permits up to eight concurrent positions and twelve entries per UTC day.
+  This preserves the rule being tested instead of creating a new policy.
+- Historical context remains exposed evidence only. The bound four-year MT5
+  replay contains 413 trades. A descriptive independent reconstruction gives
+  +190.646821 gross R, PF 1.860878, 49.88% wins, and 20.695852R closed
+  drawdown; 2026 through June was -4.338010R. None of these rows can enter
+  V61 validation or confirmation.
+- Forward boundary: `2026-07-27T00:00:00Z`. The contract was created before
+  that boundary at `2026-07-26T06:57:16.345055Z`, with no aggregate economics
+  present.
+- Contract SHA-256:
+  `cfed6d8394161e84f5709b7e97894963ce3aa1e0a1471b4cd7d0d703621fed18`.
+  Contract-file SHA-256:
+  `67889d5b35e8c29f965c897e8757b0838eb1f39493624b849bbbc4f25a9559e4`.
+  The lock binds 11 package files, eight dependencies, V29/V40 identities,
+  the account/feed, stage counts, day-quality rules, routing, gates, and all
+  authority flags.
+- Eligible weekdays require at least 100,000 unique quote milliseconds, data
+  from no later than 02:00 UTC through at least 22:00 UTC, p99 interquote gaps
+  no greater than five seconds, duplicate-millisecond share no greater than
+  5%, and exact account/server/symbol and read-only authority identity.
+- Validation opens only at the first outcome-blind endpoint with at least 20
+  eligible weekdays, five executed R1 trades, and final resolution of every
+  R1 candidate through the endpoint. Gates are positive stressed net, PF at
+  least 1.10, mean at least +0.05R, drawdown at most 8R, and positive net
+  after removing the largest winner.
+- If validation passes, confirmation uses a disjoint period with at least 40
+  eligible weekdays and twelve executed trades. Gates are PF at least 1.20,
+  mean at least +0.10R, drawdown at most 12R, and positive net after removing
+  the two largest winners. Same-version tuning is forbidden.
+- Focused V61 tests: 3 passed. V47/V49/V51/V55/V61 focused suites passed
+  7/6/1/1/3 tests respectively. V61 Ruff, format, compilation, and diff checks
+  pass.
+- First locked V61 cycle:
+  `WAITING_FOR_UNTOUCHED_VALIDATION`, zero eligible weekdays, zero candidates,
+  zero executed trades, zero unresolved candidates, and
+  `aggregate_economics_opened=false`. Model training, Python predictions, EA
+  consumption, demo, live, and broker-action authority are all false.
+- Persistent hidden V61 watcher: parent PID `33844`, child PID `21460`, poll
+  interval 300 seconds. Its stderr is empty. Runtime status:
+  `xau-usd/xauusd-fast-research/capital-r1-dedicated-prospective-v61/outputs/CAPITAL_R1_V61_STATUS.json`.
+- Cross-check at handoff: V47, V49, V51, V55, and V61 all report
+  `WAITING_FOR_UNTOUCHED_VALIDATION`, zero eligible days, and no aggregate
+  economics. Their watcher pairs are V47 `28824/21420`, V49 `37984/40504`,
+  V51 `21576/28840`, V55 `34112/36496`, and V61 `33844/21460`.
+- V60 remained unchanged. Feed processes `42008/45896` and portfolio
+  processes `40444/45588` are alive. V60 reports all requested feeds healthy,
+  account `1033030`, `ml_used=false`, `ml_runtime_authorized=false`, and
+  `ml_shadow_authorized=false`. V61 cannot place or alter a demo order.
+- Next decision is mechanical: collect untouched Capital data from July 27,
+  preserve every append-only prefix, and wait for the frozen stage endpoint.
+  Do not inspect interim R1 economics, lower the trade-count requirement,
+  alter the gates, or call the exposed MT5 history prospective proof.
+
+## R1 Box Dedicated Untouched Capital Evaluation V62 - 2026-07-26
+
+- Closed the remaining R1 prospective-measurement gap by adding, testing,
+  locking, and starting
+  `xau-usd/xauusd-fast-research/capital-r1-box-dedicated-prospective-v62`.
+  It transports the already locked V41 box outcome engine to account `1033030`
+  and evaluates only untouched rows from July 27.
+- V62 changes runtime locations and account identity only. Locked V41 still
+  owns candidate schema and identity, executable Capital bid/ask entry/exit,
+  stop distance, 2R target, ten-minute entry window, spread limits, ticket
+  cost, holding cost, 0.05R slippage stress, maximum two concurrent positions,
+  and maximum one entry per UTC day.
+- The V41 transport reads V60's append-only
+  `R1_UPTREND_LONG_V1` candidate feed and the account `1033030` prospective
+  tick files. It writes a separate append-only resolution ledger below
+  `C:\MT5PortableTier1BestEA\MQL5\Files\v60_canonical_demo_v2\feeds\r1_box_outcomes`.
+  It cannot alter the source candidate feed or V60.
+- Forward boundary: `2026-07-27T00:00:00Z`. The V62 contract was created at
+  `2026-07-26T07:07:45.290903Z`, before the boundary, with no aggregate
+  economics present.
+- V62 contract SHA-256:
+  `dcd2b1787742b999bab2931f303c15204429350b3ca5bd88713f5e35caf99ca5`.
+  Contract-file SHA-256:
+  `f4fb79ca42cea3cf93355cad19946b960a5e7bd79d9da68f830c4abf30aa3c7f`.
+  It binds 11 package files, nine dependencies, V41 contract
+  `f78d0b01b9ed9b65e71429dd461d0b967ae44058944de2452043051402728363`,
+  source contract
+  `27fef83d1a57aa28a1e4d4e6968b2854184a673cdff6769da16828fbe4084908`,
+  transport identity, stages, gates, and all authority flags.
+- A pre-lock live transport cycle and the first complete post-lock cycle both
+  passed on account `1033030`: active read-only V41 resolver, zero candidates,
+  zero resolutions, no aggregate economics, and all model, EA, demo, live,
+  trade, and broker-action authority false.
+- V62 validation/confirmation use the same complete-day criteria and stage
+  gates as V61. Validation needs at least 20 eligible weekdays and five
+  executed box trades; confirmation, only after a pass, needs a disjoint 40
+  eligible weekdays and twelve trades. Endpoints require every candidate
+  through the date to have a final causal resolution.
+- Focused tests: 4 passed. Ruff, format, compilation, and diff checks pass.
+  Tests verify transport-only overrides, exclusion of preboundary candidates,
+  resolution hash/policy identity, and retention of every V41 primary-policy
+  execution.
+- First evaluator status:
+  `WAITING_FOR_UNTOUCHED_VALIDATION`, zero eligible weekdays, zero executed
+  trades, zero unresolved candidates, and
+  `aggregate_economics_opened=false`.
+- Persistent hidden V62 watcher: parent PID `40244`, child PID `6332`, poll
+  interval 300 seconds; stderr is empty. It resolves the frozen V41 stream
+  before each evaluator cycle. Runtime status:
+  `xau-usd/xauusd-fast-research/capital-r1-box-dedicated-prospective-v62/outputs/CAPITAL_R1_BOX_V62_STATUS.json`.
+- Cross-check after V62: all six untouched evaluators V47, V49, V51, V55,
+  V61, and V62 report `WAITING_FOR_UNTOUCHED_VALIDATION`, zero eligible
+  weekdays, no opened aggregate economics, and no model or broker authority.
+  All 16 expected evaluator/V60 processes are alive and responding.
+- R1 through R4 prospective coverage is now explicit: V61 owns the R1 pullback
+  decision, V62 owns R1 box, V55 owns R2, V51 owns R3, and V49 plus the
+  unchanged V47 benchmark own R4. R0 and R5 remain causal abstain states.
+  This is complete measurement infrastructure, not proof that any candidate
+  will pass.
+
+## Raw BREAK_60 Shared-Account Feasibility Rejection - 2026-07-26
+
+- Before creating another research package, a read-only feasibility audit
+  reconstructed the exact post-outcome V100 diagnostic lane
+  `BREAK_60, 12:00-20:00 UTC` with no health circuit. The reconstruction used
+  the locked V19 episode markouts, prescribed direction, V100 spread filter,
+  maximum one entry per family per UTC date, maximum two open positions, fixed
+  60-minute exit, ticket/holding/slippage stress, and the unchanged V60
+  account simulator.
+- This was an exposed diagnostic used to reject an architecture. It was not
+  preregistered evidence, did not create a strategy version, and cannot support
+  promotion or prospective authority.
+- Stage results:
+  - Development-2: 462 trades, 0.886756/day, +676.354171 stress R, PF
+    2.829729, mean +1.463970R, 51.621852R closed drawdown, four of four
+    profitable half-year segments.
+  - Confirmation: 255 trades, 0.977011/day, +173.246326 stress R, PF
+    1.742837, mean +0.679397R, 82.517351R closed drawdown, two of two
+    profitable half-year segments.
+  - Final: 257 trades, 0.984674/day, -34.214061 stress R, PF 0.902421, mean
+    -0.133129R, 81.999523R closed drawdown, zero of two profitable half-year
+    segments.
+- The frozen shared-account router accepted 834 of 974 candidates. It rejected
+  134 while the account drawdown circuit was suspended and six for the
+  add-on-position limit.
+- Shared V60 plus BREAK_60 results also failed:
+  - Development-2 combined frequency was 1.953935/day, below 2.0/day.
+  - Confirmation passed the window checks at 2.452107/day and combined PF
+    1.693934.
+  - Final frequency was 2.206897/day, but the add-on lost USD 152.08 at PF
+    0.903586 and remained negative after winner removal.
+  - Maximum floating drawdown was USD 397.02; the frozen 1.25 capital buffer
+    made it USD 496.28, above the USD 449.7675 cap.
+- Decision: reject raw BREAK_60, binary-health variants, risk-scaling variants,
+  and session rerouting as the next strategy architecture. The failure is
+  final-year expectancy as well as drawdown, not only position sizing.
+  Reusing the same exposed outcomes would be post-selection optimization.
+- The next specialist must use a materially different causal input and begin
+  with an untouched July 27 boundary. Existing V59/V60 and all V47/V49/V51/
+  V55/V61/V62 contracts remain unchanged.
+
+## R4 Asia Sweep/Reclaim V63 - 2026-07-26
+
+- Added, tested, candidate-froze, locked, opened once, and independently
+  verified
+  `xau-usd/xauusd-fast-research/r4-asia-sweep-reclaim-v63`.
+- V63 tested one deterministic R4 mechanism with no parameter grid. It built
+  each completed 00:00-06:00 UTC Asia range, required the latest completed
+  canonical H4 state to be valid `R4_CHOP`, waited from 07:00-16:00 for a
+  0.20-ATR sweep and completed directional reclaim, and entered opposite the
+  sweep at the next exact M5 bid/ask open.
+- The rule was materially different from earlier session boundary fades and
+  six-bar Core add-ons: it required an actual post-session sweep/reclaim, used
+  the completed six-hour auction as its reference, reversed the sweep, and
+  required no existing Core position.
+- Frozen execution used the larger of 1.50 ATR or a stop 0.10 ATR beyond the
+  sweep extreme, a 1.50R target, six-hour maximum hold, one position and one
+  entry per UTC date, 0.15R maximum entry spread, USD 0.30 ticket cost,
+  prorated holding cost, 0.05R stress slippage, gap-through stops, and
+  stop-first same-bar ambiguity.
+- Outcome-blind preflight produced 161 executable candidates from 437 raw
+  reclaim dates: 79 long and 82 short. Stage supply was 38 Discovery, 33
+  Validation, 43 Confirmation, and 47 Final. No trade outcome was present at
+  lock.
+- Contract SHA-256:
+  `3bcfe405f87a9ed3f7db287ff91545f39ca899c9217adbedaa18dbb2cd671fac`.
+  Candidate SHA-256:
+  `a599cf6b52e9499a337bd545a934180e33063f93b9db4c4d30e6b2febab56ee7`.
+- Discovery failed terminally on its first and only opening:
+  - 38 trades over 1,175 weekdays, or 0.032340/day;
+  - -12.494929R net, -0.328814R mean, PF 0.562622;
+  - 14 wins, 24 losses, 36.84% win rate, 16.941823R drawdown;
+  - all three chronological segments lost and the worst segment PF was zero;
+  - removing the three largest winners left -16.615372R;
+  - the 80% weekly-block mean interval was
+    [-0.575376R, -0.085344R].
+- Decision:
+  `R4_ASIA_SWEEP_RECLAIM_V63_DISCOVERY_FAIL_TERMINAL`. Validation,
+  Confirmation, and Final remain sealed. Do not mirror direction, retune
+  sweep depth, widen the session, alter stop/target/hold, or weaken gates on
+  these exposed outcomes.
+- Independent replay returned
+  `R4_ASIA_SWEEP_RECLAIM_V63_VERIFICATION_PASS`; all five tests, Ruff,
+  formatting, compilation, and diff checks pass. Model training, Python
+  prediction, EA, demo/live, runtime, account, and broker authority remain
+  false.
+## Capital Multi-Symbol Prospective Foundation - 2026-07-26
+
+- Audited the account `1033030` Capital quote feed before defining another
+  R3/R4 strategy. July 22-24 supplied approximately 275k-305k unique XAUUSD
+  millisecond quotes per day. Quotes were non-crossed and midpoint-active, but
+  spread was exactly USD `0.30` at the 1st, 50th, and 99th percentiles.
+  Reported tick volume and real volume were zero.
+- Market-book files contain headers only. The collector reports
+  `symbol_book_depth=0`, subscription failure/error `4901`, and zero book rows.
+  Capital therefore supplies no usable depth, microprice, queue, volume, spread
+  dynamics, or bid-versus-ask asymmetry. A new single-symbol threshold rule
+  would repeat the already retired V24.1/V26/V30/V31 mechanisms.
+- A read-only MetaTrader5 catalogue audit confirmed synchronized broker ticks
+  are available on the exact account for `XAUUSD`, `XAGUSD`, `DXY`, `US500`,
+  `EURUSD`, and `USDJPY`. A July 22 source-only probe found respectively
+  `398438`, `102442`, `14900`, `63965`, `61175`, and `58645` rows. No candidate
+  outcome or P/L was calculated.
+- Added and preregistered
+  `multi-asset/data-foundation/capital-multisymbol-prospective-v1`. It uses the
+  locked information boundary `2026-07-27T00:00:00Z`, stores data under
+  `D:/AlgoTradingData/prospective/capital-multisymbol-v1`, refuses every account
+  except `1033030` on `Capital.ComMena-Demo`, and contains no broker-action API.
+  Model training, Python prediction, EA consumption, demo execution, live
+  execution, and broker action are all false.
+- Contract SHA-256:
+  `1038543cc35a9d77a8b416eb02060cc86163e537465f6d8aa6c1db640e29c057`.
+  Contract verification passes with
+  `CAPITAL_MULTISYMBOL_PROSPECTIVE_V1_VERIFICATION_PASS`; all five tests pass,
+  compilation and diff checks are clean, and the real-terminal preflight passes
+  for all six symbols.
+- A pre-boundary collection pass returned `WAIT_BOUNDARY` and produced zero
+  tick CSVs. The hidden watcher is active as Python PID `44796`; its PID and
+  logs are under
+  `D:/AlgoTradingData/prospective/capital-multisymbol-v1/_runtime`. The latest
+  health file is
+  `D:/AlgoTradingData/prospective/capital-multisymbol-v1/_state/health.json`.
+- This is a prospective data foundation, not a discovered strategy and not
+  trading authority. Per the owner's instruction, research stops after this
+  final iteration. V59/V60 remains the accepted historical benchmark and
+  unchanged demo implementation; V57 counter-extension and V63 Asia
+  sweep/reclaim remain terminal historical failures.
+
+## V60 Prospective Runtime Supervisor - 2026-07-26
+
+- Added `xau-usd/operations/v60-prospective-supervisor-v1` as a separate
+  operational continuity layer. It changes no strategy, signal, threshold,
+  action geometry, lot, risk limit, contract, model authority, or broker
+  authority.
+- The supervisor monitors the exact Capital demo terminal, the V60 feed and
+  portfolio workers, the read-only six-symbol prospective collector, and all
+  six frozen R1-R4 evaluators. Missing Python workers are restarted
+  idempotently. The MT5 terminal is monitored but is never started, stopped, or
+  restarted by this package.
+- The consolidated state is written under
+  `D:/AlgoTradingData/prospective/v60-prospective-supervisor-v1`. The first
+  real-runtime reconciliation and a complete later 60-second cycle both
+  returned `READY`: terminal running, all nine workers running or proven fresh,
+  zero process errors, and zero failed health sources.
+- The live smoke test exposed two Windows-only orchestration issues before
+  handoff: a UTF-8 BOM in the PowerShell process snapshot and a legacy V51
+  worker whose relative command line could look absent. Both are handled. The
+  duplicate V51 process created by the first smoke cycle was removed, leaving
+  the original watcher active; future fallback expires after 900 seconds and
+  then launches the canonical absolute command.
+- Persistent hidden supervisor PID at handoff: `18780`. Runtime stderr is empty.
+  The status timestamp advanced from `2026-07-26T12:40:50Z` to
+  `2026-07-26T12:41:51Z` while remaining `READY`.
+- Five focused tests pass, PowerShell syntax parsing passes for both scripts,
+  Python compilation passes, and `git diff --check` is clean. Ruff was not
+  available in the active local runtimes and was not installed.
+- V60 itself remains `ACTIVE_DEMO_BROKER_ACTION` on account `1033030`, with ML
+  runtime/shadow disabled. It has observed four candidates, filled three V57
+  demo trades, rejected one V7 candidate under the locked daily add-on cap,
+  and currently has zero XAUUSD positions. Closed prospective demo P/L at this
+  checkpoint is USD `-4.82`; this tiny sample is operational evidence only.
+- The next untouched evidence boundary remains
+  `2026-07-27T00:00:00Z`. All R1-R4 evaluators still have zero eligible
+  weekdays by design. The supervisor protects continuity but cannot shorten
+  the locked evidence requirements or manufacture a profitable result.
+
+## Causal Specialist Winner/Loser Diagnostic V1 - 2026-07-26
+
+- Added
+  `xau-usd/xauusd-fast-research/causal-specialist-win-loss-diagnostic-v1`
+  to test whether entry-time measurements separate stressed winners from
+  failures inside each canonical specialist. Historical outcomes were already
+  exposed, so this is locked exploratory feature discovery rather than
+  promotion evidence.
+- The canonical population reconciles exactly to `3,752` candidates, `1,664`
+  stressed winners, `2,088` stressed failures, and `2,194` historically
+  accepted candidates. The accepted population reconciles to the V59 structure:
+  `815` core candidates and `1,379` add-ons. The diagnostic uses the `3,024`
+  rows with complete mandatory causal XAU features.
+- Winners and failures are matched without replacement inside exact family,
+  direction, calendar year, UTC session, stop mode, and target mode strata.
+  One row per family/direction/structural episode is retained, producing `983`
+  matched pairs. Feature values do not influence matching.
+- Each feature's favorable direction and standardization are learned only from
+  the purged expanding fit partition. Disjoint test partitions are opened once.
+  Thirty-four causal, non-COMEX features were tested across all nine families.
+- The locked result is
+  `STABLE_EXPLORATORY_SEPARATOR_LEADS_FOUND_REQUIRES_PROSPECTIVE_CONFIRMATION`.
+  It reports nine univariate leads:
+  - R1: normalized planned stop width, five-minute directional tick imbalance,
+    and four-hour directional bond return;
+  - V57: direction-adjusted XAU returns over 5, 15, and 60 minutes;
+  - V7: direction-adjusted five-minute XAU return;
+  - V8: direction-adjusted 60-minute XAU return;
+  - R5: direction-adjusted inverse-dollar four-hour return.
+- The three V57 horizons and the V7/V8 return signals are correlated
+  measurements of one interpretable mechanism, not five independent
+  discoveries. Winners generally began after a pullback or weaker
+  direction-aligned extension; worse candidates were more often entered after
+  price had already moved in the intended direction. The strongest examples
+  were V57 15-minute return, walk-forward AUC `0.6082`, and V8 60-minute
+  return, walk-forward AUC `0.6183`.
+- R1 normalized stop width was the strongest individual diagnostic:
+  `277` walk-forward rows, AUC `0.6632`, latest-fold AUC `0.6512`, matched
+  standardized difference `0.3607`, and weekly-block 95% interval
+  `[0.1145, 0.6193]`. This remains a hypothesis; it is not a fitted stop rule.
+- R2 remains evidence-limited despite positive baseline economics: only `128`
+  feature-complete candidates and `24` matched pairs. R3 produced `49` matched
+  pairs; its best apparent spread effect had aggregate walk-forward AUC
+  `0.4659`, so no R3 filter advanced.
+- The complete causal-feature baseline remains positive but is not an
+  executable portfolio result. V59 core feature-complete accepted rows had
+  weighted stressed PF `1.5894`; accepted add-ons had PF `1.2468`.
+- Independent replay returned `SPECIALIST_WIN_LOSS_V1_VERIFIED`: all eight
+  generated artifacts reproduced byte-for-byte, five tests pass, Ruff passes,
+  formatting and compilation pass, and diff checks are clean.
+- No multivariate model, threshold, portfolio simulation, MT5 attachment,
+  shadow scoring, demo/live change, or broker action was created. The correct
+  next research step is to collapse correlated leads into a small
+  mechanism-level hypothesis set and preregister untouched prospective
+  confirmation. ML runtime and shadow remain disabled.
+
+## Causal Anti-Chase Prospective V1 - 2026-07-26
+
+- Added
+  `xau-usd/xauusd-fast-research/causal-anti-chase-prospective-v1` as the
+  strictly prospective next step from the winner/loser diagnostic. It watches
+  the existing V60 V57/V7/V8 candidate feed but is completely ignored by the
+  demo executor.
+- The untouched boundary is `2026-07-27T00:00:00Z`. The existing four add-on
+  candidates are sealed in the append-only prefix and excluded; the initial
+  locked status is `WAIT_BOUNDARY` with zero post-boundary candidates, zero
+  feature decisions, zero resolutions, and aggregate economics closed.
+- One correlated anti-chase mechanism is frozen with one causal feature per
+  family: V57 uses direction-adjusted 15-minute return/ATR, V7 uses 5-minute
+  return/ATR, and V8 uses 60-minute return/ATR.
+- Each rule rejects only values above its outcome-blind historical 75th
+  percentile. The exact thresholds are V57 `2.271208771039961`, V7
+  `0.7758645561091196`, and V8 `3.8986037874340607`. They reproduce from
+  `1,259` feature-complete rows while reading only family, XAU feature status,
+  and the three named feature columns; no P/L, winner/failure label, or
+  historical acceptance field is read.
+- Pre-entry features use only Capital account `1033030` XAUUSD ticks in
+  `(cutoff - horizon, cutoff]`. Health statistics, future ticks, actual demo
+  acceptance, and actual demo fills are not predictors. Every candidate is
+  independently resolved from executable bid/ask ticks with frozen stop,
+  target, horizon, spread, ticket cost, holding cost, and `0.05R` stress
+  semantics.
+- Feature decisions and individual resolutions are separate append-only
+  ledgers under
+  `D:/AlgoTradingData/prospective/causal-anti-chase-prospective-v1`.
+  Aggregate economics remain sealed until the locked 20-weekday/15-candidate
+  validation endpoint is complete. A passing validation is followed by a
+  disjoint 40-weekday/30-candidate confirmation.
+- Contract SHA-256:
+  `5752dbd34c4cc4849b7a9f12c0b81b077a1bffbff9614d4f38367ded5e8f1b9b`.
+  Verification returns `CAUSAL_ANTI_CHASE_PROSPECTIVE_V1_VERIFIED`; seven
+  focused tests, Ruff, formatting, compilation, supervisor tests, and diff
+  checks pass.
+- Added the watcher and a fail-closed health source to
+  `xau-usd/operations/v60-prospective-supervisor-v1`. The restarted supervisor
+  PID is `35036`; the anti-chase watcher launcher PID is `13624`. Consolidated
+  supervisor status is `READY` with ten monitored workers and ten healthy
+  sources.
+- Model training, Python prediction, ML shadow, EA consumption, live
+  authorization, and broker action all remain false. V60 deterministic demo
+  trading and all account/risk settings are unchanged.
+
+## Causal Anti-Chase Historical Robustness V1 - 2026-07-26
+
+- Added and locked
+  `xau-usd/xauusd-fast-research/causal-anti-chase-historical-robustness-v1`.
+  It compares the untouched V57/V7/V8 candidate baseline, V57-only anti-chase,
+  and all-family anti-chase over fixed 3M, 6M, 1Y, 2Y, 3Y, 5Y, 10Y, and full
+  windows. The thresholds are byte-bound to the existing prospective V1
+  contract and were not changed after viewing these results.
+- The primary candidate-quality population reconciles to `1,259` resolved,
+  XAU-feature-valid candidates: V57 `549`, V7 `467`, and V8 `243`. The data
+  starts on `2019-02-15`, so the requested 10Y and full rows contain only
+  approximately 7.4 years of actual coverage. A secondary static diagnostic
+  contains the `1,021` candidates historically accepted by the account policy;
+  it is explicitly not represented as a rerouted account counterfactual.
+- The locked result is
+  `V57_ONLY_DOES_NOT_CLEAR_HISTORICAL_ROBUSTNESS`: `15/19` gates passed. V57-only
+  improved the fixed 3M candidate result from 63 trades, USD `307.9960`, PF
+  `1.6976`, and USD `72.4369` closed drawdown to 53 trades, USD `331.1853`, PF
+  `1.9789`, and the same drawdown.
+- The recent gain did not persist. Versus baseline, V57-only lost USD
+  `90.7694` over 6M, `74.5376` over 1Y, `125.1515` over 3Y, `151.6696` over
+  5Y, and `119.0298` over all available history. It improved or tied annual
+  net P/L in only `2/7` years with V57 evidence, below the locked `60%` gate.
+  Those long-horizon P/L and annual-stability checks are the four failed gates.
+- V57-only did improve long-horizon quality and closed drawdown: available
+  history PF rose from `1.4192` to `1.4583`, and closed drawdown fell from USD
+  `143.7412` to `128.8376`. It retained `89.12%` of trades. At doubled
+  canonical stress costs it remained positive over 5Y and available history,
+  and both windows remained positive after removing the five largest winners.
+  These benefits do not outweigh the failed long-horizon net-profit gates.
+- All-family anti-chase was also too blunt for promotion. Over available
+  history it raised PF to `1.5521` and reduced closed drawdown to USD
+  `123.0682`, but cut trades from `1,259` to `944` and net P/L from USD
+  `1,701.7234` to `1,559.9175`.
+- The core replay is deterministic: after canonical timestamp normalization,
+  the result is identical and all `11` generated artifact hashes reproduce
+  byte-for-byte. The locked `verify.py` stops early because it compares
+  in-memory `Timestamp` objects with their correct JSON string serialization;
+  this narrow verifier defect is recorded rather than hidden or repaired by
+  changing the locked implementation after results.
+- No new V57-only prospective lane is nominated. The existing research-only
+  anti-chase watcher remains online under supervisor PID `35036`, still reports
+  `WAIT_BOUNDARY`, and has zero post-boundary candidates before
+  `2026-07-27T00:00:00Z`. It remains ignored by the demo executor. The
+  deterministic V60 baseline, account controls, and broker authority are
+  unchanged.
+- The evidence says a fixed extension cutoff confuses healthy momentum with
+  late chasing. Any later version must add a causal context interaction
+  learned only on development history and tested once on untouched time, such
+  as extension conditional on pullback state, volatility, session, and trend
+  strength. It must not retune this failed percentile threshold in place.
+
+## Canonical Expected-R Prospective V13 - 2026-07-26
+
+- The ML audit recovered the strongest existing offline model:
+  `causal-canonical-expected-r-availability-v11`. It predicts stressed
+  Expected-R for already positive canonical specialist candidates rather than
+  predicting direction or creating trades. V11 historically passed all `21/21`
+  availability gates after requiring at least `1,000` fit rows.
+- Frozen V11 historical evidence used `2,851` final fit rows and the
+  byte-bound V10 model SHA-256
+  `a334d911c316844f3e44bbc7f8adbb4d69c6f326b00e24d4a8e55ba5f964973b`.
+  Its six purged out-of-time folds selected `1,808` candidates at about
+  `1.158` per weekday, improving weighted mean stressed return to `0.3156R`,
+  PF to `1.5402`, and closed drawdown from `74.69R` to `53.95R`. This remains
+  historical research, not execution authorization.
+- Added and locked
+  `xau-usd/xauusd-fast-research/causal-canonical-expected-r-prospective-v13`
+  to supply the missing forward confirmation. Contract SHA-256:
+  `570a32e8174e62400059b5481ea57afd276055d5ed6516410d63fd0229408824`.
+  The untouched boundary is `2026-07-27T00:00:00Z`.
+- V13 captures every post-boundary deterministic candidate from all nine V60
+  sources. R1 box and R1 pullback both map to the historically trained
+  `R1_UPTREND` family. R2, R3, R4, V7, V8, V25, and V57 retain their exact
+  family identities. Frozen `R5_TRANSITION` remains absent because it is not
+  in the current V60 executable source set.
+- The evaluator rebuilds the exact `36` B1/B2 numeric feature columns, applies
+  the byte-bound V10 model and frozen family thresholds, and independently
+  resolves both retained and vetoed candidates from executable Capital bid/ask
+  ticks. Entry, stop, target, horizon, R1 90-day barrier cap, ticket cost,
+  holding cost, and `0.05R` stress slippage match the original Step 3 label
+  contract. Missing mandatory features cause model abstention and retain-all.
+- Capital account `1033030` ticks are intentionally used for forward features
+  while training used Dukascopy. Cross-broker feature-domain portability is
+  therefore part of the confirmation test rather than being hidden.
+- Individual scores and counterfactual outcomes are append-only under
+  `D:/AlgoTradingData/prospective/causal-canonical-expected-r-prospective-v13`.
+  Aggregate economics stay sealed until the locked endpoint. Validation
+  requires at least `20` eligible weekdays, `20` fully resolved candidates,
+  and four model-scored families. Confirmation then uses a disjoint period of
+  at least `40` eligible weekdays, `60` resolved candidates, and five families.
+- A passing stage never authorizes trading. Model refit, Python prediction
+  serving, ML shadow, EA consumption, demo authority, live authority, and
+  broker action are all false. V60 remains deterministic and unchanged.
+- Five focused V13 tests pass. Ruff, formatting, compilation, real V60 source
+  normalization, contract verification, and `git diff --check` pass. A real
+  pre-boundary Capital candidate rehearsal produced all 36 features, replayed
+  a deterministic V11 score/threshold decision, and independently resolved
+  its stressed bid/ask outcome.
+- The first locked cycle and independent verifier both pass with
+  `WAIT_BOUNDARY`: zero post-boundary candidates, zero score rows, zero
+  resolutions, and aggregate economics closed.
+- V13 was added to
+  `xau-usd/operations/v60-prospective-supervisor-v1` as an isolated worker and
+  fail-closed health source. Supervisor tests now pass `6/6`. Persistent
+  process IDs at handoff are supervisor `34584` and V13 watcher
+  launcher/worker `48260/46604`. Consolidated status is `READY`, all V13 and
+  supervisor stderr logs are empty, and the V13 health status is
+  `WAIT_BOUNDARY`.
+- V60 remains `ACTIVE_DEMO_BROKER_ACTION` on account `1033030`; both
+  `ml_runtime_authorized` and `ml_shadow_authorized` remain false. V60 feed
+  health is current and all requested deterministic feeds are healthy. The
+  existing anti-chase prospective lane is also unchanged and still ignored by
+  V60.
+
+## V60/V13 Deployment Review Repairs - 2026-07-26
+
+- V60 remains deterministic demo-only on Capital account `1033030`; ML runtime,
+  ML shadow, EA consumption, and live authority remain false. The repaired
+  supervisor status is `READY`, with no open XAU positions, no entry halt,
+  no drawdown suspension, and zero emergency-close failures.
+- Drawdown limits now use the lower of the locked absolute amount and the
+  activation-equity fraction. At activation equity USD `987.6624`, effective
+  limits are USD `74.0747` closed-drawdown suspension, USD `98.7662` closed
+  hard stop, and USD `148.1494` floating hard stop.
+- Account-wide and same-direction initial risk are each capped at the lower of
+  USD `60` or `6%` of activation equity, currently USD `59.2597`. Core
+  candidates also have a USD `45` individual initial-risk ceiling.
+- MT5 chart preflight now validates each expert and all required safety inputs
+  on the same chart. Order tracking no longer substitutes order/deal numbers
+  for position tickets; ambiguous fills remain explicitly unresolved and are
+  reconciled before horizon management.
+- Startup now enforces the tracked exact-source parity artifact at
+  `xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/`.
+  It covers `2,184` fee-stressed fixed-0.01-lot historical trades after
+  excluding non-executable R5. Full-history P/L is USD `5,434.3910`, PF
+  `1.6486`, and win rate `44.6429%`.
+- The exact final 12 completed months, `2025-07-01` through `2026-07-01`,
+  contain `363` trades, USD `2,474.8069` fee-stressed P/L, `43.8017%` win
+  rate, PF `1.9467`, and USD `208.4144` closed-trade drawdown. The tracked
+  monthly table is under the V60 package `reports/` directory.
+- Expected-R V13 now evaluates independently routed take-all and model-selected
+  account portfolios, fixes the model-scored endpoint count, requires a passed
+  validation before confirmation, and adds per-family minimums plus
+  deterministic weekly-block bootstrap confidence gates. Validation requires
+  40 scored outcomes across five families; confirmation requires 120 new
+  outcomes across six families.
+- Final V13 contract SHA-256 is
+  `44246a60c513d5ec1770e57165325f4ee44a815f4730dfc293b213292e7c5b50`,
+  locked before `2026-07-27T00:00:00Z`. It is read-only, currently
+  `WAIT_BOUNDARY`, and has no broker authority.
+- Older prospective contracts that correctly failed closed after the V60
+  safety-config change remain untouched as audit evidence and were retired
+  from operational supervision. V13 replaces their fragmented coverage with
+  the full nine-source population; the still-valid R4 V49 lane remains active.
+- Final focused verification: V60 `20/20` tests, V13 `6/6` tests, supervisor
+  `7/7` tests, V13 independent verification `verified=true`, and
+  `git diff --check` passes.
+- Active processes at handoff: MT5 `41384`; supervisor `42024`; V60 feeds
+  `28036/39528`; V60 portfolio `2336/35156`; multisymbol collector
+  `44796/38504`; R4 V49 `37984/40504`; V13 `28752/50692`.
+
+## V60 Frozen ML Historical Overlay - 2026-07-27
+
+- Added `build_ml_historical_comparison.py` to compare the exact V60
+  fee-stressed fixed-0.01-lot ledger with the frozen Expected-R V10/V11
+  out-of-time decisions for the final completed 12 months, July 2025 through
+  June 2026. The calculation is hash-bound to the canonical dataset, V11
+  predictions, and V60 ledger.
+- The join is exact and one-to-one for all `363` historically routed,
+  currently executable trades after excluding R5. The `296` feature-complete
+  trades receive their frozen F2025 out-of-time decisions; the `67` trades
+  missing mandatory XAU features follow the prospective rule
+  `MODEL_ABSTAIN_RETAIN_ALL`.
+- The ML overlay retains `225` trades and vetoes `138`. P/L falls from USD
+  `2,474.8069` to USD `2,284.8483`, because the vetoed group still earned USD
+  `189.9587`. Win rate improves from `43.8017%` to `47.1111%`, PF improves
+  from `1.9467` to `2.4613`, average P/L per retained trade improves from USD
+  `6.8176` to USD `10.1549`, and comparable closed-trade drawdown falls from
+  USD `208.4144` to USD `155.5251`.
+- This result improves selectivity but fails the total-profit objective. It is
+  historical research with already-exposed outcomes, not ML deployment
+  evidence. ML runtime, shadow, demo filtering, live, and broker-action
+  authority remain false.
+- Reports are under
+  `xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/`:
+  monthly comparison CSV, JSON summary, and 363-row trade audit.
+
+## V60 V57 Same-Direction Post-Loss Cooldown - 2026-07-27
+
+- The two July 23 V57 long losses were sequential, not concurrent duplicates.
+  The existing one-open-position guard worked, but the second long entered 92
+  minutes after the first loss closed and crossed a UTC-day boundary, so the
+  per-UTC-day entry limit did not block it.
+- Added a V57-only 120-minute same-direction cooldown after negative realized
+  net P/L. MT5 deal lifecycles are paired by position ID, so guardian exits or
+  exit deals with another magic still count. Commission, swap, and fees are
+  included. Opposite-direction V57 candidates and all other sources are
+  unchanged. V57 fails closed if MT5 deal history is unavailable.
+- The path-dependent frozen-ledger replay changes the final completed 12 months
+  from 363 trades, USD `2,474.8069` P/L, `43.8017%` win rate, PF `1.9467`,
+  and USD `208.4144` drawdown to 356 trades, USD `2,502.7233` P/L,
+  `44.1011%` win rate, PF `1.9837`, and the same USD `208.4144` drawdown.
+  The effect is seven fewer trades and USD `27.9163` more net P/L.
+- Over all available history the policy removes 31 trades, changes net P/L
+  from USD `5,434.3910` to `5,432.4660`, raises PF from `1.6486` to `1.6594`,
+  and changes closed-trade drawdown from USD `276.8659` to `279.0395`.
+  Promotion is based on the approved replay-protection purpose and positive
+  recent effect, not a claim that every historical window improves.
+- Rebuilt the deployment parity artifact for 2,153 post-policy executable
+  rows. Expected-R V13 routing now mirrors the cooldown for both baseline and
+  selected research scenarios. Because V13 had zero scores and resolutions
+  before its boundary, its old lock was preserved as superseded audit evidence
+  and it was cleanly relocked before the boundary at contract SHA-256
+  `12a28b26a428bd94d4169a88835e19af90d611acf6061ec3ef5a67c10c18571d`.
+- ML runtime, ML shadow, EA consumption, live authority, and V13 broker action
+  remain false. The deployment is deterministic demo-only on account `1033030`.
+
+## V60 V12 Exact Profit-Policy Diagnostic - 2026-07-27
+
+- Added
+  `xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/build_ml_profit_policy_comparison.py`
+  and focused tests. The offline-only script hash-binds the Step 3 canonical
+  labels, V12 out-of-time predictions, V12 final policy, V60 price ledger, and
+  current V60 cooldown config.
+- The canonical accepted non-R5 population and historical V60 ledger join
+  exactly one-to-one for all `2,184` trades by family and signal minute. There
+  are `1,495` V12 prediction rows; the remaining `689` rows correctly follow
+  `MODEL_ABSTAIN_RETAIN_ALL`.
+- Raw and V12 paths replay the V57 120-minute same-direction post-loss cooldown
+  independently. In the final 12 completed months, raw is `356` trades, USD
+  `2,502.7233`, `44.1011%` win rate, PF `1.9837`, and USD `208.4144`
+  closed-trade drawdown. V12 is `325` trades, USD `2,565.6581`, `44.9231%`
+  win rate, PF `2.1193`, and USD `191.6678` drawdown.
+- V12 improves six-month P/L by USD `24.2434`, twelve-month P/L by USD
+  `62.9348`, and all-history P/L by USD `56.7394`. It loses USD `43.7844`
+  versus raw in the latest three months and worsens all-history closed-trade
+  drawdown by USD `4.3442`. Most recent benefit is concentrated in V57 and the
+  F2025 fold.
+- The result is explicitly
+  `POST_OUTCOME_DIAGNOSTIC_POSITIVE_NOT_DEPLOYABLE`. Historical outcomes were
+  exposed, V12's final forward policy is
+  `RETAIN_ALL_INSUFFICIENT_CALIBRATION_USD_IMPROVEMENT`, and disjoint
+  prospective confirmation is unavailable. No V60 runtime file or authority
+  changed; ML serving, shadow, EA consumption, demo filtering, live, and
+  broker-action authority all remain false.
+- Reports include window, fold, final-12-month monthly and family summaries,
+  plus CSV and Parquet row audits under the V60 package `reports/` directory.
+  The full V60 package test suite passes `24/24`.
+
+## V60 B3 Macro Expected-R Diagnostic - 2026-07-27
+
+- Threshold engineering on the frozen 36-feature B1/B2 score did not solve the
+  ML problem. Direct expected-USD training, monthly adaptive thresholds,
+  disjoint calibration/validation, and a 120-day recent-validation drift gate
+  all remained worse than raw in the latest three months or over full history.
+  Those exploratory variants were not promoted.
+- COMEX B4 was tested only on causally complete rows. Its F2025 calibration
+  correctly selected retain-all, so it produced no portfolio change. The
+  older Step 4 HGB/logistic B1/B2/B3 classifiers also failed exact-portfolio
+  bottom-tail veto diagnostics.
+- Added `build_ml_macro_expected_r_comparison.py` and focused tests for the
+  distinct B1+B2+B3 partial-pooling ridge. B3 adds completed dollar-index and
+  Treasury returns while retaining alpha `300`, family-interaction scale
+  `0.25`, clipped stressed-R target `[-3R,+3R]`, and purged chronological
+  folds. The profit-policy grid is limited to `0%` through `15%` veto with at
+  least `85%` calibration coverage.
+- The script hash-binds the canonical dataset, split assignments, feature
+  contract, V10 and V12 implementation/config files, V60 ledger, and current
+  V60 config. F2020-F2023 retain all; F2024 chooses `15%` and F2025 chooses
+  `5%`. Missing predictions abstain and retain.
+- Exact V60 results after independent current-cooldown replay:
+  all history `2,109` versus `2,153` trades, USD `+86.7893` ML-minus-raw,
+  PF `+0.0318`, drawdown USD `-8.1658`; final 12 months USD `+66.7226`;
+  final six months USD `+7.8742`; latest three months USD `-18.3237`.
+- Status is `HISTORICAL_DIAGNOSTIC_POSITIVE_LATEST_WINDOW_FAIL`,
+  `deployment_eligible=false`. Historical outcomes informed this diagnostic,
+  and no prospective Capital dollar/bond confirmation exists. ML serving,
+  shadow, EA consumption, demo filtering, live, broker action, and runtime
+  change remain unauthorized.
+
+## V14 Macro Expected-R Prospective Confirmation - 2026-07-27
+
+- Frozen a final 44-feature B1/B2/B3 partial-pooling Ridge model from all
+  `3,024` causal feature-pass candidates with labels complete before
+  `2026-07-01T00:00:00Z`. The pooled veto quantile is fixed at `5%`; the
+  construction fit retained `2,860` rows and `95.0119%` of structural weight.
+  This in-sample fit statistic is not deployment evidence.
+- Added
+  `xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14`.
+  It consumes immutable V13 B1/B2 score facts, ignores V13's model decision,
+  and adds only completed Dukascopy `DOLLARIDXUSD` and `USTBONDTRUSD` state.
+  Missing, stale, incomplete, or delayed features always produce
+  `MODEL_ABSTAIN_RETAIN_ALL`.
+- V14's initial zero-row pre-boundary lock was preserved as superseded audit
+  evidence after static lint found mechanical import cleanup. The clean
+  package was relocked at `2026-07-26T21:58:16Z`, still before its untouched
+  `2026-07-27T03:00:00Z` boundary. Final contract SHA-256 is
+  `ed5e6c2d69ac037de878017745d6c366b2a5ffdfab09500a2064bd10d9668d83`.
+  No model, feature, threshold, protocol, or boundary changed; both locks had
+  zero candidates and zero scores.
+- The preregistered validation requires at least 20 eligible weekdays, 40
+  resolved scored candidates, and five families. A later disjoint confirmation
+  requires 40 additional weekdays, 120 resolved candidates, and six families.
+  Each stage must retain at least 90% of raw trades, improve exact V60 P/L,
+  avoid worse PF or drawdown, improve the latest stage, and pass a weekly-block
+  bootstrap lower bound above zero.
+- Added a continuous free Dukascopy macro refresh worker. The first real run
+  reconciled `1,242` symbol-hours through `2026-07-26T21:00:00Z`, reproduced
+  the frozen transformation with `0.0` maximum absolute parity error, and
+  correctly retained closed-market hours as zero-tick source files. No
+  Databento or paid source is used.
+- Added the macro refresh and V14 watchers to the existing supervisor. Current
+  supervisor status is `READY`; seven worker groups and all seven health
+  sources are healthy. V14 reports `WAIT_BOUNDARY`; macro health reports
+  `CURRENT`; MT5 remains PID `41384`.
+- Verification: V60 `26/26`, V13 `7/7`, V14 `4/4`, macro data foundation
+  `3/3`, and supervisor `7/7` tests pass. V14's model-serving, ML-shadow,
+  EA-consumption, broker-action, demo, and live authorities are all false.
+
+## Auxiliary ML Transfer Experiments V15-V18 - 2026-07-27
+
+- V15 tested whether the overlap-cleaned auxiliary population could improve
+  canonical filtering. It used `64,319` action labels from `24,835` mechanical
+  events in `13,639` structural episodes after removing canonical-overlap
+  episodes. The retained pool contains `26,775` winning and `37,544` failing
+  action labels; the quarantined journey-attempt rows remained excluded.
+- V15 stacked three causal auxiliary scores into the B1+B2+B3 canonical
+  Expected-R model. It improved raw V60 over all history by USD `82.6234`, but
+  finished USD `4.1659` below locked B123 and lost USD `31.8425` versus raw in
+  the latest three months. Decision: `V15_HISTORICAL_GATE_FAIL`.
+- V16 required two-of-three auxiliary agreement before honoring a B123 veto.
+  It re-admitted `53` of `66` B123 vetoes. All-history P/L remained USD
+  `44.4445` above raw but USD `42.3448` below B123; six-month and three-month
+  P/L were both USD `24.1386` below raw. Decision:
+  `V16_HISTORICAL_GATE_FAIL`.
+- V17 isolated `V57_BREAK_SWING_H4ADX_HIGH`, where the three auxiliary scores
+  achieved mean out-of-time AUCs of about `0.606-0.615`. It re-admitted `17`
+  of `24` B123 V57 vetoes. It matched raw over three and six months and
+  improved raw all-history P/L by USD `76.7092`, PF from `1.6594` to `1.6815`,
+  and drawdown from USD `279.0395` to `263.1529`, but remained USD `10.0801`
+  below B123 and did not improve the six-month raw result. Decision:
+  `V17_HISTORICAL_GATE_FAIL`.
+- Added, preregistered, tested, locked, evaluated once, and independently
+  verified
+  `xau-usd/xauusd-fast-research/causal-v8-auxiliary-veto-v18`. V18 tested the
+  strongest stable family transfer relationship: the frozen nonlinear
+  auxiliary score ranked `V8_RETEST_HEALTH` outcomes above `0.55` AUC in all
+  six out-of-time folds, with mean AUC `0.6572`.
+- V18 could only add a calibration-approved V8 bottom-tail veto to B123. It
+  could not create trades, re-admit B123 vetoes, change another family, or
+  alter runtime. Four folds had sufficient calibration support. V18 added
+  `19` V8 vetoes, but none of the six fold-level portfolio deltas improved
+  B123. All-history P/L was USD `5,490.6594`: USD `58.1935` above raw but USD
+  `28.5959` below B123. PF was `1.6891`, win rate `44.7733%`, drawdown USD
+  `270.8737`, and trade count `2,095`.
+- V18 matched B123 over the latest twelve months: `335` trades, USD
+  `2,569.4458`, `44.7761%` win rate, PF `2.0790`, and USD `191.6678`
+  drawdown. It therefore retained B123's latest-three-month shortfall: `60`
+  trades, USD `331.4018`, PF `1.6461`, versus raw USD `349.7255`.
+  Decision: `V18_HISTORICAL_GATE_FAIL`.
+- V18 contract SHA-256 is
+  `7bc6ade920a1091c43973f52fa45776e016fde3064dd2d5e5ed8ba6d588e6d00`.
+  Independent verification reports `VERIFIED`, `11` artifacts, and focused
+  tests pass `4/4`. The full comparison through V18 is
+  `causal-v8-auxiliary-veto-v18/outputs/ML_EXPERIMENT_COMPARISON_V18.md`.
+- The combined conclusion is that the larger auxiliary label pool contains
+  genuine ranking information, especially for V57 and V8, but the current
+  binary veto policies discard occasional large winners and do not improve
+  exact portfolio P/L robustly. AUC improvement alone is not sufficient.
+  V14 remains the only locked prospective ML lane. V15-V18 have no serving,
+  shadow, EA, demo, live, sizing, runtime, or broker authority.

@@ -1,0 +1,8 @@
+joblib==1.5.3
+numpy==2.5.1
+pandas==3.0.3
+pyarrow>=20,<24
+pytest>=8,<10
+ruff>=0.12,<1
+scikit-learn==1.8.0
+scipy>=1.16,<2

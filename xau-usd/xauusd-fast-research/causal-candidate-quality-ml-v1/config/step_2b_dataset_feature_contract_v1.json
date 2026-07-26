@@ -1,0 +1,623 @@
+{
+  "schema_version": "xauusd_causal_candidate_quality_step_2b_contract_v1",
+  "campaign_id": "causal-candidate-quality-ml-v1",
+  "stage": "STEP_2B_DATASET_AND_FEATURE_CONTRACT_LOCK",
+  "created_utc": "2026-07-22T04:31:52Z",
+  "controls": {
+    "economic_outcomes_authorized": false,
+    "counterfactual_label_build_authorized": false,
+    "feature_value_build_authorized": false,
+    "model_training_authorized": false,
+    "threshold_fitting_authorized": false,
+    "portfolio_simulation_authorized": false,
+    "runtime_change_authorized": false,
+    "new_data_acquisition_authorized": false,
+    "rejection_is_loss": false,
+    "archive_rows_are_independent_training_rows": false,
+    "same_version_contract_change_after_outcomes": false,
+    "forbidden_read_columns": [
+      "base_net_r",
+      "stress_net_r",
+      "net_r",
+      "gross_r",
+      "pnl_usd",
+      "pnl_usd_0p01_equiv",
+      "stress_pnl_usd",
+      "portfolio_pnl_usd",
+      "mfe_r",
+      "mae_r",
+      "exit_time",
+      "exit_time_utc",
+      "exit_price",
+      "profit_factor",
+      "win",
+      "winner"
+    ]
+  },
+  "bound_inputs": {
+    "step_1_contract": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/config/causal_candidate_quality_ml_v1.json",
+      "sha256": "a6380e06b9b5bfe8d81624773e8982499bfcd1c9529f69a9e6cdc5fb64c263f7"
+    },
+    "step_1_lock": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/CAUSAL_CANDIDATE_QUALITY_ML_V1_CONTRACT_LOCK.json",
+      "sha256": "4804f6c3e63f67cf9241616a47d7118f693f829f14389002500caa8b6f9a89c5"
+    },
+    "step_2a_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2a/STEP_2A_RESULT.json",
+      "sha256": "42d2bf177d1d13f0c8ea4fe8a406df732fb92e76e88f6c443a68e992a1502c86"
+    },
+    "step_2a_artifact_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2a/STEP_2A_ARTIFACT_MANIFEST.json",
+      "sha256": "5a4ceec23a803e0c675379d25d29fe6a7b6b62288fe39fb6204ee5434f6ffe1d"
+    },
+    "canonical_registry": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2a/STEP_2A_CANONICAL_CANDIDATE_REGISTRY.parquet",
+      "sha256": "07fc62fc9713aaf340a5a6477ee84ab1b61e65c2c4b1b14d796ac055be8b868d"
+    },
+    "journey_action_registry": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2a/STEP_2A_JOURNEY_ACTION_REGISTRY.parquet",
+      "sha256": "5b81727150744c6b20f0502b9b3765c3586a8fdd3daa56650d46d1164f771ecb"
+    },
+    "journey_candidate_registry": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2a/STEP_2A_JOURNEY_CANDIDATE_REGISTRY.parquet",
+      "sha256": "cd377ed7d778849630b2bf1d4f3a5bb79c3045713067756654c593ac7057e5a6"
+    },
+    "journey_archive_catalog": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2a/STEP_2A_JOURNEY_ARCHIVE_CATALOG.json",
+      "sha256": "6a00b736df3f82e5b0d349a6a203c530b2c51d598cf3daec290dddf57ca292e5"
+    },
+    "dukascopy_decoder": {
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/src/replication.py",
+      "sha256": "76d471ba5a623134461c783e67ad128fae96c68e7a0cd55e7e9653a9ec0a4333"
+    },
+    "dukascopy_decoder_tests": {
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/tests/test_replication.py",
+      "sha256": "dbb814fdf5e76e884711d414d228b9134e9897acff05ef7a00e1e8d5f6197a58"
+    },
+    "r2_r3_candidates": {
+      "path": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet",
+      "sha256": "3a8b1d1812ca46f9a89d24e41cf3580b19d7ea5a5e1744a3c052a9d0339eb99b"
+    },
+    "r4_candidates": {
+      "path": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_CANDIDATES.parquet",
+      "sha256": "26b8c6e75957f3b33b966aa82bf05f4a21d41b4365a86543a8ad8391f1d084e4"
+    },
+    "r5_candidates": {
+      "path": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_CANDIDATES.parquet",
+      "sha256": "25742cdf86c4634e447c6aed59c8251ead09f5e04f7a80a173eb9c518ef1742f"
+    },
+    "v57_candidates": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-unified-portfolio-v57/outputs/ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_CANDIDATES.parquet",
+      "sha256": "05a30d5ba24fefe728e39bb4d85c38d2f82d35cdfb45eb0dc59e71ef26badad9"
+    },
+    "comex_source_manifest": {
+      "path": "C:/ComexGoldFuturesFoundationV1/manifests/downloaded_and_hashed_20260717T082157Z.json",
+      "sha256": "5abfaa2de812671938a48b5b88b83c7a45acdc85093effa61890a45ee2a428e6"
+    },
+    "capital_transfer_manifest": {
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-crossvenue-foundation-v22-1/outputs/CROSSVENUE_V22_1_SOURCE_MANIFEST.json",
+      "sha256": "c6584f80aa20315c69f6b78094148c5ba09f0721c44770b94890f737ec42d4b2"
+    }
+  },
+  "source_corpora": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "monthly_manifest_name": "_FROZEN_MANIFEST.json",
+    "included": [
+      {
+        "symbol": "XAUUSD",
+        "role": "PRIMARY_FEATURE_AND_LABEL_PROXY",
+        "start_inclusive_utc": "2010-01-01T00:00:00Z",
+        "end_exclusive_utc": "2026-07-01T00:00:00Z",
+        "expected_months": 198
+      },
+      {
+        "symbol": "DOLLARIDXUSD",
+        "role": "PRIMARY_CROSS_ASSET_FEATURE",
+        "start_inclusive_utc": "2019-01-01T00:00:00Z",
+        "end_exclusive_utc": "2026-07-01T00:00:00Z",
+        "expected_months": 90
+      },
+      {
+        "symbol": "USTBONDTRUSD",
+        "role": "PRIMARY_CROSS_ASSET_FEATURE",
+        "start_inclusive_utc": "2019-01-01T00:00:00Z",
+        "end_exclusive_utc": "2026-07-01T00:00:00Z",
+        "expected_months": 90
+      }
+    ],
+    "excluded_from_v1_features": [
+      {
+        "symbol": "EURUSD",
+        "reason": "LOCAL_HISTORY_ENDS_2024_06_AND_CANNOT_SCORE_NEWEST_ERAS"
+      },
+      {
+        "symbol": "GBPUSD",
+        "reason": "LOCAL_HISTORY_ENDS_2021_06_AND_CANNOT_SCORE_LATER_ERAS"
+      },
+      {
+        "symbol": "USDJPY",
+        "reason": "LOCAL_HISTORY_ENDS_2024_06_AND_CANNOT_SCORE_NEWEST_ERAS"
+      },
+      {
+        "symbol": "XAGUSD",
+        "reason": "LOCAL_HISTORY_IS_NOT_COMPLETE_THROUGH_2026_06"
+      }
+    ]
+  },
+  "population_contract": {
+    "primary_fit_population": "CANONICAL",
+    "primary_fit_candidate_rows": 3752,
+    "primary_fit_includes_historical_policy_rejections": true,
+    "primary_fit_includes_resolved_winners_and_losers": true,
+    "historical_accept_state_is_predictor": false,
+    "research_negative_role": "SEPARATE_FAILURE_LIBRARY_AND_ROBUSTNESS_DIAGNOSTIC",
+    "comex_role": "SEPARATE_HISTORICAL_RESEARCH_ABLATION",
+    "journey_action_rows": 117534,
+    "journey_candidate_directions": 51722,
+    "journey_structural_events": 40077,
+    "journey_rows_may_enter_primary_fit": false,
+    "journey_rows_may_rescue_primary_failure": false,
+    "archive_file_count": 115,
+    "archive_direct_ingestion_authorized": false,
+    "broker_ineligible_rows_are_diagnostic_only": true
+  },
+  "geometry_sources": {
+    "R1_UPTREND": "STEP_2A_NATIVE_PRETRADE_STOP_POINTS_TIMES_0P01",
+    "R2_DOWNTREND": "R2_R3_SOURCE_SIGNAL_ATR_TIMES_STOP_ATR",
+    "R3_COMPRESSION": "R2_R3_SOURCE_SIGNAL_ATR_TIMES_STOP_ATR",
+    "R4_CHOP": "R4_SOURCE_SIGNAL_ATR_TIMES_STOP_ATR",
+    "R5_TRANSITION": "R5_PREPOLICY_SOURCE_SIGNAL_ATR_TIMES_STOP_ATR",
+    "V25_CHOP": "V57_PRETRADE_RISK_USD_DIVIDED_BY_ONE_OUNCE",
+    "V57_BREAK_SWING_H4ADX_HIGH": "V57_PRETRADE_RISK_USD_DIVIDED_BY_ONE_OUNCE",
+    "V7_SWING_HEALTH": "V57_PRETRADE_RISK_USD_DIVIDED_BY_ONE_OUNCE",
+    "V8_RETEST_HEALTH": "V57_PRETRADE_RISK_USD_DIVIDED_BY_ONE_OUNCE"
+  },
+  "label_contract": {
+    "one_primary_action_per_canonical_candidate": true,
+    "source": "DUKASCOPY_XAUUSD_RAW_BID_ASK",
+    "entry": {
+      "long_side": "ASK",
+      "short_side": "BID",
+      "selection": "FIRST_VALID_QUOTE_AT_OR_AFTER_ENTRY_ELIGIBLE_TIME",
+      "maximum_gap_minutes_by_family": {
+        "R1_UPTREND": 5,
+        "R2_DOWNTREND": 10,
+        "R3_COMPRESSION": 10,
+        "R4_CHOP": 5,
+        "R5_TRANSITION": 20,
+        "V25_CHOP": 5,
+        "V57_BREAK_SWING_H4ADX_HIGH": 10,
+        "V7_SWING_HEALTH": 10,
+        "V8_RETEST_HEALTH": 10
+      }
+    },
+    "exit": {
+      "long_executable_side": "BID",
+      "short_executable_side": "ASK",
+      "stop_fill": "FIRST_OBSERVED_EXECUTABLE_QUOTE_ON_OR_THROUGH_STOP",
+      "target_fill": "LOCKED_TARGET_PRICE_ON_FIRST_CROSS",
+      "horizon_fill": "FIRST_VALID_EXECUTABLE_QUOTE_AT_OR_AFTER_DEADLINE",
+      "maximum_horizon_gap_minutes_by_family": {
+        "R2_DOWNTREND": 5760,
+        "R3_COMPRESSION": 5760,
+        "R4_CHOP": 5,
+        "R5_TRANSITION": 4320,
+        "V25_CHOP": 5,
+        "V57_BREAK_SWING_H4ADX_HIGH": 4320,
+        "V7_SWING_HEALTH": 4320,
+        "V8_RETEST_HEALTH": 4320
+      },
+      "r1_barrier_only": true,
+      "r1_observation_cap_days": 90,
+      "r1_cap_is_forced_exit": false
+    },
+    "costs": {
+      "spread_is_implicit_in_bid_ask_path": true,
+      "spread_double_charge_prohibited": true,
+      "ticket_cost_usd": 0.3,
+      "holding_cost_per_24h_usd": 0.35,
+      "stress_slippage_r": 0.05,
+      "ounces_at_0p01_lot": 1.0,
+      "base_net_r_formula": "GROSS_EXECUTABLE_R_MINUS_TICKET_AND_HOLDING_COST_R",
+      "stress_net_r_formula": "BASE_NET_R_MINUS_0P05R_STRESS_SLIPPAGE"
+    },
+    "path_ordering": {
+      "raw_tick_sequence_is_authoritative": true,
+      "m5_bar_fallback_authorized": false,
+      "nearest_time_join_authorized": false,
+      "unexplained_source_gap_is_unresolved": true
+    },
+    "required_outputs": [
+      "candidate_id",
+      "entry_time",
+      "label_end_time",
+      "initial_risk_price",
+      "initial_risk_usd_0p01",
+      "entry_price",
+      "exit_price",
+      "stop_price",
+      "target_price",
+      "gross_r",
+      "base_cost_r",
+      "stress_cost_r",
+      "base_net_r",
+      "stress_net_r",
+      "stress_net_r_positive",
+      "target_before_stop",
+      "mfe_r",
+      "mae_r",
+      "holding_minutes",
+      "exit_reason",
+      "label_status"
+    ],
+    "resolved_statuses": [
+      "RESOLVED_STOP",
+      "RESOLVED_STOP_SLIPPAGE",
+      "RESOLVED_TARGET",
+      "RESOLVED_FIXED_HORIZON"
+    ],
+    "unresolved_statuses": [
+      "UNRESOLVED_BEFORE_SOURCE_START",
+      "UNRESOLVED_NO_TIMELY_ENTRY_QUOTE",
+      "UNRESOLVED_INVALID_INITIAL_RISK",
+      "UNRESOLVED_CORRUPT_QUOTE",
+      "UNRESOLVED_SOURCE_GAP",
+      "UNRESOLVED_NO_HORIZON_QUOTE",
+      "CENSORED_R1_OBSERVATION_CAP",
+      "UNRESOLVED_INCOMPLETE_HOLD_PATH",
+      "UNRESOLVED_AFTER_SOURCE_END"
+    ],
+    "high_spread_is_automatic_loss": false,
+    "high_spread_is_automatic_exclusion": false,
+    "historical_rejection_is_predictor": false
+  },
+  "feature_contract": {
+    "maximum_raw_columns": 64,
+    "exact_raw_column_count": 59,
+    "feature_time": "FEATURE_CUTOFF_TIME",
+    "raw_tick_inclusion": "EVENT_TIMESTAMP_LE_FEATURE_CUTOFF_TIME",
+    "completed_bar_inclusion": "BAR_END_TIME_LE_FEATURE_CUTOFF_TIME",
+    "join_modes": ["EXACT", "BACKWARD_ASOF"],
+    "nearest_join_authorized": false,
+    "full_history_normalization_authorized": false,
+    "ordered_blocks": [
+      {
+        "block_id": "B1_DETERMINISTIC_CANDIDATE_AND_REGIME",
+        "primary": true,
+        "features": [
+          "family_id",
+          "broad_mechanic",
+          "direction_sign",
+          "stop_mode",
+          "target_mode",
+          "planned_stop_atr",
+          "planned_stop_price",
+          "stop_floor_price",
+          "target_r_filled",
+          "target_absent_flag",
+          "log1p_observation_cap_minutes",
+          "barrier_only_flag",
+          "utc_hour_sin",
+          "utc_hour_cos",
+          "utc_weekday_sin",
+          "utc_weekday_cos"
+        ]
+      },
+      {
+        "block_id": "B2_PLUS_XAU_MICROSTRUCTURE_AND_COST",
+        "primary": true,
+        "features": [
+          "xau_spread_last_atr",
+          "xau_spread_mean_30s_atr",
+          "xau_spread_max_5m_atr",
+          "xau_quote_age_seconds",
+          "xau_tick_count_log1p_30s",
+          "xau_tick_count_log1p_5m",
+          "xau_quote_intensity_ratio_15m_60m",
+          "dir_xau_return_30s_atr",
+          "dir_xau_return_5m_atr",
+          "dir_xau_return_15m_atr",
+          "dir_xau_return_60m_atr",
+          "dir_xau_return_4h_atr",
+          "dir_xau_return_24h_atr",
+          "xau_range_5m_atr",
+          "xau_range_15m_atr",
+          "xau_range_60m_atr",
+          "xau_realized_variance_5m_atr2",
+          "xau_realized_variance_15m_atr2",
+          "xau_realized_variance_60m_atr2",
+          "xau_efficiency_5m",
+          "xau_efficiency_15m",
+          "xau_efficiency_60m",
+          "dir_xau_tick_imbalance_5m",
+          "dir_xau_tick_imbalance_15m"
+        ]
+      },
+      {
+        "block_id": "B3_PLUS_COMPLETED_CROSS_ASSET_STATE",
+        "primary": true,
+        "features": [
+          "dir_inverse_dollar_return_1h",
+          "dir_inverse_dollar_return_4h",
+          "dir_inverse_dollar_return_24h",
+          "dir_bond_return_1h",
+          "dir_bond_return_4h",
+          "dir_bond_return_24h",
+          "crossasset_max_staleness_seconds",
+          "crossasset_coverage_fraction"
+        ]
+      },
+      {
+        "block_id": "B4_PLUS_COMEX_RESEARCH_ABLATION",
+        "primary": false,
+        "research_only": true,
+        "features": [
+          "gc_trade_count_log1p_5m",
+          "gc_trade_count_log1p_60m",
+          "gc_volume_log1p_5m",
+          "gc_volume_log1p_60m",
+          "dir_gc_delta_ratio_5m",
+          "dir_gc_delta_ratio_60m",
+          "dir_gc_return_5m",
+          "dir_gc_return_60m",
+          "dir_gc_minus_spot_return_15m",
+          "gc_roll_boundary_24h_flag",
+          "gc_last_event_age_seconds"
+        ]
+      }
+    ],
+    "categorical_features": [
+      "family_id",
+      "broad_mechanic",
+      "stop_mode",
+      "target_mode"
+    ],
+    "forbidden_predictors": [
+      "candidate_id",
+      "source_candidate_id",
+      "event_id",
+      "action_row_id",
+      "historical_accept_state",
+      "historical_decision_reason",
+      "historical_specialist_accepted",
+      "historical_portfolio_accepted",
+      "origin_attempt",
+      "attempt_id",
+      "experiment_id",
+      "result_version",
+      "exact_timestamp",
+      "date_identity",
+      "pnl",
+      "outcome",
+      "post_outcome_tag"
+    ],
+    "removed_predeclared_sources": {
+      "FOREX_CONTEXT": "INCOMPLETE_THROUGH_NEWEST_OUTER_ERAS",
+      "XAG_CONTEXT": "INCOMPLETE_THROUGH_NEWEST_OUTER_ERAS"
+    },
+    "comex_historical_availability": "TS_EVENT_LE_FEATURE_CUTOFF_MINUS_1_SECOND",
+    "comex_live_delivery_claim": false
+  },
+  "feature_definitions": {
+    "family_id": "FIXED_STEP_2A_FAMILY_CATEGORY",
+    "broad_mechanic": "OUTCOME_BLIND_FAMILY_TO_MECHANIC_MAPPING",
+    "direction_sign": "LONG_PLUS_1_SHORT_MINUS_1",
+    "stop_mode": "FIXED_ACTION_STOP_MODE_CATEGORY",
+    "target_mode": "FIXED_ACTION_TARGET_MODE_CATEGORY",
+    "planned_stop_atr": "PLANNED_STOP_PRICE_DIVIDED_BY_LAST_COMPLETED_M5_WILDER_ATR14",
+    "planned_stop_price": "PRETRADE_GEOMETRY_SOURCE_INITIAL_RISK_DISTANCE_IN_PRICE",
+    "stop_floor_price": "FIXED_PRICE_FLOOR_OR_ZERO",
+    "target_r_filled": "FIXED_TARGET_R_OR_ZERO_WHEN_TARGET_ABSENT",
+    "target_absent_flag": "ONE_WHEN_TARGET_MODE_NONE_ELSE_ZERO",
+    "log1p_observation_cap_minutes": "LOG1P_LABEL_OBSERVATION_CAP_MINUTES",
+    "barrier_only_flag": "ONE_FOR_BARRIER_ONLY_NO_TIME_STOP_ELSE_ZERO",
+    "utc_hour_sin": "SIN_2PI_DECISION_UTC_MINUTE_OF_DAY_DIV_1440",
+    "utc_hour_cos": "COS_2PI_DECISION_UTC_MINUTE_OF_DAY_DIV_1440",
+    "utc_weekday_sin": "SIN_2PI_DECISION_UTC_WEEKDAY_DIV_7",
+    "utc_weekday_cos": "COS_2PI_DECISION_UTC_WEEKDAY_DIV_7",
+    "xau_spread_last_atr": "LAST_ASK_MINUS_BID_AT_CUTOFF_DIV_ATR14",
+    "xau_spread_mean_30s_atr": "MEAN_TICK_SPREAD_OVER_TRAILING_30S_DIV_ATR14",
+    "xau_spread_max_5m_atr": "MAX_TICK_SPREAD_OVER_TRAILING_5M_DIV_ATR14",
+    "xau_quote_age_seconds": "FEATURE_CUTOFF_MINUS_LAST_XAU_QUOTE_TIMESTAMP_SECONDS",
+    "xau_tick_count_log1p_30s": "LOG1P_VALID_XAU_QUOTES_TRAILING_30S",
+    "xau_tick_count_log1p_5m": "LOG1P_VALID_XAU_QUOTES_TRAILING_5M",
+    "xau_quote_intensity_ratio_15m_60m": "COUNT_15M_DIV_MAX_COUNT_60M_DIV_4,1",
+    "dir_xau_return_30s_atr": "DIRECTION_TIMES_MID_CHANGE_TRAILING_30S_DIV_ATR14",
+    "dir_xau_return_5m_atr": "DIRECTION_TIMES_MID_CHANGE_TRAILING_5M_DIV_ATR14",
+    "dir_xau_return_15m_atr": "DIRECTION_TIMES_MID_CHANGE_TRAILING_15M_DIV_ATR14",
+    "dir_xau_return_60m_atr": "DIRECTION_TIMES_MID_CHANGE_TRAILING_60M_DIV_ATR14",
+    "dir_xau_return_4h_atr": "DIRECTION_TIMES_COMPLETED_MID_CHANGE_TRAILING_4H_DIV_ATR14",
+    "dir_xau_return_24h_atr": "DIRECTION_TIMES_COMPLETED_MID_CHANGE_TRAILING_24H_DIV_ATR14",
+    "xau_range_5m_atr": "MID_MAX_MINUS_MIN_TRAILING_5M_DIV_ATR14",
+    "xau_range_15m_atr": "MID_MAX_MINUS_MIN_TRAILING_15M_DIV_ATR14",
+    "xau_range_60m_atr": "MID_MAX_MINUS_MIN_TRAILING_60M_DIV_ATR14",
+    "xau_realized_variance_5m_atr2": "SUM_SQUARED_CONSECUTIVE_MID_CHANGES_5M_DIV_ATR14_SQUARED",
+    "xau_realized_variance_15m_atr2": "SUM_SQUARED_CONSECUTIVE_MID_CHANGES_15M_DIV_ATR14_SQUARED",
+    "xau_realized_variance_60m_atr2": "SUM_SQUARED_CONSECUTIVE_MID_CHANGES_60M_DIV_ATR14_SQUARED",
+    "xau_efficiency_5m": "ABS_NET_MID_CHANGE_DIV_SUM_ABS_MID_CHANGES_5M",
+    "xau_efficiency_15m": "ABS_NET_MID_CHANGE_DIV_SUM_ABS_MID_CHANGES_15M",
+    "xau_efficiency_60m": "ABS_NET_MID_CHANGE_DIV_SUM_ABS_MID_CHANGES_60M",
+    "dir_xau_tick_imbalance_5m": "DIRECTION_TIMES_UP_MINUS_DOWN_MID_TICKS_DIV_NONZERO_MID_TICKS_5M",
+    "dir_xau_tick_imbalance_15m": "DIRECTION_TIMES_UP_MINUS_DOWN_MID_TICKS_DIV_NONZERO_MID_TICKS_15M",
+    "dir_inverse_dollar_return_1h": "NEG_DIRECTION_TIMES_COMPLETED_DOLLAR_INDEX_LOG_RETURN_1H",
+    "dir_inverse_dollar_return_4h": "NEG_DIRECTION_TIMES_COMPLETED_DOLLAR_INDEX_LOG_RETURN_4H",
+    "dir_inverse_dollar_return_24h": "NEG_DIRECTION_TIMES_COMPLETED_DOLLAR_INDEX_LOG_RETURN_24H",
+    "dir_bond_return_1h": "DIRECTION_TIMES_COMPLETED_BOND_PROXY_LOG_RETURN_1H",
+    "dir_bond_return_4h": "DIRECTION_TIMES_COMPLETED_BOND_PROXY_LOG_RETURN_4H",
+    "dir_bond_return_24h": "DIRECTION_TIMES_COMPLETED_BOND_PROXY_LOG_RETURN_24H",
+    "crossasset_max_staleness_seconds": "MAX_CUTOFF_MINUS_LAST_SOURCE_EVENT_DOLLAR_AND_BOND_SECONDS",
+    "crossasset_coverage_fraction": "AVAILABLE_REQUIRED_CROSSASSET_FEATURES_DIV_6",
+    "gc_trade_count_log1p_5m": "LOG1P_VALID_GC_TRADES_TRAILING_5M",
+    "gc_trade_count_log1p_60m": "LOG1P_VALID_GC_TRADES_TRAILING_60M",
+    "gc_volume_log1p_5m": "LOG1P_SUM_GC_TRADE_SIZE_TRAILING_5M",
+    "gc_volume_log1p_60m": "LOG1P_SUM_GC_TRADE_SIZE_TRAILING_60M",
+    "dir_gc_delta_ratio_5m": "DIRECTION_TIMES_AGGRESSOR_BUY_MINUS_SELL_VOLUME_DIV_KNOWN_SIDE_VOLUME_5M",
+    "dir_gc_delta_ratio_60m": "DIRECTION_TIMES_AGGRESSOR_BUY_MINUS_SELL_VOLUME_DIV_KNOWN_SIDE_VOLUME_60M",
+    "dir_gc_return_5m": "DIRECTION_TIMES_GC_LOG_RETURN_TRAILING_5M",
+    "dir_gc_return_60m": "DIRECTION_TIMES_GC_LOG_RETURN_TRAILING_60M",
+    "dir_gc_minus_spot_return_15m": "DIRECTION_TIMES_GC_LOG_RETURN_MINUS_XAU_LOG_RETURN_15M",
+    "gc_roll_boundary_24h_flag": "ONE_WHEN_GC_INSTRUMENT_ID_CHANGES_IN_TRAILING_24H",
+    "gc_last_event_age_seconds": "FEATURE_CUTOFF_MINUS_LAST_ELIGIBLE_GC_EVENT_SECONDS"
+  },
+  "broad_mechanic_mapping": {
+    "R1_UPTREND": "TREND_PULLBACK_OR_CONTINUATION",
+    "R2_DOWNTREND": "TREND_PULLBACK_OR_CONTINUATION",
+    "R3_COMPRESSION": "BREAKOUT_OR_VOLATILITY_EXPANSION",
+    "R4_CHOP": "CHOP_MEAN_REVERSION",
+    "R5_TRANSITION": "TRANSITION",
+    "V25_CHOP": "CHOP_MEAN_REVERSION",
+    "V57_BREAK_SWING_H4ADX_HIGH": "BREAKOUT_OR_VOLATILITY_EXPANSION",
+    "V7_SWING_HEALTH": "HEALTH_GATED_PULLBACK_RETEST",
+    "V8_RETEST_HEALTH": "HEALTH_GATED_PULLBACK_RETEST"
+  },
+  "preprocessing_contract": {
+    "fit_scope": "OUTER_FOLD_TRAIN_ONLY",
+    "categorical_encoder": "ONE_HOT_FIXED_TRAINING_CATEGORIES_HANDLE_UNKNOWN_IGNORE",
+    "numeric_imputer": "TRAINING_FOLD_MEDIAN",
+    "numeric_scaler_linear_pair": "TRAINING_FOLD_STANDARD_SCALER",
+    "numeric_scaler_hgb_pair": "NONE",
+    "missing_numeric_fraction_failure_threshold": 0.05,
+    "mandatory_xau_feature_missing_action": "ABSTAIN",
+    "unknown_family_or_mechanic_action": "ABSTAIN_OUT_OF_DOMAIN",
+    "crossasset_max_staleness_seconds": 7200,
+    "xau_max_staleness_seconds": 300,
+    "comex_max_staleness_seconds": 300,
+    "transformed_column_count_is_raw_feature_cap": false,
+    "feature_selection_from_outcomes": false
+  },
+  "deduplication_contract": {
+    "canonical_primary_identity": "STEP_2A_CANDIDATE_ID",
+    "journey_action_identity": "STEP_2A_ACTION_ROW_ID",
+    "journey_candidate_identity": "STEP_2A_CANDIDATE_ID",
+    "exact_semantic_duplicate_key": [
+      "decision_time",
+      "direction",
+      "broad_mechanic",
+      "stop_mode",
+      "planned_stop_price",
+      "target_mode",
+      "target_r_filled",
+      "observation_cap_minutes"
+    ],
+    "lineage_priority": [
+      "CANONICAL",
+      "PROSPECTIVE_CAPITAL",
+      "RESEARCH_NEGATIVE",
+      "COMEX_RESEARCH",
+      "ARCHIVE_ONLY"
+    ],
+    "same_event_different_mechanics_are_rows": true,
+    "same_event_different_mechanics_share_episode": true,
+    "fuzzy_pnl_or_duration_matching_authorized": false,
+    "unadapted_archive_role": "PROVENANCE_QUARANTINE",
+    "all_duplicate_lineage_retained": true
+  },
+  "weight_contract": {
+    "canonical_primary_weight": "STEP_2A_STRUCTURAL_WEIGHT",
+    "canonical_primary_weight_sum": 3489.0,
+    "canonical_sensitivity_weights": [
+      "UNWEIGHTED",
+      "STEP_2A_CONSERVATIVE_WEIGHT"
+    ],
+    "journey_diagnostic_weight_formula": "ONE_DIV_CANDIDATE_DIRECTIONS_PER_STRUCTURAL_EVENT_DIV_ACTIONS_PER_CANDIDATE",
+    "journey_diagnostic_weight_sum": 40077.0,
+    "class_weight": null,
+    "smote_authorized": false,
+    "row_oversampling_authorized": false,
+    "weights_locked_before_outcomes": true
+  },
+  "split_contract": {
+    "mode": "PURGED_EXPANDING_WALK_FORWARD",
+    "data_start_inclusive_utc": "2010-01-01T00:00:00Z",
+    "development_cutoff_exclusive_utc": "2026-07-01T00:00:00Z",
+    "calibration_months": 6,
+    "assignment_clock": "DECISION_TIME",
+    "fit_requires_planned_observation_end_before_calibration_start": true,
+    "fit_requires_actual_label_end_before_calibration_start": true,
+    "calibration_requires_planned_observation_end_before_test_start": true,
+    "calibration_requires_actual_label_end_before_test_start": true,
+    "structural_episode_siblings_same_split": true,
+    "random_or_shuffled_split_authorized": false,
+    "outer_eras": [
+      {
+        "fold_id": "F2020",
+        "test_start": "2020-07-01T00:00:00Z",
+        "test_end_exclusive": "2021-07-01T00:00:00Z",
+        "expected_outcome_blind_fit_rows": 702,
+        "expected_outcome_blind_calibration_rows": 140,
+        "expected_test_candidate_rows": 476
+      },
+      {
+        "fold_id": "F2021",
+        "test_start": "2021-07-01T00:00:00Z",
+        "test_end_exclusive": "2022-07-01T00:00:00Z",
+        "expected_outcome_blind_fit_rows": 1058,
+        "expected_outcome_blind_calibration_rows": 257,
+        "expected_test_candidate_rows": 289
+      },
+      {
+        "fold_id": "F2022",
+        "test_start": "2022-07-01T00:00:00Z",
+        "test_end_exclusive": "2023-07-01T00:00:00Z",
+        "expected_outcome_blind_fit_rows": 1505,
+        "expected_outcome_blind_calibration_rows": 101,
+        "expected_test_candidate_rows": 506
+      },
+      {
+        "fold_id": "F2023",
+        "test_start": "2023-07-01T00:00:00Z",
+        "test_end_exclusive": "2024-07-01T00:00:00Z",
+        "expected_outcome_blind_fit_rows": 1756,
+        "expected_outcome_blind_calibration_rows": 287,
+        "expected_test_candidate_rows": 443
+      },
+      {
+        "fold_id": "F2024",
+        "test_start": "2024-07-01T00:00:00Z",
+        "test_end_exclusive": "2025-07-01T00:00:00Z",
+        "expected_outcome_blind_fit_rows": 2299,
+        "expected_outcome_blind_calibration_rows": 194,
+        "expected_test_candidate_rows": 645
+      },
+      {
+        "fold_id": "F2025",
+        "test_start": "2025-07-01T00:00:00Z",
+        "test_end_exclusive": "2026-07-01T00:00:00Z",
+        "expected_outcome_blind_fit_rows": 2853,
+        "expected_outcome_blind_calibration_rows": 295,
+        "expected_test_candidate_rows": 550
+      }
+    ],
+    "comex_eligible_folds": ["F2023", "F2024", "F2025"]
+  },
+  "serial_effective_size_contract": {
+    "unit": "CHRONOLOGICAL_STRUCTURAL_EPISODE_OUTCOME",
+    "autocorrelation_rule": "GEYER_INITIAL_POSITIVE_SEQUENCE_OF_PAIRED_AUTOCORRELATIONS",
+    "maximum_lag": 60,
+    "effective_size": "MIN_EPISODE_COUNT_KISH_AND_SERIAL",
+    "primary_bootstrap_block_weekdays": 5,
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 60104,
+    "calculated_after_labels_only": true
+  },
+  "next_stage": {
+    "name": "STEP_3_COUNTERFACTUAL_LABEL_AND_CAUSAL_FEATURE_BUILD",
+    "economic_outcomes_authorized_only_after_lock": true,
+    "model_training_authorized": false,
+    "threshold_fitting_authorized": false,
+    "runtime_change_authorized": false,
+    "same_version_contract_changes_after_start": false
+  },
+  "outputs": {
+    "directory": "outputs/step_2b",
+    "source_corpus_manifest": "STEP_2B_SOURCE_CORPUS_MANIFEST.json",
+    "split_plan": "STEP_2B_OUTCOME_BLIND_SPLIT_PLAN.json",
+    "journey_weight_plan": "STEP_2B_JOURNEY_WEIGHT_PLAN.parquet",
+    "contract_lock": "STEP_2B_DATASET_FEATURE_CONTRACT_LOCK.json",
+    "result_json": "STEP_2B_RESULT.json",
+    "result_markdown": "STEP_2B_RESULT.md",
+    "artifact_manifest": "STEP_2B_ARTIFACT_MANIFEST.json"
+  }
+}

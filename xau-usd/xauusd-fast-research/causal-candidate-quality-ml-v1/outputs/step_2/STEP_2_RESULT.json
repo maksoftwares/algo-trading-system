@@ -1,0 +1,33 @@
+{
+  "canonical_candidates": 3752,
+  "checks": {
+    "addon_candidate_ids_reconcile": true,
+    "all_action_geometry_complete": false,
+    "all_canonical_sources_are_pre_policy_candidate_ledgers": false,
+    "all_prelabel_causal_clocks_complete": false,
+    "all_source_hashes_match": true,
+    "canonical_candidate_ids_unique": true,
+    "canonical_count_reconciles": true,
+    "episode_weights_ready_to_lock": false,
+    "features_ready_to_build": false,
+    "one_primary_action_per_canonical_candidate": true
+  },
+  "complete_prelabel_clock_rows": 0,
+  "counterfactual_label_build_authorized_next": false,
+  "counterfactual_labels_built": false,
+  "created_utc": "2026-07-21T22:00:00Z",
+  "decision": "STEP_2_METADATA_AUDIT_COMPLETE_REPAIR_REQUIRED",
+  "decision_time_rows": 3194,
+  "economic_outcomes_opened": false,
+  "features_built": false,
+  "ml_execution_authorized": false,
+  "model_fitted": false,
+  "next_authorized_work": "STEP_2A_METADATA_REPAIR_AND_CANDIDATE_ADAPTERS",
+  "portfolio_simulated": false,
+  "provisional_conservative_episodes": 853,
+  "runtime_changed": false,
+  "schema_version": "xauusd_causal_candidate_quality_step_2_result_v1",
+  "stage": "STEP_2_METADATA_ONLY_DATA_AND_CANDIDATE_AUDIT",
+  "threshold_fitted": false,
+  "unique_candidate_ids": 3752
+}

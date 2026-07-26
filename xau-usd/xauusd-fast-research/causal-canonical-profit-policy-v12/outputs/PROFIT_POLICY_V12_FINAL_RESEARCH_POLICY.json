@@ -1,0 +1,12 @@
+{
+  "calibration_rows": 172,
+  "chosen_quantile": 0.0,
+  "chosen_threshold": -0.3474003613573576,
+  "definition_contract_sha256": "7d12460900a68d9289cc4a31e4d9f79e027b79ee4798a06f4a4df947dbffa1a0",
+  "research_only": true,
+  "runtime_authorized": false,
+  "schema_version": "xauusd_profit_policy_v12_final_research_policy",
+  "selection_reason": "RETAIN_ALL_INSUFFICIENT_CALIBRATION_USD_IMPROVEMENT",
+  "v10_final_model_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/outputs/EXPECTED_R_V10_FINAL_RESEARCH_MODEL.joblib",
+  "v10_final_model_sha256": "a334d911c316844f3e44bbc7f8adbb4d69c6f326b00e24d4a8e55ba5f964973b"
+}

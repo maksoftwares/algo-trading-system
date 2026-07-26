@@ -1,0 +1,90 @@
+{
+  "artifact_paths": {
+    "folds_csv": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_FOLDS.csv",
+    "predictions_parquet": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_PREDICTIONS.parquet",
+    "trade_audit_csv": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_TRADE_AUDIT.csv",
+    "windows_csv": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/reports/V60_ML_B123_EXPECTED_R_WINDOWS.csv"
+  },
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "ml_shadow_authorized": false,
+    "offline_research_authorized": true,
+    "python_serving_authorized": false,
+    "runtime_change_authorized": false
+  },
+  "data_checks": {
+    "canonical_accepted_non_r5_count": true,
+    "canonical_candidate_ids_unique": true,
+    "canonical_join_keys_unique": true,
+    "exact_one_to_one_portfolio_join": true,
+    "joined_count": true,
+    "ledger_join_keys_unique": true,
+    "ledger_non_r5_count": true,
+    "missing_predictions_abstain": true,
+    "missing_predictions_retain_all": true,
+    "predicted_rows_have_selection": true,
+    "prediction_candidate_ids_unique": true
+  },
+  "deployment_eligible": false,
+  "diagnostic_checks": {
+    "all_history_drawdown_not_worse": true,
+    "all_history_net_pnl_improved": true,
+    "all_history_profit_factor_improved": true,
+    "latest_three_month_net_pnl_improved": false,
+    "prospective_confirmation_available": false,
+    "six_month_net_pnl_improved": true,
+    "twelve_month_net_pnl_improved": true
+  },
+  "historical_outcomes_already_exposed": true,
+  "input_sha256": {
+    "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/config/step_2b_dataset_feature_contract_v1.json": "f1cafa6375db1597e9721397bb6c2f7e54b25ead9016df6fdc670a94584317de",
+    "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45",
+    "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_SPLIT_ASSIGNMENTS.parquet": "0ba856a55666af55243d104ada4195b0850f522cfd608a4c623e07630137d3fc",
+    "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/config/canonical_expected_r_v10.json": "3af418d65876277711b5a480c015275c8df70bfcd84dea467c7499bb2684ae97",
+    "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py": "2ea01130ab139fc6795909724ae375ad03cf69e3e17b09bd66b8905446a66f0a",
+    "xau-usd/xauusd-fast-research/causal-canonical-profit-policy-v12/config/profit_policy_v12.json": "8ad9446682f6996b17f07feccc574e13f18237be1c0abb435e87831484a3362e",
+    "xau-usd/xauusd-fast-research/causal-canonical-profit-policy-v12/policy.py": "f8400eba4fa06c06a9bee7c29a7e7817ec78316bc6059ed33f612a871c122a00",
+    "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf",
+    "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json": "053bbb0e0d0f8e365f8b93b8a7d61376c6762c861ad1ec2c1b3d796d3089a9df"
+  },
+  "limitations": [
+    "This B3 design was formalized after its historical portfolio result was observed.",
+    "The latest three-month portfolio remains worse than non-ML.",
+    "The model has no prospective Capital dollar/bond feature confirmation.",
+    "The exact comparison can veto routed trades but cannot re-admit historically rejected candidates.",
+    "No historical result authorizes ML use in demo or live trading."
+  ],
+  "model": {
+    "alpha": 300.0,
+    "family_interaction_scale": 0.25,
+    "kind": "RIDGE_PARTIAL_POOLING_EXPECTED_R",
+    "minimum_fit_rows": 1000,
+    "missing_prediction_action": "MODEL_ABSTAIN_RETAIN_ALL",
+    "numeric_feature_count": 44,
+    "profit_policy_overrides": {
+      "minimum_profit_improvement_usd": 10.0,
+      "minimum_selected_weight_coverage": 0.85,
+      "weighted_quantile_grid": [
+        0.0,
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.15
+      ]
+    },
+    "source_blocks": [
+      "B1_DETERMINISTIC_CANDIDATE_AND_REGIME",
+      "B2_PLUS_XAU_MICROSTRUCTURE_AND_COST",
+      "B3_PLUS_COMPLETED_CROSS_ASSET_STATE"
+    ],
+    "target_clip_max_r": 3.0,
+    "target_clip_min_r": -3.0
+  },
+  "post_outcome_parameter_selection_disclosed": true,
+  "schema_version": "xauusd_v60_ml_b123_expected_r_comparison_v1",
+  "status": "HISTORICAL_DIAGNOSTIC_POSITIVE_LATEST_WINDOW_FAIL"
+}

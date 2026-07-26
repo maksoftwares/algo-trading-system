@@ -1,0 +1,59 @@
+{
+  "acceptance_sha256": "f829d8882defa8b28843aa2ecbc800ebfb17f061e95dfb090ce533a7e6225b5b",
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "ml_shadow_authorized": false,
+    "offline_model_fit_authorized": true,
+    "offline_scoring_authorized": true,
+    "python_serving_authorized": false,
+    "research_only": true,
+    "runtime_change_authorized": false
+  },
+  "bootstrap_sha256": "9b200f9152fc8dc56981908c15598c0e4f17199356712977c370466d705ec402",
+  "config_sha256": "3af418d65876277711b5a480c015275c8df70bfcd84dea467c7499bb2684ae97",
+  "definition_contract_sha256": "cee3154af687944880ff15d3e96761cf4e55a24cc29100fc925d99c42224ef42",
+  "feature_sha256": "640a1fd7e42b19fd7da195ca619887e14413c23e91e00bde1bf3454d1139a1c1",
+  "implementation": {
+    "expected_r": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+      "sha256": "2ea01130ab139fc6795909724ae375ad03cf69e3e17b09bd66b8905446a66f0a"
+    },
+    "run_evaluation": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/run_evaluation.py",
+      "sha256": "e2ee725b7b62f6498a509e77b538c43bd989dcc3cdeaa10100e60f7d3392d334"
+    },
+    "score_candidates": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/score_candidates.py",
+      "sha256": "92651c1315e0e2855c350eee3c34898bcbd095852cedd7ddff3a394f837b6a7d"
+    },
+    "verify": {
+      "path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/verify.py",
+      "sha256": "7c9379cd764d6161fb59fc34873adc389f779121f691ca2eb0b8c0fd27b8cb33"
+    }
+  },
+  "input_sha256": {
+    "loss_only_v1_result": "adaa3b71aeed1bea402e22907b9ca30e5be07d80a1730365d8157a8e8e22633c",
+    "regime_v2_result": "9d50fa4661b01e1ca3588654effe41b28e3fea4555bb09ff9d2da883f1aeed1b",
+    "step_2b_contract": "f1cafa6375db1597e9721397bb6c2f7e54b25ead9016df6fdc670a94584317de",
+    "step_3_dataset": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45",
+    "step_3_manifest": "5dbbdc8189524b18a230eebe8011dcf6b64e0a7eb502f8e24ec4b4bd7562bedc",
+    "step_3_splits": "0ba856a55666af55243d104ada4195b0850f522cfd608a4c623e07630137d3fc",
+    "step_4_result": "5032222e8007c0a3a77112a10207673584be992a8d20d0e91d87ea95a64c1a7e"
+  },
+  "model_sha256": "909cc670c54e7eba983e4b1e9a4f544e1c7018aaf45cde5596988ce1d41673f4",
+  "numeric_feature_count": 36,
+  "preregistration_sha256": "74f1d84e906248226578d4324293bff0547f63d3bcf004e405025064ae88dab3",
+  "raw_feature_count": 40,
+  "schema_version": "xauusd_causal_canonical_expected_r_v10",
+  "threshold_sha256": "1c49a0fd375ebab89441448190eabf1e58dd231b55f755c3aa7a67d8f6700a38",
+  "versions": {
+    "joblib": "1.5.3",
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "python": "3.14.4",
+    "scikit_learn": "1.9.0"
+  }
+}

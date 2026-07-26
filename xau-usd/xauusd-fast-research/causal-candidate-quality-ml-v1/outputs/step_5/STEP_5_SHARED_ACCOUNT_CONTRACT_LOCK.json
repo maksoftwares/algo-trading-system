@@ -1,0 +1,835 @@
+{
+  "candidate_outcomes_already_exposed": true,
+  "decision": "STEP_5_SHARED_ACCOUNT_CONTRACT_LOCKED",
+  "definition": {
+    "bound_inputs": {
+      "step_3_artifact_manifest": "5dbbdc8189524b18a230eebe8011dcf6b64e0a7eb502f8e24ec4b4bd7562bedc",
+      "step_3_dataset": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45",
+      "step_3_result": "41f005792e81a8d2783a2528247ea886a6463a74f9648c0384725a8fc98e379d",
+      "step_4_acceptance": "835ca408b3a65d0a174d154eaede62cebaab3f1adc36a3e63804201641568f70",
+      "step_4_artifact_manifest": "9c9d2e95caf53bad5e5cc28b6562028247d6c32fd16c1dab9e69cad52a82eee3",
+      "step_4_result": "5032222e8007c0a3a77112a10207673584be992a8d20d0e91d87ea95a64c1a7e",
+      "v60_market_contract": "358f12f5a4cf272c1e2ef7ea33c7d690732bc97b1aa246bd3d98b642fa3a97bc"
+    },
+    "config_sha256": "31bf7195b88fcbfacd65562607996791096e4ba4ca72b1ba645b7c5bce7ffb2d",
+    "databento_api_access_authorized": false,
+    "implementation_sha256": {
+      "run_step_5.py": "a829483cdc9c5ca0f199077383e4506507300ad611893064a22f09daca9696ac",
+      "src/step_3_common.py": "bd64152bdc86aa72cf2d6e052557f8e92efb493f0e2c3dfcee15be3cf9ab751c",
+      "src/step_5_metrics.py": "037ef5be32dc40e037ac6141f573e2294d220b5391cdf3db4bcb7c37cea791a9",
+      "src/step_5_portfolio.py": "6adc562837c40868130049e214e1806bcac1cde010bb0944e025bf1dcd7316dc",
+      "src/step_5_runner.py": "6d8607f7cc762525afad8c8ddc6c4522197d329ef5a39761fdf29a7b4ebffc5f"
+    },
+    "market_source_manifest": {
+      "manifest_sha256": "4ec22658cf9855d12693009c6c6ed904ea2d2efc5d48a76cbc4974a59f4c1460",
+      "records": {
+        "legacy_ask_m5": [
+          {
+            "bytes": 127541,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=01/bars.parquet",
+            "sha256": "17651e21dd6ade021b00426d9677790f6df245eb8e23a4e5aa833240dc708893"
+          },
+          {
+            "bytes": 122849,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=02/bars.parquet",
+            "sha256": "77a4c0031c0f020e2cb811742a02da2561fe826104ab7d6430c2fa97aab0c883"
+          },
+          {
+            "bytes": 138071,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=03/bars.parquet",
+            "sha256": "ed4af2862a79c6e63c703346be47bdd5b2d3b3a7932c740c588552e968a58569"
+          },
+          {
+            "bytes": 133210,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=04/bars.parquet",
+            "sha256": "23dd34a1c42818e5cecc0b561eede9657358d52c8d52e3b0c1aa12f08cf859bd"
+          },
+          {
+            "bytes": 129029,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=05/bars.parquet",
+            "sha256": "43ca8e922441c6ebb4dfe6bf023941c75edcd3d51e644570c3db321caadc3038"
+          },
+          {
+            "bytes": 133957,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=06/bars.parquet",
+            "sha256": "732cfa80f316651df5c761cf54e5b7aa84881940e84ba39aeb5f02bdba4c12cc"
+          },
+          {
+            "bytes": 133120,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=07/bars.parquet",
+            "sha256": "21fa21422c2bc27869bc7ecf2f1f6face67cf196fd3d4a545b0060961a75b3dc"
+          },
+          {
+            "bytes": 134790,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=08/bars.parquet",
+            "sha256": "a27fa071003569c020e57c14e12863ef36aa66fa50b03bbc46bc5d45ecc913d4"
+          },
+          {
+            "bytes": 134608,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=09/bars.parquet",
+            "sha256": "26f335bc5a1a99f0b69501ad2f9f6633bdc2c2e15ba20482180aab4b7e20ca7d"
+          },
+          {
+            "bytes": 131817,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=10/bars.parquet",
+            "sha256": "312c447a868c32c8f7944346c2445c35284ad1bb9267ac3828baeaca35760c14"
+          },
+          {
+            "bytes": 140388,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=11/bars.parquet",
+            "sha256": "fae67338c4b7a73593504b8b56d551ae739713bfd87d7f0edb2925531d872f5b"
+          },
+          {
+            "bytes": 144074,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=12/bars.parquet",
+            "sha256": "c5d2cac9c146bd1737632a73593a7c62ff692e1f5ae591d0daaa5f9360b964bc"
+          },
+          {
+            "bytes": 133239,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=01/bars.parquet",
+            "sha256": "b323b80310a217b7bf6af7ce880ca81ca15a9d8298d5a7958fd8b13760c66c6b"
+          },
+          {
+            "bytes": 125696,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=02/bars.parquet",
+            "sha256": "664b8bd82a0d2fc7a05fa866701c7a787b7bb01e9d814d8ac147be464d8a4caa"
+          },
+          {
+            "bytes": 144669,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=03/bars.parquet",
+            "sha256": "dadb31bbac4636ec4d43da38b3c001866a03c135cf6edf820086ccd1170a2004"
+          },
+          {
+            "bytes": 130579,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=04/bars.parquet",
+            "sha256": "003b472a927f5ce1fa0927da2fcfaf496b60d217dd17c1d8c3ab6cdf32562fcc"
+          },
+          {
+            "bytes": 140385,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=05/bars.parquet",
+            "sha256": "c40217c7d651c4c7ea8afdad5303bbbea2b63229cf1e2fba1148958d4dd9b4e5"
+          },
+          {
+            "bytes": 139889,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=06/bars.parquet",
+            "sha256": "e1ac658539116279b524e5ea1a74d9fd291d35bc2df29c19557d9d6118731c58"
+          },
+          {
+            "bytes": 133323,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=07/bars.parquet",
+            "sha256": "612de5ee26f1e0009595a1308586ddb2386a62fc475f501f080a56d335204646"
+          },
+          {
+            "bytes": 151579,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=08/bars.parquet",
+            "sha256": "78d58ec96370008e49ee5880f85426cc4996b85275c0c24262420db76c17916f"
+          },
+          {
+            "bytes": 143512,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=09/bars.parquet",
+            "sha256": "3f7c08759e1500ac7e97a7a2ef10725359c6205108a4522ae4d654e274677c34"
+          },
+          {
+            "bytes": 136452,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=10/bars.parquet",
+            "sha256": "30057e6c9bdc78f1150d88d6629b44792a84aea9899ed6efa4b408f997f579ac"
+          },
+          {
+            "bytes": 139681,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=11/bars.parquet",
+            "sha256": "d0e6aee074eab81625ba4144543bf6ac4730ad2c7523104c243c674b63edf191"
+          },
+          {
+            "bytes": 135840,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=12/bars.parquet",
+            "sha256": "44867683e948f32ff3f8b1b6218c277a3e726af39ee57c39f9715e2758574375"
+          },
+          {
+            "bytes": 131309,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=01/bars.parquet",
+            "sha256": "b145765c727bbd6215aac15efc4ae5b9842848f8184f161ff0992669429fa820"
+          },
+          {
+            "bytes": 131416,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=02/bars.parquet",
+            "sha256": "44912a49703572e03208952780e68d8f4aed602c37b4a080600940e6fd25fa3b"
+          },
+          {
+            "bytes": 137905,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=03/bars.parquet",
+            "sha256": "eddb7ecc9179441ed41b058ac5c02a1f150a32f0f14aa528a2d8acdc67fe4ea7"
+          },
+          {
+            "bytes": 130243,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=04/bars.parquet",
+            "sha256": "22815b1eaebd67068708936811e570a21a4e2f5db07de1c903e064462859e87e"
+          },
+          {
+            "bytes": 143912,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=05/bars.parquet",
+            "sha256": "353e022fb93a39ad5fa165d0539d688ef81e556c38a8da11d4ebd3ed9fc396d9"
+          },
+          {
+            "bytes": 132448,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=06/bars.parquet",
+            "sha256": "9095806b8332a8f717ff270d74e76e7acb6d9ac4a04ed69687dfebe70953e79d"
+          },
+          {
+            "bytes": 139416,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=07/bars.parquet",
+            "sha256": "79b25e41f74d153d9efa1b90d72e5218c140be9bc133e4b434d4006905c062b8"
+          },
+          {
+            "bytes": 143169,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=08/bars.parquet",
+            "sha256": "9565d7f1f9f78013502581cbff7614f4ddfe0515a86d1ab0fe7444520af8d6c6"
+          },
+          {
+            "bytes": 124562,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=09/bars.parquet",
+            "sha256": "4a24c69e23b498c10641b37cdba8b549dcdb44724f006c20d9539200d01c705f"
+          },
+          {
+            "bytes": 140152,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=10/bars.parquet",
+            "sha256": "765ed89976a5d25f81d227a600c731a9916eefbda004981fcff81fd2da36e4ff"
+          },
+          {
+            "bytes": 132500,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=11/bars.parquet",
+            "sha256": "95b4f746bb20d710c5979e91958299c5b2339b053e0b258fde7b159c05eb1763"
+          },
+          {
+            "bytes": 117939,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=12/bars.parquet",
+            "sha256": "a959d2069b78e772a77c01e779b4c6624f25fc83d86c4810758142a95f41b013"
+          },
+          {
+            "bytes": 131028,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=01/bars.parquet",
+            "sha256": "642174f077ba1e0d59fc673a4960f62c8b2abf2260f423b697f1381b5837845a"
+          },
+          {
+            "bytes": 114980,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=02/bars.parquet",
+            "sha256": "1761b3a908d82102055daa77de793003a458db12715764681ee45e1efca870df"
+          },
+          {
+            "bytes": 120939,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=03/bars.parquet",
+            "sha256": "f94f422f84ceb884fdc126a1d0ed4b607896c80b19aa65443d69e1f7aa6814e7"
+          },
+          {
+            "bytes": 134724,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=04/bars.parquet",
+            "sha256": "78464a1c5fc7e93e5892af7a7df7f8fc9be217508e072baf2831a363fec6e771"
+          },
+          {
+            "bytes": 139118,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=05/bars.parquet",
+            "sha256": "99b985718019a2cd23742379de3399d26bb9dc163783f61f4a51811bd9839b27"
+          },
+          {
+            "bytes": 125558,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=06/bars.parquet",
+            "sha256": "e2d2a287afa2240c30e02cec1f336c58cfa656f9df95fffff63d2897ada8e2f8"
+          },
+          {
+            "bytes": 135881,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=07/bars.parquet",
+            "sha256": "279849c25e331f5e99663c659031b6407a909dcc2b9da95f36e367dc22278d5c"
+          },
+          {
+            "bytes": 133114,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=08/bars.parquet",
+            "sha256": "6f743b5f71665dc4dfb45163ee7515a6a98770d26d0d028c0df81c87e1713f62"
+          },
+          {
+            "bytes": 125552,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=09/bars.parquet",
+            "sha256": "cf858d278bc9fdf56b2f446de2d110282d37726256ffe38c54cb3f4ceadcfe1c"
+          },
+          {
+            "bytes": 137537,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=10/bars.parquet",
+            "sha256": "c1193ad54eecc8306c57b341d8025a5316927bc84320b499b26930254ec03940"
+          },
+          {
+            "bytes": 122279,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=11/bars.parquet",
+            "sha256": "7fc5a2247cb21daa86cee9de38816dc9137a425dffe04e68783701e8f1ac6403"
+          },
+          {
+            "bytes": 123939,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=12/bars.parquet",
+            "sha256": "92e58a2e2978b7f20298ada6f5ebc1fea8c8a920297d30827e15fb03ba561f0b"
+          },
+          {
+            "bytes": 128977,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=01/bars.parquet",
+            "sha256": "83f42d59030af698f204dbf9ea579419e3b447a9f63e0035a2d7b6f9de5f0f83"
+          },
+          {
+            "bytes": 119088,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=02/bars.parquet",
+            "sha256": "88d64501e16faecb3dadf2b1ac842a17e71081955a318c2de5aa8c1db588c02e"
+          },
+          {
+            "bytes": 125387,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=03/bars.parquet",
+            "sha256": "3cebc8491f4bf3909423675c860f91f4ed1b4f6639dcda3a55c28facb3d06f0c"
+          },
+          {
+            "bytes": 123236,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=04/bars.parquet",
+            "sha256": "bcae788884ea79e3d09f495edad28bb1e722ea7b7fc47c089ab333f51beb0d38"
+          },
+          {
+            "bytes": 131325,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=05/bars.parquet",
+            "sha256": "65cbf1195eda61cdacb7a5bf47882498a63ad96ea0a8c449b61f4b0cef82b4ff"
+          },
+          {
+            "bytes": 126860,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=06/bars.parquet",
+            "sha256": "2203e36fb3335baf181128a22ca2633eeec8ebcc6b9463f6f6bdeae1070ab934"
+          },
+          {
+            "bytes": 136283,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=07/bars.parquet",
+            "sha256": "cadb1f6f5c25aa497795c22dc91e2a8ce96f28b3e4930feb2cdfe4f63ec34a86"
+          },
+          {
+            "bytes": 125562,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=08/bars.parquet",
+            "sha256": "8cd21e2a411071227944569b7c7cf17d8dd0075d73f01def71f3209586353ad3"
+          },
+          {
+            "bytes": 134738,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=09/bars.parquet",
+            "sha256": "eb94d2dbd1bf6d8e5097729e6925cd88e4974e67076707b19e25d3d1257f41f4"
+          },
+          {
+            "bytes": 139528,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=10/bars.parquet",
+            "sha256": "230cbaa4480745ff939a81f33eede6224c9eeedc9202669d0e4f6bfd701ab75f"
+          },
+          {
+            "bytes": 121818,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=11/bars.parquet",
+            "sha256": "3842f7f94f554b3846728036a195d4cbf5724a50fb6962832ff3dfa4371f7abb"
+          },
+          {
+            "bytes": 133381,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=12/bars.parquet",
+            "sha256": "3e053016a570630baeeeacdc435d4fa17b2775140511fc7988e22550bfe370bb"
+          },
+          {
+            "bytes": 129732,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=01/bars.parquet",
+            "sha256": "5dce55bbce9435c549732b773f6993f77f3d79723db4c5ef7122f39c9530f0ab"
+          },
+          {
+            "bytes": 122424,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=02/bars.parquet",
+            "sha256": "20963982b86235d0befcbfc807401a51ebb82c7d6c7e1869e52325c671cc9920"
+          },
+          {
+            "bytes": 134942,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=03/bars.parquet",
+            "sha256": "09b7e21c7f09ef498fe4e58c35681e0a88ced8d8e49ad6189297b46127d56163"
+          },
+          {
+            "bytes": 128426,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=04/bars.parquet",
+            "sha256": "2435435e36eab6e780ed8aebaf2e619289df9b0de0d1fd9527e7c046676b3dce"
+          },
+          {
+            "bytes": 125523,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=05/bars.parquet",
+            "sha256": "8e723250e68f9b2919fc319d04840c780144a758f854ed4f26e18223d1e18af2"
+          },
+          {
+            "bytes": 127565,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=06/bars.parquet",
+            "sha256": "8ba8af687270d313baa09acdef92332d93ea0685cf8969546d3369275efbc702"
+          },
+          {
+            "bytes": 134111,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=07/bars.parquet",
+            "sha256": "0b53f1ca4e3c21a3031a291997c351c0cd538c41ec759b09a536d45b29caf453"
+          },
+          {
+            "bytes": 126034,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=08/bars.parquet",
+            "sha256": "81ad709bdf011fdc04d3a27e0e41bc345d5ccbc7d64820c44177cd84ca7b3aec"
+          },
+          {
+            "bytes": 128326,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=09/bars.parquet",
+            "sha256": "676d3c30e0e050f8f9a887944c6352b6de3e0614005b0743fc34152b8315aaca"
+          },
+          {
+            "bytes": 130419,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=10/bars.parquet",
+            "sha256": "9df71ecde700cd47f3dfa04a12ea4fbc421bd36e6809708d09813dd769cbc0d0"
+          },
+          {
+            "bytes": 123513,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=11/bars.parquet",
+            "sha256": "458a4f4d8fafe188c37a5a70d6befb457e39ecd8a05480d0ff3e6e7b5350be2a"
+          },
+          {
+            "bytes": 128282,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=12/bars.parquet",
+            "sha256": "bc195471db7b2a9b6f2d8ea8b8db08a21937f6e0581e5882fc3a646d3bbab718"
+          },
+          {
+            "bytes": 120167,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=01/bars.parquet",
+            "sha256": "1b85e49084c022a9e366f94b11019c32968746eb61a4b98fa4fbbae921535d65"
+          },
+          {
+            "bytes": 126562,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=02/bars.parquet",
+            "sha256": "9bc70e237ae624f84dcbd51202e1c85468b24780c83c69ac9981ee2675dee5ee"
+          },
+          {
+            "bytes": 131829,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=03/bars.parquet",
+            "sha256": "54a43001c0894f176b77365d067a9f13080ca438fc2ccdfb625e7f29e6f88d1d"
+          },
+          {
+            "bytes": 124711,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=04/bars.parquet",
+            "sha256": "26db0bfc40cf3e619b007ec1dd4ae2d718116813ac95bfeda1ee04be869b8e82"
+          },
+          {
+            "bytes": 131094,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=05/bars.parquet",
+            "sha256": "f9bc45c2e80a452ad30d20837c119c4057ada2e7dc25480e7aad1ab8ec6efcde"
+          },
+          {
+            "bytes": 132187,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=06/bars.parquet",
+            "sha256": "03049520156dbc101c8b6d67cab996fe7135ebfb7699fe94df4591b01e7fa35e"
+          }
+        ],
+        "legacy_bid_m5": [
+          {
+            "bytes": 127461,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=01/bars.parquet",
+            "sha256": "de1d9213cc37026865efffabbe8e5f9ef7fb9194044e22b20a3c2f8b280e4377"
+          },
+          {
+            "bytes": 122707,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=02/bars.parquet",
+            "sha256": "a7a2532bf017513e5b04cc6ed7fe0cb3c873d87db0a3e46e837bc70cd7498b78"
+          },
+          {
+            "bytes": 138124,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=03/bars.parquet",
+            "sha256": "4e00e6b2a0c73215e37e596e9ff8b9dfe28ba425a948e0c00fb09f62fe7ee1d7"
+          },
+          {
+            "bytes": 133369,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=04/bars.parquet",
+            "sha256": "3d59af6dcec79425aafba863f46b76b8d3bfb614747e2880ca3381a6a5c78392"
+          },
+          {
+            "bytes": 128700,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=05/bars.parquet",
+            "sha256": "5cccb7eff532c1c194c1bd8f97f01386f810b50b3ab7cbe61af5809b5ec0e38e"
+          },
+          {
+            "bytes": 133874,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=06/bars.parquet",
+            "sha256": "b9090634ba6dff0bf7c589cc81b06a46a58a84687ea65988d755ec7e88540e34"
+          },
+          {
+            "bytes": 133020,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=07/bars.parquet",
+            "sha256": "3dbb35df7836d561f6406566576a9a5469fead6c65033445f271ede7af15b653"
+          },
+          {
+            "bytes": 134692,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=08/bars.parquet",
+            "sha256": "5fb13067e2d94ec9d569233a4c73f2fe7c33f4df097d0c66f115476d43cd71fd"
+          },
+          {
+            "bytes": 134672,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=09/bars.parquet",
+            "sha256": "3c30f0b5b16761f2897da0cf889fe32930e603277dabc6c03e297a78265fb16e"
+          },
+          {
+            "bytes": 131651,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=10/bars.parquet",
+            "sha256": "07679f18a3fbd753367b08393b6988c4e84db9814fedbe75f2c5fd3ddc5b5b2a"
+          },
+          {
+            "bytes": 140244,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=11/bars.parquet",
+            "sha256": "5679c8c3f2eb6719c1751e0445e768c340639d0b05c11c2716dc4a0a9658a9ea"
+          },
+          {
+            "bytes": 143887,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=12/bars.parquet",
+            "sha256": "f9a5e14fbc223709130f9954d721c31f341076beb99de50ca6786e25daf731e2"
+          },
+          {
+            "bytes": 133259,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=01/bars.parquet",
+            "sha256": "9680986801fb81a8b019610bff03fcd838d3e206264caf2a761e10dcd1ee9861"
+          },
+          {
+            "bytes": 125749,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=02/bars.parquet",
+            "sha256": "d1b28ab8b4876c4418e42132191013d8dcaa7b3ca60eb20b3cf04c2af41ad85e"
+          },
+          {
+            "bytes": 144637,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=03/bars.parquet",
+            "sha256": "03be2d384a3485ef471243344d23fecc75089abda9a4112f4f1baafcbd7aea5e"
+          },
+          {
+            "bytes": 130582,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=04/bars.parquet",
+            "sha256": "b49b4a53a9d71805e2dce074e025fbbdbe912bfd528eb18b9ef23d98561c00c2"
+          },
+          {
+            "bytes": 140451,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=05/bars.parquet",
+            "sha256": "1431c728e932d323d51716fc11bdf0d7a8a22bef1c052095d83a342edf21f2f7"
+          },
+          {
+            "bytes": 139891,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=06/bars.parquet",
+            "sha256": "8a644b154d58a7c820f49ac2774374365acf4735882b85e4bb502d8001f39374"
+          },
+          {
+            "bytes": 133265,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=07/bars.parquet",
+            "sha256": "feb6fcdc196ef482c949c178dd3e71f3e2817d4a57ae586e7c1c01c54fe78fb4"
+          },
+          {
+            "bytes": 151505,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=08/bars.parquet",
+            "sha256": "6166e2a71463de5b6b44b9dcf9fc9f507ec7253b2ed257362b9a7c05a8c2385f"
+          },
+          {
+            "bytes": 143476,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=09/bars.parquet",
+            "sha256": "65f785f1d244582107f9de0a6d81dfffdb4fed89228f2c76a03775b0a11b8b72"
+          },
+          {
+            "bytes": 136403,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=10/bars.parquet",
+            "sha256": "7b4509c94892c135a747285aef8f36fe543868a3e1dba5cfc85a1d87f9e581da"
+          },
+          {
+            "bytes": 139589,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=11/bars.parquet",
+            "sha256": "f261a65303bd33898bbd4cbce6e2b988e88f361daef1cd9c910f744f49fe1354"
+          },
+          {
+            "bytes": 135914,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=12/bars.parquet",
+            "sha256": "c7414b5299811257c0cbbd7471b5d72cc32dfebcd362817c621c5de414a8a663"
+          },
+          {
+            "bytes": 129501,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=01/bars.parquet",
+            "sha256": "7c978282b22e88663960737dd95aa4d0336570c08736e2cdf9f9e4cdaa3fa17a"
+          },
+          {
+            "bytes": 131317,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=02/bars.parquet",
+            "sha256": "717900398a3fc6c107eb9e1a5194462fd6a04073921966da89b200220732091c"
+          },
+          {
+            "bytes": 137457,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=03/bars.parquet",
+            "sha256": "73a22cac47e787c5e5958ea74f595fcf131803b9c3f6c8f609b61a8cb961cb25"
+          },
+          {
+            "bytes": 129739,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=04/bars.parquet",
+            "sha256": "f6002170e14bf1577b71603e81c79579fb847b6c7b722c624b56c28b5c4f7b3c"
+          },
+          {
+            "bytes": 143775,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=05/bars.parquet",
+            "sha256": "095b4333a8e1ced74408f93b2822c91f65b333bc0cea35b221a77d45238a3906"
+          },
+          {
+            "bytes": 132069,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=06/bars.parquet",
+            "sha256": "6f80ddef39fe3f7202bf390f0526dcdfb88f0323e510b0823b7fecf7b43b4ad1"
+          },
+          {
+            "bytes": 138649,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=07/bars.parquet",
+            "sha256": "768c3b73fd061c88655faac908d9dff1f9fad2c813f3cc047fe27180e374004d"
+          },
+          {
+            "bytes": 141845,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=08/bars.parquet",
+            "sha256": "6178db5edabe0be42d0c71aa43a5194067571c1f0725285e7d898700d4e11806"
+          },
+          {
+            "bytes": 123176,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=09/bars.parquet",
+            "sha256": "f8f5153d1c020bf11fbcd82141fd90e573706bc2eff07079a7cb5251792b4ad1"
+          },
+          {
+            "bytes": 139330,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=10/bars.parquet",
+            "sha256": "32d0d08e64c24702b212ebcc1a24339a5a3a860a046eec048c6a97a7de5d820d"
+          },
+          {
+            "bytes": 129493,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=11/bars.parquet",
+            "sha256": "6ca9fde85ff387a04cda02f035b29301ee325955c4660d79aee6b5621566a4e5"
+          },
+          {
+            "bytes": 118612,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=12/bars.parquet",
+            "sha256": "e99f1f1dc502ec0adad3b76a39fb6598e2efd086a2a6337798172288da5e7019"
+          },
+          {
+            "bytes": 129571,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=01/bars.parquet",
+            "sha256": "45fcea577fbc46cd9698b10ac49a13c0be92898708cdd87465c428b7335907e4"
+          },
+          {
+            "bytes": 114021,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=02/bars.parquet",
+            "sha256": "81f8d2e8e9b2aa75161681ea9d47083509c7b749ba64b957a2201fd648768084"
+          },
+          {
+            "bytes": 119701,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=03/bars.parquet",
+            "sha256": "ae629388e933297313620f8216e1641b1b64c7d7d3a06b60a6fd14478b75127f"
+          },
+          {
+            "bytes": 135030,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=04/bars.parquet",
+            "sha256": "94c236f46c7ad7a952a2075c83f84ceca846c137049876f7df9f5330e4e3c78e"
+          },
+          {
+            "bytes": 139102,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=05/bars.parquet",
+            "sha256": "77023506be7bb0c11c44d4323029ae23c057a80971aeb60f4e8b2dfc8d8b2f90"
+          },
+          {
+            "bytes": 125139,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=06/bars.parquet",
+            "sha256": "ec7d31df39b3a1b7c1ddec7c687afde0cf7947e7ab143a94cbbe41e526a56899"
+          },
+          {
+            "bytes": 135673,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=07/bars.parquet",
+            "sha256": "3fec7b42f1f9eb92eecec1f83a9693d3d81ed55356488f8b9de9d6fd6d363809"
+          },
+          {
+            "bytes": 133180,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=08/bars.parquet",
+            "sha256": "ff43daad4507560eddb0185d1819b20bfb20ce9140323e7a6423205937ee656c"
+          },
+          {
+            "bytes": 125838,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=09/bars.parquet",
+            "sha256": "154199095a406f04014f15cb84db553c8e872942067ffb1f06735c2739489add"
+          },
+          {
+            "bytes": 138153,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=10/bars.parquet",
+            "sha256": "ac8cc13f8fe94a12673b861fb0e19b1ecc68adb16ee460972d88bc0f245e1369"
+          },
+          {
+            "bytes": 122673,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=11/bars.parquet",
+            "sha256": "b102346aa10fa9bb7841e064356472363797d48cedf7b95880db5bca99a3e146"
+          },
+          {
+            "bytes": 125180,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=12/bars.parquet",
+            "sha256": "3b03fc689b962fc922ec3fda89c1977199d55d94f8fd6de8ded951920633c1cb"
+          },
+          {
+            "bytes": 129289,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=01/bars.parquet",
+            "sha256": "8f86878eb6b3ad684eaf45637bda51df4233810aa066c0eca8a3524e562c75c5"
+          },
+          {
+            "bytes": 118580,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=02/bars.parquet",
+            "sha256": "34db8447363557a167162bf0da8b001545fb6b6f982888a290fb14efaccd4c55"
+          },
+          {
+            "bytes": 125239,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=03/bars.parquet",
+            "sha256": "d32a315e48da80e4fba4752c2b073ab2c50ba1b26667260d411771ceedf38048"
+          },
+          {
+            "bytes": 123457,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=04/bars.parquet",
+            "sha256": "82322665f5109033d6f0cc58c28311e9266d64cea2dd5238865ae10bd2995ac5"
+          },
+          {
+            "bytes": 131620,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=05/bars.parquet",
+            "sha256": "aa8d9e59a5905eea07b63396f3eeb7a834a5ac5b53e44bccfccbf965a93dc4c6"
+          },
+          {
+            "bytes": 126800,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=06/bars.parquet",
+            "sha256": "34ed867a71e7c4098486d5b79a916c130766fc4d5e232031241223e636b89d87"
+          },
+          {
+            "bytes": 136262,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=07/bars.parquet",
+            "sha256": "3a6e158c634a60193f5d2545d3fb049875185f35fd92ead117c7433ed819534a"
+          },
+          {
+            "bytes": 125756,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=08/bars.parquet",
+            "sha256": "a40b428b0fcff9775dac364e92a5657f2cc0a230a5d01e63d2706229b210cebf"
+          },
+          {
+            "bytes": 135082,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=09/bars.parquet",
+            "sha256": "76a761c727d22d749fa5fbb3a9f14cfa36f19cdd7ac4d1c8f653ee8e03bb7f07"
+          },
+          {
+            "bytes": 139762,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=10/bars.parquet",
+            "sha256": "ca86903c562d9a77425772e6e4c654003e9fb69d1bae76c00b94eb194ee47468"
+          },
+          {
+            "bytes": 121645,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=11/bars.parquet",
+            "sha256": "e90b81fe5cd0e8003104e9efa4d83a164ae3518d2f1c0060947bd159e9019c38"
+          },
+          {
+            "bytes": 134035,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=12/bars.parquet",
+            "sha256": "b9a6ee10c58b3d280d45cbfd2ac3f2ae7fc7ee0535699ee5290526db49ae82b2"
+          },
+          {
+            "bytes": 129585,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=01/bars.parquet",
+            "sha256": "8006a1816039da652cb6694126d791a9925afece564e5906dedd5a2f696f3506"
+          },
+          {
+            "bytes": 122490,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=02/bars.parquet",
+            "sha256": "8d72970ff0e30aa206dcc09ce6678d80fd8adeb00e9f335af05e8f25833cdfa0"
+          },
+          {
+            "bytes": 135161,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=03/bars.parquet",
+            "sha256": "94552f712b487fa2037cbc24efcde423c3c2c1fa7ad6ae6d963d546b5311b131"
+          },
+          {
+            "bytes": 127786,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=04/bars.parquet",
+            "sha256": "d3f4dabd38e850de538b090268d8140fb3a5b4b24ae84758b6597a9a0036921c"
+          },
+          {
+            "bytes": 125342,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=05/bars.parquet",
+            "sha256": "98b7f258bb6600531da7037c7bc361e739c2c2e23bdabdcbb6ec561d30b14ba6"
+          },
+          {
+            "bytes": 127608,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=06/bars.parquet",
+            "sha256": "40d119b3414b264730e82eefcb12115a88b63a629a35c039c13b85bd607822c9"
+          },
+          {
+            "bytes": 133997,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=07/bars.parquet",
+            "sha256": "8c0d874b7e1fbe91d14f11b641e1b8d15cf8e9da4136f178f0af5d03d391fd26"
+          },
+          {
+            "bytes": 126145,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=08/bars.parquet",
+            "sha256": "5509fc645de040b8a566c94988d7a6f14b7d1141d3c3f8a8db0590d1913354ef"
+          },
+          {
+            "bytes": 128047,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=09/bars.parquet",
+            "sha256": "1a5f428ab9c812ea7cdfcc3b1322b6f1d9517d27d400e91594cb2e0972b45a87"
+          },
+          {
+            "bytes": 130617,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=10/bars.parquet",
+            "sha256": "95fb8ee9ea13345a77f635108974932038da730107c6ded7c13e4befc60aef1f"
+          },
+          {
+            "bytes": 123465,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=11/bars.parquet",
+            "sha256": "93d209473b5dbd82665374b3bd87d41349739ea63a3ca5c60aa18e12c747e720"
+          },
+          {
+            "bytes": 128281,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=12/bars.parquet",
+            "sha256": "136c062945ff9d347da0f706306bb2885c06b1a2deaaea5b6693fd56d2e30254"
+          },
+          {
+            "bytes": 119997,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=01/bars.parquet",
+            "sha256": "58146b3920b4b3c75d14b5aaf6f70e35264e8a96d9c6b16834954adeaa98fc49"
+          },
+          {
+            "bytes": 126459,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=02/bars.parquet",
+            "sha256": "792361b75af02420e2c8a9120583867e264297f3e3d7961a91465645a84b43a7"
+          },
+          {
+            "bytes": 131785,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=03/bars.parquet",
+            "sha256": "0bb1d4ef3f163855dfbc510088d4ac8ab9b0c7638df721fbf970a91a4d5b8770"
+          },
+          {
+            "bytes": 124768,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=04/bars.parquet",
+            "sha256": "a6b953f983f385f474d6f21d1402d7b6ab452130c1673a28d908edf8ef7b1d99"
+          },
+          {
+            "bytes": 131055,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=05/bars.parquet",
+            "sha256": "b4cf94d45bda273d778ba17207aef9819223977ddceaaa2df26b78a6ea36dce5"
+          },
+          {
+            "bytes": 132305,
+            "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=06/bars.parquet",
+            "sha256": "371cbc1761f68c942db6ae0c172e0cbfbbe49c86a54b9930aa5bf513dd20746e"
+          }
+        ],
+        "modern_m5": {
+          "bytes": 104974475,
+          "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+          "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+        }
+      },
+      "schema_version": "xauusd_step_5_m5_source_manifest_v1"
+    },
+    "ml_predictions_used": false,
+    "policy_ids": [
+      "FIVE_FROZEN_POLICY_AS_RECORDED",
+      "FIVE_ALL_CANDIDATES_GOVERNED",
+      "NINE_FROZEN_POLICY_AS_RECORDED",
+      "NINE_ALL_CANDIDATES_GOVERNED"
+    ],
+    "preregistration_sha256": "6b8e5cc62af1c98b27f8d9a57e97f2f2568cb745ea08ab577ac672cce8575a87",
+    "primary_policy_id": "NINE_ALL_CANDIDATES_GOVERNED",
+    "requirements_sha256": "b95752ca2eed3fe3ea1cce9539c6552df4b2a9fcc3449d3b75b559f262844208"
+  },
+  "definition_contract_sha256": "b8d8e29c14f493a54a7965b36cde4126e499c247a37e7f91b3edec0189c15803",
+  "locked_utc": "2026-07-22T08:01:33.518278+00:00",
+  "next_action": "RUN_LOCKED_STEP_5_PORTFOLIO_EVALUATION",
+  "portfolio_result_opened": false,
+  "runtime_changed": false,
+  "schema_version": "xauusd_step_5_shared_account_contract_lock_v1"
+}

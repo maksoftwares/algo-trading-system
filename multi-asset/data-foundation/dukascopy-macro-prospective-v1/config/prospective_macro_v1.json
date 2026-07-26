@@ -1,0 +1,41 @@
+{
+  "schema_version": "dukascopy_macro_prospective_snapshot_v1",
+  "symbols": {
+    "DOLLARIDXUSD": {
+      "source_code": "DOLLAR.IDX-USD",
+      "pip_size": 0.001,
+      "price_scale": 3
+    },
+    "USTBONDTRUSD": {
+      "source_code": "USTBOND.TR-USD",
+      "pip_size": 0.001,
+      "price_scale": 3
+    }
+  },
+  "start_utc": "2026-07-01T00:00:00Z",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "maximum_concurrency": 4,
+  "source": {
+    "implementation_path": "multi-asset/data-foundation/dukascopy-ticks-v1/src/dukascopy_tick_foundation/foundation.py",
+    "implementation_sha256": "d43980eb2d8ac5d262706380d483a36c21884981beb2b7f7de87269adcc1baba",
+    "official_origin": "https://jetta.dukascopy.com/v1"
+  },
+  "historical_context": {
+    "feature_cache": "research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+    "feature_sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+    "manifest": "research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+    "manifest_sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8",
+    "parity_date_utc": "2026-06-30"
+  },
+  "output": {
+    "manifest_directory": "prospective-macro-v1/manifests",
+    "feature_directory": "prospective-macro-v1/features"
+  },
+  "authorization": {
+    "data_only": true,
+    "paid_source_authorized": false,
+    "databento_access_authorized": false,
+    "strategy_scoring_authorized": false,
+    "broker_action_authorized": false
+  }
+}

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 import hashlib
 import json
 import math
@@ -10,7 +10,7 @@ from typing import Any, Mapping
 import numpy as np
 import pandas as pd
 
-from executor import append_event, atomic_write_json, parse_utc, utc_text
+from executor import append_event, atomic_write_json, utc_text
 from feeds import REPO_ROOT, RESEARCH_ROOT, _load_module, _target_guard, _transport
 
 

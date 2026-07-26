@@ -1,0 +1,56 @@
+{
+  "account": {
+    "balance": 3627.19,
+    "currency": "AED",
+    "equity": 3627.19,
+    "leverage": 100,
+    "login": 1033030,
+    "margin": 0.0,
+    "margin_free": 3627.19,
+    "name": "MUHAMMAD ALI KHAN",
+    "server": "Capital.ComMena-Demo",
+    "trade_allowed": true,
+    "trade_expert": true,
+    "trade_mode": 0
+  },
+  "broker_action_performed": false,
+  "captured_utc": "2026-07-22T08:14:26.299091+00:00",
+  "conversion": {
+    "account_currency": "AED",
+    "broker_margin_probe_account": 30.24,
+    "loss_account_per_source_usd": 3.6740000000000004,
+    "loss_probe_account_for_minus_1_usd": -3.67,
+    "profit_account_per_source_usd": 3.6715,
+    "profit_probe_account_for_plus_1_usd": 3.67,
+    "rate_source": "MT5_SYMBOL_TICK_VALUES_AT_CAPTURE",
+    "reference_lot": 0.01,
+    "source_currency": "USD"
+  },
+  "open_positions": 0,
+  "pending_orders": 0,
+  "read_only": true,
+  "schema_version": "xauusd_step_5_1_broker_snapshot_v1",
+  "symbol": {
+    "ask": 4115.83,
+    "bid": 4115.53,
+    "currency_base": "USD",
+    "currency_margin": "USD",
+    "currency_profit": "USD",
+    "description": "Gold",
+    "name": "XAUUSD",
+    "trade_contract_size": 100.0,
+    "trade_mode": 4,
+    "trade_tick_size": 0.01,
+    "trade_tick_value_loss": 3.6740000000000004,
+    "trade_tick_value_profit": 3.6715,
+    "volume_min": 0.01,
+    "volume_step": 0.01
+  },
+  "terminal": {
+    "build": 5833,
+    "connected": true,
+    "data_path": "C:\\MT5PortableTier1BestEA",
+    "trade_allowed": true
+  },
+  "terminal_path": "C:/MT5PortableTier1BestEA/terminal64.exe"
+}

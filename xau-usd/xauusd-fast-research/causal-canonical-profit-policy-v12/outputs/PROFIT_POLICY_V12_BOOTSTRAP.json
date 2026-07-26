@@ -1,0 +1,44 @@
+{
+  "confidence": 0.95,
+  "intervals": {
+    "baseline_normalized_usd_sum": {
+      "lower": 4369.849855729735,
+      "median": 8687.645709290331,
+      "upper": 13966.694020265037
+    },
+    "baseline_weighted_r_sum": {
+      "lower": 347.1279510291897,
+      "median": 572.9795483415992,
+      "upper": 795.224469122807
+    },
+    "selected_normalized_usd_sum": {
+      "lower": 4381.781202468276,
+      "median": 8731.874217419128,
+      "upper": 14034.939354011492
+    },
+    "selected_profit_delta_r": {
+      "lower": -31.368034661597516,
+      "median": -2.853334217547115,
+      "upper": 23.412724893051607
+    },
+    "selected_profit_delta_usd": {
+      "lower": -242.59238736051856,
+      "median": 30.787999558161573,
+      "upper": 268.1252526738601
+    },
+    "selected_profit_factor": {
+      "lower": 1.2511366919916742,
+      "median": 1.4317591140908033,
+      "upper": 1.6194543050969867
+    },
+    "selected_weighted_r_sum": {
+      "lower": 347.0591781477026,
+      "median": 568.7184253949843,
+      "upper": 790.3045431190034
+    }
+  },
+  "resamples": 5000,
+  "schema_version": "xauusd_profit_policy_v12_weekly_bootstrap",
+  "seed": 6072303,
+  "weekly_blocks": 296
+}

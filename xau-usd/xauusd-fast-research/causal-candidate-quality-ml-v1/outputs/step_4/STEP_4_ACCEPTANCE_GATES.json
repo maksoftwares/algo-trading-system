@@ -1,0 +1,24 @@
+{
+  "all_required": true,
+  "checks": {
+    "delta_ev_ci": false,
+    "family_concentration": true,
+    "minimum_fold_selected_fraction": true,
+    "minimum_selected_rows": true,
+    "pooled_selected_fraction": true,
+    "pooled_weighted_roc_auc": false,
+    "pooled_weighted_roc_auc_ci": false,
+    "positive_selected_ev_folds": true,
+    "selected_drawdown": true,
+    "selected_ev_ci": true,
+    "selected_profit_factor": true,
+    "weighted_ece": true
+  },
+  "decision": "MODEL_EVIDENCE_GATE_FAIL",
+  "passed_checks": 9,
+  "primary_model_id": "HGB_B12_PRIMARY",
+  "primary_test_rows": 2368,
+  "required_checks": 12,
+  "runtime_authorized": false,
+  "schema_version": "xauusd_step_4_acceptance_gates_v1"
+}

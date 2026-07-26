@@ -1,0 +1,52 @@
+{
+  "schema_version": "capital_multisymbol_prospective_v1",
+  "run_id": "CAPITAL_MULTISYMBOL_PROSPECTIVE_V1_1033030",
+  "account": {
+    "expected_login": 1033030,
+    "expected_server": "Capital.ComMena-Demo",
+    "terminal_exe": "C:/MT5PortableTier1BestEA/terminal64.exe",
+    "portable": true,
+    "require_connected": true
+  },
+  "information_boundary": {
+    "start_inclusive_utc": "2026-07-27T00:00:00Z",
+    "preboundary_data_authorized": false,
+    "calibration_dates_utc": [
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24"
+    ],
+    "calibration_use": "SOURCE_SCHEMA_AND_COVERAGE_ONLY_NO_CANDIDATE_OUTCOME_OR_PNL"
+  },
+  "symbols": [
+    "XAUUSD",
+    "XAGUSD",
+    "DXY",
+    "US500",
+    "EURUSD",
+    "USDJPY"
+  ],
+  "storage": {
+    "root": "D:/AlgoTradingData/prospective/capital-multisymbol-v1",
+    "state_relative": "_state/watermarks.json",
+    "health_relative": "_state/health.json",
+    "filename_template": "capital_multisymbol_1033030_Capital_ComMena_Demo_{symbol}_ticks_{date}.csv"
+  },
+  "collection": {
+    "poll_seconds": 2.0,
+    "publication_lag_ms": 5000,
+    "chunk_minutes": 30,
+    "maximum_rows_per_chunk": 1000000,
+    "flush_and_fsync_each_chunk": true,
+    "select_symbols_read_only": true
+  },
+  "authority": {
+    "broker_action_allowed": false,
+    "model_training_authorized": false,
+    "python_prediction_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_execution_authorized": false,
+    "live_execution_authorized": false
+  }
+}
+

@@ -1,0 +1,25 @@
+{
+  "block_weekdays": 5,
+  "calendar_blocks": 313,
+  "resamples": 10000,
+  "schema_version": "xauusd_step_4_primary_block_bootstrap_v1",
+  "seed": 60104,
+  "selected_minus_baseline_weighted_mean_stress_r": {
+    "lower": 0.0,
+    "median": 0.0,
+    "upper": 0.0,
+    "valid_resamples": 10000
+  },
+  "selected_weighted_mean_stress_r": {
+    "lower": 0.15710499210553186,
+    "median": 0.24993263056762,
+    "upper": 0.3465810556881891,
+    "valid_resamples": 10000
+  },
+  "weighted_roc_auc": {
+    "lower": 0.4921818897482136,
+    "median": 0.5192626977811273,
+    "upper": 0.5474356905432277,
+    "valid_resamples": 10000
+  }
+}

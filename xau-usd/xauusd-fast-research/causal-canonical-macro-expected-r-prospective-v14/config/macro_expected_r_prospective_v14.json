@@ -1,0 +1,91 @@
+{
+  "schema_version": "xauusd_canonical_macro_expected_r_prospective_v14",
+  "forward_start_inclusive_utc": "2026-07-27T03:00:00Z",
+  "model": {
+    "path": "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_V14_FINAL_RESEARCH_MODEL.joblib",
+    "sha256": "22b7b5c0eba85a72063aab5ac7eb1706e2eadf2b79afc994717b773bb5b623ba",
+    "manifest_path": "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_V14_FINAL_MODEL_MANIFEST.json",
+    "manifest_sha256": "d27cb199cd4a67533eab2b3142d48f91624b4b54cc49b0ead593ab5b74297683",
+    "expected_r_module_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+    "expected_r_module_sha256": "2ea01130ab139fc6795909724ae375ad03cf69e3e17b09bd66b8905446a66f0a",
+    "veto_quantile": 0.05,
+    "minimum_fit_rows": 2500,
+    "actual_fit_rows": 3024,
+    "minimum_fit_selected_weight_fraction": 0.94,
+    "actual_fit_selected_weight_fraction": 0.9501186239620403
+  },
+  "upstream": {
+    "v13_score_ledger": "D:/AlgoTradingData/prospective/causal-canonical-expected-r-prospective-v13/scores.jsonl",
+    "v13_resolution_ledger": "D:/AlgoTradingData/prospective/causal-canonical-expected-r-prospective-v13/resolutions.jsonl",
+    "v13_status": "D:/AlgoTradingData/prospective/causal-canonical-expected-r-prospective-v13/status.json",
+    "v13_contract_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-prospective-v13/outputs/EXPECTED_R_PROSPECTIVE_V13_CONTRACT_LOCK.json",
+    "v13_contract_file_sha256": "8d91ab134b8bf05326d0fdf9b5428c3cebe7fc681899e0ee30cd2cda2e289c7e",
+    "v13_contract_sha256": "12a28b26a428bd94d4169a88835e19af90d611acf6061ec3ef5a67c10c18571d",
+    "v13_evaluator_path": "xau-usd/xauusd-fast-research/causal-canonical-expected-r-prospective-v13/src/evaluator.py",
+    "v13_evaluator_sha256": "5edcf964e306e246e081c763b0097ca2782a14ef7b4a0a3f4d98fee1a02282ed"
+  },
+  "macro_source": {
+    "storage_root": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1",
+    "feature_manifest_glob": "prospective-macro-v1/features/MACRO_*_M5_FEATURES_V1.manifest.json",
+    "source_config_path": "multi-asset/data-foundation/dukascopy-macro-prospective-v1/config/prospective_macro_v1.json",
+    "source_config_sha256": "4ae83a8fbf602e3c70cdc1d92d687770335514ff4414e8fc2faacc44e20d8f68",
+    "m5_module_path": "multi-asset/data-foundation/dukascopy-macro-prospective-v1/src/m5.py",
+    "m5_module_sha256": "c7d8721c740ad88ffb667b91878ec4007905a8390fba9b018bb00136ee6d5cb2",
+    "required_symbols": [
+      "DOLLARIDXUSD",
+      "USTBONDTRUSD"
+    ],
+    "maximum_staleness_seconds": 7200,
+    "maximum_snapshot_lag_seconds": 7200
+  },
+  "prospective_protocol": {
+    "missing_or_stale_feature_action": "MODEL_ABSTAIN_RETAIN_ALL",
+    "upstream_xau_abstention_action": "MODEL_ABSTAIN_RETAIN_ALL",
+    "score_comparison": "SCORE_GREATER_THAN_OR_EQUAL_TO_FROZEN_POOLED_THRESHOLD",
+    "minimum_frequency_retention": 0.9,
+    "minimum_resolved_candidates_validation": 40,
+    "minimum_resolved_candidates_confirmation": 120,
+    "minimum_scored_families_validation": 5,
+    "minimum_scored_families_confirmation": 6,
+    "minimum_eligible_weekdays_validation": 20,
+    "minimum_eligible_weekdays_confirmation": 40,
+    "required_profit_delta_usd": 0.0,
+    "require_profit_factor_not_worse": true,
+    "require_drawdown_not_worse": true,
+    "require_latest_stage_profit_delta_positive": true,
+    "weekly_bootstrap_profit_delta_lower_required": 0.0
+  },
+  "runtime": {
+    "directory": "D:/AlgoTradingData/prospective/causal-canonical-macro-expected-r-prospective-v14",
+    "poll_seconds": 300,
+    "upstream_prefix_state": "upstream_prefix_state.json",
+    "score_ledger": "scores.jsonl",
+    "status": "status.json"
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "MACRO_EXPECTED_R_PROSPECTIVE_V14_CONTRACT_LOCK.json"
+  },
+  "contract_dependencies": [
+    "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_V14_FINAL_RESEARCH_MODEL.joblib",
+    "xau-usd/xauusd-fast-research/causal-canonical-macro-expected-r-prospective-v14/outputs/MACRO_EXPECTED_R_V14_FINAL_MODEL_MANIFEST.json",
+    "xau-usd/xauusd-fast-research/causal-canonical-expected-r-v10/src/expected_r.py",
+    "xau-usd/xauusd-fast-research/causal-canonical-expected-r-prospective-v13/outputs/EXPECTED_R_PROSPECTIVE_V13_CONTRACT_LOCK.json",
+    "xau-usd/xauusd-fast-research/causal-canonical-expected-r-prospective-v13/src/evaluator.py",
+    "multi-asset/data-foundation/dukascopy-macro-prospective-v1/config/prospective_macro_v1.json",
+    "multi-asset/data-foundation/dukascopy-macro-prospective-v1/src/m5.py"
+  ],
+  "research_controls": {
+    "historical_outcomes_exposed_before_design": true,
+    "post_outcome_parameter_selection_disclosed": true,
+    "same_version_tuning_authorized": false,
+    "model_refit_after_boundary_authorized": false,
+    "prospective_research_scoring_authorized": true,
+    "python_serving_authorized": false,
+    "ml_shadow_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false
+  }
+}

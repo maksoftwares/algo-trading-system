@@ -1,0 +1,40 @@
+{
+  "artifacts": {
+    "contract_lock": {
+      "bytes": 4796,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b/STEP_2B_DATASET_FEATURE_CONTRACT_LOCK.json",
+      "sha256": "0dce2c3825fae87534db503194b02ea21e6b695a5dcab95369ee0a1adabe9cad"
+    },
+    "journey_weight_plan": {
+      "bytes": 7245496,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b/STEP_2B_JOURNEY_WEIGHT_PLAN.parquet",
+      "sha256": "e1e19acb026f80a10d320350ce1319f77301f8f90bd4ebabdfe9b530ea9b2deb"
+    },
+    "result_json": {
+      "bytes": 1259,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b/STEP_2B_RESULT.json",
+      "sha256": "cef660a910a4e91337cb92a5fe173c9d13ccb383973e607ff4df13f128eb3008"
+    },
+    "result_markdown": {
+      "bytes": 800,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b/STEP_2B_RESULT.md",
+      "sha256": "f559a9df2eb547243c53fa9d1314649396adf2b3c20afa37f653145929986881"
+    },
+    "source_corpus_manifest": {
+      "bytes": 182127,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b/STEP_2B_SOURCE_CORPUS_MANIFEST.json",
+      "sha256": "f26a3b95df953b1367bb0c58d935b4643691135d9e214f2220b3604fa52c82d1"
+    },
+    "split_plan": {
+      "bytes": 8633,
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b/STEP_2B_OUTCOME_BLIND_SPLIT_PLAN.json",
+      "sha256": "90d8697f04f9ab900fda148607c94e3f382c00715ca6025eeb33e2d9c7f50d5e"
+    }
+  },
+  "decision": "STEP_2B_DATASET_FEATURE_CONTRACT_LOCKED",
+  "definition_contract_sha256": "964eebd668d5291be94d1339d102a55101d0ec561094edbbf9d849c99a4bfc5a",
+  "economic_outcomes_opened": false,
+  "model_fitted": false,
+  "runtime_changed": false,
+  "schema_version": "xauusd_step_2b_artifact_manifest_v1"
+}

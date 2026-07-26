@@ -1,0 +1,5 @@
+numpy==2.5.1
+pandas==3.0.3
+pyarrow==25.0.0
+pytest>=9,<10
+ruff>=0.15,<0.16

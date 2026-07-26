@@ -1,0 +1,71 @@
+{
+  "all_valid_candidates_replay_under_frozen_action": true,
+  "canonical_by_family": {
+    "R1_UPTREND": {
+      "broker_executable": 558,
+      "candidates": 558,
+      "portfolio_accepted": 444,
+      "specialist_accepted": 558
+    },
+    "R2_DOWNTREND": {
+      "broker_executable": 168,
+      "candidates": 168,
+      "portfolio_accepted": 118,
+      "specialist_accepted": 118
+    },
+    "R3_COMPRESSION": {
+      "broker_executable": 490,
+      "candidates": 490,
+      "portfolio_accepted": 118,
+      "specialist_accepted": 118
+    },
+    "R4_CHOP": {
+      "broker_executable": 521,
+      "candidates": 521,
+      "portfolio_accepted": 125,
+      "specialist_accepted": 125
+    },
+    "R5_TRANSITION": {
+      "broker_executable": 10,
+      "candidates": 330,
+      "portfolio_accepted": 10,
+      "specialist_accepted": 330
+    },
+    "V25_CHOP": {
+      "broker_executable": 131,
+      "candidates": 131,
+      "portfolio_accepted": 111,
+      "specialist_accepted": 131
+    },
+    "V57_BREAK_SWING_H4ADX_HIGH": {
+      "broker_executable": 687,
+      "candidates": 687,
+      "portfolio_accepted": 610,
+      "specialist_accepted": 687
+    },
+    "V7_SWING_HEALTH": {
+      "broker_executable": 587,
+      "candidates": 587,
+      "portfolio_accepted": 454,
+      "specialist_accepted": 587
+    },
+    "V8_RETEST_HEALTH": {
+      "broker_executable": 280,
+      "candidates": 280,
+      "portfolio_accepted": 204,
+      "specialist_accepted": 280
+    }
+  },
+  "canonical_candidates": 3752,
+  "canonical_portfolio_accepted": 2194,
+  "r1_guard_decisions": {
+    "ORDER_ACCEPTED": 558,
+    "REJECTED_GUARD": 3393
+  },
+  "r5_broker_executable": 10,
+  "r5_prepolicy_candidates": 799,
+  "r5_router_rejected": 469,
+  "r5_router_selected": 330,
+  "rejection_is_loss": false,
+  "schema_version": "xauusd_step_2a_acceptance_audit_v1"
+}

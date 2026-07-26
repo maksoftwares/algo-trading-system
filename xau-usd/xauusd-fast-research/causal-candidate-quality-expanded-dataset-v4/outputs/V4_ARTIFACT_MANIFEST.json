@@ -1,0 +1,96 @@
+{
+  "artifacts": {
+    "action_dataset": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_ACTION_DATASET.parquet",
+      "sha256": "1c481738ffd137de1fb4c64f526758040728f6065563f907bc928bb1a8008611"
+    },
+    "contract_lock": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_CONTRACT_LOCK.json",
+      "sha256": "3d045cde7159919090c08921457f8963f874186260444ae96437ec612c806b2b"
+    },
+    "event_registry": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_EVENT_REGISTRY.parquet",
+      "sha256": "69a728850585776698901fc0f01cdfdf1355653cd3e7b7599ca59ea1ba1cd8b3"
+    },
+    "overlap_audit": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_SOURCE_OVERLAP_AUDIT.json",
+      "sha256": "5f10fafce2190164b5064d82040102f1640cea20546d9fc80ea2c0e8acaecd09"
+    },
+    "population_audit": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_POPULATION_AUDIT.json",
+      "sha256": "c53a14b1ef754fbc802ac2cdc0cdbd5689e6a84d7f378fd4be73dae27c52a9c9"
+    },
+    "split_assignments": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v4/outputs/V4_SPLIT_ASSIGNMENTS.parquet",
+      "sha256": "4ab4902d363824edb82909e75a283b6c54bff26684239b1b66303f7bd41bcea5"
+    }
+  },
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "ml_shadow_authorized": false,
+    "model_fit_authorized": false,
+    "portfolio_simulation_authorized": false,
+    "python_serving_authorized": false,
+    "research_only": true,
+    "threshold_fit_authorized": false
+  },
+  "counts": {
+    "actions": 73116,
+    "events": 29419,
+    "stressed_failures": 42067,
+    "stressed_winners": 31049,
+    "structural_episodes": 15172
+  },
+  "decision": "V4_CORRECTED_EXPANDED_DATASET_COMPLETE_RESEARCH_ONLY",
+  "definition_contract_sha256": "07c66d5508503851882d113da6aea284a6360ef04e0b4fab73eb55d2e05f43dc",
+  "inputs": {
+    "canonical_benchmark": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet",
+      "sha256": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45"
+    },
+    "hf_actions": {
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v5/outputs/COMPLETE_CANDIDATE_ACTION_LABELS_V5.parquet",
+      "sha256": "fadcd3167ddefdc8e03ecaa9e796bd3288362d9af843c11f3feff6cf4c8939f3"
+    },
+    "hf_contract_lock": {
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v5/outputs/COMPLETE_CANDIDATE_DATASET_V5_CONTRACT_LOCK.json",
+      "sha256": "271d94a5718f5cbfc110d155325c9ac887b95dbf8106260d0730777d6684ddc3"
+    },
+    "hf_events": {
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v5/outputs/COMPLETE_CANDIDATE_EVENTS_V5.parquet",
+      "sha256": "6e3e07e37f955e987561b7889b0a12e1308f9304b6e5a34ce8308323c764fe2c"
+    },
+    "hf_evidence": {
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v5/outputs/COMPLETE_CANDIDATE_DATASET_V5_EVIDENCE.json",
+      "sha256": "66542fb7d14d23f49f3db3fad0618a1cda0297e2f9ef364989052dcc0532e28d"
+    },
+    "hf_manifest": {
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v5/outputs/COMPLETE_CANDIDATE_DATASET_V5_MANIFEST.json",
+      "sha256": "70e6192ce243172d59b63621f8399ce642aadfbf3d4e6d429f629f52e57294cb"
+    },
+    "journey_quarantine": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_JOURNEY_ACTION_LABELS.parquet",
+      "sha256": "a09653c4e9af1b7e0b70c7ec8fdf4a396046667c2fbade6d88259ed0581303ad"
+    },
+    "previous_v3_actions": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v3/outputs/V3_ACTION_DATASET.parquet",
+      "sha256": "f3e9d28f7c9e73c8fd343c64a608787febf31fb1d4de636f7d09cc1347f8d1e0"
+    },
+    "previous_v3_events": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v3/outputs/V3_EVENT_REGISTRY.parquet",
+      "sha256": "30ea1a893d3f73901fba1f552ac71720234d5be6b3d8a4193c5e03a3d95c93d2"
+    },
+    "previous_v3_splits": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v3/outputs/V3_SPLIT_ASSIGNMENTS.parquet",
+      "sha256": "4ab4902d363824edb82909e75a283b6c54bff26684239b1b66303f7bd41bcea5"
+    },
+    "shared_dataset_code": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-expanded-dataset-v3/src/dataset_v3.py",
+      "sha256": "48243a4103bd9695546cb2b6483e325bd53ca64a83c9dc6260e7cdc859ae3e68"
+    }
+  },
+  "schema_version": "xauusd_causal_candidate_quality_expanded_dataset_v4"
+}

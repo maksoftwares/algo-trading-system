@@ -1,0 +1,110 @@
+{
+  "blocks": [
+    {
+      "block": "DETERMINISTIC_CANDIDATE_AND_REGIME",
+      "fields": [
+        "family",
+        "direction",
+        "regime",
+        "stop_geometry",
+        "target_geometry",
+        "maximum_hold",
+        "decision_time"
+      ],
+      "reason": "Several canonical sources lack a pre-policy candidate ledger, complete action geometry, or a distinct decision clock.",
+      "status": "PARTIAL"
+    },
+    {
+      "block": "PLUS_XAU_MICROSTRUCTURE_AND_COST",
+      "fields": [
+        "spread",
+        "returns",
+        "realized_variance",
+        "range",
+        "efficiency",
+        "quote_intensity",
+        "staleness"
+      ],
+      "reason": "Ten years of XAUUSD bid/ask ticks are hashed, but candidate-time aggregates and source availability clocks are not built.",
+      "status": "RAW_SOURCE_AVAILABLE_NOT_MATERIALIZED"
+    },
+    {
+      "block": "PLUS_COMPLETED_CROSS_ASSET_STATE",
+      "fields": [
+        "forex_context",
+        "xag_context",
+        "dollar_consensus",
+        "bond_proxy",
+        "completed_h1_h4_d1"
+      ],
+      "reason": "Local Dukascopy histories exist, but a common causal availability and direction-normalization contract is not yet proven.",
+      "status": "RAW_SOURCE_AVAILABLE_NORMALIZATION_UNVERIFIED"
+    },
+    {
+      "block": "PLUS_COMEX_RESEARCH_ABLATION",
+      "fields": [
+        "trade_count",
+        "volume",
+        "aggressor_imbalance",
+        "intensity",
+        "roll_state",
+        "futures_spot_gap"
+      ],
+      "reason": "The trades archive is present for 2022-07 through 2026-06; live delivery latency is not verified and no order-book fields are authorized.",
+      "status": "HISTORICAL_RESEARCH_ONLY_NOT_MATERIALIZED"
+    },
+    {
+      "block": "CAPITAL_COST_TRANSFER",
+      "fields": [
+        "capital_spread",
+        "capital_dukascopy_basis",
+        "staleness",
+        "broker_cost_stress"
+      ],
+      "reason": "The frozen source manifest covers 34 Capital files from 2026-05-27 through 2026-06-30 with one missing date.",
+      "status": "SHORT_HISTORY_ONLY"
+    }
+  ],
+  "exact_ordered_feature_list_locked": false,
+  "features_materialized": false,
+  "future_or_nearest_time_joins_performed": false,
+  "maximum_primary_columns": 64,
+  "raw_event_windows_seconds": [
+    30,
+    300,
+    900,
+    3600
+  ],
+  "schema_version": "xauusd_step_2_feature_availability_matrix_v1",
+  "source_roots": {
+    "CAPITAL_PAIRED": {
+      "exists": true,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\capital-dukas-crossvenue-foundation-v22-1\\outputs\\CROSSVENUE_V22_1_PAIRED_QUOTES.parquet"
+    },
+    "COMEX": {
+      "exists": true,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw"
+    },
+    "DUKASCOPY_BOND": {
+      "exists": true,
+      "path": "C:\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD"
+    },
+    "DUKASCOPY_DOLLAR": {
+      "exists": true,
+      "path": "C:\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD"
+    },
+    "DUKASCOPY_FOREX": {
+      "exists": true,
+      "path": "C:\\DukascopyTickDataFoundationV1\\raw\\EURUSD"
+    },
+    "DUKASCOPY_XAG": {
+      "exists": true,
+      "path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAGUSD"
+    },
+    "DUKASCOPY_XAU": {
+      "exists": true,
+      "path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD"
+    }
+  },
+  "status": "REPAIR_AND_CAUSAL_AGGREGATION_REQUIRED"
+}

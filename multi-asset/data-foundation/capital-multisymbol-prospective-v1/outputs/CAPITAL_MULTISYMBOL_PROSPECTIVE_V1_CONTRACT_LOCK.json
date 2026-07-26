@@ -1,0 +1,38 @@
+{
+  "account_login": 1033030,
+  "account_server": "Capital.ComMena-Demo",
+  "authority": {
+    "broker_action_allowed": false,
+    "demo_execution_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_execution_authorized": false,
+    "model_training_authorized": false,
+    "python_prediction_authorized": false
+  },
+  "boundary_utc": "2026-07-27T00:00:00Z",
+  "contract_sha256": "1038543cc35a9d77a8b416eb02060cc86163e537465f6d8aa6c1db640e29c057",
+  "decision": "CAPITAL_MULTISYMBOL_PROSPECTIVE_V1_CONTRACT_LOCKED",
+  "files": {
+    "PREREGISTRATION.md": "7e89632a8f8b2bb36282762d6bf83efa32710712c9465d2bb831b249f20c1550",
+    "README.md": "abe8c8998aed4d73f60ec064916267b05cd2a7db282d2fd24306470d4ac4ff10",
+    "config/capital_multisymbol_prospective_v1.json": "c79c329d94456defba73212eddb0ebb144ec51b948259278cc8e6b67e83b2e95",
+    "lock_contract.py": "95ec386d10b2b31f8c66fe8f4030745e3ea006bcf328f8a5b9892123dd0f8566",
+    "requirements.txt": "28590533b259c6398d85a1c4040b6f9c962de123732429f13da2d15694fb4d33",
+    "run_collector.py": "440a8e58644f6e18f5d653b41cc9a5589747da5c6d4574feabb43ca5a5fafa86",
+    "src/__init__.py": "d8284f7d298cfbdbd16dccaa334283877818ea45d4ca0bff342b8f10ecc01bbf",
+    "src/collector.py": "25f7d77a29184b8a5a3010121b3e8f2dd52c1254c188f03ce1dd3b06c3f40b8a",
+    "tests/test_collector.py": "6944afaaed9272303a06794f8675bee24b1e7cf9e70e890c8a3f3ff0fb58c130",
+    "verify.py": "7e14996323057b6f1c0d5cb5e99b06f0b9ff1057f182e70a9a11c45443283660"
+  },
+  "locked_at_utc": "2026-07-26T07:49:16.944724Z",
+  "preboundary_prospective_csv_count": 0,
+  "schema_version": "capital_multisymbol_prospective_contract_v1",
+  "symbols": [
+    "XAUUSD",
+    "XAGUSD",
+    "DXY",
+    "US500",
+    "EURUSD",
+    "USDJPY"
+  ]
+}

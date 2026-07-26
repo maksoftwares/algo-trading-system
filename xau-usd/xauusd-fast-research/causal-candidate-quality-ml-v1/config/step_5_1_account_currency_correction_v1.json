@@ -1,0 +1,101 @@
+{
+  "schema_version": "xauusd_step_5_1_account_currency_correction_contract_v1",
+  "campaign_id": "causal-candidate-quality-ml-v1",
+  "stage": "STEP_5_1_AED_ACCOUNT_CURRENCY_CORRECTION",
+  "created_utc": "2026-07-22T13:30:00Z",
+  "controls": {
+    "corrective_recalculation_authorized": true,
+    "step_5_result_superseded_for_account_specific_claims": true,
+    "strategy_or_governor_logic_change_authorized": false,
+    "risk_fraction_change_authorized": false,
+    "post_result_tuning_authorized": false,
+    "ml_used": false,
+    "comex_used": false,
+    "databento_api_access_authorized": false,
+    "new_market_data_acquisition_authorized": false,
+    "broker_order_action_authorized": false,
+    "runtime_change_authorized": false,
+    "shadow_demo_or_live_authorized": false
+  },
+  "bound_inputs": {
+    "step_3_dataset": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet",
+      "sha256": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45"
+    },
+    "step_3_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_RESULT.json",
+      "sha256": "41f005792e81a8d2783a2528247ea886a6463a74f9648c0384725a8fc98e379d"
+    },
+    "step_5_config": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/config/step_5_shared_account_portfolio_contract_v1.json",
+      "sha256": "31bf7195b88fcbfacd65562607996791096e4ba4ca72b1ba645b7c5bce7ffb2d"
+    },
+    "step_5_lock": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5/STEP_5_SHARED_ACCOUNT_CONTRACT_LOCK.json",
+      "sha256": "2677682665e9253aefd121c1486eac7bb5cc2975909155ec20252c4b6a2e1f20"
+    },
+    "step_5_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5/STEP_5_RESULT.json",
+      "sha256": "32b430fc790e45a1a00449f38abcf3d3f547387db0e5f617fb1be2d8d77e8fae"
+    },
+    "step_5_artifact_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_5/STEP_5_ARTIFACT_MANIFEST.json",
+      "sha256": "f6aa8a4827da8d09e33af25329b8e3d6cc855906d1210e60252231a71716b672"
+    }
+  },
+  "broker_snapshot": {
+    "path": "outputs/step_5_1/STEP_5_1_BROKER_SNAPSHOT.json",
+    "expected_login": 1033030,
+    "expected_server": "Capital.ComMena-Demo",
+    "expected_account_currency": "AED",
+    "expected_symbol": "XAUUSD",
+    "expected_symbol_profit_currency": "USD",
+    "required_zero_positions": true,
+    "required_zero_orders": true
+  },
+  "correction": {
+    "source_currency": "USD",
+    "account_currency": "AED",
+    "starting_equity_source": "MIN_BROKER_BALANCE_AND_EQUITY_AT_CAPTURE",
+    "positive_pnl_conversion": "MT5_TRADE_TICK_VALUE_PROFIT",
+    "negative_pnl_conversion": "MT5_TRADE_TICK_VALUE_LOSS",
+    "initial_risk_conversion": "MT5_TRADE_TICK_VALUE_LOSS",
+    "cost_conversion": "MT5_TRADE_TICK_VALUE_LOSS",
+    "floating_profit_conversion": "MT5_TRADE_TICK_VALUE_PROFIT",
+    "floating_loss_conversion": "MT5_TRADE_TICK_VALUE_LOSS",
+    "conservative_margin_leverage": 20.0,
+    "fixed_reference_lot": 0.01,
+    "dynamic_fx_history_claimed": false,
+    "aed_usd_peg_assumption": true
+  },
+  "policy_mapping": [
+    ["FIVE_FROZEN_POLICY_AS_RECORDED", "AED_FIVE_FROZEN_POLICY_AS_RECORDED"],
+    ["FIVE_ALL_CANDIDATES_GOVERNED", "AED_FIVE_ALL_CANDIDATES_GOVERNED"],
+    ["NINE_FROZEN_POLICY_AS_RECORDED", "AED_NINE_FROZEN_POLICY_AS_RECORDED"],
+    ["NINE_ALL_CANDIDATES_GOVERNED", "AED_NINE_ALL_CANDIDATES_GOVERNED"]
+  ],
+  "acceptance": {
+    "primary_policy_id": "AED_NINE_ALL_CANDIDATES_GOVERNED",
+    "inherit_step_5_gate_values": true,
+    "all_gates_required": true,
+    "pass_decision": "STEP_5_1_AED_PORTFOLIO_GATE_PASS_RESEARCH_ONLY",
+    "fail_decision": "STEP_5_1_AED_PORTFOLIO_GATE_FAIL",
+    "runtime_authorized_on_pass": false
+  },
+  "outputs": {
+    "directory": "outputs/step_5_1",
+    "broker_snapshot": "STEP_5_1_BROKER_SNAPSHOT.json",
+    "contract_lock": "STEP_5_1_ACCOUNT_CURRENCY_CONTRACT_LOCK.json",
+    "decision_ledger": "STEP_5_1_DECISION_LEDGER.parquet",
+    "accepted_trades": "STEP_5_1_ACCEPTED_TRADES.parquet",
+    "window_metrics": "STEP_5_1_WINDOW_METRICS.parquet",
+    "daily_metrics": "STEP_5_1_DAILY_METRICS.parquet",
+    "attribution": "STEP_5_1_ATTRIBUTION.parquet",
+    "six_month_stability": "STEP_5_1_SIX_MONTH_STABILITY.parquet",
+    "primary_equity_curve": "STEP_5_1_PRIMARY_M5_EQUITY_CURVE.parquet",
+    "acceptance_gates": "STEP_5_1_ACCEPTANCE_GATES.json",
+    "result_json": "STEP_5_1_RESULT.json",
+    "result_markdown": "STEP_5_1_RESULT.md",
+    "artifact_manifest": "STEP_5_1_ARTIFACT_MANIFEST.json"
+  }
+}

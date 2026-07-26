@@ -1,0 +1,17 @@
+{
+  "canonical_benchmark_keys": 3493,
+  "hf_action_entry_keys": 28426,
+  "hf_entry_keys_overlapping_journey": 106,
+  "hf_event_keys": 29419,
+  "hf_event_keys_overlapping_canonical": 1642,
+  "hf_exact_action_keys": 73100,
+  "hf_exact_action_keys_overlapping_journey": 285,
+  "journey_entry_keys": 50880,
+  "journey_exact_action_keys": 117518,
+  "population_policy": {
+    "canonical_benchmark_enters_future_v3_fit": false,
+    "hf_primary_enters_future_v3_fit": true,
+    "journey_quarantine_enters_future_v3_fit": false,
+    "silent_pooling_forbidden": true
+  }
+}

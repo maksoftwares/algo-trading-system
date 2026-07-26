@@ -1,0 +1,30 @@
+{
+  "checks": {
+    "entries_per_weekday_1Y": true,
+    "entries_per_weekday_2Y": true,
+    "entries_per_weekday_5Y": true,
+    "family_concentration_5Y": true,
+    "floating_drawdown_FULL": true,
+    "hard_stop_not_triggered": true,
+    "net_usd_10Y": true,
+    "net_usd_1Y": true,
+    "net_usd_2Y": true,
+    "net_usd_5Y": true,
+    "positive_six_month_blocks": true,
+    "profit_factor_10Y": true,
+    "profit_factor_1Y": true,
+    "profit_factor_2Y": true,
+    "profit_factor_5Y": true,
+    "risk_invariants": true,
+    "top_winners_removed_net_10Y": true,
+    "top_winners_removed_net_5Y": true
+  },
+  "decision": "STEP_5_HISTORICAL_PORTFOLIO_GATE_PASS_RESEARCH_ONLY",
+  "passed_checks": 18,
+  "positive_six_month_block_fraction": 0.65,
+  "primary_policy_id": "NINE_ALL_CANDIDATES_GOVERNED",
+  "required_checks": 18,
+  "research_only": true,
+  "runtime_authorized": false,
+  "schema_version": "xauusd_step_5_acceptance_gates_v1"
+}

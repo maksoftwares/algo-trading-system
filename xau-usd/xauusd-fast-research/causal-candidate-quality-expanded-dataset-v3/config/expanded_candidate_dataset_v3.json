@@ -1,0 +1,192 @@
+{
+  "schema_version": "xauusd_causal_candidate_quality_expanded_dataset_v3",
+  "inputs": {
+    "hf_events": {
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v4/outputs/COMPLETE_CANDIDATE_EVENTS_V4.parquet",
+      "sha256": "69a936ea2c7429f87e63500ae0839963683dd3e6a442e536aee3268f0029d784"
+    },
+    "hf_actions": {
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v4/outputs/COMPLETE_CANDIDATE_ACTION_LABELS_V4.parquet",
+      "sha256": "53605ee426d10334a3b0ddbc38ee15374943ff547e6921532369a224f0f7ccf8"
+    },
+    "hf_evidence": {
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v4/outputs/COMPLETE_CANDIDATE_DATASET_V4_EVIDENCE.json",
+      "sha256": "b5e874e5f71aa25462db93a0d899bde571907beb6d845c07d849e68d13f631b1"
+    },
+    "hf_manifest": {
+      "path": "xau-usd/xauusd-fast-research/complete-candidate-dataset-v4/outputs/COMPLETE_CANDIDATE_DATASET_V4_MANIFEST.json",
+      "sha256": "75d8bd875faed1a2ef22ca46957975a9b8a7b2da7a5e05c283ebae6642bb3d78"
+    },
+    "canonical_benchmark": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet",
+      "sha256": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45"
+    },
+    "journey_quarantine": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_JOURNEY_ACTION_LABELS.parquet",
+      "sha256": "a09653c4e9af1b7e0b70c7ec8fdf4a396046667c2fbade6d88259ed0581303ad"
+    }
+  },
+  "expected": {
+    "hf_event_rows": 29419,
+    "hf_action_rows": 73116,
+    "canonical_rows": 3752,
+    "journey_rows": 117534
+  },
+  "mechanisms": [
+    "BREAK_AND_RUN",
+    "DOWNSIDE_IMPULSE_RETEST",
+    "OPENING_RANGE_REVERSAL"
+  ],
+  "actions": [
+    "FAST_1R_4H",
+    "INTRADAY_1P5R_12H",
+    "SWING_2R_36H"
+  ],
+  "episode_gap_minutes": 30,
+  "model_features": [
+    "direction_sign",
+    "mechanism_break_and_run",
+    "mechanism_downside_impulse_retest",
+    "mechanism_opening_range_reversal",
+    "signal_source_count",
+    "log_body_fraction",
+    "log_dir_close_location",
+    "log_dir_three_bar_move_atr",
+    "log_break_distance_atr",
+    "log_estimated_cost_r",
+    "log_spread_atr",
+    "dir_return_15m_atr",
+    "dir_return_1h_atr",
+    "dir_return_4h_atr",
+    "dir_return_24h_atr",
+    "range_1h_atr",
+    "range_4h_atr",
+    "dir_ema20_distance_atr",
+    "dir_ema50_distance_atr",
+    "efficiency_1h",
+    "efficiency_4h",
+    "atr_ratio_m5",
+    "quote_intensity_ratio",
+    "dir_tick_imbalance_5m",
+    "dir_tick_imbalance_15m",
+    "dir_book_imbalance_mean",
+    "dir_microprice_edge_atr",
+    "price_efficiency_5m",
+    "spread_atr",
+    "h1_adx",
+    "h1_efficiency",
+    "dir_h1_ema_slope_atr",
+    "dir_h1_ema_distance_atr",
+    "h4_adx",
+    "h4_efficiency",
+    "dir_h4_ema_slope_atr",
+    "h4_range_width_atr",
+    "h4_displacement_atr",
+    "regime_unsafe_shock",
+    "regime_trend_up",
+    "regime_trend_down",
+    "regime_compression",
+    "regime_chop",
+    "regime_transition_unknown",
+    "hour_sin",
+    "hour_cos",
+    "weekday_sin",
+    "weekday_cos",
+    "prior_events_1h",
+    "prior_events_4h",
+    "prior_same_direction_1h",
+    "minutes_since_prior_event_log1p",
+    "action_stop_atr",
+    "action_target_r",
+    "action_hold_hours",
+    "action_fast",
+    "action_intraday",
+    "action_swing"
+  ],
+  "forbidden_model_columns": [
+    "event_id",
+    "candidate_id",
+    "signal_time",
+    "feature_time",
+    "entry_time",
+    "exit_time",
+    "entry_price",
+    "exit_price",
+    "stop_price",
+    "target_price",
+    "signal_close",
+    "mid_close",
+    "alignment_error_usd",
+    "alignment_error_atr",
+    "current_account_feasible",
+    "net_r",
+    "stress_net_r",
+    "stress_net_r_positive",
+    "mfe_r",
+    "mae_r",
+    "holding_minutes",
+    "exit_reason",
+    "ambiguous_m5"
+  ],
+  "folds": [
+    {
+      "fold_id": "F2021",
+      "fit": ["2016-07-01T00:00:00Z", "2019-07-01T00:00:00Z"],
+      "calibration": ["2019-07-01T00:00:00Z", "2020-07-01T00:00:00Z"],
+      "test": ["2020-07-01T00:00:00Z", "2021-07-01T00:00:00Z"]
+    },
+    {
+      "fold_id": "F2022",
+      "fit": ["2016-07-01T00:00:00Z", "2020-07-01T00:00:00Z"],
+      "calibration": ["2020-07-01T00:00:00Z", "2021-07-01T00:00:00Z"],
+      "test": ["2021-07-01T00:00:00Z", "2022-07-01T00:00:00Z"]
+    },
+    {
+      "fold_id": "F2023",
+      "fit": ["2016-07-01T00:00:00Z", "2021-07-01T00:00:00Z"],
+      "calibration": ["2021-07-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+      "test": ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"]
+    },
+    {
+      "fold_id": "F2024",
+      "fit": ["2016-07-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+      "calibration": ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+      "test": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"]
+    },
+    {
+      "fold_id": "F2025",
+      "fit": ["2016-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+      "calibration": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+      "test": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"]
+    },
+    {
+      "fold_id": "F2026",
+      "fit": ["2016-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+      "calibration": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+      "test": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+    }
+  ],
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "V3_CONTRACT_LOCK.json",
+    "event_registry": "V3_EVENT_REGISTRY.parquet",
+    "action_dataset": "V3_ACTION_DATASET.parquet",
+    "split_assignments": "V3_SPLIT_ASSIGNMENTS.parquet",
+    "population_audit": "V3_POPULATION_AUDIT.json",
+    "overlap_audit": "V3_SOURCE_OVERLAP_AUDIT.json",
+    "manifest": "V3_ARTIFACT_MANIFEST.json"
+  },
+  "authorization": {
+    "research_only": true,
+    "model_fit_authorized": false,
+    "threshold_fit_authorized": false,
+    "portfolio_simulation_authorized": false,
+    "python_serving_authorized": false,
+    "ml_shadow_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  },
+  "historical_outcomes_already_exposed": true
+}

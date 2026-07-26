@@ -1,0 +1,48 @@
+{
+  "corrected_result_opened": false,
+  "decision": "STEP_5_1_ACCOUNT_CURRENCY_CONTRACT_LOCKED",
+  "definition": {
+    "account_currency": "AED",
+    "account_login": 1033030,
+    "bound_inputs": {
+      "step_3_dataset": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45",
+      "step_3_result": "41f005792e81a8d2783a2528247ea886a6463a74f9648c0384725a8fc98e379d",
+      "step_5_artifact_manifest": "f6aa8a4827da8d09e33af25329b8e3d6cc855906d1210e60252231a71716b672",
+      "step_5_config": "31bf7195b88fcbfacd65562607996791096e4ba4ca72b1ba645b7c5bce7ffb2d",
+      "step_5_lock": "2677682665e9253aefd121c1486eac7bb5cc2975909155ec20252c4b6a2e1f20",
+      "step_5_result": "32b430fc790e45a1a00449f38abcf3d3f547387db0e5f617fb1be2d8d77e8fae"
+    },
+    "broker_order_action_authorized": false,
+    "broker_snapshot_sha256": "b00ed54600b8a55eaff914b1e5d52ff625ea5aa882f0648b802f7d1856504434",
+    "config_sha256": "660a589e40428a73433f95b7e01f0d079bbe40ae4b9650e45dd5fceda5c324ed",
+    "conversion": {
+      "account_currency": "AED",
+      "broker_margin_probe_account": 30.24,
+      "loss_account_per_source_usd": 3.6740000000000004,
+      "loss_probe_account_for_minus_1_usd": -3.67,
+      "profit_account_per_source_usd": 3.6715,
+      "profit_probe_account_for_plus_1_usd": 3.67,
+      "rate_source": "MT5_SYMBOL_TICK_VALUES_AT_CAPTURE",
+      "reference_lot": 0.01,
+      "source_currency": "USD"
+    },
+    "implementation_sha256": {
+      "run_step_5_1.py": "7e09b9452b80715cda62a2269361a5cfbc4c1be3ff1728737ba8ac3c9880011c",
+      "src/step_3_common.py": "bd64152bdc86aa72cf2d6e052557f8e92efb493f0e2c3dfcee15be3cf9ab751c",
+      "src/step_5_1_account_currency.py": "a417a078dd613ee8f3116df3112ea8266a859cfebce3725576af7f1de1f57759",
+      "src/step_5_1_runner.py": "8218cbda014d2ba1c7bcf76959acd7cb9668f43251588fd8bdda033df1c957e0",
+      "src/step_5_metrics.py": "037ef5be32dc40e037ac6141f573e2294d220b5391cdf3db4bcb7c37cea791a9",
+      "src/step_5_portfolio.py": "6adc562837c40868130049e214e1806bcac1cde010bb0944e025bf1dcd7316dc"
+    },
+    "preregistration_sha256": "f591443adb79bec8e25120cffe2285491e79cb25cb3f8984acc74bd6ec24c3b0",
+    "primary_policy_id": "AED_NINE_ALL_CANDIDATES_GOVERNED",
+    "requirements_sha256": "7c5f580deca22a9842c56ff5f9cf97c5fe278266f24b7a67fc125216a0692750",
+    "starting_equity_account": 3627.19
+  },
+  "definition_contract_sha256": "969924a5d42200f2bd5b3af57e9c61a1249ac43e50068dcbc68aeaf3c4bd1d0c",
+  "historical_outcomes_already_exposed": true,
+  "locked_utc": "2026-07-22T08:22:37.706950+00:00",
+  "next_action": "RUN_LOCKED_STEP_5_1_AED_CORRECTION",
+  "runtime_changed": false,
+  "schema_version": "xauusd_step_5_1_account_currency_contract_lock_v1"
+}

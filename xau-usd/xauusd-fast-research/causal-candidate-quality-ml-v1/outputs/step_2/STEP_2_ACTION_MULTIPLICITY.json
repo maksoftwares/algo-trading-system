@@ -1,0 +1,47 @@
+{
+  "canonical": {
+    "action_rows": 3752,
+    "candidate_rows": 3752,
+    "missing_action_identity": 0,
+    "one_primary_action_per_candidate": true
+  },
+  "schema_version": "xauusd_step_2_action_multiplicity_v1",
+  "separate_populations": {
+    "COMEX_RESEARCH_ACTIONS": {
+      "action_id_counts": {
+        "INTRADAY_1P5R_3H": 13844,
+        "RUN_2R_6H": 23284,
+        "SCALP_1P25R_1P5H": 7290
+      },
+      "action_rows": 44418,
+      "actions_per_candidate_distribution": {
+        "1": 9446,
+        "2": 6560,
+        "3": 7284
+      },
+      "duplicate_event_direction_action_rows": 0,
+      "population": "COMEX_RESEARCH",
+      "statistical_treatment": "SIBLING_ACTIONS_ARE_NOT_INDEPENDENT",
+      "unique_candidate_directions": 23290,
+      "unique_event_ids": 11645
+    },
+    "RESEARCH_NEGATIVE_SPOT_ACTIONS": {
+      "action_id_counts": {
+        "FAST_1R_4H": 19089,
+        "INTRADAY_1P5R_12H": 25679,
+        "SWING_2R_36H": 28348
+      },
+      "action_rows": 73116,
+      "actions_per_candidate_distribution": {
+        "1": 2753,
+        "2": 6674,
+        "3": 19005
+      },
+      "duplicate_event_direction_action_rows": 0,
+      "population": "RESEARCH_NEGATIVE",
+      "statistical_treatment": "SIBLING_ACTIONS_ARE_NOT_INDEPENDENT",
+      "unique_candidate_directions": 28432,
+      "unique_event_ids": 28432
+    }
+  }
+}

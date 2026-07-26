@@ -1,0 +1,154 @@
+{
+  "schema_version": "xauusd_causal_canonical_expected_r_v10",
+  "inputs": {
+    "step_3_dataset": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_CANONICAL_DATASET.parquet",
+      "sha256": "fc4771063013cf3633192715d2124c374cf37b44b1be9c1fddde7f67741fbc45"
+    },
+    "step_3_splits": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_SPLIT_ASSIGNMENTS.parquet",
+      "sha256": "0ba856a55666af55243d104ada4195b0850f522cfd608a4c623e07630137d3fc"
+    },
+    "step_2b_contract": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/config/step_2b_dataset_feature_contract_v1.json",
+      "sha256": "f1cafa6375db1597e9721397bb6c2f7e54b25ead9016df6fdc670a94584317de"
+    },
+    "step_3_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_3/STEP_3_ARTIFACT_MANIFEST.json",
+      "sha256": "5dbbdc8189524b18a230eebe8011dcf6b64e0a7eb502f8e24ec4b4bd7562bedc"
+    },
+    "step_4_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_4/STEP_4_RESULT.json",
+      "sha256": "5032222e8007c0a3a77112a10207673584be992a8d20d0e91d87ea95a64c1a7e"
+    },
+    "regime_v2_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-regime-models-v2/outputs/REGIME_V2_RESULT.json",
+      "sha256": "9d50fa4661b01e1ca3588654effe41b28e3fea4555bb09ff9d2da883f1aeed1b"
+    },
+    "loss_only_v1_result": {
+      "path": "xau-usd/xauusd-fast-research/causal-loss-signature-one-class-v1/outputs/LOSS_ONLY_V1_RESULT.json",
+      "sha256": "adaa3b71aeed1bea402e22907b9ca30e5be07d80a1730365d8157a8e8e22633c"
+    }
+  },
+  "population": {
+    "expected_canonical_rows": 3752,
+    "expected_xau_feature_pass_rows": 3024,
+    "families": [
+      "R1_UPTREND",
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "R5_TRANSITION",
+      "V25_CHOP",
+      "V57_BREAK_SWING_H4ADX_HIGH",
+      "V7_SWING_HEALTH",
+      "V8_RETEST_HEALTH"
+    ],
+    "eligibility_column": "xau_feature_status",
+    "eligibility_value": "PASS",
+    "target": "stress_net_r",
+    "binary_diagnostic_target": "stress_net_r_positive",
+    "weight": "structural_weight",
+    "episode": "structural_episode_id",
+    "clock": "decision_time",
+    "historical_outcomes_already_exposed": true,
+    "development_selection_disclosed": true
+  },
+  "features": {
+    "source_blocks": [
+      "B1_DETERMINISTIC_CANDIDATE_AND_REGIME",
+      "B2_PLUS_XAU_MICROSTRUCTURE_AND_COST"
+    ],
+    "categorical_family": "family_id",
+    "excluded_categorical": [
+      "broad_mechanic",
+      "stop_mode",
+      "target_mode"
+    ],
+    "fit_only_median_imputation": true,
+    "fit_only_standardization": true,
+    "family_interaction_scale": 0.25
+  },
+  "model": {
+    "kind": "RIDGE_PARTIAL_POOLING_EXPECTED_R",
+    "alpha": 300.0,
+    "fit_intercept": true,
+    "target_clip_min_r": -3.0,
+    "target_clip_max_r": 3.0,
+    "recency_weighting": false
+  },
+  "outer_evaluation": {
+    "folds": ["F2020", "F2021", "F2022", "F2023", "F2024", "F2025"],
+    "fit_assignment": "FIT",
+    "calibration_assignment": "CALIBRATION",
+    "test_assignment": "TEST",
+    "random_or_shuffled_split_authorized": false
+  },
+  "threshold": {
+    "weighted_veto_quantile": 0.3,
+    "minimum_family_calibration_rows": 8,
+    "sparse_family_fallback": "POOLED_CALIBRATION_WEIGHTED_QUANTILE",
+    "comparison": "SCORE_GREATER_THAN_OR_EQUAL"
+  },
+  "bootstrap": {
+    "resamples": 5000,
+    "confidence": 0.95,
+    "block": "UTC_WEEK",
+    "seed": 6072301
+  },
+  "acceptance_gates": {
+    "minimum_weighted_score_auc": 0.53,
+    "minimum_selected_weighted_mean_r": 0.28,
+    "minimum_selected_mean_bootstrap_lower_r": 0.0,
+    "minimum_ev_lift_r": 0.04,
+    "minimum_ev_lift_bootstrap_lower_r": 0.0,
+    "minimum_selected_profit_factor": 1.45,
+    "minimum_profit_factor_bootstrap_lower": 1.2,
+    "minimum_selected_weight_coverage": 0.65,
+    "maximum_selected_weight_coverage": 0.75,
+    "minimum_selected_candidates_per_weekday": 1.0,
+    "minimum_positive_folds": 6,
+    "minimum_latest_fold_mean_r": 0.25,
+    "minimum_latest_fold_profit_factor": 1.4,
+    "minimum_latest_fold_weight_coverage": 0.5,
+    "maximum_drawdown_ratio_to_baseline": 1.0,
+    "minimum_family_selected_mean_r": 0.0,
+    "maximum_single_family_selected_weight_fraction": 0.35,
+    "minimum_selected_rows": 1500
+  },
+  "final_research_model": {
+    "fit_decision_before_utc": "2026-01-01T00:00:00Z",
+    "fit_label_end_before_utc": "2026-01-01T00:00:00Z",
+    "calibration_start_utc": "2026-01-01T00:00:00Z",
+    "calibration_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "runtime_authorized": false
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "EXPECTED_R_V10_CONTRACT_LOCK.json",
+    "predictions": "EXPECTED_R_V10_OUT_OF_TIME_PREDICTIONS.parquet",
+    "fold_metrics": "EXPECTED_R_V10_FOLD_METRICS.parquet",
+    "family_metrics": "EXPECTED_R_V10_FAMILY_METRICS.parquet",
+    "thresholds": "EXPECTED_R_V10_CALIBRATION_THRESHOLDS.parquet",
+    "bootstrap": "EXPECTED_R_V10_BOOTSTRAP.json",
+    "acceptance": "EXPECTED_R_V10_ACCEPTANCE.json",
+    "result_json": "EXPECTED_R_V10_RESULT.json",
+    "result_markdown": "EXPECTED_R_V10_RESULT.md",
+    "manifest": "EXPECTED_R_V10_ARTIFACT_MANIFEST.json",
+    "models_directory": "models",
+    "final_model": "EXPECTED_R_V10_FINAL_RESEARCH_MODEL.joblib"
+  },
+  "authorization": {
+    "offline_model_fit_authorized": true,
+    "offline_scoring_authorized": true,
+    "research_only": true,
+    "python_serving_authorized": false,
+    "ml_shadow_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false,
+    "runtime_change_authorized": false
+  }
+}
+

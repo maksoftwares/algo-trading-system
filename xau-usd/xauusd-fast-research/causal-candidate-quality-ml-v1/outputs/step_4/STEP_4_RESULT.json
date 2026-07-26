@@ -1,0 +1,187 @@
+{
+  "acceptance_checks": {
+    "delta_ev_ci": false,
+    "family_concentration": true,
+    "minimum_fold_selected_fraction": true,
+    "minimum_selected_rows": true,
+    "pooled_selected_fraction": true,
+    "pooled_weighted_roc_auc": false,
+    "pooled_weighted_roc_auc_ci": false,
+    "positive_selected_ev_folds": true,
+    "selected_drawdown": true,
+    "selected_ev_ci": true,
+    "selected_profit_factor": true,
+    "weighted_ece": true
+  },
+  "comex_features_used": false,
+  "contract_lock_sha256": "f4137ea65492eb7cabeb9f977faec4cd8956f57f913f9b5b485907140880966b",
+  "databento_api_accessed": false,
+  "decision": "MODEL_EVIDENCE_GATE_FAIL",
+  "journey_rows_used_for_fit": 0,
+  "models_evaluated": [
+    "HGB_B123_CROSSASSET_ABLATION",
+    "HGB_B12_PRIMARY",
+    "HGB_B1_ABLATION",
+    "LOGIT_B12_CHALLENGER"
+  ],
+  "outer_folds": [
+    "F2020",
+    "F2021",
+    "F2022",
+    "F2023",
+    "F2024",
+    "F2025"
+  ],
+  "portfolio_simulated": false,
+  "primary_bootstrap": {
+    "block_weekdays": 5,
+    "calendar_blocks": 313,
+    "resamples": 10000,
+    "schema_version": "xauusd_step_4_primary_block_bootstrap_v1",
+    "seed": 60104,
+    "selected_minus_baseline_weighted_mean_stress_r": {
+      "lower": 0.0,
+      "median": 0.0,
+      "upper": 0.0,
+      "valid_resamples": 10000
+    },
+    "selected_weighted_mean_stress_r": {
+      "lower": 0.15710499210553186,
+      "median": 0.24993263056762,
+      "upper": 0.3465810556881891,
+      "valid_resamples": 10000
+    },
+    "weighted_roc_auc": {
+      "lower": 0.4921818897482136,
+      "median": 0.5192626977811273,
+      "upper": 0.5474356905432277,
+      "valid_resamples": 10000
+    }
+  },
+  "primary_model_id": "HGB_B12_PRIMARY",
+  "primary_out_of_time_rows": 2368,
+  "primary_pooled_metrics": {
+    "attribution": [
+      {
+        "dimension": "family_id",
+        "rows": 476,
+        "value": "R1_UPTREND",
+        "weight_fraction": 0.20747252747252748,
+        "weighted_mean_stress_r": 0.41305505522938024
+      },
+      {
+        "dimension": "family_id",
+        "rows": 37,
+        "value": "R2_DOWNTREND",
+        "weight_fraction": 0.015604395604395605,
+        "weighted_mean_stress_r": 0.3657086058619984
+      },
+      {
+        "dimension": "family_id",
+        "rows": 163,
+        "value": "R3_COMPRESSION",
+        "weight_fraction": 0.045054945054945054,
+        "weighted_mean_stress_r": 0.41826005887275447
+      },
+      {
+        "dimension": "family_id",
+        "rows": 207,
+        "value": "R4_CHOP",
+        "weight_fraction": 0.08791208791208792,
+        "weighted_mean_stress_r": 0.029683992416936728
+      },
+      {
+        "dimension": "family_id",
+        "rows": 253,
+        "value": "R5_TRANSITION",
+        "weight_fraction": 0.11032967032967032,
+        "weighted_mean_stress_r": 0.0903510089429086
+      },
+      {
+        "dimension": "family_id",
+        "rows": 61,
+        "value": "V25_CHOP",
+        "weight_fraction": 0.023736263736263738,
+        "weighted_mean_stress_r": 0.16359888019878607
+      },
+      {
+        "dimension": "family_id",
+        "rows": 528,
+        "value": "V57_BREAK_SWING_H4ADX_HIGH",
+        "weight_fraction": 0.23186813186813188,
+        "weighted_mean_stress_r": 0.23479013292005835
+      },
+      {
+        "dimension": "family_id",
+        "rows": 448,
+        "value": "V7_SWING_HEALTH",
+        "weight_fraction": 0.1945054945054945,
+        "weighted_mean_stress_r": 0.2261933979480604
+      },
+      {
+        "dimension": "family_id",
+        "rows": 195,
+        "value": "V8_RETEST_HEALTH",
+        "weight_fraction": 0.08351648351648351,
+        "weighted_mean_stress_r": 0.3093924738536242
+      },
+      {
+        "dimension": "direction",
+        "rows": 1349,
+        "value": "LONG",
+        "weight_fraction": 0.5734065934065934,
+        "weighted_mean_stress_r": 0.2805887600695064
+      },
+      {
+        "dimension": "direction",
+        "rows": 1019,
+        "value": "SHORT",
+        "weight_fraction": 0.4265934065934066,
+        "weighted_mean_stress_r": 0.21119468840647365
+      }
+    ],
+    "baseline": {
+      "episodes": 2275,
+      "raw_candidates_per_weekday": 1.5130990415335464,
+      "rows": 2368,
+      "selected_fraction": 1.0,
+      "structural_episodes_per_weekday": 1.4536741214057507,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_stress_r": 0.25098570664138625,
+      "weighted_profit_factor": 1.4142405281207302,
+      "weighted_r_sum": 570.9924826091537,
+      "win_rate": 0.45988175675675674
+    },
+    "constant_fit_prior": {
+      "weighted_average_precision": 0.45983477837023057,
+      "weighted_brier": 0.2506716110228361,
+      "weighted_ece": 0.04139230568914548,
+      "weighted_log_loss": 0.694559205964381,
+      "weighted_roc_auc": 0.49554822309528185
+    },
+    "probability": {
+      "weighted_average_precision": 0.4804633229536923,
+      "weighted_brier": 0.2557924547935506,
+      "weighted_ece": 0.06009193452817858,
+      "weighted_log_loss": 0.7073239597469368,
+      "weighted_roc_auc": 0.5193164716090694
+    },
+    "selected": {
+      "episodes": 2275,
+      "raw_candidates_per_weekday": 1.5130990415335464,
+      "rows": 2368,
+      "selected_fraction": 1.0,
+      "structural_episodes_per_weekday": 1.4536741214057507,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_stress_r": 0.25098570664138625,
+      "weighted_profit_factor": 1.4142405281207302,
+      "weighted_r_sum": 570.9924826091537,
+      "win_rate": 0.45988175675675674
+    },
+    "selected_minus_baseline_weighted_mean_stress_r": 0.0
+  },
+  "primary_selected_rows": 2368,
+  "runtime_changed": false,
+  "schema_version": "xauusd_step_4_result_v1",
+  "shadow_or_demo_activated": false
+}

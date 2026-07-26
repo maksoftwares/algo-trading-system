@@ -1,0 +1,21 @@
+{
+  "schema_version": "dukascopy_xau_prospective_snapshot_v1",
+  "symbol": "XAUUSD",
+  "start_utc": "2026-07-01T00:00:00Z",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "maximum_concurrency": 4,
+  "source": {
+    "implementation_path": "multi-asset/data-foundation/dukascopy-ticks-v1/src/dukascopy_tick_foundation/foundation.py",
+    "implementation_sha256": "d43980eb2d8ac5d262706380d483a36c21884981beb2b7f7de87269adcc1baba",
+    "official_origin": "https://jetta.dukascopy.com/v1"
+  },
+  "output": {
+    "manifest_directory": "prospective-v1/manifests"
+  },
+  "authorization": {
+    "data_only": true,
+    "paid_source_authorized": false,
+    "strategy_scoring_authorized": false,
+    "broker_action_authorized": false
+  }
+}

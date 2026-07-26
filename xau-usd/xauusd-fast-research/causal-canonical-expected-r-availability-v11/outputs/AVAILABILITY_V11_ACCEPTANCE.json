@@ -1,0 +1,32 @@
+{
+  "all_required": true,
+  "checks": {
+    "inactive_folds_are_full_abstention": true,
+    "maximum_drawdown_ratio_to_baseline": true,
+    "maximum_selected_weight_coverage": true,
+    "maximum_single_family_selected_weight_fraction": true,
+    "minimum_active_fold_lift_r": true,
+    "minimum_active_folds": true,
+    "minimum_all_fold_lift_r": true,
+    "minimum_ev_lift_bootstrap_lower_r": true,
+    "minimum_ev_lift_r": true,
+    "minimum_family_selected_mean_r": true,
+    "minimum_latest_fold_mean_r": true,
+    "minimum_latest_fold_profit_factor": true,
+    "minimum_latest_fold_weight_coverage": true,
+    "minimum_profit_factor_bootstrap_lower": true,
+    "minimum_selected_candidates_per_weekday": true,
+    "minimum_selected_mean_bootstrap_lower_r": true,
+    "minimum_selected_profit_factor": true,
+    "minimum_selected_rows": true,
+    "minimum_selected_weight_coverage": true,
+    "minimum_selected_weighted_mean_r": true,
+    "minimum_weighted_score_auc": true
+  },
+  "decision": "EXPECTED_R_V11_WORKING_OFFLINE_MODEL_FORWARD_CONFIRMATION_REQUIRED",
+  "passed": true,
+  "passed_checks": 21,
+  "required_checks": 21,
+  "runtime_authorized": false,
+  "schema_version": "xauusd_expected_r_availability_v11_acceptance"
+}

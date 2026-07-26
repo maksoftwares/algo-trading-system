@@ -1,0 +1,24 @@
+{
+  "conservative_effective_size": 1321.9424183295991,
+  "kish_effective_size": 3600.9823990533946,
+  "maximum_lag": 60,
+  "resolved_candidate_rows": 3752,
+  "resolved_structural_episodes": 3489,
+  "schema_version": "xauusd_step_3_effective_sample_v1",
+  "serial_effective_size": 1321.9424183295991,
+  "serial_retained_autocorrelations": [
+    0.2550765251188182,
+    0.13568965885137382,
+    0.08900788630200679,
+    0.07240840632851528,
+    0.031084476312394395,
+    0.05525288831327987,
+    0.029743179640674813,
+    0.054272064762829544,
+    0.048181940538755665,
+    0.018690559329757685,
+    0.020693078190727618,
+    0.009548343568189063
+  ],
+  "serial_rule": "GEYER_INITIAL_POSITIVE_SEQUENCE_OF_PAIRED_AUTOCORRELATIONS"
+}

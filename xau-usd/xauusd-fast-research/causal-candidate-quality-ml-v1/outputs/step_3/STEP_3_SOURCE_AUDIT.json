@@ -1,0 +1,43 @@
+{
+  "bound_decoder_sha256": "76d471ba5a623134461c783e67ad128fae96c68e7a0cd55e7e9653a9ec0a4333",
+  "comex_daily_file_verification": "SHA256_AND_SIZE_ON_EVERY_OPEN",
+  "dukascopy_raw_hour_verification": "SHA256_AND_TICK_COUNT_ON_EVERY_OPEN",
+  "no_new_data_acquired": true,
+  "opened_source_verification": {
+    "comex_gc": {
+      "all_opened_files_sha256_verified": true,
+      "verified_compressed_bytes": 1267293576,
+      "verified_daily_files": 984
+    },
+    "dollaridxusd": {
+      "all_opened_hours_sha256_verified": true,
+      "symbol": "DOLLARIDXUSD",
+      "verified_hour_files": 30035,
+      "verified_raw_bytes": 494635639,
+      "verified_record_set_sha256": "872a1f8a9d60db8d43fc1c736c5488d88ad2da263715ea8f636a825c5162e44f",
+      "verified_tick_rows": 19369431
+    },
+    "ustbondtrusd": {
+      "all_opened_hours_sha256_verified": true,
+      "symbol": "USTBONDTRUSD",
+      "verified_hour_files": 30035,
+      "verified_raw_bytes": 272172967,
+      "verified_record_set_sha256": "18f51711f78aa10b689ee506b364a4a93983ecbdcd5353eab50c6aad25d58652",
+      "verified_tick_rows": 10934862
+    },
+    "xauusd": {
+      "all_opened_hours_sha256_verified": true,
+      "symbol": "XAUUSD",
+      "verified_hour_files": 66663,
+      "verified_raw_bytes": 9711346715,
+      "verified_record_set_sha256": "7d1e2d5e75e03586c75caf1db291c00c9888035ceaaa3c188b165046f3381f3b",
+      "verified_tick_rows": 441309114
+    }
+  },
+  "paid_data_used": false,
+  "schema_version": "xauusd_step_3_source_audit_v1",
+  "step_2b_physical_hour_files": 276024,
+  "step_2b_source_corpus_sha256": "f26a3b95df953b1367bb0c58d935b4643691135d9e214f2220b3604fa52c82d1",
+  "step_2b_source_months": 378,
+  "xau_atr_reference_sha256": "3ce0fc80bc561b6284de3fb4c0f967af3d59ae166987dc2d2ff20fcba08b18f4"
+}

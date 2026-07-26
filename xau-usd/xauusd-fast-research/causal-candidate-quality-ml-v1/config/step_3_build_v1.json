@@ -1,0 +1,71 @@
+{
+  "schema_version": "xauusd_causal_candidate_quality_step_3_build_v1",
+  "campaign_id": "causal-candidate-quality-ml-v1",
+  "stage": "STEP_3_COUNTERFACTUAL_LABEL_AND_CAUSAL_FEATURE_BUILD",
+  "created_utc": "2026-07-22T09:00:00Z",
+  "controls": {
+    "economic_outcomes_authorized": true,
+    "counterfactual_label_build_authorized": true,
+    "feature_value_build_authorized": true,
+    "model_training_authorized": false,
+    "threshold_fitting_authorized": false,
+    "portfolio_simulation_authorized": false,
+    "runtime_change_authorized": false,
+    "new_data_acquisition_authorized": false,
+    "historical_rejection_is_loss": false,
+    "journey_rows_enter_primary_fit": false,
+    "archive_direct_ingestion_authorized": false
+  },
+  "bound_inputs": {
+    "step_2b_contract": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/config/step_2b_dataset_feature_contract_v1.json",
+      "sha256": "f1cafa6375db1597e9721397bb6c2f7e54b25ead9016df6fdc670a94584317de"
+    },
+    "step_2b_lock": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b/STEP_2B_DATASET_FEATURE_CONTRACT_LOCK.json",
+      "sha256": "0dce2c3825fae87534db503194b02ea21e6b695a5dcab95369ee0a1adabe9cad"
+    },
+    "step_2b_artifact_manifest": {
+      "path": "xau-usd/xauusd-fast-research/causal-candidate-quality-ml-v1/outputs/step_2b/STEP_2B_ARTIFACT_MANIFEST.json",
+      "sha256": "a65e2a338e8df2398fe150e93e1323a12dc081c28f6359455cd2621b9b1b57be"
+    },
+    "xau_m5_cache_manifest": {
+      "path": "C:/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    },
+    "xau_m5_cache": {
+      "path": "C:/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    }
+  },
+  "source": {
+    "dukascopy_storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "dukascopy_default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "price_decimals": 3,
+    "comex_storage_environment_variable": "COMEX_GOLD_DATA_ROOT",
+    "comex_default_storage_root": "C:/ComexGoldFuturesFoundationV1"
+  },
+  "build": {
+    "xau_hour_cache_size": 96,
+    "crossasset_hour_cache_size": 64,
+    "comex_day_cache_size": 4,
+    "pre2016_end_exclusive_utc": "2016-07-01T00:00:00Z",
+    "progress_every_rows": 5000
+  },
+  "outputs": {
+    "directory": "outputs/step_3",
+    "xau_atr_reference": "STEP_3_XAU_M5_ATR_REFERENCE.parquet",
+    "xau_atr_reference_manifest": "STEP_3_XAU_M5_ATR_REFERENCE_MANIFEST.json",
+    "canonical_labels": "STEP_3_CANONICAL_LABELS.parquet",
+    "canonical_features": "STEP_3_CANONICAL_FEATURES.parquet",
+    "canonical_dataset": "STEP_3_CANONICAL_DATASET.parquet",
+    "journey_labels": "STEP_3_JOURNEY_ACTION_LABELS.parquet",
+    "split_assignments": "STEP_3_SPLIT_ASSIGNMENTS.parquet",
+    "effective_sample": "STEP_3_EFFECTIVE_SAMPLE_SIZE.json",
+    "data_quality_audit": "STEP_3_DATA_QUALITY_AUDIT.json",
+    "source_audit": "STEP_3_SOURCE_AUDIT.json",
+    "result_json": "STEP_3_RESULT.json",
+    "result_markdown": "STEP_3_RESULT.md",
+    "artifact_manifest": "STEP_3_ARTIFACT_MANIFEST.json"
+  }
+}

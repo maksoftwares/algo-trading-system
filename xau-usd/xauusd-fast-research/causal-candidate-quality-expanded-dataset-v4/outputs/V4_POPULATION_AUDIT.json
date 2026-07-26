@@ -1,0 +1,463 @@
+{
+  "action_rows": 73116,
+  "actions": {
+    "FAST_1R_4H": 19089,
+    "INTRADAY_1P5R_12H": 25679,
+    "SWING_2R_36H": 28348
+  },
+  "ambiguous_m5_rows": 261,
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "ml_shadow_authorized": false,
+    "model_fit_authorized": false,
+    "portfolio_simulation_authorized": false,
+    "python_serving_authorized": false,
+    "research_only": true,
+    "threshold_fit_authorized": false
+  },
+  "changed_rows_vs_v3": {
+    "action_dataset": {
+      "prior_events_1h": 73116,
+      "prior_events_4h": 73116
+    },
+    "event_registry": {
+      "prior_events_1h": 29419,
+      "prior_events_4h": 29419
+    }
+  },
+  "current_account_feasible_rows": 64838,
+  "decision": "V4_CORRECTED_EXPANDED_DATASET_COMPLETE_RESEARCH_ONLY",
+  "directions": {
+    "LONG": 26908,
+    "SHORT": 46208
+  },
+  "event_rows": 29419,
+  "events_with_resolved_actions": 28432,
+  "events_without_resolved_actions": 987,
+  "exit_reasons": {
+    "AMBIGUOUS_M5_STOP_FIRST": 261,
+    "GAP_THROUGH_STOP": 99,
+    "MAX_HOLD": 3581,
+    "STOP": 39532,
+    "TARGET": 29599,
+    "TARGET_GAP": 44
+  },
+  "first_decision_time": "2016-07-18T08:30:00+00:00",
+  "fold_counts": {
+    "F2021": {
+      "CALIBRATION": {
+        "actions": 5751,
+        "episodes": 1200,
+        "events": 2078,
+        "stressed_winners": 2645
+      },
+      "FIT": {
+        "actions": 14146,
+        "episodes": 2676,
+        "events": 4726,
+        "stressed_winners": 6037
+      },
+      "OUTSIDE": {
+        "actions": 45570,
+        "episodes": 9617,
+        "events": 18463,
+        "stressed_winners": 18977
+      },
+      "PURGED_LABEL_CROSSING": {
+        "actions": 9,
+        "episodes": 2,
+        "events": 6,
+        "stressed_winners": 3
+      },
+      "TEST": {
+        "actions": 7640,
+        "episodes": 1677,
+        "events": 3159,
+        "stressed_winners": 3387
+      }
+    },
+    "F2022": {
+      "CALIBRATION": {
+        "actions": 7640,
+        "episodes": 1677,
+        "events": 3159,
+        "stressed_winners": 3387
+      },
+      "FIT": {
+        "actions": 19897,
+        "episodes": 3876,
+        "events": 6804,
+        "stressed_winners": 8682
+      },
+      "OUTSIDE": {
+        "actions": 38371,
+        "episodes": 8204,
+        "events": 15772,
+        "stressed_winners": 15819
+      },
+      "PURGED_LABEL_CROSSING": {
+        "actions": 9,
+        "episodes": 2,
+        "events": 6,
+        "stressed_winners": 3
+      },
+      "TEST": {
+        "actions": 7199,
+        "episodes": 1413,
+        "events": 2691,
+        "stressed_winners": 3158
+      }
+    },
+    "F2023": {
+      "CALIBRATION": {
+        "actions": 7199,
+        "episodes": 1413,
+        "events": 2691,
+        "stressed_winners": 3158
+      },
+      "FIT": {
+        "actions": 27543,
+        "episodes": 5554,
+        "events": 9968,
+        "stressed_winners": 12071
+      },
+      "OUTSIDE": {
+        "actions": 30577,
+        "episodes": 6746,
+        "events": 12924,
+        "stressed_winners": 12359
+      },
+      "PURGED_LABEL_CROSSING": {
+        "actions": 6,
+        "episodes": 2,
+        "events": 2,
+        "stressed_winners": 2
+      },
+      "TEST": {
+        "actions": 7791,
+        "episodes": 1457,
+        "events": 2847,
+        "stressed_winners": 3459
+      }
+    },
+    "F2024": {
+      "CALIBRATION": {
+        "actions": 7791,
+        "episodes": 1457,
+        "events": 2847,
+        "stressed_winners": 3459
+      },
+      "FIT": {
+        "actions": 34745,
+        "episodes": 6968,
+        "events": 12660,
+        "stressed_winners": 15230
+      },
+      "OUTSIDE": {
+        "actions": 22904,
+        "episodes": 5273,
+        "events": 10189,
+        "stressed_winners": 8988
+      },
+      "PURGED_LABEL_CROSSING": {
+        "actions": 3,
+        "episodes": 1,
+        "events": 1,
+        "stressed_winners": 1
+      },
+      "TEST": {
+        "actions": 7673,
+        "episodes": 1473,
+        "events": 2735,
+        "stressed_winners": 3371
+      }
+    },
+    "F2025": {
+      "CALIBRATION": {
+        "actions": 7673,
+        "episodes": 1473,
+        "events": 2735,
+        "stressed_winners": 3371
+      },
+      "FIT": {
+        "actions": 42536,
+        "episodes": 8425,
+        "events": 15507,
+        "stressed_winners": 18689
+      },
+      "OUTSIDE": {
+        "actions": 13494,
+        "episodes": 2928,
+        "events": 5654,
+        "stressed_winners": 4877
+      },
+      "PURGED_LABEL_CROSSING": {
+        "actions": 4,
+        "episodes": 2,
+        "events": 2,
+        "stressed_winners": 2
+      },
+      "TEST": {
+        "actions": 9409,
+        "episodes": 2344,
+        "events": 4534,
+        "stressed_winners": 4110
+      }
+    },
+    "F2026": {
+      "CALIBRATION": {
+        "actions": 9409,
+        "episodes": 2344,
+        "events": 4534,
+        "stressed_winners": 4110
+      },
+      "FIT": {
+        "actions": 50212,
+        "episodes": 9899,
+        "events": 18243,
+        "stressed_winners": 22061
+      },
+      "PURGED_LABEL_CROSSING": {
+        "actions": 1,
+        "episodes": 1,
+        "events": 1,
+        "stressed_winners": 1
+      },
+      "TEST": {
+        "actions": 13494,
+        "episodes": 2928,
+        "events": 5654,
+        "stressed_winners": 4877
+      }
+    }
+  },
+  "forbidden_features_present": [],
+  "historical_outcomes_already_exposed": true,
+  "label_balance": {
+    "action": {
+      "FAST_1R_4H": {
+        "rows": 19089,
+        "stressed_failures": 9844,
+        "stressed_win_rate": 0.4843103357954843,
+        "stressed_winners": 9245,
+        "structural_weight": 3427.8370370370367
+      },
+      "INTRADAY_1P5R_12H": {
+        "rows": 25679,
+        "stressed_failures": 14691,
+        "stressed_win_rate": 0.4278982826434051,
+        "stressed_winners": 10988,
+        "structural_weight": 5133.332076719576
+      },
+      "SWING_2R_36H": {
+        "rows": 28348,
+        "stressed_failures": 17532,
+        "stressed_win_rate": 0.3815436715112177,
+        "stressed_winners": 10816,
+        "structural_weight": 6610.830886243386
+      }
+    },
+    "direction": {
+      "LONG": {
+        "rows": 26908,
+        "stressed_failures": 15846,
+        "stressed_win_rate": 0.41110450423665823,
+        "stressed_winners": 11062,
+        "structural_weight": 6156.33924963925
+      },
+      "SHORT": {
+        "rows": 46208,
+        "stressed_failures": 26221,
+        "stressed_win_rate": 0.432544148199446,
+        "stressed_winners": 19987,
+        "structural_weight": 9015.660750360748
+      }
+    },
+    "mechanism_signature": {
+      "BREAK_AND_RUN": {
+        "rows": 32601,
+        "stressed_failures": 18324,
+        "stressed_win_rate": 0.4379313517990246,
+        "stressed_winners": 14277,
+        "structural_weight": 7659.68924963925
+      },
+      "BREAK_AND_RUN+DOWNSIDE_IMPULSE_RETEST": {
+        "rows": 2716,
+        "stressed_failures": 1430,
+        "stressed_win_rate": 0.4734904270986745,
+        "stressed_winners": 1286,
+        "structural_weight": 334.781746031746
+      },
+      "BREAK_AND_RUN+DOWNSIDE_IMPULSE_RETEST+OPENING_RANGE_REVERSAL": {
+        "rows": 20,
+        "stressed_failures": 9,
+        "stressed_win_rate": 0.55,
+        "stressed_winners": 11,
+        "structural_weight": 2.9333333333333336
+      },
+      "BREAK_AND_RUN+OPENING_RANGE_REVERSAL": {
+        "rows": 569,
+        "stressed_failures": 378,
+        "stressed_win_rate": 0.335676625659051,
+        "stressed_winners": 191,
+        "structural_weight": 132.77499999999998
+      },
+      "DOWNSIDE_IMPULSE_RETEST": {
+        "rows": 21072,
+        "stressed_failures": 11136,
+        "stressed_win_rate": 0.4715261958997722,
+        "stressed_winners": 9936,
+        "structural_weight": 3546.894191919192
+      },
+      "DOWNSIDE_IMPULSE_RETEST+OPENING_RANGE_REVERSAL": {
+        "rows": 107,
+        "stressed_failures": 71,
+        "stressed_win_rate": 0.3364485981308411,
+        "stressed_winners": 36,
+        "structural_weight": 20.511111111111113
+      },
+      "OPENING_RANGE_REVERSAL": {
+        "rows": 16031,
+        "stressed_failures": 10719,
+        "stressed_win_rate": 0.3313579938868442,
+        "stressed_winners": 5312,
+        "structural_weight": 3474.415367965368
+      }
+    },
+    "regime": {
+      "CHOP": {
+        "rows": 17603,
+        "stressed_failures": 10496,
+        "stressed_win_rate": 0.403737999204681,
+        "stressed_winners": 7107,
+        "structural_weight": 3710.5469696969694
+      },
+      "COMPRESSION": {
+        "rows": 1044,
+        "stressed_failures": 586,
+        "stressed_win_rate": 0.4386973180076628,
+        "stressed_winners": 458,
+        "structural_weight": 233.14826839826839
+      },
+      "TRANSITION_UNKNOWN": {
+        "rows": 30102,
+        "stressed_failures": 17620,
+        "stressed_win_rate": 0.4146568334329945,
+        "stressed_winners": 12482,
+        "structural_weight": 6324.50974025974
+      },
+      "TREND_DOWN": {
+        "rows": 7052,
+        "stressed_failures": 3992,
+        "stressed_win_rate": 0.4339194554736245,
+        "stressed_winners": 3060,
+        "structural_weight": 1376.271212121212
+      },
+      "TREND_UP": {
+        "rows": 8924,
+        "stressed_failures": 4972,
+        "stressed_win_rate": 0.4428507395786643,
+        "stressed_winners": 3952,
+        "structural_weight": 1928.7321428571427
+      },
+      "UNSAFE_SHOCK": {
+        "rows": 8391,
+        "stressed_failures": 4401,
+        "stressed_win_rate": 0.4755094744368967,
+        "stressed_winners": 3990,
+        "structural_weight": 1598.7916666666667
+      }
+    }
+  },
+  "last_decision_time": "2026-06-29T22:45:00+00:00",
+  "mechanism_signatures": {
+    "BREAK_AND_RUN": 32601,
+    "BREAK_AND_RUN+DOWNSIDE_IMPULSE_RETEST": 2716,
+    "BREAK_AND_RUN+DOWNSIDE_IMPULSE_RETEST+OPENING_RANGE_REVERSAL": 20,
+    "BREAK_AND_RUN+OPENING_RANGE_REVERSAL": 569,
+    "DOWNSIDE_IMPULSE_RETEST": 21072,
+    "DOWNSIDE_IMPULSE_RETEST+OPENING_RANGE_REVERSAL": 107,
+    "OPENING_RANGE_REVERSAL": 16031
+  },
+  "model_feature_count": 58,
+  "model_features": [
+    "direction_sign",
+    "mechanism_break_and_run",
+    "mechanism_downside_impulse_retest",
+    "mechanism_opening_range_reversal",
+    "signal_source_count",
+    "log_body_fraction",
+    "log_dir_close_location",
+    "log_dir_three_bar_move_atr",
+    "log_break_distance_atr",
+    "log_estimated_cost_r",
+    "log_spread_atr",
+    "dir_return_15m_atr",
+    "dir_return_1h_atr",
+    "dir_return_4h_atr",
+    "dir_return_24h_atr",
+    "range_1h_atr",
+    "range_4h_atr",
+    "dir_ema20_distance_atr",
+    "dir_ema50_distance_atr",
+    "efficiency_1h",
+    "efficiency_4h",
+    "atr_ratio_m5",
+    "quote_intensity_ratio",
+    "dir_tick_imbalance_5m",
+    "dir_tick_imbalance_15m",
+    "dir_book_imbalance_mean",
+    "dir_microprice_edge_atr",
+    "price_efficiency_5m",
+    "spread_atr",
+    "h1_adx",
+    "h1_efficiency",
+    "dir_h1_ema_slope_atr",
+    "dir_h1_ema_distance_atr",
+    "h4_adx",
+    "h4_efficiency",
+    "dir_h4_ema_slope_atr",
+    "h4_range_width_atr",
+    "h4_displacement_atr",
+    "regime_unsafe_shock",
+    "regime_trend_up",
+    "regime_trend_down",
+    "regime_compression",
+    "regime_chop",
+    "regime_transition_unknown",
+    "hour_sin",
+    "hour_cos",
+    "weekday_sin",
+    "weekday_cos",
+    "prior_events_1h",
+    "prior_events_4h",
+    "prior_same_direction_1h",
+    "minutes_since_prior_event_log1p",
+    "action_stop_atr",
+    "action_target_r",
+    "action_hold_hours",
+    "action_fast",
+    "action_intraday",
+    "action_swing"
+  ],
+  "population": "HF_PRIMARY",
+  "regimes": {
+    "CHOP": 17603,
+    "COMPRESSION": 1044,
+    "TRANSITION_UNKNOWN": 30102,
+    "TREND_DOWN": 7052,
+    "TREND_UP": 8924,
+    "UNSAFE_SHOCK": 8391
+  },
+  "resolved_labels": 73116,
+  "schema_version": "xauusd_causal_candidate_quality_expanded_dataset_v4",
+  "split_assignments_match_v3": true,
+  "stressed_failures": 42067,
+  "stressed_win_rate": 0.424653974506264,
+  "stressed_winners": 31049,
+  "structural_episodes": 15172,
+  "structural_weight_sum": 15172.0
+}

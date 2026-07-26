@@ -1,0 +1,49 @@
+{
+  "available_ordering_checks": {
+    "decision_after_entry_eligible": 0,
+    "feature_cutoff_after_decision": 0,
+    "signal_bar_end_after_decision": 0,
+    "source_available_after_feature_cutoff": 0
+  },
+  "blocking_findings": [
+    "No canonical row has source_available_at or feature_cutoff_time.",
+    "R1 exposes entry time but no distinct signal-bar or decision time.",
+    "R5 is represented by a post-selection trade ledger, not a complete pre-policy candidate ledger.",
+    "The label_end_time clock is intentionally absent until the separately authorized label stage."
+  ],
+  "clock_completeness": {
+    "decision_time": {
+      "missing": 558,
+      "present": 3194
+    },
+    "entry_eligible_time": {
+      "missing": 0,
+      "present": 3752
+    },
+    "feature_cutoff_time": {
+      "missing": 3752,
+      "present": 0
+    },
+    "signal_bar_end": {
+      "missing": 558,
+      "present": 3194
+    },
+    "source_available_at": {
+      "missing": 3752,
+      "present": 0
+    }
+  },
+  "decision_time_inferred_from_signal_time": 3194,
+  "join_policy": {
+    "allowed": [
+      "EXACT",
+      "BACKWARD_ASOF"
+    ],
+    "nearest_time_join_authorized": false
+  },
+  "prelabel_complete_clock_rows": 0,
+  "prelabel_incomplete_clock_rows": 3752,
+  "required_invariant": "source_available_at <= feature_cutoff_time <= decision_time <= entry_eligible_time",
+  "schema_version": "xauusd_step_2_timestamp_availability_audit_v1",
+  "status": "REPAIR_REQUIRED"
+}

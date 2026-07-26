@@ -1,0 +1,109 @@
+{
+  "action_rows": 117534,
+  "entered_primary_fit": false,
+  "features_built_for_journey": false,
+  "groups": [
+    {
+      "dimension": "source_id",
+      "rows": 44243,
+      "value": "COMEX_RESEARCH_ACTIONS",
+      "weighted_rows": 23167.666666666664,
+      "weighted_win_rate": 0.29602319324345705
+    },
+    {
+      "dimension": "source_id",
+      "rows": 72201,
+      "value": "RESEARCH_NEGATIVE_SPOT_ACTIONS",
+      "weighted_rows": 28060.666666666664,
+      "weighted_win_rate": 0.38698296547955635
+    },
+    {
+      "dimension": "regime",
+      "rows": 26915,
+      "value": "CHOP",
+      "weighted_rows": 12076.833333333332,
+      "weighted_win_rate": 0.330232814893529
+    },
+    {
+      "dimension": "regime",
+      "rows": 1581,
+      "value": "COMPRESSION",
+      "weighted_rows": 705.3333333333333,
+      "weighted_win_rate": 0.3605860113421552
+    },
+    {
+      "dimension": "regime",
+      "rows": 48411,
+      "value": "TRANSITION_UNKNOWN",
+      "weighted_rows": 21339.5,
+      "weighted_win_rate": 0.34065153041698865
+    },
+    {
+      "dimension": "regime",
+      "rows": 10789,
+      "value": "TREND_DOWN",
+      "weighted_rows": 4402.5,
+      "weighted_win_rate": 0.3586219950785538
+    },
+    {
+      "dimension": "regime",
+      "rows": 14892,
+      "value": "TREND_UP",
+      "weighted_rows": 6974.333333333332,
+      "weighted_win_rate": 0.34703436409692684
+    },
+    {
+      "dimension": "regime",
+      "rows": 13856,
+      "value": "UNSAFE_SHOCK",
+      "weighted_rows": 5729.833333333333,
+      "weighted_win_rate": 0.3850315599639314
+    },
+    {
+      "dimension": "action_id",
+      "rows": 19080,
+      "value": "FAST_1R_4H",
+      "weighted_rows": 6382.5,
+      "weighted_win_rate": 0.3915393654524089
+    },
+    {
+      "dimension": "action_id",
+      "rows": 25528,
+      "value": "INTRADAY_1P5R_12H",
+      "weighted_rows": 9614.833333333332,
+      "weighted_win_rate": 0.397042763785124
+    },
+    {
+      "dimension": "action_id",
+      "rows": 13844,
+      "value": "INTRADAY_1P5R_3H",
+      "weighted_rows": 5708.0,
+      "weighted_win_rate": 0.32530366736743754
+    },
+    {
+      "dimension": "action_id",
+      "rows": 23109,
+      "value": "RUN_2R_6H",
+      "weighted_rows": 15028.666666666666,
+      "weighted_win_rate": 0.2797098877700395
+    },
+    {
+      "dimension": "action_id",
+      "rows": 7290,
+      "value": "SCALP_1P25R_1P5H",
+      "weighted_rows": 2430.9999999999995,
+      "weighted_win_rate": 0.32812285753462284
+    },
+    {
+      "dimension": "action_id",
+      "rows": 27593,
+      "value": "SWING_2R_36H",
+      "weighted_rows": 12063.333333333332,
+      "weighted_win_rate": 0.3765542967670627
+    }
+  ],
+  "resolved_rows": 116444,
+  "schema_version": "xauusd_step_4_journey_label_diagnostic_v1",
+  "unresolved_rows": 1090,
+  "weighted_win_rate": 0.34584702475843465
+}

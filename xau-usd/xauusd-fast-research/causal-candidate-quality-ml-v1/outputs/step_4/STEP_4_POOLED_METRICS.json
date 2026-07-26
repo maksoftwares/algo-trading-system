@@ -1,0 +1,482 @@
+{
+  "HGB_B123_CROSSASSET_ABLATION": {
+    "attribution": [
+      {
+        "dimension": "family_id",
+        "rows": 446,
+        "value": "R1_UPTREND",
+        "weight_fraction": 0.23707473881596572,
+        "weighted_mean_stress_r": 0.45264470123812106
+      },
+      {
+        "dimension": "family_id",
+        "rows": 29,
+        "value": "R2_DOWNTREND",
+        "weight_fraction": 0.014733458344495045,
+        "weighted_mean_stress_r": 0.33997786257300955
+      },
+      {
+        "dimension": "family_id",
+        "rows": 108,
+        "value": "R3_COMPRESSION",
+        "weight_fraction": 0.036967586391642104,
+        "weighted_mean_stress_r": 0.6198922274940315
+      },
+      {
+        "dimension": "family_id",
+        "rows": 144,
+        "value": "R4_CHOP",
+        "weight_fraction": 0.07447093490490223,
+        "weighted_mean_stress_r": 0.0797696313237103
+      },
+      {
+        "dimension": "family_id",
+        "rows": 229,
+        "value": "R5_TRANSITION",
+        "weight_fraction": 0.12188588266809537,
+        "weighted_mean_stress_r": 0.09879300365651596
+      },
+      {
+        "dimension": "family_id",
+        "rows": 42,
+        "value": "V25_CHOP",
+        "weight_fraction": 0.01982319849986606,
+        "weighted_mean_stress_r": 0.2678344723009057
+      },
+      {
+        "dimension": "family_id",
+        "rows": 366,
+        "value": "V57_BREAK_SWING_H4ADX_HIGH",
+        "weight_fraction": 0.1958210554513796,
+        "weighted_mean_stress_r": 0.28129532676114327
+      },
+      {
+        "dimension": "family_id",
+        "rows": 395,
+        "value": "V7_SWING_HEALTH",
+        "weight_fraction": 0.20921510849182962,
+        "weighted_mean_stress_r": 0.1933047834906765
+      },
+      {
+        "dimension": "family_id",
+        "rows": 173,
+        "value": "V8_RETEST_HEALTH",
+        "weight_fraction": 0.09000803643182427,
+        "weighted_mean_stress_r": 0.28860404875412293
+      },
+      {
+        "dimension": "direction",
+        "rows": 1126,
+        "value": "LONG",
+        "weight_fraction": 0.5868381105455845,
+        "weighted_mean_stress_r": 0.3125780116013433
+      },
+      {
+        "dimension": "direction",
+        "rows": 806,
+        "value": "SHORT",
+        "weight_fraction": 0.41316188945441557,
+        "weighted_mean_stress_r": 0.23379877563565513
+      }
+    ],
+    "baseline": {
+      "episodes": 2108,
+      "raw_candidates_per_weekday": 1.4038338658146965,
+      "rows": 2197,
+      "selected_fraction": 1.0,
+      "structural_episodes_per_weekday": 1.346964856230032,
+      "weighted_max_drawdown_r": 59.081862189177656,
+      "weighted_mean_stress_r": 0.26515918705566327,
+      "weighted_profit_factor": 1.4400632519699734,
+      "weighted_r_sum": 558.9555663133382,
+      "win_rate": 0.4642694583522986
+    },
+    "constant_fit_prior": {
+      "weighted_average_precision": 0.4650954286393734,
+      "weighted_brier": 0.25185984408642276,
+      "weighted_ece": 0.0505661273484454,
+      "weighted_log_loss": 0.6969980371083608,
+      "weighted_roc_auc": 0.49644988372373255
+    },
+    "probability": {
+      "weighted_average_precision": 0.44727364365715383,
+      "weighted_brier": 0.2693247828022986,
+      "weighted_ece": 0.11612564344770786,
+      "weighted_log_loss": 0.7400288765982654,
+      "weighted_roc_auc": 0.46257390270548177
+    },
+    "selected": {
+      "episodes": 1869,
+      "raw_candidates_per_weekday": 1.2345047923322683,
+      "rows": 1932,
+      "selected_fraction": 0.8793809740555303,
+      "structural_episodes_per_weekday": 1.1942492012779553,
+      "weighted_max_drawdown_r": 59.081862189177656,
+      "weighted_mean_stress_r": 0.28002943361998434,
+      "weighted_profit_factor": 1.469383322085639,
+      "weighted_r_sum": 522.6749378517009,
+      "win_rate": 0.4715320910973085
+    },
+    "selected_minus_baseline_weighted_mean_stress_r": 0.014870246564321066
+  },
+  "HGB_B12_PRIMARY": {
+    "attribution": [
+      {
+        "dimension": "family_id",
+        "rows": 476,
+        "value": "R1_UPTREND",
+        "weight_fraction": 0.20747252747252748,
+        "weighted_mean_stress_r": 0.41305505522938024
+      },
+      {
+        "dimension": "family_id",
+        "rows": 37,
+        "value": "R2_DOWNTREND",
+        "weight_fraction": 0.015604395604395605,
+        "weighted_mean_stress_r": 0.3657086058619984
+      },
+      {
+        "dimension": "family_id",
+        "rows": 163,
+        "value": "R3_COMPRESSION",
+        "weight_fraction": 0.045054945054945054,
+        "weighted_mean_stress_r": 0.41826005887275447
+      },
+      {
+        "dimension": "family_id",
+        "rows": 207,
+        "value": "R4_CHOP",
+        "weight_fraction": 0.08791208791208792,
+        "weighted_mean_stress_r": 0.029683992416936728
+      },
+      {
+        "dimension": "family_id",
+        "rows": 253,
+        "value": "R5_TRANSITION",
+        "weight_fraction": 0.11032967032967032,
+        "weighted_mean_stress_r": 0.0903510089429086
+      },
+      {
+        "dimension": "family_id",
+        "rows": 61,
+        "value": "V25_CHOP",
+        "weight_fraction": 0.023736263736263738,
+        "weighted_mean_stress_r": 0.16359888019878607
+      },
+      {
+        "dimension": "family_id",
+        "rows": 528,
+        "value": "V57_BREAK_SWING_H4ADX_HIGH",
+        "weight_fraction": 0.23186813186813188,
+        "weighted_mean_stress_r": 0.23479013292005835
+      },
+      {
+        "dimension": "family_id",
+        "rows": 448,
+        "value": "V7_SWING_HEALTH",
+        "weight_fraction": 0.1945054945054945,
+        "weighted_mean_stress_r": 0.2261933979480604
+      },
+      {
+        "dimension": "family_id",
+        "rows": 195,
+        "value": "V8_RETEST_HEALTH",
+        "weight_fraction": 0.08351648351648351,
+        "weighted_mean_stress_r": 0.3093924738536242
+      },
+      {
+        "dimension": "direction",
+        "rows": 1349,
+        "value": "LONG",
+        "weight_fraction": 0.5734065934065934,
+        "weighted_mean_stress_r": 0.2805887600695064
+      },
+      {
+        "dimension": "direction",
+        "rows": 1019,
+        "value": "SHORT",
+        "weight_fraction": 0.4265934065934066,
+        "weighted_mean_stress_r": 0.21119468840647365
+      }
+    ],
+    "baseline": {
+      "episodes": 2275,
+      "raw_candidates_per_weekday": 1.5130990415335464,
+      "rows": 2368,
+      "selected_fraction": 1.0,
+      "structural_episodes_per_weekday": 1.4536741214057507,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_stress_r": 0.25098570664138625,
+      "weighted_profit_factor": 1.4142405281207302,
+      "weighted_r_sum": 570.9924826091537,
+      "win_rate": 0.45988175675675674
+    },
+    "constant_fit_prior": {
+      "weighted_average_precision": 0.45983477837023057,
+      "weighted_brier": 0.2506716110228361,
+      "weighted_ece": 0.04139230568914548,
+      "weighted_log_loss": 0.694559205964381,
+      "weighted_roc_auc": 0.49554822309528185
+    },
+    "probability": {
+      "weighted_average_precision": 0.4804633229536923,
+      "weighted_brier": 0.2557924547935506,
+      "weighted_ece": 0.06009193452817858,
+      "weighted_log_loss": 0.7073239597469368,
+      "weighted_roc_auc": 0.5193164716090694
+    },
+    "selected": {
+      "episodes": 2275,
+      "raw_candidates_per_weekday": 1.5130990415335464,
+      "rows": 2368,
+      "selected_fraction": 1.0,
+      "structural_episodes_per_weekday": 1.4536741214057507,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_stress_r": 0.25098570664138625,
+      "weighted_profit_factor": 1.4142405281207302,
+      "weighted_r_sum": 570.9924826091537,
+      "win_rate": 0.45988175675675674
+    },
+    "selected_minus_baseline_weighted_mean_stress_r": 0.0
+  },
+  "HGB_B1_ABLATION": {
+    "attribution": [
+      {
+        "dimension": "family_id",
+        "rows": 514,
+        "value": "R1_UPTREND",
+        "weight_fraction": 0.20586060891188923,
+        "weighted_mean_stress_r": 0.4413635512715618
+      },
+      {
+        "dimension": "family_id",
+        "rows": 43,
+        "value": "R2_DOWNTREND",
+        "weight_fraction": 0.016936622084817526,
+        "weighted_mean_stress_r": -0.12225353422794444
+      },
+      {
+        "dimension": "family_id",
+        "rows": 183,
+        "value": "R3_COMPRESSION",
+        "weight_fraction": 0.04610524900866994,
+        "weighted_mean_stress_r": 0.5083375532581426
+      },
+      {
+        "dimension": "family_id",
+        "rows": 243,
+        "value": "R4_CHOP",
+        "weight_fraction": 0.09415955373344982,
+        "weighted_mean_stress_r": 0.10426599605252707
+      },
+      {
+        "dimension": "family_id",
+        "rows": 278,
+        "value": "R5_TRANSITION",
+        "weight_fraction": 0.11190268163183009,
+        "weighted_mean_stress_r": 0.09271738318440856
+      },
+      {
+        "dimension": "family_id",
+        "rows": 67,
+        "value": "V25_CHOP",
+        "weight_fraction": 0.023388668593319444,
+        "weighted_mean_stress_r": 0.29421949416752824
+      },
+      {
+        "dimension": "family_id",
+        "rows": 507,
+        "value": "V57_BREAK_SWING_H4ADX_HIGH",
+        "weight_fraction": 0.20444922373815444,
+        "weighted_mean_stress_r": 0.2582724444969325
+      },
+      {
+        "dimension": "family_id",
+        "rows": 537,
+        "value": "V7_SWING_HEALTH",
+        "weight_fraction": 0.2141272935009073,
+        "weighted_mean_stress_r": 0.18914333905639066
+      },
+      {
+        "dimension": "family_id",
+        "rows": 211,
+        "value": "V8_RETEST_HEALTH",
+        "weight_fraction": 0.08307009879696216,
+        "weighted_mean_stress_r": 0.255429134886768
+      },
+      {
+        "dimension": "direction",
+        "rows": 1460,
+        "value": "LONG",
+        "weight_fraction": 0.5691914779219033,
+        "weighted_mean_stress_r": 0.2922740394739751
+      },
+      {
+        "dimension": "direction",
+        "rows": 1123,
+        "value": "SHORT",
+        "weight_fraction": 0.4308085220780966,
+        "weighted_mean_stress_r": 0.20302102039074066
+      }
+    ],
+    "baseline": {
+      "episodes": 2783,
+      "raw_candidates_per_weekday": 1.8587859424920128,
+      "rows": 2909,
+      "selected_fraction": 1.0,
+      "structural_episodes_per_weekday": 1.7782747603833866,
+      "weighted_max_drawdown_r": 87.27275959964294,
+      "weighted_mean_stress_r": 0.24236829666841023,
+      "weighted_profit_factor": 1.3968809637825634,
+      "weighted_r_sum": 674.5109696281856,
+      "win_rate": 0.4554829838432451
+    },
+    "constant_fit_prior": {
+      "weighted_average_precision": 0.45892509334317927,
+      "weighted_brier": 0.2496718163006019,
+      "weighted_ece": 0.0344548854851397,
+      "weighted_log_loss": 0.6925303123409342,
+      "weighted_roc_auc": 0.49838730941795684
+    },
+    "probability": {
+      "weighted_average_precision": 0.4621926544209203,
+      "weighted_brier": 0.25470488970641886,
+      "weighted_ece": 0.05136323444525372,
+      "weighted_log_loss": 0.7034826012736122,
+      "weighted_roc_auc": 0.478166633923439
+    },
+    "selected": {
+      "episodes": 2486,
+      "raw_candidates_per_weekday": 1.650479233226837,
+      "rows": 2583,
+      "selected_fraction": 0.8879339979374355,
+      "structural_episodes_per_weekday": 1.5884984025559106,
+      "weighted_max_drawdown_r": 87.27275959964294,
+      "weighted_mean_stress_r": 0.2538230782317187,
+      "weighted_profit_factor": 1.4179858582170572,
+      "weighted_r_sum": 629.4389301682904,
+      "win_rate": 0.462253193960511
+    },
+    "selected_minus_baseline_weighted_mean_stress_r": 0.011454781563308453
+  },
+  "LOGIT_B12_CHALLENGER": {
+    "attribution": [
+      {
+        "dimension": "family_id",
+        "rows": 443,
+        "value": "R1_UPTREND",
+        "weight_fraction": 0.21852004960727575,
+        "weighted_mean_stress_r": 0.43315434749737086
+      },
+      {
+        "dimension": "family_id",
+        "rows": 31,
+        "value": "R2_DOWNTREND",
+        "weight_fraction": 0.014882182720132286,
+        "weighted_mean_stress_r": -0.23911878171627243
+      },
+      {
+        "dimension": "family_id",
+        "rows": 123,
+        "value": "R3_COMPRESSION",
+        "weight_fraction": 0.04059528730880529,
+        "weighted_mean_stress_r": 0.6066308140216344
+      },
+      {
+        "dimension": "family_id",
+        "rows": 199,
+        "value": "R4_CHOP",
+        "weight_fraction": 0.0954940057875155,
+        "weighted_mean_stress_r": 0.04406068559694902
+      },
+      {
+        "dimension": "family_id",
+        "rows": 241,
+        "value": "R5_TRANSITION",
+        "weight_fraction": 0.11880942538238942,
+        "weighted_mean_stress_r": 0.07981332346901523
+      },
+      {
+        "dimension": "family_id",
+        "rows": 57,
+        "value": "V25_CHOP",
+        "weight_fraction": 0.025051674245556016,
+        "weighted_mean_stress_r": 0.1992496981845724
+      },
+      {
+        "dimension": "family_id",
+        "rows": 395,
+        "value": "V57_BREAK_SWING_H4ADX_HIGH",
+        "weight_fraction": 0.19594873914840844,
+        "weighted_mean_stress_r": 0.2872336894730179
+      },
+      {
+        "dimension": "family_id",
+        "rows": 408,
+        "value": "V7_SWING_HEALTH",
+        "weight_fraction": 0.1999173212071104,
+        "weighted_mean_stress_r": 0.21526494025483375
+      },
+      {
+        "dimension": "family_id",
+        "rows": 188,
+        "value": "V8_RETEST_HEALTH",
+        "weight_fraction": 0.09078131459280694,
+        "weighted_mean_stress_r": 0.3079564905600937
+      },
+      {
+        "dimension": "direction",
+        "rows": 1195,
+        "value": "LONG",
+        "weight_fraction": 0.5770979743695743,
+        "weighted_mean_stress_r": 0.3057380403356137
+      },
+      {
+        "dimension": "direction",
+        "rows": 890,
+        "value": "SHORT",
+        "weight_fraction": 0.42290202563042584,
+        "weighted_mean_stress_r": 0.2015513118925241
+      }
+    ],
+    "baseline": {
+      "episodes": 2275,
+      "raw_candidates_per_weekday": 1.5130990415335464,
+      "rows": 2368,
+      "selected_fraction": 1.0,
+      "structural_episodes_per_weekday": 1.4536741214057507,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_stress_r": 0.25098570664138625,
+      "weighted_profit_factor": 1.4142405281207302,
+      "weighted_r_sum": 570.9924826091537,
+      "win_rate": 0.45988175675675674
+    },
+    "constant_fit_prior": {
+      "weighted_average_precision": 0.45983477837023057,
+      "weighted_brier": 0.2506716110228361,
+      "weighted_ece": 0.04139230568914548,
+      "weighted_log_loss": 0.694559205964381,
+      "weighted_roc_auc": 0.49554822309528185
+    },
+    "probability": {
+      "weighted_average_precision": 0.4806561459538823,
+      "weighted_brier": 0.25515529628892564,
+      "weighted_ece": 0.053999027856894866,
+      "weighted_log_loss": 0.7076272798676573,
+      "weighted_roc_auc": 0.5172642500962727
+    },
+    "selected": {
+      "episodes": 2018,
+      "raw_candidates_per_weekday": 1.3322683706070289,
+      "rows": 2085,
+      "selected_fraction": 0.8804898648648649,
+      "structural_episodes_per_weekday": 1.2894568690095847,
+      "weighted_max_drawdown_r": 74.69151348250381,
+      "weighted_mean_stress_r": 0.26167726183322404,
+      "weighted_profit_factor": 1.4358783524722838,
+      "weighted_r_sum": 527.4977469788074,
+      "win_rate": 0.4671462829736211
+    },
+    "selected_minus_baseline_weighted_mean_stress_r": 0.010691555191837787
+  }
+}
