@@ -145,6 +145,57 @@ Statistical significance and tradeability are not the same thing.
 
 Evidence: `outputs/MICRO_CENSUS.json`, `outputs/BROKER_SPREAD_TICKS.json`.
 
+## R8 — Volatility-conditioned microstructure (2026-07-26)
+
+**The most seductive false positive in this lane. Worth reading before proposing
+anything else.**
+
+The hypothesis was well motivated, not fishing: the broker's spread is *fixed*
+(EURUSD 0.70 pips at every hour), while the size of predictable moves scales with
+volatility. R7 measured effects averaged over all conditions, which mixes calm
+hours where cost dominates with volatile hours where it might not. So volatility
+should buy affordability.
+
+Searched 4 signals × 5 horizons × 3 symbols × 5 volatility quintiles = **300
+cells**, scoring each against measured round-trip cost.
+
+**It appeared to work.** 8 cells cleared cost with |t| > 2, all at the 4h horizon,
+with edges of 24–63 points against 11–17 points of cost — 2.2x to 4.8x cost. On a
+naive reading that is a tradeable system.
+
+**Four things said otherwise before any further data was touched:**
+
+1. 8 hits from 300 cells is *below* the ~15 expected at a 5% false-positive rate;
+2. the winning volatility quintiles were scattered (Q2, Q3, Q4, Q5) with no
+   monotone relationship to volatility — the opposite of a mechanism;
+3. the sign flipped between pairs;
+4. a 50-point edge is an implausibly large fraction of a 4h EURUSD move.
+
+**Replication test.** The identical measurement was re-run on validation and each
+cell checked for the same sign, still clearing cost, still |t| > 2 — a
+replication, not a new search, so it cannot manufacture a result.
+
+| Result | Count |
+|---|---|
+| Cells selected on design | 8 |
+| **Replicated on validation** | **0** |
+| Sign flipped entirely | 5 |
+| Reached \|t\| > 2 | 0 (best 1.67) |
+
+**Result: REJECTED as multiple-testing noise.**
+
+**The lesson, which is the durable output.** An edge of 4.8x cost with t = 2.8 was
+available to ship, and it was worthless. What killed it was not a better idea but
+a cheap procedural habit: count the cells searched, compare the hit rate to chance,
+distrust scattered parameters and flipped signs, and re-run the same measurement on
+new data before believing anything. This repo's four prior reversals
+(PF 1.99 → 0.82, claimed 2.03 → 1.20, EURUSD 1.3075 → 1.019 ex-top-5%, and R4's
+6-of-6 years → sign reversal) are all the same error. Any future FX or XAU
+candidate should face this replication step before it is written up, let alone
+deployed.
+
+Evidence: `outputs/VOL_CONDITIONED_CENSUS.json`, `outputs/VOL_REPLICATION_TEST.json`.
+
 ## R6a — Carry re-tested with measured broker swap (2026-07-26)
 
 R6 rejected carry on the assumption that retail swap markup destroys the

@@ -5,10 +5,11 @@ carries **no** demo authority, no live authority, no chart attachment, no preset
 and no broker-action file. It does not touch any MT5 runtime, terminal, profile
 or the XAUUSD lane.
 
-**Read [`FINDINGS.md`](FINDINGS.md) first.** Seven hypothesis classes were tested
-against the goal of a profitable, higher-frequency Forex system; all seven were
+**Read [`FINDINGS.md`](FINDINGS.md) first.** Eight hypothesis classes were tested
+against the goal of a profitable, higher-frequency Forex system; all eight were
 rejected, and each is recorded in [`REJECTIONS.md`](REJECTIONS.md) with the
-evidence that closed it.
+evidence that closed it. Read **R8** for the near-miss that mattered: an edge at
+4.8x measured cost that vanished entirely on replication.
 
 The result reduces to one measured inequality: **the bid-ask spread is wider than
 the entire predictable component of FX returns.** EURUSD trades at a fixed 0.70
@@ -58,6 +59,8 @@ python acquire_fred_fx.py            # 27.5y daily panel, 7 majors
 python run_premia_census.py          # cross-sectional premia + carry -> R5, R6
 python build_micro_features.py       # order-book depth features (~453s)
 python run_micro_census.py           # microstructure vs measured cost -> R7
+python run_vol_conditioned_census.py # 300-cell vol-conditioned search -> R8
+python run_vol_replication_test.py   # replication that rejected R8
 ```
 
 Broker measurement needs the MT5 module, which requires Python 3.12 (the
@@ -97,16 +100,33 @@ The properties that make the numbers trustworthy, each pinned by a test:
 
 ## Cost model
 
-Assumed, **not measured** — no FX broker spread exists anywhere in this repo.
-Effective spreads of 12 / 18 / 14 points for EURUSD / GBPUSD / USDJPY, plus 2
-points entry and 2 points stop slippage. See `FINDINGS.md` §"Cost-model caveat".
-Measuring the demo account's true spread and swap is the recommended first
-follow-up, because it is the only thing that could revive the carry rejection.
+**Measured**, from real broker tick history (`outputs/BROKER_SPREAD_TICKS.json`).
+Spreads are *fixed* — p25 = median = p95 at every hour except the 21:00 UTC
+rollover:
+
+| AUDUSD | EURUSD | USDJPY | GBPUSD | USDCHF | USDCAD | USDMXN | USDZAR |
+|---|---|---|---|---|---|---|---|
+| 0.60 | 0.70 | 1.20 | 1.30 | 1.40 | 2.00 | 21.2 | 50.0 |
+
+`src/report.py` exposes both models: `COSTS` is the assumed one used by R1–R6 and
+kept verbatim so those runs stay reproducible, and `MEASURED_SPREAD_POINTS` /
+`measured_costs()` are the real figures used from R7 onward. Real EURUSD cost is
+~30% *below* what R1–R6 assumed, so those rejections ran against a pessimistic
+model and stand regardless.
+
+Swap is skimmed **asymmetrically** — near-fair on one side of each pair, punitive
+on the other (GBPJPY long ~96% pass-through, EURUSD long ~0%).
 
 ## What not to retry
 
-`REJECTIONS.md` closes: bar-geometry breakout/channel/fade families on majors,
-the inherited EURUSD RSI/Bollinger fade at retail cost, intraday
-momentum/reversion conditioning, the Tokyo-hour USD drift, and price-only
-cross-sectional momentum and value. Another EURUSD parameter search is not a
-next step.
+`REJECTIONS.md` closes eight classes: bar-geometry breakout/channel/fade families
+on majors, the inherited EURUSD RSI/Bollinger fade, intraday momentum/reversion
+conditioning, the Tokyo-hour USD drift, price-only cross-sectional momentum and
+value, carry (both on interbank rates and on measured broker swap), tick
+microstructure/order flow, and volatility-conditioned microstructure.
+
+Before writing up any future candidate — here or in the XAU lane — run the R8
+replication step: count the cells searched, compare the hit rate against chance,
+distrust scattered parameters and flipped signs, and re-run the identical
+measurement on untouched data. R8 offered an edge at 4.8x measured cost with
+t = 2.8 and **none of it replicated**.

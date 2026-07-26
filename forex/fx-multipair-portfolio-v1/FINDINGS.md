@@ -6,10 +6,15 @@ Status: **`NO_DEPLOYABLE_FX_EDGE_FOUND_STOP`**
 ## Bottom line
 
 I could not find a profitable Forex system on this evidence, and I am not going
-to ship one that only looks profitable. **Seven** independent hypothesis classes
-were tested and all seven were rejected, the last two against *measured* broker
+to ship one that only looks profitable. **Eight** independent hypothesis classes
+were tested and all eight were rejected, the last three against *measured* broker
 costs rather than assumed ones. The rejections are in `REJECTIONS.md` with the
 evidence that closed each.
+
+R8 is the one to read: a volatility-conditioned microstructure edge at **2.2x to
+4.8x measured cost with t up to 2.8** was available to ship, and **0 of its 8
+cells replicated** on new data. It was multiple-testing noise from a 300-cell
+search.
 
 This is a negative result, but a *load-bearing* one: it quantifies why the
 existing Forex lane never passed, closes the search space with numbers rather
@@ -63,6 +68,7 @@ counts should be re-read in light of this.
 | R6 | FX carry with real OECD interbank rates | Real premium (SR 0.40, t 2.11) but 100% of it is interest accrual |
 | R6a | Carry re-tested on **measured broker swap** | Favourable-side pass-through is real (91–96% on JPY pairs) but nets only ≈+0.5%/yr vs 68.6% drawdown |
 | R7 | **Tick microstructure / order flow** — depth imbalance, microprice, quote asymmetry | Rejected. Best decile spread ~6 pts vs 22–34 pts required. Highly significant (t −9.3) but 1.6 pts wide |
+| R8 | **Volatility-conditioned microstructure** (fixed spread vs vol-scaling signal) | Rejected. 8 of 300 cells cleared cost at 2.2–4.8x with \|t\|>2; **0 replicated**, 5 flipped sign |
 
 ## Why the existing Forex lane never passed
 
@@ -97,20 +103,25 @@ up against the client on both sides — so the component that *is* the edge is
 precisely the component the broker keeps, and what is left is a 55%-drawdown
 spot coin flip.
 
-**This is falsifiable and cheap to check:** read the actual swap rates for the
-demo account's FX symbols. If pass-through is favourable, carry becomes worth a
-real design pass. That is the highest-value next experiment in this lane.
+**This was falsifiable and cheap, so it was checked** — see R6a. The account's real
+swap rates were read, and the picture is more interesting than "the broker keeps
+it": pass-through is *asymmetric*, near-fair on one side of each pair and punitive
+on the other (GBPJPY long ~96%, USDJPY long ~91%, EURUSD long ~0%). Taking only
+the favourable sides is genuinely positive-expectancy — and still not enough:
+**+2.10%/yr accrual − 1.61%/yr historical spot drift ≈ +0.5%/yr net, against a
+68.6% historical drawdown.** Rejected as deployable, but on measurement rather
+than assumption.
 
 ## The structural problem
 
 Three factors compound:
 
-1. **Cost vs edge.** Real intraday regularities in majors are ~5–12 points.
-   Retail round-trip cost is ~16–22 points. Short-horizon systematic FX on
-   majors is arithmetically closed at retail spread.
+1. **Cost vs edge.** Real intraday regularities in majors are ~1–12 points.
+   Measured round-trip cost is 11–17 points on the majors. Short-horizon
+   systematic FX on majors is arithmetically closed at this account's spread.
 2. **Horizon.** Cost stops mattering only at multi-week horizons (~1.4bp), but
    at that horizon the price-only premia are dead (R5) and only carry survives,
-   which the broker taxes (R6).
+   which the broker taxes asymmetrically (R6, R6a).
 3. **Universe.** Three USD majors is far too thin for cross-sectional work, and
    even seven majors over 27 years is thin. Published FX premia use 10–30
    currencies, and the G10 momentum premium largely disappeared after 2008 —

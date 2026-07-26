@@ -1,0 +1,123 @@
+{
+  "cells_searched": 300,
+  "design_selected": 8,
+  "expected_false_positives_at_5pct": 15.0,
+  "method": "identical measurement re-run on validation; same cell, sign, and cost bar",
+  "records": [
+    {
+      "cell": [
+        "combo",
+        "4h",
+        "GBPUSD",
+        4
+      ],
+      "design_edge_points": 44.56,
+      "replicates": false,
+      "same_sign": true,
+      "validation_clears_cost": true,
+      "validation_edge_points": 37.55,
+      "validation_t": 0.92
+    },
+    {
+      "cell": [
+        "depth_imbalance",
+        "4h",
+        "EURUSD",
+        5
+      ],
+      "design_edge_points": 50.16,
+      "replicates": false,
+      "same_sign": false,
+      "validation_clears_cost": true,
+      "validation_edge_points": -37.96,
+      "validation_t": -1.38
+    },
+    {
+      "cell": [
+        "depth_imbalance",
+        "4h",
+        "GBPUSD",
+        2
+      ],
+      "design_edge_points": -47.15,
+      "replicates": false,
+      "same_sign": true,
+      "validation_clears_cost": true,
+      "validation_edge_points": -36.18,
+      "validation_t": -1.29
+    },
+    {
+      "cell": [
+        "micro_dev_points",
+        "4h",
+        "EURUSD",
+        3
+      ],
+      "design_edge_points": 24.12,
+      "replicates": false,
+      "same_sign": false,
+      "validation_clears_cost": true,
+      "validation_edge_points": -26.81,
+      "validation_t": -1.38
+    },
+    {
+      "cell": [
+        "micro_dev_points",
+        "4h",
+        "EURUSD",
+        5
+      ],
+      "design_edge_points": 52.98,
+      "replicates": false,
+      "same_sign": false,
+      "validation_clears_cost": true,
+      "validation_edge_points": -33.13,
+      "validation_t": -1.04
+    },
+    {
+      "cell": [
+        "micro_dev_points",
+        "4h",
+        "GBPUSD",
+        2
+      ],
+      "design_edge_points": -39.13,
+      "replicates": false,
+      "same_sign": false,
+      "validation_clears_cost": true,
+      "validation_edge_points": 34.5,
+      "validation_t": 1.67
+    },
+    {
+      "cell": [
+        "signed_flow",
+        "4h",
+        "EURUSD",
+        5
+      ],
+      "design_edge_points": 47.72,
+      "replicates": false,
+      "same_sign": true,
+      "validation_clears_cost": true,
+      "validation_edge_points": 33.19,
+      "validation_t": 1.36
+    },
+    {
+      "cell": [
+        "signed_flow",
+        "4h",
+        "GBPUSD",
+        4
+      ],
+      "design_edge_points": 63.49,
+      "replicates": false,
+      "same_sign": false,
+      "validation_clears_cost": true,
+      "validation_edge_points": -48.3,
+      "validation_t": -1.05
+    }
+  ],
+  "replicated": 0,
+  "schema_version": "fx_vol_replication_v1",
+  "verdict": "R8_REJECTED_MULTIPLE_TESTING_NOISE"
+}
