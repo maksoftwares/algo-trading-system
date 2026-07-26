@@ -6,8 +6,8 @@ Status: **`NO_DEPLOYABLE_FX_EDGE_FOUND_STOP`**
 ## Bottom line
 
 I could not find a profitable Forex system on this evidence, and I am not going
-to ship one that only looks profitable. **Nine** independent hypothesis classes
-were tested and all nine were rejected, the last four against *measured* broker
+to ship one that only looks profitable. **Ten** independent hypothesis classes
+were tested and all ten were rejected, the last five against *measured* broker
 costs rather than assumed ones. The search space is now closed, majors and
 crosses alike. The rejections are in `REJECTIONS.md` with the
 evidence that closed each.
@@ -45,6 +45,14 @@ four to six times smaller than the cost of trading it. Statistical significance
 and tradeability are different things, and in liquid FX the gap between them is
 the spread.
 
+R10 puts the sharpest possible point on this. Stacking every advantage at once —
+the single most favourable regime (liquidity stress, where the broker's fixed
+spread is a genuine structural edge), the cheapest major, the longest horizon
+tested, and charging the broker's fixed cost instead of the true market spread —
+produces a clean monotone effect at t = 3.3–4.6 that peaks at **1.21x cost**, and
+then fails to replicate. Signal exists in FX. After every advantage is granted it
+is still roughly the same size as the cost of acting on it.
+
 And the only income that needs no signal — carry, paid for merely holding — nets
 about **+0.5%/yr** on measured swap after historical spot drift, against a
 **68.6%** historical drawdown.
@@ -79,6 +87,7 @@ counts should be re-read in light of this.
 | R7 | **Tick microstructure / order flow** — depth imbalance, microprice, quote asymmetry | Rejected. Best decile spread ~6 pts vs 22–34 pts required. Highly significant (t −9.3) but 1.6 pts wide |
 | R8 | **Volatility-conditioned microstructure** (fixed spread vs vol-scaling signal) | Rejected. 8 of 300 cells cleared cost at 2.2–4.8x with \|t\|>2; **0 replicated**, 5 flipped sign |
 | R9 | **Synthetic crosses** (EURGBP/EURJPY/GBPJPY) — R1 grid + momentum | Rejected. One survivor, GBPJPY Donchian at design PF 1.483, fell to **0.908 pooled out-of-sample** |
+| R10 | **Fixed-spread structural advantage** — R7 effects inside liquidity-stress bars, charged the broker's fixed cost | Rejected. 1 of 24 cells cleared cost (~1.2 expected by chance); peak **1.21x cost**, did not replicate |
 
 ## Why the existing Forex lane never passed
 

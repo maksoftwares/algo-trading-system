@@ -145,6 +145,52 @@ Statistical significance and tradeability are not the same thing.
 
 Evidence: `outputs/MICRO_CENSUS.json`, `outputs/BROKER_SPREAD_TICKS.json`.
 
+## R10 — The fixed-spread structural advantage (2026-07-26)
+
+**The last stone, and the one that makes the conclusion airtight.**
+
+This lane measured a genuine asymmetry and had not exploited it: the broker quotes
+a **fixed** spread (EURUSD 0.70 pips at every hour) while the true interbank
+spread in the Dukascopy quotes reaches 3.0 pips at its 99th percentile. Inside
+those bars the account is offered materially better-than-market execution — and
+liquidity withdrawal is exactly when transient dislocations are largest, which is
+where R7's real mean-reversion effect should pay.
+
+Critically this is *not* R8 repeated: R8 conditioned on realised volatility (how
+big moves are), R10 conditions on quoted spread (market-maker inventory stress).
+Different variable, different hypothesis.
+
+Method: measure the R7 effects inside the top-decile-quoted-spread bars, and
+charge the broker's **fixed** cost rather than the true spread. Grid deliberately
+pre-specified and small after R8's lesson — 2 signals × 4 horizons × 3 pairs =
+**24 cells**, not 300.
+
+**Result: REJECTED.** Exactly **1 of 24** cells cleared cost, against ~1.2 expected
+by chance at 5%. It did not replicate: EURUSD `signed_flow` at 60m went from 13.35
+points (1.21x cost, t = 3.35) on design to 4.73 points (t = 1.44) on validation —
+same sign, but below cost and not significant.
+
+**What the design window does show, and why it settles the question.** The effect
+is unmistakably real, with a clean monotone gradient in horizon on EURUSD:
+
+| Horizon | 5m | 15m | 30m | 60m |
+|---|---|---|---|---|
+| Edge (points) | 1.59 | 3.37 | 5.71 | **13.35** |
+| t | 4.56 | 4.03 | 3.44 | 3.35 |
+| Multiple of cost | 0.14 | 0.31 | 0.52 | **1.21** |
+
+A consistent, highly significant, monotonically growing effect — measured in the
+single most favourable regime available (liquidity stress), on the cheapest major,
+charged the broker's fixed cost rather than the true one. It still only reaches
+1.21x cost at its best, and then fails to replicate.
+
+That is the strongest available statement of this lane's conclusion. It is not
+that no signal exists in FX — signal demonstrably exists, at t > 4. It is that
+after stacking every advantage in its favour, the signal is roughly the same size
+as the cost of acting on it, and what little exceeds it does not persist.
+
+Evidence: `outputs/SPREAD_DISLOCATION_TEST.json`.
+
 ## R9 — Synthetic crosses, including the one candidate that reached validation (2026-07-26)
 
 **The last gap, now closed.** EURGBP / EURJPY / GBPJPY are tradeable on the

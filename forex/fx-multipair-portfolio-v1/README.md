@@ -5,8 +5,8 @@ carries **no** demo authority, no live authority, no chart attachment, no preset
 and no broker-action file. It does not touch any MT5 runtime, terminal, profile
 or the XAUUSD lane.
 
-**Read [`FINDINGS.md`](FINDINGS.md) first.** Nine hypothesis classes were tested
-against the goal of a profitable, higher-frequency Forex system; all nine were
+**Read [`FINDINGS.md`](FINDINGS.md) first.** Ten hypothesis classes were tested
+against the goal of a profitable, higher-frequency Forex system; all ten were
 rejected, and each is recorded in [`REJECTIONS.md`](REJECTIONS.md) with the
 evidence that closed it. Majors and crosses are both closed.
 
@@ -68,6 +68,7 @@ python run_vol_replication_test.py   # replication that rejected R8
 python build_crosses.py              # synthetic EURGBP/EURJPY/GBPJPY bid/ask bars
 python run_cross_search.py           # R1 grid + momentum on crosses -> R9
 python validate_gbpjpy_donchian.py   # full discipline on the one survivor
+python run_spread_dislocation_test.py # fixed-spread structural advantage -> R10
 ```
 
 Broker measurement needs the MT5 module, which requires Python 3.12 (the
@@ -126,12 +127,13 @@ on the other (GBPJPY long ~96% pass-through, EURUSD long ~0%).
 
 ## What not to retry
 
-`REJECTIONS.md` closes nine classes: bar-geometry breakout/channel/fade families
+`REJECTIONS.md` closes ten classes: bar-geometry breakout/channel/fade families
 on majors, the inherited EURUSD RSI/Bollinger fade, intraday momentum/reversion
 conditioning, the Tokyo-hour USD drift, price-only cross-sectional momentum and
 value, carry (both on interbank rates and on measured broker swap), tick
 microstructure/order flow, volatility-conditioned microstructure, and the
-synthetic crosses including their one surviving candidate.
+synthetic crosses including their one surviving candidate, and the fixed-spread
+structural advantage.
 
 Before writing up any future candidate — here or in the XAU lane — apply the R8
 and R9 checks, because both near-misses passed everything short of a holdout:

@@ -1,0 +1,386 @@
+{
+  "design": {
+    "micro_dev_points": {
+      "15m": {
+        "EURUSD": {
+          "best_abs_edge_points": 2.43,
+          "bottom_mean_points": 0.42,
+          "bottom_t": 0.4,
+          "clears_cost": false,
+          "edge_over_cost": 0.221,
+          "fixed_broker_cost_points": 11.0,
+          "n_stress_bars": 13720,
+          "signed_edge": 2.4344023323613615,
+          "signed_t": 2.575054226629488,
+          "stress_threshold_points": 4.5,
+          "top_mean_points": 2.43,
+          "top_t": 2.58
+        },
+        "GBPUSD": {
+          "best_abs_edge_points": 1.82,
+          "bottom_mean_points": 1.08,
+          "bottom_t": 0.63,
+          "clears_cost": false,
+          "edge_over_cost": 0.107,
+          "fixed_broker_cost_points": 17.0,
+          "n_stress_bars": 13718,
+          "signed_edge": 1.8181486880467115,
+          "signed_t": 1.3695068123004328,
+          "stress_threshold_points": 14.2,
+          "top_mean_points": 1.82,
+          "top_t": 1.37
+        },
+        "USDJPY": {
+          "best_abs_edge_points": 2.85,
+          "bottom_mean_points": 2.85,
+          "bottom_t": 1.73,
+          "clears_cost": false,
+          "edge_over_cost": 0.178,
+          "fixed_broker_cost_points": 16.0,
+          "n_stress_bars": 13720,
+          "signed_edge": 2.8491253644314596,
+          "signed_t": 1.7268921893701628,
+          "stress_threshold_points": 5.1,
+          "top_mean_points": -1.6,
+          "top_t": -0.55
+        }
+      },
+      "30m": {
+        "EURUSD": {
+          "best_abs_edge_points": 7.44,
+          "bottom_mean_points": -2.78,
+          "bottom_t": -1.47,
+          "clears_cost": false,
+          "edge_over_cost": 0.676,
+          "fixed_broker_cost_points": 11.0,
+          "n_stress_bars": 6860,
+          "signed_edge": 7.44023323615147,
+          "signed_t": 3.6904735161437228,
+          "stress_threshold_points": 4.4,
+          "top_mean_points": 7.44,
+          "top_t": 3.69
+        },
+        "GBPUSD": {
+          "best_abs_edge_points": 3.75,
+          "bottom_mean_points": 3.75,
+          "bottom_t": 1.22,
+          "clears_cost": false,
+          "edge_over_cost": 0.221,
+          "fixed_broker_cost_points": 17.0,
+          "n_stress_bars": 6859,
+          "signed_edge": 3.749271137026267,
+          "signed_t": 1.2161385304610408,
+          "stress_threshold_points": 14.3,
+          "top_mean_points": 2.39,
+          "top_t": 1.02
+        },
+        "USDJPY": {
+          "best_abs_edge_points": 4.95,
+          "bottom_mean_points": 4.95,
+          "bottom_t": 1.39,
+          "clears_cost": false,
+          "edge_over_cost": 0.309,
+          "fixed_broker_cost_points": 16.0,
+          "n_stress_bars": 6860,
+          "signed_edge": 4.945335276968052,
+          "signed_t": 1.3928531772694461,
+          "stress_threshold_points": 5.1,
+          "top_mean_points": -1.28,
+          "top_t": -0.22
+        }
+      },
+      "5m": {
+        "EURUSD": {
+          "best_abs_edge_points": 1.39,
+          "bottom_mean_points": -0.44,
+          "bottom_t": -1.12,
+          "clears_cost": false,
+          "edge_over_cost": 0.127,
+          "fixed_broker_cost_points": 11.0,
+          "n_stress_bars": 41161,
+          "signed_edge": 1.3936118532911923,
+          "signed_t": 3.675501523458135,
+          "stress_threshold_points": 4.5,
+          "top_mean_points": 1.39,
+          "top_t": 3.68
+        },
+        "GBPUSD": {
+          "best_abs_edge_points": 1.9,
+          "bottom_mean_points": 0.76,
+          "bottom_t": 1.26,
+          "clears_cost": false,
+          "edge_over_cost": 0.112,
+          "fixed_broker_cost_points": 17.0,
+          "n_stress_bars": 41153,
+          "signed_edge": 1.9014820213801322,
+          "signed_t": 3.4233735852236378,
+          "stress_threshold_points": 14.2,
+          "top_mean_points": 1.9,
+          "top_t": 3.42
+        },
+        "USDJPY": {
+          "best_abs_edge_points": 0.06,
+          "bottom_mean_points": 0.04,
+          "bottom_t": 0.07,
+          "clears_cost": false,
+          "edge_over_cost": 0.004,
+          "fixed_broker_cost_points": 16.0,
+          "n_stress_bars": 41158,
+          "signed_edge": 0.056608357628811584,
+          "signed_t": 0.09144904183982104,
+          "stress_threshold_points": 5.1,
+          "top_mean_points": 0.06,
+          "top_t": 0.09
+        }
+      },
+      "60m": {
+        "EURUSD": {
+          "best_abs_edge_points": 5.81,
+          "bottom_mean_points": 4.16,
+          "bottom_t": 1.04,
+          "clears_cost": false,
+          "edge_over_cost": 0.528,
+          "fixed_broker_cost_points": 11.0,
+          "n_stress_bars": 3430,
+          "signed_edge": 5.806122448979241,
+          "signed_t": 1.847060014742054,
+          "stress_threshold_points": 4.4,
+          "top_mean_points": 5.81,
+          "top_t": 1.85
+        },
+        "GBPUSD": {
+          "best_abs_edge_points": 8.33,
+          "bottom_mean_points": 8.33,
+          "bottom_t": 1.43,
+          "clears_cost": false,
+          "edge_over_cost": 0.49,
+          "fixed_broker_cost_points": 17.0,
+          "n_stress_bars": 3430,
+          "signed_edge": 8.332361516034869,
+          "signed_t": 1.434541488944409,
+          "stress_threshold_points": 14.2,
+          "top_mean_points": 1.19,
+          "top_t": 0.23
+        },
+        "USDJPY": {
+          "best_abs_edge_points": 8.35,
+          "bottom_mean_points": 4.69,
+          "bottom_t": 0.55,
+          "clears_cost": false,
+          "edge_over_cost": 0.522,
+          "fixed_broker_cost_points": 16.0,
+          "n_stress_bars": 3430,
+          "signed_edge": 8.352769679301188,
+          "signed_t": 2.0611517427636823,
+          "stress_threshold_points": 5.0,
+          "top_mean_points": 8.35,
+          "top_t": 2.06
+        }
+      }
+    },
+    "signed_flow": {
+      "15m": {
+        "EURUSD": {
+          "best_abs_edge_points": 3.37,
+          "bottom_mean_points": 3.37,
+          "bottom_t": 4.03,
+          "clears_cost": false,
+          "edge_over_cost": 0.306,
+          "fixed_broker_cost_points": 11.0,
+          "n_stress_bars": 13720,
+          "signed_edge": 3.3706268221571336,
+          "signed_t": 4.031900834566517,
+          "stress_threshold_points": 4.5,
+          "top_mean_points": -1.0,
+          "top_t": -1.12
+        },
+        "GBPUSD": {
+          "best_abs_edge_points": 3.18,
+          "bottom_mean_points": 3.18,
+          "bottom_t": 1.8,
+          "clears_cost": false,
+          "edge_over_cost": 0.187,
+          "fixed_broker_cost_points": 17.0,
+          "n_stress_bars": 13718,
+          "signed_edge": 3.1797505502564074,
+          "signed_t": 1.8020184305714186,
+          "stress_threshold_points": 14.2,
+          "top_mean_points": 0.9,
+          "top_t": 0.6
+        },
+        "USDJPY": {
+          "best_abs_edge_points": 1.32,
+          "bottom_mean_points": -1.32,
+          "bottom_t": -0.95,
+          "clears_cost": false,
+          "edge_over_cost": 0.082,
+          "fixed_broker_cost_points": 16.0,
+          "n_stress_bars": 13720,
+          "signed_edge": -1.316214233308646,
+          "signed_t": -0.9510884205216491,
+          "stress_threshold_points": 5.1,
+          "top_mean_points": -0.28,
+          "top_t": -0.23
+        }
+      },
+      "30m": {
+        "EURUSD": {
+          "best_abs_edge_points": 5.71,
+          "bottom_mean_points": 5.71,
+          "bottom_t": 3.44,
+          "clears_cost": false,
+          "edge_over_cost": 0.519,
+          "fixed_broker_cost_points": 11.0,
+          "n_stress_bars": 6860,
+          "signed_edge": 5.710603829160367,
+          "signed_t": 3.435337162511128,
+          "stress_threshold_points": 4.4,
+          "top_mean_points": -1.33,
+          "top_t": -0.77
+        },
+        "GBPUSD": {
+          "best_abs_edge_points": 9.39,
+          "bottom_mean_points": 9.39,
+          "bottom_t": 2.92,
+          "clears_cost": false,
+          "edge_over_cost": 0.552,
+          "fixed_broker_cost_points": 17.0,
+          "n_stress_bars": 6859,
+          "signed_edge": 9.387334315169287,
+          "signed_t": 2.9175903342801406,
+          "stress_threshold_points": 14.3,
+          "top_mean_points": 4.42,
+          "top_t": 1.39
+        },
+        "USDJPY": {
+          "best_abs_edge_points": 3.64,
+          "bottom_mean_points": 3.64,
+          "bottom_t": 1.23,
+          "clears_cost": false,
+          "edge_over_cost": 0.227,
+          "fixed_broker_cost_points": 16.0,
+          "n_stress_bars": 6860,
+          "signed_edge": 3.6394160583940702,
+          "signed_t": 1.230433110231607,
+          "stress_threshold_points": 5.1,
+          "top_mean_points": -1.36,
+          "top_t": -0.52
+        }
+      },
+      "5m": {
+        "EURUSD": {
+          "best_abs_edge_points": 1.59,
+          "bottom_mean_points": 1.59,
+          "bottom_t": 4.56,
+          "clears_cost": false,
+          "edge_over_cost": 0.145,
+          "fixed_broker_cost_points": 11.0,
+          "n_stress_bars": 41161,
+          "signed_edge": 1.5931026078479296,
+          "signed_t": 4.564834092896597,
+          "stress_threshold_points": 4.5,
+          "top_mean_points": -0.94,
+          "top_t": -3.0
+        },
+        "GBPUSD": {
+          "best_abs_edge_points": 1.24,
+          "bottom_mean_points": 1.24,
+          "bottom_t": 1.89,
+          "clears_cost": false,
+          "edge_over_cost": 0.073,
+          "fixed_broker_cost_points": 17.0,
+          "n_stress_bars": 41153,
+          "signed_edge": 1.242339494163344,
+          "signed_t": 1.8928214417699878,
+          "stress_threshold_points": 14.2,
+          "top_mean_points": -0.92,
+          "top_t": -1.66
+        },
+        "USDJPY": {
+          "best_abs_edge_points": 1.15,
+          "bottom_mean_points": -1.15,
+          "bottom_t": -1.26,
+          "clears_cost": false,
+          "edge_over_cost": 0.072,
+          "fixed_broker_cost_points": 16.0,
+          "n_stress_bars": 41158,
+          "signed_edge": -1.151813976138181,
+          "signed_t": -1.2635012002815067,
+          "stress_threshold_points": 5.1,
+          "top_mean_points": 0.2,
+          "top_t": 0.44
+        }
+      },
+      "60m": {
+        "EURUSD": {
+          "best_abs_edge_points": 13.35,
+          "bottom_mean_points": 13.35,
+          "bottom_t": 3.35,
+          "clears_cost": true,
+          "edge_over_cost": 1.214,
+          "fixed_broker_cost_points": 11.0,
+          "n_stress_bars": 3430,
+          "signed_edge": 13.352769679298754,
+          "signed_t": 3.353400845652715,
+          "stress_threshold_points": 4.4,
+          "top_mean_points": 1.27,
+          "top_t": 0.2
+        },
+        "GBPUSD": {
+          "best_abs_edge_points": 10.85,
+          "bottom_mean_points": 10.85,
+          "bottom_t": 1.81,
+          "clears_cost": false,
+          "edge_over_cost": 0.638,
+          "fixed_broker_cost_points": 17.0,
+          "n_stress_bars": 3430,
+          "signed_edge": 10.8537313432835,
+          "signed_t": 1.81280612589045,
+          "stress_threshold_points": 14.2,
+          "top_mean_points": 1.74,
+          "top_t": 0.32
+        },
+        "USDJPY": {
+          "best_abs_edge_points": 6.92,
+          "bottom_mean_points": 6.92,
+          "bottom_t": 1.4,
+          "clears_cost": false,
+          "edge_over_cost": 0.433,
+          "fixed_broker_cost_points": 16.0,
+          "n_stress_bars": 3430,
+          "signed_edge": 6.924198250728448,
+          "signed_t": 1.396397825769833,
+          "stress_threshold_points": 5.0,
+          "top_mean_points": 3.54,
+          "top_t": 0.69
+        }
+      }
+    }
+  },
+  "grid_cells": 24,
+  "hypothesis": "fixed broker spread is a structural edge inside liquidity-stress bars",
+  "replicated": 0,
+  "schema_version": "fx_spread_dislocation_v1",
+  "stress_definition": "lagged quoted spread >= its 90% quantile",
+  "validation": {
+    "signed_flow": {
+      "60m": {
+        "EURUSD": {
+          "best_abs_edge_points": 4.73,
+          "bottom_mean_points": 4.73,
+          "bottom_t": 1.44,
+          "clears_cost": false,
+          "edge_over_cost": 0.43,
+          "fixed_broker_cost_points": 11.0,
+          "n_stress_bars": 1556,
+          "signed_edge": 4.730769230770618,
+          "signed_t": 1.4368606237848978,
+          "stress_threshold_points": 5.4,
+          "top_mean_points": 3.12,
+          "top_t": 0.87
+        }
+      }
+    }
+  },
+  "verdict": "R10_REJECTED_DID_NOT_REPLICATE"
+}
