@@ -113,6 +113,65 @@ edge is precisely the component the broker keeps. Combined with a 45% strategy
 drawdown, this is not a demo-ready proposition without verified swap rates
 showing favourable pass-through.
 
+## R7 — Tick microstructure / order-flow (2026-07-26)
+
+**The last untried information source, and the most decisive rejection.**
+
+Every earlier test read OHLC bars. The Dukascopy archive turns out to carry real
+top-of-book depth (`bidVolumes`/`askVolumes` are populated quoted sizes, median
+~4.6M on EURUSD), so this tested order-flow information that bars do not contain:
+depth imbalance, microprice deviation from mid, quote-update asymmetry, signed
+tick flow, realised activity and mean spread — plus a z-scored composite. 747k
+M5 rows per pair.
+
+Scored against **measured** broker cost, not an assumption. A long-top-decile /
+short-bottom-decile strategy earns about half the decile spread per trade, so the
+bar is a decile spread above 2x round-trip cost: 22 points on EURUSD, 34 on
+GBPUSD, 32 on USDJPY.
+
+**Result: REJECTED.** No feature, on any pair, at any horizon (5/15/30/60 min),
+cleared the bar. The largest decile spread found anywhere was ~6 points against
+22+ required — short by a factor of 4 to 6.
+
+**The instructive part.** `signed_flow` is overwhelmingly significant and
+consistent across all three pairs at the 5-minute horizon: t = −9.3 (EURUSD),
+−7.8 (GBPUSD), −6.3 (USDJPY), a genuine short-term mean-reversion effect. Its
+magnitude is **1.6 points**, against a measured 7-point EURUSD spread.
+
+This is the central result of the whole lane: **the bid-ask spread is wider than
+the entire predictable component of FX returns.** The information is real and
+highly significant; it is simply smaller than the cost of acting on it.
+Statistical significance and tradeability are not the same thing.
+
+Evidence: `outputs/MICRO_CENSUS.json`, `outputs/BROKER_SPREAD_TICKS.json`.
+
+## R6a — Carry re-tested with measured broker swap (2026-07-26)
+
+R6 rejected carry on the assumption that retail swap markup destroys the
+accrual. Measuring the account's real swap rates refines that: the broker skims
+**asymmetrically**, paying close to fair on one side of each pair and gouging the
+other (GBPJPY long ~96% pass-through, USDJPY long ~91%, EURUSD long ~0%). Taking
+only the favourable side is therefore genuinely positive-expectancy.
+
+Quantified on the four best-paying sides (long USDJPY, long USDCHF, short
+USDMXN, short USDZAR), equal-weight, 0.01 lot, 6,905 daily observations:
+
+| Quantity | Value |
+|---|---|
+| Expected accrual (today's measured swap) | **+2.10%/yr** |
+| Historical spot drift | **−1.61%/yr** |
+| **Net expectancy** | **≈ +0.5%/yr** |
+| Historical spot volatility | 6.69%/yr |
+| Historical spot max drawdown | **68.6%** |
+
+**Result: REJECTED as deployable.** Diversification works — leg volatility of
+10–16% falls to 6.69% at the basket level, with leg correlations of −0.29 to
++0.50 — but the accrual is simply too small. Roughly half a percent a year of net
+expectancy against a 68.6% historical drawdown is not a system, and the entry
+spread on USDZAR alone takes 8 days of accrual to repay.
+
+Evidence: `outputs/CARRY_SLEEVE.json`, `outputs/BROKER_COSTS.json`.
+
 ## R2 — Inherited EURUSD M30 RSI/Bollinger fade at retail cost (2026-07-26)
 
 **Result: REJECTED as a deployable candidate.** PF 1.083 at Dukascopy raw

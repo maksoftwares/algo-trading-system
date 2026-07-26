@@ -1,0 +1,13 @@
+{
+  "access": "READ_ONLY_COPY_RATES_NO_ORDERS",
+  "account": {
+    "login": 1025742,
+    "server": "Capital.ComMena-Demo"
+  },
+  "request_window": {
+    "end": "2026-07-27T00:00:00+00:00",
+    "start": "2015-01-01T00:00:00+00:00"
+  },
+  "schema_version": "fx_broker_h1_bars_v1",
+  "symbols": {}
+}

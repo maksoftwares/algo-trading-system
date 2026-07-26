@@ -1,0 +1,52 @@
+{
+  "basis": "measured broker swap (current) + historical FRED spot risk",
+  "basket": {
+    "accrual_over_vol": 0.315,
+    "expected_accrual_pct_per_year": 2.105,
+    "historical_spot_drift_pct_per_year": -1.613,
+    "historical_spot_max_drawdown_pct": 68.56,
+    "historical_spot_vol_pct": 6.692,
+    "positions": 4
+  },
+  "legs": {
+    "USDCHF": {
+      "entry_spread_pct_of_notional": 0.0174,
+      "expected_accrual_pct_per_year": 2.75,
+      "historical_spot_max_drawdown_pct": 91.68,
+      "historical_spot_vol_pct": 10.12,
+      "side": 1,
+      "spread_payback_days": 2.3,
+      "swap_points_per_day": 6.08
+    },
+    "USDJPY": {
+      "entry_spread_pct_of_notional": 0.0074,
+      "expected_accrual_pct_per_year": 2.113,
+      "historical_spot_max_drawdown_pct": 57.65,
+      "historical_spot_vol_pct": 10.0,
+      "side": 1,
+      "spread_payback_days": 1.28,
+      "swap_points_per_day": 9.402
+    },
+    "USDMXN": {
+      "entry_spread_pct_of_notional": 0.0121,
+      "expected_accrual_pct_per_year": 2.196,
+      "historical_spot_max_drawdown_pct": 103.29,
+      "historical_spot_vol_pct": 11.08,
+      "side": -1,
+      "spread_payback_days": 2.01,
+      "swap_points_per_day": 105.347
+    },
+    "USDZAR": {
+      "entry_spread_pct_of_notional": 0.0303,
+      "expected_accrual_pct_per_year": 1.36,
+      "historical_spot_max_drawdown_pct": 126.11,
+      "historical_spot_vol_pct": 16.21,
+      "side": -1,
+      "spread_payback_days": 8.13,
+      "swap_points_per_day": 61.479
+    }
+  },
+  "limitation": "Swap is today's measured rate, not a historical series, so this is expected forward accrual rather than a backtest. Spot drift is historically ~0 and is the coin flip that carry trades lose on; the drawdown column is the real risk.",
+  "lot": 0.01,
+  "schema_version": "fx_carry_sleeve_v1"
+}

@@ -5,15 +5,21 @@ carries **no** demo authority, no live authority, no chart attachment, no preset
 and no broker-action file. It does not touch any MT5 runtime, terminal, profile
 or the XAUUSD lane.
 
-**Read [`FINDINGS.md`](FINDINGS.md) first.** Six hypothesis classes were tested
-against the goal of a profitable, higher-frequency Forex system; all six were
-rejected, and the rejections are recorded in [`REJECTIONS.md`](REJECTIONS.md)
-with the evidence that closed each one. The headline: the strongest in-sample
-effect (positive in 6 of 6 design years) reversed sign in both out-of-sample
-windows and loses even at zero spread markup.
+**Read [`FINDINGS.md`](FINDINGS.md) first.** Seven hypothesis classes were tested
+against the goal of a profitable, higher-frequency Forex system; all seven were
+rejected, and each is recorded in [`REJECTIONS.md`](REJECTIONS.md) with the
+evidence that closed it.
 
-What *is* delivered is a tested substrate for evaluating FX hypotheses quickly,
-plus a quantified explanation of why the existing Forex lane never passed.
+The result reduces to one measured inequality: **the bid-ask spread is wider than
+the entire predictable component of FX returns.** EURUSD trades at a fixed 0.70
+pips on this account. The most significant predictor found anywhere here — short
+term mean reversion in signed tick flow, t = −9.3 / −7.8 / −6.3 across three
+pairs using real order-book depth — is worth **1.6 points**. And carry, the only
+income needing no signal, nets ≈+0.5%/yr against a 68.6% historical drawdown.
+
+What *is* delivered: a tested substrate for evaluating FX hypotheses quickly,
+measured broker costs replacing a decade of assumption, and a quantified
+explanation of why the existing Forex lane never passed.
 
 ## Layout
 
@@ -50,11 +56,30 @@ python run_edge_census.py            # 49-bucket intraday census -> R3
 python run_tokyo_holdout_test.py     # the holdout test that killed R4
 python acquire_fred_fx.py            # 27.5y daily panel, 7 majors
 python run_premia_census.py          # cross-sectional premia + carry -> R5, R6
+python build_micro_features.py       # order-book depth features (~453s)
+python run_micro_census.py           # microstructure vs measured cost -> R7
+```
+
+Broker measurement needs the MT5 module, which requires Python 3.12 (the
+`copy_ticks_*` calls fail to marshal on 3.14). Use the `.venv312` interpreter:
+
+```bash
+python measure_broker_costs.py         # symbol specs + real swap rates
+python measure_broker_spread_ticks.py  # real spread from broker tick history
+python evaluate_carry_sleeve.py        # the one positive-expectancy position set
 python -m pytest tests -q
 ```
 
-`build_bars.py` and `acquire_fred_fx.py` write to the cache; the rest only read
-it and write into `outputs/`.
+`build_bars.py`, `build_micro_features.py` and `acquire_fred_fx.py` write to the
+cache; everything else only reads it and writes into `outputs/`.
+
+The broker scripts are **read-only**: `initialize`, `account_info`,
+`symbol_info`, `symbol_info_tick`, `symbol_select`, `copy_ticks_range` only —
+the same surface the existing `capital-multisymbol-prospective-v1` collector
+uses. They send no order, change no setting, and refuse to report on a non-demo
+account. `pull_broker_bars.py` is retained to document that this terminal
+rejects `copy_rates_*` outright ("Call failed"), so broker bar history is not
+available from it.
 
 ## Engine contract
 

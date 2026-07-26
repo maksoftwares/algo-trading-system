@@ -5,13 +5,64 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-# Frozen cost model from PREREGISTRATION.md section 5.
+# --------------------------------------------------------------------------
+# Cost model. The ASSUMED values below were used for R1-R6; the MEASURED values
+# come from `measure_broker_spread_ticks.py` reading real Capital.com MENA demo
+# tick history (outputs/BROKER_SPREAD_TICKS.json).
+#
+# The broker quotes a *fixed* spread: p25 == median == p95 at every hour except
+# the 21:00 UTC rollover. That is why MEASURED_SPREAD_POINTS is a constant per
+# symbol rather than a markup over the variable Dukascopy quote.
+#
+# Real cost is ~30% below what R1-R6 assumed for EURUSD. It does not overturn
+# any rejection: R1's families and R4's drift both fail at *zero* cost, which
+# bounds anything a cheaper spread could rescue.
+# --------------------------------------------------------------------------
+MEASURED_SPREAD_POINTS = {
+    "AUDUSD": 6.0,
+    "EURUSD": 7.0,
+    "USDJPY": 12.0,
+    "GBPUSD": 13.0,
+    "USDCHF": 14.0,
+    "NZDUSD": 16.0,
+    "USDCAD": 20.0,
+    "USDCNH": 100.0,
+    "USDMXN": 212.0,
+    "USDPLN": 247.0,
+    "USDZAR": 500.0,
+}
+SLIPPAGE_POINTS = 2.0
+STOP_SLIPPAGE_POINTS = 2.0
+
+# Assumed model retained verbatim so R1-R6 stay exactly reproducible.
 COSTS: dict[str, dict[str, float]] = {
     "EURUSD": {"spread_markup_points": 9.0, "slippage_points": 2.0, "stop_slippage_points": 2.0},
     "GBPUSD": {"spread_markup_points": 9.0, "slippage_points": 2.0, "stop_slippage_points": 2.0},
     "USDJPY": {"spread_markup_points": 10.0, "slippage_points": 2.0, "stop_slippage_points": 2.0},
 }
 ROUND_TRIP_COST_POINTS = {"EURUSD": 16.0, "GBPUSD": 22.0, "USDJPY": 18.0}
+
+# Measured round trip = fixed spread + entry slip + stop slip.
+MEASURED_ROUND_TRIP_POINTS = {
+    symbol: spread + SLIPPAGE_POINTS + STOP_SLIPPAGE_POINTS
+    for symbol, spread in MEASURED_SPREAD_POINTS.items()
+}
+
+
+def measured_costs(symbol: str, raw_median_spread_points: float) -> dict[str, float]:
+    """Cost kwargs that reproduce the broker's fixed spread on Dukascopy quotes.
+
+    Dukascopy quotes carry their own variable spread, so the markup needed is the
+    gap up to the broker's fixed spread. Clamped at zero because in a handful of
+    stressed moments the raw spread already exceeds the broker's fixed quote —
+    a fixed-spread broker genuinely underprices liquidity in thin conditions.
+    """
+    markup = max(MEASURED_SPREAD_POINTS[symbol] - raw_median_spread_points, 0.0)
+    return {
+        "spread_markup_points": markup,
+        "slippage_points": SLIPPAGE_POINTS,
+        "stop_slippage_points": STOP_SLIPPAGE_POINTS,
+    }
 STOP_FLOOR_POINTS = {symbol: 10.0 * cost for symbol, cost in ROUND_TRIP_COST_POINTS.items()}
 
 PARTITIONS = {
