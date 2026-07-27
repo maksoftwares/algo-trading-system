@@ -1,0 +1,232 @@
+{
+  "data_root": "D:\\AlgoTradingData",
+  "primary_bidask_m5": {
+    "built_utc": "2026-07-26T14:17:49.572430+00:00",
+    "columns": [
+      "timestamp_ms",
+      "bid_open",
+      "bid_high",
+      "bid_low",
+      "bid_close",
+      "ask_open",
+      "ask_high",
+      "ask_low",
+      "ask_close",
+      "tick_count"
+    ],
+    "schema_version": "fx_multipair_m5_bidask_v1",
+    "storage_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1",
+    "symbols": {
+      "EURUSD": {
+        "first_bar_utc": "2016-07-01T00:00:00.000Z",
+        "last_bar_utc": "2026-06-30T23:55:00.000Z",
+        "m5_bars": 747645,
+        "median_spread_points": 2.9999999999974487,
+        "median_spread_price": 2.999999999997449e-05,
+        "negative_spread_bars": 0,
+        "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+        "raw_hour_files": 87646,
+        "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45"
+      },
+      "GBPUSD": {
+        "first_bar_utc": "2016-07-01T00:00:00.000Z",
+        "last_bar_utc": "2026-06-30T23:55:00.000Z",
+        "m5_bars": 747528,
+        "median_spread_points": 8.999999999992347,
+        "median_spread_price": 8.999999999992347e-05,
+        "negative_spread_bars": 0,
+        "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\GBPUSD_M5_BIDASK.parquet",
+        "raw_hour_files": 87648,
+        "sha256": "4e855855978964958d255ca69b47c6452909ebe2b991bf27b5c537ea9ac765fd"
+      },
+      "USDJPY": {
+        "first_bar_utc": "2016-07-01T00:00:00.000Z",
+        "last_bar_utc": "2026-06-30T23:55:00.000Z",
+        "m5_bars": 747623,
+        "median_spread_points": 4.0000000000048885,
+        "median_spread_price": 0.0040000000000048885,
+        "negative_spread_bars": 0,
+        "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\USDJPY_M5_BIDASK.parquet",
+        "raw_hour_files": 87646,
+        "sha256": "b112d958b52ab5650fb790129184608c54268138025ea04d2322ea2f06e231b2"
+      }
+    },
+    "window": {
+      "end": "2026-06",
+      "start": "2016-07"
+    }
+  },
+  "causal_microstructure_m5": {
+    "columns": [
+      "timestamp_ms",
+      "depth_imbalance",
+      "micro_dev_points",
+      "quote_asym",
+      "signed_flow",
+      "rv_points",
+      "spread_mean_points",
+      "spread_max_points",
+      "tick_count",
+      "depth_total"
+    ],
+    "schema_version": "fx_micro_features_v1",
+    "symbols": {
+      "EURUSD": {
+        "first_utc": "2016-07-01T00:00:00.000Z",
+        "last_utc": "2026-06-30T23:55:00.000Z",
+        "median_abs_micro_dev_points": 0.11262300023589449,
+        "median_depth_total": 4591256.696748316,
+        "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\micro\\EURUSD_M5_MICRO.parquet",
+        "rows": 747644,
+        "sha256": "4dccd6f1cd58cb05aa0a1c84354f81ef048b4cff872e814b79a67f83b07be58f"
+      },
+      "GBPUSD": {
+        "first_utc": "2016-07-01T00:00:00.000Z",
+        "last_utc": "2026-06-30T23:55:00.000Z",
+        "median_abs_micro_dev_points": 0.30992363959569974,
+        "median_depth_total": 2728313.929876811,
+        "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\micro\\GBPUSD_M5_MICRO.parquet",
+        "rows": 747528,
+        "sha256": "db0ebf0fbc74cbaa32cee71e7645485d3bbdd4fd2ab711f6d652c18dc28c812e"
+      },
+      "USDJPY": {
+        "first_utc": "2016-07-01T00:00:00.000Z",
+        "last_utc": "2026-06-30T23:55:00.000Z",
+        "median_abs_micro_dev_points": 0.11560125830666891,
+        "median_depth_total": 3946816.274873879,
+        "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\micro\\USDJPY_M5_MICRO.parquet",
+        "rows": 747622,
+        "sha256": "8602ba5acc93917684ca00fe386e0a2497dbd1c9226d58a8003d09a56a6535dd"
+      }
+    }
+  },
+  "synthetic_cross_bidask_m5": {
+    "EURGBP": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURGBP_M5_BIDASK.parquet",
+      "bytes": 14306990,
+      "sha256": "0671ac86131ae822e80cfbed18d46fc7ff2db72129b90c74052f9471ca83cd72",
+      "rows": 747389,
+      "first_utc": "2016-07-01T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00",
+      "manifest_status": "FILE_PRESENT_NOT_LISTED_IN_PRIMARY_BARS_MANIFEST"
+    },
+    "EURJPY": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURJPY_M5_BIDASK.parquet",
+      "bytes": 16167022,
+      "sha256": "4b62fbf3b5c54c4728af53517fe6debfbd4380247c106fd149b1e78f4e536762",
+      "rows": 747487,
+      "first_utc": "2016-07-01T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00",
+      "manifest_status": "FILE_PRESENT_NOT_LISTED_IN_PRIMARY_BARS_MANIFEST"
+    },
+    "GBPJPY": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\GBPJPY_M5_BIDASK.parquet",
+      "bytes": 16865724,
+      "sha256": "667e12ac6f205106b5f8835bfa9cc3eaedc8c0df172a4fc7046433a27711bbc1",
+      "rows": 747357,
+      "first_utc": "2016-07-01T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00",
+      "manifest_status": "FILE_PRESENT_NOT_LISTED_IN_PRIMARY_BARS_MANIFEST"
+    }
+  },
+  "fred_daily_panel": {
+    "convention_note": "noon New York buying rates; not tradeable bid/ask",
+    "panel": {
+      "first_complete": "1999-01-04",
+      "last_complete": "2026-07-17",
+      "pairs": [
+        "EURUSD",
+        "GBPUSD",
+        "AUDUSD",
+        "NZDUSD",
+        "USDJPY",
+        "USDCAD",
+        "USDCHF"
+      ],
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\fred\\FX_DAILY_MAJORS.parquet",
+      "rows_any": 13933,
+      "rows_complete": 6906
+    },
+    "schema_version": "fx_fred_daily_v1",
+    "series": {
+      "DEXCAUS": {
+        "first": "1971-01-04",
+        "last": "2026-07-17",
+        "observations": 13933,
+        "pair": "USDCAD"
+      },
+      "DEXJPUS": {
+        "first": "1971-01-04",
+        "last": "2026-07-17",
+        "observations": 13921,
+        "pair": "USDJPY"
+      },
+      "DEXSZUS": {
+        "first": "1971-01-04",
+        "last": "2026-07-17",
+        "observations": 13927,
+        "pair": "USDCHF"
+      },
+      "DEXUSAL": {
+        "first": "1971-01-04",
+        "last": "2026-07-17",
+        "observations": 13920,
+        "pair": "AUDUSD"
+      },
+      "DEXUSEU": {
+        "first": "1999-01-04",
+        "last": "2026-07-17",
+        "observations": 6906,
+        "pair": "EURUSD"
+      },
+      "DEXUSNZ": {
+        "first": "1971-01-04",
+        "last": "2026-07-17",
+        "observations": 13911,
+        "pair": "NZDUSD"
+      },
+      "DEXUSUK": {
+        "first": "1971-01-04",
+        "last": "2026-07-17",
+        "observations": 13927,
+        "pair": "GBPUSD"
+      }
+    },
+    "source": "https://fred.stlouisfed.org/graph/fredgraph.csv"
+  },
+  "broker_h1": {
+    "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\broker_h1",
+    "files": 0,
+    "status": "EMPTY_NO_BROKER_H1_EVIDENCE"
+  },
+  "raw_symbols_present": [
+    "DOLLARIDXUSD",
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY",
+    "USTBONDTRUSD",
+    "XAGUSD",
+    "XAUUSD"
+  ],
+  "audusd_intraday_status": "NOT_PRESENT_IN_RAW_OR_PREPARED_INTRADAY_CACHE; FRED_DAILY_ONLY",
+  "october_2024_quarantine": {
+    "affected_symbols": [
+      "EURUSD",
+      "USDJPY"
+    ],
+    "interval_utc": [
+      "2024-10-09T23:00:00Z",
+      "2024-10-10T01:00:00Z"
+    ],
+    "failure": "Dukascopy source returned non-positive price or negative spread",
+    "repair_status": "UNREPAIRED_EXPLICIT_QUARANTINE",
+    "eurusd_h1_frozen_months": 119,
+    "eurusd_h1_expected_months": 120,
+    "missing_frozen_month": "2024-10"
+  },
+  "manifest_hashes": {
+    "bars": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "micro": "a7b40c252f757ca25a2fdaa77f9b153323e54a319bdd6f72b36c9b3992d3a9a8",
+    "fred": "6603fdc41e2fc6457317241d79ef8f846b29f6b4eae4122ca89b38e8970c012a"
+  }
+}

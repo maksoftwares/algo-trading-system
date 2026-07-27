@@ -1,0 +1,19 @@
+id,mechanism,status
+R-EUR-M30-MASKED,EURUSD M30 RSI/Bollinger hour-masked fade,DEVELOPMENT_ONLY_RETROSPECTIVE_MASK
+R-EUR-M30-UNMASKED,Unmasked EURUSD RSI/Bollinger baseline,REJECTED_COST_AND_RECENCY
+R-EUR-H1-1000,"1,000 frozen H1 attempts / 10 archetypes",REJECTED_ZERO_FDR_SURVIVORS
+R-EUR-STRICT-12,Twelve regime specialists,REJECTED_ADAPTIVE_EXAM_PF_0_68
+R-EUR-FREQ-FALLBACK,M15 RSI long + same-entry trend lot overlay + H1 short,RESEARCH_WATCHLIST_AUDIT_BLOCKED
+R-EUR-H4-CHOP,H4 chop Asia/London short control,RESEARCH_WATCHLIST_SPARSE
+R-USDJPY-LDN120,USDJPY London120 D1 ATR20 breakout,RESEARCH_WATCHLIST_RECENT_ALT_FEED_FAIL
+R1,Uniform bar-geometry breakout/fade across majors,REJECTED
+R2,Inherited EURUSD RSI/Bollinger at retail cost,REJECTED
+R3,Intraday momentum/reversion conditioning,REJECTED
+R4,Tokyo short-USD drift,REJECTED_SIGN_REVERSAL
+R5,Price-only momentum and value,REJECTED
+R6,Carry with official rates and broker swaps,REJECTED_DEPLOYABILITY
+R7,Tick microstructure and order flow,REJECTED_BELOW_COST
+R8,Volatility-conditioned microstructure,REJECTED_REPLICATION
+R9,Synthetic crosses and GBPJPY Donchian,REJECTED_OOS
+R10,Fixed-spread dislocation,REJECTED_REPLICATION
+R11,Gradient-boosting microstructure ML,REJECTED_OOS_DECAY
