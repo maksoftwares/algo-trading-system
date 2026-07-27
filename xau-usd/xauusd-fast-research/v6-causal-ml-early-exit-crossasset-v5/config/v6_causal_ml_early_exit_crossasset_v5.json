@@ -1,0 +1,128 @@
+{
+  "schema_version": "xauusd_v6_causal_ml_early_exit_crossasset_v5",
+  "sources": {
+    "v4_config": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-early-exit-utility-v4/config/v6_causal_ml_early_exit_utility_v4.json",
+      "sha256": "56f531c274f36bd0b37a2afd90c557c7d8503ef7ecd68ab360ce79079d073676"
+    },
+    "v4_implementation": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-early-exit-utility-v4/src/utility.py",
+      "sha256": "01a4277c1146fb4f4041dc73b7e9602e13965e1890c4e89ffd91184fc15cb557"
+    },
+    "v4_result": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-early-exit-utility-v4/outputs/V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_RESULT.json",
+      "sha256": "b2e5447371dc5a08681600a4f57e43015a0d00bae9dff4a6718a1a8341f5ee9c"
+    },
+    "dxy_treasury": {
+      "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+      "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4"
+    },
+    "eurusd": {
+      "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45"
+    },
+    "gbpusd": {
+      "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/GBPUSD_M5_BIDASK.parquet",
+      "sha256": "4e855855978964958d255ca69b47c6452909ebe2b991bf27b5c537ea9ac765fd"
+    },
+    "usdjpy": {
+      "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/USDJPY_M5_BIDASK.parquet",
+      "sha256": "b112d958b52ab5650fb790129184608c54268138025ea04d2322ea2f06e231b2"
+    }
+  },
+  "cross_asset": {
+    "bar_minutes": 5,
+    "maximum_staleness_minutes": 10,
+    "features": [
+      "dxy_return_1h",
+      "dxy_return_4h",
+      "treasury_return_1h",
+      "treasury_return_4h",
+      "common_dollar_return_1h",
+      "dxy_1h_available",
+      "dxy_4h_available",
+      "treasury_1h_available",
+      "treasury_4h_available",
+      "common_dollar_1h_available",
+      "dxy_staleness_minutes",
+      "treasury_staleness_minutes",
+      "common_dollar_max_staleness_minutes"
+    ]
+  },
+  "model": {
+    "type": "HistGradientBoostingRegressor",
+    "loss": "quantile",
+    "quantile": 0.25,
+    "parameters": {
+      "learning_rate": 0.05,
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "max_depth": 3,
+      "min_samples_leaf": 250,
+      "l2_regularization": 2.0,
+      "early_stopping": false,
+      "random_state": 260727
+    },
+    "target": "unclipped_early_exit_stress_benefit_r",
+    "sample_weight": "equal_total_weight_per_decision_utc_day"
+  },
+  "action_policy": {
+    "minimum_predicted_lower_benefit_r": 0.0,
+    "maximum_current_r": -0.10,
+    "minimum_max_adverse_r": 0.25,
+    "maximum_recent_15m_r": 0.0
+  },
+  "walk_forward": {
+    "target_years": [2022, 2023, 2024, 2025, 2026],
+    "purge_hours": 48,
+    "minimum_training_rows": 30000
+  },
+  "windows": {
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "minimum_mean_annual_spearman": 0.05,
+    "minimum_years_spearman_above_zero": 3,
+    "minimum_years_positive_first_action_net": 3,
+    "minimum_first_action_positive_benefit_share": 0.70,
+    "minimum_total_first_action_benefit_usd": 0.0,
+    "minimum_early_exit_trade_share": 0.01,
+    "maximum_early_exit_trade_share": 0.20,
+    "minimum_managed_accepted_trades_per_window": 10,
+    "top_winners_removed": 5
+  },
+  "coverage_gates": {
+    "minimum_dxy_1h_available_share": 0.80,
+    "minimum_treasury_1h_available_share": 0.80,
+    "minimum_common_dollar_1h_available_share": 0.80
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_CONTRACT_LOCK.json",
+    "snapshot_predictions": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_SNAPSHOT_PREDICTIONS.parquet",
+    "managed_candidates": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_MANAGED_CANDIDATES.parquet",
+    "accepted": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_ACCEPTED.parquet",
+    "routing": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_ROUTING.parquet",
+    "annual_models": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_ANNUAL_MODELS.csv",
+    "windows": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_WINDOWS.csv",
+    "result_json": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_RESULT.json",
+    "result_markdown": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_RESULT.md",
+    "manifest": "V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_MANIFEST.json"
+  },
+  "research_controls": {
+    "all_history_is_development_evidence": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "v1_entry_filter_modification_authorized": false,
+    "v3_modification_authorized": false,
+    "v4_modification_authorized": false,
+    "v60_modification_authorized": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}
