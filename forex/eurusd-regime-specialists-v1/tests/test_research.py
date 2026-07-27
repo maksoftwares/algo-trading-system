@@ -25,6 +25,11 @@ from eurusd_regime_specialists.asymmetric import (
 )
 from eurusd_regime_specialists.confirmed_reversal import verify_lock as verify_confirmation_lock
 from eurusd_regime_specialists.crossasset_handoff import verify_lock as verify_handoff_lock
+from eurusd_regime_specialists.retrospective_overfit import (
+    density_bucket,
+    resolve_portfolio,
+    select_cells,
+)
 
 
 def test_lock():
@@ -134,3 +139,72 @@ def test_signal_uses_latest_completed_state_across_context_gap():
     signals = generate_raw_signals(m5, state, cfg)
     assert not signals.empty
     assert signals.iloc[-1]["owner"] == "S4_NEUTRAL_AUCTION"
+
+
+def test_retrospective_selector_uses_realized_cell_outcomes():
+    rows = []
+    for hour, results in (
+        (8, [1.5] * 8 + [-1.0] * 7),
+        (9, [1.5] * 4 + [-1.0] * 11),
+    ):
+        for index, result in enumerate(results):
+            rows.append(
+                {
+                    "owner": "S1",
+                    "seed_id": "FAST",
+                    "entry_hour_utc": hour,
+                    "entry_time_utc": pd.Timestamp(
+                        "2020-01-01T00:00:00Z"
+                    )
+                    + pd.Timedelta(days=index),
+                    "r": result,
+                }
+            )
+    selected, _ = select_cells(pd.DataFrame(rows))
+    assert selected["entry_hour_utc"].tolist() == [8]
+
+
+def test_retrospective_portfolio_keeps_one_position_at_a_time():
+    frame = pd.DataFrame(
+        {
+            "entry_time_utc": pd.to_datetime(
+                [
+                    "2026-01-01T00:00:00Z",
+                    "2026-01-01T00:05:00Z",
+                    "2026-01-01T01:05:00Z",
+                ]
+            ),
+            "exit_time_utc": pd.to_datetime(
+                [
+                    "2026-01-01T01:00:00Z",
+                    "2026-01-01T00:30:00Z",
+                    "2026-01-01T02:00:00Z",
+                ]
+            ),
+            "owner_priority": [0, 0, 0],
+            "seed_priority": [0, 0, 0],
+        }
+    )
+    resolved = resolve_portfolio(frame, maximum_trades_per_utc_day=12)
+    assert len(resolved) == 2
+
+
+def test_density_oracle_keeps_only_exact_count_days():
+    frame = pd.DataFrame(
+        {
+            "entry_time_utc": pd.to_datetime(
+                [
+                    "2026-01-01T00:00:00Z",
+                    "2026-01-01T01:00:00Z",
+                    "2026-01-02T00:00:00Z",
+                    "2026-01-02T01:00:00Z",
+                    "2026-01-02T02:00:00Z",
+                ]
+            ),
+            "owner_priority": [0, 0, 0, 0, 0],
+            "seed_priority": [0, 0, 0, 0, 0],
+        }
+    )
+    selected = density_bucket(frame, trades_per_day=2)
+    assert len(selected) == 2
+    assert selected["entry_time_utc"].dt.day.unique().tolist() == [1]
