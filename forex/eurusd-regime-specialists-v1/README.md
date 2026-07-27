@@ -18,7 +18,8 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 12. Official CFTC Euro FX participant flow: conservatively released weekly leveraged-fund, asset-manager, and inverse-dealer changes produced 241 balanced candidates. Forward exact precision improved to 34.31%, but 102 trades returned PF 0.752 and lost 17.05R. Only 2025 passed; 2026 H1 collapsed to 13.33% wins and PF 0.221. Weekly aggregate positioning is closed without retuning.
 13. Official CFTC options-equivalent flow: paired futures-only and futures-and-options-combined participant positions changed 46.47% of the futures-flow directions. The 102 forward trades nevertheless finished with the same 35 winners, 34.31% precision, PF 0.752, and -17.05R. No year passed. Free aggregate options delta is closed without post-outcome unanimous-vote selection.
 14. Official CME EUR/USD strike surface: the exact `EOD_XCME_EUU_OPT_0` dataset and its 71-column schema were validated. A non-tuned 25-delta risk-reversal parser and signal were frozen, including put-call-parity and Black-76 fallbacks. The required 2019-2026 EOD history is not locally entitled; CME lists complete history at USD 2,249, while the free Daily Bulletin retains only the latest day.
-15. Free official CME SPAN route: DataMine's `SPAN_ALL_GRP_EXCG` archive was verified at USD 0.00 with coverage from 2021-11-19. Its public PA2/XML sample contains the exact `EUU` long-dated EUR/USD options product, 20 expiries, and 2,562 contracts. The sample was downloaded and a settlement-only parser now feeds the frozen risk-reversal builder. Full history awaits CME login and user acceptance of the USD 0.00 licence; no backtest has been run.
+15. Free official CME SPAN route: DataMine's `SPAN_ALL_GRP_EXCG` archive was verified at USD 0.00 with coverage from 2021-11-19. Its public PA2/XML sample contains the exact `EUU` long-dated EUR/USD options product, 20 expiries, and 2,562 contracts. The sample was downloaded and a settlement-only parser now feeds the frozen risk-reversal builder. The user's signup was stopped by missing OTP delivery; the legacy archive exposes indexes but blocks anonymous binary retrieval, so no historical options backtest was run.
+16. Price-only Neutral session OCO: four fixed UTC anchors let the first executable side of a two-sided breakout select direction without option data. The frozen rule produced 1,790 trades, 24.25% wins, 1.293 payoff, PF 0.414, and -895.98R. The latest six months produced 122 trades, 23.77% wins, PF 0.414, and -60.65R. This exact fallback is closed without repair.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -40,6 +41,8 @@ Key reports:
 - `EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_PREREG_2026_07_27.md`
 - `EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_DATA_AUDIT_2026_07_27.md`
 - `EURUSD_NEUTRAL_CME_SPAN_FREE_SOURCE_AUDIT_2026_07_27.md`
+- `EURUSD_NEUTRAL_SESSION_OCO_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_SESSION_OCO_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -59,6 +62,7 @@ Key reports:
 - `outputs/neutral_cot_options_flow/RESULT.json`
 - `outputs/neutral_cme_options_surface/AUDIT.json`
 - `outputs/neutral_cme_span_surface/AUDIT.json`
+- `outputs/neutral_session_oco/RESULT.json`
 
 Run with:
 
@@ -83,4 +87,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow python run_neutral_utc_open_vote.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_flow.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_options_flow.py
+uv run --with pandas --with numpy --with pyarrow python run_neutral_session_oco.py
 ```

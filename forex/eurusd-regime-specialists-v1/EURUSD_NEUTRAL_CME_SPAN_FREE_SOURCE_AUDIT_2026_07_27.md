@@ -2,7 +2,7 @@
 
 Date: 2026-07-27
 
-Decision: `FREE_ROUTE_VALID; FULL_ARCHIVE_AWAITS_CME_LOGIN`
+Decision: `FORMAT_ROUTE_VALID; HISTORICAL_ROUTE_AUTH_BLOCKED`
 
 ## Outcome
 
@@ -68,18 +68,21 @@ evidence. The new parser rejects any file whose `isSetl` value is not
 Cabinet or alternate quote records (`pq != 0`) are also rejected rather
 than treated as full option premiums.
 
-## Remaining access step
+## Access result after OTP attempt
 
 CME decommissioned anonymous public FTP distribution in July 2025.
 DataMine now requires a CME Login ID and completion of its self-service
-licence workflow even when the cart total is USD 0.00.
+licence workflow even when the cart total is USD 0.00. The user's CME
+signup did not complete because the OTP was not delivered.
 
-The full archive cannot be downloaded anonymously. The user must sign in
-to the CME DataMine tab, complete the USD 0.00 checkout/licence, and then
-return control. No purchase, account creation, credential entry, or
-licence acceptance was performed by Codex.
+The legacy official archive directory was also checked directly. Its
+indexes remain visible and identify exact dated settlement ZIP names,
+but anonymous binary retrieval returns an access block. Browser
+download attempts did not produce a file. This is therefore an
+index-only reference, not a usable anonymous historical source.
 
-Once entitlement is present, the remaining work is mechanical:
+If entitlement becomes available later, the remaining work is
+mechanical:
 
 1. download and hash the settlement/complete-cycle files;
 2. run the outcome-blind EUU coverage census;
@@ -90,6 +93,9 @@ Once entitlement is present, the remaining work is mechanical:
 The existing paid `EOD_XCME_EUU_OPT_0` preregistration remains unchanged
 and hash-locked. This free-source route is a separate acquisition and
 normalization lane.
+
+No OTP workaround, credential automation, scraping bypass, or
+unauthorized mirror is part of this lane.
 
 ## EURUSD spot-data status
 

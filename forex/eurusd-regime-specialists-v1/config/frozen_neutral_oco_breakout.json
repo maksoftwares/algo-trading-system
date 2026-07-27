@@ -1,0 +1,78 @@
+{
+  "campaign_id": "eurusd-neutral-session-oco-v1",
+  "frozen_at_utc": "2026-07-28T00:00:00Z",
+  "research_only": true,
+  "information_status": "ADAPTIVE_RESEARCH_ALL_ARCHIVED_HISTORY_PREVIOUSLY_INSPECTED",
+  "data_and_classifier_contract": "config/frozen_two_clock_ensemble.json",
+  "strategy": {
+    "family": "N13_NEUTRAL_SESSION_OCO_BREAKOUT",
+    "anchor_hours_utc": [0, 6, 12, 18],
+    "weekdays_only": true,
+    "range_lookback_m5_bars": 12,
+    "entry_buffer_pips": 0.2,
+    "pending_order_minutes": 90,
+    "both_sides_same_bar": "NO_TRADE_AMBIGUOUS",
+    "one_open_position": true,
+    "maximum_trades_per_utc_day": 4
+  },
+  "neutral_ownership": {
+    "state": "latest available state no later than anchor hour minus one hour",
+    "requires_direction": "NEUTRAL",
+    "shock": false,
+    "joint_dxy_eurusd_compression": false
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_exit_policy": "STOP_FIRST"
+  },
+  "windows": {
+    "development_2019_2020": [
+      "2019-01-02T00:00:00Z",
+      "2020-12-31T23:59:59Z"
+    ],
+    "development_2021_2022": [
+      "2021-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "validation_2023_2024": [
+      "2023-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025_2026h1": [
+      "2025-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "admission": {
+    "minimum_trades_each_window": 50,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.1,
+    "maximum_drawdown_r": 30.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "oracle_matching": {
+    "maximum_absolute_entry_time_difference_minutes": 60,
+    "requires_same_utc_date": true,
+    "requires_same_side": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prohibitions": [
+    "No option, CVOL, oracle, or future-return value may enter regime ownership, pending-order placement, trigger selection, or execution.",
+    "No anchor, range, buffer, pending lifetime, risk, target, hold, or cost value may be changed after the historical outcome pass.",
+    "No same-bar long-versus-short trigger may be guessed; ambiguous dual triggers are no-trade.",
+    "No hour, direction, year, month, or subgroup may be selected after outcomes."
+  ]
+}

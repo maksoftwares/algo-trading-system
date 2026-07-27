@@ -1,0 +1,11 @@
+{
+  "campaign_id": "eurusd-neutral-session-oco-v1",
+  "locked_before_historical_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T00:00:00Z",
+  "files": {
+    "config/frozen_neutral_oco_breakout.json": "692fc00210fbf5ca0b32fac19383dc41d9b4a92fd4efe8276b61bfb762e5f2cd",
+    "EURUSD_NEUTRAL_SESSION_OCO_PREREG_2026_07_28.md": "e4cb0188ada5f5f974b048b90e4c4364c0ca2d5e894b6936fb02845e7673a8bf",
+    "src/eurusd_regime_specialists/neutral_session_oco.py": "98e716576a660cf0707c33239971e56d89b951c3229f49901b60403ca9853177",
+    "run_neutral_session_oco.py": "aa7c073b4fc5dc9ff12a3a91da00e1dbf61a426473a8d35c83a6b44b3a08e5b5"
+  }
+}
