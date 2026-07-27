@@ -1,0 +1,7 @@
+{
+  "locked_before_crosspair_outcome_inspection": true,
+  "files": {
+    "EURUSD_NEUTRAL_CROSSPAIR_PREREG_2026_07_27.md": "7b0ea28ac1fe6fa2a493c3e038b8eb19c7052b519fcff0d550c21880e662a27a",
+    "config/frozen_neutral_crosspair.json": "7c68e184f05dac1ef042470e3a360d169786cbba31efc0ac4e54eab41be0177e"
+  }
+}

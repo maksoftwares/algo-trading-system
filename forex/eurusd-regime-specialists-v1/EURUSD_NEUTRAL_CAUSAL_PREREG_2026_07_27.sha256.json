@@ -1,0 +1,7 @@
+{
+  "locked_before_neutral_candidate_outcome_inspection": true,
+  "files": {
+    "EURUSD_NEUTRAL_CAUSAL_PREREG_2026_07_27.md": "39d146b0bdfb3088f79f9c249030773c8b0354581e3b75f3e5778a516d49abae",
+    "config/frozen_neutral_causal.json": "81449a350cad8ec118942ba66e388b8ddce15553c77de07adc91a3ec9d89f874"
+  }
+}

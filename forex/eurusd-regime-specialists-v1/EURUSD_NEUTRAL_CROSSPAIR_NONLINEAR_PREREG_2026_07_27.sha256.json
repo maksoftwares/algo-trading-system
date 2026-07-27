@@ -1,0 +1,7 @@
+{
+  "locked_before_nonlinear_outcome_inspection": true,
+  "files": {
+    "EURUSD_NEUTRAL_CROSSPAIR_NONLINEAR_PREREG_2026_07_27.md": "31cd4f99915bfcbd0c46a6b06d4de37bbf584ce74fdfd900e1e19ef835f4aecc",
+    "config/frozen_neutral_crosspair_nonlinear.json": "465bd999c04e913e335f419ec08e5a9cf20f863c5e4d689a22943bd844c901fd"
+  }
+}

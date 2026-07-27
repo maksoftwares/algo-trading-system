@@ -1,0 +1,7 @@
+{
+  "locked_before_volatility_lifecycle_outcome_inspection": true,
+  "files": {
+    "EURUSD_NEUTRAL_TICK_VOLATILITY_PREREG_2026_07_27.md": "f412fd4bc40adbabdb2194f08da2fbea03aa5cc210213c59ca7659c1041b2def",
+    "config/frozen_neutral_tick_volatility.json": "4764ed872d819ffb5f2298d0de7f57792eade1e339e5af78be4f3b7f96621cf9"
+  }
+}

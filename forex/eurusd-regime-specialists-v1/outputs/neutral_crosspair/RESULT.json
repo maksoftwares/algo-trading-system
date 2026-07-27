@@ -1,0 +1,169 @@
+{
+  "campaign_id": "eurusd-neutral-crosspair-walkforward-v1",
+  "status": "REJECTED_NEUTRAL_CROSSPAIR_V1",
+  "information_status": "ADAPTIVE_RESEARCH_ALL_ARCHIVED_HISTORY_PREVIOUSLY_INSPECTED",
+  "source_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "causality": {
+    "eurusd_features": "Completed M5 plus lagged H1 state",
+    "crosspair_features": "Exact-timestamp completed GBPUSD and USDJPY M5 bars",
+    "training_label_purge": "Label exit strictly precedes every inference refit",
+    "oracle_usage": "EVALUATION_ONLY_NEVER_FEATURE_TRAINING_LABEL_OR_SELECTION",
+    "future_information_at_inference": false
+  },
+  "dataset": {
+    "rows": 83580,
+    "timestamps": 41790,
+    "positive_label_rate": 0.2971524288107203,
+    "features": 32
+  },
+  "development": {
+    "selected_threshold": 0.35,
+    "qualified": false,
+    "thresholds_tested": 9
+  },
+  "walk_forward": {
+    "admitted": false,
+    "overall": {
+      "trades": 1042,
+      "wins": 348,
+      "losses": 694,
+      "win_rate": 0.33397312859884837,
+      "average_win_r": 1.481752873562889,
+      "average_loss_r": 1.028422190201786,
+      "realized_payoff_ratio": 1.4408021216190943,
+      "profit_factor": 0.7224771445582778,
+      "net_r": -198.0750000001541,
+      "expectancy_r": -0.19009117082548377,
+      "max_drawdown_r": 199.05000000015082
+    },
+    "windows": {
+      "validation_2023": {
+        "trades": 290,
+        "wins": 99,
+        "losses": 191,
+        "win_rate": 0.3413793103448276,
+        "average_win_r": 1.4749999999996712,
+        "average_loss_r": 1.0361256544503212,
+        "realized_payoff_ratio": 1.4235725113689794,
+        "profit_factor": 0.7378726629608847,
+        "net_r": -51.87500000004397,
+        "expectancy_r": -0.1788793103449792,
+        "max_drawdown_r": 51.87500000004417
+      },
+      "validation_2024": {
+        "trades": 279,
+        "wins": 91,
+        "losses": 188,
+        "win_rate": 0.32616487455197135,
+        "average_win_r": 1.4749999999996715,
+        "average_loss_r": 1.0250000000000534,
+        "realized_payoff_ratio": 1.439024390243507,
+        "profit_factor": 0.6965490399582932,
+        "net_r": -58.475000000040026,
+        "expectancy_r": -0.20958781362021514,
+        "max_drawdown_r": 72.9750000000353
+      },
+      "pseudo_oos_2025": {
+        "trades": 311,
+        "wins": 102,
+        "losses": 209,
+        "win_rate": 0.3279742765273312,
+        "average_win_r": 1.4980392156859448,
+        "average_loss_r": 1.0250000000000563,
+        "realized_payoff_ratio": 1.4615016738398658,
+        "profit_factor": 0.713268759481657,
+        "net_r": -61.42500000004547,
+        "expectancy_r": -0.1975080385853552,
+        "max_drawdown_r": 68.67500000004327
+      },
+      "pseudo_oos_2026h1": {
+        "trades": 162,
+        "wins": 56,
+        "losses": 106,
+        "win_rate": 0.345679012345679,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0273584905660962,
+        "realized_payoff_ratio": 1.435720844811352,
+        "profit_factor": 0.7584940312210916,
+        "net_r": -26.30000000002464,
+        "expectancy_r": -0.16234567901249777,
+        "max_drawdown_r": 31.20000000001681
+      }
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 989,
+      "wins": 295,
+      "losses": 694,
+      "win_rate": 0.2982810920121335,
+      "average_win_r": 1.4749999999996708,
+      "average_loss_r": 1.028422190201786,
+      "realized_payoff_ratio": 1.4342358751616027,
+      "profit_factor": 0.6096535780586064,
+      "net_r": -278.6000000001365,
+      "expectancy_r": -0.28169868554108846,
+      "max_drawdown_r": 279.57500000013215
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 1042,
+      "wins": 348,
+      "losses": 694,
+      "win_rate": 0.33397312859884837,
+      "average_win_r": 1.356752873562889,
+      "average_loss_r": 1.153422190201786,
+      "realized_payoff_ratio": 1.17628469877585,
+      "profit_factor": 0.5898372841123859,
+      "net_r": -328.3250000001541,
+      "expectancy_r": -0.31509117082548377,
+      "max_drawdown_r": 328.3250000001505
+    },
+    "recent_six_months": {
+      "trades": 162,
+      "wins": 56,
+      "losses": 106,
+      "win_rate": 0.345679012345679,
+      "average_win_r": 1.474999999999671,
+      "average_loss_r": 1.0273584905660962,
+      "realized_payoff_ratio": 1.435720844811352,
+      "profit_factor": 0.7584940312210916,
+      "net_r": -26.30000000002464,
+      "expectancy_r": -0.16234567901249777,
+      "max_drawdown_r": 31.20000000001681,
+      "fixed_0p01_lot_usd": -10.520000000009855,
+      "trades_per_weekday": 1.255813953488372
+    },
+    "oracle_imitation": {
+      "causal_trades": 1042,
+      "neutral_oracle_trades": 2615,
+      "matched_trades": 23,
+      "precision": 0.022072936660268713,
+      "recall": 0.008795411089866157,
+      "median_absolute_difference_minutes": 20.0
+    }
+  },
+  "verdict": "Cross-pair M5 information did not pass the frozen development and walk-forward gates."
+}

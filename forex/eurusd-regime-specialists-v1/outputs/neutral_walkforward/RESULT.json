@@ -1,0 +1,170 @@
+{
+  "campaign_id": "eurusd-neutral-walkforward-v1",
+  "status": "REJECTED_NEUTRAL_WALKFORWARD_V1",
+  "information_status": "ADAPTIVE_RESEARCH_ALL_ARCHIVED_HISTORY_PREVIOUSLY_INSPECTED",
+  "source_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "causality": {
+    "features": "Completed M5 and lagged completed H1 state only",
+    "training_labels": "Future paths are used only after each historical label exit",
+    "refit_purge": "Every training label exit is strictly before inference",
+    "oracle_usage": "EVALUATION_ONLY_NEVER_FEATURE_TRAINING_LABEL_OR_SELECTION",
+    "future_information_at_inference": false
+  },
+  "dataset": {
+    "rows": 83612,
+    "timestamps": 41806,
+    "long_rows": 41806,
+    "short_rows": 41806,
+    "positive_label_rate": 0.29707458259579966
+  },
+  "development": {
+    "selected_threshold": 0.35,
+    "qualified": false,
+    "thresholds_tested": 9
+  },
+  "walk_forward": {
+    "admitted": false,
+    "overall": {
+      "trades": 1019,
+      "wins": 336,
+      "losses": 683,
+      "win_rate": 0.3297350343473994,
+      "average_win_r": 1.4819940476187181,
+      "average_loss_r": 1.0308931185944918,
+      "realized_payoff_ratio": 1.4375826367327509,
+      "profit_factor": 0.707214884249201,
+      "net_r": -206.15000000014868,
+      "expectancy_r": -0.2023061825320399,
+      "max_drawdown_r": 212.12500000014498
+    },
+    "windows": {
+      "validation_2023": {
+        "trades": 279,
+        "wins": 91,
+        "losses": 188,
+        "win_rate": 0.32616487455197135,
+        "average_win_r": 1.4749999999996715,
+        "average_loss_r": 1.0452127659575088,
+        "realized_payoff_ratio": 1.4111959287527827,
+        "profit_factor": 0.683078880406932,
+        "net_r": -62.2750000000416,
+        "expectancy_r": -0.22320788530480862,
+        "max_drawdown_r": 62.2750000000418
+      },
+      "validation_2024": {
+        "trades": 270,
+        "wins": 88,
+        "losses": 182,
+        "win_rate": 0.32592592592592595,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000534,
+        "realized_payoff_ratio": 1.4390243902435065,
+        "profit_factor": 0.6957920128649921,
+        "net_r": -56.75000000003871,
+        "expectancy_r": -0.21018518518532855,
+        "max_drawdown_r": 69.27500000003107
+      },
+      "pseudo_oos_2025": {
+        "trades": 311,
+        "wins": 99,
+        "losses": 212,
+        "win_rate": 0.3183279742765273,
+        "average_win_r": 1.4987373737370435,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4621828036458195,
+        "profit_factor": 0.682811780947812,
+        "net_r": -68.9250000000441,
+        "expectancy_r": -0.22162379421236042,
+        "max_drawdown_r": 73.55000000004125
+      },
+      "pseudo_oos_2026h1": {
+        "trades": 159,
+        "wins": 58,
+        "losses": 101,
+        "win_rate": 0.36477987421383645,
+        "average_win_r": 1.4749999999996708,
+        "average_loss_r": 1.0272277227723288,
+        "realized_payoff_ratio": 1.4359036144574389,
+        "profit_factor": 0.8245783132527867,
+        "net_r": -18.200000000024307,
+        "expectancy_r": -0.11446540880518433,
+        "max_drawdown_r": 28.025000000018753
+      }
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 968,
+      "wins": 285,
+      "losses": 683,
+      "win_rate": 0.2944214876033058,
+      "average_win_r": 1.4749999999996708,
+      "average_loss_r": 1.0308931185944918,
+      "realized_payoff_ratio": 1.4307981820760132,
+      "profit_factor": 0.597038772901411,
+      "net_r": -283.7250000001318,
+      "expectancy_r": -0.2931043388431113,
+      "max_drawdown_r": 289.70000000012595
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 1019,
+      "wins": 336,
+      "losses": 683,
+      "win_rate": 0.3297350343473994,
+      "average_win_r": 1.3569940476187181,
+      "average_loss_r": 1.1558931185944918,
+      "realized_payoff_ratio": 1.1739788270984388,
+      "profit_factor": 0.5775357041069918,
+      "net_r": -333.52500000014874,
+      "expectancy_r": -0.32730618253203997,
+      "max_drawdown_r": 336.87500000014086
+    },
+    "recent_six_months": {
+      "trades": 159,
+      "wins": 58,
+      "losses": 101,
+      "win_rate": 0.36477987421383645,
+      "average_win_r": 1.4749999999996708,
+      "average_loss_r": 1.0272277227723288,
+      "realized_payoff_ratio": 1.4359036144574389,
+      "profit_factor": 0.8245783132527867,
+      "net_r": -18.200000000024307,
+      "expectancy_r": -0.11446540880518433,
+      "max_drawdown_r": 28.025000000018753,
+      "fixed_0p01_lot_usd": -7.280000000009723,
+      "trades_per_weekday": 1.2325581395348837
+    },
+    "oracle_imitation": {
+      "causal_trades": 1019,
+      "neutral_oracle_trades": 2615,
+      "matched_trades": 18,
+      "precision": 0.017664376840039256,
+      "recall": 0.006883365200764819,
+      "median_absolute_difference_minutes": 10.0
+    }
+  },
+  "verdict": "The locked regularized model failed its development or walk-forward admission gates and is not deployable."
+}

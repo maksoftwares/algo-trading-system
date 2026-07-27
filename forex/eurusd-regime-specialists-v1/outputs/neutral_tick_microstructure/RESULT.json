@@ -1,0 +1,180 @@
+{
+  "campaign_id": "eurusd-neutral-tick-microstructure-v1",
+  "status": "REJECTED_EURUSD_NEUTRAL_TICK_MICROSTRUCTURE_V1",
+  "information_status": "ADAPTIVE_RESEARCH_AFTER_ARCHIVED_BAR_MODEL_REJECTIONS",
+  "source_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    },
+    "EURUSD_TICKS": {
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\EURUSD",
+      "source_chain_sha256": "92b476255ea682e8fa2c8f01a8fc0624962822beb6e069b03fd0a712e9011a5f",
+      "files_seen": 65686,
+      "populated_files": 46726,
+      "m5_rows": 560527,
+      "first_utc": "2019-01-02T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\EURUSD_M5_MICROSTRUCTURE_v1.parquet",
+      "cache_sha256": "b42d82ff55579d29550c1f97f72e9a8651ae7aae488a141c0d13704fc017887b"
+    }
+  },
+  "causality": {
+    "microstructure": "Raw ticks aggregated only through completed signal M5 bar",
+    "missing_policy": "No forward fill",
+    "training_label_purge": "Label exit strictly precedes every inference refit",
+    "oracle_usage": "EVALUATION_ONLY_NEVER_FEATURE_TRAINING_LABEL_OR_SELECTION",
+    "future_information_at_inference": false
+  },
+  "dataset": {
+    "rows": 83612,
+    "timestamps": 41806,
+    "positive_label_rate": 0.29707458259579966,
+    "features": 32
+  },
+  "development": {
+    "selected_threshold": 0.375,
+    "qualified": false,
+    "thresholds_tested": 9
+  },
+  "walk_forward": {
+    "admitted": false,
+    "overall": {
+      "trades": 103,
+      "wins": 37,
+      "losses": 66,
+      "win_rate": 0.3592233009708738,
+      "average_win_r": 1.4749999999996706,
+      "average_loss_r": 1.0250000000000534,
+      "realized_payoff_ratio": 1.439024390243506,
+      "profit_factor": 0.8067257945304503,
+      "net_r": -13.075000000015713,
+      "expectancy_r": -0.12694174757296808,
+      "max_drawdown_r": 20.67500000000555
+    },
+    "windows": {
+      "validation_2023": {
+        "trades": 63,
+        "wins": 27,
+        "losses": 36,
+        "win_rate": 0.42857142857142855,
+        "average_win_r": 1.4749999999996706,
+        "average_loss_r": 1.0250000000000539,
+        "realized_payoff_ratio": 1.4390243902435054,
+        "profit_factor": 1.0792682926826291,
+        "net_r": 2.9249999999891863,
+        "expectancy_r": 0.04642857142839978,
+        "max_drawdown_r": 6.850000000001577
+      },
+      "validation_2024": {
+        "trades": 16,
+        "wins": 2,
+        "losses": 14,
+        "win_rate": 0.125,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4390243902435063,
+        "profit_factor": 0.20557491289192945,
+        "net_r": -11.400000000001409,
+        "expectancy_r": -0.7125000000000881,
+        "max_drawdown_r": 11.850000000001026
+      },
+      "pseudo_oos_2025": {
+        "trades": 14,
+        "wins": 5,
+        "losses": 9,
+        "win_rate": 0.35714285714285715,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4390243902435063,
+        "profit_factor": 0.7994579945797257,
+        "net_r": -1.8500000000021277,
+        "expectancy_r": -0.13214285714300913,
+        "max_drawdown_r": 4.100000000000215
+      },
+      "pseudo_oos_2026h1": {
+        "trades": 10,
+        "wins": 3,
+        "losses": 7,
+        "win_rate": 0.3,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4390243902435063,
+        "profit_factor": 0.6167247386757884,
+        "net_r": -2.7500000000013625,
+        "expectancy_r": -0.27500000000013625,
+        "max_drawdown_r": 5.125000000000268
+      }
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 97,
+      "wins": 31,
+      "losses": 66,
+      "win_rate": 0.31958762886597936,
+      "average_win_r": 1.4749999999996701,
+      "average_loss_r": 1.0250000000000534,
+      "realized_payoff_ratio": 1.4390243902435056,
+      "profit_factor": 0.6759053954174041,
+      "net_r": -21.92500000001374,
+      "expectancy_r": -0.22603092783519318,
+      "max_drawdown_r": 22.825000000012984
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 103,
+      "wins": 37,
+      "losses": 66,
+      "win_rate": 0.3592233009708738,
+      "average_win_r": 1.3499999999996706,
+      "average_loss_r": 1.1500000000000534,
+      "realized_payoff_ratio": 1.17391304347792,
+      "profit_factor": 0.6581027667982278,
+      "net_r": -25.95000000001572,
+      "expectancy_r": -0.25194174757296817,
+      "max_drawdown_r": 29.500000000011184
+    },
+    "recent_six_months": {
+      "trades": 10,
+      "wins": 3,
+      "losses": 7,
+      "win_rate": 0.3,
+      "average_win_r": 1.474999999999671,
+      "average_loss_r": 1.0250000000000536,
+      "realized_payoff_ratio": 1.4390243902435063,
+      "profit_factor": 0.6167247386757884,
+      "net_r": -2.7500000000013625,
+      "expectancy_r": -0.27500000000013625,
+      "max_drawdown_r": 5.125000000000268,
+      "fixed_0p01_lot_usd": -1.100000000000545,
+      "trades_per_weekday": 0.07751937984496124
+    },
+    "oracle_imitation": {
+      "causal_trades": 103,
+      "neutral_oracle_trades": 2615,
+      "matched_trades": 4,
+      "precision": 0.038834951456310676,
+      "recall": 0.0015296367112810707,
+      "median_absolute_difference_minutes": 5.0
+    }
+  },
+  "verdict": "Completed tick microstructure did not pass the frozen development and walk-forward gates."
+}

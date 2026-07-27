@@ -25,6 +25,31 @@ from eurusd_regime_specialists.asymmetric import (
 )
 from eurusd_regime_specialists.confirmed_reversal import verify_lock as verify_confirmation_lock
 from eurusd_regime_specialists.crossasset_handoff import verify_lock as verify_handoff_lock
+from eurusd_regime_specialists.neutral_causal import (
+    add_causal_features,
+    verify_lock as verify_neutral_lock,
+    walk_exit as walk_neutral_exit,
+)
+from eurusd_regime_specialists.neutral_walkforward import (
+    _labeled_outcome,
+    choose_side,
+    purged_training_rows,
+    verify_lock as verify_walkforward_lock,
+)
+from eurusd_regime_specialists.neutral_crosspair import (
+    crosspair_features,
+    verify_lock as verify_crosspair_lock,
+)
+from eurusd_regime_specialists.neutral_crosspair_nonlinear import (
+    verify_lock as verify_nonlinear_lock,
+)
+from eurusd_regime_specialists.neutral_tick_microstructure import (
+    aggregate_tick_payload,
+    verify_lock as verify_tick_microstructure_lock,
+)
+from eurusd_regime_specialists.neutral_tick_volatility import (
+    verify_lock as verify_tick_volatility_lock,
+)
 from eurusd_regime_specialists.retrospective_overfit import (
     _dense_target_candidate,
     density_bucket,
@@ -41,6 +66,12 @@ def test_lock():
     assert len(verify_asymmetric_lock()) == 2
     assert len(verify_confirmation_lock()) == 2
     assert len(verify_handoff_lock()) == 2
+    assert len(verify_neutral_lock()) == 2
+    assert len(verify_walkforward_lock()) == 2
+    assert len(verify_crosspair_lock()) == 2
+    assert len(verify_nonlinear_lock()) == 2
+    assert len(verify_tick_microstructure_lock()) == 2
+    assert len(verify_tick_volatility_lock()) == 2
 
 
 def test_wilder_seed_and_recursion():
@@ -271,3 +302,172 @@ def test_dense_oracle_resolves_same_bar_against_both_sides():
         slippage=0.00001,
     )
     assert candidate is None
+
+
+def test_neutral_features_exclude_current_bar_from_prior_extreme():
+    index = pd.date_range("2026-01-01", periods=14, freq="5min", tz="UTC")
+    highs = [1.0] * 13 + [2.0]
+    lows = [0.9] * 14
+    frame = pd.DataFrame(
+        {
+            "bid_open": [0.95] * 14,
+            "bid_high": highs,
+            "bid_low": lows,
+            "bid_close": [0.95] * 14,
+            "tick_count": [10] * 14,
+        },
+        index=index,
+    )
+    cfg = {
+        "features": {
+            "atr_bars": 2,
+            "tick_median_bars": 2,
+            "rolling_extreme_bars": 12,
+            "ema_fast_bars": 2,
+            "ema_slow_bars": 3,
+        },
+        "families": {
+            "N2_ASIA_RANGE_FADE": {
+                "asian_start_hour_utc": 0,
+                "asian_end_hour_utc": 6,
+            }
+        },
+    }
+    features = add_causal_features(frame, cfg)
+    assert features.iloc[-1]["prior_high"] == 1.0
+
+
+def test_neutral_exit_is_stop_first_for_long_and_short():
+    index = pd.date_range("2026-01-01", periods=1, freq="5min", tz="UTC")
+    frame = pd.DataFrame(
+        {
+            "bid_open": [1.0],
+            "bid_high": [1.01],
+            "bid_low": [0.99],
+            "bid_close": [1.0],
+            "ask_open": [1.001],
+            "ask_high": [1.011],
+            "ask_low": [0.991],
+            "ask_close": [1.001],
+        },
+        index=index,
+    )
+    long_exit = walk_neutral_exit(
+        frame, 0, index[0], "LONG", 0.995, 1.005, 0.001, 0.0
+    )
+    short_exit = walk_neutral_exit(
+        frame, 0, index[0], "SHORT", 1.006, 0.996, 0.001, 0.0
+    )
+    assert long_exit[2] == "STOP"
+    assert short_exit[2] == "STOP"
+
+
+def test_walkforward_training_purges_unfinished_labels():
+    frame = pd.DataFrame(
+        {
+            "entry_time_utc": pd.to_datetime(
+                [
+                    "2025-12-31T20:00:00Z",
+                    "2025-12-31T23:00:00Z",
+                    "2026-01-01T00:00:00Z",
+                ]
+            ),
+            "exit_time_utc": pd.to_datetime(
+                [
+                    "2025-12-31T21:00:00Z",
+                    "2026-01-01T01:00:00Z",
+                    "2026-01-01T02:00:00Z",
+                ]
+            ),
+        }
+    )
+    purged = purged_training_rows(
+        frame, pd.Timestamp("2026-01-01T00:00:00Z")
+    )
+    assert len(purged) == 1
+
+
+def test_walkforward_chooses_one_higher_probability_side():
+    timestamp = pd.Timestamp("2026-01-01T12:00:00Z")
+    frame = pd.DataFrame(
+        {
+            "completion_time_utc": [timestamp, timestamp],
+            "entry_time_utc": [timestamp, timestamp],
+            "side": ["LONG", "SHORT"],
+            "predicted_probability": [0.51, 0.57],
+        }
+    )
+    selected = choose_side(frame, threshold=0.55)
+    assert selected["side"].tolist() == ["SHORT"]
+
+
+def test_crosspair_tick_baseline_excludes_current_bar():
+    index = pd.date_range("2026-01-01", periods=25, freq="5min", tz="UTC")
+    close = pd.Series(
+        [1.0 + i * 0.0001 for i in range(25)], index=index
+    )
+    frame = pd.DataFrame(
+        {
+            "bid_high": close + 0.0001,
+            "bid_low": close - 0.0001,
+            "bid_close": close,
+            "tick_count": [10] * 24 + [20],
+        },
+        index=index,
+    )
+    cfg = {
+        "features": {
+            "atr_bars": 2,
+            "tick_median_bars": 24,
+            "crosspair_return_horizons_bars": [3, 6, 12, 24],
+        }
+    }
+    features = crosspair_features(frame, "test", cfg)
+    assert features.iloc[-1]["test_tick_ratio"] == 2.0
+
+
+def test_tick_payload_decodes_cumulative_time_and_price_deltas():
+    payload = {
+        "timestamp": 0,
+        "multiplier": 0.0001,
+        "bid": 1.0,
+        "ask": 1.0002,
+        "times": [0, 60_000, 60_000, 170_000],
+        "bids": [0, 1, 1, 1],
+        "asks": [0, 1, 1, 1],
+        "bidVolumes": [1, 1, 1, 1],
+        "askVolumes": [1, 1, 1, 1],
+    }
+    rows = aggregate_tick_payload(payload)
+    assert len(rows) == 1
+    assert rows[0]["timestamp_ms"] == 0
+    assert rows[0]["quote_change_imbalance"] == 1.0
+    assert rows[0]["path_efficiency"] == 1.0
+
+
+def test_walkforward_label_honors_causal_dynamic_risk():
+    index = pd.date_range("2026-01-01", periods=1, freq="5min", tz="UTC")
+    arrays = {
+        "bid_open": [1.0],
+        "bid_high": [1.0],
+        "bid_low": [1.0],
+        "bid_close": [1.0],
+        "ask_open": [1.0001],
+        "ask_high": [1.0001],
+        "ask_low": [1.0001],
+        "ask_close": [1.0001],
+    }
+    cfg = {
+        "label": {
+            "risk_pips": 4.0,
+            "target_r": 1.5,
+            "maximum_hold_hours": 12,
+            "minimum_retail_spread_pips": 0.7,
+            "extra_slippage_pips_per_side": 0.1,
+        }
+    }
+    outcome = _labeled_outcome(
+        0, index, arrays, "LONG", cfg, risk_pips=10.0
+    )
+    assert outcome["risk_pips"] == 10.0
+    assert outcome["risk_distance"] == 0.001

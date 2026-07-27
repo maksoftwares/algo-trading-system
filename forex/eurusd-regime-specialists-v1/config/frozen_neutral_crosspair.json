@@ -1,0 +1,79 @@
+{
+  "campaign_id": "eurusd-neutral-crosspair-walkforward-v1",
+  "frozen_at_utc": "2026-07-27T00:00:00Z",
+  "research_only": true,
+  "information_status": "ADAPTIVE_RESEARCH_ALL_ARCHIVED_HISTORY_PREVIOUSLY_INSPECTED",
+  "data_and_classifier_contract": "config/frozen_two_clock_ensemble.json",
+  "oracle_usage": "EVALUATION_ONLY_NEVER_FEATURE_TRAINING_LABEL_OR_SELECTION",
+  "candidate_schedule_minutes": 15,
+  "label": {
+    "risk_pips": 4.0,
+    "target_r": 1.50,
+    "maximum_hold_hours": 12,
+    "same_bar_policy": "stop_first",
+    "minimum_retail_spread_pips": 0.70,
+    "extra_slippage_pips_per_side": 0.10
+  },
+  "features": {
+    "atr_bars": 24,
+    "tick_median_bars": 24,
+    "rolling_extreme_bars": 12,
+    "ema_fast_bars": 12,
+    "ema_slow_bars": 48,
+    "return_horizons_bars": [1, 3, 6, 12, 24],
+    "crosspair_return_horizons_bars": [3, 6, 12, 24],
+    "clip_standardized_input": 10.0
+  },
+  "model": {
+    "type": "L2_LOGISTIC_REGRESSION",
+    "penalty": "l2",
+    "C": 0.10,
+    "solver": "lbfgs",
+    "max_iter": 1000,
+    "class_weight": null,
+    "random_state": 20260727
+  },
+  "development": {
+    "fit": ["2019-01-02T00:00:00Z", "2020-12-31T23:59:59Z"],
+    "threshold_selection": ["2021-01-01T00:00:00Z", "2022-12-31T23:59:59Z"],
+    "threshold_grid": [0.35, 0.375, 0.40, 0.425, 0.45, 0.475, 0.50, 0.525, 0.55],
+    "minimum_trades_each_threshold_year": 100,
+    "minimum_profit_factor_each_threshold_year": 1.05,
+    "selection_score": "maximum minimum annual profit factor then total net R"
+  },
+  "walk_forward_windows": {
+    "validation_2023": ["2023-01-01T00:00:00Z", "2023-12-31T23:59:59Z"],
+    "validation_2024": ["2024-01-01T00:00:00Z", "2024-12-31T23:59:59Z"],
+    "pseudo_oos_2025": ["2025-01-01T00:00:00Z", "2025-12-31T23:59:59Z"],
+    "pseudo_oos_2026h1": ["2026-01-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "refit": {
+    "frequency": "calendar_year",
+    "training_rule": "all rows whose label exit is strictly before inference window start",
+    "scaler_fit": "training_rows_only",
+    "model_fit": "training_rows_only"
+  },
+  "execution": {
+    "choose_one_side_per_timestamp": "higher predicted target-first probability",
+    "one_open_position": true,
+    "max_trades_per_utc_day": 4
+  },
+  "final_admission": {
+    "minimum_trades_each_walk_forward_window": 50,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.10,
+    "minimum_expectancy_r": 0.0,
+    "maximum_drawdown_r_overall": 30.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "oracle_matching": {
+    "maximum_absolute_entry_time_difference_minutes": 60,
+    "requires_same_utc_date": true,
+    "requires_same_side": true,
+    "one_to_one": true
+  }
+}

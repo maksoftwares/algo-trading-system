@@ -1,0 +1,104 @@
+{
+  "campaign_id": "eurusd-neutral-causal-v1",
+  "frozen_at_utc": "2026-07-27T00:00:00Z",
+  "research_only": true,
+  "information_status": "ADAPTIVE_RESEARCH_ALL_ARCHIVED_HISTORY_PREVIOUSLY_INSPECTED",
+  "data_and_classifier_contract": "config/frozen_two_clock_ensemble.json",
+  "oracle_usage": "EVALUATION_ONLY_NEVER_SIGNAL_GENERATION_OR_SELECTION",
+  "windows": {
+    "development_2019_2020": ["2019-01-02T00:00:00Z", "2020-12-31T23:59:59Z"],
+    "development_2021_2022": ["2021-01-01T00:00:00Z", "2022-12-31T23:59:59Z"],
+    "validation_2023_2024": ["2023-01-01T00:00:00Z", "2024-12-31T23:59:59Z"],
+    "pseudo_oos_2025_2026h1": ["2025-01-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "selection_windows": [
+    "development_2019_2020",
+    "development_2021_2022"
+  ],
+  "evaluation_windows": [
+    "validation_2023_2024",
+    "pseudo_oos_2025_2026h1"
+  ],
+  "recent_six_months": ["2026-01-01T00:00:00Z", "2026-06-30T23:59:59Z"],
+  "features": {
+    "atr_bars": 24,
+    "tick_median_bars": 24,
+    "rolling_extreme_bars": 12,
+    "ema_fast_bars": 12,
+    "ema_slow_bars": 48
+  },
+  "families": {
+    "N1_ROLLING_SWEEP_FADE": {
+      "mechanism": "fade a completed M5 sweep of the prior one-hour extreme",
+      "close_location_minimum": 0.65,
+      "minimum_tick_ratio": 1.0
+    },
+    "N2_ASIA_RANGE_FADE": {
+      "mechanism": "fade a completed 06-12 UTC sweep back inside the completed 00-06 UTC range",
+      "asian_start_hour_utc": 0,
+      "asian_end_hour_utc": 6,
+      "trade_start_hour_utc": 6,
+      "trade_end_hour_utc": 12,
+      "close_location_minimum": 0.60,
+      "minimum_tick_ratio": 1.0
+    },
+    "N3_ANCHOR_REVERSION": {
+      "mechanism": "revert after a completed rejection bar beyond a slow causal EMA anchor",
+      "minimum_atr_deviation": 1.25,
+      "close_location_minimum": 0.65,
+      "minimum_tick_ratio": 1.0
+    },
+    "N4_MICRO_BREAKOUT": {
+      "mechanism": "continue a completed one-hour breakout with causal EMA and tick confirmation",
+      "close_location_minimum": 0.75,
+      "minimum_tick_ratio": 1.25
+    }
+  },
+  "neutral_ownership": {
+    "state": "latest available state no later than completion-hour minus one hour",
+    "requires_direction": "NEUTRAL",
+    "shock": false,
+    "joint_dxy_eurusd_compression": false
+  },
+  "execution": {
+    "entry": "first M5 open after completed signal",
+    "risk_pips": 4.0,
+    "target_r": 1.50,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.70,
+    "extra_slippage_pips_per_side": 0.10,
+    "same_bar_policy": "stop_first",
+    "one_open_position_per_family": true,
+    "one_open_position_in_combination": true,
+    "max_trades_per_utc_day": 4,
+    "family_priority": [
+      "N2_ASIA_RANGE_FADE",
+      "N1_ROLLING_SWEEP_FADE",
+      "N3_ANCHOR_REVERSION",
+      "N4_MICRO_BREAKOUT"
+    ]
+  },
+  "development_selection": {
+    "minimum_trades_each_selection_window": 50,
+    "minimum_profit_factor_each_selection_window": 1.05,
+    "minimum_expectancy_r_each_selection_window": 0.0
+  },
+  "final_admission": {
+    "minimum_trades_each_evaluation_window": 50,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.10,
+    "minimum_expectancy_r": 0.0,
+    "maximum_drawdown_r_overall": 30.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "oracle_matching": {
+    "maximum_absolute_entry_time_difference_minutes": 60,
+    "requires_same_utc_date": true,
+    "requires_same_side": true,
+    "one_to_one": true
+  }
+}

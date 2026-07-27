@@ -1,0 +1,11 @@
+{
+  "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\EURUSD",
+  "source_chain_sha256": "92b476255ea682e8fa2c8f01a8fc0624962822beb6e069b03fd0a712e9011a5f",
+  "files_seen": 65686,
+  "populated_files": 46726,
+  "m5_rows": 560527,
+  "first_utc": "2019-01-02T00:00:00+00:00",
+  "last_utc": "2026-06-30T23:55:00+00:00",
+  "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\EURUSD_M5_MICROSTRUCTURE_v1.parquet",
+  "cache_sha256": "b42d82ff55579d29550c1f97f72e9a8651ae7aae488a141c0d13704fc017887b"
+}

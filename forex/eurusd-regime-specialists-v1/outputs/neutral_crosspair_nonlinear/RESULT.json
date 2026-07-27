@@ -1,0 +1,169 @@
+{
+  "campaign_id": "eurusd-neutral-crosspair-nonlinear-v1",
+  "status": "REJECTED_EURUSD_NEUTRAL_CROSSPAIR_NONLINEAR_V1",
+  "information_status": "ADAPTIVE_RESEARCH_AFTER_LINEAR_MODEL_REJECTION",
+  "source_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "causality": {
+    "eurusd_features": "Completed M5 plus lagged H1 state",
+    "crosspair_features": "Exact-timestamp completed GBPUSD and USDJPY M5 bars",
+    "training_label_purge": "Label exit strictly precedes every inference refit",
+    "oracle_usage": "EVALUATION_ONLY_NEVER_FEATURE_TRAINING_LABEL_OR_SELECTION",
+    "future_information_at_inference": false
+  },
+  "dataset": {
+    "rows": 83580,
+    "timestamps": 41790,
+    "positive_label_rate": 0.2971524288107203,
+    "features": 32
+  },
+  "development": {
+    "selected_threshold": 0.4,
+    "qualified": false,
+    "thresholds_tested": 9
+  },
+  "walk_forward": {
+    "admitted": false,
+    "overall": {
+      "trades": 22,
+      "wins": 3,
+      "losses": 19,
+      "win_rate": 0.13636363636363635,
+      "average_win_r": 1.474999999999671,
+      "average_loss_r": 1.0250000000000539,
+      "realized_payoff_ratio": 1.4390243902435058,
+      "profit_factor": 0.22721437740686934,
+      "net_r": -15.050000000002006,
+      "expectancy_r": -0.6840909090910002,
+      "max_drawdown_r": 15.050000000002006
+    },
+    "windows": {
+      "validation_2023": {
+        "trades": 8,
+        "wins": 2,
+        "losses": 6,
+        "win_rate": 0.25,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4390243902435063,
+        "profit_factor": 0.47967479674783536,
+        "net_r": -3.20000000000098,
+        "expectancy_r": -0.4000000000001225,
+        "max_drawdown_r": 3.650000000000597
+      },
+      "validation_2024": {
+        "trades": 7,
+        "wins": 1,
+        "losses": 6,
+        "win_rate": 0.14285714285714285,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4390243902435063,
+        "profit_factor": 0.23983739837391768,
+        "net_r": -4.675000000000651,
+        "expectancy_r": -0.6678571428572359,
+        "max_drawdown_r": 6.150000000000322
+      },
+      "pseudo_oos_2025": {
+        "trades": 4,
+        "wins": 0,
+        "losses": 4,
+        "win_rate": 0.0,
+        "average_win_r": 0.0,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 0.0,
+        "profit_factor": 0.0,
+        "net_r": -4.100000000000215,
+        "expectancy_r": -1.0250000000000536,
+        "max_drawdown_r": 4.100000000000215
+      },
+      "pseudo_oos_2026h1": {
+        "trades": 3,
+        "wins": 0,
+        "losses": 3,
+        "win_rate": 0.0,
+        "average_win_r": 0.0,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 0.0,
+        "profit_factor": 0.0,
+        "net_r": -3.075000000000161,
+        "expectancy_r": -1.0250000000000536,
+        "max_drawdown_r": 3.075000000000161
+      }
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 20,
+      "wins": 1,
+      "losses": 19,
+      "win_rate": 0.05,
+      "average_win_r": 1.474999999999671,
+      "average_loss_r": 1.0250000000000539,
+      "realized_payoff_ratio": 1.4390243902435058,
+      "profit_factor": 0.07573812580228978,
+      "net_r": -18.00000000000135,
+      "expectancy_r": -0.9000000000000675,
+      "max_drawdown_r": 18.00000000000135
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 22,
+      "wins": 3,
+      "losses": 19,
+      "win_rate": 0.13636363636363635,
+      "average_win_r": 1.349999999999671,
+      "average_loss_r": 1.1500000000000539,
+      "realized_payoff_ratio": 1.17391304347792,
+      "profit_factor": 0.18535469107546101,
+      "net_r": -17.800000000002008,
+      "expectancy_r": -0.8090909090910003,
+      "max_drawdown_r": 17.800000000002008
+    },
+    "recent_six_months": {
+      "trades": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "average_win_r": 0.0,
+      "average_loss_r": 1.0250000000000536,
+      "realized_payoff_ratio": 0.0,
+      "profit_factor": 0.0,
+      "net_r": -3.075000000000161,
+      "expectancy_r": -1.0250000000000536,
+      "max_drawdown_r": 3.075000000000161,
+      "fixed_0p01_lot_usd": -1.2300000000000644,
+      "trades_per_weekday": 0.023255813953488372
+    },
+    "oracle_imitation": {
+      "causal_trades": 22,
+      "neutral_oracle_trades": 2615,
+      "matched_trades": 1,
+      "precision": 0.045454545454545456,
+      "recall": 0.0003824091778202677,
+      "median_absolute_difference_minutes": 10.0
+    }
+  },
+  "verdict": "Cross-pair M5 information did not pass the frozen development and walk-forward gates."
+}

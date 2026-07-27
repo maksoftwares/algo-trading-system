@@ -1,0 +1,7 @@
+{
+  "locked_before_tick_microstructure_outcome_inspection": true,
+  "files": {
+    "EURUSD_NEUTRAL_TICK_MICROSTRUCTURE_PREREG_2026_07_27.md": "6e879aa4ff55541474d32e2ae7f6e2113f2ab54fcd9b93a4b1412c0a82e13d95",
+    "config/frozen_neutral_tick_microstructure.json": "91c52354049a90da87770effbfc6df00b86fddb92c7011f1b549427c583c8ab5"
+  }
+}
