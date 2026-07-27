@@ -23,12 +23,14 @@ from eurusd_regime_specialists.asymmetric import (
     verify_asymmetric_lock,
     walk_timed_long_exit,
 )
+from eurusd_regime_specialists.confirmed_reversal import verify_lock as verify_confirmation_lock
 
 
 def test_lock():
     assert len(verify_lock()) == 2
     assert len(verify_ensemble_lock()) == 2
     assert len(verify_asymmetric_lock()) == 2
+    assert len(verify_confirmation_lock()) == 2
 
 
 def test_wilder_seed_and_recursion():

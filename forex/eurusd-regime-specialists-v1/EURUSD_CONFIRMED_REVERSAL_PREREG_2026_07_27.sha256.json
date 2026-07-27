@@ -1,0 +1,7 @@
+{
+  "locked_before_confirmation_outcome_inspection": true,
+  "files": {
+    "EURUSD_CONFIRMED_REVERSAL_PREREG_2026_07_27.md": "b4f0e96ae4f6ea4d163d036204b09301b6f3123d1fca3cabc282c5c84574d1fd",
+    "config/frozen_confirmed_reversal.json": "ff4acf071cc4d4b305d14b4a5e6115ae76977cfbbb55acc2bf5279dfceac5de9"
+  }
+}

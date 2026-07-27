@@ -1,0 +1,29 @@
+{
+  "lock": {
+    "EURUSD_CONFIRMED_REVERSAL_PREREG_2026_07_27.md": "b4f0e96ae4f6ea4d163d036204b09301b6f3123d1fca3cabc282c5c84574d1fd",
+    "config/frozen_confirmed_reversal.json": "ff4acf071cc4d4b305d14b4a5e6115ae76977cfbbb55acc2bf5279dfceac5de9"
+  },
+  "census": {
+    "weekday_count": 1954,
+    "confirmed_signals": 5517,
+    "owned_confirmations": 4100,
+    "owned_confirmations_per_weekday": 2.0982599795291708,
+    "weekday_coverage": 0.9375639713408394,
+    "by_owner": {
+      "C1_COMPRESSION_REVERSAL": 2383,
+      "C2_USD_ALIGNED_PULLBACK": 315,
+      "C3_NEUTRAL_REVERSAL": 912,
+      "C4_COUNTERTREND_EXHAUSTION": 490
+    },
+    "by_side": {
+      "LONG": 2076,
+      "SHORT": 2024
+    },
+    "by_window": {
+      "historical_extension": 1623,
+      "inherited_evidence": 1377,
+      "adaptive_exam": 1100
+    },
+    "passed": true
+  }
+}

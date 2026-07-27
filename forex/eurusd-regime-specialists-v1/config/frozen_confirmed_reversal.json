@@ -1,0 +1,83 @@
+{
+  "campaign_id": "eurusd-confirmed-reversal-v1",
+  "frozen_at_utc": "2026-07-27T00:00:00Z",
+  "research_only": true,
+  "information_status": "ADAPTIVE_DEVELOPMENT_ALL_HISTORY_PREVIOUSLY_INSPECTED",
+  "data_and_classifier_contract": "config/frozen_two_clock_ensemble.json",
+  "windows": {
+    "historical_extension": ["2019-01-02T00:00:00Z", "2021-12-31T23:59:59Z"],
+    "inherited_evidence": ["2022-01-01T00:00:00Z", "2024-06-30T23:59:59Z"],
+    "adaptive_exam": ["2024-07-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "recent_six_months": ["2026-01-01T00:00:00Z", "2026-06-30T23:59:59Z"],
+  "arm": {
+    "timeframe_minutes": 15,
+    "rsi_period": 14,
+    "rsi_long_maximum": 35.0,
+    "rsi_short_minimum": 65.0,
+    "bands_period": 20,
+    "bands_deviation": 2.0,
+    "atr_period": 14,
+    "episode_first_bar_only": true
+  },
+  "confirmation": {
+    "timeframe_minutes": 5,
+    "maximum_wait_minutes": 60,
+    "structure_lookback_bars": 3,
+    "long": "bullish M5 close above prior three completed M5 highs",
+    "short": "bearish M5 close below prior three completed M5 lows",
+    "entry": "next available M5 open after completed confirmation"
+  },
+  "ownership": {
+    "shock": "CASH",
+    "joint_dxy_eurusd_compression": "C1_COMPRESSION_REVERSAL",
+    "usd_aligned_direction": "C2_USD_ALIGNED_PULLBACK",
+    "neutral": "C3_NEUTRAL_REVERSAL",
+    "opposing_usd_direction": "C4_COUNTERTREND_EXHAUSTION"
+  },
+  "risk": {
+    "stop_atr_multiple": 1.25,
+    "stop_floor_pips": 3.0,
+    "stop_ceiling_pips": 70.0,
+    "target_r": 1.50,
+    "maximum_hold_hours": 12
+  },
+  "execution": {
+    "minimum_retail_spread_pips": 0.70,
+    "extra_slippage_pips_per_side": 0.10,
+    "same_bar_policy": "stop_first",
+    "one_open_position": true
+  },
+  "census_gate": {
+    "minimum_owned_confirmations_per_weekday": 1.50,
+    "minimum_weekday_coverage": 0.50,
+    "minimum_owned_confirmations_each_window": 850
+  },
+  "specialist_admission": {
+    "minimum_trades_each_window": 75,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.30,
+    "minimum_expectancy_r": 0.05,
+    "maximum_drawdown_r_overall": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "portfolio_admission": {
+    "priority": [
+      "C2_USD_ALIGNED_PULLBACK",
+      "C1_COMPRESSION_REVERSAL",
+      "C3_NEUTRAL_REVERSAL",
+      "C4_COUNTERTREND_EXHAUSTION"
+    ],
+    "minimum_actual_trades_per_weekday": 1.0,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.30,
+    "require_positive_each_window": true
+  }
+}
