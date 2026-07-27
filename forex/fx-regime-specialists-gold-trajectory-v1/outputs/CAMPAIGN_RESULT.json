@@ -1,0 +1,307 @@
+{
+  "campaign_id": "fx-regime-specialists-gold-trajectory-v1",
+  "status": "NO_PORTFOLIO_FORMED",
+  "research_only": true,
+  "preregistration_hashes": {
+    "FOREX_REGIME_SPECIALIST_CAMPAIGN_PREREG_2026_07_27.md": "3a946e24fdc9991fb4fc14961d2b3c8354c8212bfe0c60be18227faa9691ee79",
+    "config/frozen_campaign.json": "7fee4e0e8995fd98319da91d21f1305a756f2b26d07564a1e41d5ccd602c6a3c"
+  },
+  "config_sha256": "7fee4e0e8995fd98319da91d21f1305a756f2b26d07564a1e41d5ccd602c6a3c",
+  "coverage": {
+    "context": {
+      "DOLLARIDXUSD": {
+        "symbol": "DOLLARIDXUSD",
+        "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+        "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+        "files_seen": 65688,
+        "empty_hours": 25468,
+        "populated_hours": 40220,
+        "first_utc": "2019-01-02T01:00:00+00:00",
+        "last_utc": "2026-06-30T20:00:00+00:00",
+        "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\fx-regime-specialists-gold-trajectory-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+        "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+      },
+      "USTBONDTRUSD": {
+        "symbol": "USTBONDTRUSD",
+        "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+        "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+        "files_seen": 65688,
+        "empty_hours": 22272,
+        "populated_hours": 43416,
+        "first_utc": "2019-01-02T20:00:00+00:00",
+        "last_utc": "2026-06-30T23:00:00+00:00",
+        "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\fx-regime-specialists-gold-trajectory-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+        "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+      }
+    },
+    "fx": {
+      "EURUSD": {
+        "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+        "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+        "m5_rows": 560527,
+        "first_utc": "2019-01-02T00:00:00+00:00",
+        "last_utc": "2026-06-30T23:55:00+00:00",
+        "h1_rows": 46726
+      },
+      "GBPUSD": {
+        "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\GBPUSD_M5_BIDASK.parquet",
+        "sha256": "4e855855978964958d255ca69b47c6452909ebe2b991bf27b5c537ea9ac765fd",
+        "m5_rows": 560420,
+        "first_utc": "2019-01-02T00:00:00+00:00",
+        "last_utc": "2026-06-30T23:55:00+00:00",
+        "h1_rows": 46724
+      },
+      "USDJPY": {
+        "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\USDJPY_M5_BIDASK.parquet",
+        "sha256": "b112d958b52ab5650fb790129184608c54268138025ea04d2322ea2f06e231b2",
+        "m5_rows": 560538,
+        "first_utc": "2019-01-02T00:00:00+00:00",
+        "last_utc": "2026-06-30T23:55:00+00:00",
+        "h1_rows": 46725
+      }
+    },
+    "common_h1_rows": 39365,
+    "common_first_utc": "2019-01-02T20:00:00+00:00",
+    "common_last_utc": "2026-06-30T20:00:00+00:00",
+    "active_fx_days": 2344
+  },
+  "regime_counts": [
+    {
+      "direction": "NEUTRAL",
+      "volatility": "NORMAL",
+      "phase": "UNRESOLVED",
+      "bars": 16864
+    },
+    {
+      "direction": "USD_UP",
+      "volatility": "NORMAL",
+      "phase": "ESTABLISHED",
+      "bars": 8505
+    },
+    {
+      "direction": "USD_DOWN",
+      "volatility": "NORMAL",
+      "phase": "ESTABLISHED",
+      "bars": 7408
+    },
+    {
+      "direction": "NEUTRAL",
+      "volatility": "SHOCK",
+      "phase": "UNRESOLVED",
+      "bars": 2961
+    },
+    {
+      "direction": "USD_UP",
+      "volatility": "SHOCK",
+      "phase": "ESTABLISHED",
+      "bars": 1384
+    },
+    {
+      "direction": "USD_DOWN",
+      "volatility": "SHOCK",
+      "phase": "ESTABLISHED",
+      "bars": 1375
+    },
+    {
+      "direction": "USD_UP",
+      "volatility": "NORMAL",
+      "phase": "TRANSITION",
+      "bars": 369
+    },
+    {
+      "direction": "USD_DOWN",
+      "volatility": "NORMAL",
+      "phase": "TRANSITION",
+      "bars": 359
+    },
+    {
+      "direction": "USD_DOWN",
+      "volatility": "SHOCK",
+      "phase": "TRANSITION",
+      "bars": 70
+    },
+    {
+      "direction": "USD_UP",
+      "volatility": "SHOCK",
+      "phase": "TRANSITION",
+      "bars": 70
+    }
+  ],
+  "signals": {
+    "r1_usd_trend_synchronization": 227,
+    "r2_crossasset_compression_release": 238
+  },
+  "specialists": {
+    "r1_usd_trend_synchronization": {
+      "status": "REJECTED_STANDALONE",
+      "admitted": false,
+      "overall": {
+        "trades": 199,
+        "net_r": -31.718954156420757,
+        "profit_factor": 0.7717286494402256,
+        "expectancy_r": -0.15939172942925003,
+        "win_rate": 0.3015075376884422,
+        "max_drawdown_r": 31.702093105626695
+      },
+      "windows": {
+        "design": {
+          "trades": 56,
+          "net_r": -27.101992617940212,
+          "profit_factor": 0.39197359122878783,
+          "expectancy_r": -0.4839641538917895,
+          "win_rate": 0.19642857142857142,
+          "max_drawdown_r": 26.09642901318796
+        },
+        "validation": {
+          "trades": 82,
+          "net_r": 12.007250487498201,
+          "profit_factor": 1.2414931180033482,
+          "expectancy_r": 0.1464298839938805,
+          "win_rate": 0.4146341463414634,
+          "max_drawdown_r": 9.664819733045423
+        },
+        "adaptive_exam": {
+          "trades": 61,
+          "net_r": -16.62421202597875,
+          "profit_factor": 0.6277460637480795,
+          "expectancy_r": -0.2725280659996516,
+          "win_rate": 0.2459016393442623,
+          "max_drawdown_r": 23.56047556364389
+        }
+      },
+      "top_5_percent_winners_removed": {
+        "trades": 189,
+        "net_r": -51.69194475383483,
+        "profit_factor": 0.6279893093628207,
+        "expectancy_r": -0.2735023531948933,
+        "win_rate": 0.26455026455026454,
+        "max_drawdown_r": 51.67508370304075
+      },
+      "extra_half_pip_round_trip": {
+        "trades": 199,
+        "net_r": -36.792417635091795,
+        "profit_factor": 0.7421055603814682,
+        "expectancy_r": -0.18488652077935575,
+        "win_rate": 0.3015075376884422,
+        "max_drawdown_r": 36.691251330327404
+      }
+    },
+    "r2_crossasset_compression_release": {
+      "status": "REJECTED_STANDALONE",
+      "admitted": false,
+      "overall": {
+        "trades": 222,
+        "net_r": -39.65788529698111,
+        "profit_factor": 0.7407500589782481,
+        "expectancy_r": -0.17863912295937434,
+        "win_rate": 0.30180180180180183,
+        "max_drawdown_r": 41.635623996122504
+      },
+      "windows": {
+        "design": {
+          "trades": 53,
+          "net_r": -17.549515901489695,
+          "profit_factor": 0.5584385250271847,
+          "expectancy_r": -0.3311229415375414,
+          "win_rate": 0.24528301886792453,
+          "max_drawdown_r": 20.51847475696213
+        },
+        "validation": {
+          "trades": 99,
+          "net_r": -12.101935928472644,
+          "profit_factor": 0.8190633665906832,
+          "expectancy_r": -0.12224177705527924,
+          "win_rate": 0.31313131313131315,
+          "max_drawdown_r": 19.810611862032566
+        },
+        "adaptive_exam": {
+          "trades": 70,
+          "net_r": -10.006433467018764,
+          "profit_factor": 0.7840763791151507,
+          "expectancy_r": -0.1429490495288395,
+          "win_rate": 0.32857142857142857,
+          "max_drawdown_r": 14.929136813329098
+        }
+      },
+      "top_5_percent_winners_removed": {
+        "trades": 210,
+        "net_r": -63.61645295053124,
+        "profit_factor": 0.584129069113684,
+        "expectancy_r": -0.30293549024062494,
+        "win_rate": 0.2619047619047619,
+        "max_drawdown_r": 65.59419164967264
+      },
+      "extra_half_pip_round_trip": {
+        "trades": 222,
+        "net_r": -46.26699191186544,
+        "profit_factor": 0.7063755256278363,
+        "expectancy_r": -0.20840987347687134,
+        "win_rate": 0.2927927927927928,
+        "max_drawdown_r": 48.13342410671489
+      }
+    }
+  },
+  "admitted_specialists": [],
+  "portfolio": {
+    "status": "NO_PORTFOLIO_FORMED",
+    "overall": {
+      "trades": 0,
+      "net_r": 0.0,
+      "profit_factor": 0.0,
+      "expectancy_r": 0.0,
+      "win_rate": 0.0,
+      "max_drawdown_r": 0.0
+    },
+    "windows": {
+      "design": {
+        "trades": 0,
+        "net_r": 0.0,
+        "profit_factor": 0.0,
+        "expectancy_r": 0.0,
+        "win_rate": 0.0,
+        "max_drawdown_r": 0.0
+      },
+      "validation": {
+        "trades": 0,
+        "net_r": 0.0,
+        "profit_factor": 0.0,
+        "expectancy_r": 0.0,
+        "win_rate": 0.0,
+        "max_drawdown_r": 0.0
+      },
+      "adaptive_exam": {
+        "trades": 0,
+        "net_r": 0.0,
+        "profit_factor": 0.0,
+        "expectancy_r": 0.0,
+        "win_rate": 0.0,
+        "max_drawdown_r": 0.0
+      }
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 0,
+      "net_r": 0.0,
+      "profit_factor": 0.0,
+      "expectancy_r": 0.0,
+      "win_rate": 0.0,
+      "max_drawdown_r": 0.0
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 0,
+      "net_r": 0.0,
+      "profit_factor": 0.0,
+      "expectancy_r": 0.0,
+      "win_rate": 0.0,
+      "max_drawdown_r": 0.0
+    },
+    "active_fx_days": 2344,
+    "trades_per_active_fx_day": 0.0
+  },
+  "boundary": {
+    "mt5_or_broker_runtime_used": false,
+    "orders_or_accounts_touched": false,
+    "threshold_search_used": false,
+    "post_outcome_parameter_edits_used": false,
+    "all_history_is_development_evidence": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "locked_before_regime_outcome_join": true,
+  "locked_at_utc": "2026-07-27T00:00:00Z",
+  "files": {
+    "FOREX_SESSION_SEED_REGIME_DECOMPOSITION_PREREG_2026_07_27.md": "46ddd3197eb3bd4c5a1e382dd5978e55693de871fc987c99ea8dcbd1706922d2",
+    "config/frozen_seed_decomposition.json": "654f8aa63537e5109eff7e21259a78e701fab3d99cdca04c09fed9c5565e60b0"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "context": {
+    "DOLLARIDXUSD": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\fx-regime-specialists-gold-trajectory-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "USTBONDTRUSD": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\fx-regime-specialists-gold-trajectory-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "fx": {
+    "EURUSD": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+      "m5_rows": 560527,
+      "first_utc": "2019-01-02T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00",
+      "h1_rows": 46726
+    },
+    "GBPUSD": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\GBPUSD_M5_BIDASK.parquet",
+      "sha256": "4e855855978964958d255ca69b47c6452909ebe2b991bf27b5c537ea9ac765fd",
+      "m5_rows": 560420,
+      "first_utc": "2019-01-02T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00",
+      "h1_rows": 46724
+    },
+    "USDJPY": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\USDJPY_M5_BIDASK.parquet",
+      "sha256": "b112d958b52ab5650fb790129184608c54268138025ea04d2322ea2f06e231b2",
+      "m5_rows": 560538,
+      "first_utc": "2019-01-02T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00",
+      "h1_rows": 46725
+    }
+  },
+  "common_h1_rows": 39365,
+  "common_first_utc": "2019-01-02T20:00:00+00:00",
+  "common_last_utc": "2026-06-30T20:00:00+00:00",
+  "active_fx_days": 2344
+}

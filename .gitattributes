@@ -10,6 +10,9 @@
 *.set text eol=lf
 *.mq5 text eol=lf
 
+# Hash-locked Forex campaign contracts and results must survive checkout byte-for-byte.
+forex/fx-regime-specialists-gold-trajectory-v1/**/*.json text eol=lf
+
 *.zip binary
 *.png binary
 *.jpg binary

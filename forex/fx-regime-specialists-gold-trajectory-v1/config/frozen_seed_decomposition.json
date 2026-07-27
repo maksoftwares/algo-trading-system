@@ -1,0 +1,81 @@
+{
+  "campaign_id": "fx-usdjpy-session-seed-regime-decomposition-v1",
+  "frozen_at_utc": "2026-07-27T00:00:00Z",
+  "research_only": true,
+  "base_seed": {
+    "id": "USDJPY_london120_break_m15_D1ATR20_frozen_watchlist_v1",
+    "symbol": "USDJPY",
+    "range_start_hour_utc": 6,
+    "range_minutes": 120,
+    "trade_start_hour_utc": 8,
+    "trade_end_hour_utc": 12,
+    "signal_timeframe_minutes": 15,
+    "atr_period_m15": 14,
+    "d1_atr_period": 14,
+    "range_atr_min": 0.45,
+    "range_atr_max": 3.2,
+    "daily_range_atr_min": 0.2,
+    "body_fraction_min": 0.3,
+    "break_buffer_atr": 0.05,
+    "long_close_location_min": 0.65,
+    "short_close_location_max": 0.35,
+    "stop_atr_multiple": 1.0,
+    "stop_range_multiple": 1.0,
+    "stop_floor_points": 30,
+    "point": 0.001,
+    "stop_ceiling_points": 900,
+    "risk_reward": 1.0,
+    "max_trades_per_day": 2
+  },
+  "data": {
+    "fx_bar_root": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars",
+    "start_utc": "2019-01-02T00:00:00Z",
+    "end_utc": "2026-06-30T23:59:59Z"
+  },
+  "windows": {
+    "design": ["2019-01-02T00:00:00Z", "2021-12-31T23:59:59Z"],
+    "validation": ["2022-01-01T00:00:00Z", "2024-06-30T23:59:59Z"],
+    "adaptive_exam": ["2024-07-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "regime_precedence": [
+    "SHOCK_CASH",
+    "COMPRESSION_RELEASE",
+    "ESTABLISHED_ALIGNED",
+    "TRANSITION_ALIGNED",
+    "NEUTRAL_NORMAL"
+  ],
+  "specialists": {
+    "s1_established_aligned_breakout": "ESTABLISHED_ALIGNED",
+    "s2_transition_aligned_breakout": "TRANSITION_ALIGNED",
+    "s3_compression_release_breakout": "COMPRESSION_RELEASE",
+    "s4_neutral_normal_breakout": "NEUTRAL_NORMAL"
+  },
+  "execution": {
+    "entry": "next M5 ask for long or bid for short after completed M15 signal",
+    "exit": "first executable stop or target; no time exit, matching frozen seed",
+    "same_bar_policy": "stop_first",
+    "extra_slippage_pips_per_side": 0.1,
+    "quarantine_start_utc": "2024-10-09T23:00:00Z",
+    "quarantine_end_utc": "2024-10-10T01:00:00Z"
+  },
+  "admission": {
+    "minimum_trades_each_window": 30,
+    "minimum_profit_factor_each_window": 1.1,
+    "minimum_expectancy_r_each_window": 0.02,
+    "maximum_drawdown_r_overall": 12.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "router": {
+    "max_concurrent_positions": 1,
+    "risk_per_trade_r": 1.0,
+    "daily_loss_stop_r": -2.0,
+    "weekly_loss_stop_r": -4.0,
+    "priority": [
+      "s1_established_aligned_breakout",
+      "s2_transition_aligned_breakout",
+      "s3_compression_release_breakout",
+      "s4_neutral_normal_breakout"
+    ]
+  }
+}
