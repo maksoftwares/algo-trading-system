@@ -182,7 +182,73 @@
       "maximum_concurrent_positions": 4,
       "realized_payoff_ratio_display": "UNDEFINED_NO_LOSSES",
       "profit_factor_display": "INFINITE_NO_LOSSES"
-    }
+    },
+    "regime_attribution": [
+      {
+        "owner": "S1_COMPRESSION_REVERSION",
+        "regime": "JOINT_COMPRESSION",
+        "definition": "Non-shock DXY and EURUSD joint compression",
+        "trades": 231,
+        "trade_share": 0.3701923076923077,
+        "active_days": 86,
+        "trades_per_regime_active_day": 2.686046511627907,
+        "win_rate": 1.0,
+        "average_winner_r": 1.4882417829391368,
+        "net_r": 343.7838518589406,
+        "fixed_0p01_lot_usd": 352.94083523008743,
+        "recent_six_months_trades": 25,
+        "recent_six_months_active_days": 11,
+        "recent_six_months_net_r": 37.176613154625926
+      },
+      {
+        "owner": "S2_SUPPORTIVE_PULLBACK",
+        "regime": "USD_DOWN_SUPPORTIVE",
+        "definition": "Non-compressed USD-down regime supporting the EURUSD long",
+        "trades": 104,
+        "trade_share": 0.16666666666666666,
+        "active_days": 34,
+        "trades_per_regime_active_day": 3.0588235294117645,
+        "win_rate": 1.0,
+        "average_winner_r": 1.4899953669159853,
+        "net_r": 154.95951815926247,
+        "fixed_0p01_lot_usd": 180.4773386285039,
+        "recent_six_months_trades": 8,
+        "recent_six_months_active_days": 3,
+        "recent_six_months_net_r": 11.917706154661555
+      },
+      {
+        "owner": "S3_NEUTRAL_AUCTION",
+        "regime": "NEUTRAL_AUCTION",
+        "definition": "Non-compressed neutral USD regime",
+        "trades": 281,
+        "trade_share": 0.45032051282051283,
+        "active_days": 89,
+        "trades_per_regime_active_day": 3.157303370786517,
+        "win_rate": 1.0,
+        "average_winner_r": 1.4895858579231958,
+        "net_r": 418.573626076418,
+        "fixed_0p01_lot_usd": 488.94116687172135,
+        "recent_six_months_trades": 30,
+        "recent_six_months_active_days": 11,
+        "recent_six_months_net_r": 44.65650775981154
+      },
+      {
+        "owner": "S4_OPPOSING_CAPITULATION",
+        "regime": "USD_UP_OPPOSING",
+        "definition": "Non-compressed USD-up regime; deep counter-regime capitulation only",
+        "trades": 8,
+        "trade_share": 0.01282051282051282,
+        "active_days": 5,
+        "trades_per_regime_active_day": 1.6,
+        "win_rate": 1.0,
+        "average_winner_r": 1.491295102275297,
+        "net_r": 11.930360818202375,
+        "fixed_0p01_lot_usd": 14.443572854957454,
+        "recent_six_months_trades": 5,
+        "recent_six_months_active_days": 3,
+        "recent_six_months_net_r": 7.456830426315111
+      }
+    ]
   },
   "four_trade_active_day_oracle": {
     "status": "IMPOSSIBLE_CAUSALLY_RETROSPECTIVE_DAILY_COUNT",

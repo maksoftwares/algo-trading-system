@@ -18,6 +18,19 @@ The pure hindsight ceiling now has the requested 100% historical win rate while 
 | Fixed 0.01-lot P&L | +$1,036.80 |
 | Maximum concurrent positions | 4 |
 
+## Regime division
+
+The unchanged 624 oracle trades divide into four mutually exclusive regime experts:
+
+| Regime expert | Definition | Trades | Share | Active days | Avg winner | Net | 2026 H1 trades / net |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Neutral auction | Non-compressed neutral USD regime | 281 | 45.03% | 89 | 1.490R | +418.57R | 30 / +44.66R |
+| Joint compression | Non-shock DXY and EURUSD joint compression | 231 | 37.02% | 86 | 1.488R | +343.78R | 25 / +37.18R |
+| USD-down supportive | Non-compressed weak-USD regime supporting the EURUSD long | 104 | 16.67% | 34 | 1.490R | +154.96R | 8 / +11.92R |
+| USD-up opposing | Non-compressed strong-USD regime; deep capitulation only | 8 | 1.28% | 5 | 1.491R | +11.93R | 5 / +7.46R |
+
+Neutral Auction and Joint Compression supply 82.05% of all selected trades. The opposing regime has only eight trades, so the perfect curve is not a balanced four-regime portfolio. Every bucket remains at 100% wins solely because the oracle deleted its losing candidates.
+
 ## How the perfect curve was manufactured
 
 The broad EURUSD regime-specialist stream produced 6,035 independently priced candidate opportunities. For each candidate, the oracle:
@@ -79,6 +92,11 @@ Primary artifacts:
 
 - `outputs/retrospective_overfit/RESULT.json`
 - `outputs/retrospective_overfit/PERFECT_FORESIGHT_TRADES.csv`
+- `outputs/retrospective_overfit/PERFECT_FORESIGHT_BY_REGIME.csv`
+- `outputs/retrospective_overfit/PERFECT_S1_COMPRESSION_REVERSION_TRADES.csv`
+- `outputs/retrospective_overfit/PERFECT_S2_SUPPORTIVE_PULLBACK_TRADES.csv`
+- `outputs/retrospective_overfit/PERFECT_S3_NEUTRAL_AUCTION_TRADES.csv`
+- `outputs/retrospective_overfit/PERFECT_S4_OPPOSING_CAPITULATION_TRADES.csv`
 - `outputs/retrospective_overfit/EQUITY_CURVES.csv`
 - `outputs/retrospective_overfit/OPPORTUNITY_OUTCOMES.csv`
 - `outputs/retrospective_overfit/FOUR_TRADE_DAY_ORACLE_TRADES.csv`

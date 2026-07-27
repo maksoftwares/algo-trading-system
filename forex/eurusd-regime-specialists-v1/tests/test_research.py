@@ -28,6 +28,7 @@ from eurusd_regime_specialists.crossasset_handoff import verify_lock as verify_h
 from eurusd_regime_specialists.retrospective_overfit import (
     density_bucket,
     perfect_foresight_oracle,
+    regime_attribution,
     resolve_portfolio,
     select_cells,
 )
@@ -226,3 +227,25 @@ def test_perfect_foresight_oracle_discards_every_loss():
     selected = perfect_foresight_oracle(frame, winners_per_active_day=4)
     assert len(selected) == 4
     assert (selected["r"] > 0).all()
+
+
+def test_regime_attribution_preserves_trade_total():
+    frame = pd.DataFrame(
+        {
+            "owner": [
+                "S1_COMPRESSION_REVERSION",
+                "S2_SUPPORTIVE_PULLBACK",
+                "S3_NEUTRAL_AUCTION",
+                "S4_OPPOSING_CAPITULATION",
+            ],
+            "oracle_date": ["2026-01-01"] * 4,
+            "entry_time_utc": pd.to_datetime(
+                ["2026-01-01T00:00:00Z"] * 4
+            ),
+            "r": [1.5] * 4,
+            "fixed_0p01_lot_usd": [1.0] * 4,
+        }
+    )
+    attribution = regime_attribution(frame)
+    assert attribution["trades"].sum() == 4
+    assert attribution["trade_share"].sum() == 1.0

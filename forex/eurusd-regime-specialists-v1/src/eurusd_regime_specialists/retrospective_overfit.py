@@ -32,6 +32,24 @@ MINIMUM_CELL_WIN_RATE = 0.45
 MAXIMUM_CELL_WIN_RATE = 0.65
 MINIMUM_CELL_PROFIT_FACTOR = 1.30
 TARGET_TRADES_PER_ACTIVE_DAY = 4
+REGIME_LABELS = {
+    "S1_COMPRESSION_REVERSION": (
+        "JOINT_COMPRESSION",
+        "Non-shock DXY and EURUSD joint compression",
+    ),
+    "S2_SUPPORTIVE_PULLBACK": (
+        "USD_DOWN_SUPPORTIVE",
+        "Non-compressed USD-down regime supporting the EURUSD long",
+    ),
+    "S3_NEUTRAL_AUCTION": (
+        "NEUTRAL_AUCTION",
+        "Non-compressed neutral USD regime",
+    ),
+    "S4_OPPOSING_CAPITULATION": (
+        "USD_UP_OPPOSING",
+        "Non-compressed USD-up regime; deep counter-regime capitulation only",
+    ),
+}
 FIT_END = pd.Timestamp("2026-06-30T23:59:59Z")
 EARLY_FIT_END = pd.Timestamp("2024-12-31T23:59:59Z")
 PSEUDO_OOS_START = pd.Timestamp("2025-01-01T00:00:00Z")
@@ -314,6 +332,51 @@ def perfect_foresight_oracle(
     )
 
 
+def regime_attribution(
+    perfect_trades: pd.DataFrame,
+    recent_start: pd.Timestamp = pd.Timestamp("2026-01-01T00:00:00Z"),
+) -> pd.DataFrame:
+    rows = []
+    total = len(perfect_trades)
+    for owner in OWNERS:
+        frame = perfect_trades[perfect_trades["owner"].eq(owner)]
+        recent = frame[frame["entry_time_utc"] >= recent_start]
+        label, definition = REGIME_LABELS[owner]
+        rows.append(
+            {
+                "owner": owner,
+                "regime": label,
+                "definition": definition,
+                "trades": int(len(frame)),
+                "trade_share": len(frame) / total if total else 0.0,
+                "active_days": int(frame["oracle_date"].nunique()),
+                "trades_per_regime_active_day": (
+                    len(frame) / frame["oracle_date"].nunique()
+                    if not frame.empty
+                    else 0.0
+                ),
+                "win_rate": (
+                    float((frame["r"] > 0).mean())
+                    if not frame.empty
+                    else 0.0
+                ),
+                "average_winner_r": (
+                    float(frame["r"].mean()) if not frame.empty else 0.0
+                ),
+                "net_r": float(frame["r"].sum()),
+                "fixed_0p01_lot_usd": float(
+                    frame["fixed_0p01_lot_usd"].sum()
+                ),
+                "recent_six_months_trades": int(len(recent)),
+                "recent_six_months_active_days": int(
+                    recent["oracle_date"].nunique()
+                ),
+                "recent_six_months_net_r": float(recent["r"].sum()),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
 def density_ladder(
     opportunity_outcomes: pd.DataFrame,
     m5: pd.DataFrame,
@@ -445,6 +508,7 @@ def run_retrospective_overfit() -> tuple[
         "2026-01-01T00:00:00Z",
         "2026-06-30T23:59:59Z",
     )
+    perfect_regimes = regime_attribution(perfect_oracle)
     result = {
         "status": "INTENTIONALLY_OVERFIT_DIAGNOSTIC_NOT_TRADABLE",
         "warning": (
@@ -510,6 +574,9 @@ def run_retrospective_overfit() -> tuple[
                 m5,
                 pd.Timestamp("2026-01-01T00:00:00Z"),
                 pd.Timestamp("2026-06-30T23:59:59Z"),
+            ),
+            "regime_attribution": perfect_regimes.to_dict(
+                orient="records"
             ),
         },
         "four_trade_active_day_oracle": {
@@ -580,10 +647,15 @@ def run_retrospective_overfit() -> tuple[
         "DENSITY_LADDER": ladder,
         "FOUR_TRADE_DAY_ORACLE_TRADES": density_oracle,
         "PERFECT_FORESIGHT_TRADES": perfect_oracle,
+        "PERFECT_FORESIGHT_BY_REGIME": perfect_regimes,
         "EQUITY_CURVES": _equity_rows(
             fitted, chronological, density_oracle, perfect_oracle
         ),
     }
+    for owner in OWNERS:
+        artifacts[f"PERFECT_{owner}_TRADES"] = perfect_oracle[
+            perfect_oracle["owner"].eq(owner)
+        ].copy()
     return result, artifacts
 
 
