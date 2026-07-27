@@ -141,7 +141,7 @@
         "profit_factor": 0.7717286494402256,
         "expectancy_r": -0.15939172942925003,
         "win_rate": 0.3015075376884422,
-        "max_drawdown_r": 31.702093105626695
+        "max_drawdown_r": 32.70765671037894
       },
       "windows": {
         "design": {
@@ -150,7 +150,7 @@
           "profit_factor": 0.39197359122878783,
           "expectancy_r": -0.4839641538917895,
           "win_rate": 0.19642857142857142,
-          "max_drawdown_r": 26.09642901318796
+          "max_drawdown_r": 27.10199261794021
         },
         "validation": {
           "trades": 82,
@@ -175,7 +175,7 @@
         "profit_factor": 0.6279893093628207,
         "expectancy_r": -0.2735023531948933,
         "win_rate": 0.26455026455026454,
-        "max_drawdown_r": 51.67508370304075
+        "max_drawdown_r": 52.680647307792995
       },
       "extra_half_pip_round_trip": {
         "trades": 199,
@@ -183,7 +183,7 @@
         "profit_factor": 0.7421055603814682,
         "expectancy_r": -0.18488652077935575,
         "win_rate": 0.3015075376884422,
-        "max_drawdown_r": 36.691251330327404
+        "max_drawdown_r": 37.72463295884088
       }
     },
     "r2_crossasset_compression_release": {
@@ -195,7 +195,7 @@
         "profit_factor": 0.7407500589782481,
         "expectancy_r": -0.17863912295937434,
         "win_rate": 0.30180180180180183,
-        "max_drawdown_r": 41.635623996122504
+        "max_drawdown_r": 41.65141018568999
       },
       "windows": {
         "design": {
@@ -204,7 +204,7 @@
           "profit_factor": 0.5584385250271847,
           "expectancy_r": -0.3311229415375414,
           "win_rate": 0.24528301886792453,
-          "max_drawdown_r": 20.51847475696213
+          "max_drawdown_r": 20.534260946529617
         },
         "validation": {
           "trades": 99,
@@ -229,7 +229,7 @@
         "profit_factor": 0.584129069113684,
         "expectancy_r": -0.30293549024062494,
         "win_rate": 0.2619047619047619,
-        "max_drawdown_r": 65.59419164967264
+        "max_drawdown_r": 65.60997783924013
       },
       "extra_half_pip_round_trip": {
         "trades": 222,
@@ -237,7 +237,7 @@
         "profit_factor": 0.7063755256278363,
         "expectancy_r": -0.20840987347687134,
         "win_rate": 0.2927927927927928,
-        "max_drawdown_r": 48.13342410671489
+        "max_drawdown_r": 48.228141244119485
       }
     }
   },

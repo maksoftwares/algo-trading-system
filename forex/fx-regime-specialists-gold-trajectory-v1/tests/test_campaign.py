@@ -16,7 +16,7 @@ from fx_regime_specialists.campaign import (  # noqa: E402
     route_portfolio,
     verify_preregistration,
 )
-from fx_regime_specialists.seed_decomposition import verify_seed_lock
+from fx_regime_specialists.seed_decomposition import verify_seed_lock, walk_seed_exit_to_cycle
 
 
 def test_preregistration_hashes_are_locked():
@@ -47,6 +47,11 @@ def test_metric_block_and_top_winner_removal():
     assert block["profit_factor"] == 1.5
     assert block["net_r"] == 1.0
     assert metric_block(remove_top_winners(trades))["net_r"] == -1.0
+
+
+def test_drawdown_starts_from_zero_equity():
+    trades = pd.DataFrame({"r": [-1.0, 0.25]})
+    assert metric_block(trades)["max_drawdown_r"] == 1.0
 
 
 def test_router_requires_admission():
@@ -82,3 +87,24 @@ def test_router_enforces_single_concurrent_position():
     )
     assert len(routed) == 1
     assert routed.iloc[0]["specialist"] == "r1"
+
+
+def test_cycle_exit_uses_boundary_open_when_no_price_exit():
+    index = pd.date_range("2026-01-01T10:00:00Z", periods=3, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "bid_open": [100.0, 100.1, 100.2],
+            "bid_low": [99.9, 100.0, 100.1],
+            "bid_high": [100.2, 100.3, 100.4],
+            "ask_open": [100.01, 100.11, 100.21],
+            "ask_low": [99.91, 100.01, 100.11],
+            "ask_high": [100.21, 100.31, 100.41],
+        },
+        index=index,
+    )
+    exit_time, exit_price, reason = walk_seed_exit_to_cycle(
+        m5, 0, 2, "LONG", 99.0, 101.0, 0.01
+    )
+    assert exit_time == index[2]
+    assert exit_price == 100.19
+    assert reason == "NEXT_CYCLE"

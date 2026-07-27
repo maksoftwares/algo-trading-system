@@ -17,6 +17,7 @@ Run from the repository root:
 ```powershell
 python run_fx_regime_specialists.py
 python run_fx_session_seed_decomposition.py
+python run_fx_s1_cycle_exit.py
 ```
 
 Each runner verifies its preregistration hashes before joining signals to outcomes. Neither calls MT5 or a broker runtime.

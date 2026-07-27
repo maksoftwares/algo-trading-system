@@ -468,8 +468,8 @@ def metric_block(trades: pd.DataFrame, value_column: str = "r") -> dict[str, Any
     wins = values[values > 0].sum()
     losses = -values[values < 0].sum()
     profit_factor = float(wins / losses) if losses > 0 else (float("inf") if wins > 0 else 0.0)
-    equity = values.cumsum()
-    drawdown = equity.cummax().sub(equity)
+    equity = np.concatenate(([0.0], values.cumsum().to_numpy(dtype=float)))
+    drawdown = np.maximum.accumulate(equity) - equity
     return {
         "trades": int(len(values)),
         "net_r": float(values.sum()),

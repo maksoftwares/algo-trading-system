@@ -97,7 +97,7 @@
           "profit_factor": 0.0,
           "expectancy_r": -1.002378121284197,
           "win_rate": 0.0,
-          "max_drawdown_r": 0.0
+          "max_drawdown_r": 1.002378121284197
         },
         "adaptive_exam": {
           "trades": 2,
@@ -105,7 +105,7 @@
           "profit_factor": 0.9951173051333893,
           "expectancy_r": -0.002448824760819368,
           "win_rate": 0.5,
-          "max_drawdown_r": 0.0
+          "max_drawdown_r": 1.003062787136309
         }
       },
       "top_5_percent_winners_removed": {

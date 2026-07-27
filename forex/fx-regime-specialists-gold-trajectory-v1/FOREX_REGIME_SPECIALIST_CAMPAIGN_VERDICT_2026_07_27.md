@@ -8,8 +8,8 @@ Boundary: offline research only. No MT5, broker, account, chart, EA attachment, 
 
 | Specialist | Signals | Trades | PF | Net R | Max DD R | Decision |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| R1 USD trend synchronization | 227 | 199 | 0.7717 | -31.7190 | 31.7021 | `REJECTED_STANDALONE` |
-| R2 cross-asset compression release | 238 | 222 | 0.7408 | -39.6579 | 41.6356 | `REJECTED_STANDALONE` |
+| R1 USD trend synchronization | 227 | 199 | 0.7717 | -31.7190 | 32.7077 | `REJECTED_STANDALONE` |
+| R2 cross-asset compression release | 238 | 222 | 0.7408 | -39.6579 | 41.6514 | `REJECTED_STANDALONE` |
 
 ## Chronological Standalone Evidence
 

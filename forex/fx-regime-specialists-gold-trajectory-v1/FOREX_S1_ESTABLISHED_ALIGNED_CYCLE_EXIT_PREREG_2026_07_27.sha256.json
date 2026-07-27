@@ -1,0 +1,8 @@
+{
+  "locked_before_cycle_exit_outcomes": true,
+  "locked_at_utc": "2026-07-27T00:00:00Z",
+  "files": {
+    "FOREX_S1_ESTABLISHED_ALIGNED_CYCLE_EXIT_PREREG_2026_07_27.md": "8251434437376b83f7ed6a94e0c221eaec449466acf5e43ea74cde6015ca5ade",
+    "config/frozen_s1_cycle_exit.json": "a7206bde3ae6425101f8ddc1341c6f77f0e59b66a26f94ff53f2b5f12258190d"
+  }
+}

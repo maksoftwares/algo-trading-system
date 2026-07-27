@@ -1,0 +1,44 @@
+{
+  "campaign_id": "fx-s1-established-aligned-cycle-exit-v1",
+  "frozen_at_utc": "2026-07-27T00:00:00Z",
+  "research_only": true,
+  "source_contracts": {
+    "classifier": "config/frozen_campaign.json",
+    "seed_and_ownership": "config/frozen_seed_decomposition.json",
+    "specialist": "s1_established_aligned_breakout"
+  },
+  "only_change": {
+    "name": "next_setup_cycle_exit",
+    "rule": "If stop or target has not closed the trade, close at the first executable M5 quote at 06:00 UTC on the next later active FX date.",
+    "long_exit": "bid_open minus 0.1 pip adverse exit slippage",
+    "short_exit": "ask_open plus 0.1 pip adverse exit slippage"
+  },
+  "data": {
+    "start_utc": "2019-01-02T00:00:00Z",
+    "end_utc": "2026-06-30T23:59:59Z",
+    "last_six_completed_months": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "windows": {
+    "design": ["2019-01-02T00:00:00Z", "2021-12-31T23:59:59Z"],
+    "validation": ["2022-01-01T00:00:00Z", "2024-06-30T23:59:59Z"],
+    "adaptive_exam": ["2024-07-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "admission": {
+    "minimum_trades_each_window": 30,
+    "minimum_profit_factor_each_window": 1.1,
+    "minimum_expectancy_r_each_window": 0.02,
+    "maximum_drawdown_r_overall": 12.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "last_six_month_reporting": {
+    "monthly_breakdown": true,
+    "fixed_lot_illustration": 0.01,
+    "usd_jpy_contract_size": 100000,
+    "report_raw_and_extra_half_pip_stress": true,
+    "promotion_use": false
+  }
+}

@@ -247,3 +247,115 @@ def walk_seed_exit(
     final = m5.iloc[-1]
     price = float(final["bid_close"]) - slip if side == "LONG" else float(final["ask_close"]) + slip
     return m5.index[-1], price, "DATA_END"
+
+
+def simulate_s1_cycle_exit(
+    signals: pd.DataFrame,
+    m5: pd.DataFrame,
+    seed: dict[str, Any],
+    execution: dict[str, Any],
+) -> pd.DataFrame:
+    specialist = "s1_established_aligned_cycle_exit_v1"
+    owned = signals[signals["ownership"] == "s1_established_aligned_breakout"].sort_values("signal_complete_utc")
+    cycle_times = m5.index[(m5.index.hour == 6) & (m5.index.minute == 0)]
+    records: list[dict[str, Any]] = []
+    open_until: pd.Timestamp | None = None
+    daily_counts: dict[Any, int] = {}
+    pip = PIP_SIZE["USDJPY"]
+    slip = execution["extra_slippage_pips_per_side"] * pip
+    quarantine_start = pd.Timestamp(execution["quarantine_start_utc"])
+    quarantine_end = pd.Timestamp(execution["quarantine_end_utc"])
+    for _, signal in owned.iterrows():
+        entry_position = int(m5.index.searchsorted(signal["signal_complete_utc"], side="left"))
+        if entry_position >= len(m5):
+            continue
+        entry_time = m5.index[entry_position]
+        if quarantine_start <= entry_time <= quarantine_end:
+            continue
+        if open_until is not None and entry_time < open_until:
+            continue
+        day_key = entry_time.date()
+        if daily_counts.get(day_key, 0) >= seed["max_trades_per_day"]:
+            continue
+        next_date = entry_time.normalize() + pd.Timedelta(days=1)
+        cycle_index = int(cycle_times.searchsorted(next_date, side="left"))
+        if cycle_index >= len(cycle_times):
+            continue
+        cycle_time = cycle_times[cycle_index]
+        cycle_position = int(m5.index.searchsorted(cycle_time, side="left"))
+        entry_bar = m5.iloc[entry_position]
+        side = signal["side"]
+        base_distance = max(
+            seed["stop_atr_multiple"] * signal["atr"],
+            seed["stop_range_multiple"] * signal["session_range"],
+            seed["stop_floor_points"] * seed["point"],
+        )
+        if side == "LONG":
+            entry = float(entry_bar["ask_open"]) + slip
+            stop = min(float(signal["range_low"]), entry - base_distance)
+            risk_distance = entry - stop
+            target = entry + seed["risk_reward"] * risk_distance
+        else:
+            entry = float(entry_bar["bid_open"]) - slip
+            stop = max(float(signal["range_high"]), entry + base_distance)
+            risk_distance = stop - entry
+            target = entry - seed["risk_reward"] * risk_distance
+        if risk_distance / seed["point"] > seed["stop_ceiling_points"]:
+            continue
+        exit_time, exit_price, reason = walk_seed_exit_to_cycle(
+            m5, entry_position, cycle_position, side, stop, target, slip
+        )
+        pnl_price = exit_price - entry if side == "LONG" else entry - exit_price
+        r_value = pnl_price / risk_distance
+        pnl_usd = pnl_price * 0.01 * 100000.0 / exit_price
+        records.append(
+            {
+                "specialist": specialist,
+                "symbol": "USDJPY",
+                "signal_time_utc": signal["signal_time_utc"],
+                "entry_time_utc": entry_time,
+                "exit_time_utc": exit_time,
+                "side": side,
+                "entry_price": entry,
+                "stop_price": stop,
+                "target_price": target,
+                "exit_price": exit_price,
+                "exit_reason": reason,
+                "risk_distance": risk_distance,
+                "r": r_value,
+                "extra_half_pip_stress_r": r_value - (0.5 * pip / risk_distance),
+                "pnl_usd_0_01_lot": pnl_usd,
+            }
+        )
+        open_until = exit_time
+        daily_counts[day_key] = daily_counts.get(day_key, 0) + 1
+    columns = [*TRADE_COLUMNS, "pnl_usd_0_01_lot"]
+    return pd.DataFrame(records, columns=columns)
+
+
+def walk_seed_exit_to_cycle(
+    m5: pd.DataFrame,
+    start_position: int,
+    cycle_position: int,
+    side: str,
+    stop: float,
+    target: float,
+    slip: float,
+) -> tuple[pd.Timestamp, float, str]:
+    for position in range(start_position, cycle_position):
+        bar = m5.iloc[position]
+        timestamp = m5.index[position]
+        if side == "LONG":
+            if float(bar["bid_low"]) <= stop:
+                return timestamp, min(float(bar["bid_open"]), stop) - slip, "STOP"
+            if float(bar["bid_high"]) >= target:
+                return timestamp, max(float(bar["bid_open"]), target) - slip, "TARGET"
+        else:
+            if float(bar["ask_high"]) >= stop:
+                return timestamp, max(float(bar["ask_open"]), stop) + slip, "STOP"
+            if float(bar["ask_low"]) <= target:
+                return timestamp, min(float(bar["ask_open"]), target) + slip, "TARGET"
+    cycle_bar = m5.iloc[cycle_position]
+    if side == "LONG":
+        return m5.index[cycle_position], float(cycle_bar["bid_open"]) - slip, "NEXT_CYCLE"
+    return m5.index[cycle_position], float(cycle_bar["ask_open"]) + slip, "NEXT_CYCLE"

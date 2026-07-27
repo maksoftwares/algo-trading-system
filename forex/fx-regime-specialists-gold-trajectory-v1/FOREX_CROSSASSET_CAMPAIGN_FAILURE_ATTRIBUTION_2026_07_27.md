@@ -6,7 +6,7 @@ The first hash-locked campaign rejected both experts and formed no portfolio.
 
 ## R1 USD Trend Synchronization
 
-- 199 trades, PF 0.7717, -31.7190R, 31.7021R max drawdown.
+- 199 trades, PF 0.7717, -31.7190R, 32.7077R max drawdown.
 - Long: 123 trades, -22.6267R.
 - Short: 76 trades, -9.0923R.
 - Design: PF 0.3920, -27.1020R.
@@ -19,7 +19,7 @@ The 2022–2023 pocket is not promoted. Both surrounding chronological windows f
 
 ## R2 Cross-Asset Compression Release
 
-- 222 trades, PF 0.7408, -39.6579R, 41.6356R max drawdown.
+- 222 trades, PF 0.7408, -39.6579R, 41.6514R max drawdown.
 - Long: 112 trades, -12.9246R.
 - Short: 110 trades, -26.7333R.
 - Design: PF 0.5584, -17.5495R.

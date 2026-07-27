@@ -1,0 +1,222 @@
+{
+  "campaign_id": "fx-s1-established-aligned-cycle-exit-v1",
+  "status": "REJECTED_STANDALONE",
+  "research_only": true,
+  "preregistration_hashes": {
+    "FOREX_S1_ESTABLISHED_ALIGNED_CYCLE_EXIT_PREREG_2026_07_27.md": "8251434437376b83f7ed6a94e0c221eaec449466acf5e43ea74cde6015ca5ade",
+    "config/frozen_s1_cycle_exit.json": "a7206bde3ae6425101f8ddc1341c6f77f0e59b66a26f94ff53f2b5f12258190d"
+  },
+  "config_sha256": "a7206bde3ae6425101f8ddc1341c6f77f0e59b66a26f94ff53f2b5f12258190d",
+  "source_hashes": {
+    "classifier_config": "7fee4e0e8995fd98319da91d21f1305a756f2b26d07564a1e41d5ccd602c6a3c",
+    "seed_config": "654f8aa63537e5109eff7e21259a78e701fab3d99cdca04c09fed9c5565e60b0",
+    "dxy_source_chain": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+    "bond_source_chain": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+    "usdjpy_m5": "b112d958b52ab5650fb790129184608c54268138025ea04d2322ea2f06e231b2"
+  },
+  "signal_census": {
+    "raw_seed_signals": 2337,
+    "owned_s1_signals": 186,
+    "executed_cycle_exit_trades": 70
+  },
+  "full_history": {
+    "status": "REJECTED_STANDALONE",
+    "admitted": false,
+    "overall": {
+      "trades": 70,
+      "net_r": 23.25323649197912,
+      "profit_factor": 2.2544882341003127,
+      "expectancy_r": 0.33218909274255887,
+      "win_rate": 0.6714285714285714,
+      "max_drawdown_r": 3.0040608085120653
+    },
+    "windows": {
+      "design": {
+        "trades": 19,
+        "net_r": 9.90588681836713,
+        "profit_factor": 4.22829986731386,
+        "expectancy_r": 0.5213624641245858,
+        "win_rate": 0.7894736842105263,
+        "max_drawdown_r": 1.7294929213336405
+      },
+      "validation": {
+        "trades": 27,
+        "net_r": 8.756539815304757,
+        "profit_factor": 2.130490989909944,
+        "expectancy_r": 0.32431628945573177,
+        "win_rate": 0.6296296296296297,
+        "max_drawdown_r": 3.004060808512066
+      },
+      "adaptive_exam": {
+        "trades": 24,
+        "net_r": 4.59080985830724,
+        "profit_factor": 1.5945261682606167,
+        "expectancy_r": 0.191283744096135,
+        "win_rate": 0.625,
+        "max_drawdown_r": 2.0099861658699085
+      }
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 66,
+      "net_r": 19.259761088200634,
+      "profit_factor": 2.039044336261096,
+      "expectancy_r": 0.2918145619424338,
+      "win_rate": 0.6515151515151515,
+      "max_drawdown_r": 3.004060808512067
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 70,
+      "net_r": 22.235272834891294,
+      "profit_factor": 2.1794594590770844,
+      "expectancy_r": 0.3176467547841613,
+      "win_rate": 0.6714285714285714,
+      "max_drawdown_r": 3.024364851072294
+    }
+  },
+  "admission_failures": [
+    "design: 19 trades < 30",
+    "validation: 27 trades < 30",
+    "adaptive_exam: 24 trades < 30"
+  ],
+  "last_six_months": {
+    "window": [
+      "2026-01-01T00:00:00+00:00",
+      "2026-06-30T23:59:59+00:00"
+    ],
+    "historical_status": "DEVELOPMENT_EVIDENCE_NOT_UNTOUCHED_CONFIRMATION",
+    "overall": {
+      "trades": 6,
+      "net_r": 0.5307915321165091,
+      "profit_factor": 1.2156088953227064,
+      "expectancy_r": 0.08846525535275152,
+      "win_rate": 0.5,
+      "max_drawdown_r": 1.0045766590389233,
+      "pnl_usd_0_01_lot": -1.385526082528593
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 6,
+      "net_r": 0.4586679345079032,
+      "profit_factor": 1.1836849650252146,
+      "expectancy_r": 0.0764446557513172,
+      "win_rate": 0.5,
+      "max_drawdown_r": 1.0274599542334308
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 5,
+      "net_r": -0.4669148899018287,
+      "profit_factor": 0.8103379622127073,
+      "expectancy_r": -0.09338297798036574,
+      "win_rate": 0.4,
+      "max_drawdown_r": 1.457249098762313
+    },
+    "monthly": {
+      "2026-01": {
+        "trades": 1,
+        "net_r": -1.001154734411091,
+        "profit_factor": 0.0,
+        "expectancy_r": -1.001154734411091,
+        "win_rate": 0.0,
+        "max_drawdown_r": 1.001154734411091,
+        "pnl_usd_0_01_lot": -5.614521341009438
+      },
+      "2026-02": {
+        "trades": 1,
+        "net_r": 0.9977064220183378,
+        "profit_factor": "Infinity",
+        "expectancy_r": 0.9977064220183378,
+        "win_rate": 1.0,
+        "max_drawdown_r": 0.0,
+        "pnl_usd_0_01_lot": 2.811276125480055
+      },
+      "2026-03": {
+        "trades": 3,
+        "net_r": 1.5388165035481856,
+        "profit_factor": 4.3738994028946125,
+        "expectancy_r": 0.5129388345160618,
+        "win_rate": 0.6666666666666666,
+        "max_drawdown_r": 0.45609436435122197,
+        "pnl_usd_0_01_lot": 2.793683326588676
+      },
+      "2026-04": {
+        "trades": 1,
+        "net_r": -1.0045766590389233,
+        "profit_factor": 0.0,
+        "expectancy_r": -1.0045766590389233,
+        "win_rate": 0.0,
+        "max_drawdown_r": 1.0045766590389233,
+        "pnl_usd_0_01_lot": -1.3759641935878861
+      },
+      "2026-05": {
+        "trades": 0,
+        "net_r": 0.0,
+        "profit_factor": 0.0,
+        "expectancy_r": 0.0,
+        "win_rate": 0.0,
+        "max_drawdown_r": 0.0,
+        "pnl_usd_0_01_lot": 0.0
+      },
+      "2026-06": {
+        "trades": 0,
+        "net_r": 0.0,
+        "profit_factor": 0.0,
+        "expectancy_r": 0.0,
+        "win_rate": 0.0,
+        "max_drawdown_r": 0.0,
+        "pnl_usd_0_01_lot": 0.0
+      }
+    },
+    "direction": {
+      "LONG": {
+        "trades": 4,
+        "net_r": 0.5342398445092622,
+        "profit_factor": 1.3657496013505614,
+        "expectancy_r": 0.13355996112731555,
+        "win_rate": 0.5,
+        "max_drawdown_r": 1.0045766590389233
+      },
+      "SHORT": {
+        "trades": 2,
+        "net_r": -0.0034483123927531167,
+        "profit_factor": 0.9965556648995108,
+        "expectancy_r": -0.0017241561963765584,
+        "win_rate": 0.5,
+        "max_drawdown_r": 1.001154734411091
+      }
+    },
+    "exit_reason": {
+      "NEXT_CYCLE": {
+        "trades": 1,
+        "net_r": -0.45609436435122197,
+        "profit_factor": 0.0,
+        "expectancy_r": -0.45609436435122197,
+        "win_rate": 0.0,
+        "max_drawdown_r": 0.45609436435122197
+      },
+      "STOP": {
+        "trades": 2,
+        "net_r": -2.0057313934500143,
+        "profit_factor": 0.0,
+        "expectancy_r": -1.0028656967250071,
+        "win_rate": 0.0,
+        "max_drawdown_r": 2.0057313934500143
+      },
+      "TARGET": {
+        "trades": 3,
+        "net_r": 2.9926172899177454,
+        "profit_factor": "Infinity",
+        "expectancy_r": 0.9975390966392484,
+        "win_rate": 1.0,
+        "max_drawdown_r": 0.0
+      }
+    },
+    "active_fx_days": 155,
+    "trades_per_active_fx_day": 0.03870967741935484
+  },
+  "boundary": {
+    "only_change": "next_setup_cycle_exit",
+    "signal_or_regime_threshold_changed": false,
+    "stop_or_target_changed": false,
+    "mt5_or_broker_runtime_used": false,
+    "last_six_months_used_for_promotion": false
+  }
+}
