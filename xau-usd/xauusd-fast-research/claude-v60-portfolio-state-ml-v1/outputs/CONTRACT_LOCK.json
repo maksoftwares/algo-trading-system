@@ -1,0 +1,38 @@
+{
+ "lane": "claude-v60-portfolio-state-ml-v1",
+ "decision": "CLAUDE_V60_PORTFOLIO_STATE_ML_V1_GATE_FAIL_QUARANTINED_STRONG_SIGNAL_RECORDED",
+ "locked_utc": "2026-07-27T23:18:28+00:00",
+ "authorizes_execution": false,
+ "ml_runtime_authorized": false,
+ "preregistration_status": "PRE-COMMITTED before training; gate 4 year-count error disclosed in RESULT.md",
+ "baseline": {
+  "net": 5081.64,
+  "maxdd": 298.06,
+  "net_dd": 17.05
+ },
+ "trivial_benchmark_drop_v8_v25": {
+  "net": 4998.94,
+  "maxdd": 279.16,
+  "net_dd": 17.91
+ },
+ "best_variant": {
+  "target": "T3 pnl-regression",
+  "policy": "size 0.25-1.75x",
+  "features": "market only",
+  "net": 6694,
+  "net_dd": 19.94,
+  "years_improved": "4/6",
+  "gate4": "FAIL"
+ },
+ "hypothesis_refuted": "portfolio state adds +7 net and costs 0.79 net/DD under ablation",
+ "key_finding": "Q1/Q2 are near-zero winners not losers; vetoes remove expectancy, sizing does not",
+ "defect_fixed": "R1_NATIVE_POSITION has no risk_usd (444/444 NaN); propagated NaN dropped 35% of book incl 83% of R1",
+ "source_sha256": {
+  "evaluate.py": "acf29a09564bbde9be2c34236951ddf7661431664d80ff530200403b5362b7bd",
+  "features.py": "1457c66f3f0b64ba1f2072bdeedbc68de42f6b23e7ac4737a6c9e0c6a99cc0d3",
+  "walkforward.py": "3bd4eb5b7e76fce56d0e952c8862cfd70672f1e28bf208a9d2f41d4e641ac4f6"
+ },
+ "evidence_sha256": {
+  "RESULT.md": "9ab6cf09feea3846c20ccba079a0b89c71312521793dceabd1dd562d92658da9"
+ }
+}
