@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "V6_CAUSAL_ML_VETO_V1_ACCEPTED.parquet": {
+      "bytes": 87398,
+      "sha256": "893855474742a5c909227db7682b8f647833ab316a7222325dec80a318b65a0d"
+    },
+    "V6_CAUSAL_ML_VETO_V1_ANNUAL_MODELS.csv": {
+      "bytes": 1335,
+      "sha256": "af055d0cfd0a5588a1ade858e0de953706193c2587f25c04d00a2491ab18cf8f"
+    },
+    "V6_CAUSAL_ML_VETO_V1_CONTRACT_LOCK.json": {
+      "bytes": 4494,
+      "sha256": "3026c7954edb9f846dcf25ba99bd62ba4b7d46ae85077c2f8148223af9f43d44"
+    },
+    "V6_CAUSAL_ML_VETO_V1_PREDICTIONS.parquet": {
+      "bytes": 119286,
+      "sha256": "446d3894863324addce4e35f9eaf2f7842708f0d6d16784b0bf22c87a94368ac"
+    },
+    "V6_CAUSAL_ML_VETO_V1_RESULT.json": {
+      "bytes": 14115,
+      "sha256": "8222c86a488ef35bf8be71add8b369372f458b3492c4817fb259e4b50f80faf8"
+    },
+    "V6_CAUSAL_ML_VETO_V1_RESULT.md": {
+      "bytes": 3383,
+      "sha256": "4022d5ba6937e5f021e367038bfd13cbf62bc8f60bd297fd6587163fcd956cdc"
+    },
+    "V6_CAUSAL_ML_VETO_V1_ROUTING.parquet": {
+      "bytes": 18215,
+      "sha256": "9235276fc449a5634c0df479cf5729e6ef51ad7294c1a81990f06c6fdbe97135"
+    },
+    "V6_CAUSAL_ML_VETO_V1_WINDOWS.csv": {
+      "bytes": 3272,
+      "sha256": "6fee444b1dc36b6f8b385a2a299e5eedb3b18e4c2b0b04ea09881f9b2c5a6134"
+    }
+  },
+  "manifest_sha256": "df66078ae9914f389d0a1ef6fa60966283fbe1e904e349066c28444a84f1ea16",
+  "schema_version": "xauusd_v6_causal_ml_veto_v1_manifest"
+}

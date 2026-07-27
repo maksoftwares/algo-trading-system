@@ -1,0 +1,117 @@
+{
+  "config_sha256": "43e3c511ae0d58e47c47f708fdeb0e2f46d3af076c7a49b994b98ad328ac82db",
+  "contract_sha256": "4b1d69fb9b140d319a5a92da676719b77f0cf7c937f37e8a0ac331249674514d",
+  "feature_names": [
+    "speed",
+    "flow",
+    "imb",
+    "activity",
+    "spr",
+    "eff",
+    "adv_pre",
+    "align",
+    "score",
+    "pre2h",
+    "slope",
+    "log_stop",
+    "direction_long",
+    "utc_time_sin",
+    "utc_time_cos",
+    "regime_R0_SHOCK",
+    "regime_R1_UPTREND",
+    "regime_R2_DOWNTREND",
+    "regime_R3_COMPRESSION",
+    "regime_R4_CHOP",
+    "regime_R5_TRANSITION"
+  ],
+  "gates": {
+    "minimum_incremental_stress_net_usd": 0.0,
+    "minimum_mean_annual_target_auc": 0.55,
+    "minimum_ml_accepted_trades_per_window": 10,
+    "minimum_years_auc_above_random": 3,
+    "top_winners_removed": 5
+  },
+  "model": {
+    "label": "fee_stress_pnl_usd_gt_zero",
+    "parameters": {
+      "early_stopping": false,
+      "l2_regularization": 2.0,
+      "learning_rate": 0.05,
+      "max_depth": 3,
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 250,
+      "random_state": 260727
+    },
+    "sample_weight": "equal_total_weight_per_utc_scan_day",
+    "type": "HistGradientBoostingClassifier"
+  },
+  "research_controls": {
+    "all_history_is_development_evidence": true,
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "model_generates_signals": false,
+    "python_predictions_authorized": false,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "v60_modification_authorized": false,
+    "v6_modification_authorized": false
+  },
+  "schema_version": "xauusd_v6_causal_ml_veto_v1_contract",
+  "sklearn_version": "1.9.0",
+  "source_hashes": {
+    "v60_audit": "379b870d54a832bc76141651d3467baac3ca24a3249c2fb9d1b89943c753b809",
+    "v60_config": "358f12f5a4cf272c1e2ef7ea33c7d690732bc97b1aa246bd3d98b642fa3a97bc",
+    "v60_ledger": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf",
+    "v60_result": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095",
+    "v6_accepted": "c5054178c333578195ea6be256881315d37e94f9694c79a9faaf97252e2f2d2f",
+    "v6_candidates": "1e222c8a2f09b911c378a4866d8489c21a08c31e959e95981cde6d6b04a28a08",
+    "v6_config": "e08ea01273622d712271cc2317dd444718b3c8091f2ec92ee3185cf791de1368",
+    "v6_implementation": "581d312d6e28cb56b8e77e20d35d7d73ca96498d613d0c19cf45e21f1ba40268",
+    "v6_result": "dcea12708d5f9411ea6733c3e0092d1db60719e78ab4c89cce7e36056fb8685a"
+  },
+  "transitive_v6_source_hashes": {
+    "canonical_v60.audit_module": "379b870d54a832bc76141651d3467baac3ca24a3249c2fb9d1b89943c753b809",
+    "canonical_v60.config": "358f12f5a4cf272c1e2ef7ea33c7d690732bc97b1aa246bd3d98b642fa3a97bc",
+    "canonical_v60.ledger": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf",
+    "canonical_v60.result": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095",
+    "external_data.capital_m5": "ea6ce9dd82cfdc21ca3c4852305162ad03253af544a5d1ea21c54abe33af8ea3",
+    "external_data.dukascopy_m5": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "external_data.regime_ledger": "76896daf0171567059133bb310bdc0ad1e6f5a888b46929dae6aeffe7200eaea",
+    "external_package.engine": "ed62ae999c4b14c45b4a60b543e14092e4b46207a26ad4bb58026fc893ebb222",
+    "external_package.frozen_model": "b951a52eb169554ef4b8062143c90ad7a8c99162716603afafe1a09db57c8405",
+    "external_package.specialist": "14a845757aa1b4dae083b979751acee524419636dc69732f19a89bbfe03c4048",
+    "external_package.v6_fix": "7beaf19ecf70d378ccf10f45ee71aaea472ce6b8931e6235cd6ec43cb1aa4e53",
+    "external_package.v6_walkforward": "b83af3b76ec3d29b6896dc0ea7f55f1b4bd88935555f1e2f307a89e2d0bd7fe3"
+  },
+  "walk_forward": {
+    "calibration_years": 1,
+    "minimum_calibration_rows": 5000,
+    "minimum_training_rows": 30000,
+    "purge_hours": 48,
+    "retention_fraction": 0.6,
+    "target_years": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ]
+  },
+  "windows": {
+    "confirmation": [
+      "2024-07-01T00:00:00Z",
+      "2025-07-01T00:00:00Z"
+    ],
+    "development_2": [
+      "2022-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "final": [
+      "2025-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}

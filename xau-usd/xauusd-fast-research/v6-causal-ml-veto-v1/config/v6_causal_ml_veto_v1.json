@@ -1,0 +1,130 @@
+{
+  "schema_version": "xauusd_v6_causal_ml_veto_v1",
+  "sources": {
+    "v6_config": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-additive-replication-v1/config/v6_causal_additive_replication_v1.json",
+      "sha256": "e08ea01273622d712271cc2317dd444718b3c8091f2ec92ee3185cf791de1368"
+    },
+    "v6_implementation": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-additive-replication-v1/src/reproduction.py",
+      "sha256": "581d312d6e28cb56b8e77e20d35d7d73ca96498d613d0c19cf45e21f1ba40268"
+    },
+    "v6_candidates": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-additive-replication-v1/outputs/V6_CAUSAL_ADDITIVE_REPLICATION_V1_CANDIDATES.parquet",
+      "sha256": "1e222c8a2f09b911c378a4866d8489c21a08c31e959e95981cde6d6b04a28a08"
+    },
+    "v6_accepted": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-additive-replication-v1/outputs/V6_CAUSAL_ADDITIVE_REPLICATION_V1_ACCEPTED.parquet",
+      "sha256": "c5054178c333578195ea6be256881315d37e94f9694c79a9faaf97252e2f2d2f"
+    },
+    "v6_result": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-additive-replication-v1/outputs/V6_CAUSAL_ADDITIVE_REPLICATION_V1_RESULT.json",
+      "sha256": "dcea12708d5f9411ea6733c3e0092d1db60719e78ab4c89cce7e36056fb8685a"
+    },
+    "v60_ledger": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet",
+      "sha256": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf"
+    },
+    "v60_config": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/config/one_trade_per_day_floating_equity_v60.json",
+      "sha256": "358f12f5a4cf272c1e2ef7ea33c7d690732bc97b1aa246bd3d98b642fa3a97bc"
+    },
+    "v60_result": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_RESULT.json",
+      "sha256": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095"
+    },
+    "v60_audit": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/src/audit.py",
+      "sha256": "379b870d54a832bc76141651d3467baac3ca24a3249c2fb9d1b89943c753b809"
+    }
+  },
+  "features": {
+    "numeric": [
+      "speed",
+      "flow",
+      "imb",
+      "activity",
+      "spr",
+      "eff",
+      "adv_pre",
+      "align",
+      "score",
+      "pre2h",
+      "slope",
+      "log_stop"
+    ],
+    "regimes": [
+      "R0_SHOCK",
+      "R1_UPTREND",
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "R5_TRANSITION"
+    ],
+    "derived": [
+      "direction_long",
+      "utc_time_sin",
+      "utc_time_cos"
+    ]
+  },
+  "model": {
+    "type": "HistGradientBoostingClassifier",
+    "parameters": {
+      "learning_rate": 0.05,
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "max_depth": 3,
+      "min_samples_leaf": 250,
+      "l2_regularization": 2.0,
+      "early_stopping": false,
+      "random_state": 260727
+    },
+    "label": "fee_stress_pnl_usd_gt_zero",
+    "sample_weight": "equal_total_weight_per_utc_scan_day"
+  },
+  "walk_forward": {
+    "target_years": [2022, 2023, 2024, 2025, 2026],
+    "calibration_years": 1,
+    "purge_hours": 48,
+    "retention_fraction": 0.60,
+    "minimum_training_rows": 30000,
+    "minimum_calibration_rows": 5000
+  },
+  "windows": {
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "minimum_mean_annual_target_auc": 0.55,
+    "minimum_years_auc_above_random": 3,
+    "minimum_ml_accepted_trades_per_window": 10,
+    "top_winners_removed": 5,
+    "minimum_incremental_stress_net_usd": 0.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "V6_CAUSAL_ML_VETO_V1_CONTRACT_LOCK.json",
+    "predictions": "V6_CAUSAL_ML_VETO_V1_PREDICTIONS.parquet",
+    "accepted": "V6_CAUSAL_ML_VETO_V1_ACCEPTED.parquet",
+    "routing": "V6_CAUSAL_ML_VETO_V1_ROUTING.parquet",
+    "annual_models": "V6_CAUSAL_ML_VETO_V1_ANNUAL_MODELS.csv",
+    "windows": "V6_CAUSAL_ML_VETO_V1_WINDOWS.csv",
+    "result_json": "V6_CAUSAL_ML_VETO_V1_RESULT.json",
+    "result_markdown": "V6_CAUSAL_ML_VETO_V1_RESULT.md",
+    "manifest": "V6_CAUSAL_ML_VETO_V1_MANIFEST.json"
+  },
+  "research_controls": {
+    "all_history_is_development_evidence": true,
+    "model_generates_signals": false,
+    "same_version_post_outcome_tuning_authorized": false,
+    "v6_modification_authorized": false,
+    "v60_modification_authorized": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}
