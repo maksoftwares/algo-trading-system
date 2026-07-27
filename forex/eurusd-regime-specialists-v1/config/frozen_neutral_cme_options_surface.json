@@ -1,0 +1,99 @@
+{
+  "campaign": "eurusd-neutral-cme-options-surface-v1",
+  "status": "BLOCKED_LICENSED_HISTORY_NOT_PRESENT",
+  "source": {
+    "provider": "CME DataMine",
+    "dataset_id": "0e3d0545a67b165bfb2ea9adf6f3f0c6",
+    "dataset_code": "EOD_XCME_EUU_OPT_0",
+    "name": "Premium Quoted European Style Options on Euro/US Dollar Futures",
+    "catalog_url": "https://datamine.new.cmegroup.com/catalog/dataset/0e3d0545a67b165bfb2ea9adf6f3f0c6",
+    "catalog_date_range": [
+      "2016-08-09",
+      "2026-07-24"
+    ],
+    "catalog_file_count": 7524,
+    "required_local_root": "D:/AlgoTradingData/research/eurusd-neutral-cme-options-surface-v1/EOD_XCME_EUU_OPT_0",
+    "required_trade_date_range": [
+      "2019-01-01",
+      "2026-06-30"
+    ],
+    "sample_file": "xcme-eode-euu-opt-20250701-sample.csv.gz",
+    "sample_rows": 100,
+    "sample_has_populated_delta_or_iv": false
+  },
+  "availability": {
+    "source_final_release": "10:00 America/Chicago on the next business day",
+    "decision_time": "first 00:00 UTC strictly after final release",
+    "holiday_rule": "real file publication timestamp must override weekday-derived availability",
+    "preliminary_files_permitted": false
+  },
+  "surface": {
+    "minimum_dte": 20,
+    "maximum_dte": 45,
+    "target_dte": 30,
+    "target_abs_delta": 0.25,
+    "maximum_abs_delta_distance": 0.08,
+    "minimum_call_put_pairs": 7,
+    "strike_scale": 10000,
+    "reported_iv_above_3_is_percent": true,
+    "missing_iv_rule": "invert Black-76 from settlement after put-call-parity forward and discount inference",
+    "direction_rule": "positive 25-delta call IV minus put IV is LONG EURUSD; negative is SHORT; zero or invalid is CASH",
+    "threshold": 0.0
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "ambiguous_bar_rule": "stop_first",
+    "maximum_trades_per_utc_day": 1
+  },
+  "chronology": {
+    "development": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "forward_windows": {
+      "2023": [
+        "2023-01-01T00:00:00Z",
+        "2023-12-31T23:59:59Z"
+      ],
+      "2024": [
+        "2024-01-01T00:00:00Z",
+        "2024-12-31T23:59:59Z"
+      ],
+      "2025": [
+        "2025-01-01T00:00:00Z",
+        "2025-12-31T23:59:59Z"
+      ],
+      "2026_h1": [
+        "2026-01-01T00:00:00Z",
+        "2026-06-30T23:59:59Z"
+      ]
+    }
+  },
+  "admission": {
+    "win_rate": [
+      0.45,
+      0.55
+    ],
+    "realized_payoff_ratio": [
+      1.35,
+      1.75
+    ],
+    "minimum_profit_factor": 1.1,
+    "minimum_exact_oracle_precision": 0.25,
+    "minimum_exact_oracle_recall": 0.02,
+    "minimum_15m_same_side_precision": 0.25,
+    "maximum_drawdown_r": 30,
+    "extra_half_pip_net_must_be_positive": true,
+    "remove_largest_5_percent_winners_net_must_be_positive": true
+  },
+  "prohibitions": [
+    "No oracle label may enter parsing, expiry selection, surface construction, or direction.",
+    "No threshold, delta, expiry window, sign, publication lag, or execution repair may be changed after outcomes are opened.",
+    "No preliminary file may be substituted for a missing final file.",
+    "No CVOL, CFTC aggregate, spot-volatility, or current-bulletin proxy may fill missing historical EUU rows."
+  ]
+}

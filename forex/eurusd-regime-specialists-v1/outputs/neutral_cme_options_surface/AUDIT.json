@@ -1,0 +1,42 @@
+{
+  "audit_date": "2026-07-27",
+  "decision": "DATA_ROUTE_VALID_BUT_HISTORICAL_ACCESS_BLOCKED",
+  "dataset": {
+    "provider": "CME DataMine",
+    "id": "0e3d0545a67b165bfb2ea9adf6f3f0c6",
+    "code": "EOD_XCME_EUU_OPT_0",
+    "name": "Premium Quoted European Style Options on Euro/US Dollar Futures",
+    "first_date": "2016-08-09",
+    "last_date": "2026-07-24",
+    "file_count": 7524,
+    "format": "gzip",
+    "final_release": "10:00 CT T+1",
+    "complete_history_list_price_usd": 2249
+  },
+  "public_sample": {
+    "name": "xcme-eode-euu-opt-20250701-sample.csv.gz",
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-cme-options-surface-v1/public-sample/xcme-eode-euu-opt-20250701-sample.csv.gz",
+    "sha256": "1b590c32102344a00a758bf001fb3b700b5e4a31f82c998729ba6d11bca2135e",
+    "rows": 100,
+    "columns": 71,
+    "call_rows": 89,
+    "put_rows": 11,
+    "same_strike_pairs": 11,
+    "populated_delta_rows": 0,
+    "populated_implied_volatility_rows": 0
+  },
+  "public_schema": {
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-cme-options-surface-v1/public-sample/euu_eod_schema.json",
+    "sha256": "51fb3c4fea80440367dc113735275686334d4ea6f551160b494705a173617e09",
+    "columns": 71
+  },
+  "daily_bulletin": {
+    "current_section39_has_required_market_fields": true,
+    "historical_retention": "top day only; next day overwrites prior",
+    "usable_as_2019_2026_archive": false
+  },
+  "local_entitlement_present": false,
+  "purchase_authorized": false,
+  "historical_backtest_permitted": false,
+  "next_required_input": "Licensed final EOD_XCME_EUU_OPT_0 files from 2019-01-01 through 2026-06-30 with publication timestamps"
+}

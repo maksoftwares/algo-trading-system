@@ -1,0 +1,8 @@
+{
+  "locked_before_historical_surface_outcome_pass": true,
+  "files": {
+    "EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_PREREG_2026_07_27.md": "9e84c5b5d4ad767ec1447a93263125ef401d61ecf31745c1b0bcff9057476d0d",
+    "config/frozen_neutral_cme_options_surface.json": "654b437d44247e48258353636aeb2e634e306f337c0d4dd299c9414c23b2ac25",
+    "src/eurusd_regime_specialists/neutral_cme_options_surface.py": "230350420dae980b64bfe35ec786f97b543df27f468b7a6cdc1ecf0ddd178d5e"
+  }
+}
