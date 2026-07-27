@@ -1,0 +1,117 @@
+{
+  "schema_version": "xauusd_v6_causal_ml_early_exit_four_approach_v6",
+  "sources": {
+    "v5_config": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-early-exit-crossasset-v5/config/v6_causal_ml_early_exit_crossasset_v5.json",
+      "sha256": "1407b32c6c1136f1a14f62fcfc7c9559e081da5a62bd6fabd3971ea54c84a070"
+    },
+    "v5_implementation": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-early-exit-crossasset-v5/src/crossasset.py",
+      "sha256": "8598a68c8a0842c3265b74dedc90ddfda77402ea785c7eab09830bac50e87686"
+    },
+    "v5_result": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-early-exit-crossasset-v5/outputs/V6_CAUSAL_ML_EARLY_EXIT_CROSSASSET_V5_RESULT.json",
+      "sha256": "f304cfd53df0b221bae401fd486b68dac0f077038d1ca8bdbece09d26a74407e"
+    }
+  },
+  "arms": {
+    "A_COMPETING_UTILITY": {
+      "type": "competing_outcome_hurdle",
+      "benefit_quantile": 0.25,
+      "sacrifice_quantile": 0.75,
+      "minimum_conditional_rows": 1000
+    },
+    "B_REGIME_COMPETING": {
+      "type": "entry_regime_competing_outcome_hurdle",
+      "group_column": "entry_regime",
+      "benefit_quantile": 0.25,
+      "sacrifice_quantile": 0.75,
+      "minimum_group_training_rows": 5000,
+      "minimum_conditional_rows": 1000
+    },
+    "C_SEQUENCE_QUANTILE": {
+      "type": "causal_path_quantile",
+      "quantile": 0.25,
+      "sequence_steps": 48,
+      "bar_minutes": 5
+    },
+    "D_UNANIMOUS_ENSEMBLE": {
+      "type": "unanimous_trigger",
+      "members": [
+        "A_COMPETING_UTILITY",
+        "B_REGIME_COMPETING",
+        "C_SEQUENCE_QUANTILE"
+      ],
+      "minimum_agreeing_members": 3
+    }
+  },
+  "model_parameters": {
+    "learning_rate": 0.05,
+    "max_iter": 150,
+    "max_leaf_nodes": 15,
+    "max_depth": 3,
+    "min_samples_leaf": 250,
+    "l2_regularization": 2.0,
+    "early_stopping": false,
+    "random_state": 260727
+  },
+  "action_policy": {
+    "minimum_predicted_lower_benefit_r": 0.0,
+    "maximum_current_r": -0.10,
+    "minimum_max_adverse_r": 0.25,
+    "maximum_recent_15m_r": 0.0
+  },
+  "walk_forward": {
+    "target_years": [2022, 2023, 2024, 2025, 2026],
+    "purge_hours": 48,
+    "minimum_training_rows": 30000
+  },
+  "windows": {
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "minimum_mean_annual_spearman": 0.05,
+    "minimum_years_spearman_above_zero": 3,
+    "minimum_years_positive_first_action_net": 3,
+    "minimum_first_action_positive_benefit_share": 0.70,
+    "minimum_total_first_action_benefit_usd": 0.0,
+    "minimum_early_exit_trade_share": 0.01,
+    "maximum_early_exit_trade_share": 0.20,
+    "minimum_managed_accepted_trades_per_window": 10,
+    "top_winners_removed": 5
+  },
+  "coverage_gates": {
+    "minimum_dxy_1h_available_share": 0.80,
+    "minimum_treasury_1h_available_share": 0.80,
+    "minimum_common_dollar_1h_available_share": 0.80
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "V6_FOUR_APPROACH_CONTRACT_LOCK.json",
+    "snapshot_predictions": "V6_FOUR_APPROACH_SNAPSHOT_PREDICTIONS.parquet",
+    "annual_models": "V6_FOUR_APPROACH_ANNUAL_MODELS.csv",
+    "arm_comparison": "V6_FOUR_APPROACH_COMPARISON.csv",
+    "windows": "V6_FOUR_APPROACH_WINDOWS.csv",
+    "result_json": "V6_FOUR_APPROACH_RESULT.json",
+    "result_markdown": "V6_FOUR_APPROACH_RESULT.md",
+    "manifest": "V6_FOUR_APPROACH_MANIFEST.json"
+  },
+  "research_controls": {
+    "all_history_is_development_evidence": true,
+    "all_four_arms_locked_before_outcomes": true,
+    "same_campaign_post_outcome_tuning_authorized": false,
+    "v1_entry_filter_modification_authorized": false,
+    "v3_modification_authorized": false,
+    "v4_modification_authorized": false,
+    "v5_modification_authorized": false,
+    "v60_modification_authorized": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

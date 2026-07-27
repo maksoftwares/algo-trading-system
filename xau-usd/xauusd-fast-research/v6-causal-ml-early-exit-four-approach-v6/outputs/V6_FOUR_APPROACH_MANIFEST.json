@@ -1,0 +1,82 @@
+{
+  "artifacts": {
+    "V6_FOUR_APPROACH_ANNUAL_MODELS.csv": {
+      "bytes": 3830,
+      "sha256": "77eb637f3522cbf14e2f6e953e3a421f3ed03dc699c32a415a9af465a68e3839"
+    },
+    "V6_FOUR_APPROACH_A_COMPETING_UTILITY_ACCEPTED.parquet": {
+      "bytes": 97412,
+      "sha256": "6d8cb9548b6e4fcad2773c8de95c38714926042ef9b4ce99035b05924a9cd825"
+    },
+    "V6_FOUR_APPROACH_A_COMPETING_UTILITY_MANAGED_CANDIDATES.parquet": {
+      "bytes": 109938,
+      "sha256": "db069334d22e9596f96e95faf6bc9002e0d0fce31aab8c223b9b1dbf5193a300"
+    },
+    "V6_FOUR_APPROACH_A_COMPETING_UTILITY_ROUTING.parquet": {
+      "bytes": 18218,
+      "sha256": "87f7d8477a9ffc29a5cf3a27e236c78b94d093350cd13a5975738d3bfa8bfe9a"
+    },
+    "V6_FOUR_APPROACH_B_REGIME_COMPETING_ACCEPTED.parquet": {
+      "bytes": 99047,
+      "sha256": "20021be418a2c3497143dc64232821d345ccb36e422fd73c24edf3170aa7799b"
+    },
+    "V6_FOUR_APPROACH_B_REGIME_COMPETING_MANAGED_CANDIDATES.parquet": {
+      "bytes": 110041,
+      "sha256": "e581be30ddd5ad34caa827ee11241cea02e4207b5a2633b717da310515680648"
+    },
+    "V6_FOUR_APPROACH_B_REGIME_COMPETING_ROUTING.parquet": {
+      "bytes": 18209,
+      "sha256": "4c085b1b4204125fe2c65289da7ff6271c4f123a9071a2d02d46f60c77255fb5"
+    },
+    "V6_FOUR_APPROACH_COMPARISON.csv": {
+      "bytes": 1397,
+      "sha256": "4fdac412f5b58af96309a8d01e1c4edd5ef34526d7aa71a5c27d7b76dc958f41"
+    },
+    "V6_FOUR_APPROACH_CONTRACT_LOCK.json": {
+      "bytes": 17993,
+      "sha256": "cc35c2ad1c47b6488c1b10a00384d93f3d8feee5972e4533c75d8d70e14246b9"
+    },
+    "V6_FOUR_APPROACH_C_SEQUENCE_QUANTILE_ACCEPTED.parquet": {
+      "bytes": 98106,
+      "sha256": "a9d8dc9f46d18b34789d2b5f1e934fac1eb902ebbbb8a15b10cb1b92f9982e00"
+    },
+    "V6_FOUR_APPROACH_C_SEQUENCE_QUANTILE_MANAGED_CANDIDATES.parquet": {
+      "bytes": 110356,
+      "sha256": "c361cf3dd8d5fcb2bd10e7751106f129e0ed91359590a63b40671024f2f3f46f"
+    },
+    "V6_FOUR_APPROACH_C_SEQUENCE_QUANTILE_ROUTING.parquet": {
+      "bytes": 18188,
+      "sha256": "989b840cc36d6d1be58557d59f7b637dbc9751c6c578a13c1d7c905eff35dca6"
+    },
+    "V6_FOUR_APPROACH_D_UNANIMOUS_ENSEMBLE_ACCEPTED.parquet": {
+      "bytes": 98704,
+      "sha256": "04da30bfd7009a61c2a1b2e5b0c35570427cc1e13a230599c173e719bba46f3c"
+    },
+    "V6_FOUR_APPROACH_D_UNANIMOUS_ENSEMBLE_MANAGED_CANDIDATES.parquet": {
+      "bytes": 109675,
+      "sha256": "46422e6ffdc5cca77e01d64bcf329ec51b6308e1246564e98379499e22814ef0"
+    },
+    "V6_FOUR_APPROACH_D_UNANIMOUS_ENSEMBLE_ROUTING.parquet": {
+      "bytes": 18215,
+      "sha256": "9235276fc449a5634c0df479cf5729e6ef51ad7294c1a81990f06c6fdbe97135"
+    },
+    "V6_FOUR_APPROACH_RESULT.json": {
+      "bytes": 55399,
+      "sha256": "6ef021a860bd23916eb721a7491d27eb4fbf4eb08b52773b365d532bbc752e44"
+    },
+    "V6_FOUR_APPROACH_RESULT.md": {
+      "bytes": 6768,
+      "sha256": "658c904156b7aa3a5371d171f93472e7d984a73b4c4891fd92817c2e33ab85a3"
+    },
+    "V6_FOUR_APPROACH_SNAPSHOT_PREDICTIONS.parquet": {
+      "bytes": 436596,
+      "sha256": "c5b9a9f2ab927a6e27ea9874a5305b1bb46198833fa2c6e90af81b29ac8a6ab7"
+    },
+    "V6_FOUR_APPROACH_WINDOWS.csv": {
+      "bytes": 9809,
+      "sha256": "1e3f452ae7d3eb7a3b9f5a2e6a2b2b065d1d9cbe3d79f40b13e81ced69b74d4f"
+    }
+  },
+  "manifest_sha256": "bb4b51d1112cc7a27fece25f4ead0c6ff24633d3fa79386ef07d983866c317e1",
+  "schema_version": "xauusd_v6_four_approach_manifest"
+}
