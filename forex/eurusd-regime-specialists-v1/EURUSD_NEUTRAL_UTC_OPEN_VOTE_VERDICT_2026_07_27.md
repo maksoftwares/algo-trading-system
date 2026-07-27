@@ -111,7 +111,7 @@ oracle member; a selected side absent from the oracle must lose.
 Consequently, the causal strategy's economic win rate is exactly its
 same-entry, same-side oracle precision. The vote selected the future-winning
 side on 31.11% of forward dates. With realized payoff near 1.439 and the
-observed execution loss, break-even requires about 41.3% wins. Behavioral
+observed execution loss, break-even requires about 41.0% wins. Behavioral
 similarity within 15 minutes did not supply the missing direction.
 
 ## Robustness
