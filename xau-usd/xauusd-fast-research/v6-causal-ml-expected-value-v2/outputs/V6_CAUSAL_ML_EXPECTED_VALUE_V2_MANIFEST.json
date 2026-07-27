@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "V6_CAUSAL_ML_EXPECTED_VALUE_V2_ACCEPTED.parquet": {
+      "bytes": 37904,
+      "sha256": "df2ec3adbed06f6cf9daa19a4a676009cb18fb330d36a5db99821e826e7c033a"
+    },
+    "V6_CAUSAL_ML_EXPECTED_VALUE_V2_ANNUAL_MODELS.csv": {
+      "bytes": 1224,
+      "sha256": "4dc937430206d5b8da82892db353845db87add32b6f735885aa4d163f12bc896"
+    },
+    "V6_CAUSAL_ML_EXPECTED_VALUE_V2_CONTRACT_LOCK.json": {
+      "bytes": 3625,
+      "sha256": "ec3d6ef2fb6c6c11c711cc3fbdc7a623c296c1d93fa82b72d8b7bcd89aacb27d"
+    },
+    "V6_CAUSAL_ML_EXPECTED_VALUE_V2_PREDICTIONS.parquet": {
+      "bytes": 118709,
+      "sha256": "3af9f4d659469aa787c68749a4b078aeac8f9acd21540d7053c888860e091d2b"
+    },
+    "V6_CAUSAL_ML_EXPECTED_VALUE_V2_RESULT.json": {
+      "bytes": 13698,
+      "sha256": "1e735522736d3b2b480e80b9b13d1004e0fa410fc64d3075a549239ddd0bbfec"
+    },
+    "V6_CAUSAL_ML_EXPECTED_VALUE_V2_RESULT.md": {
+      "bytes": 3065,
+      "sha256": "f08388a47dad81e109e51a64311bb915bdc6613f63235a1ca455377f4a1d38e1"
+    },
+    "V6_CAUSAL_ML_EXPECTED_VALUE_V2_ROUTING.parquet": {
+      "bytes": 9128,
+      "sha256": "a770e618bb36584174c2fee688ae85523e703bd968da0276787a53808b1fd07f"
+    },
+    "V6_CAUSAL_ML_EXPECTED_VALUE_V2_WINDOWS.csv": {
+      "bytes": 3226,
+      "sha256": "27e92d9265fb76b1fe117666462de1df276fd80a188f8177b8c9b88862d59839"
+    }
+  },
+  "manifest_sha256": "5426780914cf5e0fe512ffa0dab4b40729091e13d3ee507b325ec741a07e2098",
+  "schema_version": "xauusd_v6_causal_ml_expected_value_v2_manifest"
+}

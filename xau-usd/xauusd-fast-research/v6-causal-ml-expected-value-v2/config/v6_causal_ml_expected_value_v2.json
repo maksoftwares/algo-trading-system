@@ -1,0 +1,79 @@
+{
+  "schema_version": "xauusd_v6_causal_ml_expected_value_v2",
+  "sources": {
+    "v1_config": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-veto-v1/config/v6_causal_ml_veto_v1.json",
+      "sha256": "43e3c511ae0d58e47c47f708fdeb0e2f46d3af076c7a49b994b98ad328ac82db"
+    },
+    "v1_implementation": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-veto-v1/src/veto.py",
+      "sha256": "65bfd048ee6da3420ee2a7da9765903b8f2c57edc0c57d9dbdc9283ec5dfa0c1"
+    },
+    "v1_result": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-veto-v1/outputs/V6_CAUSAL_ML_VETO_V1_RESULT.json",
+      "sha256": "8222c86a488ef35bf8be71add8b369372f458b3492c4817fb259e4b50f80faf8"
+    }
+  },
+  "model": {
+    "type": "HistGradientBoostingRegressor",
+    "parameters": {
+      "learning_rate": 0.05,
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "max_depth": 3,
+      "min_samples_leaf": 250,
+      "l2_regularization": 2.0,
+      "early_stopping": false,
+      "random_state": 260727
+    },
+    "target": "clipped_fee_stress_net_r",
+    "target_min_r": -1.25,
+    "target_max_r": 3.0,
+    "selection_threshold_r": 0.0,
+    "sample_weight": "equal_total_weight_per_utc_scan_day"
+  },
+  "walk_forward": {
+    "target_years": [2022, 2023, 2024, 2025, 2026],
+    "purge_hours": 48,
+    "minimum_training_rows": 30000
+  },
+  "windows": {
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "minimum_mean_annual_target_auc": 0.55,
+    "minimum_mean_annual_spearman": 0.05,
+    "minimum_years_spearman_above_zero": 3,
+    "minimum_ml_accepted_trades_per_window": 10,
+    "top_winners_removed": 5,
+    "minimum_incremental_stress_net_usd": 0.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "V6_CAUSAL_ML_EXPECTED_VALUE_V2_CONTRACT_LOCK.json",
+    "predictions": "V6_CAUSAL_ML_EXPECTED_VALUE_V2_PREDICTIONS.parquet",
+    "accepted": "V6_CAUSAL_ML_EXPECTED_VALUE_V2_ACCEPTED.parquet",
+    "routing": "V6_CAUSAL_ML_EXPECTED_VALUE_V2_ROUTING.parquet",
+    "annual_models": "V6_CAUSAL_ML_EXPECTED_VALUE_V2_ANNUAL_MODELS.csv",
+    "windows": "V6_CAUSAL_ML_EXPECTED_VALUE_V2_WINDOWS.csv",
+    "result_json": "V6_CAUSAL_ML_EXPECTED_VALUE_V2_RESULT.json",
+    "result_markdown": "V6_CAUSAL_ML_EXPECTED_VALUE_V2_RESULT.md",
+    "manifest": "V6_CAUSAL_ML_EXPECTED_VALUE_V2_MANIFEST.json"
+  },
+  "research_controls": {
+    "all_history_is_development_evidence": true,
+    "model_generates_signals": false,
+    "same_version_post_outcome_tuning_authorized": false,
+    "v1_modification_authorized": false,
+    "v6_modification_authorized": false,
+    "v60_modification_authorized": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

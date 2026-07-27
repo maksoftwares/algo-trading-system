@@ -1,0 +1,110 @@
+{
+  "config_sha256": "4a435d646cbd064059dc2959e67062680cab117996f3ac191207e5b4300db086",
+  "contract_sha256": "1b0822612ec6545a2e431046b015307523bab35ce96874004cf53f76b7213a08",
+  "feature_names": [
+    "speed",
+    "flow",
+    "imb",
+    "activity",
+    "spr",
+    "eff",
+    "adv_pre",
+    "align",
+    "score",
+    "pre2h",
+    "slope",
+    "log_stop",
+    "direction_long",
+    "utc_time_sin",
+    "utc_time_cos",
+    "regime_R0_SHOCK",
+    "regime_R1_UPTREND",
+    "regime_R2_DOWNTREND",
+    "regime_R3_COMPRESSION",
+    "regime_R4_CHOP",
+    "regime_R5_TRANSITION"
+  ],
+  "gates": {
+    "minimum_incremental_stress_net_usd": 0.0,
+    "minimum_mean_annual_spearman": 0.05,
+    "minimum_mean_annual_target_auc": 0.55,
+    "minimum_ml_accepted_trades_per_window": 10,
+    "minimum_years_spearman_above_zero": 3,
+    "top_winners_removed": 5
+  },
+  "model": {
+    "parameters": {
+      "early_stopping": false,
+      "l2_regularization": 2.0,
+      "learning_rate": 0.05,
+      "max_depth": 3,
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 250,
+      "random_state": 260727
+    },
+    "sample_weight": "equal_total_weight_per_utc_scan_day",
+    "selection_threshold_r": 0.0,
+    "target": "clipped_fee_stress_net_r",
+    "target_max_r": 3.0,
+    "target_min_r": -1.25,
+    "type": "HistGradientBoostingRegressor"
+  },
+  "research_controls": {
+    "all_history_is_development_evidence": true,
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "model_generates_signals": false,
+    "python_predictions_authorized": false,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "v1_modification_authorized": false,
+    "v60_modification_authorized": false,
+    "v6_modification_authorized": false
+  },
+  "schema_version": "xauusd_v6_causal_ml_expected_value_v2_contract",
+  "sklearn_version": "1.9.0",
+  "source_hashes": {
+    "v1_config": "43e3c511ae0d58e47c47f708fdeb0e2f46d3af076c7a49b994b98ad328ac82db",
+    "v1_implementation": "65bfd048ee6da3420ee2a7da9765903b8f2c57edc0c57d9dbdc9283ec5dfa0c1",
+    "v1_result": "8222c86a488ef35bf8be71add8b369372f458b3492c4817fb259e4b50f80faf8"
+  },
+  "transitive_v1_source_hashes": {
+    "v60_audit": "379b870d54a832bc76141651d3467baac3ca24a3249c2fb9d1b89943c753b809",
+    "v60_config": "358f12f5a4cf272c1e2ef7ea33c7d690732bc97b1aa246bd3d98b642fa3a97bc",
+    "v60_ledger": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf",
+    "v60_result": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095",
+    "v6_accepted": "c5054178c333578195ea6be256881315d37e94f9694c79a9faaf97252e2f2d2f",
+    "v6_candidates": "1e222c8a2f09b911c378a4866d8489c21a08c31e959e95981cde6d6b04a28a08",
+    "v6_config": "e08ea01273622d712271cc2317dd444718b3c8091f2ec92ee3185cf791de1368",
+    "v6_implementation": "581d312d6e28cb56b8e77e20d35d7d73ca96498d613d0c19cf45e21f1ba40268",
+    "v6_result": "dcea12708d5f9411ea6733c3e0092d1db60719e78ab4c89cce7e36056fb8685a"
+  },
+  "walk_forward": {
+    "minimum_training_rows": 30000,
+    "purge_hours": 48,
+    "target_years": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ]
+  },
+  "windows": {
+    "confirmation": [
+      "2024-07-01T00:00:00Z",
+      "2025-07-01T00:00:00Z"
+    ],
+    "development_2": [
+      "2022-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "final": [
+      "2025-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
