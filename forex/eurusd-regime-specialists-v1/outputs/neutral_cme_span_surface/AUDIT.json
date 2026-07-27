@@ -1,0 +1,34 @@
+{
+  "campaign": "eurusd-neutral-cme-span-free-source-v1",
+  "status": "FREE_ROUTE_VALID_FULL_ARCHIVE_AWAITS_CME_LOGIN",
+  "dataset": {
+    "provider": "CME DataMine",
+    "dataset_id": "aadb2ba35cb546798659c206bb63dc9a",
+    "dataset_code": "SPAN_ALL_GRP_EXCG",
+    "name": "All CME Group Exchanges - SPAN Risk Parameter Files",
+    "observed_start": "2021-11-19",
+    "observed_end": "2026-07-27",
+    "observed_file_count": 35682,
+    "observed_complete_history_usd": 0.0,
+    "permissioned": "N",
+    "restricted": "N"
+  },
+  "public_sample": {
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-free-source-audit-v1/cme_a6_cust_c21_20250718.spn-sample.zip",
+    "bytes": 22219874,
+    "sha256": "4d27adfd8841528f3eb25a698cb8dd7ae7e0df63e113a0bc464a19622d01f6f8",
+    "point_in_time_date": "2025-07-18",
+    "is_settlement": "0",
+    "admitted_to_backtest": false,
+    "euu_product_id": "22181",
+    "euu_expiry_count": 20,
+    "euu_option_count": 2562
+  },
+  "format_gate": {
+    "normal_full_premium_quote_flag": "0",
+    "reject_nonzero_quote_flag": true,
+    "require_is_settlement_1_by_default": true,
+    "oracle_outcomes_read": false
+  },
+  "remaining_blocker": "CME login and user acceptance of the USD 0.00 DataMine licence"
+}
