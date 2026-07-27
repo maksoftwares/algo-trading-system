@@ -1,0 +1,87 @@
+{
+  "schema_version": "xauusd_v6_causal_ml_early_exit_utility_v4",
+  "sources": {
+    "v3_config": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-early-exit-v3/config/v6_causal_ml_early_exit_v3.json",
+      "sha256": "a7bf36cf9f275c996b880cb4f606e17a3c25e1d4e22bee9d08865010fa8f309d"
+    },
+    "v3_implementation": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-early-exit-v3/src/early_exit.py",
+      "sha256": "2c879928ff77c41b9204111cffc472b110865f111ca8e434d0107dde5af46434"
+    },
+    "v3_result": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-early-exit-v3/outputs/V6_CAUSAL_ML_EARLY_EXIT_V3_RESULT.json",
+      "sha256": "7ec9520d81585c6899d968d45fb61c6fadfa870c659689bad1a3a419c27e3f2c"
+    }
+  },
+  "model": {
+    "type": "HistGradientBoostingRegressor",
+    "loss": "quantile",
+    "quantile": 0.25,
+    "parameters": {
+      "learning_rate": 0.05,
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "max_depth": 3,
+      "min_samples_leaf": 250,
+      "l2_regularization": 2.0,
+      "early_stopping": false,
+      "random_state": 260727
+    },
+    "target": "unclipped_early_exit_stress_benefit_r",
+    "sample_weight": "equal_total_weight_per_decision_utc_day"
+  },
+  "action_policy": {
+    "minimum_predicted_lower_benefit_r": 0.0,
+    "maximum_current_r": -0.10,
+    "minimum_max_adverse_r": 0.25,
+    "maximum_recent_15m_r": 0.0
+  },
+  "walk_forward": {
+    "target_years": [2022, 2023, 2024, 2025, 2026],
+    "purge_hours": 48,
+    "minimum_training_rows": 30000
+  },
+  "windows": {
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "minimum_mean_annual_spearman": 0.05,
+    "minimum_years_spearman_above_zero": 3,
+    "minimum_years_positive_first_action_net": 3,
+    "minimum_first_action_positive_benefit_share": 0.70,
+    "minimum_total_first_action_benefit_usd": 0.0,
+    "minimum_early_exit_trade_share": 0.01,
+    "maximum_early_exit_trade_share": 0.20,
+    "minimum_managed_accepted_trades_per_window": 10,
+    "top_winners_removed": 5
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_CONTRACT_LOCK.json",
+    "snapshot_predictions": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_SNAPSHOT_PREDICTIONS.parquet",
+    "managed_candidates": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_MANAGED_CANDIDATES.parquet",
+    "accepted": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_ACCEPTED.parquet",
+    "routing": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_ROUTING.parquet",
+    "annual_models": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_ANNUAL_MODELS.csv",
+    "windows": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_WINDOWS.csv",
+    "result_json": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_RESULT.json",
+    "result_markdown": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_RESULT.md",
+    "manifest": "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_MANIFEST.json"
+  },
+  "research_controls": {
+    "all_history_is_development_evidence": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "v1_entry_filter_modification_authorized": false,
+    "v3_modification_authorized": false,
+    "v60_modification_authorized": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

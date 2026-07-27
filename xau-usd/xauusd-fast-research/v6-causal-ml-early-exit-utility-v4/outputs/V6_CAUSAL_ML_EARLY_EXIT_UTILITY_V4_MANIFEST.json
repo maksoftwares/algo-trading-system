@@ -1,0 +1,42 @@
+{
+  "artifacts": {
+    "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_ACCEPTED.parquet": {
+      "bytes": 98130,
+      "sha256": "1f30da90c948035ab4fb8d058e57aba6de7618dafe7510600db3ba6b33028a49"
+    },
+    "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_ANNUAL_MODELS.csv": {
+      "bytes": 1407,
+      "sha256": "2ab45d2d6e0ab8064eba869f289c2bbe5c7ddf87ac8b8c58e4f21dd14a0b3b8c"
+    },
+    "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_CONTRACT_LOCK.json": {
+      "bytes": 6332,
+      "sha256": "8bc2acd977777ac49b214f072069a3fa7c1811cfcb255db7b15a4bd3da9a9d0f"
+    },
+    "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_MANAGED_CANDIDATES.parquet": {
+      "bytes": 110332,
+      "sha256": "ca2947c230ff15ec62180feb197032df75c890266342a08eec45fadd1a5d1fa7"
+    },
+    "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_RESULT.json": {
+      "bytes": 15267,
+      "sha256": "b2e5447371dc5a08681600a4f57e43015a0d00bae9dff4a6718a1a8341f5ee9c"
+    },
+    "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_RESULT.md": {
+      "bytes": 3206,
+      "sha256": "adfe7fa661c45976ba67a7c96afc3053ec2358a8927543f247a8c4cdc170c701"
+    },
+    "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_ROUTING.parquet": {
+      "bytes": 18205,
+      "sha256": "4ef690bbe99ed0b7af5b38f146b58116df5a40dccf663fbe2484e5c002de69b1"
+    },
+    "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_SNAPSHOT_PREDICTIONS.parquet": {
+      "bytes": 178192,
+      "sha256": "9ba04cb12a7c2e09307602838f737f52e7303fbe19eb44c6c07b4324a55d4ad7"
+    },
+    "V6_CAUSAL_ML_EARLY_EXIT_UTILITY_V4_WINDOWS.csv": {
+      "bytes": 2966,
+      "sha256": "254aa08c98b458528af7bcbd57e45d22e5f0aed670ca4e2cc606f7bb8e136a45"
+    }
+  },
+  "manifest_sha256": "2f8f33a3bae9e3a279074ccd78efe3cfdb03502e9d0735a5ffcc4951552750ae",
+  "schema_version": "xauusd_v6_causal_ml_early_exit_utility_v4_manifest"
+}
