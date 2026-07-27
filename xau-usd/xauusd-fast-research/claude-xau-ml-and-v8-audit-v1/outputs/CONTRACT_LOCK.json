@@ -1,0 +1,86 @@
+{
+ "lane": "claude-xau-ml-and-v8-audit-v1",
+ "decision": "CLAUDE_XAU_ML_AND_V8_AUDIT_V1_SIX_LANES_FAIL_QUARANTINED_ONE_PARTIAL_PASS",
+ "locked_utc": "2026-07-27T07:22:47+00:00",
+ "preregistration_status": "RETROSPECTIVE \u2014 written after execution; weaker than a pre-committed lane. Lane B is the exception.",
+ "authorizes_execution": false,
+ "source_branch": "codex/regime-teacher-eas-v1",
+ "source_package": "algo-regime-teacher-wt/xau-usd/xauusd-fast-research/regime-teacher-eas-v1",
+ "data": {
+  "signal_feed": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+  "execution_feed": "D:/AlgoTradingData/research/r5-capital-mt5-full-history-replication-v18/CAPITAL_XAUUSD_M5_FULL_HISTORY_V18.parquet",
+  "fit_boundary": "trades closing on or before 2024-12-31",
+  "sealed": "2025-01-01 onward"
+ },
+ "lane_decisions": {
+  "A_regime_specialists": "FAIL_QUARANTINED",
+  "B_multi_instrument": "FAIL_TERMINAL",
+  "C_gold_v8": "FAIL_REJECTED_BY_REVIEW",
+  "D_ml_early_exit": "FAIL_QUARANTINED",
+  "E_ml_entry_filter": "FAIL_QUARANTINED",
+  "F_crossasset_sizing": "FAIL_QUARANTINED",
+  "G_microstructure_entry": "FAIL_QUARANTINED",
+  "C_prime_v6_entry_lock": "PARTIAL_PASS"
+ },
+ "corrected_headline": {
+  "lane_C_claimed_causal_pf": 2.03,
+  "lane_C_corrected_causal_pf": 1.202,
+  "ci_95_weekly_block": [
+   0.96,
+   1.46
+  ],
+  "full_history_pf_claimed": 1.79,
+  "full_history_pf_corrected": 1.242,
+  "max_dd_claimed": 1167,
+  "max_dd_corrected": 1980,
+  "top_1pct_removed_pf": 1.0,
+  "top_1pct_removed_usd": -4
+ },
+ "v6_defects_found": {
+  "double_booking_share": 0.794,
+  "peak_single_signal_risk_usd": 236.58,
+  "threshold_starvation_ratio_test_era": 0.43,
+  "threshold_starvation_ratio_holdout": 0.62
+ },
+ "durable_measurements": {
+  "selection_leak_ladder_pf": [
+   1.99,
+   1.45,
+   0.82
+  ],
+  "microstructure_ablation_pf": {
+   "with_tick_features": 1.89,
+   "without": 1.1
+  }
+ },
+ "known_defects_in_src": [
+  "gold_v8_walkforward.py and its assembler size in exit order (look-ahead)",
+  "v8_lot_constrained.py computes PF on a different series from its dollars"
+ ],
+ "source_sha256": {
+  "build_tick_features.py": "eb40545622e6196e03e17b893a84dd95357bf247277cfb6a0f421df1eb1a9733",
+  "crossasset_feed_audit.py": "0645c02e0073e70df0901e88c8c0019473d7adb3a4a4eb98b3bd305bd571ee39",
+  "gold_v8.py": "516cfd14b59bfc0b8bc6d10278f66e5c7531d0c537fd021998e6bf16e94a01ef",
+  "gold_v8_walkforward.py": "ed7dfb4273ec1029c332f6deadcd079eb6c946c6d42185bfbfdfc862805dc8c8",
+  "micro_entry.py": "b4eab916a3f9ed86380885f422dd06722ed8512e054b2300dd6045b7db0c98f5",
+  "ml_crossasset_sizing.py": "e12747794e698dc47fecd8aa4c6558befee11f41780de8fad158470c239909e0",
+  "ml_crossasset_walkforward.py": "923d4320a213facc00d049017e5847b01d5bdf55efc06780c5b544f23ffd56c7",
+  "ml_early_exit.py": "62e3f2a8923a260b0b0040d14cdb8eb7f457df70e467075eb835e31cb4f1ad7c",
+  "ml_entry_filter_v2.py": "a55698c430e6f6997c5dcddfbaf1c9b90fd118f2f04edf0db5bc52701a38b0ae",
+  "multi_instrument.py": "e1eea57e0073ba9e8eef170b8cbe64b2e2c143dfda8b46d0ea475781ec24cd98",
+  "v6_fix.py": "7beaf19ecf70d378ccf10f45ee71aaea472ce6b8931e6235cd6ec43cb1aa4e53",
+  "v6_shrink_walkforward.py": "36b49173cbabd64494a30a2a7a7675dd6298469652be3880b7af7156139db1ee",
+  "v8_dualfeed.py": "230409428093542741c9c7f46001364a178fc0799b9c3dc5ee2bc254ad6ac29a",
+  "v8_lot_constrained.py": "0c4636f4908ce3fad4cbbeca10453d89c183d8c260eb40e93479066075f55b05",
+  "v8_weakness.py": "f29966a0433e79656f4e7ffe325894efbba317cc5552b56343537275b9797795",
+  "verify_tick_features.py": "821c994eaac71dfc614a62f0b2e2bfaf958dde0127998a0e1bbf1bcba916abef"
+ },
+ "evidence_sha256": {
+  "HANDOFF_TO_OTHER_AGENT.md": "373b4eba5e9edcdb8ab4c8ecec688cf329ef7fb5a018f24bc7b601c02525245b",
+  "PREREGISTRATION_MULTI_INSTRUMENT.md": "8fbe66d75bdf815f6f1dd673d7bfed1db35de0460a9a6ea35c74332eb2add087",
+  "REGIME_SPECIALIST_FAMILY_V7.md": "bb06755262eabb22eb3d15b712636a0850ba363b5a0c3be3e05c2c97831c5b7c",
+  "RESULT.md": "856dd1614e4e27a4bf7abad2a9a7e902e231ac8c327f8bbe7e5bf24dac21687f",
+  "REVIEW_BRIEF_GOLD_V8.md": "1e83f8d453326d58dc94371e5c30d07433fd3b33a756f063614eb4d84c043044",
+  "GOLD_V8_SPEC.json": "16af42c62d4ac0dcf78f45754748671a5262a1015e8b02a0eb774ad4178569af"
+ }
+}

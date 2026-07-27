@@ -1,0 +1,9 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+*.log
+
+# The repo-level .gitignore excludes outputs/ everywhere. This lane's evidence
+# lives there and must be committed, so re-include it explicitly.
+!outputs/
+!outputs/**

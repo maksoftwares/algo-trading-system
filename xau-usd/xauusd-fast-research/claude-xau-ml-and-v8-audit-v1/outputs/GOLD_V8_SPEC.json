@@ -1,0 +1,127 @@
+{
+  "name": "GOLD_V8",
+  "created": "2026-07-26",
+  "status": "REJECTED 2026-07-26 BY INDEPENDENT REVIEW - do not deploy, do not shadow, do not quote the figures below",
+  "REVIEW_VERDICT": {
+    "reviewed": "2026-07-26, independent adversarial review, read-only audit",
+    "verdict": "NOT sound enough to shadow as implemented",
+    "headline_correction": {
+      "causal_walkforward_PF": {"claimed": 2.03, "corrected": 1.202},
+      "walkforward_CI_weekly_block": [0.96, 1.46],
+      "reading": "the interval contains 1.0 - NO statistically demonstrated edge, before any multiple-comparisons correction across ~1900 configuration cells",
+      "full_history_PF": {"claimed": 1.79, "corrected_executable_dollars": 1.242},
+      "full_history_maxDD": {"claimed": 1167, "corrected": 1980},
+      "five_year_PF": {"claimed": 1.93, "corrected": 1.414},
+      "five_year_green": {"claimed": "41/60", "corrected": "35/60, binomial p=0.245 - indistinguishable from a coin flip"},
+      "forward_PF_estimate": {"author_said": "1.7-1.8", "reviewer": "1.0-1.2, central 1.1"},
+      "overfitting_rating": {"author_said": "3/10", "reviewer": "8/10"}
+    },
+    "S0_defects": [
+      "STREAK SIZING LOOK-AHEAD (gold_v9_partial.py assemble, gold_v8_walkforward.py): size assigned in EXIT order, must be ENTRY order. 63.5% of trades exposed; 35.2% receive a different multiplier under the deployable stream. Isolated effect on ideal sizing: full PF 1.790->1.183, DD $736->$2,120; walk-forward PF 2.034->1.202, 7/8->5/8 profitable years. The author flagged this and then failed to clear it before reporting.",
+      "WALK-FORWARD NOT CAUSAL: trades assigned by exit_t.year, so 26 trades were already open when year Y's model was selected ($812, 6.5% of claimed profit); state reconstructed retrospectively under each year's new model rather than carried along the traded path; grid and green-month objective supplied after inspecting the sample."
+    ],
+    "S1_defects": [
+      "PF computed on a different series from dollars and drawdown - recurred in v8_lot_constrained.py:46 and v8_drawdown.py:69 after being fixed once in the walk-forward. Saved GOLD_V8_WALKFORWARD.json itself records PF 1.11 while the brief reported 2.03.",
+      "Capital dual-feed leg imports Dukascopy sizing state and attributes Capital P&L to Dukascopy exit timestamps. 2,040/5,961 trades have differing exit times, 73 cross a month boundary. Worst month on true Capital realisation is -$458, not -$336.",
+      "NO SINGLE FROZEN V8: gold_v8.py defaults K=4/streak 3-5; this spec says K=6/2-4; v8_dualfeed.py inherits the V9 assembler's defaults; walk-forward selects 1/3. Reported figures came from several different systems under one name."
+    ],
+    "S2_defects": [
+      "Deduplication picks the winning sleeve using rankers fit through 2024 - the winner changes on 41.0% of pre-2025 decisions under prior-year-only rankers.",
+      "K lockout reserves slots at decision time using future confirmation/exit information rather than at entry time."
+    ],
+    "tail_dependence_that_disqualifies": "Removing the top 1% of trades (56 of 5,572) leaves PF 1.000 and -$4. Removing the top 5% leaves PF 0.606 and -$11,181. The entire ten-year profit is ~56 trades.",
+    "structural_claims_refuted": {
+      "green_iff_3R_trade": "claimed 97% vs 21%; actual 95.7% vs 35.1%",
+      "green_months_pinned_63_67pct": "actual 44.4% walk-forward, 58.3% executable",
+      "worst_drawdown_16_months": "actual 23-month peak-to-trough, ~40 months underwater",
+      "no_risk_control_can_help": "UNPROVED - the rejection used contaminated sizing and mixed-series PF"
+    },
+    "not_reproducible": "the '28-sleeve causal chooser PF 2.04' has no saved script, pool definition, trade file or pick log. It was run inline and lost. Treat as non-evidence.",
+    "required_before_any_shadow": "broker-clock event-driven nested walk-forward parity test: select at actual score/entry availability; carry K and streak state continuously across years; settle only actual Capital exits from a heap; recompute Capital outcomes, gaps, funding, slippage, integer units, margin and hedging state; freeze configuration before the evaluation interval; reconcile every decision, rejection, size and exit row-for-row against the shadow runner.",
+    "legacy_status_below": "The remainder of this file records the PRE-REVIEW claims. Retained for audit only. Every performance figure in it is superseded by the corrections above."
+  },
+  "legacy_status": "RESEARCH CANDIDATE - no demo or live authority",
+  "instrument": "XAUUSD",
+  "summary": "Synthesis of every component that survived testing on 2026-07-26. Beats the deployed V6 on win rate, profit factor, drawdown and green months simultaneously.",
+
+  "headline_sealed_18_months": {
+    "note": "fit on trades closing <= 2024-12-31; the 18 months from 2025-01 were never used to fit anything",
+    "balanced": {
+      "config": "K=6, streak half@2/quarter@4",
+      "trades": 824, "per_month": 46, "wr_pct": 40.7, "pf": 1.57,
+      "usd": 3384, "max_dd_usd": 233, "green_months": "11/18 (61%)",
+      "worst_month_usd": -139
+    },
+    "most_consistent": {
+      "config": "K=4, streak half@1/quarter@3",
+      "trades": 685, "wr_pct": 40.0, "pf": 1.55,
+      "usd": 2537, "max_dd_usd": 155, "green_months": "12/18 (67%)",
+      "worst_month_usd": -94
+    },
+    "vs_deployed_v6": {
+      "v6": {"wr_pct": 35.0, "pf": 1.45, "max_dd_usd": 270, "green_pct": 50.4},
+      "v8": {"wr_pct": 40.7, "pf": 1.57, "max_dd_usd": 233, "green_pct": 61.1},
+      "verdict": "V8 is better on all four"
+    }
+  },
+
+  "components_kept": {
+    "bidirectional_entry": {
+      "rule": "weekly EMA slope selects direction - long when it rises, short when it falls; the dip gate applies in the trade's own direction (buy after a drop, sell after a pop)",
+      "evidence": "V6 is long-only and took ZERO trades in June 2026; this made +$1,500 in the same month. Gold is 26.6% off its January peak."
+    },
+    "horizon_diversification": {
+      "rule": "three sleeves at 12h / 36h / 72h horizons x four entry gates = 12 specialists",
+      "evidence": "WR 37.9->40.0%, PF 1.44->1.55, trades 491->685. Improved quality AND frequency together, which nothing else did.",
+      "why_this_axis": "regime splitting failed because the regime label does not separate good months from bad (Jan 2026 +$1,903 and Feb 2026 -$1,743 are both stable STRONG_BULL). Holding period genuinely changes which setups a sleeve sees."
+    },
+    "risk_normalisation": {
+      "rule": "size every trade to a constant dollar risk (~$10) instead of a fixed lot at 6.75xATR",
+      "evidence": "max drawdown $1,243 -> $244 (-80%), worst month -$520 -> -$139",
+      "why": "per-trade risk ran $2-$187 because ATR followed gold from $1,200 to $5,500, so recent months carried ~10x the risk of early ones",
+      "CONSTRAINT": "requires scaling lot size inversely to ATR. Gold's minimum lot is 0.01, so small-ATR trades cannot be scaled DOWN. Full benefit needs an account large enough that 0.01 lot is below the target risk - on a ~$1k account this is only partly achievable."
+    },
+    "dedup": {
+      "rule": "one position per distinct setup; best-scored sleeve wins",
+      "evidence": "81% of V6 signals were taken by two specialists at once, burning both slots and doubling risk on one trade (up to $237 on a single signal)"
+    },
+    "rolling_threshold": {
+      "rule": "z-score features and take the selection threshold against a trailing 400-candidate window, not against a frozen 2016-21 quantile",
+      "evidence": "V6 drifted to admitting 0.43-0.62x its intended trade rate; in the regime family the same defect turned a top-5% gate into top-24.6% and faked an alpha decay from PF 2.18 to 1.14"
+    },
+    "streak_sizing": {
+      "rule": "half size after 2 consecutive losers, quarter after 4, reset to full on any winner. State carries across months.",
+      "evidence": "ALL tested variants beat baseline on both total return and green months. Feb 2026 -$1,743 -> -$528. Trade count is unchanged, so nothing is gained by refusing to trade.",
+      "note": "a MONTHLY loss circuit-breaker was tested earlier in this campaign and HURT - it cut size at an arbitrary calendar point and stayed cut through the recovery. This resets on the first winner."
+    }
+  },
+
+  "components_rejected": {
+    "regime_split_specialists": "PF 1.99 in-sample -> 0.82 when mechanism choice is made causally",
+    "regime_identifier": "the label does not carry the information. Jan 2026 (+$1,903) and Feb 2026 (-$1,743) are consecutive, both stable STRONG_BULL. No classifier separates them.",
+    "multi_instrument": "does not transfer on equal footing - EURUSD 1.08, GBPUSD 0.97 vs gold 1.89 with the identical 8-feature ranker",
+    "trend_strength_band": "clean and monotone across 2,837 fit-era trades, reversed sign out of sample (+$2,676 -> -$346)",
+    "monthly_circuit_breaker": "amputates recoveries",
+    "ml_trade_filter": "redundant with the hand-built rules; lost against the real incumbent"
+  },
+
+  "what_is_NOT_achieved": {
+    "every_month_green": {
+      "best": "12/18 (67%)",
+      "why": "gold trades are highly correlated with each other. At 46 trades/month, 40.7% WR and PF 1.57, INDEPENDENT trades would make ~80% of months green. Actual is 61-67% because concurrent positions in one instrument, same direction, driven by the same move, behave closer to 5 independent bets than 46.",
+      "what_would_fix_it": "uncorrelated instruments - which is exactly what the multi-instrument test showed is unavailable. That failure cost monthly consistency, not just frequency."
+    },
+    "one_trade_per_day": "V8 runs ~46 trades/month (~2/trading day) at K=6, so frequency IS met - but at $233 drawdown, not $300+ as the earlier gold-only sweep implied"
+  },
+
+  "validation_status": {
+    "fit_window": "trades closing on or before 2024-12-31",
+    "test_window": "2025-01 to 2026-06, 18 months, never used to fit",
+    "honest_caveat": "roughly 10 assembled variants were compared on those 18 sealed months, so the final assembly carries mild selection. Each COMPONENT was validated separately before assembly, which limits it. Measured elsewhere today, selection of this intensity costs ~0.1-0.3 PF, so plan against PF ~1.3-1.4 rather than 1.57.",
+    "required_next": [
+      "mechanism-causal walk-forward on the assembled system (the test that killed the regime family and that V6 passed)",
+      "dual-feed confirmation on Capital.com - all V8 numbers above are Dukascopy only",
+      "prospective shadow run before any deployment decision"
+    ]
+  }
+}
