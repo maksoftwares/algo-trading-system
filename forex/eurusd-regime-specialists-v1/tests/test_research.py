@@ -27,6 +27,7 @@ from eurusd_regime_specialists.confirmed_reversal import verify_lock as verify_c
 from eurusd_regime_specialists.crossasset_handoff import verify_lock as verify_handoff_lock
 from eurusd_regime_specialists.retrospective_overfit import (
     density_bucket,
+    perfect_foresight_oracle,
     resolve_portfolio,
     select_cells,
 )
@@ -208,3 +209,20 @@ def test_density_oracle_keeps_only_exact_count_days():
     selected = density_bucket(frame, trades_per_day=2)
     assert len(selected) == 2
     assert selected["entry_time_utc"].dt.day.unique().tolist() == [1]
+
+
+def test_perfect_foresight_oracle_discards_every_loss():
+    frame = pd.DataFrame(
+        {
+            "entry_time_utc": pd.to_datetime(
+                [f"2026-01-01T0{hour}:00:00Z" for hour in range(6)]
+            ),
+            "owner_priority": [0] * 6,
+            "seed_priority": [0] * 6,
+            "exit_reason": ["TARGET"] * 5 + ["STOP"],
+            "r": [1.5] * 5 + [-1.0],
+        }
+    )
+    selected = perfect_foresight_oracle(frame, winners_per_active_day=4)
+    assert len(selected) == 4
+    assert (selected["r"] > 0).all()

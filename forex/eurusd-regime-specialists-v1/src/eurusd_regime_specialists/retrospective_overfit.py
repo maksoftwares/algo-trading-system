@@ -265,6 +265,20 @@ def summarize_concurrent(
     return metrics
 
 
+def summarize_perfect_oracle(
+    trades: pd.DataFrame,
+    m5: pd.DataFrame,
+    start: pd.Timestamp,
+    end: pd.Timestamp,
+) -> dict[str, Any]:
+    metrics = summarize_concurrent(trades, m5, start, end)
+    metrics["realized_payoff_ratio"] = None
+    metrics["realized_payoff_ratio_display"] = "UNDEFINED_NO_LOSSES"
+    metrics["profit_factor"] = None
+    metrics["profit_factor_display"] = "INFINITE_NO_LOSSES"
+    return metrics
+
+
 def density_bucket(
     opportunity_outcomes: pd.DataFrame, trades_per_day: int
 ) -> pd.DataFrame:
@@ -274,6 +288,30 @@ def density_bucket(
     return opportunity_outcomes[dates.isin(selected_dates)].sort_values(
         ["entry_time_utc", "owner_priority", "seed_priority"]
     ).reset_index(drop=True)
+
+
+def perfect_foresight_oracle(
+    opportunity_outcomes: pd.DataFrame,
+    winners_per_active_day: int = TARGET_TRADES_PER_ACTIVE_DAY,
+) -> pd.DataFrame:
+    """Keep four known future target hits on every qualifying historical day."""
+    future_winners = opportunity_outcomes[
+        (opportunity_outcomes["r"] > 0)
+        & opportunity_outcomes["exit_reason"].eq("TARGET")
+    ].copy()
+    dates = future_winners["entry_time_utc"].dt.strftime("%Y-%m-%d")
+    counts = dates.value_counts()
+    qualifying_dates = set(
+        counts[counts >= winners_per_active_day].index
+    )
+    future_winners["oracle_date"] = dates
+    return (
+        future_winners[future_winners["oracle_date"].isin(qualifying_dates)]
+        .sort_values(["entry_time_utc", "owner_priority", "seed_priority"])
+        .groupby("oracle_date", sort=True)
+        .head(winners_per_active_day)
+        .reset_index(drop=True)
+    )
 
 
 def density_ladder(
@@ -308,12 +346,14 @@ def _equity_rows(
     fitted: pd.DataFrame,
     chronological: pd.DataFrame,
     density_oracle: pd.DataFrame,
+    perfect_oracle: pd.DataFrame,
 ) -> pd.DataFrame:
     rows = []
     for label, frame in (
         ("FULL_HISTORY_FITTED", fitted),
         ("CHRONOLOGICAL_2025_2026", chronological),
         ("FOUR_TRADE_DAY_ORACLE", density_oracle),
+        ("PERFECT_FORESIGHT_ORACLE", perfect_oracle),
     ):
         equity = 0.0
         rows.append(
@@ -370,6 +410,7 @@ def run_retrospective_overfit() -> tuple[
     density_oracle = density_bucket(
         opportunities, TARGET_TRADES_PER_ACTIVE_DAY
     )
+    perfect_oracle = perfect_foresight_oracle(opportunities)
 
     recent = _window(
         fitted,
@@ -399,12 +440,18 @@ def run_retrospective_overfit() -> tuple[
         "2026-01-01T00:00:00Z",
         "2026-06-30T23:59:59Z",
     )
+    perfect_recent = _window(
+        perfect_oracle,
+        "2026-01-01T00:00:00Z",
+        "2026-06-30T23:59:59Z",
+    )
     result = {
         "status": "INTENTIONALLY_OVERFIT_DIAGNOSTIC_NOT_TRADABLE",
         "warning": (
-            "The four-trade-day result uses the completed day's future signal "
-            "count, and the cell result uses future realized outcomes. No "
-            "result in this package is causal, out-of-sample, or promotion evidence."
+            "The perfect oracle reads each candidate's future exit and deletes "
+            "every loss; other diagnostics use future daily counts or realized "
+            "cell outcomes. Nothing in this package is causal, out-of-sample, "
+            "or promotion evidence."
         ),
         "method": {
             "gold_analogue": (
@@ -433,8 +480,38 @@ def run_retrospective_overfit() -> tuple[
                 "spread floor, slippage, and stop-first execution; no shared-"
                 "account margin or floating-equity claim."
             ),
+            "perfect_foresight_rule": (
+                "Directly read future TARGET outcomes, retain four known "
+                "winners per qualifying day, and discard every losing trade."
+            ),
         },
         "baseline": summarize(baseline, m5, start, end),
+        "perfect_foresight_four_winner_oracle": {
+            "status": "DIRECT_FUTURE_OUTCOME_LEAKAGE",
+            "rule": (
+                "Inspect every candidate's future exit, retain only target "
+                "winners, keep the first four winners on dates having at least "
+                "four future target winners, and discard every loss."
+            ),
+            "full_history": summarize_perfect_oracle(
+                perfect_oracle, m5, start, end
+            ),
+            "by_period": {
+                name: summarize_perfect_oracle(
+                    _window(perfect_oracle, window_start, window_end),
+                    m5,
+                    pd.Timestamp(window_start),
+                    pd.Timestamp(window_end),
+                )
+                for name, (window_start, window_end) in periods.items()
+            },
+            "latest_six_months": summarize_perfect_oracle(
+                perfect_recent,
+                m5,
+                pd.Timestamp("2026-01-01T00:00:00Z"),
+                pd.Timestamp("2026-06-30T23:59:59Z"),
+            ),
+        },
         "four_trade_active_day_oracle": {
             "status": "IMPOSSIBLE_CAUSALLY_RETROSPECTIVE_DAILY_COUNT",
             "rule": (
@@ -488,10 +565,9 @@ def run_retrospective_overfit() -> tuple[
             ),
         },
         "verdict": (
-            "A four-trade active-day historical curve with approximately "
-            "50% wins and PF near 1.5 can be manufactured only by using the "
-            "completed day's future opportunity count. It is an oracle, not "
-            "an executable trading system."
+            "The pure hindsight ceiling reaches four trades per active day "
+            "and 100% wins only by reading each candidate's future exit and "
+            "discarding every loss. It is label leakage, not a strategy."
         ),
     }
     artifacts = {
@@ -503,8 +579,9 @@ def run_retrospective_overfit() -> tuple[
         "CHRONOLOGICAL_TRADES": chronological,
         "DENSITY_LADDER": ladder,
         "FOUR_TRADE_DAY_ORACLE_TRADES": density_oracle,
+        "PERFECT_FORESIGHT_TRADES": perfect_oracle,
         "EQUITY_CURVES": _equity_rows(
-            fitted, chronological, density_oracle
+            fitted, chronological, density_oracle, perfect_oracle
         ),
     }
     return result, artifacts

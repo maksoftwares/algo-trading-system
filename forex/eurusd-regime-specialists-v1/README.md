@@ -9,7 +9,7 @@ Five outcome-locked experiments and one intentionally contaminated control were 
 3. A 1.50R/12-hour asymmetric exit: realized payoff reached 1.428 overall and 1.454 in the latest six months, but full-history win rate was only 38.75% and PF was 0.904.
 4. M15 exhaustion plus M5 structure confirmation: capacity passed at 2.10 signals/day, but full-history win rate fell to 37.15% and PF to 0.841. The price-confirmation family is closed.
 5. DXY-confirmed London and New York session handoffs: capacity passed at 0.254 signals/weekday, but full-history win rate was 33.87% and PF was 0.744. The cross-asset continuation family is closed.
-6. Gold-style retrospective selection: the daily-density oracle reached exactly 4.00 trades per active day, 49.60% wins, 1.467 payoff, and PF 1.444. It uses the completed day's future opportunity count and covers only 6.35% of weekdays, so it is a selection-bias demonstration, not a strategy.
+6. Gold-style retrospective selection: the pure perfect-foresight oracle reached exactly 4.00 trades per active day and 100% wins by retaining only known future target hits. Its average winner was 1.489R and PF is infinite because every loss was deleted. This is direct label leakage, not a strategy.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
