@@ -69,6 +69,11 @@ from eurusd_regime_specialists.neutral_synchronous_crossasset import (
     build_crossasset_features,
     verify_lock as verify_synchronous_crossasset_lock,
 )
+from eurusd_regime_specialists.neutral_utc_open_vote import (
+    attach_vote_sources,
+    completed_return_vote,
+    verify_lock as verify_utc_open_vote_lock,
+)
 from eurusd_regime_specialists.retrospective_overfit import (
     _dense_target_candidate,
     density_bucket,
@@ -94,6 +99,7 @@ def test_lock():
     assert len(verify_prospective_lock()) == 2
     assert len(verify_oracle_imitation_lock()) == 2
     assert len(verify_synchronous_crossasset_lock()) == 3
+    assert len(verify_utc_open_vote_lock()) == 7
 
 
 def test_dukascopy_bi5_url_and_decoder():
@@ -244,6 +250,76 @@ def test_synchronous_crossasset_features_are_completed_and_causal():
     long_value = augmented.iloc[0]["aligned_dxy_m5_return_1_atr"]
     short_value = augmented.iloc[1]["aligned_dxy_m5_return_1_atr"]
     assert long_value == -short_value
+
+
+def test_utc_open_vote_uses_only_completed_bounded_sources():
+    fx_index = pd.date_range(
+        "2026-01-01T22:55:00Z", periods=18, freq="5min"
+    )
+    fx_frames = {}
+    for symbol, start in (
+        ("EURUSD", 1.10),
+        ("EURGBP", 0.85),
+        ("EURJPY", 160.0),
+    ):
+        close = pd.Series(
+            [start + index * 0.001 for index in range(len(fx_index))],
+            index=fx_index,
+        )
+        fx_frames[symbol] = pd.DataFrame(
+            {
+                "bid_close": close,
+                "ask_close": close + 0.0002,
+            },
+            index=fx_index,
+        )
+    dxy_index = pd.date_range(
+        "2026-01-01T20:55:00Z", periods=14, freq="5min"
+    )
+    dxy_macro = pd.DataFrame(
+        {
+            "timestamp_utc": list(dxy_index)
+            + [pd.Timestamp("2026-01-02T00:00:00Z")],
+            "dollaridxusd_available": [True] * 15,
+            "dollaridxusd_mid_close": [
+                100.0 + index * 0.01
+                for index in range(len(dxy_index))
+            ]
+            + [50.0],
+        }
+    )
+    candidates = pd.DataFrame(
+        {
+            "signal_time_utc": [
+                pd.Timestamp("2026-01-01T23:55:00Z")
+            ],
+            "completion_time_utc": [
+                pd.Timestamp("2026-01-02T00:00:00Z")
+            ],
+        }
+    )
+    cfg = {
+        "candidate": {"return_horizon_minutes": 60},
+        "sources": {"DXY": {"maximum_age_minutes": 240}},
+    }
+    actual = attach_vote_sources(
+        candidates, fx_frames, dxy_macro, cfg
+    ).iloc[0]
+    assert actual["vote_eurusd"] == 1.0
+    assert actual["vote_eurgbp"] == 1.0
+    assert actual["vote_eurjpy"] == 1.0
+    assert actual["vote_dxy"] == -1.0
+    assert actual["vote_sum"] == 2.0
+    assert actual["side"] == "LONG"
+    assert actual["dxy_source_time_utc"] == dxy_index[-1]
+    assert actual["dxy_age_minutes"] == 115.0
+
+    gapped = fx_frames["EURUSD"].drop(fx_index[-2])
+    vote = completed_return_vote(
+        (gapped["bid_close"] + gapped["ask_close"]) / 2.0,
+        60,
+    )
+    assert pd.isna(vote.iloc[-1])
 
 
 def test_wilder_seed_and_recursion():

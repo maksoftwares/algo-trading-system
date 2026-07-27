@@ -144,6 +144,41 @@ remained dominant; the explicit DXY/Treasury joint-direction coefficient
 was essentially zero. Synchronized quoted cross-asset behavior did not
 provide the missing causal direction.
 
+## Deterministic UTC-open vote boundary
+
+An outcome-blind source audit found that scheduled CPI, payroll, and FOMC
+timing was incompatible with the target cluster: none of the 1,123 Neutral
+oracle trades in the calendar-covered period occurred within two hours
+after one of 126 available scheduled events. No local EUR FX futures,
+executed-flow, or order-book archive was available.
+
+A separately locked deterministic rule therefore tested one 00:00 UTC
+Neutral entry from completed 60-minute EURUSD, EURGBP, and EURJPY returns
+plus a bounded prior-session DXY return. Three of four votes had to agree.
+The outcome-blind census contained 314 trades, evenly split between long
+and short.
+
+| Window | Trades | Win rate | PF | Net | Exact precision | 15m precision |
+|---|---:|---:|---:|---:|---:|---:|
+| 2023 | 39 | 43.59% | 1.112 | +2.53R | 43.59% | 64.10% |
+| 2024 | 33 | 21.21% | 0.387 | -16.33R | 21.21% | 30.30% |
+| 2025 | 40 | 27.50% | 0.546 | -13.50R | 27.50% | 57.50% |
+| 2026 H1 | 23 | 30.43% | 0.629 | -6.10R | 30.43% | 47.83% |
+| Overall | 135 | 31.11% | 0.650 | -33.40R | 31.11% | 51.11% |
+
+All 42 forward exact members won +61.95R, while all 93 nonmembers lost
+-95.35R. This identity follows from the hindsight generator: because it
+begins each date at 00:00 and keeps the first target-first paths, any
+winning midnight side becomes an exact member and any absent side loses.
+The causal rule's economic win rate therefore equals its exact precision.
+At a 1.439 realized payoff, its 31.11% precision remains far below the
+roughly 41% break-even requirement.
+
+The 2023 slice was a near miss but failed the 45% win-rate floor and became
+negative under the extra-half-pip stress. The following three windows
+collapsed. The pre-open EUR-cross/DXY vote route is closed without
+post-outcome repair.
+
 ## Interpretation
 
 At a realized payoff near 1.44, break-even requires approximately 41% wins. The best stable causal variants remained around 33–35%. The 100%-winning Neutral oracle does not reveal a learnable process: it scans both future directions, keeps early target-first paths, and deletes every failure.
@@ -175,4 +210,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_prospective.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_oracle_imitation.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_synchronous_crossasset.py
+uv run --with pandas --with numpy --with pyarrow python run_neutral_utc_open_vote.py
 ```

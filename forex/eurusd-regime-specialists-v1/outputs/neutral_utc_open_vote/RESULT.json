@@ -1,0 +1,356 @@
+{
+  "campaign_id": "eurusd-neutral-utc-open-vote-v1",
+  "status": "REJECTED_NEUTRAL_UTC_OPEN_VOTE_V1",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "source_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    },
+    "EURUSD": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+      "rows": 560527,
+      "first_utc": "2019-01-02T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00"
+    },
+    "EURGBP": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURGBP_M5_BIDASK.parquet",
+      "sha256": "0671ac86131ae822e80cfbed18d46fc7ff2db72129b90c74052f9471ca83cd72",
+      "rows": 747389,
+      "first_utc": "2016-07-01T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00"
+    },
+    "EURJPY": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURJPY_M5_BIDASK.parquet",
+      "sha256": "4b62fbf3b5c54c4728af53517fe6debfbd4380247c106fd149b1e78f4e536762",
+      "rows": 747487,
+      "first_utc": "2016-07-01T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00"
+    },
+    "DXY_M5": {
+      "path": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\research\\xau-intraday-macro-source-v1\\m5_bidask_features_v1.parquet",
+      "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+      "rows": 525099,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00"
+    }
+  },
+  "causality": {
+    "signal": "One 00:00 UTC entry from exact completed 23:55 FX returns and a bounded prior DXY-session handoff",
+    "dxy_maximum_age_minutes": 240,
+    "future_information_in_signal": false,
+    "oracle_loaded_after_execution": true,
+    "ml_used": false
+  },
+  "outcome_blind_census": {
+    "neutral_open_candidates": 655,
+    "four_valid_nonzero_votes": 464,
+    "trade_candidates": 314,
+    "long_candidates": 157,
+    "short_candidates": 157,
+    "by_year": {
+      "2019": 53,
+      "2020": 49,
+      "2021": 36,
+      "2022": 41,
+      "2023": 39,
+      "2024": 33,
+      "2025": 40,
+      "2026": 23
+    },
+    "passed": true
+  },
+  "development": {
+    "passed": false,
+    "economics": {
+      "trades": 179,
+      "wins": 44,
+      "losses": 135,
+      "win_rate": 0.24581005586592178,
+      "average_win_r": 1.4749999999996832,
+      "average_loss_r": 1.025000000000041,
+      "realized_payoff_ratio": 1.4390243902435358,
+      "profit_factor": 0.46901535682011536,
+      "net_r": -73.4750000000195,
+      "expectancy_r": -0.4104748603353045,
+      "max_drawdown_r": 75.85000000001854,
+      "active_weekdays": 1042,
+      "trades_per_active_weekday": 0.17178502879078694,
+      "extra_half_pip_stress_net_r": -95.8500000000195,
+      "portfolio_net_r": -18.368750000004876,
+      "portfolio_max_drawdown_r": 18.962500000004635
+    }
+  },
+  "walk_forward": {
+    "admitted": false,
+    "windows": {
+      "validation_2023": {
+        "passed": false,
+        "economics": {
+          "trades": 39,
+          "wins": 17,
+          "losses": 22,
+          "win_rate": 0.4358974358974359,
+          "average_win_r": 1.474999999999671,
+          "average_loss_r": 1.025000000000054,
+          "realized_payoff_ratio": 1.4390243902435056,
+          "profit_factor": 1.1119733924608906,
+          "net_r": 2.524999999993227,
+          "expectancy_r": 0.06474358974341608,
+          "max_drawdown_r": 5.950000000002342,
+          "active_weekdays": 260,
+          "trades_per_active_weekday": 0.15,
+          "extra_half_pip_stress_net_r": -2.350000000006773,
+          "portfolio_net_r": 0.6312499999983068,
+          "portfolio_max_drawdown_r": 1.4875000000005856
+        },
+        "oracle_imitation": {
+          "predicted_trades": 39,
+          "oracle_trades": 300,
+          "exact_matches": 17,
+          "exact_precision": 0.4358974358974359,
+          "exact_recall": 0.056666666666666664,
+          "exact_f1": 0.10029498525073746,
+          "tolerance_minutes": 15,
+          "tolerant_matches": 25,
+          "tolerant_precision": 0.6410256410256411,
+          "tolerant_recall": 0.08333333333333333,
+          "tolerant_f1": 0.14749262536873156
+        }
+      },
+      "validation_2024": {
+        "passed": false,
+        "economics": {
+          "trades": 33,
+          "wins": 7,
+          "losses": 26,
+          "win_rate": 0.21212121212121213,
+          "average_win_r": 1.474999999999671,
+          "average_loss_r": 1.0250000000000539,
+          "realized_payoff_ratio": 1.4390243902435058,
+          "profit_factor": 0.38742964352709774,
+          "net_r": -16.325000000003698,
+          "expectancy_r": -0.49469696969708177,
+          "max_drawdown_r": 17.80000000000337,
+          "active_weekdays": 262,
+          "trades_per_active_weekday": 0.12595419847328243,
+          "extra_half_pip_stress_net_r": -20.450000000003698,
+          "portfolio_net_r": -4.081250000000924,
+          "portfolio_max_drawdown_r": 4.450000000000842
+        },
+        "oracle_imitation": {
+          "predicted_trades": 33,
+          "oracle_trades": 263,
+          "exact_matches": 7,
+          "exact_precision": 0.21212121212121213,
+          "exact_recall": 0.026615969581749048,
+          "exact_f1": 0.04729729729729729,
+          "tolerance_minutes": 15,
+          "tolerant_matches": 10,
+          "tolerant_precision": 0.30303030303030304,
+          "tolerant_recall": 0.03802281368821293,
+          "tolerant_f1": 0.06756756756756756
+        }
+      },
+      "pseudo_oos_2025": {
+        "passed": false,
+        "economics": {
+          "trades": 40,
+          "wins": 11,
+          "losses": 29,
+          "win_rate": 0.275,
+          "average_win_r": 1.474999999999671,
+          "average_loss_r": 1.0250000000000539,
+          "realized_payoff_ratio": 1.4390243902435058,
+          "profit_factor": 0.5458368376785712,
+          "net_r": -13.500000000005175,
+          "expectancy_r": -0.33750000000012936,
+          "max_drawdown_r": 13.825000000003973,
+          "active_weekdays": 261,
+          "trades_per_active_weekday": 0.1532567049808429,
+          "extra_half_pip_stress_net_r": -18.500000000005173,
+          "portfolio_net_r": -3.3750000000012936,
+          "portfolio_max_drawdown_r": 3.4562500000009932
+        },
+        "oracle_imitation": {
+          "predicted_trades": 40,
+          "oracle_trades": 320,
+          "exact_matches": 11,
+          "exact_precision": 0.275,
+          "exact_recall": 0.034375,
+          "exact_f1": 0.061111111111111116,
+          "tolerance_minutes": 15,
+          "tolerant_matches": 23,
+          "tolerant_precision": 0.575,
+          "tolerant_recall": 0.071875,
+          "tolerant_f1": 0.12777777777777777
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "passed": false,
+        "economics": {
+          "trades": 23,
+          "wins": 7,
+          "losses": 16,
+          "win_rate": 0.30434782608695654,
+          "average_win_r": 1.474999999999671,
+          "average_loss_r": 1.0265625000000986,
+          "realized_payoff_ratio": 1.4368340943678823,
+          "profit_factor": 0.6286149162859486,
+          "net_r": -6.100000000003879,
+          "expectancy_r": -0.2652173913045165,
+          "max_drawdown_r": 10.975000000002511,
+          "active_weekdays": 129,
+          "trades_per_active_weekday": 0.17829457364341086,
+          "extra_half_pip_stress_net_r": -8.97500000000388,
+          "portfolio_net_r": -1.5250000000009698,
+          "portfolio_max_drawdown_r": 2.743750000000628
+        },
+        "oracle_imitation": {
+          "predicted_trades": 23,
+          "oracle_trades": 160,
+          "exact_matches": 7,
+          "exact_precision": 0.30434782608695654,
+          "exact_recall": 0.04375,
+          "exact_f1": 0.07650273224043715,
+          "tolerance_minutes": 15,
+          "tolerant_matches": 11,
+          "tolerant_precision": 0.4782608695652174,
+          "tolerant_recall": 0.06875,
+          "tolerant_f1": 0.1202185792349727
+        }
+      }
+    },
+    "overall_economics": {
+      "trades": 135,
+      "wins": 42,
+      "losses": 93,
+      "win_rate": 0.3111111111111111,
+      "average_win_r": 1.4749999999996708,
+      "average_loss_r": 1.0252688172043622,
+      "realized_payoff_ratio": 1.4386470896692312,
+      "profit_factor": 0.6497115888828786,
+      "net_r": -33.400000000019524,
+      "expectancy_r": -0.24740740740755204,
+      "max_drawdown_r": 42.27500000001109,
+      "active_weekdays": 912,
+      "trades_per_active_weekday": 0.14802631578947367,
+      "extra_half_pip_stress_net_r": -50.27500000001953,
+      "portfolio_net_r": -8.350000000004881,
+      "portfolio_max_drawdown_r": 10.568750000002773
+    },
+    "overall_oracle_imitation": {
+      "predicted_trades": 135,
+      "oracle_trades": 1043,
+      "exact_matches": 42,
+      "exact_precision": 0.3111111111111111,
+      "exact_recall": 0.040268456375838924,
+      "exact_f1": 0.07130730050933785,
+      "tolerance_minutes": 15,
+      "tolerant_matches": 69,
+      "tolerant_precision": 0.5111111111111111,
+      "tolerant_recall": 0.06615532118887824,
+      "tolerant_f1": 0.1171477079796265
+    },
+    "outcomes_by_exact_oracle_membership": {
+      "exact_oracle_members": {
+        "trades": 42,
+        "wins": 42,
+        "losses": 0,
+        "win_rate": 1.0,
+        "average_win_r": 1.4749999999996708,
+        "average_loss_r": 0.0,
+        "realized_payoff_ratio": null,
+        "profit_factor": null,
+        "net_r": 61.949999999986176,
+        "expectancy_r": 1.4749999999996708,
+        "max_drawdown_r": 0.0
+      },
+      "nonmembers": {
+        "trades": 93,
+        "wins": 0,
+        "losses": 93,
+        "win_rate": 0.0,
+        "average_win_r": 0.0,
+        "average_loss_r": 1.0252688172043622,
+        "realized_payoff_ratio": 0.0,
+        "profit_factor": 0.0,
+        "net_r": -95.35000000000569,
+        "expectancy_r": -1.0252688172043622,
+        "max_drawdown_r": 95.35000000000564
+      }
+    },
+    "imitation_gate_passed": true
+  },
+  "all_history": {
+    "economics": {
+      "trades": 314,
+      "wins": 86,
+      "losses": 228,
+      "win_rate": 0.27388535031847133,
+      "average_win_r": 1.4749999999996772,
+      "average_loss_r": 1.0251096491228564,
+      "realized_payoff_ratio": 1.4388704674292874,
+      "profit_factor": 0.5427318429777136,
+      "net_r": -106.87500000003902,
+      "expectancy_r": -0.3403662420383408,
+      "max_drawdown_r": 114.12500000003635,
+      "active_weekdays": 1954,
+      "trades_per_active_weekday": 0.16069600818833163,
+      "extra_half_pip_stress_net_r": -146.12500000003902,
+      "portfolio_net_r": -26.718750000009756,
+      "portfolio_max_drawdown_r": 28.531250000009088
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 298,
+      "wins": 70,
+      "losses": 228,
+      "win_rate": 0.2348993288590604,
+      "average_win_r": 1.4749999999996708,
+      "average_loss_r": 1.0251096491228564,
+      "realized_payoff_ratio": 1.4388704674292812,
+      "profit_factor": 0.4417584768423231,
+      "net_r": -130.47500000003433,
+      "expectancy_r": -0.43783557046991384,
+      "max_drawdown_r": 135.35000000003265
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 314,
+      "wins": 86,
+      "losses": 228,
+      "win_rate": 0.27388535031847133,
+      "average_win_r": 1.3499999999996772,
+      "average_loss_r": 1.1501096491228566,
+      "realized_payoff_ratio": 1.1738011249877516,
+      "profit_factor": 0.4427495471445027,
+      "net_r": -146.12500000003902,
+      "expectancy_r": -0.4653662420383408,
+      "max_drawdown_r": 152.1250000000365
+    },
+    "robustness_gate_passed": false
+  },
+  "verdict": "The deterministic UTC-open vote failed at least one frozen development, forward, imitation, or robustness gate."
+}

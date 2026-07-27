@@ -1,0 +1,139 @@
+{
+  "campaign_id": "eurusd-neutral-utc-open-vote-v1",
+  "frozen_at_utc": "2026-07-27T16:55:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "parent_contract": {
+    "path": "config/frozen_neutral_oracle_imitation.json",
+    "sha256": "9439fdcdfadde2a0fb692df7fd8f9be56c89261dd361a71c8824b1b65efc8000"
+  },
+  "sources": {
+    "EURUSD": {
+      "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+      "timestamp_semantics": "M5 bar start; the 23:55 row is complete at the 00:00 decision"
+    },
+    "EURGBP": {
+      "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURGBP_M5_BIDASK.parquet",
+      "sha256": "0671ac86131ae822e80cfbed18d46fc7ff2db72129b90c74052f9471ca83cd72",
+      "timestamp_semantics": "M5 bar start; exact 23:55 row required"
+    },
+    "EURJPY": {
+      "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURJPY_M5_BIDASK.parquet",
+      "sha256": "4b62fbf3b5c54c4728af53517fe6debfbd4380247c106fd149b1e78f4e536762",
+      "timestamp_semantics": "M5 bar start; exact 23:55 row required"
+    },
+    "DXY": {
+      "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+      "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+      "symbol_column_prefix": "dollaridxusd",
+      "timestamp_semantics": "M5 bar start; use only the latest completed available row no later than 23:55",
+      "maximum_age_minutes": 240
+    }
+  },
+  "candidate": {
+    "regime": "NEUTRAL",
+    "shock_allowed": false,
+    "joint_compression_allowed": false,
+    "signal_bar_start_utc": "23:55",
+    "entry_time_utc": "00:00",
+    "return_horizon_minutes": 60,
+    "return_requires_exact_contiguous_endpoints": true,
+    "one_candidate_per_utc_date": true,
+    "votes": {
+      "EURUSD": "SIGN_OF_COMPLETED_60M_MID_RETURN",
+      "EURGBP": "SIGN_OF_COMPLETED_60M_MID_RETURN",
+      "EURJPY": "SIGN_OF_COMPLETED_60M_MID_RETURN",
+      "DXY": "NEGATIVE_SIGN_OF_LAST_COMPLETED_SESSION_60M_MID_RETURN"
+    },
+    "all_four_votes_must_be_nonzero": true,
+    "decision": "TRADE_ONLY_IF_AT_LEAST_THREE_OF_FOUR_VOTES_AGREE",
+    "long_rule": "vote_sum >= 2",
+    "short_rule": "vote_sum <= -2",
+    "tie_rule": "CASH"
+  },
+  "outcome_blind_census": {
+    "neutral_open_candidates": 655,
+    "four_valid_nonzero_votes": 464,
+    "trade_candidates": 314,
+    "long_candidates": 157,
+    "short_candidates": 157,
+    "minimum_trade_candidates": 300,
+    "minimum_each_full_forward_year": 30,
+    "minimum_2026_h1": 15
+  },
+  "label": {
+    "risk_mode": "FIXED",
+    "risk_pips": 4.0,
+    "target_r": 1.50,
+    "maximum_hold_hours": 12,
+    "same_bar_policy": "stop_first",
+    "minimum_retail_spread_pips": 0.70,
+    "extra_slippage_pips_per_side": 0.10
+  },
+  "development_window": [
+    "2019-01-02T00:00:00Z",
+    "2022-12-31T23:59:59Z"
+  ],
+  "walk_forward_windows": {
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "execution": {
+    "maximum_concurrent_positions": 1,
+    "maximum_trades_per_utc_day": 1,
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_open_portfolio_r": 0.25
+  },
+  "development_gate": {
+    "minimum_trades": 150,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.10,
+    "minimum_expectancy_r": 0.0
+  },
+  "final_admission": {
+    "minimum_trades_by_window": {
+      "validation_2023": 30,
+      "validation_2024": 30,
+      "pseudo_oos_2025": 30,
+      "pseudo_oos_2026h1": 15
+    },
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.10,
+    "minimum_expectancy_r": 0.0,
+    "maximum_drawdown_r_overall": 30.0,
+    "minimum_exact_match_precision_overall": 0.25,
+    "minimum_exact_match_recall_overall": 0.02,
+    "minimum_15m_match_precision_overall": 0.25,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  }
+}

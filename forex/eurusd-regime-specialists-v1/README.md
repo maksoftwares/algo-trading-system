@@ -14,6 +14,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 8. Frozen July prospective diagnostic: the rejected volatility-scaled tick model was locked before bulk July acquisition and run without retuning. It produced 19 trades, 31.58% wins, 1.459 payoff, PF 0.673, and -4.317R. Both the 100-trade/60-day sample gate and the metric gate failed, so the result cannot admit or rescue the model.
 9. Direct causal oracle imitation: a purged five-minute classifier learned meaningful entry resemblance (23.03% exact precision and 27.52% recall), but this was mostly the oracle's midnight scan artifact. Its 1,246 chronological trades won 31.54%, returned PF 0.654, and lost 306.20R. Every forward year failed.
 10. Synchronous DXY/Treasury oracle imitation: 18 completed M5 cross-asset features raised exact-match precision only to 24.76% while recall fell to 15.15%. Its 638 chronological trades won 30.56%, returned PF 0.633, and lost 166.43R. Every forward year failed, so this quoted-cross-asset extension is closed.
+11. Deterministic UTC-open cross-market vote: one Neutral trade per date used completed EURUSD, EURGBP, EURJPY, and bounded prior-session DXY returns. It achieved 31.11% exact precision and 51.11% same-side precision within 15 minutes, but its 135 forward trades returned PF 0.650 and lost 33.40R. All 42 exact members won and all 93 nonmembers lost, proving that this midnight task reduces directly to selecting the future-winning side. The route is closed without retuning.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -29,6 +30,7 @@ Key reports:
 - `EURUSD_NEUTRAL_PROSPECTIVE_JULY_RESULT_2026_07_27.md`
 - `EURUSD_NEUTRAL_ORACLE_IMITATION_VERDICT_2026_07_27.md`
 - `EURUSD_NEUTRAL_SYNCHRONOUS_CROSSASSET_VERDICT_2026_07_27.md`
+- `EURUSD_NEUTRAL_UTC_OPEN_VOTE_VERDICT_2026_07_27.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -43,6 +45,7 @@ Key reports:
 - `outputs/neutral_prospective_july/RESULT.json`
 - `outputs/neutral_oracle_imitation/RESULT.json`
 - `outputs/neutral_synchronous_crossasset/RESULT.json`
+- `outputs/neutral_utc_open_vote/RESULT.json`
 
 Run with:
 
@@ -64,4 +67,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_prospective.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_oracle_imitation.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_synchronous_crossasset.py
+uv run --with pandas --with numpy --with pyarrow python run_neutral_utc_open_vote.py
 ```
