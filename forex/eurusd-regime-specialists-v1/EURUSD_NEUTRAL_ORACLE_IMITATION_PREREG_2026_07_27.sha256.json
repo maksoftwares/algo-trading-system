@@ -1,0 +1,7 @@
+{
+  "locked_before_oracle_imitation_outcome_pass": true,
+  "files": {
+    "EURUSD_NEUTRAL_ORACLE_IMITATION_PREREG_2026_07_27.md": "e95fdded8eae756a39acd5363b6907d01724dae5eeb112ef3a4801639a225b0b",
+    "config/frozen_neutral_oracle_imitation.json": "9439fdcdfadde2a0fb692df7fd8f9be56c89261dd361a71c8824b1b65efc8000"
+  }
+}

@@ -58,6 +58,12 @@ from eurusd_regime_specialists.neutral_prospective import (
     dukascopy_url,
     verify_lock as verify_prospective_lock,
 )
+from eurusd_regime_specialists.neutral_oracle_imitation import (
+    attach_oracle_labels,
+    oracle_match_metrics,
+    purged_oracle_training_rows,
+    verify_lock as verify_oracle_imitation_lock,
+)
 from eurusd_regime_specialists.retrospective_overfit import (
     _dense_target_candidate,
     density_bucket,
@@ -81,6 +87,7 @@ def test_lock():
     assert len(verify_tick_microstructure_lock()) == 2
     assert len(verify_tick_volatility_lock()) == 2
     assert len(verify_prospective_lock()) == 2
+    assert len(verify_oracle_imitation_lock()) == 2
 
 
 def test_dukascopy_bi5_url_and_decoder():
@@ -107,6 +114,64 @@ def test_dukascopy_bi5_url_and_decoder():
     assert frame.iloc[0]["bid"] == 1.13855
     assert frame.iloc[0]["ask_volume"] == 1.0
     assert frame.iloc[0]["bid_volume"] == 2.0
+
+
+def test_oracle_imitation_label_and_purge_are_causal():
+    entry = pd.Timestamp("2026-01-01T00:00:00Z")
+    dataset = pd.DataFrame(
+        {
+            "entry_time_utc": [entry, entry],
+            "side": ["LONG", "SHORT"],
+        }
+    )
+    oracle = pd.DataFrame(
+        {"entry_time_utc": [entry], "side": ["SHORT"]}
+    )
+    cfg = {
+        "oracle_label": {
+            "negative_label_known_after_hours": 12
+        }
+    }
+    labeled = attach_oracle_labels(dataset, oracle, cfg)
+    assert labeled["oracle_member"].tolist() == [0, 1]
+    assert purged_oracle_training_rows(
+        labeled, entry + pd.Timedelta(hours=12)
+    ).empty
+    assert len(
+        purged_oracle_training_rows(
+            labeled, entry + pd.Timedelta(hours=12, seconds=1)
+        )
+    ) == 2
+
+
+def test_oracle_imitation_matching_is_side_aware_and_one_to_one():
+    start = pd.Timestamp("2026-01-01T00:00:00Z")
+    trades = pd.DataFrame(
+        {
+            "entry_time_utc": [
+                start,
+                start + pd.Timedelta(minutes=5),
+            ],
+            "side": ["LONG", "LONG"],
+        }
+    )
+    oracle = pd.DataFrame(
+        {
+            "entry_time_utc": [start],
+            "side": ["LONG"],
+            "oracle_trade_number": [1],
+        }
+    )
+    metrics, matches = oracle_match_metrics(
+        trades,
+        oracle,
+        start,
+        start + pd.Timedelta(days=1),
+        tolerance_minutes=15,
+    )
+    assert metrics["exact_matches"] == 1
+    assert metrics["tolerant_matches"] == 1
+    assert len(matches) == 1
 
 
 def test_wilder_seed_and_recursion():

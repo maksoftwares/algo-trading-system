@@ -12,6 +12,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 6. Gold-style retrospective selection: the dense perfect-foresight oracle reached exactly 4.00 trades on every one of 1,954 archived weekdays (7,816 trades) with 100% wins by scanning future long/short paths from M5 entries. Its average winner was 1.475R and PF is infinite because every loss was deleted. This is direct path leakage, not a strategy.
 7. Regime 1 Neutral causal reconstruction: four rule families, regularized bar models, synchronized GBPUSD/USDJPY features, constrained nonlinear models, raw EURUSD tick microstructure, and volatility-scaled risk were preregistered and tested chronologically. None qualified development or passed the forward gates. The best isolated year was tick microstructure in 2023 at PF 1.079; it collapsed afterward. Regime 1 remains cash.
 8. Frozen July prospective diagnostic: the rejected volatility-scaled tick model was locked before bulk July acquisition and run without retuning. It produced 19 trades, 31.58% wins, 1.459 payoff, PF 0.673, and -4.317R. Both the 100-trade/60-day sample gate and the metric gate failed, so the result cannot admit or rescue the model.
+9. Direct causal oracle imitation: a purged five-minute classifier learned meaningful entry resemblance (23.03% exact precision and 27.52% recall), but this was mostly the oracle's midnight scan artifact. Its 1,246 chronological trades won 31.54%, returned PF 0.654, and lost 306.20R. Every forward year failed.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -25,6 +26,7 @@ Key reports:
 - `EURUSD_RETROSPECTIVE_OVERFIT_DEMONSTRATION_2026_07_27.md`
 - `EURUSD_REGIME_1_NEUTRAL_CAUSAL_VERDICT_2026_07_27.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_JULY_RESULT_2026_07_27.md`
+- `EURUSD_NEUTRAL_ORACLE_IMITATION_VERDICT_2026_07_27.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -37,6 +39,7 @@ Key reports:
 - `outputs/neutral_tick_microstructure/RESULT.json`
 - `outputs/neutral_tick_volatility/RESULT.json`
 - `outputs/neutral_prospective_july/RESULT.json`
+- `outputs/neutral_oracle_imitation/RESULT.json`
 
 Run with:
 
@@ -56,4 +59,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_tick_microstructure.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_tick_volatility.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_prospective.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_oracle_imitation.py
 ```

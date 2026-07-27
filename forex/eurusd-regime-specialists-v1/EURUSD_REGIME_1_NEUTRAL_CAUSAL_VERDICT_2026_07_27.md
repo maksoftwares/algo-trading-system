@@ -8,7 +8,10 @@ Decision: `NO_CAUSAL_NEUTRAL_EXPERT_ADMITTED`
 
 Approximate the 2,615 Regime 1 Neutral hindsight-oracle trades using only information available at the decision timestamp, while preserving approximately 1.50R payoff and rejecting outcome-dependent parameter repair.
 
-The oracle is a comparison benchmark only. It never generates a causal signal, feature, training label, model threshold, or execution decision.
+The oracle is a comparison benchmark only in the first six campaigns. A
+separately locked seventh campaign uses historical oracle membership as a
+purged supervised label, but forbids oracle rows at inference. The oracle
+never generates a causal feature or execution decision.
 
 ## Causal campaigns tested
 
@@ -20,8 +23,10 @@ The oracle is a comparison benchmark only. It never generates a causal signal, f
 | Constrained nonlinear cross-pair classifier | 2023–2026 H1 walk-forward | 22 | 13.64% | 1.439 | 0.227 | -15.05R |
 | Raw EURUSD tick-microstructure classifier, fixed 4-pip risk | 2023–2026 H1 walk-forward | 103 | 35.92% | 1.439 | 0.807 | -13.08R |
 | Raw tick-microstructure classifier, volatility-scaled risk | 2023–2026 H1 walk-forward | 779 | 35.30% | 1.449 | 0.791 | -106.94R |
+| Purged direct Neutral-oracle imitation classifier | 2023–2026 H1 walk-forward | 1,246 | 31.54% | 1.420 | 0.654 | -306.20R |
 
-None passed its locked development gate. Consequently, none is an admitted strategy or eligible for demo/live use.
+None passed all locked chronological admission gates. Consequently, none is
+an admitted strategy or eligible for demo/live use.
 
 ## Fixed-rule family result
 
@@ -96,6 +101,26 @@ The preregistered evidence gate requires at least 100 completed trades and
 therefore remains an accumulating, non-promotional diagnostic. Its metric
 gate also failed, and it does not rescue the historical model.
 
+## Direct oracle-imitation boundary
+
+A separately locked classifier was trained on exact historical Neutral
+oracle membership rather than generic target-first outcomes. It used causal
+five-minute bar, cross-asset, time-cycle, and tick features, a 12-hour label
+purge, 2019-2022 development, and annual expanding refits for 2023-2026 H1.
+
+The model achieved 23.03% exact-match precision, 27.52% exact recall, and
+31.30% same-side precision within 15 minutes across the forward windows.
+This passed its behavioral-imitation gate. Economics nevertheless failed in
+every window: 1,246 trades, 31.54% wins, 1.420 payoff, PF 0.654, and
+-306.20R.
+
+All 287 exact oracle matches won, while the 959 accepted nonmembers won only
+11.05% and lost -729.55R. The dominant coefficient was the UTC time cycle,
+reflecting that 2,482 of 2,615 Neutral oracle rows occur in the first UTC
+hour because the hindsight generator scans from midnight. The model learned
+that construction artifact but could not identify the future-winning
+direction.
+
 ## Interpretation
 
 At a realized payoff near 1.44, break-even requires approximately 41% wins. The best stable causal variants remained around 33–35%. The 100%-winning Neutral oracle does not reveal a learnable process: it scans both future directions, keeps early target-first paths, and deletes every failure.
@@ -123,4 +148,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_tick_microstructure.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_tick_volatility.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_prospective.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_oracle_imitation.py
 ```

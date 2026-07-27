@@ -1,0 +1,97 @@
+{
+  "campaign_id": "eurusd-neutral-oracle-imitation-v1",
+  "frozen_at_utc": "2026-07-27T17:30:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "data_and_classifier_contract": "config/frozen_two_clock_ensemble.json",
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "candidate_schedule_minutes": 5,
+  "oracle_label": {
+    "positive_rule": "Exact same entry timestamp and side as a full-calendar NEUTRAL oracle trade",
+    "negative_label_known_after_hours": 12,
+    "inference_usage": "FORBIDDEN",
+    "purpose": "Historical supervised imitation target only"
+  },
+  "label": {
+    "risk_mode": "FIXED",
+    "risk_pips": 4.0,
+    "target_r": 1.50,
+    "maximum_hold_hours": 12,
+    "same_bar_policy": "stop_first",
+    "minimum_retail_spread_pips": 0.70,
+    "extra_slippage_pips_per_side": 0.10
+  },
+  "features": {
+    "atr_bars": 24,
+    "tick_median_bars": 24,
+    "rolling_extreme_bars": 12,
+    "ema_fast_bars": 12,
+    "ema_slow_bars": 48,
+    "return_horizons_bars": [1, 3, 6, 12, 24],
+    "clip_standardized_input": 10.0,
+    "microstructure_rolling_bars": 3,
+    "late_bar_seconds": 60
+  },
+  "tick_microstructure": {
+    "source_symbol": "EURUSD",
+    "completed_signal_bar_only": true,
+    "no_forward_fill": true
+  },
+  "model": {
+    "type": "L2_LOGISTIC_REGRESSION",
+    "penalty": "l2",
+    "C": 0.10,
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "class_weight": "balanced",
+    "random_state": 20260727
+  },
+  "development": {
+    "fit": ["2019-01-02T00:00:00Z", "2020-12-31T23:59:59Z"],
+    "threshold_selection": ["2021-01-01T00:00:00Z", "2022-12-31T23:59:59Z"],
+    "threshold_grid": [0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90],
+    "minimum_trades_each_threshold_year": 50,
+    "selection_score": "Maximum exact-match F1, then 15-minute F1, then net R",
+    "minimum_exact_precision": 0.05,
+    "minimum_exact_recall": 0.05
+  },
+  "walk_forward_windows": {
+    "validation_2023": ["2023-01-01T00:00:00Z", "2023-12-31T23:59:59Z"],
+    "validation_2024": ["2024-01-01T00:00:00Z", "2024-12-31T23:59:59Z"],
+    "pseudo_oos_2025": ["2025-01-01T00:00:00Z", "2025-12-31T23:59:59Z"],
+    "pseudo_oos_2026h1": ["2026-01-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "refit": {
+    "frequency": "calendar_year",
+    "training_rule": "Entry plus 12-hour oracle-label horizon strictly before inference window start",
+    "model_fit": "Training rows only"
+  },
+  "execution": {
+    "online_policy": "At each completed M5 timestamp choose the higher-probability side and accept only if threshold and risk limits pass",
+    "maximum_concurrent_positions": 4,
+    "maximum_trades_per_utc_day": 4,
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_open_portfolio_r": 1.0
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true
+  },
+  "final_admission": {
+    "minimum_trades_each_walk_forward_window": 50,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.10,
+    "minimum_expectancy_r": 0.0,
+    "minimum_exact_match_precision_overall": 0.10,
+    "minimum_exact_match_recall_overall": 0.05,
+    "minimum_15m_match_precision_overall": 0.15,
+    "positive_after_extra_half_pip_round_trip": true
+  }
+}
