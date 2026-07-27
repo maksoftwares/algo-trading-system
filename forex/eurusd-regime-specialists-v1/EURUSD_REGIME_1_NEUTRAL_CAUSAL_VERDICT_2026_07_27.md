@@ -10,8 +10,10 @@ Approximate the 2,615 Regime 1 Neutral hindsight-oracle trades using only inform
 
 The oracle is a comparison benchmark only in the first six campaigns. A
 separately locked seventh campaign uses historical oracle membership as a
-purged supervised label, but forbids oracle rows at inference. The oracle
-never generates a causal feature or execution decision.
+purged supervised label, but forbids oracle rows at inference. An eighth
+controlled campaign adds synchronized completed DXY and Treasury M5
+features to that model. The oracle never generates a causal feature or
+execution decision.
 
 ## Causal campaigns tested
 
@@ -24,6 +26,7 @@ never generates a causal feature or execution decision.
 | Raw EURUSD tick-microstructure classifier, fixed 4-pip risk | 2023–2026 H1 walk-forward | 103 | 35.92% | 1.439 | 0.807 | -13.08R |
 | Raw tick-microstructure classifier, volatility-scaled risk | 2023–2026 H1 walk-forward | 779 | 35.30% | 1.449 | 0.791 | -106.94R |
 | Purged direct Neutral-oracle imitation classifier | 2023–2026 H1 walk-forward | 1,246 | 31.54% | 1.420 | 0.654 | -306.20R |
+| Synchronous DXY/Treasury oracle-imitation extension | 2023–2026 H1 walk-forward | 638 | 30.56% | 1.439 | 0.633 | -166.43R |
 
 None passed all locked chronological admission gates. Consequently, none is
 an admitted strategy or eligible for demo/live use.
@@ -121,6 +124,26 @@ hour because the hindsight generator scans from midnight. The model learned
 that construction artifact but could not identify the future-winning
 direction.
 
+## Synchronous cross-asset boundary
+
+A final controlled extension added 18 exact-timestamp, completed M5
+DOLLARIDXUSD and USTBONDTRUSD features to the direct imitation model.
+Source rows required both symbols and were never forward-filled. The
+525,099-row source was hash-pinned, and 266 independently produced overlap
+rows reproduced with maximum absolute error 0.0.
+
+The extension achieved 24.76% exact precision and 36.68% same-side
+precision within 15 minutes, but only 15.15% exact recall. Economics failed
+in every window: 638 trades, 30.56% wins, 1.439 payoff, PF 0.633, and
+-166.43R. Compared with the prior imitation baseline, exact precision rose
+only 1.73 percentage points while PF fell by 0.0209.
+
+All 158 exact oracle members won +233.08R, while the 480 accepted
+nonmembers won only 7.71% and lost -399.50R. The UTC time-cycle coefficient
+remained dominant; the explicit DXY/Treasury joint-direction coefficient
+was essentially zero. Synchronized quoted cross-asset behavior did not
+provide the missing causal direction.
+
 ## Interpretation
 
 At a realized payoff near 1.44, break-even requires approximately 41% wins. The best stable causal variants remained around 33–35%. The 100%-winning Neutral oracle does not reveal a learnable process: it scans both future directions, keeps early target-first paths, and deletes every failure.
@@ -133,7 +156,9 @@ Progress now requires at least one source not adaptively exhausted here:
 
 1. a prospectively collected, untouched EURUSD tick period;
 2. event-time macroeconomic surprise data known at release;
-3. genuine executed-flow or multi-venue order-book imbalance rather than quoted Dukascopy volume;
+3. genuine executed-flow or multi-venue order-book imbalance rather than
+   quoted Dukascopy volume; synchronized DXY/Treasury quoted M5 behavior has
+   now also failed;
 4. an explicit relaxation of the requested frequency/payoff objective.
 
 Until then, Regime 1 remains `CASH`.
@@ -149,4 +174,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_tick_volatility.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_prospective.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_oracle_imitation.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_synchronous_crossasset.py
 ```

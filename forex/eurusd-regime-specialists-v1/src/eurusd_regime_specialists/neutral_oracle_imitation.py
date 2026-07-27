@@ -160,10 +160,12 @@ def fit_oracle_model(
     training: pd.DataFrame,
     inference: pd.DataFrame,
     cfg: dict[str, Any],
+    feature_columns: list[str] | None = None,
 ) -> tuple[np.ndarray, pd.DataFrame]:
+    columns = feature_columns or MODEL_FEATURE_COLUMNS
     model_cfg = cfg["model"]
     scaler = StandardScaler()
-    train_x = scaler.fit_transform(training[MODEL_FEATURE_COLUMNS])
+    train_x = scaler.fit_transform(training[columns])
     model = LogisticRegression(
         penalty=model_cfg["penalty"],
         C=float(model_cfg["C"]),
@@ -174,11 +176,11 @@ def fit_oracle_model(
     )
     model.fit(train_x, training["oracle_member"].astype(int))
     probabilities = model.predict_proba(
-        scaler.transform(inference[MODEL_FEATURE_COLUMNS])
+        scaler.transform(inference[columns])
     )[:, 1]
     coefficients = pd.DataFrame(
         {
-            "feature": MODEL_FEATURE_COLUMNS,
+            "feature": columns,
             "coefficient": model.coef_[0],
             "training_mean": scaler.mean_,
             "training_scale": scaler.scale_,

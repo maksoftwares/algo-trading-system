@@ -64,6 +64,11 @@ from eurusd_regime_specialists.neutral_oracle_imitation import (
     purged_oracle_training_rows,
     verify_lock as verify_oracle_imitation_lock,
 )
+from eurusd_regime_specialists.neutral_synchronous_crossasset import (
+    attach_crossasset_features,
+    build_crossasset_features,
+    verify_lock as verify_synchronous_crossasset_lock,
+)
 from eurusd_regime_specialists.retrospective_overfit import (
     _dense_target_candidate,
     density_bucket,
@@ -88,6 +93,7 @@ def test_lock():
     assert len(verify_tick_volatility_lock()) == 2
     assert len(verify_prospective_lock()) == 2
     assert len(verify_oracle_imitation_lock()) == 2
+    assert len(verify_synchronous_crossasset_lock()) == 3
 
 
 def test_dukascopy_bi5_url_and_decoder():
@@ -172,6 +178,72 @@ def test_oracle_imitation_matching_is_side_aware_and_one_to_one():
     assert metrics["exact_matches"] == 1
     assert metrics["tolerant_matches"] == 1
     assert len(matches) == 1
+
+
+def test_synchronous_crossasset_features_are_completed_and_causal():
+    index = pd.date_range(
+        "2026-01-01", periods=30, freq="5min", tz="UTC"
+    )
+    macro = pd.DataFrame({"timestamp_utc": index})
+    for prefix, start in (
+        ("dollaridxusd", 100.0),
+        ("ustbondtrusd", 110.0),
+    ):
+        close = pd.Series(
+            [start + value * 0.01 for value in range(30)]
+        )
+        macro[f"{prefix}_mid_close"] = close
+        macro[f"{prefix}_mid_high"] = close + 0.01
+        macro[f"{prefix}_mid_low"] = close - 0.01
+        macro[f"{prefix}_mid_tick_count"] = [10.0] * 29 + [20.0]
+        macro[f"{prefix}_ask_close"] = close + 0.02
+        macro[f"{prefix}_bid_close"] = close
+        macro[f"{prefix}_available"] = True
+    cfg = {
+        "crossasset_features": {
+            "atr_bars": 24,
+            "return_horizons_bars": [1, 3, 6, 12],
+            "tick_and_spread_baseline_bars": 24,
+            "clip_standardized_input": 10.0,
+            "columns": [
+                "aligned_dxy_m5_return_1_atr",
+                "aligned_dxy_m5_return_3_atr",
+                "aligned_dxy_m5_return_6_atr",
+                "aligned_dxy_m5_return_12_atr",
+                "aligned_bond_m5_return_1_atr",
+                "aligned_bond_m5_return_3_atr",
+                "aligned_bond_m5_return_6_atr",
+                "aligned_bond_m5_return_12_atr",
+                "aligned_dxy_m5_close_location",
+                "aligned_bond_m5_close_location",
+                "dxy_m5_range_atr",
+                "bond_m5_range_atr",
+                "dxy_m5_tick_ratio_24",
+                "bond_m5_tick_ratio_24",
+                "dxy_m5_spread_ratio_24",
+                "bond_m5_spread_ratio_24",
+                "aligned_joint_pressure_1",
+                "dxy_bond_support_agreement_1",
+            ],
+        }
+    }
+    features = build_crossasset_features(macro, cfg)
+    assert features.iloc[-1]["dxy_m5_tick_ratio_24"] == 2.0
+    signal = index[-1]
+    dataset = pd.DataFrame(
+        {
+            "signal_time_utc": [signal, signal],
+            "completion_time_utc": [
+                signal + pd.Timedelta(minutes=5),
+                signal + pd.Timedelta(minutes=5),
+            ],
+            "side": ["LONG", "SHORT"],
+        }
+    )
+    augmented = attach_crossasset_features(dataset, features, cfg)
+    long_value = augmented.iloc[0]["aligned_dxy_m5_return_1_atr"]
+    short_value = augmented.iloc[1]["aligned_dxy_m5_return_1_atr"]
+    assert long_value == -short_value
 
 
 def test_wilder_seed_and_recursion():

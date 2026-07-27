@@ -1,0 +1,96 @@
+{
+  "campaign_id": "eurusd-neutral-synchronous-crossasset-v1",
+  "frozen_at_utc": "2026-07-27T18:45:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "parent_contract": "config/frozen_neutral_oracle_imitation.json",
+  "candidate_and_execution": "Inherited unchanged from eurusd-neutral-oracle-imitation-v1",
+  "source": {
+    "provider": "Dukascopy public CFD tick archive",
+    "historical_path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+    "historical_sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+    "contract_sha256": "e368416625445fc670a3633f9d8a542ea0e328a0cb822eeb003c75a86005c496",
+    "rows": 525099,
+    "start_utc": "2019-01-02T01:00:00Z",
+    "end_utc": "2026-06-30T23:55:00Z",
+    "symbols": ["DOLLARIDXUSD", "USTBONDTRUSD"],
+    "timestamp_semantics": "M5 bar start; the row at signal_time is usable only at signal_time plus five minutes",
+    "missing_policy": "Exact timestamp and both symbols required; no forward fill",
+    "prospective_parity": {
+      "overlap_rows": 266,
+      "maximum_absolute_error": 0.0
+    },
+    "limitations": "CFD quotes and quoted tick volume, not exchange order flow"
+  },
+  "crossasset_features": {
+    "atr_bars": 24,
+    "atr_method": "WILDER",
+    "return_horizons_bars": [1, 3, 6, 12],
+    "tick_and_spread_baseline_bars": 24,
+    "clip_standardized_input": 10.0,
+    "columns": [
+      "aligned_dxy_m5_return_1_atr",
+      "aligned_dxy_m5_return_3_atr",
+      "aligned_dxy_m5_return_6_atr",
+      "aligned_dxy_m5_return_12_atr",
+      "aligned_bond_m5_return_1_atr",
+      "aligned_bond_m5_return_3_atr",
+      "aligned_bond_m5_return_6_atr",
+      "aligned_bond_m5_return_12_atr",
+      "aligned_dxy_m5_close_location",
+      "aligned_bond_m5_close_location",
+      "dxy_m5_range_atr",
+      "bond_m5_range_atr",
+      "dxy_m5_tick_ratio_24",
+      "bond_m5_tick_ratio_24",
+      "dxy_m5_spread_ratio_24",
+      "bond_m5_spread_ratio_24",
+      "aligned_joint_pressure_1",
+      "dxy_bond_support_agreement_1"
+    ]
+  },
+  "model": {
+    "type": "L2_LOGISTIC_REGRESSION",
+    "penalty": "l2",
+    "C": 0.10,
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "class_weight": "balanced",
+    "random_state": 20260727
+  },
+  "development": {
+    "fit": ["2019-01-02T00:00:00Z", "2020-12-31T23:59:59Z"],
+    "threshold_selection": ["2021-01-01T00:00:00Z", "2022-12-31T23:59:59Z"],
+    "threshold_grid": [0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90],
+    "minimum_trades_each_threshold_year": 50,
+    "selection_score": "Maximum exact-match F1, then 15-minute F1, then net R",
+    "minimum_exact_precision": 0.05,
+    "minimum_exact_recall": 0.05
+  },
+  "walk_forward_windows": {
+    "validation_2023": ["2023-01-01T00:00:00Z", "2023-12-31T23:59:59Z"],
+    "validation_2024": ["2024-01-01T00:00:00Z", "2024-12-31T23:59:59Z"],
+    "pseudo_oos_2025": ["2025-01-01T00:00:00Z", "2025-12-31T23:59:59Z"],
+    "pseudo_oos_2026h1": ["2026-01-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "final_admission": {
+    "minimum_trades_each_walk_forward_window": 50,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.10,
+    "minimum_expectancy_r": 0.0,
+    "minimum_exact_match_precision_overall": 0.10,
+    "minimum_exact_match_recall_overall": 0.05,
+    "minimum_15m_match_precision_overall": 0.15,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "baseline_comparison": {
+    "campaign": "eurusd-neutral-oracle-imitation-v1",
+    "overall_profit_factor": 0.654362794897663,
+    "overall_exact_precision": 0.2303370786516854,
+    "use": "Diagnostic only; admission still requires every absolute gate"
+  }
+}

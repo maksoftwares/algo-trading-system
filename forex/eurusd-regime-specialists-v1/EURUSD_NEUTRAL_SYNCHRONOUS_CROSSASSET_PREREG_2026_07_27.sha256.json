@@ -1,0 +1,7 @@
+{
+  "locked_before_synchronous_crossasset_outcome_pass": true,
+  "files": {
+    "EURUSD_NEUTRAL_SYNCHRONOUS_CROSSASSET_PREREG_2026_07_27.md": "b5dc550e264a57fe677db86fa48a556c46bcf667483711c6916b8e0e3e0e52ad",
+    "config/frozen_neutral_synchronous_crossasset.json": "654017680690224994d122192f684b6d2ed3553cd97867fc447213fbe02d0db4"
+  }
+}
