@@ -1,0 +1,126 @@
+{
+  "schema_version": "xauusd_v6_causal_ml_early_exit_v3",
+  "sources": {
+    "v1_config": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-veto-v1/config/v6_causal_ml_veto_v1.json",
+      "sha256": "43e3c511ae0d58e47c47f708fdeb0e2f46d3af076c7a49b994b98ad328ac82db"
+    },
+    "v1_implementation": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-veto-v1/src/veto.py",
+      "sha256": "65bfd048ee6da3420ee2a7da9765903b8f2c57edc0c57d9dbdc9283ec5dfa0c1"
+    },
+    "v1_predictions": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-veto-v1/outputs/V6_CAUSAL_ML_VETO_V1_PREDICTIONS.parquet",
+      "sha256": "446d3894863324addce4e35f9eaf2f7842708f0d6d16784b0bf22c87a94368ac"
+    },
+    "v1_accepted": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-veto-v1/outputs/V6_CAUSAL_ML_VETO_V1_ACCEPTED.parquet",
+      "sha256": "893855474742a5c909227db7682b8f647833ab316a7222325dec80a318b65a0d"
+    },
+    "v1_routing": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-veto-v1/outputs/V6_CAUSAL_ML_VETO_V1_ROUTING.parquet",
+      "sha256": "9235276fc449a5634c0df479cf5729e6ef51ad7294c1a81990f06c6fdbe97135"
+    },
+    "v1_result": {
+      "path": "xau-usd/xauusd-fast-research/v6-causal-ml-veto-v1/outputs/V6_CAUSAL_ML_VETO_V1_RESULT.json",
+      "sha256": "8222c86a488ef35bf8be71add8b369372f458b3492c4817fb259e4b50f80faf8"
+    }
+  },
+  "features": {
+    "numeric": [
+      "checkpoint_minutes",
+      "elapsed_hours",
+      "current_r",
+      "recent_15m_r",
+      "recent_30m_r",
+      "close_min_r",
+      "close_max_r",
+      "max_adverse_r",
+      "giveback_r",
+      "recovery_r",
+      "duka_flow_30m",
+      "duka_imbalance_30m",
+      "duka_activity_30m",
+      "duka_spread_per_risk_30m",
+      "duka_efficiency_30m",
+      "duka_slope",
+      "regime_changed"
+    ],
+    "derived": [
+      "direction_long"
+    ],
+    "regimes": [
+      "R0_SHOCK",
+      "R1_UPTREND",
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "R5_TRANSITION"
+    ]
+  },
+  "snapshots": {
+    "checkpoint_minutes": [30, 60, 120, 240],
+    "bar_minutes": 5,
+    "material_benefit_r": 0.25,
+    "probability_threshold": 0.70
+  },
+  "model": {
+    "type": "HistGradientBoostingClassifier",
+    "parameters": {
+      "learning_rate": 0.05,
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "max_depth": 3,
+      "min_samples_leaf": 250,
+      "l2_regularization": 2.0,
+      "early_stopping": false,
+      "random_state": 260727
+    },
+    "label": "original_stress_loss_and_early_exit_benefit_at_least_0_25r",
+    "sample_weight": "equal_total_weight_per_decision_utc_day"
+  },
+  "walk_forward": {
+    "target_years": [2022, 2023, 2024, 2025, 2026],
+    "purge_hours": 48,
+    "minimum_training_rows": 30000
+  },
+  "windows": {
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "minimum_mean_annual_target_auc": 0.60,
+    "minimum_years_auc_above_random": 3,
+    "minimum_trigger_precision": 0.60,
+    "minimum_early_exit_trade_share": 0.03,
+    "maximum_early_exit_trade_share": 0.35,
+    "minimum_managed_accepted_trades_per_window": 10,
+    "top_winners_removed": 5
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "V6_CAUSAL_ML_EARLY_EXIT_V3_CONTRACT_LOCK.json",
+    "snapshot_predictions": "V6_CAUSAL_ML_EARLY_EXIT_V3_SNAPSHOT_PREDICTIONS.parquet",
+    "managed_candidates": "V6_CAUSAL_ML_EARLY_EXIT_V3_MANAGED_CANDIDATES.parquet",
+    "accepted": "V6_CAUSAL_ML_EARLY_EXIT_V3_ACCEPTED.parquet",
+    "routing": "V6_CAUSAL_ML_EARLY_EXIT_V3_ROUTING.parquet",
+    "annual_models": "V6_CAUSAL_ML_EARLY_EXIT_V3_ANNUAL_MODELS.csv",
+    "windows": "V6_CAUSAL_ML_EARLY_EXIT_V3_WINDOWS.csv",
+    "result_json": "V6_CAUSAL_ML_EARLY_EXIT_V3_RESULT.json",
+    "result_markdown": "V6_CAUSAL_ML_EARLY_EXIT_V3_RESULT.md",
+    "manifest": "V6_CAUSAL_ML_EARLY_EXIT_V3_MANIFEST.json"
+  },
+  "research_controls": {
+    "all_history_is_development_evidence": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "v1_entry_filter_modification_authorized": false,
+    "v60_modification_authorized": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

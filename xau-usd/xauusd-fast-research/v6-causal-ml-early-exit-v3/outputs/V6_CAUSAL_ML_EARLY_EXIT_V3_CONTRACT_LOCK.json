@@ -1,0 +1,145 @@
+{
+  "config_sha256": "a7bf36cf9f275c996b880cb4f606e17a3c25e1d4e22bee9d08865010fa8f309d",
+  "contract_sha256": "ba2db7866dc19fb6aa0eecc4fa799b1c844858c53d9df07d98ae5e1756cf1e3d",
+  "feature_names": [
+    "checkpoint_minutes",
+    "elapsed_hours",
+    "current_r",
+    "recent_15m_r",
+    "recent_30m_r",
+    "close_min_r",
+    "close_max_r",
+    "max_adverse_r",
+    "giveback_r",
+    "recovery_r",
+    "duka_flow_30m",
+    "duka_imbalance_30m",
+    "duka_activity_30m",
+    "duka_spread_per_risk_30m",
+    "duka_efficiency_30m",
+    "duka_slope",
+    "regime_changed",
+    "direction_long",
+    "entry_regime_R0_SHOCK",
+    "entry_regime_R1_UPTREND",
+    "entry_regime_R2_DOWNTREND",
+    "entry_regime_R3_COMPRESSION",
+    "entry_regime_R4_CHOP",
+    "entry_regime_R5_TRANSITION",
+    "current_regime_R0_SHOCK",
+    "current_regime_R1_UPTREND",
+    "current_regime_R2_DOWNTREND",
+    "current_regime_R3_COMPRESSION",
+    "current_regime_R4_CHOP",
+    "current_regime_R5_TRANSITION"
+  ],
+  "gates": {
+    "maximum_early_exit_trade_share": 0.35,
+    "minimum_early_exit_trade_share": 0.03,
+    "minimum_managed_accepted_trades_per_window": 10,
+    "minimum_mean_annual_target_auc": 0.6,
+    "minimum_trigger_precision": 0.6,
+    "minimum_years_auc_above_random": 3,
+    "top_winners_removed": 5
+  },
+  "implementation_sha256": "2c879928ff77c41b9204111cffc472b110865f111ca8e434d0107dde5af46434",
+  "model": {
+    "label": "original_stress_loss_and_early_exit_benefit_at_least_0_25r",
+    "parameters": {
+      "early_stopping": false,
+      "l2_regularization": 2.0,
+      "learning_rate": 0.05,
+      "max_depth": 3,
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 250,
+      "random_state": 260727
+    },
+    "sample_weight": "equal_total_weight_per_decision_utc_day",
+    "type": "HistGradientBoostingClassifier"
+  },
+  "research_controls": {
+    "all_history_is_development_evidence": true,
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "python_predictions_authorized": false,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "v1_entry_filter_modification_authorized": false,
+    "v60_modification_authorized": false
+  },
+  "runner_sha256": "95648d6f9961c7d8828cf2db6f7befb6b3478f6703672e3960e133c512ca0542",
+  "schema_version": "xauusd_v6_causal_ml_early_exit_v3_contract",
+  "sklearn_version": "1.9.0",
+  "snapshots": {
+    "bar_minutes": 5,
+    "checkpoint_minutes": [
+      30,
+      60,
+      120,
+      240
+    ],
+    "material_benefit_r": 0.25,
+    "probability_threshold": 0.7
+  },
+  "source_hashes": {
+    "v1_accepted": "893855474742a5c909227db7682b8f647833ab316a7222325dec80a318b65a0d",
+    "v1_config": "43e3c511ae0d58e47c47f708fdeb0e2f46d3af076c7a49b994b98ad328ac82db",
+    "v1_implementation": "65bfd048ee6da3420ee2a7da9765903b8f2c57edc0c57d9dbdc9283ec5dfa0c1",
+    "v1_predictions": "446d3894863324addce4e35f9eaf2f7842708f0d6d16784b0bf22c87a94368ac",
+    "v1_result": "8222c86a488ef35bf8be71add8b369372f458b3492c4817fb259e4b50f80faf8",
+    "v1_routing": "9235276fc449a5634c0df479cf5729e6ef51ad7294c1a81990f06c6fdbe97135"
+  },
+  "transitive_v6_source_hashes": {
+    "canonical_v60.audit_module": "379b870d54a832bc76141651d3467baac3ca24a3249c2fb9d1b89943c753b809",
+    "canonical_v60.config": "358f12f5a4cf272c1e2ef7ea33c7d690732bc97b1aa246bd3d98b642fa3a97bc",
+    "canonical_v60.ledger": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf",
+    "canonical_v60.result": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095",
+    "external_data.capital_m5": "ea6ce9dd82cfdc21ca3c4852305162ad03253af544a5d1ea21c54abe33af8ea3",
+    "external_data.dukascopy_m5": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "external_data.regime_ledger": "76896daf0171567059133bb310bdc0ad1e6f5a888b46929dae6aeffe7200eaea",
+    "external_package.engine": "ed62ae999c4b14c45b4a60b543e14092e4b46207a26ad4bb58026fc893ebb222",
+    "external_package.frozen_model": "b951a52eb169554ef4b8062143c90ad7a8c99162716603afafe1a09db57c8405",
+    "external_package.specialist": "14a845757aa1b4dae083b979751acee524419636dc69732f19a89bbfe03c4048",
+    "external_package.v6_fix": "7beaf19ecf70d378ccf10f45ee71aaea472ce6b8931e6235cd6ec43cb1aa4e53",
+    "external_package.v6_walkforward": "b83af3b76ec3d29b6896dc0ea7f55f1b4bd88935555f1e2f307a89e2d0bd7fe3"
+  },
+  "v1_source_hashes": {
+    "v60_audit": "379b870d54a832bc76141651d3467baac3ca24a3249c2fb9d1b89943c753b809",
+    "v60_config": "358f12f5a4cf272c1e2ef7ea33c7d690732bc97b1aa246bd3d98b642fa3a97bc",
+    "v60_ledger": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf",
+    "v60_result": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095",
+    "v6_accepted": "c5054178c333578195ea6be256881315d37e94f9694c79a9faaf97252e2f2d2f",
+    "v6_candidates": "1e222c8a2f09b911c378a4866d8489c21a08c31e959e95981cde6d6b04a28a08",
+    "v6_config": "e08ea01273622d712271cc2317dd444718b3c8091f2ec92ee3185cf791de1368",
+    "v6_implementation": "581d312d6e28cb56b8e77e20d35d7d73ca96498d613d0c19cf45e21f1ba40268",
+    "v6_result": "dcea12708d5f9411ea6733c3e0092d1db60719e78ab4c89cce7e36056fb8685a"
+  },
+  "walk_forward": {
+    "minimum_training_rows": 30000,
+    "purge_hours": 48,
+    "target_years": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ]
+  },
+  "windows": {
+    "confirmation": [
+      "2024-07-01T00:00:00Z",
+      "2025-07-01T00:00:00Z"
+    ],
+    "development_2": [
+      "2022-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "final": [
+      "2025-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
