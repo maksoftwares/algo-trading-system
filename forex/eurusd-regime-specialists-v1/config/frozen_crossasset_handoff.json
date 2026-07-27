@@ -1,0 +1,73 @@
+{
+  "campaign_id": "eurusd-crossasset-session-handoff-v1",
+  "frozen_at_utc": "2026-07-27T00:00:00Z",
+  "research_only": true,
+  "information_status": "ADAPTIVE_DEVELOPMENT_ALL_HISTORY_PREVIOUSLY_INSPECTED",
+  "data_and_classifier_contract": "config/frozen_two_clock_ensemble.json",
+  "windows": {
+    "historical_extension": ["2019-01-02T00:00:00Z", "2021-12-31T23:59:59Z"],
+    "inherited_evidence": ["2022-01-01T00:00:00Z", "2024-06-30T23:59:59Z"],
+    "adaptive_exam": ["2024-07-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "recent_six_months": ["2026-01-01T00:00:00Z", "2026-06-30T23:59:59Z"],
+  "signal": {
+    "timeframe_minutes": 15,
+    "atr_period": 14,
+    "breakout_buffer_atr": 0.05,
+    "dxy_impulse_lookback_h1": 6,
+    "one_signal_per_session_date": true,
+    "require_nonshock_usd_direction": true
+  },
+  "specialists": {
+    "X1_LONDON_CROSSASSET_HANDOFF": {
+      "reference_hours_utc": [0, 1, 2, 3, 4, 5],
+      "decision_hours_utc": [6, 7, 8, 9]
+    },
+    "X2_NEWYORK_CROSSASSET_HANDOFF": {
+      "reference_hours_utc": [6, 7, 8, 9, 10, 11],
+      "decision_hours_utc": [12, 13, 14, 15]
+    }
+  },
+  "direction": {
+    "long": "EURUSD closes above reference high while regime is USD_DOWN and DXY closes below its prior six-H1 low",
+    "short": "EURUSD closes below reference low while regime is USD_UP and DXY closes above its prior six-H1 high"
+  },
+  "risk": {
+    "stop_atr_multiple": 1.25,
+    "stop_floor_pips": 4.0,
+    "stop_ceiling_pips": 70.0,
+    "target_r": 1.50,
+    "maximum_hold_hours": 12
+  },
+  "execution": {
+    "minimum_retail_spread_pips": 0.70,
+    "extra_slippage_pips_per_side": 0.10,
+    "same_bar_policy": "stop_first",
+    "one_open_position": true
+  },
+  "census_gate": {
+    "minimum_signals_per_weekday": 0.15,
+    "minimum_weekday_coverage": 0.10,
+    "minimum_signals_each_window": 75
+  },
+  "specialist_admission": {
+    "minimum_trades_each_window": 40,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.30,
+    "minimum_expectancy_r": 0.05,
+    "maximum_drawdown_r_overall": 15.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "portfolio_admission": {
+    "priority": [
+      "X1_LONDON_CROSSASSET_HANDOFF",
+      "X2_NEWYORK_CROSSASSET_HANDOFF"
+    ],
+    "minimum_profit_factor": 1.30,
+    "require_positive_each_window": true
+  }
+}

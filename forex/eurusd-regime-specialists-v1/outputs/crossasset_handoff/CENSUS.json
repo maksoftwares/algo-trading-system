@@ -1,0 +1,26 @@
+{
+  "lock": {
+    "EURUSD_CROSSASSET_HANDOFF_PREREG_2026_07_27.md": "aa4aaee471b8f6716c45d9720d746bbde39241f6bac8f7744852f600024a578e",
+    "config/frozen_crossasset_handoff.json": "1f2db76628e72379282ac6c33fdefddcb4825172e8b2a380bf99d9bd6b5c2dd5"
+  },
+  "census": {
+    "weekday_count": 1954,
+    "signals": 497,
+    "signals_per_weekday": 0.25435005117707266,
+    "weekday_coverage": 0.22159672466734903,
+    "by_specialist": {
+      "X1_LONDON_CROSSASSET_HANDOFF": 306,
+      "X2_NEWYORK_CROSSASSET_HANDOFF": 191
+    },
+    "by_side": {
+      "LONG": 219,
+      "SHORT": 278
+    },
+    "by_window": {
+      "historical_extension": 158,
+      "inherited_evidence": 201,
+      "adaptive_exam": 138
+    },
+    "passed": true
+  }
+}
