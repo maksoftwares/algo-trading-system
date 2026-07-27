@@ -1,0 +1,42 @@
+{
+  "campaign_id": "eurusd-asymmetric-payoff-v1",
+  "frozen_at_utc": "2026-07-27T00:00:00Z",
+  "research_only": true,
+  "information_status": "ADAPTIVE_DEVELOPMENT_ALL_HISTORY_PREVIOUSLY_INSPECTED",
+  "entry_contract": "config/frozen_two_clock_ensemble.json",
+  "windows": {
+    "historical_extension": ["2019-01-02T00:00:00Z", "2021-12-31T23:59:59Z"],
+    "inherited_evidence": ["2022-01-01T00:00:00Z", "2024-06-30T23:59:59Z"],
+    "adaptive_exam": ["2024-07-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "recent_six_months": ["2026-01-01T00:00:00Z", "2026-06-30T23:59:59Z"],
+  "exit": {
+    "target_r": 1.50,
+    "maximum_hold_hours": 12,
+    "time_exit": "last executable M5 bid close at or before deadline",
+    "same_bar_policy": "stop_first",
+    "extra_slippage_pips_per_side": 0.10,
+    "minimum_retail_spread_pips": 0.70
+  },
+  "specialist_admission": {
+    "minimum_trades_each_window": 75,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.30,
+    "minimum_expectancy_r": 0.05,
+    "maximum_drawdown_r_overall": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "portfolio_admission": {
+    "minimum_actual_trades_per_active_day": 1.0,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.30,
+    "require_positive_each_window": true
+  }
+}

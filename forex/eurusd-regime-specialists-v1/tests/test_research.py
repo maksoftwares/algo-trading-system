@@ -18,11 +18,17 @@ from eurusd_regime_specialists.research import (
     walk_long_exit,
 )
 from eurusd_regime_specialists.ensemble import verify_ensemble_lock
+from eurusd_regime_specialists.asymmetric import (
+    payoff_metrics,
+    verify_asymmetric_lock,
+    walk_timed_long_exit,
+)
 
 
 def test_lock():
     assert len(verify_lock()) == 2
     assert len(verify_ensemble_lock()) == 2
+    assert len(verify_asymmetric_lock()) == 2
 
 
 def test_wilder_seed_and_recursion():
@@ -41,6 +47,31 @@ def test_same_bar_is_stop_first():
     _, price, reason = walk_long_exit(frame, 0, 0.9, 1.1, 0.01)
     assert reason == "STOP"
     assert price == 0.89
+
+
+def test_timed_exit_uses_last_bid_close():
+    index = pd.date_range("2026-01-01", periods=3, freq="5min", tz="UTC")
+    frame = pd.DataFrame(
+        {
+            "bid_open": [1.0, 1.01, 1.02],
+            "bid_low": [0.99, 1.0, 1.01],
+            "bid_high": [1.01, 1.02, 1.03],
+            "bid_close": [1.005, 1.015, 1.025],
+        },
+        index=index,
+    )
+    _, price, reason = walk_timed_long_exit(
+        frame, 0, index[-1], 0.8, 1.2, 0.001
+    )
+    assert reason == "TIME_12H"
+    assert price == 1.024
+
+
+def test_realized_payoff_ratio_is_average_win_over_average_loss():
+    result = payoff_metrics(pd.DataFrame({"r": [1.5, 1.5, -1.0, -1.0]}))
+    assert result["win_rate"] == 0.5
+    assert result["realized_payoff_ratio"] == 1.5
+    assert result["profit_factor"] == 1.5
 
 
 def test_drawdown_includes_zero_origin():
