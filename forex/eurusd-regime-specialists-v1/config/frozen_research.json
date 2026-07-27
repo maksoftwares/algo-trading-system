@@ -1,0 +1,94 @@
+{
+  "campaign_id": "eurusd-regime-specialists-v1",
+  "frozen_at_utc": "2026-07-27T00:00:00Z",
+  "research_only": true,
+  "data": {
+    "fx_bar_root": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars",
+    "dukascopy_raw_root": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/raw",
+    "start_utc": "2019-01-02T00:00:00Z",
+    "end_utc": "2026-06-30T23:59:59Z"
+  },
+  "windows": {
+    "historical_extension": ["2019-01-02T00:00:00Z", "2021-12-31T23:59:59Z"],
+    "inherited_evidence": ["2022-01-01T00:00:00Z", "2024-06-30T23:59:59Z"],
+    "adaptive_exam": ["2024-07-01T00:00:00Z", "2026-06-30T23:59:59Z"]
+  },
+  "recent_six_months": ["2026-01-01T00:00:00Z", "2026-06-30T23:59:59Z"],
+  "quarantine": [
+    {
+      "start_utc": "2024-10-09T23:00:00Z",
+      "end_utc": "2024-10-10T01:00:00Z",
+      "symbols": ["EURUSD"],
+      "reason": "Inherited known suspect interval; excluded before outcomes."
+    }
+  ],
+  "classifier": {
+    "ema_fast_h1": 24,
+    "ema_slow_h1": 120,
+    "atr_h1": 24,
+    "trend_separation_atr": 0.25,
+    "established_bars": 3,
+    "shock_range_quantile": 0.95,
+    "shock_lookback_h1": 480,
+    "compression_hours": 12,
+    "compression_quantile": 0.60,
+    "compression_lookback_h1": 480
+  },
+  "seed": {
+    "symbol": "EURUSD",
+    "signal_timeframe_minutes": 30,
+    "direction": "LONG",
+    "bands_period": 20,
+    "bands_deviation": 2.0,
+    "rsi_period": 14,
+    "rsi_oversold": 35.0,
+    "atr_period": 14,
+    "stop_atr_multiple": 1.40,
+    "recent_low_bars": 6,
+    "stop_floor_pips": 3.0,
+    "stop_ceiling_pips": 70.0,
+    "target_r": 0.80,
+    "max_trades_per_utc_day": 24
+  },
+  "ownership_precedence": [
+    "CASH_SHOCK",
+    "S1_JOINT_COMPRESSION_FADE",
+    "S2_SUPPORTIVE_ESTABLISHED",
+    "S3_SUPPORTIVE_TRANSITION",
+    "S4_NEUTRAL_AUCTION",
+    "S5_OPPOSING_CAPITULATION"
+  ],
+  "census_gate": {
+    "minimum_owned_raw_signals_per_active_day": 1.50,
+    "minimum_active_day_coverage": 0.60,
+    "minimum_owned_raw_signals_each_window": 350
+  },
+  "execution": {
+    "signal_price": "Dukascopy bid M30 OHLC",
+    "entry": "first M5 open after completed M30 signal",
+    "exit": "first stop or target using executable bid; stop first on ambiguous M5 bars",
+    "minimum_retail_spread_pips": 0.70,
+    "extra_slippage_pips_per_side": 0.10,
+    "one_open_position": true
+  },
+  "admission": {
+    "minimum_trades_each_window": 75,
+    "minimum_profit_factor_each_window": 1.10,
+    "minimum_expectancy_r_each_window": 0.01,
+    "maximum_drawdown_r_overall": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "portfolio": {
+    "priority": [
+      "S2_SUPPORTIVE_ESTABLISHED",
+      "S3_SUPPORTIVE_TRANSITION",
+      "S1_JOINT_COMPRESSION_FADE",
+      "S4_NEUTRAL_AUCTION",
+      "S5_OPPOSING_CAPITULATION"
+    ],
+    "minimum_profit_factor": 1.15,
+    "minimum_actual_trades_per_active_day": 1.0,
+    "require_positive_each_window": true
+  }
+}

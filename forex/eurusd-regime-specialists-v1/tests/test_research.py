@@ -1,0 +1,101 @@
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+import pandas as pd
+
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from eurusd_regime_specialists.research import (
+    active_weekday_fx_days,
+    generate_raw_signals,
+    metric_block,
+    verify_lock,
+    wilder_average,
+    walk_long_exit,
+)
+from eurusd_regime_specialists.ensemble import verify_ensemble_lock
+
+
+def test_lock():
+    assert len(verify_lock()) == 2
+    assert len(verify_ensemble_lock()) == 2
+
+
+def test_wilder_seed_and_recursion():
+    values = pd.Series([float("nan"), 1.0, 2.0, 3.0, 4.0])
+    actual = wilder_average(values, 3)
+    assert actual.iloc[3] == 2.0
+    assert actual.iloc[4] == (2.0 * 2.0 + 4.0) / 3.0
+
+
+def test_same_bar_is_stop_first():
+    index = pd.date_range("2026-01-01", periods=1, freq="5min", tz="UTC")
+    frame = pd.DataFrame(
+        {"bid_open": [1.0], "bid_low": [0.8], "bid_high": [1.2], "bid_close": [1.0]},
+        index=index,
+    )
+    _, price, reason = walk_long_exit(frame, 0, 0.9, 1.1, 0.01)
+    assert reason == "STOP"
+    assert price == 0.89
+
+
+def test_drawdown_includes_zero_origin():
+    assert metric_block(pd.DataFrame({"r": [-1.0, 0.2]}))["max_drawdown_r"] == 1.0
+
+
+def test_active_day_denominator_excludes_sunday_fragment():
+    index = pd.to_datetime(
+        ["2026-01-04T22:00:00Z", "2026-01-05T00:00:00Z", "2026-01-06T00:00:00Z"]
+    )
+    frame = pd.DataFrame({"x": [1, 1, 1]}, index=index)
+    assert active_weekday_fx_days(
+        frame, pd.Timestamp("2026-01-04T00:00:00Z"), pd.Timestamp("2026-01-06T23:59:59Z")
+    ) == 2
+
+
+def test_signal_uses_latest_completed_state_across_context_gap():
+    idx = pd.date_range("2026-01-01", periods=50, freq="30min", tz="UTC")
+    m5_idx = pd.date_range("2026-01-01", periods=300, freq="5min", tz="UTC")
+    price = [1.1] * 294 + [1.08] * 6
+    m5 = pd.DataFrame(
+        {
+            "timestamp_ms": m5_idx.astype("int64") // 1_000_000,
+            "bid_open": price,
+            "bid_high": price,
+            "bid_low": price,
+            "bid_close": price,
+            "ask_open": [x + 0.0001 for x in price],
+            "ask_high": [x + 0.0001 for x in price],
+            "ask_low": [x + 0.0001 for x in price],
+            "ask_close": [x + 0.0001 for x in price],
+            "tick_count": 1,
+        },
+        index=m5_idx,
+    )
+    state = pd.DataFrame(
+        {
+            "direction": ["NEUTRAL"],
+            "phase": ["UNRESOLVED"],
+            "shock": [False],
+            "DXY_compressed": [False],
+            "EURUSD_compressed": [False],
+        },
+        index=pd.DatetimeIndex([idx[-10]], name="timestamp_utc"),
+    )
+    cfg = {
+        "seed": {
+            "bands_period": 20,
+            "bands_deviation": 2.0,
+            "rsi_period": 14,
+            "rsi_oversold": 35.0,
+            "atr_period": 14,
+            "recent_low_bars": 6,
+        }
+    }
+    signals = generate_raw_signals(m5, state, cfg)
+    assert not signals.empty
+    assert signals.iloc[-1]["owner"] == "S4_NEUTRAL_AUCTION"

@@ -1,0 +1,29 @@
+{
+  "lock": {
+    "EURUSD_TWO_CLOCK_ENSEMBLE_PREREG_2026_07_27.md": "00013a72a925941ac204c07b7bc794a3408a739ae0aed2d81030e75c62903de7",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+  },
+  "census": {
+    "active_days": 1954,
+    "all_seed_signals_after_same_timestamp_dedup": 10666,
+    "owned_raw_signals": 6035,
+    "owned_signals_per_active_day": 3.0885363357215967,
+    "active_day_coverage": 0.59007164790174,
+    "by_owner": {
+      "S1_COMPRESSION_REVERSION": 2839,
+      "S2_SUPPORTIVE_PULLBACK": 701,
+      "S3_NEUTRAL_AUCTION": 2108,
+      "S4_OPPOSING_CAPITULATION": 387
+    },
+    "by_seed": {
+      "FAST_M15_RSI_EXTREME": 3479,
+      "DEEP_M30_RSI_BB": 2556
+    },
+    "by_window": {
+      "historical_extension": 2438,
+      "inherited_evidence": 2129,
+      "adaptive_exam": 1468
+    },
+    "passed": true
+  }
+}

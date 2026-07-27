@@ -1,0 +1,405 @@
+{
+  "specialists": {
+    "S1_COMPRESSION_REVERSION": {
+      "admitted": false,
+      "status": "REJECTED_STANDALONE",
+      "overall": {
+        "trades": 1581,
+        "net_r": -163.28044579718585,
+        "profit_factor": 0.7941041771381371,
+        "expectancy_r": -0.10327668930878295,
+        "win_rate": 0.5041113219481341,
+        "max_drawdown_r": 166.90527055281953
+      },
+      "windows": {
+        "historical_extension": {
+          "trades": 613,
+          "net_r": -98.74995835999465,
+          "profit_factor": 0.6981678093243988,
+          "expectancy_r": -0.16109291738987708,
+          "win_rate": 0.4730831973898858,
+          "max_drawdown_r": 101.35320036436104
+        },
+        "inherited_evidence": {
+          "trades": 565,
+          "net_r": -43.329169278148676,
+          "profit_factor": 0.8423207630010585,
+          "expectancy_r": -0.07668879518256402,
+          "win_rate": 0.5185840707964602,
+          "max_drawdown_r": 48.9334399031632
+        },
+        "adaptive_exam": {
+          "trades": 403,
+          "net_r": -21.201318159042536,
+          "profit_factor": 0.8890349567776031,
+          "expectancy_r": -0.052608729923182475,
+          "win_rate": 0.5310173697270472,
+          "max_drawdown_r": 26.94672736103933
+        }
+      },
+      "top_5_percent_winners_removed": {
+        "trades": 1501,
+        "net_r": -227.79655674513077,
+        "profit_factor": 0.7127496849537257,
+        "expectancy_r": -0.15176319569962077,
+        "win_rate": 0.4776815456362425,
+        "max_drawdown_r": 230.6265097058924
+      },
+      "extra_half_pip_round_trip": {
+        "trades": 1581,
+        "net_r": -252.24146327949347,
+        "profit_factor": 0.6990488039955688,
+        "expectancy_r": -0.1595455175708371,
+        "win_rate": 0.5041113219481341,
+        "max_drawdown_r": 253.99041181331015
+      }
+    },
+    "S2_SUPPORTIVE_PULLBACK": {
+      "admitted": false,
+      "status": "REJECTED_STANDALONE",
+      "overall": {
+        "trades": 282,
+        "net_r": -19.764751511876867,
+        "profit_factor": 0.8564505746566627,
+        "expectancy_r": -0.0700877713187123,
+        "win_rate": 0.524822695035461,
+        "max_drawdown_r": 25.214751440218805
+      },
+      "windows": {
+        "historical_extension": {
+          "trades": 107,
+          "net_r": -6.377309422460982,
+          "profit_factor": 0.8761759935059,
+          "expectancy_r": -0.05960102263982226,
+          "win_rate": 0.5233644859813084,
+          "max_drawdown_r": 9.676341874563564
+        },
+        "inherited_evidence": {
+          "trades": 103,
+          "net_r": -13.286337797922545,
+          "profit_factor": 0.7523300980002131,
+          "expectancy_r": -0.12899357085361696,
+          "win_rate": 0.49514563106796117,
+          "max_drawdown_r": 13.903575436865454
+        },
+        "adaptive_exam": {
+          "trades": 72,
+          "net_r": -0.10110429149333733,
+          "profit_factor": 0.9968927010153948,
+          "expectancy_r": -0.0014042262707407963,
+          "win_rate": 0.5694444444444444,
+          "max_drawdown_r": 14.285074088008372
+        }
+      },
+      "top_5_percent_winners_removed": {
+        "trades": 267,
+        "net_r": -32.57607552410711,
+        "profit_factor": 0.7634032019771815,
+        "expectancy_r": -0.12200777349852851,
+        "win_rate": 0.49812734082397003,
+        "max_drawdown_r": 38.02607545244903
+      },
+      "extra_half_pip_round_trip": {
+        "trades": 282,
+        "net_r": -32.7379435624365,
+        "profit_factor": 0.7724346425791047,
+        "expectancy_r": -0.11609199844835638,
+        "win_rate": 0.524822695035461,
+        "max_drawdown_r": 37.437943132492
+      }
+    },
+    "S3_NEUTRAL_AUCTION": {
+      "admitted": false,
+      "status": "REJECTED_STANDALONE",
+      "overall": {
+        "trades": 798,
+        "net_r": 5.954676852792618,
+        "profit_factor": 1.016905214972565,
+        "expectancy_r": 0.007462001068662428,
+        "win_rate": 0.5651629072681704,
+        "max_drawdown_r": 27.775260236133317
+      },
+      "windows": {
+        "historical_extension": {
+          "trades": 372,
+          "net_r": 7.310034909475062,
+          "profit_factor": 1.0454509874156286,
+          "expectancy_r": 0.0196506314770835,
+          "win_rate": 0.5725806451612904,
+          "max_drawdown_r": 15.389797898806473
+        },
+        "inherited_evidence": {
+          "trades": 240,
+          "net_r": -13.482906918996324,
+          "profit_factor": 0.8824283033589585,
+          "expectancy_r": -0.05617877882915135,
+          "win_rate": 0.5333333333333333,
+          "max_drawdown_r": 18.58080367449614
+        },
+        "adaptive_exam": {
+          "trades": 186,
+          "net_r": 12.127548862313875,
+          "profit_factor": 1.158059955939979,
+          "expectancy_r": 0.06520187560383804,
+          "win_rate": 0.5913978494623656,
+          "max_drawdown_r": 16.403683521360296
+        }
+      },
+      "top_5_percent_winners_removed": {
+        "trades": 758,
+        "net_r": -27.76635822456417,
+        "profit_factor": 0.9211718341069396,
+        "expectancy_r": -0.03663107945193162,
+        "win_rate": 0.5422163588390502,
+        "max_drawdown_r": 40.14719930959156
+      },
+      "extra_half_pip_round_trip": {
+        "trades": 798,
+        "net_r": -34.47490069946676,
+        "profit_factor": 0.906866039184584,
+        "expectancy_r": -0.04320162994920646,
+        "win_rate": 0.5651629072681704,
+        "max_drawdown_r": 45.3606997050902
+      }
+    },
+    "S4_OPPOSING_CAPITULATION": {
+      "admitted": false,
+      "status": "REJECTED_STANDALONE",
+      "overall": {
+        "trades": 268,
+        "net_r": -5.741126111798257,
+        "profit_factor": 0.952973145230106,
+        "expectancy_r": -0.021422112357456183,
+        "win_rate": 0.5485074626865671,
+        "max_drawdown_r": 22.692399285449255
+      },
+      "windows": {
+        "historical_extension": {
+          "trades": 100,
+          "net_r": -12.767793308387681,
+          "profit_factor": 0.7521783563775541,
+          "expectancy_r": -0.12767793308387682,
+          "win_rate": 0.49,
+          "max_drawdown_r": 12.767793308387681
+        },
+        "inherited_evidence": {
+          "trades": 106,
+          "net_r": -2.435966417608263,
+          "profit_factor": 0.949643668644759,
+          "expectancy_r": -0.022980815260455312,
+          "win_rate": 0.5471698113207547,
+          "max_drawdown_r": 9.924605977061576
+        },
+        "adaptive_exam": {
+          "trades": 62,
+          "net_r": 9.462633614197685,
+          "profit_factor": 1.4264907763512717,
+          "expectancy_r": 0.15262312280964008,
+          "win_rate": 0.6451612903225806,
+          "max_drawdown_r": 4.034538222307757
+        }
+      },
+      "top_5_percent_winners_removed": {
+        "trades": 254,
+        "net_r": -16.886484404841653,
+        "profit_factor": 0.8616790096199731,
+        "expectancy_r": -0.06648222206630572,
+        "win_rate": 0.5236220472440944,
+        "max_drawdown_r": 29.49853150596716
+      },
+      "extra_half_pip_round_trip": {
+        "trades": 268,
+        "net_r": -17.446756670710855,
+        "profit_factor": 0.8631532337044461,
+        "expectancy_r": -0.06509983832354796,
+        "win_rate": 0.5485074626865671,
+        "max_drawdown_r": 28.154395712653812
+      }
+    }
+  },
+  "specialist_recent_six_months": {
+    "S1_COMPRESSION_REVERSION": {
+      "trades": 119,
+      "net_r": -14.073712478128188,
+      "profit_factor": 0.7679957969024364,
+      "expectancy_r": -0.11826649141284191,
+      "win_rate": 0.4957983193277311,
+      "max_drawdown_r": 16.918559518900935,
+      "fixed_0p01_lot_usd": -12.724050364250505
+    },
+    "S2_SUPPORTIVE_PULLBACK": {
+      "trades": 15,
+      "net_r": -3.7761959506588876,
+      "profit_factor": 0.5942693363056119,
+      "expectancy_r": -0.2517463967105925,
+      "win_rate": 0.4666666666666667,
+      "max_drawdown_r": 5.927163426898237,
+      "fixed_0p01_lot_usd": -5.8450000820948755
+    },
+    "S3_NEUTRAL_AUCTION": {
+      "trades": 53,
+      "net_r": 9.52997541697652,
+      "profit_factor": 1.4968815926993018,
+      "expectancy_r": 0.17981085692408527,
+      "win_rate": 0.6415094339622641,
+      "max_drawdown_r": 3.9078850868786286,
+      "fixed_0p01_lot_usd": 11.514255885936686
+    },
+    "S4_OPPOSING_CAPITULATION": {
+      "trades": 23,
+      "net_r": 9.184182915929739,
+      "profit_factor": 2.817406044775585,
+      "expectancy_r": 0.3993123006925973,
+      "win_rate": 0.782608695652174,
+      "max_drawdown_r": 2.0217452170416976,
+      "fixed_0p01_lot_usd": 12.12831207514875
+    }
+  },
+  "admitted_specialists": [],
+  "portfolio": {
+    "admitted": false,
+    "status": "REJECTED",
+    "overall": {
+      "trades": 0,
+      "net_r": 0.0,
+      "profit_factor": 0.0,
+      "expectancy_r": 0.0,
+      "win_rate": 0.0,
+      "max_drawdown_r": 0.0
+    },
+    "windows": {
+      "historical_extension": {
+        "trades": 0,
+        "net_r": 0.0,
+        "profit_factor": 0.0,
+        "expectancy_r": 0.0,
+        "win_rate": 0.0,
+        "max_drawdown_r": 0.0
+      },
+      "inherited_evidence": {
+        "trades": 0,
+        "net_r": 0.0,
+        "profit_factor": 0.0,
+        "expectancy_r": 0.0,
+        "win_rate": 0.0,
+        "max_drawdown_r": 0.0
+      },
+      "adaptive_exam": {
+        "trades": 0,
+        "net_r": 0.0,
+        "profit_factor": 0.0,
+        "expectancy_r": 0.0,
+        "win_rate": 0.0,
+        "max_drawdown_r": 0.0
+      }
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 0,
+      "net_r": 0.0,
+      "profit_factor": 0.0,
+      "expectancy_r": 0.0,
+      "win_rate": 0.0,
+      "max_drawdown_r": 0.0
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 0,
+      "net_r": 0.0,
+      "profit_factor": 0.0,
+      "expectancy_r": 0.0,
+      "win_rate": 0.0,
+      "max_drawdown_r": 0.0
+    },
+    "actual_trades_per_active_day": 0.0,
+    "fixed_0p01_lot_usd": 0.0,
+    "portfolio_gate_passed": false
+  },
+  "recent_six_months": {
+    "trades": 0,
+    "net_r": 0.0,
+    "profit_factor": 0.0,
+    "expectancy_r": 0.0,
+    "win_rate": 0.0,
+    "max_drawdown_r": 0.0,
+    "fixed_0p01_lot_usd": 0.0,
+    "trades_per_active_day": 0.0,
+    "monthly": {}
+  },
+  "all_owner_diagnostic": {
+    "overall": {
+      "trades": 2776,
+      "net_r": -167.30341658360223,
+      "profit_factor": 0.8740058906282826,
+      "expectancy_r": -0.0602678013629691,
+      "win_rate": 0.5277377521613833,
+      "max_drawdown_r": 182.64047199634362
+    },
+    "fixed_0p01_lot_usd": -131.2305616039814,
+    "recent_six_months": {
+      "trades": 197,
+      "net_r": -0.41096085616717115,
+      "profit_factor": 0.9953907331287395,
+      "expectancy_r": -0.002086095716584625,
+      "win_rate": 0.5583756345177665,
+      "max_drawdown_r": 13.813482268910608,
+      "fixed_0p01_lot_usd": 4.726921698918751,
+      "trades_per_active_day": 1.5271317829457365,
+      "monthly": {
+        "2026-01": {
+          "trades": 27,
+          "net_r": 5.13302479544386,
+          "profit_factor": 1.563287212338519,
+          "expectancy_r": 0.1901120294608837,
+          "win_rate": 0.6666666666666666,
+          "max_drawdown_r": 3.0556893707969355,
+          "fixed_0p01_lot_usd": 11.75301945762297
+        },
+        "2026-02": {
+          "trades": 25,
+          "net_r": -3.6462832391635613,
+          "profit_factor": 0.7220790902588522,
+          "expectancy_r": -0.14585132956654245,
+          "win_rate": 0.48,
+          "max_drawdown_r": 8.963013286201635,
+          "fixed_0p01_lot_usd": -6.754663669472638
+        },
+        "2026-03": {
+          "trades": 40,
+          "net_r": -2.5603568158767853,
+          "profit_factor": 0.8664793636487719,
+          "expectancy_r": -0.06400892039691963,
+          "win_rate": 0.525,
+          "max_drawdown_r": 10.174265766774084,
+          "fixed_0p01_lot_usd": -2.3930001387975075
+        },
+        "2026-04": {
+          "trades": 31,
+          "net_r": -5.555547678462433,
+          "profit_factor": 0.6805677343309563,
+          "expectancy_r": -0.17921121543427201,
+          "win_rate": 0.4838709677419355,
+          "max_drawdown_r": 7.032147254485264,
+          "fixed_0p01_lot_usd": -8.162993291831455
+        },
+        "2026-05": {
+          "trades": 37,
+          "net_r": 5.831965173571536,
+          "profit_factor": 1.411481653073133,
+          "expectancy_r": 0.15762068036679827,
+          "win_rate": 0.6216216216216216,
+          "max_drawdown_r": 7.774725833613356,
+          "fixed_0p01_lot_usd": 7.806423707689136
+        },
+        "2026-06": {
+          "trades": 37,
+          "net_r": 0.38623690832021007,
+          "profit_factor": 1.023861744069823,
+          "expectancy_r": 0.010438835360005677,
+          "win_rate": 0.5675675675675675,
+          "max_drawdown_r": 2.993976407998133,
+          "fixed_0p01_lot_usd": 2.478135633708245
+        }
+      }
+    },
+    "status": "DIAGNOSTIC_ONLY_NOT_ADMITTED"
+  }
+}

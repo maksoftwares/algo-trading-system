@@ -1,0 +1,26 @@
+{
+  "lock": {
+    "EURUSD_REGIME_SPECIALIST_PREREG_2026_07_27.md": "84437fd571fef72dc04052ef6c34cb75c3f46fc09396c5a76a045c6ba4255175",
+    "config/frozen_research.json": "94c647f29a4b0f662e9c59c3a4b4abcb41dc1b8cf0dc1eaa55fb55926071f888"
+  },
+  "census": {
+    "active_days": 1954,
+    "raw_signals": 3826,
+    "owned_raw_signals": 2556,
+    "owned_signals_per_active_day": 1.308085977482088,
+    "active_day_coverage": 0.4923234390992835,
+    "by_owner": {
+      "S1_JOINT_COMPRESSION_FADE": 1325,
+      "S2_SUPPORTIVE_ESTABLISHED": 215,
+      "S3_SUPPORTIVE_TRANSITION": 16,
+      "S4_NEUTRAL_AUCTION": 613,
+      "S5_OPPOSING_CAPITULATION": 387
+    },
+    "by_window": {
+      "historical_extension": 1035,
+      "inherited_evidence": 873,
+      "adaptive_exam": 648
+    },
+    "passed": false
+  }
+}
