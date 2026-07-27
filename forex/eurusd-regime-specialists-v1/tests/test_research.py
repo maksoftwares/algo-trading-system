@@ -52,6 +52,11 @@ from eurusd_regime_specialists.neutral_cot_flow import (
     prepare_cot_flow_context,
     verify_lock as verify_cot_flow_lock,
 )
+from eurusd_regime_specialists.neutral_cot_options_flow import (
+    load_config as load_cot_options_flow_config,
+    prepare_options_flow_context,
+    verify_lock as verify_cot_options_flow_lock,
+)
 from eurusd_regime_specialists.neutral_tick_microstructure import (
     aggregate_tick_payload,
     verify_lock as verify_tick_microstructure_lock,
@@ -107,6 +112,7 @@ def test_lock():
     assert len(verify_synchronous_crossasset_lock()) == 3
     assert len(verify_utc_open_vote_lock()) == 7
     assert len(verify_cot_flow_lock()) == 14
+    assert len(verify_cot_options_flow_lock()) == 25
 
 
 def test_dukascopy_bi5_url_and_decoder():
@@ -358,6 +364,76 @@ def test_cot_flow_excludes_delayed_reports_before_change():
     assert actual["leveraged_flow_change"] == pytest.approx(
         -0.10
     )
+    assert actual["vote_dealer"] == 1.0
+    assert actual["vote_asset"] == 1.0
+    assert actual["vote_leveraged"] == -1.0
+    assert actual["vote_sum"] == 1.0
+    assert actual["side"] == "LONG"
+    assert actual["availability_utc"] == pd.Timestamp(
+        "2023-03-29T00:00:00Z"
+    )
+
+
+def test_cot_options_flow_is_paired_and_delta_adjusted():
+    def row(
+        date: str,
+        dealer: tuple[int, int],
+        asset: tuple[int, int],
+        leveraged: tuple[int, int],
+    ) -> dict[str, object]:
+        return {
+            "Report_Date_as_YYYY-MM-DD": date,
+            "Open_Interest_All": 1000,
+            "Dealer_Positions_Long_All": dealer[0],
+            "Dealer_Positions_Short_All": dealer[1],
+            "Asset_Mgr_Positions_Long_All": asset[0],
+            "Asset_Mgr_Positions_Short_All": asset[1],
+            "Lev_Money_Positions_Long_All": leveraged[0],
+            "Lev_Money_Positions_Short_All": leveraged[1],
+        }
+
+    futures = pd.DataFrame(
+        [
+            row(
+                "2023-01-24",
+                (400, 300),
+                (200, 300),
+                (200, 300),
+            ),
+            row(
+                "2023-03-21",
+                (400, 300),
+                (200, 300),
+                (200, 300),
+            ),
+        ]
+    )
+    combined = pd.DataFrame(
+        [
+            row(
+                "2023-01-24",
+                (450, 300),
+                (250, 300),
+                (200, 300),
+            ),
+            row(
+                "2023-03-21",
+                (420, 300),
+                (320, 300),
+                (150, 300),
+            ),
+        ]
+    )
+    context = prepare_options_flow_context(
+        futures, combined, load_cot_options_flow_config()
+    )
+    actual = context.iloc[-1]
+    assert actual["dealer_options_equivalent_net"] == 20
+    assert actual["asset_options_equivalent_net"] == 120
+    assert actual["leveraged_options_equivalent_net"] == -50
+    assert actual["dealer_flow_change"] == -30
+    assert actual["asset_flow_change"] == 70
+    assert actual["leveraged_flow_change"] == -50
     assert actual["vote_dealer"] == 1.0
     assert actual["vote_asset"] == 1.0
     assert actual["vote_leveraged"] == -1.0

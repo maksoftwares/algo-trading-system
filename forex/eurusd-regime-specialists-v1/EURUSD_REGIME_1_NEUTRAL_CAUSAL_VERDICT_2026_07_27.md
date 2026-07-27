@@ -211,6 +211,37 @@ percentage points versus the prior pre-open price vote, but remained below
 the approximately 41% break-even boundary. The route is closed without
 participant or direction selection.
 
+## Official CFTC options-equivalent boundary
+
+A paired-source extension subtracted futures-only participant net
+positions from same-date futures-and-options-combined positions to isolate
+delta-adjusted aggregate options exposure. All 22 official annual archives
+were hash-pinned, and the same conservative CFTC availability and
+publication-interruption controls were applied.
+
+The options-derived directions differed from futures-only flow on 112 of
+241 candidate dates, or 46.47%, establishing genuine behavioral novelty
+before outcomes.
+
+| Window | Trades | Win rate | PF | Net | Exact precision | 15m precision |
+|---|---:|---:|---:|---:|---:|---:|
+| 2023 | 28 | 39.29% | 0.931 | -1.20R | 39.29% | 60.71% |
+| 2024 | 31 | 22.58% | 0.420 | -14.28R | 22.58% | 32.26% |
+| 2025 | 28 | 39.29% | 0.931 | -1.20R | 39.29% | 64.29% |
+| 2026 H1 | 15 | 40.00% | 0.959 | -0.38R | 40.00% | 53.33% |
+| Overall | 102 | 34.31% | 0.752 | -17.05R | 34.31% | 51.96% |
+
+On the 47 flipped forward dates, the options source replaced sixteen
+futures-only winners with sixteen different winners; fifteen dates lost
+under both directions. Both CFTC campaigns therefore finished with exactly
+35 forward winners, 34.31% precision, PF 0.752, and -17.05R.
+
+The post-outcome unanimous-short subgroup was positive over full history,
+but it was not preregistered as a separate expert. Selecting it now would
+be retrospective subgroup overfitting. Free aggregate options-equivalent
+flow is closed; legitimate options evidence now requires strike-level
+skew/risk reversal or the actual surface.
+
 ## Interpretation
 
 At a realized payoff near 1.44, break-even requires approximately 41% wins. The best stable causal variants remained around 33–35%. The 100%-winning Neutral oracle does not reveal a learnable process: it scans both future directions, keeps early target-first paths, and deletes every failure.
@@ -226,7 +257,7 @@ Progress now requires at least one source not adaptively exhausted here:
 3. genuine executed-flow or multi-venue order-book imbalance rather than
    quoted Dukascopy volume; synchronized DXY/Treasury quoted M5 behavior has
    now also failed, and weekly aggregate CFTC Euro FX positioning has also
-   failed;
+   failed, including its free options-equivalent extension;
 4. an explicit relaxation of the requested frequency/payoff objective.
 
 Until then, Regime 1 remains `CASH`.
@@ -245,4 +276,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_synchronous_crossasset.py
 uv run --with pandas --with numpy --with pyarrow python run_neutral_utc_open_vote.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_flow.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_options_flow.py
 ```
