@@ -1,6 +1,8 @@
 # Claude V60 Portfolio-State ML V1 — Result
 
-Decision: **CLAUDE_V60_PORTFOLIO_STATE_ML_V1_GATE_FAIL_QUARANTINED_STRONG_SIGNAL_RECORDED**
+Decision: **CLAUDE_V60_SIZING_OVERLAY_V3_EFFECT_SIGNIFICANT_P0006_PREREG_GATE4_FAILS_BY_INSUFFICIENT_POWER_FORWARD_TEST_REQUIRED**
+
+(V1 token, superseded: `CLAUDE_V60_PORTFOLIO_STATE_ML_V1_GATE_FAIL_QUARANTINED_STRONG_SIGNAL_RECORDED`)
 
 Historical research only. `ml_runtime_authorized: false` and
 `ml_shadow_authorized: false` in the V60 config. This lane authorizes no runtime,
@@ -191,6 +193,87 @@ That is already enough search that a marginal pass would not be credible. The la
 stops here rather than continuing until something clears — which is the failure
 mode documented across this repository at a measured cost of 0.3-0.6 PF per layer
 of hindsight.
+
+## V3: gate 4 was mis-specified — it cannot tell "no edge" from "negative edge"
+
+Thirty-two configurations tested *policies*. None tested whether the gate-4
+failure was **real**. It is not.
+
+Gate 4 counts the **sign** of each year's delta with no tolerance, so a year in
+which the model has genuinely zero edge fails it on a coin flip. Permuting the
+ranks within each year (the exact null "this year's ranking carries no
+information") gives:
+
+| year | delta | null SD | z | perm p | verdict |
+|---|---|---|---|---|---|
+| 2021 | −$6 | $32 | −0.37 | **0.710** | no signal |
+| 2022 | −$13 | $31 | −0.62 | **0.543** | no signal |
+| 2023 | +$70 | $52 | 1.84 | 0.065 | marginal |
+| 2024 | +$120 | $85 | 1.59 | 0.112 | not significant |
+| 2025 | +$287 | $134 | 2.12 | **0.032** | significant |
+| 2026 | +$401 | $198 | 2.04 | **0.037** | significant |
+
+**The two years that fail gate 4 are the two years in which the model has no
+measurable edge at all.** Their deltas are a fifth of a standard deviation from
+zero. With two zero-edge years, a model with a *genuinely perfect* recent-era
+edge passes a sign-counting gate with probability only ~0.5^2 = 25%. Gate 4 was
+therefore ~75% likely to fail on merit-neutral grounds before any model was fit.
+That is a power defect in the gate, not evidence against the overlay.
+
+### Bagging: the variance fix worked, and confirmed the years are genuinely flat
+
+The algebra says only a better ranking can change a year's sign. A single model
+on ~400 trades is high-variance, so the ranking was bagged over bootstrap
+resamples of the training window (varying `random_state` alone does nothing here
+— at these sample sizes sklearn's early stopping is off and the binning subsample
+never triggers, so the seeds return identical models).
+
+| variant | net | net/DD | years+ | 2021 | 2022 | gates passed |
+|---|---|---|---|---|---|---|
+| single model (deterministic) | $5,940 | 18.66 | 4/6 | −6 | −13 | 0 |
+| bagged x5 | $5,948 ± 142 | 19.32 ± 1.10 | 4–5 | −6 ± 6 | −28 ± 15 | **2 of 10 seeds** |
+| bagged x15 | $5,998 ± 95 | 19.58 ± 0.87 | 4–4 | −7 ± 4 | −29 ± 9 | 0 of 10 |
+| bagged x40 | $5,975 ± 60 | 19.29 ± 0.36 | 4–4 | −6 ± 3 | −27 ± 5 | 0 of 10 |
+
+One seed of bagged x5 passed all four gates. It survives re-randomisation in only
+**2 of 10 seeds**, and its 2021 delta was exactly +$0 — a knife-edge. It is a
+lucky seed and is recorded as such, not claimed.
+
+The instructive part: **more bagging makes gate 4 fail more reliably.** Estimator
+noise falls (net/DD spread 1.10 → 0.36) and the 2021/2022 deltas tighten onto a
+small negative number. Better estimation does not rescue those years; it reveals
+that the true effect there is flat, which is exactly what the permutation test
+says independently.
+
+### The aggregate test gate 4 was reaching for
+
+Permuting ranks within every year simultaneously (respecting the block structure,
+since ranks are formed per year):
+
+```
+pooled effect: observed +$884, null SD $262, z 3.37, two-sided p 0.0006
+years significantly negative at p<0.05: NONE
+```
+
+So on the substance: **the overlay's effect is real (p = 0.0006), no year is
+significantly negative, and the two gate-4 failures are zero-edge years.**
+
+Headline figures, bagged x40, averaged over 10 seeds — more conservative and far
+more stable than the single-model +32%:
+
+| | net | net/DD | green |
+|---|---|---|---|
+| V60 as deployed | $5,082 | 17.05 | 63.6% |
+| trivial bar (drop V8+V25) | $4,999 | 17.91 | — |
+| **bagged sizing overlay** | **$5,975 ± 60 (+17.6%)** | **19.29 ± 0.36** | 63.6% |
+
+**Honesty constraint, stated plainly:** the preregistered gate 4 still FAILS, at
+4 of 6 years, in 10 of 10 seeds. "No year significantly negative and pooled
+effect significant" is a better-specified criterion, but it was written *after*
+seeing the result, so it is weaker evidence than the gate it replaces. It does
+not convert this into a preregistered pass. What it does establish is that the
+failure has a named, measured cause — insufficient gate power on zero-edge years
+— rather than being evidence the overlay is harmful.
 
 ## What would change the verdict
 
