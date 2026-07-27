@@ -123,8 +123,78 @@ Note V8_RETEST_HEALTH (204 trades, PF 1.04, $18 net) and V25_CHOP (111 trades,
 PF 1.10, $32) contribute 15% of trade count for 0.9% of profit — but dropping
 them is roughly neutral, not free money, and the yearly deltas alternate sign.
 
+## V2: the diagnosed fixes were tried and did not work
+
+V1's gate-4 failure was diagnosed as thin training data in 2021-2022, plus two
+omissions. Both were addressed:
+
+- **sleeve identity** — the model saw only `is_core`, though sleeve quality runs
+  from PF 1.04 (V8) to 2.03 (R1). Added as a causally target-encoded mean over
+  prior trades, shrunk toward the global mean by sample size.
+- **confidence shrinkage** — the policy sized as hard on 400 training trades as
+  on 1,500. The multiplier is now shrunk toward flat by sqrt(n_train / 1500).
+
+| variant | net | net/DD | years+ |
+|---|---|---|---|
+| V1 reproduction | $6,408 | 19.26 | 4/6 |
+| + sleeve identity | $6,555 | 18.39 | 4/6 |
+| + shrinkage only | $6,368 | 19.38 | 4/6 |
+| V2: both | $6,529 | 18.68 | 4/6 |
+
+Shrinkage worked on the diagnosed symptom — 2022 improved from −$96 to −$32 —
+but no variant reached 5 of 6 years.
+
+A band x shrinkage sweep (5 widths x 2 shrinkage levels) then confirmed the
+limit:
+
+| band | 2021 delta | 2022 delta |
+|---|---|---|
+| (0.9, 1.1) | −$1 | −$4 |
+| (0.7, 1.3) | −$4 | −$13 |
+| (0.5, 1.5) | −$7 | −$21 |
+
+**2021 and 2022 are negative at every band width and every shrinkage level.**
+Narrowing the ramp shrinks the loss toward zero but never changes its sign.
+**0 of 32 total configurations passed all four gates.**
+
+### Why no band can ever work — this is algebra, not a sweep result
+
+The per-year deltas are exactly linear in band half-width (2025: +86, +172, +258,
++344, +430 — steps of precisely 86; 2026: steps of precisely 75). That is forced,
+because the multiplier is an affine function of score rank:
+
+```
+delta_year  =  width  x  SUM_i ( pnl_i  x  (rank_i - mean_rank) )
+```
+
+The sum is a fixed per-year quantity — the covariance between the model's ranking
+and realised P&L in that year. Band width is a positive scalar multiplying it.
+**A positive scalar cannot change a sign.** So if a year's score/P&L covariance is
+negative, every band width loses money in that year, and the sweep could not have
+found otherwise. Running it at five widths was redundant; one width plus the
+linearity determines all of them.
+
+This converts gate 4 from a tuning failure into a structural one: the only way to
+fix 2021 and 2022 is to change the **ranking**, not the policy applied to it.
+V2's sleeve-identity variant was an attempt at exactly that — a better ranking,
+not a gentler policy — and it also came in at 4/6, with net/DD *falling* 19.26 ->
+18.39. That is the evidence against the remaining structural idea (per-sleeve
+models): a per-sleeve model is a higher-variance version of sleeve encoding,
+fitted on ~200 trades per sleeve instead of 1,500 pooled, so it is very unlikely
+to rank better where pooled encoding already ranked worse.
+
+## Search budget, declared
+
+32 configurations were evaluated on 1,713 trades: 3 targets x 6 policies, one
+ablation, sleeve identity, confidence shrinkage, and 5 bands x 2 shrinkage levels.
+That is already enough search that a marginal pass would not be credible. The lane
+stops here rather than continuing until something clears — which is the failure
+mode documented across this repository at a measured cost of 0.3-0.6 PF per layer
+of hindsight.
+
 ## What would change the verdict
 
-Forward evidence. The overlay needs to improve in 2027 and beyond, on data that
-did not exist when it was fitted. Nothing in the historical record can settle a
-4-of-6 consistency failure.
+Forward evidence only. The overlay needs to improve in 2027 and beyond, on data
+that did not exist when it was fitted. Nothing in the historical record can settle
+a 4-of-6 consistency failure, and no further search of this record should be
+treated as if it could.
