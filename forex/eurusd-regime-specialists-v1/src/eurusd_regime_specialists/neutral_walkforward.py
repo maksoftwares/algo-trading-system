@@ -559,6 +559,7 @@ def route_outcomes(
                 "exit_reason",
                 "predicted_probability",
                 "risk_distance",
+                "risk_pips",
                 "r",
                 "extra_half_pip_stress_r",
                 "fixed_0p01_lot_usd",
@@ -603,6 +604,7 @@ def route_outcomes(
                     "predicted_probability"
                 ],
                 "risk_distance": risk,
+                "risk_pips": float(row["risk_pips"]),
                 "r": result_r,
                 "extra_half_pip_stress_r": (
                     result_r - 0.5 * PIP / risk

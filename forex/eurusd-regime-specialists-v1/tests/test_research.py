@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import lzma
+import struct
 import sys
 from pathlib import Path
 
@@ -34,6 +36,7 @@ from eurusd_regime_specialists.neutral_walkforward import (
     _labeled_outcome,
     choose_side,
     purged_training_rows,
+    route_outcomes,
     verify_lock as verify_walkforward_lock,
 )
 from eurusd_regime_specialists.neutral_crosspair import (
@@ -49,6 +52,11 @@ from eurusd_regime_specialists.neutral_tick_microstructure import (
 )
 from eurusd_regime_specialists.neutral_tick_volatility import (
     verify_lock as verify_tick_volatility_lock,
+)
+from eurusd_regime_specialists.neutral_prospective import (
+    decode_bi5_payload,
+    dukascopy_url,
+    verify_lock as verify_prospective_lock,
 )
 from eurusd_regime_specialists.retrospective_overfit import (
     _dense_target_candidate,
@@ -72,6 +80,33 @@ def test_lock():
     assert len(verify_nonlinear_lock()) == 2
     assert len(verify_tick_microstructure_lock()) == 2
     assert len(verify_tick_volatility_lock()) == 2
+    assert len(verify_prospective_lock()) == 2
+
+
+def test_dukascopy_bi5_url_and_decoder():
+    hour = pd.Timestamp("2026-07-01T12:00:00Z")
+    assert dukascopy_url("EURUSD", hour).endswith(
+        "/EURUSD/2026/06/01/12h_ticks.bi5"
+    )
+    raw = struct.pack(
+        ">IIIff",
+        1_000,
+        113_856,
+        113_855,
+        1.0,
+        2.0,
+    )
+    frame = decode_bi5_payload(
+        lzma.compress(raw), hour, "EURUSD"
+    )
+    assert len(frame) == 1
+    assert frame.iloc[0]["timestamp_utc"] == pd.Timestamp(
+        "2026-07-01T12:00:01Z"
+    )
+    assert frame.iloc[0]["ask"] == 1.13856
+    assert frame.iloc[0]["bid"] == 1.13855
+    assert frame.iloc[0]["ask_volume"] == 1.0
+    assert frame.iloc[0]["bid_volume"] == 2.0
 
 
 def test_wilder_seed_and_recursion():
@@ -399,6 +434,32 @@ def test_walkforward_chooses_one_higher_probability_side():
     )
     selected = choose_side(frame, threshold=0.55)
     assert selected["side"].tolist() == ["SHORT"]
+
+
+def test_routed_walkforward_trade_preserves_risk_pips():
+    timestamp = pd.Timestamp("2026-01-05T12:00:00Z")
+    prediction = pd.DataFrame(
+        {
+            "side": ["LONG"],
+            "signal_time_utc": [timestamp - pd.Timedelta(minutes=5)],
+            "completion_time_utc": [timestamp],
+            "entry_time_utc": [timestamp],
+            "exit_time_utc": [timestamp + pd.Timedelta(minutes=5)],
+            "entry_price": [1.1],
+            "stop_price": [1.099],
+            "target_price": [1.1015],
+            "exit_price": [1.099],
+            "exit_reason": ["STOP"],
+            "predicted_probability": [0.6],
+            "risk_distance": [0.001],
+            "risk_pips": [10.0],
+            "outcome_r": [-1.01],
+            "fixed_0p01_lot_usd": [-1.01],
+        }
+    )
+    cfg = {"execution": {"max_trades_per_utc_day": 4}}
+    routed = route_outcomes(prediction, cfg)
+    assert routed.iloc[0]["risk_pips"] == 10.0
 
 
 def test_crosspair_tick_baseline_excludes_current_bar():

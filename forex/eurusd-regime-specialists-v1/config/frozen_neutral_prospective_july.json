@@ -1,0 +1,57 @@
+{
+  "campaign_id": "eurusd-neutral-prospective-july-2026-v1",
+  "frozen_at_utc": "2026-07-27T15:45:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "parent_model_contract": "config/frozen_neutral_tick_volatility.json",
+  "parent_model_campaign": "eurusd-neutral-tick-volatility-v1",
+  "model_status_before_prospective_run": "REJECTED_ARCHIVED_RESEARCH_DIAGNOSTIC_ONLY",
+  "selected_probability_threshold": 0.375,
+  "threshold_source": "Frozen 2021-2022 development selection; no July retuning",
+  "source": {
+    "provider": "Dukascopy public datafeed",
+    "format": "hourly bid/ask ticks.bi5",
+    "symbols": ["EURUSD", "GBPUSD", "USDJPY"],
+    "download_start_utc": "2026-07-01T00:00:00Z",
+    "download_end_utc": "2026-07-27T14:59:59Z",
+    "url_template": "https://datafeed.dukascopy.com/datafeed/{SYMBOL}/{YYYY}/{ZERO_BASED_MM}/{DD}/{HH}h_ticks.bi5",
+    "no_broker_runtime": true
+  },
+  "context": {
+    "symbols": ["DOLLARIDXUSD", "USTBONDTRUSD"],
+    "source": "existing source-hashed hourly raw archive",
+    "maximum_context_utc": "2026-07-27T14:00:00Z"
+  },
+  "inference": {
+    "start_utc": "2026-07-01T00:00:00Z",
+    "end_utc": "2026-07-27T02:59:59Z",
+    "reason_for_end": "Preserve the frozen 12-hour outcome lifecycle before downloaded data ends",
+    "training_rule": "Only rows whose label exits are strictly before 2026-07-01T00:00:00Z",
+    "model_refit": "Single refit at prospective cutoff using the frozen model specification",
+    "parameter_changes": "FORBIDDEN"
+  },
+  "execution": {
+    "risk_mode": "ATR_CLIPPED",
+    "atr_multiple": 1.50,
+    "minimum_risk_pips": 6.0,
+    "maximum_risk_pips": 15.0,
+    "target_r": 1.50,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.70,
+    "extra_slippage_pips_per_side": 0.10,
+    "same_bar_policy": "stop_first",
+    "one_open_position": true,
+    "max_trades_per_utc_day": 4
+  },
+  "interpretation_gate": {
+    "minimum_completed_trades": 100,
+    "minimum_calendar_days": 60,
+    "minimum_profit_factor": 1.10,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_expectancy_r": 0.0,
+    "minimum_status_if_sample_gate_fails": "ACCUMULATING_PROSPECTIVE_EVIDENCE"
+  }
+}

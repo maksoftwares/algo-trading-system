@@ -79,6 +79,23 @@ The volatility-scaled lifecycle increased usable frequency but remained negative
 | 2025 | 235 | 37.02% | 1.441 | 0.847 | -22.82R |
 | 2026 H1 | 102 | 31.37% | 1.437 | 0.657 | -24.38R |
 
+## Frozen July prospective diagnostic
+
+The rejected volatility-scaled model was subsequently frozen at its
+development-selected 0.375 threshold before bulk acquisition of July
+EURUSD, GBPUSD, and USDJPY ticks. A single refit used only labels completed
+before 2026-07-01, followed by untouched inference through
+2026-07-27 02:59 UTC.
+
+| Trades | Win rate | Payoff | PF | Net | Frequency |
+|---:|---:|---:|---:|---:|---:|
+| 19 | 31.58% | 1.459 | 0.673 | -4.317R | 1.00/active weekday |
+
+The preregistered evidence gate requires at least 100 completed trades and
+60 calendar days; the available slice has 19 trades and 27 days. It
+therefore remains an accumulating, non-promotional diagnostic. Its metric
+gate also failed, and it does not rescue the historical model.
+
 ## Interpretation
 
 At a realized payoff near 1.44, break-even requires approximately 41% wins. The best stable causal variants remained around 33–35%. The 100%-winning Neutral oracle does not reveal a learnable process: it scans both future directions, keeps early target-first paths, and deletes every failure.
@@ -105,4 +122,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_crosspair_nonlinear.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_tick_microstructure.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_tick_volatility.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_prospective.py
 ```

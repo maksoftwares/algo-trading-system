@@ -1,0 +1,114 @@
+{
+  "campaign_id": "eurusd-neutral-prospective-july-2026-v1",
+  "status": "ACCUMULATING_PROSPECTIVE_EVIDENCE",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "parent_model_status": "REJECTED_ARCHIVED_RESEARCH_DIAGNOSTIC_ONLY",
+  "no_retuning": {
+    "threshold": 0.375,
+    "model_specification": "config/frozen_neutral_tick_volatility.json",
+    "training_label_exit_cutoff_utc": "2026-07-01T00:00:00+00:00",
+    "parameters_changed_after_july_acquisition": false
+  },
+  "coverage": {
+    "download_start_utc": "2026-07-01T00:00:00Z",
+    "download_end_utc": "2026-07-27T14:59:59Z",
+    "inference_start_utc": "2026-07-01T00:00:00Z",
+    "inference_end_utc": "2026-07-27T02:59:59Z",
+    "calendar_days": 27,
+    "active_weekdays": 19,
+    "training_rows": 83611,
+    "inference_rows": 870
+  },
+  "download_manifests": {
+    "EURUSD": {
+      "source": "Dukascopy public datafeed .bi5",
+      "hours_requested": 639,
+      "nonempty_hours": 447,
+      "ticks": 1083228,
+      "first_tick_utc": "2026-07-01T00:00:00.240000+00:00",
+      "last_tick_utc": "2026-07-27T14:59:59.092000+00:00",
+      "source_chain_sha256": "ab3b3e6454d2ca074d8ca0753c3980977f6b6e6a34f573c6278f2d0f3e7d0266"
+    },
+    "GBPUSD": {
+      "source": "Dukascopy public datafeed .bi5",
+      "hours_requested": 639,
+      "nonempty_hours": 447,
+      "ticks": 1729387,
+      "first_tick_utc": "2026-07-01T00:00:00.552000+00:00",
+      "last_tick_utc": "2026-07-27T14:59:59.823000+00:00",
+      "source_chain_sha256": "68728ecd7ce4ff703067aecf45353d70e8e810cf9d31ec39e06ff704e189b03d"
+    },
+    "USDJPY": {
+      "source": "Dukascopy public datafeed .bi5",
+      "hours_requested": 639,
+      "nonempty_hours": 447,
+      "ticks": 1577803,
+      "first_tick_utc": "2026-07-01T00:00:00.188000+00:00",
+      "last_tick_utc": "2026-07-27T14:59:59.966000+00:00",
+      "source_chain_sha256": "baa1a5ce72a096eb08207ecd88c8226bdab209a2caeeca201768ee745efab1e9"
+    }
+  },
+  "context_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "e3d939fade02e3c7c63753f7274f19f467360b7618145a6e06ff5bdd2a4d2b01",
+      "files_seen": 66327,
+      "empty_hours": 25716,
+      "populated_hours": 40611,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-07-27T14:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\neutral_prospective_july\\context_cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "95d6ec9711f2ce34cc5cb6902304e765b6ca5c15baeee1fdb1f9eb87551ec13f"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "9b4c5fb139c0a07e261aef4cd41c7749738f548868c2b7336d4ac7a8ed3dc989",
+      "files_seen": 66327,
+      "empty_hours": 22487,
+      "populated_hours": 43840,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-07-27T14:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\neutral_prospective_july\\context_cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "3e671fadefac339717bdd59755ab1f00ff0150fbca18d19d2a151cddae7c3522"
+    },
+    "HISTORICAL_EURUSD_TICKS": {
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\EURUSD",
+      "source_chain_sha256": "92b476255ea682e8fa2c8f01a8fc0624962822beb6e069b03fd0a712e9011a5f",
+      "files_seen": 65686,
+      "populated_files": 46726,
+      "m5_rows": 560527,
+      "first_utc": "2019-01-02T00:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\EURUSD_M5_MICROSTRUCTURE_v1.parquet",
+      "cache_sha256": "b42d82ff55579d29550c1f97f72e9a8651ae7aae488a141c0d13704fc017887b"
+    }
+  },
+  "prospective_metrics": {
+    "trades": 19,
+    "wins": 6,
+    "losses": 13,
+    "win_rate": 0.3157894736842105,
+    "average_win_r": 1.4833333333330587,
+    "average_loss_r": 1.0166666666666941,
+    "realized_payoff_ratio": 1.4590163934423135,
+    "profit_factor": 0.67339218158876,
+    "net_r": -4.316666666668672,
+    "expectancy_r": -0.2271929824562459,
+    "max_drawdown_r": 4.783333333335065,
+    "fixed_0p01_lot_usd": -2.5900000000012025,
+    "trades_per_weekday": 1.0
+  },
+  "sample_gate": {
+    "passed": false,
+    "minimum_completed_trades": 100,
+    "minimum_calendar_days": 60
+  },
+  "metric_gate": {
+    "passed": false,
+    "evaluated_but_nonpromotional_when_sample_incomplete": true
+  },
+  "verdict": "The frozen prospective sample is still accumulating and cannot admit or rescue the historically rejected Neutral model."
+}
