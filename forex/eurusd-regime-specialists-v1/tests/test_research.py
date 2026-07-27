@@ -26,6 +26,7 @@ from eurusd_regime_specialists.asymmetric import (
 from eurusd_regime_specialists.confirmed_reversal import verify_lock as verify_confirmation_lock
 from eurusd_regime_specialists.crossasset_handoff import verify_lock as verify_handoff_lock
 from eurusd_regime_specialists.retrospective_overfit import (
+    _dense_target_candidate,
     density_bucket,
     perfect_foresight_oracle,
     regime_attribution,
@@ -249,3 +250,24 @@ def test_regime_attribution_preserves_trade_total():
     attribution = regime_attribution(frame)
     assert attribution["trades"].sum() == 4
     assert attribution["trade_share"].sum() == 1.0
+
+
+def test_dense_oracle_resolves_same_bar_against_both_sides():
+    index = pd.date_range("2026-01-01", periods=1, freq="5min", tz="UTC")
+    arrays = {
+        "bid_open": [1.0],
+        "bid_high": [1.0010],
+        "bid_low": [0.9990],
+        "ask_open": [1.0001],
+        "ask_high": [1.0011],
+        "ask_low": [0.9991],
+    }
+    candidate = _dense_target_candidate(
+        0,
+        index,
+        arrays,
+        risk_pips=4.0,
+        spread_floor=0.00007,
+        slippage=0.00001,
+    )
+    assert candidate is None

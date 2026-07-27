@@ -1,86 +1,93 @@
-# EURUSD 100% win-rate perfect-foresight demonstration
+# EURUSD full-calendar perfect-foresight demonstration
 
-Status: `DIRECT_FUTURE_OUTCOME_LEAKAGE_NOT_TRADABLE`
+Status: `DIRECT_FUTURE_PATH_LEAKAGE_NOT_TRADABLE`
 
-The pure hindsight ceiling now has the requested 100% historical win rate while retaining exactly four trades per qualifying active day.
+The pure hindsight ceiling now fills every archived EURUSD trading weekday:
 
-| Metric | Perfect-foresight result |
+| Metric | Full-calendar oracle |
 |---|---:|
-| Trades | 624 |
-| Wins / losses | 624 / 0 |
+| Period | 2019-01-02 through 2026-06-30 |
+| Archived Monday-Friday dates | 1,954 |
+| Active dates | 1,954 |
+| Calendar coverage | 100.00% |
+| Trades | 7,816 |
+| Trades / weekday | 4.000 |
+| Wins / losses | 7,816 / 0 |
 | Win rate | 100.00% |
-| Active trading days | 156 |
-| Trades / active day | 4.000 |
-| Average realized winner | +1.489R |
+| Average realized winner | +1.475R |
 | Profit factor | Infinite: no losses |
-| Net | +929.25R |
-| Maximum drawdown | 0.00R |
-| Fixed 0.01-lot P&L | +$1,036.80 |
-| Maximum concurrent positions | 4 |
+| Net | +11,528.79R |
+| Maximum closed-trade drawdown | 0.00R |
+| Fixed 0.01-lot P&L | +$4,610.93 |
+| Long / short trades | 3,887 / 3,929 |
+| Maximum concurrent positions | 7 |
+
+“Full calendar” means every Monday-Friday date containing archived FX M5 bars. Weekends remain excluded because EURUSD is closed. The raw date span contains 1,955 Monday-Friday dates; 2021-01-01 has no archived bars and is therefore not an active trading day. All other 1,954 weekdays are filled.
+
+## How it was manufactured
+
+The oracle no longer depends on the original sparse RSI/Bollinger specialist signals. For every weekday it:
+
+1. treats every distinct M5 timestamp as a possible entry;
+2. evaluates both long and short future paths;
+3. uses a 4-pip stop and nominal 1.50R target;
+4. looks forward as far as 12 hours;
+5. keeps the first four timestamps whose future path reaches the target before the stop;
+6. discards every losing path and every unused winner.
+
+No trade is cloned: all four daily entries have distinct timestamps. Archived bid/ask prices, a 0.70-pip minimum spread, 0.10-pip adverse slippage per side, and stop-first same-bar ambiguity remain applied.
+
+Christmas Day 2025 could not supply four 4-pip-risk winners. The oracle retrospectively switched only that date to a 3-pip stop and 4.5-pip target. This is another explicit hindsight choice.
+
+This is future-path leakage, not executable prediction. At each entry the oracle knows both the future direction and whether target or stop occurs first.
 
 ## Regime division
 
-The unchanged 624 oracle trades divide into four mutually exclusive regime experts:
+Regimes use the latest completed causal cross-asset state at each entry. Trade selection remains noncausal.
 
-| Regime expert | Definition | Trades | Share | Active days | Avg winner | Net | 2026 H1 trades / net |
-|---|---|---:|---:|---:|---:|---:|---:|
-| Neutral auction | Non-compressed neutral USD regime | 281 | 45.03% | 89 | 1.490R | +418.57R | 30 / +44.66R |
-| Joint compression | Non-shock DXY and EURUSD joint compression | 231 | 37.02% | 86 | 1.488R | +343.78R | 25 / +37.18R |
-| USD-down supportive | Non-compressed weak-USD regime supporting the EURUSD long | 104 | 16.67% | 34 | 1.490R | +154.96R | 8 / +11.92R |
-| USD-up opposing | Non-compressed strong-USD regime; deep capitulation only | 8 | 1.28% | 5 | 1.491R | +11.93R | 5 / +7.46R |
+| Regime | Trades | Share | Long / short | Active days | Net | 2026 H1 trades |
+|---|---:|---:|---:|---:|---:|---:|
+| Neutral | 2,615 | 33.46% | 1,321 / 1,294 | 662 | +3,857.15R | 160 |
+| Joint compression | 2,577 | 32.97% | 1,295 / 1,282 | 656 | +3,801.22R | 217 |
+| USD up | 1,238 | 15.84% | 594 / 644 | 312 | +1,826.05R | 84 |
+| USD down | 1,100 | 14.07% | 544 / 556 | 278 | +1,622.52R | 35 |
+| Shock | 282 | 3.61% | 133 / 149 | 77 | +415.95R | 20 |
+| Missing initial context | 4 | 0.05% | 0 / 4 | 1 | +5.90R | 0 |
 
-Neutral Auction and Joint Compression supply 82.05% of all selected trades. The opposing regime has only eight trades, so the perfect curve is not a balanced four-regime portfolio. Every bucket remains at 100% wins solely because the oracle deleted its losing candidates.
-
-## How the perfect curve was manufactured
-
-The broad EURUSD regime-specialist stream produced 6,035 independently priced candidate opportunities. For each candidate, the oracle:
-
-1. reads its future exit;
-2. keeps it only if the 1.50R target will be reached;
-3. finds historical dates having at least four such future winners;
-4. retains the first four known target winners on each qualifying date;
-5. discards every future loss and every additional winner.
-
-Individual fills still include archived bid/ask prices, a 0.70-pip spread floor, 0.10-pip adverse slippage per side, and stop-first ambiguity. Those execution details do not make the result causal: the trade-selection label comes directly from the future exit.
-
-## Why PF and payoff are not 1.5
-
-Profit factor is gross profit divided by gross loss. With zero losses, the denominator is zero, so PF is mathematically infinite.
-
-Average-win / average-loss payoff is undefined for the same reason. The useful displayed quantity is the average realized winner, +1.489R. It sits just below the nominal 1.50R target because execution costs are included.
+The direction mix is nearly balanced, but Neutral plus Joint Compression still contributes 66.43% of trades.
 
 ## Period breakdown
 
-Every period is perfectly fitted because future outcomes are read separately on every date.
+Every period is perfect because future paths are read separately on every date.
 
-| Period | Trades | Active days | Trades / active day | Win rate | Average winner | Net |
+| Period | Weekdays | Trades | Trades / weekday | Win rate | Average winner | Net |
 |---|---:|---:|---:|---:|---:|---:|
-| 2019-2021 | 228 | 57 | 4.0 | 100% | 1.489R | +339.44R |
-| 2022-2024 | 256 | 64 | 4.0 | 100% | 1.489R | +381.27R |
-| 2025 | 72 | 18 | 4.0 | 100% | 1.491R | +107.32R |
-| 2026 H1 | 68 | 17 | 4.0 | 100% | 1.488R | +101.21R |
+| 2019-2021 | 782 | 3,128 | 4.0 | 100% | 1.475R | +4,613.82R |
+| 2022-2024 | 782 | 3,128 | 4.0 | 100% | 1.475R | +4,613.95R |
+| 2025 | 261 | 1,044 | 4.0 | 100% | 1.475R | +1,539.92R |
+| 2026 H1 | 129 | 516 | 4.0 | 100% | 1.475R | +761.10R |
 
 ## Last six completed months
 
 January through June 2026:
 
-- 68 trades on 17 qualifying active days;
-- exactly 4.00 trades per active day;
-- 68 wins and zero losses;
+- all 129 archived weekdays covered;
+- exactly 516 trades, or 4.00 per weekday;
+- 516 wins and zero losses;
 - 100.00% win rate;
-- +1.488R average realized winner;
+- +1.475R average realized winner;
 - infinite PF;
-- +101.21R and +$101.43 at fixed 0.01 lot;
+- +761.10R and +$304.44 at fixed 0.01 lot;
 - zero closed-trade drawdown;
-- maximum four concurrent positions.
+- maximum seven concurrent positions.
 
-## Frequency caveat
+## PF and payoff interpretation
 
-The oracle trades four times on its selected dates, but its 156 active dates cover only 7.98% of the 1,954 available weekdays. The full-calendar rate is 0.319 trades per weekday.
+With zero losses, profit factor is infinite and average-win / average-loss payoff is undefined. The average realized winner is +1.475R, slightly below the nominal 1.50R target because adverse execution costs are included.
 
 ## Verdict
 
-This is no longer ordinary parameter overfitting. It is a perfect-foresight label-leakage benchmark. It demonstrates the maximum curve that can be drawn after all future outcomes are known, but it cannot be encoded as a causal EA, tested out of sample, or used for demo/live trading.
+The requested curve exists historically: four distinct winners on every archived weekday with 100% win rate. It exists only because the algorithm reads future M5 paths, chooses the winning direction and timestamp, and deletes all failures. It cannot be converted into a causal EA, validated out of sample, or used for demo/live trading.
 
 Reproduce:
 
@@ -91,12 +98,6 @@ uv run --with pandas --with numpy --with pyarrow python run_retrospective_overfi
 Primary artifacts:
 
 - `outputs/retrospective_overfit/RESULT.json`
-- `outputs/retrospective_overfit/PERFECT_FORESIGHT_TRADES.csv`
-- `outputs/retrospective_overfit/PERFECT_FORESIGHT_BY_REGIME.csv`
-- `outputs/retrospective_overfit/PERFECT_S1_COMPRESSION_REVERSION_TRADES.csv`
-- `outputs/retrospective_overfit/PERFECT_S2_SUPPORTIVE_PULLBACK_TRADES.csv`
-- `outputs/retrospective_overfit/PERFECT_S3_NEUTRAL_AUCTION_TRADES.csv`
-- `outputs/retrospective_overfit/PERFECT_S4_OPPOSING_CAPITULATION_TRADES.csv`
-- `outputs/retrospective_overfit/EQUITY_CURVES.csv`
+- `outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv`
+- `outputs/retrospective_overfit/FULL_CALENDAR_BY_REGIME.csv`
 - `outputs/retrospective_overfit/OPPORTUNITY_OUTCOMES.csv`
-- `outputs/retrospective_overfit/FOUR_TRADE_DAY_ORACLE_TRADES.csv`

@@ -32,6 +32,9 @@ MINIMUM_CELL_WIN_RATE = 0.45
 MAXIMUM_CELL_WIN_RATE = 0.65
 MINIMUM_CELL_PROFIT_FACTOR = 1.30
 TARGET_TRADES_PER_ACTIVE_DAY = 4
+DENSE_TARGET_R = 1.50
+DENSE_HOLD_HOURS = 12
+DENSE_RISK_TIERS_PIPS = (4.0, 3.0)
 REGIME_LABELS = {
     "S1_COMPRESSION_REVERSION": (
         "JOINT_COMPRESSION",
@@ -49,6 +52,14 @@ REGIME_LABELS = {
         "USD_UP_OPPOSING",
         "Non-compressed USD-up regime; deep counter-regime capitulation only",
     ),
+}
+DENSE_REGIME_DEFINITIONS = {
+    "JOINT_COMPRESSION": "Non-shock DXY and EURUSD joint compression",
+    "USD_DOWN": "Non-compressed USD-down regime",
+    "NEUTRAL": "Non-compressed neutral USD regime",
+    "USD_UP": "Non-compressed USD-up regime",
+    "SHOCK": "Causal cross-asset shock state",
+    "MISSING_CONTEXT": "No completed causal state was available",
 }
 FIT_END = pd.Timestamp("2026-06-30T23:59:59Z")
 EARLY_FIT_END = pd.Timestamp("2024-12-31T23:59:59Z")
@@ -377,6 +388,257 @@ def regime_attribution(
     return pd.DataFrame(rows)
 
 
+def _dense_target_candidate(
+    position: int,
+    index: pd.DatetimeIndex,
+    arrays: dict[str, Any],
+    risk_pips: float,
+    spread_floor: float,
+    slippage: float,
+) -> dict[str, Any] | None:
+    risk = risk_pips * PIP
+    target_distance = DENSE_TARGET_R * risk
+    deadline = index[position] + pd.Timedelta(hours=DENSE_HOLD_HOURS)
+    end = int(index.searchsorted(deadline, side="right"))
+    end = min(end, len(index))
+    candidates = []
+
+    entry = max(
+        arrays["ask_open"][position],
+        arrays["bid_open"][position] + spread_floor,
+    ) + slippage
+    stop = entry - risk
+    target = entry + target_distance
+    for cursor in range(position, end):
+        if arrays["bid_low"][cursor] <= stop:
+            break
+        if arrays["bid_high"][cursor] >= target:
+            exit_price = max(arrays["bid_open"][cursor], target) - slippage
+            candidates.append(
+                {
+                    "exit_position": cursor,
+                    "side": "LONG",
+                    "entry_price": entry,
+                    "stop_price": stop,
+                    "target_price": target,
+                    "exit_price": exit_price,
+                    "r": (exit_price - entry) / risk,
+                    "fixed_0p01_lot_usd": (exit_price - entry) * 1000.0,
+                }
+            )
+            break
+
+    entry = arrays["bid_open"][position] - slippage
+    stop = entry + risk
+    target = entry - target_distance
+    for cursor in range(position, end):
+        ask_open = max(
+            arrays["ask_open"][cursor],
+            arrays["bid_open"][cursor] + spread_floor,
+        )
+        ask_high = max(
+            arrays["ask_high"][cursor],
+            arrays["bid_high"][cursor] + spread_floor,
+        )
+        ask_low = max(
+            arrays["ask_low"][cursor],
+            arrays["bid_low"][cursor] + spread_floor,
+        )
+        if ask_high >= stop:
+            break
+        if ask_low <= target:
+            exit_price = min(ask_open, target) + slippage
+            candidates.append(
+                {
+                    "exit_position": cursor,
+                    "side": "SHORT",
+                    "entry_price": entry,
+                    "stop_price": stop,
+                    "target_price": target,
+                    "exit_price": exit_price,
+                    "r": (entry - exit_price) / risk,
+                    "fixed_0p01_lot_usd": (entry - exit_price) * 1000.0,
+                }
+            )
+            break
+    if not candidates:
+        return None
+    chosen = min(
+        candidates,
+        key=lambda item: (
+            item["exit_position"],
+            0 if item["side"] == "LONG" else 1,
+        ),
+    )
+    chosen["entry_position"] = position
+    chosen["risk_distance"] = risk
+    chosen["risk_pips"] = risk_pips
+    return chosen
+
+
+def assign_dense_regimes(
+    trades: pd.DataFrame, state: pd.DataFrame
+) -> pd.DataFrame:
+    frame = trades.copy()
+    frame["state_time_utc"] = (
+        frame["entry_time_utc"].dt.floor("h") - pd.Timedelta(hours=1)
+    ).dt.as_unit("ns")
+    context = (
+        state[
+            [
+                "direction",
+                "shock",
+                "DXY_compressed",
+                "EURUSD_compressed",
+            ]
+        ]
+        .reset_index()
+        .rename(columns={"timestamp_utc": "matched_state_time_utc"})
+        .sort_values("matched_state_time_utc")
+    )
+    context["matched_state_time_utc"] = context[
+        "matched_state_time_utc"
+    ].dt.as_unit("ns")
+    joined = pd.merge_asof(
+        frame.sort_values("state_time_utc"),
+        context,
+        left_on="state_time_utc",
+        right_on="matched_state_time_utc",
+        direction="backward",
+        allow_exact_matches=True,
+    )
+    joined["regime"] = "MISSING_CONTEXT"
+    valid = joined["direction"].notna()
+    shock = valid & joined["shock"].astype("boolean").fillna(False)
+    joined.loc[shock, "regime"] = "SHOCK"
+    nonshock = valid & ~joined["shock"].astype("boolean").fillna(True)
+    compressed = (
+        nonshock
+        & joined["DXY_compressed"].astype("boolean").fillna(False)
+        & joined["EURUSD_compressed"].astype("boolean").fillna(False)
+    )
+    joined.loc[compressed, "regime"] = "JOINT_COMPRESSION"
+    remaining = nonshock & ~compressed
+    for direction in ("USD_DOWN", "NEUTRAL", "USD_UP"):
+        joined.loc[
+            remaining & joined["direction"].eq(direction), "regime"
+        ] = direction
+    joined["regime_definition"] = joined["regime"].map(
+        DENSE_REGIME_DEFINITIONS
+    )
+    return joined.sort_values(
+        ["entry_time_utc", "oracle_trade_number"]
+    ).reset_index(drop=True)
+
+
+def build_full_calendar_perfect_oracle(
+    m5: pd.DataFrame,
+    state: pd.DataFrame,
+    payoff_cfg: dict[str, Any],
+) -> pd.DataFrame:
+    index = m5.index
+    arrays = {
+        column: m5[column].to_numpy(dtype=float)
+        for column in (
+            "bid_open",
+            "bid_high",
+            "bid_low",
+            "ask_open",
+            "ask_high",
+            "ask_low",
+        )
+    }
+    spread_floor = (
+        float(payoff_cfg["exit"]["minimum_retail_spread_pips"]) * PIP
+    )
+    slippage = (
+        float(payoff_cfg["exit"]["extra_slippage_pips_per_side"]) * PIP
+    )
+    positions_by_date: dict[str, list[int]] = {}
+    for position, timestamp in enumerate(index):
+        if timestamp.weekday() < 5:
+            positions_by_date.setdefault(
+                timestamp.strftime("%Y-%m-%d"), []
+            ).append(position)
+
+    records = []
+    for date, positions in positions_by_date.items():
+        winners: list[dict[str, Any]] = []
+        selected_risk = None
+        for risk_pips in DENSE_RISK_TIERS_PIPS:
+            winners = []
+            for position in positions:
+                candidate = _dense_target_candidate(
+                    position,
+                    index,
+                    arrays,
+                    risk_pips,
+                    spread_floor,
+                    slippage,
+                )
+                if candidate is None:
+                    continue
+                winners.append(candidate)
+                if len(winners) == TARGET_TRADES_PER_ACTIVE_DAY:
+                    break
+            if len(winners) == TARGET_TRADES_PER_ACTIVE_DAY:
+                selected_risk = risk_pips
+                break
+        if len(winners) != TARGET_TRADES_PER_ACTIVE_DAY:
+            raise RuntimeError(
+                f"Full-calendar oracle cannot fill four winners on {date}"
+            )
+        for rank, winner in enumerate(winners, start=1):
+            entry_position = int(winner.pop("entry_position"))
+            exit_position = int(winner.pop("exit_position"))
+            records.append(
+                {
+                    "oracle_date": date,
+                    "oracle_trade_number": rank,
+                    "side": winner.pop("side"),
+                    "entry_time_utc": index[entry_position],
+                    "exit_time_utc": index[exit_position],
+                    "exit_reason": "TARGET_KNOWN_IN_FUTURE",
+                    "nominal_target_r": DENSE_TARGET_R,
+                    "risk_tier_pips": selected_risk,
+                    "fallback_risk_tier": (
+                        selected_risk != DENSE_RISK_TIERS_PIPS[0]
+                    ),
+                    **winner,
+                }
+            )
+    return assign_dense_regimes(pd.DataFrame(records), state)
+
+
+def dense_regime_attribution(
+    trades: pd.DataFrame,
+    recent_start: pd.Timestamp = pd.Timestamp("2026-01-01T00:00:00Z"),
+) -> pd.DataFrame:
+    rows = []
+    total = len(trades)
+    for regime in DENSE_REGIME_DEFINITIONS:
+        frame = trades[trades["regime"].eq(regime)]
+        recent = frame[frame["entry_time_utc"] >= recent_start]
+        rows.append(
+            {
+                "regime": regime,
+                "definition": DENSE_REGIME_DEFINITIONS[regime],
+                "trades": int(len(frame)),
+                "trade_share": len(frame) / total if total else 0.0,
+                "long_trades": int(frame["side"].eq("LONG").sum()),
+                "short_trades": int(frame["side"].eq("SHORT").sum()),
+                "active_days": int(frame["oracle_date"].nunique()),
+                "average_winner_r": (
+                    float(frame["r"].mean()) if not frame.empty else 0.0
+                ),
+                "net_r": float(frame["r"].sum()),
+                "recent_six_months_trades": int(len(recent)),
+                "recent_six_months_net_r": float(recent["r"].sum()),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
 def density_ladder(
     opportunity_outcomes: pd.DataFrame,
     m5: pd.DataFrame,
@@ -454,6 +716,9 @@ def run_retrospective_overfit() -> tuple[
     opportunities = build_opportunity_outcomes(
         owned, m5, entry_cfg, payoff_cfg
     )
+    full_calendar_oracle = build_full_calendar_perfect_oracle(
+        m5, state, payoff_cfg
+    )
     maximum_daily = int(entry_cfg["execution"]["max_trades_per_utc_day"])
     start = pd.Timestamp(entry_cfg["data"]["start_utc"])
     end = pd.Timestamp(entry_cfg["data"]["end_utc"])
@@ -509,13 +774,21 @@ def run_retrospective_overfit() -> tuple[
         "2026-06-30T23:59:59Z",
     )
     perfect_regimes = regime_attribution(perfect_oracle)
+    full_calendar_recent = _window(
+        full_calendar_oracle,
+        "2026-01-01T00:00:00Z",
+        "2026-06-30T23:59:59Z",
+    )
+    full_calendar_regimes = dense_regime_attribution(
+        full_calendar_oracle
+    )
     result = {
         "status": "INTENTIONALLY_OVERFIT_DIAGNOSTIC_NOT_TRADABLE",
         "warning": (
-            "The perfect oracle reads each candidate's future exit and deletes "
-            "every loss; other diagnostics use future daily counts or realized "
-            "cell outcomes. Nothing in this package is causal, out-of-sample, "
-            "or promotion evidence."
+            "The full-calendar oracle scans future long and short M5 paths to "
+            "choose four known winners on every weekday and deletes every "
+            "loss. Nothing in this package is causal, out-of-sample, or "
+            "promotion evidence."
         ),
         "method": {
             "gold_analogue": (
@@ -523,6 +796,9 @@ def run_retrospective_overfit() -> tuple[
                 "including a daily-density ladder and specialist-hour cells."
             ),
             "target_trades_per_active_day": TARGET_TRADES_PER_ACTIVE_DAY,
+            "target_trades_per_archived_weekday": (
+                TARGET_TRADES_PER_ACTIVE_DAY
+            ),
             "density_ladder_buckets": list(range(1, 13)),
             "candidate_cells": int(len(all_cells)),
             "cell_dimensions": CELL_COLUMNS,
@@ -548,8 +824,56 @@ def run_retrospective_overfit() -> tuple[
                 "Directly read future TARGET outcomes, retain four known "
                 "winners per qualifying day, and discard every losing trade."
             ),
+            "full_calendar_perfect_foresight_rule": (
+                "Evaluate both directions at distinct M5 timestamps, read the "
+                "next 12 hours, and retain four known 1.50R target hits on "
+                "every archived Monday-Friday date."
+            ),
         },
         "baseline": summarize(baseline, m5, start, end),
+        "full_calendar_perfect_foresight_oracle": {
+            "status": "DIRECT_FUTURE_PATH_LEAKAGE_ALL_WEEKDAYS",
+            "rule": (
+                "For every Monday-Friday date with archived M5 bars, inspect "
+                "both future long and short paths from distinct M5 entries and "
+                "retain the first four known 1.50R target hits."
+            ),
+            "full_history": summarize_perfect_oracle(
+                full_calendar_oracle, m5, start, end
+            ),
+            "by_period": {
+                name: summarize_perfect_oracle(
+                    _window(
+                        full_calendar_oracle, window_start, window_end
+                    ),
+                    m5,
+                    pd.Timestamp(window_start),
+                    pd.Timestamp(window_end),
+                )
+                for name, (window_start, window_end) in periods.items()
+            },
+            "latest_six_months": summarize_perfect_oracle(
+                full_calendar_recent,
+                m5,
+                pd.Timestamp("2026-01-01T00:00:00Z"),
+                pd.Timestamp("2026-06-30T23:59:59Z"),
+            ),
+            "long_trades": int(
+                full_calendar_oracle["side"].eq("LONG").sum()
+            ),
+            "short_trades": int(
+                full_calendar_oracle["side"].eq("SHORT").sum()
+            ),
+            "fallback_risk_dates": sorted(
+                full_calendar_oracle.loc[
+                    full_calendar_oracle["fallback_risk_tier"],
+                    "oracle_date",
+                ].unique()
+            ),
+            "regime_attribution": full_calendar_regimes.to_dict(
+                orient="records"
+            ),
+        },
         "perfect_foresight_four_winner_oracle": {
             "status": "DIRECT_FUTURE_OUTCOME_LEAKAGE",
             "rule": (
@@ -632,9 +956,9 @@ def run_retrospective_overfit() -> tuple[
             ),
         },
         "verdict": (
-            "The pure hindsight ceiling reaches four trades per active day "
-            "and 100% wins only by reading each candidate's future exit and "
-            "discarding every loss. It is label leakage, not a strategy."
+            "The dense pure-hindsight ceiling reaches exactly four winners on "
+            "every archived weekday only by scanning future long and short "
+            "paths from M5 entries. It is path leakage, not a strategy."
         ),
     }
     artifacts = {
@@ -648,6 +972,8 @@ def run_retrospective_overfit() -> tuple[
         "FOUR_TRADE_DAY_ORACLE_TRADES": density_oracle,
         "PERFECT_FORESIGHT_TRADES": perfect_oracle,
         "PERFECT_FORESIGHT_BY_REGIME": perfect_regimes,
+        "FULL_CALENDAR_PERFECT_FORESIGHT_TRADES": full_calendar_oracle,
+        "FULL_CALENDAR_BY_REGIME": full_calendar_regimes,
         "EQUITY_CURVES": _equity_rows(
             fitted, chronological, density_oracle, perfect_oracle
         ),
