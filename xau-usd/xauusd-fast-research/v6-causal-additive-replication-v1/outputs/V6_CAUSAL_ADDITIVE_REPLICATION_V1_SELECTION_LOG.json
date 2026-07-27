@@ -1,0 +1,307 @@
+[
+  {
+    "year": 2022,
+    "members": [
+      {
+        "rank": 1,
+        "member": "LONG__day_exShock_gNone_m0.0_p95",
+        "selection_score": 95.01765268101417,
+        "n": 340,
+        "win_rate_pct": 45.294117647058826,
+        "profit_factor": 2.486176751697767
+      },
+      {
+        "rank": 2,
+        "member": "LONG__NY_exShock_gNone_m0.0_p95",
+        "selection_score": 89.17785221326125,
+        "n": 171,
+        "win_rate_pct": 47.953216374269005,
+        "profit_factor": 2.061231791949612
+      },
+      {
+        "rank": 3,
+        "member": "LONG__NY_exShock_gNone_m0.0_p90",
+        "selection_score": 87.33825090857519,
+        "n": 341,
+        "win_rate_pct": 46.62756598240469,
+        "profit_factor": 2.0355342463085253
+      },
+      {
+        "rank": 4,
+        "member": "LONG__day_ALL_gNone_m0.0_p95",
+        "selection_score": 80.07556062805747,
+        "n": 402,
+        "win_rate_pct": 41.54228855721393,
+        "profit_factor": 1.9266636035421774
+      },
+      {
+        "rank": 5,
+        "member": "LONG__NY_exShock_g0.5_m0.0_p95",
+        "selection_score": 79.92036909561679,
+        "n": 76,
+        "win_rate_pct": 40.78947368421053,
+        "profit_factor": 1.9565447705703136
+      },
+      {
+        "rank": 6,
+        "member": "LONG__day_exShock_gNone_mNone_p95",
+        "selection_score": 78.55930075228281,
+        "n": 612,
+        "win_rate_pct": 41.17647058823529,
+        "profit_factor": 1.8691415082023757
+      },
+      {
+        "rank": 7,
+        "member": "LONG__NY_ALL_gNone_m0.0_p90",
+        "selection_score": 77.34204497397525,
+        "n": 390,
+        "win_rate_pct": 44.1025641025641,
+        "profit_factor": 1.6619740435705572
+      }
+    ]
+  },
+  {
+    "year": 2023,
+    "members": [
+      {
+        "rank": 1,
+        "member": "LONG__day_exShock_gNone_m0.0_p95",
+        "selection_score": 92.29920709266771,
+        "n": 368,
+        "win_rate_pct": 45.108695652173914,
+        "profit_factor": 2.35952557202469
+      },
+      {
+        "rank": 2,
+        "member": "LONG__NY_exShock_gNone_m0.0_p95",
+        "selection_score": 87.53579087791896,
+        "n": 189,
+        "win_rate_pct": 47.61904761904761,
+        "profit_factor": 1.9958371629435672
+      },
+      {
+        "rank": 3,
+        "member": "LONG__NY_exShock_gNone_m0.0_p90",
+        "selection_score": 84.6825463393722,
+        "n": 377,
+        "win_rate_pct": 45.88859416445623,
+        "profit_factor": 1.9396976087457982
+      },
+      {
+        "rank": 4,
+        "member": "LONG__NY_exShock_g0.5_m0.0_p95",
+        "selection_score": 81.32243144323954,
+        "n": 82,
+        "win_rate_pct": 40.243902439024396,
+        "profit_factor": 2.0539264502107573
+      },
+      {
+        "rank": 5,
+        "member": "LONG__day_ALL_gNone_m0.0_p95",
+        "selection_score": 77.1685694480931,
+        "n": 435,
+        "win_rate_pct": 41.14942528735632,
+        "profit_factor": 1.8009572080368386
+      },
+      {
+        "rank": 6,
+        "member": "LONG__day_exShock_gNone_mNone_p95",
+        "selection_score": 76.60347552830495,
+        "n": 669,
+        "win_rate_pct": 40.95665171898356,
+        "profit_factor": 1.7823411904660698
+      },
+      {
+        "rank": 7,
+        "member": "LONG__all_exShock_gNone_m0.0_p95",
+        "selection_score": 75.33292084585254,
+        "n": 779,
+        "win_rate_pct": 39.53786906290115,
+        "profit_factor": 1.7897525891475694
+      }
+    ]
+  },
+  {
+    "year": 2024,
+    "members": [
+      {
+        "rank": 1,
+        "member": "LONG__day_exShock_gNone_m0.0_p95",
+        "selection_score": 91.15362140879918,
+        "n": 397,
+        "win_rate_pct": 45.34005037783375,
+        "profit_factor": 2.2906785515482713
+      },
+      {
+        "rank": 2,
+        "member": "LONG__NY_exShock_gNone_m0.0_p95",
+        "selection_score": 87.11813619728441,
+        "n": 208,
+        "win_rate_pct": 48.07692307692308,
+        "profit_factor": 1.9520606560180667
+      },
+      {
+        "rank": 3,
+        "member": "LONG__NY_exShock_g0.5_m0.0_p95",
+        "selection_score": 80.41656588232078,
+        "n": 85,
+        "win_rate_pct": 40.0,
+        "profit_factor": 2.0208282941160394
+      },
+      {
+        "rank": 4,
+        "member": "LONG__NY_exShock_gNone_m0.0_p90",
+        "selection_score": 80.36581465861917,
+        "n": 421,
+        "win_rate_pct": 44.655581947743464,
+        "profit_factor": 1.785511635543786
+      },
+      {
+        "rank": 5,
+        "member": "LONG__day_exShock_gNone_mNone_p95",
+        "selection_score": 77.64121207192954,
+        "n": 721,
+        "win_rate_pct": 41.19278779472954,
+        "profit_factor": 1.8224212138600002
+      },
+      {
+        "rank": 6,
+        "member": "LONG__day_ALL_gNone_m0.0_p95",
+        "selection_score": 77.11873588066246,
+        "n": 469,
+        "win_rate_pct": 41.57782515991471,
+        "profit_factor": 1.7770455360373876
+      },
+      {
+        "rank": 7,
+        "member": "LONG__NY_ALL_gNone_m0.0_p95",
+        "selection_score": 76.34510693194542,
+        "n": 237,
+        "win_rate_pct": 44.303797468354425,
+        "profit_factor": 1.6020654731795498
+      }
+    ]
+  },
+  {
+    "year": 2025,
+    "members": [
+      {
+        "rank": 1,
+        "member": "LONG__day_exShock_gNone_m0.0_p95",
+        "selection_score": 89.66141294410008,
+        "n": 431,
+        "win_rate_pct": 45.011600928074245,
+        "profit_factor": 2.2324906008012912
+      },
+      {
+        "rank": 2,
+        "member": "LONG__NY_exShock_gNone_m0.0_p95",
+        "selection_score": 85.78675162852082,
+        "n": 230,
+        "win_rate_pct": 47.391304347826086,
+        "profit_factor": 1.9197723640347366
+      },
+      {
+        "rank": 3,
+        "member": "LONG__NY_exShock_g0.5_m0.0_p95",
+        "selection_score": 84.76889802403707,
+        "n": 90,
+        "win_rate_pct": 41.11111111111111,
+        "profit_factor": 2.182889345646298
+      },
+      {
+        "rank": 4,
+        "member": "LONG__NY_exShock_gNone_m0.0_p90",
+        "selection_score": 81.68236858920679,
+        "n": 470,
+        "win_rate_pct": 44.8936170212766,
+        "profit_factor": 1.83943757839651
+      },
+      {
+        "rank": 5,
+        "member": "LONG__day_exShock_g0.5_m0.0_p95",
+        "selection_score": 81.24875288994284,
+        "n": 164,
+        "win_rate_pct": 36.58536585365854,
+        "profit_factor": 2.233169351814215
+      },
+      {
+        "rank": 6,
+        "member": "LONG__day_exShock_gNone_mNone_p95",
+        "selection_score": 76.44055195667806,
+        "n": 777,
+        "win_rate_pct": 41.05534105534105,
+        "profit_factor": 1.7692605450668504
+      },
+      {
+        "rank": 7,
+        "member": "LONG__NY_ALL_gNone_m0.0_p95",
+        "selection_score": 76.32768028622675,
+        "n": 260,
+        "win_rate_pct": 43.84615384615385,
+        "profit_factor": 1.624076322003645
+      }
+    ]
+  },
+  {
+    "year": 2026,
+    "members": [
+      {
+        "rank": 1,
+        "member": "LONG__day_exShock_gNone_m0.0_p95",
+        "selection_score": 88.3867392628952,
+        "n": 474,
+        "win_rate_pct": 44.936708860759495,
+        "profit_factor": 2.1725015201067857
+      },
+      {
+        "rank": 2,
+        "member": "LONG__NY_exShock_gNone_m0.0_p95",
+        "selection_score": 84.21569580706205,
+        "n": 259,
+        "win_rate_pct": 46.71814671814672,
+        "profit_factor": 1.8748774544457663
+      },
+      {
+        "rank": 3,
+        "member": "LONG__NY_exShock_gNone_m0.0_p90",
+        "selection_score": 78.42243206310752,
+        "n": 536,
+        "win_rate_pct": 44.21641791044777,
+        "profit_factor": 1.7103007076329881
+      },
+      {
+        "rank": 4,
+        "member": "LONG__NY_exShock_gNone_mNone_p95",
+        "selection_score": 77.7961205138227,
+        "n": 465,
+        "win_rate_pct": 43.87096774193549,
+        "profit_factor": 1.6962576385943606
+      },
+      {
+        "rank": 5,
+        "member": "LONG__day_ALL_gNone_m0.0_p95",
+        "selection_score": 76.03059324125752,
+        "n": 553,
+        "win_rate_pct": 41.41048824593128,
+        "profit_factor": 1.7310052497663118
+      },
+      {
+        "rank": 6,
+        "member": "LONG__day_exShock_g0.5_m0.0_p95",
+        "selection_score": 75.80889556211105,
+        "n": 177,
+        "win_rate_pct": 36.15819209039548,
+        "profit_factor": 1.9825351735857788
+      },
+      {
+        "rank": 7,
+        "member": "BOTH_NY_exShock_gNone_m0.0_p95",
+        "selection_score": 75.20663452116094,
+        "n": 445,
+        "win_rate_pct": 43.37078651685393,
+        "profit_factor": 1.59179240021535
+      }
+    ]
+  }
+]
