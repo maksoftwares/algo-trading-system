@@ -179,6 +179,38 @@ negative under the extra-half-pip stress. The following three windows
 collapsed. The pre-open EUR-cross/DXY vote route is closed without
 post-outcome repair.
 
+## Official CFTC participant-flow boundary
+
+A genuinely different campaign used official CFTC Traders in Financial
+Futures positions for CME Euro FX. Report dates were lagged eight calendar
+days, and rows affected by the 2018-2019 and 2025 federal shutdowns and the
+2023 ION interruption were excluded before calculating weekly changes.
+
+Leveraged-money and asset-manager net-position changes voted directly;
+dealer inventory change voted inversely. The simple majority selected only
+the first Neutral midnight opening within five days of conservative
+availability. The outcome-blind census contained 241 trades, split 126
+long and 115 short.
+
+| Window | Trades | Win rate | PF | Net | Exact precision | 15m precision |
+|---|---:|---:|---:|---:|---:|---:|
+| 2023 | 28 | 35.71% | 0.799 | -3.70R | 35.71% | 50.00% |
+| 2024 | 31 | 32.26% | 0.685 | -6.78R | 32.26% | 41.94% |
+| 2025 | 28 | 46.43% | 1.247 | +3.80R | 46.43% | 64.29% |
+| 2026 H1 | 15 | 13.33% | 0.221 | -10.38R | 13.33% | 26.67% |
+| Overall | 102 | 34.31% | 0.752 | -17.05R | 34.31% | 48.04% |
+
+The 2025 window passed every annual economic gate, including extra-cost
+stress, but the effect did not persist. Development was negative, 2023 and
+2024 failed, and 2026 H1 collapsed to two wins in fifteen trades.
+
+All four preregistered vote-strength groups were negative over full
+history. Across the forward period, all 35 exact members won while all 67
+nonmembers lost. Weekly aggregate positioning improved precision by 3.20
+percentage points versus the prior pre-open price vote, but remained below
+the approximately 41% break-even boundary. The route is closed without
+participant or direction selection.
+
 ## Interpretation
 
 At a realized payoff near 1.44, break-even requires approximately 41% wins. The best stable causal variants remained around 33–35%. The 100%-winning Neutral oracle does not reveal a learnable process: it scans both future directions, keeps early target-first paths, and deletes every failure.
@@ -193,7 +225,8 @@ Progress now requires at least one source not adaptively exhausted here:
 2. event-time macroeconomic surprise data known at release;
 3. genuine executed-flow or multi-venue order-book imbalance rather than
    quoted Dukascopy volume; synchronized DXY/Treasury quoted M5 behavior has
-   now also failed;
+   now also failed, and weekly aggregate CFTC Euro FX positioning has also
+   failed;
 4. an explicit relaxation of the requested frequency/payoff objective.
 
 Until then, Regime 1 remains `CASH`.
@@ -211,4 +244,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_oracle_imitation.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_synchronous_crossasset.py
 uv run --with pandas --with numpy --with pyarrow python run_neutral_utc_open_vote.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_flow.py
 ```

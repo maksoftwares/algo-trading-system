@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,6 +46,11 @@ from eurusd_regime_specialists.neutral_crosspair import (
 )
 from eurusd_regime_specialists.neutral_crosspair_nonlinear import (
     verify_lock as verify_nonlinear_lock,
+)
+from eurusd_regime_specialists.neutral_cot_flow import (
+    load_config as load_cot_flow_config,
+    prepare_cot_flow_context,
+    verify_lock as verify_cot_flow_lock,
 )
 from eurusd_regime_specialists.neutral_tick_microstructure import (
     aggregate_tick_payload,
@@ -100,6 +106,7 @@ def test_lock():
     assert len(verify_oracle_imitation_lock()) == 2
     assert len(verify_synchronous_crossasset_lock()) == 3
     assert len(verify_utc_open_vote_lock()) == 7
+    assert len(verify_cot_flow_lock()) == 14
 
 
 def test_dukascopy_bi5_url_and_decoder():
@@ -320,6 +327,45 @@ def test_utc_open_vote_uses_only_completed_bounded_sources():
         60,
     )
     assert pd.isna(vote.iloc[-1])
+
+
+def test_cot_flow_excludes_delayed_reports_before_change():
+    raw = pd.DataFrame(
+        {
+            "Report_Date_as_YYYY-MM-DD": [
+                "2023-01-24",
+                "2023-01-31",
+                "2023-03-21",
+            ],
+            "Open_Interest_All": [1000, 1000, 1000],
+            "Dealer_Positions_Long_All": [400, 900, 350],
+            "Dealer_Positions_Short_All": [300, 100, 300],
+            "Asset_Mgr_Positions_Long_All": [200, 900, 350],
+            "Asset_Mgr_Positions_Short_All": [300, 100, 300],
+            "Lev_Money_Positions_Long_All": [200, 900, 100],
+            "Lev_Money_Positions_Short_All": [300, 100, 300],
+        }
+    )
+    context = prepare_cot_flow_context(
+        raw, load_cot_flow_config()
+    )
+    assert list(
+        context["report_date_utc"].dt.strftime("%Y-%m-%d")
+    ) == ["2023-01-24", "2023-03-21"]
+    actual = context.iloc[-1]
+    assert actual["dealer_flow_change"] == pytest.approx(-0.05)
+    assert actual["asset_flow_change"] == pytest.approx(0.15)
+    assert actual["leveraged_flow_change"] == pytest.approx(
+        -0.10
+    )
+    assert actual["vote_dealer"] == 1.0
+    assert actual["vote_asset"] == 1.0
+    assert actual["vote_leveraged"] == -1.0
+    assert actual["vote_sum"] == 1.0
+    assert actual["side"] == "LONG"
+    assert actual["availability_utc"] == pd.Timestamp(
+        "2023-03-29T00:00:00Z"
+    )
 
 
 def test_wilder_seed_and_recursion():

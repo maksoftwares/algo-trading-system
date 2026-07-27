@@ -1,0 +1,168 @@
+{
+  "campaign_id": "eurusd-neutral-cot-flow-v1",
+  "frozen_at_utc": "2026-07-27T18:20:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "parent_contract": {
+    "path": "config/frozen_neutral_oracle_imitation.json",
+    "sha256": "9439fdcdfadde2a0fb692df7fd8f9be56c89261dd361a71c8824b1b65efc8000"
+  },
+  "source": {
+    "provider": "U.S. Commodity Futures Trading Commission",
+    "report": "Traders in Financial Futures - Futures Only",
+    "market": "EURO FX - CHICAGO MERCANTILE EXCHANGE",
+    "market_code": "099741",
+    "root": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/forex-research/data/external/cftc_cot/financial_futures",
+    "archives": {
+      "fut_fin_txt_2016.zip": "e8570bcd83df5c3e25aca61a59985001db83a8299a25943525c8d109ffc94a15",
+      "fut_fin_txt_2017.zip": "e6e2dd537efcc57cdd6cdcc4e45e567fd47e65d8afc8369d8383bf09195ae7f5",
+      "fut_fin_txt_2018.zip": "6843d130a25a17c6248df67463810f02077ef4eeafdd629299d21c18f5125e40",
+      "fut_fin_txt_2019.zip": "631b31880d513072aa50d63117c896184dd35db3cc8fcdd6debd80197ee7a661",
+      "fut_fin_txt_2020.zip": "c90d98d94db708772d669f263fb8061c75f8a7f681ba231fb21247e5c9798e6b",
+      "fut_fin_txt_2021.zip": "5c929991038c70ae2501661b6d442b9e784d3c29d3166ceac2e21b45ac93d56a",
+      "fut_fin_txt_2022.zip": "94c9c1fdee9dfbe377a09923ddfe26b88d3460605dd076081f221ad367d88601",
+      "fut_fin_txt_2023.zip": "43c3dbdd4d01fceefad5e457003751cdc0974c7cf46097b322e26e9e2fe44d7a",
+      "fut_fin_txt_2024.zip": "3f00585741a7cf76c207df640951d644dd91ff22a1106b38ca37a2469c765637",
+      "fut_fin_txt_2025.zip": "2ea0cda6395f7dd6501c27422be3763e1f2f5b41b768cfd36b871f092a07d438",
+      "fut_fin_txt_2026.zip": "2a00eda53ee25b2364cc8a3d4ef534e04552c75c801d5903475696f528de826d"
+    },
+    "official_about_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/AbouttheCOTReports/index.htm",
+    "official_release_schedule_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+    "official_special_announcements_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+  },
+  "availability": {
+    "report_date_lag_calendar_days": 8,
+    "available_time_utc": "00:00",
+    "maximum_signal_age_calendar_days": 5,
+    "interrupted_report_date_exclusions": [
+      {
+        "start": "2018-12-24",
+        "end": "2019-02-19",
+        "reason": "2018-2019 lapse in federal appropriations"
+      },
+      {
+        "start": "2023-01-31",
+        "end": "2023-03-14",
+        "reason": "ION Cleared Derivatives reporting interruption"
+      },
+      {
+        "start": "2025-09-30",
+        "end": "2025-12-16",
+        "reason": "2025 lapse in federal appropriations"
+      }
+    ],
+    "policy": "Exclude interrupted report rows entirely, calculate change only across admissible rows, then make an admissible report usable at 00:00 UTC eight calendar days after its report date."
+  },
+  "candidate": {
+    "regime": "NEUTRAL",
+    "shock_allowed": false,
+    "joint_compression_allowed": false,
+    "entry_time_utc": "00:00",
+    "one_candidate_per_cot_report": true,
+    "selection": "FIRST_NEUTRAL_UTC_OPEN_ON_OR_AFTER_AVAILABILITY_WITHIN_FIVE_CALENDAR_DAYS",
+    "participant_votes": {
+      "leveraged_money": "SIGN_OF_WEEK_OVER_WEEK_CHANGE_IN_NET_POSITION_DIVIDED_BY_OPEN_INTEREST",
+      "asset_manager": "SIGN_OF_WEEK_OVER_WEEK_CHANGE_IN_NET_POSITION_DIVIDED_BY_OPEN_INTEREST",
+      "dealer": "NEGATIVE_SIGN_OF_WEEK_OVER_WEEK_CHANGE_IN_NET_POSITION_DIVIDED_BY_OPEN_INTEREST"
+    },
+    "all_three_votes_must_be_nonzero": true,
+    "decision": "SIMPLE_MAJORITY_OF_THREE_PARTICIPANT_FLOW_VOTES",
+    "long_rule": "vote_sum >= 1",
+    "short_rule": "vote_sum <= -1"
+  },
+  "outcome_blind_census": {
+    "usable_cot_reports": 519,
+    "valid_flow_reports": 518,
+    "neutral_open_candidates": 655,
+    "trade_candidates": 241,
+    "long_candidates": 126,
+    "short_candidates": 115,
+    "by_year": {
+      "2019": 30,
+      "2020": 41,
+      "2021": 35,
+      "2022": 33,
+      "2023": 28,
+      "2024": 31,
+      "2025": 28,
+      "2026": 15
+    },
+    "minimum_trade_candidates": 220,
+    "minimum_each_full_forward_year": 20,
+    "minimum_2026_h1": 10
+  },
+  "label": {
+    "risk_mode": "FIXED",
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "same_bar_policy": "stop_first",
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1
+  },
+  "development_window": [
+    "2019-01-02T00:00:00Z",
+    "2022-12-31T23:59:59Z"
+  ],
+  "walk_forward_windows": {
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "execution": {
+    "maximum_concurrent_positions": 1,
+    "maximum_trades_per_utc_day": 1,
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_open_portfolio_r": 0.25
+  },
+  "development_gate": {
+    "minimum_trades": 120,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.1,
+    "minimum_expectancy_r": 0.0
+  },
+  "final_admission": {
+    "minimum_trades_by_window": {
+      "validation_2023": 20,
+      "validation_2024": 20,
+      "pseudo_oos_2025": 20,
+      "pseudo_oos_2026h1": 10
+    },
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.1,
+    "minimum_expectancy_r": 0.0,
+    "maximum_drawdown_r_overall": 30.0,
+    "minimum_exact_match_precision_overall": 0.25,
+    "minimum_exact_match_recall_overall": 0.02,
+    "minimum_15m_match_precision_overall": 0.25,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  }
+}
