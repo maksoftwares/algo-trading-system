@@ -1,0 +1,58 @@
+{
+  "schema_version": "eurusd_neutral_growth_risk_consensus_census_v1",
+  "family": "N46_NEUTRAL_GROWTH_RISK_CONSENSUS",
+  "status": "CENSUS_PASS_DEVELOPMENT_ALLOWED",
+  "census": {
+    "neutral_dates_total": 642,
+    "neutral_dates_in_source_windows": 642,
+    "expected_decision_points": 1926,
+    "source_row_missing_points": 924,
+    "noncausal_or_incomplete_points": 9,
+    "causal_complete_points": 993,
+    "mixed_or_zero_cash_points": 583,
+    "quarantine_cash_points": 0,
+    "consensus_candidates": 410,
+    "candidate_dates": 261,
+    "by_window": {
+      "development_2022": 104,
+      "confirmation_2023": 106,
+      "forward_2024": 66,
+      "forward_2025": 85,
+      "recent_2026_h1": 49
+    },
+    "by_expert": {
+      "ASIA_HANDOFF_0300": 148,
+      "EUROPE_MORNING_0900": 124,
+      "US_RISK_1500": 138
+    },
+    "by_side": {
+      "LONG": 223,
+      "SHORT": 187
+    },
+    "gate_results": {
+      "total": true,
+      "development": true,
+      "confirmation": true,
+      "full_forward_years": true,
+      "recent_half_year": true,
+      "both_sides": true,
+      "all_experts": true
+    },
+    "passed": true
+  },
+  "growth_risk_source": {
+    "origin": "OFFICIAL_DUKASCOPY_JETTA_V1",
+    "path": "D:/AlgoTradingData/C_DRIVE/DukascopyGrowthRiskFoundationV1/curated/growth_risk_m5_v1.parquet",
+    "sha256": "c1b03f03c19af300dc378f892e8d538b7c5a4a05e66e09572de896b1359a16c3",
+    "manifest_path": "D:/AlgoTradingData/C_DRIVE/DukascopyGrowthRiskFoundationV1/curated/growth_risk_m5_v1.manifest.json",
+    "manifest_sha256": "874363b2f866172a01954f538d05063d3ede9ab232b51163d21bfbb281215b28",
+    "schema_version": "dukascopy_growth_risk_pulse_m5_v1",
+    "rows": 334801,
+    "first_bar_open_timestamp_ms": 1641164400000,
+    "last_bar_open_timestamp_ms": 1782863700000,
+    "paid_data_used": false,
+    "databento_used": false
+  },
+  "eurusd_outcomes_loaded": false,
+  "broker_action_allowed": false
+}

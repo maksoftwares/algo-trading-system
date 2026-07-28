@@ -1,0 +1,175 @@
+{
+  "schema_version": "eurusd_neutral_growth_risk_development_v1",
+  "family": "N46_NEUTRAL_GROWTH_RISK_CONSENSUS",
+  "status": "REJECTED_IN_DEVELOPMENT_2023_2026_FORBIDDEN",
+  "census": {
+    "neutral_dates_total": 642,
+    "neutral_dates_in_source_windows": 642,
+    "expected_decision_points": 1926,
+    "source_row_missing_points": 924,
+    "noncausal_or_incomplete_points": 9,
+    "causal_complete_points": 993,
+    "mixed_or_zero_cash_points": 583,
+    "quarantine_cash_points": 0,
+    "consensus_candidates": 410,
+    "candidate_dates": 261,
+    "by_window": {
+      "development_2022": 104,
+      "confirmation_2023": 106,
+      "forward_2024": 66,
+      "forward_2025": 85,
+      "recent_2026_h1": 49
+    },
+    "by_expert": {
+      "ASIA_HANDOFF_0300": 148,
+      "EUROPE_MORNING_0900": 124,
+      "US_RISK_1500": 138
+    },
+    "by_side": {
+      "LONG": 223,
+      "SHORT": 187
+    },
+    "gate_results": {
+      "total": true,
+      "development": true,
+      "confirmation": true,
+      "full_forward_years": true,
+      "recent_half_year": true,
+      "both_sides": true,
+      "all_experts": true
+    },
+    "passed": true
+  },
+  "stage": "development_2022",
+  "stage_bounds": [
+    "2022-01-01T00:00:00Z",
+    "2022-12-31T23:59:59Z"
+  ],
+  "development": {
+    "overall": {
+      "trades": 68,
+      "wins": 31,
+      "losses": 37,
+      "win_rate": 0.45588235294117646,
+      "average_win_r": 1.4509878217410543,
+      "average_loss_r": 1.0117068564413878,
+      "realized_payoff_ratio": 1.434197873131757,
+      "profit_factor": 1.2016252450563372,
+      "net_r": 7.547468785641341,
+      "expectancy_r": 0.11099218802413736,
+      "max_drawdown_r": 7.4009308178141096
+    },
+    "by_side": {
+      "LONG": {
+        "trades": 38,
+        "wins": 16,
+        "losses": 22,
+        "win_rate": 0.42105263157894735,
+        "average_win_r": 1.4886733112189419,
+        "average_loss_r": 1.0119294779456591,
+        "realized_payoff_ratio": 1.4711235749759273,
+        "profit_factor": 1.0699080545279471,
+        "net_r": 1.5563244646985788,
+        "expectancy_r": 0.040955906965752076,
+        "max_drawdown_r": 5.721855615170591
+      },
+      "SHORT": {
+        "trades": 30,
+        "wins": 15,
+        "losses": 15,
+        "win_rate": 0.5,
+        "average_win_r": 1.4107899662979735,
+        "average_loss_r": 1.0113803449017897,
+        "realized_payoff_ratio": 1.3949153485229817,
+        "profit_factor": 1.3949153485229817,
+        "net_r": 5.9911443209427615,
+        "expectancy_r": 0.19970481069809204,
+        "max_drawdown_r": 4.214335974603999
+      }
+    },
+    "by_expert": {
+      "ASIA_HANDOFF_0300": {
+        "trades": 35,
+        "wins": 16,
+        "losses": 19,
+        "win_rate": 0.45714285714285713,
+        "average_win_r": 1.4860921684209716,
+        "average_loss_r": 1.012278794916044,
+        "realized_payoff_ratio": 1.4680660860274415,
+        "profit_factor": 1.2362661777073192,
+        "net_r": 4.544177591330712,
+        "expectancy_r": 0.12983364546659176,
+        "max_drawdown_r": 4.5885148138882155
+      },
+      "EUROPE_MORNING_0900": {
+        "trades": 19,
+        "wins": 10,
+        "losses": 9,
+        "win_rate": 0.5263157894736842,
+        "average_win_r": 1.4894449817294304,
+        "average_loss_r": 1.0091736152071382,
+        "realized_payoff_ratio": 1.4759055917486645,
+        "profit_factor": 1.6398951019429608,
+        "net_r": 5.811887280430062,
+        "expectancy_r": 0.30588880423316117,
+        "max_drawdown_r": 3.0704941125225775
+      },
+      "US_RISK_1500": {
+        "trades": 14,
+        "wins": 5,
+        "losses": 9,
+        "win_rate": 0.35714285714285715,
+        "average_win_r": 1.2617395923885666,
+        "average_loss_r": 1.0130326720069183,
+        "realized_payoff_ratio": 1.2455073042105693,
+        "profit_factor": 0.6919485023392051,
+        "net_r": -2.8085960861194326,
+        "expectancy_r": -0.20061400615138805,
+        "max_drawdown_r": 4.778806093897284
+      }
+    },
+    "gate_results": {
+      "minimum_trades": false,
+      "win_rate_band": true,
+      "realized_payoff_band": true,
+      "profit_factor": true,
+      "positive_expectancy": true,
+      "side_trade_capacity": true,
+      "side_profit_factor": true,
+      "drawdown": true
+    },
+    "passed": false
+  },
+  "execution_skips": {
+    "position_open": 0,
+    "entry_bar_missing": 0,
+    "prior_structure_missing_or_noncontiguous": 0,
+    "risk_ceiling": 36
+  },
+  "eurusd_bounded_load": {
+    "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+    "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "requested_start_utc": "2022-01-01T00:00:00+00:00",
+    "read_start_with_stop_lookback_utc": "2021-12-31T23:00:00+00:00",
+    "stage_end_utc": "2022-12-31T23:59:59+00:00",
+    "loaded_first_timestamp_utc": "2022-01-02T22:00:00+00:00",
+    "loaded_last_timestamp_utc": "2022-12-30T21:55:00+00:00",
+    "loaded_rows": 74873,
+    "future_rows_loaded": false
+  },
+  "later_eurusd_outcomes_loaded": false,
+  "growth_risk_source": {
+    "origin": "OFFICIAL_DUKASCOPY_JETTA_V1",
+    "path": "D:/AlgoTradingData/C_DRIVE/DukascopyGrowthRiskFoundationV1/curated/growth_risk_m5_v1.parquet",
+    "sha256": "c1b03f03c19af300dc378f892e8d538b7c5a4a05e66e09572de896b1359a16c3",
+    "manifest_path": "D:/AlgoTradingData/C_DRIVE/DukascopyGrowthRiskFoundationV1/curated/growth_risk_m5_v1.manifest.json",
+    "manifest_sha256": "874363b2f866172a01954f538d05063d3ede9ab232b51163d21bfbb281215b28",
+    "schema_version": "dukascopy_growth_risk_pulse_m5_v1",
+    "rows": 334801,
+    "first_bar_open_timestamp_ms": 1641164400000,
+    "last_bar_open_timestamp_ms": 1782863700000,
+    "paid_data_used": false,
+    "databento_used": false
+  },
+  "broker_action_allowed": false
+}

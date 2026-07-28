@@ -1,0 +1,20 @@
+{
+  "campaign_id": "eurusd-neutral-growth-risk-consensus-v1",
+  "family": "N46_NEUTRAL_GROWTH_RISK_CONSENSUS",
+  "closed_at_utc": "2026-07-28T13:30:00Z",
+  "status": "REJECTED_IN_DEVELOPMENT_2023_2026_FORBIDDEN",
+  "contract_rewritten_after_outcome": false,
+  "development_result_profitable": true,
+  "rejection_reason": "FROZEN_MINIMUM_80_TRADES_FAILED_WITH_68_EXECUTED_TRADES",
+  "later_eurusd_outcomes_loaded": false,
+  "broker_action_allowed": false,
+  "files": {
+    "outputs/neutral_growth_risk_consensus/CENSUS.json": "23cc544da5b882331561d74f5c704a3b9bc7d367b0843dc087249898bf0f67e1",
+    "outputs/neutral_growth_risk_consensus/CANDIDATES_OUTCOME_BLIND.parquet": "8e07592e2e79cf05712ba5d22c7e0c493ebb04e78e5eec7f83b4c2dd66227c6a",
+    "outputs/neutral_growth_risk_consensus/DEVELOPMENT_RESULT.json": "d3b40c3a25083a729b134fb6325eadbfb3dabf9e8a21f20043947d57cc70c690",
+    "outputs/neutral_growth_risk_consensus/DEVELOPMENT_CANDIDATES.parquet": "8b074ffc9bef6de5a9ea55097e9f32bdd4a4394f1954da5441564c29c9fdca92",
+    "outputs/neutral_growth_risk_consensus/DEVELOPMENT_TRADES.parquet": "b11a71cc684cfd503d64414d283fdb1044609846be288454f74622eb15b64315",
+    "EURUSD_NEUTRAL_GROWTH_RISK_CONSENSUS_DEVELOPMENT_VERDICT_2026_07_28.md": "7a1928c9f687a01ec6021394ad827a3a92317a143f671b202b3549fbfc61b069"
+  },
+  "next_allowed_action": "PREREGISTER_DISTINCT_ADAPTIVE_SUCCESSOR_BEFORE_2023_OUTCOME"
+}
