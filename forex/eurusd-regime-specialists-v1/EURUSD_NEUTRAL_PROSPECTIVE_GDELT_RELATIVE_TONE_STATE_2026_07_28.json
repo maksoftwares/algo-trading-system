@@ -1,0 +1,48 @@
+{
+  "schema_version": "eurusd_neutral_prospective_gdelt_relative_tone_state_v1",
+  "as_of_utc": "2026-07-28T19:38:31.4626873Z",
+  "status": "FROZEN_WAITING_FOR_FIRST_PROSPECTIVE_CAPTURE",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "strategy_preregistration_lock_sha256": "0b29e6b578a3114e4249495db734746307fbd750f3f8950acf0285cb1250a874",
+  "source_and_decision_implementation_lock_sha256": "4622fc9b2f10f67cb6c2a1d3262c3f5e448668712cc1b01c853fb6f4a622a131",
+  "path_implementation_lock_sha256": "5947804271412a3590925d54d561115d5c179b7ab8c5a31b94738d5da4cee250",
+  "first_entry_date_utc": "2026-07-29",
+  "source_capture": {
+    "status": "WAITING_FOR_CAPTURE_WINDOW",
+    "capture_window_start_utc": "2026-07-29T00:01:00Z",
+    "decision_deadline_utc": "2026-07-29T00:15:00Z",
+    "complete_on_time_manifests": 0
+  },
+  "decision": {
+    "status": "WAITING_FOR_DECISION_TIME",
+    "decision_due_at_utc": "2026-07-29T00:15:00Z",
+    "ownership_record_available": false,
+    "signals": 0
+  },
+  "execution": {
+    "shadow_entry_time_utc": "2026-07-29T00:20:00Z",
+    "conditional_path_capture_utc": "2026-07-29T04:21:00Z",
+    "closed_trades": 0,
+    "net_r": 0.0,
+    "profit_factor": 0.0
+  },
+  "software_verification": {
+    "full_test_suite": "331 passed, 2 warnings",
+    "targeted_new_file_lint": "PASSED",
+    "package_wide_lint": "NOT_A_GATE_573_PRE_EXISTING_FINDINGS_UNDER_CURRENT_RUFF",
+    "json_artifacts_validated": 9
+  },
+  "scheduled_boundary_helper": {
+    "pid": 48480,
+    "status": "RUNNING",
+    "stdout_path": "D:/AlgoTradingData/prospective/eurusd-neutral-gdelt-relative-tone-v1/operations/20260729_boundary.stdout.log",
+    "stderr_path": "D:/AlgoTradingData/prospective/eurusd-neutral-gdelt-relative-tone-v1/operations/20260729_boundary.stderr.log",
+    "broker_action_allowed": false
+  },
+  "historical_backtest_run": false,
+  "historical_eurusd_pnl_loaded": false,
+  "oracle_rows_loaded": false,
+  "profitability_review_allowed": false,
+  "oracle_imitation_claim_allowed": false,
+  "broker_action_allowed": false
+}

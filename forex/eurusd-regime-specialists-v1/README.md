@@ -58,6 +58,9 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 52. Neutral oracle target-timing audit: the source-hashed perfect-foresight ledger contains 2,615 Neutral oracle rows on 662 dates. Because the oracle scans M5 candidates chronologically and stops after its first four target-before-stop winners, 2,482 entries (94.91%) occur before 01:00 UTC. Zero lie within four hours of the prospective macro specialist's 12:45 UTC entry clock. The macro rule can still be evaluated as a profitable Neutral-owned specialist, but it cannot claim temporal imitation without passing the separately frozen one-to-one timing test; this distinction changes no signal or threshold.
 53. GDELT GKG source audit: a no-login official 15-minute GKG batch was preserved on `D:` with an exact provider-MD5 match and independent SHA-256. All 1,800 rows have the expected 27 fields and one batch timestamp. The feed contains central-bank and currency themes, but a strict monetary-policy-plus-organization filter found 12 Fed documents and zero ECB documents, while several Fed matches concerned unrelated oil, equity, or political context. The free timestamped source is accepted only for a separately frozen multi-date coverage census; no EURUSD signal, threshold, outcome, or broker action was created.
 54. GDELT multi-date coverage census: before downloading another source file, 24 entry dates were fixed as the first and third Tuesday of each month from August 2025 through July 2026. Only four prior-date 23:00-23:45 GKG batches per date may be requested, for 96 files. File, schema, paired ECB/Fed-date, unique-source, concentration, and duplication gates are frozen. EURUSD prices, oracle rows, direction mapping, and P&L are prohibited; failure closes the source lane and passing permits only a separately preregistered prospective design.
+55. GDELT coverage result: 95 of 96 frozen archives passed strict validation, 23 of 24 dates were complete, and 17 dates contained both ECB and Fed documents. The filter retained 57 ECB documents from 53 sources and 733 Fed documents from 375 sources; largest-source shares were 3.51% and 3.00%, with zero duplicate-document share. All ten capacity gates passed without loading EURUSD prices, returns, oracle rows, or P&L.
+56. GDELT source-only relative tone: one median-of-source-medians ECB-minus-Fed transform and its MAD-normalized threshold were locked before tone inspection. All 790 strict documents had finite tone, 12 dates met two-source quorum on both sides, and six source-only candidates split 3 LONG / 3 SHORT. This passed the frozen transform-capacity gates but did not test return prediction.
+57. Prospective GDELT Neutral expert: the exact source filter, relative-tone transform, Neutral ownership, 00:15 decision, 00:20 bid/ask shadow entry, 0.7-pip spread floor, 1.5-pip spread ceiling, adverse slippage, four-pip stop, six-pip target, four-hour path, and conservative cross-expert conflict rule are implementation-hash locked before the 29 July start. Frequency is not a gate. The first boundary is scheduled, but signals, trades, P&L, profitability approval, and broker authorization remain zero.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -79,6 +82,9 @@ Key reports:
 - `EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_PREREG_2026_07_27.md`
 - `EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_DATA_AUDIT_2026_07_27.md`
 - `EURUSD_NEUTRAL_CME_SPAN_FREE_SOURCE_AUDIT_2026_07_27.md`
+- `EURUSD_NEUTRAL_GDELT_COVERAGE_CENSUS_RESULT_2026_07_28.md`
+- `EURUSD_NEUTRAL_GDELT_RELATIVE_TONE_DESIGN_AUDIT_RESULT_2026_07_28.md`
+- `EURUSD_NEUTRAL_PROSPECTIVE_GDELT_RELATIVE_TONE_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_FUTURES_PARTICIPATION_PREREG_2026_07_28.md`

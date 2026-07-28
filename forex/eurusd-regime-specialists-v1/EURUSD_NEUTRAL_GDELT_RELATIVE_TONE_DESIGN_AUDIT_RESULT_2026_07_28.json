@@ -1,0 +1,27 @@
+{
+  "schema_version": "eurusd_neutral_gdelt_relative_tone_design_audit_repo_result_v1",
+  "evaluated_at_utc": "2026-07-28T19:25:12.319278Z",
+  "status": "PASS_SOURCE_ONLY_TRANSFORM_CAPACITY",
+  "preregistration_lock_sha256": "83a47ae5e96ae9b5c618c5ffeedc6cbefe25877a967a0661df42470873a78226",
+  "result_path": "D:/AlgoTradingData/source-audits/gdelt-gkg-coverage-census-v1/RELATIVE_TONE_DESIGN_AUDIT.json",
+  "result_sha256": "f61fb06dfbb1683a0df88b2e6081e70307356991c9ef7bbb6f16bf1160698248",
+  "strict_deduplicated_documents": 790,
+  "finite_tone_documents": 790,
+  "finite_tone_parse_rate": 1.0,
+  "source_quorum_dates": 12,
+  "candidate_signal_dates": 6,
+  "candidate_side_counts": {
+    "LONG": 3,
+    "SHORT": 3
+  },
+  "largest_direction_share": 0.5,
+  "all_source_only_gates_passed": true,
+  "decision": "PASS_PREREGISTER_PROSPECTIVE_GDELT_RELATIVE_TONE_EXPERT",
+  "strategy_preregistered_by_audit": false,
+  "eurusd_prices_loaded": false,
+  "eurusd_returns_loaded": false,
+  "oracle_rows_loaded": false,
+  "pnl_loaded": false,
+  "signal_generated": false,
+  "broker_action_allowed": false
+}

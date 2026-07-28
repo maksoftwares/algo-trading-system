@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_neutral_prospective_gdelt_relative_tone_v1_lock",
+  "locked_at_utc": "2026-07-28T19:27:04.0511464Z",
+  "locked_before_prospective_start_and_first_source_capture": true,
+  "locked_before_first_signal_and_trade": true,
+  "historical_eurusd_prices_loaded": false,
+  "historical_eurusd_returns_loaded": false,
+  "historical_oracle_rows_loaded": false,
+  "historical_pnl_loaded": false,
+  "prospective_source_archives_captured_before_lock": 0,
+  "prospective_signals_before_lock": 0,
+  "prospective_trades_before_lock": 0,
+  "broker_action_allowed": false,
+  "source_design_audit": {
+    "path": "D:/AlgoTradingData/source-audits/gdelt-gkg-coverage-census-v1/RELATIVE_TONE_DESIGN_AUDIT.json",
+    "sha256": "f61fb06dfbb1683a0df88b2e6081e70307356991c9ef7bbb6f16bf1160698248"
+  },
+  "files": {
+    "config/frozen_prospective_neutral_gdelt_relative_tone_v1.json": "72106d4ab8d4cd012fe932904030307b53719a5ebf1f4ab2aca32afaf058986a",
+    "EURUSD_NEUTRAL_PROSPECTIVE_GDELT_RELATIVE_TONE_PREREG_2026_07_28.md": "bc6bb04df500012a85c4c68217b8ab7f82c81e50caf0b95a4d3739c871e78172"
+  }
+}

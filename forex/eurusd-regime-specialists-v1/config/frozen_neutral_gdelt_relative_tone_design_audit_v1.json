@@ -1,0 +1,58 @@
+{
+  "schema_version": "eurusd_neutral_gdelt_relative_tone_design_audit_v1",
+  "frozen_at_utc": "2026-07-28T19:22:30Z",
+  "research_only": true,
+  "source_only_design_audit": true,
+  "strategy_preregistered": false,
+  "eurusd_prices_allowed": false,
+  "eurusd_returns_allowed": false,
+  "oracle_rows_allowed": false,
+  "pnl_allowed": false,
+  "broker_action_allowed": false,
+  "source_census": {
+    "manifest_path": "D:/AlgoTradingData/source-audits/gdelt-gkg-coverage-census-v1/MANIFEST.json",
+    "manifest_sha256": "4b279b62cd25d7c0d01927e0a006742606f5ed42d493cff0a74a57ac89b89be3",
+    "normalized_sha256": "26cf36b3b2f38a3b6b169005c3c5f9e1a730f1de9da223bcde10c9ec02dfa66c",
+    "capacity_gates_passed": true,
+    "target_entry_dates": 24,
+    "validated_archives": 95
+  },
+  "document_filter": {
+    "reuse_exact_census_strict_filter": true,
+    "deduplicate_by": "V2DOCUMENTIDENTIFIER",
+    "tone_field": "V2TONE_FIRST_COMPONENT",
+    "tone_must_be_finite": true,
+    "source_key": "V2SOURCECOMMONNAME_LOWERCASE_WITH_DOCUMENT_HOST_FALLBACK"
+  },
+  "frozen_candidate_transform": {
+    "minimum_unique_sources_per_side_per_date": 2,
+    "maximum_largest_source_share_per_side_per_date": 0.5,
+    "per_source_score": "MEDIAN_DOCUMENT_TONE",
+    "per_side_score": "MEDIAN_SOURCE_SCORE",
+    "relative_tone": "ECB_SIDE_SCORE_MINUS_FED_SIDE_SCORE",
+    "pooled_dispersion": "MEDIAN_ABSOLUTE_DEVIATION_OF_ALL_ECB_AND_FED_SOURCE_SCORES",
+    "dispersion_floor": 0.5,
+    "strength": "ABS_RELATIVE_TONE_DIVIDED_BY_MAX_DISPERSION_FLOOR_OR_POOLED_DISPERSION",
+    "minimum_strength": 1.0,
+    "long_mapping": "RELATIVE_TONE_POSITIVE",
+    "short_mapping": "RELATIVE_TONE_NEGATIVE",
+    "zero_relative_tone_action": "NO_CANDIDATE",
+    "hypothetical_source_decision_time_utc": "00:15",
+    "strategy_or_entry_rule_created_by_this_audit": false
+  },
+  "source_only_capacity_gates": {
+    "minimum_finite_tone_parse_rate": 0.99,
+    "minimum_dates_with_two_sources_each_side": 8,
+    "minimum_candidate_signal_dates": 6,
+    "minimum_long_candidate_dates": 2,
+    "minimum_short_candidate_dates": 2,
+    "maximum_largest_direction_share": 0.8
+  },
+  "decision_policy": {
+    "capacity_failure_action": "CLOSE_GDELT_RELATIVE_TONE_LANE_WITHOUT_STRATEGY",
+    "capacity_pass_action": "PREREGISTER_PROSPECTIVE_GDELT_RELATIVE_TONE_EXPERT_BEFORE_FIRST_SIGNAL",
+    "candidate_transform_change_after_tone_inspection_forbidden": true,
+    "historical_eurusd_or_oracle_evaluation_forbidden": true,
+    "automatic_strategy_or_broker_activation": false
+  }
+}

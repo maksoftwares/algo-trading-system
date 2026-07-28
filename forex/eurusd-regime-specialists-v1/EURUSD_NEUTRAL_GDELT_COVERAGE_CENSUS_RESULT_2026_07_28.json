@@ -1,0 +1,45 @@
+{
+  "schema_version": "eurusd_neutral_gdelt_coverage_census_repo_result_v1",
+  "evaluated_at_utc": "2026-07-28T19:21:03.7397499Z",
+  "status": "PASS_SOURCE_CAPACITY_ONLY",
+  "preregistration_lock_sha256": "fcc64a2e4c2e25412c5abf95c7c4343f3e4c1d871bf342ca2fe85834d504d4a0",
+  "manifest_path": "D:/AlgoTradingData/source-audits/gdelt-gkg-coverage-census-v1/MANIFEST.json",
+  "manifest_sha256": "4b279b62cd25d7c0d01927e0a006742606f5ed42d493cff0a74a57ac89b89be3",
+  "normalized_sha256": "26cf36b3b2f38a3b6b169005c3c5f9e1a730f1de9da223bcde10c9ec02dfa66c",
+  "target_files": 96,
+  "successful_files": 95,
+  "successful_file_rate": 0.9895833333333334,
+  "complete_entry_dates": 23,
+  "dates_with_both_strict_ecb_and_fed_articles": 17,
+  "raw_strict_article_occurrences": 790,
+  "deduplicated_strict_articles": 790,
+  "duplicate_document_share": 0.0,
+  "by_side": {
+    "ECB": {
+      "strict_articles": 57,
+      "unique_sources": 53,
+      "largest_source_share": 0.03508771929824561
+    },
+    "FED": {
+      "strict_articles": 733,
+      "unique_sources": 375,
+      "largest_source_share": 0.030013642564802184
+    }
+  },
+  "failed_archive": {
+    "batch_timestamp_utc": "20260518230000",
+    "entry_date_utc": "2026-05-19",
+    "status": "FAILED_VALIDATION",
+    "reason": "STRICT_UTF8_DECODE_FAILURE"
+  },
+  "all_capacity_gates_passed": true,
+  "decision": "PASS_PREREGISTER_SEPARATE_PROSPECTIVE_DESIGN",
+  "strategy_preregistered_by_census": false,
+  "eurusd_prices_loaded": false,
+  "eurusd_returns_loaded": false,
+  "eurusd_outcomes_loaded": false,
+  "oracle_rows_loaded": false,
+  "pnl_loaded": false,
+  "signal_generated": false,
+  "broker_action_allowed": false
+}

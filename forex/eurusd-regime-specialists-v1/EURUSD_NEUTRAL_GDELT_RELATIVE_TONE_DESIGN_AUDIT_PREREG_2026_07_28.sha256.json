@@ -1,0 +1,19 @@
+{
+  "schema_version": "eurusd_neutral_gdelt_relative_tone_design_audit_v1_lock",
+  "locked_at_utc": "2026-07-28T19:22:38.9913723Z",
+  "locked_before_historical_gkg_tone_inspection": true,
+  "strategy_preregistered_before_lock": false,
+  "eurusd_prices_loaded_before_lock": false,
+  "eurusd_returns_loaded_before_lock": false,
+  "oracle_rows_loaded_before_lock": false,
+  "pnl_loaded_before_lock": false,
+  "broker_action_allowed": false,
+  "source_census_manifest": {
+    "path": "D:/AlgoTradingData/source-audits/gdelt-gkg-coverage-census-v1/MANIFEST.json",
+    "sha256": "4b279b62cd25d7c0d01927e0a006742606f5ed42d493cff0a74a57ac89b89be3"
+  },
+  "files": {
+    "config/frozen_neutral_gdelt_relative_tone_design_audit_v1.json": "73b6841f80a901155d9d2a4628fd14b59d301db23005538302afaa496f116012",
+    "EURUSD_NEUTRAL_GDELT_RELATIVE_TONE_DESIGN_AUDIT_PREREG_2026_07_28.md": "cdda9a0b8c016fb18ad5403963ca6988be45df96db80fc252eec9309baeb399a"
+  }
+}
