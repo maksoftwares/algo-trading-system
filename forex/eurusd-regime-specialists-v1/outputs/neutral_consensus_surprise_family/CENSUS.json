@@ -1,0 +1,148 @@
+{
+  "schema_version": "eurusd_neutral_consensus_surprise_family_census_v1",
+  "family": "N39_NEUTRAL_CONSENSUS_SURPRISE_FAMILY",
+  "status": "CENSUS_PASS_FOR_ONE_OR_MORE_VARIANTS",
+  "census": {
+    "source_rows": 262,
+    "missing_actual_or_forecast": 0,
+    "zero_surprise": 42,
+    "directional_release_surprises": 220,
+    "by_source_family": {
+      "CPI": {
+        "source_rows": 88,
+        "directional_rows": 58
+      },
+      "PPI": {
+        "source_rows": 88,
+        "directional_rows": 77
+      },
+      "NFP": {
+        "source_rows": 86,
+        "directional_rows": 85
+      }
+    },
+    "neutral_clock_points": 2568,
+    "recent_macro_clock_points": 404,
+    "cash_no_release_within_72h": 2164,
+    "price_confirmation_available": 402,
+    "price_macro_agreements": 212,
+    "variants": {
+      "MACRO_SURPRISE_CARRY": {
+        "candidates": 404,
+        "candidate_days": 101,
+        "by_window": {
+          "development_2019_2022": 248,
+          "chronological_2023": 60,
+          "chronological_2024": 36,
+          "chronological_2025": 44,
+          "recent_2026_h1": 16
+        },
+        "by_side": {
+          "LONG": 140,
+          "SHORT": 264
+        },
+        "by_macro_family": {
+          "CPI": 116,
+          "PPI": 136,
+          "NFP": 152
+        },
+        "by_clock_minute": {
+          "0": 101,
+          "15": 101,
+          "30": 101,
+          "45": 101
+        },
+        "gate_results": {
+          "total": true,
+          "development": true,
+          "full_forward_years": true,
+          "recent_half_year": true,
+          "both_sides": true,
+          "families": true
+        },
+        "passed": true
+      },
+      "MACRO_SURPRISE_PRICE_AGREEMENT": {
+        "candidates": 212,
+        "candidate_days": 97,
+        "by_window": {
+          "development_2019_2022": 125,
+          "chronological_2023": 33,
+          "chronological_2024": 17,
+          "chronological_2025": 25,
+          "recent_2026_h1": 12
+        },
+        "by_side": {
+          "LONG": 72,
+          "SHORT": 140
+        },
+        "by_macro_family": {
+          "CPI": 63,
+          "PPI": 71,
+          "NFP": 78
+        },
+        "by_clock_minute": {
+          "0": 59,
+          "15": 49,
+          "30": 53,
+          "45": 51
+        },
+        "gate_results": {
+          "total": true,
+          "development": true,
+          "full_forward_years": true,
+          "recent_half_year": true,
+          "both_sides": true,
+          "families": true
+        },
+        "passed": true
+      }
+    },
+    "passed_variants": [
+      "MACRO_SURPRISE_CARRY",
+      "MACRO_SURPRISE_PRICE_AGREEMENT"
+    ],
+    "passed": true
+  },
+  "data_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    },
+    "TRADINGVIEW_CONSENSUS": {
+      "rows": 262,
+      "path": "D:/AlgoTradingData/research/eurusd-neutral-tradingview-consensus-v1/TRADINGVIEW_CONSENSUS.parquet",
+      "sha256": "90ee94228f7b9be6ca85de2ba1c1483a1d3d04957e4ab98c87134fcb432c4793",
+      "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-tradingview-consensus-v1/MANIFEST.json",
+      "manifest_sha256": "3506cd392d9118c392c2d51e4fe00b24b43163dd3e874355faf012c3470a7e6e",
+      "raw_response_files": 90,
+      "raw_response_chain_sha256": "d9558ac0016e94b7aaf6a7db19a1bec0540d945b420026c6eb94f7fb6c3f83ce",
+      "information_status": "POST_HOC_HISTORICAL_FORECAST_FIELD_NOT_PRISTINE_OOS"
+    },
+    "NEUTRAL_CLOCK_POINTS": {
+      "rows": 2568,
+      "paired_source_path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+      "paired_source_sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1"
+    }
+  }
+}
