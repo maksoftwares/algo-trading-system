@@ -31,6 +31,7 @@ execution decision.
 | Official OCC FXE customer call/put flow | 2024 H2–2026 H1 | 78 | 38.46% | 1.439 | 0.899 | -4.95R |
 | Public DTCC OTC EUR/USD option flow | 2025 Sep–2026 H1 | 66 | 24.24% | 1.439 | 0.460 | -27.65R |
 | Matched OTC option premium skew | 2025 Q4–2026 H1 | 48 | 35.42% | 1.439 | 0.789 | -6.70R |
+| Four-session 30-minute opening drive | 2019–2026 H1 | 593 | 32.04% | 1.432 | 0.675 | -134.20R |
 
 None passed all locked chronological admission gates. Consequently, none is
 an admitted strategy or eligible for demo/live use.
@@ -263,6 +264,13 @@ A separately locked matched OTM premium-skew surface was slightly positive
 in development, then failed both chronological forward quarters. Neither
 rule may be reversed, repaired, or narrowed after observing these results.
 
+A separately locked session-opening-drive geometry also failed. Its PF
+improved monotonically from 0.480 in 2019-2020 to 0.921 in 2025-2026 H1,
+but no window reached profitability and the latest six months remained
+below break-even at PF 0.957. The planned post-lock watchlist was cancelled
+with zero observations rather than using future data to rescue a rejected
+historical rule.
+
 The evidence does not support claiming that Regime 1 has been solved. Further retrospective threshold, hour, feature, or model search on this archive would increase overfitting rather than improve causal evidence.
 
 ## Next legitimate evidence
@@ -300,4 +308,5 @@ uv run --with pandas --with numpy --with pyarrow python download_neutral_dtcc_fx
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_fx_options.py
 uv run --with pandas --with numpy --with pyarrow python build_neutral_dtcc_skew_source.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_skew.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_opening_drive.py
 ```

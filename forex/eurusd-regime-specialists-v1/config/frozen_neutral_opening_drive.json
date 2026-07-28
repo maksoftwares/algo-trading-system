@@ -1,0 +1,98 @@
+{
+  "campaign_id": "eurusd-neutral-opening-drive-v1",
+  "frozen_at_utc": "2026-07-28T07:05:00Z",
+  "research_only": true,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_WITH_FORWARD_ONLY_START",
+  "data_and_classifier_contract": "config/frozen_two_clock_ensemble.json",
+  "strategy": {
+    "family": "N19_NEUTRAL_SESSION_OPENING_DRIVE",
+    "anchor_hours_utc": [0, 6, 12, 18],
+    "weekdays_only": true,
+    "observation_window_minutes": 30,
+    "minimum_absolute_body_pips": 4.0,
+    "minimum_directional_close_location": 0.75,
+    "entry": "NEXT_M5_OPEN_AFTER_COMPLETED_OBSERVATION_WINDOW",
+    "one_open_position": true,
+    "maximum_trades_per_utc_day": 4
+  },
+  "neutral_ownership": {
+    "state": "latest available state no later than anchor hour minus one hour",
+    "requires_direction": "NEUTRAL",
+    "shock": false,
+    "joint_dxy_eurusd_compression": false
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST"
+  },
+  "outcome_blind_census": {
+    "anchors": 7785,
+    "neutral_anchors": 1927,
+    "drive_signals": 2498,
+    "trade_candidates": 593,
+    "long_candidates": 299,
+    "short_candidates": 294,
+    "by_window": {
+      "development_2019_2020": 160,
+      "development_2021_2022": 173,
+      "pseudo_oos_2025_2026h1": 128,
+      "validation_2023_2024": 132
+    }
+  },
+  "windows": {
+    "development_2019_2020": [
+      "2019-01-02T00:00:00Z",
+      "2020-12-31T23:59:59Z"
+    ],
+    "development_2021_2022": [
+      "2021-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "validation_2023_2024": [
+      "2023-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025_2026h1": [
+      "2025-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "admission": {
+    "minimum_trades_each_window": 40,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.1,
+    "maximum_drawdown_r": 30.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "positive_after_extra_half_pip_round_trip": true
+  },
+  "oracle_matching": {
+    "maximum_absolute_entry_time_difference_minutes": 60,
+    "requires_same_utc_date": true,
+    "requires_same_side": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 100,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "No threshold, anchor, direction, or subgroup may be selected after outcomes.",
+    "No incomplete observation bar may enter the signal.",
+    "No oracle or future-return value may enter regime ownership or direction.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}

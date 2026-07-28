@@ -1,0 +1,177 @@
+{
+  "campaign_id": "eurusd-neutral-opening-drive-v1",
+  "status": "REJECTED_NEUTRAL_OPENING_DRIVE_V1",
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_WITH_FORWARD_ONLY_START",
+  "source_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "causality": {
+    "direction": "Sign of fully completed first 30-minute session bar",
+    "entry": "Next M5 open after the completed observation window",
+    "regime": "latest available state no later than anchor hour minus one hour",
+    "future_information_in_signal_or_execution": false,
+    "oracle_usage": "evaluation only after trade ledger"
+  },
+  "outcome_blind_census": {
+    "anchors": 7785,
+    "neutral_anchors": 1927,
+    "drive_signals": 2498,
+    "trade_candidates": 593,
+    "long_candidates": 299,
+    "short_candidates": 294,
+    "by_window": {
+      "development_2019_2020": 160,
+      "development_2021_2022": 173,
+      "pseudo_oos_2025_2026h1": 128,
+      "validation_2023_2024": 132
+    }
+  },
+  "strategy": {
+    "admitted": false,
+    "overall": {
+      "trades": 593,
+      "wins": 190,
+      "losses": 403,
+      "win_rate": 0.32040472175379425,
+      "average_win_r": 1.468421052631248,
+      "average_loss_r": 1.0253101736973214,
+      "realized_payoff_ratio": 1.432172517450057,
+      "profit_factor": 0.6752178121972974,
+      "net_r": -134.2000000000834,
+      "expectancy_r": -0.22630691399676797,
+      "max_drawdown_r": 142.9000000000668
+    },
+    "windows": {
+      "development_2019_2020": {
+        "trades": 160,
+        "wins": 40,
+        "losses": 120,
+        "win_rate": 0.25,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4390243902435063,
+        "profit_factor": 0.47967479674783536,
+        "net_r": -64.00000000001961,
+        "expectancy_r": -0.4000000000001226,
+        "max_drawdown_r": 71.6500000000132
+      },
+      "development_2021_2022": {
+        "trades": 173,
+        "wins": 56,
+        "losses": 117,
+        "win_rate": 0.3236994219653179,
+        "average_win_r": 1.4522321428568132,
+        "average_loss_r": 1.0250000000000414,
+        "realized_payoff_ratio": 1.4168118466895165,
+        "profit_factor": 0.6781321659368627,
+        "net_r": -38.60000000002334,
+        "expectancy_r": -0.2231213872833719,
+        "max_drawdown_r": 48.05000000001701
+      },
+      "validation_2023_2024": {
+        "trades": 132,
+        "wins": 44,
+        "losses": 88,
+        "win_rate": 0.3333333333333333,
+        "average_win_r": 1.4749999999996708,
+        "average_loss_r": 1.0244318181818743,
+        "realized_payoff_ratio": 1.4398225180251127,
+        "profit_factor": 0.7199112590125563,
+        "net_r": -25.250000000019423,
+        "expectancy_r": -0.19128787878802592,
+        "max_drawdown_r": 32.9750000000101
+      },
+      "pseudo_oos_2025_2026h1": {
+        "trades": 128,
+        "wins": 50,
+        "losses": 78,
+        "win_rate": 0.390625,
+        "average_win_r": 1.475499999999663,
+        "average_loss_r": 1.0272435897436434,
+        "realized_payoff_ratio": 1.436368174726586,
+        "profit_factor": 0.9207488299529397,
+        "net_r": -6.350000000021061,
+        "expectancy_r": -0.04960937500016454,
+        "max_drawdown_r": 13.17500000000915
+      }
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 563,
+      "wins": 160,
+      "losses": 403,
+      "win_rate": 0.2841918294849023,
+      "average_win_r": 1.4670312499996707,
+      "average_loss_r": 1.0253101736973214,
+      "realized_payoff_ratio": 1.430817022627875,
+      "profit_factor": 0.5680663117133002,
+      "net_r": -178.47500000007318,
+      "expectancy_r": -0.3170071047958671,
+      "max_drawdown_r": 182.4500000000632
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 593,
+      "wins": 190,
+      "losses": 403,
+      "win_rate": 0.32040472175379425,
+      "average_win_r": 1.343421052631248,
+      "average_loss_r": 1.1503101736973214,
+      "realized_payoff_ratio": 1.1678772242039994,
+      "profit_factor": 0.5506120908157813,
+      "net_r": -208.32500000008343,
+      "expectancy_r": -0.351306913996768,
+      "max_drawdown_r": 212.97500000008142
+    },
+    "recent_six_months": {
+      "trades": 45,
+      "wins": 18,
+      "losses": 27,
+      "win_rate": 0.4,
+      "average_win_r": 1.4763888888885381,
+      "average_loss_r": 1.0287037037037612,
+      "realized_payoff_ratio": 1.435193519351514,
+      "profit_factor": 0.956795679567676,
+      "net_r": -1.2000000000078614,
+      "expectancy_r": -0.026666666666841365,
+      "max_drawdown_r": 8.325000000004579,
+      "trades_per_weekday": 0.3488372093023256
+    }
+  },
+  "oracle_imitation": {
+    "causal_trades": 593,
+    "neutral_oracle_trades": 2615,
+    "matched_trades": 168,
+    "precision": 0.28330522765598654,
+    "recall": 0.06424474187380497,
+    "median_absolute_difference_minutes": 15.0
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "historical_rows_before_start_are_research_only": true,
+    "available_candidates_after_start": 0,
+    "status": "WAITING_FOR_POST_LOCK_MARKET_DATA"
+  },
+  "verdict": "The fixed opening-drive rule failed its frozen historical gates and is closed without repair."
+}

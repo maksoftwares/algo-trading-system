@@ -1,0 +1,11 @@
+{
+  "campaign_id": "eurusd-neutral-opening-drive-v1",
+  "locked_before_opening_drive_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T07:08:00Z",
+  "files": {
+    "config/frozen_neutral_opening_drive.json": "0f2cd08c71c1b5ec2c641be30849fa14294bab0a14f3d9e69a04814ffef81314",
+    "EURUSD_NEUTRAL_OPENING_DRIVE_PREREG_2026_07_28.md": "551bbb29a5476f0af563cdd4a6588340db37164175f5c6d0f1dca5f7b0dcb129",
+    "src/eurusd_regime_specialists/neutral_opening_drive.py": "a4ad6e96d2dd85f1e4adc2850dd0a52bc53198fb11afcf3d4de96032f6cae478",
+    "run_neutral_opening_drive.py": "3c41b9ba9116b85d4a7a83e3f6bb5d816b1a8ba67c3ed64868ba7b8eb8748218"
+  }
+}

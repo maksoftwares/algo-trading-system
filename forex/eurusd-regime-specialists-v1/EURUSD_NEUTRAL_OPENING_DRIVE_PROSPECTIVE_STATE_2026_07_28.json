@@ -1,0 +1,20 @@
+{
+  "campaign_id": "eurusd-neutral-opening-drive-v1",
+  "planned_start_utc": "2026-07-29T00:00:00Z",
+  "status": "CANCELLED_HISTORICAL_GATE_FAILURE",
+  "post_lock_observations": 0,
+  "promotion_review_allowed": false,
+  "historical_gate": {
+    "passed": false,
+    "full_trades": 593,
+    "full_win_rate": 0.32040472175379425,
+    "full_profit_factor": 0.6752178121972974,
+    "full_net_r": -134.2000000000834,
+    "latest_six_months_trades": 45,
+    "latest_six_months_win_rate": 0.4,
+    "latest_six_months_profit_factor": 0.956795679567676,
+    "latest_six_months_net_r": -1.2000000000078614
+  },
+  "reason": "The frozen historical rule failed every chronological admission window and robustness gate. Prospective data is not used to rescue it.",
+  "next_action": "Reserve post-lock EURUSD data for a genuinely new mechanism frozen before its outcomes."
+}

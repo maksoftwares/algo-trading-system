@@ -24,6 +24,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 18. Official OCC FXE customer flow: a login-free OCC batch query supplied prior-day customer call and put volumes. The frozen normalized imbalance rule produced 78 trades, 38.46% wins, 1.439 payoff, PF 0.899, and -4.95R. The latest six months produced 21 trades, 38.10% wins, PF 0.886, and -1.53R. An isolated profitable eight-trade quarter was not selected; the full rule is closed.
 19. Public DTCC OTC options flow: 674 credential-free CFTC public-dissemination queries supplied executed EUR/USD vanilla calls and puts. The frozen standalone 7-90 day notional-plus-premium imbalance produced 66 trades, 24.24% wins, 1.439 payoff, PF 0.460, and -27.65R. The latest six months produced 39 trades, 25.64% wins, PF 0.496, and -14.98R. The direction is not reversed after outcome inspection.
 20. Matched DTCC premium skew: standalone OTM calls and puts were paired on tenor and absolute moneyness using only M5 spot completed before execution. The frozen normalized premium-skew rule produced 48 trades, 35.42% wins, 1.439 payoff, PF 0.789, and -6.70R. Development reached PF 1.119 but both forward quarters failed; the latest six months returned PF 0.654 and -7.80R. The exact surface is closed.
+21. Four-session opening drive: the fully completed first 30-minute bar at each six-hour UTC anchor selected direction before entry. The frozen rule produced 593 trades, 32.04% wins, 1.432 payoff, PF 0.675, and -134.20R. PF improved monotonically across windows and reached 0.957 in the latest six months, but never crossed break-even. Its planned post-lock watchlist was cancelled with zero observations.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -55,6 +56,9 @@ Key reports:
 - `EURUSD_NEUTRAL_DTCC_FX_OPTIONS_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_DTCC_SKEW_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_DTCC_SKEW_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_OPENING_DRIVE_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_OPENING_DRIVE_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_OPENING_DRIVE_PROSPECTIVE_STATE_2026_07_28.json`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -79,6 +83,7 @@ Key reports:
 - `outputs/neutral_occ_fxe_flow/RESULT.json`
 - `outputs/neutral_dtcc_fx_options/RESULT.json`
 - `outputs/neutral_dtcc_skew/RESULT.json`
+- `outputs/neutral_opening_drive/RESULT.json`
 
 Run with:
 
@@ -113,4 +118,5 @@ uv run --with pandas --with numpy --with pyarrow python download_neutral_dtcc_fx
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_fx_options.py
 uv run --with pandas --with numpy --with pyarrow python build_neutral_dtcc_skew_source.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_skew.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_opening_drive.py
 ```
