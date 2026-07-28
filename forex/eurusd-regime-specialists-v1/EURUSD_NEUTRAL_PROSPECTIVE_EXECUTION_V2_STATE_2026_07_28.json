@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T17:02:20.207902Z",
+  "as_of_utc": "2026-07-28T17:19:05.185514Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -18,7 +18,9 @@
   "campaign_orchestration_v1_2_lock_sha256": "759f6cdda68ae2ee469c681524ce446c0448944c3c5fb35734b3fd88f7b4ce2e",
   "prospective_oracle_evaluation_lock_sha256": "006a7afda3115ed9d3eaa2e585d38b51e406a1642c82f862890cae81e1df5610",
   "prospective_ownership_prewarm_lock_sha256": "98cb9b8f1ab9e20917c8573dd623d85f7a9335dbd16381336ef2761e3b451301",
-  "prospective_operations_planner_lock_sha256": "6604c256bb35419a2e651ae422da0d096e86f0fd91af4289c61c569976d67e5f",
+  "prospective_operations_planner_v1_superseded_before_start_and_first_signal": true,
+  "prospective_operations_planner_v1_lock_sha256": "6604c256bb35419a2e651ae422da0d096e86f0fd91af4289c61c569976d67e5f",
+  "prospective_operations_planner_lock_sha256": "5d8ec0df44f2e7ec7eda6ba41ce04bc328c6e3b474063b3db2628ca9c326b778",
   "prospective_independent_validation_lock_sha256": "4a6158c8d22b72ab1a10fb51c6d451034f4a33a0f6ddc2358d3921a8846878f7",
   "prospective_directional_falsification_lock_sha256": "93f022e4ab721d835ff99528de388671e4457c31d483f186cbbee4a2536fe1d8",
   "prospective_official_bls_schedule_lock_sha256": "f97311c04bf60e0cd2ddb684420dc61abc5b036a6109ae8e2ba63ab0be3f20bc",
@@ -69,10 +71,23 @@
     "market_capture_not_due_before_utc": "2026-08-07T12:46:00Z"
   },
   "prospective_operations_planner": {
-    "schema_version": "eurusd_neutral_prospective_operations_plan_v1",
+    "schema_version": "eurusd_neutral_prospective_operations_plan_v1_1",
     "status": "WAITING_FOR_NEXT_SAFE_ACTION",
-    "evaluated_at_utc": "2026-07-28T17:02:18.862104Z",
+    "evaluated_at_utc": "2026-07-28T17:19:05.185514Z",
     "target_events": 3,
+    "runtime_only_supersession": {
+      "reason": "THE_WINDOWS_PYTHON_COMMAND_RESOLVED_TO_A_NONFUNCTIONAL_MICROSOFT_STORE_STUB",
+      "old_planner_preserved_for_audit": true,
+      "strategy_or_evidence_semantics_changed": false,
+      "new_launcher": "uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python",
+      "dependency_resolution_network_allowed": false,
+      "runtime_launcher_status_evaluated_at_utc": "2026-07-28T17:17:04.422385Z",
+      "runtime_launcher_status": "PREWARM_COMPLETE_FOR_SAFELY_COMPLETED_HOURS",
+      "boundary_rehearsal_status": "PASSED",
+      "synthetic_boundary_as_of_utc": "2026-07-28T18:01:00Z",
+      "rehearsed_missing_safe_symbol_hours": 5,
+      "rehearsed_due_command": "uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python prewarm_prospective_neutral_ownership.py capture --eligible-date 2026-08-07 --max-new-requests 120"
+    },
     "first_live_due_action": {
       "stage": "OWNERSHIP_CACHE_PREWARM",
       "missing_safe_symbol_hours": 5,
@@ -239,10 +254,10 @@
   "profitability_and_robustness_required_for_demo_readiness": true,
   "demo_trading_authorized": false,
   "full_test_suite": {
-    "passed": 286,
+    "passed": 289,
     "failed": 0,
     "warnings": 2
   },
-  "next_action": "AT OR AFTER 2026-07-28T18:01:00Z RUN THE READ-ONLY OPERATIONS PLANNER; EXECUTE ONLY THE EXACT DUE CAPTURE IT REPORTS; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
+  "next_action": "AT OR AFTER 2026-07-28T18:01:00Z RUN plan_prospective_neutral_operations_v1_1.py; EXECUTE ONLY THE EXACT OFFLINE-UV DUE CAPTURE IT REPORTS; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
   "broker_action_allowed": false
 }
