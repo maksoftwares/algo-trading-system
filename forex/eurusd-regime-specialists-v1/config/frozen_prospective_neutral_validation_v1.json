@@ -1,0 +1,84 @@
+{
+  "schema_version": "eurusd_neutral_prospective_validation_v1",
+  "frozen_at_utc": "2026-07-28T16:32:46Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "shadow_only": true,
+  "network_requests_allowed": false,
+  "broker_action_allowed": false,
+  "campaign_orchestration_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_V1_2_PREREG_2026_07_28.sha256.json",
+    "sha256": "759f6cdda68ae2ee469c681524ce446c0448944c3c5fb35734b3fd88f7b4ce2e"
+  },
+  "frequency_policy": {
+    "minimum_trades_per_day": null,
+    "minimum_active_days": null,
+    "frequency_is_reported_but_not_an_admission_gate": true,
+    "abstention_is_preferred_to_a_nonqualifying_signal": true
+  },
+  "sample_gate": {
+    "minimum_calendar_months": 12,
+    "minimum_closed_trades": 30,
+    "minimum_each_side_trades": 8,
+    "all_closed_trade_paths_required": true,
+    "all_closed_trade_oracle_dates_required": true
+  },
+  "execution_reference": {
+    "minimum_retail_spread_pips": 0.7,
+    "adverse_slippage_pips_per_side": 0.1,
+    "extra_round_trip_stress_pips": 0.5,
+    "same_bar_policy": "STOP_FIRST",
+    "one_open_position": true
+  },
+  "economic_gate": {
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.3,
+    "minimum_expectancy_r": 0.0,
+    "minimum_each_side_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.15,
+    "minimum_trailing_12_month_profit_factor": 1.15,
+    "minimum_trailing_12_month_net_r": 0.0
+  },
+  "robustness_gate": {
+    "minimum_positive_active_month_rate": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_largest_month_share_of_positive_profit": 0.5,
+    "starting_balance_usd": 1000.0,
+    "fixed_research_lots": 0.01,
+    "pip_value_usd_at_fixed_lots": 0.1,
+    "maximum_base_floating_drawdown_pct": 5.0,
+    "maximum_stressed_floating_drawdown_pct": 10.0
+  },
+  "oracle_gate": {
+    "minimum_same_day_same_side_precision": 0.5,
+    "minimum_precision_lift_over_random_side": 0.0,
+    "maximum_random_side_poisson_binomial_tail_p_value": 0.1,
+    "timing_windows_minutes_reported": [
+      15,
+      60,
+      240
+    ]
+  },
+  "monte_carlo": {
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP",
+    "seed": 20260728,
+    "simulations": 10000,
+    "block_length_trades": 5,
+    "horizon_trades": 250,
+    "hard_drawdown_pct": 10.0,
+    "maximum_breach_probability": 0.01
+  },
+  "decision_policy": {
+    "historical_pnl_loading_forbidden": true,
+    "parameter_search_forbidden": true,
+    "gate_change_after_prospective_start_forbidden": true,
+    "oracle_may_not_change_or_filter_signals": true,
+    "insufficient_sample_action": "ACCUMULATE_PROSPECTIVE_EVIDENCE",
+    "failed_gate_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING",
+    "passing_action": "INDEPENDENT_RESEARCH_REVIEW_ONLY",
+    "automatic_demo_or_broker_activation": false
+  }
+}
