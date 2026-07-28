@@ -1,0 +1,80 @@
+{
+  "schema_version": "eurusd_prospective_neutral_ownership_v1",
+  "campaign_id": "eurusd-prospective-neutral-ownership-v1",
+  "frozen_at_utc": "2026-07-28T14:26:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "execution_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_EXECUTION_V2_1_PREREG_2026_07_28.sha256.json",
+    "sha256": "4364d8160008a120f1e6048ec4a0212c06a37a8026ab5d0c42d5e878c2abcb46"
+  },
+  "classifier_contract": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "source_path": "../fx-regime-specialists-gold-trajectory-v1/src/fx_regime_specialists/campaign.py",
+    "source_sha256": "cb45c7f83ae722f69d194c303a537d0d335ee5be892e54d97139c999b2a73671",
+    "state_timestamp": "LATEST_COMMON_COMPLETED_FIVE_MARKET_H1_STATE_NO_LATER_THAN_ELIGIBLE_DATE_MINUS_ONE_HOUR",
+    "state_bar_completed_at": "ELIGIBLE_DATE_0000_UTC",
+    "state_selection": "BACKWARD_ASOF_WITHOUT_FORWARD_FILL_OR_TOLERANCE",
+    "state_staleness_hours_recorded": true,
+    "minimum_common_h1_rows_through_state": 520,
+    "all_terminal_features_must_be_finite": true
+  },
+  "provider": {
+    "name": "Dukascopy public Jetta tick JSON",
+    "authentication_required": false,
+    "official_origin": "https://jetta.dukascopy.com/v1",
+    "symbols": {
+      "EURUSD": {
+        "source_code": "EUR-USD",
+        "price_scale": 5
+      },
+      "GBPUSD": {
+        "source_code": "GBP-USD",
+        "price_scale": 5
+      },
+      "USDJPY": {
+        "source_code": "USD-JPY",
+        "price_scale": 3
+      },
+      "DOLLARIDXUSD": {
+        "source_code": "DOLLAR.IDX-USD",
+        "price_scale": 3
+      },
+      "USTBONDTRUSD": {
+        "source_code": "USTBOND.TR-USD",
+        "price_scale": 3
+      }
+    },
+    "endpoint_probe_utc": "2026-07-28T14:18:00Z",
+    "all_five_endpoints_returned_http_200": true
+  },
+  "capture": {
+    "lookback_calendar_days": 60,
+    "minimum_capture_lag_after_midnight_seconds": 60,
+    "raw_and_metadata_snapshots_append_only": true,
+    "decoded_hour_is_aggregated_before_next_request": true,
+    "missing_or_empty_hour_action": "PRESERVE_MISSING_NO_FORWARD_FILL",
+    "source_chain_sha256_per_symbol": true,
+    "ownership_observed_at": "MAXIMUM_OBSERVED_AT_ACROSS_ALL_FETCHED_HOURS"
+  },
+  "ownership": {
+    "owned_state": "DIRECTION_NEUTRAL_AND_NOT_SHOCK_AND_NOT_JOINT_DXY_EURUSD_COMPRESSION",
+    "nonowned_state_action": "CASH",
+    "missing_terminal_state_action": "NO_OWNERSHIP_RECORD",
+    "insufficient_lookback_action": "NO_OWNERSHIP_RECORD",
+    "feature_nan_action": "NO_OWNERSHIP_RECORD",
+    "capture_semantics": "FROZEN_CLASSIFIER_STATE_FROM_COMPLETED_PRIOR_H1",
+    "record_must_exist_before_signal_entry": true
+  },
+  "decision_policy": {
+    "historical_pnl_forbidden": true,
+    "oracle_columns_forbidden": true,
+    "future_event_reaction_columns_forbidden": true,
+    "classifier_retuning_forbidden": true,
+    "missing_data_imputation_forbidden": true,
+    "failed_or_nonowned_date_action": "CASH"
+  },
+  "output_root": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership"
+}

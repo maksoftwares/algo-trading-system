@@ -1,10 +1,12 @@
 {
-  "schema_version": "eurusd_neutral_macro_crossasset_execution_v2",
+  "schema_version": "eurusd_neutral_macro_crossasset_execution_v2_1",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
-  "frozen_at_utc": "2026-07-28T13:58:39Z",
+  "frozen_at_utc": "2026-07-28T14:24:00Z",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
   "supersedes_v1_before_first_eligible_signal": true,
+  "supersedes_v2_before_first_eligible_signal": true,
   "supersession_reason": "V1 named the observation-completion M5 open as entry even though the immutable public market snapshot is not admissible until at least 60 seconds later. V2 preserves the signal and risk hypothesis but moves entry strictly after every required evidence item is observable.",
+  "v2_1_correction_reason": "V2 required an exact prior-date 23:00 common classifier row, but the frozen historical parent router used backward as-of selection of the latest common five-market state no later than 23:00. DXY can end earlier, so exact matching would not reproduce Regime 1 ownership. V2.1 restores the unchanged causal parent selection before any prospective signal.",
   "research_only": true,
   "shadow_only": true,
   "broker_action_allowed": false,
@@ -23,8 +25,10 @@
     "required_capture_semantics": "ONLY_FULLY_COMPLETED_M5_BARS_ENTRY_BAR_EXCLUDED"
   },
   "neutral_ownership": {
-    "state_timestamp": "PREVIOUS_UTC_DATE_2300_H1_BAR",
+    "state_timestamp": "LATEST_COMMON_COMPLETED_FIVE_MARKET_H1_STATE_NO_LATER_THAN_PREVIOUS_UTC_DATE_2300",
     "state_bar_completion": "EVENT_DATE_0000_UTC",
+    "selection": "BACKWARD_ASOF_WITHOUT_FORWARD_FILL_OR_TOLERANCE",
+    "state_staleness_hours_recorded": true,
     "ownership_evidence_must_be_observed_before_entry": true,
     "owned_state": "DIRECTION_NEUTRAL_AND_NOT_SHOCK_AND_NOT_JOINT_COMPRESSION",
     "required_capture_semantics": "FROZEN_CLASSIFIER_STATE_FROM_COMPLETED_PRIOR_H1"

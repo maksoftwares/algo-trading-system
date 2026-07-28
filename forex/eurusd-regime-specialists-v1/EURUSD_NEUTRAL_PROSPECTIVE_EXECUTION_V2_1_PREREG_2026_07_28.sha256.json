@@ -1,0 +1,20 @@
+{
+  "schema_version": "eurusd_neutral_prospective_execution_v2_1_lock",
+  "locked_at_utc": "2026-07-28T14:24:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_prospective_start_and_first_signal": true,
+  "historical_pnl_loaded_before_lock": false,
+  "supersedes_lock_path": "EURUSD_NEUTRAL_PROSPECTIVE_EXECUTION_V2_PREREG_2026_07_28.sha256.json",
+  "supersedes_lock_sha256": "024fba2fe01be1043f2f15ef7267eaa3286250bf3e5ca2471734324a8d67b31c",
+  "v2_eligible_signals_before_supersession": 0,
+  "v2_closed_trades_before_supersession": 0,
+  "files": {
+    "config/frozen_prospective_neutral_macro_crossasset_execution_v2.json": "1184fdbf12e01fe23233e128ff890aaddb9b5b7f792c79a72e0d042d14ad8863",
+    "src/eurusd_regime_specialists/prospective_neutral_macro_crossasset_execution.py": "4c8fb5379510b2eea990db9f3463eea8f71aa1afc757053cee2edd2b880edf95",
+    "capture_prospective_eurusd_trade_path.py": "e2c04b024108eb83270dfb0cb2b48a77a4cc135af0479a20d3b98f066dcfe32f",
+    "run_prospective_macro_crossasset_execution_v2.py": "ff69dd6dad0d8c5caae385a030dfa0859a52534c8c7668a0f52f7b77acfe9cc2",
+    "tests/test_prospective_neutral_macro_crossasset_execution.py": "8879d7fc22d968cdec7a74d9955586aa32d77015f1263789fb18faecf0de319b",
+    "tests/test_capture_prospective_eurusd_trade_path.py": "abeb137fdc2e5c2c63a28e443507df5c95d3979b9e42c4d81c5f2d41f0019551",
+    "EURUSD_NEUTRAL_PROSPECTIVE_EXECUTION_V2_PREREG_2026_07_28.md": "ec18d49ba245d0476c9e81ad2186d92a81b868481152e72f4d8695e00d8e04de"
+  }
+}

@@ -80,10 +80,7 @@ def operational_status(as_of_utc: Any) -> dict[str, Any]:
             list(market.glob("normalized/*.parquet"))
         ),
         "neutral_ownership_records": len(
-            [
-                *ownership.glob("*.json"),
-                *ownership.glob("*.parquet"),
-            ]
+            list(ownership.glob("records/*.json"))
         ),
         "trade_path_snapshot_files": len(
             list(path.glob("normalized/*.parquet"))
@@ -132,7 +129,7 @@ def operational_status(as_of_utc: Any) -> dict[str, Any]:
         next_action = "BUILD_IMMUTABLE_SIGNAL_LEDGER"
     return {
         "schema_version": (
-            "eurusd_neutral_prospective_execution_status_v2"
+            "eurusd_neutral_prospective_execution_status_v2_1"
         ),
         "as_of_utc": pd.Timestamp(as_of_utc),
         "campaign_id": cfg["campaign_id"],

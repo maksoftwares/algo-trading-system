@@ -22,7 +22,7 @@ CONFIG_PATH = (
 )
 LOCK_PATH = (
     PACKAGE_ROOT
-    / "EURUSD_NEUTRAL_PROSPECTIVE_EXECUTION_V2_PREREG_2026_07_28.sha256.json"
+    / "EURUSD_NEUTRAL_PROSPECTIVE_EXECUTION_V2_1_PREREG_2026_07_28.sha256.json"
 )
 ACTUAL_SEMANTICS = (
     "LINKED_PRE_RELEASE_FORECAST_AND_POST_RELEASE_ACTUAL"
@@ -131,15 +131,18 @@ def build_neutral_ownership_record(
     eurusd_compressed: bool,
     source_hashes: Mapping[str, str],
 ) -> dict[str, Any]:
-    """Freeze the parent classifier's prior-date 23:00 H1 state."""
+    """Freeze the latest common parent state no later than prior 23:00."""
     day = _utc(eligible_date).floor("D")
     state_time = _utc(state_timestamp_utc)
     observed = _utc(ownership_observed_at_utc)
-    expected_state = day - pd.Timedelta(hours=1)
-    if state_time != expected_state:
+    latest_allowed_state = day - pd.Timedelta(hours=1)
+    if state_time > latest_allowed_state:
         raise ValueError(
-            "Neutral ownership must use the prior-date 23:00 H1 state"
+            "Neutral ownership state is later than prior-date 23:00"
         )
+    state_staleness_hours = (
+        latest_allowed_state - state_time
+    ).total_seconds() / 3600.0
     if observed < day:
         raise ValueError("Ownership cannot be observed before state completion")
     required_symbols = {
@@ -168,6 +171,7 @@ def build_neutral_ownership_record(
     core = {
         "eligible_date": day.strftime("%Y-%m-%d"),
         "state_timestamp_utc": state_time,
+        "state_staleness_hours": state_staleness_hours,
         "neutral_known_at_utc": day,
         "ownership_observed_at_utc": observed,
         "direction": str(direction),
@@ -225,6 +229,9 @@ def verify_neutral_ownership_record(
         "state_timestamp_utc": _utc(
             _required(ownership, "state_timestamp_utc")
         ),
+        "state_staleness_hours": float(
+            _required(ownership, "state_staleness_hours")
+        ),
         "neutral_known_at_utc": _utc(
             _required(ownership, "neutral_known_at_utc")
         ),
@@ -245,6 +252,25 @@ def verify_neutral_ownership_record(
         ownership, "ownership_evidence_sha256"
     ) != _canonical_hash(core):
         raise ValueError("Neutral ownership evidence hash mismatch")
+    eligible_day = _utc(f"{core['eligible_date']}T00:00:00Z")
+    latest_allowed_state = eligible_day - pd.Timedelta(hours=1)
+    state_time = core["state_timestamp_utc"]
+    if state_time > latest_allowed_state:
+        raise ValueError("Neutral ownership state is later than allowed")
+    expected_staleness = (
+        latest_allowed_state - state_time
+    ).total_seconds() / 3600.0
+    if not math.isclose(
+        core["state_staleness_hours"],
+        expected_staleness,
+        rel_tol=0.0,
+        abs_tol=1e-12,
+    ):
+        raise ValueError("Neutral ownership state staleness was altered")
+    if core["neutral_known_at_utc"] != eligible_day:
+        raise ValueError("Neutral logical availability is not UTC midnight")
+    if core["ownership_observed_at_utc"] < eligible_day:
+        raise ValueError("Ownership was observed before state completion")
 
 
 def build_signal_record(
@@ -301,8 +327,8 @@ def build_signal_record(
     state_time = _utc(
         _required(ownership, "state_timestamp_utc")
     )
-    if state_time != event.floor("D") - pd.Timedelta(hours=1):
-        raise ValueError("Ownership state is not the frozen prior H1 bar")
+    if state_time > event.floor("D") - pd.Timedelta(hours=1):
+        raise ValueError("Ownership state is later than the frozen cutoff")
     if neutral_known != event.floor("D"):
         raise ValueError("Neutral logical availability is not UTC midnight")
     if market_observed < observation_completed + pd.Timedelta(

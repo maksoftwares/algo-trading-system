@@ -59,11 +59,15 @@ def _market(*, long: bool = False) -> dict:
     }
 
 
-def _ownership(*, neutral: bool = True) -> dict:
+def _ownership(
+    *,
+    neutral: bool = True,
+    state_timestamp_utc: str = "2026-08-11T23:00:00Z",
+) -> dict:
     direction = "NEUTRAL" if neutral else "USD_UP"
     return build_neutral_ownership_record(
         eligible_date="2026-08-12T00:00:00Z",
-        state_timestamp_utc="2026-08-11T23:00:00Z",
+        state_timestamp_utc=state_timestamp_utc,
         ownership_observed_at_utc="2026-08-12T00:02:00Z",
         direction=direction,
         shock=False,
@@ -110,13 +114,16 @@ def _path(
     )
 
 
-def test_ownership_is_derived_from_exact_prior_h1_state() -> None:
+def test_ownership_uses_latest_common_state_no_later_than_cutoff() -> None:
     ownership = _ownership()
     assert ownership["is_neutral"] is True
+    assert ownership["state_staleness_hours"] == 0.0
     assert ownership["neutral_known_at_utc"] == pd.Timestamp(
         "2026-08-12T00:00:00Z"
     )
-    with pytest.raises(ValueError, match="prior-date 23:00"):
+    stale = _ownership(state_timestamp_utc="2026-08-11T20:00:00Z")
+    assert stale["state_staleness_hours"] == 3.0
+    with pytest.raises(ValueError, match="later than prior-date 23:00"):
         build_neutral_ownership_record(
             eligible_date="2026-08-12T00:00:00Z",
             state_timestamp_utc="2026-08-12T00:00:00Z",
@@ -182,6 +189,15 @@ def test_tampered_neutral_ownership_is_rejected() -> None:
     ownership = _ownership(neutral=False)
     ownership["is_neutral"] = True
     with pytest.raises(ValueError, match="flag was altered"):
+        build_signal_record(_actual(), _market(), ownership)
+
+
+def test_tampered_ownership_staleness_is_rejected() -> None:
+    ownership = _ownership(
+        state_timestamp_utc="2026-08-11T20:00:00Z"
+    )
+    ownership["state_staleness_hours"] = 0.0
+    with pytest.raises(ValueError, match="evidence hash mismatch"):
         build_signal_record(_actual(), _market(), ownership)
 
 
