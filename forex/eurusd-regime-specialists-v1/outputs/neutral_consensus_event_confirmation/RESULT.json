@@ -1,0 +1,375 @@
+{
+  "schema_version": "eurusd_neutral_consensus_event_confirmation_result_v1",
+  "family": "N40_NEUTRAL_CONSENSUS_EVENT_CONFIRMATION",
+  "status": "REJECTED_NEUTRAL_CONSENSUS_EVENT_CONFIRMATION_V1",
+  "demo_ready": false,
+  "live_ready": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "research_boundary": "The historical forecast field was retrieved post-event. All archived windows are adaptive development evidence; future forecasts require pre-release capture and checksums.",
+  "mechanism": "On a Neutral-owned UTC date, trade a reconciled CPI, PPI, or NFP surprise only after three completed M5 bars confirm the same EURUSD direction.",
+  "census": {
+    "source_rows": 262,
+    "missing_actual_or_forecast": 0,
+    "zero_surprise": 42,
+    "directional_release_surprises": 220,
+    "by_source_family": {
+      "CPI": {
+        "source_rows": 88,
+        "directional_rows": 58
+      },
+      "PPI": {
+        "source_rows": 88,
+        "directional_rows": 77
+      },
+      "NFP": {
+        "source_rows": 86,
+        "directional_rows": 85
+      }
+    },
+    "neutral_dates": 642,
+    "neutral_directional_releases": 69,
+    "cash_reasons": {
+      "release_not_on_neutral_date": 151,
+      "observation_or_entry_bar_missing": 0,
+      "entry_crosses_utc_date": 0,
+      "quarantine": 0,
+      "zero_price_reaction": 0,
+      "macro_price_disagreement": 20
+    },
+    "confirmed_candidates": 49,
+    "candidate_dates": 49,
+    "by_window": {
+      "development_2019_2022": 27,
+      "chronological_2023": 9,
+      "chronological_2024": 4,
+      "chronological_2025": 6,
+      "recent_2026_h1": 3
+    },
+    "by_side": {
+      "LONG": 26,
+      "SHORT": 23
+    },
+    "by_macro_family": {
+      "CPI": 12,
+      "PPI": 19,
+      "NFP": 18
+    },
+    "gate_results": {
+      "total": true,
+      "development": true,
+      "full_forward_years": true,
+      "recent_half_year": true,
+      "both_sides": true,
+      "families": true
+    },
+    "passed": true
+  },
+  "execution": {
+    "candidate_signals": 49,
+    "executed_trades": 49,
+    "skipped_while_position_open": 0
+  },
+  "summary": {
+    "overall": {
+      "trades": 49,
+      "wins": 18,
+      "losses": 31,
+      "win_rate": 0.3673469387755102,
+      "average_win_r": 1.4259259259259334,
+      "average_loss_r": 0.9369892473119117,
+      "realized_payoff_ratio": 1.5218167444468667,
+      "profit_factor": 0.8836355290336644,
+      "net_r": -3.3800000000024575,
+      "expectancy_r": -0.06897959183678484,
+      "max_drawdown_r": 8.940000000001135
+    },
+    "windows": {
+      "development_2019_2022": {
+        "trades": 27,
+        "wins": 9,
+        "losses": 18,
+        "win_rate": 0.3333333333333333,
+        "average_win_r": 1.35851851851852,
+        "average_loss_r": 0.8866666666667515,
+        "realized_payoff_ratio": 1.5321637426899135,
+        "profit_factor": 0.7660818713449568,
+        "net_r": -3.7333333333348477,
+        "expectancy_r": -0.13827160493832769,
+        "max_drawdown_r": 8.940000000001135
+      },
+      "chronological_2023": {
+        "trades": 9,
+        "wins": 5,
+        "losses": 4,
+        "win_rate": 0.5555555555555556,
+        "average_win_r": 1.4933333333333465,
+        "average_loss_r": 1.0066666666667483,
+        "realized_payoff_ratio": 1.4834437086091643,
+        "profit_factor": 1.8543046357614554,
+        "net_r": 3.4399999999997393,
+        "expectancy_r": 0.38222222222219326,
+        "max_drawdown_r": 3.0200000000002447
+      },
+      "chronological_2024": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 0.5,
+        "average_win_r": 1.4933333333333465,
+        "average_loss_r": 1.0066666666667483,
+        "realized_payoff_ratio": 1.4834437086091643,
+        "profit_factor": 1.4834437086091643,
+        "net_r": 0.9733333333331964,
+        "expectancy_r": 0.2433333333332991,
+        "max_drawdown_r": 2.0133333333334966
+      },
+      "chronological_2025": {
+        "trades": 6,
+        "wins": 1,
+        "losses": 5,
+        "win_rate": 0.16666666666666666,
+        "average_win_r": 1.4933333333333465,
+        "average_loss_r": 1.0066666666667483,
+        "realized_payoff_ratio": 1.4834437086091643,
+        "profit_factor": 0.29668874172183285,
+        "net_r": -3.5400000000003953,
+        "expectancy_r": -0.5900000000000659,
+        "max_drawdown_r": 4.026666666666993
+      },
+      "recent_2026_h1": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 0.3333333333333333,
+        "average_win_r": 1.4933333333333465,
+        "average_loss_r": 1.0066666666667483,
+        "realized_payoff_ratio": 1.4834437086091643,
+        "profit_factor": 0.7417218543045822,
+        "net_r": -0.5200000000001501,
+        "expectancy_r": -0.17333333333338338,
+        "max_drawdown_r": 2.0133333333334966
+      }
+    },
+    "by_side": {
+      "LONG": {
+        "trades": 26,
+        "wins": 9,
+        "losses": 17,
+        "win_rate": 0.34615384615384615,
+        "average_win_r": 1.35851851851852,
+        "average_loss_r": 0.9290196078432239,
+        "realized_payoff_ratio": 1.4623141503680468,
+        "profit_factor": 0.7741663149007307,
+        "net_r": -3.5666666666681257,
+        "expectancy_r": -0.13717948717954329,
+        "max_drawdown_r": 4.580000000000695
+      },
+      "SHORT": {
+        "trades": 23,
+        "wins": 9,
+        "losses": 14,
+        "win_rate": 0.391304347826087,
+        "average_win_r": 1.4933333333333465,
+        "average_loss_r": 0.9466666666667461,
+        "realized_payoff_ratio": 1.577464788732276,
+        "profit_factor": 1.0140845070421773,
+        "net_r": 0.1866666666656691,
+        "expectancy_r": 0.008115942028942136,
+        "max_drawdown_r": 6.726666666667363
+      }
+    },
+    "by_macro_family": {
+      "CPI": {
+        "trades": 12,
+        "wins": 4,
+        "losses": 8,
+        "win_rate": 0.3333333333333333,
+        "average_win_r": 1.4933333333333465,
+        "average_loss_r": 0.9666666666667638,
+        "realized_payoff_ratio": 1.5448275862067549,
+        "profit_factor": 0.7724137931033774,
+        "net_r": -1.7600000000007243,
+        "expectancy_r": -0.14666666666672704,
+        "max_drawdown_r": 3.7066666666671173
+      },
+      "PPI": {
+        "trades": 19,
+        "wins": 7,
+        "losses": 12,
+        "win_rate": 0.3684210526315789,
+        "average_win_r": 1.3199999999999983,
+        "average_loss_r": 0.9366666666667459,
+        "realized_payoff_ratio": 1.4092526690390248,
+        "profit_factor": 0.8220640569394312,
+        "net_r": -2.0000000000009646,
+        "expectancy_r": -0.10526315789478762,
+        "max_drawdown_r": 3.913333333333806
+      },
+      "NFP": {
+        "trades": 18,
+        "wins": 7,
+        "losses": 11,
+        "win_rate": 0.3888888888888889,
+        "average_win_r": 1.4933333333333465,
+        "average_loss_r": 0.9157575757576538,
+        "realized_payoff_ratio": 1.6307081403043096,
+        "profit_factor": 1.0377233620118334,
+        "net_r": 0.37999999999923184,
+        "expectancy_r": 0.021111111111068434,
+        "max_drawdown_r": 5.033333333333742
+      }
+    },
+    "recent_2026_h1_monthly": {
+      "2026-01": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "average_win_r": 0.0,
+        "average_loss_r": 1.0066666666667483,
+        "realized_payoff_ratio": 0.0,
+        "profit_factor": 0.0,
+        "net_r": -1.0066666666667483,
+        "expectancy_r": -1.0066666666667483,
+        "max_drawdown_r": 1.0066666666667483
+      },
+      "2026-02": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "average_win_r": 0.0,
+        "average_loss_r": 1.0066666666667483,
+        "realized_payoff_ratio": 0.0,
+        "profit_factor": 0.0,
+        "net_r": -1.0066666666667483,
+        "expectancy_r": -1.0066666666667483,
+        "max_drawdown_r": 1.0066666666667483
+      },
+      "2026-06": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 1.0,
+        "average_win_r": 1.4933333333333465,
+        "average_loss_r": 0.0,
+        "realized_payoff_ratio": "Infinity",
+        "profit_factor": "Infinity",
+        "net_r": 1.4933333333333465,
+        "expectancy_r": 1.4933333333333465,
+        "max_drawdown_r": 0.0
+      }
+    },
+    "top_5pct_winners_removed": {
+      "trades": 46,
+      "wins": 15,
+      "losses": 31,
+      "win_rate": 0.32608695652173914,
+      "average_win_r": 1.4124444444444506,
+      "average_loss_r": 0.9369892473119116,
+      "realized_payoff_ratio": 1.5074286588630041,
+      "profit_factor": 0.7294009639659698,
+      "net_r": -7.860000000002493,
+      "expectancy_r": -0.1708695652174455,
+      "max_drawdown_r": 29.046666666669267
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 49,
+      "wins": 18,
+      "losses": 31,
+      "win_rate": 0.3673469387755102,
+      "average_win_r": 1.3925925925926,
+      "average_loss_r": 0.9703225806452448,
+      "realized_payoff_ratio": 1.4351851851850692,
+      "profit_factor": 0.833333333333266,
+      "net_r": -5.013333333335796,
+      "expectancy_r": -0.10231292517011828,
+      "max_drawdown_r": 9.440000000001133
+    },
+    "oracle_clock_resemblance": {
+      "oracle_trades": 2615,
+      "exact_matches": 0,
+      "exact_precision": 0.0,
+      "exact_recall": 0.0,
+      "same_side_15m_matches": 0,
+      "same_side_15m_precision": 0.0,
+      "same_side_15m_recall": 0.0
+    },
+    "oracle_same_day_resemblance": {
+      "trades": 49,
+      "same_day_same_side_matches": 31,
+      "same_day_same_side_precision": 0.6326530612244898
+    },
+    "fixed_0p01_lot_usd": {
+      "net": -5.070000000003683,
+      "recent_2026_h1": -0.780000000000225
+    },
+    "gate_results": {
+      "total_trades": true,
+      "development_sample": true,
+      "forward_samples": true,
+      "win_rate": false,
+      "payoff": true,
+      "overall_profit_factor": false,
+      "every_window_profitable": false,
+      "both_sides": false,
+      "drawdown": true,
+      "top_winner_removal": false,
+      "extra_half_pip": false,
+      "oracle_day_precision": true
+    },
+    "passed": false
+  },
+  "data_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    },
+    "TRADINGVIEW_CONSENSUS": {
+      "rows": 262,
+      "path": "D:/AlgoTradingData/research/eurusd-neutral-tradingview-consensus-v1/TRADINGVIEW_CONSENSUS.parquet",
+      "sha256": "90ee94228f7b9be6ca85de2ba1c1483a1d3d04957e4ab98c87134fcb432c4793",
+      "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-tradingview-consensus-v1/MANIFEST.json",
+      "manifest_sha256": "3506cd392d9118c392c2d51e4fe00b24b43163dd3e874355faf012c3470a7e6e",
+      "raw_response_files": 90,
+      "raw_response_chain_sha256": "d9558ac0016e94b7aaf6a7db19a1bec0540d945b420026c6eb94f7fb6c3f83ce",
+      "information_status": "POST_HOC_HISTORICAL_FORECAST_FIELD_NOT_PRISTINE_OOS"
+    },
+    "NEUTRAL_DATE_SOURCE": {
+      "rows": 2568,
+      "paired_source_path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+      "paired_source_sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1"
+    }
+  },
+  "decision_policy": {
+    "no_parameter_search": true,
+    "no_surprise_magnitude_threshold_after_outcome": true,
+    "no_price_threshold_after_outcome": true,
+    "no_release_family_selection_after_outcome": true,
+    "no_event_hour_or_weekday_filter_after_outcome": true,
+    "no_year_filter_after_outcome": true,
+    "no_side_reversal_after_outcome": true,
+    "no_activation_of_isolated_profitable_window": true,
+    "failure_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING"
+  }
+}

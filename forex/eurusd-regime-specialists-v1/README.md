@@ -46,6 +46,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 40. BLS six-release rolling surprise: the current first-published CPI, PPI, or NFP value was compared with the median of its six previous consecutive initial values, then carried for at most 72 hours to the same four Neutral clocks. The locked census passed with 404 candidates on 101 dates. The frozen run achieved 1.439 payoff but only 32.18% wins, PF 0.683, and -89.10R. The latest six months appear strong at four trades, 75% wins, PF 4.317, +3.40R, and +$1.36 at 0.01 lot, but all four were overlapping CPI shorts on one date, 12 June 2026. That effective sample of one cannot authorize demo trading; development, 2023, and 2025 lost, stress PF was 0.557, and the exact rule is rejected.
 41. TradingView consensus source: 90 login-free monthly JSON responses supplied historical consensus forecasts for the exact CPI MoM, PPI MoM, and NFP tickers. Every provider row had to match the UTC timestamp and initial actual parsed from the official BLS PDF. This accepted 262 of 267 releases at 98.13% total coverage and 100% forecast coverage among matches; five revised, missing, or value-less rows were quarantined. The known 2024-01-05 payroll corruption check reproduces the contemporaneous 216K/170K/173K actual/forecast/previous triplet. The source is deterministic and accepted for one adaptive historical test, but its post-hoc API retrieval is not pristine point-in-time proof; prospective pre-release capture remains mandatory.
 42. Consensus-surprise finite family: actual-minus-consensus direction was carried for at most 72 hours to the four Neutral clocks, both raw and with agreement from the completed prior 15-minute EURUSD return. Both locked censuses passed at 404 and 212 trades. Full-history PFs were only 0.755 and 0.772, with 34.41% and 34.91% wins; development, 2023, and 2025 lost for both. The latest six months were profitable—carry returned 16 tickets, 68.75% wins, PF 3.166, +11.10 ticket R, and +$4.44 at 0.01 lot; agreement returned 12 tickets, 58.33% wins, PF 2.015, +5.20 ticket R, and +$2.08—but all activity clustered on only four dates. The 2026 exception is not selected after inspection, and both exact variants are rejected.
+43. Neutral consensus event confirmation: on a date classified Neutral at 00:00, a CPI/PPI/NFP surprise was traded only when the first three completed post-release M5 bars agreed with its EURUSD side. The locked census passed with 49 trades on 49 dates. The 15-pip/1.5R execution returned 36.73% wins, 1.522 payoff, PF 0.884, -3.38R, and -$5.07 at 0.01 lot. Combined 2023-2026 was marginally positive at PF 1.027, but profitable 2023-2024 gave way to PF 0.297 in 2025 and PF 0.742 in 2026 H1. The latest six months contained only three trades and lost -0.52R / -$0.78. Same-day oracle-side precision reached 63.27%, but cost and winner stress failed; the exact rule is rejected.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -125,6 +126,8 @@ Key reports:
 - `EURUSD_NEUTRAL_TRADINGVIEW_CONSENSUS_SOURCE_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_CONSENSUS_SURPRISE_FAMILY_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_CONSENSUS_SURPRISE_FAMILY_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_CONSENSUS_EVENT_CONFIRMATION_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_CONSENSUS_EVENT_CONFIRMATION_VERDICT_2026_07_28.md`
 - `EURUSD_ADAPTIVE_FREQUENCY_FALLBACK_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_VERDICT_2026_07_28.md`
@@ -242,4 +245,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with pyarrow python download_neutral_tradingview_consensus.py resume
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_consensus_surprise_family.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_consensus_surprise_family.py backtest
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_consensus_event_confirmation.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_consensus_event_confirmation.py backtest
 ```
