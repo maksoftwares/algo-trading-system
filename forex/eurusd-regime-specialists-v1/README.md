@@ -40,6 +40,8 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 34. Adaptive-frequency fallback audit: the two raw Capital.com MT5 reports reproduce the published 697 trades, 57.82% win rate, PF 1.3075, and +$119.42. The stronger Regime 1 claim fails. Realized payoff is only 0.954, the best 5% of trades contribute 93.78% of net, and a further 0.5-pip round-trip haircut reduces PF to 1.194. Exact UTC normalization and the causal cross-asset classifier isolate 116 Neutral trades at PF 1.448, but fixed 0.01-lot sizing plus 0.5 pip reduces PF to 1.261, while 2026 H1 falls to PF 0.898 and -$1.79. The slice is 97.41% long and has zero same-side oracle matches within 15 minutes. The H4 overlay is conditional leverage on the same M15 entries, not an independent specialist; combined portfolio floating drawdown remains unavailable from the two separate reports. Status is `REJECTED_AS_REGIME_1_IMITATION / NO_DEMO_PROMOTION`.
 35. Neutral symmetric RSI 1.5R: the rule, source, costs, and gates were hash-locked before an outcome-blind census. Capacity passed with 3,920 balanced Neutral signals, and the one frozen run executed 1,433 trades. The target delivered a 1.424 realized payoff, but win rate was only 37.89%, PF 0.869, and net -114.11R. Both sides lost, every block through 2025 lost, and the marginal 2026 H1 PF 1.027 / +1.52R fell to PF 0.928 / -4.30R under 0.5-pip stress and was -$2.75 at fixed 0.01 lot. Best-5%-removed PF was 0.745, maximum drawdown 129.87R, and only 29 trades matched the oracle within 15 minutes. The exact rule is rejected without deleting shorts or activating 2026.
 36. Event-conditioned DXY/Treasury rates agreement: the event clock, exact USD title taxonomy, completed M5 cross-asset reaction, Neutral ownership, execution, and census gates were hash-locked and pushed before candidate counts. Of 890 qualifying USD event clusters, 402 produced opposite-sign DXY/Treasury agreement before regime filtering, but only 53 survived the full frozen Neutral and risk contract: 28/4/10/6/5 across development, 2023, 2024, 2025, and 2026 H1. LONG/SHORT capacity was balanced at 26/27, but the total, development, later-window, and recent sample gates failed. Per the lock, P&L was not opened and the gates were not relaxed. The exact family is closed as `CENSUS_FAIL_NO_PNL_ALLOWED`.
+37. Point-in-time BLS source: 267 official archived CPI, PPI, and Employment Situation PDFs were downloaded without login and normalized to the values initially published at each release. Coverage is 98.89%/96.74%/96.74%, every parsed PDF has an evidence sentence and checksum, no later database revision is used, and the 2020 NFP unit audit preserves -20.5 million and +2.5 million correctly. This revision-safe source is accepted for causal research, not trading authorization.
+38. BLS release-time acceleration: the source, same-family initial-value comparison, 15-minute wait, fixed 15-pip/1.5R execution, entry-time Neutral ownership, and gates were hash-locked and pushed before census. The 267 releases produced 244 directional macro signals but only 30 full-contract Neutral candidates: 19/2/1/6/2 across development, 2023, 2024, 2025, and 2026 H1. Both sides and all three families were represented, but total, development, 2023, and 2024 capacity failed. P&L was not opened and the exact event-entry family is closed.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -109,6 +111,9 @@ Key reports:
 - `EURUSD_NEUTRAL_FIVE_SESSION_REVERSAL_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_EVENT_CROSSASSET_RATES_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_EVENT_CROSSASSET_RATES_CENSUS_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_BLS_INITIAL_RELEASE_SOURCE_AUDIT_2026_07_28.md`
+- `EURUSD_NEUTRAL_BLS_RELEASE_ACCELERATION_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_BLS_RELEASE_ACCELERATION_CENSUS_VERDICT_2026_07_28.md`
 - `EURUSD_ADAPTIVE_FREQUENCY_FALLBACK_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_VERDICT_2026_07_28.md`
@@ -152,6 +157,7 @@ Key reports:
 - `outputs/neutral_precious_metals_consensus/RESULT.json`
 - `outputs/neutral_five_session_reversal/RESULT.json`
 - `outputs/neutral_event_crossasset_rates/CENSUS.json`
+- `outputs/neutral_bls_release_acceleration/CENSUS.json`
 
 Run with:
 
@@ -215,4 +221,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_five_session_reversal.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_five_session_reversal.py backtest
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_event_crossasset_rates.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_bls_release_acceleration.py census
 ```
