@@ -48,6 +48,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 42. Consensus-surprise finite family: actual-minus-consensus direction was carried for at most 72 hours to the four Neutral clocks, both raw and with agreement from the completed prior 15-minute EURUSD return. Both locked censuses passed at 404 and 212 trades. Full-history PFs were only 0.755 and 0.772, with 34.41% and 34.91% wins; development, 2023, and 2025 lost for both. The latest six months were profitable—carry returned 16 tickets, 68.75% wins, PF 3.166, +11.10 ticket R, and +$4.44 at 0.01 lot; agreement returned 12 tickets, 58.33% wins, PF 2.015, +5.20 ticket R, and +$2.08—but all activity clustered on only four dates. The 2026 exception is not selected after inspection, and both exact variants are rejected.
 43. Neutral consensus event confirmation: on a date classified Neutral at 00:00, a CPI/PPI/NFP surprise was traded only when the first three completed post-release M5 bars agreed with its EURUSD side. The locked census passed with 49 trades on 49 dates. The 15-pip/1.5R execution returned 36.73% wins, 1.522 payoff, PF 0.884, -3.38R, and -$5.07 at 0.01 lot. Combined 2023-2026 was marginally positive at PF 1.027, but profitable 2023-2024 gave way to PF 0.297 in 2025 and PF 0.742 in 2026 H1. The latest six months contained only three trades and lost -0.52R / -$0.78. Same-day oracle-side precision reached 63.27%, but cost and winner stress failed; the exact rule is rejected.
 44. Two-stage opportunity audit: a fixed L2 model first estimated whether either side had a 1.5R opportunity, then a separate paired model chose LONG or SHORT. Only 2019-2020 training labels and 2021-2022 development outcomes were admitted; the source filter stopped at 2022-12-30 00:45 UTC and no 2023-2026 return was loaded. At success-score thresholds 0.45/0.43/0.41, the development selections returned PF 0.739/0.726/0.764 and lost 19.80R/29.45R/35.05R. The strictest threshold retained 112 trades but won only 33.93%, with PF 0.632 in 2021 and 0.872 in 2022. Opportunity probability was not the missing variable; future side remained unlearnable from the available causal feature set. The family is rejected in development and forward evaluation is forbidden.
+45. Prospective consensus capture: a no-login append-only pipeline now records raw TradingView responses, local request times, provider HTTP date, immutable normalized pre-release rows, and a deterministic SHA-256 evidence chain. The first 28 July snapshot saw the scheduled 7 August NFP, 12 August CPI, and 13 August PPI events but correctly admitted zero rows because all three forecasts were still null. The null snapshot is retained as point-in-time proof; repeated captures closer to release can append a forecast but can never rewrite earlier evidence. This fixes the historical source's timestamp boundary, not strategy profitability, and authorizes no broker action.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -130,6 +131,8 @@ Key reports:
 - `EURUSD_NEUTRAL_CONSENSUS_EVENT_CONFIRMATION_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_CONSENSUS_EVENT_CONFIRMATION_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_TWO_STAGE_OPPORTUNITY_AUDIT_2026_07_28.md`
+- `EURUSD_NEUTRAL_PROSPECTIVE_CONSENSUS_CAPTURE_2026_07_28.md`
+- `EURUSD_NEUTRAL_PROSPECTIVE_CONSENSUS_CAPTURE_STATE_2026_07_28.json`
 - `EURUSD_ADAPTIVE_FREQUENCY_FALLBACK_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_VERDICT_2026_07_28.md`
@@ -250,4 +253,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_consensus_event_confirmation.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_consensus_event_confirmation.py backtest
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_two_stage_opportunity_audit.py
+uv run --with pandas --with pyarrow python capture_prospective_tradingview_consensus.py capture --days-ahead 60
 ```

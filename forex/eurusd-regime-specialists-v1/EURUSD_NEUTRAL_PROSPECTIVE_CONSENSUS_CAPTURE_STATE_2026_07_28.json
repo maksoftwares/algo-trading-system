@@ -1,0 +1,59 @@
+{
+  "schema_version": "eurusd_neutral_prospective_consensus_capture_state_v1",
+  "state_at_utc": "2026-07-28T12:42:50Z",
+  "status": "CAPTURE_PIPELINE_ACTIVE_NO_FORECAST_ROWS_YET",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "external_root": "D:/AlgoTradingData/prospective/eurusd-neutral-tradingview-consensus-v1",
+  "first_capture": {
+    "request_window": [
+      "2026-07-28T00:00:00Z",
+      "2026-09-26T00:00:00Z"
+    ],
+    "request_started_utc": "2026-07-28T12:42:41.009640Z",
+    "request_finished_utc": "2026-07-28T12:42:42.462211Z",
+    "provider_http_date_utc": "2026-07-28T12:42:50Z",
+    "raw_relative_path": "raw/20260728T124250Z_338a35c9d58b15c3.json",
+    "raw_sha256": "338a35c9d58b15c3a429b6456646a21670b8b9b42ca183b794aa091e874a447b",
+    "metadata_relative_path": "metadata/20260728T124250Z_338a35c9d58b15c3.json",
+    "metadata_sha256": "21f416c56039b6680c4f2e17018b9ae874803e87acf6eac4e269ec75c3e61779",
+    "normalized_relative_path": "normalized/20260728T124250Z_338a35c9d58b15c3.parquet",
+    "normalized_sha256": "00152b94095988960f46ce88c26f51a2164f95fad1faf8cf2a919150955a6372",
+    "manifest_relative_path": "manifests/MANIFEST_20260728T124250Z_338a35c9d58b15c3_235c645e2b93.json",
+    "manifest_sha256": "9cec7db675a29e6298441eafad615d2de26545b1fcbfb9e594c155777a2bc7e6",
+    "evidence_chain_sha256": "235c645e2b939027d495f38152ede4b760b1d88758ae8fd3348f3aa873fdc09d",
+    "pre_release_forecast_rows": 0
+  },
+  "target_events_visible_in_first_snapshot": [
+    {
+      "family": "NFP",
+      "tradingview_event_id": "396495",
+      "event_time_utc": "2026-08-07T12:30:00Z",
+      "forecast_value_at_capture": null,
+      "previous_value": 57000.0
+    },
+    {
+      "family": "CPI",
+      "tradingview_event_id": "398841",
+      "event_time_utc": "2026-08-12T12:30:00Z",
+      "forecast_value_at_capture": null,
+      "previous_value": -0.4
+    },
+    {
+      "family": "PPI",
+      "tradingview_event_id": "399062",
+      "event_time_utc": "2026-08-13T12:30:00Z",
+      "forecast_value_at_capture": null,
+      "previous_value": -0.3
+    }
+  ],
+  "capture_contract": {
+    "minimum_pre_release_lead_seconds": 60,
+    "actual_must_be_absent": true,
+    "forecast_must_be_present": true,
+    "raw_metadata_and_normalized_snapshot_files_are_immutable": true,
+    "provider_http_date_is_recorded": true,
+    "each_capture_extends_a_deterministic_checksum_chain": true
+  },
+  "next_action": "Rerun the append-only capture closer to each release until a forecast is populated, preserving every earlier null snapshot."
+}
