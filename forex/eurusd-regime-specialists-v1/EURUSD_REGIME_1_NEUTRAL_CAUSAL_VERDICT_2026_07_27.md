@@ -35,6 +35,7 @@ execution decision.
 | Midnight dual-side pairs | 2019–2026 H1 | 2,620 | 31.56% | 1.433 | 0.661 | -625.38R |
 | Four-clock paired side ranker | 2021–2026 H1 | 1,732 | 33.26% | 1.432 | 0.714 | -341.10R |
 | Binance EURUSDT executed-flow sign | 2020–2026 H1 | 2,076 | 32.18% | 1.433 | 0.680 | -463.75R |
+| Binance-flow augmented paired ranker | 2022–2026 H1 evaluation | 1,336 | 32.41% | 1.430 | 0.686 | -292.70R |
 
 None passed all locked chronological admission gates. Consequently, none is
 an admitted strategy or eligible for demo/live use.
@@ -297,7 +298,16 @@ had only 50.72% conditional winning-side accuracy. All five windows failed;
 2,076 trades returned 32.18% wins, 1.433 payoff, PF 0.680, and -463.75R.
 The source pipeline is retained, but this exact direction rule is closed.
 
-The evidence does not support claiming that Regime 1 has been solved. Further retrospective threshold, hour, feature, or model search on this archive would increase overfitting rather than improve causal evidence.
+A separately locked fitted test then appended only the taker imbalance and
+same-window EURUSDT return to the 16 fixed paired contrasts. The 2020-2021
+period was training-only. Across 1,336 forced trades from 2022 through June
+2026, conditional side accuracy remained 51.30%, PF was 0.686, and net was
+-292.70R. Every window and every clock lost. The latest six months improved
+to PF 0.698 and -32.48R, but still failed all economic gates. Both the
+standalone sign and the only predeclared linear conditional use of this
+executed-flow source are now closed.
+
+The evidence does not support claiming that Regime 1 has been solved. Further retrospective threshold, hour, flow horizon, interaction, feature, or model search on this archive would increase overfitting rather than improve causal evidence.
 
 ## Next legitimate evidence
 
@@ -305,10 +315,10 @@ Progress now requires at least one source not adaptively exhausted here:
 
 1. a prospectively collected, untouched EURUSD tick period;
 2. event-time macroeconomic surprise data known at release;
-3. genuine executed-flow or multi-venue order-book imbalance rather than
-   quoted Dukascopy volume; synchronized DXY/Treasury quoted M5 behavior has
-   now also failed, and weekly aggregate CFTC Euro FX positioning has also
-   failed, including its free options-equivalent extension;
+3. an untouched second executed-flow venue or multi-venue order-book
+   imbalance; synchronized DXY/Treasury quoted M5 behavior, weekly aggregate
+   CFTC positioning, and both frozen uses of Binance EURUSDT taker flow have
+   now failed;
 4. an explicit relaxation of the requested frequency/payoff objective.
 
 Until then, Regime 1 remains `CASH`.
@@ -339,4 +349,5 @@ uv run --with pandas --with numpy --with pyarrow python run_neutral_midnight_pai
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_four_clock_ranker.py
 uv run --with pandas --with numpy --with pyarrow python download_neutral_binance_eurusdt.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_binance_eurusdt_flow.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_flow_augmented_ranker.py
 ```

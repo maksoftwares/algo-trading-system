@@ -1,0 +1,492 @@
+{
+  "campaign_id": "eurusd-neutral-flow-augmented-paired-ranker-v1",
+  "status": "REJECTED_NEUTRAL_FLOW_AUGMENTED_PAIRED_RANKER_V1",
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_WITH_FORWARD_ONLY_START",
+  "source_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "executed_flow_source": {
+    "provider": "Binance official public market-data archive",
+    "documentation": "https://github.com/binance/binance-public-data",
+    "authentication_required": false,
+    "symbol": "EURUSDT",
+    "interval": "5m",
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-binance-eurusdt-flow-v1/EURUSDT_5M_EXECUTED_FLOW.parquet",
+    "sha256": "7ba02f67f3278038a81095b90bceee402ffdce6bd4fb5d465b7c0a6e408aeb41",
+    "bytes": 39244999,
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-binance-eurusdt-flow-v1/MANIFEST.json",
+    "manifest_sha256": "17e9a956fb4ff908199022b51712df71adfc778ce148f243017be8273c48f1e7",
+    "archive_files": 78,
+    "archive_chain_sha256": "aa380ef80b3144873d089972d85699844904874bee3717bd3e8a894b626a3952",
+    "rows": 682290,
+    "first_open_utc": "2020-01-03T08:00:00Z",
+    "last_open_utc": "2026-06-30T23:55:00Z"
+  },
+  "causality": {
+    "paired_features": "sixteen frozen LONG-minus-SHORT decision-time contrasts",
+    "executed_flow_features": "prior three fully completed EURUSDT M5 bars' taker imbalance and return",
+    "model_features": [
+      "contrast_aligned_return_1_atr",
+      "contrast_aligned_return_3_atr",
+      "contrast_aligned_return_6_atr",
+      "contrast_aligned_return_12_atr",
+      "contrast_aligned_return_24_atr",
+      "contrast_aligned_ema_gap_atr",
+      "contrast_aligned_anchor_gap_atr",
+      "contrast_aligned_close_location",
+      "contrast_side_room_atr",
+      "contrast_aligned_dxy_gap_atr",
+      "contrast_aligned_eurusd_h1_gap_atr",
+      "contrast_aligned_bond_gap_atr",
+      "contrast_aligned_quote_change_imbalance",
+      "contrast_aligned_three_bar_quote_change_imbalance",
+      "contrast_aligned_path_efficiency",
+      "contrast_aligned_late_return_pips",
+      "flow_taker_imbalance_15m",
+      "flow_return_15m"
+    ],
+    "label_purge": "both entry and paired label-known time strictly before each inference window",
+    "direction": "fixed 0.5 paired probability; no feature, interaction, threshold, or hyperparameter search",
+    "future_information_in_inference": false,
+    "oracle_usage": "evaluation only after trade ledger"
+  },
+  "outcome_blind_census": {
+    "source_flow_complete_days": 519,
+    "source_flow_decision_points": 2076,
+    "eligible_complete_days": 519,
+    "paired_decision_points": 2076,
+    "forced_trade_candidates": 2076,
+    "days_exactly_four_candidates": 519,
+    "eligible_day_exact_four_coverage": 1.0,
+    "by_window": {
+      "TRAINING_2020_2021": {
+        "eligible_days": 185,
+        "decision_points": 740,
+        "forced_trade_candidates": 740
+      },
+      "validation_2022_2023": {
+        "eligible_days": 149,
+        "decision_points": 596,
+        "forced_trade_candidates": 596
+      },
+      "validation_2024": {
+        "eligible_days": 66,
+        "decision_points": 264,
+        "forced_trade_candidates": 264
+      },
+      "pseudo_oos_2025": {
+        "eligible_days": 80,
+        "decision_points": 320,
+        "forced_trade_candidates": 320
+      },
+      "pseudo_oos_2026h1": {
+        "eligible_days": 39,
+        "decision_points": 156,
+        "forced_trade_candidates": 156
+      }
+    }
+  },
+  "strategy": {
+    "admitted": false,
+    "admission_checks": {
+      "every_window": false,
+      "overall_profit_factor": false,
+      "overall_exact_oracle_precision": false,
+      "overall_15m_oracle_precision": false,
+      "stressed": false,
+      "top_winners_removed": false,
+      "daily_drawdown": false,
+      "exact_four_frequency": true
+    },
+    "window_checks": {
+      "validation_2022_2023": false,
+      "validation_2024": false,
+      "pseudo_oos_2025": false,
+      "pseudo_oos_2026h1": false
+    },
+    "overall_tickets": {
+      "trades": 1336,
+      "wins": 433,
+      "losses": 903,
+      "win_rate": 0.3241017964071856,
+      "average_win_r": 1.4749999999996863,
+      "average_loss_r": 1.0314230343300608,
+      "realized_payoff_ratio": 1.4300630787809987,
+      "profit_factor": 0.6857334585959828,
+      "net_r": -292.7000000001806,
+      "expectancy_r": -0.21908682634744056,
+      "max_drawdown_r": 294.0500000001779
+    },
+    "overall_daily_portfolio": {
+      "trades": 334,
+      "wins": 145,
+      "losses": 189,
+      "win_rate": 0.4341317365269461,
+      "average_win_r": 0.42741379310324884,
+      "average_loss_r": 0.715079365079451,
+      "realized_payoff_ratio": 0.597715182364072,
+      "profit_factor": 0.4585645578983621,
+      "net_r": -73.17500000004516,
+      "expectancy_r": -0.2190868263474406,
+      "max_drawdown_r": 73.40000000004477
+    },
+    "overall_direction_selection": {
+      "decision_points": 1336,
+      "one_winner_points": 844,
+      "no_winner_points": 492,
+      "correct_side_when_one_winner": 433,
+      "conditional_direction_accuracy": 0.5130331753554502,
+      "unconditional_target_first_rate": 0.3241017964071856,
+      "predicted_long_rate": 0.5269461077844312
+    },
+    "windows": {
+      "validation_2022_2023": {
+        "training_one_winner_pairs": 473,
+        "training_long_class_rate": 0.44608879492600423,
+        "tickets": {
+          "trades": 596,
+          "wins": 192,
+          "losses": 404,
+          "win_rate": 0.3221476510067114,
+          "average_win_r": 1.4749999999997057,
+          "average_loss_r": 1.0389851485148922,
+          "realized_payoff_ratio": 1.419654556283163,
+          "profit_factor": 0.6746873138771468,
+          "net_r": -136.550000000073,
+          "expectancy_r": -0.22911073825515604,
+          "max_drawdown_r": 137.90000000007151,
+          "active_weekdays": 520,
+          "trades_per_active_weekday": 1.146153846153846,
+          "eligible_neutral_days": 149,
+          "trades_per_eligible_neutral_day": 4.0
+        },
+        "daily_portfolio": {
+          "trades": 149,
+          "wins": 65,
+          "losses": 84,
+          "win_rate": 0.436241610738255,
+          "average_win_r": 0.46499999999981384,
+          "average_loss_r": 0.7662202380953114,
+          "realized_payoff_ratio": 0.6068751213824918,
+          "profit_factor": 0.469605748688833,
+          "net_r": -34.13750000001826,
+          "expectancy_r": -0.2291107382551561,
+          "max_drawdown_r": 34.36250000001808
+        },
+        "direction_selection": {
+          "decision_points": 596,
+          "one_winner_points": 382,
+          "no_winner_points": 214,
+          "correct_side_when_one_winner": 192,
+          "conditional_direction_accuracy": 0.5026178010471204,
+          "unconditional_target_first_rate": 0.3221476510067114,
+          "predicted_long_rate": 0.5654362416107382
+        }
+      },
+      "validation_2024": {
+        "training_one_winner_pairs": 855,
+        "training_long_class_rate": 0.49239766081871345,
+        "tickets": {
+          "trades": 264,
+          "wins": 84,
+          "losses": 180,
+          "win_rate": 0.3181818181818182,
+          "average_win_r": 1.4749999999996708,
+          "average_loss_r": 1.0250000000000534,
+          "realized_payoff_ratio": 1.4390243902435063,
+          "profit_factor": 0.6715447154469696,
+          "net_r": -60.60000000003729,
+          "expectancy_r": -0.2295454545455958,
+          "max_drawdown_r": 73.17500000003322,
+          "active_weekdays": 262,
+          "trades_per_active_weekday": 1.0076335877862594,
+          "eligible_neutral_days": 66,
+          "trades_per_eligible_neutral_day": 4.0
+        },
+        "daily_portfolio": {
+          "trades": 66,
+          "wins": 30,
+          "losses": 36,
+          "win_rate": 0.45454545454545453,
+          "average_win_r": 0.39166666666645705,
+          "average_loss_r": 0.7472222222223065,
+          "realized_payoff_ratio": 0.5241635687728946,
+          "profit_factor": 0.43680297397741213,
+          "net_r": -15.150000000009324,
+          "expectancy_r": -0.22954545454559583,
+          "max_drawdown_r": 17.925000000008353
+        },
+        "direction_selection": {
+          "decision_points": 264,
+          "one_winner_points": 172,
+          "no_winner_points": 92,
+          "correct_side_when_one_winner": 84,
+          "conditional_direction_accuracy": 0.4883720930232558,
+          "unconditional_target_first_rate": 0.3181818181818182,
+          "predicted_long_rate": 0.5303030303030303
+        }
+      },
+      "pseudo_oos_2025": {
+        "training_one_winner_pairs": 1027,
+        "training_long_class_rate": 0.4878286270691334,
+        "tickets": {
+          "trades": 320,
+          "wins": 106,
+          "losses": 214,
+          "win_rate": 0.33125,
+          "average_win_r": 1.4749999999996712,
+          "average_loss_r": 1.0253504672897755,
+          "realized_payoff_ratio": 1.4385325281983021,
+          "profit_factor": 0.712544149481402,
+          "net_r": -63.07500000004684,
+          "expectancy_r": -0.1971093750001464,
+          "max_drawdown_r": 63.72500000004465,
+          "active_weekdays": 261,
+          "trades_per_active_weekday": 1.2260536398467432,
+          "eligible_neutral_days": 80,
+          "trades_per_eligible_neutral_day": 4.0
+        },
+        "daily_portfolio": {
+          "trades": 80,
+          "wins": 33,
+          "losses": 47,
+          "win_rate": 0.4125,
+          "average_win_r": 0.4143939393937272,
+          "average_loss_r": 0.626462765957547,
+          "realized_payoff_ratio": 0.6614821533093462,
+          "profit_factor": 0.46444491615337075,
+          "net_r": -15.76875000001171,
+          "expectancy_r": -0.1971093750001464,
+          "max_drawdown_r": 15.768750000011714
+        },
+        "direction_selection": {
+          "decision_points": 320,
+          "one_winner_points": 200,
+          "no_winner_points": 120,
+          "correct_side_when_one_winner": 106,
+          "conditional_direction_accuracy": 0.53,
+          "unconditional_target_first_rate": 0.33125,
+          "predicted_long_rate": 0.471875
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "training_one_winner_pairs": 1227,
+        "training_long_class_rate": 0.5004074979625102,
+        "tickets": {
+          "trades": 156,
+          "wins": 51,
+          "losses": 105,
+          "win_rate": 0.3269230769230769,
+          "average_win_r": 1.4749999999996708,
+          "average_loss_r": 1.0257142857143493,
+          "realized_payoff_ratio": 1.4380222841221526,
+          "profit_factor": 0.698467966573617,
+          "net_r": -32.475000000023456,
+          "expectancy_r": -0.20817307692322728,
+          "max_drawdown_r": 33.37500000002273,
+          "active_weekdays": 129,
+          "trades_per_active_weekday": 1.2093023255813953,
+          "eligible_neutral_days": 39,
+          "trades_per_eligible_neutral_day": 4.0
+        },
+        "daily_portfolio": {
+          "trades": 39,
+          "wins": 17,
+          "losses": 22,
+          "win_rate": 0.4358974358974359,
+          "average_win_r": 0.3720588235292043,
+          "average_loss_r": 0.6565340909091972,
+          "realized_payoff_ratio": 0.5667014534065716,
+          "profit_factor": 0.43790566854144164,
+          "net_r": -8.118750000005864,
+          "expectancy_r": -0.20817307692322728,
+          "max_drawdown_r": 8.343750000005674
+        },
+        "direction_selection": {
+          "decision_points": 156,
+          "one_winner_points": 90,
+          "no_winner_points": 66,
+          "correct_side_when_one_winner": 51,
+          "conditional_direction_accuracy": 0.5666666666666667,
+          "unconditional_target_first_rate": 0.3269230769230769,
+          "predicted_long_rate": 0.48717948717948717
+        }
+      }
+    },
+    "frequency": {
+      "eligible_evaluation_days": 334,
+      "executed_days": 334,
+      "days_exactly_four_executed_trades": 334,
+      "eligible_day_exact_four_execution_coverage": 1.0,
+      "trades_per_eligible_day": 4.0
+    },
+    "robustness": {
+      "top_5_percent_winners_removed": {
+        "trades": 1269,
+        "wins": 366,
+        "losses": 903,
+        "win_rate": 0.28841607565011823,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0314230343300608,
+        "realized_payoff_ratio": 1.4300630787809838,
+        "profit_factor": 0.5796268957185383,
+        "net_r": -391.52500000016516,
+        "expectancy_r": -0.30853033884961795,
+        "max_drawdown_r": 392.42500000015514
+      },
+      "extra_half_pip_round_trip": {
+        "trades": 1336,
+        "wins": 433,
+        "losses": 903,
+        "win_rate": 0.3241017964071856,
+        "average_win_r": 1.3499999999996863,
+        "average_loss_r": 1.1564230343300608,
+        "realized_payoff_ratio": 1.1673928656927597,
+        "profit_factor": 0.5597797462291971,
+        "net_r": -459.7000000001806,
+        "expectancy_r": -0.34408682634744053,
+        "max_drawdown_r": 460.30000000017026
+      }
+    },
+    "recent_six_months": {
+      "tickets": {
+        "trades": 156,
+        "wins": 51,
+        "losses": 105,
+        "win_rate": 0.3269230769230769,
+        "average_win_r": 1.4749999999996708,
+        "average_loss_r": 1.0257142857143493,
+        "realized_payoff_ratio": 1.4380222841221526,
+        "profit_factor": 0.698467966573617,
+        "net_r": -32.475000000023456,
+        "expectancy_r": -0.20817307692322728,
+        "max_drawdown_r": 33.37500000002273
+      },
+      "daily_portfolio": {
+        "trades": 39,
+        "wins": 17,
+        "losses": 22,
+        "win_rate": 0.4358974358974359,
+        "average_win_r": 0.3720588235292043,
+        "average_loss_r": 0.6565340909091972,
+        "realized_payoff_ratio": 0.5667014534065716,
+        "profit_factor": 0.43790566854144164,
+        "net_r": -8.118750000005864,
+        "expectancy_r": -0.20817307692322728,
+        "max_drawdown_r": 8.343750000005674
+      },
+      "direction_selection": {
+        "decision_points": 156,
+        "one_winner_points": 90,
+        "no_winner_points": 66,
+        "correct_side_when_one_winner": 51,
+        "conditional_direction_accuracy": 0.5666666666666667,
+        "unconditional_target_first_rate": 0.3269230769230769,
+        "predicted_long_rate": 0.48717948717948717
+      },
+      "active_weekdays": 129,
+      "eligible_neutral_days": 39,
+      "trades_per_active_weekday": 1.2093023255813953,
+      "trades_per_eligible_neutral_day": 4.0
+    }
+  },
+  "oracle_resemblance": {
+    "overall": {
+      "predicted_trades": 1336,
+      "oracle_trades": 1343,
+      "exact_matches": 276,
+      "exact_precision": 0.20658682634730538,
+      "exact_recall": 0.20551005212211468,
+      "exact_f1": 0.20604703247480402,
+      "tolerance_minutes": 15,
+      "tolerant_matches": 522,
+      "tolerant_precision": 0.3907185628742515,
+      "tolerant_recall": 0.38868205510052123,
+      "tolerant_f1": 0.38969764837625975
+    },
+    "windows": {
+      "validation_2022_2023": {
+        "predicted_trades": 596,
+        "oracle_trades": 600,
+        "exact_matches": 120,
+        "exact_precision": 0.20134228187919462,
+        "exact_recall": 0.2,
+        "exact_f1": 0.2006688963210702,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 230,
+        "tolerant_precision": 0.3859060402684564,
+        "tolerant_recall": 0.38333333333333336,
+        "tolerant_f1": 0.38461538461538464
+      },
+      "validation_2024": {
+        "predicted_trades": 264,
+        "oracle_trades": 263,
+        "exact_matches": 54,
+        "exact_precision": 0.20454545454545456,
+        "exact_recall": 0.20532319391634982,
+        "exact_f1": 0.20493358633776093,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 94,
+        "tolerant_precision": 0.3560606060606061,
+        "tolerant_recall": 0.3574144486692015,
+        "tolerant_f1": 0.35673624288425043
+      },
+      "pseudo_oos_2025": {
+        "predicted_trades": 320,
+        "oracle_trades": 320,
+        "exact_matches": 69,
+        "exact_precision": 0.215625,
+        "exact_recall": 0.215625,
+        "exact_f1": 0.215625,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 132,
+        "tolerant_precision": 0.4125,
+        "tolerant_recall": 0.4125,
+        "tolerant_f1": 0.4125
+      },
+      "pseudo_oos_2026h1": {
+        "predicted_trades": 156,
+        "oracle_trades": 160,
+        "exact_matches": 33,
+        "exact_precision": 0.21153846153846154,
+        "exact_recall": 0.20625,
+        "exact_f1": 0.2088607594936709,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 66,
+        "tolerant_precision": 0.4230769230769231,
+        "tolerant_recall": 0.4125,
+        "tolerant_f1": 0.4177215189873418
+      }
+    }
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "historical_rows_before_start_are_research_only": true,
+    "available_points_after_start": 0,
+    "status": "WAITING_FOR_POST_LOCK_MARKET_DATA"
+  },
+  "verdict": "The frozen flow-augmented paired ranker failed one or more gates and is closed without repair."
+}

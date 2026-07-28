@@ -28,6 +28,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 22. Midnight dual-side pairs: independent long and short tickets were retained at both 00:00 and 00:05 UTC on every Neutral-owned weekday, guaranteeing exactly four causal tickets per eligible day without direction prediction. The frozen rule produced 2,620 trades, 31.56% wins, 1.433 payoff, PF 0.661, and -625.38R. One-winner pairs earned only about +0.45R while no-winner pairs lost about -2.05R. The latest six months produced 156 tickets, 27.56% wins, PF 0.547, and -52.43R. This hedge-mode route is closed.
 23. Four-clock paired side ranker: a purged L2 model learned LONG-minus-SHORT feature contrasts directly and forced one side at 00:00, 00:15, 00:30, and 00:45 UTC. It produced exactly four trades on all 433 evaluation Neutral dates, but conditional direction accuracy was only 52.60%. Its 1,732 trades won 33.26%, returned 1.432 payoff, PF 0.714, and -341.10R. The latest six months produced 156 trades, 29.49% wins, PF 0.601, and -44.98R. Direct paired learning is closed.
 24. Login-free EURUSDT executed flow: 78 official Binance archives supplied 682,290 checksum-validated M5 bars with actual volume, trade count, and taker-buy volume from 2020 through June 2026. A frozen, unfitted rule used the sign of the prior 15-minute taker imbalance at four first-hour clocks. It produced exactly four trades on all 519 eligible Neutral dates, but conditional side accuracy was only 50.72%. Its 2,076 trades won 32.18%, returned 1.433 payoff, PF 0.680, and -463.75R. The latest six months fell to 26.28% wins, PF 0.513, and -57.48R. The source pipeline is retained; the sign rule is closed.
+25. Flow-augmented paired ranker: the same checksum-pinned EURUSDT archive added only prior-15-minute taker imbalance and return to the frozen 16-feature paired side model. The 2020-2021 period was training-only; 1,336 later trades executed exactly four times on all 334 eligible Neutral dates. Conditional side accuracy was only 51.30%, win rate 32.41%, payoff 1.430, PF 0.686, and net -292.70R. The latest six months improved to PF 0.698 but still lost 32.48R. All four windows and every clock failed, so this final predeclared fitted use of the source is closed.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -69,6 +70,8 @@ Key reports:
 - `EURUSD_NEUTRAL_BINANCE_EURUSDT_SOURCE_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_BINANCE_EURUSDT_FLOW_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_BINANCE_EURUSDT_FLOW_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_FLOW_AUGMENTED_RANKER_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_FLOW_AUGMENTED_RANKER_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -97,6 +100,7 @@ Key reports:
 - `outputs/neutral_midnight_pairs/RESULT.json`
 - `outputs/neutral_four_clock_ranker/RESULT.json`
 - `outputs/neutral_binance_eurusdt_flow/RESULT.json`
+- `outputs/neutral_flow_augmented_ranker/RESULT.json`
 
 Run with:
 
@@ -136,4 +140,5 @@ uv run --with pandas --with numpy --with pyarrow python run_neutral_midnight_pai
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_four_clock_ranker.py
 uv run --with pandas --with numpy --with pyarrow python download_neutral_binance_eurusdt.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_binance_eurusdt_flow.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_flow_augmented_ranker.py
 ```

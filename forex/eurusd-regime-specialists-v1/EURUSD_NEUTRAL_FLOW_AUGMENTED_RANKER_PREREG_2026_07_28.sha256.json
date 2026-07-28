@@ -1,0 +1,25 @@
+{
+  "locked_before_flow_augmented_ranker_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T13:00:00Z",
+  "files": {
+    "config/frozen_neutral_flow_augmented_ranker.json": "fc55489da3466a9dbf3de2a1db748585a5b003306fd7da1a505b76a49fcb59b6",
+    "src/eurusd_regime_specialists/neutral_flow_augmented_ranker.py": "c5e0fd1923fd59ca60ea42241b156132b3a92af0b033e1811318e581b653ae3b",
+    "run_neutral_flow_augmented_ranker.py": "f2e6e526a4087ba1b00c2639f34bcb04cc10b7e42de5b6617cbcca3e6833db6e",
+    "tests/test_neutral_flow_augmented_ranker.py": "0e56f90c1eaffad87a9d7a080101b442ba538de5b8f4c9032235653f358718a8",
+    "EURUSD_NEUTRAL_FLOW_AUGMENTED_RANKER_PREREG_2026_07_28.md": "1bed027ed5da3291681045f1bd97182b06e944e7f44413a06d4406c062fc04d1"
+  },
+  "pinned_sources": {
+    "PARENT_FOUR_CLOCK_CONTRACT": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "PARENT_FLOW_CONTRACT": "b76196715ce8beae5887e16305eb6d331f2cb4f47ab42a7e5e4adde3909a6bdf",
+    "PAIRED_TRADE_SOURCE.parquet": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "EURUSDT_5M_EXECUTED_FLOW.parquet": "7ba02f67f3278038a81095b90bceee402ffdce6bd4fb5d465b7c0a6e408aeb41",
+    "EURUSDT_SOURCE_MANIFEST.json": "17e9a956fb4ff908199022b51712df71adfc778ce148f243017be8273c48f1e7",
+    "BINANCE_ARCHIVE_CHAIN": "aa380ef80b3144873d089972d85699844904874bee3717bd3e8a894b626a3952"
+  },
+  "outcome_blind_census": {
+    "training_points": 740,
+    "evaluation_points": 1336,
+    "evaluation_complete_days": 334,
+    "evaluation_days_exactly_four": 334
+  }
+}
