@@ -1,6 +1,6 @@
 {
-  "schema_version": "eurusd_neutral_prospective_execution_status_v2_1",
-  "as_of_utc": "2026-07-28T14:50:00Z",
+  "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
+  "as_of_utc": "2026-07-28T15:20:00Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -11,7 +11,10 @@
   "v2_original_lock_sha256": "024fba2fe01be1043f2f15ef7267eaa3286250bf3e5ca2471734324a8d67b31c",
   "v2_1_lock_sha256": "4364d8160008a120f1e6048ec4a0212c06a37a8026ab5d0c42d5e878c2abcb46",
   "neutral_ownership_lock_sha256": "e980c958bd350f9254fa51b559448800f00a1f0f9fbeb5e070d354b3772c180a",
-  "campaign_orchestration_lock_sha256": "ee39abf89b58789b3bdd03b055b5e075450b63045b7711619200462228913cb6",
+  "campaign_orchestration_original_lock_sha256": "ee39abf89b58789b3bdd03b055b5e075450b63045b7711619200462228913cb6",
+  "campaign_orchestration_v1_1_superseded_original_before_first_signal": true,
+  "campaign_orchestration_v1_1_lock_sha256": "a54e1fd7ee0ae664adfa8fee7bd18b575f622bc8fa2d3efb248174903d55bfa1",
+  "prospective_oracle_evaluation_lock_sha256": "006a7afda3115ed9d3eaa2e585d38b51e406a1642c82f862890cae81e1df5610",
   "orchestration_status": "WAITING_FOR_PROSPECTIVE_START",
   "evidence_inventory_sha256": "8fd4da44e16793129acf782f226f1038bd9a267c854334a979586454a39c5458",
   "ledger_inventory_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -24,9 +27,18 @@
   "linked_post_release_actual_rows": 0,
   "complete_event_market_rows": 0,
   "neutral_ownership_records": 0,
+  "prospective_oracle_manifests": 0,
+  "prospective_oracle_labels": 0,
   "immutable_signals": 0,
   "closed_prospective_trades": 0,
   "admission_review_allowed": false,
-  "next_action": "WAIT_FOR_FIRST_LINKED_POST_RELEASE_ACTUAL; NO MARKET OR PATH REQUEST IS DUE",
+  "oracle_labels_are_evaluation_only": true,
+  "four_trades_per_day_required": false,
+  "full_test_suite": {
+    "passed": 245,
+    "failed": 0,
+    "warnings": 2
+  },
+  "next_action": "WAIT_FOR_PROSPECTIVE_START; CAPTURE DAILY OWNERSHIP AFTER ITS SAFE LAG; FIRST JULY_29 ORACLE DATE IS NOT DUE BEFORE JULY_30_12_01_UTC; NO EVENT MARKET OR PATH REQUEST IS DUE",
   "broker_action_allowed": false
 }

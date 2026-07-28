@@ -1,8 +1,14 @@
 {
-  "schema_version": "eurusd_neutral_prospective_campaign_orchestration_v1",
+  "schema_version": "eurusd_neutral_prospective_campaign_orchestration_v1_1",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
-  "frozen_at_utc": "2026-07-28T14:48:00Z",
+  "frozen_at_utc": "2026-07-28T15:10:00Z",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "supersedes": {
+    "lock_path": "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_PREREG_2026_07_28.sha256.json",
+    "lock_sha256": "ee39abf89b58789b3bdd03b055b5e075450b63045b7711619200462228913cb6",
+    "before_first_signal": true,
+    "reason": "ADD_LATE_EVALUATION_ONLY_ORACLE_LABEL_INGESTION_WITHOUT_CHANGING_SIGNALS_TRADES_OR_ROUTING"
+  },
   "research_only": true,
   "shadow_only": true,
   "broker_action_allowed": false,
@@ -14,17 +20,25 @@
     "path": "EURUSD_NEUTRAL_PROSPECTIVE_OWNERSHIP_PREREG_2026_07_28.sha256.json",
     "sha256": "e980c958bd350f9254fa51b559448800f00a1f0f9fbeb5e070d354b3772c180a"
   },
+  "oracle_evaluation_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_ORACLE_EVALUATION_PREREG_2026_07_28.sha256.json",
+    "sha256": "006a7afda3115ed9d3eaa2e585d38b51e406a1642c82f862890cae81e1df5610"
+  },
   "evidence_roots": {
     "consensus_and_actual": "D:/AlgoTradingData/prospective/eurusd-neutral-tradingview-consensus-v1",
     "event_market": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/market",
     "neutral_ownership": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership",
     "trade_path": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/path",
+    "oracle_evaluation": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/oracle",
     "ledger": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ledger"
   },
   "source_validation": {
     "every_normalized_snapshot_requires_one_valid_manifest": true,
     "all_referenced_raw_metadata_and_normalized_hashes_required": true,
     "ownership_record_and_content_addressed_manifest_required": true,
+    "oracle_raw_metadata_market_labels_and_content_addressed_manifest_required": true,
+    "oracle_labels_before_known_time_are_ignored": true,
+    "completed_oracle_date_without_four_winners_is_a_known_negative_date": true,
     "complete_path_requires_144_continuous_m5_rows": true,
     "relative_paths_must_remain_inside_evidence_root": true,
     "missing_or_tampered_evidence_action": "FAIL_CLOSED"
@@ -46,6 +60,13 @@
     "complete_path_action": "PERSIST_CLOSED_TRADE",
     "one_open_position": true
   },
+  "frequency_policy": {
+    "four_trades_per_day_required": false,
+    "minimum_daily_trade_count": 0,
+    "profitability_and_robustness_take_priority_over_frequency": true,
+    "four_trade_hindsight_oracle_is_evaluation_benchmark_only": true,
+    "strategy_frequency_may_not_be_increased_by_oracle_labels": true
+  },
   "process_policy": {
     "network_requests_allowed": false,
     "historical_pnl_allowed": false,
@@ -53,6 +74,9 @@
     "source_revision_may_replace_existing_signal": false,
     "terminal_trade_revision_allowed": false,
     "oracle_labels_may_filter_signals": false,
+    "oracle_labels_may_change_persisted_signal_or_trade_records": false,
+    "oracle_labels_may_enter_routing_risk_sizing_or_exits": false,
+    "oracle_labels_may_enter_admission_after_terminal_reconciliation": true,
     "broker_action_allowed": false
   }
 }

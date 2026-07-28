@@ -20,7 +20,6 @@ from .prospective_neutral_macro_crossasset_execution import (
 )
 from .research import PACKAGE_ROOT, sha256_file
 
-
 CONFIG_PATH = (
     PACKAGE_ROOT
     / "config"
@@ -28,7 +27,7 @@ CONFIG_PATH = (
 )
 LOCK_PATH = (
     PACKAGE_ROOT
-    / "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_PREREG_2026_07_28.sha256.json"
+    / "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_V1_1_PREREG_2026_07_28.sha256.json"
 )
 HEX_64 = re.compile(r"[0-9a-f]{64}")
 TERMINAL_STATUSES = {
@@ -44,27 +43,27 @@ def load_config() -> dict[str, Any]:
 
 def verify_lock() -> dict[str, str]:
     lock = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
-    if (
-        lock.get("locked_before_prospective_start_and_first_signal")
-        is not True
-    ):
+    if lock.get("locked_before_prospective_start_and_first_signal") is not True:
         raise RuntimeError("Prospective campaign orchestration is not locked")
     checked: dict[str, str] = {}
     for relative, expected in lock["files"].items():
         actual = sha256_file(PACKAGE_ROOT / relative)
         if actual != expected:
-            raise RuntimeError(
-                f"Prospective orchestration lock mismatch: {relative}"
-            )
+            raise RuntimeError(f"Prospective orchestration lock mismatch: {relative}")
         checked[relative] = actual
     cfg = load_config()
-    for section in ("execution_contract", "ownership_contract"):
+    for section in (
+        "execution_contract",
+        "ownership_contract",
+        "oracle_evaluation_contract",
+    ):
         reference = cfg[section]
         actual = sha256_file(PACKAGE_ROOT / reference["path"])
         if actual != reference["sha256"]:
-            raise RuntimeError(
-                f"Prospective orchestration reference drift: {section}"
-            )
+            raise RuntimeError(f"Prospective orchestration reference drift: {section}")
+    superseded = cfg["supersedes"]
+    if sha256_file(PACKAGE_ROOT / superseded["lock_path"]) != superseded["lock_sha256"]:
+        raise RuntimeError("Superseded orchestration lock drift")
     return checked
 
 
@@ -81,9 +80,7 @@ def _serialize(value: Any) -> Any:
     if isinstance(value, Path):
         return value.as_posix()
     if isinstance(value, Mapping):
-        return {
-            str(key): _serialize(item) for key, item in value.items()
-        }
+        return {str(key): _serialize(item) for key, item in value.items()}
     if isinstance(value, (list, tuple)):
         return [_serialize(item) for item in value]
     if isinstance(value, (np.bool_, bool)):
@@ -98,9 +95,9 @@ def _serialize(value: Any) -> Any:
 
 
 def _json_bytes(value: Any) -> bytes:
-    return (
-        json.dumps(_serialize(value), indent=2, sort_keys=True) + "\n"
-    ).encode("utf-8")
+    return (json.dumps(_serialize(value), indent=2, sort_keys=True) + "\n").encode(
+        "utf-8"
+    )
 
 
 def _canonical_hash(value: Any) -> str:
@@ -180,9 +177,7 @@ def _require_columns(
 ) -> None:
     missing = required - set(frame.columns)
     if missing:
-        raise RuntimeError(
-            f"{label} lacks required columns: {sorted(missing)}"
-        )
+        raise RuntimeError(f"{label} lacks required columns: {sorted(missing)}")
 
 
 def load_actual_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
@@ -204,17 +199,13 @@ def load_actual_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
             manifest.get("capture_metadata", {}),
             "actual capture metadata",
         )
-        normalized_relative, normalized_path, _normalized_hash = (
-            _verified_reference(
-                root,
-                manifest.get("normalized_snapshot", {}),
-                "actual normalized snapshot",
-            )
+        normalized_relative, normalized_path, _normalized_hash = _verified_reference(
+            root,
+            manifest.get("normalized_snapshot", {}),
+            "actual normalized snapshot",
         )
         if normalized_relative in frames:
-            raise RuntimeError(
-                "One actual snapshot has multiple manifests"
-            )
+            raise RuntimeError("One actual snapshot has multiple manifests")
         frame = _read_frame(
             normalized_path,
             manifest["normalized_snapshot"]["rows"],
@@ -235,44 +226,45 @@ def load_actual_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
                 },
                 "Actual snapshot",
             )
-            if not frame["capture_semantics"].eq(
-                ACTUAL_SEMANTICS
-            ).all():
+            if not frame["capture_semantics"].eq(ACTUAL_SEMANTICS).all():
                 raise RuntimeError("Actual snapshot semantics drift")
-            if not frame[
-                "actual_raw_snapshot_relative_path"
-            ].astype(str).eq(raw_relative).all():
+            if (
+                not frame["actual_raw_snapshot_relative_path"]
+                .astype(str)
+                .eq(raw_relative)
+                .all()
+            ):
                 raise RuntimeError("Actual raw path linkage drift")
-            if not frame["actual_raw_snapshot_sha256"].astype(
-                str
-            ).str.lower().eq(raw_hash).all():
+            if (
+                not frame["actual_raw_snapshot_sha256"]
+                .astype(str)
+                .str.lower()
+                .eq(raw_hash)
+                .all()
+            ):
                 raise RuntimeError("Actual raw hash linkage drift")
-            for row in frame[
-                [
-                    "forecast_raw_snapshot_relative_path",
-                    "forecast_raw_snapshot_sha256",
+            for row in (
+                frame[
+                    [
+                        "forecast_raw_snapshot_relative_path",
+                        "forecast_raw_snapshot_sha256",
+                    ]
                 ]
-            ].drop_duplicates().itertuples(index=False):
+                .drop_duplicates()
+                .itertuples(index=False)
+            ):
                 relative, path = _safe_relative(root, row[0])
-                expected = _valid_hash(
-                    row[1], "Forecast raw snapshot hash"
-                )
+                expected = _valid_hash(row[1], "Forecast raw snapshot hash")
                 if relative in referenced_forecasts:
                     if referenced_forecasts[relative] != expected:
-                        raise RuntimeError(
-                            "Forecast snapshot has conflicting hashes"
-                        )
+                        raise RuntimeError("Forecast snapshot has conflicting hashes")
                 else:
                     if not path.is_file() or sha256_file(path) != expected:
-                        raise RuntimeError(
-                            "Forecast raw snapshot hash drift"
-                        )
+                        raise RuntimeError("Forecast raw snapshot hash drift")
                     referenced_forecasts[relative] = expected
         frames[normalized_relative] = frame
     combined = (
-        pd.concat(frames.values(), ignore_index=True)
-        if frames
-        else pd.DataFrame()
+        pd.concat(frames.values(), ignore_index=True) if frames else pd.DataFrame()
     )
     return combined, {
         "actual_manifests": len(manifests),
@@ -309,17 +301,13 @@ def load_market_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
                 },
                 "event-market metadata",
             )
-        normalized_relative, normalized_path, normalized_hash = (
-            _verified_reference(
-                root,
-                manifest.get("normalized_snapshot", {}),
-                "event-market normalized snapshot",
-            )
+        normalized_relative, normalized_path, normalized_hash = _verified_reference(
+            root,
+            manifest.get("normalized_snapshot", {}),
+            "event-market normalized snapshot",
         )
         if normalized_relative in frames:
-            raise RuntimeError(
-                "One event-market snapshot has multiple manifests"
-            )
+            raise RuntimeError("One event-market snapshot has multiple manifests")
         frame = _read_frame(
             normalized_path,
             manifest["normalized_snapshot"]["rows"],
@@ -333,9 +321,7 @@ def load_market_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
                 )
             continue
         if len(frame) != 1:
-            raise RuntimeError(
-                "Complete event-market snapshot must have one row"
-            )
+            raise RuntimeError("Complete event-market snapshot must have one row")
         _require_columns(
             frame,
             {
@@ -347,9 +333,7 @@ def load_market_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
         )
         if str(frame["capture_semantics"].iloc[0]) != MARKET_SEMANTICS:
             raise RuntimeError("Event-market semantics drift")
-        if _utc(frame["event_time_utc"].iloc[0]) != _utc(
-            manifest["event_time_utc"]
-        ):
+        if _utc(frame["event_time_utc"].iloc[0]) != _utc(manifest["event_time_utc"]):
             raise RuntimeError("Event-market event time linkage drift")
         if _utc(frame["market_observed_at_utc"].iloc[0]) != _utc(
             manifest["market_observed_at_utc"]
@@ -360,9 +344,7 @@ def load_market_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
         linked["market_snapshot_sha256"] = normalized_hash
         complete_rows.append(linked)
     combined = (
-        pd.concat(complete_rows, ignore_index=True)
-        if complete_rows
-        else pd.DataFrame()
+        pd.concat(complete_rows, ignore_index=True) if complete_rows else pd.DataFrame()
     )
     return combined, {
         "market_manifests": len(manifests),
@@ -397,21 +379,16 @@ def load_ownership_evidence(
             raise RuntimeError("One ownership record has multiple manifests")
         record = json.loads(record_path.read_bytes())
         verify_neutral_ownership_record(record)
-        manifest_date = _utc(manifest["eligible_date"]).strftime(
-            "%Y-%m-%d"
-        )
+        manifest_date = _utc(manifest["eligible_date"]).strftime("%Y-%m-%d")
         if manifest_date != str(record["eligible_date"]):
             raise RuntimeError("Ownership eligible-date linkage drift")
         if manifest_date in dates:
             raise RuntimeError("Date has multiple ownership records")
-        if (
-            str(reference.get("ownership_evidence_sha256"))
-            != str(record["ownership_evidence_sha256"])
+        if str(reference.get("ownership_evidence_sha256")) != str(
+            record["ownership_evidence_sha256"]
         ):
             raise RuntimeError("Ownership evidence linkage drift")
-        if bool(reference.get("is_neutral")) != bool(
-            record["is_neutral"]
-        ):
+        if bool(reference.get("is_neutral")) != bool(record["is_neutral"]):
             raise RuntimeError("Ownership status linkage drift")
         expected_record_name = (
             f"{record['eligible_date']}_"
@@ -423,20 +400,272 @@ def load_ownership_evidence(
             raise RuntimeError("Ownership record hash drift")
         records[relative] = record
         dates[manifest_date] = relative
-    combined = (
-        pd.DataFrame(list(records.values()))
-        if records
-        else pd.DataFrame()
-    )
+    combined = pd.DataFrame(list(records.values())) if records else pd.DataFrame()
     return combined, {
         "ownership_manifests": len(manifests),
         "ownership_records": len(records),
         "neutral_owned_dates": (
-            int(combined["is_neutral"].astype(bool).sum())
-            if len(combined)
-            else 0
+            int(combined["is_neutral"].astype(bool).sum()) if len(combined) else 0
         ),
     }
+
+
+def load_oracle_evidence(
+    root: Path,
+    ownership_root: Path,
+    *,
+    evaluated_at_utc: Any,
+) -> tuple[pd.DataFrame, set[str], dict[str, int]]:
+    """Load only immutable oracle dates known by the evaluation timestamp."""
+    evaluated = _utc(evaluated_at_utc)
+    prospective_start = _utc(load_config()["prospective_start_utc"])
+    manifests = sorted(root.glob("manifests/MANIFEST_*.json"))
+    labels_by_date: dict[str, pd.DataFrame] = {}
+    completed_dates: set[str] = set()
+    seen_dates: set[str] = set()
+    not_yet_known = 0
+    complete = 0
+    unavailable = 0
+    for manifest_path in manifests:
+        manifest, manifest_hash = _read_manifest(manifest_path)
+        if manifest.get("schema_version") != "eurusd_neutral_prospective_oracle_day_v1":
+            raise RuntimeError("Unexpected prospective oracle manifest schema")
+        day = _utc(manifest.get("oracle_date")).floor("D")
+        if day != _utc(manifest.get("oracle_date")):
+            raise RuntimeError("Oracle manifest date is not UTC midnight")
+        if day < prospective_start or day.weekday() >= 5:
+            raise RuntimeError("Oracle manifest date is outside the campaign")
+        day_string = day.strftime("%Y-%m-%d")
+        expected_name = f"MANIFEST_{day_string}_{manifest_hash[:16]}.json"
+        if manifest_path.name != expected_name:
+            raise RuntimeError("Oracle manifest name/hash drift")
+        if day_string in seen_dates:
+            raise RuntimeError("Oracle date has multiple manifests")
+        seen_dates.add(day_string)
+        if manifest.get("historical_pnl_loaded") is not False:
+            raise RuntimeError("Oracle manifest historical-PnL boundary drift")
+
+        known = _utc(manifest.get("oracle_label_known_time_utc"))
+        earliest = day + pd.Timedelta(hours=36, seconds=60)
+        if known < earliest:
+            raise RuntimeError("Oracle label predates its safe known time")
+        raw_rows = manifest.get("raw_snapshots", [])
+        if not isinstance(raw_rows, list) or len(raw_rows) != 36:
+            raise RuntimeError("Oracle manifest lacks the frozen 36 hours")
+        expected_hours = list(pd.date_range(day, periods=36, freq="h"))
+        observed_hours: list[pd.Timestamp] = []
+        for row in raw_rows:
+            hour = _utc(row.get("hour_utc"))
+            observed = _utc(row.get("observed_at_utc"))
+            if observed > known:
+                raise RuntimeError("Oracle raw evidence postdates label")
+            observed_hours.append(hour)
+            _, raw_path, raw_hash = _verified_reference(
+                root,
+                {
+                    "relative_path": row.get("raw_relative_path"),
+                    "sha256": row.get("raw_sha256"),
+                },
+                "oracle raw snapshot",
+            )
+            _, metadata_path, _ = _verified_reference(
+                root,
+                {
+                    "relative_path": row.get("metadata_relative_path"),
+                    "sha256": row.get("metadata_sha256"),
+                },
+                "oracle metadata",
+            )
+            metadata = json.loads(metadata_path.read_bytes())
+            if (
+                str(metadata.get("symbol")) != "EURUSD"
+                or _utc(metadata.get("hour_utc")) != hour
+                or _utc(metadata.get("observed_at_utc")) != observed
+                or str(metadata.get("raw_sha256")).lower() != raw_hash
+                or metadata.get("broker_action_allowed") is not False
+            ):
+                raise RuntimeError("Oracle metadata linkage drift")
+            if not raw_path.is_file():
+                raise RuntimeError("Oracle raw snapshot is missing")
+        if observed_hours != expected_hours:
+            raise RuntimeError("Oracle hour inventory is not exact and ordered")
+
+        _, market_path, _ = _verified_reference(
+            root,
+            manifest.get("normalized_market", {}),
+            "oracle normalized market",
+        )
+        market = _read_frame(
+            market_path,
+            manifest["normalized_market"]["rows"],
+            "Oracle normalized market",
+        )
+        if not market.empty:
+            _require_columns(market, {"timestamp_utc"}, "Oracle normalized market")
+            market_times = pd.to_datetime(market["timestamp_utc"], utc=True).dt.as_unit(
+                "ns"
+            )
+            if (
+                market_times.duplicated().any()
+                or not market_times.is_monotonic_increasing
+                or market_times.lt(day).any()
+                or market_times.ge(day + pd.Timedelta(hours=36)).any()
+            ):
+                raise RuntimeError("Oracle normalized market time drift")
+
+        _, labels_path, _ = _verified_reference(
+            root,
+            manifest.get("oracle_labels", {}),
+            "oracle labels",
+        )
+        labels = _read_frame(
+            labels_path,
+            manifest["oracle_labels"]["rows"],
+            "Oracle labels",
+        )
+        status = str(manifest.get("status"))
+        if status == "ORACLE_DATE_COMPLETE":
+            complete += 1
+            if len(labels) != 4:
+                raise RuntimeError("Complete oracle date must have four labels")
+        elif status == "ORACLE_DATE_COMPLETE_UNAVAILABLE":
+            unavailable += 1
+            if not labels.empty:
+                raise RuntimeError("Unavailable oracle date cannot contain labels")
+        else:
+            raise RuntimeError("Unexpected oracle completion status")
+
+        inventory_hash = _valid_hash(
+            manifest.get("market_inventory_sha256"),
+            "Oracle market inventory hash",
+        )
+        if not labels.empty:
+            _require_columns(
+                labels,
+                {
+                    "oracle_date",
+                    "side",
+                    "entry_time_utc",
+                    "regime",
+                    "oracle_label_known_time_utc",
+                    "oracle_date_complete",
+                    "market_inventory_sha256",
+                    "ownership_manifest_sha256",
+                },
+                "Oracle labels",
+            )
+            entry_times = pd.to_datetime(labels["entry_time_utc"], utc=True).dt.as_unit(
+                "ns"
+            )
+            label_known = pd.to_datetime(
+                labels["oracle_label_known_time_utc"], utc=True
+            ).dt.as_unit("ns")
+            if (
+                not labels["oracle_date"].astype(str).eq(day_string).all()
+                or not entry_times.dt.floor("D").eq(day).all()
+                or not labels["side"].isin(["LONG", "SHORT"]).all()
+                or not label_known.eq(known).all()
+                or not labels["oracle_date_complete"].astype(bool).all()
+                or not labels["market_inventory_sha256"]
+                .astype(str)
+                .str.lower()
+                .eq(inventory_hash)
+                .all()
+            ):
+                raise RuntimeError("Oracle label linkage drift")
+            neutral_rows = int(labels["regime"].eq("NEUTRAL").sum())
+            if neutral_rows != int(manifest["oracle_labels"]["neutral_rows"]):
+                raise RuntimeError("Oracle Neutral row-count drift")
+
+        context = manifest.get("next_day_context", {})
+        if _utc(context.get("eligible_date")) != day + pd.Timedelta(days=1):
+            raise RuntimeError("Oracle next-day context date drift")
+        context_manifest_relative, context_manifest_path, context_manifest_hash = (
+            _verified_reference(
+                ownership_root,
+                {
+                    "relative_path": context.get("ownership_manifest_relative_path"),
+                    "sha256": context.get("ownership_manifest_sha256"),
+                },
+                "oracle ownership manifest",
+            )
+        )
+        context_manifest, _ = _read_manifest(context_manifest_path)
+        if _utc(context_manifest.get("eligible_date")) != (day + pd.Timedelta(days=1)):
+            raise RuntimeError("Oracle ownership manifest date drift")
+        context_record_relative, context_record_path, context_record_hash = (
+            _verified_reference(
+                ownership_root,
+                {
+                    "relative_path": context.get("ownership_record_relative_path"),
+                    "sha256": context.get("ownership_record_sha256"),
+                },
+                "oracle ownership record",
+            )
+        )
+        record = json.loads(context_record_path.read_bytes())
+        verify_neutral_ownership_record(record)
+        manifest_record = context_manifest.get("ownership_record", {})
+        if (
+            context_manifest_relative
+            != str(context.get("ownership_manifest_relative_path")).replace("\\", "/")
+            or context_manifest_hash
+            != str(context.get("ownership_manifest_sha256")).lower()
+            or context_record_relative
+            != str(context.get("ownership_record_relative_path")).replace("\\", "/")
+            or context_record_hash
+            != str(context.get("ownership_record_sha256")).lower()
+            or str(manifest_record.get("relative_path")).replace("\\", "/")
+            != context_record_relative
+            or str(manifest_record.get("sha256")).lower() != context_record_hash
+            or str(record.get("ownership_evidence_sha256"))
+            != str(context.get("ownership_evidence_sha256"))
+        ):
+            raise RuntimeError("Oracle ownership context linkage drift")
+        if (
+            not labels.empty
+            and not labels["ownership_manifest_sha256"]
+            .astype(str)
+            .str.lower()
+            .eq(context_manifest_hash)
+            .all()
+        ):
+            raise RuntimeError("Oracle label ownership linkage drift")
+
+        if known > evaluated:
+            not_yet_known += 1
+            continue
+        completed_dates.add(day_string)
+        labels_by_date[day_string] = labels
+
+    combined = (
+        pd.concat(labels_by_date.values(), ignore_index=True)
+        if labels_by_date
+        else pd.DataFrame(
+            columns=[
+                "oracle_date",
+                "side",
+                "entry_time_utc",
+                "regime",
+                "oracle_label_known_time_utc",
+            ]
+        )
+    )
+    return (
+        combined,
+        completed_dates,
+        {
+            "oracle_manifests": len(manifests),
+            "oracle_dates_known_as_of": len(completed_dates),
+            "oracle_dates_not_yet_known": not_yet_known,
+            "oracle_complete_dates": complete,
+            "oracle_unavailable_dates": unavailable,
+            "oracle_label_rows_known_as_of": len(combined),
+            "neutral_oracle_label_rows_known_as_of": (
+                int(combined["regime"].eq("NEUTRAL").sum()) if len(combined) else 0
+            ),
+        },
+    )
 
 
 def load_complete_paths(
@@ -447,14 +676,9 @@ def load_complete_paths(
     incomplete = 0
     for manifest_path in manifests:
         manifest, manifest_hash = _read_manifest(manifest_path)
-        if (
-            manifest.get("schema_version")
-            != "eurusd_neutral_prospective_trade_path_v2"
-        ):
+        if manifest.get("schema_version") != "eurusd_neutral_prospective_trade_path_v2":
             raise RuntimeError("Unexpected trade-path manifest schema")
-        signal_id = _valid_hash(
-            manifest.get("signal_id"), "Trade-path signal ID"
-        )
+        signal_id = _valid_hash(manifest.get("signal_id"), "Trade-path signal ID")
         for row in manifest.get("raw_snapshots", []):
             _verified_reference(
                 root,
@@ -520,9 +744,7 @@ def load_complete_paths(
             deadline - pd.Timedelta(minutes=5),
             freq="5min",
         )
-        timestamps = pd.to_datetime(
-            frame["timestamp_utc"], utc=True
-        ).dt.as_unit("ns")
+        timestamps = pd.to_datetime(frame["timestamp_utc"], utc=True).dt.as_unit("ns")
         if list(timestamps) != list(expected):
             raise RuntimeError("Complete trade path timestamps drift")
         complete[signal_id] = {
@@ -568,9 +790,7 @@ def _load_content_records(
     records: dict[str, dict[str, Any]] = {}
     for signal_id, paths in grouped.items():
         if len(paths) != 1:
-            raise RuntimeError(
-                f"Multiple immutable {kind} records for one signal"
-            )
+            raise RuntimeError(f"Multiple immutable {kind} records for one signal")
         path = paths[0]
         payload = path.read_bytes()
         payload_hash = _sha256_bytes(payload)
@@ -600,9 +820,7 @@ def _persist_content_record(
     kind: str,
     record: Mapping[str, Any],
 ) -> tuple[str, str]:
-    signal_id = _valid_hash(
-        record.get("signal_id"), f"{kind} signal ID"
-    )
+    signal_id = _valid_hash(record.get("signal_id"), f"{kind} signal ID")
     schema = (
         "eurusd_neutral_prospective_signal_record_v1"
         if kind == "signals"
@@ -615,11 +833,7 @@ def _persist_content_record(
         }
     )
     payload_hash = _sha256_bytes(payload)
-    relative = (
-        Path(kind)
-        / "records"
-        / f"{signal_id}_{payload_hash[:16]}.json"
-    )
+    relative = Path(kind) / "records" / f"{signal_id}_{payload_hash[:16]}.json"
     _write_immutable(ledger_root / relative, payload)
     return relative.as_posix(), payload_hash
 
@@ -636,9 +850,7 @@ def reconcile_signal_records(
 ) -> pd.DataFrame:
     existing = _load_content_records(ledger_root, "signals")
     generated_records = (
-        generated.to_dict(orient="records")
-        if not generated.empty
-        else []
+        generated.to_dict(orient="records") if not generated.empty else []
     )
     by_id: dict[str, dict[str, Any]] = {}
     events: dict[tuple[str, str, str], str] = {}
@@ -664,18 +876,16 @@ def reconcile_signal_records(
     for signal_id, record in by_id.items():
         if signal_id in existing:
             if not _records_equal(existing[signal_id], record):
-                raise RuntimeError(
-                    "Existing immutable signal record drift"
-                )
+                raise RuntimeError("Existing immutable signal record drift")
         elif persist:
             _persist_content_record(
                 ledger_root, "signals", {**record, "broker_action_allowed": False}
             )
     result = pd.DataFrame(list(by_id.values()))
     if not result.empty:
-        result = result.sort_values(
-            ["entry_time_utc", "signal_id"]
-        ).reset_index(drop=True)
+        result = result.sort_values(["entry_time_utc", "signal_id"]).reset_index(
+            drop=True
+        )
     return result
 
 
@@ -699,9 +909,9 @@ def route_operational_signals(
                 "path_evidence_sha256",
             ]
         )
-    ordered = signals.sort_values(
-        ["entry_time_utc", "signal_id"]
-    ).to_dict(orient="records")
+    ordered = signals.sort_values(["entry_time_utc", "signal_id"]).to_dict(
+        orient="records"
+    )
     for signal in ordered:
         signal_id = str(signal["signal_id"])
         side = str(signal["side"])
@@ -754,14 +964,10 @@ def route_operational_signals(
         result = execute_signal(
             signal,
             path["frame"],
-            path_evidence_sha256=str(
-                path["path_evidence_sha256"]
-            ),
+            path_evidence_sha256=str(path["path_evidence_sha256"]),
         )
         if result["status"] != "CLOSED":
-            raise RuntimeError(
-                "Validated complete path did not close its signal"
-            )
+            raise RuntimeError("Validated complete path did not close its signal")
         result["path_manifest_sha256"] = _valid_hash(
             path["path_manifest_sha256"], "Path manifest hash"
         )
@@ -784,20 +990,66 @@ def reconcile_trade_records(
     }
     extra = set(existing) - set(expected_terminal)
     if extra:
-        raise RuntimeError(
-            "Existing terminal trade is not reconstructible"
-        )
+        raise RuntimeError("Existing terminal trade is not reconstructible")
     for signal_id, record in expected_terminal.items():
         if signal_id in existing:
             if not _records_equal(existing[signal_id], record):
-                raise RuntimeError(
-                    "Existing immutable terminal trade record drift"
-                )
+                raise RuntimeError("Existing immutable terminal trade record drift")
         elif persist:
-            _persist_content_record(
-                ledger_root, "trades", record
-            )
+            _persist_content_record(ledger_root, "trades", record)
     return routed
+
+
+def attach_completed_oracle_labels(
+    routed: pd.DataFrame,
+    oracle: pd.DataFrame,
+    completed_dates: set[str],
+    *,
+    evaluated_at_utc: Any,
+) -> pd.DataFrame:
+    """Attach nullable evaluation labels only after terminal reconciliation."""
+    result = routed.copy()
+    result["oracle_same_day_same_side"] = pd.Series(
+        pd.array([pd.NA] * len(result), dtype="boolean"),
+        index=result.index,
+    )
+    if result.empty:
+        return result
+    evaluated = _utc(evaluated_at_utc)
+    keys: set[tuple[str, str]] = set()
+    if not oracle.empty:
+        _require_columns(
+            oracle,
+            {
+                "oracle_date",
+                "side",
+                "regime",
+                "oracle_label_known_time_utc",
+            },
+            "Oracle evaluation labels",
+        )
+        known = pd.to_datetime(
+            oracle["oracle_label_known_time_utc"], utc=True
+        ).dt.as_unit("ns")
+        if known.gt(evaluated).any():
+            raise ValueError("Oracle label was not known at evaluation time")
+        neutral = oracle[oracle["regime"].eq("NEUTRAL")]
+        keys = set(
+            zip(
+                neutral["oracle_date"].astype(str),
+                neutral["side"].astype(str),
+                strict=True,
+            )
+        )
+    values: list[Any] = [pd.NA] * len(result)
+    for position, row in enumerate(result.to_dict(orient="records")):
+        if str(row.get("status")) != "CLOSED":
+            continue
+        day = _utc(row["entry_time_utc"]).strftime("%Y-%m-%d")
+        if day in completed_dates:
+            values[position] = (day, str(row["side"])) in keys
+    result["oracle_same_day_same_side"] = pd.array(values, dtype="boolean")
+    return result
 
 
 def _evidence_inventory_hash(roots: Mapping[str, Path]) -> str:
@@ -826,19 +1078,22 @@ def _evidence_inventory_hash(roots: Mapping[str, Path]) -> str:
             "normalized/*.parquet",
             "manifests/*.json",
         ),
+        "oracle_evaluation": (
+            "raw/**/*.json",
+            "metadata/**/*.json",
+            "normalized/*.parquet",
+            "labels/*.parquet",
+            "manifests/*.json",
+        ),
     }
     for name, globs in patterns.items():
         root = roots[name]
         paths: set[Path] = set()
         for pattern in globs:
             paths.update(root.glob(pattern))
-        for path in sorted(
-            paths, key=lambda item: item.relative_to(root).as_posix()
-        ):
+        for path in sorted(paths, key=lambda item: item.relative_to(root).as_posix()):
             digest.update(name.encode("utf-8"))
-            digest.update(
-                path.relative_to(root).as_posix().encode("utf-8")
-            )
+            digest.update(path.relative_to(root).as_posix().encode("utf-8"))
             digest.update(bytes.fromhex(sha256_file(path)))
     return digest.hexdigest()
 
@@ -853,9 +1108,7 @@ def _ledger_inventory_hash(ledger_root: Path) -> str:
         key=lambda item: item.relative_to(ledger_root).as_posix(),
     )
     for path in paths:
-        digest.update(
-            path.relative_to(ledger_root).as_posix().encode("utf-8")
-        )
+        digest.update(path.relative_to(ledger_root).as_posix().encode("utf-8"))
         digest.update(bytes.fromhex(sha256_file(path)))
     return digest.hexdigest()
 
@@ -877,6 +1130,7 @@ def _resolve_roots(
         "event_market",
         "neutral_ownership",
         "trade_path",
+        "oracle_evaluation",
         "ledger",
     }
     if set(values) != required:
@@ -893,36 +1147,30 @@ def process_campaign(
     evaluated = _utc(evaluated_at_utc)
     resolved = _resolve_roots(roots)
     _validate_process_manifests(resolved["ledger"])
-    actuals, actual_census = load_actual_evidence(
-        resolved["consensus_and_actual"]
-    )
-    markets, market_census = load_market_evidence(
-        resolved["event_market"]
-    )
+    actuals, actual_census = load_actual_evidence(resolved["consensus_and_actual"])
+    markets, market_census = load_market_evidence(resolved["event_market"])
     ownerships, ownership_census = load_ownership_evidence(
         resolved["neutral_ownership"]
     )
-    paths, path_census = load_complete_paths(
-        resolved["trade_path"]
+    paths, path_census = load_complete_paths(resolved["trade_path"])
+    oracle, completed_oracle_dates, oracle_census = load_oracle_evidence(
+        resolved["oracle_evaluation"],
+        resolved["neutral_ownership"],
+        evaluated_at_utc=evaluated,
     )
-    generated, signal_census = build_signal_ledger(
-        actuals, markets, ownerships
-    )
-    signals = reconcile_signal_records(
-        generated, resolved["ledger"], persist=persist
-    )
+    generated, signal_census = build_signal_ledger(actuals, markets, ownerships)
+    signals = reconcile_signal_records(generated, resolved["ledger"], persist=persist)
     routed = route_operational_signals(signals, paths)
-    routed = reconcile_trade_records(
-        routed, resolved["ledger"], persist=persist
+    routed = reconcile_trade_records(routed, resolved["ledger"], persist=persist)
+    evaluated_routed = attach_completed_oracle_labels(
+        routed,
+        oracle,
+        completed_oracle_dates,
+        evaluated_at_utc=evaluated,
     )
-    admission = evaluate_admission(
-        routed, evaluated_at_utc=evaluated
-    )
+    admission = evaluate_admission(evaluated_routed, evaluated_at_utc=evaluated)
     status_counts = (
-        {
-            str(key): int(value)
-            for key, value in routed["status"].value_counts().items()
-        }
+        {str(key): int(value) for key, value in routed["status"].value_counts().items()}
         if len(routed)
         else {}
     )
@@ -940,9 +1188,7 @@ def process_campaign(
         status = admission["status"]
     elif actual_census["actual_rows"] == 0:
         status = "WAITING_FOR_LINKED_POST_RELEASE_ACTUAL"
-    elif signal_census["missing_ownership"] or signal_census[
-        "missing_market"
-    ]:
+    elif signal_census["missing_ownership"] or signal_census["missing_market"]:
         status = "WAITING_FOR_COMPLETE_SIGNAL_EVIDENCE"
     elif pending:
         status = "WAITING_FOR_COMPLETE_TRADE_PATH"
@@ -951,9 +1197,7 @@ def process_campaign(
     evidence_hash = _evidence_inventory_hash(resolved)
     ledger_hash = _ledger_inventory_hash(resolved["ledger"])
     result = {
-        "schema_version": (
-            "eurusd_neutral_prospective_campaign_process_v1"
-        ),
+        "schema_version": ("eurusd_neutral_prospective_campaign_process_v1_1"),
         "evaluated_at_utc": evaluated,
         "status": status,
         "persisted": bool(persist),
@@ -965,6 +1209,7 @@ def process_campaign(
             **market_census,
             **ownership_census,
             **path_census,
+            **oracle_census,
         },
         "signal_census": signal_census,
         "routed_status_counts": status_counts,
@@ -973,6 +1218,21 @@ def process_campaign(
         "evidence_inventory_sha256": evidence_hash,
         "ledger_inventory_sha256": ledger_hash,
         "admission": admission,
+        "oracle_evaluation": {
+            "completed_dates_known_as_of": sorted(completed_oracle_dates),
+            "closed_trades_with_known_oracle_date": int(
+                evaluated_routed.loc[
+                    evaluated_routed["status"].eq("CLOSED"),
+                    "oracle_same_day_same_side",
+                ]
+                .notna()
+                .sum()
+            )
+            if len(evaluated_routed)
+            else 0,
+            "labels_evaluation_only": True,
+            "persisted_signal_or_trade_records_changed": False,
+        },
     }
     if persist:
         manifest = {
@@ -991,10 +1251,7 @@ def process_campaign(
         payload = _json_bytes(manifest)
         payload_hash = _sha256_bytes(payload)
         stem = evaluated.strftime("%Y%m%dT%H%M%SZ")
-        relative = (
-            Path("manifests")
-            / f"PROCESS_{stem}_{payload_hash[:16]}.json"
-        )
+        relative = Path("manifests") / f"PROCESS_{stem}_{payload_hash[:16]}.json"
         _write_immutable(resolved["ledger"] / relative, payload)
         result["process_manifest_relative_path"] = relative.as_posix()
         result["process_manifest_sha256"] = payload_hash
@@ -1004,10 +1261,12 @@ def process_campaign(
 __all__ = [
     "CONFIG_PATH",
     "LOCK_PATH",
+    "attach_completed_oracle_labels",
     "load_actual_evidence",
     "load_complete_paths",
     "load_config",
     "load_market_evidence",
+    "load_oracle_evidence",
     "load_ownership_evidence",
     "process_campaign",
     "reconcile_signal_records",

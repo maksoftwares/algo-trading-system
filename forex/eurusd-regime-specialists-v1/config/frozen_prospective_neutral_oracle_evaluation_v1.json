@@ -1,0 +1,79 @@
+{
+  "schema_version": "eurusd_neutral_prospective_oracle_evaluation_v1",
+  "campaign_id": "eurusd-neutral-prospective-oracle-evaluation-v1",
+  "frozen_at_utc": "2026-07-28T14:55:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "evaluation_only": true,
+  "broker_action_allowed": false,
+  "execution_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_EXECUTION_V2_1_PREREG_2026_07_28.sha256.json",
+    "sha256": "4364d8160008a120f1e6048ec4a0212c06a37a8026ab5d0c42d5e878c2abcb46"
+  },
+  "ownership_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_OWNERSHIP_PREREG_2026_07_28.sha256.json",
+    "sha256": "e980c958bd350f9254fa51b559448800f00a1f0f9fbeb5e070d354b3772c180a"
+  },
+  "historical_oracle_algorithm": {
+    "path": "src/eurusd_regime_specialists/retrospective_overfit.py",
+    "sha256": "d9e0348c6a3639121508004642f7865a6a7be3490614c3e7afebe008d4840e0f",
+    "function": "build_full_calendar_perfect_oracle",
+    "daily_parity_required": true
+  },
+  "classifier_contract": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "selection": "LATEST_COMMON_STATE_NO_LATER_THAN_ENTRY_FLOOR_HOUR_MINUS_ONE_HOUR",
+    "join": "BACKWARD_ASOF_ALLOW_EXACT_WITHOUT_TOLERANCE"
+  },
+  "market_source": {
+    "capture_reference_path": "capture_prospective_dukascopy_event_m5.py",
+    "capture_reference_sha256": "a8ac3b5bf4dd0c4a25716dabec4728c8150da9a3c3a59f400f0b05a32a565e08",
+    "provider": "Dukascopy public Jetta tick JSON",
+    "symbol": "EURUSD",
+    "authentication_required": false,
+    "required_hours_from_oracle_date_start": 36,
+    "only_completed_bid_ask_m5_bars": true,
+    "missing_market_intervals_are_not_filled": true
+  },
+  "oracle": {
+    "candidate_entries": "EVERY_EXISTING_EURUSD_M5_BAR_WITH_ENTRY_DATE_EQUAL_TO_ORACLE_UTC_DATE",
+    "sides": [
+      "LONG",
+      "SHORT"
+    ],
+    "risk_tiers_pips_in_order": [
+      4.0,
+      3.0
+    ],
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "same_bar_policy": "STOP_FIRST",
+    "minimum_retail_spread_pips": 0.7,
+    "adverse_slippage_pips_per_side": 0.1,
+    "winner_rule": "TARGET_HIT_BEFORE_STOP",
+    "side_tie_break": "EARLIEST_EXIT_THEN_LONG",
+    "daily_selection": "FIRST_FOUR_WINNERS_BY_ENTRY_TIME_AT_FIRST_RISK_TIER_CAPABLE_OF_FOUR",
+    "insufficient_four_winners_action": "PERSIST_DATE_COMPLETE_WITH_ORACLE_UNAVAILABLE",
+    "regime_filter_for_imitation": "NEUTRAL"
+  },
+  "known_time": {
+    "earliest_capture": "ORACLE_DATE_PLUS_36_HOURS_PLUS_60_SECONDS",
+    "next_day_five_market_context_required": true,
+    "label_known_at": "MAXIMUM_OF_EARLIEST_CAPTURE_MARKET_OBSERVED_AND_CONTEXT_OBSERVED",
+    "labels_before_known_time_forbidden": true
+  },
+  "roots": {
+    "ownership": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership",
+    "oracle": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/oracle"
+  },
+  "decision_policy": {
+    "signal_generation_usage": "FORBIDDEN",
+    "trade_routing_usage": "FORBIDDEN",
+    "risk_or_sizing_usage": "FORBIDDEN",
+    "admission_usage": "EVALUATION_ONLY_AFTER_LABEL_KNOWN_TIME",
+    "historical_pnl_allowed": false,
+    "parameter_search_allowed": false,
+    "broker_action_allowed": false
+  }
+}
