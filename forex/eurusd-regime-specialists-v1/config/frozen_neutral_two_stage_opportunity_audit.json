@@ -1,0 +1,119 @@
+{
+  "campaign_id": "eurusd-neutral-two-stage-opportunity-audit-v1",
+  "frozen_at_utc": "2026-07-28T20:30:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_DEVELOPMENT_ONLY_FORWARD_RETURNS_FORBIDDEN",
+  "paired_source": {
+    "path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+    "sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "row_filter_entry_time_before_exclusive": "2023-01-01T00:00:00Z"
+  },
+  "parent_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8"
+  },
+  "strategy": {
+    "entry_hour_utc": 0,
+    "entry_minutes_utc": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "abstention_allowed": true,
+    "stage_one": "PREDICT_WHETHER_EXACTLY_ONE_SIDE_HITS_1P5R_TARGET_FIRST",
+    "stage_two": "PREDICT_LONG_VERSUS_SHORT_ON_ONE_WINNER_TRAINING_PAIRS",
+    "success_score": "STAGE_ONE_PROBABILITY_TIMES_MAXIMUM_STAGE_TWO_SIDE_PROBABILITY",
+    "selected_side": "LONG_IF_STAGE_TWO_LONG_PROBABILITY_AT_LEAST_0P5_ELSE_SHORT",
+    "threshold_ladder_descending": [
+      0.45,
+      0.43,
+      0.41
+    ],
+    "selection_rule": "FIRST_DESCENDING_THRESHOLD_PASSING_ALL_DEVELOPMENT_GATES",
+    "frequency_quota": null
+  },
+  "opportunity_features": [
+    "range_atr",
+    "tick_ratio",
+    "dxy_range_12_atr",
+    "eurusd_range_12_atr",
+    "spread_mean_pips",
+    "spread_std_pips",
+    "spread_max_pips",
+    "spread_last_pips",
+    "realized_variance_pips2",
+    "late_tick_share",
+    "tick_count_ratio_24"
+  ],
+  "side_contrast_features": [
+    "aligned_return_1_atr",
+    "aligned_return_3_atr",
+    "aligned_return_6_atr",
+    "aligned_return_12_atr",
+    "aligned_return_24_atr",
+    "aligned_ema_gap_atr",
+    "aligned_anchor_gap_atr",
+    "aligned_close_location",
+    "side_room_atr",
+    "aligned_dxy_gap_atr",
+    "aligned_eurusd_h1_gap_atr",
+    "aligned_bond_gap_atr",
+    "aligned_quote_change_imbalance",
+    "aligned_three_bar_quote_change_imbalance",
+    "aligned_path_efficiency",
+    "aligned_late_return_pips"
+  ],
+  "models": {
+    "opportunity": {
+      "type": "STANDARDIZED_L2_LOGISTIC",
+      "C": 0.1,
+      "solver": "liblinear",
+      "class_weight": null
+    },
+    "side": {
+      "type": "STANDARDIZED_L2_LOGISTIC",
+      "C": 0.1,
+      "solver": "liblinear",
+      "class_weight": "balanced"
+    },
+    "max_iter": 2000,
+    "random_state": 20260728,
+    "feature_or_hyperparameter_search": false,
+    "probability_calibration": null
+  },
+  "training_period": [
+    "2019-01-02T00:00:00Z",
+    "2020-12-31T23:59:59Z"
+  ],
+  "development_period": [
+    "2021-01-01T00:00:00Z",
+    "2022-12-31T23:59:59Z"
+  ],
+  "development_admission": {
+    "minimum_selected_trades": 50,
+    "minimum_selected_trades_each_year": 20,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_profit_factor": 1.15,
+    "minimum_net_r_exclusive": 0.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0
+  },
+  "execution_reference": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "forward_policy": {
+    "forward_start_utc": "2023-01-01T00:00:00Z",
+    "forward_source_rows_must_not_be_loaded_during_audit": true,
+    "forward_selection_or_pnl_allowed_only_if_development_passes": true,
+    "failure_action": "REJECT_IN_DEVELOPMENT_WITHOUT_FORWARD_EVALUATION"
+  }
+}

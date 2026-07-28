@@ -1,0 +1,277 @@
+{
+  "schema_version": "eurusd_neutral_two_stage_opportunity_audit_v1",
+  "family": "N41_NEUTRAL_TWO_STAGE_OPPORTUNITY_AUDIT",
+  "status": "REJECTED_IN_DEVELOPMENT_FORWARD_FORBIDDEN",
+  "forward_returns_loaded": false,
+  "selected_threshold": null,
+  "source_boundary": {
+    "side_rows": 147086,
+    "paired_points": 1532,
+    "maximum_entry_time_utc": "2022-12-30T00:45:00+00:00",
+    "forward_start_utc": "2023-01-01T00:00:00Z"
+  },
+  "training": {
+    "paired_points": 836,
+    "one_winner_points": 528,
+    "opportunity_rate": 0.631578947368421
+  },
+  "development": {
+    "paired_points": 696,
+    "eligible_dates": 174,
+    "opportunity_rate": 0.6350574712643678,
+    "score_distribution": {
+      "0.0": 0.08729796866376087,
+      "0.5": 0.3786483102517181,
+      "0.9": 0.4723162603078378,
+      "0.95": 0.5171524041488722,
+      "0.99": 0.606565720132489,
+      "1.0": 0.6847846217609626
+    },
+    "thresholds": [
+      {
+        "threshold": 0.45,
+        "active_dates": 76,
+        "metrics": {
+          "trades": 112,
+          "wins": 38,
+          "losses": 74,
+          "win_rate": 0.3392857142857143,
+          "average_win_r": 1.4749999999997296,
+          "average_loss_r": 1.0250000000000348,
+          "realized_payoff_ratio": 1.4390243902435897,
+          "profit_factor": 0.7389584706656271,
+          "net_r": -19.800000000012865,
+          "expectancy_r": -0.17678571428582915,
+          "max_drawdown_r": 22.37500000001338
+        },
+        "by_year": {
+          "2021": {
+            "trades": 59,
+            "wins": 18,
+            "losses": 41,
+            "win_rate": 0.3050847457627119,
+            "average_win_r": 1.474999999999671,
+            "average_loss_r": 1.0250000000000536,
+            "realized_payoff_ratio": 1.4390243902435063,
+            "profit_factor": 0.6317668054727588,
+            "net_r": -15.475000000008123,
+            "expectancy_r": -0.262288135593358,
+            "max_drawdown_r": 21.70000000000561
+          },
+          "2022": {
+            "trades": 53,
+            "wins": 20,
+            "losses": 33,
+            "win_rate": 0.37735849056603776,
+            "average_win_r": 1.4749999999997818,
+            "average_loss_r": 1.0250000000000117,
+            "realized_payoff_ratio": 1.4390243902436732,
+            "profit_factor": 0.8721359940870747,
+            "net_r": -4.325000000004741,
+            "expectancy_r": -0.08160377358499511,
+            "max_drawdown_r": 7.025000000006054
+          }
+        },
+        "extra_half_pip": {
+          "trades": 112,
+          "wins": 38,
+          "losses": 74,
+          "win_rate": 0.3392857142857143,
+          "average_win_r": 1.3499999999997296,
+          "average_loss_r": 1.1500000000000348,
+          "realized_payoff_ratio": 1.1739130434779903,
+          "profit_factor": 0.6028202115157246,
+          "net_r": -33.800000000012865,
+          "expectancy_r": -0.3017857142858292,
+          "max_drawdown_r": 34.400000000011744
+        },
+        "top_5pct_winners_removed": {
+          "trades": 106,
+          "wins": 32,
+          "losses": 74,
+          "win_rate": 0.3018867924528302,
+          "average_win_r": 1.474999999999671,
+          "average_loss_r": 1.0250000000000348,
+          "realized_payoff_ratio": 1.4390243902435327,
+          "profit_factor": 0.6222808174026087,
+          "net_r": -28.65000000001311,
+          "expectancy_r": -0.27028301886804823,
+          "max_drawdown_r": 75.85000000000264
+        },
+        "gate_results": {
+          "sample": true,
+          "each_year_sample": true,
+          "win_rate": false,
+          "profit_factor": false,
+          "net": false,
+          "extra_half_pip": false,
+          "top_winner_removal": false
+        },
+        "passed": false
+      },
+      {
+        "threshold": 0.43,
+        "active_dates": 97,
+        "metrics": {
+          "trades": 158,
+          "wins": 53,
+          "losses": 105,
+          "win_rate": 0.33544303797468356,
+          "average_win_r": 1.4749999999997334,
+          "average_loss_r": 1.0250000000000405,
+          "realized_payoff_ratio": 1.4390243902435855,
+          "profit_factor": 0.7263646922181908,
+          "net_r": -29.450000000018353,
+          "expectancy_r": -0.1863924050634073,
+          "max_drawdown_r": 33.37500000001885
+        },
+        "by_year": {
+          "2021": {
+            "trades": 88,
+            "wins": 27,
+            "losses": 61,
+            "win_rate": 0.3068181818181818,
+            "average_win_r": 1.4749999999996706,
+            "average_loss_r": 1.0250000000000539,
+            "realized_payoff_ratio": 1.4390243902435054,
+            "profit_factor": 0.6369452219110598,
+            "net_r": -22.700000000012153,
+            "expectancy_r": -0.25795454545468355,
+            "max_drawdown_r": 27.000000000010374
+          },
+          "2022": {
+            "trades": 70,
+            "wins": 26,
+            "losses": 44,
+            "win_rate": 0.37142857142857144,
+            "average_win_r": 1.4749999999997991,
+            "average_loss_r": 1.0250000000000223,
+            "realized_payoff_ratio": 1.439024390243675,
+            "profit_factor": 0.8503325942348989,
+            "net_r": -6.750000000006197,
+            "expectancy_r": -0.09642857142865996,
+            "max_drawdown_r": 11.125000000006269
+          }
+        },
+        "extra_half_pip": {
+          "trades": 158,
+          "wins": 53,
+          "losses": 105,
+          "win_rate": 0.33544303797468356,
+          "average_win_r": 1.3499999999997334,
+          "average_loss_r": 1.1500000000000405,
+          "realized_payoff_ratio": 1.1739130434779876,
+          "profit_factor": 0.5925465838507938,
+          "net_r": -49.200000000018356,
+          "expectancy_r": -0.3113924050634073,
+          "max_drawdown_r": 50.8000000000201
+        },
+        "top_5pct_winners_removed": {
+          "trades": 150,
+          "wins": 45,
+          "losses": 105,
+          "win_rate": 0.3,
+          "average_win_r": 1.4749999999996706,
+          "average_loss_r": 1.0250000000000405,
+          "realized_payoff_ratio": 1.439024390243524,
+          "profit_factor": 0.6167247386757961,
+          "net_r": -41.25000000001905,
+          "expectancy_r": -0.275000000000127,
+          "max_drawdown_r": 107.62500000000414
+        },
+        "gate_results": {
+          "sample": true,
+          "each_year_sample": true,
+          "win_rate": false,
+          "profit_factor": false,
+          "net": false,
+          "extra_half_pip": false,
+          "top_winner_removal": false
+        },
+        "passed": false
+      },
+      {
+        "threshold": 0.41,
+        "active_dates": 117,
+        "metrics": {
+          "trades": 222,
+          "wins": 77,
+          "losses": 145,
+          "win_rate": 0.34684684684684686,
+          "average_win_r": 1.4749999999997212,
+          "average_loss_r": 1.025000000000042,
+          "realized_payoff_ratio": 1.4390243902435713,
+          "profit_factor": 0.7641715727500343,
+          "net_r": -35.05000000002756,
+          "expectancy_r": -0.15788288288300703,
+          "max_drawdown_r": 42.00000000002545
+        },
+        "by_year": {
+          "2021": {
+            "trades": 124,
+            "wins": 41,
+            "losses": 83,
+            "win_rate": 0.33064516129032256,
+            "average_win_r": 1.474999999999671,
+            "average_loss_r": 1.0250000000000534,
+            "realized_payoff_ratio": 1.4390243902435065,
+            "profit_factor": 0.7108433734937802,
+            "net_r": -24.60000000001794,
+            "expectancy_r": -0.19838709677433822,
+            "max_drawdown_r": 33.65000000001399
+          },
+          "2022": {
+            "trades": 98,
+            "wins": 36,
+            "losses": 62,
+            "win_rate": 0.3673469387755102,
+            "average_win_r": 1.4749999999997792,
+            "average_loss_r": 1.025000000000027,
+            "realized_payoff_ratio": 1.439024390243649,
+            "profit_factor": 0.8355625491737317,
+            "net_r": -10.450000000009618,
+            "expectancy_r": -0.10663265306132264,
+            "max_drawdown_r": 17.525000000008234
+          }
+        },
+        "extra_half_pip": {
+          "trades": 222,
+          "wins": 77,
+          "losses": 145,
+          "win_rate": 0.34684684684684686,
+          "average_win_r": 1.3499999999997212,
+          "average_loss_r": 1.150000000000042,
+          "realized_payoff_ratio": 1.1739130434779754,
+          "profit_factor": 0.6233883058469248,
+          "net_r": -62.800000000027566,
+          "expectancy_r": -0.28288288288300706,
+          "max_drawdown_r": 65.05000000002676
+        },
+        "top_5pct_winners_removed": {
+          "trades": 210,
+          "wins": 65,
+          "losses": 145,
+          "win_rate": 0.30952380952380953,
+          "average_win_r": 1.474999999999671,
+          "average_loss_r": 1.0250000000000423,
+          "realized_payoff_ratio": 1.439024390243522,
+          "profit_factor": 0.6450798990746822,
+          "net_r": -52.7500000000275,
+          "expectancy_r": -0.25119047619060714,
+          "max_drawdown_r": 148.625000000006
+        },
+        "gate_results": {
+          "sample": true,
+          "each_year_sample": true,
+          "win_rate": false,
+          "profit_factor": false,
+          "net": false,
+          "extra_half_pip": false,
+          "top_winner_removal": false
+        },
+        "passed": false
+      }
+    ]
+  },
+  "decision": "No threshold may proceed to forward evaluation."
+}
