@@ -1,0 +1,132 @@
+{
+  "campaign_id": "eurusd-neutral-bls-first-hour-carry-v1",
+  "frozen_at_utc": "2026-07-28T16:30:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "parent_neutral_clock_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "paired_source_path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+    "paired_source_sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "census_must_exclude_outcomes": true
+  },
+  "data_and_classifier_contract": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+  },
+  "initial_release_source": {
+    "provider": "U.S. Bureau of Labor Statistics archived news-release PDFs",
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-bls-initial-release-v1/BLS_INITIAL_RELEASES.parquet",
+    "sha256": "1fa88ef36dda61dba5ab711179283d6a2e77c11aaddde9f326f5444b5c1791fc",
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-bls-initial-release-v1/MANIFEST.json",
+    "manifest_sha256": "7971ec2175f0958e80bd3e99dbe85641626cc2fc353f9bee1bf6808f6c8734e7",
+    "raw_pdf_chain_sha256": "05d06e91e43b942bf9a200faa6e5777d7f271255fbed09ba30e41612a3cf3a34",
+    "families": [
+      "CPI",
+      "PPI",
+      "NFP"
+    ]
+  },
+  "owned_regime": "NEUTRAL_DATE_FIRST_HOUR_CLOCKS",
+  "strategy": {
+    "families": [
+      "CPI",
+      "PPI",
+      "NFP"
+    ],
+    "release_signal": "CURRENT_INITIAL_VALUE_MINUS_PREVIOUS_SAME_FAMILY_INITIAL_VALUE",
+    "minimum_predecessor_calendar_days": 20,
+    "maximum_predecessor_calendar_days": 45,
+    "positive_acceleration_side": "SHORT",
+    "negative_acceleration_side": "LONG",
+    "zero_acceleration": "CASH",
+    "latest_directional_release_only": true,
+    "minimum_release_age_hours_exclusive": 0,
+    "maximum_release_age_hours": 72,
+    "entry_hour_utc": 0,
+    "entry_minutes_utc": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "abstention_when_no_recent_release": true,
+    "magnitude_threshold": null,
+    "frequency_quota": null
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "maximum_concurrent_positions": 4,
+    "risk_per_trade_portfolio_r": 0.25,
+    "fixed_research_lots": 0.01,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-02T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "chronological_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "chronological_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "chronological_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "recent_2026_h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "outcome_blind_census": {
+    "minimum_candidates_total": 100,
+    "minimum_candidates_development": 50,
+    "minimum_candidates_each_full_forward_year": 8,
+    "minimum_candidates_recent_half_year": 4,
+    "minimum_candidates_each_side": 20,
+    "minimum_families_represented": 3
+  },
+  "admission": {
+    "minimum_executed_trades_total": 100,
+    "minimum_executed_trades_development": 50,
+    "minimum_executed_trades_each_full_forward_year": 8,
+    "minimum_executed_trades_recent_half_year": 4,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_window": 1.0,
+    "minimum_each_side_trades": 20,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_exact_oracle_precision": 0.4,
+    "minimum_15m_oracle_precision": 0.45
+  },
+  "oracle_source": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230"
+  },
+  "decision_policy": {
+    "no_parameter_search": true,
+    "no_release_family_selection_after_outcome": true,
+    "no_release_age_change_after_outcome": true,
+    "no_clock_or_year_filter_after_outcome": true,
+    "no_side_reversal_after_outcome": true,
+    "no_activation_of_isolated_profitable_window": true,
+    "failure_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING"
+  }
+}
