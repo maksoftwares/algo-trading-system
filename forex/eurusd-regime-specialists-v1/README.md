@@ -32,6 +32,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 26. Kraken/Binance multivenue executed flow: 699 login-free Kraken API pages supplied 398,079 trades from the actual EUR/USD pair inside the required decision-time windows. Kraken and Binance imbalance correlated only 0.06, establishing source novelty. A locked equal-weight sign rule produced exactly four trades on all 453 eligible Neutral dates, but conditional accuracy was 50.57%. Its 1,812 trades won 31.95%, returned 1.439 payoff, PF 0.676, and -410.05R. The latest six months returned PF 0.602 and -44.93R. Every window and clock failed; both venue histories are now closed.
 27. Coinbase stablecoin/EUR volume pressure: 668 login-free public responses supplied 7,260 M5 candles from the USDC-EUR and USDT-EUR order books. A frozen prior-three-candle signed-volume agreement rule selected 614 trades, or 1.838 per source-eligible Neutral date. It won 33.22%, returned 1.439 payoff, PF 0.716, and -119.33R. The latest six months produced 85 trades, 29.41% wins, PF 0.600, and -24.60R. Development and every validation window failed; the exact rule is closed.
 28. Macro-event drift: 30 login-free Dukascopy calendar responses supplied 84,305 events from 2019 through June 2026. A source audit prohibited historical actual/forecast/previous/impact values after finding that they were not trustworthy point-in-time records. A frozen title taxonomy and completed event-to-midnight EURUSD impulse produced 439 candidates. Development selected momentum over reversal, but both lost. The selected branch's 185 forward trades won 29.19%, returned 1.439 payoff, PF 0.593, and -54.63R. The latest six months produced 31 trades, 19.35% wins, PF 0.345, and -16.78R. Every forward window failed; the exact event-timing family is closed.
+29. Direct post-event drive: the latest qualifying event on each Neutral date opened a 15-minute completed-bar observation, followed by a structure-risk 1.5R trade. The outcome-blind rule produced 495 candidates. Development selected momentum, but both frozen branches lost. The selected branch's 210 forward trades won 35.71%, returned 1.388 payoff, PF 0.771, and -31.11R. The latest six months were a genuine profitable exception—37 trades, 43.24% wins, 1.459 payoff, PF 1.112, and +2.39R—but 2019-2025 all lost and the rule had zero oracle matches. The exact rule is closed rather than cherry-picking 2026.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -88,6 +89,8 @@ Key reports:
 - `EURUSD_NEUTRAL_DUKASCOPY_EVENT_TIMING_SOURCE_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_MACRO_EVENT_DRIFT_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_MACRO_EVENT_DRIFT_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_POST_EVENT_DRIVE_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_POST_EVENT_DRIVE_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -122,6 +125,7 @@ Key reports:
 - `outputs/neutral_selective_target_probability/RESULT.json`
 - `outputs/neutral_coinbase_stablecoin_flow/RESULT.json`
 - `outputs/neutral_macro_event_drift/RESULT.json`
+- `outputs/neutral_post_event_drive/RESULT.json`
 
 Run with:
 
@@ -174,4 +178,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with pyarrow python download_neutral_dukascopy_event_timing.py rebuild
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_macro_event_drift.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_macro_event_drift.py backtest
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_post_event_drive.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_post_event_drive.py backtest
 ```

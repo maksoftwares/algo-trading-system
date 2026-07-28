@@ -1,0 +1,31 @@
+{
+  "locked_before_post_event_drive_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T11:15:00Z",
+  "files": {
+    "config/frozen_neutral_post_event_drive.json": "1ca410da76100c1d1065eef1873fdcef258b8acbab08943b3a3b2d40b0b6a729",
+    "src/eurusd_regime_specialists/neutral_post_event_drive.py": "d10ede705ddc45e6b1d4d39508d971db3c6b5623d79f69df5e21dc7cdb236c07",
+    "run_neutral_post_event_drive.py": "b3b8e6f9e099eb928ac8b4628903631fc84d0dd37c242f48f57e87e77914912a",
+    "tests/test_neutral_post_event_drive.py": "0379a6149337003b5b4ac147b2d6293a660e383d021500cc9f578a9fb6d42247",
+    "EURUSD_NEUTRAL_POST_EVENT_DRIVE_PREREG_2026_07_28.md": "0e21a7d07c410a457ced41bcaaf9ec9b1e779d8ae9f6bacaedcd9c4e4d8c33ce"
+  },
+  "pinned_sources": {
+    "PARENT_FOUR_CLOCK_CONTRACT": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "PARENT_MACRO_EVENT_CONFIG": "ff7b2fbb8412312c3097bdc248e27525cb4bbfd59554a34b82f451243b9223e9",
+    "PARENT_MACRO_EVENT_LOCK": "4d41b8502f7421641f3a936fccc705b2586d5e1d472e35b533e0affc1d8838e8",
+    "DUKASCOPY_ECONOMIC_EVENTS.parquet": "805603f819b727a9481f577ff3d2191f80456a4d83d37360e1416a75c6504be1",
+    "DUKASCOPY_MANIFEST.json": "441ad058e84055adf773d61a73ab38385ab8d7e1e422b6bce4fb16f4003cc1e3",
+    "DUKASCOPY_RAW_RESPONSE_CHAIN": "6d083d561f16add86fc05dd004711209518ddaef489f9e5d32ca440e67724a4a"
+  },
+  "outcome_blind_census": {
+    "source_eligible_days": 642,
+    "event_candidates": 495,
+    "active_candidate_days": 495,
+    "no_trade_days": 147,
+    "momentum_long_rate": 0.5272727272727272,
+    "last_six_month_candidates": 37,
+    "candidate_count_distribution": {
+      "0": 147,
+      "1": 495
+    }
+  }
+}

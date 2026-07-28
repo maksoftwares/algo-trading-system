@@ -1,0 +1,247 @@
+{
+  "campaign_id": "eurusd-neutral-post-event-drive-v1",
+  "frozen_at_utc": "2026-07-28T10:15:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_REUSE_OF_PINNED_EVENT_CLOCK_WITH_NEW_ENTRY_MECHANISM",
+  "parent_event_clock_contract": {
+    "path": "config/frozen_neutral_macro_event_drift.json",
+    "sha256": "ff7b2fbb8412312c3097bdc248e27525cb4bbfd59554a34b82f451243b9223e9",
+    "lock_path": "EURUSD_NEUTRAL_MACRO_EVENT_DRIFT_PREREG_2026_07_28.sha256.json",
+    "lock_sha256": "4d41b8502f7421641f3a936fccc705b2586d5e1d472e35b533e0affc1d8838e8"
+  },
+  "strategy": {
+    "family": "N29_NEUTRAL_POST_EVENT_DRIVE",
+    "neutral_date_source": "LOCKED_0000_PARENT_POINT_DATES",
+    "latest_qualifying_event_cluster_on_neutral_utc_date": true,
+    "maximum_trades_per_neutral_date": 1,
+    "observation_minutes": 15,
+    "observation_bars": 3,
+    "observation_starts_at_first_full_m5_bar_AT_OR_AFTER_EVENT": true,
+    "entry": "FIRST_M5_OPEN_AFTER_THREE_COMPLETED_OBSERVATION_BARS",
+    "entry_must_share_event_utc_date": true,
+    "impulse": "MID_CLOSE_LAST_OBSERVATION_BAR_MINUS_MID_OPEN_FIRST_OBSERVATION_BAR",
+    "zero_impulse_is_cash": true,
+    "impulse_magnitude_threshold_pips": null,
+    "branches": ["MOMENTUM", "REVERSAL"],
+    "momentum_side": "SIGN_OF_FIRST_15M_IMPULSE",
+    "reversal_side": "OPPOSITE_SIGN_OF_FIRST_15M_IMPULSE",
+    "both_branch_risks_must_be_within_ceiling": true
+  },
+  "structure_risk": {
+    "long_stop": "MINIMUM_OBSERVATION_BID_LOW_MINUS_BUFFER",
+    "short_stop": "MAXIMUM_OBSERVATION_EFFECTIVE_ASK_HIGH_PLUS_BUFFER",
+    "stop_buffer_pips": 0.5,
+    "minimum_risk_pips": 4.0,
+    "maximum_risk_pips": 25.0,
+    "minimum_risk_is_achieved_by_EXPANDING_STOP_AWAY_FROM_ENTRY": true,
+    "maximum_risk_is_cash": true
+  },
+  "branch_selection": {
+    "window": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "minimum_trades": 50,
+    "primary_metric": "profit_factor",
+    "secondary_metric": "net_r",
+    "deterministic_tie_break": "MOMENTUM",
+    "selected_once": true,
+    "refit_or_reselection": false,
+    "selection_pass_requires_positive_net_r": true,
+    "selection_pass_requires_profit_factor_exclusive": 1.0
+  },
+  "execution": {
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_concurrent_positions": 1
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "forward_windows": [
+    "validation_2023",
+    "validation_2024",
+    "pseudo_oos_2025",
+    "pseudo_oos_2026h1"
+  ],
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_census": {
+    "source_eligible_days": 642,
+    "event_candidates": 495,
+    "active_candidate_days": 495,
+    "no_trade_days": 147,
+    "momentum_long_rate": 0.5272727272727272,
+    "reversal_long_rate": 0.4727272727272727,
+    "trades_per_source_eligible_day": 0.7710280373831776,
+    "trades_per_active_candidate_day": 1.0,
+    "candidate_count_distribution": {
+      "0": 147,
+      "1": 495
+    },
+    "neutral_dates_with_qualifying_events": 549,
+    "cash_reasons": {
+      "no_qualifying_event_on_neutral_date": 93,
+      "observation_or_entry_bar_missing": 0,
+      "entry_crosses_utc_date": 0,
+      "quarantine": 0,
+      "zero_impulse": 1,
+      "risk_ceiling": 53
+    },
+    "risk_pips": {
+      "long_minimum": 4.0,
+      "long_median": 5.40000000000207,
+      "long_maximum": 24.800000000000377,
+      "short_minimum": 4.0,
+      "short_median": 5.100000000002325,
+      "short_maximum": 24.600000000001288
+    },
+    "event_currency_clusters": {
+      "EUR": 350,
+      "USD": 142,
+      "EUR|USD": 3
+    },
+    "by_window": {
+      "development_2019_2022": {
+        "source_eligible_days": 383,
+        "event_candidates": 285,
+        "active_candidate_days": 285,
+        "no_trade_days": 98,
+        "momentum_long_rate": 0.48771929824561405,
+        "reversal_long_rate": 0.512280701754386,
+        "trades_per_source_eligible_day": 0.7441253263707572,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 98,
+          "1": 285
+        }
+      },
+      "validation_2023": {
+        "source_eligible_days": 74,
+        "event_candidates": 54,
+        "active_candidate_days": 54,
+        "no_trade_days": 20,
+        "momentum_long_rate": 0.5740740740740741,
+        "reversal_long_rate": 0.42592592592592593,
+        "trades_per_source_eligible_day": 0.7297297297297297,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 20,
+          "1": 54
+        }
+      },
+      "validation_2024": {
+        "source_eligible_days": 66,
+        "event_candidates": 55,
+        "active_candidate_days": 55,
+        "no_trade_days": 11,
+        "momentum_long_rate": 0.5636363636363636,
+        "reversal_long_rate": 0.43636363636363634,
+        "trades_per_source_eligible_day": 0.8333333333333334,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 11,
+          "1": 55
+        }
+      },
+      "pseudo_oos_2025": {
+        "source_eligible_days": 80,
+        "event_candidates": 64,
+        "active_candidate_days": 64,
+        "no_trade_days": 16,
+        "momentum_long_rate": 0.65625,
+        "reversal_long_rate": 0.34375,
+        "trades_per_source_eligible_day": 0.8,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 16,
+          "1": 64
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "source_eligible_days": 39,
+        "event_candidates": 37,
+        "active_candidate_days": 37,
+        "no_trade_days": 2,
+        "momentum_long_rate": 0.4864864864864865,
+        "reversal_long_rate": 0.5135135135135135,
+        "trades_per_source_eligible_day": 0.9487179487179487,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 2,
+          "1": 37
+        }
+      }
+    }
+  },
+  "admission": {
+    "minimum_development_trades": 50,
+    "minimum_forward_trades_each_window": 8,
+    "minimum_forward_win_rate_each_window": 0.4,
+    "maximum_forward_win_rate_each_window": 0.6,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_forward_profit_factor_each_window_exclusive": 1.0,
+    "minimum_forward_daily_profit_factor_each_window_exclusive": 1.0,
+    "minimum_forward_overall_profit_factor": 1.15,
+    "minimum_forward_overall_win_rate": 0.45,
+    "maximum_forward_overall_win_rate": 0.55,
+    "minimum_stressed_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_trades": 8,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "minimum_overall_exact_oracle_precision": 0.05,
+    "minimum_overall_15m_oracle_precision": 0.2,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "exact_daily_frequency_gate": false
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 100,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "Do not change the event title taxonomy inherited from the locked parent.",
+    "Do not use Dukascopy impact, actual, forecast, previous, or normalized numeric fields.",
+    "Do not add an event-time, currency, event-age, impulse, range, volatility, or weekday subgroup after outcomes.",
+    "Do not change the observation length, structure stop, risk bounds, target, hold, or development branch selection after outcomes.",
+    "Do not use an incomplete M5 bar, outcome, oracle membership, or future event in the decision.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}
