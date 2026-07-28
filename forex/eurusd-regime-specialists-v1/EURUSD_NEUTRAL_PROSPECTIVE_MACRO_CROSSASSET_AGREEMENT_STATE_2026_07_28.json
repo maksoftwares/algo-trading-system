@@ -1,0 +1,26 @@
+{
+  "schema_version": "eurusd_neutral_prospective_macro_crossasset_agreement_state_v1",
+  "as_of_utc": "2026-07-28T12:48:19.127455Z",
+  "status": "WAITING_FOR_FIRST_ADMISSIBLE_PRE_RELEASE_FORECAST",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "historical_backtest_run": false,
+  "historical_pnl_loaded": false,
+  "admissible_pre_release_forecasts": 0,
+  "mature_pre_release_forecasts": 0,
+  "linked_post_release_actuals": 0,
+  "eligible_three_way_signals": 0,
+  "closed_prospective_trades": 0,
+  "observed_calendar_months": 0,
+  "admission_eligible": false,
+  "pre_release_evidence": {
+    "first_capture_observed_at_utc": "2026-07-28T12:42:50Z",
+    "raw_sha256": "338a35c9d58b15c3a429b6456646a21670b8b9b42ca183b794aa091e874a447b",
+    "evidence_chain_sha256": "235c645e2b939027d495f38152ede4b760b1d88758ae8fd3348f3aa873fdc09d",
+    "manifest_sha256": "9cec7db675a29e6298441eafad615d2de26545b1fcbfb9e594c155777a2bc7e6"
+  },
+  "post_release_capture": {
+    "status": "NO_MATURE_PRE_RELEASE_FORECASTS",
+    "network_request_made": false
+  },
+  "broker_action_allowed": false
+}

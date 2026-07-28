@@ -1,0 +1,134 @@
+{
+  "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v1",
+  "frozen_at_utc": "2026-07-28T12:53:01Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "shadow_only": true,
+  "broker_action_allowed": false,
+  "information_status": "PRISTINE_PROSPECTIVE_ONLY_NO_HISTORICAL_PNL",
+  "parent_neutral_date_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "paired_source_path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+    "paired_source_sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "neutral_date_known_at_utc_midnight": true,
+    "outcome_columns_forbidden_at_decision_time": true
+  },
+  "data_and_classifier_contract": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+  },
+  "prospective_consensus_and_actual_evidence": {
+    "provider": "TradingView Economic Calendar public JSON",
+    "authentication_required": false,
+    "output_root": "D:/AlgoTradingData/prospective/eurusd-neutral-tradingview-consensus-v1",
+    "pre_release_capture_script": "capture_prospective_tradingview_consensus.py",
+    "post_release_capture_script": "capture_prospective_tradingview_actuals.py",
+    "families": [
+      "CPI",
+      "PPI",
+      "NFP"
+    ],
+    "minimum_forecast_lead_seconds": 60,
+    "minimum_actual_lag_seconds": 60,
+    "exact_linkage_fields": [
+      "tradingview_event_id",
+      "tradingview_ticker",
+      "event_time_utc"
+    ],
+    "latest_admissible_pre_release_forecast_only": true,
+    "raw_and_normalized_artifacts_append_only": true,
+    "historical_backfill_forbidden": true
+  },
+  "crossasset_contract": {
+    "provider": "Dukascopy public CFD tick archive",
+    "schema_reference_path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+    "schema_reference_sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+    "manifest_path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+    "manifest_sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8",
+    "contract_sha256": "e368416625445fc670a3633f9d8a542ea0e328a0cb822eeb003c75a86005c496",
+    "symbols": [
+      "DOLLARIDXUSD",
+      "USTBONDTRUSD"
+    ],
+    "timestamp_semantics": "M5_BAR_START_USABLE_ONLY_AT_START_PLUS_FIVE_MINUTES",
+    "prospective_snapshots_must_be_append_only_and_individually_hashed": true,
+    "historical_reference_usage": "SCHEMA_AND_TIMESTAMP_SEMANTICS_ONLY_NO_HISTORICAL_PNL"
+  },
+  "owned_regime": "NEUTRAL_DATE_KNOWN_AT_0000_UTC",
+  "strategy": {
+    "families": [
+      "CPI",
+      "PPI",
+      "NFP"
+    ],
+    "release_signal": "POST_RELEASE_ACTUAL_MINUS_IMMUTABLY_CAPTURED_PRE_RELEASE_FORECAST",
+    "positive_us_surprise_side": "SHORT",
+    "negative_us_surprise_side": "LONG",
+    "zero_surprise": "CASH",
+    "observation_minutes": 15,
+    "completed_observation_bars": 3,
+    "pre_event_baseline": "MID_CLOSE_OF_LAST_M5_BAR_FULLY_COMPLETED_BEFORE_EVENT",
+    "reaction_endpoint": "MID_CLOSE_OF_THIRD_COMPLETED_POST_RELEASE_M5_BAR",
+    "entry": "FIRST_EURUSD_M5_OPEN_AFTER_THREE_COMPLETED_OBSERVATION_BARS",
+    "entry_bar_forbidden_from_confirmation": true,
+    "entry_must_share_event_utc_date": true,
+    "agreement_rule": {
+      "short_eurusd": "POSITIVE_US_SURPRISE_AND_EURUSD_DOWN_AND_DXY_UP_AND_USTBOND_DOWN",
+      "long_eurusd": "NEGATIVE_US_SURPRISE_AND_EURUSD_UP_AND_DXY_DOWN_AND_USTBOND_UP",
+      "any_zero_or_disagreement": "CASH"
+    },
+    "reaction_magnitude_threshold": null,
+    "surprise_magnitude_threshold": null,
+    "maximum_trades_per_release": 1,
+    "frequency_quota": null,
+    "frequency_is_not_an_admission_gate": true,
+    "fitted_model": null,
+    "stop_structure": "OBSERVATION_EXTREME_PLUS_BUFFER_WITH_FLOOR_AND_CEILING",
+    "stop_buffer_pips": 0.5,
+    "stop_floor_pips": 4.0,
+    "stop_ceiling_pips": 25.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12
+  },
+  "execution": {
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "one_open_position": true,
+    "fixed_research_lots": 0.01,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "prospective_admission": {
+    "minimum_calendar_months": 12,
+    "minimum_executed_trades": 30,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_each_side_trades": 8,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_same_day_same_side_oracle_precision": 0.5,
+    "all_checks_required": true,
+    "qualification_action": "RESEARCH_REVIEW_ONLY_NO_AUTOMATIC_BROKER_ACTIVATION"
+  },
+  "oracle_evaluation": {
+    "allowed_only_after_each_prospective_trade_is_immutably_closed": true,
+    "same_day_same_side_precision_only": true,
+    "oracle_may_not_change_or_filter_signals": true
+  },
+  "decision_policy": {
+    "no_historical_backtest_for_this_rule": true,
+    "no_historical_pnl_loaded": true,
+    "no_parameter_search": true,
+    "no_threshold_change_after_start": true,
+    "no_family_side_hour_weekday_or_year_selection_after_outcome": true,
+    "no_activation_from_an_isolated_profitable_window": true,
+    "insufficient_sample_action": "REMAIN_SHADOW_CASH",
+    "failed_admission_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING"
+  }
+}

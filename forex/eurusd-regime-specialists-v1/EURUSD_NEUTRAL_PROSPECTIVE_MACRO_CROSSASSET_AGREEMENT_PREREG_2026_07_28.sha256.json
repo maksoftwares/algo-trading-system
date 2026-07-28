@@ -1,0 +1,17 @@
+{
+  "schema_version": "eurusd_neutral_prospective_macro_crossasset_agreement_prereg_lock_v1",
+  "locked_at_utc": "2026-07-28T12:53:01Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_first_prospective_signal": true,
+  "historical_pnl_loaded_before_lock": false,
+  "files": {
+    "config/frozen_prospective_neutral_macro_crossasset_agreement.json": "d693b611a1a141579848c8e3ad381cced6198f478da9a2fe4942a46a15f968ee",
+    "src/eurusd_regime_specialists/prospective_neutral_macro_crossasset_agreement.py": "5479511b0646f72c10cafd6e7d6affe337b4751dd6d6b3daa6f03366155896f4",
+    "capture_prospective_tradingview_consensus.py": "a5b663baabc82ec68249454f3539d9bad84fd600bab388cc65e0770d0c7e78a3",
+    "capture_prospective_tradingview_actuals.py": "a1d01dbf1e90865fe211835862e027ab207c1c4585438ad72860383c27e2ae83",
+    "tests/test_capture_prospective_tradingview_consensus.py": "2f66f63b16e6d84ac34b78f450e28ad4382df77171e052655351b97e0ad85eda",
+    "tests/test_capture_prospective_tradingview_actuals.py": "0e0849b09ac9b16cd755d9934156594d69d9bac92543b3d254f0f67ae1fcceaf",
+    "tests/test_prospective_neutral_macro_crossasset_agreement.py": "d5fa672bb67f8cb0c64b00be547731bef15181fc0236eb71699b850ca6ecac25",
+    "EURUSD_NEUTRAL_PROSPECTIVE_MACRO_CROSSASSET_AGREEMENT_PREREG_2026_07_28.md": "ae08bef06fcbfe1e34e6474660f74c2a5867f3e3302990d82f435e161cdd374d"
+  }
+}
