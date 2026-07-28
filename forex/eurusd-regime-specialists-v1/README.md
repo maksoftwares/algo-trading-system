@@ -36,6 +36,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 30. Selective post-event probability: one fixed side-stacked L2 model learned from the 2019-2022 post-event candidates and required a cost-aware 0.42 predicted win probability. The forward-outcome-blind screen retained only 28 of 210 candidates: 11/5/9/3 across 2023, 2024, 2025, and 2026 H1. The latter two deficient blocks failed the frozen eight-trade capacity gate, so forward P&L was intentionally not loaded. A three-trade six-month sample is not sufficient evidence of profitability; the threshold is not lowered after screening.
 31. Capacity-calibrated selective post-event probability: a fixed outcome-blind 0.42/0.41/0.40 threshold ladder chose 0.40, the highest level retaining at least eight candidates in every window. The exact 75-candidate manifest was locked before P&L. It improved forward PF to 0.853 and reduced the loss to -6.77R, but still won only 38.67%. Both 2024 (PF 1.391) and 2026 H1 (9 trades, 44.44% wins, 1.468 payoff, PF 1.175, +0.88R) were profitable; 2023 and 2025 lost. The two favorable windows are not converted into a post-outcome activation filter.
 32. XAUUSD/XAGUSD first-hour consensus: 438 missing login-free XAGUSD hours were downloaded from Dukascopy's public Jetta endpoint and combined with existing XAUUSD raw history into a checksum-pinned 40,481-row M5 source. A frozen, unfitted 60-minute sign-agreement rule selected 690 forward trades at the Neutral oracle's four actual clocks. Conditional side accuracy reached 52.06%, but the rule won only 32.90%, returned 1.439 payoff, PF 0.705, and -139.83R. The latest six months produced 111 trades, 27.93% wins, PF 0.558, and -36.25R. Development and every forward window failed; the economic direction is not reversed.
+33. Five-session mean reversal: a development-only audit rejected two-stage opportunity scoring, 240 fixed-stop price rules, 480 wider session-entry rules, and 72 Asian-range OCO rules before forward data. The simplest surviving rule reversed the sign of 1,440 completed M5 bars with a 40-pip stop, 60-pip target, 72-hour hold, and deterministic cooldown. It earned PF 1.228 in 234 development trades and PF 1.309 in untouched 2023, but 2024-2026 all lost. Its 171 forward trades won 41.52%, realized only 1.268 payoff, returned PF 0.900, and lost 9.43R. The latest six months returned PF 0.816 and -2.62R. The exact rule is closed rather than activating the favorable 2023 window.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -101,6 +102,8 @@ Key reports:
 - `EURUSD_NEUTRAL_PRECIOUS_METALS_SOURCE_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_PRECIOUS_METALS_CONSENSUS_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_PRECIOUS_METALS_CONSENSUS_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_FIVE_SESSION_REVERSAL_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_FIVE_SESSION_REVERSAL_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -139,6 +142,7 @@ Key reports:
 - `outputs/neutral_selective_post_event/SCREEN.json`
 - `outputs/neutral_capacity_selective_post_event/RESULT.json`
 - `outputs/neutral_precious_metals_consensus/RESULT.json`
+- `outputs/neutral_five_session_reversal/RESULT.json`
 
 Run with:
 
@@ -199,4 +203,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow python download_neutral_precious_metals.py rebuild
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_precious_metals_consensus.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_precious_metals_consensus.py backtest
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_five_session_reversal.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_five_session_reversal.py backtest
 ```

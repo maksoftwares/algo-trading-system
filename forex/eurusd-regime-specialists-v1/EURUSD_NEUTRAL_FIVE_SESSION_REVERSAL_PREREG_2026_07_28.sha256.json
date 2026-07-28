@@ -1,0 +1,36 @@
+{
+  "locked_before_five_session_reversal_forward_outcomes": true,
+  "locked_at_utc": "2026-07-28T14:59:00Z",
+  "files": {
+    "config/frozen_neutral_five_session_reversal.json": "f541759e6453064f84d1af3288c9dd0f6ddb2e3fc943d1a03fb6199a7b9c07d0",
+    "src/eurusd_regime_specialists/neutral_five_session_reversal.py": "e3dd05425aa6c0bf0feec75ddb6c3d89ff8bc2e91cbfa0685d7c9999a22557f9",
+    "run_neutral_five_session_reversal.py": "55f91d10501907d1b03e3bf6c7b810b753f07f6ccc0fcc0942e1c8e363aa8579",
+    "tests/test_neutral_five_session_reversal.py": "a73395e87d0d100eb705462d35bd34a47f097ddc6fbb79e3ee3a7dea89272271",
+    "EURUSD_NEUTRAL_FIVE_SESSION_REVERSAL_PREREG_2026_07_28.md": "99957a183d043fe40e990dadd0e95bfc2609162a304559009b61ed29151383a8"
+  },
+  "pinned_sources": {
+    "PARENT_DATA_CONTRACT": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "NEUTRAL_TIMESTAMP_SOURCE": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "NEUTRAL_TIMESTAMP_SOURCE_LOCK": "9c84010d1db4c39f9a6a9c67d4bf37107975ec759febc9c398a04d8675c6b96c",
+    "EVALUATION_ONLY_ORACLE": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230"
+  },
+  "development_evidence": {
+    "trades": 234,
+    "wins": 109,
+    "win_rate": 0.4658119658119658,
+    "realized_payoff_ratio": 1.4087502228516198,
+    "profit_factor": 1.2284301943266123,
+    "net_r": 25.184999999995398,
+    "max_drawdown_r": 8.057500000000775,
+    "extra_half_pip_profit_factor": 1.1990788355765774,
+    "top_5_percent_removed_profit_factor": 1.0654406929547662,
+    "last_exit_utc": "2022-12-29T17:50:00Z"
+  },
+  "outcome_blind_forward_census": {
+    "validation_2023": 51,
+    "validation_2024": 41,
+    "pseudo_oos_2025": 53,
+    "pseudo_oos_2026h1": 26,
+    "forward_total": 171
+  }
+}

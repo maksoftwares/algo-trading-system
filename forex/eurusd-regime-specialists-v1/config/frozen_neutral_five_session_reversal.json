@@ -1,0 +1,177 @@
+{
+  "campaign_id": "eurusd-neutral-five-session-reversal-v1",
+  "frozen_at_utc": "2026-07-28T14:55:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_SIMPLE_RULE_SELECTED_ON_2019_2022_DEVELOPMENT_ONLY",
+  "data_and_classifier_contract": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+  },
+  "neutral_timestamp_source": {
+    "path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+    "sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "columns_allowed_before_outcome_pass": [
+      "entry_time_utc",
+      "side"
+    ],
+    "requires_exactly_two_side_rows": true
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "strategy": {
+    "family": "N33_NEUTRAL_FIVE_SESSION_REVERSAL",
+    "entry_hour_utc": 0,
+    "entry_minute_utc": 0,
+    "weekdays_only": true,
+    "completed_m5_lookback_bars": 1440,
+    "direction_rule": "REVERSE_SIGN_OF_1440_COMPLETED_M5_MIDPOINT_CLOSE_MOVE",
+    "zero_move_action": "CASH",
+    "cooldown_hours_from_entry": 72,
+    "magnitude_threshold": null,
+    "fitting": false,
+    "daily_quota": 1
+  },
+  "execution": {
+    "risk_pips": 40.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 72,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_concurrent_positions": 1
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-02T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "forward_windows": [
+    "validation_2023",
+    "validation_2024",
+    "pseudo_oos_2025",
+    "pseudo_oos_2026h1"
+  ],
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_census": {
+    "neutral_midnight_source_points": 642,
+    "history_complete_points": 642,
+    "zero_move_cash_points": 0,
+    "cooldown_cash_points": 237,
+    "selected_candidates": 405,
+    "active_candidate_days": 405,
+    "long_candidates": 205,
+    "short_candidates": 200,
+    "long_rate": 0.5061728395061729,
+    "by_window": {
+      "development_2019_2022": {
+        "candidates": 234,
+        "active_days": 234,
+        "long_candidates": 120,
+        "short_candidates": 114,
+        "long_rate": 0.5128205128205128
+      },
+      "validation_2023": {
+        "candidates": 51,
+        "active_days": 51,
+        "long_candidates": 25,
+        "short_candidates": 26,
+        "long_rate": 0.49019607843137253
+      },
+      "validation_2024": {
+        "candidates": 41,
+        "active_days": 41,
+        "long_candidates": 20,
+        "short_candidates": 21,
+        "long_rate": 0.4878048780487805
+      },
+      "pseudo_oos_2025": {
+        "candidates": 53,
+        "active_days": 53,
+        "long_candidates": 23,
+        "short_candidates": 30,
+        "long_rate": 0.4339622641509434
+      },
+      "pseudo_oos_2026h1": {
+        "candidates": 26,
+        "active_days": 26,
+        "long_candidates": 17,
+        "short_candidates": 9,
+        "long_rate": 0.6538461538461539
+      }
+    }
+  },
+  "admission": {
+    "minimum_development_trades": 200,
+    "minimum_development_trades_each_year": 40,
+    "minimum_development_profit_factor": 1.15,
+    "minimum_development_year_profit_factor_exclusive": 1.0,
+    "minimum_development_win_rate": 0.4,
+    "maximum_development_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "development_positive_after_extra_half_pip": true,
+    "development_positive_after_top_5_percent_winners_removed": true,
+    "minimum_forward_trades_by_window": {
+      "validation_2023": 20,
+      "validation_2024": 20,
+      "pseudo_oos_2025": 20,
+      "pseudo_oos_2026h1": 10
+    },
+    "minimum_forward_win_rate_each_window": 0.4,
+    "maximum_forward_win_rate_each_window": 0.6,
+    "minimum_profit_factor_each_window_exclusive": 1.0,
+    "minimum_forward_overall_profit_factor": 1.15,
+    "minimum_forward_overall_win_rate": 0.4,
+    "maximum_forward_overall_win_rate": 0.55,
+    "minimum_stressed_profit_factor_exclusive": 1.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "maximum_ticket_drawdown_r": 20.0,
+    "minimum_recent_six_month_trades": 10,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "oracle_resemblance_is_diagnostic_only": true,
+    "exact_daily_frequency_gate": false
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 100,
+    "minimum_calendar_months_before_any_promotion_review": 12,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "No return-magnitude threshold, weekday, year, clock, side, volatility, event, or source filter may be added after outcomes.",
+    "The reversal mapping may not be flipped after outcomes.",
+    "The 40-pip stop, 1.5R target, 72-hour hold, and 72-hour cooldown may not be repaired after outcomes.",
+    "No 2023-2026 outcome may be used to select or modify the rule.",
+    "No favorable isolated window may activate the rule.",
+    "No historical pass can authorize broker action without prospective confirmation."
+  ]
+}
