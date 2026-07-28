@@ -1,0 +1,19 @@
+{
+  "schema_version": "eurusd_neutral_bls_release_acceleration_prereg_lock_v1",
+  "locked_at_utc": "2026-07-28T16:00:00Z",
+  "locked_before_census_and_outcome": true,
+  "files": {
+    "config/frozen_neutral_bls_release_acceleration.json": "1655e55ef1ad2e2db031487c3a39a984f31b0a4f34fed5ca76530b54a6be2169",
+    "EURUSD_NEUTRAL_BLS_RELEASE_ACCELERATION_PREREG_2026_07_28.md": "e4d3fa382859f69adb0f8f138bc3b4644fd268a71e7ea2d3a6b9dec98fe8a18f",
+    "src/eurusd_regime_specialists/neutral_bls_release_acceleration.py": "370813bc7fb7905112836ad0299fea4a037c760cc1d8ce08086a11c2b70dbece",
+    "run_neutral_bls_release_acceleration.py": "a4ce277c9d349accd6074aefe1381ca2fc51a54083fa405555480ecd42db30c0",
+    "tests/test_neutral_bls_release_acceleration.py": "2b98863305dd23395ac441d18d253a3d1649d29a6ac26bc719d795bcd7db6e9b",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "EURUSD_NEUTRAL_BLS_INITIAL_RELEASE_SOURCE_AUDIT_2026_07_28.md": "cf352017271354589c8134c85c31c518a0a7d479bd9f1d2ff0aa2e28080b1878",
+    "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230"
+  },
+  "external_sources": {
+    "D:/AlgoTradingData/research/eurusd-neutral-bls-initial-release-v1/BLS_INITIAL_RELEASES.parquet": "1fa88ef36dda61dba5ab711179283d6a2e77c11aaddde9f326f5444b5c1791fc",
+    "D:/AlgoTradingData/research/eurusd-neutral-bls-initial-release-v1/MANIFEST.json": "7971ec2175f0958e80bd3e99dbe85641626cc2fc353f9bee1bf6808f6c8734e7"
+  }
+}
