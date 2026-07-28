@@ -1,0 +1,54 @@
+{
+  "schema_version": "eurusd_neutral_symmetric_rsi_1p5r_census_v1",
+  "family": "N34_NEUTRAL_SYMMETRIC_RSI_1P5R",
+  "status": "CENSUS_PASS_BACKTEST_ALLOWED",
+  "census": {
+    "all_ready_long_signals": 8202,
+    "all_ready_short_signals": 8353,
+    "neutral_signals": 3920,
+    "neutral_by_side": {
+      "LONG": 1933,
+      "SHORT": 1987
+    },
+    "neutral_by_window": {
+      "development_2019_2022": 2111,
+      "chronological_2023": 660,
+      "chronological_2024": 385,
+      "chronological_2025": 514,
+      "recent_2026_h1": 250
+    },
+    "gate_results": {
+      "total": true,
+      "full_year_windows": true,
+      "recent_half_year": true,
+      "both_directions": true
+    },
+    "passed": true
+  },
+  "data_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  }
+}

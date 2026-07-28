@@ -1,0 +1,232 @@
+{
+  "schema_version": "eurusd_neutral_symmetric_rsi_1p5r_result_v1",
+  "family": "N34_NEUTRAL_SYMMETRIC_RSI_1P5R",
+  "status": "REJECTED_NEUTRAL_SYMMETRIC_RSI_1P5R_V1",
+  "demo_ready": false,
+  "live_ready": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "research_boundary": "All archived windows are adaptive historical development data. Chronological labels do not make them pristine holdouts.",
+  "census": {
+    "all_ready_long_signals": 8202,
+    "all_ready_short_signals": 8353,
+    "neutral_signals": 3920,
+    "neutral_by_side": {
+      "LONG": 1933,
+      "SHORT": 1987
+    },
+    "neutral_by_window": {
+      "development_2019_2022": 2111,
+      "chronological_2023": 660,
+      "chronological_2024": 385,
+      "chronological_2025": 514,
+      "recent_2026_h1": 250
+    },
+    "gate_results": {
+      "total": true,
+      "full_year_windows": true,
+      "recent_half_year": true,
+      "both_directions": true
+    },
+    "passed": true
+  },
+  "execution": {
+    "candidate_signals": 3920,
+    "executed_trades": 1433,
+    "skipped_while_position_open": 2486,
+    "skipped_stop_ceiling": 1
+  },
+  "summary": {
+    "overall": {
+      "trades": 1433,
+      "wins": 543,
+      "losses": 890,
+      "win_rate": 0.37892533147243546,
+      "average_win_r": 1.3941074580188728,
+      "average_loss_r": 0.9787738940456826,
+      "realized_payoff_ratio": 1.4243406638651166,
+      "profit_factor": 0.8690078432345599,
+      "net_r": -114.10841599640955,
+      "expectancy_r": -0.07962904116986012,
+      "max_drawdown_r": 129.86530761121733
+    },
+    "windows": {
+      "development_2019_2022": {
+        "trades": 788,
+        "wins": 315,
+        "losses": 473,
+        "win_rate": 0.399746192893401,
+        "average_win_r": 1.3730913699261615,
+        "average_loss_r": 0.9741063893384992,
+        "realized_payoff_ratio": 1.409590764370827,
+        "profit_factor": 0.9387338071391342,
+        "net_r": -28.228540630369235,
+        "expectancy_r": -0.035823021104529486,
+        "max_drawdown_r": 46.33208217577412
+      },
+      "chronological_2023": {
+        "trades": 201,
+        "wins": 63,
+        "losses": 138,
+        "win_rate": 0.31343283582089554,
+        "average_win_r": 1.4381435878998814,
+        "average_loss_r": 0.9635523554921644,
+        "realized_payoff_ratio": 1.492543274584498,
+        "profit_factor": 0.681378451440749,
+        "net_r": -42.367179020226175,
+        "expectancy_r": -0.2107819851752546,
+        "max_drawdown_r": 47.813266713494755
+      },
+      "chronological_2024": {
+        "trades": 149,
+        "wins": 50,
+        "losses": 99,
+        "win_rate": 0.33557046979865773,
+        "average_win_r": 1.4011173390699552,
+        "average_loss_r": 0.9823773083570315,
+        "realized_payoff_ratio": 1.4262517335760145,
+        "profit_factor": 0.7203291583717245,
+        "net_r": -27.199486573848354,
+        "expectancy_r": -0.18254688975737152,
+        "max_drawdown_r": 30.27830233592083
+      },
+      "chronological_2025": {
+        "trades": 197,
+        "wins": 74,
+        "losses": 123,
+        "win_rate": 0.3756345177664975,
+        "average_win_r": 1.4263640058943827,
+        "average_loss_r": 1.0031582216494086,
+        "realized_payoff_ratio": 1.4218734144940093,
+        "profit_factor": 0.8554360379882657,
+        "net_r": -17.83752482669292,
+        "expectancy_r": -0.09054581130300975,
+        "max_drawdown_r": 28.498343311411137
+      },
+      "recent_2026_h1": {
+        "trades": 98,
+        "wins": 41,
+        "losses": 57,
+        "win_rate": 0.41836734693877553,
+        "average_win_r": 1.4211394817105465,
+        "average_loss_r": 0.9954807665860573,
+        "realized_payoff_ratio": 1.4275910991070784,
+        "profit_factor": 1.0268637730419337,
+        "net_r": 1.5243150547271407,
+        "expectancy_r": 0.015554235252317762,
+        "max_drawdown_r": 12.257784032753783
+      }
+    },
+    "by_side": {
+      "LONG": {
+        "trades": 713,
+        "wins": 290,
+        "losses": 423,
+        "win_rate": 0.4067321178120617,
+        "average_win_r": 1.388183148622434,
+        "average_loss_r": 0.980754185630632,
+        "realized_payoff_ratio": 1.415424138852716,
+        "profit_factor": 0.9703853434214839,
+        "net_r": -12.285907421251418,
+        "expectancy_r": -0.017231286705822465,
+        "max_drawdown_r": 45.226733856035935
+      },
+      "SHORT": {
+        "trades": 720,
+        "wins": 253,
+        "losses": 467,
+        "win_rate": 0.35138888888888886,
+        "average_win_r": 1.4008981683942372,
+        "average_loss_r": 0.9769801823959318,
+        "realized_payoff_ratio": 1.433906432941859,
+        "profit_factor": 0.7768272538207501,
+        "net_r": -101.82250857515811,
+        "expectancy_r": -0.14142015079883072,
+        "max_drawdown_r": 109.17367931171067
+      }
+    },
+    "top_5pct_winners_removed": {
+      "trades": 1361,
+      "wins": 471,
+      "losses": 890,
+      "win_rate": 0.346069066862601,
+      "average_win_r": 1.3787706938246778,
+      "average_loss_r": 0.9787738940456826,
+      "realized_payoff_ratio": 1.4086713000953068,
+      "profit_factor": 0.7454878453313366,
+      "net_r": -221.70776890923412,
+      "expectancy_r": -0.16290063843441155,
+      "max_drawdown_r": 871.1087657006578
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 1433,
+      "wins": 541,
+      "losses": 892,
+      "win_rate": 0.377529658060014,
+      "average_win_r": 1.3412141386794696,
+      "average_loss_r": 1.036149128870954,
+      "realized_payoff_ratio": 1.2944219140935163,
+      "profit_factor": 0.7850697931890048,
+      "net_r": -198.64817392729788,
+      "expectancy_r": -0.13862398738820508,
+      "max_drawdown_r": 211.2135498055786
+    },
+    "oracle_resemblance": {
+      "oracle_trades": 2615,
+      "exact_matches": 20,
+      "exact_precision": 0.013956734124214934,
+      "exact_recall": 0.0076481835564053535,
+      "same_side_15m_matches": 29,
+      "same_side_15m_precision": 0.020237264480111653,
+      "same_side_15m_recall": 0.011089866156787764
+    },
+    "gate_results": {
+      "total_trades": true,
+      "window_sample": true,
+      "win_rate": false,
+      "payoff": true,
+      "overall_profit_factor": false,
+      "every_window_profitable": false,
+      "both_sides": false,
+      "drawdown": false,
+      "top_winner_removal": false,
+      "extra_half_pip": false,
+      "oracle_precision": false,
+      "oracle_recall": false
+    },
+    "passed": false
+  },
+  "data_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "decision_policy": {
+    "no_parameter_search": true,
+    "no_threshold_change_after_census": true,
+    "no_direction_cut_after_outcome": true,
+    "no_hour_or_calendar_filter_after_outcome": true,
+    "no_activation_of_isolated_profitable_window": true,
+    "failure_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING"
+  }
+}
