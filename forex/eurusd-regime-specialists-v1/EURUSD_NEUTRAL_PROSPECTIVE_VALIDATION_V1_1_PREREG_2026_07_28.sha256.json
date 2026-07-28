@@ -1,0 +1,25 @@
+{
+  "schema_version": "eurusd_neutral_prospective_validation_v1_1_lock",
+  "locked_at_utc": "2026-07-28T18:19:15Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_prospective_start_and_first_signal": true,
+  "supersedes": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_VALIDATION_PREREG_2026_07_28.sha256.json",
+    "sha256": "4a6158c8d22b72ab1a10fb51c6d451034f4a33a0f6ddc2358d3921a8846878f7",
+    "evaluation_only": true
+  },
+  "historical_pnl_loaded": false,
+  "actual_evidence_rows_before_lock": 0,
+  "event_market_rows_before_lock": 0,
+  "ownership_rows_before_lock": 0,
+  "signal_rows_before_lock": 0,
+  "terminal_trade_rows_before_lock": 0,
+  "oracle_rows_before_lock": 0,
+  "files": {
+    "config/frozen_prospective_neutral_validation_v1_1.json": "24ea8a35afd4aac629d7e54b965dce3b325340c0e65350983aab68bf7637e35c",
+    "src/eurusd_regime_specialists/prospective_neutral_validation_v1_1.py": "013e9975ea0fd7580130507a753a6fc3f88fdce299c0d4773e833407be81b8a3",
+    "run_prospective_neutral_validation_v1_1.py": "6d88b0a571f7a47b334f55b14717afe082933b34f61284ec85b507c15243e77d",
+    "tests/test_prospective_neutral_validation_v1_1.py": "86cdf558abaa8e0af1ff031b1034e3112afeb1c7ad8a1c31db2e32233883d5f3",
+    "EURUSD_NEUTRAL_PROSPECTIVE_VALIDATION_V1_1_PREREG_2026_07_28.md": "d8d5a16e73fc6c0aea4ed9dd47614f58f9d523ec09b80feab2af154445fe0224"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "eurusd_neutral_prospective_validation_v1_1",
+  "frozen_at_utc": "2026-07-28T18:16:30Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "shadow_only": true,
+  "network_requests_allowed": false,
+  "broker_action_allowed": false,
+  "supersedes": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_VALIDATION_PREREG_2026_07_28.sha256.json",
+    "sha256": "4a6158c8d22b72ab1a10fb51c6d451034f4a33a0f6ddc2358d3921a8846878f7",
+    "before_prospective_start_and_first_signal": true,
+    "reason": "SAME_DAY_SIDE_PRECISION_DID_NOT_PROVE_TEMPORAL_ORACLE_IMITATION"
+  },
+  "temporal_oracle_gate": {
+    "matching": "MAXIMUM_CARDINALITY_THEN_MINIMUM_DISTANCE_ONE_TO_ONE_WITHIN_UTC_DATE_AND_SIDE",
+    "reported_windows_minutes": [
+      15,
+      60,
+      240
+    ],
+    "primary_window_minutes": 60,
+    "minimum_primary_window_precision": 0.25,
+    "minimum_primary_window_lift_over_uniform_time_and_side": 0.0,
+    "maximum_primary_window_uniform_time_and_side_tail_p_value": 0.1,
+    "uniform_entry_grid_minutes": 5,
+    "one_strategy_trade_per_utc_date_required_for_exact_null": true,
+    "recall_is_reported_but_not_an_admission_gate": true,
+    "frequency_is_not_an_admission_gate": true
+  },
+  "decision_policy": {
+    "strategy_or_evidence_semantics_changed": false,
+    "historical_pnl_loading_forbidden": true,
+    "parameter_search_forbidden": true,
+    "oracle_may_not_change_or_filter_signals": true,
+    "failed_temporal_gate_action": "NO_REGIME_1_IMITATION_CLAIM",
+    "automatic_demo_or_broker_activation": false
+  }
+}
