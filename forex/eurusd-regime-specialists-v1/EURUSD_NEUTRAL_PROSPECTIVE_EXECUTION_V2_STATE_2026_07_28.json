@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T18:36:07.154866Z",
+  "as_of_utc": "2026-07-28T18:39:11.245575Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -29,7 +29,9 @@
   "prospective_operations_planner_lock_sha256": "8d41c3bd71a495c1c34ae6f5e9ff9e562dc579302730b03353e73bc81c88b59a",
   "prospective_independent_validation_v1_superseded_before_start_and_first_signal": true,
   "prospective_independent_validation_v1_lock_sha256": "4a6158c8d22b72ab1a10fb51c6d451034f4a33a0f6ddc2358d3921a8846878f7",
-  "prospective_independent_validation_lock_sha256": "36f4de5728caa0e01096dff0b1bd53bfb1fd5d55ff075ccc291b5c9873c012da",
+  "prospective_independent_validation_v1_1_superseded_before_start_and_first_signal": true,
+  "prospective_independent_validation_v1_1_lock_sha256": "36f4de5728caa0e01096dff0b1bd53bfb1fd5d55ff075ccc291b5c9873c012da",
+  "prospective_independent_validation_lock_sha256": "c04d2da49ae933b261ec58ae204e00a901669726de482ccbe2b1ab3b93ae9f36",
   "prospective_directional_falsification_lock_sha256": "93f022e4ab721d835ff99528de388671e4457c31d483f186cbbee4a2536fe1d8",
   "prospective_official_bls_schedule_lock_sha256": "f97311c04bf60e0cd2ddb684420dc61abc5b036a6109ae8e2ba63ab0be3f20bc",
   "orchestration_status": "WAITING_FOR_PROSPECTIVE_START",
@@ -170,9 +172,9 @@
     "broker_action_allowed": false
   },
   "independent_prospective_validation": {
-    "schema_version": "eurusd_neutral_prospective_validation_result_v1_1",
+    "schema_version": "eurusd_neutral_prospective_validation_result_v1_2",
     "status": "WAITING_FOR_PROSPECTIVE_START",
-    "evaluated_at_utc": "2026-07-28T18:21:23.539376Z",
+    "evaluated_at_utc": "2026-07-28T18:39:11.245575Z",
     "closed_trades": 0,
     "frequency_is_an_admission_gate": false,
     "minimum_calendar_months": 12,
@@ -190,6 +192,10 @@
     "oracle_uniform_m5_time_and_side_null_test_required": true,
     "maximum_oracle_uniform_m5_time_and_side_tail_p_value": 0.1,
     "oracle_imitation_claim_allowed": false,
+    "profitability_review_is_separate_from_oracle_imitation": true,
+    "profitability_review_allowed": false,
+    "same_day_regime_review_allowed": false,
+    "full_temporal_oracle_imitation_review_allowed": false,
     "all_gates_passed": false,
     "research_review_allowed": false,
     "controlled_demo_ready": false,
@@ -340,10 +346,10 @@
   "profitability_and_robustness_required_for_demo_readiness": true,
   "demo_trading_authorized": false,
   "full_test_suite": {
-    "passed": 306,
+    "passed": 310,
     "failed": 0,
     "warnings": 2
   },
-  "next_action": "AT OR AFTER 2026-07-28T19:01:00Z RUN plan_prospective_neutral_operations_v1_4.py; EXECUTE ONE EXACT OFFLINE-UV MUTATING COMMAND AND THEN REPLAN; CAPTURE ALL FIVE REQUIRED EVENT_AND_ORACLE_CONTEXT OWNERSHIP DATES IN CHRONOLOGICAL ZERO_GAP_CACHE ORDER; EVALUATE WITH run_prospective_neutral_validation_v1_1.py; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z WITHOUT CROSSING THE FROZEN 60-SECOND FORECAST DEADLINE; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES AND REQUIRE ONE-TO-ONE TEMPORAL ORACLE EVIDENCE FOR ANY REGIME 1 IMITATION CLAIM; NO BROKER ACTION IS AUTHORIZED",
+  "next_action": "AT OR AFTER 2026-07-28T19:01:00Z RUN plan_prospective_neutral_operations_v1_4.py; EXECUTE ONE EXACT OFFLINE-UV MUTATING COMMAND AND THEN REPLAN; CAPTURE ALL FIVE REQUIRED EVENT_AND_ORACLE_CONTEXT OWNERSHIP DATES IN CHRONOLOGICAL ZERO_GAP_CACHE ORDER; EVALUATE WITH run_prospective_neutral_validation_v1_2.py; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z WITHOUT CROSSING THE FROZEN 60-SECOND FORECAST DEADLINE; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES, REVIEW PROFITABILITY SEPARATELY, AND REQUIRE ONE-TO-ONE TEMPORAL ORACLE EVIDENCE FOR ANY REGIME 1 IMITATION CLAIM; NO BROKER ACTION IS AUTHORIZED",
   "broker_action_allowed": false
 }

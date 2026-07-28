@@ -1,0 +1,31 @@
+{
+  "schema_version": "eurusd_neutral_prospective_validation_v1_2",
+  "frozen_at_utc": "2026-07-28T18:38:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "shadow_only": true,
+  "network_requests_allowed": false,
+  "broker_action_allowed": false,
+  "supersedes": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_VALIDATION_V1_1_PREREG_2026_07_28.sha256.json",
+    "sha256": "36f4de5728caa0e01096dff0b1bd53bfb1fd5d55ff075ccc291b5c9873c012da",
+    "before_prospective_start_and_first_signal": true,
+    "reason": "SEPARATE_PROFITABILITY_REVIEW_FROM_ORACLE_IMITATION_CLAIM"
+  },
+  "claim_separation": {
+    "economic_and_robustness": "ALL_NON_ORACLE_V1_AND_V1_1_GATES",
+    "same_day_regime_resemblance": "ALL_V1_GATES_BEFORE_TEMPORAL_ADDITIONS",
+    "full_temporal_oracle_imitation": "ALL_V1_AND_V1_1_GATES",
+    "frequency_is_not_an_admission_gate": true,
+    "economic_review_may_proceed_without_temporal_imitation": true,
+    "temporal_imitation_claim_requires_every_gate": true
+  },
+  "decision_policy": {
+    "threshold_changed": false,
+    "strategy_or_evidence_semantics_changed": false,
+    "historical_pnl_loading_forbidden": true,
+    "parameter_search_forbidden": true,
+    "oracle_may_not_change_or_filter_signals": true,
+    "automatic_demo_or_broker_activation": false
+  }
+}
