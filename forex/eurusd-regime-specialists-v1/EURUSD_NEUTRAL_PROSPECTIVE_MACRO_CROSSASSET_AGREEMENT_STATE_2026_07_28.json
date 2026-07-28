@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_macro_crossasset_agreement_state_v1",
-  "as_of_utc": "2026-07-28T15:53:03.518388Z",
+  "as_of_utc": "2026-07-28T19:02:34.827780Z",
   "status": "WAITING_FOR_FIRST_ADMISSIBLE_PRE_RELEASE_FORECAST",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
   "historical_backtest_run": false,
@@ -36,11 +36,77 @@
     "earliest_actual_capture_utc": "2026-08-07T12:31:00Z",
     "earliest_complete_market_capture_utc": "2026-08-07T12:46:00Z",
     "ownership_prewarm_status": "PREWARM_COMPLETE_FOR_SAFELY_COMPLETED_HOURS",
-    "ownership_safely_completed_symbol_hours": 6075,
-    "ownership_cached_symbol_hours": 6075,
+    "ownership_safely_completed_symbol_hours": 6095,
+    "ownership_cached_symbol_hours": 6095,
     "ownership_missing_safe_symbol_hours": 0,
-    "ownership_not_yet_safe_symbol_hours": 1125,
+    "ownership_not_yet_safe_symbol_hours": 1105,
     "ownership_status_network_request_made": false
+  },
+  "latest_bounded_prewarm_result": {
+    "status": "PREWARM_BATCH_CAPTURED",
+    "eligible_date": "2026-08-07T00:00:00Z",
+    "evaluated_at_utc": "2026-07-28T19:01:08.886747Z",
+    "capture_observed_at_utc": "2026-07-28T19:01:33Z",
+    "network_request_attempts": 5,
+    "new_cached_symbol_hours": 5,
+    "safely_completed_symbol_hours": 6095,
+    "cached_symbol_hours": 6095,
+    "missing_safe_symbol_hours": 0,
+    "not_yet_safe_symbol_hours": 1105,
+    "last_cached_hour_utc": "2026-07-28T18:00:00Z",
+    "cache_inventory_sha256": "048140414ed61645ebf65a88c146657c1e3d3e5cf389a0479b000dbf8f827326",
+    "manifest_sha256": "67706f10a285ec60a8383ba61dba8d4f6ea4f12206243cce530f0aa7cd6e035e",
+    "oracle_or_outcome_loaded": false,
+    "historical_pnl_loaded": false,
+    "ownership_record_created": false,
+    "signal_generated": false,
+    "broker_action_allowed": false
+  },
+  "operations_planner_v1_4": {
+    "evaluated_at_utc": "2026-07-28T19:02:34.760327Z",
+    "status": "WAITING_FOR_NEXT_SAFE_ACTION",
+    "next_scheduled_action_utc": "2026-07-28T20:01:00Z",
+    "due_actions": 0,
+    "ownership_cache_ready_for_earliest_missing_date": true,
+    "forecast_deadline_clamped_event_stages": 0,
+    "network_request_made": false,
+    "broker_action_allowed": false
+  },
+  "prospective_validation_v1_2": {
+    "preregistration_lock_sha256": "c04d2da49ae933b261ec58ae204e00a901669726de482ccbe2b1ab3b93ae9f36",
+    "evaluated_at_utc": "2026-07-28T19:02:34.713503Z",
+    "status": "WAITING_FOR_PROSPECTIVE_START",
+    "closed_trades": 0,
+    "signals": 0,
+    "net_r": 0.0,
+    "profit_factor": 0.0,
+    "economic_and_robustness_gates_passed": false,
+    "same_day_regime_resemblance_gates_passed": false,
+    "full_temporal_oracle_imitation_gates_passed": false,
+    "profitability_review_allowed": false,
+    "same_day_regime_review_allowed": false,
+    "oracle_imitation_claim_allowed": false,
+    "historical_pnl_loaded": false,
+    "network_request_made": false,
+    "broker_action_allowed": false
+  },
+  "directional_falsification": {
+    "evaluated_at_utc": "2026-07-28T19:02:34.728643Z",
+    "status": "WAITING_FOR_PROSPECTIVE_START",
+    "closed_primary_trades": 0,
+    "directional_hypothesis_survived": false,
+    "research_review_allowed": false
+  },
+  "official_bls_schedule_verification": {
+    "evaluated_at_utc": "2026-07-28T19:02:34.827780Z",
+    "status": "MATCHED_OFFICIAL_BLS_SCHEDULE",
+    "matched_events": [
+      "NFP",
+      "CPI",
+      "PPI"
+    ],
+    "official_page_recheck_due_at_utc": "2026-08-06T12:30:00Z",
+    "network_request_made_by_offline_verifier": false
   },
   "prospective_market_capture": {
     "status": "IMPLEMENTATION_FROZEN_WAITING_FOR_FIRST_ELIGIBLE_RELEASE",
@@ -52,5 +118,6 @@
     "nfp_2026_08_07_earliest_capture_utc": "2026-08-07T12:46:00Z",
     "dry_run_network_request_made": false
   },
+  "next_action": "Keep V1.4 ownership-cache maintenance and V1.2 outcome-blind validation frozen; the next safe cache check is 2026-07-28T20:01:00Z. Do not force trade frequency and do not claim profitability before prospective trades exist.",
   "broker_action_allowed": false
 }
