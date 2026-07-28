@@ -1,0 +1,84 @@
+{
+  "schema_version": "eurusd_neutral_event_crossasset_rates_census_v1",
+  "family": "N35_NEUTRAL_EVENT_CROSSASSET_RATES",
+  "status": "CENSUS_FAIL_NO_PNL_ALLOWED",
+  "census": {
+    "qualifying_usd_event_rows": 2477,
+    "qualifying_usd_event_clusters": 890,
+    "agreement_candidates_before_regime": 402,
+    "non_neutral_or_other_regime_rejections": 349,
+    "neutral_candidates": 53,
+    "neutral_by_window": {
+      "development_2019_2022": 28,
+      "chronological_2023": 4,
+      "chronological_2024": 10,
+      "chronological_2025": 6,
+      "recent_2026_h1": 5
+    },
+    "neutral_by_side": {
+      "LONG": 26,
+      "SHORT": 27
+    },
+    "candidate_days": 51,
+    "cash_reasons": {
+      "clusters_in_frozen_period": 890,
+      "entry_outside_eurusd": 1,
+      "eurusd_observation_missing": 0,
+      "crossasset_baseline_or_endpoint_missing": 39,
+      "same_direction_or_zero_reaction": 236,
+      "risk_ceiling": 212,
+      "quarantine": 0
+    },
+    "gate_results": {
+      "total": false,
+      "development": false,
+      "full_forward_years": false,
+      "recent_half_year": false,
+      "both_sides": true
+    },
+    "passed": false
+  },
+  "data_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    },
+    "CROSSASSET_M5": {
+      "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+      "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+      "manifest_path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+      "manifest_sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8",
+      "contract_sha256": "e368416625445fc670a3633f9d8a542ea0e328a0cb822eeb003c75a86005c496",
+      "rows": 525099,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T23:55:00+00:00"
+    },
+    "EVENTS": {
+      "path": "D:/AlgoTradingData/research/eurusd-neutral-dukascopy-event-timing-v1/DUKASCOPY_ECONOMIC_EVENTS.parquet",
+      "sha256": "805603f819b727a9481f577ff3d2191f80456a4d83d37360e1416a75c6504be1",
+      "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-dukascopy-event-timing-v1/MANIFEST.json",
+      "manifest_sha256": "441ad058e84055adf773d61a73ab38385ab8d7e1e422b6bce4fb16f4003cc1e3",
+      "qualifying_rows_all_currencies": 8587
+    }
+  }
+}

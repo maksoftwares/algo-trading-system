@@ -39,6 +39,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 33. Five-session mean reversal: a development-only audit rejected two-stage opportunity scoring, 240 fixed-stop price rules, 480 wider session-entry rules, and 72 Asian-range OCO rules before forward data. The simplest surviving rule reversed the sign of 1,440 completed M5 bars with a 40-pip stop, 60-pip target, 72-hour hold, and deterministic cooldown. It earned PF 1.228 in 234 development trades and PF 1.309 in untouched 2023, but 2024-2026 all lost. Its 171 forward trades won 41.52%, realized only 1.268 payoff, returned PF 0.900, and lost 9.43R. The latest six months returned PF 0.816 and -2.62R. The exact rule is closed rather than activating the favorable 2023 window.
 34. Adaptive-frequency fallback audit: the two raw Capital.com MT5 reports reproduce the published 697 trades, 57.82% win rate, PF 1.3075, and +$119.42. The stronger Regime 1 claim fails. Realized payoff is only 0.954, the best 5% of trades contribute 93.78% of net, and a further 0.5-pip round-trip haircut reduces PF to 1.194. Exact UTC normalization and the causal cross-asset classifier isolate 116 Neutral trades at PF 1.448, but fixed 0.01-lot sizing plus 0.5 pip reduces PF to 1.261, while 2026 H1 falls to PF 0.898 and -$1.79. The slice is 97.41% long and has zero same-side oracle matches within 15 minutes. The H4 overlay is conditional leverage on the same M15 entries, not an independent specialist; combined portfolio floating drawdown remains unavailable from the two separate reports. Status is `REJECTED_AS_REGIME_1_IMITATION / NO_DEMO_PROMOTION`.
 35. Neutral symmetric RSI 1.5R: the rule, source, costs, and gates were hash-locked before an outcome-blind census. Capacity passed with 3,920 balanced Neutral signals, and the one frozen run executed 1,433 trades. The target delivered a 1.424 realized payoff, but win rate was only 37.89%, PF 0.869, and net -114.11R. Both sides lost, every block through 2025 lost, and the marginal 2026 H1 PF 1.027 / +1.52R fell to PF 0.928 / -4.30R under 0.5-pip stress and was -$2.75 at fixed 0.01 lot. Best-5%-removed PF was 0.745, maximum drawdown 129.87R, and only 29 trades matched the oracle within 15 minutes. The exact rule is rejected without deleting shorts or activating 2026.
+36. Event-conditioned DXY/Treasury rates agreement: the event clock, exact USD title taxonomy, completed M5 cross-asset reaction, Neutral ownership, execution, and census gates were hash-locked and pushed before candidate counts. Of 890 qualifying USD event clusters, 402 produced opposite-sign DXY/Treasury agreement before regime filtering, but only 53 survived the full frozen Neutral and risk contract: 28/4/10/6/5 across development, 2023, 2024, 2025, and 2026 H1. LONG/SHORT capacity was balanced at 26/27, but the total, development, later-window, and recent sample gates failed. Per the lock, P&L was not opened and the gates were not relaxed. The exact family is closed as `CENSUS_FAIL_NO_PNL_ALLOWED`.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -106,6 +107,8 @@ Key reports:
 - `EURUSD_NEUTRAL_PRECIOUS_METALS_CONSENSUS_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_FIVE_SESSION_REVERSAL_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_FIVE_SESSION_REVERSAL_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_EVENT_CROSSASSET_RATES_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_EVENT_CROSSASSET_RATES_CENSUS_VERDICT_2026_07_28.md`
 - `EURUSD_ADAPTIVE_FREQUENCY_FALLBACK_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_VERDICT_2026_07_28.md`
@@ -148,6 +151,7 @@ Key reports:
 - `outputs/neutral_capacity_selective_post_event/RESULT.json`
 - `outputs/neutral_precious_metals_consensus/RESULT.json`
 - `outputs/neutral_five_session_reversal/RESULT.json`
+- `outputs/neutral_event_crossasset_rates/CENSUS.json`
 
 Run with:
 
@@ -210,4 +214,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_precious_metals_consensus.py backtest
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_five_session_reversal.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_five_session_reversal.py backtest
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_event_crossasset_rates.py census
 ```
