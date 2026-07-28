@@ -59,39 +59,58 @@ def _roots(tmp_path: Path) -> dict[str, Path]:
     return roots
 
 
-def _write_actual(root: Path) -> pd.DataFrame:
+def _write_actual(
+    root: Path,
+    *,
+    suffix: str = "actual",
+    actual_value: float = 0.1,
+    actual_observed_at: str = "2026-08-12T12:32:00Z",
+) -> pd.DataFrame:
     forecast_relative = "raw/forecast.json"
-    actual_relative = "post_release_raw/actual.json"
-    metadata_relative = "post_release_metadata/actual.json"
+    actual_relative = f"post_release_raw/{suffix}.json"
+    metadata_relative = f"post_release_metadata/{suffix}.json"
     forecast_hash = _write(root / forecast_relative, b"forecast")
-    actual_hash = _write(root / actual_relative, b"actual")
-    metadata_hash = _write(root / metadata_relative, b"metadata")
+    actual_hash = _write(
+        root / actual_relative,
+        f"actual:{actual_value}".encode(),
+    )
+    metadata_hash = _write(
+        root / metadata_relative,
+        f"metadata:{suffix}".encode(),
+    )
+    event_time = pd.Timestamp("2026-08-12T12:30:00Z")
+    actual_observed = pd.Timestamp(actual_observed_at)
+    forecast_value = 0.2
+    surprise = actual_value - forecast_value
+    macro_side = "LONG" if surprise < 0 else ("SHORT" if surprise > 0 else "CASH")
     frame = pd.DataFrame(
         [
             {
                 "family": "CPI",
-                "event_time_utc": pd.Timestamp("2026-08-12T12:30:00Z"),
-                "forecast_value": 0.2,
+                "event_time_utc": event_time,
+                "forecast_value": forecast_value,
                 "forecast_observed_at_utc": pd.Timestamp("2026-08-12T11:00:00Z"),
                 "forecast_lead_seconds": 5400.0,
                 "forecast_raw_snapshot_relative_path": (forecast_relative),
                 "forecast_raw_snapshot_sha256": forecast_hash,
                 "tradingview_event_id": "event-1",
                 "tradingview_ticker": "ECONOMICS:USCPI",
-                "actual_value": 0.1,
-                "actual_observed_at_utc": pd.Timestamp("2026-08-12T12:32:00Z"),
-                "actual_lag_seconds": 120.0,
+                "actual_value": actual_value,
+                "actual_observed_at_utc": actual_observed,
+                "actual_lag_seconds": float(
+                    (actual_observed - event_time).total_seconds()
+                ),
                 "actual_raw_snapshot_relative_path": actual_relative,
                 "actual_raw_snapshot_sha256": actual_hash,
-                "surprise_value": -0.1,
-                "macro_side": "LONG",
+                "surprise_value": surprise,
+                "macro_side": macro_side,
                 "capture_semantics": ACTUAL_SEMANTICS,
             }
         ]
     )
-    normalized_relative = "post_release_normalized/actual.parquet"
+    normalized_relative = f"post_release_normalized/{suffix}.parquet"
     normalized_path = root / normalized_relative
-    normalized_path.parent.mkdir(parents=True)
+    normalized_path.parent.mkdir(parents=True, exist_ok=True)
     frame.to_parquet(normalized_path, index=False)
     normalized_hash = hashlib.sha256(normalized_path.read_bytes()).hexdigest()
     manifest = {
@@ -112,49 +131,71 @@ def _write_actual(root: Path) -> pd.DataFrame:
         "broker_action_allowed": False,
     }
     _write(
-        root / "post_release_manifests/MANIFEST_actual.json",
+        root / f"post_release_manifests/MANIFEST_{suffix}.json",
         _json_bytes(manifest),
     )
     return frame
 
 
-def _market_frame() -> pd.DataFrame:
+def _market_frame(
+    *,
+    market_observed_at: str = "2026-08-12T12:46:01Z",
+    eurusd_post_mid: float = 1.1010,
+    dxy_post_mid: float = 99.8,
+    treasury_post_mid: float = 110.2,
+) -> pd.DataFrame:
     return pd.DataFrame(
         [
             {
                 "event_time_utc": pd.Timestamp("2026-08-12T12:30:00Z"),
                 "observation_start_utc": pd.Timestamp("2026-08-12T12:30:00Z"),
                 "observation_completed_at_utc": pd.Timestamp("2026-08-12T12:45:00Z"),
-                "market_observed_at_utc": pd.Timestamp("2026-08-12T12:46:01Z"),
+                "market_observed_at_utc": pd.Timestamp(market_observed_at),
                 "eurusd_pre_mid": 1.1000,
-                "eurusd_post_mid": 1.1010,
+                "eurusd_post_mid": eurusd_post_mid,
                 "eurusd_observation_mid_high": 1.1012,
                 "eurusd_observation_mid_low": 1.0998,
                 "dxy_pre_mid": 100.0,
-                "dxy_post_mid": 99.8,
+                "dxy_post_mid": dxy_post_mid,
                 "treasury_pre_mid": 110.0,
-                "treasury_post_mid": 110.2,
+                "treasury_post_mid": treasury_post_mid,
                 "capture_semantics": MARKET_SEMANTICS,
             }
         ]
     )
 
 
-def _write_market(root: Path) -> pd.DataFrame:
-    raw_relative = "raw/EURUSD/hour.json"
-    metadata_relative = "metadata/EURUSD/hour.json"
-    raw_hash = _write(root / raw_relative, b"market raw")
-    metadata_hash = _write(root / metadata_relative, b"market metadata")
-    frame = _market_frame()
-    normalized_relative = "normalized/market.parquet"
+def _write_market(
+    root: Path,
+    *,
+    suffix: str = "market",
+    market_observed_at: str = "2026-08-12T12:46:01Z",
+    eurusd_post_mid: float = 1.1010,
+    dxy_post_mid: float = 99.8,
+    treasury_post_mid: float = 110.2,
+) -> pd.DataFrame:
+    raw_relative = f"raw/EURUSD/{suffix}.json"
+    metadata_relative = f"metadata/EURUSD/{suffix}.json"
+    raw_hash = _write(root / raw_relative, f"market raw:{suffix}".encode())
+    metadata_hash = _write(
+        root / metadata_relative,
+        f"market metadata:{suffix}".encode(),
+    )
+    frame = _market_frame(
+        market_observed_at=market_observed_at,
+        eurusd_post_mid=eurusd_post_mid,
+        dxy_post_mid=dxy_post_mid,
+        treasury_post_mid=treasury_post_mid,
+    )
+    normalized_relative = f"normalized/{suffix}.parquet"
     normalized_path = root / normalized_relative
-    normalized_path.parent.mkdir(parents=True)
+    normalized_path.parent.mkdir(parents=True, exist_ok=True)
     frame.to_parquet(normalized_path, index=False)
     normalized_hash = hashlib.sha256(normalized_path.read_bytes()).hexdigest()
     manifest = {
         "schema_version": ("eurusd_neutral_prospective_event_market_m5_v1"),
         "event_time_utc": "2026-08-12T12:30:00Z",
-        "market_observed_at_utc": "2026-08-12T12:46:01Z",
+        "market_observed_at_utc": market_observed_at,
         "coverage": "COMPLETE",
         "raw_snapshots": [
             {
@@ -172,7 +213,7 @@ def _write_market(root: Path) -> pd.DataFrame:
         "broker_action_allowed": False,
     }
     _write(
-        root / "manifests/MANIFEST_market.json",
+        root / f"manifests/MANIFEST_{suffix}.json",
         _json_bytes(manifest),
     )
     return frame
@@ -494,6 +535,77 @@ def test_end_to_end_process_is_append_only_and_idempotent(
     assert first["process_manifest_sha256"] == (second["process_manifest_sha256"])
     assert first["network_request_made"] is False
     assert first["broker_action_allowed"] is False
+
+
+def test_later_contradictory_actual_and_market_revisions_cannot_change_trade(
+    tmp_path: Path,
+) -> None:
+    roots = _roots(tmp_path)
+    _write_actual(roots["consensus_and_actual"])
+    _write_market(roots["event_market"])
+    _write_ownership(roots["neutral_ownership"])
+    signal = _load_signal(roots)
+    assert signal["side"] == "LONG"
+    _write_path(roots["trade_path"], signal["signal_id"])
+
+    first = process_campaign(
+        evaluated_at_utc="2026-08-13T01:00:00Z",
+        roots=roots,
+        persist=True,
+    )
+    signal_payloads = {
+        path.name: path.read_bytes()
+        for path in roots["ledger"].glob("signals/records/*.json")
+    }
+    trade_payloads = {
+        path.name: path.read_bytes()
+        for path in roots["ledger"].glob("trades/records/*.json")
+    }
+
+    late_actual = _write_actual(
+        roots["consensus_and_actual"],
+        suffix="actual_late_short_revision",
+        actual_value=0.4,
+        actual_observed_at="2026-08-12T12:40:00Z",
+    )
+    late_market = _write_market(
+        roots["event_market"],
+        suffix="market_late_short_revision",
+        market_observed_at="2026-08-12T12:55:00Z",
+        eurusd_post_mid=1.0990,
+        dxy_post_mid=100.2,
+        treasury_post_mid=109.8,
+    )
+    assert late_actual["macro_side"].iloc[0] == "SHORT"
+    assert late_market["eurusd_post_mid"].iloc[0] < late_market["eurusd_pre_mid"].iloc[0]
+    assert late_market["dxy_post_mid"].iloc[0] > late_market["dxy_pre_mid"].iloc[0]
+    assert (
+        late_market["treasury_post_mid"].iloc[0]
+        < late_market["treasury_pre_mid"].iloc[0]
+    )
+
+    second = process_campaign(
+        evaluated_at_utc="2026-08-13T01:00:00Z",
+        roots=roots,
+        persist=True,
+    )
+    assert first["routed_status_counts"] == second["routed_status_counts"] == {
+        "CLOSED": 1
+    }
+    assert second["evidence_census"]["actual_rows"] == 2
+    assert second["evidence_census"]["complete_market_rows"] == 2
+    assert second["signal_census"]["selected_actual_events"] == 1
+    assert second["signal_census"]["complete_market_events"] == 1
+    assert first["evidence_inventory_sha256"] != second["evidence_inventory_sha256"]
+    assert first["process_manifest_sha256"] != second["process_manifest_sha256"]
+    assert {
+        path.name: path.read_bytes()
+        for path in roots["ledger"].glob("signals/records/*.json")
+    } == signal_payloads
+    assert {
+        path.name: path.read_bytes()
+        for path in roots["ledger"].glob("trades/records/*.json")
+    } == trade_payloads
 
 
 def test_cash_signal_persists_without_any_path(tmp_path: Path) -> None:

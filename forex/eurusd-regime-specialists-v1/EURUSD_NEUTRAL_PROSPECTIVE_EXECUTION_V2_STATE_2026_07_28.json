@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T15:53:03.518388Z",
+  "as_of_utc": "2026-07-28T16:00:18.956027Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -62,6 +62,22 @@
     "ownership_missing_safe_symbol_hours": 0,
     "market_capture_not_due_before_utc": "2026-08-07T12:46:00Z"
   },
+  "causal_revision_invariance_rehearsal": {
+    "status": "PASSED",
+    "scope": "END_TO_END_ACTUAL_AND_MARKET_REVISION_AFTER_IMMUTABLE_CLOSED_TRADE",
+    "initial_macro_and_market_side": "LONG",
+    "later_contradictory_macro_and_market_side": "SHORT",
+    "later_evidence_retained_in_inventory": true,
+    "earliest_actual_selected": true,
+    "earliest_complete_market_selected": true,
+    "immutable_signal_bytes_changed": false,
+    "immutable_trade_bytes_changed": false,
+    "evidence_inventory_sha256_changed": true,
+    "process_manifest_sha256_changed": true,
+    "historical_pnl_loaded": false,
+    "network_request_made": false,
+    "broker_action_allowed": false
+  },
   "pre_release_snapshot_files": 2,
   "admissible_pre_release_rows": 0,
   "linked_post_release_actual_rows": 0,
@@ -79,7 +95,7 @@
   "profitability_and_robustness_required_for_demo_readiness": true,
   "demo_trading_authorized": false,
   "full_test_suite": {
-    "passed": 251,
+    "passed": 252,
     "failed": 0,
     "warnings": 2
   },
