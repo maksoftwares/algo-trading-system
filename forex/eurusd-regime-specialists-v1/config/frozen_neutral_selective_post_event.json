@@ -1,0 +1,205 @@
+{
+  "campaign_id": "eurusd-neutral-selective-post-event-v1",
+  "frozen_at_utc": "2026-07-28T12:05:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_FIXED_FIT_REUSE_OF_LOCKED_POST_EVENT_CANDIDATES",
+  "parent_post_event_contract": {
+    "path": "config/frozen_neutral_post_event_drive.json",
+    "sha256": "1ca410da76100c1d1065eef1873fdcef258b8acbab08943b3a3b2d40b0b6a729",
+    "lock_path": "EURUSD_NEUTRAL_POST_EVENT_DRIVE_PREREG_2026_07_28.sha256.json",
+    "lock_sha256": "ac04db0199f53d022940d96812bfe5296eed4ac3d45319c12538fbf9de3be2d5"
+  },
+  "strategy": {
+    "family": "N30_NEUTRAL_SELECTIVE_POST_EVENT",
+    "source_candidates": "LOCKED_N29_POST_EVENT_CANDIDATES",
+    "direction_rule": "HIGHER_OF_CAUSAL_LONG_AND_SHORT_WIN_PROBABILITIES",
+    "abstention_rule": "CASH_UNLESS_HIGHER_WIN_PROBABILITY_IS_AT_LEAST_0P42",
+    "abstention_allowed": true,
+    "maximum_trades_per_neutral_date": 1,
+    "frequency_target": null,
+    "one_fit_only": true,
+    "refit_after_2022": false
+  },
+  "features": {
+    "side_aligned_columns": [
+      "aligned_impulse_pips",
+      "aligned_pre_event_return_15m_pips",
+      "aligned_pre_event_return_60m_pips",
+      "aligned_pre_event_return_240m_pips",
+      "own_risk_pips",
+      "risk_advantage_pips"
+    ],
+    "shared_columns": [
+      "observation_range_pips",
+      "observation_range_to_prior_median",
+      "event_hour_sin",
+      "event_hour_cos",
+      "event_has_eur",
+      "event_has_usd",
+      "log1p_event_cluster_size"
+    ],
+    "model_column_count": 13,
+    "pre_event_history_bars": 288,
+    "minimum_pre_event_history_bars": 49,
+    "prior_range_median_bars": 288,
+    "features_complete_at_entry": true,
+    "feature_selection_or_interaction_search": false,
+    "event_title_or_tag_feature": false
+  },
+  "label": {
+    "unit": "ONE_POST_EVENT_CANDIDATE_SIDE",
+    "positive": "THAT_SIDE_REALIZED_POSITIVE_R",
+    "negative": "THAT_SIDE_DID_NOT_REALIZE_POSITIVE_R",
+    "known_time": "THAT_SIDE_EXIT_TIMESTAMP",
+    "both_sides_stacked_with_shared_coefficients": true,
+    "training_window_only": true,
+    "forward_outcomes_forbidden_during_screen": true
+  },
+  "model": {
+    "type": "SIDE_STACKED_STANDARDIZED_L2_LOGISTIC",
+    "C": 0.1,
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "class_weight": null,
+    "selection_probability_threshold": 0.42,
+    "tie_direction": "LONG",
+    "random_state": 20260728,
+    "minimum_training_side_rows": 500,
+    "hyperparameter_threshold_or_calibration_search": false
+  },
+  "training_window": [
+    "2019-01-01T00:00:00Z",
+    "2022-12-31T23:59:59Z"
+  ],
+  "windows": {
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "forward_windows": [
+    "validation_2023",
+    "validation_2024",
+    "pseudo_oos_2025",
+    "pseudo_oos_2026h1"
+  ],
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "pre_forward_selection_census": {
+    "training_candidates": 285,
+    "training_side_rows": 570,
+    "training_positive_side_rows": 199,
+    "training_positive_rate": 0.34912280701754383,
+    "source_candidates_all_windows": 495,
+    "forward": {
+      "source_candidates": 210,
+      "selected_candidates": 28,
+      "cash_candidates": 182,
+      "selected_long_rate": 0.6071428571428571
+    },
+    "by_window": {
+      "validation_2023": {
+        "source_candidates": 54,
+        "selected_candidates": 11,
+        "cash_candidates": 43,
+        "selected_long_rate": 0.6363636363636364
+      },
+      "validation_2024": {
+        "source_candidates": 55,
+        "selected_candidates": 5,
+        "cash_candidates": 50,
+        "selected_long_rate": 0.2
+      },
+      "pseudo_oos_2025": {
+        "source_candidates": 64,
+        "selected_candidates": 9,
+        "cash_candidates": 55,
+        "selected_long_rate": 0.7777777777777778
+      },
+      "pseudo_oos_2026h1": {
+        "source_candidates": 37,
+        "selected_candidates": 3,
+        "cash_candidates": 34,
+        "selected_long_rate": 0.6666666666666666
+      }
+    },
+    "selection_probability_threshold": 0.42,
+    "selection_probability": {
+      "minimum": 0.2805063938659171,
+      "median": 0.3905444040130249,
+      "p90": 0.42657437614375554,
+      "p95": 0.4397018104838233,
+      "p99": 0.47335768127273836,
+      "maximum": 0.4857553825542317
+    },
+    "selected_candidate_manifest_sha256": "8885005fdc71cbe0332ae61e6dff1eeda790c9f5d22f4409170de93025d18232"
+  },
+  "execution": {
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_concurrent_positions": 1
+  },
+  "admission": {
+    "minimum_forward_trades_each_window": 8,
+    "minimum_forward_win_rate_each_window": 0.4,
+    "maximum_forward_win_rate_each_window": 0.6,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_forward_profit_factor_each_window_exclusive": 1.0,
+    "minimum_forward_daily_profit_factor_each_window_exclusive": 1.0,
+    "minimum_forward_overall_profit_factor": 1.15,
+    "minimum_forward_overall_win_rate": 0.45,
+    "maximum_forward_overall_win_rate": 0.55,
+    "minimum_stressed_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_trades": 8,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "minimum_overall_exact_oracle_precision": 0.05,
+    "minimum_overall_15m_oracle_precision": 0.2,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "exact_daily_frequency_gate": false
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 100,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "Do not change a feature, transform, coefficient penalty, probability threshold, or side mapping after the forward screen.",
+    "Do not add an event title, tag, time, currency, impulse, range, volatility, or weekday subgroup after forward outcomes.",
+    "Do not balance target classes or retrospectively calibrate probabilities.",
+    "Do not refit after 2022 or use a forward-period label during inference.",
+    "Do not lower the 0.42 threshold or force a daily trade after the screen.",
+    "Do not activate only the profitable 2026 H1 slice.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}

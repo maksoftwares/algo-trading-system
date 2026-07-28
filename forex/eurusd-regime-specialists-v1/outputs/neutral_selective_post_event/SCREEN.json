@@ -1,0 +1,172 @@
+{
+  "campaign_id": "eurusd-neutral-selective-post-event-v1",
+  "status": "PRE_FORWARD_SELECTION_SCREEN",
+  "forward_outcomes_loaded": false,
+  "parent_outcome_blind_census": {
+    "source_eligible_days": 642,
+    "event_candidates": 495,
+    "active_candidate_days": 495,
+    "no_trade_days": 147,
+    "momentum_long_rate": 0.5272727272727272,
+    "reversal_long_rate": 0.4727272727272727,
+    "trades_per_source_eligible_day": 0.7710280373831776,
+    "trades_per_active_candidate_day": 1.0,
+    "candidate_count_distribution": {
+      "0": 147,
+      "1": 495
+    },
+    "neutral_dates_with_qualifying_events": 549,
+    "cash_reasons": {
+      "no_qualifying_event_on_neutral_date": 93,
+      "observation_or_entry_bar_missing": 0,
+      "entry_crosses_utc_date": 0,
+      "quarantine": 0,
+      "zero_impulse": 1,
+      "risk_ceiling": 53
+    },
+    "risk_pips": {
+      "long_minimum": 4.0,
+      "long_median": 5.40000000000207,
+      "long_maximum": 24.800000000000377,
+      "short_minimum": 4.0,
+      "short_median": 5.100000000002325,
+      "short_maximum": 24.600000000001288
+    },
+    "event_currency_clusters": {
+      "EUR": 350,
+      "USD": 142,
+      "EUR|USD": 3
+    },
+    "by_window": {
+      "development_2019_2022": {
+        "source_eligible_days": 383,
+        "event_candidates": 285,
+        "active_candidate_days": 285,
+        "no_trade_days": 98,
+        "momentum_long_rate": 0.48771929824561405,
+        "reversal_long_rate": 0.512280701754386,
+        "trades_per_source_eligible_day": 0.7441253263707572,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 98,
+          "1": 285
+        }
+      },
+      "validation_2023": {
+        "source_eligible_days": 74,
+        "event_candidates": 54,
+        "active_candidate_days": 54,
+        "no_trade_days": 20,
+        "momentum_long_rate": 0.5740740740740741,
+        "reversal_long_rate": 0.42592592592592593,
+        "trades_per_source_eligible_day": 0.7297297297297297,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 20,
+          "1": 54
+        }
+      },
+      "validation_2024": {
+        "source_eligible_days": 66,
+        "event_candidates": 55,
+        "active_candidate_days": 55,
+        "no_trade_days": 11,
+        "momentum_long_rate": 0.5636363636363636,
+        "reversal_long_rate": 0.43636363636363634,
+        "trades_per_source_eligible_day": 0.8333333333333334,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 11,
+          "1": 55
+        }
+      },
+      "pseudo_oos_2025": {
+        "source_eligible_days": 80,
+        "event_candidates": 64,
+        "active_candidate_days": 64,
+        "no_trade_days": 16,
+        "momentum_long_rate": 0.65625,
+        "reversal_long_rate": 0.34375,
+        "trades_per_source_eligible_day": 0.8,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 16,
+          "1": 64
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "source_eligible_days": 39,
+        "event_candidates": 37,
+        "active_candidate_days": 37,
+        "no_trade_days": 2,
+        "momentum_long_rate": 0.4864864864864865,
+        "reversal_long_rate": 0.5135135135135135,
+        "trades_per_source_eligible_day": 0.9487179487179487,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 2,
+          "1": 37
+        }
+      }
+    }
+  },
+  "feature_cash_reasons": {
+    "insufficient_pre_event_history": 0
+  },
+  "pre_forward_selection_census": {
+    "training_candidates": 285,
+    "training_side_rows": 570,
+    "training_positive_side_rows": 199,
+    "training_positive_rate": 0.34912280701754383,
+    "source_candidates_all_windows": 495,
+    "forward": {
+      "source_candidates": 210,
+      "selected_candidates": 28,
+      "cash_candidates": 182,
+      "selected_long_rate": 0.6071428571428571
+    },
+    "by_window": {
+      "validation_2023": {
+        "source_candidates": 54,
+        "selected_candidates": 11,
+        "cash_candidates": 43,
+        "selected_long_rate": 0.6363636363636364
+      },
+      "validation_2024": {
+        "source_candidates": 55,
+        "selected_candidates": 5,
+        "cash_candidates": 50,
+        "selected_long_rate": 0.2
+      },
+      "pseudo_oos_2025": {
+        "source_candidates": 64,
+        "selected_candidates": 9,
+        "cash_candidates": 55,
+        "selected_long_rate": 0.7777777777777778
+      },
+      "pseudo_oos_2026h1": {
+        "source_candidates": 37,
+        "selected_candidates": 3,
+        "cash_candidates": 34,
+        "selected_long_rate": 0.6666666666666666
+      }
+    },
+    "selection_probability_threshold": 0.42,
+    "selection_probability": {
+      "minimum": 0.2805063938659171,
+      "median": 0.3905444040130249,
+      "p90": 0.42657437614375554,
+      "p95": 0.4397018104838233,
+      "p99": 0.47335768127273836,
+      "maximum": 0.4857553825542317
+    },
+    "selected_candidate_manifest_sha256": "8885005fdc71cbe0332ae61e6dff1eeda790c9f5d22f4409170de93025d18232"
+  },
+  "model": {
+    "type": "SIDE_STACKED_STANDARDIZED_L2_LOGISTIC",
+    "training_end_utc": "2022-12-31T23:59:59Z",
+    "refit_after_2022": false,
+    "threshold": 0.42,
+    "feature_count": 13
+  }
+}

@@ -33,6 +33,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 27. Coinbase stablecoin/EUR volume pressure: 668 login-free public responses supplied 7,260 M5 candles from the USDC-EUR and USDT-EUR order books. A frozen prior-three-candle signed-volume agreement rule selected 614 trades, or 1.838 per source-eligible Neutral date. It won 33.22%, returned 1.439 payoff, PF 0.716, and -119.33R. The latest six months produced 85 trades, 29.41% wins, PF 0.600, and -24.60R. Development and every validation window failed; the exact rule is closed.
 28. Macro-event drift: 30 login-free Dukascopy calendar responses supplied 84,305 events from 2019 through June 2026. A source audit prohibited historical actual/forecast/previous/impact values after finding that they were not trustworthy point-in-time records. A frozen title taxonomy and completed event-to-midnight EURUSD impulse produced 439 candidates. Development selected momentum over reversal, but both lost. The selected branch's 185 forward trades won 29.19%, returned 1.439 payoff, PF 0.593, and -54.63R. The latest six months produced 31 trades, 19.35% wins, PF 0.345, and -16.78R. Every forward window failed; the exact event-timing family is closed.
 29. Direct post-event drive: the latest qualifying event on each Neutral date opened a 15-minute completed-bar observation, followed by a structure-risk 1.5R trade. The outcome-blind rule produced 495 candidates. Development selected momentum, but both frozen branches lost. The selected branch's 210 forward trades won 35.71%, returned 1.388 payoff, PF 0.771, and -31.11R. The latest six months were a genuine profitable exception—37 trades, 43.24% wins, 1.459 payoff, PF 1.112, and +2.39R—but 2019-2025 all lost and the rule had zero oracle matches. The exact rule is closed rather than cherry-picking 2026.
+30. Selective post-event probability: one fixed side-stacked L2 model learned from the 2019-2022 post-event candidates and required a cost-aware 0.42 predicted win probability. The forward-outcome-blind screen retained only 28 of 210 candidates: 11/5/9/3 across 2023, 2024, 2025, and 2026 H1. The latter two deficient blocks failed the frozen eight-trade capacity gate, so forward P&L was intentionally not loaded. A three-trade six-month sample is not sufficient evidence of profitability; the threshold is not lowered after screening.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -91,6 +92,8 @@ Key reports:
 - `EURUSD_NEUTRAL_MACRO_EVENT_DRIFT_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_POST_EVENT_DRIVE_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_POST_EVENT_DRIVE_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_SELECTIVE_POST_EVENT_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_SELECTIVE_POST_EVENT_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -126,6 +129,7 @@ Key reports:
 - `outputs/neutral_coinbase_stablecoin_flow/RESULT.json`
 - `outputs/neutral_macro_event_drift/RESULT.json`
 - `outputs/neutral_post_event_drive/RESULT.json`
+- `outputs/neutral_selective_post_event/SCREEN.json`
 
 Run with:
 
@@ -180,4 +184,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_macro_event_drift.py backtest
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_post_event_drive.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_post_event_drive.py backtest
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_post_event.py screen
 ```

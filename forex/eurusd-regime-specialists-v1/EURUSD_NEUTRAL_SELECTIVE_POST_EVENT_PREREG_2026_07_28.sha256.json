@@ -1,0 +1,28 @@
+{
+  "locked_before_selective_post_event_forward_outcome_pass": true,
+  "forward_outcome_pass_intentionally_skipped_for_capacity": true,
+  "locked_at_utc": "2026-07-28T12:25:00Z",
+  "files": {
+    "config/frozen_neutral_selective_post_event.json": "75db01e7c31b854fc6da41323e82fdc1dd1609930dca99f7c395da636845b28a",
+    "src/eurusd_regime_specialists/neutral_selective_post_event.py": "71e3d270e1dcd72bee2d7601ee252431c87f22023d0e97afd27fdfa98914d4c2",
+    "run_neutral_selective_post_event.py": "a740464f5e3cd4864ada225349ada758ea6383d5549d656270fc56c496de428f",
+    "tests/test_neutral_selective_post_event.py": "f2e62d5d887ca3a9af3a01bb4c927f6752ba83f502f80e7b0b0d9baae5d9cdd0",
+    "EURUSD_NEUTRAL_SELECTIVE_POST_EVENT_PREREG_2026_07_28.md": "c823c3d1a991a4dfbb2560dbcb383e410332e18272655f8ab0d71b5c9ec763e3",
+    "outputs/neutral_selective_post_event/SCREEN.json": "abe5b28f674c2e50348ed788bbbb7ff0b38e78c261a08b4ec4c2be51956cfd5b"
+  },
+  "pinned_sources": {
+    "PARENT_POST_EVENT_CONFIG": "1ca410da76100c1d1065eef1873fdcef258b8acbab08943b3a3b2d40b0b6a729",
+    "PARENT_POST_EVENT_LOCK": "ac04db0199f53d022940d96812bfe5296eed4ac3d45319c12538fbf9de3be2d5",
+    "PARENT_POST_EVENT_RESULT": "5a20e4cb75dcec0383dab83494d389a30442c431ae55d8b9726a199b84439b24"
+  },
+  "pre_forward_selection_census": {
+    "source_candidates": 210,
+    "selected_candidates": 28,
+    "validation_2023": 11,
+    "validation_2024": 5,
+    "pseudo_oos_2025": 9,
+    "pseudo_oos_2026h1": 3,
+    "selected_candidate_manifest_sha256": "8885005fdc71cbe0332ae61e6dff1eeda790c9f5d22f4409170de93025d18232"
+  },
+  "structural_verdict": "STOPPED_BEFORE_FORWARD_PNL_INSUFFICIENT_CAPACITY"
+}
