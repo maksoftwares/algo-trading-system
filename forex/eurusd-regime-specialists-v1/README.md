@@ -22,6 +22,8 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 16. Price-only Neutral session OCO: four fixed UTC anchors let the first executable side of a two-sided breakout select direction without option data. The frozen rule produced 1,790 trades, 24.25% wins, 1.293 payoff, PF 0.414, and -895.98R. The latest six months produced 122 trades, 23.77% wins, PF 0.414, and -60.65R. This exact fallback is closed without repair.
 17. Exchange-traded participation: prior-session Euro FX futures direction was required to agree with inverse UUP direction, with both volume ratios above their preceding 20-session medians. The frozen rule produced 227 trades, 31.72% wins, 1.439 payoff, PF 0.668, and -52.70R. The latest six months produced 18 trades, 16.67% wins, PF 0.288, and -10.95R. This exact fallback is closed.
 18. Official OCC FXE customer flow: a login-free OCC batch query supplied prior-day customer call and put volumes. The frozen normalized imbalance rule produced 78 trades, 38.46% wins, 1.439 payoff, PF 0.899, and -4.95R. The latest six months produced 21 trades, 38.10% wins, PF 0.886, and -1.53R. An isolated profitable eight-trade quarter was not selected; the full rule is closed.
+19. Public DTCC OTC options flow: 674 credential-free CFTC public-dissemination queries supplied executed EUR/USD vanilla calls and puts. The frozen standalone 7-90 day notional-plus-premium imbalance produced 66 trades, 24.24% wins, 1.439 payoff, PF 0.460, and -27.65R. The latest six months produced 39 trades, 25.64% wins, PF 0.496, and -14.98R. The direction is not reversed after outcome inspection.
+20. Matched DTCC premium skew: standalone OTM calls and puts were paired on tenor and absolute moneyness using only M5 spot completed before execution. The frozen normalized premium-skew rule produced 48 trades, 35.42% wins, 1.439 payoff, PF 0.789, and -6.70R. Development reached PF 1.119 but both forward quarters failed; the latest six months returned PF 0.654 and -7.80R. The exact surface is closed.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -49,6 +51,10 @@ Key reports:
 - `EURUSD_NEUTRAL_FUTURES_PARTICIPATION_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_OCC_FXE_FLOW_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_OCC_FXE_FLOW_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_DTCC_FX_OPTIONS_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_DTCC_FX_OPTIONS_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_DTCC_SKEW_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_DTCC_SKEW_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -71,6 +77,8 @@ Key reports:
 - `outputs/neutral_session_oco/RESULT.json`
 - `outputs/neutral_futures_participation/RESULT.json`
 - `outputs/neutral_occ_fxe_flow/RESULT.json`
+- `outputs/neutral_dtcc_fx_options/RESULT.json`
+- `outputs/neutral_dtcc_skew/RESULT.json`
 
 Run with:
 
@@ -101,4 +109,8 @@ uv run --with pandas --with numpy --with pyarrow python run_neutral_futures_part
 powershell -ExecutionPolicy Bypass -File download_occ_fxe_flow_raw.ps1
 uv run --with pandas --with numpy --with pyarrow python download_neutral_occ_fxe_flow.py
 uv run --with pandas --with numpy --with pyarrow python run_neutral_occ_fxe_flow.py
+uv run --with pandas --with numpy --with pyarrow python download_neutral_dtcc_fx_options.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_fx_options.py
+uv run --with pandas --with numpy --with pyarrow python build_neutral_dtcc_skew_source.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_skew.py
 ```

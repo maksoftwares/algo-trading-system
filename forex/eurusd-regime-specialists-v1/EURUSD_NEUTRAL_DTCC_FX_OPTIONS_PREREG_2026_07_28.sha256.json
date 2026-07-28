@@ -1,0 +1,13 @@
+{
+  "campaign_id": "eurusd-neutral-dtcc-fx-options-v1",
+  "locked_before_dtcc_fx_options_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T06:42:00Z",
+  "files": {
+    "config/frozen_neutral_dtcc_fx_options.json": "b9ca20425770519b2d6fef4fa0e17dd140751ab2cc3a085f09d5c58bcdaf45aa",
+    "EURUSD_NEUTRAL_DTCC_FX_OPTIONS_PREREG_2026_07_28.md": "ddb812c79543fc034cf5c4e584347a366a8f161fa80b6a0c564a2446bda89c42",
+    "src/eurusd_regime_specialists/neutral_dtcc_fx_options.py": "048f4831d9a274bfa4e36700a942680f7f71d82d0dc7daa6bd361930ff016617",
+    "run_neutral_dtcc_fx_options.py": "1d5d37c5d060bf0c2426b5651e445d2b73924225a4fb6554c90e83449569791d",
+    "download_neutral_dtcc_fx_options.py": "520ac106462ab8440527b7a62afbd83f6fb59d3b5d6a955853f4f2aefb9a50d5"
+  },
+  "source_manifest_sha256": "48eb0250a49c80e95207977dfdf73526fe01e913c02e68f2da7fb6e1ce97b1a6"
+}

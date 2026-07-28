@@ -29,6 +29,8 @@ execution decision.
 | Synchronous DXY/Treasury oracle-imitation extension | 2023–2026 H1 walk-forward | 638 | 30.56% | 1.439 | 0.633 | -166.43R |
 | Exchange-traded Euro FX/UUP participation | 2019–2026 H1 | 227 | 31.72% | 1.439 | 0.668 | -52.70R |
 | Official OCC FXE customer call/put flow | 2024 H2–2026 H1 | 78 | 38.46% | 1.439 | 0.899 | -4.95R |
+| Public DTCC OTC EUR/USD option flow | 2025 Sep–2026 H1 | 66 | 24.24% | 1.439 | 0.460 | -27.65R |
+| Matched OTC option premium skew | 2025 Q4–2026 H1 | 48 | 35.42% | 1.439 | 0.789 | -6.70R |
 
 None passed all locked chronological admission gates. Consequently, none is
 an admitted strategy or eligible for demo/live use.
@@ -254,6 +256,13 @@ forward year. Official OCC FXE customer call/put flow came closer, but its
 fixed full rule still lost money; the isolated profitable final quarter had
 only eight trades and cannot be selected retrospectively.
 
+Transaction-level public OTC data removed the remaining options-history
+access blocker but did not remove the directional problem. Aggregate
+standalone call/put notional-plus-premium flow failed all three windows.
+A separately locked matched OTM premium-skew surface was slightly positive
+in development, then failed both chronological forward quarters. Neither
+rule may be reversed, repaired, or narrowed after observing these results.
+
 The evidence does not support claiming that Regime 1 has been solved. Further retrospective threshold, hour, feature, or model search on this archive would increase overfitting rather than improve causal evidence.
 
 ## Next legitimate evidence
@@ -287,4 +296,8 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_options_flow.py
 uv run --with pandas --with numpy --with pyarrow python run_neutral_futures_participation.py
 uv run --with pandas --with numpy --with pyarrow python run_neutral_occ_fxe_flow.py
+uv run --with pandas --with numpy --with pyarrow python download_neutral_dtcc_fx_options.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_fx_options.py
+uv run --with pandas --with numpy --with pyarrow python build_neutral_dtcc_skew_source.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_skew.py
 ```

@@ -1,0 +1,13 @@
+{
+  "campaign_id": "eurusd-neutral-dtcc-skew-v1",
+  "locked_before_dtcc_skew_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T06:47:00Z",
+  "files": {
+    "config/frozen_neutral_dtcc_skew.json": "d43767f9e2315ea11cd78288206ab49984dfb6869eaf89ae69e27a27b3bbd1ed",
+    "EURUSD_NEUTRAL_DTCC_SKEW_PREREG_2026_07_28.md": "f2fa75dcc4c4883f7975e7cdee69cd18a6bf3820f9d5d645f882a3d863d05883",
+    "src/eurusd_regime_specialists/neutral_dtcc_skew.py": "832781e5c7da3c6498fdf645dfd9d0b0f91d963b92c93b64ca95b23775efb011",
+    "run_neutral_dtcc_skew.py": "093b57e9c8f577af3875233880bbf0e02a1bfca93f3534df295787297adfafa2",
+    "build_neutral_dtcc_skew_source.py": "1cb93f8160391d187a8c4dfd9db0b3d57b4f4e25eb01e6fa8b69fca7a64e03a8"
+  },
+  "source_manifest_sha256": "7c906cd04a832dc6b915c935a049997aa024d5c8ab7dcff6a8098462dbfe5ace"
+}
