@@ -1,0 +1,16 @@
+{
+  "campaign_id": "eurusd-neutral-growth-risk-selected-v1",
+  "family": "N47_NEUTRAL_GROWTH_RISK_SELECTED",
+  "closed_at_utc": "2026-07-28T13:45:00Z",
+  "status": "REJECTED_IN_CONFIRMATION_2024_2026_FORBIDDEN",
+  "contract_rewritten_after_confirmation": false,
+  "forward_eurusd_outcomes_loaded": false,
+  "broker_action_allowed": false,
+  "files": {
+    "outputs/neutral_growth_risk_selected/CONFIRMATION_RESULT.json": "ea6a387e8f187deb353db3aee91e616a677b3abe4f027cb84a8d363a397d4bf3",
+    "outputs/neutral_growth_risk_selected/CONFIRMATION_CANDIDATES.parquet": "e32d053cecc6cafbc2c5bc3b6012b05ad9c626e3b9bdcbcfc83f1753c268c5ee",
+    "outputs/neutral_growth_risk_selected/CONFIRMATION_TRADES.parquet": "f1f752d53543851856a5eca4d2dca5fc039d3b179f872b9f5881195ca35f789e",
+    "EURUSD_NEUTRAL_GROWTH_RISK_SELECTED_CONFIRMATION_VERDICT_2026_07_28.md": "e3cf121f74f8637862530258c49685bb1243a798c63be8759891acb8b46f12a1"
+  },
+  "next_allowed_action": "PREREGISTER_DISTINCT_SUCCESSOR_BEFORE_2024_OUTCOME"
+}

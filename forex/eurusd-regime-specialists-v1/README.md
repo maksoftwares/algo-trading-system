@@ -53,6 +53,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 47. Prospective event-market capture: a no-login Dukascopy collector now preserves the exact EURUSD, DXY, and Treasury hourly tick responses needed around each eligible release, reconstructs only completed M5 bars, and appends one linked reaction row with an evidence-chain hash. It refuses all requests until the three observation bars plus a 60-second lag are complete, excludes the entry bar, and stays in cash if any required bar is absent. The 7 August NFP dry run correctly reports that 12:46 UTC is the earliest capture time and makes no network request now.
 48. Neutral London-fix reversal: a new two-expert structural-flow family separated ordinary from calendar month-end fixes, converted 16:00 Europe/London with DST, required a large prior-only 60-minute displacement and opposite completed fix-bar confirmation, and was locked before census. Capacity passed with 165 candidates on 165 dates, balanced 98/67 across LONG/SHORT. Development then rejected both experts without opening any 2023-2026 outcome. Ordinary fixes returned 93 trades, 29.03% wins, 1.454 payoff, PF 0.595, -27.25R, and 30.56R drawdown; both 2019-2020 and 2021-2022 lost. Month-end had only three development trades and PF 0.731. The empty selection forbids a forward or latest-six-month P&L run, and the exact family is closed without direction reversal or threshold repair.
 49. Neutral growth/risk consensus: a no-login Dukascopy panel of SPX, copper, and USD/CNH was audited for exact completed-M5 availability, then a single three-session consensus family was locked before EURUSD outcomes. Its census passed with 410 candidates. The bounded 2022 development slice produced 68 trades, 45.59% wins, 1.434 payoff, PF 1.202, and +7.55R, but the exact family is contractually rejected because it missed its frozen 80-trade evidence floor. No 2023-2026 EURUSD outcome was loaded. Asia and Europe were individually profitable while the US expert lost; that decomposition may only be used as disclosed development evidence for a separately locked successor.
+50. Neutral selected growth/risk experts: an explicitly adaptive N47 successor permanently selected the profitable 2022 Asia and Europe experts and was committed before opening 2023. The 54-trade development portfolio had 48.15% wins, 1.471 payoff, PF 1.366, and +10.36R. Untouched 2023 confirmation rejected it with 60 trades, 31.67% wins, 1.526 payoff, PF 0.707, -11.69R, and 17.16R drawdown. Asia was near flat at PF 0.980, while Europe collapsed to PF 0.346. No 2024-2026 outcome was loaded and the exact portfolio cannot be repaired or forwarded.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -192,6 +193,7 @@ Key reports:
 - `outputs/neutral_bls_first_hour_carry/RESULT.json`
 - `outputs/neutral_bls_rolling_surprise_carry/RESULT.json`
 - `outputs/neutral_growth_risk_consensus/DEVELOPMENT_RESULT.json`
+- `outputs/neutral_growth_risk_selected/CONFIRMATION_RESULT.json`
 
 Run with:
 
@@ -273,4 +275,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_london_fix_reversal.py development
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_growth_risk_consensus.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_growth_risk_consensus.py development
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_growth_risk_selected.py confirmation
 ```

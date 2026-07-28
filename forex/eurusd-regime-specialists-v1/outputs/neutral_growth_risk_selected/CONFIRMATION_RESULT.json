@@ -1,0 +1,131 @@
+{
+  "schema_version": "eurusd_neutral_growth_risk_selected_confirmation_v1",
+  "family": "N47_NEUTRAL_GROWTH_RISK_SELECTED",
+  "status": "REJECTED_IN_CONFIRMATION_2024_2026_FORBIDDEN",
+  "information_status": "ADAPTIVE_AFTER_DISCLOSED_2022_DEVELOPMENT_FORWARD_CHRONOLOGICAL",
+  "outcome_blind_selected_census": {
+    "total_candidates_2023_2026_h1": 204,
+    "by_window": {
+      "confirmation_2023": 71,
+      "forward_2024": 40,
+      "forward_2025": 57,
+      "recent_2026_h1": 36
+    },
+    "by_expert": {
+      "ASIA_HANDOFF_0300": 111,
+      "EUROPE_MORNING_0900": 93
+    },
+    "by_side": {
+      "LONG": 107,
+      "SHORT": 97
+    }
+  },
+  "stage": "confirmation_2023",
+  "stage_bounds": [
+    "2023-01-01T00:00:00Z",
+    "2023-12-31T23:59:59Z"
+  ],
+  "confirmation": {
+    "overall": {
+      "trades": 60,
+      "wins": 19,
+      "losses": 41,
+      "win_rate": 0.31666666666666665,
+      "average_win_r": 1.4857936690262379,
+      "average_loss_r": 0.973562247290982,
+      "realized_payoff_ratio": 1.5261414184461062,
+      "profit_factor": 0.7072362670847808,
+      "net_r": -11.685972427431741,
+      "expectancy_r": -0.19476620712386236,
+      "max_drawdown_r": 17.158406802597277
+    },
+    "by_side": {
+      "LONG": {
+        "trades": 31,
+        "wins": 12,
+        "losses": 19,
+        "win_rate": 0.3870967741935484,
+        "average_win_r": 1.4864564692670286,
+        "average_loss_r": 1.0131115775449528,
+        "realized_payoff_ratio": 1.4672189146916277,
+        "profit_factor": 0.9266645776999755,
+        "net_r": -1.4116423421497644,
+        "expectancy_r": -0.04553684974676659,
+        "max_drawdown_r": 7.641519785013246
+      },
+      "SHORT": {
+        "trades": 29,
+        "wins": 7,
+        "losses": 22,
+        "win_rate": 0.2413793103448276,
+        "average_win_r": 1.4846574400420245,
+        "average_loss_r": 0.939406007526189,
+        "realized_payoff_ratio": 1.580421487777887,
+        "profit_factor": 0.5028613824747823,
+        "net_r": -10.274330085281978,
+        "expectancy_r": -0.3542872443200682,
+        "max_drawdown_r": 10.529082139535324
+      }
+    },
+    "by_expert": {
+      "ASIA_HANDOFF_0300": {
+        "trades": 39,
+        "wins": 15,
+        "losses": 24,
+        "win_rate": 0.38461538461538464,
+        "average_win_r": 1.4853343294405619,
+        "average_loss_r": 0.947094007177545,
+        "realized_payoff_ratio": 1.5683071777288913,
+        "profit_factor": 0.9801919860805571,
+        "net_r": -0.4502412306526567,
+        "expectancy_r": -0.01154464693981171,
+        "max_drawdown_r": 12.094034230868534
+      },
+      "EUROPE_MORNING_0900": {
+        "trades": 21,
+        "wins": 4,
+        "losses": 17,
+        "win_rate": 0.19047619047619047,
+        "average_win_r": 1.4875161924725235,
+        "average_loss_r": 1.0109291745099518,
+        "realized_payoff_ratio": 1.4714346266577947,
+        "profit_factor": 0.34621991215477527,
+        "net_r": -11.235731196779085,
+        "expectancy_r": -0.5350348188942421,
+        "max_drawdown_r": 11.235731196779087
+      }
+    },
+    "gate_results": {
+      "minimum_trades": true,
+      "win_rate_band": false,
+      "realized_payoff_band": true,
+      "profit_factor": false,
+      "positive_expectancy": false,
+      "side_trade_capacity": true,
+      "side_profit_factor": false,
+      "drawdown": false,
+      "expert_trade_capacity": true,
+      "expert_profit_factor": false
+    },
+    "passed": false
+  },
+  "execution_skips": {
+    "position_open": 0,
+    "entry_bar_missing": 0,
+    "prior_structure_missing_or_noncontiguous": 0,
+    "risk_ceiling": 11
+  },
+  "eurusd_bounded_load": {
+    "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+    "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "requested_start_utc": "2023-01-01T00:00:00+00:00",
+    "read_start_with_stop_lookback_utc": "2022-12-31T23:00:00+00:00",
+    "stage_end_utc": "2023-12-31T23:59:59+00:00",
+    "loaded_first_timestamp_utc": "2023-01-01T22:00:00+00:00",
+    "loaded_last_timestamp_utc": "2023-12-29T21:55:00+00:00",
+    "loaded_rows": 74656,
+    "future_rows_loaded": false
+  },
+  "forward_eurusd_outcomes_loaded": false,
+  "broker_action_allowed": false
+}
