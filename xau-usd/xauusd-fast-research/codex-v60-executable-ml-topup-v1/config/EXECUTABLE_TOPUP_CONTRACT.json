@@ -1,0 +1,123 @@
+{
+  "schema_version": "codex_v60_executable_ml_topup_v1",
+  "locked_utc": "2026-07-28T07:22:46.5284313Z",
+  "locked_before_source_aware_run": true,
+  "source_commit": "848ad500950ef39d2d33c3d100ade5a38a1cab30",
+  "research_only": true,
+  "authorizations": {
+    "ml_runtime_authorized": false,
+    "ml_shadow_authorized": false,
+    "demo_broker_action_authorized": false,
+    "live_authorized": false,
+    "mt5_change_authorized": false
+  },
+  "inputs": {
+    "causal_retest_source": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-ml-sizing-causal-retest-v1/src/retest.py",
+      "sha256": "98e215dec916f1c803868af8af93d857481d73ac526af47fc9be0c0c61248e29"
+    },
+    "causal_retest_contract": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-ml-sizing-causal-retest-v1/config/CAUSAL_RETEST_CONTRACT.json",
+      "sha256": "56b1349c417506d022928d96f82641272cb229199e5963706e608de161439932"
+    },
+    "cooldown_source": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/build_v57_post_loss_cooldown_impact.py",
+      "sha256": "ca240345d7a65342cff8f820ac8fd3c14a30b5f7a5306e805e749c38feb105b9"
+    },
+    "floating_config": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/config/one_trade_per_day_floating_equity_v60.json",
+      "sha256": "358f12f5a4cf272c1e2ef7ea33c7d690732bc97b1aa246bd3d98b642fa3a97bc"
+    },
+    "current_demo_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "053bbb0e0d0f8e365f8b93b8a7d61376c6762c861ad1ec2c1b3d796d3089a9df"
+    }
+  },
+  "population": {
+    "test_entry_years": [2021, 2022, 2023, 2024, 2025, 2026],
+    "recent_window_start_utc": "2025-07-01T00:00:00Z",
+    "recent_window_end_utc": "2026-07-01T00:00:00Z",
+    "training_requires_known_initial_risk": true
+  },
+  "features": {
+    "market_features_from_causal_retest": true,
+    "include_is_long": true,
+    "include_is_core": true,
+    "include_execution_source_one_hot": true,
+    "primary_source_ids": [
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "V25_CHOP",
+      "V57_BREAK_SWING_H4ADX_HIGH",
+      "V7_SWING_HEALTH",
+      "V8_RETEST_HEALTH"
+    ]
+  },
+  "model": {
+    "purge_hours": 48,
+    "minimum_train_rows": 200,
+    "bags": 40,
+    "primary_seed": 0,
+    "diagnostic_seeds": [1, 2, 3, 4],
+    "regression_target": "fee_stress_pnl_usd",
+    "regression_winsor_quantiles": [0.01, 0.99],
+    "classification_target": "fee_stress_pnl_usd_gt_zero",
+    "parameters": {
+      "max_depth": 3,
+      "max_iter": 200,
+      "learning_rate": 0.05,
+      "min_samples_leaf": 30,
+      "l2_regularization": 1.0,
+      "random_state": 0
+    }
+  },
+  "score_policy": {
+    "rank_mode": "expanding_prior_actionable_oos",
+    "minimum_oos_history": 100,
+    "expected_pnl_weight": 0.5,
+    "win_probability_weight": 0.5,
+    "minimum_expected_pnl_rank_exclusive": 0.5,
+    "minimum_win_probability_rank_exclusive": 0.5,
+    "minimum_joint_score_exclusive": 0.8
+  },
+  "broker_policy": {
+    "base_lot": 0.01,
+    "topup_lot": 0.01,
+    "maximum_lot": 0.02,
+    "skip_authorized": false,
+    "missing_risk_topup_authorized": false
+  },
+  "frozen_risk_limits": {
+    "activation_equity_usd": 987.6623553437713,
+    "account_initial_risk_usd": 59.259741320626276,
+    "directional_initial_risk_usd": 59.259741320626276,
+    "addon_initial_risk_usd": 45.0,
+    "maximum_account_positions": 12,
+    "maximum_core_positions": 10,
+    "maximum_addon_positions": 2,
+    "floating_drawdown_hard_stop_usd": 148.1493533015657
+  },
+  "gates": {
+    "all_features_available_at_entry": true,
+    "training_and_topups_require_known_risk": true,
+    "net_pnl_not_below_baseline": true,
+    "profit_factor_not_below_baseline": true,
+    "floating_drawdown_not_above_baseline": true,
+    "minimum_net_to_floating_drawdown_improvement_fraction": 0.05,
+    "maximum_green_month_decline_percentage_points": 2.0,
+    "minimum_nonnegative_delta_years": 5,
+    "weekly_block_bootstrap_lower_delta_above_zero": true,
+    "recent_net_pnl_not_below_baseline": true,
+    "recent_profit_factor_not_below_baseline": true,
+    "recent_closed_drawdown_not_above_baseline": true,
+    "minimum_seeds_with_nonnegative_delta": 4,
+    "risk_limits_respected": true
+  },
+  "locked_diagnostics": {
+    "expected_pnl_rank_only": true,
+    "win_probability_rank_only": true,
+    "market_only_dual_model": true,
+    "diagnostics_cannot_replace_primary": true
+  }
+}
