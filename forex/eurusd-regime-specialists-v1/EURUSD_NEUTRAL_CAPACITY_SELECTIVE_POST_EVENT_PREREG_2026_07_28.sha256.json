@@ -1,0 +1,29 @@
+{
+  "locked_before_capacity_selective_post_event_forward_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T13:05:00Z",
+  "files": {
+    "config/frozen_neutral_capacity_selective_post_event.json": "151099925ef47f865d6f2d516ebb11adfdf09e138cf6093c8fb6d992cf863c36",
+    "src/eurusd_regime_specialists/neutral_capacity_selective_post_event.py": "80a371ae12b7e069d89e844f31e5dd501100621260487a7e21c72adb84f5877f",
+    "run_neutral_capacity_selective_post_event.py": "a9434abdc74a8ffe630c2f5cabb0a6c6fe34463447c92b9bdf5050ce65918a4b",
+    "tests/test_neutral_capacity_selective_post_event.py": "7a78c7de5f7b9414c8fc116284211553ba6f9f7c094ba168f052f5559dc58e1a",
+    "EURUSD_NEUTRAL_CAPACITY_SELECTIVE_POST_EVENT_PREREG_2026_07_28.md": "d1be628b3a67d7d5e54266b6eb5ca364f6b5dd56a890840d74bf4779ba85e364",
+    "outputs/neutral_capacity_selective_post_event/SCREEN.json": "d532b3eb30e27f5a5b6d678773aafb90da2cfa8c9f9f34e6a5c477b2fa13477f"
+  },
+  "pinned_sources": {
+    "PARENT_POST_EVENT_CONFIG": "1ca410da76100c1d1065eef1873fdcef258b8acbab08943b3a3b2d40b0b6a729",
+    "PARENT_POST_EVENT_LOCK": "ac04db0199f53d022940d96812bfe5296eed4ac3d45319c12538fbf9de3be2d5",
+    "PARENT_SELECTIVE_CONFIG": "75db01e7c31b854fc6da41323e82fdc1dd1609930dca99f7c395da636845b28a",
+    "PARENT_SELECTIVE_LOCK": "be6fb34ca431a17e19b59e05f98467d734d95c136f2175e9a336351d95f424a7",
+    "PARENT_SELECTIVE_SCREEN": "abe5b28f674c2e50348ed788bbbb7ff0b38e78c261a08b4ec4c2be51956cfd5b"
+  },
+  "pre_forward_selection_census": {
+    "source_candidates": 210,
+    "selected_candidates": 75,
+    "validation_2023": 24,
+    "validation_2024": 18,
+    "pseudo_oos_2025": 24,
+    "pseudo_oos_2026h1": 9,
+    "selected_threshold": 0.4,
+    "selected_candidate_manifest_sha256": "d81f8fe7d3bc579ee0c46c41cedec1f1e5fb2d7ea3ea3f64e5d77c918b1d3ebd"
+  }
+}
