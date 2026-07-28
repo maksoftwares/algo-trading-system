@@ -1,0 +1,14 @@
+{
+  "schema_version": "eurusd_neutral_london_fix_reversal_prereg_lock_v1",
+  "locked_at_utc": "2026-07-28T13:08:23Z",
+  "locked_before_census_and_outcome": true,
+  "historical_outcome_loaded_before_lock": false,
+  "files": {
+    "config/frozen_neutral_london_fix_reversal.json": "387fff0fa6560cc98687dd130da302e1eab297d16c0283463efafd160b2512da",
+    "src/eurusd_regime_specialists/neutral_london_fix_reversal.py": "47f4ae01e3db7edc06936a017764fcc817c50da0c0a27aecacd4775fc4e59b81",
+    "run_neutral_london_fix_reversal.py": "af320d75017495c3e63e1590ee1416bcacef27b88b754e6463bc9af4c19e8c72",
+    "tests/test_neutral_london_fix_reversal.py": "b9014880162951b3e41f524b7eacac700cb0dc58893b7000e93cc8b2f77b2845",
+    "EURUSD_NEUTRAL_LONDON_FIX_REVERSAL_PREREG_2026_07_28.md": "d9203fb4261efe7a3fd4f8d459e863282bbde32df075c77ebe4a21334fc2c045"
+  },
+  "broker_action_allowed": false
+}

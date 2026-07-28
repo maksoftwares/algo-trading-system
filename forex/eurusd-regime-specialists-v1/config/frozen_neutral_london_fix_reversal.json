@@ -1,0 +1,137 @@
+{
+  "campaign_id": "eurusd-neutral-london-fix-reversal-v1",
+  "frozen_at_utc": "2026-07-28T13:08:23Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "NEW_FINITE_FAMILY_ADAPTIVE_HISTORY_FORWARD_CHRONOLOGICAL",
+  "parent_neutral_date_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "paired_source_path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+    "paired_source_sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "neutral_date_known_at_utc_midnight": true,
+    "outcome_columns_forbidden_in_census": true
+  },
+  "data_and_classifier_contract": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+  },
+  "owned_regime": "NEUTRAL_DATE_KNOWN_AT_0000_UTC",
+  "experts": [
+    "ORDINARY_FIX_REVERSAL",
+    "MONTH_END_FIX_REVERSAL"
+  ],
+  "strategy": {
+    "benchmark_clock": "16:00_EUROPE_LONDON",
+    "dst_conversion": "IANA_EUROPE_LONDON",
+    "pre_fix_completed_m5_bars": 12,
+    "pre_fix_minutes": 60,
+    "displacement_measure": "MID_CLOSE_LAST_PRE_FIX_BAR_MINUS_MID_OPEN_FIRST_PRE_FIX_BAR",
+    "magnitude_gate": "ABS_DISPLACEMENT_AT_LEAST_MEDIAN_OF_PRIOR_20_NEUTRAL_FIX_OBSERVATIONS",
+    "magnitude_lookback_observations": 20,
+    "magnitude_gate_excludes_current_observation": true,
+    "fix_confirmation_bars": 1,
+    "fix_confirmation": "COMPLETED_FIX_M5_BAR_MUST_MOVE_OPPOSITE_PRE_FIX_DISPLACEMENT",
+    "entry": "FIRST_M5_OPEN_AFTER_COMPLETED_FIX_CONFIRMATION_BAR",
+    "entry_bar_forbidden_from_signal": true,
+    "positive_pre_fix_displacement_side": "SHORT",
+    "negative_pre_fix_displacement_side": "LONG",
+    "zero_displacement_or_confirmation": "CASH",
+    "ordinary_definition": "ALL_NON_MONTH_END_WEEKDAYS",
+    "month_end_definition": "LAST_MONDAY_TO_FRIDAY_CALENDAR_DATE_OF_MONTH",
+    "holiday_or_missing_bar_policy": "CASH_NO_INTERPOLATION",
+    "maximum_trades_per_fix": 1,
+    "frequency_quota": null,
+    "fitted_model": null,
+    "stop_structure": "FIX_CONFIRMATION_EXTREME_PLUS_BUFFER_WITH_FLOOR_AND_CEILING",
+    "stop_buffer_pips": 0.5,
+    "stop_floor_pips": 4.0,
+    "stop_ceiling_pips": 25.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12
+  },
+  "execution": {
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "one_open_position": true,
+    "fixed_research_lots": 0.01,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "windows": {
+    "development_a_2019_2020": [
+      "2019-01-02T00:00:00Z",
+      "2020-12-31T23:59:59Z"
+    ],
+    "development_b_2021_2022": [
+      "2021-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "chronological_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "chronological_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "chronological_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "recent_2026_h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "outcome_blind_census": {
+    "minimum_candidates_total": 100,
+    "minimum_candidates_development": 40,
+    "minimum_candidates_each_full_forward_year": 10,
+    "minimum_candidates_recent_half_year": 5,
+    "minimum_candidates_each_side": 20,
+    "minimum_month_end_candidates_total": 8
+  },
+  "development_selection": {
+    "allowed_windows": [
+      "development_a_2019_2020",
+      "development_b_2021_2022"
+    ],
+    "minimum_trades_each_window": 8,
+    "minimum_profit_factor_each_window": 1.0,
+    "minimum_expectancy_r_each_window": 0.0,
+    "minimum_combined_profit_factor": 1.1,
+    "selection_rule": "SELECT_EACH_EXPERT_INDEPENDENTLY_ONLY_IF_ALL_CHECKS_PASS",
+    "no_forward_outcome_loading_if_none_selected": true
+  },
+  "forward_admission": {
+    "minimum_trades_each_full_year": 8,
+    "minimum_trades_recent_half_year": 4,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_window": 1.0,
+    "minimum_each_side_trades": 8,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_same_day_same_side_oracle_precision": 0.5
+  },
+  "oracle_source": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230",
+    "usage": "FORWARD_EVALUATION_ONLY_AFTER_SELECTION_LOCK"
+  },
+  "decision_policy": {
+    "finite_family_size": 2,
+    "no_clock_threshold_stop_target_or_hold_search": true,
+    "no_direction_reversal_after_outcome": true,
+    "no_month_or_season_filter_after_outcome": true,
+    "no_forward_year_selection": true,
+    "development_failure_action": "REJECT_EXACT_EXPERT_WITHOUT_FORWARD_OUTCOME",
+    "forward_failure_action": "REJECT_EXACT_SELECTED_PORTFOLIO_WITHOUT_RETUNING"
+  }
+}
