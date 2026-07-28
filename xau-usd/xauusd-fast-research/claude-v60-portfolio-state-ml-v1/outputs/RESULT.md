@@ -275,6 +275,43 @@ not convert this into a preregistered pass. What it does establish is that the
 failure has a named, measured cause — insufficient gate power on zero-edge years
 — rather than being evidence the overlay is harmful.
 
+## V4: a look-ahead was found in the sizing map, removed, and the result improved
+
+Self-audit before handing the lane to review found that V1-V3 built the
+multiplier from `scores.rank(pct=True)` over the **whole test year**, normalised
+by `raw / raw.mean()` over the same year. A January trade was therefore ranked
+against the following December's trades. No P&L is involved so it is not outcome
+leakage, but the policy was not implementable live, and it is the same class of
+defect as the fixed dev-era percentile threshold that faked an alpha decay
+earlier in this research.
+
+Three mappings on identical model scores, 5 seeds each:
+
+| mapping | net | net/DD | years+ | mean mult | gates |
+|---|---|---|---|---|---|
+| A within-year rank (**not causal**) | $6,051 | 19.37 | 4/6 | 1.000 | 0/5 seeds |
+| B train-distribution (causal) | $6,059 | 18.50 | 4–5/6 | 1.006 | 1/5 seeds |
+| **C expanding OOS (causal)** | **$6,311** | 19.10 | 4–5/6 | 1.017 | 2/5 seeds |
+
+B fixes the map at model-fit time; C ranks each trade against every previously
+scored out-of-sample trade, appending only after use. Both are implementable in
+real time. The normaliser becomes the constant `(lo+hi)/2`, which is the mean of
+a uniform rank map, so no test-set quantity is consulted.
+
+Pooled permutation test on C: **observed +$1,110, null SD $264, z 4.21,
+p < 0.0001** — stronger than the non-causal version (z 3.37).
+
+**A spurious effect disappears when look-ahead is removed. This one got bigger.**
+That is the single most reassuring result in the lane.
+
+Per-year deltas are unchanged in character: 2021 −$4 and 2022 −$22 remain flat
+to slightly negative under every mapping, consistent with the zero-edge finding.
+
+Caveat carried forward: mean multiplier under C is 1.017, so the book runs 1.7%
+larger on average. Naive 1.017x leverage on the baseline would yield ~$5,168 of
+the $6,311, so leverage explains roughly $86 of the $1,229 gain — but the overlay
+is not exactly size-neutral and any deployment must normalise it to mean 1.0.
+
 ## What would change the verdict
 
 Forward evidence only. The overlay needs to improve in 2027 and beyond, on data
