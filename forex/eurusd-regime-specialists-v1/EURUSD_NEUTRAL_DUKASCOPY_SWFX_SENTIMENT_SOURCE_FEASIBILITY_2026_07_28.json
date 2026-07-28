@@ -1,0 +1,58 @@
+{
+  "schema_version": "eurusd_neutral_dukascopy_swfx_sentiment_source_feasibility_v1",
+  "observed_at_utc": "2026-07-28T20:24:55.0511867Z",
+  "verdict": "FEASIBLE_FOR_SEPARATELY_LOCKED_PROSPECTIVE_CAPTURE_ONLY",
+  "provider": "DUKASCOPY_BANK_SA",
+  "source": {
+    "endpoint": "https://freeserv.dukascopy.com/2.0/index.php?path=historical_sentiment_index/data",
+    "query": {
+      "liquidity": "consumers",
+      "type": "swfx"
+    },
+    "official_referer": "https://freeserv.dukascopy.com/2.0/?path=historical_sentiment_index/index&liquidity=consumers&type=swfx",
+    "login_used": false,
+    "cookie_used": false,
+    "token_used": false,
+    "account_used": false,
+    "http_status": 200,
+    "http_date": "Tue, 28 Jul 2026 20:25:04 GMT",
+    "content_type": "text/javascript; charset=UTF-8",
+    "response_bytes": 344590,
+    "response_sha256": "7c63d05c98acd2de8f9c9d4a43456ab33c1a94bd453996ee19e1b2d252ab181b",
+    "raw_response_preserved": false
+  },
+  "schema_observation": {
+    "jsonp_rows": 1360,
+    "exact_eurusd_rows": 1,
+    "eurusd": {
+      "name": "EUR/USD",
+      "last_long": -12.399999618530273,
+      "last_short": 12.4,
+      "sixhours_long": -12.65999984741211,
+      "sixhours_short": 12.66,
+      "oneday_long": -16.639999389648438,
+      "oneday_short": 16.64,
+      "fivedays_long": -14.220000267028809,
+      "fivedays_short": 14.22
+    }
+  },
+  "limitations": {
+    "explicit_provider_settlement_timestamp_in_payload": false,
+    "signed_jsonp_field_semantics_independently_verified": false,
+    "lagged_values_have_explicit_timestamps": false,
+    "revision_policy_known": false,
+    "query_filters_response_to_eurusd_only": false
+  },
+  "research_boundary": {
+    "source_only_diagnostic": true,
+    "strategy_preregistered": false,
+    "direction_mapping_selected": false,
+    "threshold_selected": false,
+    "historical_eurusd_prices_loaded": false,
+    "historical_eurusd_pnl_loaded": false,
+    "oracle_rows_loaded": false,
+    "trade_created": false,
+    "broker_action_allowed": false
+  },
+  "next_allowed_action": "SEPARATELY_PREREGISTER_FIXED_CLOCK_PROSPECTIVE_SOURCE_ONLY_CAPTURE_CENSUS"
+}

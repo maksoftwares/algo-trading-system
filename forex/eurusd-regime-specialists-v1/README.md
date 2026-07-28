@@ -63,6 +63,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 57. Prospective GDELT Neutral expert: the exact source filter, relative-tone transform, Neutral ownership, 00:15 decision, 00:20 bid/ask shadow entry, 0.7-pip spread floor, 1.5-pip spread ceiling, adverse slippage, four-pip stop, six-pip target, four-hour path, and conservative cross-expert conflict rule are implementation-hash locked before the 29 July start. Frequency is not a gate. The first boundary is scheduled, but signals, trades, P&L, profitability approval, and broker authorization remain zero.
 58. Prospective GDELT independent validation: the validator contract and implementation were hash-locked with zero source captures, decisions, signals, paths, or oracle rows. It verifies every decision/path/raw-tick hash, replays each closed path from immutable ticks, reports frequency without gating it, and separates profitability, same-day Regime 1 resemblance, and full temporal oracle-imitation claims. The empty-evidence status is `WAITING_FOR_PROSPECTIVE_START`; the full suite is 335 passed with two existing dependency warnings.
 59. First-boundary publication safety: a direct diagnostic received HTTP 400 when requesting Dukascopy's still-open current-hour archive. The waiting helper was therefore replaced before the boundary; if a signal occurs, it preserves the exact 04:20 UTC time exit but delays evidence capture until 05:16 UTC, after the 04:00-05:00 archive is complete, and then runs the locked validator.
+60. Dukascopy SWFX sentiment feasibility: the official no-login public endpoint returned 1,360 consumer-sentiment rows with exactly one EUR/USD record, an HTTP timestamp, and a reproducible response hash. The source is genuinely new but not yet strategy-ready: its JSONP payload lacks an explicit settlement timestamp, its signed field semantics are not formally bound to the documented percentage-long versus tendency definitions, and the raw diagnostic body was not preserved. Only a separately preregistered, source-only prospective capture census is allowed next; no direction, threshold, outcome, or P&L was selected.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -88,6 +89,7 @@ Key reports:
 - `EURUSD_NEUTRAL_GDELT_RELATIVE_TONE_DESIGN_AUDIT_RESULT_2026_07_28.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_GDELT_RELATIVE_TONE_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_GDELT_VALIDATION_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_DUKASCOPY_SWFX_SENTIMENT_SOURCE_FEASIBILITY_2026_07_28.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_FUTURES_PARTICIPATION_PREREG_2026_07_28.md`
