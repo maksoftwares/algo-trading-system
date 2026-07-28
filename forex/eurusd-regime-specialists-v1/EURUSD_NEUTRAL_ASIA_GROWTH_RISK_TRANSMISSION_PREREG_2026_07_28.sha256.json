@@ -1,0 +1,16 @@
+{
+  "campaign_id": "eurusd-neutral-asia-growth-risk-transmission-v1",
+  "family": "N48_NEUTRAL_ASIA_GROWTH_RISK_TRANSMISSION",
+  "locked_at_utc": "2026-07-28T13:50:00Z",
+  "locked_before_transmission_subgroup_outcome": true,
+  "later_than_2023_eurusd_outcomes_loaded": false,
+  "frequency_quota": null,
+  "files": {
+    "config/frozen_neutral_asia_growth_risk_transmission.json": "24b6ed129efaecda3b866d06af1a3cb3453f28c95fad87161be6dec07d245d41",
+    "EURUSD_NEUTRAL_ASIA_GROWTH_RISK_TRANSMISSION_PREREG_2026_07_28.md": "e095eb42171cc57cc2ad2c011cb3f7ef04a0b38d6fc4770851e21a80dbb2e1d3",
+    "src/eurusd_regime_specialists/neutral_asia_growth_risk_transmission.py": "f01263a41dfd1c079d453d4aa06583b950f3fc6fc148954ea1dc41a028a5b7ce",
+    "run_neutral_asia_growth_risk_transmission.py": "f701cb46d1f58d3a8ae75646d8b4320d96cac95a0472118ffaf99e431cee74d4",
+    "tests/test_neutral_asia_growth_risk_transmission.py": "1ce0a0661d2932fd0036c0c80bd722d86ca34fa1bd535b81cd06ac41b3d98a43"
+  },
+  "next_allowed_action": "OUTCOME_BLIND_TRANSMISSION_CENSUS_ONLY"
+}

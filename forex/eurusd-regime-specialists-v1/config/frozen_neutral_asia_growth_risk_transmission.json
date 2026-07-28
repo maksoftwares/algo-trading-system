@@ -1,0 +1,133 @@
+{
+  "campaign_id": "eurusd-neutral-asia-growth-risk-transmission-v1",
+  "frozen_at_utc": "2026-07-28T13:50:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_AFTER_2022_2023_DEVELOPMENT_CANDIDATE_FORWARD_CHRONOLOGICAL",
+  "parent_mechanics": {
+    "family": "N46_NEUTRAL_GROWTH_RISK_CONSENSUS",
+    "config_path": "config/frozen_neutral_growth_risk_consensus.json",
+    "config_sha256": "5cc91bab6e2c515dde553f8097c6e53189719942a24a07737d5b7dd1a1fb65ad",
+    "prereg_lock_path": "EURUSD_NEUTRAL_GROWTH_RISK_CONSENSUS_PREREG_2026_07_28.sha256.json",
+    "prereg_lock_sha256": "917102ff8bea7f035495b06ef49f499fea64990dd9e91db5cb20c4eb0d9b6cbf"
+  },
+  "prior_attempt_closure": {
+    "path": "EURUSD_NEUTRAL_GROWTH_RISK_SELECTED_CONFIRMATION_CLOSURE_2026_07_28.sha256.json",
+    "sha256": "0c301bde97792c9a57aa520ff0ee45ab3faa6530bf7f739e5f41ce42a80732ba",
+    "later_eurusd_outcomes_loaded": false
+  },
+  "owned_regime": "NEUTRAL_DATE_KNOWN_AT_0000_UTC",
+  "expert": "ASIA_HANDOFF_0300",
+  "decision_time_utc": "03:00",
+  "strategy": {
+    "external_signal": "INHERIT_N46_UNANIMOUS_SPX_COPPER_USDCNH_COMPLETED_60M_SIGN",
+    "eurusd_confirmation_completed_m5_bars": 3,
+    "eurusd_confirmation_minutes": 15,
+    "eurusd_confirmation_measure": "MID_CLOSE_LAST_COMPLETED_BAR_MINUS_MID_OPEN_FIRST_COMPLETED_BAR",
+    "long_confirmation": "EURUSD_15M_DISPLACEMENT_STRICTLY_POSITIVE",
+    "short_confirmation": "EURUSD_15M_DISPLACEMENT_STRICTLY_NEGATIVE",
+    "opposite_or_zero_confirmation": "CASH",
+    "entry": "EURUSD_M5_OPEN_AT_0300_AFTER_ALL_CONFIRMATION_BARS_COMPLETE",
+    "entry_bar_forbidden_from_signal": true,
+    "frequency_quota": null,
+    "inherited_stop_target_hold_and_costs": true
+  },
+  "windows": {
+    "development_2022": [
+      "2022-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "development_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "confirmation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "forward_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "recent_2026_h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "outcome_blind_census_gate": {
+    "minimum_candidates_total": 45,
+    "minimum_candidates_each_development_year": 8,
+    "minimum_candidates_confirmation": 5,
+    "minimum_candidates_forward_2025": 8,
+    "minimum_candidates_recent_half_year": 5,
+    "minimum_candidates_each_side": 12
+  },
+  "development_gate": {
+    "allowed_windows": [
+      "development_2022",
+      "development_2023"
+    ],
+    "minimum_trades_each_window": 8,
+    "minimum_profit_factor_each_window": 0.9,
+    "minimum_expectancy_r_each_window": -0.1,
+    "minimum_combined_trades": 20,
+    "minimum_combined_win_rate": 0.4,
+    "maximum_combined_win_rate": 0.6,
+    "minimum_combined_realized_payoff_ratio": 1.25,
+    "maximum_combined_realized_payoff_ratio": 1.85,
+    "minimum_combined_profit_factor": 1.1,
+    "minimum_combined_expectancy_r": 0.05,
+    "minimum_each_side_trades": 6,
+    "minimum_each_side_profit_factor": 0.9,
+    "maximum_drawdown_r": 10.0,
+    "pass_action": "HASH_LOCK_BEFORE_OPENING_2024",
+    "failure_action": "REJECT_WITHOUT_OPENING_2024_TO_2026"
+  },
+  "confirmation_gate": {
+    "allowed_window": "confirmation_2024",
+    "minimum_trades": 6,
+    "minimum_win_rate": 0.35,
+    "maximum_win_rate": 0.65,
+    "minimum_realized_payoff_ratio": 1.2,
+    "maximum_realized_payoff_ratio": 1.9,
+    "minimum_profit_factor": 1.0,
+    "minimum_expectancy_r": 0.0,
+    "minimum_each_side_trades": 2,
+    "minimum_each_side_profit_factor": 0.8,
+    "maximum_drawdown_r": 6.0,
+    "pass_action": "HASH_LOCK_BEFORE_OPENING_2025_AND_2026",
+    "failure_action": "REJECT_WITHOUT_OPENING_2025_AND_2026"
+  },
+  "forward_admission": {
+    "minimum_trades_2025": 8,
+    "minimum_trades_recent_half_year": 4,
+    "minimum_overall_win_rate": 0.4,
+    "maximum_overall_win_rate": 0.6,
+    "minimum_overall_realized_payoff_ratio": 1.3,
+    "maximum_overall_realized_payoff_ratio": 1.8,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_window": 1.0,
+    "minimum_each_side_trades": 4,
+    "minimum_each_side_profit_factor": 0.9,
+    "maximum_drawdown_r": 8.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_same_day_same_side_oracle_precision": 0.5
+  },
+  "oracle_source": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230",
+    "usage": "FINAL_FORWARD_ONLY_AFTER_2024_CONFIRMATION_LOCK"
+  },
+  "decision_policy": {
+    "finite_family_size": 1,
+    "single_clock_single_confirmation_rule": true,
+    "no_confirmation_length_threshold_or_direction_search": true,
+    "no_opposite_confirmation_reversal": true,
+    "no_frequency_gate": true,
+    "no_2024_or_later_subgroup_selection": true,
+    "development_failure_action": "REJECT_WITHOUT_LATER_OUTCOME",
+    "confirmation_failure_action": "REJECT_WITHOUT_2025_2026_OUTCOME",
+    "forward_failure_action": "REJECT_WITHOUT_RETUNING"
+  }
+}
