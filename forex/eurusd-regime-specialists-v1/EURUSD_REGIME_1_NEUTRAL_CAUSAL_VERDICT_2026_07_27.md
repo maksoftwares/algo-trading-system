@@ -32,6 +32,7 @@ execution decision.
 | Public DTCC OTC EUR/USD option flow | 2025 Sep–2026 H1 | 66 | 24.24% | 1.439 | 0.460 | -27.65R |
 | Matched OTC option premium skew | 2025 Q4–2026 H1 | 48 | 35.42% | 1.439 | 0.789 | -6.70R |
 | Four-session 30-minute opening drive | 2019–2026 H1 | 593 | 32.04% | 1.432 | 0.675 | -134.20R |
+| Midnight dual-side pairs | 2019–2026 H1 | 2,620 | 31.56% | 1.433 | 0.661 | -625.38R |
 
 None passed all locked chronological admission gates. Consequently, none is
 an admitted strategy or eligible for demo/live use.
@@ -271,6 +272,14 @@ below break-even at PF 0.957. The planned post-lock watchlist was cancelled
 with zero observations rather than using future data to rescue a rejected
 historical rule.
 
+A separately locked hedge-mode campaign then removed direction prediction
+entirely by retaining long and short tickets at both 00:00 and 00:05 UTC.
+It achieved exactly four executions on all 655 eligible Neutral dates, but
+failed every economic window: 2,620 tickets, 31.56% wins, 1.433 payoff,
+PF 0.661, and -625.38R. The 827 one-winner pairs earned about +0.45R each,
+while 483 no-winner pairs lost about -2.05R each. Mechanical frequency did
+not solve the missing directional edge.
+
 The evidence does not support claiming that Regime 1 has been solved. Further retrospective threshold, hour, feature, or model search on this archive would increase overfitting rather than improve causal evidence.
 
 ## Next legitimate evidence
@@ -309,4 +318,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow python build_neutral_dtcc_skew_source.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_skew.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_opening_drive.py
+uv run --with pandas --with numpy --with pyarrow python run_neutral_midnight_pairs.py
 ```

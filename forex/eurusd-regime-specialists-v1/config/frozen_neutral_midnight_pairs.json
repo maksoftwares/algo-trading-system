@@ -1,0 +1,137 @@
+{
+  "campaign_id": "eurusd-neutral-midnight-paired-v1",
+  "frozen_at_utc": "2026-07-28T08:30:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_WITH_FORWARD_ONLY_START",
+  "data_and_classifier_contract": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "strategy": {
+    "family": "N20_NEUTRAL_MIDNIGHT_DUAL_SIDE_PAIRS",
+    "anchor_hour_utc": 0,
+    "pair_offsets_minutes": [0, 5],
+    "sides_each_pair": ["LONG", "SHORT"],
+    "weekdays_only": true,
+    "required_trades_per_eligible_day": 4,
+    "direction_selection": "NONE_KEEP_BOTH_SIDES",
+    "one_open_position": false,
+    "maximum_concurrent_tickets_opened_per_day": 4
+  },
+  "neutral_ownership": {
+    "state": "latest available state no later than prior UTC day 23:00",
+    "requires_direction": "NEUTRAL",
+    "shock": false,
+    "joint_dxy_eurusd_compression": false
+  },
+  "execution": {
+    "account_mode_required": "HEDGING_INDEPENDENT_TICKETS",
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_ticket_portfolio_r": 0.25,
+    "maximum_new_portfolio_r_per_eligible_day": 1.0
+  },
+  "outcome_blind_census": {
+    "weekday_midnights": 1949,
+    "schedule_complete_days": 1948,
+    "neutral_schedule_complete_days": 655,
+    "quarantined_neutral_days": 0,
+    "eligible_days": 655,
+    "pair_timestamps": 1310,
+    "trade_candidates": 2620,
+    "long_candidates": 1310,
+    "short_candidates": 1310,
+    "days_exactly_four_trade_candidates": 655,
+    "eligible_day_exact_four_coverage": 1.0,
+    "by_window": {
+      "development_2019_2020": {
+        "eligible_days": 222,
+        "pair_timestamps": 444,
+        "trade_candidates": 888
+      },
+      "development_2021_2022": {
+        "eligible_days": 174,
+        "pair_timestamps": 348,
+        "trade_candidates": 696
+      },
+      "validation_2023_2024": {
+        "eligible_days": 140,
+        "pair_timestamps": 280,
+        "trade_candidates": 560
+      },
+      "pseudo_oos_2025_2026h1": {
+        "eligible_days": 119,
+        "pair_timestamps": 238,
+        "trade_candidates": 476
+      }
+    }
+  },
+  "windows": {
+    "development_2019_2020": [
+      "2019-01-02T00:00:00Z",
+      "2020-12-31T23:59:59Z"
+    ],
+    "development_2021_2022": [
+      "2021-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "validation_2023_2024": [
+      "2023-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025_2026h1": [
+      "2025-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "admission": {
+    "minimum_ticket_trades_each_window": 200,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_ticket_profit_factor_each_window": 1.1,
+    "minimum_pair_timestamps_each_window": 100,
+    "minimum_pair_profit_factor_each_window": 1.1,
+    "minimum_eligible_days_each_window": 50,
+    "minimum_daily_profit_factor_each_window": 1.1,
+    "minimum_overall_ticket_profit_factor": 1.3,
+    "minimum_stressed_ticket_profit_factor": 1.15,
+    "minimum_stressed_daily_profit_factor": 1.15,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "positive_after_top_5_percent_ticket_winners_removed": true,
+    "positive_after_top_5_percent_daily_winners_removed": true,
+    "requires_exactly_four_executed_tickets_each_eligible_day": true
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 400,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "No timestamp, side, threshold, stop, target, or subgroup may be changed after outcomes.",
+    "No oracle or future-return value may enter regime ownership, entries, or exits.",
+    "Both sides remain independent after entry; no hindsight cancellation or loser deletion.",
+    "No result is applicable to a netting account.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}

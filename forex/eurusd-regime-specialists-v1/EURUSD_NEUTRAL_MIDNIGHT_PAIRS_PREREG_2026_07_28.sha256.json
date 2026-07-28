@@ -1,0 +1,17 @@
+{
+  "locked_before_midnight_pairs_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T08:45:00Z",
+  "files": {
+    "config/frozen_neutral_midnight_pairs.json": "17a14be78d916b34319d90c53d581d4b688e16d14e39f02d051f0c967e72254d",
+    "src/eurusd_regime_specialists/neutral_midnight_pairs.py": "87443b65aabaaf127bd46e6a76c7af62493623122032416e8663e51f30e40c6f",
+    "run_neutral_midnight_pairs.py": "b9a6c3d04b70a1ae1a942569ad4d2e86543d17391fc40bc889b632d40041f0d0",
+    "tests/test_neutral_midnight_pairs.py": "09dc49ba7f4f7853a6dec4b26ebd1f9025dca8047cc902e9def2d358d0e0717e",
+    "EURUSD_NEUTRAL_MIDNIGHT_PAIRS_PREREG_2026_07_28.md": "9bd757a8c555a1c498395b36c23f440f3b821b7ffa745d89f7c3b26e58576467"
+  },
+  "outcome_blind_census": {
+    "eligible_days": 655,
+    "pair_timestamps": 1310,
+    "trade_candidates": 2620,
+    "days_exactly_four_trade_candidates": 655
+  }
+}
