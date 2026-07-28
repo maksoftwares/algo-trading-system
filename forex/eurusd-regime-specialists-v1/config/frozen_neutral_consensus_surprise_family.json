@@ -1,0 +1,156 @@
+{
+  "campaign_id": "eurusd-neutral-consensus-surprise-family-v1",
+  "frozen_at_utc": "2026-07-28T18:30:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "parent_neutral_clock_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "paired_source_path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+    "paired_source_sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "census_must_exclude_outcomes": true
+  },
+  "data_and_classifier_contract": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+  },
+  "consensus_source": {
+    "provider": "TradingView Economic Calendar reconciled to official BLS initial releases",
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-tradingview-consensus-v1/TRADINGVIEW_CONSENSUS.parquet",
+    "sha256": "90ee94228f7b9be6ca85de2ba1c1483a1d3d04957e4ab98c87134fcb432c4793",
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-tradingview-consensus-v1/MANIFEST.json",
+    "manifest_sha256": "3506cd392d9118c392c2d51e4fe00b24b43163dd3e874355faf012c3470a7e6e",
+    "raw_response_chain_sha256": "d9558ac0016e94b7aaf6a7db19a1bec0540d945b420026c6eb94f7fb6c3f83ce",
+    "accepted_for_adaptive_historical_research": true,
+    "accepted_for_pristine_oos_claim": false,
+    "families": [
+      "CPI",
+      "PPI",
+      "NFP"
+    ]
+  },
+  "owned_regime": "NEUTRAL_DATE_FIRST_HOUR_CLOCKS",
+  "strategy": {
+    "families": [
+      "CPI",
+      "PPI",
+      "NFP"
+    ],
+    "variants": [
+      "MACRO_SURPRISE_CARRY",
+      "MACRO_SURPRISE_PRICE_AGREEMENT"
+    ],
+    "release_signal": "OFFICIAL_INITIAL_VALUE_MINUS_PROVIDER_FORECAST_VALUE",
+    "positive_us_surprise_side": "SHORT",
+    "negative_us_surprise_side": "LONG",
+    "zero_surprise": "CASH",
+    "latest_directional_release_only": true,
+    "minimum_release_age_hours_exclusive": 0,
+    "maximum_release_age_hours": 72,
+    "entry_hour_utc": 0,
+    "entry_minutes_utc": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "price_confirmation": {
+      "applies_only_to_variant": "MACRO_SURPRISE_PRICE_AGREEMENT",
+      "formula": "BID_CLOSE_ENTRY_MINUS_1_BAR_MINUS_BID_CLOSE_ENTRY_MINUS_4_BARS",
+      "completed_m5_bars": 4,
+      "positive_return_side": "LONG",
+      "negative_return_side": "SHORT",
+      "zero_return": "CASH",
+      "entry_bar_forbidden": true,
+      "agreement_required": true
+    },
+    "abstention_when_no_recent_release": true,
+    "magnitude_threshold": null,
+    "price_threshold": null,
+    "family_weight": null,
+    "clock_filter": null,
+    "frequency_quota": null,
+    "fitted_model": null
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "maximum_concurrent_positions": 4,
+    "risk_per_trade_portfolio_r": 0.25,
+    "fixed_research_lots": 0.01,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-02T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "chronological_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "chronological_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "chronological_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "recent_2026_h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "outcome_blind_census": {
+    "minimum_candidates_total": 100,
+    "minimum_candidates_development": 50,
+    "minimum_candidates_each_full_forward_year": 8,
+    "minimum_candidates_recent_half_year": 4,
+    "minimum_candidates_each_side": 20,
+    "minimum_families_represented": 3
+  },
+  "admission": {
+    "minimum_executed_trades_total": 100,
+    "minimum_executed_trades_development": 50,
+    "minimum_executed_trades_each_full_forward_year": 8,
+    "minimum_executed_trades_recent_half_year": 4,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_window": 1.0,
+    "minimum_each_side_trades": 20,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_exact_oracle_precision": 0.4,
+    "minimum_15m_oracle_precision": 0.45
+  },
+  "oracle_source": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230"
+  },
+  "decision_policy": {
+    "finite_family_predeclared": true,
+    "each_variant_must_pass_independently": true,
+    "no_post_outcome_best_variant_selection": true,
+    "no_post_outcome_variant_combination": true,
+    "no_parameter_search": true,
+    "no_surprise_magnitude_threshold_after_outcome": true,
+    "no_price_threshold_after_outcome": true,
+    "no_release_family_selection_after_outcome": true,
+    "no_release_age_change_after_outcome": true,
+    "no_clock_or_year_filter_after_outcome": true,
+    "no_side_reversal_after_outcome": true,
+    "no_activation_of_isolated_profitable_window": true,
+    "failure_action": "REJECT_FAILED_VARIANT_WITHOUT_RETUNING"
+  }
+}

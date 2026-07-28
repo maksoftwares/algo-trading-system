@@ -1,0 +1,23 @@
+{
+  "schema_version": "eurusd_neutral_consensus_surprise_family_prereg_lock_v1",
+  "locked_at_utc": "2026-07-28T18:35:00Z",
+  "locked_before_census_and_outcome": true,
+  "files": {
+    "config/frozen_neutral_consensus_surprise_family.json": "2b9629623a60316f0faef09bb7a73b7c7dfc9fd1836d50272b0f8a022df5e1fa",
+    "EURUSD_NEUTRAL_CONSENSUS_SURPRISE_FAMILY_PREREG_2026_07_28.md": "8358e74533c6dae511a80600a808e8671aba6fb0dd55fa0a6f1ebe6c74d90d3b",
+    "src/eurusd_regime_specialists/neutral_consensus_surprise_family.py": "f6716efe61bcf89415872f72f68e0ba3e6c0d42cf063054be2882ac26d40ded0",
+    "run_neutral_consensus_surprise_family.py": "a8c290a0a8c7b847ab70601f35a9c40d7367d71784beccecd502c0d09407c97b",
+    "tests/test_neutral_consensus_surprise_family.py": "5ce8997bcc17e1d67c83d62dff2647ea9afd957d39da6d24e6c1ded667ccf1a0",
+    "src/eurusd_regime_specialists/neutral_bls_first_hour_carry.py": "a17318687db300afafc9f78f1718fdf93b8bd2cb031c866c48dd24a7ea99afad",
+    "config/frozen_neutral_four_clock_ranker.json": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "EURUSD_NEUTRAL_TRADINGVIEW_CONSENSUS_SOURCE_AUDIT_2026_07_28.md": "546efaa3752673f12a1d55e5f87bf50d89d8dbc5e218a005b650bb4701c82585",
+    "download_neutral_tradingview_consensus.py": "dc04622d4f356bddc73e563a6a009b5a3a779c478ce19931ef753e8b89c600a8",
+    "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230"
+  },
+  "external_sources": {
+    "D:/AlgoTradingData/research/eurusd-neutral-tradingview-consensus-v1/TRADINGVIEW_CONSENSUS.parquet": "90ee94228f7b9be6ca85de2ba1c1483a1d3d04957e4ab98c87134fcb432c4793",
+    "D:/AlgoTradingData/research/eurusd-neutral-tradingview-consensus-v1/MANIFEST.json": "3506cd392d9118c392c2d51e4fe00b24b43163dd3e874355faf012c3470a7e6e"
+  }
+}
