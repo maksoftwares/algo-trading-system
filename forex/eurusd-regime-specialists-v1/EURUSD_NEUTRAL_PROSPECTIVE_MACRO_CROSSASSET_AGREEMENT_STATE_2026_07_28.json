@@ -22,5 +22,15 @@
     "status": "NO_MATURE_PRE_RELEASE_FORECASTS",
     "network_request_made": false
   },
+  "prospective_market_capture": {
+    "status": "IMPLEMENTATION_FROZEN_WAITING_FOR_FIRST_ELIGIBLE_RELEASE",
+    "symbols": [
+      "EURUSD",
+      "DOLLARIDXUSD",
+      "USTBONDTRUSD"
+    ],
+    "nfp_2026_08_07_earliest_capture_utc": "2026-08-07T12:46:00Z",
+    "dry_run_network_request_made": false
+  },
   "broker_action_allowed": false
 }

@@ -50,6 +50,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 44. Two-stage opportunity audit: a fixed L2 model first estimated whether either side had a 1.5R opportunity, then a separate paired model chose LONG or SHORT. Only 2019-2020 training labels and 2021-2022 development outcomes were admitted; the source filter stopped at 2022-12-30 00:45 UTC and no 2023-2026 return was loaded. At success-score thresholds 0.45/0.43/0.41, the development selections returned PF 0.739/0.726/0.764 and lost 19.80R/29.45R/35.05R. The strictest threshold retained 112 trades but won only 33.93%, with PF 0.632 in 2021 and 0.872 in 2022. Opportunity probability was not the missing variable; future side remained unlearnable from the available causal feature set. The family is rejected in development and forward evaluation is forbidden.
 45. Prospective consensus capture: a no-login append-only pipeline now records raw TradingView responses, local request times, provider HTTP date, immutable normalized pre-release rows, and a deterministic SHA-256 evidence chain. The first 28 July snapshot saw the scheduled 7 August NFP, 12 August CPI, and 13 August PPI events but correctly admitted zero rows because all three forecasts were still null. The null snapshot is retained as point-in-time proof; repeated captures closer to release can append a forecast but can never rewrite earlier evidence. This fixes the historical source's timestamp boundary, not strategy profitability, and authorizes no broker action.
 46. Prospective Neutral macro/cross-asset agreement: the post-release collector now links an actual only to an immutable forecast captured at least 60 seconds before the same TradingView event id, ticker, and UTC timestamp. The new specialist is frozen without any historical backtest or historical P&L. On a Neutral-owned date it waits for three completed M5 bars, then requires a macro surprise, EURUSD reaction, and DXY/Treasury reaction to agree. Frequency is not a gate; the rule remains shadow-only until at least 12 months and 30 trades pass win-rate, 1.5R payoff, PF, side-balance, drawdown, cost, winner-removal, and oracle-precision checks. The initial state has zero forecasts, actuals, signals, and trades, so no profitability claim or broker action is authorized.
+47. Prospective event-market capture: a no-login Dukascopy collector now preserves the exact EURUSD, DXY, and Treasury hourly tick responses needed around each eligible release, reconstructs only completed M5 bars, and appends one linked reaction row with an evidence-chain hash. It refuses all requests until the three observation bars plus a 60-second lag are complete, excludes the entry bar, and stays in cash if any required bar is absent. The 7 August NFP dry run correctly reports that 12:46 UTC is the earliest capture time and makes no network request now.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -137,6 +138,8 @@ Key reports:
 - `EURUSD_NEUTRAL_PROSPECTIVE_ACTUAL_CAPTURE_2026_07_28.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_MACRO_CROSSASSET_AGREEMENT_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_MACRO_CROSSASSET_AGREEMENT_STATE_2026_07_28.json`
+- `EURUSD_NEUTRAL_PROSPECTIVE_MARKET_CAPTURE_2026_07_28.md`
+- `EURUSD_NEUTRAL_PROSPECTIVE_MARKET_CAPTURE_2026_07_28.sha256.json`
 - `EURUSD_ADAPTIVE_FREQUENCY_FALLBACK_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_VERDICT_2026_07_28.md`
@@ -259,4 +262,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_two_stage_opportunity_audit.py
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_consensus.py capture --days-ahead 60
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_actuals.py capture
+uv run --with pandas --with pyarrow python capture_prospective_dukascopy_event_m5.py capture --event-time 2026-08-07T12:30:00Z
 ```

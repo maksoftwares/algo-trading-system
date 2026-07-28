@@ -1,0 +1,13 @@
+{
+  "schema_version": "eurusd_neutral_prospective_market_capture_lock_v1",
+  "locked_at_utc": "2026-07-28T13:00:58Z",
+  "locked_before_first_eligible_release": true,
+  "historical_pnl_loaded_before_lock": false,
+  "official_origin": "https://jetta.dukascopy.com/v1",
+  "files": {
+    "capture_prospective_dukascopy_event_m5.py": "a8ac3b5bf4dd0c4a25716dabec4728c8150da9a3c3a59f400f0b05a32a565e08",
+    "tests/test_capture_prospective_dukascopy_event_m5.py": "5081d7eb9c5aacdbf2d32847d7a2a768548d0f69d2befbb4590545ab2ae3747b",
+    "EURUSD_NEUTRAL_PROSPECTIVE_MARKET_CAPTURE_2026_07_28.md": "fc961228ab677110e1249f657e4110739c3e2e023b8d40a4d6374a0be0553c5f"
+  },
+  "broker_action_allowed": false
+}
