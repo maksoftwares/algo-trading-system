@@ -78,6 +78,8 @@ Key reports:
 - `EURUSD_NEUTRAL_KRAKEN_MULTIVENUE_FLOW_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_SELECTIVE_MULTIVENUE_AGREEMENT_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SELECTIVE_MULTIVENUE_AGREEMENT_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_SELECTIVE_TARGET_PROBABILITY_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_SELECTIVE_TARGET_PROBABILITY_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -109,6 +111,7 @@ Key reports:
 - `outputs/neutral_flow_augmented_ranker/RESULT.json`
 - `outputs/neutral_kraken_multivenue_flow/RESULT.json`
 - `outputs/neutral_selective_multivenue_agreement/RESULT.json`
+- `outputs/neutral_selective_target_probability/RESULT.json`
 
 Run with:
 
@@ -153,4 +156,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python down
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_kraken_multivenue_flow.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_multivenue_agreement.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_multivenue_agreement.py backtest
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_target_probability.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_target_probability.py backtest
 ```

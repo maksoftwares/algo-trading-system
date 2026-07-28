@@ -324,6 +324,14 @@ Neutral date, but still failed every window: 31.56% wins, 1.439 payoff, PF
 0.663, and -222.23R overall. The last six months deteriorated to 68 trades,
 20.59% wins, PF 0.373, and -34.75R. Frequency was not the binding problem.
 
+A separately frozen side-stacked probability model then estimated each
+direction's chance of reaching 1.5R and allowed CASH below a fixed 45%
+hurdle. Before any trade outcome was routed, zero of 1,280 evaluation
+decisions qualified. The maximum estimate was 43.18% overall and only 40.02%
+in 2026 H1. Lowering the hurdle to manufacture trades would sacrifice the
+required margin above break-even, so the model was structurally rejected
+without P&L or oracle evaluation.
+
 The evidence does not support claiming that Regime 1 has been solved. Further
 retrospective venue weighting, threshold, hour, flow horizon, interaction,
 feature, or model search on these archives would increase overfitting rather
@@ -373,4 +381,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python down
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_kraken_multivenue_flow.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_multivenue_agreement.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_multivenue_agreement.py backtest
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_target_probability.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_target_probability.py backtest
 ```

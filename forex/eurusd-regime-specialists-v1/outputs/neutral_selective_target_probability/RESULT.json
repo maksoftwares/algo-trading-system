@@ -1,0 +1,241 @@
+{
+  "campaign_id": "eurusd-neutral-selective-target-probability-v1",
+  "status": "REJECTED_PRE_EVALUATION_NO_TARGET_PROBABILITY_SIGNALS",
+  "information_status": "ADAPTIVE_WALK_FORWARD_HISTORICAL_RESEARCH_WITH_FORWARD_ONLY_START",
+  "parent_multivenue_contract": {
+    "path": "config/frozen_neutral_kraken_multivenue_flow.json",
+    "sha256": "4d051e8ea4d1901495279c28415d69c20f228081914db717af6d54562acb1e50",
+    "lock_path": "EURUSD_NEUTRAL_KRAKEN_MULTIVENUE_FLOW_PREREG_2026_07_28.sha256.json",
+    "lock_sha256": "1dd0e965a275321e87a51848b41baf34dbfb00f9c5b6d5c4eefd7daae00eb59d"
+  },
+  "causality": {
+    "model": "shared side-stacked L2 logistic target-first probability",
+    "features": [
+      "aligned_return_3_atr",
+      "aligned_return_12_atr",
+      "aligned_ema_gap_atr",
+      "aligned_anchor_gap_atr",
+      "aligned_close_location",
+      "side_room_atr",
+      "aligned_dxy_gap_atr",
+      "aligned_quote_change_imbalance",
+      "aligned_kraken_side_imbalance",
+      "aligned_binance_taker_imbalance",
+      "kraken_imbalance_magnitude",
+      "binance_imbalance_magnitude"
+    ],
+    "selection_threshold": 0.45,
+    "training_purge": "side entry and side exit strictly before each evaluation-window start",
+    "current_window_outcome_in_fit": false,
+    "threshold_feature_or_hyperparameter_search": false,
+    "trade_outcomes_routed": false,
+    "oracle_evaluated": false
+  },
+  "outcome_blind_source_census": {
+    "training_2020_2021": {
+      "source_eligible_days": 133,
+      "decision_points": 532
+    },
+    "evaluation": {
+      "source_eligible_days": 320,
+      "decision_points": 1280,
+      "by_window": {
+        "validation_2022_2023": {
+          "source_eligible_days": 140,
+          "decision_points": 560
+        },
+        "validation_2024": {
+          "source_eligible_days": 62,
+          "decision_points": 248
+        },
+        "pseudo_oos_2025": {
+          "source_eligible_days": 79,
+          "decision_points": 316
+        },
+        "pseudo_oos_2026h1": {
+          "source_eligible_days": 39,
+          "decision_points": 156
+        }
+      }
+    }
+  },
+  "pre_evaluation_selection_census": {
+    "source_eligible_days": 320,
+    "source_decision_points": 1280,
+    "selected_candidates": 0,
+    "active_candidate_days": 0,
+    "no_trade_days": 320,
+    "predicted_long_rate": 0.0,
+    "trades_per_source_eligible_day": 0.0,
+    "trades_per_active_candidate_day": 0.0,
+    "candidate_count_distribution": {
+      "0": 320,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    "selection_probability": {
+      "minimum": 0.29316996064202044,
+      "median": 0.34392839731315367,
+      "p90": 0.37577651986758553,
+      "p95": 0.38396658826470825,
+      "p99": 0.40472691857585075,
+      "maximum": 0.4317617197850206
+    },
+    "by_window": {
+      "validation_2022_2023": {
+        "source_eligible_days": 140,
+        "source_decision_points": 560,
+        "selected_candidates": 0,
+        "active_candidate_days": 0,
+        "no_trade_days": 140,
+        "predicted_long_rate": 0.0,
+        "trades_per_source_eligible_day": 0.0,
+        "trades_per_active_candidate_day": 0.0,
+        "candidate_count_distribution": {
+          "0": 140,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        }
+      },
+      "validation_2024": {
+        "source_eligible_days": 62,
+        "source_decision_points": 248,
+        "selected_candidates": 0,
+        "active_candidate_days": 0,
+        "no_trade_days": 62,
+        "predicted_long_rate": 0.0,
+        "trades_per_source_eligible_day": 0.0,
+        "trades_per_active_candidate_day": 0.0,
+        "candidate_count_distribution": {
+          "0": 62,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        }
+      },
+      "pseudo_oos_2025": {
+        "source_eligible_days": 79,
+        "source_decision_points": 316,
+        "selected_candidates": 0,
+        "active_candidate_days": 0,
+        "no_trade_days": 79,
+        "predicted_long_rate": 0.0,
+        "trades_per_source_eligible_day": 0.0,
+        "trades_per_active_candidate_day": 0.0,
+        "candidate_count_distribution": {
+          "0": 79,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "source_eligible_days": 39,
+        "source_decision_points": 156,
+        "selected_candidates": 0,
+        "active_candidate_days": 0,
+        "no_trade_days": 39,
+        "predicted_long_rate": 0.0,
+        "trades_per_source_eligible_day": 0.0,
+        "trades_per_active_candidate_day": 0.0,
+        "candidate_count_distribution": {
+          "0": 39,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        }
+      }
+    },
+    "fit_metadata": {
+      "validation_2022_2023": {
+        "cutoff_utc": "2022-01-01T00:00:00+00:00",
+        "training_side_rows": 1064,
+        "training_decision_points": 532,
+        "training_positive_side_rows": 336,
+        "training_positive_rate": 0.3157894736842105,
+        "selected_decisions": 0,
+        "cash_decisions": 560,
+        "selection_probability": {
+          "minimum": 0.29316996064202044,
+          "median": 0.346998356260384,
+          "p90": 0.37824253748896014,
+          "p95": 0.3893009210509191,
+          "p99": 0.40560993761744835,
+          "maximum": 0.4317617197850206
+        }
+      },
+      "validation_2024": {
+        "cutoff_utc": "2024-01-01T00:00:00+00:00",
+        "training_side_rows": 2184,
+        "training_decision_points": 1092,
+        "training_positive_side_rows": 694,
+        "training_positive_rate": 0.31776556776556775,
+        "selected_decisions": 0,
+        "cash_decisions": 248,
+        "selection_probability": {
+          "minimum": 0.3044775086295846,
+          "median": 0.33908809497978387,
+          "p90": 0.36485531213948785,
+          "p95": 0.37475478801955686,
+          "p99": 0.3891066533198817,
+          "maximum": 0.4087022926596942
+        }
+      },
+      "pseudo_oos_2025": {
+        "cutoff_utc": "2025-01-01T00:00:00+00:00",
+        "training_side_rows": 2680,
+        "training_decision_points": 1340,
+        "training_positive_side_rows": 857,
+        "training_positive_rate": 0.31977611940298506,
+        "selected_decisions": 0,
+        "cash_decisions": 316,
+        "selection_probability": {
+          "minimum": 0.29783645422449456,
+          "median": 0.3445131104807748,
+          "p90": 0.37663555440071556,
+          "p95": 0.38363389998182473,
+          "p99": 0.40436308845509344,
+          "maximum": 0.4292483650567776
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "cutoff_utc": "2026-01-01T00:00:00+00:00",
+        "training_side_rows": 3312,
+        "training_decision_points": 1656,
+        "training_positive_side_rows": 1055,
+        "training_positive_rate": 0.3185386473429952,
+        "selected_decisions": 0,
+        "cash_decisions": 156,
+        "selection_probability": {
+          "minimum": 0.30378401988510356,
+          "median": 0.3424795749617918,
+          "p90": 0.366688516000619,
+          "p95": 0.37656059462690705,
+          "p99": 0.3949922035642217,
+          "maximum": 0.40022226386127696
+        }
+      }
+    }
+  },
+  "strategy": {
+    "admitted": false,
+    "selection_threshold": 0.45,
+    "selected_trades": 0,
+    "cash_decisions": 1280,
+    "frequency_gate_relaxed": true,
+    "economic_evaluation": "NOT_RUN_BECAUSE_NO_DECISION_CLEARED_THE_FROZEN_PROBABILITY_HURDLE"
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "status": "CANCELLED_BY_PRE_EVALUATION_NO_TRADE_GATE",
+    "available_points_after_start": 0
+  },
+  "verdict": "No evaluation decision cleared the frozen 0.45 target-probability hurdle. The model remains CASH and the threshold will not be lowered after the screen."
+}

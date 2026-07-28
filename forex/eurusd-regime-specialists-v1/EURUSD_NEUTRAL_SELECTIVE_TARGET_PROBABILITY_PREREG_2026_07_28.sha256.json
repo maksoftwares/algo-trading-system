@@ -1,0 +1,24 @@
+{
+  "locked_before_selective_target_probability_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T09:12:00Z",
+  "files": {
+    "config/frozen_neutral_selective_target_probability.json": "74eb4d96d8a984e56141058bf50d91cbe6d72d424e1f398b3fc835505e3045f3",
+    "src/eurusd_regime_specialists/neutral_selective_target_probability.py": "3744bf722264c723b57f1552de2dc36b13673734482b8ac7cd878f84a705e161",
+    "run_neutral_selective_target_probability.py": "c6e87b4237a04d3ad147f82a8e88bca0c6234120acb5268bca01a0bd0bb0ed88",
+    "tests/test_neutral_selective_target_probability.py": "62257122eb898f7a10bf6ab37c5562537c21d58e76b15bce578e1c5b3f99ebf7",
+    "EURUSD_NEUTRAL_SELECTIVE_TARGET_PROBABILITY_PREREG_2026_07_28.md": "e8e5f51f8bdf3509d3d4c765c577c52239aed445099883d783c07bfd9183ef5b"
+  },
+  "pinned_parent": {
+    "PARENT_MULTIVENUE_CONTRACT": "4d051e8ea4d1901495279c28415d69c20f228081914db717af6d54562acb1e50",
+    "PARENT_MULTIVENUE_LOCK": "1dd0e965a275321e87a51848b41baf34dbfb00f9c5b6d5c4eefd7daae00eb59d"
+  },
+  "pre_evaluation_selection_census": {
+    "sha256": "62d0fe950d86f7642a6f89eb5c605471c17288c73257a5948c0b342d1b22341f",
+    "source_decision_points": 1280,
+    "selected_candidates": 0,
+    "selection_probability_threshold": 0.45,
+    "overall_probability_maximum": 0.4317617197850206,
+    "recent_six_month_probability_maximum": 0.40022226386127696,
+    "outcomes_routed_before_lock": false
+  }
+}
