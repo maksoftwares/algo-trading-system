@@ -1,0 +1,21 @@
+{
+  "schema_version": "eurusd_neutral_event_crossasset_rates_prereg_lock_v1",
+  "locked_at_utc": "2026-07-28T15:30:00Z",
+  "locked_before_census_and_outcome": true,
+  "files": {
+    "config/frozen_neutral_event_crossasset_rates.json": "0f0a6743a113e8e0a4edd4fab50a792141d2afb015c461e0de7383a5db929108",
+    "EURUSD_NEUTRAL_EVENT_CROSSASSET_RATES_PREREG_2026_07_28.md": "8c23b5d5fba6550dbb9ae1e76e6704458ae701a3dea0e3c4f459f9cee935997f",
+    "src/eurusd_regime_specialists/neutral_event_crossasset_rates.py": "22ef92ca45af9557be36c560041d82dbd58360c82cadbb654b06192a7b956888",
+    "run_neutral_event_crossasset_rates.py": "a4a8fc7e023c2b42bfb922d11ffec4b0067117df14477a1840171f5124a400e5",
+    "tests/test_neutral_event_crossasset_rates.py": "7637fdb43874a4fcc3f90f5123c0f8d06a9f4e43a824ac9fa7be1a193ea9eecd",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "config/frozen_neutral_macro_event_drift.json": "ff7b2fbb8412312c3097bdc248e27525cb4bbfd59554a34b82f451243b9223e9",
+    "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230"
+  },
+  "external_sources": {
+    "D:/AlgoTradingData/research/eurusd-neutral-dukascopy-event-timing-v1/DUKASCOPY_ECONOMIC_EVENTS.parquet": "805603f819b727a9481f577ff3d2191f80456a4d83d37360e1416a75c6504be1",
+    "D:/AlgoTradingData/research/eurusd-neutral-dukascopy-event-timing-v1/MANIFEST.json": "441ad058e84055adf773d61a73ab38385ab8d7e1e422b6bce4fb16f4003cc1e3",
+    "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+    "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8"
+  }
+}

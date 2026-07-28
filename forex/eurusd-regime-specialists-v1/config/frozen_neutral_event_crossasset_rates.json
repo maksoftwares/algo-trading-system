@@ -1,0 +1,149 @@
+{
+  "campaign_id": "eurusd-neutral-event-crossasset-rates-v1",
+  "frozen_at_utc": "2026-07-28T15:30:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "data_and_classifier_contract": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+  },
+  "event_clock_contract": {
+    "path": "config/frozen_neutral_macro_event_drift.json",
+    "sha256": "ff7b2fbb8412312c3097bdc248e27525cb4bbfd59554a34b82f451243b9223e9",
+    "currency": "USD",
+    "title_fragments": "INHERIT_EXACTLY_WITHOUT_ADDITION_OR_REMOVAL"
+  },
+  "event_source": {
+    "provider": "Dukascopy public Economic Calendar widget",
+    "authentication_required": false,
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-dukascopy-event-timing-v1/DUKASCOPY_ECONOMIC_EVENTS.parquet",
+    "sha256": "805603f819b727a9481f577ff3d2191f80456a4d83d37360e1416a75c6504be1",
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-dukascopy-event-timing-v1/MANIFEST.json",
+    "manifest_sha256": "441ad058e84055adf773d61a73ab38385ab8d7e1e422b6bce4fb16f4003cc1e3",
+    "allowed_fields": [
+      "event_id",
+      "event_time_utc",
+      "currency",
+      "title",
+      "tag"
+    ],
+    "prohibited_fields": [
+      "impact",
+      "actual",
+      "actual_norm",
+      "forecast",
+      "forecast_norm",
+      "previous",
+      "previous_norm",
+      "historical_count",
+      "effect"
+    ]
+  },
+  "crossasset_source": {
+    "provider": "Dukascopy public CFD tick archive",
+    "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+    "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+    "manifest_path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+    "manifest_sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8",
+    "contract_sha256": "e368416625445fc670a3633f9d8a542ea0e328a0cb822eeb003c75a86005c496",
+    "symbols": [
+      "DOLLARIDXUSD",
+      "USTBONDTRUSD"
+    ],
+    "timestamp_semantics": "M5_BAR_START_USABLE_ONLY_AT_START_PLUS_FIVE_MINUTES",
+    "missing_policy": "PRE_EVENT_AND_FINAL_OBSERVATION_CLOSE_REQUIRED_FOR_BOTH_SYMBOLS_NO_FORWARD_FILL"
+  },
+  "owned_regime": "NEUTRAL",
+  "strategy": {
+    "event_currency": "USD",
+    "observation_minutes": 15,
+    "completed_observation_bars": 3,
+    "pre_event_baseline": "MID_CLOSE_OF_LAST_M5_BAR_FULLY_COMPLETED_BEFORE_EVENT",
+    "reaction_endpoint": "MID_CLOSE_OF_THIRD_M5_BAR_AFTER_EVENT_BUCKET_START",
+    "agreement_rule": {
+      "dxy_up_bond_down": "SHORT_EURUSD",
+      "dxy_down_bond_up": "LONG_EURUSD",
+      "same_direction_or_zero": "CASH"
+    },
+    "reaction_magnitude_threshold": null,
+    "maximum_event_clusters_per_day": null,
+    "frequency_quota": null,
+    "stop_structure": "OBSERVATION_EXTREME_PLUS_BUFFER_WITH_FLOOR_AND_CEILING",
+    "stop_buffer_pips": 0.5,
+    "stop_floor_pips": 4.0,
+    "stop_ceiling_pips": 25.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12
+  },
+  "execution": {
+    "entry": "FIRST_EURUSD_M5_OPEN_AFTER_THREE_COMPLETED_OBSERVATION_BARS",
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "one_open_position": true,
+    "fixed_research_lots": 0.01,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-02T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "chronological_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "chronological_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "chronological_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "recent_2026_h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "outcome_blind_census": {
+    "minimum_candidates_total": 100,
+    "minimum_candidates_development": 50,
+    "minimum_candidates_each_full_forward_year": 8,
+    "minimum_candidates_recent_half_year": 8,
+    "minimum_candidates_each_side": 20
+  },
+  "admission": {
+    "minimum_executed_trades_total": 100,
+    "minimum_executed_trades_development": 40,
+    "minimum_executed_trades_each_full_forward_year": 8,
+    "minimum_executed_trades_recent_half_year": 8,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_window": 1.0,
+    "minimum_each_side_trades": 20,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_drawdown_r": 20.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_same_side_15m_oracle_precision": 0.1,
+    "minimum_same_side_15m_oracle_recall": 0.01
+  },
+  "oracle_source": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230"
+  },
+  "decision_policy": {
+    "no_parameter_search": true,
+    "no_threshold_change_after_census": true,
+    "no_event_title_or_clock_subgroup_after_outcome": true,
+    "no_magnitude_filter_after_outcome": true,
+    "no_side_or_year_deletion_after_outcome": true,
+    "no_activation_of_isolated_profitable_window": true,
+    "failure_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING"
+  }
+}
