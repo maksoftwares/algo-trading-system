@@ -1,0 +1,120 @@
+{
+  "schema_version": "codex_v60_ml_sizing_causal_retest_v1",
+  "locked_utc": "2026-07-28T05:22:50.7087129Z",
+  "locked_before_corrected_run": true,
+  "source_commit": "d03e0c35fb57835d6e6d6e68648abb45032d2ebb",
+  "research_only": true,
+  "authorizations": {
+    "ml_runtime_authorized": false,
+    "ml_shadow_authorized": false,
+    "demo_broker_action_authorized": false,
+    "live_authorized": false,
+    "mt5_change_authorized": false
+  },
+  "inputs": {
+    "v60_price_ledger": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet",
+      "sha256": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf"
+    },
+    "dukascopy_m5": {
+      "path": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+      "bar_width_minutes": 5,
+      "timestamp_semantics": "BAR_OPEN"
+    },
+    "claude_features_source": {
+      "path": "xau-usd/xauusd-fast-research/claude-v60-portfolio-state-ml-v1/src/features.py",
+      "sha256": "1457c66f3f0b64ba1f2072bdeedbc68de42f6b23e7ac4737a6c9e0c6a99cc0d3"
+    },
+    "claude_v4_source": {
+      "path": "xau-usd/xauusd-fast-research/claude-v60-portfolio-state-ml-v1/src/v4_causal_rank.py",
+      "sha256": "a4c1292d76c74e8845ed2a7f96e139c5a005bcd8aca473dbbb5d7d4cbced4d35"
+    },
+    "v60_floating_audit_source": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/src/audit.py",
+      "sha256": "379b870d54a832bc76141651d3467baac3ca24a3249c2fb9d1b89943c753b809"
+    },
+    "current_demo_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "053bbb0e0d0f8e365f8b93b8a7d61376c6762c861ad1ec2c1b3d796d3089a9df"
+    }
+  },
+  "population": {
+    "feed_start_utc": "2016-07-01T00:00:00Z",
+    "exclude_specialist_ids": [
+      "R5_TRANSITION"
+    ],
+    "post_loss_cooldowns_minutes": {
+      "V57_BREAK_SWING_H4ADX_HIGH": 120
+    },
+    "test_entry_years": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ]
+  },
+  "feature_policy": {
+    "availability_rule": "bar_open_timestamp_plus_5m_lte_entry_time",
+    "feature_set": "original_market_16_plus_is_long_plus_is_core",
+    "portfolio_features_enabled": false
+  },
+  "model": {
+    "target": "fee_stress_pnl_usd",
+    "winsor_quantiles": [
+      0.01,
+      0.99
+    ],
+    "purge_hours": 48,
+    "minimum_train_rows": 200,
+    "bags": 40,
+    "primary_seed": 0,
+    "diagnostic_seeds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "parameters": {
+      "max_depth": 3,
+      "max_iter": 200,
+      "learning_rate": 0.05,
+      "min_samples_leaf": 40,
+      "l2_regularization": 1.0,
+      "random_state": 0
+    }
+  },
+  "sizing": {
+    "rank_mode": "expanding_prior_oos",
+    "minimum_oos_history": 150,
+    "training_size_reference": 1500,
+    "continuous_band": [
+      0.5,
+      1.5
+    ],
+    "continuous_constant_normalizer": 1.0,
+    "broker_base_lot": 0.01,
+    "broker_minimum_lot": 0.01,
+    "broker_lot_step": 0.01,
+    "broker_policy": {
+      "skip_below_multiplier": 0.75,
+      "double_above_multiplier": 1.25,
+      "missing_risk_double_authorized": false
+    }
+  },
+  "gates": {
+    "all_features_available_at_entry": true,
+    "net_pnl_not_below_baseline": true,
+    "floating_drawdown_not_above_baseline": true,
+    "minimum_net_to_floating_drawdown_improvement_fraction": 0.05,
+    "maximum_green_month_decline_percentage_points": 2.0,
+    "minimum_nonnegative_entry_years": 5,
+    "weekly_block_bootstrap_confidence": 0.95,
+    "weekly_block_bootstrap_lower_delta_above_zero": true,
+    "leverage_adjusted_delta_above_zero": true,
+    "broker_policy_must_independently_pass": true,
+    "broker_policy_must_respect_current_risk_limits": true
+  }
+}

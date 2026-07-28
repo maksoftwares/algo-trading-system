@@ -1,0 +1,7 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Keep the compact reviewer-facing evidence produced by this lane.
+!outputs/
+!outputs/**
