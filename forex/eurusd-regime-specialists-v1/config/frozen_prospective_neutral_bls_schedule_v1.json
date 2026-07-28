@@ -1,0 +1,74 @@
+{
+  "schema_version": "eurusd_neutral_prospective_bls_schedule_v1",
+  "frozen_at_utc": "2026-07-28T16:49:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "network_requests_allowed": false,
+  "broker_action_allowed": false,
+  "official_evidence": {
+    "provider": "U.S. Bureau of Labor Statistics",
+    "url": "https://www.bls.gov/schedule/2026/08_sched_list.htm",
+    "page_title": "Schedule of Selected Releases for August 2026",
+    "page_last_modified": "June 10, 2026",
+    "observed_at_utc": "2026-07-28T16:48:57.533Z",
+    "access_method": "VISIBLE_DOM_IN_CODEX_IN_APP_BROWSER_AFTER_SCRIPTED_HTTP_403",
+    "scripted_http_status": 403,
+    "timezone_statement": "NOTE: All times on calendar are Eastern Time.",
+    "timezone": "America/New_York",
+    "canonicalization": "UTF8_JSON_SORTED_KEYS_COMPACT",
+    "canonical_extracted_payload_sha256": "03816009f06ff96b330486c3333e2b52fd3ce0949e72f0b1c0869d53df4eedee",
+    "raw_html_archived": false,
+    "rows": [
+      [
+        "Friday, August 07, 2026",
+        "08:30 AM",
+        "Employment Situation for July 2026"
+      ],
+      [
+        "Wednesday, August 12, 2026",
+        "08:30 AM",
+        "Consumer Price Index for July 2026"
+      ],
+      [
+        "Thursday, August 13, 2026",
+        "08:30 AM",
+        "Producer Price Index for July 2026"
+      ]
+    ]
+  },
+  "target_mapping": {
+    "Employment Situation": {
+      "family": "NFP",
+      "tradingview_event_id": "396495",
+      "tradingview_ticker": "ECONOMICS:USNFP",
+      "expected_event_time_utc": "2026-08-07T12:30:00Z"
+    },
+    "Consumer Price Index": {
+      "family": "CPI",
+      "tradingview_event_id": "398841",
+      "tradingview_ticker": "ECONOMICS:USIRMM",
+      "expected_event_time_utc": "2026-08-12T12:30:00Z"
+    },
+    "Producer Price Index": {
+      "family": "PPI",
+      "tradingview_event_id": "399062",
+      "tradingview_ticker": "ECONOMICS:USPPIMM",
+      "expected_event_time_utc": "2026-08-13T12:30:00Z"
+    }
+  },
+  "tradingview_evidence_root": "D:/AlgoTradingData/prospective/eurusd-neutral-tradingview-consensus-v1",
+  "operations_planner_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_OPERATIONS_PLANNER_PREREG_2026_07_28.sha256.json",
+    "sha256": "6604c256bb35419a2e651ae422da0d096e86f0fd91af4289c61c569976d67e5f"
+  },
+  "verification_policy": {
+    "exact_family_set_required": true,
+    "exact_tradingview_event_id_required": true,
+    "exact_tradingview_ticker_required": true,
+    "exact_utc_timestamp_required": true,
+    "official_schedule_mismatch_action": "BLOCK_EVENT_NO_TRADE",
+    "missing_target_action": "BLOCK_EVENT_NO_TRADE",
+    "official_page_recheck_required_hours_before_release": 24,
+    "offline_verifier_makes_network_requests": false
+  }
+}

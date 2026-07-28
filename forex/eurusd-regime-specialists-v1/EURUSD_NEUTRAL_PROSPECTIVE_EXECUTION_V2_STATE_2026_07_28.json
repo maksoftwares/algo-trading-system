@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T16:44:59.741363Z",
+  "as_of_utc": "2026-07-28T16:52:37.890162Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -21,6 +21,7 @@
   "prospective_operations_planner_lock_sha256": "6604c256bb35419a2e651ae422da0d096e86f0fd91af4289c61c569976d67e5f",
   "prospective_independent_validation_lock_sha256": "4a6158c8d22b72ab1a10fb51c6d451034f4a33a0f6ddc2358d3921a8846878f7",
   "prospective_directional_falsification_lock_sha256": "93f022e4ab721d835ff99528de388671e4457c31d483f186cbbee4a2536fe1d8",
+  "prospective_official_bls_schedule_lock_sha256": "f97311c04bf60e0cd2ddb684420dc61abc5b036a6109ae8e2ba63ab0be3f20bc",
   "orchestration_status": "WAITING_FOR_PROSPECTIVE_START",
   "evidence_inventory_sha256": "c05dfd9bf596edb567816e153fabff48b2716b1c77f26b5909740194c2a5ec38",
   "ledger_inventory_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -133,6 +134,26 @@
     "network_request_made": false,
     "broker_action_allowed": false
   },
+  "official_bls_schedule_crosscheck": {
+    "schema_version": "eurusd_neutral_prospective_bls_schedule_status_v1",
+    "status": "MATCHED_OFFICIAL_BLS_SCHEDULE",
+    "evaluated_at_utc": "2026-07-28T16:52:37.890162Z",
+    "official_source_observed_at_utc": "2026-07-28T16:48:57.533Z",
+    "official_source_last_modified": "June 10, 2026",
+    "official_extracted_payload_sha256": "03816009f06ff96b330486c3333e2b52fd3ce0949e72f0b1c0869d53df4eedee",
+    "official_raw_html_archived": false,
+    "scripted_http_status": 403,
+    "matched_target_events": 3,
+    "mismatch_reasons": [],
+    "nfp_event_time_utc": "2026-08-07T12:30:00Z",
+    "cpi_event_time_utc": "2026-08-12T12:30:00Z",
+    "ppi_event_time_utc": "2026-08-13T12:30:00Z",
+    "official_page_recheck_due_at_utc": "2026-08-06T12:30:00Z",
+    "mismatch_action": "BLOCK_EVENT_NO_TRADE",
+    "historical_pnl_loaded": false,
+    "network_request_made_by_offline_verifier": false,
+    "broker_action_allowed": false
+  },
   "causal_revision_invariance_rehearsal": {
     "status": "PASSED",
     "scope": "END_TO_END_ACTUAL_AND_MARKET_REVISION_AFTER_IMMUTABLE_CLOSED_TRADE",
@@ -208,7 +229,7 @@
   "profitability_and_robustness_required_for_demo_readiness": true,
   "demo_trading_authorized": false,
   "full_test_suite": {
-    "passed": 279,
+    "passed": 286,
     "failed": 0,
     "warnings": 2
   },

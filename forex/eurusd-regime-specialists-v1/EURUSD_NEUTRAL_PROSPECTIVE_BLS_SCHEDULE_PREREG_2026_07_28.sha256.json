@@ -1,0 +1,24 @@
+{
+  "schema_version": "eurusd_neutral_prospective_bls_schedule_v1_lock",
+  "locked_at_utc": "2026-07-28T16:52:17Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_prospective_start_and_first_signal": true,
+  "official_source_observed_at_utc": "2026-07-28T16:48:57.533Z",
+  "official_source_url": "https://www.bls.gov/schedule/2026/08_sched_list.htm",
+  "official_extracted_payload_sha256": "03816009f06ff96b330486c3333e2b52fd3ce0949e72f0b1c0869d53df4eedee",
+  "official_raw_html_archived": false,
+  "scripted_http_status": 403,
+  "operations_planner_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_OPERATIONS_PLANNER_PREREG_2026_07_28.sha256.json",
+    "sha256": "6604c256bb35419a2e651ae422da0d096e86f0fd91af4289c61c569976d67e5f"
+  },
+  "historical_pnl_loaded": false,
+  "signal_rows_before_lock": 0,
+  "closed_trade_rows_before_lock": 0,
+  "files": {
+    "config/frozen_prospective_neutral_bls_schedule_v1.json": "184d7c78045397616dc9047efbdd12acc23a0b792ea58ed0554b7a447591f053",
+    "verify_prospective_neutral_bls_schedule.py": "9f5f6fda4c4fd204d166762f909e5a0b17e6d7c82dd97995e0ae7af377092400",
+    "tests/test_verify_prospective_neutral_bls_schedule.py": "b6cc7e0dd3adece3069eaa2d7fa86f27c149a99328999800031189c8d8019ee2",
+    "EURUSD_NEUTRAL_PROSPECTIVE_BLS_SCHEDULE_PREREG_2026_07_28.md": "6d5663d9d45b4206861b7b7dae501ad0c6407806c62756dd70d627aaf0d5682e"
+  }
+}
