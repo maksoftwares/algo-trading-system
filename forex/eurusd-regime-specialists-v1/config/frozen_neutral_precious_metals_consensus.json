@@ -1,0 +1,229 @@
+{
+  "campaign_id": "eurusd-neutral-precious-metals-consensus-v1",
+  "frozen_at_utc": "2026-07-28T14:00:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_NEW_SYNCHRONIZED_CROSS_MARKET_SOURCE",
+  "parent_four_clock_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "lock_path": "EURUSD_NEUTRAL_FOUR_CLOCK_RANKER_PREREG_2026_07_28.sha256.json",
+    "lock_sha256": "b5f07e8cdd9d4e79d58e8a1a3d785999172f937f517164d177081c121811d02a"
+  },
+  "source": {
+    "provider": "Dukascopy public Jetta tick endpoint",
+    "authentication_required": false,
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-precious-metals-v1/PRECIOUS_METALS_FIRST_HOUR_M5.parquet",
+    "sha256": "64fbf4e9e0a77b37e738db48a256c230873fce29a532b87c8ed55148c728982f",
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-precious-metals-v1/MANIFEST.json",
+    "manifest_sha256": "b2a14d3cf81a156016bcef642e063892d31751edefb84546f6612a25490aac83",
+    "raw_source_chain_sha256": "5a13466c55b0b06237149c4d48bc08520c4ce1d6ac1fdb449d4e3ee61d41084b",
+    "symbols": ["XAUUSD", "XAGUSD"],
+    "rows": 40481,
+    "timestamp_semantics": "M5_BAR_START_USABLE_AT_TIMESTAMP_PLUS_5_MINUTES"
+  },
+  "strategy": {
+    "family": "N32_NEUTRAL_PRECIOUS_METALS_CONSENSUS",
+    "regime": "NEUTRAL",
+    "entry_hour_utc": 0,
+    "entry_minutes_utc": [0, 15, 30, 45],
+    "signal_bar_start": "ENTRY_TIME_MINUS_5_MINUTES",
+    "return_horizon_minutes": 60,
+    "return_endpoints_must_exist_exactly": true,
+    "xau_vote": "SIGN_OF_COMPLETED_60M_MID_CLOSE_RETURN",
+    "xag_vote": "SIGN_OF_COMPLETED_60M_MID_CLOSE_RETURN",
+    "trade_rule": "TRADE_ONLY_WHEN_BOTH_NONZERO_VOTES_AGREE",
+    "long_rule": "XAU_VOTE_EQUALS_XAG_VOTE_EQUALS_POSITIVE_ONE",
+    "short_rule": "XAU_VOTE_EQUALS_XAG_VOTE_EQUALS_NEGATIVE_ONE",
+    "disagreement_or_zero": "CASH",
+    "magnitude_threshold": null,
+    "abstention_allowed": true,
+    "maximum_trades_per_neutral_date": 4,
+    "minimum_trades_per_neutral_date": 0,
+    "frequency_target": null,
+    "branch_selection": false,
+    "fitting": false
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "forward_windows": [
+    "validation_2023",
+    "validation_2024",
+    "pseudo_oos_2025",
+    "pseudo_oos_2026h1"
+  ],
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_census": {
+    "parent_paired_decision_points": 2568,
+    "both_metals_valid_nonzero_points": 2269,
+    "agreement_trade_candidates": 1764,
+    "active_candidate_days": 621,
+    "cash_decision_points": 804,
+    "predicted_long_rate": 0.5017006802721088,
+    "trades_per_source_eligible_day": 2.7476635514018692,
+    "candidate_count_distribution_per_source_day": {
+      "0": 21,
+      "1": 65,
+      "2": 132,
+      "3": 261,
+      "4": 163
+    },
+    "by_window": {
+      "development_2019_2022": {
+        "source_decision_points": 1532,
+        "trade_candidates": 1074,
+        "active_candidate_days": 370,
+        "cash_decision_points": 458,
+        "predicted_long_rate": 0.4851024208566108,
+        "candidate_count_distribution_per_source_day": {
+          "0": 13,
+          "1": 36,
+          "2": 67,
+          "3": 164,
+          "4": 103
+        }
+      },
+      "validation_2023": {
+        "source_decision_points": 296,
+        "trade_candidates": 207,
+        "active_candidate_days": 72,
+        "cash_decision_points": 89,
+        "predicted_long_rate": 0.6135265700483091,
+        "candidate_count_distribution_per_source_day": {
+          "0": 2,
+          "1": 8,
+          "2": 14,
+          "3": 29,
+          "4": 21
+        }
+      },
+      "validation_2024": {
+        "source_decision_points": 264,
+        "trade_candidates": 178,
+        "active_candidate_days": 64,
+        "cash_decision_points": 86,
+        "predicted_long_rate": 0.398876404494382,
+        "candidate_count_distribution_per_source_day": {
+          "0": 2,
+          "1": 4,
+          "2": 22,
+          "3": 22,
+          "4": 16
+        }
+      },
+      "pseudo_oos_2025": {
+        "source_decision_points": 320,
+        "trade_candidates": 194,
+        "active_candidate_days": 76,
+        "cash_decision_points": 126,
+        "predicted_long_rate": 0.5463917525773195,
+        "candidate_count_distribution_per_source_day": {
+          "0": 4,
+          "1": 14,
+          "2": 17,
+          "3": 34,
+          "4": 11
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "source_decision_points": 156,
+        "trade_candidates": 111,
+        "active_candidate_days": 39,
+        "cash_decision_points": 45,
+        "predicted_long_rate": 0.5405405405405406,
+        "candidate_count_distribution_per_source_day": {
+          "1": 3,
+          "2": 12,
+          "3": 12,
+          "4": 12
+        }
+      }
+    }
+  },
+  "model": {
+    "decision_probability": 0.5
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_new_portfolio_r_per_eligible_day": 1.0,
+    "maximum_concurrent_positions": 4
+  },
+  "admission": {
+    "minimum_development_trades": 100,
+    "minimum_forward_trades_by_window": {
+      "validation_2023": 20,
+      "validation_2024": 20,
+      "pseudo_oos_2025": 20,
+      "pseudo_oos_2026h1": 10
+    },
+    "minimum_forward_win_rate_each_window": 0.4,
+    "maximum_forward_win_rate_each_window": 0.6,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor_each_window_exclusive": 1.0,
+    "minimum_daily_profit_factor_each_window_exclusive": 1.0,
+    "minimum_forward_overall_profit_factor": 1.15,
+    "minimum_forward_overall_win_rate": 0.45,
+    "maximum_forward_overall_win_rate": 0.55,
+    "minimum_stressed_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_trades": 10,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "minimum_overall_exact_oracle_precision": 0.25,
+    "minimum_overall_15m_oracle_precision": 0.35,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "exact_daily_frequency_gate": false
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 100,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "Do not reverse the economic side mapping after outcomes.",
+    "Do not change the 60-minute horizon, four clocks, consensus rule, or add a return-magnitude threshold.",
+    "Do not add XAU/XAG ratio, volatility, spread, clock, year, weekday, event, or regime subgroups after outcomes.",
+    "Do not use an incomplete metals bar, EURUSD outcome, oracle membership, or future price at inference.",
+    "Do not require a fixed number of daily trades or repair a failed window.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}

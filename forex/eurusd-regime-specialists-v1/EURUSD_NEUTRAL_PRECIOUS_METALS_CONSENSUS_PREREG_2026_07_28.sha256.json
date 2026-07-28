@@ -1,0 +1,30 @@
+{
+  "locked_before_precious_metals_consensus_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T14:20:00Z",
+  "files": {
+    "config/frozen_neutral_precious_metals_consensus.json": "4857959204aa36e5e7b597814e640e0fc110c1210905e9296e0fe8ab84fd2f21",
+    "download_neutral_precious_metals.py": "b41b86f49ac4c0c5bf26c40553d399ec9356d8acfe680ab673d9d9d229b8d056",
+    "src/eurusd_regime_specialists/neutral_precious_metals_consensus.py": "f3fd2978f347bc935e13c08fb8b3bb8824ee3c4b2e0ee2d5d192fd835e4d4103",
+    "run_neutral_precious_metals_consensus.py": "8b944ac642d03b14b045ac2a9c655ca4d719385fb8551c8395ad698bfa7882a8",
+    "tests/test_download_neutral_precious_metals.py": "3fe45d34c739c875bd7bb790212620d1cad7a88915e303ddf97d397603344f86",
+    "tests/test_neutral_precious_metals_consensus.py": "afc84403fa8f159c997a9b83deddfd8092f6cb170677db9b4e8435ea148ea1cf",
+    "EURUSD_NEUTRAL_PRECIOUS_METALS_SOURCE_AUDIT_2026_07_28.md": "e79514f1b8577d222e6ee1de626c6f0bc1624bc1e7b097e46579209b67c9727f",
+    "EURUSD_NEUTRAL_PRECIOUS_METALS_CONSENSUS_PREREG_2026_07_28.md": "dfa1cf5930869fbb012b3b9143fe3f214561a3f5817b114e8b57dbe0836303d5"
+  },
+  "pinned_sources": {
+    "PARENT_FOUR_CLOCK_CONFIG": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "PARENT_FOUR_CLOCK_LOCK": "b5f07e8cdd9d4e79d58e8a1a3d785999172f937f517164d177081c121811d02a",
+    "PRECIOUS_METALS_FIRST_HOUR_M5.parquet": "64fbf4e9e0a77b37e738db48a256c230873fce29a532b87c8ed55148c728982f",
+    "PRECIOUS_METALS_MANIFEST.json": "b2a14d3cf81a156016bcef642e063892d31751edefb84546f6612a25490aac83",
+    "PRECIOUS_METALS_RAW_RESPONSE_CHAIN": "5a13466c55b0b06237149c4d48bc08520c4ce1d6ac1fdb449d4e3ee61d41084b"
+  },
+  "outcome_blind_census": {
+    "parent_paired_decision_points": 2568,
+    "both_metals_valid_nonzero_points": 2269,
+    "agreement_trade_candidates": 1764,
+    "active_candidate_days": 621,
+    "cash_decision_points": 804,
+    "predicted_long_rate": 0.5017006802721088,
+    "last_six_month_candidates": 111
+  }
+}

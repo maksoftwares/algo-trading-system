@@ -35,6 +35,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 29. Direct post-event drive: the latest qualifying event on each Neutral date opened a 15-minute completed-bar observation, followed by a structure-risk 1.5R trade. The outcome-blind rule produced 495 candidates. Development selected momentum, but both frozen branches lost. The selected branch's 210 forward trades won 35.71%, returned 1.388 payoff, PF 0.771, and -31.11R. The latest six months were a genuine profitable exception—37 trades, 43.24% wins, 1.459 payoff, PF 1.112, and +2.39R—but 2019-2025 all lost and the rule had zero oracle matches. The exact rule is closed rather than cherry-picking 2026.
 30. Selective post-event probability: one fixed side-stacked L2 model learned from the 2019-2022 post-event candidates and required a cost-aware 0.42 predicted win probability. The forward-outcome-blind screen retained only 28 of 210 candidates: 11/5/9/3 across 2023, 2024, 2025, and 2026 H1. The latter two deficient blocks failed the frozen eight-trade capacity gate, so forward P&L was intentionally not loaded. A three-trade six-month sample is not sufficient evidence of profitability; the threshold is not lowered after screening.
 31. Capacity-calibrated selective post-event probability: a fixed outcome-blind 0.42/0.41/0.40 threshold ladder chose 0.40, the highest level retaining at least eight candidates in every window. The exact 75-candidate manifest was locked before P&L. It improved forward PF to 0.853 and reduced the loss to -6.77R, but still won only 38.67%. Both 2024 (PF 1.391) and 2026 H1 (9 trades, 44.44% wins, 1.468 payoff, PF 1.175, +0.88R) were profitable; 2023 and 2025 lost. The two favorable windows are not converted into a post-outcome activation filter.
+32. XAUUSD/XAGUSD first-hour consensus: 438 missing login-free XAGUSD hours were downloaded from Dukascopy's public Jetta endpoint and combined with existing XAUUSD raw history into a checksum-pinned 40,481-row M5 source. A frozen, unfitted 60-minute sign-agreement rule selected 690 forward trades at the Neutral oracle's four actual clocks. Conditional side accuracy reached 52.06%, but the rule won only 32.90%, returned 1.439 payoff, PF 0.705, and -139.83R. The latest six months produced 111 trades, 27.93% wins, PF 0.558, and -36.25R. Development and every forward window failed; the economic direction is not reversed.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -97,6 +98,9 @@ Key reports:
 - `EURUSD_NEUTRAL_SELECTIVE_POST_EVENT_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_CAPACITY_SELECTIVE_POST_EVENT_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_CAPACITY_SELECTIVE_POST_EVENT_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_PRECIOUS_METALS_SOURCE_AUDIT_2026_07_28.md`
+- `EURUSD_NEUTRAL_PRECIOUS_METALS_CONSENSUS_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_PRECIOUS_METALS_CONSENSUS_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -134,6 +138,7 @@ Key reports:
 - `outputs/neutral_post_event_drive/RESULT.json`
 - `outputs/neutral_selective_post_event/SCREEN.json`
 - `outputs/neutral_capacity_selective_post_event/RESULT.json`
+- `outputs/neutral_precious_metals_consensus/RESULT.json`
 
 Run with:
 
@@ -191,4 +196,7 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_post_event.py screen
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_capacity_selective_post_event.py screen
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_capacity_selective_post_event.py backtest
+uv run --with pandas --with numpy --with pyarrow python download_neutral_precious_metals.py rebuild
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_precious_metals_consensus.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_precious_metals_consensus.py backtest
 ```
