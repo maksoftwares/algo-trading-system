@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T15:46:15Z",
+  "as_of_utc": "2026-07-28T15:53:03.518388Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -17,7 +17,7 @@
   "prospective_oracle_evaluation_lock_sha256": "006a7afda3115ed9d3eaa2e585d38b51e406a1642c82f862890cae81e1df5610",
   "prospective_ownership_prewarm_lock_sha256": "98cb9b8f1ab9e20917c8573dd623d85f7a9335dbd16381336ef2761e3b451301",
   "orchestration_status": "WAITING_FOR_PROSPECTIVE_START",
-  "evidence_inventory_sha256": "8fd4da44e16793129acf782f226f1038bd9a267c854334a979586454a39c5458",
+  "evidence_inventory_sha256": "c05dfd9bf596edb567816e153fabff48b2716b1c77f26b5909740194c2a5ec38",
   "ledger_inventory_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "historical_backtest_run": false,
   "historical_pnl_loaded": false,
@@ -50,7 +50,19 @@
     "signal_generated": false,
     "broker_action_allowed": false
   },
-  "pre_release_snapshot_files": 1,
+  "first_eligible_event_preflight": {
+    "family": "NFP",
+    "event_time_utc": "2026-08-07T12:30:00Z",
+    "forecast_populated": false,
+    "latest_pre_release_evidence_chain_sha256": "b151acc7dcd4d5f8fe3757ffbe22f0c7c161f0c173d596b5cd114eb33ad4a672",
+    "post_release_status": "NO_MATURE_PRE_RELEASE_FORECASTS",
+    "post_release_network_request_made": false,
+    "ownership_target_date_utc": "2026-08-07T00:00:00Z",
+    "ownership_cached_safe_symbol_hours": 6075,
+    "ownership_missing_safe_symbol_hours": 0,
+    "market_capture_not_due_before_utc": "2026-08-07T12:46:00Z"
+  },
+  "pre_release_snapshot_files": 2,
   "admissible_pre_release_rows": 0,
   "linked_post_release_actual_rows": 0,
   "complete_event_market_rows": 0,
@@ -71,6 +83,6 @@
     "failed": 0,
     "warnings": 2
   },
-  "next_action": "WAIT_FOR_PROSPECTIVE_START; CAPTURE JULY_29 OWNERSHIP AFTER ITS SAFE LAG USING THE PREWARMED CACHE; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; FIRST JULY_29 ORACLE DATE IS NOT DUE BEFORE JULY_30_12_01_UTC; NO EVENT MARKET OR PATH REQUEST IS DUE",
+  "next_action": "WAIT_FOR_PROSPECTIVE_START; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; EXTEND THE AUGUST_7 OWNERSHIP CACHE ONLY WITH NEWLY SAFE HOURS; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO ACTUAL MARKET PATH OR ORACLE REQUEST IS DUE",
   "broker_action_allowed": false
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_macro_crossasset_agreement_state_v1",
-  "as_of_utc": "2026-07-28T12:48:19.127455Z",
+  "as_of_utc": "2026-07-28T15:53:03.518388Z",
   "status": "WAITING_FOR_FIRST_ADMISSIBLE_PRE_RELEASE_FORECAST",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
   "historical_backtest_run": false,
@@ -13,14 +13,34 @@
   "observed_calendar_months": 0,
   "admission_eligible": false,
   "pre_release_evidence": {
+    "immutable_snapshot_count": 2,
     "first_capture_observed_at_utc": "2026-07-28T12:42:50Z",
     "raw_sha256": "338a35c9d58b15c3a429b6456646a21670b8b9b42ca183b794aa091e874a447b",
-    "evidence_chain_sha256": "235c645e2b939027d495f38152ede4b760b1d88758ae8fd3348f3aa873fdc09d",
-    "manifest_sha256": "9cec7db675a29e6298441eafad615d2de26545b1fcbfb9e594c155777a2bc7e6"
+    "first_manifest_sha256": "9cec7db675a29e6298441eafad615d2de26545b1fcbfb9e594c155777a2bc7e6",
+    "latest_capture_observed_at_utc": "2026-07-28T15:50:54Z",
+    "latest_raw_sha256": "0f03d1d3bde3ab06d7bc02dc84f632e27417f3c161bf5ac253f729149983da9b",
+    "latest_evidence_chain_sha256": "b151acc7dcd4d5f8fe3757ffbe22f0c7c161f0c173d596b5cd114eb33ad4a672",
+    "latest_manifest_sha256": "9a916f9eb6f35b3e1dcae499d91745da948cdaadd61fbb7248e1d3c8ffaaba5e",
+    "latest_pre_release_forecast_rows": 0
   },
   "post_release_capture": {
     "status": "NO_MATURE_PRE_RELEASE_FORECASTS",
+    "observed_at_utc": "2026-07-28T15:53:03.518388Z",
     "network_request_made": false
+  },
+  "first_eligible_event_preflight": {
+    "family": "NFP",
+    "tradingview_event_id": "396495",
+    "event_time_utc": "2026-08-07T12:30:00Z",
+    "forecast_populated": false,
+    "earliest_actual_capture_utc": "2026-08-07T12:31:00Z",
+    "earliest_complete_market_capture_utc": "2026-08-07T12:46:00Z",
+    "ownership_prewarm_status": "PREWARM_COMPLETE_FOR_SAFELY_COMPLETED_HOURS",
+    "ownership_safely_completed_symbol_hours": 6075,
+    "ownership_cached_symbol_hours": 6075,
+    "ownership_missing_safe_symbol_hours": 0,
+    "ownership_not_yet_safe_symbol_hours": 1125,
+    "ownership_status_network_request_made": false
   },
   "prospective_market_capture": {
     "status": "IMPLEMENTATION_FROZEN_WAITING_FOR_FIRST_ELIGIBLE_RELEASE",
