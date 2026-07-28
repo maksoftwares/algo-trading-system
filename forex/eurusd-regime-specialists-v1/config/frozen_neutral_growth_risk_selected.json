@@ -1,0 +1,152 @@
+{
+  "campaign_id": "eurusd-neutral-growth-risk-selected-v1",
+  "frozen_at_utc": "2026-07-28T13:35:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_AFTER_DISCLOSED_2022_DEVELOPMENT_FORWARD_CHRONOLOGICAL",
+  "parent_mechanics": {
+    "family": "N46_NEUTRAL_GROWTH_RISK_CONSENSUS",
+    "config_path": "config/frozen_neutral_growth_risk_consensus.json",
+    "config_sha256": "5cc91bab6e2c515dde553f8097c6e53189719942a24a07737d5b7dd1a1fb65ad",
+    "prereg_lock_path": "EURUSD_NEUTRAL_GROWTH_RISK_CONSENSUS_PREREG_2026_07_28.sha256.json",
+    "prereg_lock_sha256": "917102ff8bea7f035495b06ef49f499fea64990dd9e91db5cb20c4eb0d9b6cbf",
+    "inherited_without_change": [
+      "NEUTRAL_DATE_OWNERSHIP",
+      "EXACT_EXTERNAL_SOURCE_AVAILABILITY",
+      "THREE_MARKET_60M_UNANIMOUS_SIGN_SIGNAL",
+      "EURUSD_ENTRY_TIMING",
+      "STRUCTURAL_STOP",
+      "STOP_FLOOR_AND_CEILING",
+      "TARGET_R",
+      "MAXIMUM_HOLD",
+      "SPREAD_SLIPPAGE_AND_STOP_FIRST_EXECUTION"
+    ]
+  },
+  "development_evidence": {
+    "window": "2022-01-01T00:00:00Z_TO_2022-12-31T23:59:59Z",
+    "closure_path": "EURUSD_NEUTRAL_GROWTH_RISK_CONSENSUS_DEVELOPMENT_CLOSURE_2026_07_28.sha256.json",
+    "closure_sha256": "47d8e88d3b3940695d3390b5f8107005db4657019f881885ba2a09b05680c683",
+    "result_path": "outputs/neutral_growth_risk_consensus/DEVELOPMENT_RESULT.json",
+    "result_sha256": "d3b40c3a25083a729b134fb6325eadbfb3dabf9e8a21f20043947d57cc70c690",
+    "trades_path": "outputs/neutral_growth_risk_consensus/DEVELOPMENT_TRADES.parquet",
+    "trades_sha256": "b11a71cc684cfd503d64414d283fdb1044609846be288454f74622eb15b64315",
+    "use": "IN_SAMPLE_EXPERT_SELECTION_ONLY",
+    "later_eurusd_outcomes_loaded": false
+  },
+  "selected_experts": {
+    "ASIA_HANDOFF_0300": {
+      "development_trades": 35,
+      "development_profit_factor": 1.2362661777073192,
+      "development_net_r": 4.544177591330712
+    },
+    "EUROPE_MORNING_0900": {
+      "development_trades": 19,
+      "development_profit_factor": 1.6398951019429608,
+      "development_net_r": 5.811887280430062
+    }
+  },
+  "excluded_experts": {
+    "US_RISK_1500": {
+      "development_trades": 14,
+      "development_profit_factor": 0.6919485023392051,
+      "development_net_r": -2.8085960861194326,
+      "exclusion_status": "PERMANENT_FOR_N47_BEFORE_2023_OPEN"
+    }
+  },
+  "development_selected_portfolio": {
+    "trades": 54,
+    "win_rate": 0.48148148148148145,
+    "realized_payoff_ratio": 1.470790167246231,
+    "profit_factor": 1.365733726728643,
+    "net_r": 10.356064871760776,
+    "expectancy_r": 0.19177897910668104,
+    "max_drawdown_r": 6.121789165830467
+  },
+  "frequency_quota": null,
+  "windows": {
+    "confirmation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "forward_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "forward_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "recent_2026_h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "outcome_blind_selected_census": {
+    "total_candidates_2023_2026_h1": 204,
+    "by_window": {
+      "confirmation_2023": 71,
+      "forward_2024": 40,
+      "forward_2025": 57,
+      "recent_2026_h1": 36
+    },
+    "by_expert": {
+      "ASIA_HANDOFF_0300": 111,
+      "EUROPE_MORNING_0900": 93
+    },
+    "by_side": {
+      "LONG": 107,
+      "SHORT": 97
+    }
+  },
+  "confirmation_gate": {
+    "allowed_window": "confirmation_2023",
+    "minimum_trades": 40,
+    "minimum_win_rate": 0.4,
+    "maximum_win_rate": 0.6,
+    "minimum_realized_payoff_ratio": 1.25,
+    "maximum_realized_payoff_ratio": 1.85,
+    "minimum_profit_factor": 1.1,
+    "minimum_expectancy_r": 0.0,
+    "minimum_each_side_trades": 15,
+    "minimum_each_side_profit_factor": 0.9,
+    "minimum_each_expert_trades": 12,
+    "minimum_each_expert_profit_factor": 0.9,
+    "maximum_drawdown_r": 10.0,
+    "pass_action": "HASH_LOCK_CONFIRMATION_BEFORE_OPENING_2024_TO_2026",
+    "failure_action": "REJECT_N47_WITHOUT_OPENING_2024_TO_2026"
+  },
+  "forward_admission": {
+    "minimum_trades_each_full_year": 20,
+    "minimum_trades_recent_half_year": 15,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_window": 1.0,
+    "minimum_each_side_trades": 20,
+    "minimum_each_side_profit_factor": 1.0,
+    "minimum_each_expert_trades": 15,
+    "minimum_each_expert_profit_factor": 1.0,
+    "maximum_drawdown_r": 12.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_same_day_same_side_oracle_precision": 0.5
+  },
+  "oracle_source": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230",
+    "usage": "FORWARD_EVALUATION_ONLY_AFTER_2023_CONFIRMATION_LOCK"
+  },
+  "decision_policy": {
+    "finite_adaptive_successor_count": 1,
+    "selected_experts_are_immutable_before_2023": true,
+    "excluded_us_expert_cannot_be_reintroduced": true,
+    "no_frequency_gate": true,
+    "no_mechanics_threshold_direction_cost_or_window_change": true,
+    "no_2023_subgroup_selection": true,
+    "no_forward_year_selection": true,
+    "confirmation_failure_action": "REJECT_WITHOUT_FORWARD_OUTCOME",
+    "forward_failure_action": "REJECT_WITHOUT_RETUNING"
+  }
+}

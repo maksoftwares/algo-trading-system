@@ -1,0 +1,17 @@
+{
+  "campaign_id": "eurusd-neutral-growth-risk-selected-v1",
+  "family": "N47_NEUTRAL_GROWTH_RISK_SELECTED",
+  "locked_at_utc": "2026-07-28T13:35:00Z",
+  "locked_before_2023_eurusd_outcome": true,
+  "development_window": "2022_ONLY",
+  "first_unopened_confirmation_window": "2023",
+  "frequency_quota": null,
+  "files": {
+    "config/frozen_neutral_growth_risk_selected.json": "61f62b3f7c7932b400b60674b298c1bd7751be700c3c9956e6542065f8ddeafe",
+    "EURUSD_NEUTRAL_GROWTH_RISK_SELECTED_PREREG_2026_07_28.md": "068320d0b0478867c8b623ac32839539646216ed78a0e208cd2f9e7b50d104d5",
+    "src/eurusd_regime_specialists/neutral_growth_risk_selected.py": "39310da7cdac3c7b6ae780baed221a5900a50f3abc3dee1b5846ea87e64b3521",
+    "run_neutral_growth_risk_selected.py": "8ea970664e562f2643cc6755533875abe92b4b4cb8bbface1cf8ba45c3578d92",
+    "tests/test_neutral_growth_risk_selected.py": "3b8cb08b4d66263855037c95dec94d5780399f29d6740971c26aaa7da3a6a15f"
+  },
+  "next_allowed_action": "BOUNDED_2023_CONFIRMATION_ONLY"
+}
