@@ -1,0 +1,23 @@
+{
+  "schema_version": "eurusd_neutral_prospective_gdelt_validation_implementation_v1_lock",
+  "locked_at_utc": "2026-07-28T20:14:31Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_first_prospective_source_capture": true,
+  "locked_before_first_prospective_decision_and_signal": true,
+  "locked_before_first_prospective_path_outcome": true,
+  "prospective_source_manifests_before_lock": 0,
+  "prospective_decisions_before_lock": 0,
+  "prospective_signals_before_lock": 0,
+  "prospective_path_outcomes_before_lock": 0,
+  "historical_eurusd_pnl_loaded": false,
+  "oracle_rows_loaded": false,
+  "broker_action_allowed": false,
+  "validation_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_GDELT_VALIDATION_PREREG_2026_07_28.sha256.json",
+    "sha256": "b36df823f7f934ee4b530a5ccdcba1e59cde7b584071a56383f6c1db291d4491"
+  },
+  "files": {
+    "validate_prospective_neutral_gdelt_relative_tone.py": "1b331b067e4123013b2c310237bc053f1f105ca3c413ce56863bea61cee49c6d",
+    "tests/test_prospective_neutral_gdelt_validation.py": "594e413cdb3443c68e86de3b3ee4b5e0b4859b2a5336fccdc073ccd08e1bd9cc"
+  }
+}

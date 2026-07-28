@@ -61,6 +61,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 55. GDELT coverage result: 95 of 96 frozen archives passed strict validation, 23 of 24 dates were complete, and 17 dates contained both ECB and Fed documents. The filter retained 57 ECB documents from 53 sources and 733 Fed documents from 375 sources; largest-source shares were 3.51% and 3.00%, with zero duplicate-document share. All ten capacity gates passed without loading EURUSD prices, returns, oracle rows, or P&L.
 56. GDELT source-only relative tone: one median-of-source-medians ECB-minus-Fed transform and its MAD-normalized threshold were locked before tone inspection. All 790 strict documents had finite tone, 12 dates met two-source quorum on both sides, and six source-only candidates split 3 LONG / 3 SHORT. This passed the frozen transform-capacity gates but did not test return prediction.
 57. Prospective GDELT Neutral expert: the exact source filter, relative-tone transform, Neutral ownership, 00:15 decision, 00:20 bid/ask shadow entry, 0.7-pip spread floor, 1.5-pip spread ceiling, adverse slippage, four-pip stop, six-pip target, four-hour path, and conservative cross-expert conflict rule are implementation-hash locked before the 29 July start. Frequency is not a gate. The first boundary is scheduled, but signals, trades, P&L, profitability approval, and broker authorization remain zero.
+58. Prospective GDELT independent validation: the validator contract and implementation were hash-locked with zero source captures, decisions, signals, paths, or oracle rows. It verifies every decision/path/raw-tick hash, replays each closed path from immutable ticks, reports frequency without gating it, and separates profitability, same-day Regime 1 resemblance, and full temporal oracle-imitation claims. The empty-evidence status is `WAITING_FOR_PROSPECTIVE_START`; the full suite is 335 passed with two existing dependency warnings.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -85,6 +86,7 @@ Key reports:
 - `EURUSD_NEUTRAL_GDELT_COVERAGE_CENSUS_RESULT_2026_07_28.md`
 - `EURUSD_NEUTRAL_GDELT_RELATIVE_TONE_DESIGN_AUDIT_RESULT_2026_07_28.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_GDELT_RELATIVE_TONE_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_PROSPECTIVE_GDELT_VALIDATION_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_FUTURES_PARTICIPATION_PREREG_2026_07_28.md`
@@ -289,4 +291,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_growth_risk_selected.py confirmation
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_asia_growth_risk_transmission.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_asia_growth_risk_transmission.py development
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python validate_prospective_neutral_gdelt_relative_tone.py status
 ```

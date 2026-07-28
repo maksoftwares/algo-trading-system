@@ -1,0 +1,30 @@
+{
+  "schema_version": "eurusd_neutral_prospective_gdelt_validation_v1_lock",
+  "locked_at_utc": "2026-07-28T20:10:19Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_prospective_start_and_first_source_capture": true,
+  "locked_before_first_decision_signal_trade_and_oracle_row": true,
+  "prospective_source_manifests_before_lock": 0,
+  "prospective_decisions_before_lock": 0,
+  "prospective_signals_before_lock": 0,
+  "prospective_path_outcomes_before_lock": 0,
+  "prospective_oracle_rows_before_lock": 0,
+  "historical_eurusd_pnl_loaded": false,
+  "broker_action_allowed": false,
+  "strategy_preregistration": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_GDELT_RELATIVE_TONE_PREREG_2026_07_28.sha256.json",
+    "sha256": "0b29e6b578a3114e4249495db734746307fbd750f3f8950acf0285cb1250a874"
+  },
+  "source_and_decision_implementation": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_GDELT_RELATIVE_TONE_IMPLEMENTATION_2026_07_28.sha256.json",
+    "sha256": "4622fc9b2f10f67cb6c2a1d3262c3f5e448668712cc1b01c853fb6f4a622a131"
+  },
+  "path_implementation": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_GDELT_RELATIVE_TONE_PATH_IMPLEMENTATION_2026_07_28.sha256.json",
+    "sha256": "5947804271412a3590925d54d561115d5c179b7ab8c5a31b94738d5da4cee250"
+  },
+  "files": {
+    "config/frozen_prospective_neutral_gdelt_validation_v1.json": "377bbe1bb89ffa21224e56d2a03e42e512ea213fb5c70e1f35bafe91350a3f10",
+    "EURUSD_NEUTRAL_PROSPECTIVE_GDELT_VALIDATION_PREREG_2026_07_28.md": "daf5aba27cfccef432da0e0a441110a9068492e60fb246ca46a4a1f3b3d06036"
+  }
+}
