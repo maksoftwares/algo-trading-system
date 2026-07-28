@@ -1,0 +1,16 @@
+{
+  "campaign_id": "eurusd-neutral-growth-risk-consensus-v1",
+  "family": "N46_NEUTRAL_GROWTH_RISK_CONSENSUS",
+  "locked_at_utc": "2026-07-28T13:20:00Z",
+  "locked_before_census_and_eurusd_outcome": true,
+  "frequency_quota": null,
+  "files": {
+    "config/frozen_neutral_growth_risk_consensus.json": "5cc91bab6e2c515dde553f8097c6e53189719942a24a07737d5b7dd1a1fb65ad",
+    "EURUSD_NEUTRAL_GROWTH_RISK_SOURCE_AUDIT_2026_07_28.md": "9c852e1dbb52966b9d7af4035283209ef159843de004ac0bc543045797ca0267",
+    "EURUSD_NEUTRAL_GROWTH_RISK_CONSENSUS_PREREG_2026_07_28.md": "2b858f0227b477f3a8bd4828cd2b77c215714a75b57f0c3f6c14b6dda9b26cf7",
+    "src/eurusd_regime_specialists/neutral_growth_risk_consensus.py": "59a3f0d299b0e88ea6b8683a8a3d34848d8af371b7068b575a6ff11deef1cd66",
+    "run_neutral_growth_risk_consensus.py": "aa9b94579e1a8532a246f3e30db63b7a387c008655b63894e4018f0034d0b23f",
+    "tests/test_neutral_growth_risk_consensus.py": "05ed9580ddee75e6656068522bb1fe652c7af74b42f9f9b4cf34af30c3e7a137"
+  },
+  "next_allowed_action": "OUTCOME_BLIND_CENSUS_ONLY"
+}
