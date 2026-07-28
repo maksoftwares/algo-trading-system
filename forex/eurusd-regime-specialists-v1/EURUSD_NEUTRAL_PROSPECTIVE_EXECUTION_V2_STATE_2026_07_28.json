@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T17:35:39.850053Z",
+  "as_of_utc": "2026-07-28T18:01:50.121698Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -77,7 +77,7 @@
   "prospective_operations_planner": {
     "schema_version": "eurusd_neutral_prospective_operations_plan_v1_3",
     "status": "WAITING_FOR_NEXT_SAFE_ACTION",
-    "evaluated_at_utc": "2026-07-28T17:34:52.518601Z",
+    "evaluated_at_utc": "2026-07-28T18:01:50.121698Z",
     "target_events": 3,
     "runtime_only_supersession": {
       "reason": "THE_WINDOWS_PYTHON_COMMAND_RESOLVED_TO_A_NONFUNCTIONAL_MICROSOFT_STORE_STUB",
@@ -138,16 +138,18 @@
       "manifest_sha256": "d24edbd0a08030fdf539e66a55828a45962117bdd8c83b53604a2e064f7ba3da"
     },
     "latest_bounded_prewarm_result": {
-      "evaluated_at_utc": "2026-07-28T17:01:32.464479Z",
+      "evaluated_at_utc": "2026-07-28T18:01:12.543722Z",
+      "capture_observed_at_utc": "2026-07-28T18:01:35Z",
       "network_request_attempts": 5,
       "new_cached_symbol_hours": 5,
-      "safely_completed_symbol_hours": 6085,
-      "cached_symbol_hours": 6085,
+      "safely_completed_symbol_hours": 6090,
+      "cached_symbol_hours": 6090,
       "missing_safe_symbol_hours": 0,
-      "last_cached_hour_utc": "2026-07-28T16:00:00Z",
-      "manifest_sha256": "09d3091b9ff17c02f57a648565c09a9053a9a10fd1906e3e0752798868663dcb"
+      "last_cached_hour_utc": "2026-07-28T17:00:00Z",
+      "cache_inventory_sha256": "3b78a8ba78f2226d0268e8baf61b302947d81e5d3aa6ba5c6f1dacbc5eff3b72",
+      "manifest_sha256": "d0eb3fdd2d3a8b1cd68eeecfe9df7fc2ddb4fb44f819f979b4fe148efe8286fc"
     },
-    "next_safe_cache_check_utc": "2026-07-28T18:01:00Z",
+    "next_safe_cache_check_utc": "2026-07-28T19:01:00Z",
     "next_forecast_poll_utc": "2026-07-29T15:50:54Z",
     "historical_pnl_loaded": false,
     "oracle_or_outcome_used_before_safe_known_time": false,
@@ -157,7 +159,7 @@
   "independent_prospective_validation": {
     "schema_version": "eurusd_neutral_prospective_validation_result_v1",
     "status": "WAITING_FOR_PROSPECTIVE_START",
-    "evaluated_at_utc": "2026-07-28T17:02:19.430278Z",
+    "evaluated_at_utc": "2026-07-28T18:01:50.045824Z",
     "closed_trades": 0,
     "frequency_is_an_admission_gate": false,
     "minimum_calendar_months": 12,
@@ -179,7 +181,7 @@
   "prospective_directional_falsification": {
     "schema_version": "eurusd_neutral_prospective_directional_falsification_result_v1",
     "status": "WAITING_FOR_PROSPECTIVE_START",
-    "evaluated_at_utc": "2026-07-28T17:02:19.818264Z",
+    "evaluated_at_utc": "2026-07-28T18:01:50.041239Z",
     "closed_primary_trades": 0,
     "opposite_side_counterfactual_trades": 0,
     "frequency_is_an_admission_gate": false,
@@ -198,7 +200,7 @@
   "official_bls_schedule_crosscheck": {
     "schema_version": "eurusd_neutral_prospective_bls_schedule_status_v1",
     "status": "MATCHED_OFFICIAL_BLS_SCHEDULE",
-    "evaluated_at_utc": "2026-07-28T17:02:20.207902Z",
+    "evaluated_at_utc": "2026-07-28T18:01:50.042015Z",
     "official_source_observed_at_utc": "2026-07-28T16:48:57.533Z",
     "official_source_last_modified": "June 10, 2026",
     "official_extracted_payload_sha256": "03816009f06ff96b330486c3333e2b52fd3ce0949e72f0b1c0869d53df4eedee",
@@ -294,6 +296,6 @@
     "failed": 0,
     "warnings": 2
   },
-  "next_action": "AT OR AFTER 2026-07-28T18:01:00Z RUN plan_prospective_neutral_operations_v1_3.py; EXECUTE ONE EXACT OFFLINE-UV MUTATING COMMAND AND THEN REPLAN; CAPTURE ALL FIVE REQUIRED EVENT_AND_ORACLE_CONTEXT OWNERSHIP DATES IN CHRONOLOGICAL ZERO_GAP_CACHE ORDER; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
+  "next_action": "AT OR AFTER 2026-07-28T19:01:00Z RUN plan_prospective_neutral_operations_v1_3.py; EXECUTE ONE EXACT OFFLINE-UV MUTATING COMMAND AND THEN REPLAN; CAPTURE ALL FIVE REQUIRED EVENT_AND_ORACLE_CONTEXT OWNERSHIP DATES IN CHRONOLOGICAL ZERO_GAP_CACHE ORDER; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
   "broker_action_allowed": false
 }
