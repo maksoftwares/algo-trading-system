@@ -1,0 +1,51 @@
+{
+  "contract_sha256": "56b1349c417506d022928d96f82641272cb229199e5963706e608de161439932",
+  "files": {
+    "BASELINE_MONTHLY.csv": {
+      "bytes": 3388,
+      "sha256": "c367d72cc6875017fd9620dbd39a9ef47fe312c86ddb3e7411e1f5951d1f69c7"
+    },
+    "BASELINE_YEARLY.csv": {
+      "bytes": 349,
+      "sha256": "5eaab1ff3657757cb4c125ca86013a6ec418fd08ae1acc1761f05e6eabe35000"
+    },
+    "BROKER_MONTHLY.csv": {
+      "bytes": 4093,
+      "sha256": "3bfb949c4f6fd46f8a844f8901f394fff3083235594b40a20f5d0ddd47888ead"
+    },
+    "BROKER_YEARLY.csv": {
+      "bytes": 430,
+      "sha256": "a00dc8efa7f2abbf0c83ddeb2b4b55a1edba768b06e2a11cbbaffbf155642d0f"
+    },
+    "CONTINUOUS_MONTHLY.csv": {
+      "bytes": 4373,
+      "sha256": "646dc48db7d02d3ceaf483bd5d8aa3a67720a7f52de9bb82b9f928d5818f06a0"
+    },
+    "CONTINUOUS_YEARLY.csv": {
+      "bytes": 431,
+      "sha256": "bfb669ed059a739876f9ce484fcece464514c9bc3bd16c6ee282784989562afd"
+    },
+    "CORRECTED_FEATURES.parquet": {
+      "bytes": 213667,
+      "sha256": "5838ce38a12e15d81aac86ac0c96066efe653a2c203d2fae84353aa9b7f0ed59"
+    },
+    "CORRECTED_META.parquet": {
+      "bytes": 120351,
+      "sha256": "c684990cba686ca91ed0a36b689ef3ecf6566242b74c6670d51df18e4f5e48ae"
+    },
+    "PRIMARY_DECISIONS.parquet": {
+      "bytes": 211243,
+      "sha256": "881e35c7af88da1cb257d034cda1b6a9c329346cba8b96b83e4834569d2bb749"
+    },
+    "RESULT.json": {
+      "bytes": 9609,
+      "sha256": "7e334e4b03d02398a215b57a76da41f5a15e22b84ac5b21d5eb5b0e04f331e81"
+    },
+    "RESULT.md": {
+      "bytes": 1298,
+      "sha256": "784cf80be102c44cf4dcaabc9b2972dd91ee0414c4a689cb91f8fec8c75893b5"
+    }
+  },
+  "integrity_sha256": "712912b367cb0e8d63a10f2744083229f8770537085cf8079ad354f29a6991c3",
+  "schema_version": "codex_v60_ml_sizing_causal_retest_integrity_v1"
+}
