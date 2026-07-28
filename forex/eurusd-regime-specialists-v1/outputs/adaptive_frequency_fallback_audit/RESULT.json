@@ -13,8 +13,25 @@
       "m15_source_sha256": "0dd10b6d12b48598f891619f56c5bbab3a289dd8ecc9fef111ab45c6b5cdfcdd",
       "m15_ex5_sha256": "c7a9ff74de8836d13521fc5433133f044235a5037fcc9699717070f71db1456e"
     },
+    "supplemental_hashes_absent_from_prior_verdict": {
+      "control_source_sha256": "77727156019e69247134ed45055496ae2bd50fff1bfa7aab4a1732c0ff28a6a8",
+      "control_ex5_sha256": "b806acde676b3610652398552783299f68a55e350733805c905fd8f8c8cf7b1c",
+      "m15_shadow_preset_sha256": "1aa5926b62e6b19d26dc99fd4e8768867b90c36021d53d03f3c1e0db59ca6ccc",
+      "control_shadow_preset_sha256": "25f602c12dd8ccf52e14e45d80fbed9f22b32061af8ca69bb7481be9b5ab7981"
+    },
     "compile_log_reports_zero_errors_zero_warnings": true,
-    "source_ex5_parity_status": "PARTIAL_PROVENANCE_ONLY: source and EX5 hashes are recorded and the compile log is clean, but the scratch compile log does not bind its input source hash to the packaged EX5 hash."
+    "control_compile_log_present": false,
+    "control_report_shadow_preset_parity": {
+      "status": "FAIL",
+      "differences": [
+        "Report ShadowMode=false; shadow preset true.",
+        "Report EnableDemoOrders=true; shadow preset false.",
+        "Report MagicNumber=26072342; shadow preset 26072341.",
+        "Tester report leverage is 1:50; archived parity INI requests 1:100."
+      ],
+      "interpretation": "The report proves historical order execution in Strategy Tester, not bit-for-bit shadow-preset parity. Signal and risk inputs otherwise match the archived preset."
+    },
+    "source_ex5_parity_status": "PARTIAL_PROVENANCE_ONLY: M15 source and EX5 hashes are recorded and its compile log is clean, but the log does not bind its input hash to the packaged EX5. The control source and EX5 can now be hashed, but no control compile log binds those files."
   },
   "packaged_ledger_check": {
     "path": "eur-usd/eurusd-fast-research/regime-specialists-v2/outputs/frequency_v2_mt5/PORTFOLIO_TRADES.csv",
@@ -143,7 +160,30 @@
       "maximum_equity_drawdown_usd": 14.82,
       "maximum_equity_drawdown_pct": 0.0015
     },
-    "portfolio_maximum_floating_drawdown_status": "UNKNOWN: the combined reports do not contain a synchronized portfolio equity curve. Closed-trade drawdown is not a substitute for portfolio floating drawdown."
+    "synchronized_portfolio_proxy": {
+      "estimate_kind": "CONSERVATIVE_INDEPENDENT_M5_PROXY",
+      "window_start_utc": "2024-07-01T00:00:00+00:00",
+      "window_end_utc": "2026-06-30T23:59:59+00:00",
+      "trades_in_proxy": 695,
+      "trades_without_intersecting_m5_quote": 0,
+      "exits_without_later_m5_quote": 0,
+      "independent_m5_first_timestamp_utc": "2024-07-01T00:00:00+00:00",
+      "independent_m5_last_timestamp_utc": "2026-06-30T23:55:00+00:00",
+      "relevant_curve_observations": 12211,
+      "maximum_conservative_floating_drawdown_usd": 30.80999999999993,
+      "maximum_drawdown_timestamp_utc": "2026-03-23T11:05:00+00:00",
+      "minimum_conservative_equity_usd": -0.320000000000098,
+      "minimum_equity_timestamp_utc": "2024-07-01T15:40:00+00:00",
+      "maximum_open_positions_intersecting_one_m5_bar": 2,
+      "maximum_gross_lots_intersecting_one_m5_bar": 0.03,
+      "maximum_absolute_net_lots_intersecting_one_m5_bar": 0.02,
+      "maximum_opposing_lots_intersecting_one_m5_bar": 0.01,
+      "ledger_net_pnl_usd": 119.53000000000002,
+      "terminal_realized_equity_usd": 119.52999999999993,
+      "terminal_reconciliation_difference_usd": -8.526512829121202e-14,
+      "method_limitations": "Uses independent Dukascopy M5 full-bar bid lows for longs and ask highs for shorts. It conservatively sums sleeve extremes that need not have occurred at the same tick, cannot see within-bar ordering, and is not an exact Capital.com equity reconstruction."
+    },
+    "exact_broker_portfolio_floating_drawdown_status": "UNKNOWN: the independent M5 proxy closes the prior risk blind spot conservatively, but the two reports still cannot recover the exact Capital.com tick-level combined equity curve."
   },
   "regime_attribution": {
     "by_regime": [
@@ -640,7 +680,20 @@
     "m15_share_of_trades": 0.9110473457675753,
     "doubled_size_m15_trades": 120,
     "overlay_interpretation": "The H4 overlay changes only requested lot size. It does not create an independent entry, side, stop, target, or exit.",
-    "cross_sleeve_overlap_count_declared": 58
+    "cross_sleeve_overlap_count_declared": 58,
+    "recomputed_common_window": {
+      "cross_sleeve_overlap_pairs": 58,
+      "cross_sleeve_same_entry_pairs": 7,
+      "cross_sleeve_entry_pairs_within_15_minutes": 21,
+      "cross_sleeve_opposite_side_pairs": 58,
+      "maximum_concurrent_positions_exact_intervals": 2,
+      "maximum_concurrent_gross_lots_exact_intervals": 0.03,
+      "maximum_absolute_net_lots_exact_intervals": 0.02,
+      "maximum_opposing_lots_exact_intervals": 0.01,
+      "exact_duplicate_trade_rows": 0,
+      "same_sleeve_same_entry_excess_trades": 0
+    },
+    "same_account_execution_limit": "The sleeves were tested in separate MT5 reports. Their combined ledger does not prove whether a target demo account is hedging or netting, nor how opposing EURUSD positions would be margined or offset."
   },
   "data_manifests": {
     "DXY": {
@@ -675,6 +728,7 @@
     "The Neutral slice is profitable retrospectively, but 2026 H1 becomes negative after the same 0.5-pip haircut.",
     "The Neutral slice has zero same-side oracle matches within 15 minutes and an almost entirely long side mix.",
     "The doubled-size H4 overlay is conditional leverage on the same M15 entries, not an independent regime expert.",
-    "Combined portfolio floating drawdown cannot be recovered from the two independent reports."
+    "The synchronized independent M5 proxy is conservative, but the exact broker tick-level combined equity path and target account netting/hedging behavior remain unproven.",
+    "The control report does not match the archived shadow preset or tester leverage exactly, and its source-to-EX5 compile provenance is unbound."
   ]
 }

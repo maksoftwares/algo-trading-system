@@ -65,14 +65,29 @@ not imitation of the Regime 1 oracle.
 The individual MT5 reports show maximum equity drawdown of
 `$39.39` for the M15
 sleeve and `$14.82`
-for the control. They do not provide a synchronized portfolio equity curve, so
-the combined maximum floating drawdown is unknown. The earlier `$28.45` figure
-is closed-trade drawdown only.
+for the control. A synchronized reconstruction over the 695 trades covered by
+the independent Dukascopy window gives a conservative M5 floating-drawdown
+proxy of
+`$30.81`. The earlier
+`$28.45` figure is closed-trade drawdown only. The proxy uses each M5 bid low
+for longs and ask high for shorts, and can sum extremes that did not occur on
+the same tick. It is therefore deliberately adverse, not an exact broker
+tick-equity result.
 
-Source/report hashes match the prior verdict and the compile log says zero
-errors and warnings. Source-to-EX5 provenance remains partial because the
-scratch compile log does not bind an input-source hash to the packaged EX5
-hash.
+The claimed `58` cross-sleeve overlaps are reproduced exactly. Of these,
+`7` share the exact entry time and
+`21` enter within 15
+minutes; all `58` are opposing
+long/short positions. Maximum exact-interval concurrency is
+`2`. The two separate
+tester reports do not establish whether the intended demo account nets or
+hedges those positions.
+
+The M15 source/report hashes match the prior verdict and its compile log says
+zero errors and warnings. The control hashes were omitted from that verdict,
+no control compile log binds source to EX5, and its report was produced with
+ordering enabled plus 1:50 leverage rather than the archived shadow preset
+plus 1:100 tester configuration. This blocks bit-for-bit shadow parity.
 
 ## Decision
 

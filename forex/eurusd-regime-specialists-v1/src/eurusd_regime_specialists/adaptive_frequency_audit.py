@@ -130,6 +130,148 @@ def reconstruct_portfolio() -> pd.DataFrame:
     )
 
 
+def cross_sleeve_overlap_audit(
+    trades: pd.DataFrame,
+) -> tuple[dict[str, Any], pd.DataFrame]:
+    """Recompute interval overlaps and exact portfolio concurrency."""
+    ordered = trades.sort_values(
+        ["entry_time", "exit_time", "sleeve"]
+    ).copy()
+    m15 = ordered[ordered["sleeve"].eq(M15_SLEEVE)]
+    control = ordered[ordered["sleeve"].eq(CONTROL_SLEEVE)]
+    pairs: list[dict[str, Any]] = []
+    for m15_index, m15_trade in m15.iterrows():
+        possible = control[
+            (control["entry_time"] < m15_trade["exit_time"])
+            & (control["exit_time"] > m15_trade["entry_time"])
+        ]
+        for control_index, control_trade in possible.iterrows():
+            overlap_start = max(
+                m15_trade["entry_time"],
+                control_trade["entry_time"],
+            )
+            overlap_end = min(
+                m15_trade["exit_time"],
+                control_trade["exit_time"],
+            )
+            entry_delta = abs(
+                (
+                    m15_trade["entry_time"]
+                    - control_trade["entry_time"]
+                ).total_seconds()
+                / 60.0
+            )
+            pairs.append(
+                {
+                    "m15_trade_index": int(m15_index),
+                    "control_trade_index": int(control_index),
+                    "m15_entry_time": m15_trade["entry_time"],
+                    "m15_exit_time": m15_trade["exit_time"],
+                    "control_entry_time": control_trade["entry_time"],
+                    "control_exit_time": control_trade["exit_time"],
+                    "overlap_start_utc": overlap_start,
+                    "overlap_end_utc": overlap_end,
+                    "overlap_minutes": float(
+                        (overlap_end - overlap_start).total_seconds()
+                        / 60.0
+                    ),
+                    "absolute_entry_delta_minutes": float(entry_delta),
+                    "same_entry_time": bool(entry_delta == 0.0),
+                    "entries_within_15_minutes": bool(
+                        entry_delta <= 15.0
+                    ),
+                    "opposite_side": bool(
+                        m15_trade["side"] != control_trade["side"]
+                    ),
+                    "m15_volume": float(m15_trade["volume"]),
+                    "control_volume": float(control_trade["volume"]),
+                }
+            )
+    pair_frame = pd.DataFrame(pairs)
+
+    concurrency_rows = []
+    for timestamp in ordered["entry_time"].drop_duplicates().sort_values():
+        active = ordered[
+            (ordered["entry_time"] <= timestamp)
+            & (ordered["exit_time"] > timestamp)
+        ]
+        long_lots = float(
+            active.loc[active["side"].eq("LONG"), "volume"].sum()
+        )
+        short_lots = float(
+            active.loc[active["side"].eq("SHORT"), "volume"].sum()
+        )
+        concurrency_rows.append(
+            (
+                int(len(active)),
+                long_lots + short_lots,
+                abs(long_lots - short_lots),
+                min(long_lots, short_lots),
+            )
+        )
+    concurrency = np.asarray(concurrency_rows, dtype=float)
+    duplicate_columns = [
+        "entry_time",
+        "exit_time",
+        "sleeve",
+        "side",
+        "volume",
+        "entry_price",
+        "exit_price",
+        "net_pnl_usd",
+    ]
+    same_sleeve_entry_sizes = ordered.groupby(
+        ["sleeve", "entry_time"]
+    ).size()
+    metrics = {
+        "cross_sleeve_overlap_pairs": int(len(pair_frame)),
+        "cross_sleeve_same_entry_pairs": int(
+            pair_frame["same_entry_time"].sum()
+        )
+        if len(pair_frame)
+        else 0,
+        "cross_sleeve_entry_pairs_within_15_minutes": int(
+            pair_frame["entries_within_15_minutes"].sum()
+        )
+        if len(pair_frame)
+        else 0,
+        "cross_sleeve_opposite_side_pairs": int(
+            pair_frame["opposite_side"].sum()
+        )
+        if len(pair_frame)
+        else 0,
+        "maximum_concurrent_positions_exact_intervals": int(
+            concurrency[:, 0].max()
+        )
+        if len(concurrency)
+        else 0,
+        "maximum_concurrent_gross_lots_exact_intervals": float(
+            concurrency[:, 1].max()
+        )
+        if len(concurrency)
+        else 0.0,
+        "maximum_absolute_net_lots_exact_intervals": float(
+            concurrency[:, 2].max()
+        )
+        if len(concurrency)
+        else 0.0,
+        "maximum_opposing_lots_exact_intervals": float(
+            concurrency[:, 3].max()
+        )
+        if len(concurrency)
+        else 0.0,
+        "exact_duplicate_trade_rows": int(
+            ordered.duplicated(
+                duplicate_columns, keep=False
+            ).sum()
+        ),
+        "same_sleeve_same_entry_excess_trades": int(
+            (same_sleeve_entry_sizes - 1).clip(lower=0).sum()
+        ),
+    }
+    return metrics, pair_frame
+
+
 def verify_packaged_ledger(reconstructed: pd.DataFrame) -> dict[str, Any]:
     path = FALLBACK_OUTPUT / "PORTFOLIO_TRADES.csv"
     packaged = pd.read_csv(path)
@@ -200,6 +342,219 @@ def report_drawdown(path: Path) -> dict[str, float]:
     raise RuntimeError(f"Cannot parse drawdown statistics from {path}")
 
 
+def synchronized_m5_portfolio_proxy(
+    trades: pd.DataFrame,
+    m5: pd.DataFrame,
+    start: pd.Timestamp = COMMON_START,
+    end: pd.Timestamp = COMMON_END,
+) -> tuple[dict[str, Any], pd.DataFrame]:
+    """Build a conservative synchronized equity proxy from Dukascopy M5.
+
+    A trade is exposed on every available M5 bar that intersects its
+    half-open broker interval [entry, exit). Longs are marked at the full-bar
+    bid low and shorts at the full-bar ask high. Summing those separate
+    extremes can be more adverse than any realizable intrabar path, which is
+    intentional: this is a conservative independent-data proxy, not a claim
+    to reproduce the broker's tick-level equity curve.
+    """
+    scope = trades[
+        trades["entry_time"].between(start, end)
+        & (trades["exit_time"] <= end)
+    ].sort_values(["exit_time", "sleeve"]).reset_index(drop=True)
+    for column in ("entry_time", "exit_time"):
+        scope[column] = scope[column].dt.as_unit("ns")
+    quotes = m5[
+        (m5.index >= start.floor("5min"))
+        & (m5.index <= end.floor("5min"))
+    ].copy()
+    quotes.index = quotes.index.as_unit("ns")
+    if scope.empty or quotes.empty:
+        raise RuntimeError("No trades or independent M5 quotes in audit window")
+    if not quotes.index.is_monotonic_increasing:
+        raise RuntimeError("Independent M5 quote index is not ordered")
+    if quotes.index.has_duplicates:
+        raise RuntimeError("Independent M5 quote index contains duplicates")
+
+    quote_ns = quotes.index.asi8
+    five_minutes_ns = int(pd.Timedelta(minutes=5).value)
+    entry_ns = scope["entry_time"].array.asi8
+    exit_ns = scope["exit_time"].array.asi8
+    relevant = np.zeros(len(quotes), dtype=bool)
+    active_quote_counts = np.zeros(len(scope), dtype=int)
+    exits_without_later_quote = 0
+    for trade_index, (entry, exit_) in enumerate(
+        zip(entry_ns, exit_ns, strict=True)
+    ):
+        first = int(
+            np.searchsorted(
+                quote_ns, entry - five_minutes_ns, side="right"
+            )
+        )
+        stop = int(np.searchsorted(quote_ns, exit_, side="left"))
+        if stop > first:
+            relevant[first:stop] = True
+            active_quote_counts[trade_index] = stop - first
+        realization = int(
+            np.searchsorted(quote_ns, exit_, side="left")
+        )
+        if realization < len(quotes):
+            relevant[realization] = True
+        else:
+            exits_without_later_quote += 1
+    relevant_positions = np.flatnonzero(relevant)
+    if not len(relevant_positions):
+        raise RuntimeError("No M5 observations intersect portfolio trades")
+
+    sides = scope["side"].to_numpy()
+    volumes = scope["volume"].to_numpy(dtype=float)
+    entry_prices = scope["entry_price"].to_numpy(dtype=float)
+    pnl = scope["net_pnl_usd"].to_numpy(dtype=float)
+    active_cost_adjustment = np.minimum(
+        (
+            scope["commission"].to_numpy(dtype=float)
+            + scope["swap"].to_numpy(dtype=float)
+        ),
+        0.0,
+    )
+    exit_order = np.argsort(exit_ns, kind="stable")
+    sorted_exit_ns = exit_ns[exit_order]
+    sorted_cumulative_pnl = np.cumsum(pnl[exit_order])
+    rows: list[dict[str, Any]] = []
+    for quote_position in relevant_positions:
+        timestamp_ns = quote_ns[quote_position]
+        realized_count = int(
+            np.searchsorted(
+                sorted_exit_ns, timestamp_ns, side="right"
+            )
+        )
+        realized = (
+            float(sorted_cumulative_pnl[realized_count - 1])
+            if realized_count
+            else 0.0
+        )
+        active = (
+            (entry_ns < timestamp_ns + five_minutes_ns)
+            & (exit_ns > timestamp_ns)
+        )
+        long_active = active & (sides == "LONG")
+        short_active = active & (sides == "SHORT")
+        bid_low = float(quotes.iloc[quote_position]["bid_low"])
+        ask_high = float(quotes.iloc[quote_position]["ask_high"])
+        unrealized = float(active_cost_adjustment[active].sum())
+        unrealized += float(
+            (
+                (bid_low - entry_prices[long_active])
+                * volumes[long_active]
+                * 100_000.0
+            ).sum()
+        )
+        unrealized += float(
+            (
+                (entry_prices[short_active] - ask_high)
+                * volumes[short_active]
+                * 100_000.0
+            ).sum()
+        )
+        long_lots = float(volumes[long_active].sum())
+        short_lots = float(volumes[short_active].sum())
+        rows.append(
+            {
+                "timestamp_utc": quotes.index[quote_position],
+                "realized_equity_at_bar_start_usd": realized,
+                "worst_bar_unrealized_usd": unrealized,
+                "conservative_equity_usd": realized + unrealized,
+                "open_positions_intersecting_bar": int(active.sum()),
+                "long_lots_intersecting_bar": long_lots,
+                "short_lots_intersecting_bar": short_lots,
+                "gross_lots_intersecting_bar": (
+                    long_lots + short_lots
+                ),
+                "net_lots_intersecting_bar": (
+                    long_lots - short_lots
+                ),
+                "opposing_lots_intersecting_bar": min(
+                    long_lots, short_lots
+                ),
+                "dukascopy_bid_low": bid_low,
+                "dukascopy_ask_high": ask_high,
+            }
+        )
+    curve = pd.DataFrame(rows)
+    equity = curve["conservative_equity_usd"].to_numpy(dtype=float)
+    running_peak = np.maximum.accumulate(
+        np.concatenate(([0.0], equity))
+    )[1:]
+    curve["running_peak_usd"] = running_peak
+    curve["drawdown_from_running_peak_usd"] = running_peak - equity
+    maximum_drawdown_index = int(
+        curve["drawdown_from_running_peak_usd"].idxmax()
+    )
+    minimum_equity_index = int(
+        curve["conservative_equity_usd"].idxmin()
+    )
+    ledger_net = float(pnl.sum())
+    terminal_realized = float(
+        curve.iloc[-1]["realized_equity_at_bar_start_usd"]
+    )
+    metrics = {
+        "estimate_kind": "CONSERVATIVE_INDEPENDENT_M5_PROXY",
+        "window_start_utc": start,
+        "window_end_utc": end,
+        "trades_in_proxy": int(len(scope)),
+        "trades_without_intersecting_m5_quote": int(
+            (active_quote_counts == 0).sum()
+        ),
+        "exits_without_later_m5_quote": int(
+            exits_without_later_quote
+        ),
+        "independent_m5_first_timestamp_utc": quotes.index.min(),
+        "independent_m5_last_timestamp_utc": quotes.index.max(),
+        "relevant_curve_observations": int(len(curve)),
+        "maximum_conservative_floating_drawdown_usd": float(
+            curve.loc[
+                maximum_drawdown_index,
+                "drawdown_from_running_peak_usd",
+            ]
+        ),
+        "maximum_drawdown_timestamp_utc": curve.loc[
+            maximum_drawdown_index, "timestamp_utc"
+        ],
+        "minimum_conservative_equity_usd": float(
+            curve.loc[
+                minimum_equity_index, "conservative_equity_usd"
+            ]
+        ),
+        "minimum_equity_timestamp_utc": curve.loc[
+            minimum_equity_index, "timestamp_utc"
+        ],
+        "maximum_open_positions_intersecting_one_m5_bar": int(
+            curve["open_positions_intersecting_bar"].max()
+        ),
+        "maximum_gross_lots_intersecting_one_m5_bar": float(
+            curve["gross_lots_intersecting_bar"].max()
+        ),
+        "maximum_absolute_net_lots_intersecting_one_m5_bar": float(
+            curve["net_lots_intersecting_bar"].abs().max()
+        ),
+        "maximum_opposing_lots_intersecting_one_m5_bar": float(
+            curve["opposing_lots_intersecting_bar"].max()
+        ),
+        "ledger_net_pnl_usd": ledger_net,
+        "terminal_realized_equity_usd": terminal_realized,
+        "terminal_reconciliation_difference_usd": float(
+            terminal_realized - ledger_net
+        ),
+        "method_limitations": (
+            "Uses independent Dukascopy M5 full-bar bid lows for longs and "
+            "ask highs for shorts. It conservatively sums sleeve extremes "
+            "that need not have occurred at the same tick, cannot see "
+            "within-bar ordering, and is not an exact Capital.com equity "
+            "reconstruction."
+        ),
+    }
+    return metrics, curve
+
+
 def source_evidence() -> dict[str, Any]:
     verdict_path = FALLBACK_OUTPUT / "VERDICT.json"
     verdict = json.loads(verdict_path.read_text(encoding="utf-8"))
@@ -212,6 +567,30 @@ def source_evidence() -> dict[str, Any]:
         / "ForexMeanReversionScout.mq5"
     )
     m15_ex5 = FALLBACK_ROOT / "mt5" / "Experts" / "ForexMeanReversionScout.ex5"
+    control_source = (
+        FALLBACK_ROOT
+        / "mt5"
+        / "Experts"
+        / "EurUsdV4AsiaLondonCompressionShort.mq5"
+    )
+    control_ex5 = (
+        FALLBACK_ROOT
+        / "mt5"
+        / "Experts"
+        / "EurUsdV4AsiaLondonCompressionShort.ex5"
+    )
+    m15_preset = (
+        FALLBACK_ROOT
+        / "mt5"
+        / "Presets"
+        / "EURUSD_FREQUENCY_V2_M15_SHADOW_DEMO.set"
+    )
+    control_preset = (
+        FALLBACK_ROOT
+        / "mt5"
+        / "Presets"
+        / "EURUSD_V4_SHADOW_DEMO.set"
+    )
     checks = {
         "m15_report_sha256": sha256_file(
             FALLBACK_OUTPUT / "M15_TREND_OVERLAY_REPORT.htm"
@@ -221,6 +600,12 @@ def source_evidence() -> dict[str, Any]:
         ),
         "m15_source_sha256": sha256_file(m15_source),
         "m15_ex5_sha256": sha256_file(m15_ex5),
+    }
+    supplemental_checks = {
+        "control_source_sha256": sha256_file(control_source),
+        "control_ex5_sha256": sha256_file(control_ex5),
+        "m15_shadow_preset_sha256": sha256_file(m15_preset),
+        "control_shadow_preset_sha256": sha256_file(control_preset),
     }
     compile_bytes = (
         FALLBACK_ROOT / "mt5" / "frequency_v2_m15_compile.log"
@@ -236,13 +621,32 @@ def source_evidence() -> dict[str, Any]:
             all(checks[name] == declared[name] for name in checks)
         ),
         "hashes": checks,
+        "supplemental_hashes_absent_from_prior_verdict": (
+            supplemental_checks
+        ),
         "compile_log_reports_zero_errors_zero_warnings": (
             "Result: 0 errors, 0 warnings" in compile_log
         ),
+        "control_compile_log_present": False,
+        "control_report_shadow_preset_parity": {
+            "status": "FAIL",
+            "differences": [
+                "Report ShadowMode=false; shadow preset true.",
+                "Report EnableDemoOrders=true; shadow preset false.",
+                "Report MagicNumber=26072342; shadow preset 26072341.",
+                "Tester report leverage is 1:50; archived parity INI requests 1:100.",
+            ],
+            "interpretation": (
+                "The report proves historical order execution in Strategy "
+                "Tester, not bit-for-bit shadow-preset parity. Signal and "
+                "risk inputs otherwise match the archived preset."
+            ),
+        },
         "source_ex5_parity_status": (
-            "PARTIAL_PROVENANCE_ONLY: source and EX5 hashes are recorded and "
-            "the compile log is clean, but the scratch compile log does not "
-            "bind its input source hash to the packaged EX5 hash."
+            "PARTIAL_PROVENANCE_ONLY: M15 source and EX5 hashes are recorded "
+            "and its compile log is clean, but the log does not bind its "
+            "input hash to the packaged EX5. The control source and EX5 can "
+            "now be hashed, but no control compile log binds those files."
         ),
     }
 
@@ -695,6 +1099,12 @@ def build_result() -> tuple[
     ledger_check = verify_packaged_ledger(trades)
     offsets = price_time_offset_audit(trades, m5)
     time_audit = selected_time_offset(offsets)
+    proxy_metrics, proxy_curve = synchronized_m5_portfolio_proxy(
+        trades, m5
+    )
+    overlap_metrics, overlap_pairs = cross_sleeve_overlap_audit(
+        trades[trades["entry_time"].between(COMMON_START, COMMON_END)]
+    )
     trades = attach_causal_regime(trades, state, cfg)
     common = trades[
         trades["entry_time"].between(COMMON_START, COMMON_END)
@@ -743,10 +1153,12 @@ def build_result() -> tuple[
             "control_component": report_drawdown(
                 FALLBACK_OUTPUT / "CHOP_CONTROL_REPORT.htm"
             ),
-            "portfolio_maximum_floating_drawdown_status": (
-                "UNKNOWN: the combined reports do not contain a synchronized "
-                "portfolio equity curve. Closed-trade drawdown is not a "
-                "substitute for portfolio floating drawdown."
+            "synchronized_portfolio_proxy": proxy_metrics,
+            "exact_broker_portfolio_floating_drawdown_status": (
+                "UNKNOWN: the independent M5 proxy closes the prior risk "
+                "blind spot conservatively, but the two reports still cannot "
+                "recover the exact Capital.com tick-level combined equity "
+                "curve."
             ),
         },
         "regime_attribution": {
@@ -785,6 +1197,13 @@ def build_result() -> tuple[
                 "create an independent entry, side, stop, target, or exit."
             ),
             "cross_sleeve_overlap_count_declared": 58,
+            "recomputed_common_window": overlap_metrics,
+            "same_account_execution_limit": (
+                "The sleeves were tested in separate MT5 reports. Their "
+                "combined ledger does not prove whether a target demo "
+                "account is hedging or netting, nor how opposing EURUSD "
+                "positions would be margined or offset."
+            ),
         },
         "data_manifests": manifests,
         "decision_reasons": [
@@ -814,8 +1233,14 @@ def build_result() -> tuple[
                 "same M15 entries, not an independent regime expert."
             ),
             (
-                "Combined portfolio floating drawdown cannot be recovered "
-                "from the two independent reports."
+                "The synchronized independent M5 proxy is conservative, but "
+                "the exact broker tick-level combined equity path and target "
+                "account netting/hedging behavior remain unproven."
+            ),
+            (
+                "The control report does not match the archived shadow "
+                "preset or tester leverage exactly, and its source-to-EX5 "
+                "compile provenance is unbound."
             ),
         ],
     }
@@ -825,6 +1250,8 @@ def build_result() -> tuple[
             "TRADES_WITH_CAUSAL_REGIME": trades,
             "TIME_OFFSET_AUDIT": offsets,
             "ORACLE_MATCHES_15M": matches,
+            "CROSS_SLEEVE_OVERLAPS": overlap_pairs,
+            "SYNCHRONIZED_M5_EQUITY_PROXY": proxy_curve,
         },
     )
 
@@ -845,6 +1272,10 @@ def render_report(result: dict[str, Any]) -> str:
     chronological = result["neutral_regime"]["chronological_slices"]
     oracle = result["oracle_resemblance"]
     floating = result["floating_drawdown_evidence"]
+    proxy = floating["synchronized_portfolio_proxy"]
+    overlap = result["selection_and_overlap_audit"][
+        "recomputed_common_window"
+    ]
     rows = []
     for name in ("2024_H2", "2025", "2026_H1"):
         raw = chronological[name]["observed"]
@@ -921,14 +1352,29 @@ not imitation of the Regime 1 oracle.
 The individual MT5 reports show maximum equity drawdown of
 `${floating['m15_component']['maximum_equity_drawdown_usd']:.2f}` for the M15
 sleeve and `${floating['control_component']['maximum_equity_drawdown_usd']:.2f}`
-for the control. They do not provide a synchronized portfolio equity curve, so
-the combined maximum floating drawdown is unknown. The earlier `$28.45` figure
-is closed-trade drawdown only.
+for the control. A synchronized reconstruction over the 695 trades covered by
+the independent Dukascopy window gives a conservative M5 floating-drawdown
+proxy of
+`${proxy['maximum_conservative_floating_drawdown_usd']:.2f}`. The earlier
+`$28.45` figure is closed-trade drawdown only. The proxy uses each M5 bid low
+for longs and ask high for shorts, and can sum extremes that did not occur on
+the same tick. It is therefore deliberately adverse, not an exact broker
+tick-equity result.
 
-Source/report hashes match the prior verdict and the compile log says zero
-errors and warnings. Source-to-EX5 provenance remains partial because the
-scratch compile log does not bind an input-source hash to the packaged EX5
-hash.
+The claimed `58` cross-sleeve overlaps are reproduced exactly. Of these,
+`{overlap['cross_sleeve_same_entry_pairs']}` share the exact entry time and
+`{overlap['cross_sleeve_entry_pairs_within_15_minutes']}` enter within 15
+minutes; all `{overlap['cross_sleeve_opposite_side_pairs']}` are opposing
+long/short positions. Maximum exact-interval concurrency is
+`{overlap['maximum_concurrent_positions_exact_intervals']}`. The two separate
+tester reports do not establish whether the intended demo account nets or
+hedges those positions.
+
+The M15 source/report hashes match the prior verdict and its compile log says
+zero errors and warnings. The control hashes were omitted from that verdict,
+no control compile log binds source to EX5, and its report was produced with
+ordering enabled plus 1:50 leverage rather than the archived shadow preset
+plus 1:100 tester configuration. This blocks bit-for-bit shadow parity.
 
 ## Decision
 
@@ -958,8 +1404,10 @@ __all__ = [
     "REPORT_PATH",
     "attach_causal_regime",
     "build_result",
+    "cross_sleeve_overlap_audit",
     "match_oracle",
     "profit_metrics",
     "run_audit",
+    "synchronized_m5_portfolio_proxy",
     "with_cost_haircut",
 ]
