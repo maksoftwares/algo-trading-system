@@ -1,0 +1,224 @@
+{
+  "campaign_id": "eurusd-neutral-selective-multivenue-agreement-v1",
+  "frozen_at_utc": "2026-07-28T08:31:47Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_WITH_FORWARD_ONLY_START",
+  "parent_multivenue_contract": {
+    "path": "config/frozen_neutral_kraken_multivenue_flow.json",
+    "sha256": "4d051e8ea4d1901495279c28415d69c20f228081914db717af6d54562acb1e50",
+    "lock_path": "EURUSD_NEUTRAL_KRAKEN_MULTIVENUE_FLOW_PREREG_2026_07_28.sha256.json",
+    "lock_sha256": "1dd0e965a275321e87a51848b41baf34dbfb00f9c5b6d5c4eefd7daae00eb59d"
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "strategy": {
+    "family": "N25_NEUTRAL_SELECTIVE_MULTIVENUE_AGREEMENT",
+    "entry_hour_utc": 0,
+    "entry_minutes_utc": [0, 15, 30, 45],
+    "weekdays_only": true,
+    "direction_rule": "TRADE_ONLY_WHEN_KRAKEN_EURUSD_AND_BINANCE_EURUSDT_PRIOR_15M_EXECUTED_FLOW_SIGNS_AGREE",
+    "abstention_allowed": true,
+    "maximum_candidates_per_source_eligible_day": 4,
+    "minimum_candidates_per_source_eligible_day": 0,
+    "daily_quota": null,
+    "one_open_position": false
+  },
+  "flow_rule": {
+    "completed_m5_bars_per_venue": 3,
+    "requires_consecutive_bars_per_venue": true,
+    "requires_positive_total_quote_volume_per_venue": true,
+    "kraken_long_when_imbalance_greater_than_or_equal_to": 0.0,
+    "binance_long_when_imbalance_greater_than_or_equal_to": 0.0,
+    "trade_when_signs_agree": true,
+    "long_when_both_nonnegative": true,
+    "short_when_both_negative": true,
+    "cash_when_signs_disagree": true,
+    "magnitude_threshold": null,
+    "venue_weights": null,
+    "fit_or_refit": false
+  },
+  "model": {
+    "type": "NONE_DETERMINISTIC_TWO_VENUE_SIGN_AGREEMENT",
+    "decision_probability": 0.5,
+    "fit_or_refit": false
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_new_portfolio_r_per_source_eligible_day": 1.0,
+    "maximum_concurrent_positions": 4
+  },
+  "windows": {
+    "development_2020_2021": [
+      "2020-03-13T00:00:00Z",
+      "2021-12-31T23:59:59Z"
+    ],
+    "validation_2022_2023": [
+      "2022-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_census": {
+    "parent_decision_points": 1812,
+    "source_eligible_days": 453,
+    "agreement_candidates": 941,
+    "disagreement_points": 871,
+    "active_candidate_days": 419,
+    "no_trade_days": 34,
+    "predicted_long_rate": 0.5026567481402763,
+    "trades_per_source_eligible_day": 2.077262693156733,
+    "trades_per_active_candidate_day": 2.2458233890214796,
+    "candidate_count_distribution": {
+      "0": 34,
+      "1": 96,
+      "2": 168,
+      "3": 111,
+      "4": 44
+    },
+    "by_window": {
+      "development_2020_2021": {
+        "source_eligible_days": 133,
+        "agreement_candidates": 294,
+        "active_candidate_days": 126,
+        "no_trade_days": 7,
+        "predicted_long_rate": 0.45918367346938777,
+        "trades_per_source_eligible_day": 2.210526315789474,
+        "trades_per_active_candidate_day": 2.3333333333333335,
+        "candidate_count_distribution": {
+          "0": 7,
+          "1": 28,
+          "2": 47,
+          "3": 32,
+          "4": 19
+        }
+      },
+      "validation_2022_2023": {
+        "source_eligible_days": 140,
+        "agreement_candidates": 298,
+        "active_candidate_days": 133,
+        "no_trade_days": 7,
+        "predicted_long_rate": 0.4899328859060403,
+        "trades_per_source_eligible_day": 2.1285714285714286,
+        "trades_per_active_candidate_day": 2.2406015037593985,
+        "candidate_count_distribution": {
+          "0": 7,
+          "1": 30,
+          "2": 54,
+          "3": 36,
+          "4": 13
+        }
+      },
+      "validation_2024": {
+        "source_eligible_days": 62,
+        "agreement_candidates": 114,
+        "active_candidate_days": 52,
+        "no_trade_days": 10,
+        "predicted_long_rate": 0.5526315789473685,
+        "trades_per_source_eligible_day": 1.8387096774193548,
+        "trades_per_active_candidate_day": 2.1923076923076925,
+        "candidate_count_distribution": {
+          "0": 10,
+          "1": 13,
+          "2": 21,
+          "3": 13,
+          "4": 5
+        }
+      },
+      "pseudo_oos_2025": {
+        "source_eligible_days": 79,
+        "agreement_candidates": 167,
+        "active_candidate_days": 73,
+        "no_trade_days": 6,
+        "predicted_long_rate": 0.592814371257485,
+        "trades_per_source_eligible_day": 2.1139240506329116,
+        "trades_per_active_candidate_day": 2.287671232876712,
+        "candidate_count_distribution": {
+          "0": 6,
+          "1": 14,
+          "2": 31,
+          "3": 21,
+          "4": 7
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "source_eligible_days": 39,
+        "agreement_candidates": 68,
+        "active_candidate_days": 35,
+        "no_trade_days": 4,
+        "predicted_long_rate": 0.4411764705882353,
+        "trades_per_source_eligible_day": 1.7435897435897436,
+        "trades_per_active_candidate_day": 1.9428571428571428,
+        "candidate_count_distribution": {
+          "0": 4,
+          "1": 11,
+          "2": 15,
+          "3": 9,
+          "4": 0
+        }
+      }
+    }
+  },
+  "admission": {
+    "minimum_trades_each_window": 50,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor_each_window_exclusive": 1.0,
+    "minimum_expectancy_r_each_window_exclusive": 0.0,
+    "minimum_conditional_direction_accuracy_each_window_exclusive": 0.5,
+    "minimum_daily_profit_factor_each_window_exclusive": 1.0,
+    "minimum_overall_profit_factor": 1.1,
+    "minimum_overall_exact_oracle_precision": 0.2,
+    "minimum_overall_15m_oracle_precision": 0.4,
+    "minimum_stressed_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_trades": 50,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_daily_profit_factor_exclusive": 1.0,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "exact_daily_frequency_gate": false
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 200,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "Do not add a magnitude threshold, venue weight, fitted model, clock filter, side reversal, quota, or retrospective subgroup after outcomes.",
+    "Do not trade a disagreement; disagreement is CASH.",
+    "Only fully completed and consecutive prior M5 bars with positive volume at both venues may determine direction.",
+    "Do not forward-fill a missing Kraken or Binance bar.",
+    "Do not use an EURUSD outcome, oracle membership, or future venue trade in the decision.",
+    "Do not repair or reinterpret a failed historical result.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}

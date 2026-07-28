@@ -317,7 +317,17 @@ available winning side only 50.57% of the time. All five windows failed;
 The latest six months returned PF 0.602 and -44.93R. Both executed-flow
 venue histories are now closed.
 
-The evidence does not support claiming that Regime 1 has been solved. Further retrospective venue weighting, threshold, hour, flow horizon, interaction, feature, or model search on these archives would increase overfitting rather than improve causal evidence.
+After the user explicitly relaxed the four-trades-per-day target, one
+separately locked selective rule traded only when the Kraken and Binance flow
+signs agreed. It reduced frequency to 941 trades, or 2.077 per source-complete
+Neutral date, but still failed every window: 31.56% wins, 1.439 payoff, PF
+0.663, and -222.23R overall. The last six months deteriorated to 68 trades,
+20.59% wins, PF 0.373, and -34.75R. Frequency was not the binding problem.
+
+The evidence does not support claiming that Regime 1 has been solved. Further
+retrospective venue weighting, threshold, hour, flow horizon, interaction,
+feature, or model search on these archives would increase overfitting rather
+than improve causal evidence.
 
 ## Next legitimate evidence
 
@@ -327,7 +337,8 @@ Progress now requires at least one source not adaptively exhausted here:
 2. event-time macroeconomic surprise data known at release;
 3. an institutional multi-venue order-book archive not represented by the
    inspected Kraken EUR/USD and Binance EURUSDT retail-venue histories;
-4. an explicit relaxation of the requested frequency/payoff objective.
+4. a forward-only, predeclared selective learner whose probability calibration
+   and admission rule are frozen before any new observations.
 
 Until then, Regime 1 remains `CASH`.
 
@@ -360,4 +371,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_flow_augmented_ranker.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python download_neutral_kraken_eurusd.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_kraken_multivenue_flow.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_multivenue_agreement.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_multivenue_agreement.py backtest
 ```

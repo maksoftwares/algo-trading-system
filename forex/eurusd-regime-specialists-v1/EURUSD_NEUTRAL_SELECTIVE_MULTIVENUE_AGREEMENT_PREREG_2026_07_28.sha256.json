@@ -1,0 +1,30 @@
+{
+  "locked_before_selective_multivenue_agreement_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T08:36:00Z",
+  "files": {
+    "config/frozen_neutral_selective_multivenue_agreement.json": "033e0458d32eaebe496cc8704d0cf17227853b9a4b64fd3f7902a8b4cdd09c41",
+    "src/eurusd_regime_specialists/neutral_selective_multivenue_agreement.py": "e9f76cbf2a5d0b19c91fdd64c38e9964b20c55648022ba732feb2622decc0d34",
+    "run_neutral_selective_multivenue_agreement.py": "8e3bd35d155eef0a6729803724c0e5ab7a86a0336bc5f54771c90929a706804c",
+    "tests/test_neutral_selective_multivenue_agreement.py": "a7728aa1446d85ef62e2b5b8fbd88a115ff27b5cde06fd922c670727afa84d21",
+    "EURUSD_NEUTRAL_SELECTIVE_MULTIVENUE_AGREEMENT_PREREG_2026_07_28.md": "ec44569391ad86fa71c3f1a549c7ecad6095cd075fa43e75e75a50405eaf8c7e"
+  },
+  "pinned_parent": {
+    "PARENT_MULTIVENUE_CONTRACT": "4d051e8ea4d1901495279c28415d69c20f228081914db717af6d54562acb1e50",
+    "PARENT_MULTIVENUE_LOCK": "1dd0e965a275321e87a51848b41baf34dbfb00f9c5b6d5c4eefd7daae00eb59d"
+  },
+  "outcome_blind_census": {
+    "parent_decision_points": 1812,
+    "source_eligible_days": 453,
+    "agreement_candidates": 941,
+    "disagreement_points": 871,
+    "active_candidate_days": 419,
+    "no_trade_days": 34,
+    "candidate_count_distribution": {
+      "0": 34,
+      "1": 96,
+      "2": 168,
+      "3": 111,
+      "4": 44
+    }
+  }
+}
