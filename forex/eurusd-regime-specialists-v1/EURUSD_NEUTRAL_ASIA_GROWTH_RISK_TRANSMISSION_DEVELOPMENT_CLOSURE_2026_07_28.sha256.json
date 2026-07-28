@@ -1,0 +1,18 @@
+{
+  "campaign_id": "eurusd-neutral-asia-growth-risk-transmission-v1",
+  "family": "N48_NEUTRAL_ASIA_GROWTH_RISK_TRANSMISSION",
+  "closed_at_utc": "2026-07-28T14:00:00Z",
+  "status": "REJECTED_IN_DEVELOPMENT_2024_2026_FORBIDDEN",
+  "contract_rewritten_after_outcome": false,
+  "later_trade_outcomes_loaded": false,
+  "broker_action_allowed": false,
+  "files": {
+    "outputs/neutral_asia_growth_risk_transmission/CENSUS.json": "3706896bfea5ed79a69b47289577fd54b7c589d287cb6476ebbb8b9077d0a050",
+    "outputs/neutral_asia_growth_risk_transmission/CANDIDATES_OUTCOME_BLIND.parquet": "a3a72828048c064c8fa29e8cb4b60f7274fc474ff6cc1c8d39a03cb86573d35d",
+    "outputs/neutral_asia_growth_risk_transmission/DEVELOPMENT_RESULT.json": "32394d3812431d2a44e95b798964af63e02a7ef129f2275dda26f30272bb6cc4",
+    "outputs/neutral_asia_growth_risk_transmission/DEVELOPMENT_CANDIDATES.parquet": "ad81823b77ca346fcdc9cbbcd2f7293a5add833913754069a78724bdf9924916",
+    "outputs/neutral_asia_growth_risk_transmission/DEVELOPMENT_TRADES.parquet": "ca2556aef7016a43a85a63048ffa5a900df0fb30f2e15c982e6eb8f5dfa87095",
+    "EURUSD_NEUTRAL_ASIA_GROWTH_RISK_TRANSMISSION_DEVELOPMENT_VERDICT_2026_07_28.md": "05c0f7f730d4c97a28e642cfd64fa00fe809d88e205046302b4aea1f4b8b935a"
+  },
+  "next_allowed_action": "CLOSE_GROWTH_RISK_BRANCH_AND_PRESERVE_SEALED_FORWARD"
+}

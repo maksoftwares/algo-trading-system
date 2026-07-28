@@ -1,0 +1,158 @@
+{
+  "schema_version": "eurusd_neutral_asia_growth_risk_transmission_development_v1",
+  "family": "N48_NEUTRAL_ASIA_GROWTH_RISK_TRANSMISSION",
+  "status": "REJECTED_IN_DEVELOPMENT_2024_2026_FORBIDDEN",
+  "census": {
+    "candidates": 87,
+    "candidate_dates": 87,
+    "by_window": {
+      "development_2022": 19,
+      "development_2023": 25,
+      "confirmation_2024": 9,
+      "forward_2025": 21,
+      "recent_2026_h1": 13
+    },
+    "by_side": {
+      "LONG": 50,
+      "SHORT": 37
+    },
+    "cash_reasons_by_window": {
+      "development_2022": {
+        "non_asia_external_candidate": 67,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 18
+      },
+      "development_2023": {
+        "non_asia_external_candidate": 66,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 15
+      },
+      "confirmation_2024": {
+        "non_asia_external_candidate": 47,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 10
+      },
+      "forward_2025": {
+        "non_asia_external_candidate": 54,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 10
+      },
+      "recent_2026_h1": {
+        "non_asia_external_candidate": 28,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 8
+      }
+    },
+    "gate_results": {
+      "total": true,
+      "development_years": true,
+      "confirmation": true,
+      "forward_2025": true,
+      "recent_half_year": true,
+      "both_sides": true
+    },
+    "passed": true
+  },
+  "development": {
+    "windows": {
+      "development_2022": {
+        "trades": 17,
+        "wins": 7,
+        "losses": 10,
+        "win_rate": 0.4117647058823529,
+        "average_win_r": 1.4883402997653772,
+        "average_loss_r": 1.0087912655323,
+        "realized_payoff_ratio": 1.4753699309440769,
+        "profit_factor": 1.0327589516608537,
+        "net_r": 0.33046944303464043,
+        "expectancy_r": 0.019439379002037672,
+        "max_drawdown_r": 3.5649676647652577
+      },
+      "development_2023": {
+        "trades": 24,
+        "wins": 9,
+        "losses": 15,
+        "win_rate": 0.375,
+        "average_win_r": 1.4870756313738083,
+        "average_loss_r": 1.0137205318601425,
+        "realized_payoff_ratio": 1.4669483202091955,
+        "profit_factor": 0.8801689921255174,
+        "net_r": -1.8221272955378627,
+        "expectancy_r": -0.07592197064741095,
+        "max_drawdown_r": 5.626783006206794
+      }
+    },
+    "combined": {
+      "trades": 41,
+      "wins": 16,
+      "losses": 25,
+      "win_rate": 0.3902439024390244,
+      "average_win_r": 1.4876289237951197,
+      "average_loss_r": 1.0117488253290057,
+      "realized_payoff_ratio": 1.4703539915762835,
+      "profit_factor": 0.9410265546088216,
+      "net_r": -1.4916578525032222,
+      "expectancy_r": -0.036381898841542006,
+      "max_drawdown_r": 5.626783006206794
+    },
+    "by_side": {
+      "LONG": {
+        "trades": 24,
+        "wins": 10,
+        "losses": 14,
+        "win_rate": 0.4166666666666667,
+        "average_win_r": 1.488497410980651,
+        "average_loss_r": 1.0107712734667176,
+        "realized_payoff_ratio": 1.4726352539436944,
+        "profit_factor": 1.051882324245496,
+        "net_r": 0.7341762812724666,
+        "expectancy_r": 0.030590678386352776,
+        "max_drawdown_r": 5.094926920119036
+      },
+      "SHORT": {
+        "trades": 17,
+        "wins": 6,
+        "losses": 11,
+        "win_rate": 0.35294117647058826,
+        "average_win_r": 1.4861814451525674,
+        "average_loss_r": 1.0129929822446448,
+        "realized_payoff_ratio": 1.4671191915460322,
+        "profit_factor": 0.8002468317523812,
+        "net_r": -2.225834133775688,
+        "expectancy_r": -0.130931419633864,
+        "max_drawdown_r": 5.681467902522066
+      }
+    },
+    "gate_results": {
+      "each_window": false,
+      "combined_trades": true,
+      "combined_win_rate_band": false,
+      "combined_payoff_band": true,
+      "combined_profit_factor": false,
+      "combined_expectancy": false,
+      "side_capacity": true,
+      "side_profit_factor": false,
+      "drawdown": true
+    },
+    "passed": false
+  },
+  "execution_skips": {
+    "position_open": 0,
+    "entry_bar_missing": 0,
+    "prior_structure_missing_or_noncontiguous": 0,
+    "risk_ceiling": 3
+  },
+  "eurusd_bounded_load": {
+    "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+    "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "requested_start_utc": "2022-01-01T00:00:00+00:00",
+    "read_start_with_stop_lookback_utc": "2021-12-31T23:00:00+00:00",
+    "stage_end_utc": "2023-12-31T23:59:59+00:00",
+    "loaded_first_timestamp_utc": "2022-01-02T22:00:00+00:00",
+    "loaded_last_timestamp_utc": "2023-12-29T21:55:00+00:00",
+    "loaded_rows": 149529,
+    "future_rows_loaded": false
+  },
+  "later_trade_outcomes_loaded": false,
+  "broker_action_allowed": false
+}

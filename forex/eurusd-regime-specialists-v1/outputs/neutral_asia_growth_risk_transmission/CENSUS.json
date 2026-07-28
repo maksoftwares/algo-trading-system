@@ -1,0 +1,115 @@
+{
+  "schema_version": "eurusd_neutral_asia_growth_risk_transmission_census_v1",
+  "family": "N48_NEUTRAL_ASIA_GROWTH_RISK_TRANSMISSION",
+  "status": "CENSUS_PASS_DEVELOPMENT_ALLOWED",
+  "census": {
+    "candidates": 87,
+    "candidate_dates": 87,
+    "by_window": {
+      "development_2022": 19,
+      "development_2023": 25,
+      "confirmation_2024": 9,
+      "forward_2025": 21,
+      "recent_2026_h1": 13
+    },
+    "by_side": {
+      "LONG": 50,
+      "SHORT": 37
+    },
+    "cash_reasons_by_window": {
+      "development_2022": {
+        "non_asia_external_candidate": 67,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 18
+      },
+      "development_2023": {
+        "non_asia_external_candidate": 66,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 15
+      },
+      "confirmation_2024": {
+        "non_asia_external_candidate": 47,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 10
+      },
+      "forward_2025": {
+        "non_asia_external_candidate": 54,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 10
+      },
+      "recent_2026_h1": {
+        "non_asia_external_candidate": 28,
+        "required_eurusd_bar_missing": 0,
+        "opposite_or_zero_transmission": 8
+      }
+    },
+    "gate_results": {
+      "total": true,
+      "development_years": true,
+      "confirmation": true,
+      "forward_2025": true,
+      "recent_half_year": true,
+      "both_sides": true
+    },
+    "passed": true
+  },
+  "feature_only_bounded_loads": {
+    "development_2022": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+      "requested_start_utc": "2022-01-01T00:00:00+00:00",
+      "read_start_with_stop_lookback_utc": "2021-12-31T23:00:00+00:00",
+      "stage_end_utc": "2022-12-31T23:59:59+00:00",
+      "loaded_first_timestamp_utc": "2022-01-02T22:00:00+00:00",
+      "loaded_last_timestamp_utc": "2022-12-30T21:55:00+00:00",
+      "loaded_rows": 74873,
+      "future_rows_loaded": false
+    },
+    "development_2023": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+      "requested_start_utc": "2023-01-01T00:00:00+00:00",
+      "read_start_with_stop_lookback_utc": "2022-12-31T23:00:00+00:00",
+      "stage_end_utc": "2023-12-31T23:59:59+00:00",
+      "loaded_first_timestamp_utc": "2023-01-01T22:00:00+00:00",
+      "loaded_last_timestamp_utc": "2023-12-29T21:55:00+00:00",
+      "loaded_rows": 74656,
+      "future_rows_loaded": false
+    },
+    "confirmation_2024": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+      "requested_start_utc": "2024-01-01T00:00:00+00:00",
+      "read_start_with_stop_lookback_utc": "2023-12-31T23:00:00+00:00",
+      "stage_end_utc": "2024-12-31T23:59:59+00:00",
+      "loaded_first_timestamp_utc": "2024-01-01T22:00:00+00:00",
+      "loaded_last_timestamp_utc": "2024-12-31T21:55:00+00:00",
+      "loaded_rows": 74948,
+      "future_rows_loaded": false
+    },
+    "forward_2025": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+      "requested_start_utc": "2025-01-01T00:00:00+00:00",
+      "read_start_with_stop_lookback_utc": "2024-12-31T23:00:00+00:00",
+      "stage_end_utc": "2025-12-31T23:59:59+00:00",
+      "loaded_first_timestamp_utc": "2025-01-01T22:00:00+00:00",
+      "loaded_last_timestamp_utc": "2025-12-31T21:55:00+00:00",
+      "loaded_rows": 74662,
+      "future_rows_loaded": false
+    },
+    "recent_2026_h1": {
+      "path": "D:\\AlgoTradingData\\research\\fx-multipair-portfolio-v1\\bars\\EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+      "requested_start_utc": "2026-01-01T00:00:00+00:00",
+      "read_start_with_stop_lookback_utc": "2025-12-31T23:00:00+00:00",
+      "stage_end_utc": "2026-06-30T23:59:59+00:00",
+      "loaded_first_timestamp_utc": "2026-01-01T22:00:00+00:00",
+      "loaded_last_timestamp_utc": "2026-06-30T23:55:00+00:00",
+      "loaded_rows": 36900,
+      "future_rows_loaded": false
+    }
+  },
+  "trade_outcomes_loaded": false,
+  "broker_action_allowed": false
+}
