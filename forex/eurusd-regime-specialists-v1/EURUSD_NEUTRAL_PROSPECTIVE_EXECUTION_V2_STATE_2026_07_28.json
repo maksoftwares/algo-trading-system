@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T18:26:56.246284Z",
+  "as_of_utc": "2026-07-28T18:36:07.154866Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -212,6 +212,20 @@
     "historical_pnl_used_for_strategy_selection": false,
     "broker_action_allowed": false
   },
+  "gdelt_gkg_source_audit": {
+    "status": "FREE_TIMESTAMPED_SOURCE_ACCEPTED_FOR_PROSPECTIVE_CENSUS_ONLY",
+    "sample_observed_at_utc": "2026-07-28T18:32:10.333130Z",
+    "provider_md5_matched": true,
+    "sample_sha256": "5b1d45505628a4690f6390d5c84de1c5eb84abb11a95f9576cb2b135057115fe",
+    "sample_rows": 1800,
+    "expected_fields_per_row": 27,
+    "strict_ecb_articles": 0,
+    "strict_fed_articles": 12,
+    "strategy_preregistered": false,
+    "eurusd_outcomes_loaded": false,
+    "next_allowed_step": "OUTCOME_BLIND_MULTI_DATE_COVERAGE_CENSUS",
+    "broker_action_allowed": false
+  },
   "prospective_directional_falsification": {
     "schema_version": "eurusd_neutral_prospective_directional_falsification_result_v1",
     "status": "WAITING_FOR_PROSPECTIVE_START",
@@ -326,7 +340,7 @@
   "profitability_and_robustness_required_for_demo_readiness": true,
   "demo_trading_authorized": false,
   "full_test_suite": {
-    "passed": 305,
+    "passed": 306,
     "failed": 0,
     "warnings": 2
   },

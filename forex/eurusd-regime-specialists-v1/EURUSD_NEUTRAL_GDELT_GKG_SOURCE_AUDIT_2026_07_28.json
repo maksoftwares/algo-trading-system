@@ -1,0 +1,65 @@
+{
+  "schema_version": "eurusd_neutral_gdelt_gkg_source_audit_v1",
+  "status": "FREE_TIMESTAMPED_SOURCE_ACCEPTED_FOR_PROSPECTIVE_CENSUS_ONLY",
+  "source_audit_only": true,
+  "strategy_preregistered": false,
+  "eurusd_outcomes_loaded": false,
+  "broker_action_allowed": false,
+  "provider": "GDELT Project",
+  "provider_lastupdate_url": "http://data.gdeltproject.org/gdeltv2/lastupdate.txt",
+  "sample_url": "http://data.gdeltproject.org/gdeltv2/20260728183000.gkg.csv.zip",
+  "sample_observed_at_utc": "2026-07-28T18:32:10.333130Z",
+  "sample_path": "D:/AlgoTradingData/source-audits/gdelt-gkg-v1/raw/20260728183000.gkg.csv.zip",
+  "provider_expected_bytes": 7563257,
+  "sample_bytes": 7563257,
+  "provider_md5": "51b4d4a4dde88aeab93506f5468003ec",
+  "sample_md5": "51b4d4a4dde88aeab93506f5468003ec",
+  "sample_sha256": "5b1d45505628a4690f6390d5c84de1c5eb84abb11a95f9576cb2b135057115fe",
+  "zip_members": [
+    "20260728183000.gkg.csv"
+  ],
+  "zip_member_compressed_bytes": 7563063,
+  "zip_member_uncompressed_bytes": 23359158,
+  "rows": 1800,
+  "field_count_distribution": {
+    "27": 1800
+  },
+  "gkg_timestamp_counts": {
+    "20260728183000": 1800
+  },
+  "tracked_theme_counts": {
+    "EPU_POLICY_FEDERAL_RESERVE": 15,
+    "ECON_CENTRALBANK": 24,
+    "ECON_WORLDCURRENCIES_EURO": 1,
+    "ECON_WORLDCURRENCIES_US_DOLLAR": 1
+  },
+  "strict_central_bank_article_counts": {
+    "ECB": 0,
+    "FED": 12
+  },
+  "strict_central_bank_examples": {
+    "ECB": [],
+    "FED": [
+      {
+        "record_id": "20260728183000-359",
+        "source_common_name": "moneycontrol.com",
+        "document_identifier": "https://www.moneycontrol.com/news/business/commodities/oil-prices-fall-5-to-two-week-low-on-hopes-for-us-iran-conflict-easing-13986293.html",
+        "tone": -3.80281690140845
+      },
+      {
+        "record_id": "20260728183000-421",
+        "source_common_name": "etftrends.com",
+        "document_identifier": "https://www.etftrends.com/portfolio-strategies-content-hub/treasury-yield-nears-5-percent-fed-shifts-course/",
+        "tone": 0.0
+      },
+      {
+        "record_id": "20260728183000-454",
+        "source_common_name": "lasvegassun.com",
+        "document_identifier": "https://lasvegassun.com/news/2026/jul/27/wall-streets-flip-from-ai-stocks-to-elsewhere-acce/",
+        "tone": 0.236406619385343
+      }
+    ]
+  },
+  "semantic_finding": "GKG tone is document-level and strict ECB/Fed coverage can be asymmetric; no causal EURUSD side rule is justified by this single schema sample.",
+  "next_allowed_step": "FREEZE AN OUTCOME-BLIND MULTI-DATE COVERAGE CENSUS BEFORE ANY EURUSD RETURN OR ORACLE MATCH IS LOADED"
+}
