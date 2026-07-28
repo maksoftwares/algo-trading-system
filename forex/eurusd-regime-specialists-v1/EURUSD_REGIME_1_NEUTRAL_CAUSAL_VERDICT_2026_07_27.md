@@ -33,6 +33,7 @@ execution decision.
 | Matched OTC option premium skew | 2025 Q4–2026 H1 | 48 | 35.42% | 1.439 | 0.789 | -6.70R |
 | Four-session 30-minute opening drive | 2019–2026 H1 | 593 | 32.04% | 1.432 | 0.675 | -134.20R |
 | Midnight dual-side pairs | 2019–2026 H1 | 2,620 | 31.56% | 1.433 | 0.661 | -625.38R |
+| Four-clock paired side ranker | 2021–2026 H1 | 1,732 | 33.26% | 1.432 | 0.714 | -341.10R |
 
 None passed all locked chronological admission gates. Consequently, none is
 an admitted strategy or eligible for demo/live use.
@@ -280,6 +281,14 @@ PF 0.661, and -625.38R. The 827 one-winner pairs earned about +0.45R each,
 while 483 no-winner pairs lost about -2.05R each. Mechanical frequency did
 not solve the missing directional edge.
 
+A final paired-learning campaign directly modeled LONG versus SHORT instead
+of independent rare-event membership. Sixteen fixed decision-time feature
+contrasts fed a purged L2 ranker at four fixed first-hour clocks. It
+delivered exactly four trades on every evaluation Neutral date, but
+conditional winning-side accuracy remained only 52.60%. All five windows
+failed; 1,732 trades returned 33.26% wins, 1.432 payoff, PF 0.714, and
+-341.10R. The direct ranking formulation is also closed.
+
 The evidence does not support claiming that Regime 1 has been solved. Further retrospective threshold, hour, feature, or model search on this archive would increase overfitting rather than improve causal evidence.
 
 ## Next legitimate evidence
@@ -319,4 +328,5 @@ uv run --with pandas --with numpy --with pyarrow python build_neutral_dtcc_skew_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_dtcc_skew.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_opening_drive.py
 uv run --with pandas --with numpy --with pyarrow python run_neutral_midnight_pairs.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_four_clock_ranker.py
 ```

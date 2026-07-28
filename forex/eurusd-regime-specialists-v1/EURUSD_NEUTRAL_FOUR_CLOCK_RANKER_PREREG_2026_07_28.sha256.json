@@ -1,0 +1,21 @@
+{
+  "locked_before_four_clock_ranker_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T10:30:00Z",
+  "files": {
+    "config/frozen_neutral_four_clock_ranker.json": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "src/eurusd_regime_specialists/neutral_four_clock_ranker.py": "b825761224cc74c773121aaf44f16e48000a40aefca9322776ac42a61b2693fc",
+    "run_neutral_four_clock_ranker.py": "87b203e04d0f8be618b67cb8c74c05b7a3ace926be4d48c4efd4e0aad321969b",
+    "tests/test_neutral_four_clock_ranker.py": "f10a5e7bc693a0bf388f4013d7f0498819a654c2337873fd5f17464774f44fc0",
+    "EURUSD_NEUTRAL_FOUR_CLOCK_RANKER_PREREG_2026_07_28.md": "11177085b4ca6ad38ce14fae8c682fd350be497b00ce8ffaeb1ae8778b10cb8f"
+  },
+  "pinned_sources": {
+    "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "config/frozen_neutral_oracle_imitation.json": "9439fdcdfadde2a0fb692df7fd8f9be56c89261dd361a71c8824b1b65efc8000"
+  },
+  "outcome_blind_census": {
+    "eligible_complete_days": 642,
+    "paired_decision_points": 2568,
+    "forced_trade_candidates": 2568,
+    "days_exactly_four_candidates": 642
+  }
+}
