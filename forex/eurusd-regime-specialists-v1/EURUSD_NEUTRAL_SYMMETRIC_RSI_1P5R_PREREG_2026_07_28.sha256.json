@@ -1,0 +1,14 @@
+{
+  "schema_version": "eurusd_neutral_symmetric_rsi_1p5r_prereg_lock_v1",
+  "locked_at_utc": "2026-07-28T12:00:00Z",
+  "locked_before_census_and_outcome": true,
+  "files": {
+    "config/frozen_neutral_symmetric_rsi_1p5r.json": "b4602dc82fa04db34fc9bcf8dbabdd345300448272d5fdfc35d21dad79d743c3",
+    "EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_PREREG_2026_07_28.md": "33349acefb7a26eb250bc19d9a46fb401d009a3bad989571a1731ff0b220c084",
+    "src/eurusd_regime_specialists/neutral_symmetric_rsi_1p5r.py": "e06c071ee3cd239a9a5d927e4e64605b1e69c3f8d3b7899b9765115c76b04423",
+    "run_neutral_symmetric_rsi_1p5r.py": "746390a3c9e0ef6f9f8ab9ad81bfa55dd676571f36e59020b9c04c8a23599882",
+    "tests/test_neutral_symmetric_rsi_1p5r.py": "6e9eb212cee0b9d2116f6a51e3eb696229daf712c4dbf861971ed035cd82dc48",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "outputs/adaptive_frequency_fallback_audit/RESULT.json": "26ea26eaf080fd7fe5575878a5861fb74fd784347688db7cf35ab4abc4fc5209"
+  }
+}

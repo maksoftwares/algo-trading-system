@@ -1,0 +1,101 @@
+{
+  "campaign_id": "eurusd-neutral-symmetric-rsi-1p5r-v1",
+  "frozen_at_utc": "2026-07-28T12:00:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "parent_audit": {
+    "path": "outputs/adaptive_frequency_fallback_audit/RESULT.json",
+    "sha256": "26ea26eaf080fd7fe5575878a5861fb74fd784347688db7cf35ab4abc4fc5209"
+  },
+  "data_and_classifier_contract": "config/frozen_two_clock_ensemble.json",
+  "owned_regime": "NEUTRAL",
+  "strategy": {
+    "signal_timeframe_minutes": 15,
+    "bands_period": 20,
+    "bands_deviation": 2.0,
+    "rsi_period": 14,
+    "long_rsi_maximum": 30.0,
+    "short_rsi_minimum": 70.0,
+    "atr_period": 14,
+    "recent_extreme_bars": 6,
+    "stop_atr_multiple": 1.4,
+    "stop_floor_pips": 3.0,
+    "stop_ceiling_pips": 70.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "directions": [
+      "LONG",
+      "SHORT"
+    ],
+    "long_signal": "completed M15 RSI(14) <= 30 and bid close below completed Bollinger mid(20)",
+    "short_signal": "completed M15 RSI(14) >= 70 and bid close above completed Bollinger mid(20)",
+    "entry_hour_filters": [],
+    "body_filter": null,
+    "h4_size_overlay": false,
+    "frequency_quota": null
+  },
+  "execution": {
+    "entry": "first archived M5 open at or after completed M15 signal",
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "one_open_position": true,
+    "fixed_research_lots": 0.01,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-02T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "chronological_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "chronological_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "chronological_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "recent_2026_h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "outcome_blind_census": {
+    "minimum_neutral_signals_total": 250,
+    "minimum_neutral_signals_each_full_year_window": 20,
+    "minimum_neutral_signals_recent_half_year": 10,
+    "requires_both_directions": true
+  },
+  "admission": {
+    "minimum_executed_trades_total": 150,
+    "minimum_executed_trades_each_full_year_window": 20,
+    "minimum_executed_trades_recent_half_year": 10,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_window": 1.0,
+    "minimum_each_side_trades": 30,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_drawdown_r": 20.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_same_side_15m_oracle_precision": 0.1,
+    "minimum_same_side_15m_oracle_recall": 0.02
+  },
+  "decision_policy": {
+    "no_parameter_search": true,
+    "no_threshold_change_after_census": true,
+    "no_direction_cut_after_outcome": true,
+    "no_hour_or_calendar_filter_after_outcome": true,
+    "no_activation_of_isolated_profitable_window": true,
+    "failure_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING"
+  }
+}
