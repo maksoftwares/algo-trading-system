@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T16:38:27.142449Z",
+  "as_of_utc": "2026-07-28T16:44:59.741363Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -20,6 +20,7 @@
   "prospective_ownership_prewarm_lock_sha256": "98cb9b8f1ab9e20917c8573dd623d85f7a9335dbd16381336ef2761e3b451301",
   "prospective_operations_planner_lock_sha256": "6604c256bb35419a2e651ae422da0d096e86f0fd91af4289c61c569976d67e5f",
   "prospective_independent_validation_lock_sha256": "4a6158c8d22b72ab1a10fb51c6d451034f4a33a0f6ddc2358d3921a8846878f7",
+  "prospective_directional_falsification_lock_sha256": "93f022e4ab721d835ff99528de388671e4457c31d483f186cbbee4a2536fe1d8",
   "orchestration_status": "WAITING_FOR_PROSPECTIVE_START",
   "evidence_inventory_sha256": "c05dfd9bf596edb567816e153fabff48b2716b1c77f26b5909740194c2a5ec38",
   "ledger_inventory_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -113,6 +114,25 @@
     "network_request_made": false,
     "broker_action_allowed": false
   },
+  "prospective_directional_falsification": {
+    "schema_version": "eurusd_neutral_prospective_directional_falsification_result_v1",
+    "status": "WAITING_FOR_PROSPECTIVE_START",
+    "evaluated_at_utc": "2026-07-28T16:44:59.741363Z",
+    "closed_primary_trades": 0,
+    "opposite_side_counterfactual_trades": 0,
+    "frequency_is_an_admission_gate": false,
+    "minimum_calendar_months": 12,
+    "minimum_closed_primary_trades": 30,
+    "minimum_primary_profit_factor": 1.3,
+    "minimum_profit_factor_advantage": 0.15,
+    "maximum_one_sided_paired_randomization_p_value": 0.1,
+    "counterfactual_changed_primary_trade": false,
+    "directional_hypothesis_survived": false,
+    "research_review_allowed": false,
+    "historical_pnl_loaded": false,
+    "network_request_made": false,
+    "broker_action_allowed": false
+  },
   "causal_revision_invariance_rehearsal": {
     "status": "PASSED",
     "scope": "END_TO_END_ACTUAL_AND_MARKET_REVISION_AFTER_IMMUTABLE_CLOSED_TRADE",
@@ -188,7 +208,7 @@
   "profitability_and_robustness_required_for_demo_readiness": true,
   "demo_trading_authorized": false,
   "full_test_suite": {
-    "passed": 272,
+    "passed": 279,
     "failed": 0,
     "warnings": 2
   },

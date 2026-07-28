@@ -1,0 +1,63 @@
+{
+  "schema_version": "eurusd_neutral_prospective_directional_falsification_v1",
+  "frozen_at_utc": "2026-07-28T16:41:08Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "evaluation_only": true,
+  "network_requests_allowed": false,
+  "broker_action_allowed": false,
+  "campaign_orchestration_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_V1_2_PREREG_2026_07_28.sha256.json",
+    "sha256": "759f6cdda68ae2ee469c681524ce446c0448944c3c5fb35734b3fd88f7b4ce2e"
+  },
+  "independent_validation_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_VALIDATION_PREREG_2026_07_28.sha256.json",
+    "sha256": "4a6158c8d22b72ab1a10fb51c6d451034f4a33a0f6ddc2358d3921a8846878f7"
+  },
+  "counterfactual": {
+    "side": "EXACT_OPPOSITE_OF_FROZEN_CAUSAL_SIGNAL",
+    "entry_time": "EXACT_SAME_M5_TIMESTAMP_AS_PRIMARY",
+    "risk_pips": "EXACT_SAME_AS_PRIMARY",
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "adverse_slippage_pips_per_side": 0.1,
+    "extra_round_trip_stress_pips": 0.5,
+    "same_bar_policy": "STOP_FIRST",
+    "missing_path_action": "FAIL_CLOSED",
+    "counterfactual_may_change_primary_trade": false
+  },
+  "sample_gate": {
+    "minimum_calendar_months": 12,
+    "minimum_closed_primary_trades": 30,
+    "all_closed_primary_paths_required": true
+  },
+  "directional_gate": {
+    "minimum_primary_profit_factor": 1.3,
+    "minimum_primary_minus_counterfactual_profit_factor": 0.15,
+    "minimum_primary_minus_counterfactual_expectancy_r": 0.0,
+    "minimum_primary_minus_counterfactual_win_rate": 0.0,
+    "maximum_one_sided_paired_randomization_p_value": 0.1,
+    "all_checks_required": true
+  },
+  "paired_randomization": {
+    "null": "PRIMARY_AND_OPPOSITE_SIDE_LABELS_ARE_EXCHANGEABLE_WITHIN_EACH_EVENT",
+    "statistic": "MEAN_PRIMARY_R_MINUS_COUNTERFACTUAL_R",
+    "exact_enumeration_maximum_pairs": 20,
+    "monte_carlo_sign_vectors": 100000,
+    "seed": 20260728,
+    "tail": "ONE_SIDED_GREATER"
+  },
+  "frequency_policy": {
+    "minimum_trades_per_day": null,
+    "frequency_is_reported_but_not_an_admission_gate": true
+  },
+  "decision_policy": {
+    "historical_pnl_loading_forbidden": true,
+    "parameter_search_forbidden": true,
+    "counterfactual_filtering_or_routing_forbidden": true,
+    "failed_test_action": "REJECT_DIRECTIONAL_HYPOTHESIS_WITHOUT_RETUNING",
+    "passing_action": "INDEPENDENT_RESEARCH_REVIEW_ONLY",
+    "automatic_demo_or_broker_activation": false
+  }
+}
