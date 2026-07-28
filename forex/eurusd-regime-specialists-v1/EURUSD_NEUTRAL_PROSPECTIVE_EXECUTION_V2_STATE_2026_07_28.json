@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1",
-  "as_of_utc": "2026-07-28T14:30:00Z",
+  "as_of_utc": "2026-07-28T14:50:00Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -11,6 +11,10 @@
   "v2_original_lock_sha256": "024fba2fe01be1043f2f15ef7267eaa3286250bf3e5ca2471734324a8d67b31c",
   "v2_1_lock_sha256": "4364d8160008a120f1e6048ec4a0212c06a37a8026ab5d0c42d5e878c2abcb46",
   "neutral_ownership_lock_sha256": "e980c958bd350f9254fa51b559448800f00a1f0f9fbeb5e070d354b3772c180a",
+  "campaign_orchestration_lock_sha256": "ee39abf89b58789b3bdd03b055b5e075450b63045b7711619200462228913cb6",
+  "orchestration_status": "WAITING_FOR_PROSPECTIVE_START",
+  "evidence_inventory_sha256": "8fd4da44e16793129acf782f226f1038bd9a267c854334a979586454a39c5458",
+  "ledger_inventory_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "historical_backtest_run": false,
   "historical_pnl_loaded": false,
   "network_request_made_by_status_check": false,

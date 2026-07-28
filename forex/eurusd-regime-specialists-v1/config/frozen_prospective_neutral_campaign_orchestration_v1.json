@@ -1,0 +1,58 @@
+{
+  "schema_version": "eurusd_neutral_prospective_campaign_orchestration_v1",
+  "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
+  "frozen_at_utc": "2026-07-28T14:48:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "shadow_only": true,
+  "broker_action_allowed": false,
+  "execution_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_EXECUTION_V2_1_PREREG_2026_07_28.sha256.json",
+    "sha256": "4364d8160008a120f1e6048ec4a0212c06a37a8026ab5d0c42d5e878c2abcb46"
+  },
+  "ownership_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_OWNERSHIP_PREREG_2026_07_28.sha256.json",
+    "sha256": "e980c958bd350f9254fa51b559448800f00a1f0f9fbeb5e070d354b3772c180a"
+  },
+  "evidence_roots": {
+    "consensus_and_actual": "D:/AlgoTradingData/prospective/eurusd-neutral-tradingview-consensus-v1",
+    "event_market": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/market",
+    "neutral_ownership": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership",
+    "trade_path": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/path",
+    "ledger": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ledger"
+  },
+  "source_validation": {
+    "every_normalized_snapshot_requires_one_valid_manifest": true,
+    "all_referenced_raw_metadata_and_normalized_hashes_required": true,
+    "ownership_record_and_content_addressed_manifest_required": true,
+    "complete_path_requires_144_continuous_m5_rows": true,
+    "relative_paths_must_remain_inside_evidence_root": true,
+    "missing_or_tampered_evidence_action": "FAIL_CLOSED"
+  },
+  "ledger": {
+    "signal_record_layout": "signals/records/SIGNAL_ID_RECORD_SHA16.json",
+    "trade_record_layout": "trades/records/SIGNAL_ID_RECORD_SHA16.json",
+    "process_manifest_layout": "manifests/PROCESS_ASOF_SHA16.json",
+    "one_record_per_signal_id": true,
+    "one_signal_per_exact_event_identity": true,
+    "existing_record_must_match_reconstructed_record": true,
+    "overwrite_allowed": false
+  },
+  "routing": {
+    "cash_signal_action": "PERSIST_CASH_NO_TRADE",
+    "missing_complete_path_action": "PENDING_NOT_PERSISTED",
+    "later_non_cash_signal_while_prior_path_pending": "BLOCKED_NOT_PERSISTED",
+    "entry_at_or_before_prior_exit": "PERSIST_SKIPPED_POSITION_ALREADY_OPEN",
+    "complete_path_action": "PERSIST_CLOSED_TRADE",
+    "one_open_position": true
+  },
+  "process_policy": {
+    "network_requests_allowed": false,
+    "historical_pnl_allowed": false,
+    "parameter_search_allowed": false,
+    "source_revision_may_replace_existing_signal": false,
+    "terminal_trade_revision_allowed": false,
+    "oracle_labels_may_filter_signals": false,
+    "broker_action_allowed": false
+  }
+}

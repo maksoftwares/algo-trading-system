@@ -1,0 +1,17 @@
+{
+  "schema_version": "eurusd_neutral_prospective_campaign_orchestration_v1_lock",
+  "locked_at_utc": "2026-07-28T14:49:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_prospective_start_and_first_signal": true,
+  "historical_pnl_loaded_before_lock": false,
+  "ownership_records_before_lock": 0,
+  "eligible_signals_before_lock": 0,
+  "terminal_trade_records_before_lock": 0,
+  "files": {
+    "config/frozen_prospective_neutral_campaign_orchestration_v1.json": "ee3d04b796b4b3108ac11963f7c4bd69875fc142cfdee9bf339b22aa996167ac",
+    "src/eurusd_regime_specialists/prospective_neutral_campaign_orchestration.py": "f77ce11ee020345801c5b16bf8dc001f3bd4a39540be468638b9ce35358dda48",
+    "run_prospective_neutral_campaign_v1.py": "290c885851f71fbf124d46750b18631f69f489712fde8e9741b5a7dba839f795",
+    "tests/test_prospective_neutral_campaign_orchestration.py": "5def0f59bff703838d4b177f8000e26a25f023c31f1eedb3c1cd342227757745",
+    "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_PREREG_2026_07_28.md": "839f85a2345afb537311764614b9da56ac8a218e9cbc7ab41cc55606fd972cba"
+  }
+}
