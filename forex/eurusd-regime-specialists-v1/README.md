@@ -43,6 +43,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 37. Point-in-time BLS source: 267 official archived CPI, PPI, and Employment Situation PDFs were downloaded without login and normalized to the values initially published at each release. Coverage is 98.89%/96.74%/96.74%, every parsed PDF has an evidence sentence and checksum, no later database revision is used, and the 2020 NFP unit audit preserves -20.5 million and +2.5 million correctly. This revision-safe source is accepted for causal research, not trading authorization.
 38. BLS release-time acceleration: the source, same-family initial-value comparison, 15-minute wait, fixed 15-pip/1.5R execution, entry-time Neutral ownership, and gates were hash-locked and pushed before census. The 267 releases produced 244 directional macro signals but only 30 full-contract Neutral candidates: 19/2/1/6/2 across development, 2023, 2024, 2025, and 2026 H1. Both sides and all three families were represented, but total, development, 2023, and 2024 capacity failed. P&L was not opened and the exact event-entry family is closed.
 39. BLS first-hour macro carry: the revision-safe acceleration state was carried for at most 72 hours to Regime 1's four outcome-blind first-hour clocks. The frozen census passed with 448 candidates on 112 Neutral dates, balanced across directions and all three families. The single permitted run achieved the intended 1.439 payoff but only 32.37% wins, PF 0.689, and -96.70R. Only 2024 was positive. The latest six months produced 20 trades, 20.00% wins, PF 0.360, -10.50R, and -$4.20 at fixed 0.01 lot. Stress PF was 0.562 and 15-minute oracle precision only 34.82%; the exact carry rule is rejected without reversal or year selection.
+40. BLS six-release rolling surprise: the current first-published CPI, PPI, or NFP value was compared with the median of its six previous consecutive initial values, then carried for at most 72 hours to the same four Neutral clocks. The locked census passed with 404 candidates on 101 dates. The frozen run achieved 1.439 payoff but only 32.18% wins, PF 0.683, and -89.10R. The latest six months appear strong at four trades, 75% wins, PF 4.317, +3.40R, and +$1.36 at 0.01 lot, but all four were overlapping CPI shorts on one date, 12 June 2026. That effective sample of one cannot authorize demo trading; development, 2023, and 2025 lost, stress PF was 0.557, and the exact rule is rejected.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -117,6 +118,8 @@ Key reports:
 - `EURUSD_NEUTRAL_BLS_RELEASE_ACCELERATION_CENSUS_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_BLS_FIRST_HOUR_CARRY_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_BLS_FIRST_HOUR_CARRY_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_BLS_ROLLING_SURPRISE_CARRY_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_BLS_ROLLING_SURPRISE_CARRY_VERDICT_2026_07_28.md`
 - `EURUSD_ADAPTIVE_FREQUENCY_FALLBACK_AUDIT_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_VERDICT_2026_07_28.md`
@@ -162,6 +165,7 @@ Key reports:
 - `outputs/neutral_event_crossasset_rates/CENSUS.json`
 - `outputs/neutral_bls_release_acceleration/CENSUS.json`
 - `outputs/neutral_bls_first_hour_carry/RESULT.json`
+- `outputs/neutral_bls_rolling_surprise_carry/RESULT.json`
 
 Run with:
 
@@ -228,4 +232,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_bls_release_acceleration.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_bls_first_hour_carry.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_bls_first_hour_carry.py backtest
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_bls_rolling_surprise_carry.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_bls_rolling_surprise_carry.py backtest
 ```

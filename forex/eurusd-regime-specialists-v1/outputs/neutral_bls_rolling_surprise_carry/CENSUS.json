@@ -1,0 +1,93 @@
+{
+  "schema_version": "eurusd_neutral_bls_rolling_surprise_carry_census_v1",
+  "family": "N38_NEUTRAL_BLS_ROLLING_SURPRISE_CARRY",
+  "status": "CENSUS_PASS_BACKTEST_ALLOWED",
+  "census": {
+    "source_rows": 267,
+    "incomplete_six_release_history": 38,
+    "zero_surprise": 12,
+    "directional_release_surprises": 217,
+    "neutral_clock_points": 2568,
+    "recent_macro_candidates": 404,
+    "cash_no_release_within_72h": 2164,
+    "candidate_days": 101,
+    "by_window": {
+      "development_2019_2022": 244,
+      "chronological_2023": 72,
+      "chronological_2024": 48,
+      "chronological_2025": 36,
+      "recent_2026_h1": 4
+    },
+    "by_side": {
+      "LONG": 192,
+      "SHORT": 212
+    },
+    "by_macro_family": {
+      "CPI": 164,
+      "PPI": 104,
+      "NFP": 136
+    },
+    "by_clock_minute": {
+      "0": 101,
+      "15": 101,
+      "30": 101,
+      "45": 101
+    },
+    "gate_results": {
+      "total": true,
+      "development": true,
+      "full_forward_years": true,
+      "recent_half_year": true,
+      "both_sides": true,
+      "families": true
+    },
+    "passed": true
+  },
+  "data_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    },
+    "BLS_INITIAL_RELEASES": {
+      "path": "D:/AlgoTradingData/research/eurusd-neutral-bls-initial-release-v1/BLS_INITIAL_RELEASES.parquet",
+      "sha256": "1fa88ef36dda61dba5ab711179283d6a2e77c11aaddde9f326f5444b5c1791fc",
+      "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-bls-initial-release-v1/MANIFEST.json",
+      "manifest_sha256": "7971ec2175f0958e80bd3e99dbe85641626cc2fc353f9bee1bf6808f6c8734e7",
+      "raw_pdf_chain_sha256": "05d06e91e43b942bf9a200faa6e5777d7f271255fbed09ba30e41612a3cf3a34",
+      "rows": 267,
+      "first_utc": "2019-01-04T13:30:00+00:00",
+      "last_utc": "2026-06-11T12:30:00+00:00",
+      "coverage_by_family": {
+        "CPI": 0.9888888888888889,
+        "PPI": 0.967391304347826,
+        "NFP": 0.967391304347826
+      },
+      "parse_errors": 0
+    },
+    "NEUTRAL_CLOCK_POINTS": {
+      "rows": 2568,
+      "paired_source_path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+      "paired_source_sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1"
+    }
+  }
+}
