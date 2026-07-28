@@ -1,0 +1,14 @@
+{
+  "campaign_id": "eurusd-neutral-futures-participation-v1",
+  "locked_before_futures_participation_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T06:15:00Z",
+  "files": {
+    "config/frozen_neutral_futures_participation.json": "3722e133034d176664ecf0264dc3a0b02b9680409e997d50f3e4bf54568267d3",
+    "EURUSD_NEUTRAL_FUTURES_PARTICIPATION_PREREG_2026_07_28.md": "a1e6c82a17d2f216905f18ed401f424a09b86b6ecadf82b03ac5a5886ec1fb6d",
+    "src/eurusd_regime_specialists/neutral_futures_participation.py": "10fc2b375057688595ce24030837d6f992c5d22a4d2c784f1ac41af465afb805",
+    "run_neutral_futures_participation.py": "796d0bfcc95a1d68810f482db1d303316daf262cbdb7d4b073dbe1a5152c3e46",
+    "download_neutral_futures_participation.py": "e09081b0e3d946cc20659b6146b05e664528a6681852bd09fc395f849c2de964",
+    "fetch_public_chart.ps1": "bb5d9f1b5eb671f8254dbb9156394e717948de3fa7580d659e03647de40d9f59"
+  },
+  "source_manifest_sha256": "c2af43f31eb8d2d3a9b37bdfb5f04fae7625a43e8c1eae5101fa980448dc5dd8"
+}

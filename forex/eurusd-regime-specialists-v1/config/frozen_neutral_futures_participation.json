@@ -1,0 +1,124 @@
+{
+  "campaign_id": "eurusd-neutral-futures-participation-v1",
+  "frozen_at_utc": "2026-07-28T06:15:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "parent_contract": {
+    "path": "config/frozen_neutral_oracle_imitation.json",
+    "sha256": "9439fdcdfadde2a0fb692df7fd8f9be56c89261dd361a71c8824b1b65efc8000"
+  },
+  "source_manifest": {
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-futures-participation-v1/MANIFEST.json",
+    "sha256": "c2af43f31eb8d2d3a9b37bdfb5f04fae7625a43e8c1eae5101fa980448dc5dd8"
+  },
+  "sources": {
+    "EURO_FX": {
+      "symbol": "6E=F",
+      "path": "D:/AlgoTradingData/research/eurusd-neutral-futures-participation-v1/EURO_FX_DAILY.parquet",
+      "sha256": "ed92569de6e4edc9aeb7949fca5ee9e00ec639439995e6d7d8670104c3b6e9d5",
+      "direction_multiplier": 1
+    },
+    "DOLLAR_ETF": {
+      "symbol": "UUP",
+      "path": "D:/AlgoTradingData/research/eurusd-neutral-futures-participation-v1/DOLLAR_ETF_DAILY.parquet",
+      "sha256": "36caa4cef96fa537a2abd9730a477c71a45f8a73a7bd32e89129298a5cbaf7c1",
+      "direction_multiplier": -1
+    }
+  },
+  "candidate": {
+    "regime": "NEUTRAL",
+    "entry_time_utc": "00:00",
+    "one_candidate_per_utc_date": true,
+    "source_bar": "LATEST_MATCHED_COMPLETED_PRIOR_US_SESSION",
+    "maximum_source_age_hours": 96,
+    "require_same_source_trade_date": true,
+    "return_definition": "SESSION_CLOSE_DIVIDED_BY_SESSION_OPEN_MINUS_ONE",
+    "volume_baseline_sessions": 20,
+    "volume_baseline_excludes_current_session": true,
+    "require_direction_agreement": true,
+    "participation_score": "GEOMETRIC_MEAN_OF_TWO_VOLUME_RATIOS",
+    "minimum_participation_score": 1.0,
+    "long_rule": "EURO_FX_RETURN_POSITIVE_AND_INVERTED_UUP_RETURN_POSITIVE",
+    "short_rule": "EURO_FX_RETURN_NEGATIVE_AND_INVERTED_UUP_RETURN_NEGATIVE",
+    "tie_or_missing_rule": "CASH"
+  },
+  "outcome_blind_census": {
+    "neutral_open_candidates": 655,
+    "same_date_valid_sources": 634,
+    "direction_agreements": 446,
+    "trade_candidates": 227,
+    "long_candidates": 105,
+    "short_candidates": 122,
+    "by_year": {
+      "2019": 36,
+      "2020": 31,
+      "2021": 38,
+      "2022": 30,
+      "2023": 22,
+      "2024": 21,
+      "2025": 31,
+      "2026": 18
+    }
+  },
+  "label": {
+    "risk_mode": "FIXED",
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "same_bar_policy": "stop_first",
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1
+  },
+  "development_window": [
+    "2019-01-02T00:00:00Z",
+    "2022-12-31T23:59:59Z"
+  ],
+  "walk_forward_windows": {
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "execution": {
+    "maximum_concurrent_positions": 1,
+    "maximum_trades_per_utc_day": 1,
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_open_portfolio_r": 0.25
+  },
+  "admission": {
+    "minimum_development_trades": 60,
+    "minimum_forward_window_trades": 10,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor_per_window": 1.0,
+    "minimum_profit_factor_overall": 1.3,
+    "minimum_stressed_profit_factor_overall": 1.15,
+    "minimum_expectancy_r": 0.0,
+    "maximum_drawdown_r_overall": 30.0,
+    "minimum_exact_match_precision_overall": 0.4,
+    "minimum_exact_match_recall_overall": 0.02,
+    "positive_after_top_5_percent_winners_removed": true
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  }
+}

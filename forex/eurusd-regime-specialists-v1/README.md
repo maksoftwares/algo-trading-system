@@ -20,6 +20,8 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 14. Official CME EUR/USD strike surface: the exact `EOD_XCME_EUU_OPT_0` dataset and its 71-column schema were validated. A non-tuned 25-delta risk-reversal parser and signal were frozen, including put-call-parity and Black-76 fallbacks. The required 2019-2026 EOD history is not locally entitled; CME lists complete history at USD 2,249, while the free Daily Bulletin retains only the latest day.
 15. Free official CME SPAN route: DataMine's `SPAN_ALL_GRP_EXCG` archive was verified at USD 0.00 with coverage from 2021-11-19. Its public PA2/XML sample contains the exact `EUU` long-dated EUR/USD options product, 20 expiries, and 2,562 contracts. The sample was downloaded and a settlement-only parser now feeds the frozen risk-reversal builder. The user's signup was stopped by missing OTP delivery; the legacy archive exposes indexes but blocks anonymous binary retrieval, so no historical options backtest was run.
 16. Price-only Neutral session OCO: four fixed UTC anchors let the first executable side of a two-sided breakout select direction without option data. The frozen rule produced 1,790 trades, 24.25% wins, 1.293 payoff, PF 0.414, and -895.98R. The latest six months produced 122 trades, 23.77% wins, PF 0.414, and -60.65R. This exact fallback is closed without repair.
+17. Exchange-traded participation: prior-session Euro FX futures direction was required to agree with inverse UUP direction, with both volume ratios above their preceding 20-session medians. The frozen rule produced 227 trades, 31.72% wins, 1.439 payoff, PF 0.668, and -52.70R. The latest six months produced 18 trades, 16.67% wins, PF 0.288, and -10.95R. This exact fallback is closed.
+18. Official OCC FXE customer flow: a login-free OCC batch query supplied prior-day customer call and put volumes. The frozen normalized imbalance rule produced 78 trades, 38.46% wins, 1.439 payoff, PF 0.899, and -4.95R. The latest six months produced 21 trades, 38.10% wins, PF 0.886, and -1.53R. An isolated profitable eight-trade quarter was not selected; the full rule is closed.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -43,6 +45,10 @@ Key reports:
 - `EURUSD_NEUTRAL_CME_SPAN_FREE_SOURCE_AUDIT_2026_07_27.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_FUTURES_PARTICIPATION_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_FUTURES_PARTICIPATION_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_OCC_FXE_FLOW_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_OCC_FXE_FLOW_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -63,6 +69,8 @@ Key reports:
 - `outputs/neutral_cme_options_surface/AUDIT.json`
 - `outputs/neutral_cme_span_surface/AUDIT.json`
 - `outputs/neutral_session_oco/RESULT.json`
+- `outputs/neutral_futures_participation/RESULT.json`
+- `outputs/neutral_occ_fxe_flow/RESULT.json`
 
 Run with:
 
@@ -88,4 +96,9 @@ uv run --with pandas --with numpy --with pyarrow python run_neutral_utc_open_vot
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_flow.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_options_flow.py
 uv run --with pandas --with numpy --with pyarrow python run_neutral_session_oco.py
+uv run --with pandas --with numpy --with pyarrow python download_neutral_futures_participation.py
+uv run --with pandas --with numpy --with pyarrow python run_neutral_futures_participation.py
+powershell -ExecutionPolicy Bypass -File download_occ_fxe_flow_raw.ps1
+uv run --with pandas --with numpy --with pyarrow python download_neutral_occ_fxe_flow.py
+uv run --with pandas --with numpy --with pyarrow python run_neutral_occ_fxe_flow.py
 ```

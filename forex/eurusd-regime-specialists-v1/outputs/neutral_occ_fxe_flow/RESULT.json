@@ -1,0 +1,321 @@
+{
+  "campaign_id": "eurusd-neutral-occ-fxe-flow-v1",
+  "status": "REJECTED_NEUTRAL_OCC_FXE_FLOW_V1",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "NEW_CAUSAL_SOURCE_BUT_EURUSD_ARCHIVE_PREVIOUSLY_INSPECTED",
+  "source_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    },
+    "OCC_FXE": {
+      "path": "D:/AlgoTradingData/research/eurusd-neutral-occ-fxe-flow-v1/OCC_FXE_CUSTOMER_FLOW.parquet",
+      "sha256": "ecaf8416677fd6e4182dac2e4cbf1332cf2b1f481c5dbcc9a3ef61e4910c56b6",
+      "underlying": "FXE",
+      "account_type": "CUSTOMER",
+      "put_call_scope": "BOTH",
+      "manifest": {
+        "path": "D:/AlgoTradingData/research/eurusd-neutral-occ-fxe-flow-v1/MANIFEST.json",
+        "sha256": "0e9167d1d6b47215d36fe566b87bc036acd8b5e375e7027c0b079390e6706271"
+      }
+    }
+  },
+  "causality": {
+    "signal": "OCC-cleared prior-day FXE customer call-versus-put volume relative to its trailing structural baseline",
+    "source_available_time": "Conservatively next UTC midnight after report date",
+    "future_information_in_signal": false,
+    "oracle_loaded_after_execution": true,
+    "ml_used": false
+  },
+  "outcome_blind_census": {
+    "neutral_open_candidates": 142,
+    "source_available_candidates": 139,
+    "active_participation_candidates": 78,
+    "trade_candidates": 78,
+    "long_candidates": 41,
+    "short_candidates": 37,
+    "by_window": {
+      "development": 24,
+      "final_2026q2": 8,
+      "pseudo_oos_2025q4_2026q1": 28,
+      "validation_2025q2q3": 18
+    }
+  },
+  "chronological_windows": {
+    "development": {
+      "passed": false,
+      "economics": {
+        "trades": 24,
+        "wins": 9,
+        "losses": 15,
+        "win_rate": 0.375,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4390243902435063,
+        "profit_factor": 0.8634146341461038,
+        "net_r": -2.1000000000037655,
+        "expectancy_r": -0.0875000000001569,
+        "max_drawdown_r": 5.950000000002342,
+        "active_weekdays": 154,
+        "trades_per_active_weekday": 0.15584415584415584,
+        "extra_half_pip_stress_net_r": -5.1000000000037655,
+        "portfolio_net_r": -0.5250000000009414,
+        "portfolio_max_drawdown_r": 1.4875000000005856
+      },
+      "oracle_imitation": {
+        "predicted_trades": 24,
+        "oracle_trades": 183,
+        "exact_matches": 9,
+        "exact_precision": 0.375,
+        "exact_recall": 0.04918032786885246,
+        "exact_f1": 0.08695652173913043,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 14,
+        "tolerant_precision": 0.5833333333333334,
+        "tolerant_recall": 0.07650273224043716,
+        "tolerant_f1": 0.1352657004830918
+      }
+    },
+    "validation_2025q2q3": {
+      "passed": false,
+      "economics": {
+        "trades": 18,
+        "wins": 10,
+        "losses": 8,
+        "win_rate": 0.5555555555555556,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4390243902435063,
+        "profit_factor": 1.7987804878043827,
+        "net_r": 6.549999999996281,
+        "expectancy_r": 0.36388888888868226,
+        "max_drawdown_r": 3.075000000000161,
+        "active_weekdays": 131,
+        "trades_per_active_weekday": 0.13740458015267176,
+        "extra_half_pip_stress_net_r": 4.299999999996281,
+        "portfolio_net_r": 1.6374999999990703,
+        "portfolio_max_drawdown_r": 0.7687500000000402
+      },
+      "oracle_imitation": {
+        "predicted_trades": 18,
+        "oracle_trades": 133,
+        "exact_matches": 10,
+        "exact_precision": 0.5555555555555556,
+        "exact_recall": 0.07518796992481203,
+        "exact_f1": 0.1324503311258278,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 14,
+        "tolerant_precision": 0.7777777777777778,
+        "tolerant_recall": 0.10526315789473684,
+        "tolerant_f1": 0.18543046357615892
+      }
+    },
+    "pseudo_oos_2025q4_2026q1": {
+      "passed": false,
+      "economics": {
+        "trades": 28,
+        "wins": 7,
+        "losses": 21,
+        "win_rate": 0.25,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.025000000000054,
+        "realized_payoff_ratio": 1.4390243902435056,
+        "profit_factor": 0.4796747967478352,
+        "net_r": -11.20000000000343,
+        "expectancy_r": -0.4000000000001225,
+        "max_drawdown_r": 12.100000000002664,
+        "active_weekdays": 130,
+        "trades_per_active_weekday": 0.2153846153846154,
+        "extra_half_pip_stress_net_r": -14.70000000000343,
+        "portfolio_net_r": -2.8000000000008574,
+        "portfolio_max_drawdown_r": 3.025000000000666
+      },
+      "oracle_imitation": {
+        "predicted_trades": 28,
+        "oracle_trades": 188,
+        "exact_matches": 7,
+        "exact_precision": 0.25,
+        "exact_recall": 0.03723404255319149,
+        "exact_f1": 0.06481481481481481,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 10,
+        "tolerant_precision": 0.35714285714285715,
+        "tolerant_recall": 0.05319148936170213,
+        "tolerant_f1": 0.09259259259259259
+      }
+    },
+    "final_2026q2": {
+      "passed": true,
+      "economics": {
+        "trades": 8,
+        "wins": 4,
+        "losses": 4,
+        "win_rate": 0.5,
+        "average_win_r": 1.474999999999671,
+        "average_loss_r": 1.0250000000000536,
+        "realized_payoff_ratio": 1.4390243902435063,
+        "profit_factor": 1.4390243902435063,
+        "net_r": 1.7999999999984695,
+        "expectancy_r": 0.2249999999998087,
+        "max_drawdown_r": 4.100000000000215,
+        "active_weekdays": 65,
+        "trades_per_active_weekday": 0.12307692307692308,
+        "extra_half_pip_stress_net_r": 0.7999999999984695,
+        "portfolio_net_r": 0.4499999999996174,
+        "portfolio_max_drawdown_r": 1.0250000000000536
+      },
+      "oracle_imitation": {
+        "predicted_trades": 8,
+        "oracle_trades": 68,
+        "exact_matches": 4,
+        "exact_precision": 0.5,
+        "exact_recall": 0.058823529411764705,
+        "exact_f1": 0.10526315789473684,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 5,
+        "tolerant_precision": 0.625,
+        "tolerant_recall": 0.07352941176470588,
+        "tolerant_f1": 0.13157894736842107
+      }
+    }
+  },
+  "all_available_history": {
+    "economics": {
+      "trades": 78,
+      "wins": 30,
+      "losses": 48,
+      "win_rate": 0.38461538461538464,
+      "average_win_r": 1.4749999999996704,
+      "average_loss_r": 1.0250000000000536,
+      "realized_payoff_ratio": 1.4390243902435056,
+      "profit_factor": 0.8993902439021909,
+      "net_r": -4.9500000000124444,
+      "expectancy_r": -0.06346153846169801,
+      "max_drawdown_r": 15.425000000004463,
+      "active_weekdays": 480,
+      "trades_per_active_weekday": 0.1625,
+      "extra_half_pip_stress_net_r": -14.700000000012444,
+      "portfolio_net_r": -1.2375000000031111,
+      "portfolio_max_drawdown_r": 3.8562500000011157
+    },
+    "oracle_imitation": {
+      "predicted_trades": 78,
+      "oracle_trades": 572,
+      "exact_matches": 30,
+      "exact_precision": 0.38461538461538464,
+      "exact_recall": 0.05244755244755245,
+      "exact_f1": 0.0923076923076923,
+      "tolerance_minutes": 15,
+      "tolerant_matches": 43,
+      "tolerant_precision": 0.5512820512820513,
+      "tolerant_recall": 0.07517482517482517,
+      "tolerant_f1": 0.1323076923076923
+    },
+    "top_5_percent_winners_removed": {
+      "trades": 74,
+      "wins": 26,
+      "losses": 48,
+      "win_rate": 0.35135135135135137,
+      "average_win_r": 1.4749999999996708,
+      "average_loss_r": 1.0250000000000536,
+      "realized_payoff_ratio": 1.439024390243506,
+      "profit_factor": 0.7794715447152324,
+      "net_r": -10.850000000011127,
+      "expectancy_r": -0.14662162162177197,
+      "max_drawdown_r": 16.750000000009813
+    },
+    "extra_half_pip_round_trip": {
+      "trades": 78,
+      "wins": 30,
+      "losses": 48,
+      "win_rate": 0.38461538461538464,
+      "average_win_r": 1.3499999999996704,
+      "average_loss_r": 1.1500000000000536,
+      "realized_payoff_ratio": 1.1739130434779195,
+      "profit_factor": 0.7336956521736996,
+      "net_r": -14.700000000012444,
+      "expectancy_r": -0.188461538461698,
+      "max_drawdown_r": 23.200000000009712
+    },
+    "overall_gate_passed": false
+  },
+  "trailing_windows": {
+    "latest_3_months": {
+      "trades": 8,
+      "wins": 4,
+      "losses": 4,
+      "win_rate": 0.5,
+      "average_win_r": 1.474999999999671,
+      "average_loss_r": 1.0250000000000536,
+      "realized_payoff_ratio": 1.4390243902435063,
+      "profit_factor": 1.4390243902435063,
+      "net_r": 1.7999999999984695,
+      "expectancy_r": 0.2249999999998087,
+      "max_drawdown_r": 4.100000000000215,
+      "active_weekdays": 65,
+      "trades_per_active_weekday": 0.12307692307692308,
+      "extra_half_pip_stress_net_r": 0.7999999999984695,
+      "portfolio_net_r": 0.4499999999996174,
+      "portfolio_max_drawdown_r": 1.0250000000000536
+    },
+    "latest_6_months": {
+      "trades": 21,
+      "wins": 8,
+      "losses": 13,
+      "win_rate": 0.38095238095238093,
+      "average_win_r": 1.474999999999671,
+      "average_loss_r": 1.0250000000000536,
+      "realized_payoff_ratio": 1.4390243902435063,
+      "profit_factor": 0.8855534709190808,
+      "net_r": -1.5250000000033292,
+      "expectancy_r": -0.07261904761920615,
+      "max_drawdown_r": 8.900000000001684,
+      "active_weekdays": 129,
+      "trades_per_active_weekday": 0.16279069767441862,
+      "extra_half_pip_stress_net_r": -4.150000000003329,
+      "portfolio_net_r": -0.3812500000008323,
+      "portfolio_max_drawdown_r": 2.225000000000421
+    },
+    "latest_12_months": {
+      "trades": 44,
+      "wins": 15,
+      "losses": 29,
+      "win_rate": 0.3409090909090909,
+      "average_win_r": 1.474999999999671,
+      "average_loss_r": 1.0250000000000539,
+      "realized_payoff_ratio": 1.4390243902435058,
+      "profit_factor": 0.7443229604707788,
+      "net_r": -7.6000000000064905,
+      "expectancy_r": -0.17272727272742025,
+      "max_drawdown_r": 15.425000000004463,
+      "active_weekdays": 261,
+      "trades_per_active_weekday": 0.1685823754789272,
+      "extra_half_pip_stress_net_r": -13.100000000006489,
+      "portfolio_net_r": -1.9000000000016226,
+      "portfolio_max_drawdown_r": 3.8562500000011157
+    }
+  },
+  "admitted": false,
+  "verdict": "The fixed OCC customer options-flow expert failed at least one frozen chronological or robustness gate and is closed without repair."
+}

@@ -27,6 +27,8 @@ execution decision.
 | Raw tick-microstructure classifier, volatility-scaled risk | 2023–2026 H1 walk-forward | 779 | 35.30% | 1.449 | 0.791 | -106.94R |
 | Purged direct Neutral-oracle imitation classifier | 2023–2026 H1 walk-forward | 1,246 | 31.54% | 1.420 | 0.654 | -306.20R |
 | Synchronous DXY/Treasury oracle-imitation extension | 2023–2026 H1 walk-forward | 638 | 30.56% | 1.439 | 0.633 | -166.43R |
+| Exchange-traded Euro FX/UUP participation | 2019–2026 H1 | 227 | 31.72% | 1.439 | 0.668 | -52.70R |
+| Official OCC FXE customer call/put flow | 2024 H2–2026 H1 | 78 | 38.46% | 1.439 | 0.899 | -4.95R |
 
 None passed all locked chronological admission gates. Consequently, none is
 an admitted strategy or eligible for demo/live use.
@@ -246,6 +248,12 @@ skew/risk reversal or the actual surface.
 
 At a realized payoff near 1.44, break-even requires approximately 41% wins. The best stable causal variants remained around 33–35%. The 100%-winning Neutral oracle does not reveal a learnable process: it scans both future directions, keeps early target-first paths, and deletes every failure.
 
+Two login-free market-participation extensions did not change that conclusion.
+The Euro FX/UUP futures-volume confirmation lost in development and every
+forward year. Official OCC FXE customer call/put flow came closer, but its
+fixed full rule still lost money; the isolated profitable final quarter had
+only eight trades and cannot be selected retrospectively.
+
 The evidence does not support claiming that Regime 1 has been solved. Further retrospective threshold, hour, feature, or model search on this archive would increase overfitting rather than improve causal evidence.
 
 ## Next legitimate evidence
@@ -277,4 +285,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow python run_neutral_utc_open_vote.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_flow.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_cot_options_flow.py
+uv run --with pandas --with numpy --with pyarrow python run_neutral_futures_participation.py
+uv run --with pandas --with numpy --with pyarrow python run_neutral_occ_fxe_flow.py
 ```

@@ -1,0 +1,110 @@
+{
+  "campaign_id": "eurusd-neutral-occ-fxe-flow-v1",
+  "frozen_at_utc": "2026-07-28T06:25:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "NEW_CAUSAL_SOURCE_BUT_EURUSD_ARCHIVE_PREVIOUSLY_INSPECTED",
+  "parent_contract": {
+    "path": "config/frozen_neutral_oracle_imitation.json",
+    "sha256": "9439fdcdfadde2a0fb692df7fd8f9be56c89261dd361a71c8824b1b65efc8000"
+  },
+  "source_manifest": {
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-occ-fxe-flow-v1/MANIFEST.json",
+    "sha256": "0e9167d1d6b47215d36fe566b87bc036acd8b5e375e7027c0b079390e6706271"
+  },
+  "source": {
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-occ-fxe-flow-v1/OCC_FXE_CUSTOMER_FLOW.parquet",
+    "sha256": "ecaf8416677fd6e4182dac2e4cbf1332cf2b1f481c5dbcc9a3ef61e4910c56b6",
+    "underlying": "FXE",
+    "account_type": "CUSTOMER",
+    "put_call_scope": "BOTH"
+  },
+  "candidate": {
+    "regime": "NEUTRAL",
+    "entry_time_utc": "00:00",
+    "one_candidate_per_utc_date": true,
+    "maximum_source_age_hours": 96,
+    "baseline_sessions": 20,
+    "baseline_excludes_current_session": true,
+    "raw_imbalance": "LOG1P_CALL_VOLUME_MINUS_LOG1P_PUT_VOLUME",
+    "normalized_imbalance": "RAW_IMBALANCE_MINUS_TRAILING_20_SESSION_MEDIAN",
+    "participation": "TOTAL_CUSTOMER_VOLUME_DIVIDED_BY_TRAILING_20_SESSION_MEDIAN",
+    "minimum_participation_ratio": 1.0,
+    "long_rule": "NORMALIZED_IMBALANCE_GREATER_THAN_ZERO",
+    "short_rule": "NORMALIZED_IMBALANCE_LESS_THAN_ZERO",
+    "tie_missing_or_no_record_rule": "CASH"
+  },
+  "outcome_blind_census": {
+    "neutral_open_candidates": 142,
+    "source_available_candidates": 139,
+    "active_participation_candidates": 78,
+    "trade_candidates": 78,
+    "long_candidates": 41,
+    "short_candidates": 37,
+    "by_window": {
+      "development": 24,
+      "final_2026q2": 8,
+      "pseudo_oos_2025q4_2026q1": 28,
+      "validation_2025q2q3": 18
+    }
+  },
+  "label": {
+    "risk_mode": "FIXED",
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "same_bar_policy": "stop_first",
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1
+  },
+  "chronological_windows": {
+    "development": [
+      "2024-08-28T00:00:00Z",
+      "2025-03-31T23:59:59Z"
+    ],
+    "validation_2025q2q3": [
+      "2025-04-01T00:00:00Z",
+      "2025-09-30T23:59:59Z"
+    ],
+    "pseudo_oos_2025q4_2026q1": [
+      "2025-10-01T00:00:00Z",
+      "2026-03-31T23:59:59Z"
+    ],
+    "final_2026q2": [
+      "2026-04-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "execution": {
+    "maximum_concurrent_positions": 1,
+    "maximum_trades_per_utc_day": 1,
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_open_portfolio_r": 0.25
+  },
+  "admission": {
+    "minimum_trades_by_window": {
+      "development": 20,
+      "validation_2025q2q3": 10,
+      "pseudo_oos_2025q4_2026q1": 10,
+      "final_2026q2": 5
+    },
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor_per_window": 1.0,
+    "minimum_profit_factor_overall": 1.3,
+    "minimum_stressed_profit_factor_overall": 1.15,
+    "minimum_expectancy_r": 0.0,
+    "maximum_drawdown_r_overall": 20.0,
+    "minimum_exact_match_precision_overall": 0.4,
+    "positive_after_top_5_percent_winners_removed": true
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  }
+}

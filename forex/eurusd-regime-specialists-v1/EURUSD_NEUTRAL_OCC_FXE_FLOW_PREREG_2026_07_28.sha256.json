@@ -1,0 +1,14 @@
+{
+  "campaign_id": "eurusd-neutral-occ-fxe-flow-v1",
+  "locked_before_occ_fxe_flow_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T06:25:00Z",
+  "files": {
+    "config/frozen_neutral_occ_fxe_flow.json": "15bcd5176ccf4ea70b977a1b9bf723d6ea55d85fd47c8a9aa6bf758ca6c6746d",
+    "EURUSD_NEUTRAL_OCC_FXE_FLOW_PREREG_2026_07_28.md": "1972b286bd90952e873d5a61920a9fc29fd8794b8965c12682fab7f65b3e98af",
+    "src/eurusd_regime_specialists/neutral_occ_fxe_flow.py": "2cabcce3bc711b32e31b2a8d5e5f98750a5c46716dbae2df2034621af36de4c1",
+    "run_neutral_occ_fxe_flow.py": "b7ed6c634dabbfb2f27695224b523c58ec803844e084dc92897d6580c1a2235f",
+    "download_neutral_occ_fxe_flow.py": "cb92dff55d2c5befc55c6a89eddf7e11d11193c2da96865d979ce365e327c82f",
+    "download_occ_fxe_flow_raw.ps1": "e1ce7512d909816d543ebf3692d62ac440cf1d86a09f714572771b5699ac2b61"
+  },
+  "source_manifest_sha256": "0e9167d1d6b47215d36fe566b87bc036acd8b5e375e7027c0b079390e6706271"
+}
