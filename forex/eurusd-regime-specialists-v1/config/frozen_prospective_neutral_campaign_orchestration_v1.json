@@ -1,13 +1,13 @@
 {
-  "schema_version": "eurusd_neutral_prospective_campaign_orchestration_v1_1",
+  "schema_version": "eurusd_neutral_prospective_campaign_orchestration_v1_2",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
-  "frozen_at_utc": "2026-07-28T15:10:00Z",
+  "frozen_at_utc": "2026-07-28T16:08:00Z",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
   "supersedes": {
-    "lock_path": "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_PREREG_2026_07_28.sha256.json",
-    "lock_sha256": "ee39abf89b58789b3bdd03b055b5e075450b63045b7711619200462228913cb6",
+    "lock_path": "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_V1_1_PREREG_2026_07_28.sha256.json",
+    "lock_sha256": "a54e1fd7ee0ae664adfa8fee7bd18b575f622bc8fa2d3efb248174903d55bfa1",
     "before_first_signal": true,
-    "reason": "ADD_LATE_EVALUATION_ONLY_ORACLE_LABEL_INGESTION_WITHOUT_CHANGING_SIGNALS_TRADES_OR_ROUTING"
+    "reason": "FILTER_EVERY_NON_ORACLE_EVIDENCE_AND_IMMUTABLE_LEDGER_RECORD_BY_ITS_SAFE_KNOWN_TIME_FOR_CHRONOLOGICAL_AS_OF_REPLAY"
   },
   "research_only": true,
   "shadow_only": true,
@@ -38,6 +38,8 @@
     "ownership_record_and_content_addressed_manifest_required": true,
     "oracle_raw_metadata_market_labels_and_content_addressed_manifest_required": true,
     "oracle_labels_before_known_time_are_ignored": true,
+    "actual_market_ownership_and_path_evidence_after_as_of_are_ignored": true,
+    "ledger_records_after_as_of_are_VALIDATED_BUT_INVISIBLE": true,
     "completed_oracle_date_without_four_winners_is_a_known_negative_date": true,
     "complete_path_requires_144_continuous_m5_rows": true,
     "relative_paths_must_remain_inside_evidence_root": true,
@@ -77,6 +79,8 @@
     "oracle_labels_may_change_persisted_signal_or_trade_records": false,
     "oracle_labels_may_enter_routing_risk_sizing_or_exits": false,
     "oracle_labels_may_enter_admission_after_terminal_reconciliation": true,
+    "future_known_non_oracle_evidence_may_enter_decisions": false,
+    "future_known_ledger_records_may_enter_as_of_metrics": false,
     "broker_action_allowed": false
   }
 }

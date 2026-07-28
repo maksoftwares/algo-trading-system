@@ -1,0 +1,23 @@
+{
+  "schema_version": "eurusd_neutral_prospective_campaign_orchestration_v1_2_lock",
+  "locked_at_utc": "2026-07-28T16:08:54Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_prospective_start_and_first_signal": true,
+  "supersedes_lock_path": "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_V1_1_PREREG_2026_07_28.sha256.json",
+  "supersedes_lock_sha256": "a54e1fd7ee0ae664adfa8fee7bd18b575f622bc8fa2d3efb248174903d55bfa1",
+  "supersession_reason": "FILTER_ALL_NON_ORACLE_EVIDENCE_AND_IMMUTABLE_LEDGER_RECORDS_BY_SAFE_KNOWN_TIME_FOR_CHRONOLOGICAL_AS_OF_REPLAY",
+  "historical_pnl_loaded_before_lock": false,
+  "actual_manifests_before_lock": 0,
+  "market_manifests_before_lock": 0,
+  "ownership_records_before_lock": 0,
+  "eligible_signals_before_lock": 0,
+  "terminal_trade_records_before_lock": 0,
+  "oracle_manifests_before_lock": 0,
+  "files": {
+    "config/frozen_prospective_neutral_campaign_orchestration_v1.json": "89ff6a3f4c0e34b64a0183d1d01efa8e7426f7dc926336ab9007f6a39c753647",
+    "src/eurusd_regime_specialists/prospective_neutral_campaign_orchestration.py": "2eb21c9c520a6e43f3be1b20ceab05de589317c8c7b728b6f5583466b956021f",
+    "run_prospective_neutral_campaign_v1.py": "d9965f122ffca4c3bc68bec2fc597f27dbf8e18a866ee609bb3351c5f02ce2c9",
+    "tests/test_prospective_neutral_campaign_orchestration.py": "8517cbde74c677058482c78b308d262ae5520a0b57bd1aed98f431dd432813c9",
+    "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_V1_2_PREREG_2026_07_28.md": "781f0c54ce9c49ed4ac25bd8fc3099bde0eccfb1d0a1ae5e7dfeae5c88136c82"
+  }
+}

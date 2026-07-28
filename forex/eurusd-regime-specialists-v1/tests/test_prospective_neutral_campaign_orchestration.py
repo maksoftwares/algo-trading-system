@@ -537,6 +537,92 @@ def test_end_to_end_process_is_append_only_and_idempotent(
     assert first["broker_action_allowed"] is False
 
 
+def test_point_in_time_replay_withholds_every_future_evidence_stage(
+    tmp_path: Path,
+) -> None:
+    roots = _roots(tmp_path)
+    _write_actual(roots["consensus_and_actual"])
+    _write_market(roots["event_market"])
+    _write_ownership(roots["neutral_ownership"])
+    signal = _load_signal(roots)
+    _write_path(roots["trade_path"], signal["signal_id"])
+
+    before_actual = process_campaign(
+        evaluated_at_utc="2026-08-12T12:31:00Z",
+        roots=roots,
+        persist=False,
+    )
+    assert before_actual["evidence_census"]["actual_rows"] == 0
+    assert before_actual["signal_census"]["signals"] == 0
+    assert before_actual["routed_status_counts"] == {}
+
+    before_market = process_campaign(
+        evaluated_at_utc="2026-08-12T12:40:00Z",
+        roots=roots,
+        persist=False,
+    )
+    assert before_market["evidence_census"]["actual_rows"] == 1
+    assert before_market["evidence_census"]["complete_market_rows"] == 0
+    assert before_market["signal_census"]["missing_market"] == 1
+    assert before_market["signal_census"]["signals"] == 0
+
+    after_signal_before_path = process_campaign(
+        evaluated_at_utc="2026-08-12T12:47:00Z",
+        roots=roots,
+        persist=False,
+    )
+    assert after_signal_before_path["signal_census"]["signals"] == 1
+    assert after_signal_before_path["evidence_census"]["complete_paths"] == 0
+    assert after_signal_before_path["routed_status_counts"] == {
+        "PENDING_COMPLETE_PATH_NOT_AVAILABLE": 1
+    }
+
+    one_second_before_path = process_campaign(
+        evaluated_at_utc="2026-08-13T00:51:00Z",
+        roots=roots,
+        persist=False,
+    )
+    assert one_second_before_path["evidence_census"]["complete_paths"] == 0
+    assert one_second_before_path["routed_status_counts"] == {
+        "PENDING_COMPLETE_PATH_NOT_AVAILABLE": 1
+    }
+
+    at_path_known_time = process_campaign(
+        evaluated_at_utc="2026-08-13T00:51:01Z",
+        roots=roots,
+        persist=False,
+    )
+    assert at_path_known_time["evidence_census"]["complete_paths"] == 1
+    assert at_path_known_time["routed_status_counts"] == {"CLOSED": 1}
+    assert at_path_known_time["admission"]["closed_trades"] == 1
+
+    process_campaign(
+        evaluated_at_utc="2026-08-13T00:51:01Z",
+        roots=roots,
+        persist=True,
+    )
+    replay_before_actual = process_campaign(
+        evaluated_at_utc="2026-08-12T12:31:00Z",
+        roots=roots,
+        persist=False,
+    )
+    assert replay_before_actual["evidence_census"]["actual_rows"] == 0
+    assert replay_before_actual["routed_status_counts"] == {}
+    assert replay_before_actual["ledger_inventory_sha256"] == hashlib.sha256(
+        b""
+    ).hexdigest()
+
+    replay_before_path = process_campaign(
+        evaluated_at_utc="2026-08-13T00:51:00Z",
+        roots=roots,
+        persist=False,
+    )
+    assert replay_before_path["evidence_census"]["complete_paths"] == 0
+    assert replay_before_path["routed_status_counts"] == {
+        "PENDING_COMPLETE_PATH_NOT_AVAILABLE": 1
+    }
+
+
 def test_later_contradictory_actual_and_market_revisions_cannot_change_trade(
     tmp_path: Path,
 ) -> None:

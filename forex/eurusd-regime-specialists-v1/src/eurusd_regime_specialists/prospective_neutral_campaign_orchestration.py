@@ -27,7 +27,7 @@ CONFIG_PATH = (
 )
 LOCK_PATH = (
     PACKAGE_ROOT
-    / "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_V1_1_PREREG_2026_07_28.sha256.json"
+    / "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_V1_2_PREREG_2026_07_28.sha256.json"
 )
 HEX_64 = re.compile(r"[0-9a-f]{64}")
 TERMINAL_STATUSES = {
@@ -180,7 +180,14 @@ def _require_columns(
         raise RuntimeError(f"{label} lacks required columns: {sorted(missing)}")
 
 
-def load_actual_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
+def load_actual_evidence(
+    root: Path,
+    *,
+    evaluated_at_utc: Any | None = None,
+) -> tuple[pd.DataFrame, dict[str, int]]:
+    evaluated = (
+        None if evaluated_at_utc is None else _utc(evaluated_at_utc)
+    )
     manifests = sorted(root.glob("post_release_manifests/*.json"))
     frames: dict[str, pd.DataFrame] = {}
     referenced_forecasts: dict[str, str] = {}
@@ -266,17 +273,37 @@ def load_actual_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
     combined = (
         pd.concat(frames.values(), ignore_index=True) if frames else pd.DataFrame()
     )
+    inventory_rows = len(combined)
+    if evaluated is not None and not combined.empty:
+        forecast_observed = pd.to_datetime(
+            combined["forecast_observed_at_utc"], utc=True
+        ).dt.as_unit("ns")
+        actual_observed = pd.to_datetime(
+            combined["actual_observed_at_utc"], utc=True
+        ).dt.as_unit("ns")
+        combined = combined.loc[
+            forecast_observed.le(evaluated) & actual_observed.le(evaluated)
+        ].reset_index(drop=True)
     return combined, {
         "actual_manifests": len(manifests),
         "actual_snapshots": len(frames),
+        "actual_rows_inventory": inventory_rows,
         "actual_rows": len(combined),
     }
 
 
-def load_market_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
+def load_market_evidence(
+    root: Path,
+    *,
+    evaluated_at_utc: Any | None = None,
+) -> tuple[pd.DataFrame, dict[str, int]]:
+    evaluated = (
+        None if evaluated_at_utc is None else _utc(evaluated_at_utc)
+    )
     manifests = sorted(root.glob("manifests/*.json"))
     frames: dict[str, pd.DataFrame] = {}
     complete_rows: list[pd.DataFrame] = []
+    complete_inventory = 0
     for manifest_path in manifests:
         manifest, manifest_hash = _read_manifest(manifest_path)
         if (
@@ -339,6 +366,12 @@ def load_market_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
             manifest["market_observed_at_utc"]
         ):
             raise RuntimeError("Event-market observation linkage drift")
+        complete_inventory += 1
+        if (
+            evaluated is not None
+            and _utc(manifest["market_observed_at_utc"]) > evaluated
+        ):
+            continue
         linked = frame.copy()
         linked["market_manifest_sha256"] = manifest_hash
         linked["market_snapshot_sha256"] = normalized_hash
@@ -349,13 +382,19 @@ def load_market_evidence(root: Path) -> tuple[pd.DataFrame, dict[str, int]]:
     return combined, {
         "market_manifests": len(manifests),
         "market_snapshots": len(frames),
+        "complete_market_rows_inventory": complete_inventory,
         "complete_market_rows": len(combined),
     }
 
 
 def load_ownership_evidence(
     root: Path,
+    *,
+    evaluated_at_utc: Any | None = None,
 ) -> tuple[pd.DataFrame, dict[str, int]]:
+    evaluated = (
+        None if evaluated_at_utc is None else _utc(evaluated_at_utc)
+    )
     manifests = sorted(root.glob("manifests/MANIFEST_*.json"))
     records: dict[str, dict[str, Any]] = {}
     dates: dict[str, str] = {}
@@ -400,10 +439,17 @@ def load_ownership_evidence(
             raise RuntimeError("Ownership record hash drift")
         records[relative] = record
         dates[manifest_date] = relative
-    combined = pd.DataFrame(list(records.values())) if records else pd.DataFrame()
+    visible_records = [
+        record
+        for record in records.values()
+        if evaluated is None
+        or _utc(record["ownership_observed_at_utc"]) <= evaluated
+    ]
+    combined = pd.DataFrame(visible_records) if visible_records else pd.DataFrame()
     return combined, {
         "ownership_manifests": len(manifests),
-        "ownership_records": len(records),
+        "ownership_records_inventory": len(records),
+        "ownership_records": len(visible_records),
         "neutral_owned_dates": (
             int(combined["is_neutral"].astype(bool).sum()) if len(combined) else 0
         ),
@@ -670,10 +716,18 @@ def load_oracle_evidence(
 
 def load_complete_paths(
     root: Path,
+    *,
+    evaluated_at_utc: Any | None = None,
 ) -> tuple[dict[str, dict[str, Any]], dict[str, int]]:
+    evaluated = (
+        None if evaluated_at_utc is None else _utc(evaluated_at_utc)
+    )
     manifests = sorted(root.glob("manifests/MANIFEST_*.json"))
     complete: dict[str, dict[str, Any]] = {}
+    complete_seen: set[str] = set()
+    complete_inventory = 0
     incomplete = 0
+    incomplete_inventory = 0
     for manifest_path in manifests:
         manifest, manifest_hash = _read_manifest(manifest_path)
         if manifest.get("schema_version") != "eurusd_neutral_prospective_trade_path_v2":
@@ -706,11 +760,16 @@ def load_complete_paths(
             manifest["normalized_snapshot"]["rows"],
             "Trade-path snapshot",
         )
+        market_observed = _utc(manifest["market_observed_at_utc"])
         if manifest.get("status") != "COMPLETE":
-            incomplete += 1
+            incomplete_inventory += 1
+            if evaluated is None or market_observed <= evaluated:
+                incomplete += 1
             continue
-        if signal_id in complete:
+        if signal_id in complete_seen:
             raise RuntimeError("Signal has multiple complete path manifests")
+        complete_seen.add(signal_id)
+        complete_inventory += 1
         if (
             int(manifest.get("expected_m5_rows", -1)) != 144
             or len(frame) != 144
@@ -736,7 +795,6 @@ def load_complete_paths(
         deadline = _utc(manifest["deadline_utc"])
         if deadline != entry + pd.Timedelta(hours=12):
             raise RuntimeError("Complete trade path deadline drift")
-        market_observed = _utc(manifest["market_observed_at_utc"])
         if market_observed < deadline + pd.Timedelta(seconds=60):
             raise RuntimeError("Trade path was observed before admissible time")
         expected = pd.date_range(
@@ -747,16 +805,21 @@ def load_complete_paths(
         timestamps = pd.to_datetime(frame["timestamp_utc"], utc=True).dt.as_unit("ns")
         if list(timestamps) != list(expected):
             raise RuntimeError("Complete trade path timestamps drift")
+        if evaluated is not None and market_observed > evaluated:
+            continue
         complete[signal_id] = {
             "frame": frame,
             "entry_time_utc": entry,
             "deadline_utc": deadline,
+            "path_observed_at_utc": market_observed,
             "path_evidence_sha256": normalized_hash,
             "path_manifest_sha256": manifest_hash,
         }
     return complete, {
         "path_manifests": len(manifests),
+        "complete_paths_inventory": complete_inventory,
         "complete_paths": len(complete),
+        "incomplete_paths_inventory": incomplete_inventory,
         "incomplete_paths": incomplete,
     }
 
@@ -815,6 +878,46 @@ def _load_content_records(
     return records
 
 
+def _record_known_at(kind: str, record: Mapping[str, Any]) -> pd.Timestamp:
+    if kind == "signals":
+        candidates = [
+            record.get("actual_observed_at_utc"),
+            record.get("market_observed_at_utc"),
+            record.get("ownership_observed_at_utc"),
+            record.get("observation_completed_at_utc"),
+        ]
+        known = [value for value in candidates if value is not None]
+        if known:
+            return max(_utc(value) for value in known)
+        return _utc(record["entry_time_utc"])
+    if kind != "trades":
+        raise ValueError(f"Unsupported ledger kind: {kind}")
+    if str(record.get("status")) == "CLOSED":
+        observed = record.get("path_observed_at_utc")
+        if observed is not None:
+            return _utc(observed)
+        return _utc(record["entry_time_utc"]) + pd.Timedelta(
+            hours=12,
+            seconds=60,
+        )
+    return _utc(record["entry_time_utc"])
+
+
+def _visible_content_records(
+    records: Mapping[str, dict[str, Any]],
+    kind: str,
+    evaluated_at_utc: Any | None,
+) -> dict[str, dict[str, Any]]:
+    if evaluated_at_utc is None:
+        return dict(records)
+    evaluated = _utc(evaluated_at_utc)
+    return {
+        signal_id: record
+        for signal_id, record in records.items()
+        if _record_known_at(kind, record) <= evaluated
+    }
+
+
 def _persist_content_record(
     ledger_root: Path,
     kind: str,
@@ -847,8 +950,13 @@ def reconcile_signal_records(
     ledger_root: Path,
     *,
     persist: bool,
+    evaluated_at_utc: Any | None = None,
 ) -> pd.DataFrame:
-    existing = _load_content_records(ledger_root, "signals")
+    existing = _visible_content_records(
+        _load_content_records(ledger_root, "signals"),
+        "signals",
+        evaluated_at_utc,
+    )
     generated_records = (
         generated.to_dict(orient="records") if not generated.empty else []
     )
@@ -971,6 +1079,12 @@ def route_operational_signals(
         result["path_manifest_sha256"] = _valid_hash(
             path["path_manifest_sha256"], "Path manifest hash"
         )
+        result["path_observed_at_utc"] = _utc(
+            path.get(
+                "path_observed_at_utc",
+                entry + pd.Timedelta(hours=12, seconds=60),
+            )
+        )
         records.append(result)
         open_until = _utc(result["exit_time_utc"])
     return pd.DataFrame(records)
@@ -981,8 +1095,13 @@ def reconcile_trade_records(
     ledger_root: Path,
     *,
     persist: bool,
+    evaluated_at_utc: Any | None = None,
 ) -> pd.DataFrame:
-    existing = _load_content_records(ledger_root, "trades")
+    existing = _visible_content_records(
+        _load_content_records(ledger_root, "trades"),
+        "trades",
+        evaluated_at_utc,
+    )
     expected_terminal = {
         str(row["signal_id"]): row
         for row in routed.to_dict(orient="records")
@@ -1098,18 +1217,26 @@ def _evidence_inventory_hash(roots: Mapping[str, Path]) -> str:
     return digest.hexdigest()
 
 
-def _ledger_inventory_hash(ledger_root: Path) -> str:
+def _ledger_inventory_hash(
+    ledger_root: Path,
+    *,
+    evaluated_at_utc: Any | None = None,
+) -> str:
     digest = hashlib.sha256()
-    paths = sorted(
-        [
-            *ledger_root.glob("signals/records/*.json"),
-            *ledger_root.glob("trades/records/*.json"),
-        ],
-        key=lambda item: item.relative_to(ledger_root).as_posix(),
-    )
-    for path in paths:
-        digest.update(path.relative_to(ledger_root).as_posix().encode("utf-8"))
-        digest.update(bytes.fromhex(sha256_file(path)))
+    for kind in ("signals", "trades"):
+        visible = _visible_content_records(
+            _load_content_records(ledger_root, kind),
+            kind,
+            evaluated_at_utc,
+        )
+        for signal_id in sorted(visible):
+            path = next(
+                _record_directory(ledger_root, kind).glob(
+                    f"{signal_id}_*.json"
+                )
+            )
+            digest.update(path.relative_to(ledger_root).as_posix().encode("utf-8"))
+            digest.update(bytes.fromhex(sha256_file(path)))
     return digest.hexdigest()
 
 
@@ -1147,21 +1274,41 @@ def process_campaign(
     evaluated = _utc(evaluated_at_utc)
     resolved = _resolve_roots(roots)
     _validate_process_manifests(resolved["ledger"])
-    actuals, actual_census = load_actual_evidence(resolved["consensus_and_actual"])
-    markets, market_census = load_market_evidence(resolved["event_market"])
-    ownerships, ownership_census = load_ownership_evidence(
-        resolved["neutral_ownership"]
+    actuals, actual_census = load_actual_evidence(
+        resolved["consensus_and_actual"],
+        evaluated_at_utc=evaluated,
     )
-    paths, path_census = load_complete_paths(resolved["trade_path"])
+    markets, market_census = load_market_evidence(
+        resolved["event_market"],
+        evaluated_at_utc=evaluated,
+    )
+    ownerships, ownership_census = load_ownership_evidence(
+        resolved["neutral_ownership"],
+        evaluated_at_utc=evaluated,
+    )
+    paths, path_census = load_complete_paths(
+        resolved["trade_path"],
+        evaluated_at_utc=evaluated,
+    )
     oracle, completed_oracle_dates, oracle_census = load_oracle_evidence(
         resolved["oracle_evaluation"],
         resolved["neutral_ownership"],
         evaluated_at_utc=evaluated,
     )
     generated, signal_census = build_signal_ledger(actuals, markets, ownerships)
-    signals = reconcile_signal_records(generated, resolved["ledger"], persist=persist)
+    signals = reconcile_signal_records(
+        generated,
+        resolved["ledger"],
+        persist=persist,
+        evaluated_at_utc=evaluated,
+    )
     routed = route_operational_signals(signals, paths)
-    routed = reconcile_trade_records(routed, resolved["ledger"], persist=persist)
+    routed = reconcile_trade_records(
+        routed,
+        resolved["ledger"],
+        persist=persist,
+        evaluated_at_utc=evaluated,
+    )
     evaluated_routed = attach_completed_oracle_labels(
         routed,
         oracle,
@@ -1195,9 +1342,12 @@ def process_campaign(
     else:
         status = admission["status"]
     evidence_hash = _evidence_inventory_hash(resolved)
-    ledger_hash = _ledger_inventory_hash(resolved["ledger"])
+    ledger_hash = _ledger_inventory_hash(
+        resolved["ledger"],
+        evaluated_at_utc=evaluated,
+    )
     result = {
-        "schema_version": ("eurusd_neutral_prospective_campaign_process_v1_1"),
+        "schema_version": ("eurusd_neutral_prospective_campaign_process_v1_2"),
         "evaluated_at_utc": evaluated,
         "status": status,
         "persisted": bool(persist),
