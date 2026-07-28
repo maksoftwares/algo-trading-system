@@ -34,6 +34,7 @@ execution decision.
 | Four-session 30-minute opening drive | 2019–2026 H1 | 593 | 32.04% | 1.432 | 0.675 | -134.20R |
 | Midnight dual-side pairs | 2019–2026 H1 | 2,620 | 31.56% | 1.433 | 0.661 | -625.38R |
 | Four-clock paired side ranker | 2021–2026 H1 | 1,732 | 33.26% | 1.432 | 0.714 | -341.10R |
+| Binance EURUSDT executed-flow sign | 2020–2026 H1 | 2,076 | 32.18% | 1.433 | 0.680 | -463.75R |
 
 None passed all locked chronological admission gates. Consequently, none is
 an admitted strategy or eligible for demo/live use.
@@ -289,6 +290,13 @@ conditional winning-side accuracy remained only 52.60%. All five windows
 failed; 1,732 trades returned 33.26% wins, 1.432 payoff, PF 0.714, and
 -341.10R. The direct ranking formulation is also closed.
 
+A genuinely new login-free source then supplied executed EURUSDT taker flow
+from 78 official Binance archives. The acquisition succeeded with all
+checksums verified, but the preregistered, unfitted 15-minute flow-sign rule
+had only 50.72% conditional winning-side accuracy. All five windows failed;
+2,076 trades returned 32.18% wins, 1.433 payoff, PF 0.680, and -463.75R.
+The source pipeline is retained, but this exact direction rule is closed.
+
 The evidence does not support claiming that Regime 1 has been solved. Further retrospective threshold, hour, feature, or model search on this archive would increase overfitting rather than improve causal evidence.
 
 ## Next legitimate evidence
@@ -329,4 +337,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_opening_drive.py
 uv run --with pandas --with numpy --with pyarrow python run_neutral_midnight_pairs.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_four_clock_ranker.py
+uv run --with pandas --with numpy --with pyarrow python download_neutral_binance_eurusdt.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_binance_eurusdt_flow.py
 ```

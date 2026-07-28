@@ -1,0 +1,172 @@
+{
+  "campaign_id": "eurusd-neutral-binance-eurusdt-flow-v1",
+  "frozen_at_utc": "2026-07-28T11:15:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_WITH_FORWARD_ONLY_START",
+  "parent_four_clock_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8"
+  },
+  "paired_trade_source": {
+    "path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+    "sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1"
+  },
+  "executed_flow_source": {
+    "provider": "Binance official public market-data archive",
+    "documentation": "https://github.com/binance/binance-public-data",
+    "authentication_required": false,
+    "symbol": "EURUSDT",
+    "interval": "5m",
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-binance-eurusdt-flow-v1/EURUSDT_5M_EXECUTED_FLOW.parquet",
+    "sha256": "7ba02f67f3278038a81095b90bceee402ffdce6bd4fb5d465b7c0a6e408aeb41",
+    "bytes": 39244999,
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-binance-eurusdt-flow-v1/MANIFEST.json",
+    "manifest_sha256": "17e9a956fb4ff908199022b51712df71adfc778ce148f243017be8273c48f1e7",
+    "archive_files": 78,
+    "archive_chain_sha256": "aa380ef80b3144873d089972d85699844904874bee3717bd3e8a894b626a3952",
+    "rows": 682290,
+    "first_open_utc": "2020-01-03T08:00:00Z",
+    "last_open_utc": "2026-06-30T23:55:00Z",
+    "missing_five_minute_bars": 462
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "strategy": {
+    "family": "N22_NEUTRAL_BINANCE_EURUSDT_EXECUTED_FLOW",
+    "entry_hour_utc": 0,
+    "entry_minutes_utc": [0, 15, 30, 45],
+    "weekdays_only": true,
+    "required_trades_per_eligible_day": 4,
+    "direction_rule": "LONG_IF_PRIOR_15M_EURUSDT_TAKER_QUOTE_IMBALANCE_NONNEGATIVE_ELSE_SHORT",
+    "abstention_allowed": false,
+    "one_open_position": false
+  },
+  "flow_rule": {
+    "completed_m5_bars": 3,
+    "requires_consecutive_bars": true,
+    "requires_positive_total_quote_volume": true,
+    "imbalance": "(2 * sum_taker_buy_quote_volume - sum_quote_volume) / sum_quote_volume",
+    "long_threshold": 0.0,
+    "tie_direction": "LONG",
+    "price_or_volume_threshold_search": false
+  },
+  "model": {
+    "type": "NONE_DETERMINISTIC_EXECUTED_FLOW_SIGN",
+    "decision_probability": 0.5,
+    "fit_or_refit": false
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_new_portfolio_r_per_eligible_day": 1.0,
+    "maximum_concurrent_positions": 4
+  },
+  "windows": {
+    "development_2020_2021": [
+      "2020-01-03T00:00:00Z",
+      "2021-12-31T23:59:59Z"
+    ],
+    "validation_2022_2023": [
+      "2022-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_census": {
+    "parent_paired_decision_points": 2568,
+    "flow_feature_matched_points": 2118,
+    "flow_feature_missing_or_invalid_points": 450,
+    "complete_days_before_window_filter": 519,
+    "eligible_complete_days": 519,
+    "paired_decision_points": 2076,
+    "forced_trade_candidates": 2076,
+    "days_exactly_four_candidates": 519,
+    "eligible_day_exact_four_coverage": 1.0,
+    "by_window": {
+      "development_2020_2021": {
+        "eligible_days": 185,
+        "decision_points": 740,
+        "forced_trade_candidates": 740
+      },
+      "validation_2022_2023": {
+        "eligible_days": 149,
+        "decision_points": 596,
+        "forced_trade_candidates": 596
+      },
+      "validation_2024": {
+        "eligible_days": 66,
+        "decision_points": 264,
+        "forced_trade_candidates": 264
+      },
+      "pseudo_oos_2025": {
+        "eligible_days": 80,
+        "decision_points": 320,
+        "forced_trade_candidates": 320
+      },
+      "pseudo_oos_2026h1": {
+        "eligible_days": 39,
+        "decision_points": 156,
+        "forced_trade_candidates": 156
+      }
+    }
+  },
+  "admission": {
+    "minimum_trades_each_window": 120,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor_each_window": 1.1,
+    "minimum_expectancy_r_each_window": 0.0,
+    "minimum_conditional_direction_accuracy_each_window": 0.7,
+    "minimum_daily_profit_factor_each_window": 1.1,
+    "minimum_overall_profit_factor": 1.3,
+    "minimum_overall_exact_oracle_precision": 0.4,
+    "minimum_overall_15m_oracle_precision": 0.45,
+    "minimum_stressed_profit_factor": 1.15,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "requires_exactly_four_executed_trades_each_eligible_day": true
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 400,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "No flow horizon, clock, sign, threshold, fallback, or subgroup may be changed after outcomes.",
+    "Only fully completed and consecutive EURUSDT bars may determine direction.",
+    "No EURUSD outcome, oracle membership, or future Binance bar may enter the direction rule.",
+    "No date with missing flow at any required clock may enter the complete-day ledger.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}

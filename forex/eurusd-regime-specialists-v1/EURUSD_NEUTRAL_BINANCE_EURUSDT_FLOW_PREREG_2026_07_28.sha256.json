@@ -1,0 +1,26 @@
+{
+  "locked_before_binance_eurusdt_flow_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T11:30:00Z",
+  "files": {
+    "config/frozen_neutral_binance_eurusdt_flow.json": "b76196715ce8beae5887e16305eb6d331f2cb4f47ab42a7e5e4adde3909a6bdf",
+    "download_neutral_binance_eurusdt.py": "72a7a275a94144a27e6f1780dac18aa79fcbb4b384c1cd14c94e6eb10a37f912",
+    "src/eurusd_regime_specialists/neutral_binance_eurusdt_flow.py": "9fabf84a6d00f053432c766d912f322fa84b60c9ed20ba75ec7f7a86066b0830",
+    "run_neutral_binance_eurusdt_flow.py": "7cef24fc0baddaf209a5e03cb3cc0e32db368decce56734fd600935845876ad5",
+    "tests/test_download_neutral_binance_eurusdt.py": "39600551081b953d012f1c98fe3ac86f2b975bf2593f0af044d3801fca573ee6",
+    "tests/test_neutral_binance_eurusdt_flow.py": "34aa01382fa4865fafadf28a8410c178273b9ec82f9781cd747ff41d7cb2af19",
+    "EURUSD_NEUTRAL_BINANCE_EURUSDT_SOURCE_AUDIT_2026_07_28.md": "98646935ddc06e57f790f77cb7007e786cff1a8cb39e2d20be4d6e26b53aa66f",
+    "EURUSD_NEUTRAL_BINANCE_EURUSDT_FLOW_PREREG_2026_07_28.md": "3bbcfa2d85afaf73c76cd1d3089ea4d52b8003ef09c7169733a97c62487083fa"
+  },
+  "pinned_sources": {
+    "EURUSDT_5M_EXECUTED_FLOW.parquet": "7ba02f67f3278038a81095b90bceee402ffdce6bd4fb5d465b7c0a6e408aeb41",
+    "EURUSDT_SOURCE_MANIFEST.json": "17e9a956fb4ff908199022b51712df71adfc778ce148f243017be8273c48f1e7",
+    "BINANCE_ARCHIVE_CHAIN": "aa380ef80b3144873d089972d85699844904874bee3717bd3e8a894b626a3952",
+    "PAIRED_TRADE_SOURCE.parquet": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1"
+  },
+  "outcome_blind_census": {
+    "eligible_complete_days": 519,
+    "paired_decision_points": 2076,
+    "forced_trade_candidates": 2076,
+    "days_exactly_four_candidates": 519
+  }
+}
