@@ -1,0 +1,340 @@
+{
+  "baseline": {
+    "closed": {
+      "baseline_rows": 1676,
+      "closed_trade_drawdown_usd": 298.0638896632511,
+      "evaluated_entry_years": 6,
+      "green_month_percentage": 63.63636363636363,
+      "green_months": 42,
+      "mean_factor": 1.0,
+      "months": 66,
+      "net_pnl_usd": 5045.67325409181,
+      "nonnegative_entry_years": 6,
+      "profit_factor": 1.7206816937983571,
+      "trade_rows": 1676,
+      "win_rate": 0.45584725536992843
+    },
+    "floating": {
+      "final_close_equity_pnl_usd": 5045.67325409182,
+      "maximum_floating_drawdown_usd": 335.34420669426163,
+      "maximum_known_initial_risk_usd": 58.83893043863128,
+      "maximum_open_addon_positions": 2,
+      "maximum_open_core_positions": 8,
+      "maximum_open_positions": 10,
+      "maximum_unknown_risk_positions": 8,
+      "net_pnl_usd": 5045.673254091811,
+      "net_to_floating_drawdown": 15.046251443645865,
+      "peak_before_trough_usd": 1496.065790618828,
+      "trough_low_equity_pnl_usd": 1160.7215839245664,
+      "trough_time_utc": "2024-09-10T14:10:00+00:00"
+    }
+  },
+  "contract_sha256": "7e076ad2840539e65c245a99fa3ca56a5094da8db4ddf4b9d7021d8cd90dcefb",
+  "decision": "HISTORICAL_OR_EXECUTION_GATES_FAIL_KEEP_ML_OFF_DEMO",
+  "demo_verdict": "Do not connect this ML candidate to demo shadow or orders. Keep deterministic V60 unchanged.",
+  "feature_audit": {
+    "dropped_rows": 0,
+    "feature_columns": [
+      "atr_ratio",
+      "rv_1h",
+      "rv_24h",
+      "slope_atr",
+      "ret_1h",
+      "ret_4h",
+      "ret_24h",
+      "dist_hi_24h",
+      "dist_lo_24h",
+      "hour",
+      "dow",
+      "ms_flow",
+      "ms_imb",
+      "ms_eff",
+      "ms_spread_per_risk",
+      "ms_activity",
+      "is_long",
+      "is_core"
+    ],
+    "feature_complete_rows": 2069,
+    "input_rows": 2069,
+    "selected_bar_available_at_entry_rows": 2069,
+    "selected_bar_max_age_seconds": 39.833,
+    "selected_bar_min_age_seconds": 0.0,
+    "selected_bar_unavailable_at_entry_rows": 0
+  },
+  "gates": {
+    "account_risk_limit_respected": true,
+    "addon_risk_limit_respected": true,
+    "all_features_available_at_entry": true,
+    "at_least_5_of_6_delta_years_nonnegative": false,
+    "directional_risk_limit_respected": true,
+    "floating_drawdown_not_above_baseline": false,
+    "green_month_within_2_points": true,
+    "lot_values_broker_expressible": true,
+    "minimum_4_of_5_seeds_nonnegative": true,
+    "net_pnl_not_below_baseline": true,
+    "net_to_floating_drawdown_improves_at_least_5pct": false,
+    "no_baseline_trade_skipped": true,
+    "position_limits_respected": true,
+    "profit_factor_not_below_baseline": false,
+    "recent_closed_drawdown_not_above_baseline": true,
+    "recent_net_pnl_not_below_baseline": true,
+    "recent_profit_factor_not_below_baseline": false,
+    "topups_used_no_missing_risk": true,
+    "training_used_no_missing_risk": true,
+    "weekly_block_bootstrap_lower_bound_above_zero": false
+  },
+  "gates_passed": 14,
+  "gates_total": 20,
+  "limitations": [
+    "The architecture was chosen after the historical V60 record was exposed.",
+    "A historical pass can nominate prospective shadow observation only.",
+    "M5 bar extremes cannot order an intrabar entry against that bar's high or low.",
+    "The current-account floating halt and restart path is not simulated.",
+    "R1 has missing historical initial risk and is never trained or topped up."
+  ],
+  "locked_diagnostics": [
+    {
+      "accepted_topups": 166,
+      "delta_pnl_usd": 98.6122707689874,
+      "floating_drawdown_usd": 347.5283539469465,
+      "name": "expected_pnl_rank_only",
+      "net_pnl_usd": 5144.2855248607975,
+      "net_to_floating_drawdown": 14.802491556260536,
+      "nonnegative_delta_years": 3,
+      "profit_factor": 1.6787303885374876,
+      "proposals": 216
+    },
+    {
+      "accepted_topups": 134,
+      "delta_pnl_usd": 15.846590888147148,
+      "floating_drawdown_usd": 366.93217169492436,
+      "name": "win_probability_rank_only",
+      "net_pnl_usd": 5061.519844979957,
+      "net_to_floating_drawdown": 13.794156619191785,
+      "nonnegative_delta_years": 3,
+      "profit_factor": 1.683897282281014,
+      "proposals": 170
+    },
+    {
+      "accepted_topups": 136,
+      "delta_pnl_usd": 46.18104531321205,
+      "floating_drawdown_usd": 361.8579455631775,
+      "name": "market_only_dual_model",
+      "net_pnl_usd": 5091.854299405022,
+      "net_to_floating_drawdown": 14.07141769812548,
+      "nonnegative_delta_years": 3,
+      "profit_factor": 1.6864493739032826,
+      "proposals": 174
+    }
+  ],
+  "market_data_audit": {
+    "bars": 1176817,
+    "first_bar_utc": "2010-01-01T00:00:00+00:00",
+    "last_bar_utc": "2026-06-30T23:55:00+00:00",
+    "legacy_ask_manifest_sha256": "140df640a17f1acf1566c32d36100a22f923a128303e57ddcb2164e94c15f346",
+    "legacy_bid_manifest_sha256": "65caffbba728eecf2c76fc82d2eab56a717b45e638c25e825977095e11222676"
+  },
+  "population_audit": {
+    "current_population_end_utc": "2026-06-29T00:45:00+00:00",
+    "current_population_rows": 2069,
+    "current_population_start_utc": "2016-07-27T14:00:00.215000+00:00",
+    "pre_feed_or_cooldown_excluded_rows": 115,
+    "r5_excluded_rows": 10,
+    "raw_ledger_rows": 2194
+  },
+  "primary_policy": {
+    "closed": {
+      "baseline_rows": 1676,
+      "closed_trade_drawdown_usd": 337.9093036941525,
+      "evaluated_entry_years": 6,
+      "green_month_percentage": 62.121212121212125,
+      "green_months": 41,
+      "mean_factor": 1.0805489260143197,
+      "months": 66,
+      "net_pnl_usd": 5047.130276763912,
+      "nonnegative_entry_years": 4,
+      "profit_factor": 1.6808597662666045,
+      "trade_rows": 1676,
+      "win_rate": 0.45584725536992843
+    },
+    "delta_pnl_usd": 1.4570226721016297,
+    "floating": {
+      "final_close_equity_pnl_usd": 5047.130276763924,
+      "maximum_floating_drawdown_usd": 383.7650952626873,
+      "maximum_known_initial_risk_usd": 58.83893043863128,
+      "maximum_open_addon_positions": 2,
+      "maximum_open_core_positions": 8,
+      "maximum_open_positions": 10,
+      "maximum_unknown_risk_positions": 8,
+      "net_pnl_usd": 5047.130276763912,
+      "net_to_floating_drawdown": 13.151613680001695,
+      "peak_before_trough_usd": 576.4789144139504,
+      "trough_low_equity_pnl_usd": 192.71381915126312,
+      "trough_time_utc": "2023-11-22T18:50:00+00:00"
+    },
+    "risk_audit": {
+      "accepted_missing_risk_topups": 0,
+      "accepted_topups": 135,
+      "base_trade_rows": 1676,
+      "lot_values": [
+        0.01,
+        0.02
+      ],
+      "maximum_account_positions": 10,
+      "maximum_addon_positions": 2,
+      "maximum_core_positions": 8,
+      "maximum_known_account_risk_usd": 58.83893043863131,
+      "maximum_known_addon_risk_usd": 29.951548525986297,
+      "maximum_known_direction_risk_usd": 56.10179505773017,
+      "maximum_unknown_risk_positions": 8,
+      "one_lot_unit_rows": 1541,
+      "proposed_topups": 174,
+      "rejected_topups": 39,
+      "rejections": {
+        "ACTIVE_UNKNOWN_RISK": 34,
+        "SOURCE_RISK_LIMIT": 5
+      },
+      "skipped_trade_rows": 0,
+      "two_lot_unit_rows": 135
+    },
+    "weekly_block_bootstrap": {
+      "block_weeks": 4,
+      "lower_95_one_sided_usd": -136.47418618658799,
+      "lower_95_two_sided_usd": -161.14984863015383,
+      "observed_delta_usd": 1.4570226721014023,
+      "probability_nonpositive": 0.4949,
+      "repetitions": 10000,
+      "upper_95_two_sided_usd": 165.3372530908942
+    }
+  },
+  "recent_window": {
+    "baseline": {
+      "closed": {
+        "baseline_rows": 356,
+        "closed_trade_drawdown_usd": 152.88940082371732,
+        "evaluated_entry_years": 2,
+        "green_month_percentage": 83.33333333333334,
+        "green_months": 10,
+        "mean_factor": 1.0,
+        "months": 12,
+        "net_pnl_usd": 2502.7232508824322,
+        "nonnegative_entry_years": 2,
+        "profit_factor": 1.9837293720046052,
+        "trade_rows": 356,
+        "win_rate": 0.4410112359550562
+      },
+      "floating": {
+        "final_close_equity_pnl_usd": 2502.723250882425,
+        "maximum_floating_drawdown_usd": 258.70447324704037,
+        "maximum_known_initial_risk_usd": 58.838930438631294,
+        "maximum_open_addon_positions": 2,
+        "maximum_open_core_positions": 6,
+        "maximum_open_positions": 6,
+        "maximum_unknown_risk_positions": 6,
+        "net_pnl_usd": 2502.7232508824327,
+        "net_to_floating_drawdown": 9.674062529612886,
+        "peak_before_trough_usd": 1039.3273596034687,
+        "trough_low_equity_pnl_usd": 780.6228863564284,
+        "trough_time_utc": "2026-01-16T15:30:00+00:00"
+      }
+    },
+    "end_utc_exclusive": "2026-07-01T00:00:00+00:00",
+    "primary_policy": {
+      "closed": {
+        "baseline_rows": 356,
+        "closed_trade_drawdown_usd": 152.88940082371732,
+        "evaluated_entry_years": 2,
+        "green_month_percentage": 83.33333333333334,
+        "green_months": 10,
+        "mean_factor": 1.0280898876404494,
+        "months": 12,
+        "net_pnl_usd": 2527.8742930745207,
+        "nonnegative_entry_years": 1,
+        "profit_factor": 1.9782842407793149,
+        "trade_rows": 356,
+        "win_rate": 0.4410112359550562
+      },
+      "floating": {
+        "final_close_equity_pnl_usd": 2527.874293074512,
+        "maximum_floating_drawdown_usd": 258.70447324703946,
+        "maximum_known_initial_risk_usd": 58.838930438631294,
+        "maximum_open_addon_positions": 2,
+        "maximum_open_core_positions": 6,
+        "maximum_open_positions": 6,
+        "maximum_unknown_risk_positions": 6,
+        "net_pnl_usd": 2527.8742930745207,
+        "net_to_floating_drawdown": 9.771281730643398,
+        "peak_before_trough_usd": 1021.4875025541951,
+        "trough_low_equity_pnl_usd": 762.7830293071556,
+        "trough_time_utc": "2026-01-16T15:30:00+00:00"
+      }
+    },
+    "start_utc": "2025-07-01T00:00:00+00:00"
+  },
+  "runtime_changed": false,
+  "schema_version": "codex_v60_executable_ml_topup_v1_result",
+  "seed_sensitivity": [
+    {
+      "accepted_topups": 135,
+      "delta_pnl_usd": 1.4570226721016297,
+      "net_pnl_usd": 5047.130276763912,
+      "nonnegative_delta_years": 4,
+      "profit_factor": 1.6808597662666045,
+      "proposed_topups": 174,
+      "seed": 0
+    },
+    {
+      "accepted_topups": 123,
+      "delta_pnl_usd": 29.44362780454958,
+      "net_pnl_usd": 5075.11688189636,
+      "nonnegative_delta_years": 5,
+      "profit_factor": 1.6888627067311202,
+      "proposed_topups": 158,
+      "seed": 1
+    },
+    {
+      "accepted_topups": 134,
+      "delta_pnl_usd": 32.467109758139486,
+      "net_pnl_usd": 5078.14036384995,
+      "nonnegative_delta_years": 3,
+      "profit_factor": 1.6849241259079677,
+      "proposed_topups": 176,
+      "seed": 2
+    },
+    {
+      "accepted_topups": 135,
+      "delta_pnl_usd": 129.64541358532097,
+      "net_pnl_usd": 5175.318667677131,
+      "nonnegative_delta_years": 4,
+      "profit_factor": 1.7006578729321111,
+      "proposed_topups": 177,
+      "seed": 3
+    },
+    {
+      "accepted_topups": 127,
+      "delta_pnl_usd": 88.22707820253981,
+      "net_pnl_usd": 5133.90033229435,
+      "nonnegative_delta_years": 4,
+      "profit_factor": 1.6964066592790314,
+      "proposed_topups": 163,
+      "seed": 4
+    }
+  ],
+  "training_audit": {
+    "evaluation_known_risk_rows": 1232,
+    "evaluation_rows": 1676,
+    "known_risk_rows": 1625,
+    "missing_risk_rows": 444,
+    "source_aware_feature_count": 25,
+    "source_feature_columns": [
+      "source__R2_DOWNTREND",
+      "source__R3_COMPRESSION",
+      "source__R4_CHOP",
+      "source__V25_CHOP",
+      "source__V57_BREAK_SWING_H4ADX_HIGH",
+      "source__V7_SWING_HEALTH",
+      "source__V8_RETEST_HEALTH"
+    ],
+    "training_missing_risk_rows": 0
+  }
+}
