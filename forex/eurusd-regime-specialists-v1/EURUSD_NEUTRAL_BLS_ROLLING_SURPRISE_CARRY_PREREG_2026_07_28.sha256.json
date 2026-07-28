@@ -1,0 +1,23 @@
+{
+  "schema_version": "eurusd_neutral_bls_rolling_surprise_carry_prereg_lock_v1",
+  "locked_at_utc": "2026-07-28T17:15:00Z",
+  "locked_before_census_and_outcome": true,
+  "files": {
+    "config/frozen_neutral_bls_rolling_surprise_carry.json": "0bdc1f753f339eb1e58cb46ef0548d86d580bf7308bb5eb14309c55ce203f894",
+    "EURUSD_NEUTRAL_BLS_ROLLING_SURPRISE_CARRY_PREREG_2026_07_28.md": "fdc4ecce0c02b271b861160ccd96250518c9746f81665adad59f6add943bf313",
+    "src/eurusd_regime_specialists/neutral_bls_rolling_surprise_carry.py": "d8b0e9487daaac976a859725a754554b19ae6854774aaf96f768d7c782feaf1b",
+    "run_neutral_bls_rolling_surprise_carry.py": "ab3386f8de801dac815ed7c6c4bce8a3549d4235c843dfdb0054074f5a20671c",
+    "tests/test_neutral_bls_rolling_surprise_carry.py": "fcbd2c43c3aaa56ca049641803a6127c63898be82aea980a0508bba7853f4e32",
+    "src/eurusd_regime_specialists/neutral_bls_first_hour_carry.py": "a17318687db300afafc9f78f1718fdf93b8bd2cb031c866c48dd24a7ea99afad",
+    "src/eurusd_regime_specialists/neutral_bls_release_acceleration.py": "370813bc7fb7905112836ad0299fea4a037c760cc1d8ce08086a11c2b70dbece",
+    "config/frozen_neutral_four_clock_ranker.json": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "EURUSD_NEUTRAL_BLS_INITIAL_RELEASE_SOURCE_AUDIT_2026_07_28.md": "cf352017271354589c8134c85c31c518a0a7d479bd9f1d2ff0aa2e28080b1878",
+    "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230"
+  },
+  "external_sources": {
+    "D:/AlgoTradingData/research/eurusd-neutral-bls-initial-release-v1/BLS_INITIAL_RELEASES.parquet": "1fa88ef36dda61dba5ab711179283d6a2e77c11aaddde9f326f5444b5c1791fc",
+    "D:/AlgoTradingData/research/eurusd-neutral-bls-initial-release-v1/MANIFEST.json": "7971ec2175f0958e80bd3e99dbe85641626cc2fc353f9bee1bf6808f6c8734e7"
+  }
+}
