@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T17:27:25.301405Z",
+  "as_of_utc": "2026-07-28T17:35:39.850053Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -22,7 +22,9 @@
   "prospective_operations_planner_v1_lock_sha256": "6604c256bb35419a2e651ae422da0d096e86f0fd91af4289c61c569976d67e5f",
   "prospective_operations_planner_v1_1_superseded_before_start_and_first_signal": true,
   "prospective_operations_planner_v1_1_lock_sha256": "5d8ec0df44f2e7ec7eda6ba41ce04bc328c6e3b474063b3db2628ca9c326b778",
-  "prospective_operations_planner_lock_sha256": "0c30774ea785e1996f388f8a23c3516db102836145aa26b20a18925f9b088517",
+  "prospective_operations_planner_v1_2_superseded_before_start_and_first_signal": true,
+  "prospective_operations_planner_v1_2_lock_sha256": "0c30774ea785e1996f388f8a23c3516db102836145aa26b20a18925f9b088517",
+  "prospective_operations_planner_lock_sha256": "45f9c509a73a4479c28abf76de8d02036fb7d5d36caaacff2b422d3a5f0cf9d3",
   "prospective_independent_validation_lock_sha256": "4a6158c8d22b72ab1a10fb51c6d451034f4a33a0f6ddc2358d3921a8846878f7",
   "prospective_directional_falsification_lock_sha256": "93f022e4ab721d835ff99528de388671e4457c31d483f186cbbee4a2536fe1d8",
   "prospective_official_bls_schedule_lock_sha256": "f97311c04bf60e0cd2ddb684420dc61abc5b036a6109ae8e2ba63ab0be3f20bc",
@@ -73,9 +75,9 @@
     "market_capture_not_due_before_utc": "2026-08-07T12:46:00Z"
   },
   "prospective_operations_planner": {
-    "schema_version": "eurusd_neutral_prospective_operations_plan_v1_2",
+    "schema_version": "eurusd_neutral_prospective_operations_plan_v1_3",
     "status": "WAITING_FOR_NEXT_SAFE_ACTION",
-    "evaluated_at_utc": "2026-07-28T17:27:25.301405Z",
+    "evaluated_at_utc": "2026-07-28T17:34:52.518601Z",
     "target_events": 3,
     "runtime_only_supersession": {
       "reason": "THE_WINDOWS_PYTHON_COMMAND_RESOLVED_TO_A_NONFUNCTIONAL_MICROSOFT_STORE_STUB",
@@ -106,6 +108,21 @@
       "available_required_ownership_dates": 0,
       "missing_required_ownership_dates": 5,
       "cache_action_precedes_due_ownership_capture": true
+    },
+    "ownership_dependency_gate": {
+      "status": "FROZEN_BEFORE_PROSPECTIVE_START_AND_FIRST_SIGNAL",
+      "ownership_dates_processed_in_chronological_order": true,
+      "exact_date_cache_must_have_zero_safe_gaps": true,
+      "replan_after_each_mutating_command": true,
+      "earliest_missing_ownership_date": "2026-08-07",
+      "earliest_date_cache_ready": true,
+      "delayed_recovery_rehearsal_as_of_utc": "2026-08-08T00:01:00Z",
+      "delayed_recovery_executable_ownership_actions": [
+        "OWNERSHIP_CACHE_PREWARM"
+      ],
+      "dependent_context_capture_blocked": true,
+      "strategy_or_evidence_semantics_changed": false,
+      "oracle_labels_remain_evaluation_only": true
     },
     "first_live_due_action": {
       "stage": "OWNERSHIP_CACHE_PREWARM",
@@ -273,10 +290,10 @@
   "profitability_and_robustness_required_for_demo_readiness": true,
   "demo_trading_authorized": false,
   "full_test_suite": {
-    "passed": 293,
+    "passed": 296,
     "failed": 0,
     "warnings": 2
   },
-  "next_action": "AT OR AFTER 2026-07-28T18:01:00Z RUN plan_prospective_neutral_operations_v1_2.py; EXECUTE ONLY THE EXACT OFFLINE-UV DUE CAPTURE IT REPORTS; CAPTURE ALL FIVE REQUIRED EVENT_AND_ORACLE_CONTEXT OWNERSHIP DATES; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
+  "next_action": "AT OR AFTER 2026-07-28T18:01:00Z RUN plan_prospective_neutral_operations_v1_3.py; EXECUTE ONE EXACT OFFLINE-UV MUTATING COMMAND AND THEN REPLAN; CAPTURE ALL FIVE REQUIRED EVENT_AND_ORACLE_CONTEXT OWNERSHIP DATES IN CHRONOLOGICAL ZERO_GAP_CACHE ORDER; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
   "broker_action_allowed": false
 }

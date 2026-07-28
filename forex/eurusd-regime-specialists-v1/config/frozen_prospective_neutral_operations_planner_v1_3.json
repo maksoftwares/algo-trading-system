@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_neutral_prospective_operations_planner_v1_3",
+  "frozen_at_utc": "2026-07-28T17:33:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "network_requests_allowed": false,
+  "broker_action_allowed": false,
+  "supersedes": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_OPERATIONS_PLANNER_V1_2_PREREG_2026_07_28.sha256.json",
+    "sha256": "0c30774ea785e1996f388f8a23c3516db102836145aa26b20a18925f9b088517",
+    "before_prospective_start_and_first_signal": true,
+    "reason": "BLOCK_OWNERSHIP_CAPTURE_UNTIL_ITS_EXACT_REQUIRED_DATE_HAS_ZERO_SAFE_CACHE_GAPS"
+  },
+  "dependency_gate": {
+    "ownership_dates_processed_in_chronological_order": true,
+    "exact_date_cache_must_be_complete": true,
+    "missing_safe_symbol_hours_required": 0,
+    "replan_after_each_mutating_command": true,
+    "strategy_or_evidence_semantics_changed": false,
+    "oracle_labels_remain_evaluation_only": true
+  }
+}
