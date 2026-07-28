@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_gdelt_relative_tone_state_v1",
-  "as_of_utc": "2026-07-28T20:15:00Z",
+  "as_of_utc": "2026-07-28T20:18:20Z",
   "status": "FROZEN_WAITING_FOR_FIRST_PROSPECTIVE_CAPTURE",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
   "strategy_preregistration_lock_sha256": "0b29e6b578a3114e4249495db734746307fbd750f3f8950acf0285cb1250a874",
@@ -33,7 +33,8 @@
   },
   "execution": {
     "shadow_entry_time_utc": "2026-07-29T00:20:00Z",
-    "conditional_path_capture_utc": "2026-07-29T04:21:00Z",
+    "conditional_path_capture_utc": "2026-07-29T05:16:00Z",
+    "path_capture_clock_reason": "WAIT_FOR_COMPLETE_DUKASCOPY_0400_0500_UTC_HOURLY_ARCHIVE_AFTER_CURRENT_HOUR_HTTP_400_DIAGNOSTIC",
     "closed_trades": 0,
     "net_r": 0.0,
     "profit_factor": 0.0
@@ -61,10 +62,15 @@
     "json_artifacts_validated": 12
   },
   "scheduled_boundary_helper": {
-    "pid": 48480,
+    "version": "V2_POST_COMPLETE_HOURLY_ARCHIVE",
+    "pid": 48248,
     "status": "RUNNING",
-    "stdout_path": "D:/AlgoTradingData/prospective/eurusd-neutral-gdelt-relative-tone-v1/operations/20260729_boundary.stdout.log",
-    "stderr_path": "D:/AlgoTradingData/prospective/eurusd-neutral-gdelt-relative-tone-v1/operations/20260729_boundary.stderr.log",
+    "replaced_pid": 48480,
+    "replaced_pid_status": "STOPPED_BEFORE_BOUNDARY",
+    "path_capture_utc_if_signal": "2026-07-29T05:16:00Z",
+    "post_path_validation_status_enabled": true,
+    "stdout_path": "D:/AlgoTradingData/prospective/eurusd-neutral-gdelt-relative-tone-v1/operations/20260729_boundary_v2.stdout.log",
+    "stderr_path": "D:/AlgoTradingData/prospective/eurusd-neutral-gdelt-relative-tone-v1/operations/20260729_boundary_v2.stderr.log",
     "broker_action_allowed": false
   },
   "scheduled_pre_midnight_cache_helper": {
