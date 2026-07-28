@@ -1,0 +1,306 @@
+{
+  "campaign_id": "eurusd-neutral-macro-event-drift-v1",
+  "frozen_at_utc": "2026-07-28T09:40:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "NEW_EVENT_TIMING_SOURCE_WITH_ADAPTIVELY_INSPECTED_EURUSD_HISTORY",
+  "parent_four_clock_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8"
+  },
+  "event_source": {
+    "provider": "Dukascopy public Economic Calendar widget",
+    "documentation": "https://www.dukascopy.com/trading-tools/widgets/calendars/economic_calendar",
+    "authentication_required": false,
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-dukascopy-event-timing-v1/DUKASCOPY_ECONOMIC_EVENTS.parquet",
+    "sha256": "805603f819b727a9481f577ff3d2191f80456a4d83d37360e1416a75c6504be1",
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-dukascopy-event-timing-v1/MANIFEST.json",
+    "manifest_sha256": "441ad058e84055adf773d61a73ab38385ab8d7e1e422b6bce4fb16f4003cc1e3",
+    "raw_response_chain_sha256": "6d083d561f16add86fc05dd004711209518ddaef489f9e5d32ca440e67724a4a",
+    "normalized_rows": 84305,
+    "first_event_utc": "2019-01-01T23:50:00+00:00",
+    "last_event_utc": "2026-06-30T23:50:00+00:00",
+    "allowed_strategy_fields": [
+      "event_id",
+      "event_time_utc",
+      "currency",
+      "title",
+      "tag"
+    ],
+    "prohibited_strategy_fields": [
+      "impact",
+      "actual",
+      "actual_norm",
+      "forecast",
+      "forecast_norm",
+      "previous",
+      "previous_norm",
+      "historical_count",
+      "effect"
+    ]
+  },
+  "strategy": {
+    "family": "N28_NEUTRAL_MACRO_EVENT_DRIFT",
+    "entry_hour_utc": 0,
+    "entry_minutes_utc": [0],
+    "weekdays_only": true,
+    "maximum_trades_per_neutral_date": 1,
+    "abstention_allowed": true,
+    "lookback_hours": 24,
+    "latest_qualifying_event_cluster_only": true,
+    "pre_event_price": "MID_CLOSE_OF_LAST_M5_BAR_FULLY_COMPLETED_BEFORE_EVENT",
+    "pre_entry_price": "MID_CLOSE_OF_2355_UTC_M5_BAR_COMPLETED_AT_ENTRY",
+    "impulse": "PRE_ENTRY_MID_CLOSE_MINUS_PRE_EVENT_MID_CLOSE",
+    "zero_impulse_is_cash": true,
+    "magnitude_threshold_pips": null,
+    "branches": ["MOMENTUM", "REVERSAL"],
+    "momentum_side": "SIGN_OF_EVENT_TO_ENTRY_IMPULSE",
+    "reversal_side": "OPPOSITE_SIGN_OF_EVENT_TO_ENTRY_IMPULSE"
+  },
+  "event_filter": {
+    "currencies": ["EUR", "USD"],
+    "case_insensitive_title_fragments": {
+      "EUR": [
+        "ECB",
+        "Harmonized Index of Consumer Prices",
+        "Gross Domestic Product",
+        "Markit Manufacturing PMI",
+        "Markit Services PMI",
+        "Retail Sales",
+        "Unemployment Rate"
+      ],
+      "USD": [
+        "Nonfarm Payrolls",
+        "Average Hourly Earnings",
+        "Consumer Price Index",
+        "FOMC",
+        "Fed Interest Rate Decision",
+        "Fed's Monetary Policy Statement",
+        "Gross Domestic Product",
+        "ISM Manufacturing PMI",
+        "ISM Non-Manufacturing PMI",
+        "ISM Services PMI",
+        "Retail Sales",
+        "Producer Price Index",
+        "Durable Goods Orders"
+      ]
+    },
+    "source_impact_is_not_used": true,
+    "actual_forecast_previous_are_not_used": true,
+    "event_rows_at_same_latest_timestamp_form_one_cluster": true
+  },
+  "branch_selection": {
+    "window": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "minimum_trades": 50,
+    "primary_metric": "profit_factor",
+    "secondary_metric": "net_r",
+    "deterministic_tie_break": "MOMENTUM",
+    "selected_once": true,
+    "refit_or_reselection": false,
+    "selection_pass_requires_positive_net_r": true,
+    "selection_pass_requires_profit_factor_exclusive": 1.0
+  },
+  "model": {
+    "type": "NONE_TWO_FIXED_MECHANISM_BRANCHES",
+    "decision_probability": 0.5,
+    "fit_or_refit": false
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_new_portfolio_r_per_source_eligible_day": 0.25,
+    "maximum_concurrent_positions": 1
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "forward_windows": [
+    "validation_2023",
+    "validation_2024",
+    "pseudo_oos_2025",
+    "pseudo_oos_2026h1"
+  ],
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_census": {
+    "source_eligible_days": 642,
+    "source_decision_points": 642,
+    "event_candidates": 439,
+    "active_candidate_days": 439,
+    "no_trade_days": 203,
+    "momentum_long_rate": 0.4806378132118451,
+    "reversal_long_rate": 0.5193621867881549,
+    "trades_per_source_eligible_day": 0.6838006230529595,
+    "trades_per_active_candidate_day": 1.0,
+    "candidate_count_distribution": {
+      "0": 203,
+      "1": 439
+    },
+    "qualifying_event_rows": 8587,
+    "qualifying_event_clusters": 5080,
+    "parent_points_without_event_in_prior_24h": 197,
+    "missing_pre_event_completed_bar": 6,
+    "missing_pre_entry_completed_bar": 0,
+    "zero_impulse_cash_points": 0,
+    "event_currency_clusters": {
+      "EUR": 288,
+      "USD": 145,
+      "EUR|USD": 6
+    },
+    "event_age_minutes": {
+      "minimum": 30.0,
+      "median": 630.0,
+      "maximum": 1170.0
+    },
+    "by_window": {
+      "development_2019_2022": {
+        "source_eligible_days": 383,
+        "source_decision_points": 383,
+        "event_candidates": 254,
+        "active_candidate_days": 254,
+        "no_trade_days": 129,
+        "momentum_long_rate": 0.468503937007874,
+        "reversal_long_rate": 0.531496062992126,
+        "trades_per_source_eligible_day": 0.6631853785900783,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 129,
+          "1": 254
+        }
+      },
+      "validation_2023": {
+        "source_eligible_days": 74,
+        "source_decision_points": 74,
+        "event_candidates": 46,
+        "active_candidate_days": 46,
+        "no_trade_days": 28,
+        "momentum_long_rate": 0.5217391304347826,
+        "reversal_long_rate": 0.4782608695652174,
+        "trades_per_source_eligible_day": 0.6216216216216216,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 28,
+          "1": 46
+        }
+      },
+      "validation_2024": {
+        "source_eligible_days": 66,
+        "source_decision_points": 66,
+        "event_candidates": 50,
+        "active_candidate_days": 50,
+        "no_trade_days": 16,
+        "momentum_long_rate": 0.48,
+        "reversal_long_rate": 0.52,
+        "trades_per_source_eligible_day": 0.7575757575757576,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 16,
+          "1": 50
+        }
+      },
+      "pseudo_oos_2025": {
+        "source_eligible_days": 80,
+        "source_decision_points": 80,
+        "event_candidates": 58,
+        "active_candidate_days": 58,
+        "no_trade_days": 22,
+        "momentum_long_rate": 0.5344827586206896,
+        "reversal_long_rate": 0.46551724137931033,
+        "trades_per_source_eligible_day": 0.725,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 22,
+          "1": 58
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "source_eligible_days": 39,
+        "source_decision_points": 39,
+        "event_candidates": 31,
+        "active_candidate_days": 31,
+        "no_trade_days": 8,
+        "momentum_long_rate": 0.41935483870967744,
+        "reversal_long_rate": 0.5806451612903226,
+        "trades_per_source_eligible_day": 0.7948717948717948,
+        "trades_per_active_candidate_day": 1.0,
+        "candidate_count_distribution": {
+          "0": 8,
+          "1": 31
+        }
+      }
+    }
+  },
+  "admission": {
+    "minimum_development_trades": 50,
+    "minimum_forward_trades_each_window": 8,
+    "minimum_forward_win_rate_each_window": 0.4,
+    "maximum_forward_win_rate_each_window": 0.6,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_forward_profit_factor_each_window_exclusive": 1.0,
+    "minimum_forward_daily_profit_factor_each_window_exclusive": 1.0,
+    "minimum_forward_overall_profit_factor": 1.15,
+    "minimum_forward_overall_win_rate": 0.45,
+    "maximum_forward_overall_win_rate": 0.55,
+    "minimum_stressed_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_trades": 8,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "minimum_overall_exact_oracle_precision": 0.2,
+    "minimum_overall_15m_oracle_precision": 0.4,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "exact_daily_frequency_gate": false
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 100,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "Do not use the source impact, actual, forecast, previous, normalized value, historical count, or effect fields.",
+    "Do not add or remove a title fragment after outcomes.",
+    "Do not add an impulse magnitude threshold, event-age filter, currency reversal, or event subgroup after outcomes.",
+    "Do not select between momentum and reversal outside the frozen 2019-2022 development window.",
+    "Do not use an incomplete M5 bar, EURUSD outcome, oracle membership, or future event in the decision.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}

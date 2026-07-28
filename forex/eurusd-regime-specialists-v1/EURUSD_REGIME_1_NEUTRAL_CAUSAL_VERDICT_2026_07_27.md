@@ -339,6 +339,16 @@ but lost in development and every validation window: 33.22% wins, 1.439
 payoff, PF 0.716, and -119.33R overall. The last six months returned PF 0.600
 and -24.60R. The source is retained; this exact causal use is closed.
 
+A login-free Dukascopy calendar archive then supplied reproducible event
+timestamps and labels, but its historical consensus and revision fields
+failed a point-in-time audit and were prohibited. A separately locked title
+taxonomy conditioned one 00:00 Neutral trade on the latest qualifying event
+and selected once between momentum and reversal using 2019-2022. Both
+development branches lost. Momentum was retained mechanically, then failed
+all four forward windows: 185 trades, 29.19% wins, 1.439 payoff, PF 0.593,
+and -54.63R. The latest six months fell to 19.35% wins, PF 0.345, and
+-16.78R. Event timing without trustworthy release surprise data is closed.
+
 The evidence does not support claiming that Regime 1 has been solved. Further
 retrospective venue weighting, threshold, hour, flow horizon, interaction,
 feature, or model search on these archives would increase overfitting rather
@@ -349,7 +359,7 @@ than improve causal evidence.
 Progress now requires at least one source not adaptively exhausted here:
 
 1. a prospectively collected, untouched EURUSD tick period;
-2. event-time macroeconomic surprise data known at release;
+2. point-in-time macroeconomic surprise data known at release;
 3. an institutional multi-venue order-book archive not represented by the
    inspected Kraken EUR/USD and Binance EURUSDT retail-venue histories;
 4. a forward-only, predeclared selective learner whose probability calibration
@@ -393,4 +403,7 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow python download_neutral_coinbase_stablecoin_eur.py rebuild
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_coinbase_stablecoin_flow.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_coinbase_stablecoin_flow.py backtest
+uv run --with pandas --with pyarrow python download_neutral_dukascopy_event_timing.py rebuild
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_macro_event_drift.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_macro_event_drift.py backtest
 ```
