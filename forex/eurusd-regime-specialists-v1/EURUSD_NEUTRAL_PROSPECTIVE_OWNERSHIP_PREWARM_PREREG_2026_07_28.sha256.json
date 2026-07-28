@@ -1,0 +1,17 @@
+{
+  "schema_version": "eurusd_prospective_neutral_ownership_prewarm_v1_lock",
+  "locked_at_utc": "2026-07-28T15:25:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_prospective_start_and_first_ownership_record": true,
+  "historical_pnl_loaded_before_lock": false,
+  "oracle_or_outcome_loaded_before_lock": false,
+  "ownership_records_before_lock": 0,
+  "eligible_signals_before_lock": 0,
+  "closed_trades_before_lock": 0,
+  "files": {
+    "config/frozen_prospective_neutral_ownership_prewarm_v1.json": "96d1471314237746d927b6b52061a0a12c6ea9da42f53ca5533034a8e35b17b2",
+    "prewarm_prospective_neutral_ownership.py": "e270da96ab1d5a29a4f28f6617ba2daa573f1e2faf9e0745a7d1272f3c87836f",
+    "tests/test_prewarm_prospective_neutral_ownership.py": "6e7b9e4bc740b3bc5e8dd3f39dc479f9ee929b7318c747a465df4a38bc09732d",
+    "EURUSD_NEUTRAL_PROSPECTIVE_OWNERSHIP_PREWARM_PREREG_2026_07_28.md": "53f0d9df02d9fa310fa7b6d8efbd4a69fb72a470d515c3c64b9db7e26ebe1317"
+  }
+}
