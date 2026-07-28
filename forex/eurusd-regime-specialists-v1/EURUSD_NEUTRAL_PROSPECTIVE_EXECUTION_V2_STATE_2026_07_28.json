@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T18:01:50.121698Z",
+  "as_of_utc": "2026-07-28T18:11:12.542686Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -24,7 +24,9 @@
   "prospective_operations_planner_v1_1_lock_sha256": "5d8ec0df44f2e7ec7eda6ba41ce04bc328c6e3b474063b3db2628ca9c326b778",
   "prospective_operations_planner_v1_2_superseded_before_start_and_first_signal": true,
   "prospective_operations_planner_v1_2_lock_sha256": "0c30774ea785e1996f388f8a23c3516db102836145aa26b20a18925f9b088517",
-  "prospective_operations_planner_lock_sha256": "45f9c509a73a4479c28abf76de8d02036fb7d5d36caaacff2b422d3a5f0cf9d3",
+  "prospective_operations_planner_v1_3_superseded_before_start_and_first_signal": true,
+  "prospective_operations_planner_v1_3_lock_sha256": "45f9c509a73a4479c28abf76de8d02036fb7d5d36caaacff2b422d3a5f0cf9d3",
+  "prospective_operations_planner_lock_sha256": "8d41c3bd71a495c1c34ae6f5e9ff9e562dc579302730b03353e73bc81c88b59a",
   "prospective_independent_validation_lock_sha256": "4a6158c8d22b72ab1a10fb51c6d451034f4a33a0f6ddc2358d3921a8846878f7",
   "prospective_directional_falsification_lock_sha256": "93f022e4ab721d835ff99528de388671e4457c31d483f186cbbee4a2536fe1d8",
   "prospective_official_bls_schedule_lock_sha256": "f97311c04bf60e0cd2ddb684420dc61abc5b036a6109ae8e2ba63ab0be3f20bc",
@@ -75,9 +77,9 @@
     "market_capture_not_due_before_utc": "2026-08-07T12:46:00Z"
   },
   "prospective_operations_planner": {
-    "schema_version": "eurusd_neutral_prospective_operations_plan_v1_3",
+    "schema_version": "eurusd_neutral_prospective_operations_plan_v1_4",
     "status": "WAITING_FOR_NEXT_SAFE_ACTION",
-    "evaluated_at_utc": "2026-07-28T18:01:50.121698Z",
+    "evaluated_at_utc": "2026-07-28T18:10:00Z",
     "target_events": 3,
     "runtime_only_supersession": {
       "reason": "THE_WINDOWS_PYTHON_COMMAND_RESOLVED_TO_A_NONFUNCTIONAL_MICROSOFT_STORE_STUB",
@@ -123,6 +125,15 @@
       "dependent_context_capture_blocked": true,
       "strategy_or_evidence_semantics_changed": false,
       "oracle_labels_remain_evaluation_only": true
+    },
+    "forecast_deadline_gate": {
+      "status": "FROZEN_BEFORE_PROSPECTIVE_START_AND_FIRST_SIGNAL",
+      "next_poll_may_not_exceed_forecast_deadline": true,
+      "forecast_deadline_seconds_before_release": 60,
+      "late_forecast_backfill_allowed": false,
+      "clamped_event_stages_at_live_evaluation": 0,
+      "strategy_or_evidence_semantics_changed": false,
+      "broker_action_allowed": false
     },
     "first_live_due_action": {
       "stage": "OWNERSHIP_CACHE_PREWARM",
@@ -292,10 +303,10 @@
   "profitability_and_robustness_required_for_demo_readiness": true,
   "demo_trading_authorized": false,
   "full_test_suite": {
-    "passed": 296,
+    "passed": 299,
     "failed": 0,
     "warnings": 2
   },
-  "next_action": "AT OR AFTER 2026-07-28T19:01:00Z RUN plan_prospective_neutral_operations_v1_3.py; EXECUTE ONE EXACT OFFLINE-UV MUTATING COMMAND AND THEN REPLAN; CAPTURE ALL FIVE REQUIRED EVENT_AND_ORACLE_CONTEXT OWNERSHIP DATES IN CHRONOLOGICAL ZERO_GAP_CACHE ORDER; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
+  "next_action": "AT OR AFTER 2026-07-28T19:01:00Z RUN plan_prospective_neutral_operations_v1_4.py; EXECUTE ONE EXACT OFFLINE-UV MUTATING COMMAND AND THEN REPLAN; CAPTURE ALL FIVE REQUIRED EVENT_AND_ORACLE_CONTEXT OWNERSHIP DATES IN CHRONOLOGICAL ZERO_GAP_CACHE ORDER; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z WITHOUT CROSSING THE FROZEN 60-SECOND FORECAST DEADLINE; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
   "broker_action_allowed": false
 }

@@ -1,0 +1,26 @@
+{
+  "schema_version": "eurusd_neutral_prospective_operations_planner_v1_4_lock",
+  "locked_at_utc": "2026-07-28T18:06:30Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "locked_before_prospective_start_and_first_signal": true,
+  "supersedes": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_OPERATIONS_PLANNER_V1_3_PREREG_2026_07_28.sha256.json",
+    "sha256": "45f9c509a73a4479c28abf76de8d02036fb7d5d36caaacff2b422d3a5f0cf9d3",
+    "operations_only": true
+  },
+  "historical_pnl_loaded": false,
+  "actual_evidence_rows_before_lock": 0,
+  "event_market_rows_before_lock": 0,
+  "ownership_rows_before_lock": 0,
+  "signal_rows_before_lock": 0,
+  "terminal_trade_rows_before_lock": 0,
+  "oracle_rows_before_lock": 0,
+  "ownership_cache_symbol_hours_before_lock": 6090,
+  "missing_safe_ownership_cache_symbol_hours_before_lock": 0,
+  "files": {
+    "config/frozen_prospective_neutral_operations_planner_v1_4.json": "1a272c9bb9b05a3ee85fc87b215b5a5ed571340971b38f02e9d048342234681d",
+    "plan_prospective_neutral_operations_v1_4.py": "829d1449a5f2a390bb370b808496961bb6f8657b70fd4fb32c4ccb14e6b302bb",
+    "tests/test_plan_prospective_neutral_operations_v1_4.py": "957127a50a06f8f8de9d13a093613cdd8d89233525b2cd77d6dad48144fcf7bf",
+    "EURUSD_NEUTRAL_PROSPECTIVE_OPERATIONS_PLANNER_V1_4_PREREG_2026_07_28.md": "21bae69a04e0e854e3f0b6086fe48109a2807819becc5ead57449aafab9d72e5"
+  }
+}

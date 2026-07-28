@@ -1,0 +1,21 @@
+{
+  "schema_version": "eurusd_neutral_prospective_operations_planner_v1_4",
+  "frozen_at_utc": "2026-07-28T18:06:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "network_requests_allowed": false,
+  "broker_action_allowed": false,
+  "supersedes": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_OPERATIONS_PLANNER_V1_3_PREREG_2026_07_28.sha256.json",
+    "sha256": "45f9c509a73a4479c28abf76de8d02036fb7d5d36caaacff2b422d3a5f0cf9d3",
+    "before_prospective_start_and_first_signal": true,
+    "reason": "CLAMP_FINAL_FORECAST_POLL_TO_THE_FROZEN_MINIMUM_LEAD_DEADLINE"
+  },
+  "forecast_deadline_gate": {
+    "next_poll_may_not_exceed_forecast_deadline": true,
+    "forecast_deadline_seconds_before_release": 60,
+    "late_forecast_backfill_allowed": false,
+    "strategy_or_evidence_semantics_changed": false,
+    "broker_action_allowed": false
+  }
+}
