@@ -1,0 +1,189 @@
+{
+  "schema_version": "eurusd_neutral_london_fix_reversal_development_v1",
+  "family": "N45_NEUTRAL_LONDON_FIX_REVERSAL",
+  "status": "REJECTED_IN_DEVELOPMENT_FORWARD_FORBIDDEN",
+  "census": {
+    "neutral_dates": 642,
+    "raw_fix_observations": 642,
+    "confirmed_candidates": 165,
+    "candidate_dates": 165,
+    "by_window": {
+      "development_a_2019_2020": 45,
+      "development_b_2021_2022": 52,
+      "chronological_2023": 20,
+      "chronological_2024": 16,
+      "chronological_2025": 20,
+      "recent_2026_h1": 12
+    },
+    "by_expert": {
+      "ORDINARY_FIX_REVERSAL": 150,
+      "MONTH_END_FIX_REVERSAL": 15
+    },
+    "by_side": {
+      "LONG": 98,
+      "SHORT": 67
+    },
+    "cash_reasons": {
+      "weekend": 0,
+      "required_bar_missing": 0,
+      "quarantine": 0,
+      "insufficient_prior_magnitude_history": 20,
+      "below_prior_median_displacement": 316,
+      "zero_pre_fix_displacement": 0,
+      "zero_or_same_direction_fix_bar": 141
+    },
+    "gate_results": {
+      "total": true,
+      "development": true,
+      "full_forward_years": true,
+      "recent_half_year": true,
+      "both_sides": true,
+      "month_end": true
+    },
+    "passed": true
+  },
+  "development": {
+    "ORDINARY_FIX_REVERSAL": {
+      "windows": {
+        "development_a_2019_2020": {
+          "trades": 43,
+          "wins": 14,
+          "losses": 29,
+          "win_rate": 0.32558139534883723,
+          "average_win_r": 1.4817674905428873,
+          "average_loss_r": 1.0191298172549985,
+          "realized_payoff_ratio": 1.4539536234294392,
+          "profit_factor": 0.7019086457935223,
+          "net_r": -8.810019832794548,
+          "expectancy_r": -0.20488418215801277,
+          "max_drawdown_r": 13.504251520867593
+        },
+        "development_b_2021_2022": {
+          "trades": 50,
+          "wins": 13,
+          "losses": 37,
+          "win_rate": 0.26,
+          "average_win_r": 1.4818724421583505,
+          "average_loss_r": 1.0189628706244764,
+          "realized_payoff_ratio": 1.454294837308623,
+          "profit_factor": 0.5109684563516784,
+          "net_r": -18.437284465047064,
+          "expectancy_r": -0.36874568930094126,
+          "max_drawdown_r": 18.43728446504706
+        }
+      },
+      "combined": {
+        "trades": 93,
+        "wins": 27,
+        "losses": 66,
+        "win_rate": 0.2903225806451613,
+        "average_win_r": 1.481818022802184,
+        "average_loss_r": 1.01903622596213,
+        "realized_payoff_ratio": 1.4541367471044668,
+        "profit_factor": 0.5948741238154636,
+        "net_r": -27.247304297841612,
+        "expectancy_r": -0.2929817666434582,
+        "max_drawdown_r": 30.562463304211295
+      },
+      "selection_checks": {
+        "each_window": false,
+        "combined_profit_factor": false
+      },
+      "selected": false
+    },
+    "MONTH_END_FIX_REVERSAL": {
+      "windows": {
+        "development_a_2019_2020": {
+          "trades": 1,
+          "wins": 0,
+          "losses": 1,
+          "win_rate": 0.0,
+          "average_win_r": 0.0,
+          "average_loss_r": 1.0232558139536325,
+          "realized_payoff_ratio": 0.0,
+          "profit_factor": 0.0,
+          "net_r": -1.0232558139536325,
+          "expectancy_r": -1.0232558139536325,
+          "max_drawdown_r": 1.0232558139536325
+        },
+        "development_b_2021_2022": {
+          "trades": 2,
+          "wins": 1,
+          "losses": 1,
+          "win_rate": 0.5,
+          "average_win_r": 1.4859154929576583,
+          "average_loss_r": 1.0103092783504684,
+          "realized_payoff_ratio": 1.470753089968363,
+          "profit_factor": 1.470753089968363,
+          "net_r": 0.47560621460719,
+          "expectancy_r": 0.237803107303595,
+          "max_drawdown_r": 1.0103092783504684
+        }
+      },
+      "combined": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 0.3333333333333333,
+        "average_win_r": 1.4859154929576583,
+        "average_loss_r": 1.0167825461520503,
+        "realized_payoff_ratio": 1.4613896536491624,
+        "profit_factor": 0.7306948268245812,
+        "net_r": -0.5476495993464423,
+        "expectancy_r": -0.1825498664488141,
+        "max_drawdown_r": 2.0335650923041007
+      },
+      "selection_checks": {
+        "each_window": false,
+        "combined_profit_factor": false
+      },
+      "selected": false
+    }
+  },
+  "execution_skips": {
+    "ORDINARY_FIX_REVERSAL": {
+      "position_open": 0,
+      "entry_bar_missing": 0,
+      "risk_ceiling": 1
+    },
+    "MONTH_END_FIX_REVERSAL": {
+      "position_open": 0,
+      "entry_bar_missing": 0,
+      "risk_ceiling": 0
+    }
+  },
+  "selection": {
+    "schema_version": "eurusd_neutral_london_fix_development_selection_v1",
+    "selected_experts": [],
+    "selection_rule": "SELECT_EACH_EXPERT_INDEPENDENTLY_ONLY_IF_ALL_CHECKS_PASS",
+    "outcome_source_max_timestamp_utc": "2022-12-31T23:59:59+00:00",
+    "forward_outcomes_loaded": false
+  },
+  "data_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "broker_action_allowed": false
+}

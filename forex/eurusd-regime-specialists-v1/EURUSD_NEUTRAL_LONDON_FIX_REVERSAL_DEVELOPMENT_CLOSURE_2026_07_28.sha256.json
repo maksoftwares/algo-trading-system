@@ -1,0 +1,16 @@
+{
+  "schema_version": "eurusd_neutral_london_fix_reversal_development_closure_v1",
+  "closed_at_utc": "2026-07-28T13:12:19Z",
+  "status": "REJECTED_IN_DEVELOPMENT_FORWARD_FORBIDDEN",
+  "selected_experts": [],
+  "forward_outcomes_loaded": false,
+  "files": {
+    "outputs/neutral_london_fix_reversal/CENSUS.json": "a3d5b0c60d43a3fe60af0679045444e4897de45e235502b81bf6bd45de954cd2",
+    "outputs/neutral_london_fix_reversal/CANDIDATES_OUTCOME_BLIND.parquet": "52156b93f14a9b08f2eb5a455ad0c63997c85a1aebee2717524ba036a80bd28f",
+    "outputs/neutral_london_fix_reversal/DEVELOPMENT_RESULT.json": "5101e7344ef0a4ed0b45120ec6b7f219785272062282090c6ad1ddb3d1268ac1",
+    "outputs/neutral_london_fix_reversal/SELECTION.json": "33e90844ef7684d527f9efadf140ce71fe2fed0c443684506d49e64a9818f4f8",
+    "outputs/neutral_london_fix_reversal/ORDINARY_FIX_REVERSAL_DEVELOPMENT_TRADES.parquet": "b29c85302deddea2531a3a2a5d67ed00d51b9a15e0152f9f2f155620dcb6d561",
+    "outputs/neutral_london_fix_reversal/MONTH_END_FIX_REVERSAL_DEVELOPMENT_TRADES.parquet": "181dd85d00b4dbca622a6f518516d6bc5ad26c55a02d9188906dbd0a63ea70b4"
+  },
+  "broker_action_allowed": false
+}

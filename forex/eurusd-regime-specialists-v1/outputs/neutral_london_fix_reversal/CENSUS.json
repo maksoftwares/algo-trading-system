@@ -1,0 +1,72 @@
+{
+  "schema_version": "eurusd_neutral_london_fix_reversal_census_v1",
+  "family": "N45_NEUTRAL_LONDON_FIX_REVERSAL",
+  "status": "CENSUS_PASS_DEVELOPMENT_ALLOWED",
+  "census": {
+    "neutral_dates": 642,
+    "raw_fix_observations": 642,
+    "confirmed_candidates": 165,
+    "candidate_dates": 165,
+    "by_window": {
+      "development_a_2019_2020": 45,
+      "development_b_2021_2022": 52,
+      "chronological_2023": 20,
+      "chronological_2024": 16,
+      "chronological_2025": 20,
+      "recent_2026_h1": 12
+    },
+    "by_expert": {
+      "ORDINARY_FIX_REVERSAL": 150,
+      "MONTH_END_FIX_REVERSAL": 15
+    },
+    "by_side": {
+      "LONG": 98,
+      "SHORT": 67
+    },
+    "cash_reasons": {
+      "weekend": 0,
+      "required_bar_missing": 0,
+      "quarantine": 0,
+      "insufficient_prior_magnitude_history": 20,
+      "below_prior_median_displacement": 316,
+      "zero_pre_fix_displacement": 0,
+      "zero_or_same_direction_fix_bar": 141
+    },
+    "gate_results": {
+      "total": true,
+      "development": true,
+      "full_forward_years": true,
+      "recent_half_year": true,
+      "both_sides": true,
+      "month_end": true
+    },
+    "passed": true
+  },
+  "data_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "broker_action_allowed": false
+}

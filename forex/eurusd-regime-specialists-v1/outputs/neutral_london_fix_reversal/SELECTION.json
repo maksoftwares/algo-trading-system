@@ -1,0 +1,7 @@
+{
+  "schema_version": "eurusd_neutral_london_fix_development_selection_v1",
+  "selected_experts": [],
+  "selection_rule": "SELECT_EACH_EXPERT_INDEPENDENTLY_ONLY_IF_ALL_CHECKS_PASS",
+  "outcome_source_max_timestamp_utc": "2022-12-31T23:59:59+00:00",
+  "forward_outcomes_loaded": false
+}
