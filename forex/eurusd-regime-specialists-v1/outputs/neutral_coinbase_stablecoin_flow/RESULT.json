@@ -1,0 +1,622 @@
+{
+  "campaign_id": "eurusd-neutral-coinbase-stablecoin-flow-v1",
+  "status": "REJECTED_NEUTRAL_COINBASE_STABLECOIN_FLOW_V1",
+  "information_status": "NEW_CAUSAL_SOURCE_WITH_ADAPTIVELY_INSPECTED_EURUSD_HISTORY",
+  "source_manifests": {
+    "DXY": {
+      "symbol": "DOLLARIDXUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "files_seen": 65688,
+      "empty_hours": 25468,
+      "populated_hours": 40220,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052"
+    },
+    "BOND": {
+      "symbol": "USTBONDTRUSD",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "files_seen": 65688,
+      "empty_hours": 22272,
+      "populated_hours": 43416,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644"
+    }
+  },
+  "coinbase_source": {
+    "provider": "Coinbase Exchange public REST product candles",
+    "documentation": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles",
+    "authentication_required": false,
+    "products": [
+      "USDC-EUR",
+      "USDT-EUR"
+    ],
+    "granularity_seconds": 300,
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-coinbase-stablecoin-eur-v1/COINBASE_STABLECOIN_EUR_M5.parquet",
+    "sha256": "d2f978e185534417a2f3f237983a9f97b90084b3d174b114e2f9df105130268a",
+    "bytes": 243976,
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-coinbase-stablecoin-eur-v1/MANIFEST.json",
+    "manifest_sha256": "37b2dc54439a91dedc42919a7a80604b48fdffe6a7345397ca2b404828490090",
+    "raw_response_chain_sha256": "7f6c307db8675ea688ee31d2a5665424d30bf2dec3969eeb8105dd1b427eae11",
+    "product_metadata_chain_sha256": "fa7bb9d45bcec9e84c6a8130be230415cd6db395034d59ecd79b0e30965b8f52",
+    "normalized_rows": 7260
+  },
+  "causality": {
+    "direction": "agreed sign of prior-three-candle volume-weighted direction on Coinbase USDC-EUR and USDT-EUR, inverted into EURUSD terms",
+    "candle_direction_volume_is_true_taker_flow": false,
+    "magnitude_threshold_product_weight_or_model": false,
+    "clock_or_subgroup_selection": false,
+    "future_information_in_signal": false,
+    "oracle_usage": "evaluation only after trade ledger"
+  },
+  "outcome_blind_census": {
+    "source_eligible_days": 334,
+    "source_decision_points": 1336,
+    "both_products_valid_points": 963,
+    "both_products_valid_days": 291,
+    "agreement_candidates": 614,
+    "active_candidate_days": 260,
+    "no_trade_days": 74,
+    "predicted_long_rate": 0.49348534201954397,
+    "trades_per_source_eligible_day": 1.8383233532934131,
+    "trades_per_active_candidate_day": 2.3615384615384616,
+    "candidate_count_distribution": {
+      "0": 74,
+      "1": 48,
+      "2": 99,
+      "3": 84,
+      "4": 29
+    },
+    "missing_or_invalid_product_points": 373,
+    "valid_product_sign_disagreements": 349,
+    "by_window": {
+      "development_2022_2023": {
+        "source_eligible_days": 149,
+        "source_decision_points": 596,
+        "both_products_valid_points": 279,
+        "both_products_valid_days": 106,
+        "agreement_candidates": 166,
+        "active_candidate_days": 83,
+        "no_trade_days": 66,
+        "predicted_long_rate": 0.5060240963855421,
+        "trades_per_source_eligible_day": 1.1140939597315436,
+        "trades_per_active_candidate_day": 2.0,
+        "candidate_count_distribution": {
+          "0": 66,
+          "1": 27,
+          "2": 33,
+          "3": 19,
+          "4": 4
+        }
+      },
+      "validation_2024": {
+        "source_eligible_days": 66,
+        "source_decision_points": 264,
+        "both_products_valid_points": 264,
+        "both_products_valid_days": 66,
+        "agreement_candidates": 169,
+        "active_candidate_days": 65,
+        "no_trade_days": 1,
+        "predicted_long_rate": 0.41420118343195267,
+        "trades_per_source_eligible_day": 2.5606060606060606,
+        "trades_per_active_candidate_day": 2.6,
+        "candidate_count_distribution": {
+          "0": 1,
+          "1": 6,
+          "2": 23,
+          "3": 27,
+          "4": 9
+        }
+      },
+      "pseudo_oos_2025": {
+        "source_eligible_days": 80,
+        "source_decision_points": 320,
+        "both_products_valid_points": 295,
+        "both_products_valid_days": 80,
+        "agreement_candidates": 194,
+        "active_candidate_days": 76,
+        "no_trade_days": 4,
+        "predicted_long_rate": 0.5309278350515464,
+        "trades_per_source_eligible_day": 2.425,
+        "trades_per_active_candidate_day": 2.5526315789473686,
+        "candidate_count_distribution": {
+          "0": 4,
+          "1": 10,
+          "2": 25,
+          "3": 30,
+          "4": 11
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "source_eligible_days": 39,
+        "source_decision_points": 156,
+        "both_products_valid_points": 125,
+        "both_products_valid_days": 39,
+        "agreement_candidates": 85,
+        "active_candidate_days": 36,
+        "no_trade_days": 3,
+        "predicted_long_rate": 0.5411764705882353,
+        "trades_per_source_eligible_day": 2.1794871794871793,
+        "trades_per_active_candidate_day": 2.361111111111111,
+        "candidate_count_distribution": {
+          "0": 3,
+          "1": 5,
+          "2": 18,
+          "3": 8,
+          "4": 5
+        }
+      }
+    },
+    "outcome_blind_source_relationship": {
+      "pressure_correlation": 0.3740590987798568,
+      "return_correlation": 0.809045437231771,
+      "pressure_sign_agreement": 0.6375908618899273,
+      "usdc_pressure_return_sign_consistency": 0.7528556593977155,
+      "usdt_pressure_return_sign_consistency": 0.7528556593977155
+    }
+  },
+  "strategy": {
+    "admitted": false,
+    "admission_checks": {
+      "every_window": false,
+      "overall_profit_factor": false,
+      "overall_exact_oracle_precision": false,
+      "overall_15m_oracle_precision": false,
+      "stressed": false,
+      "top_winners_removed": false,
+      "daily_drawdown": false,
+      "recent_six_months": false,
+      "frequency_not_a_gate": true
+    },
+    "window_checks": {
+      "development_2022_2023": {
+        "minimum_trades": true,
+        "payoff_ratio": true,
+        "ticket_profit_factor": false,
+        "positive_expectancy": false,
+        "conditional_direction_accuracy": true,
+        "daily_profit_factor": false
+      },
+      "validation_2024": {
+        "minimum_trades": true,
+        "payoff_ratio": true,
+        "ticket_profit_factor": false,
+        "positive_expectancy": false,
+        "conditional_direction_accuracy": false,
+        "daily_profit_factor": false
+      },
+      "pseudo_oos_2025": {
+        "minimum_trades": true,
+        "payoff_ratio": true,
+        "ticket_profit_factor": false,
+        "positive_expectancy": false,
+        "conditional_direction_accuracy": true,
+        "daily_profit_factor": false
+      },
+      "pseudo_oos_2026h1": {
+        "minimum_trades": true,
+        "payoff_ratio": true,
+        "ticket_profit_factor": false,
+        "positive_expectancy": false,
+        "conditional_direction_accuracy": false,
+        "daily_profit_factor": false
+      }
+    },
+    "window_pass": {
+      "development_2022_2023": false,
+      "validation_2024": false,
+      "pseudo_oos_2025": false,
+      "pseudo_oos_2026h1": false
+    },
+    "overall_tickets": {
+      "trades": 614,
+      "wins": 204,
+      "losses": 410,
+      "win_rate": 0.3322475570032573,
+      "average_win_r": 1.4751225490192934,
+      "average_loss_r": 1.02500000000005,
+      "realized_payoff_ratio": 1.4391439502626548,
+      "profit_factor": 0.7160618679355648,
+      "net_r": -119.32500000008477,
+      "expectancy_r": -0.19434039087961688,
+      "max_drawdown_r": 129.67500000007544
+    },
+    "overall_daily_portfolio": {
+      "trades": 260,
+      "wins": 96,
+      "losses": 164,
+      "win_rate": 0.36923076923076925,
+      "average_win_r": 0.40891927083320273,
+      "average_loss_r": 0.4212652439024918,
+      "realized_payoff_ratio": 0.9706931125983259,
+      "profit_factor": 0.568210602496581,
+      "net_r": -29.831250000021196,
+      "expectancy_r": -0.11473557692315844,
+      "max_drawdown_r": 32.41875000001902
+    },
+    "overall_direction_selection": {
+      "decision_points": 614,
+      "one_winner_points": 402,
+      "no_winner_points": 212,
+      "correct_side_when_one_winner": 204,
+      "conditional_direction_accuracy": 0.5074626865671642,
+      "unconditional_target_first_rate": 0.3322475570032573,
+      "predicted_long_rate": 0.49348534201954397
+    },
+    "windows": {
+      "development_2022_2023": {
+        "tickets": {
+          "trades": 166,
+          "wins": 63,
+          "losses": 103,
+          "win_rate": 0.3795180722891566,
+          "average_win_r": 1.4749999999997234,
+          "average_loss_r": 1.0250000000000397,
+          "realized_payoff_ratio": 1.4390243902435769,
+          "profit_factor": 0.880179966848013,
+          "net_r": -12.650000000021532,
+          "expectancy_r": -0.07620481927723814,
+          "max_drawdown_r": 23.72500000000749,
+          "active_weekdays": 520,
+          "source_eligible_neutral_days": 149,
+          "executed_neutral_days": 83,
+          "cash_only_source_eligible_days": 66,
+          "trades_per_active_weekday": 0.3192307692307692,
+          "trades_per_source_eligible_neutral_day": 1.1140939597315436,
+          "trades_per_executed_neutral_day": 2.0
+        },
+        "daily_portfolio": {
+          "trades": 83,
+          "wins": 34,
+          "losses": 49,
+          "win_rate": 0.40963855421686746,
+          "average_win_r": 0.4509191176469577,
+          "average_loss_r": 0.37742346938779486,
+          "realized_payoff_ratio": 1.1947299365839052,
+          "profit_factor": 0.8289962825276077,
+          "net_r": -3.1625000000053833,
+          "expectancy_r": -0.03810240963861908,
+          "max_drawdown_r": 5.818750000001968
+        },
+        "direction_selection": {
+          "decision_points": 166,
+          "one_winner_points": 110,
+          "no_winner_points": 56,
+          "correct_side_when_one_winner": 63,
+          "conditional_direction_accuracy": 0.5727272727272728,
+          "unconditional_target_first_rate": 0.3795180722891566,
+          "predicted_long_rate": 0.5060240963855421
+        },
+        "candidate_count_distribution": {
+          "0": 66,
+          "1": 27,
+          "2": 33,
+          "3": 19,
+          "4": 4
+        }
+      },
+      "validation_2024": {
+        "tickets": {
+          "trades": 169,
+          "wins": 44,
+          "losses": 125,
+          "win_rate": 0.2603550295857988,
+          "average_win_r": 1.4749999999996708,
+          "average_loss_r": 1.0250000000000534,
+          "realized_payoff_ratio": 1.4390243902435063,
+          "profit_factor": 0.5065365853657142,
+          "net_r": -63.22500000002118,
+          "expectancy_r": -0.3741124260356283,
+          "max_drawdown_r": 63.22500000002136,
+          "active_weekdays": 262,
+          "source_eligible_neutral_days": 66,
+          "executed_neutral_days": 65,
+          "cash_only_source_eligible_days": 1,
+          "trades_per_active_weekday": 0.6450381679389313,
+          "trades_per_source_eligible_neutral_day": 2.5606060606060606,
+          "trades_per_executed_neutral_day": 2.6
+        },
+        "daily_portfolio": {
+          "trades": 65,
+          "wins": 19,
+          "losses": 46,
+          "win_rate": 0.2923076923076923,
+          "average_win_r": 0.38749999999986534,
+          "average_loss_r": 0.503668478260929,
+          "realized_payoff_ratio": 0.7693552738059543,
+          "profit_factor": 0.317777178311155,
+          "net_r": -15.806250000005296,
+          "expectancy_r": -0.2431730769231584,
+          "max_drawdown_r": 15.806250000005297
+        },
+        "direction_selection": {
+          "decision_points": 169,
+          "one_winner_points": 113,
+          "no_winner_points": 56,
+          "correct_side_when_one_winner": 44,
+          "conditional_direction_accuracy": 0.3893805309734513,
+          "unconditional_target_first_rate": 0.2603550295857988,
+          "predicted_long_rate": 0.41420118343195267
+        },
+        "candidate_count_distribution": {
+          "0": 1,
+          "1": 6,
+          "2": 23,
+          "3": 27,
+          "4": 9
+        }
+      },
+      "pseudo_oos_2025": {
+        "tickets": {
+          "trades": 194,
+          "wins": 72,
+          "losses": 122,
+          "win_rate": 0.3711340206185567,
+          "average_win_r": 1.474999999999671,
+          "average_loss_r": 1.0250000000000536,
+          "realized_payoff_ratio": 1.4390243902435063,
+          "profit_factor": 0.8492602958814135,
+          "net_r": -18.850000000030235,
+          "expectancy_r": -0.0971649484537641,
+          "max_drawdown_r": 21.225000000029155,
+          "active_weekdays": 261,
+          "source_eligible_neutral_days": 80,
+          "executed_neutral_days": 76,
+          "cash_only_source_eligible_days": 4,
+          "trades_per_active_weekday": 0.7432950191570882,
+          "trades_per_source_eligible_neutral_day": 2.425,
+          "trades_per_executed_neutral_day": 2.5526315789473686
+        },
+        "daily_portfolio": {
+          "trades": 76,
+          "wins": 29,
+          "losses": 47,
+          "win_rate": 0.3815789473684211,
+          "average_win_r": 0.41874999999984336,
+          "average_loss_r": 0.35864361702134073,
+          "realized_payoff_ratio": 1.1675936225429213,
+          "profit_factor": 0.7204301075264833,
+          "net_r": -4.712500000007558,
+          "expectancy_r": -0.06200657894746787,
+          "max_drawdown_r": 5.306250000007283
+        },
+        "direction_selection": {
+          "decision_points": 194,
+          "one_winner_points": 128,
+          "no_winner_points": 66,
+          "correct_side_when_one_winner": 72,
+          "conditional_direction_accuracy": 0.5625,
+          "unconditional_target_first_rate": 0.3711340206185567,
+          "predicted_long_rate": 0.5309278350515464
+        },
+        "candidate_count_distribution": {
+          "0": 4,
+          "1": 10,
+          "2": 25,
+          "3": 30,
+          "4": 11
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "tickets": {
+          "trades": 85,
+          "wins": 25,
+          "losses": 60,
+          "win_rate": 0.29411764705882354,
+          "average_win_r": 1.4759999999996551,
+          "average_loss_r": 1.0250000000000539,
+          "realized_payoff_ratio": 1.4399999999995878,
+          "profit_factor": 0.5999999999998283,
+          "net_r": -24.600000000011832,
+          "expectancy_r": -0.28941176470602153,
+          "max_drawdown_r": 31.400000000009786,
+          "active_weekdays": 129,
+          "source_eligible_neutral_days": 39,
+          "executed_neutral_days": 36,
+          "cash_only_source_eligible_days": 3,
+          "trades_per_active_weekday": 0.6589147286821705,
+          "trades_per_source_eligible_neutral_day": 2.1794871794871793,
+          "trades_per_executed_neutral_day": 2.361111111111111
+        },
+        "daily_portfolio": {
+          "trades": 36,
+          "wins": 14,
+          "losses": 22,
+          "win_rate": 0.3888888888888889,
+          "average_win_r": 0.3156249999998572,
+          "average_loss_r": 0.48039772727277086,
+          "realized_payoff_ratio": 0.6570076877583658,
+          "profit_factor": 0.4180958013007782,
+          "net_r": -6.15000000000296,
+          "expectancy_r": -0.17083333333341555,
+          "max_drawdown_r": 7.593750000002423
+        },
+        "direction_selection": {
+          "decision_points": 85,
+          "one_winner_points": 51,
+          "no_winner_points": 34,
+          "correct_side_when_one_winner": 25,
+          "conditional_direction_accuracy": 0.49019607843137253,
+          "unconditional_target_first_rate": 0.29411764705882354,
+          "predicted_long_rate": 0.5411764705882353
+        },
+        "candidate_count_distribution": {
+          "0": 3,
+          "1": 5,
+          "2": 18,
+          "3": 8,
+          "4": 5
+        }
+      }
+    },
+    "frequency": {
+      "source_eligible_days": 334,
+      "executed_days": 260,
+      "cash_only_days": 74,
+      "trades": 614,
+      "trades_per_source_eligible_day": 1.8383233532934131,
+      "trades_per_executed_day": 2.3615384615384616,
+      "candidate_count_distribution": {
+        "0": 74,
+        "1": 48,
+        "2": 99,
+        "3": 84,
+        "4": 29
+      },
+      "exact_daily_frequency_gate": false
+    },
+    "robustness": {
+      "top_5_percent_winners_removed": {
+        "trades": 583,
+        "wins": 173,
+        "losses": 410,
+        "win_rate": 0.2967409948542024,
+        "average_win_r": 1.4749999999996712,
+        "average_loss_r": 1.02500000000005,
+        "realized_payoff_ratio": 1.4390243902435114,
+        "profit_factor": 0.6071980963710426,
+        "net_r": -165.07500000007752,
+        "expectancy_r": -0.28314751286462697,
+        "max_drawdown_r": 170.400000000076
+      },
+      "extra_half_pip_round_trip": {
+        "trades": 614,
+        "wins": 204,
+        "losses": 410,
+        "win_rate": 0.3322475570032573,
+        "average_win_r": 1.3501225490192934,
+        "average_loss_r": 1.15000000000005,
+        "realized_payoff_ratio": 1.1740196078428127,
+        "profit_factor": 0.5841463414632531,
+        "net_r": -196.0750000000848,
+        "expectancy_r": -0.3193403908796169,
+        "max_drawdown_r": 201.87500000008296
+      }
+    },
+    "recent_six_months": {
+      "tickets": {
+        "trades": 85,
+        "wins": 25,
+        "losses": 60,
+        "win_rate": 0.29411764705882354,
+        "average_win_r": 1.4759999999996551,
+        "average_loss_r": 1.0250000000000539,
+        "realized_payoff_ratio": 1.4399999999995878,
+        "profit_factor": 0.5999999999998283,
+        "net_r": -24.600000000011832,
+        "expectancy_r": -0.28941176470602153,
+        "max_drawdown_r": 31.400000000009786
+      },
+      "daily_portfolio": {
+        "trades": 36,
+        "wins": 14,
+        "losses": 22,
+        "win_rate": 0.3888888888888889,
+        "average_win_r": 0.3156249999998572,
+        "average_loss_r": 0.48039772727277086,
+        "realized_payoff_ratio": 0.6570076877583658,
+        "profit_factor": 0.4180958013007782,
+        "net_r": -6.15000000000296,
+        "expectancy_r": -0.17083333333341555,
+        "max_drawdown_r": 7.593750000002423
+      },
+      "direction_selection": {
+        "decision_points": 85,
+        "one_winner_points": 51,
+        "no_winner_points": 34,
+        "correct_side_when_one_winner": 25,
+        "conditional_direction_accuracy": 0.49019607843137253,
+        "unconditional_target_first_rate": 0.29411764705882354,
+        "predicted_long_rate": 0.5411764705882353
+      },
+      "active_weekdays": 129,
+      "source_eligible_neutral_days": 39,
+      "executed_neutral_days": 36,
+      "cash_only_source_eligible_days": 3,
+      "trades_per_active_weekday": 0.6589147286821705,
+      "trades_per_source_eligible_neutral_day": 2.1794871794871793,
+      "trades_per_executed_neutral_day": 2.361111111111111
+    }
+  },
+  "oracle_resemblance": {
+    "overall": {
+      "predicted_trades": 614,
+      "oracle_trades": 1343,
+      "exact_matches": 116,
+      "exact_precision": 0.18892508143322476,
+      "exact_recall": 0.08637379002233805,
+      "exact_f1": 0.11854879918242207,
+      "tolerance_minutes": 15,
+      "tolerant_matches": 268,
+      "tolerant_precision": 0.4364820846905538,
+      "tolerant_recall": 0.19955323901712585,
+      "tolerant_f1": 0.27388860500766476
+    },
+    "windows": {
+      "development_2022_2023": {
+        "predicted_trades": 166,
+        "oracle_trades": 600,
+        "exact_matches": 36,
+        "exact_precision": 0.21686746987951808,
+        "exact_recall": 0.06,
+        "exact_f1": 0.09399477806788513,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 82,
+        "tolerant_precision": 0.4939759036144578,
+        "tolerant_recall": 0.13666666666666666,
+        "tolerant_f1": 0.21409921671018275
+      },
+      "validation_2024": {
+        "predicted_trades": 169,
+        "oracle_trades": 263,
+        "exact_matches": 24,
+        "exact_precision": 0.14201183431952663,
+        "exact_recall": 0.09125475285171103,
+        "exact_f1": 0.11111111111111112,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 58,
+        "tolerant_precision": 0.3431952662721893,
+        "tolerant_recall": 0.22053231939163498,
+        "tolerant_f1": 0.26851851851851855
+      },
+      "pseudo_oos_2025": {
+        "predicted_trades": 194,
+        "oracle_trades": 320,
+        "exact_matches": 41,
+        "exact_precision": 0.211340206185567,
+        "exact_recall": 0.128125,
+        "exact_f1": 0.1595330739299611,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 94,
+        "tolerant_precision": 0.4845360824742268,
+        "tolerant_recall": 0.29375,
+        "tolerant_f1": 0.3657587548638132
+      },
+      "pseudo_oos_2026h1": {
+        "predicted_trades": 85,
+        "oracle_trades": 160,
+        "exact_matches": 15,
+        "exact_precision": 0.17647058823529413,
+        "exact_recall": 0.09375,
+        "exact_f1": 0.12244897959183672,
+        "tolerance_minutes": 15,
+        "tolerant_matches": 34,
+        "tolerant_precision": 0.4,
+        "tolerant_recall": 0.2125,
+        "tolerant_f1": 0.27755102040816326
+      }
+    }
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "historical_rows_before_start_are_research_only": true,
+    "available_points_after_start": 0,
+    "status": "WAITING_FOR_POST_LOCK_MARKET_DATA"
+  },
+  "verdict": "The frozen Coinbase stablecoin-flow rule failed one or more gates and is closed without repair."
+}

@@ -1,0 +1,239 @@
+{
+  "campaign_id": "eurusd-neutral-coinbase-stablecoin-flow-v1",
+  "frozen_at_utc": "2026-07-28T10:20:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "NEW_CAUSAL_SOURCE_WITH_ADAPTIVELY_INSPECTED_EURUSD_HISTORY",
+  "parent_four_clock_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8"
+  },
+  "coinbase_source": {
+    "provider": "Coinbase Exchange public REST product candles",
+    "documentation": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles",
+    "authentication_required": false,
+    "products": ["USDC-EUR", "USDT-EUR"],
+    "granularity_seconds": 300,
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-coinbase-stablecoin-eur-v1/COINBASE_STABLECOIN_EUR_M5.parquet",
+    "sha256": "d2f978e185534417a2f3f237983a9f97b90084b3d174b114e2f9df105130268a",
+    "bytes": 243976,
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-coinbase-stablecoin-eur-v1/MANIFEST.json",
+    "manifest_sha256": "37b2dc54439a91dedc42919a7a80604b48fdffe6a7345397ca2b404828490090",
+    "raw_response_chain_sha256": "7f6c307db8675ea688ee31d2a5665424d30bf2dec3969eeb8105dd1b427eae11",
+    "product_metadata_chain_sha256": "fa7bb9d45bcec9e84c6a8130be230415cd6db395034d59ecd79b0e30965b8f52",
+    "normalized_rows": 7260
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "strategy": {
+    "family": "N27_NEUTRAL_COINBASE_STABLECOIN_FLOW",
+    "entry_hour_utc": 0,
+    "entry_minutes_utc": [0, 15, 30, 45],
+    "weekdays_only": true,
+    "direction_rule": "AGREED_SIGN_OF_USDC_EUR_AND_USDT_EUR_PRIOR_15M_VOLUME_WEIGHTED_CANDLE_DIRECTION_IN_EURO_TERMS",
+    "abstention_allowed": true,
+    "maximum_candidates_per_source_eligible_day": 4,
+    "minimum_candidates_per_source_eligible_day": 0,
+    "daily_quota": null,
+    "one_open_position": false
+  },
+  "flow_rule": {
+    "completed_m5_bars_per_product": 3,
+    "requires_consecutive_bars_per_product": true,
+    "requires_positive_total_base_volume_per_product": true,
+    "stablecoin_eur_signed_pressure": "-SUM(SIGN(CLOSE_MINUS_OPEN) * BASE_VOLUME) / SUM(BASE_VOLUME)",
+    "euro_return": "FIRST_OPEN / LAST_CLOSE - 1",
+    "trade_when_pressure_signs_agree": true,
+    "long_when_both_nonnegative": true,
+    "short_when_both_negative": true,
+    "cash_when_signs_disagree_or_either_source_invalid": true,
+    "magnitude_threshold": null,
+    "product_weights": null,
+    "fit_or_refit": false
+  },
+  "model": {
+    "type": "NONE_DETERMINISTIC_TWO_PRODUCT_SIGN_AGREEMENT",
+    "decision_probability": 0.5,
+    "fit_or_refit": false
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_new_portfolio_r_per_source_eligible_day": 1.0,
+    "maximum_concurrent_positions": 4
+  },
+  "windows": {
+    "development_2022_2023": [
+      "2022-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_census": {
+    "source_eligible_days": 334,
+    "source_decision_points": 1336,
+    "both_products_valid_points": 963,
+    "both_products_valid_days": 291,
+    "agreement_candidates": 614,
+    "active_candidate_days": 260,
+    "no_trade_days": 74,
+    "predicted_long_rate": 0.49348534201954397,
+    "trades_per_source_eligible_day": 1.8383233532934131,
+    "trades_per_active_candidate_day": 2.3615384615384616,
+    "candidate_count_distribution": {
+      "0": 74,
+      "1": 48,
+      "2": 99,
+      "3": 84,
+      "4": 29
+    },
+    "missing_or_invalid_product_points": 373,
+    "valid_product_sign_disagreements": 349,
+    "by_window": {
+      "development_2022_2023": {
+        "source_eligible_days": 149,
+        "source_decision_points": 596,
+        "both_products_valid_points": 279,
+        "both_products_valid_days": 106,
+        "agreement_candidates": 166,
+        "active_candidate_days": 83,
+        "no_trade_days": 66,
+        "predicted_long_rate": 0.5060240963855421,
+        "trades_per_source_eligible_day": 1.1140939597315436,
+        "trades_per_active_candidate_day": 2.0,
+        "candidate_count_distribution": {
+          "0": 66,
+          "1": 27,
+          "2": 33,
+          "3": 19,
+          "4": 4
+        }
+      },
+      "validation_2024": {
+        "source_eligible_days": 66,
+        "source_decision_points": 264,
+        "both_products_valid_points": 264,
+        "both_products_valid_days": 66,
+        "agreement_candidates": 169,
+        "active_candidate_days": 65,
+        "no_trade_days": 1,
+        "predicted_long_rate": 0.41420118343195267,
+        "trades_per_source_eligible_day": 2.5606060606060606,
+        "trades_per_active_candidate_day": 2.6,
+        "candidate_count_distribution": {
+          "0": 1,
+          "1": 6,
+          "2": 23,
+          "3": 27,
+          "4": 9
+        }
+      },
+      "pseudo_oos_2025": {
+        "source_eligible_days": 80,
+        "source_decision_points": 320,
+        "both_products_valid_points": 295,
+        "both_products_valid_days": 80,
+        "agreement_candidates": 194,
+        "active_candidate_days": 76,
+        "no_trade_days": 4,
+        "predicted_long_rate": 0.5309278350515464,
+        "trades_per_source_eligible_day": 2.425,
+        "trades_per_active_candidate_day": 2.5526315789473686,
+        "candidate_count_distribution": {
+          "0": 4,
+          "1": 10,
+          "2": 25,
+          "3": 30,
+          "4": 11
+        }
+      },
+      "pseudo_oos_2026h1": {
+        "source_eligible_days": 39,
+        "source_decision_points": 156,
+        "both_products_valid_points": 125,
+        "both_products_valid_days": 39,
+        "agreement_candidates": 85,
+        "active_candidate_days": 36,
+        "no_trade_days": 3,
+        "predicted_long_rate": 0.5411764705882353,
+        "trades_per_source_eligible_day": 2.1794871794871793,
+        "trades_per_active_candidate_day": 2.361111111111111,
+        "candidate_count_distribution": {
+          "0": 3,
+          "1": 5,
+          "2": 18,
+          "3": 8,
+          "4": 5
+        }
+      }
+    },
+    "outcome_blind_source_relationship": {
+      "pressure_correlation": 0.3740590987798568,
+      "return_correlation": 0.809045437231771,
+      "pressure_sign_agreement": 0.6375908618899273,
+      "usdc_pressure_return_sign_consistency": 0.7528556593977155,
+      "usdt_pressure_return_sign_consistency": 0.7528556593977155
+    }
+  },
+  "admission": {
+    "minimum_trades_each_window": 50,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor_each_window_exclusive": 1.0,
+    "minimum_expectancy_r_each_window_exclusive": 0.0,
+    "minimum_conditional_direction_accuracy_each_window_exclusive": 0.5,
+    "minimum_daily_profit_factor_each_window_exclusive": 1.0,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_overall_exact_oracle_precision": 0.25,
+    "minimum_overall_15m_oracle_precision": 0.45,
+    "minimum_stressed_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_trades": 50,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_daily_profit_factor_exclusive": 1.0,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "exact_daily_frequency_gate": false
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 200,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "Do not change a product, side inversion, aggregation horizon, magnitude threshold, clock, product weight, or subgroup after outcomes.",
+    "Do not treat candle-direction volume as true taker flow.",
+    "Do not fill or interpolate a missing Coinbase candle.",
+    "Only the three immediately preceding consecutive completed M5 candles at both products may determine direction.",
+    "Do not use an EURUSD outcome, oracle membership, or future Coinbase candle in the decision.",
+    "Do not repair or reinterpret a failed historical result.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}

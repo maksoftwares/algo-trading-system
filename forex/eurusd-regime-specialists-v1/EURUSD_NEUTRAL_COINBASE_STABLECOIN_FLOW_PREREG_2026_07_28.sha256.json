@@ -1,0 +1,30 @@
+{
+  "locked_before_coinbase_stablecoin_flow_outcome_pass": true,
+  "locked_at_utc": "2026-07-28T10:30:00Z",
+  "files": {
+    "config/frozen_neutral_coinbase_stablecoin_flow.json": "4c262e54d22aa3ea443d7e71a9738b4b669d2319b75bc1bc332d764102d9128e",
+    "download_neutral_coinbase_stablecoin_eur.py": "354002aefb29d480bd301c7e0f4765fe9f523d433b35913a2f71a41163c1be4e",
+    "src/eurusd_regime_specialists/neutral_coinbase_stablecoin_flow.py": "2b72b7013f527cc0a52f53c3a56d1ed181e7d2c83de30374fe6e751f50818e18",
+    "run_neutral_coinbase_stablecoin_flow.py": "f70fe7285ac12c1fcc28eb2070238db85024a1f771f232973d527a97c7250fe4",
+    "tests/test_download_neutral_coinbase_stablecoin_eur.py": "1d71f8065bee5c360d45949e210ee3f8dea871f6a35085db176ab632cbd928be",
+    "tests/test_neutral_coinbase_stablecoin_flow.py": "ac8c307542ef4e0a829c1ec70c51219595e48ae3c9753a86f5bf16f2397a9758",
+    "EURUSD_NEUTRAL_COINBASE_STABLECOIN_EUR_SOURCE_AUDIT_2026_07_28.md": "010c8f0b5c6dc744bec6b1a524031f5a9e7fc9796f46584a17a1d70e9aa89a1d",
+    "EURUSD_NEUTRAL_COINBASE_STABLECOIN_FLOW_PREREG_2026_07_28.md": "e6cc5e09d1ac96eabb0a27af44741cf170d252ad5ed73eb075cd5b0ab90477eb"
+  },
+  "pinned_sources": {
+    "PARENT_FOUR_CLOCK_CONTRACT": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8",
+    "COINBASE_STABLECOIN_EUR_M5.parquet": "d2f978e185534417a2f3f237983a9f97b90084b3d174b114e2f9df105130268a",
+    "COINBASE_MANIFEST.json": "37b2dc54439a91dedc42919a7a80604b48fdffe6a7345397ca2b404828490090",
+    "COINBASE_RAW_RESPONSE_CHAIN": "7f6c307db8675ea688ee31d2a5665424d30bf2dec3969eeb8105dd1b427eae11",
+    "COINBASE_PRODUCT_METADATA_CHAIN": "fa7bb9d45bcec9e84c6a8130be230415cd6db395034d59ecd79b0e30965b8f52"
+  },
+  "outcome_blind_census": {
+    "source_eligible_days": 334,
+    "source_decision_points": 1336,
+    "both_products_valid_points": 963,
+    "agreement_candidates": 614,
+    "active_candidate_days": 260,
+    "no_trade_days": 74,
+    "predicted_long_rate": 0.49348534201954397
+  }
+}

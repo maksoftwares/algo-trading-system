@@ -332,6 +332,13 @@ in 2026 H1. Lowering the hurdle to manufacture trades would sacrifice the
 required margin above break-even, so the model was structurally rejected
 without P&L or oracle evaluation.
 
+A new login-free Coinbase source then supplied 7,260 M5 candles from the
+USDC-EUR and USDT-EUR order books. The frozen prior-three-candle signed-volume
+agreement rule selected 614 trades, or 1.838 per source-eligible Neutral date,
+but lost in development and every validation window: 33.22% wins, 1.439
+payoff, PF 0.716, and -119.33R overall. The last six months returned PF 0.600
+and -24.60R. The source is retained; this exact causal use is closed.
+
 The evidence does not support claiming that Regime 1 has been solved. Further
 retrospective venue weighting, threshold, hour, flow horizon, interaction,
 feature, or model search on these archives would increase overfitting rather
@@ -383,4 +390,7 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_multivenue_agreement.py backtest
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_target_probability.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_target_probability.py backtest
+uv run --with pandas --with numpy --with pyarrow python download_neutral_coinbase_stablecoin_eur.py rebuild
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_coinbase_stablecoin_flow.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_coinbase_stablecoin_flow.py backtest
 ```

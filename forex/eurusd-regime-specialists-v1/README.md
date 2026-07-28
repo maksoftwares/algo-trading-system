@@ -30,6 +30,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 24. Login-free EURUSDT executed flow: 78 official Binance archives supplied 682,290 checksum-validated M5 bars with actual volume, trade count, and taker-buy volume from 2020 through June 2026. A frozen, unfitted rule used the sign of the prior 15-minute taker imbalance at four first-hour clocks. It produced exactly four trades on all 519 eligible Neutral dates, but conditional side accuracy was only 50.72%. Its 2,076 trades won 32.18%, returned 1.433 payoff, PF 0.680, and -463.75R. The latest six months fell to 26.28% wins, PF 0.513, and -57.48R. The source pipeline is retained; the sign rule is closed.
 25. Flow-augmented paired ranker: the same checksum-pinned EURUSDT archive added only prior-15-minute taker imbalance and return to the frozen 16-feature paired side model. The 2020-2021 period was training-only; 1,336 later trades executed exactly four times on all 334 eligible Neutral dates. Conditional side accuracy was only 51.30%, win rate 32.41%, payoff 1.430, PF 0.686, and net -292.70R. The latest six months improved to PF 0.698 but still lost 32.48R. All four windows and every clock failed, so this final predeclared fitted use of the source is closed.
 26. Kraken/Binance multivenue executed flow: 699 login-free Kraken API pages supplied 398,079 trades from the actual EUR/USD pair inside the required decision-time windows. Kraken and Binance imbalance correlated only 0.06, establishing source novelty. A locked equal-weight sign rule produced exactly four trades on all 453 eligible Neutral dates, but conditional accuracy was 50.57%. Its 1,812 trades won 31.95%, returned 1.439 payoff, PF 0.676, and -410.05R. The latest six months returned PF 0.602 and -44.93R. Every window and clock failed; both venue histories are now closed.
+27. Coinbase stablecoin/EUR volume pressure: 668 login-free public responses supplied 7,260 M5 candles from the USDC-EUR and USDT-EUR order books. A frozen prior-three-candle signed-volume agreement rule selected 614 trades, or 1.838 per source-eligible Neutral date. It won 33.22%, returned 1.439 payoff, PF 0.716, and -119.33R. The latest six months produced 85 trades, 29.41% wins, PF 0.600, and -24.60R. Development and every validation window failed; the exact rule is closed.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -80,6 +81,9 @@ Key reports:
 - `EURUSD_NEUTRAL_SELECTIVE_MULTIVENUE_AGREEMENT_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_SELECTIVE_TARGET_PROBABILITY_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SELECTIVE_TARGET_PROBABILITY_VERDICT_2026_07_28.md`
+- `EURUSD_NEUTRAL_COINBASE_STABLECOIN_EUR_SOURCE_AUDIT_2026_07_28.md`
+- `EURUSD_NEUTRAL_COINBASE_STABLECOIN_FLOW_PREREG_2026_07_28.md`
+- `EURUSD_NEUTRAL_COINBASE_STABLECOIN_FLOW_VERDICT_2026_07_28.md`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -112,6 +116,7 @@ Key reports:
 - `outputs/neutral_kraken_multivenue_flow/RESULT.json`
 - `outputs/neutral_selective_multivenue_agreement/RESULT.json`
 - `outputs/neutral_selective_target_probability/RESULT.json`
+- `outputs/neutral_coinbase_stablecoin_flow/RESULT.json`
 
 Run with:
 
@@ -158,4 +163,7 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_multivenue_agreement.py backtest
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_target_probability.py census
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_selective_target_probability.py backtest
+uv run --with pandas --with numpy --with pyarrow python download_neutral_coinbase_stablecoin_eur.py rebuild
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_coinbase_stablecoin_flow.py census
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_coinbase_stablecoin_flow.py backtest
 ```
