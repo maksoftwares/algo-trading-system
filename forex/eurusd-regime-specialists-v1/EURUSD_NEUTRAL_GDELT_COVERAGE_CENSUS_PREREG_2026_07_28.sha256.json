@@ -1,0 +1,19 @@
+{
+  "schema_version": "eurusd_neutral_gdelt_coverage_census_v1_lock",
+  "locked_at_utc": "2026-07-28T18:43:20Z",
+  "locked_before_multi_date_download_and_eurusd_outcomes": true,
+  "source_schema_sample_files_before_lock": 1,
+  "census_target_files_downloaded_before_lock": 0,
+  "strategy_preregistered_before_lock": false,
+  "eurusd_outcomes_loaded_before_lock": false,
+  "oracle_rows_loaded_before_lock": false,
+  "broker_action_allowed": false,
+  "source_audit": {
+    "path": "EURUSD_NEUTRAL_GDELT_GKG_SOURCE_AUDIT_2026_07_28.json",
+    "sha256": "7ebc61b174e96748e4a3ef1bb7a3cfaf15d32cb9d5881179e46f1735fb03c3b1"
+  },
+  "files": {
+    "config/frozen_neutral_gdelt_coverage_census_v1.json": "05fcdffba3bc183d824324e159ad702ea998fb4f84c916aa438d90089c5c488b",
+    "EURUSD_NEUTRAL_GDELT_COVERAGE_CENSUS_PREREG_2026_07_28.md": "ee3fb0b81c76de677097b70f9f2a1e8b9abbd59f1d6a1177e20f01dfd15ef888"
+  }
+}

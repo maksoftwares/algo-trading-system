@@ -1,0 +1,104 @@
+{
+  "schema_version": "eurusd_neutral_gdelt_coverage_census_v1",
+  "frozen_at_utc": "2026-07-28T18:43:00Z",
+  "research_only": true,
+  "source_census_only": true,
+  "strategy_preregistered": false,
+  "eurusd_outcomes_allowed": false,
+  "oracle_matches_allowed": false,
+  "broker_action_allowed": false,
+  "source_audit": {
+    "path": "EURUSD_NEUTRAL_GDELT_GKG_SOURCE_AUDIT_2026_07_28.json",
+    "sha256": "7ebc61b174e96748e4a3ef1bb7a3cfaf15d32cb9d5881179e46f1735fb03c3b1"
+  },
+  "sampling": {
+    "rule": "FIRST_AND_THIRD_TUESDAY_OF_EACH_UTC_MONTH",
+    "months": [
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07"
+    ],
+    "entry_dates_utc": [
+      "2025-08-05",
+      "2025-08-19",
+      "2025-09-02",
+      "2025-09-16",
+      "2025-10-07",
+      "2025-10-21",
+      "2025-11-04",
+      "2025-11-18",
+      "2025-12-02",
+      "2025-12-16",
+      "2026-01-06",
+      "2026-01-20",
+      "2026-02-03",
+      "2026-02-17",
+      "2026-03-03",
+      "2026-03-17",
+      "2026-04-07",
+      "2026-04-21",
+      "2026-05-05",
+      "2026-05-19",
+      "2026-06-02",
+      "2026-06-16",
+      "2026-07-07",
+      "2026-07-21"
+    ],
+    "source_batch_date_offset_days": -1,
+    "source_batch_times_utc": [
+      "23:00",
+      "23:15",
+      "23:30",
+      "23:45"
+    ],
+    "hypothetical_earliest_entry_time_utc": "00:15",
+    "minimum_lag_after_last_batch_minutes": 30,
+    "target_files": 96
+  },
+  "source_contract": {
+    "url_template": "http://data.gdeltproject.org/gdeltv2/{timestamp}.gkg.csv.zip",
+    "expected_zip_members": 1,
+    "expected_fields_per_row": 27,
+    "utf8_strict": true,
+    "duplicate_document_key": "V2DOCUMENTIDENTIFIER",
+    "tracked_themes": [
+      "EPU_POLICY_FEDERAL_RESERVE",
+      "ECON_CENTRALBANK",
+      "ECON_WORLDCURRENCIES_EURO",
+      "ECON_WORLDCURRENCIES_US_DOLLAR"
+    ],
+    "strict_side_filter": "CENTRAL_BANK_OR_MONETARY_POLICY_THEME_AND_EXPLICIT_ECB_OR_FED_ORGANIZATION",
+    "raw_archives_and_request_metadata_hashed": true,
+    "missing_archives_preserved": true
+  },
+  "capacity_gates": {
+    "minimum_successful_file_rate": 0.95,
+    "minimum_complete_entry_dates": 20,
+    "minimum_dates_with_both_strict_ecb_and_fed_articles": 12,
+    "minimum_total_strict_ecb_articles": 24,
+    "minimum_total_strict_fed_articles": 24,
+    "minimum_unique_sources_each_side": 10,
+    "maximum_largest_source_share_each_side": 0.5,
+    "maximum_duplicate_document_share": 0.25
+  },
+  "decision_policy": {
+    "download_concurrency": 1,
+    "download_retry_and_resume_allowed": true,
+    "maximum_target_files": 96,
+    "historical_eurusd_returns_forbidden": true,
+    "historical_oracle_loading_forbidden": true,
+    "capacity_failure_action": "CLOSE_GDELT_SOURCE_LANE_WITHOUT_SIGNAL_DESIGN",
+    "capacity_pass_action": "PREREGISTER_SEPARATE_PROSPECTIVE_CAPTURE_AND_CAUSAL_SIGNAL_BEFORE_OUTCOMES",
+    "threshold_change_after_download_forbidden": true,
+    "automatic_strategy_or_broker_activation": false
+  }
+}
