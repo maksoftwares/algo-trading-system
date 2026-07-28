@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T16:52:37.890162Z",
+  "as_of_utc": "2026-07-28T17:02:20.207902Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -64,14 +64,14 @@
     "post_release_status": "NO_MATURE_PRE_RELEASE_FORECASTS",
     "post_release_network_request_made": false,
     "ownership_target_date_utc": "2026-08-07T00:00:00Z",
-    "ownership_cached_safe_symbol_hours": 6080,
+    "ownership_cached_safe_symbol_hours": 6085,
     "ownership_missing_safe_symbol_hours": 0,
     "market_capture_not_due_before_utc": "2026-08-07T12:46:00Z"
   },
   "prospective_operations_planner": {
     "schema_version": "eurusd_neutral_prospective_operations_plan_v1",
     "status": "WAITING_FOR_NEXT_SAFE_ACTION",
-    "evaluated_at_utc": "2026-07-28T16:25:52.315859Z",
+    "evaluated_at_utc": "2026-07-28T17:02:18.862104Z",
     "target_events": 3,
     "first_live_due_action": {
       "stage": "OWNERSHIP_CACHE_PREWARM",
@@ -86,7 +86,17 @@
       "missing_safe_symbol_hours": 0,
       "manifest_sha256": "d24edbd0a08030fdf539e66a55828a45962117bdd8c83b53604a2e064f7ba3da"
     },
-    "next_safe_cache_check_utc": "2026-07-28T17:01:00Z",
+    "latest_bounded_prewarm_result": {
+      "evaluated_at_utc": "2026-07-28T17:01:32.464479Z",
+      "network_request_attempts": 5,
+      "new_cached_symbol_hours": 5,
+      "safely_completed_symbol_hours": 6085,
+      "cached_symbol_hours": 6085,
+      "missing_safe_symbol_hours": 0,
+      "last_cached_hour_utc": "2026-07-28T16:00:00Z",
+      "manifest_sha256": "09d3091b9ff17c02f57a648565c09a9053a9a10fd1906e3e0752798868663dcb"
+    },
+    "next_safe_cache_check_utc": "2026-07-28T18:01:00Z",
     "next_forecast_poll_utc": "2026-07-29T15:50:54Z",
     "historical_pnl_loaded": false,
     "oracle_or_outcome_used_before_safe_known_time": false,
@@ -96,7 +106,7 @@
   "independent_prospective_validation": {
     "schema_version": "eurusd_neutral_prospective_validation_result_v1",
     "status": "WAITING_FOR_PROSPECTIVE_START",
-    "evaluated_at_utc": "2026-07-28T16:38:27.142449Z",
+    "evaluated_at_utc": "2026-07-28T17:02:19.430278Z",
     "closed_trades": 0,
     "frequency_is_an_admission_gate": false,
     "minimum_calendar_months": 12,
@@ -118,7 +128,7 @@
   "prospective_directional_falsification": {
     "schema_version": "eurusd_neutral_prospective_directional_falsification_result_v1",
     "status": "WAITING_FOR_PROSPECTIVE_START",
-    "evaluated_at_utc": "2026-07-28T16:44:59.741363Z",
+    "evaluated_at_utc": "2026-07-28T17:02:19.818264Z",
     "closed_primary_trades": 0,
     "opposite_side_counterfactual_trades": 0,
     "frequency_is_an_admission_gate": false,
@@ -137,7 +147,7 @@
   "official_bls_schedule_crosscheck": {
     "schema_version": "eurusd_neutral_prospective_bls_schedule_status_v1",
     "status": "MATCHED_OFFICIAL_BLS_SCHEDULE",
-    "evaluated_at_utc": "2026-07-28T16:52:37.890162Z",
+    "evaluated_at_utc": "2026-07-28T17:02:20.207902Z",
     "official_source_observed_at_utc": "2026-07-28T16:48:57.533Z",
     "official_source_last_modified": "June 10, 2026",
     "official_extracted_payload_sha256": "03816009f06ff96b330486c3333e2b52fd3ce0949e72f0b1c0869d53df4eedee",
@@ -233,6 +243,6 @@
     "failed": 0,
     "warnings": 2
   },
-  "next_action": "AT OR AFTER 2026-07-28T17:01:00Z RUN THE READ-ONLY OPERATIONS PLANNER; EXECUTE ONLY THE EXACT DUE CAPTURE IT REPORTS; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
+  "next_action": "AT OR AFTER 2026-07-28T18:01:00Z RUN THE READ-ONLY OPERATIONS PLANNER; EXECUTE ONLY THE EXACT DUE CAPTURE IT REPORTS; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; RECHECK THE OFFICIAL BLS PAGE BY 2026-08-06T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
   "broker_action_allowed": false
 }
