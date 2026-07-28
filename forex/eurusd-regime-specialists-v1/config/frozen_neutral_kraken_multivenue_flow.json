@@ -1,0 +1,198 @@
+{
+  "campaign_id": "eurusd-neutral-kraken-binance-multivenue-flow-v1",
+  "frozen_at_utc": "2026-07-28T15:45:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_WITH_FORWARD_ONLY_START",
+  "parent_four_clock_contract": {
+    "path": "config/frozen_neutral_four_clock_ranker.json",
+    "sha256": "eaea7e0fe4f32186e2a08fd56787f8d9909aa3360e005076d0cf93a8880203c8"
+  },
+  "parent_binance_flow_contract": {
+    "path": "config/frozen_neutral_binance_eurusdt_flow.json",
+    "sha256": "b76196715ce8beae5887e16305eb6d331f2cb4f47ab42a7e5e4adde3909a6bdf"
+  },
+  "paired_trade_source": {
+    "path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+    "sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1"
+  },
+  "kraken_executed_flow_source": {
+    "provider": "Kraken Spot REST public Trades endpoint",
+    "documentation": "https://docs.kraken.com/api-reference/market-data/get-recent-trades",
+    "authentication_required": false,
+    "pair": "EUR/USD",
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-kraken-eurusd-flow-v1/KRAKEN_EURUSD_M5_EXECUTED_FLOW.parquet",
+    "sha256": "bc1ccfeb50f227b86f187f9f5f28f5ca4e566c3cf9576a600c207c1a3a1a8295",
+    "bytes": 692283,
+    "manifest_path": "D:/AlgoTradingData/research/eurusd-neutral-kraken-eurusd-flow-v1/MANIFEST.json",
+    "manifest_sha256": "b5378ead91fe5a786b1cb5a3fe4610bd92f6e577f3b3b7f5f2e736aa897c5aac",
+    "raw_pages": 699,
+    "raw_page_chain_sha256": "8c871c2e4647900d6b719650b18bfd01a50c393e929fbff6bd483126acd3d9ce",
+    "window_trades": 398079,
+    "normalized_m5_rows": 5958,
+    "first_trade_utc": "2020-03-26T00:40:09.339365482Z",
+    "last_trade_utc": "2026-06-30T00:44:48.410860300Z",
+    "complete_twelve_bar_dates": 453,
+    "missing_required_m5_bars": 258
+  },
+  "binance_executed_flow_source": {
+    "provider": "Binance official public market-data archive",
+    "symbol": "EURUSDT",
+    "interval": "5m",
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-binance-eurusdt-flow-v1/EURUSDT_5M_EXECUTED_FLOW.parquet",
+    "sha256": "7ba02f67f3278038a81095b90bceee402ffdce6bd4fb5d465b7c0a6e408aeb41"
+  },
+  "oracle_source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+  "oracle_regime": "NEUTRAL",
+  "strategy": {
+    "family": "N24_NEUTRAL_KRAKEN_BINANCE_MULTIVENUE_FLOW",
+    "entry_hour_utc": 0,
+    "entry_minutes_utc": [0, 15, 30, 45],
+    "weekdays_only": true,
+    "required_trades_per_eligible_day": 4,
+    "direction_rule": "SIGN_OF_EQUAL_WEIGHT_KRAKEN_EURUSD_AND_BINANCE_EURUSDT_PRIOR_15M_EXECUTED_FLOW_IMBALANCE",
+    "abstention_allowed": false,
+    "one_open_position": false
+  },
+  "flow_rule": {
+    "completed_m5_bars_per_venue": 3,
+    "requires_consecutive_bars_per_venue": true,
+    "requires_positive_total_quote_volume_per_venue": true,
+    "kraken_imbalance": "(reported_buy_quote_volume - reported_sell_quote_volume) / total_quote_volume",
+    "binance_imbalance": "(2 * taker_buy_quote_volume - total_quote_volume) / total_quote_volume",
+    "multivenue_score": "(kraken_imbalance + binance_imbalance) / 2",
+    "long_threshold": 0.0,
+    "tie_direction": "LONG",
+    "venue_weights": {
+      "KRAKEN_EURUSD": 0.5,
+      "BINANCE_EURUSDT": 0.5
+    },
+    "weight_horizon_threshold_or_agreement_search": false
+  },
+  "model": {
+    "type": "NONE_DETERMINISTIC_EQUAL_WEIGHT_MULTIVENUE_FLOW",
+    "decision_probability": 0.5,
+    "fit_or_refit": false
+  },
+  "execution": {
+    "risk_pips": 4.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "risk_per_trade_portfolio_r": 0.25,
+    "maximum_new_portfolio_r_per_eligible_day": 1.0,
+    "maximum_concurrent_positions": 4
+  },
+  "windows": {
+    "development_2020_2021": [
+      "2020-03-13T00:00:00Z",
+      "2021-12-31T23:59:59Z"
+    ],
+    "validation_2022_2023": [
+      "2022-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_census": {
+    "parent_paired_decision_points": 2568,
+    "kraken_flow_valid_points": 1920,
+    "binance_flow_valid_points": 2118,
+    "both_venues_valid_points": 1919,
+    "complete_days_before_window_filter": 453,
+    "eligible_complete_days": 453,
+    "paired_decision_points": 1812,
+    "forced_trade_candidates": 1812,
+    "days_exactly_four_candidates": 453,
+    "eligible_day_exact_four_coverage": 1.0,
+    "by_window": {
+      "development_2020_2021": {
+        "eligible_days": 133,
+        "decision_points": 532,
+        "forced_trade_candidates": 532
+      },
+      "validation_2022_2023": {
+        "eligible_days": 140,
+        "decision_points": 560,
+        "forced_trade_candidates": 560
+      },
+      "validation_2024": {
+        "eligible_days": 62,
+        "decision_points": 248,
+        "forced_trade_candidates": 248
+      },
+      "pseudo_oos_2025": {
+        "eligible_days": 79,
+        "decision_points": 316,
+        "forced_trade_candidates": 316
+      },
+      "pseudo_oos_2026h1": {
+        "eligible_days": 39,
+        "decision_points": 156,
+        "forced_trade_candidates": 156
+      }
+    },
+    "outcome_blind_source_relationship": {
+      "imbalance_correlation": 0.06026549393719392,
+      "return_correlation": 0.44282494828923563,
+      "sign_agreement": 0.5193156732891833,
+      "multivenue_predicted_long_rate": 0.5176600441501104,
+      "exact_score_ties": 0
+    }
+  },
+  "admission": {
+    "minimum_trades_each_window": 120,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor_each_window": 1.1,
+    "minimum_expectancy_r_each_window": 0.0,
+    "minimum_conditional_direction_accuracy_each_window": 0.7,
+    "minimum_daily_profit_factor_each_window": 1.1,
+    "minimum_overall_profit_factor": 1.3,
+    "minimum_overall_exact_oracle_precision": 0.4,
+    "minimum_overall_15m_oracle_precision": 0.45,
+    "minimum_stressed_profit_factor": 1.15,
+    "maximum_daily_portfolio_drawdown_r": 20.0,
+    "positive_after_top_5_percent_winners_removed": true,
+    "requires_exactly_four_executed_trades_each_eligible_day": true
+  },
+  "oracle_matching": {
+    "exact_entry_and_side": true,
+    "secondary_tolerance_minutes": 15,
+    "requires_same_utc_date": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "prospective": {
+    "start_utc": "2026-07-29T00:00:00Z",
+    "minimum_observations_before_any_promotion_review": 400,
+    "minimum_calendar_months_before_any_promotion_review": 6,
+    "historical_result_can_never_replace_post_lock_confirmation": true
+  },
+  "prohibitions": [
+    "No venue weight, side mapping, horizon, threshold, agreement requirement, clock, or subgroup may change after outcomes.",
+    "Only fully completed and consecutive M5 bars with positive volume at both venues may determine direction.",
+    "No missing Kraken or Binance bar may be forward-filled.",
+    "No EURUSD outcome, oracle membership, or future venue trade may enter the rule.",
+    "No historical pass can authorize demo or live use without the frozen prospective sample."
+  ]
+}

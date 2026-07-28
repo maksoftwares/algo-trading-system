@@ -36,6 +36,7 @@ execution decision.
 | Four-clock paired side ranker | 2021–2026 H1 | 1,732 | 33.26% | 1.432 | 0.714 | -341.10R |
 | Binance EURUSDT executed-flow sign | 2020–2026 H1 | 2,076 | 32.18% | 1.433 | 0.680 | -463.75R |
 | Binance-flow augmented paired ranker | 2022–2026 H1 evaluation | 1,336 | 32.41% | 1.430 | 0.686 | -292.70R |
+| Kraken/Binance multivenue executed flow | 2020–2026 H1 | 1,812 | 31.95% | 1.439 | 0.676 | -410.05R |
 
 None passed all locked chronological admission gates. Consequently, none is
 an admitted strategy or eligible for demo/live use.
@@ -307,7 +308,16 @@ to PF 0.698 and -32.48R, but still failed all economic gates. Both the
 standalone sign and the only predeclared linear conditional use of this
 executed-flow source are now closed.
 
-The evidence does not support claiming that Regime 1 has been solved. Further retrospective threshold, hour, flow horizon, interaction, feature, or model search on this archive would increase overfitting rather than improve causal evidence.
+A login-free second venue then supplied 398,079 actual EUR/USD trades from
+Kraken inside the outcome-blind decision windows. Its flow imbalance
+correlated only 0.06 with Binance, so the new source was materially
+independent. A locked equal-weight multivenue rule nevertheless selected the
+available winning side only 50.57% of the time. All five windows failed;
+1,812 trades returned 31.95% wins, 1.439 payoff, PF 0.676, and -410.05R.
+The latest six months returned PF 0.602 and -44.93R. Both executed-flow
+venue histories are now closed.
+
+The evidence does not support claiming that Regime 1 has been solved. Further retrospective venue weighting, threshold, hour, flow horizon, interaction, feature, or model search on these archives would increase overfitting rather than improve causal evidence.
 
 ## Next legitimate evidence
 
@@ -315,10 +325,8 @@ Progress now requires at least one source not adaptively exhausted here:
 
 1. a prospectively collected, untouched EURUSD tick period;
 2. event-time macroeconomic surprise data known at release;
-3. an untouched second executed-flow venue or multi-venue order-book
-   imbalance; synchronized DXY/Treasury quoted M5 behavior, weekly aggregate
-   CFTC positioning, and both frozen uses of Binance EURUSDT taker flow have
-   now failed;
+3. an institutional multi-venue order-book archive not represented by the
+   inspected Kraken EUR/USD and Binance EURUSDT retail-venue histories;
 4. an explicit relaxation of the requested frequency/payoff objective.
 
 Until then, Regime 1 remains `CASH`.
@@ -350,4 +358,6 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow python download_neutral_binance_eurusdt.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_binance_eurusdt_flow.py
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_flow_augmented_ranker.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python download_neutral_kraken_eurusd.py
+uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_kraken_multivenue_flow.py
 ```
