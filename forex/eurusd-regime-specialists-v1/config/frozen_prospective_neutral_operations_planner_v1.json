@@ -1,0 +1,75 @@
+{
+  "schema_version": "eurusd_neutral_prospective_operations_planner_v1",
+  "frozen_at_utc": "2026-07-28T16:16:00Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "research_only": true,
+  "network_requests_allowed": false,
+  "broker_action_allowed": false,
+  "campaign_orchestration_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_CAMPAIGN_ORCHESTRATION_V1_2_PREREG_2026_07_28.sha256.json",
+    "sha256": "759f6cdda68ae2ee469c681524ce446c0448944c3c5fb35734b3fd88f7b4ce2e"
+  },
+  "target_tickers": {
+    "ECONOMICS:USIRMM": "CPI",
+    "ECONOMICS:USPPIMM": "PPI",
+    "ECONOMICS:USNFP": "NFP"
+  },
+  "polling_cadence": [
+    {
+      "minimum_seconds_to_release": 259200,
+      "interval_seconds": 86400
+    },
+    {
+      "minimum_seconds_to_release": 21600,
+      "interval_seconds": 21600
+    },
+    {
+      "minimum_seconds_to_release": 3600,
+      "interval_seconds": 3600
+    },
+    {
+      "minimum_seconds_to_release": 600,
+      "interval_seconds": 600
+    },
+    {
+      "minimum_seconds_to_release": 60,
+      "interval_seconds": 60
+    }
+  ],
+  "safe_lags": {
+    "minimum_forecast_lead_seconds": 60,
+    "actual_after_release_seconds": 60,
+    "event_market_after_release_seconds": 960,
+    "ownership_after_midnight_seconds": 60,
+    "path_after_entry_seconds": 43260,
+    "oracle_after_date_midnight_seconds": 129660
+  },
+  "commands": {
+    "capture_forecast": "python capture_prospective_tradingview_consensus.py capture --days-ahead 60",
+    "capture_actual": "python capture_prospective_tradingview_actuals.py capture",
+    "prewarm_ownership": "python prewarm_prospective_neutral_ownership.py capture --eligible-date {date} --max-new-requests 120",
+    "capture_ownership": "python capture_prospective_neutral_ownership.py capture --eligible-date {date}",
+    "capture_event_market": "python capture_prospective_dukascopy_event_m5.py capture --event-time {event_time}",
+    "process_campaign": "python run_prospective_neutral_campaign_v1.py process --as-of {as_of}",
+    "capture_path": "python capture_prospective_eurusd_trade_path.py capture --signal-id {signal_id} --entry-time {entry_time}",
+    "capture_oracle": "python capture_prospective_neutral_oracle_day.py capture --oracle-date {date}"
+  },
+  "source_contracts": {
+    "capture_prospective_tradingview_consensus.py": "a5b663baabc82ec68249454f3539d9bad84fd600bab388cc65e0770d0c7e78a3",
+    "capture_prospective_tradingview_actuals.py": "a1d01dbf1e90865fe211835862e027ab207c1c4585438ad72860383c27e2ae83",
+    "capture_prospective_neutral_ownership.py": "c59fae3dcadc4b75f001d88df5b0e98634bf181f332624ec6cf474e945227a6f",
+    "capture_prospective_dukascopy_event_m5.py": "a8ac3b5bf4dd0c4a25716dabec4728c8150da9a3c3a59f400f0b05a32a565e08",
+    "capture_prospective_eurusd_trade_path.py": "e2c04b024108eb83270dfb0cb2b48a77a4cc135af0479a20d3b98f066dcfe32f",
+    "capture_prospective_neutral_oracle_day.py": "d0ac8fc5324a259d910fe46cebd2946674520e43cbb54e5709d113d1992816f4",
+    "prewarm_prospective_neutral_ownership.py": "e270da96ab1d5a29a4f28f6617ba2daa573f1e2faf9e0745a7d1272f3c87836f",
+    "run_prospective_neutral_campaign_v1.py": "d9965f122ffca4c3bc68bec2fc597f27dbf8e18a866ee609bb3351c5f02ce2c9"
+  },
+  "forbidden": {
+    "historical_pnl_loading": true,
+    "oracle_or_outcome_use_before_safe_known_time": true,
+    "parameter_search": true,
+    "strategy_or_threshold_change": true,
+    "network_request_execution": true,
+    "broker_action": true
+  }
+}

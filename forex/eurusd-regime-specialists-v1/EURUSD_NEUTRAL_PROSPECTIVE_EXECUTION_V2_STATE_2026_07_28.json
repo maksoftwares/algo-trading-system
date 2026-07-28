@@ -1,6 +1,6 @@
 {
   "schema_version": "eurusd_neutral_prospective_execution_status_v2_1_oracle_evaluation",
-  "as_of_utc": "2026-07-28T16:14:25.247015Z",
+  "as_of_utc": "2026-07-28T16:25:52.315859Z",
   "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
   "status": "WAITING_FOR_PROSPECTIVE_START",
   "prospective_start_utc": "2026-07-29T00:00:00Z",
@@ -18,6 +18,7 @@
   "campaign_orchestration_v1_2_lock_sha256": "759f6cdda68ae2ee469c681524ce446c0448944c3c5fb35734b3fd88f7b4ce2e",
   "prospective_oracle_evaluation_lock_sha256": "006a7afda3115ed9d3eaa2e585d38b51e406a1642c82f862890cae81e1df5610",
   "prospective_ownership_prewarm_lock_sha256": "98cb9b8f1ab9e20917c8573dd623d85f7a9335dbd16381336ef2761e3b451301",
+  "prospective_operations_planner_lock_sha256": "6604c256bb35419a2e651ae422da0d096e86f0fd91af4289c61c569976d67e5f",
   "orchestration_status": "WAITING_FOR_PROSPECTIVE_START",
   "evidence_inventory_sha256": "c05dfd9bf596edb567816e153fabff48b2716b1c77f26b5909740194c2a5ec38",
   "ledger_inventory_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -60,9 +61,34 @@
     "post_release_status": "NO_MATURE_PRE_RELEASE_FORECASTS",
     "post_release_network_request_made": false,
     "ownership_target_date_utc": "2026-08-07T00:00:00Z",
-    "ownership_cached_safe_symbol_hours": 6075,
+    "ownership_cached_safe_symbol_hours": 6080,
     "ownership_missing_safe_symbol_hours": 0,
     "market_capture_not_due_before_utc": "2026-08-07T12:46:00Z"
+  },
+  "prospective_operations_planner": {
+    "schema_version": "eurusd_neutral_prospective_operations_plan_v1",
+    "status": "WAITING_FOR_NEXT_SAFE_ACTION",
+    "evaluated_at_utc": "2026-07-28T16:25:52.315859Z",
+    "target_events": 3,
+    "first_live_due_action": {
+      "stage": "OWNERSHIP_CACHE_PREWARM",
+      "missing_safe_symbol_hours": 5,
+      "command_was_reported_but_not_automatically_executed": true
+    },
+    "bounded_prewarm_result": {
+      "network_request_attempts": 5,
+      "new_cached_symbol_hours": 5,
+      "safely_completed_symbol_hours": 6080,
+      "cached_symbol_hours": 6080,
+      "missing_safe_symbol_hours": 0,
+      "manifest_sha256": "d24edbd0a08030fdf539e66a55828a45962117bdd8c83b53604a2e064f7ba3da"
+    },
+    "next_safe_cache_check_utc": "2026-07-28T17:01:00Z",
+    "next_forecast_poll_utc": "2026-07-29T15:50:54Z",
+    "historical_pnl_loaded": false,
+    "oracle_or_outcome_used_before_safe_known_time": false,
+    "signal_generated": false,
+    "broker_action_allowed": false
   },
   "causal_revision_invariance_rehearsal": {
     "status": "PASSED",
@@ -139,10 +165,10 @@
   "profitability_and_robustness_required_for_demo_readiness": true,
   "demo_trading_authorized": false,
   "full_test_suite": {
-    "passed": 258,
+    "passed": 265,
     "failed": 0,
     "warnings": 2
   },
-  "next_action": "WAIT_FOR_PROSPECTIVE_START; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; EXTEND THE AUGUST_7 OWNERSHIP CACHE ONLY WITH NEWLY SAFE HOURS; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO ACTUAL MARKET PATH OR ORACLE REQUEST IS DUE",
+  "next_action": "AT OR AFTER 2026-07-28T17:01:00Z RUN THE READ-ONLY OPERATIONS PLANNER; EXECUTE ONLY THE EXACT DUE CAPTURE IT REPORTS; CONTINUE APPEND-ONLY FORECAST CAPTURES BEFORE NFP 2026-08-07T12:30:00Z; ALLOW SPARSE SIGNALS; JUDGE PROFITABILITY ONLY FROM CLOSED PROSPECTIVE TRADES; NO BROKER ACTION IS AUTHORIZED",
   "broker_action_allowed": false
 }
