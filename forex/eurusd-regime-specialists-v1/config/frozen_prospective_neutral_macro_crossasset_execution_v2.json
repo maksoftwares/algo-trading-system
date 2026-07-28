@@ -1,0 +1,111 @@
+{
+  "schema_version": "eurusd_neutral_macro_crossasset_execution_v2",
+  "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
+  "frozen_at_utc": "2026-07-28T13:58:39Z",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "supersedes_v1_before_first_eligible_signal": true,
+  "supersession_reason": "V1 named the observation-completion M5 open as entry even though the immutable public market snapshot is not admissible until at least 60 seconds later. V2 preserves the signal and risk hypothesis but moves entry strictly after every required evidence item is observable.",
+  "research_only": true,
+  "shadow_only": true,
+  "broker_action_allowed": false,
+  "parent_strategy": {
+    "config_path": "config/frozen_prospective_neutral_macro_crossasset_agreement.json",
+    "config_sha256": "d693b611a1a141579848c8e3ad381cced6198f478da9a2fe4942a46a15f968ee",
+    "decision_source_path": "src/eurusd_regime_specialists/prospective_neutral_macro_crossasset_agreement.py",
+    "decision_source_sha256": "5479511b0646f72c10cafd6e7d6affe337b4751dd6d6b3daa6f03366155896f4",
+    "preregistration_lock_path": "EURUSD_NEUTRAL_PROSPECTIVE_MACRO_CROSSASSET_AGREEMENT_PREREG_2026_07_28.sha256.json",
+    "preregistration_lock_sha256": "23f4f2902ae71980325d9d04e9b7057001d57b82f287e72cd515ecf19fded43e"
+  },
+  "market_capture_reference": {
+    "path": "capture_prospective_dukascopy_event_m5.py",
+    "sha256": "a8ac3b5bf4dd0c4a25716dabec4728c8150da9a3c3a59f400f0b05a32a565e08",
+    "minimum_post_observation_capture_lag_seconds": 60,
+    "required_capture_semantics": "ONLY_FULLY_COMPLETED_M5_BARS_ENTRY_BAR_EXCLUDED"
+  },
+  "neutral_ownership": {
+    "state_timestamp": "PREVIOUS_UTC_DATE_2300_H1_BAR",
+    "state_bar_completion": "EVENT_DATE_0000_UTC",
+    "ownership_evidence_must_be_observed_before_entry": true,
+    "owned_state": "DIRECTION_NEUTRAL_AND_NOT_SHOCK_AND_NOT_JOINT_COMPRESSION",
+    "required_capture_semantics": "FROZEN_CLASSIFIER_STATE_FROM_COMPLETED_PRIOR_H1"
+  },
+  "signal": {
+    "families": [
+      "CPI",
+      "PPI",
+      "NFP"
+    ],
+    "three_way_agreement_unchanged_from_v1": true,
+    "frequency_quota": null,
+    "frequency_is_not_an_admission_gate": true,
+    "maximum_trades_per_release": 1
+  },
+  "evidence_selection": {
+    "forecast": "LATEST_ADMISSIBLE_STRICTLY_PRE_RELEASE_FORECAST_ALREADY_LINKED_IN_ACTUAL_ROW",
+    "actual": "EARLIEST_ADMISSIBLE_LINKED_POST_RELEASE_CAPTURE_PER_EXACT_EVENT_ID_TICKER_AND_TIME",
+    "market": "EARLIEST_COMPLETE_THREE_BAR_CAPTURE_PER_EVENT_TIME",
+    "ownership": "EARLIEST_VALID_PRIOR_H1_CLASSIFICATION_CAPTURE_PER_ELIGIBLE_DATE",
+    "later_revision_may_replace_selected_evidence": false
+  },
+  "entry": {
+    "timing": "FIRST_M5_OPEN_STRICTLY_AFTER_MAX_OF_ACTUAL_OBSERVED_MARKET_OBSERVED_OWNERSHIP_OBSERVED_AND_OBSERVATION_COMPLETED",
+    "exact_entry_bar_required": true,
+    "entry_bar_forbidden_from_signal_inputs": true,
+    "minimum_retail_spread_pips": 0.7,
+    "adverse_slippage_pips_per_side": 0.1
+  },
+  "risk": {
+    "observation_extreme_source": "EURUSD_OBSERVATION_MID_HIGH_LOW",
+    "stop_buffer_pips": 0.5,
+    "minimum_risk_pips": 4.0,
+    "maximum_risk_pips": 25.0,
+    "ceiling_interpretation": "CLAMP_DISTANCE_TO_25_PIPS",
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "same_bar_policy": "STOP_FIRST",
+    "time_exit": "CLOSE_OF_LAST_FULL_M5_BAR_BEFORE_12H_DEADLINE",
+    "one_open_position": true,
+    "fixed_research_lots": 0.01,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "path_evidence": {
+    "capture_script": "capture_prospective_eurusd_trade_path.py",
+    "completed_bid_ask_m5_only": true,
+    "continuous_five_minute_coverage_required_until_exit": true,
+    "missing_bar_action": "PENDING_INCOMPLETE_PATH",
+    "append_only_hash_required": true
+  },
+  "evidence_roots": {
+    "consensus_and_actual": "D:/AlgoTradingData/prospective/eurusd-neutral-tradingview-consensus-v1",
+    "event_market": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/market",
+    "neutral_ownership": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership",
+    "trade_path": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/path",
+    "ledger": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ledger"
+  },
+  "prospective_admission": {
+    "minimum_calendar_months": 12,
+    "minimum_executed_trades": 30,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_each_side_trades": 8,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_same_day_same_side_oracle_precision": 0.5,
+    "all_checks_required": true,
+    "qualification_action": "RESEARCH_REVIEW_ONLY_NO_AUTOMATIC_BROKER_ACTIVATION"
+  },
+  "decision_policy": {
+    "historical_backtest_forbidden": true,
+    "historical_pnl_forbidden": true,
+    "parameter_search_forbidden": true,
+    "signal_change_after_start_forbidden": true,
+    "oracle_may_not_change_or_filter_signals": true,
+    "insufficient_sample_action": "REMAIN_SHADOW_CASH",
+    "failed_admission_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING"
+  }
+}

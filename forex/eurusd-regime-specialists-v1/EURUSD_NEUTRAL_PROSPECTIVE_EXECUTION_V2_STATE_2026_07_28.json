@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_neutral_prospective_execution_status_v2",
+  "as_of_utc": "2026-07-28T14:10:00Z",
+  "campaign_id": "eurusd-neutral-prospective-macro-crossasset-agreement-v2",
+  "status": "WAITING_FOR_PROSPECTIVE_START",
+  "prospective_start_utc": "2026-07-29T00:00:00Z",
+  "v1_superseded_before_first_eligible_signal": true,
+  "v2_lock_sha256": "024fba2fe01be1043f2f15ef7267eaa3286250bf3e5ca2471734324a8d67b31c",
+  "historical_backtest_run": false,
+  "historical_pnl_loaded": false,
+  "network_request_made_by_status_check": false,
+  "pre_release_snapshot_files": 1,
+  "admissible_pre_release_rows": 0,
+  "linked_post_release_actual_rows": 0,
+  "complete_event_market_rows": 0,
+  "neutral_ownership_records": 0,
+  "immutable_signals": 0,
+  "closed_prospective_trades": 0,
+  "admission_review_allowed": false,
+  "next_action": "WAIT_FOR_FIRST_LINKED_POST_RELEASE_ACTUAL; NO MARKET OR PATH REQUEST IS DUE",
+  "broker_action_allowed": false
+}
