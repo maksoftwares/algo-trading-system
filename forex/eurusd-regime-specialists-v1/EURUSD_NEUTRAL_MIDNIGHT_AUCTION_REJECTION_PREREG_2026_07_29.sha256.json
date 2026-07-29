@@ -1,0 +1,20 @@
+{
+  "broker_action_allowed": false,
+  "census_forbids_outcome_loading": true,
+  "family": "N50_NEUTRAL_MIDNIGHT_AUCTION_REJECTION",
+  "files": {
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_PREREG_2026_07_29.md": "8c5c8bde895ab85a5e4a371b4d32a6a99c5684fd5be26121df4c8f32d2b9ddad",
+    "EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_RESULT_2026_07_29.sha256.json": "86b8c94d5d478dad8500b81ea04f79908e73ab733ca23d8282def4bbb432b447",
+    "config/frozen_neutral_midnight_auction_rejection.json": "f0b617a2156e7da4fcdd88a0afb4d8fbd2e06a24e296823552e0d7f0bfdf4ae6",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "run_neutral_midnight_auction_rejection.py": "8637444d49acbef3fb9d0c9f740f4d3d63526ac8bdad86c41150592b9ea6c446",
+    "src/eurusd_regime_specialists/neutral_midnight_auction_rejection.py": "5f97f368aeb32ae79db059c1065da24f38bdde9f12acdec6a2baef7d8fec3a07",
+    "tests/test_neutral_midnight_auction_rejection.py": "d209a1e54d03e21d8c8aead0f03952d1526afa7cb4640cca356c7d3d3d5307a8"
+  },
+  "locked_at_utc": "2026-07-29T09:54:47.2326324Z",
+  "locked_before_any_outcome": true,
+  "locked_before_first_candidate_count": true,
+  "status": "FROZEN_ORACLE_TIMING_INFORMED_INDEPENDENT_AUCTION_REJECTION"
+}
