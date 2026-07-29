@@ -1,0 +1,58 @@
+{
+  "schema_version": "eurusd_neutral_specialist_agreement_execution_result_lock_v1",
+  "generated_at_utc": "2026-07-29T07:30:24.7578119Z",
+  "status": "REJECTED_EXACT_AGREEMENT_EXECUTION",
+  "preregistration_lock": {
+    "path": "EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_EXECUTION_PREREG_2026_07_29.sha256.json",
+    "sha256": "b81b86ddfc6f6eb252a8c68844f5701a5f46837de71ca91dd628930b6f865d1e"
+  },
+  "routing": {
+    "candidates": 214,
+    "executed_trades": 205,
+    "cash_incomplete_maximum_hold_path": 9
+  },
+  "primary_metrics": {
+    "trades": 205,
+    "wins": 69,
+    "losses": 136,
+    "win_rate": 0.33658536585365856,
+    "realized_payoff_ratio": 1.4391197802565059,
+    "profit_factor": 0.7301416532183743,
+    "net_r": -37.62500000003,
+    "max_drawdown_r": 44.300000000027154,
+    "extra_half_pip_profit_factor": 0.5956528687867845,
+    "top_5pct_winners_removed_profit_factor": 0.6135915366682924,
+    "latest_six_month_trades": 14,
+    "latest_six_month_profit_factor": 0.802168021679954,
+    "latest_six_month_net_r": -1.825000000002519,
+    "same_side_oracle_precision_15m": 0.4975609756097561,
+    "same_side_oracle_recall_15m": 0.03900573613766731
+  },
+  "chronological_profit_factors": {
+    "development_2019_2022": 0.8394308943087181,
+    "oos_2023": 0.7184170471839656,
+    "oos_2024": 0.4111498257838589,
+    "oos_2025": 0.5756097560974024,
+    "oos_2026_h1": 0.802168021679954
+  },
+  "side_profit_factors": {
+    "long": 0.8997713414631686,
+    "short": 0.5794107687096256
+  },
+  "integrity": {
+    "unique_utc_entry_dates": 205,
+    "duplicate_utc_entry_dates": 0,
+    "position_overlaps": 0,
+    "invalid_exit_durations": 0,
+    "all_research_gates_passed": false,
+    "post_result_expert_combination_deletion_allowed": false,
+    "historical_pass_can_authorize_demo": false,
+    "broker_action_allowed": false
+  },
+  "artifacts": {
+    "outputs/neutral_specialist_agreement_execution/ORACLE_MATCHES.csv": "76a938ba3af2f081638aee394e2edbd0da81a11426b844f512028d7e77771ac4",
+    "outputs/neutral_specialist_agreement_execution/RESULT.json": "e162153964be0a7da158ea688243728f64e16ac30e634443f49537da1870c767",
+    "outputs/neutral_specialist_agreement_execution/ROUTING.csv": "32255f2665324db899b42c02bbd5e5609c6a92e703a36657bf9b18eb3e85e6cf",
+    "outputs/neutral_specialist_agreement_execution/TRADES.csv": "bbf1a40b15d1fa66f98623eafe49ad59caddbf9617dc8743b9d5062276a34e09"
+  }
+}
