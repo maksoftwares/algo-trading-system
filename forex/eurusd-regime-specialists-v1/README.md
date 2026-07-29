@@ -73,6 +73,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 67. Past-only online expert aggregation: eight already-frozen Neutral specialists spanning price, macro, listed-futures, options-flow, and cross-asset mechanisms were combined only after an implementation-hash lock. The primary 126-calendar-day allocator used strictly prior closed outcomes, one trade per UTC date, and no overlapping positions; 137 selections had zero chronology violations. It nevertheless won only 40.88%, realized 1.285 payoff, returned PF 0.889, and lost 8.82R. Extra 0.5-pip cost reduced PF to 0.819, best-5%-removed PF was 0.756, the latest six months returned PF 0.862 / -2.24R, and same-side 15-minute Neutral-oracle precision was 40.15%. The preregistered 63/252-day sensitivities also lost at PF 0.782/0.898. The exact allocator is rejected without expert deletion or half-life selection.
 68. Outcome-blind specialist agreement: the same eight frozen specialists were reduced to entry clock and side only before any price path, P&L, or oracle row was loaded. Exact-clock same-side agreement with an opposite-side veto produced 214 routed candidates across all chronological windows, so the execution contract was separately hash-locked before opening EURUSD M5 paths. The single run executed 205 non-overlapping trades on 205 dates, won 33.66%, realized 1.439 payoff, returned PF 0.730, lost 37.63R, and drew down 44.30R. Every chronological window and both sides lost; extra 0.5-pip stress reduced PF to 0.596, best-5%-removed PF was 0.614, and the latest six months returned 14 trades at PF 0.802 / -1.83R. Same-side 15-minute oracle precision improved to 49.76%, but this did not translate into profitability. The exact agreement rule is rejected, and the few profitable expert combinations visible only after outcome inspection are not selected or promoted.
 69. Chronological specialist meta-selector: 4,698 exact-clock/side candidates were built from signal identity only, then one standardized L2 model was hash-locked with fixed monthly refits and a fixed 0.50 probability gate. All 42 models used only outcomes closed before their month boundary, with zero chronology violations. The selector was too sparse and unstable: 14 non-overlapping trades on 14 dates, 42.86% wins, 1.439 payoff, PF 1.079, and +0.65R. Extra 0.5-pip cost changed it to PF 0.880 / -1.10R, and removing one top winner changed it to PF 0.899 / -0.83R. It traded zero times in 2023 and the latest six months; ten profitable 2024 trades at PF 1.439 were followed by four 2025 trades at PF 0.480. The 0.50 threshold is not lowered after inspection, so the exact selector is rejected for inadequate capacity and robustness.
+70. Official two-year rate differential: eight U.S. Treasury yearly XML feeds and the ECB euro-area AAA two-year yield series were preserved with hashes before EURUSD outcomes. A fixed five-basis-point change rule used only exact common observation dates at least two calendar days old: a widening U.S.-minus-euro spread mapped to SHORT and narrowing to LONG at Neutral 00:00 UTC. The outcome-blind census produced 141 balanced candidates on 141 dates: 53 development, 31 in 2023, 25 in 2024, 28 in 2025, and 4 in 2026 H1. Every gate passed except the frozen five-candidate latest-six-month floor. Status is `CENSUS_FAIL_NO_PNL_ALLOWED`; no EURUSD price, return, oracle, or P&L was loaded, and the threshold is not relaxed to rescue the lane.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -179,6 +180,8 @@ Key reports:
 - `EURUSD_NEUTRAL_SYMMETRIC_RSI_1P5R_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_EXECUTION_RESULT_2026_07_29.sha256.json`
 - `EURUSD_NEUTRAL_SPECIALIST_META_SELECTOR_RESULT_2026_07_29.sha256.json`
+- `EURUSD_NEUTRAL_RATE_DIFFERENTIAL_SOURCE_AUDIT_2026_07_29.md`
+- `EURUSD_NEUTRAL_RATE_DIFFERENTIAL_CENSUS_RESULT_2026_07_29.sha256.json`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -318,4 +321,6 @@ uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn p
 uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_online_expert_aggregation.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_specialist_agreement_execution.py
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_specialist_meta_selector.py
+uv run --offline --with pandas --with numpy python download_neutral_rate_differential.py status
+uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_rate_differential_census.py
 ```

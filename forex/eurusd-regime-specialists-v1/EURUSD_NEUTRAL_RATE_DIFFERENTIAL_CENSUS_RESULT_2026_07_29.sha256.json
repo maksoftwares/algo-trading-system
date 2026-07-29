@@ -1,0 +1,47 @@
+{
+  "schema_version": "eurusd_neutral_rate_differential_census_result_lock_v1",
+  "generated_at_utc": "2026-07-29T07:55:57.1602038Z",
+  "status": "CENSUS_FAIL_NO_PNL_ALLOWED",
+  "preregistration_lock": {
+    "path": "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_CENSUS_V1_1_PREREG_2026_07_29.sha256.json",
+    "sha256": "65ccf79c2354a16eaf13f6d72c33ed78aca8e026464e071a9bc59589b07a3e58"
+  },
+  "census": {
+    "neutral_midnight_timestamps": 642,
+    "common_rate_observation_dates": 1847,
+    "candidates": 141,
+    "candidates_by_window": {
+      "DEVELOPMENT_2019_2022": 53,
+      "OOS_2023": 31,
+      "OOS_2024": 25,
+      "OOS_2025": 28,
+      "OOS_2026_H1": 4
+    },
+    "candidates_by_side": {
+      "LONG": 67,
+      "SHORT": 74
+    },
+    "minimum_observation_lag_calendar_days_observed": 2,
+    "maximum_observation_lag_calendar_days_observed": 6,
+    "unique_utc_entry_dates": 141,
+    "duplicate_utc_entry_dates": 0,
+    "all_capacity_gates_passed": false,
+    "failed_gate": "minimum_2026_h1",
+    "required_2026_h1_candidates": 5,
+    "observed_2026_h1_candidates": 4
+  },
+  "boundaries": {
+    "eurusd_prices_loaded": false,
+    "eurusd_returns_loaded": false,
+    "oracle_rows_loaded": false,
+    "pnl_loaded": false,
+    "execution_freeze_allowed": false,
+    "threshold_change_after_census_allowed": false,
+    "direction_reversal_after_census_allowed": false,
+    "broker_action_allowed": false
+  },
+  "artifacts": {
+    "outputs/neutral_rate_differential_census/CANDIDATES.csv": "9e0e661dbc7963385294b893acd98f8deb93244ff643b397981667e1a337a2a5",
+    "outputs/neutral_rate_differential_census/CENSUS.json": "1b74010e487128f24427f5fc16b1f7088284cf1e89935707104dd8ef927c839d"
+  }
+}
