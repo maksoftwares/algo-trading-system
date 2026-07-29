@@ -1,0 +1,104 @@
+{
+  "boundary": {
+    "broker_action_performed": false,
+    "direction_selected_by_outcome": false,
+    "forward_trade_path_evaluated": false,
+    "frequency_target_enforced": false,
+    "oracle_loaded": false,
+    "parameter_search_performed": false,
+    "pnl_loaded_or_computed": false,
+    "stop_or_target_outcome_evaluated": false,
+    "threshold_search_performed": false
+  },
+  "campaign_id": "eurusd-neutral-rates-dollar-sign-consensus-h4-v1",
+  "classifier_input_manifests": {
+    "BOND": {
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644",
+      "empty_hours": 22272,
+      "files_seen": 65688,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "populated_hours": 43416,
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "symbol": "USTBONDTRUSD"
+    },
+    "DXY": {
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052",
+      "empty_hours": 25468,
+      "files_seen": 65688,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "populated_hours": 40220,
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "symbol": "DOLLARIDXUSD"
+    }
+  },
+  "context": {
+    "first_available_time_utc": "2015-02-03T00:00:00+00:00",
+    "last_available_time_utc": "2026-07-03T00:00:00+00:00",
+    "next_calendar_day_utc_lag_enforced": true,
+    "rows": 2871
+  },
+  "execution_allowed": false,
+  "frozen_at_utc": "2026-07-29T08:24:32Z",
+  "h4": {
+    "bars": 12079,
+    "first_bar_utc": "2019-01-01T20:00:00+00:00",
+    "last_bar_utc": "2026-06-30T20:00:00+00:00"
+  },
+  "historical_census_can_authorize_demo": false,
+  "prereg_checked_files": {
+    "EURUSD_NEUTRAL_RATES_DOLLAR_SIGN_CONSENSUS_H4_PREREG_2026_07_29.md": "9e23fa434a261cfe6540433bc14c63400a6ac44571e97368008ba7a88698fecd",
+    "config/frozen_neutral_rates_dollar_sign_consensus_h4.json": "9d3c1c92621833f8f0da31b94fbb4898250a6a0b0b70dab7814cca3d70564970"
+  },
+  "prereg_lock_verified": true,
+  "schema_version": "eurusd_neutral_rates_dollar_sign_consensus_h4_census_v1",
+  "source_hashes_verified": {
+    "causal_classifier_contract": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "eurusd_m5": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "eurusd_m5_manifest": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "tlt_shy_recent": "9a7ad57e1e607e9b102642f72e3ca1ad1c855523894fdba9dddecfd54534cba7",
+    "tlt_shy_reference": "3afdc1eb305211e8545deda7177ced9e6fc3d6fa1414e50a3baa54affb7e5fdf",
+    "tlt_uup_recent": "539b42f3137d9d5e168e3284b744508f089ac278670f33bfb6dc539ac66bc9f7",
+    "tlt_uup_reference": "c4bc715783dfaaf40eb6cdb014e0ddad648ea78fa1c8e46a54589bfe4be1538c"
+  },
+  "status": "REJECTED_OUTCOME_BLIND_CAPACITY_CENSUS",
+  "summary": {
+    "active_neutral_dates": 57,
+    "all_census_gates_passed": false,
+    "all_directional_signals": 518,
+    "by_causal_regime": {
+      "JOINT_COMPRESSION": 261,
+      "NEUTRAL": 62,
+      "SHOCK": 70,
+      "USD_DOWN": 59,
+      "USD_UP": 66
+    },
+    "by_side": {
+      "LONG": 32,
+      "SHORT": 30
+    },
+    "by_window": {
+      "DEVELOPMENT_2019_2022": 23,
+      "LATEST_SIX_MONTHS": 1,
+      "OOS_2023": 15,
+      "OOS_2024": 12,
+      "OOS_2025": 11,
+      "OOS_2026_H1": 1
+    },
+    "eligible_neutral_signals": 62,
+    "gate_results": {
+      "minimum_neutral_signals_development": true,
+      "minimum_neutral_signals_each_full_oos_year": true,
+      "minimum_neutral_signals_each_side": true,
+      "minimum_neutral_signals_recent_half_year": false,
+      "minimum_neutral_signals_total": true
+    },
+    "neutral_signals_per_active_date": 1.087719298245614,
+    "quarantined_neutral_signals": 0
+  }
+}

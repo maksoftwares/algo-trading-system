@@ -1,0 +1,14 @@
+{
+  "census_completed_before_forward_outcomes": true,
+  "execution_allowed": false,
+  "family": "EURUSD_NEUTRAL_RATES_DOLLAR_SIGN_CONSENSUS_H4_V1",
+  "files": {
+    "EURUSD_NEUTRAL_RATES_DOLLAR_SIGN_CONSENSUS_H4_CENSUS_2026_07_29.md": "d8892d27ea2f8f25fb80951975ab75bf362430828f2ca9c839d52605d69087a2",
+    "outputs/neutral_rates_dollar_sign_consensus_h4/CANDIDATES.csv": "228ae508cc4e7ec9a63855e095a5a30666cde44b3432ce7a595faf4094d8fbfe",
+    "outputs/neutral_rates_dollar_sign_consensus_h4/CENSUS.json": "9be5f8a13294a85e3a39e60581e8314dfaf8ba62b5548bd3125a6c706aa95971",
+    "outputs/neutral_rates_dollar_sign_consensus_h4/LAGGED_DAILY_CONTEXT.csv": "c1ddc87c05f7c1a0c27ab0e3be8240564447c6b454d3dddb4478be09ba7da338"
+  },
+  "oracle_loaded": false,
+  "pnl_or_forward_path_loaded": false,
+  "status": "REJECTED_OUTCOME_BLIND_CAPACITY_CENSUS"
+}
