@@ -1,0 +1,22 @@
+{
+  "campaign_id": "eurusd-neutral-late-session-inventory-unwind-v1-1",
+  "locked_at_utc": "2026-07-29T10:45:11.9109838Z",
+  "locked_before_first_candidate_count": true,
+  "locked_before_any_outcome": true,
+  "census_forbids_outcome_loading": true,
+  "oracle_decision_use_allowed": false,
+  "broker_action_allowed": false,
+  "files": {
+    "config/frozen_neutral_late_session_inventory_unwind_v1_1.json": "a164158be9a2a488b3e005c00c74f9a07c1026e4a25deeab44e74d6822f8b75c",
+    "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_PREREG_2026_07_29.md": "fd33a13fc60e0d1de5bc9b9fa2bb371e89eba50af18dccf064615a3337eb7861",
+    "src/eurusd_regime_specialists/neutral_late_session_inventory_unwind_v1_1.py": "01cf33e1658f3db0fed41866b504946e4784d619b771096e801c10770930ead7",
+    "run_neutral_late_session_inventory_unwind_v1_1.py": "f405ff85ed907cc18177e8e2ef53c5e88e827f9afafe19f7e3a56e7f19000a81",
+    "tests/test_neutral_late_session_inventory_unwind_v1_1.py": "38ce4c6dd9179fb9426969ab4cdff832369a294044819c0510ba61868f689f95",
+    "src/eurusd_regime_specialists/neutral_late_session_inventory_unwind.py": "5e8b05346e310293dbfb1b8d50f0165fa86747d19c7199fac9deb429b6e109f2",
+    "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_CENSUS_RESULT_2026_07_29.sha256.json": "e60b9ac166585abb98c8c5dd85775ca37313a7d415d58ec2029932e65421a244",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb"
+  },
+  "status": "FROZEN_BEFORE_FINAL_OUTCOME_BLIND_CAPACITY_CENSUS"
+}
