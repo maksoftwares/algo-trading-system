@@ -1,0 +1,47 @@
+{
+  "schema_version": "eurusd_neutral_specialist_agreement_census_result_lock_v1",
+  "generated_at_utc": "2026-07-29T07:21:37.5149346Z",
+  "status": "CENSUS_PASS_EXECUTION_FREEZE_ALLOWED",
+  "preregistration_lock": {
+    "path": "EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_CENSUS_V1_1_PREREG_2026_07_29.sha256.json",
+    "sha256": "a8b517721a44dbd45957c7cfe29bbf5f15e75b1fb1861cd503782e23b8e19d40"
+  },
+  "census": {
+    "source_columns_loaded": [
+      "entry_time_utc",
+      "side"
+    ],
+    "input_signal_rows": 5044,
+    "raw_exact_clock_agreements": 247,
+    "conflicting_exact_clocks": 324,
+    "routed_candidates": 214,
+    "routed_candidates_by_window": {
+      "DEVELOPMENT_2019_2022": 122,
+      "OOS_2023": 24,
+      "OOS_2024": 19,
+      "OOS_2025": 35,
+      "OOS_2026_H1": 14
+    },
+    "routed_candidates_by_side": {
+      "LONG": 108,
+      "SHORT": 106
+    },
+    "distinct_expert_combinations": 15,
+    "contributing_experts": 8,
+    "all_capacity_gates_passed": true
+  },
+  "boundaries": {
+    "eurusd_prices_loaded": false,
+    "eurusd_outcomes_loaded": false,
+    "pnl_loaded": false,
+    "oracle_loaded": false,
+    "broker_action_allowed": false
+  },
+  "artifacts": {
+    "outputs/neutral_specialist_agreement_census/CENSUS.json": "c8350800176506be34b05279a7aa77f68f385c0d5ee91428e08b9159d9bf2cd3",
+    "outputs/neutral_specialist_agreement_census/CONFLICTING_EXACT_CLOCKS.csv": "0e398532b6f104b6e32db35e3282f54282d2d6ce23ba3db79cd433a0bec92893",
+    "outputs/neutral_specialist_agreement_census/RAW_EXACT_CLOCK_AGREEMENTS.csv": "9faa3d04d94325ad2e2ae468e5396eb233b03aced0399519056b2ce7ba653599",
+    "outputs/neutral_specialist_agreement_census/ROUTED_EARLIEST_DAILY_AGREEMENTS.csv": "a0c019596d996d498c0b498353efb39f9b7d8352000fb2ee2024e9c15c3abac2",
+    "outputs/neutral_specialist_agreement_census/SIGNAL_ONLY_INPUTS.csv": "b7a336dc9f692f857c21dde8d8153d44643472fbcb556ecf5107193314d8df09"
+  }
+}
