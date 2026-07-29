@@ -1,6 +1,8 @@
 {
   "campaign_id": "eurusd-neutral-prospective-inventory-unwind-0005-v1",
-  "locked_at_utc": "2026-07-29T11:14:59.0678034Z",
+  "initial_locked_at_utc": "2026-07-29T11:14:59.0678034Z",
+  "locked_at_utc": "2026-07-29T11:18:27.8164797Z",
+  "dependency_audit_amended_before_first_operation": true,
   "prospective_start_utc": "2026-07-30T00:00:00Z",
   "locked_before_prospective_start": true,
   "locked_with_zero_source_records": true,
@@ -23,10 +25,18 @@
     "prewarm_prospective_neutral_ownership.py": "e270da96ab1d5a29a4f28f6617ba2daa573f1e2faf9e0745a7d1272f3c87836f",
     "config/frozen_prospective_neutral_ownership_v1.json": "d38be594029f5b231960bd5c7ea5a41d4424b9720c845d010919f1d1fb0c367a",
     "EURUSD_NEUTRAL_PROSPECTIVE_OWNERSHIP_PREREG_2026_07_28.sha256.json": "e980c958bd350f9254fa51b559448800f00a1f0f9fbeb5e070d354b3772c180a",
+    "config/frozen_prospective_neutral_ownership_prewarm_v1.json": "96d1471314237746d927b6b52061a0a12c6ea9da42f53ca5533034a8e35b17b2",
+    "EURUSD_NEUTRAL_PROSPECTIVE_OWNERSHIP_PREWARM_PREREG_2026_07_28.sha256.json": "98cb9b8f1ab9e20917c8573dd623d85f7a9335dbd16381336ef2761e3b451301",
     "capture_prospective_neutral_oracle_day.py": "d0ac8fc5324a259d910fe46cebd2946674520e43cbb54e5709d113d1992816f4",
+    "capture_prospective_dukascopy_event_m5.py": "a8ac3b5bf4dd0c4a25716dabec4728c8150da9a3c3a59f400f0b05a32a565e08",
+    "config/frozen_prospective_neutral_oracle_evaluation_v1.json": "19139afc24af4859f40d698b30484dabbda2285821e1f7903e08751098e0f537",
+    "EURUSD_NEUTRAL_PROSPECTIVE_ORACLE_EVALUATION_PREREG_2026_07_28.sha256.json": "006a7afda3115ed9d3eaa2e585d38b51e406a1642c82f862890cae81e1df5610",
     "src/eurusd_regime_specialists/prospective_neutral_oracle_evaluation.py": "7331227441e1fcced50d224c752f8bc3cd17a3e07de781b6bf609066e1b78948",
+    "src/eurusd_regime_specialists/prospective_neutral_validation.py": "e1c3f40bdc0382d51110a5220d97004830322053eef4d0738129c795236c0892",
     "src/eurusd_regime_specialists/prospective_neutral_validation_v1_1.py": "013e9975ea0fd7580130507a753a6fc3f88fdce299c0d4773e833407be81b8a3",
     "src/eurusd_regime_specialists/prospective_neutral_macro_crossasset_execution.py": "4c8fb5379510b2eea990db9f3463eea8f71aa1afc757053cee2edd2b880edf95",
+    "src/eurusd_regime_specialists/research.py": "fe30f799acd19f3e75070e31ae47248d6b7b4d3f7db427242dcae1d86e732d03",
+    "src/eurusd_regime_specialists/ensemble.py": "9effc40004574f0ecd29821033f5c9c4a01f46319e9feb798d031dfe26b79ff6",
     "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_EXECUTION_RESULT_2026_07_29.sha256.json": "1a0f6b6613c779108330d6080b4cfcb42dcdf5e598e85f709f80610d9b971760"
   },
   "status": "FROZEN_BEFORE_FIRST_PROSPECTIVE_0005_ENTRY_DATE"
