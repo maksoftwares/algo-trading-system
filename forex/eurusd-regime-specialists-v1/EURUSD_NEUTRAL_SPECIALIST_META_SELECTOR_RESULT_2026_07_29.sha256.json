@@ -1,0 +1,77 @@
+{
+  "schema_version": "eurusd_neutral_specialist_meta_selector_result_lock_v1",
+  "generated_at_utc": "2026-07-29T07:41:11.3528800Z",
+  "status": "REJECTED_EXACT_META_SELECTOR",
+  "preregistration_lock": {
+    "path": "EURUSD_NEUTRAL_SPECIALIST_META_SELECTOR_PREREG_2026_07_29.sha256.json",
+    "sha256": "78a9b622a141282a3f8dec2a58b668e5cb3b0813368801ea685da52f58d21a17"
+  },
+  "census_and_training": {
+    "signal_candidates": 4698,
+    "canonical_closed_labels": 4392,
+    "monthly_models": 42,
+    "model_chronology_violations": 0,
+    "selected_trade_chronology_violations": 0
+  },
+  "primary_metrics": {
+    "trades": 14,
+    "wins": 6,
+    "losses": 8,
+    "win_rate": 0.42857142857142855,
+    "realized_payoff_ratio": 1.4390243902435063,
+    "profit_factor": 1.0792682926826296,
+    "net_r": 0.6499999999975969,
+    "max_drawdown_r": 2.175000000000926,
+    "extra_half_pip_profit_factor": 0.88043478260844,
+    "extra_half_pip_net_r": -1.100000000002403,
+    "top_5pct_winners_removed_profit_factor": 0.8993902439021914,
+    "top_5pct_winners_removed_net_r": -0.8250000000020741,
+    "latest_six_month_trades": 0,
+    "latest_six_month_profit_factor": 0.0,
+    "same_side_oracle_precision_15m": 0.5,
+    "same_side_oracle_recall_15m": 0.0026768642447418736
+  },
+  "chronological_windows": {
+    "oos_2023": {
+      "trades": 0,
+      "profit_factor": 0.0,
+      "net_r": 0.0
+    },
+    "oos_2024": {
+      "trades": 10,
+      "win_rate": 0.5,
+      "profit_factor": 1.4390243902435063,
+      "net_r": 2.249999999998087
+    },
+    "oos_2025": {
+      "trades": 4,
+      "win_rate": 0.25,
+      "profit_factor": 0.47967479674783536,
+      "net_r": -1.60000000000049
+    },
+    "oos_2026_h1": {
+      "trades": 0,
+      "profit_factor": 0.0,
+      "net_r": 0.0
+    }
+  },
+  "integrity": {
+    "unique_utc_entry_dates": 14,
+    "duplicate_utc_entry_dates": 0,
+    "position_overlaps": 0,
+    "all_research_gates_passed": false,
+    "post_result_threshold_change_allowed": false,
+    "post_result_expert_deletion_allowed": false,
+    "historical_pass_can_authorize_demo": false,
+    "broker_action_allowed": false
+  },
+  "artifacts": {
+    "outputs/neutral_specialist_meta_selector/CANONICAL_LABELS.csv": "73cae821011fa44614390798d7c10c1b79c4272e72890e7ef06e5846a7aca52d",
+    "outputs/neutral_specialist_meta_selector/DECISIONS.csv": "4aec4478bac6bd250d0e328ea19f1abba52ee67b99d5dc64beb0ee0088013e59",
+    "outputs/neutral_specialist_meta_selector/MONTHLY_MODELS.csv": "16254fc6e7dc182139abd6bbd797e69ccccb698bdc91d3e2076645670b4fec3f",
+    "outputs/neutral_specialist_meta_selector/ORACLE_MATCHES.csv": "01c56dda460387460ae1bcd856a0f2aec10452c12b7d2f81151ba4a7183a60a2",
+    "outputs/neutral_specialist_meta_selector/RESULT.json": "370363e04530d2fbe86b3e17f15758db2c6c4eb9990fa037ce76e25b99affc8f",
+    "outputs/neutral_specialist_meta_selector/SELECTED_TRADES.csv": "dfa0ad70256c7c102f0053aeddd6f6c341637216f939fc092834fe282ffc17fd",
+    "outputs/neutral_specialist_meta_selector/SIGNAL_CANDIDATES.csv": "b813c1e9f93a996c4611f5d52c3dc37a0f36d21c5ae2fad50c5118a3b02ec87b"
+  }
+}
