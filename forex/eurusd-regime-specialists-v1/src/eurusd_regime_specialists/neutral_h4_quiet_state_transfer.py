@@ -240,6 +240,7 @@ def simulate_short(
     mask: pd.Series,
     candidate: dict[str, Any],
     config: dict[str, Any],
+    entry_delay_minutes: int = 0,
 ) -> tuple[pd.DataFrame, dict[str, int]]:
     execution = config["execution"]
     spread_floor = float(execution["minimum_retail_spread_pips"]) * PIP
@@ -265,7 +266,9 @@ def simulate_short(
 
     for signal_index in eligible:
         signal_time = pd.Timestamp(h1["timestamp"].iloc[signal_index])
-        entry_time = signal_time + pd.Timedelta(hours=1)
+        entry_time = signal_time + pd.Timedelta(
+            hours=1, minutes=int(entry_delay_minutes)
+        )
         entry_index = time_to_index.get(entry_time)
         if entry_index is None:
             diagnostics["missing_entry"] += 1
@@ -352,6 +355,7 @@ def simulate_short(
                 "side": "SHORT",
                 "signal_time_utc": signal_time,
                 "entry_time_utc": entry_time,
+                "entry_delay_minutes": int(entry_delay_minutes),
                 "exit_time_utc": exit_time,
                 "entry": entry,
                 "stop": stop,

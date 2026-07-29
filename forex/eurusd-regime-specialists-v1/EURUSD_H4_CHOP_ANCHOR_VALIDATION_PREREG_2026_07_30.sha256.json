@@ -1,0 +1,14 @@
+{
+  "campaign_id": "eurusd-h4-chop-anchor-validation-v1",
+  "frozen_before_validation_execution": true,
+  "strategy_parameters_must_remain_unchanged": true,
+  "files": {
+    "EURUSD_H4_CHOP_ANCHOR_VALIDATION_PREREG_2026_07_30.md": "fcf43f50374ea9b2e1899b34ad24bd9bc0aae0213d69f5bf8d1d8fe7ba6957c6",
+    "config/frozen_h4_chop_anchor_validation_v1.json": "5e1fed7d8b4c1dad6acf7416041bd1f809c750feb35c839fb7f628e850108d34",
+    "run_h4_chop_anchor_validation.py": "b2f4803ffa0599da65064af273c7c6b004d49c04a20a8a7978d815ef1a58e5de",
+    "src/eurusd_regime_specialists/h4_chop_anchor_validation.py": "2b5b46cc5e22ee1d4414b1201964a063547622b2e1eb0e217a67950e0cc94a00",
+    "src/eurusd_regime_specialists/neutral_h4_quiet_state_transfer.py": "7e54a19b5fbee92d16247f4e215fbf95d58b22123a5f803d894786eccae457c4",
+    "tests/test_h4_chop_anchor_validation.py": "26700a214a52dcb63249f1424f68cd40d9071d3950e82d0cfe061d166f16faf0"
+  },
+  "status": "FROZEN_BEFORE_VALIDATION_OUTCOME"
+}

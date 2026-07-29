@@ -1,0 +1,65 @@
+{
+  "schema_version": "eurusd_h4_chop_anchor_validation_v1",
+  "frozen_at_utc": "2026-07-30T00:00:00Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "reason_not_pristine": "The anchor and all archived EURUSD outcomes were already inspected. This validates causal replay, execution robustness, stability, and sampling uncertainty; it is not a fresh holdout.",
+  "anchor": {
+    "specialist_id": "H4_CHOP_ASIA_LONDON_SHORT_CONTROL",
+    "config_path": "config/frozen_neutral_h4_quiet_state_transfer_v1.json",
+    "config_sha256": "fc9fea2f8b4fd026e58126cf3b53ce901d05760c39882f19c5cb5e9b837beca2",
+    "prior_ledger_path": "outputs/neutral_h4_quiet_state_transfer/TRADES.csv",
+    "prior_ledger_sha256": "db8f8efd9f0542005a0ff24fafaf4979a784cad3d6820370d052f59aeebe0450",
+    "parameters_must_remain_unchanged": true
+  },
+  "evaluation_window": [
+    "2017-01-01T00:00:00Z",
+    "2026-07-01T00:00:00Z"
+  ],
+  "chronological_blocks": {
+    "EARLY_2017_2019": ["2017-01-01T00:00:00Z", "2020-01-01T00:00:00Z"],
+    "MIDDLE_2020_2022H1": ["2020-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "LATE_2022H2_2024H1": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "RECENT_2024H2_2026H1": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_AUDIT": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "stress_scenarios": {
+    "extra_round_trip_cost_pips": [0.5, 1.0],
+    "entry_delay_minutes": [5, 15],
+    "rollover_charge_pips_per_utc_21_crossing": 0.5
+  },
+  "rolling_trade_windows": [50, 100, 150],
+  "bootstrap": {
+    "method": "CIRCULAR_MOVING_BLOCK",
+    "block_trades": 5,
+    "samples": 20000,
+    "seed": 20260730,
+    "lower_quantile": 0.05
+  },
+  "historical_validation_gates": {
+    "minimum_full_trades": 300,
+    "minimum_full_profit_factor": 1.15,
+    "minimum_extra_0p5pip_profit_factor": 1.10,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.15,
+    "minimum_latest_12_month_net_r_exclusive": 0.0,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_r": 15.0,
+    "minimum_positive_active_month_share": 0.50,
+    "minimum_5m_delay_profit_factor": 1.0,
+    "minimum_15m_delay_profit_factor": 1.0,
+    "minimum_extra_1p0pip_profit_factor": 1.0,
+    "minimum_rollover_stress_profit_factor": 1.0,
+    "minimum_bootstrap_base_pf_5pct_exclusive": 1.0,
+    "minimum_bootstrap_base_mean_r_5pct_exclusive": 0.0,
+    "maximum_bootstrap_probability_pf_lte_1": 0.05
+  },
+  "interpretation": {
+    "win_rate_or_payoff_shape_is_not_a_gate": true,
+    "historical_pass_can_authorize_demo": false,
+    "separate_prospective_confirmation_required": true,
+    "broker_action_allowed": false
+  }
+}
