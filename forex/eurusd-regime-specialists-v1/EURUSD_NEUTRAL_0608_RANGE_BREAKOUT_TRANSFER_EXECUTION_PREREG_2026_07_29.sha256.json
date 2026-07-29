@@ -1,0 +1,21 @@
+{
+  "broker_action_allowed": false,
+  "family": "N48_NEUTRAL_0608_UTC_RANGE_BREAKOUT_TRANSFER_FRESH_V1_1",
+  "files": {
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_EXECUTION_PREREG_2026_07_29.md": "d1093d54fc4297b5bc0f89ae634f3d09f217e92e5094e2cc1aeaa67ea67506b1",
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_V1_1_CENSUS_RESULT_2026_07_29.sha256.json": "c41faa2d198da5456f3ac7696fc88534bc48bfdae0fbca3f3fdc079cb98eef50",
+    "config/frozen_neutral_0608_range_breakout_transfer_execution.json": "2df567f05994fdd80f61a5d4f95e3b79f8c0439d99213f6c120d6b764a2a6e3a",
+    "outputs/neutral_0608_range_breakout_transfer_v1_1/CANDIDATES.csv": "4d300cc8ed85e1a0cd6f1dc288ca7b586a540b238a07f8b2d91f89ce9e94f73b",
+    "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230",
+    "run_neutral_0608_range_breakout_transfer_execution.py": "b41dd842fc9c0c8327e5b0c2c17be8360fd6b4d9351544f2017aab45a70dd53c",
+    "src/eurusd_regime_specialists/neutral_0608_range_breakout_transfer_execution.py": "0f9f7d782737696dca583e35b53a6b8a7b349e80a20f1079aee6d2e126bab617",
+    "tests/test_neutral_0608_range_breakout_transfer_execution.py": "2d4d275bc6e22e0b72077200c16581053277005aa78d640374363423b95e8464"
+  },
+  "frozen_at_utc": "2026-07-29T09:19:17.4517833Z",
+  "frozen_before_forward_price_path": true,
+  "frozen_before_pnl": true,
+  "oracle_decision_use_allowed": false,
+  "status": "FROZEN_BEFORE_FIRST_EXECUTION_OUTCOME"
+}

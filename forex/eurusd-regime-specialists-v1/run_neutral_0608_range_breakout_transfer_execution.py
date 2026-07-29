@@ -1,0 +1,26 @@
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT / "src"))
+
+from eurusd_regime_specialists.neutral_0608_range_breakout_transfer_execution import (  # noqa: E402
+    _safe,
+    run_execution,
+    write_result,
+)
+
+
+def main() -> int:
+    result, artifacts = run_execution()
+    write_result(result, artifacts)
+    print(json.dumps(_safe(result), indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
