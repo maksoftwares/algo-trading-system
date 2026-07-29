@@ -71,9 +71,14 @@ def aggregate_resolution_bars(
     bars["available_time"] = bars["timestamp"] + pd.Timedelta(
         minutes=resolution_minutes
     )
+    bars["timestamp"] = bars["timestamp"].astype("datetime64[ns, UTC]")
+    bars["available_time"] = bars["available_time"].astype("datetime64[ns, UTC]")
 
     atr_source = h1[["timestamp", "atr"]].copy()
     atr_source["atr_available_time"] = atr_source["timestamp"] + pd.Timedelta(hours=1)
+    atr_source["atr_available_time"] = atr_source["atr_available_time"].astype(
+        "datetime64[ns, UTC]"
+    )
     bars = pd.merge_asof(
         bars.sort_values("available_time"),
         atr_source[["atr_available_time", "atr"]].sort_values("atr_available_time"),
@@ -85,6 +90,9 @@ def aggregate_resolution_bars(
     regime_source["regime_available_time"] = regime_source["timestamp"] + pd.Timedelta(
         hours=4
     )
+    regime_source["regime_available_time"] = regime_source[
+        "regime_available_time"
+    ].astype("datetime64[ns, UTC]")
     bars = pd.merge_asof(
         bars.sort_values("timestamp"),
         regime_source[["regime_available_time", "regime"]].sort_values(
