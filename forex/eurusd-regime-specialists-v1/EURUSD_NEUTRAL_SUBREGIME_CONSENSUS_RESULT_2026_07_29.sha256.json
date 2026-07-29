@@ -1,0 +1,14 @@
+{
+  "schema_version": "eurusd_neutral_subregime_consensus_result_lock_v1",
+  "result_outcomes_known": true,
+  "status": "REJECTED_NEUTRAL_SUBREGIME_CONSENSUS",
+  "frozen_config_sha256": "366257c159778385633c45bd3862ae0160489efa3251da32b494e5530de6ff9c",
+  "implementation_sha256": "0297b215f21def19db8fbcd8730268724b8f88886e498424fa3217a33a37a1f1",
+  "outputs": {
+    "outputs/neutral_subregime_consensus/RESULT.json": "abb869ceaef57b3aa19668134070970a21843a6d53396bc16473c5015b1dbc8b",
+    "outputs/neutral_subregime_consensus/CONSENSUS_SELECTIONS.csv": "e75ead4685cd40cd00e8eb9be279985c2a54049a59289588ec82174e6de64192",
+    "outputs/neutral_subregime_consensus/TRADES.csv": "ec7b6bcd2a29cfa65d68fd1da2e13138adce78efb9c0f449345133bbed3523cb",
+    "outputs/neutral_subregime_consensus/MONTHLY_ADMISSIONS.csv": "4b4e8df62a937929cadab1ec320d2a66ac1efc6a6222420ec5b74920d593f1cd",
+    "outputs/neutral_subregime_consensus/MONTHLY_SUBREGIMES.csv": "4ea46a21e552e4bf3b867295b9782fd74b3dd663488feb3c467ab6cb2fba62b0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_neutral_validated_consensus_prereg_lock_v1",
+  "locked_before_first_validated_consensus_outcome": true,
+  "adaptive_successor_after_consensus_failure": true,
+  "config": {
+    "path": "config/frozen_neutral_validated_consensus_v1.json",
+    "sha256": "95cdd2ce02ad44dd838a0b4809e42b69285d0ca3ba8aefe786ce02a11115447f"
+  },
+  "implementation": {
+    "path": "src/eurusd_regime_specialists/neutral_validated_consensus.py",
+    "sha256": "bba95f21624722989fa103634123e712c24a7c6a4f052483ce2879fb635c3c0b"
+  },
+  "runner": {
+    "path": "run_neutral_validated_consensus.py",
+    "sha256": "7fa1601ecf6f0514e3693df33fca9d3297c122225c5922d4b91ed11273ded59f"
+  },
+  "tests": {
+    "path": "tests/test_neutral_validated_consensus.py",
+    "sha256": "97f93dd99c6206640da847b2faebf59f41a8551419abb6b2ed1bfbf25562b0c4"
+  },
+  "side_candidate_source_sha256": "9718d958e3546599888eb0741f3ed3b3213c05e93932718cb2a57d19a1422ae2"
+}

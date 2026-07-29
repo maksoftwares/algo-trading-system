@@ -1,0 +1,15 @@
+{
+  "schema_version": "eurusd_neutral_validated_consensus_result_lock_v1",
+  "result_outcomes_known": true,
+  "status": "REJECTED_NEUTRAL_VALIDATED_CONSENSUS",
+  "frozen_config_sha256": "95cdd2ce02ad44dd838a0b4809e42b69285d0ca3ba8aefe786ce02a11115447f",
+  "implementation_sha256": "bba95f21624722989fa103634123e712c24a7c6a4f052483ce2879fb635c3c0b",
+  "outputs": {
+    "outputs/neutral_validated_consensus/RESULT.json": "fda2ae8756b8e3b35233d142af58d813064118936460591c9e123636cd840042",
+    "outputs/neutral_validated_consensus/VALIDATED_SELECTIONS.csv": "874a0e9a0cb86179c7047c566fafe62c05df6932e7a11ecf6921b64b0193282c",
+    "outputs/neutral_validated_consensus/TRADES.csv": "d8cca6b35a2f976e6b778c18a797aae3e456e9606d9feb2a8cf22a6d7899e6b2",
+    "outputs/neutral_validated_consensus/MONTHLY_INDIVIDUAL_ADMISSIONS.csv": "4b4e8df62a937929cadab1ec320d2a66ac1efc6a6222420ec5b74920d593f1cd",
+    "outputs/neutral_validated_consensus/MONTHLY_COMPOSITE_ADMISSIONS.csv": "4a7b018f9c6cf8abcbd0648980d8523fc13fc211daa292515dbba0db13671fed",
+    "outputs/neutral_validated_consensus/MONTHLY_SUBREGIMES.csv": "452457d40ebcbbf97a7480c7c241aae90678fd600f56a021573e9b1355b3e0b0"
+  }
+}

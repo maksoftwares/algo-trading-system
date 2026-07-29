@@ -1,0 +1,150 @@
+{
+  "schema_version": "eurusd_neutral_subregime_experts_v1",
+  "frozen_at_utc": "2026-07-29T13:42:02.2212627Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "reason_not_pristine": "The fixed side-outcome ledger comes from archived EURUSD history already inspected by the wider campaign. The replay is strictly past-only but cannot be represented as pristine untouched evidence.",
+  "source": {
+    "path": "outputs/neutral_h4_walkforward/SIDE_CANDIDATES.csv",
+    "sha256": "9718d958e3546599888eb0741f3ed3b3213c05e93932718cb2a57d19a1422ae2",
+    "expected_rows": 14300,
+    "geometry": "Exact M5 bid/ask; 0.75 H4 ATR stop; 1.50R target; 12 available H4 bars; 0.7-pip minimum spread; 0.1-pip adverse slippage per side; stop first; 0.5-pip additional stress.",
+    "ownership": "Only causal H4 chop and compression decisions from the frozen Regime 1 classifier."
+  },
+  "model": {
+    "evaluation_start_utc": "2020-01-01T00:00:00Z",
+    "evaluation_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "trailing_training_years": 3,
+    "minimum_training_signals": 500,
+    "subregime_count": 6,
+    "kmeans_n_init": 20,
+    "random_state": 20260729,
+    "cluster_features": [
+      "range_atr",
+      "atr_ratio_126",
+      "efficiency_24",
+      "side_return_6_atr",
+      "side_return_24_atr",
+      "side_prior24_location",
+      "side_macro_pressure_clipped"
+    ],
+    "clustering_rule": "Fit StandardScaler and KMeans only on the trailing three-year Neutral signals whose long and short paths both closed before the monthly boundary. Rank cluster labels deterministically by standardized centroid tuple.",
+    "selection_rule": "At most one admitted expert per subregime and month, ranked by training stressed PF, then worst-half PF, then trade count. No admitted expert means cash."
+  },
+  "experts": [
+    {
+      "expert_id": "H4_ONE_BAR_FADE",
+      "feature": "side_return_1_atr",
+      "absolute_threshold": 0.35,
+      "positive_direction": "SHORT",
+      "economic_role": "Fade a completed one-bar displacement inside a quiet state."
+    },
+    {
+      "expert_id": "H4_THREE_BAR_FADE",
+      "feature": "side_return_3_atr",
+      "absolute_threshold": 0.60,
+      "positive_direction": "SHORT",
+      "economic_role": "Fade a completed three-bar displacement inside a quiet state."
+    },
+    {
+      "expert_id": "H4_THREE_BAR_FOLLOW",
+      "feature": "side_return_3_atr",
+      "absolute_threshold": 0.60,
+      "positive_direction": "LONG",
+      "economic_role": "Follow a completed three-bar displacement when the subregime behaves directionally."
+    },
+    {
+      "expert_id": "H4_SIX_BAR_FOLLOW",
+      "feature": "side_return_6_atr",
+      "absolute_threshold": 0.90,
+      "positive_direction": "LONG",
+      "economic_role": "Follow a broader completed six-bar directional move."
+    },
+    {
+      "expert_id": "H4_PRIOR24_EXTREME_FADE",
+      "feature": "side_prior24_location",
+      "absolute_threshold": 0.70,
+      "positive_direction": "SHORT",
+      "economic_role": "Fade a close in the outer 15% of the prior-24-bar range."
+    },
+    {
+      "expert_id": "H4_PRIOR24_EXTREME_FOLLOW",
+      "feature": "side_prior24_location",
+      "absolute_threshold": 0.95,
+      "positive_direction": "LONG",
+      "economic_role": "Follow only a close at the extreme edge of the prior-24-bar range."
+    },
+    {
+      "expert_id": "H4_BODY_FADE",
+      "feature": "side_body_atr",
+      "absolute_threshold": 0.35,
+      "positive_direction": "SHORT",
+      "economic_role": "Fade an unusually directional completed H4 candle."
+    },
+    {
+      "expert_id": "H4_BODY_FOLLOW",
+      "feature": "side_body_atr",
+      "absolute_threshold": 0.35,
+      "positive_direction": "LONG",
+      "economic_role": "Follow an unusually directional completed H4 candle."
+    },
+    {
+      "expert_id": "H4_MACRO_PRESSURE_FOLLOW",
+      "feature": "side_macro_pressure_clipped",
+      "absolute_threshold": 1.50,
+      "positive_direction": "SHORT",
+      "economic_role": "Follow positive U.S. real-yield and broad-dollar pressure as EURUSD bearish, and inverse pressure as bullish."
+    },
+    {
+      "expert_id": "H4_MACRO_PRESSURE_FADE",
+      "feature": "side_macro_pressure_clipped",
+      "absolute_threshold": 1.50,
+      "positive_direction": "LONG",
+      "economic_role": "Fade an extreme completed U.S. real-yield and broad-dollar pressure state."
+    }
+  ],
+  "admission_gates": {
+    "minimum_training_trades": 24,
+    "minimum_each_half_trades": 8,
+    "minimum_training_profit_factor": 1.15,
+    "minimum_training_stress_profit_factor": 1.05,
+    "minimum_each_half_profit_factor_exclusive": 1.0,
+    "minimum_training_net_r_exclusive": 0.0
+  },
+  "reporting_windows": {
+    "OOS_2020_2021": ["2020-01-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+    "OOS_2022_2023": ["2022-01-01T00:00:00Z", "2024-01-01T00:00:00Z"],
+    "OOS_2024_2025": ["2024-01-01T00:00:00Z", "2026-01-01T00:00:00Z"],
+    "OOS_2026_H1": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_WALKFORWARD": ["2020-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "historical_quality_gates": {
+    "minimum_trades": 60,
+    "minimum_win_rate_inclusive": 0.45,
+    "maximum_win_rate_inclusive": 0.55,
+    "minimum_payoff_inclusive": 1.35,
+    "maximum_payoff_inclusive": 1.75,
+    "minimum_profit_factor": 1.30,
+    "minimum_stressed_profit_factor": 1.15,
+    "minimum_each_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.15,
+    "minimum_latest_12_month_net_r_exclusive": 0.0,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_each_direction_trades": 10,
+    "minimum_each_direction_profit_factor": 0.90,
+    "maximum_single_expert_trade_share": 0.60,
+    "maximum_single_subregime_trade_share": 0.60
+  },
+  "integrity": {
+    "monthly_fit_may_read_only_prior_closed_outcomes": true,
+    "score_month_direction_is_determined_before_score_outcome_is_used": true,
+    "one_open_position": true,
+    "no_expert_cluster_direction_year_or_threshold_selection_after_result": true,
+    "historical_pass_can_authorize_demo": false,
+    "broker_action_allowed": false
+  }
+}

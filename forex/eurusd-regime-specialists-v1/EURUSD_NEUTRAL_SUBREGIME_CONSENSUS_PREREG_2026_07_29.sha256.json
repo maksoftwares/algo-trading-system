@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_neutral_subregime_consensus_prereg_lock_v1",
+  "locked_before_first_consensus_outcome_run": true,
+  "adaptive_successor_after_parent_failure": true,
+  "config": {
+    "path": "config/frozen_neutral_subregime_consensus_v1.json",
+    "sha256": "366257c159778385633c45bd3862ae0160489efa3251da32b494e5530de6ff9c"
+  },
+  "implementation": {
+    "path": "src/eurusd_regime_specialists/neutral_subregime_consensus.py",
+    "sha256": "0297b215f21def19db8fbcd8730268724b8f88886e498424fa3217a33a37a1f1"
+  },
+  "runner": {
+    "path": "run_neutral_subregime_consensus.py",
+    "sha256": "1017a09ccc1c7b61b97af1337f60a1f69cfb4e06eb58cf5dbc042e3a8ebb0d77"
+  },
+  "tests": {
+    "path": "tests/test_neutral_subregime_consensus.py",
+    "sha256": "4f4cffadc392ef96b1941d1484349391bb73a35840e345eb466a3270c5f1aadc"
+  },
+  "side_candidate_source_sha256": "9718d958e3546599888eb0741f3ed3b3213c05e93932718cb2a57d19a1422ae2"
+}

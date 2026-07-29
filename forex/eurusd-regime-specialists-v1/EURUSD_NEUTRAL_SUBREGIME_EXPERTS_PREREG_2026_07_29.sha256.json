@@ -1,0 +1,27 @@
+{
+  "schema_version": "eurusd_neutral_subregime_experts_prereg_lock_v1",
+  "locked_before_first_combined_outcome_run": true,
+  "config": {
+    "path": "config/frozen_neutral_subregime_experts_v1.json",
+    "sha256": "32c9dae9853731d2a469becc7fc9dd445cd47bfda992998824f5e9fb26d7c391"
+  },
+  "implementation": {
+    "path": "src/eurusd_regime_specialists/neutral_subregime_experts.py",
+    "sha256_before_mechanical_amendment_1": "b00403d67bcb8da03fc9dd304e222db814f69bee50c13a5bc448277b86b86ca7",
+    "sha256": "7bd7fae12954b08433f434fc13ab2c6db7bc24294b6a819f224c20cdc509535f"
+  },
+  "runner": {
+    "path": "run_neutral_subregime_experts.py",
+    "sha256": "1731c21910ee4ccca43cc7415c24650f1156ba52bd7db0272c1c3e01061a2a54"
+  },
+  "tests": {
+    "path": "tests/test_neutral_subregime_experts.py",
+    "sha256_before_mechanical_amendment_1": "0987e31724c532db590acdb121a59fbf7b7fd66111409ae23ff1715fb410b907",
+    "sha256": "18cad80e3c560aa68cabdd639230e7ae33e9cd50b6ee23671a9a6ad2f950dde7"
+  },
+  "side_candidate_source": {
+    "path": "outputs/neutral_h4_walkforward/SIDE_CANDIDATES.csv",
+    "sha256": "9718d958e3546599888eb0741f3ed3b3213c05e93932718cb2a57d19a1422ae2",
+    "rows": 14300
+  }
+}

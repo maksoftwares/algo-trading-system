@@ -1,0 +1,153 @@
+{
+  "schema_version": "eurusd_neutral_subregime_consensus_v1",
+  "frozen_at_utc": "2026-07-29T13:51:50.5286995Z",
+  "research_only": true,
+  "adaptive_successor_after_parent_failure": true,
+  "adaptation_disclosure": "The parent single-best-expert allocator returned PF 0.975 and showed weak transfer. This successor removes winner selection and requires agreement across at least two independently admitted mechanism groups, with an opposite-side veto. No parent expert, side, subregime, year, or favorable result slice was selected.",
+  "retrospective_causal_not_pristine_oos": true,
+  "source": {
+    "path": "outputs/neutral_h4_walkforward/SIDE_CANDIDATES.csv",
+    "sha256": "9718d958e3546599888eb0741f3ed3b3213c05e93932718cb2a57d19a1422ae2",
+    "expected_rows": 14300,
+    "geometry": "Exact M5 bid/ask; 0.75 H4 ATR stop; 1.50R target; 12 available H4 bars; 0.7-pip minimum spread; 0.1-pip adverse slippage per side; stop first; 0.5-pip additional stress.",
+    "ownership": "Only causal H4 chop and compression decisions from the frozen Regime 1 classifier."
+  },
+  "model": {
+    "evaluation_start_utc": "2020-01-01T00:00:00Z",
+    "evaluation_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "trailing_training_years": 3,
+    "minimum_training_signals": 500,
+    "subregime_count": 6,
+    "kmeans_n_init": 20,
+    "random_state": 20260729,
+    "minimum_agreeing_experts": 2,
+    "minimum_agreeing_mechanism_groups": 2,
+    "opposite_side_veto": true,
+    "cluster_features": [
+      "range_atr",
+      "atr_ratio_126",
+      "efficiency_24",
+      "side_return_6_atr",
+      "side_return_24_atr",
+      "side_prior24_location",
+      "side_macro_pressure_clipped"
+    ],
+    "selection_rule": "Every admitted expert may vote at the score clock. Trade only if at least two triggered experts from at least two mechanism groups agree and zero admitted triggered experts vote the opposite side."
+  },
+  "experts": [
+    {
+      "expert_id": "H4_ONE_BAR_FADE",
+      "mechanism_group": "price_reversion",
+      "feature": "side_return_1_atr",
+      "absolute_threshold": 0.35,
+      "positive_direction": "SHORT"
+    },
+    {
+      "expert_id": "H4_THREE_BAR_FADE",
+      "mechanism_group": "price_reversion",
+      "feature": "side_return_3_atr",
+      "absolute_threshold": 0.60,
+      "positive_direction": "SHORT"
+    },
+    {
+      "expert_id": "H4_THREE_BAR_FOLLOW",
+      "mechanism_group": "price_momentum",
+      "feature": "side_return_3_atr",
+      "absolute_threshold": 0.60,
+      "positive_direction": "LONG"
+    },
+    {
+      "expert_id": "H4_SIX_BAR_FOLLOW",
+      "mechanism_group": "price_momentum",
+      "feature": "side_return_6_atr",
+      "absolute_threshold": 0.90,
+      "positive_direction": "LONG"
+    },
+    {
+      "expert_id": "H4_PRIOR24_EXTREME_FADE",
+      "mechanism_group": "range_reversion",
+      "feature": "side_prior24_location",
+      "absolute_threshold": 0.70,
+      "positive_direction": "SHORT"
+    },
+    {
+      "expert_id": "H4_PRIOR24_EXTREME_FOLLOW",
+      "mechanism_group": "range_breakout",
+      "feature": "side_prior24_location",
+      "absolute_threshold": 0.95,
+      "positive_direction": "LONG"
+    },
+    {
+      "expert_id": "H4_BODY_FADE",
+      "mechanism_group": "price_reversion",
+      "feature": "side_body_atr",
+      "absolute_threshold": 0.35,
+      "positive_direction": "SHORT"
+    },
+    {
+      "expert_id": "H4_BODY_FOLLOW",
+      "mechanism_group": "price_momentum",
+      "feature": "side_body_atr",
+      "absolute_threshold": 0.35,
+      "positive_direction": "LONG"
+    },
+    {
+      "expert_id": "H4_MACRO_PRESSURE_FOLLOW",
+      "mechanism_group": "macro_follow",
+      "feature": "side_macro_pressure_clipped",
+      "absolute_threshold": 1.50,
+      "positive_direction": "SHORT"
+    },
+    {
+      "expert_id": "H4_MACRO_PRESSURE_FADE",
+      "mechanism_group": "macro_reversion",
+      "feature": "side_macro_pressure_clipped",
+      "absolute_threshold": 1.50,
+      "positive_direction": "LONG"
+    }
+  ],
+  "admission_gates": {
+    "minimum_training_trades": 24,
+    "minimum_each_half_trades": 8,
+    "minimum_training_profit_factor": 1.15,
+    "minimum_training_stress_profit_factor": 1.05,
+    "minimum_each_half_profit_factor_exclusive": 1.0,
+    "minimum_training_net_r_exclusive": 0.0
+  },
+  "reporting_windows": {
+    "OOS_2020_2021": ["2020-01-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+    "OOS_2022_2023": ["2022-01-01T00:00:00Z", "2024-01-01T00:00:00Z"],
+    "OOS_2024_2025": ["2024-01-01T00:00:00Z", "2026-01-01T00:00:00Z"],
+    "OOS_2026_H1": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_WALKFORWARD": ["2020-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "historical_quality_gates": {
+    "minimum_trades": 60,
+    "minimum_win_rate_inclusive": 0.45,
+    "maximum_win_rate_inclusive": 0.55,
+    "minimum_payoff_inclusive": 1.35,
+    "maximum_payoff_inclusive": 1.75,
+    "minimum_profit_factor": 1.30,
+    "minimum_stressed_profit_factor": 1.15,
+    "minimum_each_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.15,
+    "minimum_latest_12_month_net_r_exclusive": 0.0,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_each_direction_trades": 10,
+    "minimum_each_direction_profit_factor": 0.90,
+    "maximum_single_subregime_trade_share": 0.60,
+    "maximum_single_consensus_signature_trade_share": 0.60
+  },
+  "integrity": {
+    "monthly_fit_may_read_only_prior_closed_outcomes": true,
+    "score_month_votes_are_determined_before_score_outcome_is_used": true,
+    "one_open_position": true,
+    "no_vote_expert_group_cluster_direction_year_or_threshold_selection_after_result": true,
+    "historical_pass_can_authorize_demo": false,
+    "broker_action_allowed": false
+  }
+}
