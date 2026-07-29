@@ -67,6 +67,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 61. Prospective SWFX sentiment source census: before its `2026-07-29T06:30:00Z` start, a source-only half-hourly UTC-weekday capture was locked. It preserves immutable raw JSONP, headers, local observation clocks, hashes, and the exact EUR/USD row while loading no EURUSD price, return, oracle, outcome, or P&L. The source cannot qualify before 27 calendar days, 20 weekdays, 800 valid captures, the frozen coverage/variation gates, and three official-widget or JForex semantic comparisons. Passing would permit only a separately preregistered prospective strategy; this census cannot generate a signal or trade.
 62. GDELT daily operations restart: the missed `2026-07-29` boundary was recorded honestly as `CASH_MISSING_ON_TIME_SOURCE`, with no late backfill or trade. A hash-locked operations-only helper now schedules the unchanged source, ownership, decision, delayed path, and validator functions beginning with the `2026-07-30` entry date. It cannot change strategy logic or authorize broker action, and it skips source or ownership acquisition after the frozen decision deadline.
 63. SWFX semantics audit: the official Dukascopy page verifies that consumer sentiment is based on long/short open-position shares, that the index is the long-share-minus-short-share percentage-point difference, and that it updates every 30 minutes. The exact public JSONP `*_long`/`*_short` field binding remains unproven because the embedded instrument rows failed to load in both browser surfaces. This observation therefore counts as zero of the three frozen visible-value comparisons and does not authorize a strategy mapping.
+64. Independent SWFX source validation: before the first prospective capture, a separately hash-locked, network-free validator was frozen. It replays each EUR/USD row from immutable raw JSONP, independently verifies clocks, hashes, antipodal fields, normalized values, source-only boundaries, missing slots, failures, and every census gate. The collector can no longer certify its own output, and source admission still permits only a later separately preregistered strategy design.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -96,6 +97,7 @@ Key reports:
 - `EURUSD_NEUTRAL_PROSPECTIVE_SWFX_SENTIMENT_SOURCE_CENSUS_PREREG_2026_07_29.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_SWFX_SENTIMENT_SOURCE_CENSUS_STATE_2026_07_29.json`
 - `EURUSD_NEUTRAL_DUKASCOPY_SWFX_SENTIMENT_SEMANTICS_AUDIT_2026_07_29.md`
+- `EURUSD_NEUTRAL_PROSPECTIVE_SWFX_SENTIMENT_VALIDATION_PREREG_2026_07_29.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_FUTURES_PARTICIPATION_PREREG_2026_07_28.md`
@@ -303,4 +305,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python validate_prospective_neutral_gdelt_relative_tone.py status
 uv run python capture_prospective_neutral_swfx_sentiment_source.py status
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_prospective_neutral_gdelt_daily_operations.py
+uv run python validate_prospective_neutral_swfx_sentiment_source.py status
 ```

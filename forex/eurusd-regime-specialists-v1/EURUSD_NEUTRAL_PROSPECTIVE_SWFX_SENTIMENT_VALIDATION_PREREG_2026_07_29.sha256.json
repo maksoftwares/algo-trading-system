@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_neutral_prospective_swfx_validation_preregistration_lock_v1",
+  "locked_at_utc": "2026-07-29T05:37:29.3909355Z",
+  "prospective_start_utc": "2026-07-29T06:30:00Z",
+  "first_scheduled_capture_utc": "2026-07-29T06:32:00Z",
+  "locked_before_first_census_capture": true,
+  "source_only_no_strategy": true,
+  "files": {
+    "EURUSD_NEUTRAL_PROSPECTIVE_SWFX_SENTIMENT_VALIDATION_PREREG_2026_07_29.md": "b6b6e75906caa708acc0ab15f495dd2813be3205aae2f1af45d6e90a703a82ad",
+    "config/frozen_prospective_neutral_swfx_sentiment_source_census_v1.json": "71b47dac5e67cc453863ed9b9e0b20eadb223a8aeebdf49909e448020b41bd12"
+  },
+  "capture_contracts": [
+    {
+      "path": "EURUSD_NEUTRAL_PROSPECTIVE_SWFX_SENTIMENT_SOURCE_CENSUS_PREREG_2026_07_29.sha256.json",
+      "sha256": "60096f2b87977de00513755d20629e31ab03de554957b61fe43bc31a85013252"
+    },
+    {
+      "path": "EURUSD_NEUTRAL_PROSPECTIVE_SWFX_SENTIMENT_SOURCE_CENSUS_IMPLEMENTATION_2026_07_29.sha256.json",
+      "sha256": "d5157c34f7dda2a5a224cd34e02ee9f5de2d9be2560bfa624f7e637b34b090c1"
+    }
+  ]
+}

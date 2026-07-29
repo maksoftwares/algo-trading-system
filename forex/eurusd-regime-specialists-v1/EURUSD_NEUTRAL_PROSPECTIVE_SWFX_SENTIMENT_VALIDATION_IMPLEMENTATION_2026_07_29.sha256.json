@@ -1,0 +1,17 @@
+{
+  "schema_version": "eurusd_neutral_prospective_swfx_validation_implementation_lock_v1",
+  "locked_at_utc": "2026-07-29T05:37:43.3333279Z",
+  "prospective_start_utc": "2026-07-29T06:30:00Z",
+  "first_scheduled_capture_utc": "2026-07-29T06:32:00Z",
+  "locked_before_first_census_capture": true,
+  "network_request_allowed": false,
+  "broker_action_allowed": false,
+  "validation_preregistration": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_SWFX_SENTIMENT_VALIDATION_PREREG_2026_07_29.sha256.json",
+    "sha256": "8983a8cea540da5cc3de75bfb22a9d1d166e7328b4f788c2677ef1d4b9880f43"
+  },
+  "files": {
+    "validate_prospective_neutral_swfx_sentiment_source.py": "1dadd3b64b7053ac3c101dde6bd5e593fe282c6c9d65ec1e4bdfb258bcf734f8",
+    "tests/test_validate_prospective_neutral_swfx_sentiment_source.py": "a036d0bf880cf93bc03c446043aee4175fcd3345993d1e3d47b1f53b16cc8a49"
+  }
+}
