@@ -1,0 +1,132 @@
+{
+  "schema_version": "eurusd_neutral_online_expert_aggregation_v1",
+  "frozen_at_utc": "2026-07-29T07:06:11.5024493Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "reason_not_pristine": "Individual component summaries were inspected before this meta-policy was designed; combined chronological outcomes were not.",
+  "evaluation_start_utc": "2023-01-01T00:00:00Z",
+  "evaluation_end_utc": "2026-06-30T23:59:59Z",
+  "experts": [
+    {
+      "expert_id": "CONSENSUS_EVENT_CONFIRMATION",
+      "mechanism": "POINT_IN_TIME_MACRO_CONSENSUS_AND_PRICE_CONFIRMATION",
+      "path": "outputs/neutral_consensus_event_confirmation/TRADES.csv",
+      "sha256": "ddf4e7b8b09fec9bdea5ee0f8e68e9a9e2782bd073808dcd0dd44d1a94417c90"
+    },
+    {
+      "expert_id": "FIVE_SESSION_REVERSAL",
+      "mechanism": "MULTI_SESSION_PRICE_MEAN_REVERSION",
+      "path": "outputs/neutral_five_session_reversal/TRADES.csv",
+      "sha256": "6a2b7df207ee8c030470fef22847ae05294cef230b0db5902ea112bb5adb24fc"
+    },
+    {
+      "expert_id": "FUTURES_PARTICIPATION",
+      "mechanism": "LISTED_FUTURES_AND_DOLLAR_ETF_PARTICIPATION",
+      "path": "outputs/neutral_futures_participation/TRADES.csv",
+      "sha256": "b8c0b01501866fd43007325dc52833aac69d81adaf8d4f587bf819992f1a36ca"
+    },
+    {
+      "expert_id": "OCC_FXE_FLOW",
+      "mechanism": "OFFICIAL_CUSTOMER_OPTIONS_FLOW",
+      "path": "outputs/neutral_occ_fxe_flow/TRADES.csv",
+      "sha256": "ea602294e62af104ea5864f5df0a9af726acff4d811465bf6b1d3adb02e2cb4e"
+    },
+    {
+      "expert_id": "OPENING_DRIVE",
+      "mechanism": "COMPLETED_SESSION_OPENING_DRIVE",
+      "path": "outputs/neutral_opening_drive/TRADES.csv",
+      "sha256": "cdb35564f7407036ef58b0013918243e4c50e124dabf5aff49047c7364fac85c"
+    },
+    {
+      "expert_id": "POST_EVENT_DRIVE",
+      "mechanism": "COMPLETED_POST_EVENT_PRICE_DRIVE",
+      "path": "outputs/neutral_post_event_drive/TRADES.csv",
+      "sha256": "18f2a6b9da7eafe25328851c7da78b775d17498e27bb5772ef3624fdaa124331"
+    },
+    {
+      "expert_id": "PRECIOUS_METALS_CONSENSUS",
+      "mechanism": "XAUUSD_XAGUSD_CROSS_ASSET_CONSENSUS",
+      "path": "outputs/neutral_precious_metals_consensus/TRADES.csv",
+      "sha256": "cf4d551dc62766c6e2cd2ae52736734f3e17ff78fa123c88ec6998592b7d2290"
+    },
+    {
+      "expert_id": "SYMMETRIC_RSI",
+      "mechanism": "PRICE_ONLY_SYMMETRIC_MEAN_REVERSION",
+      "path": "outputs/neutral_symmetric_rsi_1p5r/TRADES.csv",
+      "sha256": "b0c4842abaa91a1a19094dfe27eae471bbe14b42605a3a30726825ef046d8be0"
+    }
+  ],
+  "oracle": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230",
+    "required_regime": "NEUTRAL",
+    "evaluation_only": true,
+    "same_side_tolerance_minutes": 15
+  },
+  "policy": {
+    "primary_half_life_calendar_days": 126,
+    "sensitivity_half_life_calendar_days": [
+      63,
+      252
+    ],
+    "minimum_lifetime_closed_trades": 12,
+    "minimum_effective_closed_trades": 8.0,
+    "minimum_weighted_mean_r_exclusive": 0.0,
+    "outcome_known_rule": "exit_time_utc_strictly_before_candidate_entry_time_utc",
+    "maximum_selected_trades_per_utc_day": 1,
+    "maximum_concurrent_positions": 1,
+    "simultaneous_candidate_tiebreak": [
+      "weighted_mean_r_descending",
+      "effective_closed_trades_descending",
+      "expert_id_ascending",
+      "source_row_ascending"
+    ],
+    "expert_outcome_column": "r",
+    "stress_outcome_column": "extra_half_pip_stress_r",
+    "no_positive_eligible_expert_action": "CASH",
+    "parameter_search_allowed": false,
+    "post_result_expert_deletion_allowed": false,
+    "post_result_half_life_selection_allowed": false
+  },
+  "reporting_windows": {
+    "OOS_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "OOS_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "OOS_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "OOS_2026_H1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ],
+    "LATEST_SIX_MONTHS": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "research_gates": {
+    "minimum_selected_trades": 60,
+    "minimum_win_rate": 0.43,
+    "maximum_win_rate": 0.60,
+    "minimum_realized_payoff_ratio": 1.35,
+    "minimum_profit_factor": 1.15,
+    "minimum_each_full_year_profit_factor_exclusive": 1.0,
+    "minimum_latest_six_month_profit_factor_exclusive": 1.0,
+    "minimum_extra_half_pip_profit_factor_exclusive": 1.0,
+    "minimum_top_5pct_winners_removed_profit_factor_exclusive": 1.0,
+    "minimum_trades_each_side": 10,
+    "maximum_drawdown_r": 20.0,
+    "minimum_same_side_oracle_precision_15m": 0.50
+  },
+  "promotion": {
+    "historical_pass_can_authorize_demo": false,
+    "separate_prospective_preregistration_required": true,
+    "broker_action_allowed": false
+  }
+}

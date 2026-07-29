@@ -1,0 +1,19 @@
+{
+  "schema_version": "eurusd_neutral_online_expert_aggregation_lock_v1",
+  "locked_at_utc": "2026-07-29T07:11:15.1503289Z",
+  "frozen_before_combined_outcome": true,
+  "individual_component_summaries_previously_inspected": true,
+  "combined_outcome_rows_before_lock": 0,
+  "oracle_decision_use_allowed": false,
+  "post_result_expert_deletion_allowed": false,
+  "post_result_half_life_selection_allowed": false,
+  "historical_pass_can_authorize_demo": false,
+  "broker_action_allowed": false,
+  "files": {
+    "config/frozen_neutral_online_expert_aggregation.json": "d74aa394fba74847f3c79812e1a87349ff25cd4fbcc9864ad6a7fa9443073f8d",
+    "EURUSD_NEUTRAL_ONLINE_EXPERT_AGGREGATION_PREREG_2026_07_29.md": "babc3e2ca61b8b070a4c5eb540f72beacd358b288ab24b3773c74ccc17da081a",
+    "src/eurusd_regime_specialists/neutral_online_expert_aggregation.py": "7feaff706b13f367d9b1f7c3741d8aa540b3eee6ff9f4328a2d13ea406b76a88",
+    "run_neutral_online_expert_aggregation.py": "bec40487ff07a14e96fb340bb2e19e4f230b1c69909a577cd25017176d04058b",
+    "tests/test_neutral_online_expert_aggregation.py": "abc511d7f6e314a999308e2560ec5e04e31d66d0ac95e40d97718dd8738351a0"
+  }
+}
