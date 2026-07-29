@@ -1,0 +1,47 @@
+{
+  "schema_version": "eurusd_neutral_rate_differential_capacity_screen_result_lock_v1",
+  "generated_at_utc": "2026-07-29T08:01:12.4106672Z",
+  "status": "CAPACITY_PASS_EXECUTION_FREEZE_ALLOWED",
+  "preregistration_lock": {
+    "path": "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_CAPACITY_LADDER_PREREG_2026_07_29.sha256.json",
+    "sha256": "f9e88710918ec85c9ab99ed42aa56b1a7bbfb566bcb79be6be26312b170ec39a"
+  },
+  "selection": {
+    "threshold_ladder_bps_descending": [
+      5.0,
+      4.0,
+      3.0
+    ],
+    "selected_threshold_bps": 4.0,
+    "selected_candidates": 202,
+    "unique_utc_entry_dates": 202,
+    "duplicate_utc_entry_dates": 0,
+    "candidates_by_window": {
+      "DEVELOPMENT_2019_2022": 92,
+      "OOS_2023": 34,
+      "OOS_2024": 31,
+      "OOS_2025": 37,
+      "OOS_2026_H1": 8
+    },
+    "candidates_by_side": {
+      "LONG": 95,
+      "SHORT": 107
+    },
+    "minimum_absolute_spread_change_bps_observed": 4.01534937312793,
+    "minimum_observation_lag_calendar_days_observed": 2,
+    "all_capacity_gates_passed": true
+  },
+  "boundaries": {
+    "eurusd_prices_loaded": false,
+    "eurusd_returns_loaded": false,
+    "oracle_rows_loaded": false,
+    "pnl_loaded": false,
+    "post_screen_threshold_change_allowed": false,
+    "execution_freeze_allowed": true,
+    "broker_action_allowed": false
+  },
+  "artifacts": {
+    "outputs/neutral_rate_differential_capacity_ladder/SCREEN.json": "d26a45e6e18da7c24ef3d9d42a81a0548f47d54cd98e48f3846a7a60ff026ad4",
+    "outputs/neutral_rate_differential_capacity_ladder/SELECTED_CANDIDATES.csv": "647c2303115bd5d86769e90f459cddb7ecc7c0d80c5580724c3b9819c8763fc0"
+  }
+}

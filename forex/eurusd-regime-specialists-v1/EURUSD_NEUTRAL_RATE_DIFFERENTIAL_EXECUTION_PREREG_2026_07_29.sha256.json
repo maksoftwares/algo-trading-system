@@ -1,0 +1,23 @@
+{
+  "schema_version": "eurusd_neutral_rate_differential_execution_lock_v1",
+  "locked_at_utc": "2026-07-29T08:03:44.7245177Z",
+  "frozen_before_eurusd_price_paths": true,
+  "eurusd_price_rows_loaded_before_lock": 0,
+  "executed_trade_rows_loaded_before_lock": 0,
+  "oracle_rows_loaded_before_lock": 0,
+  "oracle_decision_use_allowed": false,
+  "parameter_search_allowed": false,
+  "threshold_change_after_outcome_allowed": false,
+  "direction_reversal_after_outcome_allowed": false,
+  "side_or_window_deletion_after_outcome_allowed": false,
+  "historical_pass_can_authorize_demo": false,
+  "broker_action_allowed": false,
+  "files": {
+    "config/frozen_neutral_rate_differential_execution.json": "00820fc4d008b72d0ed40728b02473d43ca4296ca450869fad700ba6a0775861",
+    "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_EXECUTION_PREREG_2026_07_29.md": "317561eea61fdc05b3b6f582282f37767bf55dc9a05a9513ec9adc73e3ae6440",
+    "src/eurusd_regime_specialists/neutral_rate_differential_execution.py": "68f96ee89fd4e76e305ff5119be5886ab0717dc931b5240d5b56dc4ad56dbf69",
+    "run_neutral_rate_differential_execution.py": "bbab4e20d2200f9d205dd0fb97c7792492a6eeec6f6812cd6f3f7dd632f5f29c",
+    "tests/test_neutral_rate_differential_execution.py": "10f4f731cbbbffd1b443ed7ad2bcf05c74618d18ff07f369ae88356749434a27",
+    "src/eurusd_regime_specialists/neutral_specialist_agreement_execution.py": "ce5754f3137c4af160e75e06741f48e0141b3c21aaaa9340fa7139d33660deb7"
+  }
+}
