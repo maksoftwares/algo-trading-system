@@ -1,0 +1,25 @@
+{
+  "family": "EURUSD_NEUTRAL_RATES_DOLLAR_MT5_AUDIT_V1",
+  "files": {
+    "EURUSD_NEUTRAL_RATES_DOLLAR_MT5_AUDIT_2026_07_29.md": "8a966c97a759aaf3b534829948587cf484f6ed6fcfe976ed137e4c514b90bacc",
+    "outputs/neutral_rates_dollar_mt5_audit/AUDIT.json": "f9f6153fabebd93d5c87099827418bc5146255f55ce099b43600e28435567733",
+    "outputs/neutral_rates_dollar_mt5_audit/PRIMARY_NEUTRAL_ORACLE_MATCHES_15M.csv": "00176eb9d0058c1325252487bf441380812da093417bb8af9882bae25dcab789",
+    "outputs/neutral_rates_dollar_mt5_audit/TRADES_WITH_CAUSAL_REGIME.csv": "3886c38dbf13cad6d45634f8f935826fa864c01e8a43c6d6068ef61556571cae"
+  },
+  "result_outcomes_known": true,
+  "source_reports": {
+    "PRIMARY_OFFSET_0": {
+      "path": "D:\\AlgoTradingData\\C_DRIVE\\MT5A1M5MomentumBacktest\\Reports\\ForexRatesDollar_2022_2026_RATES_DOLLAR_V1_MT5_EURUSD_H4_offset0.htm",
+      "sha256": "f1ed0f85c8598e790dc0128a30ca00c6b789f386e33f2f8021e3e2688c3d0a2f"
+    },
+    "ROBUSTNESS_OFFSET_2": {
+      "path": "D:\\AlgoTradingData\\C_DRIVE\\MT5A1M5MomentumBacktest\\Reports\\ForexRatesDollar_2022_2026_RATES_DOLLAR_V1_MT5_OFFSET2_EURUSD_H4_offset2.htm",
+      "sha256": "129e62e3fe0e1e815ba1c49d59cf25612284aa7f6acbd93e1fdb438457851db4"
+    },
+    "ROBUSTNESS_OFFSET_3": {
+      "path": "D:\\AlgoTradingData\\C_DRIVE\\MT5A1M5MomentumBacktest\\Reports\\ForexRatesDollar_2022_2026_RATES_DOLLAR_V1_MT5_OFFSET3_EURUSD_H4_offset3.htm",
+      "sha256": "7ba9f23fa7542f3c6e563bdf9b8d6227d089c2f571a773f16c6f1eb22147b35f"
+    }
+  },
+  "status": "REJECTED_RETROSPECTIVE_NEUTRAL_RATES_DOLLAR_MT5"
+}

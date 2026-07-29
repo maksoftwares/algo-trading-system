@@ -184,6 +184,8 @@ Key reports:
 - `EURUSD_NEUTRAL_RATE_DIFFERENTIAL_SOURCE_AUDIT_2026_07_29.md`
 - `EURUSD_NEUTRAL_RATE_DIFFERENTIAL_CENSUS_RESULT_2026_07_29.sha256.json`
 - `EURUSD_NEUTRAL_RATE_DIFFERENTIAL_EXECUTION_RESULT_2026_07_29.sha256.json`
+- `EURUSD_NEUTRAL_RATES_DOLLAR_MT5_AUDIT_2026_07_29.md`
+- `EURUSD_NEUTRAL_RATES_DOLLAR_MT5_AUDIT_RESULT_2026_07_29.sha256.json`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -327,4 +329,5 @@ uv run --offline --with pandas --with numpy python download_neutral_rate_differe
 uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_rate_differential_census.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_rate_differential_capacity_ladder.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_rate_differential_execution.py
+uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_rates_dollar_mt5_audit.py
 ```
