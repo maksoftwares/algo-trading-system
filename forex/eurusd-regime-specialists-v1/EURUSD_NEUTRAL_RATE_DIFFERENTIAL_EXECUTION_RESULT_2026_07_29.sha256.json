@@ -1,0 +1,60 @@
+{
+  "schema_version": "eurusd_neutral_rate_differential_execution_result_lock_v1",
+  "generated_at_utc": "2026-07-29T08:05:29.1686745Z",
+  "status": "REJECTED_EXACT_RATE_DIFFERENTIAL_EXECUTION",
+  "preregistration_lock": {
+    "path": "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_EXECUTION_PREREG_2026_07_29.sha256.json",
+    "sha256": "ed53b6e1f624068ef80db381cf0b40e7fc0e8a368205f521bd263fdec28be703"
+  },
+  "primary_metrics": {
+    "trades": 202,
+    "wins": 61,
+    "losses": 141,
+    "win_rate": 0.30198019801980197,
+    "realized_payoff_ratio": 1.4390243902435256,
+    "profit_factor": 0.6225566510982627,
+    "net_r": -54.55000000002569,
+    "max_drawdown_r": 58.55000000001871,
+    "extra_half_pip_profit_factor": 0.5078630897315884,
+    "extra_half_pip_net_r": -79.80000000002569,
+    "top_5pct_winners_removed_profit_factor": 0.5102923369657892,
+    "top_5pct_winners_removed_net_r": -70.77500000002209,
+    "latest_six_month_trades": 8,
+    "latest_six_month_wins": 0,
+    "latest_six_month_profit_factor": 0.0,
+    "latest_six_month_net_r": -8.20000000000043,
+    "same_side_oracle_precision_15m": 0.48514851485148514,
+    "same_side_oracle_recall_15m": 0.03747609942638623
+  },
+  "chronological_profit_factors": {
+    "development_2019_2022": 0.6624080526517921,
+    "oos_2023": 0.5995934959347943,
+    "oos_2024": 0.5886917960087068,
+    "oos_2025": 0.7794715447152325,
+    "oos_2026_h1": 0.0
+  },
+  "side_profit_factors": {
+    "long": 0.5422410745845139,
+    "short": 0.6995257452572728
+  },
+  "integrity": {
+    "candidates": 202,
+    "executed_trades": 202,
+    "unique_utc_entry_dates": 202,
+    "duplicate_utc_entry_dates": 0,
+    "position_overlaps": 0,
+    "invalid_exit_durations": 0,
+    "all_research_gates_passed": false,
+    "threshold_change_after_outcome_allowed": false,
+    "direction_reversal_after_outcome_allowed": false,
+    "side_or_window_deletion_after_outcome_allowed": false,
+    "historical_pass_can_authorize_demo": false,
+    "broker_action_allowed": false
+  },
+  "artifacts": {
+    "outputs/neutral_rate_differential_execution/ORACLE_MATCHES.csv": "344e8935875b1702dc8fccdfd5c4cbc5c6b8d4147d56fe3c6c3e545246f89c06",
+    "outputs/neutral_rate_differential_execution/RESULT.json": "000efe0713e7ef05f25a6c4ab0a5c1616ddb561291ecebd7af1c204ae4101455",
+    "outputs/neutral_rate_differential_execution/ROUTING.csv": "df29ece7c6570aeedbef9741c11a51773a20c87ac803ba37e9db575aaa77e6b9",
+    "outputs/neutral_rate_differential_execution/TRADES.csv": "f0f67fd14e281d596d8e3117870830032264571e7c7ad5b6fa0122cf78a41f16"
+  }
+}
