@@ -1,0 +1,31 @@
+{
+  "schema_version": "eurusd_neutral_prospective_inventory_portfolio_risk_v1_lock",
+  "campaign_id": "eurusd-neutral-prospective-inventory-portfolio-risk-v1",
+  "locked_at_utc": "2026-07-29T12:14:29.7000000Z",
+  "prospective_start_utc": "2026-07-30T00:00:00Z",
+  "locked_before_first_portfolio_observation": true,
+  "locked_before_first_scheduled_operation": true,
+  "locked_with_zero_primary_source_records": true,
+  "locked_with_zero_transfer_source_records": true,
+  "locked_with_zero_primary_decisions": true,
+  "locked_with_zero_transfer_decisions": true,
+  "locked_with_zero_primary_paths": true,
+  "locked_with_zero_transfer_paths": true,
+  "locked_with_zero_primary_oracle_records": true,
+  "locked_with_zero_transfer_oracle_records": true,
+  "historical_backtest_allowed": false,
+  "historical_eurusd_pnl_allowed": false,
+  "network_request_allowed": false,
+  "broker_action_allowed": false,
+  "primary_scheduler_process_chain_count_at_lock": 3,
+  "transfer_scheduler_process_chain_count_at_lock": 3,
+  "files": {
+    "config/frozen_prospective_neutral_inventory_portfolio_risk_v1.json": "693ce73cd607dbf19b87ed68de5d36a8836e05a5eceb49f485f10b146cb2a8c9",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_PORTFOLIO_RISK_PREREG_2026_07_29.md": "199a7215f1f0397800c2a1affba8c01d7ec8f0b33109ff8101f9c546277d6469",
+    "validate_prospective_neutral_inventory_portfolio_risk.py": "18fd4ed01a27944c031576e3ec0279f28f97d3b7517198683fb7be6296f587a6",
+    "tests/test_validate_prospective_neutral_inventory_portfolio_risk.py": "7db854b3c32d6eeaf3521c4e4b772f4a2fdd7266180ca695ad658cfe9ac7d486",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_CLOCK_PORTFOLIO_PREREG_2026_07_29.sha256.json": "85852192d505ab1afb064d22f7964de314a2edd85f60a58fd65f773d28ca041a",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_OPERATIONS_AUDIT_PREREG_2026_07_29.sha256.json": "e837cb357bc614d3c0f49ba3b8579f522561948d76e9eb52040d1567a12338a5"
+  },
+  "status": "FROZEN_BEFORE_FIRST_THREE_CLOCK_RISK_OBSERVATION"
+}

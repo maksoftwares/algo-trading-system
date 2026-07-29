@@ -1,0 +1,75 @@
+{
+  "schema_version": "eurusd_neutral_prospective_inventory_portfolio_risk_v1",
+  "campaign_id": "eurusd-neutral-prospective-inventory-portfolio-risk-v1",
+  "designed_at_utc": "2026-07-29T12:15:00Z",
+  "prospective_start_utc": "2026-07-30T00:00:00Z",
+  "research_only": true,
+  "shadow_only": true,
+  "historical_backtest_forbidden": true,
+  "historical_eurusd_pnl_forbidden": true,
+  "network_requests_by_validator_forbidden": true,
+  "broker_action_allowed": false,
+  "account_contract": {
+    "declared_research_balance_usd": 1000.0,
+    "fixed_lots_per_position": 0.01,
+    "standard_lot_base_units": 100000,
+    "eurusd_pip_size": 0.0001,
+    "usd_pip_value_per_0p01_lot": 0.1,
+    "assumed_retail_leverage": 30.0,
+    "maximum_concurrent_positions": 1,
+    "maximum_gross_lots": 0.01
+  },
+  "path_contract": {
+    "exact_immutable_bid_ask_ticks_required": true,
+    "long_mark_to_market_uses_bid": true,
+    "short_mark_to_market_uses_ask": true,
+    "adverse_exit_slippage_applied_to_every_liquidation_mark": true,
+    "all_closed_portfolio_paths_required": true,
+    "duplicate_or_overlapping_positions_forbidden": true
+  },
+  "stress_contract": {
+    "extra_round_trip_cost_pips": 0.5,
+    "delayed_entry_seconds": [
+      5,
+      30
+    ],
+    "five_second_delay_is_admission_gate": true,
+    "thirty_second_delay_is_report_only": true,
+    "top_five_percent_winner_rejection_inherited_from_portfolio": true
+  },
+  "monte_carlo_contract": {
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP",
+    "block_length_trades": 5,
+    "simulations": 20000,
+    "random_seed": 20260729,
+    "use_extra_cost_stressed_returns": true,
+    "horizon": "OBSERVED_PROSPECTIVE_TRADE_COUNT",
+    "ruin_equity_usd": 0.0,
+    "hard_drawdown_fraction": 0.1,
+    "drawdown_quantiles": [
+      0.5,
+      0.95,
+      0.99
+    ]
+  },
+  "admission": {
+    "minimum_calendar_months": 12,
+    "minimum_closed_trades": 90,
+    "all_three_clock_portfolio_gates_required": true,
+    "maximum_base_floating_drawdown_fraction": 0.05,
+    "maximum_stressed_floating_drawdown_fraction": 0.1,
+    "maximum_margin_utilization_fraction": 0.1,
+    "minimum_five_second_delayed_fill_rate": 0.95,
+    "minimum_five_second_delayed_profit_factor": 1.0,
+    "five_second_delay_must_preserve_no_overlap": true,
+    "maximum_monte_carlo_risk_of_ruin_exclusive": 0.01,
+    "independent_research_review_required_after_all_gates": true
+  },
+  "unresolved_demo_requirements": {
+    "exact_mt5_parity_still_required": true,
+    "demo_account_and_server_guard_still_required": true,
+    "daily_and_rolling_loss_engine_still_required": true,
+    "broker_order_rejection_telemetry_still_required": true,
+    "live_authorization": false
+  }
+}
