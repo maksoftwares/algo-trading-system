@@ -1,0 +1,50 @@
+{
+  "schema_version": "eurusd_neutral_dukascopy_swfx_sentiment_comparison_report_v1",
+  "verdict": "FIRST_OFFICIAL_WIDGET_COMPARISON_MATCHED",
+  "observed_at_utc": "2026-07-29T08:41:32Z",
+  "official_source": "DUKASCOPY_VISIBLE_WIDGET",
+  "official_page_url": "https://www.dukascopy.com/swiss/english/fx-market-tools/swfx-index/",
+  "official_widget_last_updated_utc": "2026-07-29T08:30:00Z",
+  "capture_scheduled_at_utc": "2026-07-29T08:32:00Z",
+  "capture_manifest": "manifests/CAPTURE_20260729T083200Z_56e683351bbd911f.json",
+  "capture_manifest_sha256": "56e683351bbd911feb07c5955d6814976875ee61a240c7a3d2348cb979a236cd",
+  "external_comparison_sha256": "7a72060c679387201b0d973e28dd7f94df9fa592c84a2ea245d81103ece91c23",
+  "visible_eurusd": {
+    "long_share_percent": 55.67,
+    "short_share_percent": 44.33,
+    "long_minus_short_index_percent": 11.34
+  },
+  "captured_eurusd": {
+    "last_long": -11.34000015258789,
+    "last_short": 11.34
+  },
+  "semantic_binding_verified_for_this_observation": {
+    "last_short_is_long_minus_short_index": true,
+    "last_long_is_short_minus_long_index": true,
+    "displayed_share_reconciliation_passed": true
+  },
+  "independent_validation": {
+    "evaluated_at_utc": "2026-07-29T08:42:39.654485Z",
+    "status": "ACCUMULATING_PROSPECTIVE_SOURCE_EVIDENCE",
+    "immutable_manifests_replayed": 5,
+    "valid_source_captures": 5,
+    "failed_source_captures": 0,
+    "schedule_coverage_ratio": 1.0,
+    "valid_capture_ratio": 1.0,
+    "distinct_eurusd_states": 5,
+    "manual_official_widget_comparison_occasions": 1,
+    "source_admitted": false
+  },
+  "research_boundary": {
+    "source_only": true,
+    "direction_mapping_selected": false,
+    "strategy_threshold_selected": false,
+    "eurusd_prices_loaded": false,
+    "eurusd_returns_loaded": false,
+    "eurusd_pnl_loaded": false,
+    "oracle_rows_loaded": false,
+    "signal_generated": false,
+    "trade_created": false,
+    "broker_action_allowed": false
+  }
+}
