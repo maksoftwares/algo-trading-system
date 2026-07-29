@@ -1,0 +1,132 @@
+{
+  "schema_version": "eurusd_neutral_prospective_inventory_clock_transfer_v1",
+  "campaign_id": "eurusd-neutral-prospective-inventory-clock-transfer-v1",
+  "design_recorded_at_utc": "2026-07-29T11:24:25Z",
+  "prospective_evidence_start_utc": "2026-07-30T02:00:00Z",
+  "first_entry_date_utc": "2026-07-30",
+  "research_only": true,
+  "shadow_only": true,
+  "historical_backtest_forbidden": true,
+  "historical_eurusd_pnl_forbidden": true,
+  "parameter_search_forbidden": true,
+  "individual_clock_selection_forbidden": true,
+  "aggregate_clock_portfolio_is_only_promotion_unit": true,
+  "broker_action_allowed": false,
+  "design_disclosure": {
+    "parent_campaign_id": "eurusd-neutral-prospective-inventory-unwind-0005-v1",
+    "parent_campaign_has_zero_evidence_at_design_time": true,
+    "outcome_informed_family": true,
+    "clock_transfer_outcomes_inspected": false,
+    "historical_evaluation_of_this_rule_allowed": false,
+    "purpose": "Prospectively test whether the same causal inventory-unwind mechanism transfers to two additional non-overlapping UTC clocks without choosing a winning clock after outcomes."
+  },
+  "eligible_dates": {
+    "calendar": "UTC_WEEKDAYS_ONLY",
+    "maximum_signals_per_eligible_date": 2,
+    "frequency_quota": null,
+    "frequency_is_not_an_admission_gate": true
+  },
+  "clock_portfolio": {
+    "clocks": {
+      "0605": {
+        "source_window_start_utc": "02:00:00",
+        "source_window_end_utc": "06:00:00",
+        "source_capture_utc": "06:03:00",
+        "decision_utc": "06:04:00",
+        "entry_utc": "06:05:00",
+        "path_capture_utc": "13:16:00"
+      },
+      "1205": {
+        "source_window_start_utc": "08:00:00",
+        "source_window_end_utc": "12:00:00",
+        "source_capture_utc": "12:03:00",
+        "decision_utc": "12:04:00",
+        "entry_utc": "12:05:00",
+        "path_capture_utc": "19:16:00"
+      }
+    },
+    "same_rule_at_every_clock": true,
+    "one_open_position_within_clock_portfolio": true,
+    "prior_position_time_exit_processed_before_next_entry": true,
+    "post_outcome_clock_deletion_or_reweighting_forbidden": true
+  },
+  "neutral_ownership": {
+    "reuse_config_path": "config/frozen_prospective_neutral_ownership_v1.json",
+    "reuse_output_root": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership",
+    "owned_state": "DIRECTION_NEUTRAL_AND_NOT_SHOCK_AND_NOT_JOINT_DXY_EURUSD_COMPRESSION",
+    "daily_ownership_known_deadline_utc": "00:04:00",
+    "maximum_state_staleness_hours_at_daily_cutoff": 4.0,
+    "missing_late_or_nonowned_action": "CASH_FOR_ALL_CLOCKS"
+  },
+  "inventory_source": {
+    "symbol": "EURUSD",
+    "completed_window_hours": 4,
+    "calculation": "LAST_MID_TICK_BEFORE_CLOCK_HOUR_MINUS_FIRST_MID_TICK_FOUR_HOURS_EARLIER",
+    "minimum_absolute_displacement_pips": 4.0,
+    "positive_displacement_side": "SHORT",
+    "negative_displacement_side": "LONG",
+    "zero_or_subthreshold_action": "CASH",
+    "completed_hour_prewarm_lag_seconds": 120,
+    "source_observed_deadline_seconds_before_entry": 60,
+    "all_raw_hours_must_be_immutable_and_hash_linked": true,
+    "late_source_backfill_for_signal_forbidden": true
+  },
+  "decision_and_entry": {
+    "decision_seconds_before_entry": 60,
+    "latest_decision_creation_nanoseconds_before_entry": 1,
+    "entry_price": "FIRST_DUKASCOPY_BID_ASK_TICK_AT_OR_AFTER_FROZEN_CLOCK",
+    "all_signal_and_ownership_evidence_must_precede_decision": true,
+    "actual_spread_required": true,
+    "minimum_retail_spread_pips": 0.7,
+    "maximum_entry_spread_pips": 1.5,
+    "adverse_slippage_pips_per_side": 0.1,
+    "missing_entry_tick_or_excess_spread_action": "NO_TRADE"
+  },
+  "risk": {
+    "fixed_stop_pips": 6.0,
+    "target_r": 1.5,
+    "fixed_target_pips": 9.0,
+    "maximum_hold_hours": 6,
+    "long_barrier_observation_side": "BID",
+    "short_barrier_observation_side": "ASK",
+    "same_timestamp_policy": "STOP_FIRST",
+    "time_exit": "FIRST_AVAILABLE_BID_ASK_TICK_AT_OR_AFTER_ENTRY_PLUS_6_HOURS",
+    "fixed_research_lots": 0.01,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "evidence_roots": {
+    "source": "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-clock-transfer-v1/source",
+    "ownership": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership",
+    "ledger": "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-clock-transfer-v1/ledger",
+    "entry_and_path": "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-clock-transfer-v1/path",
+    "oracle": "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-clock-transfer-v1/oracle"
+  },
+  "prospective_admission": {
+    "minimum_calendar_months": 12,
+    "minimum_executed_trades": 60,
+    "minimum_trades_per_clock": 20,
+    "minimum_each_side_trades": 12,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.3,
+    "minimum_stressed_profit_factor": 1.15,
+    "minimum_each_clock_profit_factor": 1.0,
+    "minimum_each_clock_net_r": 0.0,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_positive_active_month_rate": 0.6,
+    "maximum_largest_month_share_of_positive_profit": 0.35,
+    "minimum_same_day_same_side_oracle_precision": 0.5,
+    "temporal_oracle_window_minutes": 15,
+    "minimum_each_clock_temporal_oracle_precision": 0.5,
+    "minimum_each_clock_temporal_lift_over_exact_uniform_time_and_side_null": 0.0,
+    "maximum_each_clock_temporal_uniform_null_p_value": 0.025,
+    "uniform_entry_grid_minutes": 5,
+    "all_closed_trade_oracle_dates_required": true,
+    "no_individual_clock_promotion": true,
+    "independent_research_review_required_after_all_gates": true
+  }
+}
