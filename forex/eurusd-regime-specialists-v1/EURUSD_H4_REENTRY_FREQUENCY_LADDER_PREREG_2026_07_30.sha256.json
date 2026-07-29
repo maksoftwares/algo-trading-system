@@ -1,0 +1,12 @@
+{
+  "campaign_id": "eurusd-h4-reentry-frequency-ladder-v1",
+  "frozen_before_reentry_outcomes": true,
+  "files": {
+    "EURUSD_H4_REENTRY_FREQUENCY_LADDER_PREREG_2026_07_30.md": "51f9a3d950f9c650ed42e53e7f57fa4e7717620959b9f6a59d6cad09b1c8ab4c",
+    "config/frozen_h4_reentry_frequency_ladder_v1.json": "300790c83781fbb785d26a15116e5787073dd8cf561eecd9f72c2562f1a1679f",
+    "run_h4_reentry_frequency_ladder.py": "3b98359d78eca2f4cd78f2ffbbd69e54c25a33b2b5e03ef3cdef199ee38e7d11",
+    "src/eurusd_regime_specialists/h4_reentry_frequency_ladder.py": "0801f881463d754201bb49c624230312b73e25a97cc4976fbadec49a469ce48f",
+    "tests/test_h4_reentry_frequency_ladder.py": "12909eb93859d6447a213bd470097426bef18671bc0d6e91e9faa4a4191e0a68"
+  },
+  "status": "FROZEN_BEFORE_FIRST_REENTRY_OUTCOME"
+}
