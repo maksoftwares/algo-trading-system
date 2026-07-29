@@ -83,6 +83,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 77. Neutral midnight-auction rejection: a new independent rule observed only the three completed 00:00-00:10 UTC M5 bars and required an excursion-and-wick rejection before a 00:15 decision. Its locked outcome-blind census found only 18 eligible dates across 7.5 years: 13 development, 2 in 2023, none in 2024, 2 in 2025, and 1 in 2026 H1. All capacity gates except state freshness failed. No post-entry path, P&L, or oracle row was opened, and the exact sparse family is retired without threshold repair.
 78. Neutral late-session inventory unwind: a simple 00:15 expert required the completed first 15 minutes to reverse at least 1.5 pips and 15% of the prior 20:00-23:55 displacement. Its 12/10/8-pip ladder was locked before counts and could select only by capacity. None passed: the broadest 8-pip version retained 46 candidates—26 development, 5 in 2023, 2 in 2024, 5 in 2025, and 8 in 2026 H1—against the frozen 60-total, 30-development, and five-per-full-OOS-year floors. Both sides, recent coverage, and state freshness passed, but no P&L or oracle row was opened.
 79. Final inventory-unwind capacity successor: because the parent census had opened no outcome, a separately locked 6/4-pip ladder kept the economic rule, execution contract, and gates unchanged. Six pips retained 63 candidates but failed with only three in 2024. The final four-pip floor passed every gate with 89 candidates on 89 dates: 49 development, 11 in 2023, 5 in 2024, 15 in 2025, and 9 in 2026 H1; directions were 38 long and 51 short. The exact manifest is frozen before any post-entry path, P&L, or oracle evidence.
+80. Final inventory-unwind execution: the single permitted four-pip run executed all 89 candidates, won 37.08%, realized 1.470 payoff, returned PF 0.867, lost 7.52R, and drew down 20.34R. Development and 2023 lost; 2024, 2025, and 2026 H1 were profitable, with the latest six months returning nine trades at PF 1.155 / +0.79R. The rule achieved unusually strong same-side 15-minute oracle precision of 84.27%, but extra-cost PF was 0.742, best-5%-removed PF was 0.734, and the long side returned PF 0.592. Recent years and the short side are not selected after inspection; the exact family is rejected.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -222,6 +223,9 @@ Key reports:
 - `EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_PREREG_2026_07_29.md`
 - `EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_CENSUS_2026_07_29.md`
 - `EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_CENSUS_RESULT_2026_07_29.sha256.json`
+- `EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_EXECUTION_PREREG_2026_07_29.md`
+- `EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_EXECUTION_RESULT_2026_07_29.md`
+- `EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_EXECUTION_RESULT_2026_07_29.sha256.json`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -375,4 +379,5 @@ uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_pr
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_midnight_auction_rejection.py census
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_late_session_inventory_unwind.py census
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_late_session_inventory_unwind_v1_1.py census
+uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_late_session_inventory_unwind_v1_1_execution.py
 ```

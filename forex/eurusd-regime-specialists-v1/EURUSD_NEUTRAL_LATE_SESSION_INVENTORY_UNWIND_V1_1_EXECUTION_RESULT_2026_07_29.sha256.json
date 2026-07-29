@@ -1,0 +1,17 @@
+{
+  "broker_action_allowed": false,
+  "family": "N51_1_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND",
+  "files": {
+    "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_EXECUTION_RESULT_2026_07_29.md": "b14b3b402a4bfb464c922e18b128f631eff81cdaefeb69f50f25fd78677d913e",
+    "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_EXECUTION_PREREG_2026_07_29.sha256.json": "573a99c038a5f03ff3815c99ac31da6c1a927351b55792f307681960e0b9084d",
+    "config/frozen_neutral_late_session_inventory_unwind_v1_1_execution.json": "b2cce09880dbec0065fede8fb161c4003a8a922f5a5850387f7f5cc61108841b",
+    "outputs/neutral_late_session_inventory_unwind_v1_1_execution/RESULT.json": "a969d830b16f1060ebda4ceb0654fe8934ac3e571752b4f4fb1b4dfc4938d52a",
+    "outputs/neutral_late_session_inventory_unwind_v1_1_execution/TRADES.csv": "f1127800863532a69ce350a4ba0431854ad9ee9dda580713607144b8b02cee4e",
+    "outputs/neutral_late_session_inventory_unwind_v1_1_execution/ROUTING.csv": "62a3e544f653e82854b729d1cb620a4a86297b4d0abb81a95b37eb0ccf950924",
+    "outputs/neutral_late_session_inventory_unwind_v1_1_execution/ORACLE_MATCHES.csv": "40890f77f96ce31f4ef77f71707ab797d8ccace8101383c898b0de33fdecf727",
+    "outputs/neutral_late_session_inventory_unwind_v1_1/CANDIDATES.csv": "2a93f07ab19424e62ddfd1b555198709d1490a90654ea288b9f01d4b1feb0220"
+  },
+  "historical_pass_can_authorize_demo": false,
+  "performance_gates_passed": false,
+  "status": "REJECTED_EXACT_LATE_SESSION_INVENTORY_UNWIND"
+}
