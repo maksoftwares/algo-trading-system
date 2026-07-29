@@ -1,0 +1,53 @@
+{
+  "schema_version": "xauusd_v60_portable_ml_topup_v3_overlay",
+  "base_config": {
+    "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+    "sha256": "053bbb0e0d0f8e365f8b93b8a7d61376c6762c861ad1ec2c1b3d796d3089a9df"
+  },
+  "authorization": {
+    "ml_runtime_authorized": true,
+    "ml_shadow_authorized": false,
+    "demo_ml_topup_authorized": true,
+    "live_authorized": false
+  },
+  "ml_topup": {
+    "enabled": true,
+    "schema_version": "xauusd_v60_portable_ml_topup_runtime_v3",
+    "serving_source": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-portable-mature-topup-prospective-v3/src/serving.py",
+      "sha256": "1030ca80e424c5972b9e7da459f6044f3807ec34afb4db4fe9cc22dbd3d6bf30"
+    },
+    "implementation_lock": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-portable-mature-topup-prospective-v3/config/IMPLEMENTATION_LOCK.json",
+      "sha256": "068bc5f04541f9e191df31e10e159fc7fea1ce89b15b15d31c717943203484fc"
+    },
+    "model_bundle": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-portable-mature-topup-prospective-v3/outputs/MODEL_BUNDLE.joblib",
+      "sha256": "573187af78f1e9617eaac87453d14af2e1e0428914321058ecf89b5b2e7dffcd"
+    },
+    "parity_result": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-portable-mature-topup-prospective-v3/outputs/PARITY_RESULT.json",
+      "sha256": "092c5d2614c0c0cad65c27deebcfae8b7b3961659d489a6e46c6b6e5ce320e28"
+    },
+    "eligible_source_ids": [
+      "R2_DOWNTREND",
+      "R3_COMPRESSION",
+      "R4_CHOP",
+      "V7_SWING_HEALTH",
+      "V8_RETEST_HEALTH",
+      "V25_CHOP",
+      "V57_BREAK_SWING_H4ADX_HIGH"
+    ],
+    "historically_unknown_risk_source_ids": [
+      "R1_BOX",
+      "R1_PULLBACK"
+    ],
+    "topup_lot": 0.01,
+    "maximum_open_ml_topups": 1,
+    "maximum_ml_topups_per_utc_day": 2,
+    "maximum_feature_bar_age_minutes": 10,
+    "history_bars": 60000,
+    "failure_policy": "BASELINE_ONLY",
+    "execution_mode": "PROSPECTIVE_DEMO_ONLY"
+  }
+}

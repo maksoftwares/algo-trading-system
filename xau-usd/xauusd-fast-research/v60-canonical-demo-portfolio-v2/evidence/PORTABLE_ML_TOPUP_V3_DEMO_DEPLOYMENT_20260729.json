@@ -1,0 +1,76 @@
+{
+  "schema_version": "xauusd_v60_portable_ml_topup_v3_demo_deployment",
+  "recorded_at_utc": "2026-07-29T18:12:57.946771Z",
+  "decision": "PASS_ACTIVE_PROSPECTIVE_DEMO_BASELINE_PRESERVING",
+  "account": {
+    "login": 1033030,
+    "server": "Capital.ComMena-Demo",
+    "currency": "AED",
+    "balance": 3648.06,
+    "equity": 3648.06,
+    "open_xauusd_positions": 0
+  },
+  "runtime": {
+    "status": "ACTIVE_DEMO_BROKER_ACTION",
+    "feeds_ok": true,
+    "minimum_balance_requirement_enabled": false,
+    "risk_limit_mode": "ABSOLUTE_USD_ONLY",
+    "ml_runtime_authorized": true,
+    "ml_shadow_authorized": false,
+    "ml_ready": true,
+    "ml_failure_policy": "BASELINE_ONLY",
+    "scored_candidates_at_deployment": 0,
+    "filled_topups_at_deployment": 0
+  },
+  "model": {
+    "bundle_sha256": "573187af78f1e9617eaac87453d14af2e1e0428914321058ecf89b5b2e7dffcd",
+    "serving_models": 40,
+    "serving_year": 2026,
+    "training_rows": 1918,
+    "training_cutoff_utc": "2025-12-30T00:00:00+00:00",
+    "stored_2026_score_maximum_absolute_error": 0.0,
+    "stored_2026_rank_maximum_absolute_error": 0.0
+  },
+  "cross_feed_parity": {
+    "decision": "PASS_PROSPECTIVE_DEMO_INTEGRATION_NOMINATED",
+    "outcome_labels_used": false,
+    "common_completed_bars": 4896,
+    "context_rows": 19584,
+    "score_spearman": 0.9825260333908673,
+    "rank_spearman": 0.9825076969868741,
+    "mean_absolute_rank_difference": 0.03097717122350134,
+    "top_quintile_jaccard": 0.8892105263157895,
+    "capital_precision": 0.9547894885560892,
+    "capital_recall": 0.9282967032967033,
+    "all_frozen_gates_passed": true
+  },
+  "historical_development_evidence": {
+    "baseline_trades": 1676,
+    "baseline_net_pnl_usd": 5045.67,
+    "baseline_profit_factor": 1.721,
+    "baseline_floating_drawdown_usd": 335.34,
+    "portable_topup_net_pnl_usd": 5296.78,
+    "portable_topup_profit_factor": 1.723,
+    "portable_topup_floating_drawdown_usd": 329.35,
+    "portable_topup_delta_pnl_usd": 251.10,
+    "weekly_block_lower_95_usd": 92.38
+  },
+  "deployment_hashes": {
+    "run_portfolio.py": "d4ebf0721c657a166ad096684a7c4ee0636b21bbdf303a4f7379099f55596935",
+    "src/ml_topup.py": "aedfa413e9e398fb4e8d7e076154a6ecc68d4e0b814a9e1ce26b281d3e25d925",
+    "config/v60_portable_ml_topup_v3_overlay.json": "3ab164af5dea078ffe0a2eb10b464fa8c8883a4416310f6888d16f4dc49082ba",
+    "start_portfolio.ps1": "1c840dc8c92eb447c8a5837c01c9eb11920362b920d75ab87b83a7ed13bbfb1d"
+  },
+  "verification": {
+    "portfolio_tests": "41/41 PASS",
+    "tick_runtime_replay_tests": "9/9 PASS",
+    "prospective_v3_tests": "4/4 PASS",
+    "python_compile": "PASS",
+    "executor_stderr_empty": true,
+    "duplicate_executor_detected": false
+  },
+  "authority": {
+    "prospective_demo_topup": true,
+    "live": false
+  }
+}

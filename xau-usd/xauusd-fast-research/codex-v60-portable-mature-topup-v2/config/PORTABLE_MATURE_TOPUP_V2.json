@@ -1,0 +1,84 @@
+{
+  "schema_version": "codex_v60_portable_mature_topup_v2",
+  "inputs": {
+    "causal_retest_contract": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-ml-sizing-causal-retest-v1/config/CAUSAL_RETEST_CONTRACT.json",
+      "sha256": "56b1349c417506d022928d96f82641272cb229199e5963706e608de161439932"
+    },
+    "causal_retest_source": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-ml-sizing-causal-retest-v1/src/retest.py",
+      "sha256": "98e215dec916f1c803868af8af93d857481d73ac526af47fc9be0c0c61248e29"
+    },
+    "topup_source": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-executable-ml-topup-v1/src/topup.py",
+      "sha256": "e6c4cc985cb12b072f498825afcd7cf27381929383c299b9d2d3a9f85dac11fa"
+    },
+    "demo_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "053bbb0e0d0f8e365f8b93b8a7d61376c6762c861ad1ec2c1b3d796d3089a9df"
+    }
+  },
+  "feature_columns": [
+    "atr_ratio",
+    "rv_1h",
+    "rv_24h",
+    "slope_atr",
+    "ret_1h",
+    "ret_4h",
+    "ret_24h",
+    "dist_hi_24h",
+    "dist_lo_24h",
+    "hour",
+    "dow",
+    "is_long",
+    "is_core"
+  ],
+  "excluded_feed_specific_features": [
+    "ms_flow",
+    "ms_imb",
+    "ms_eff",
+    "ms_spread_per_risk",
+    "ms_activity"
+  ],
+  "policy": {
+    "maturity_entry_year": 2024,
+    "minimum_rank_exclusive": 0.8,
+    "base_lot": 0.01,
+    "topup_lot": 0.01,
+    "retain_every_baseline_trade": true
+  },
+  "risk_limits": {
+    "account_initial_risk_usd": 60.0,
+    "directional_initial_risk_usd": 60.0,
+    "addon_initial_risk_usd": 45.0
+  },
+  "recent_window": {
+    "start_utc": "2025-07-01T00:00:00Z",
+    "end_utc_exclusive": "2026-07-01T00:00:00Z"
+  },
+  "gates": {
+    "minimum_seed_positive_delta_count": 4,
+    "minimum_seed_nonnegative_year_count": 5,
+    "minimum_topup_profit_factor": 1.2,
+    "maximum_profit_factor_decline_fraction": 0.01,
+    "minimum_net_to_floating_drawdown_improvement_fraction": 0.05,
+    "weekly_block_lower_bound_above_zero": true,
+    "recent_net_not_below_baseline": true,
+    "floating_drawdown_not_above_baseline": true
+  },
+  "outputs": {
+    "directory": "outputs",
+    "result_json": "RESULT.json",
+    "result_markdown": "RESULT.md",
+    "decisions": "PRIMARY_DECISIONS.parquet",
+    "seed_sensitivity": "SEED_SENSITIVITY.csv"
+  },
+  "authorization": {
+    "research_only": true,
+    "ml_runtime_authorized": false,
+    "ml_shadow_authorized": false,
+    "demo_broker_action_authorized": false,
+    "live_authorized": false
+  }
+}
+

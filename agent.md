@@ -5698,3 +5698,73 @@ permission, sizing, or broker setting changed.
   exact portfolio P/L robustly. AUC improvement alone is not sufficient.
   V14 remains the only locked prospective ML lane. V15-V18 have no serving,
   shadow, EA, demo, live, sizing, runtime, or broker authority.
+
+## V60 Absolute-USD Demo Risk Limits - 2026-07-29
+
+- Demo account `1033030` no longer has a minimum-balance eligibility gate or
+  activation-equity scaling of risk limits. The active runtime reports
+  `risk_limit_mode=ABSOLUTE_USD_ONLY` and
+  `equity_fraction_limits_enabled=false`.
+- Fixed controls remain active: USD `60` account and same-direction concurrent
+  initial risk, USD `225/180` closed-drawdown suspend/resume, USD `300` hard
+  closed-drawdown stop, and USD `449.7675` floating-drawdown hard stop. Broker
+  margin remains unavoidable.
+- Deployment preserved activation time, activation-equity telemetry, closed
+  P/L, seen candidates, position records, and daily-entry records. No state
+  reset or account funding occurred.
+- Canonical tests pass `34/34`; tick replay tests pass `9/9`. The full
+  position-origin runtime replay at deployed capital accepted `1,431` trades,
+  produced USD `1,304.56`, PF `1.3090`, USD `189.52` maximum equity drawdown,
+  and no deadlock.
+- Evidence:
+  `xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/ABSOLUTE_USD_RISK_LIMIT_DEMO_DEPLOYMENT_20260729.md`.
+
+## Legacy Frequency Causal Quality V2 - 2026-07-29
+
+- Legacy Hybrid Salvage V1 confirmed that the old high-profit hybrid does not
+  contain a qualifying one-ticket fixed-lot lane. Its frequency scope remained
+  positive in later years but only reached PF `1.10-1.20`.
+- Added, preregistered, implementation-locked, tested, and evaluated
+  `legacy-frequency-causal-quality-v2`. It reconstructed `3,417` RUNNER
+  frequency signals and attached exact completed-bar causal context to `3,382`;
+  `35` missing contexts failed closed.
+- Four fixed structural gates tested shock exclusion, opposite-H4-trend
+  exclusion, dual H1/H4 slope conflict, and their combination. Selection used
+  only 2022-07 through 2024-06.
+- No policy passed development: net remained between USD `-193.68` and
+  `-182.93`, PF between `0.9019` and `0.9068`, and top-ten-winner-removed P/L
+  remained strongly negative. Later-window improvements were not used for
+  selection.
+- Decision: `NO_CAUSAL_QUALITY_GATE_PASSES`. No MT5 rerun, ML activation, demo
+  attachment, or runtime change is authorized. Focused tests pass `6/6`.
+
+## V60 Portable ML Top-Up V3 Demo - 2026-07-29
+
+- V2 removed the five Dukascopy-specific microstructure fields and retained 13
+  completed-bar/trade-context features. Its frozen historical policy keeps all
+  `1,676` V60 trades and adds one `0.01` lot above causal rank `0.80` from
+  2024 onward, subject to the existing risk limits.
+- Historical development result: V60 USD `5,045.67`, PF `1.721`, floating DD
+  USD `335.34`; portable top-up USD `5,296.78`, PF `1.723`, floating DD USD
+  `329.35`. Delta is USD `251.10`; moving-week lower 95% bound is USD `92.38`.
+- V3 reconstructed the exact forty-model 2026 ensemble. All 147 stored 2026
+  scores and ranks reproduce with `0.0` error. Training has `1,918` rows,
+  stops at the purged `2025-12-30T00:00:00Z` cutoff, and uses no 2026 outcomes.
+- Outcome-free Capital/Dukascopy parity passed every frozen gate on `4,896`
+  common July bars and `19,584` contexts: score/rank Spearman
+  `0.9825/0.9825`, mean rank difference `0.0310`, top-quintile Jaccard
+  `0.8892`, and Capital precision/recall `0.9548/0.9283`.
+- The exact model is active on demo account `1033030` through a separately
+  hash-bound overlay. The deterministic baseline order fills and is persisted
+  before ML runs. Any ML failure produces baseline-only behavior. ML may add
+  one separate `0.01` lot only for historically known-risk R2/R3/R4/V7/V8/V25
+  or V57 signals that pass every existing portfolio control.
+- Runtime limits: maximum one open ML top-up and two top-ups per UTC day. R1
+  box and pullback remain baseline-only. ML shadow and live authority remain
+  false.
+- Active status is `ACTIVE_DEMO_BROKER_ACTION`, ML ready, feeds healthy, zero
+  positions at deployment, `minimum_balance_requirement_enabled=false`, and
+  `risk_limit_mode=ABSOLUTE_USD_ONLY`.
+- Verification: portfolio `41/41`, tick replay `9/9`, prospective V3 `4/4`,
+  and Python compilation pass. Evidence:
+  `xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/PORTABLE_ML_TOPUP_V3_DEMO_DEPLOYMENT_20260729.md`.

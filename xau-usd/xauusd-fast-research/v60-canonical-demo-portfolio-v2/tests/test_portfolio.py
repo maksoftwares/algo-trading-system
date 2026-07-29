@@ -29,6 +29,7 @@ def test_config_has_exact_canonical_sources_and_no_ml_authority() -> None:
     assert config["authorization"]["ml_shadow_authorized"] is False
     assert config["authorization"]["minimum_balance_requirement_enabled"] is False
     assert config["authorization"]["demo_balance_eligibility_waived"] is True
+    assert config["risk"]["equity_fraction_limits_enabled"] is False
     assert RUN.verify_deployment_parity(config)["status"] == "PASS"
     assert config["runtime"]["execution_enabled"] is True
     cooldowns = {
@@ -39,6 +40,86 @@ def test_config_has_exact_canonical_sources_and_no_ml_authority() -> None:
     }
     assert cooldowns["V57_BREAK_SWING_H4ADX_HIGH"] == 120
     assert all(value == 0 for key, value in cooldowns.items() if key != "V57_BREAK_SWING_H4ADX_HIGH")
+
+
+def test_portable_ml_overlay_preserves_base_and_authorizes_demo_topup_only() -> None:
+    base = RUN.load_config()
+    config = RUN.load_config(ml_overlay_path=RUN.ML_OVERLAY_PATH)
+    assert base["authorization"]["ml_runtime_authorized"] is False
+    assert "ml_topup" not in base
+    assert config["authorization"]["ml_runtime_authorized"] is True
+    assert config["authorization"]["ml_shadow_authorized"] is False
+    assert config["authorization"]["live_authorized"] is False
+    assert config["ml_topup"]["failure_policy"] == "BASELINE_ONLY"
+    assert config["ml_topup"]["topup_lot"] == config["account"]["fixed_lot"]
+    assert "R1_BOX" not in config["ml_topup"]["eligible_source_ids"]
+    assert "R1_PULLBACK" not in config["ml_topup"]["eligible_source_ids"]
+
+
+def test_config_rejects_equity_scaled_demo_limits(tmp_path: Path) -> None:
+    config = json.loads(RUN.CONFIG_PATH.read_text(encoding="utf-8"))
+    config["risk"]["equity_fraction_limits_enabled"] = True
+    path = tmp_path / "invalid.json"
+    path.write_text(json.dumps(config), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="absolute-USD-only"):
+        RUN.load_config(path)
+
+
+def test_ml_topup_risk_gate_rejects_double_source_risk() -> None:
+    config = RUN.load_config(ml_overlay_path=RUN.ML_OVERLAY_PATH)
+    candidate = SimpleNamespace(
+        candidate_id="risk",
+        source_id="R3_COMPRESSION",
+        sleeve_type="CORE",
+        direction="LONG",
+        initial_risk_usd=30.0,
+        scheduled_at=datetime(2026, 7, 29, tzinfo=UTC),
+    )
+    assert RUN.ml_topup_risk_reason(
+        candidate,
+        config,
+        {"positions": {}, "ml_topup": {"orders": {}, "daily_topups": {}}},
+        [],
+        active_initial_risk_usd=30.0,
+        active_direction_risk_usd={"LONG": 30.0, "SHORT": 0.0},
+        active_addon_risk_usd=0.0,
+        effective_risk_limits={
+            "maximum_account_concurrent_initial_risk_usd": 60.0,
+            "maximum_directional_concurrent_initial_risk_usd": 60.0,
+        },
+    ) == "ML_TOPUP_SOURCE_RISK_LIMIT"
+
+
+def test_ml_topup_rejects_when_historically_unknown_risk_position_is_open() -> None:
+    config = RUN.load_config(ml_overlay_path=RUN.ML_OVERLAY_PATH)
+    candidate = SimpleNamespace(
+        candidate_id="known",
+        source_id="V57_BREAK_SWING_H4ADX_HIGH",
+        sleeve_type="ADDON",
+        direction="SHORT",
+        initial_risk_usd=5.0,
+        scheduled_at=datetime(2026, 7, 29, tzinfo=UTC),
+    )
+    position = SimpleNamespace(ticket=7)
+    state = {
+        "positions": {
+            "r1": {"ticket": 7, "source_id": "R1_BOX"},
+        },
+        "ml_topup": {"orders": {}, "daily_topups": {}},
+    }
+    assert RUN.ml_topup_risk_reason(
+        candidate,
+        config,
+        state,
+        [position],
+        active_initial_risk_usd=10.0,
+        active_direction_risk_usd={"LONG": 10.0, "SHORT": 0.0},
+        active_addon_risk_usd=0.0,
+        effective_risk_limits={
+            "maximum_account_concurrent_initial_risk_usd": 60.0,
+            "maximum_directional_concurrent_initial_risk_usd": 60.0,
+        },
+    ) == "ML_TOPUP_ACTIVE_HISTORICALLY_UNKNOWN_RISK"
 
 
 def test_v57_post_loss_cooldown_uses_position_lifecycle_and_direction() -> None:

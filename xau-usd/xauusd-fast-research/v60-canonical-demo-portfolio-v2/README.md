@@ -5,9 +5,12 @@ demo account `1033030`. It contains the five Core specialists plus the four
 canonical add-on sleeves. The frozen research packages and their ledgers are
 not modified.
 
-The runtime has no model inference, model handoff, ML ranker, or ML shadow
-path. It fails closed if the active MT5 chart profile contains a legacy Phase2
-executor, an A3 ML observer, or an enabled ML shadow read tap.
+The base configuration remains the exact deterministic portfolio and has no ML
+authority. The separately hashed V3 overlay enables one bounded portable-model
+top-up after a deterministic baseline order has filled. The model can never
+skip, delay, or reduce that baseline order. Any model, feature, state, artifact,
+or risk-control failure produces baseline-only behavior. No ML shadow path is
+enabled.
 
 Demo broker action is enabled for exact account `1033030` after the feed,
 profile, account, historical-parity, currency-conversion, guardian-halt, and
@@ -38,12 +41,16 @@ authorize a live account. The exact demo login, server, MT5 trade mode, fixed
 lot, spread, position, daily-entry, drawdown, emergency-close, and guardian
 halt controls remain enforced.
 
-Absolute drawdown limits are now paired with activation-equity fractions; the
-lower value always applies. The fixed-lot portfolio also has aggregate initial
-risk and same-direction risk caps, and every Core candidate has a $45 initial
-risk ceiling. Startup verifies the exact-source historical parity artifact,
-and chart preflight requires every safety input to coexist on its intended
-chart rather than accepting settings scattered across the profile.
+The demo uses explicit absolute-USD risk limits. Account balance and activation
+equity do not scale entry eligibility, concurrent-risk caps, or drawdown
+thresholds. Activation equity remains telemetry, and current equity is still
+used to measure floating drawdown against the fixed USD emergency stop. The
+fixed-lot portfolio also has aggregate initial-risk and same-direction-risk
+caps, and every Core candidate has a $45 initial-risk ceiling. Broker margin
+requirements remain unavoidable. Startup verifies both this absolute-only mode
+and the exact-source historical parity artifact, and chart preflight requires
+every safety input to coexist on its intended chart rather than accepting
+settings scattered across the profile.
 
 V57 has one additional deterministic replay guard. After an accepted V57 trade
 closes with negative realized net P/L, another V57 trade in the same direction
@@ -54,6 +61,19 @@ and fees, and fails closed for V57 if deal history is unavailable.
 The account is AED-denominated. Every USD drawdown threshold is converted using
 the AED peg (`3.6725 AED/USD`) before it is compared with MT5 equity or deal
 values.
+
+Closed P/L is reconstructed from complete MT5 position-ID lifecycles. A
+position belongs to V60 only when its opening deal has one of the canonical
+source magics; all later deals on that position are then counted regardless of
+which guardian or operator closes it. The runtime rebuilds both cumulative and
+peak closed P/L from history on every cycle and fails closed when MT5 deal
+history is unavailable.
+
+The demo deployment observation for this repair is recorded in
+`evidence/POSITION_ORIGIN_REPAIR_DEMO_DEPLOYMENT_20260729.md`. The repair is
+active on demo, but its locked replay still rejects current-capital
+long-horizon operability; funding and state reinitialization remain separate
+decisions.
 
 The MT5 profile keeps both account guardians and attaches one passive telemetry
 collector plus three observer-only event sensors. Each collector/sensor has
@@ -67,6 +87,17 @@ portfolio process and refuses duplicate launchers. Healthy execution reports
 eight required feed groups healthy. `set_terminal_algo_trading.ps1` changes the
 terminal-wide Algo Trading state only while that terminal is stopped, and keeps
 a backup of `common.ini`.
+
+The launcher supplies
+`config/v60_portable_ml_topup_v3_overlay.json` to the executor. That overlay is
+bound to the immutable deterministic base config, the exact forty-model 2026
+bundle, its implementation lock, and the outcome-free Capital/Dukascopy parity
+result. Only historically known-risk R2, R3, R4, V7, V8, V25, and V57 signals
+are score-eligible. A rank strictly above `0.80` may request one separate
+`0.01`-lot top-up after the baseline fill. At most one ML top-up may be open and
+at most two may be opened per UTC day; every original absolute-USD account,
+direction, source, add-on, position, drawdown, emergency-close, and guardian
+control remains in force.
 
 The older `v60-core-demo-executor-v1` package is superseded and must not run at
 the same time as this full canonical package.

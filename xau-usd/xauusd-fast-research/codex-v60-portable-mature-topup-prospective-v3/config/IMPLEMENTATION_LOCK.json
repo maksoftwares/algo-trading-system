@@ -1,0 +1,14 @@
+{
+  "files": {
+    "PREREGISTRATION.md": "fff437d8361031ed6f9fca7561c40baf5ea302a06ac3765fde3e2dfc67e42e76",
+    "build_bundle.py": "5bfdd1d8bdb6fc5b2c9548ccfc367711eb22f0e5d8446e7d4533a10b519c09bd",
+    "capture_mt5_snapshot.py": "6c049ff97ebc88db914ea3503d42a9b73c3dc7c2dfac208b1385b89ff03d9833",
+    "config/PROSPECTIVE_SERVING_V3.json": "6e9b1a4395187ac28763102bb8d5b968fb3d4b65c01d2eb34c8a12b6ca2ed5e5",
+    "run_parity.py": "a3c28999a367c299126bb494c50f245115957c9efb8e44352740b41e9424e498",
+    "src/__init__.py": "5acebf5192e5d62899d24036a235a3a45fd2aba8c9f3be9c73a5c8c908c1b5bc",
+    "src/serving.py": "1030ca80e424c5972b9e7da459f6044f3807ec34afb4db4fe9cc22dbd3d6bf30",
+    "tests/test_serving.py": "4e84cefa2017afe99214efe176bfb972afe3cf3d2f403882fa93792a0e4c3500"
+  },
+  "locked_before_result": true,
+  "schema_version": "codex_v60_portable_mature_topup_prospective_v3_implementation_lock"
+}

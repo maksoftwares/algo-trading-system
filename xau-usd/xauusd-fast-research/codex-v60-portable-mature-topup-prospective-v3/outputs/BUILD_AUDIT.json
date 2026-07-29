@@ -1,0 +1,11 @@
+{
+  "historical_oos_reference_rows": 1676,
+  "models": 40,
+  "schema_version": "codex_v60_portable_mature_topup_bundle_build_v3",
+  "serving_year_rows": 147,
+  "stored_rank_maximum_absolute_error": 0.0,
+  "stored_score_maximum_absolute_error": 0.0,
+  "training_cutoff_utc": "2025-12-30T00:00:00+00:00",
+  "training_last_exit_utc": "2025-12-29T15:22:30+00:00",
+  "training_rows": 1918
+}

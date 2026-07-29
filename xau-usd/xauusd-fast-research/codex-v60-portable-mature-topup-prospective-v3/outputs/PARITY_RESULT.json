@@ -1,0 +1,49 @@
+{
+  "authorization": {
+    "demo_broker_action_authorized": false,
+    "live_authorized": false,
+    "ml_runtime_authorized": false,
+    "ml_shadow_authorized": false,
+    "research_only": true
+  },
+  "build_audit": {
+    "historical_oos_reference_rows": 1676,
+    "models": 40,
+    "schema_version": "codex_v60_portable_mature_topup_bundle_build_v3",
+    "serving_year_rows": 147,
+    "stored_rank_maximum_absolute_error": 0.0,
+    "stored_score_maximum_absolute_error": 0.0,
+    "training_cutoff_utc": "2025-12-30T00:00:00+00:00",
+    "training_last_exit_utc": "2025-12-29T15:22:30+00:00",
+    "training_rows": 1918
+  },
+  "decision": "PASS_PROSPECTIVE_DEMO_INTEGRATION_NOMINATED",
+  "gates": {
+    "all_scored_values_finite": true,
+    "capital_precision": true,
+    "capital_recall": true,
+    "enough_common_bars": true,
+    "enough_context_rows": true,
+    "mean_rank_difference": true,
+    "rank_spearman": true,
+    "score_spearman": true,
+    "stored_ranks_reproduce": true,
+    "stored_scores_reproduce": true,
+    "top_quintile_jaccard": true
+  },
+  "metrics": {
+    "agreed_topups": 6758,
+    "capital_precision": 0.9547894885560892,
+    "capital_recall": 0.9282967032967033,
+    "capital_topups": 7078,
+    "common_completed_bars": 4896,
+    "context_rows": 19584,
+    "dukascopy_topups": 7280,
+    "mean_absolute_rank_difference": 0.03097717122350134,
+    "rank_spearman": 0.9825076969868741,
+    "score_spearman": 0.9825260333908673,
+    "top_quintile_jaccard": 0.8892105263157895
+  },
+  "outcome_labels_used": false,
+  "schema_version": "codex_v60_portable_mature_topup_parity_result_v3"
+}

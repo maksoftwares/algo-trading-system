@@ -36,6 +36,26 @@ class Candidate:
     raw: Mapping[str, Any]
 
 
+@dataclass(frozen=True)
+class PositionOriginPnl:
+    closed_pnl: float
+    peak_closed_pnl: float
+    closed_drawdown: float
+    attributed_positions: int
+    attributed_deals: int
+
+    def scaled(self, divisor: float) -> PositionOriginPnl:
+        if not math.isfinite(divisor) or divisor <= 0.0:
+            raise ValueError("P/L scale divisor must be finite and positive")
+        return PositionOriginPnl(
+            closed_pnl=self.closed_pnl / divisor,
+            peak_closed_pnl=self.peak_closed_pnl / divisor,
+            closed_drawdown=self.closed_drawdown / divisor,
+            attributed_positions=self.attributed_positions,
+            attributed_deals=self.attributed_deals,
+        )
+
+
 def utc_now() -> datetime:
     return datetime.now(UTC)
 
@@ -245,14 +265,82 @@ def own_positions(positions: Iterable[Any], magics: set[int], symbol: str) -> li
     ]
 
 
+def _deal_time_key(deal: Any) -> tuple[int, int]:
+    time_msc = int(
+        getattr(deal, "time_msc", int(getattr(deal, "time", 0)) * 1000) or 0
+    )
+    return time_msc, int(getattr(deal, "ticket", 0) or 0)
+
+
+def _deal_net_pnl(deal: Any) -> float:
+    return sum(
+        float(getattr(deal, field, 0.0) or 0.0)
+        for field in ("profit", "commission", "swap", "fee")
+    )
+
+
+def position_origin_pnl(
+    deals: Iterable[Any],
+    magics: set[int],
+    symbol: str,
+    *,
+    entry_in: int = 0,
+    entry_inout: int = 2,
+) -> PositionOriginPnl:
+    symbol_deals = [
+        deal for deal in deals if str(getattr(deal, "symbol", "")) == symbol
+    ]
+    opening_entries = {int(entry_in), int(entry_inout)}
+    origin_position_ids = {
+        int(getattr(deal, "position_id", 0) or 0)
+        for deal in symbol_deals
+        if int(getattr(deal, "position_id", 0) or 0) > 0
+        and int(getattr(deal, "magic", -1)) in magics
+        and int(getattr(deal, "entry", -1)) in opening_entries
+    }
+    attributed = sorted(
+        (
+            deal
+            for deal in symbol_deals
+            if int(getattr(deal, "position_id", 0) or 0) in origin_position_ids
+        ),
+        key=_deal_time_key,
+    )
+    cumulative = 0.0
+    peak = 0.0
+    for deal in attributed:
+        cumulative += _deal_net_pnl(deal)
+        peak = max(peak, cumulative)
+    return PositionOriginPnl(
+        closed_pnl=cumulative,
+        peak_closed_pnl=peak,
+        closed_drawdown=peak - cumulative,
+        attributed_positions=len(origin_position_ids),
+        attributed_deals=len(attributed),
+    )
+
+
 def refresh_drawdown_state(
-    state: dict[str, Any], *, equity: float, closed_pnl: float, risk: Mapping[str, Any]
+    state: dict[str, Any],
+    *,
+    equity: float,
+    closed_pnl: float,
+    risk: Mapping[str, Any],
+    reconstructed_peak_closed_pnl: float | None = None,
 ) -> None:
     state["peak_equity_usd"] = max(float(state["peak_equity_usd"]), float(equity))
     state["closed_pnl_usd"] = float(closed_pnl)
-    state["peak_closed_pnl_usd"] = max(
-        float(state["peak_closed_pnl_usd"]), float(closed_pnl)
-    )
+    if reconstructed_peak_closed_pnl is None:
+        peak_closed_pnl = max(
+            float(state["peak_closed_pnl_usd"]), float(closed_pnl)
+        )
+    else:
+        peak_closed_pnl = float(reconstructed_peak_closed_pnl)
+        if not math.isfinite(peak_closed_pnl) or peak_closed_pnl < float(
+            closed_pnl
+        ) - 1e-9:
+            raise ValueError("Reconstructed closed-P/L peak is invalid")
+    state["peak_closed_pnl_usd"] = peak_closed_pnl
     drawdown = float(state["peak_closed_pnl_usd"]) - float(closed_pnl)
     state["closed_drawdown_usd"] = drawdown
     suspend = effective_risk_threshold_usd(
@@ -271,6 +359,8 @@ def effective_risk_threshold_usd(
     state: Mapping[str, Any], risk: Mapping[str, Any], absolute_key: str
 ) -> float:
     absolute = _finite_positive(risk[absolute_key], absolute_key)
+    if not bool(risk.get("equity_fraction_limits_enabled", True)):
+        return absolute
     fraction_key = absolute_key.removesuffix("_usd") + "_fraction"
     fraction = _finite_positive(risk[fraction_key], fraction_key)
     activation_equity = _finite_positive(

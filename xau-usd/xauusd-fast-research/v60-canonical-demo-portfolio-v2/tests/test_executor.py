@@ -2,15 +2,18 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 import json
+from types import SimpleNamespace
 
 import pytest
 
+from run_portfolio import closed_pnl
 from executor import (
     Candidate,
     candidate_prices,
     due_candidates,
     effective_risk_threshold_usd,
     normalize_candidate,
+    position_origin_pnl,
     refresh_drawdown_state,
 )
 
@@ -154,15 +157,196 @@ def test_closed_drawdown_suspend_and_resume_hysteresis() -> None:
     assert state["drawdown_suspended"] is False
 
 
+def deal(
+    ticket: int,
+    position_id: int,
+    *,
+    time_msc: int,
+    magic: int,
+    entry: int,
+    symbol: str = "XAUUSD",
+    profit: float = 0.0,
+    commission: float = 0.0,
+    swap: float = 0.0,
+    fee: float = 0.0,
+) -> SimpleNamespace:
+    return SimpleNamespace(
+        ticket=ticket,
+        position_id=position_id,
+        time_msc=time_msc,
+        magic=magic,
+        entry=entry,
+        symbol=symbol,
+        profit=profit,
+        commission=commission,
+        swap=swap,
+        fee=fee,
+    )
+
+
+def test_position_origin_pnl_includes_guardian_exit_and_all_costs() -> None:
+    snapshot = position_origin_pnl(
+        [
+            deal(1, 100, time_msc=1000, magic=961101, entry=0, commission=-0.5),
+            deal(
+                2,
+                100,
+                time_msc=2000,
+                magic=919200,
+                entry=1,
+                profit=20.0,
+                commission=-0.5,
+                swap=-1.0,
+                fee=-0.25,
+            ),
+        ],
+        {961101},
+        "XAUUSD",
+    )
+    assert snapshot.closed_pnl == pytest.approx(17.75)
+    assert snapshot.peak_closed_pnl == pytest.approx(17.75)
+    assert snapshot.closed_drawdown == pytest.approx(0.0)
+    assert snapshot.attributed_positions == 1
+    assert snapshot.attributed_deals == 2
+
+
+def test_position_origin_pnl_excludes_unrelated_and_exit_only_lifecycles() -> None:
+    snapshot = position_origin_pnl(
+        [
+            deal(1, 100, time_msc=1000, magic=777777, entry=0),
+            deal(2, 100, time_msc=2000, magic=919200, entry=1, profit=50.0),
+            deal(3, 200, time_msc=3000, magic=961101, entry=1, profit=40.0),
+            deal(
+                4,
+                300,
+                time_msc=4000,
+                magic=961101,
+                entry=0,
+                symbol="EURUSD",
+            ),
+            deal(
+                5,
+                300,
+                time_msc=5000,
+                magic=919200,
+                entry=1,
+                symbol="EURUSD",
+                profit=30.0,
+            ),
+        ],
+        {961101},
+        "XAUUSD",
+    )
+    assert snapshot.closed_pnl == 0.0
+    assert snapshot.attributed_positions == 0
+    assert snapshot.attributed_deals == 0
+
+
+def test_position_origin_pnl_counts_partial_exits_once_and_rebuilds_peak() -> None:
+    snapshot = position_origin_pnl(
+        [
+            deal(4, 400, time_msc=4000, magic=919200, entry=1, profit=-25.0),
+            deal(1, 400, time_msc=1000, magic=961201, entry=0, commission=-1.0),
+            deal(3, 400, time_msc=3000, magic=919200, entry=1, profit=-20.0),
+            deal(2, 400, time_msc=2000, magic=961201, entry=1, profit=60.0),
+        ],
+        {961201},
+        "XAUUSD",
+    )
+    assert snapshot.closed_pnl == pytest.approx(14.0)
+    assert snapshot.peak_closed_pnl == pytest.approx(59.0)
+    assert snapshot.closed_drawdown == pytest.approx(45.0)
+    assert snapshot.attributed_deals == 4
+
+
+def test_closed_pnl_fails_closed_when_mt5_history_is_unavailable() -> None:
+    mt5 = SimpleNamespace(
+        DEAL_ENTRY_IN=0,
+        DEAL_ENTRY_INOUT=2,
+        history_deals_get=lambda *_: None,
+    )
+    with pytest.raises(RuntimeError, match="deal history is unavailable"):
+        closed_pnl(
+            mt5,
+            {"activated_at_utc": "2026-07-21T00:00:00Z"},
+            {961101},
+            "XAUUSD",
+            {"account": {"usd_to_account_currency": 3.6725}},
+        )
+
+
+def test_closed_pnl_converts_complete_position_lifecycle_to_usd() -> None:
+    rows = [
+        deal(1, 500, time_msc=1000, magic=961101, entry=0, commission=-3.6725),
+        deal(2, 500, time_msc=2000, magic=919200, entry=1, profit=36.725),
+    ]
+    mt5 = SimpleNamespace(
+        DEAL_ENTRY_IN=0,
+        DEAL_ENTRY_INOUT=2,
+        history_deals_get=lambda *_: rows,
+    )
+    snapshot = closed_pnl(
+        mt5,
+        {"activated_at_utc": "2026-07-21T00:00:00Z"},
+        {961101},
+        "XAUUSD",
+        {"account": {"usd_to_account_currency": 3.6725}},
+    )
+    assert snapshot.closed_pnl == pytest.approx(9.0)
+    assert snapshot.peak_closed_pnl == pytest.approx(9.0)
+    assert snapshot.attributed_positions == 1
+    assert snapshot.attributed_deals == 2
+
+
+def test_reconstructed_peak_replaces_legacy_magic_filtered_peak() -> None:
+    state = {
+        "peak_equity_usd": 3000.0,
+        "peak_closed_pnl_usd": 10.0,
+        "closed_pnl_usd": 10.0,
+        "closed_drawdown_usd": 0.0,
+        "drawdown_suspended": False,
+        "activation_equity_usd": 3000.0,
+    }
+    risk = {
+        "closed_drawdown_suspend_usd": 225.0,
+        "closed_drawdown_suspend_fraction": 0.075,
+        "closed_drawdown_resume_usd": 180.0,
+        "closed_drawdown_resume_fraction": 0.06,
+    }
+    refresh_drawdown_state(
+        state,
+        equity=3000.0,
+        closed_pnl=-130.0,
+        reconstructed_peak_closed_pnl=100.0,
+        risk=risk,
+    )
+    assert state["peak_closed_pnl_usd"] == 100.0
+    assert state["closed_drawdown_usd"] == 230.0
+    assert state["drawdown_suspended"] is True
+
+
 def test_risk_threshold_uses_lower_of_absolute_and_activation_fraction() -> None:
     state = {"activation_equity_usd": 987.6623553437713}
     risk = {
+        "equity_fraction_limits_enabled": True,
         "floating_drawdown_hard_stop_usd": 449.7675,
         "floating_drawdown_hard_stop_fraction": 0.15,
     }
     assert effective_risk_threshold_usd(
         state, risk, "floating_drawdown_hard_stop_usd"
     ) == pytest.approx(148.1493533015657)
+
+
+def test_risk_threshold_uses_absolute_limit_when_equity_scaling_is_disabled() -> None:
+    state = {"activation_equity_usd": 1.0}
+    risk = {
+        "equity_fraction_limits_enabled": False,
+        "floating_drawdown_hard_stop_usd": 449.7675,
+        "floating_drawdown_hard_stop_fraction": 0.15,
+    }
+    assert effective_risk_threshold_usd(
+        state, risk, "floating_drawdown_hard_stop_usd"
+    ) == pytest.approx(449.7675)
 
 
 def test_addon_candidate_carries_initial_risk_and_event_identity() -> None:

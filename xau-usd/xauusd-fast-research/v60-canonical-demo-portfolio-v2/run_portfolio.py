@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from executor import (  # noqa: E402
     RETRYABLE_RETCODES,
     SUCCESS_RETCODES,
+    PositionOriginPnl,
     append_event,
     atomic_write_json,
     candidate_comment,
@@ -30,14 +31,22 @@ from executor import (  # noqa: E402
     mark_seen,
     own_positions,
     parse_utc,
+    position_origin_pnl,
     refresh_drawdown_state,
     source_positions,
     utc_now,
     utc_text,
 )
+from ml_topup import (  # noqa: E402
+    evaluate_candidate as evaluate_ml_topup_candidate,
+    prepare_runtime as prepare_ml_topup_runtime,
+    status_snapshot as ml_topup_status_snapshot,
+    topup_comment,
+)
 
 
 CONFIG_PATH = ROOT / "config" / "v60_canonical_demo_portfolio_v2.json"
+ML_OVERLAY_PATH = ROOT / "config" / "v60_portable_ml_topup_v3_overlay.json"
 
 
 def sha256_file(path: Path) -> str:
@@ -70,8 +79,31 @@ def verify_deployment_parity(config: Mapping[str, Any]) -> dict[str, Any]:
     return artifact
 
 
-def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
+def apply_ml_overlay(
+    config: dict[str, Any], base_path: Path, overlay_path: Path
+) -> dict[str, Any]:
+    overlay = json.loads(overlay_path.read_text(encoding="utf-8"))
+    if overlay.get("schema_version") != "xauusd_v60_portable_ml_topup_v3_overlay":
+        raise RuntimeError("Unexpected portable ML overlay schema")
+    expected_base = overlay["base_config"]
+    expected_path = REPO_ROOT / str(expected_base["path"])
+    if expected_path.resolve() != base_path.resolve():
+        raise RuntimeError("Portable ML overlay is bound to a different base config")
+    if sha256_file(base_path) != str(expected_base["sha256"]):
+        raise RuntimeError("Portable ML base config identity changed")
+    config["authorization"].update(overlay["authorization"])
+    config["ml_topup"] = overlay["ml_topup"]
+    config["_ml_overlay_path"] = str(overlay_path)
+    return config
+
+
+def load_config(
+    path: Path = CONFIG_PATH, ml_overlay_path: Path | None = None
+) -> dict[str, Any]:
+    path = path.resolve()
     config = json.loads(path.read_text(encoding="utf-8"))
+    if ml_overlay_path is not None:
+        config = apply_ml_overlay(config, path, ml_overlay_path.resolve())
     auth = config["authorization"]
     if not auth.get("demo_authorized") or not auth.get("broker_action_authorized"):
         raise RuntimeError("V60 demo broker action is not authorized")
@@ -81,8 +113,30 @@ def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
         raise RuntimeError("Canonical demo executor must not enforce a minimum balance")
     if not auth.get("demo_balance_eligibility_waived"):
         raise RuntimeError("Demo balance eligibility waiver is absent")
-    if auth.get("ml_runtime_authorized") or auth.get("ml_shadow_authorized"):
-        raise RuntimeError("ML runtime and ML shadow must both remain unauthorized")
+    configured_equity_scaling = config["risk"].get("equity_fraction_limits_enabled")
+    if configured_equity_scaling not in (None, False):
+        raise RuntimeError(
+            "Canonical demo risk limits must use explicit absolute-USD-only mode"
+        )
+    config["risk"]["equity_fraction_limits_enabled"] = False
+    if auth.get("ml_shadow_authorized"):
+        raise RuntimeError("ML shadow must remain unauthorized")
+    if auth.get("ml_runtime_authorized"):
+        settings = config.get("ml_topup", {})
+        if not auth.get("demo_ml_topup_authorized"):
+            raise RuntimeError("Portable ML demo top-up owner authorization is absent")
+        if not bool(settings.get("enabled")):
+            raise RuntimeError("Authorized portable ML top-up is not enabled")
+        if settings.get("failure_policy") != "BASELINE_ONLY":
+            raise RuntimeError("Portable ML must fail to the deterministic baseline")
+        if settings.get("execution_mode") != "PROSPECTIVE_DEMO_ONLY":
+            raise RuntimeError("Portable ML execution mode is not demo-only")
+        if float(settings.get("topup_lot", 0.0)) != float(
+            config["account"]["fixed_lot"]
+        ):
+            raise RuntimeError("Portable ML top-up must equal one fixed-lot unit")
+    elif config.get("ml_topup", {}).get("enabled"):
+        raise RuntimeError("Portable ML top-up is enabled without runtime authority")
     expected = {
         "R1_BOX",
         "R1_PULLBACK",
@@ -295,21 +349,19 @@ def closed_pnl(
     magics: set[int],
     symbol: str,
     config: Mapping[str, Any],
-) -> float:
+) -> PositionOriginPnl:
     start = parse_utc(state["activated_at_utc"]) - timedelta(minutes=1)
-    deals = mt5.history_deals_get(start, utc_now()) or []
-    account_currency_pnl = float(
-        sum(
-            float(getattr(deal, "profit", 0.0))
-            + float(getattr(deal, "commission", 0.0))
-            + float(getattr(deal, "swap", 0.0))
-            + float(getattr(deal, "fee", 0.0))
-            for deal in deals
-            if int(getattr(deal, "magic", -1)) in magics
-            and str(getattr(deal, "symbol", "")) == symbol
-        )
+    deals = mt5.history_deals_get(start, utc_now())
+    if deals is None:
+        raise RuntimeError("MT5 deal history is unavailable for V60 P/L accounting")
+    snapshot = position_origin_pnl(
+        deals,
+        magics,
+        symbol,
+        entry_in=int(getattr(mt5, "DEAL_ENTRY_IN", 0)),
+        entry_inout=int(getattr(mt5, "DEAL_ENTRY_INOUT", 2)),
     )
-    return account_value_usd(account_currency_pnl, config)
+    return snapshot.scaled(float(config["account"]["usd_to_account_currency"]))
 
 
 def recent_same_direction_losses(
@@ -554,6 +606,9 @@ def open_candidate(
     config: Mapping[str, Any],
     symbol_info: Any,
     tick: Any,
+    *,
+    volume: float | None = None,
+    comment_override: str | None = None,
 ) -> tuple[Any, str, str | None, Any | None]:
     point = float(symbol_info.point)
     minimum_stop = max(point, float(symbol_info.trade_stops_level) * point)
@@ -567,7 +622,11 @@ def open_candidate(
     order_type = (
         mt5.ORDER_TYPE_BUY if candidate.direction == "LONG" else mt5.ORDER_TYPE_SELL
     )
-    comment = candidate_comment(candidate)
+    comment = (
+        candidate_comment(candidate)
+        if comment_override is None
+        else str(comment_override)[:31]
+    )
     before_tickets = {
         int(position.ticket)
         for position in (mt5.positions_get(symbol=config["account"]["symbol"]) or [])
@@ -575,7 +634,9 @@ def open_candidate(
     request = {
         "action": mt5.TRADE_ACTION_DEAL,
         "symbol": config["account"]["symbol"],
-        "volume": float(config["account"]["fixed_lot"]),
+        "volume": float(
+            config["account"]["fixed_lot"] if volume is None else volume
+        ),
         "type": order_type,
         "price": price,
         "sl": stop,
@@ -712,6 +773,88 @@ def active_initial_risk(
     return total, by_direction
 
 
+def ml_topup_risk_reason(
+    candidate: Any,
+    config: Mapping[str, Any],
+    state: Mapping[str, Any],
+    positions: list[Any],
+    *,
+    active_initial_risk_usd: float,
+    active_direction_risk_usd: Mapping[str, float],
+    active_addon_risk_usd: float,
+    effective_risk_limits: Mapping[str, float],
+) -> str | None:
+    settings = config["ml_topup"]
+    source = next(
+        (
+            value
+            for value in config["sources"]
+            if str(value["source_id"]) == candidate.source_id
+        ),
+        None,
+    )
+    if source is None:
+        return "ML_TOPUP_UNKNOWN_SOURCE"
+    additional_risk = float(candidate.initial_risk_usd)
+    maximum_source_risk = source.get("maximum_risk_usd")
+    if maximum_source_risk is None:
+        return "ML_TOPUP_SOURCE_RISK_LIMIT_UNAVAILABLE"
+    if additional_risk * 2.0 > float(maximum_source_risk):
+        return "ML_TOPUP_SOURCE_RISK_LIMIT"
+
+    metadata_by_ticket = {
+        int(metadata["ticket"]): metadata
+        for metadata in state.get("positions", {}).values()
+        if metadata.get("ticket") is not None
+    }
+    unknown_sources = set(settings["historically_unknown_risk_source_ids"])
+    for position in positions:
+        metadata = metadata_by_ticket.get(int(position.ticket), {})
+        if metadata.get("source_id") in unknown_sources:
+            return "ML_TOPUP_ACTIVE_HISTORICALLY_UNKNOWN_RISK"
+
+    if (
+        active_initial_risk_usd + additional_risk
+        > float(effective_risk_limits["maximum_account_concurrent_initial_risk_usd"])
+    ):
+        return "ML_TOPUP_MAXIMUM_ACCOUNT_CONCURRENT_INITIAL_RISK"
+    if (
+        float(active_direction_risk_usd[candidate.direction]) + additional_risk
+        > float(
+            effective_risk_limits[
+                "maximum_directional_concurrent_initial_risk_usd"
+            ]
+        )
+    ):
+        return "ML_TOPUP_MAXIMUM_DIRECTIONAL_CONCURRENT_INITIAL_RISK"
+    if candidate.sleeve_type == "ADDON" and (
+        active_addon_risk_usd + additional_risk
+        > float(config["risk"]["maximum_addon_concurrent_initial_risk_usd"])
+    ):
+        return "ML_TOPUP_MAXIMUM_ADDON_CONCURRENT_INITIAL_RISK"
+    if len(positions) >= int(config["risk"]["maximum_account_xau_positions"]):
+        return "ML_TOPUP_MAXIMUM_ACCOUNT_XAU_POSITIONS"
+
+    current_tickets = {int(position.ticket) for position in positions}
+    open_ml_topups = sum(
+        bool(metadata.get("ml_topup"))
+        and metadata.get("ticket") is not None
+        and int(metadata["ticket"]) in current_tickets
+        for metadata in state.get("positions", {}).values()
+    )
+    if open_ml_topups >= int(settings["maximum_open_ml_topups"]):
+        return "ML_TOPUP_MAXIMUM_OPEN_TOPUPS"
+    ml_state = state.get("ml_topup", {})
+    if candidate.candidate_id in ml_state.get("orders", {}):
+        return "ML_TOPUP_DUPLICATE_EVENT"
+    date_key = candidate.scheduled_at.date().isoformat()
+    if int(ml_state.get("daily_topups", {}).get(date_key, 0)) >= int(
+        settings["maximum_ml_topups_per_utc_day"]
+    ):
+        return "ML_TOPUP_MAXIMUM_DAILY_TOPUPS"
+    return None
+
+
 def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     now = utc_now()
     runtime = Path(config["runtime"]["directory"])
@@ -729,6 +872,12 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     broker_geometry = broker_geometry_preflight(mt5, config, symbol_info)
     equity_usd = account_value_usd(float(account.equity), config)
     state = load_state(state_path, now, equity_usd)
+    ml_authorized = bool(config["authorization"].get("ml_runtime_authorized"))
+    ml_runtime = (
+        prepare_ml_topup_runtime(mt5, REPO_ROOT, config, symbol_info)
+        if ml_authorized
+        else {"ready": False, "reason": "ML_RUNTIME_UNAUTHORIZED"}
+    )
     magics = {int(source["magic"]) for source in config["sources"]}
     core_magics = {
         int(source["magic"])
@@ -739,8 +888,17 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     symbol = config["account"]["symbol"]
     pnl = closed_pnl(mt5, state, magics, symbol, config)
     refresh_drawdown_state(
-        state, equity=equity_usd, closed_pnl=pnl, risk=config["risk"]
+        state,
+        equity=equity_usd,
+        closed_pnl=pnl.closed_pnl,
+        reconstructed_peak_closed_pnl=pnl.peak_closed_pnl,
+        risk=config["risk"],
     )
+    state["closed_pnl_attribution"] = {
+        "mode": "POSITION_ORIGIN",
+        "attributed_positions": pnl.attributed_positions,
+        "attributed_deals": pnl.attributed_deals,
+    }
     if execution_enabled:
         manage_horizon_exits(mt5, config, state, events_path, now)
 
@@ -1009,6 +1167,156 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         active_addon_risk, _ = active_initial_risk(
             addon_positions, state, symbol_info, mt5
         )
+        # The deterministic fill is durable before any optional model work.
+        atomic_write_json(state_path, state)
+        if ml_authorized:
+            ml_decision = evaluate_ml_topup_candidate(
+                ml_runtime, config, state, candidate, now
+            )
+            if bool(ml_decision.get("topup")):
+                topup_reason = (
+                    "ML_TOPUP_BASELINE_POSITION_IDENTITY_UNRESOLVED"
+                    if ticket is None
+                    else ml_topup_risk_reason(
+                        candidate,
+                        config,
+                        state,
+                        positions,
+                        active_initial_risk_usd=active_initial_risk_usd,
+                        active_direction_risk_usd=active_direction_risk_usd,
+                        active_addon_risk_usd=active_addon_risk,
+                        effective_risk_limits=effective_risk_limits,
+                    )
+                )
+                topup_tick = mt5.symbol_info_tick(symbol)
+                if topup_reason is None and topup_tick is None:
+                    topup_reason = "ML_TOPUP_NO_BROKER_TICK"
+                if topup_reason is None:
+                    topup_tick_time = datetime.fromtimestamp(
+                        int(topup_tick.time_msc) / 1000.0, tz=UTC
+                    )
+                    if (utc_now() - topup_tick_time).total_seconds() > int(
+                        config["runtime"]["maximum_tick_age_seconds"]
+                    ):
+                        topup_reason = "ML_TOPUP_STALE_BROKER_TICK"
+
+                ml_state = state["ml_topup"]
+                order_record = {
+                    "candidate_id": candidate.candidate_id,
+                    "source_id": candidate.source_id,
+                    "decision_score": float(ml_decision["score"]),
+                    "decision_rank": float(ml_decision["rank"]),
+                    "requested_at_utc": utc_text(utc_now()),
+                    "status": "TOPUP_REJECTED",
+                    "reason": topup_reason,
+                }
+                if topup_reason is None:
+                    try:
+                        (
+                            topup_result,
+                            topup_order_comment,
+                            topup_deadline,
+                            topup_position,
+                        ) = open_candidate(
+                            mt5,
+                            candidate,
+                            config,
+                            symbol_info,
+                            topup_tick,
+                            volume=float(config["ml_topup"]["topup_lot"]),
+                            comment_override=topup_comment(candidate),
+                        )
+                        topup_retcode = (
+                            None
+                            if topup_result is None
+                            else int(topup_result.retcode)
+                        )
+                        order_record.update(
+                            {
+                                "retcode": topup_retcode,
+                                "broker_comment": (
+                                    None
+                                    if topup_result is None
+                                    else str(topup_result.comment)
+                                ),
+                            }
+                        )
+                        if topup_retcode in SUCCESS_RETCODES:
+                            topup_ticket = (
+                                None
+                                if topup_position is None
+                                else int(topup_position.ticket)
+                            )
+                            order_record.update(
+                                {
+                                    "status": (
+                                        "ORDER_FILLED"
+                                        if topup_ticket is not None
+                                        else "ORDER_FILLED_POSITION_UNRESOLVED"
+                                    ),
+                                    "reason": None,
+                                    "ticket": topup_ticket,
+                                    "broker_order": int(
+                                        getattr(topup_result, "order", 0) or 0
+                                    ),
+                                    "broker_deal": int(
+                                        getattr(topup_result, "deal", 0) or 0
+                                    ),
+                                }
+                            )
+                            position_key = f"{candidate.candidate_id}:ML3"
+                            state["positions"][position_key] = {
+                                "ticket": topup_ticket,
+                                "magic": candidate.magic,
+                                "comment": topup_order_comment,
+                                "source_id": candidate.source_id,
+                                "sleeve_type": candidate.sleeve_type,
+                                "direction": candidate.direction,
+                                "initial_risk_usd": candidate.initial_risk_usd,
+                                "event_id": candidate.event_id,
+                                "ml_topup": True,
+                                "ml_parent_candidate_id": candidate.candidate_id,
+                                "ml_score": float(ml_decision["score"]),
+                                "ml_rank": float(ml_decision["rank"]),
+                                "opened_at_utc": utc_text(utc_now()),
+                                "close_at_utc": topup_deadline,
+                                "status": (
+                                    "OPEN"
+                                    if topup_ticket is not None
+                                    else "POSITION_IDENTITY_UNRESOLVED"
+                                ),
+                            }
+                            date_key = candidate.scheduled_at.date().isoformat()
+                            ml_state["daily_topups"][date_key] = (
+                                int(ml_state["daily_topups"].get(date_key, 0)) + 1
+                            )
+                        else:
+                            order_record["reason"] = "ML_TOPUP_ORDER_NOT_FILLED"
+                    except Exception as exc:
+                        order_record.update(
+                            {
+                                "status": "TOPUP_REJECTED",
+                                "reason": "ML_TOPUP_ORDER_EXCEPTION",
+                                "detail": f"{type(exc).__name__}: {exc}",
+                            }
+                        )
+                ml_state["orders"][candidate.candidate_id] = order_record
+                append_event(
+                    events_path,
+                    order_record | {"event": "ML_TOPUP_ORDER_RESULT"},
+                )
+                positions = list(mt5.positions_get(symbol=symbol) or [])
+                ours = own_positions(positions, magics, symbol)
+                core_positions = own_positions(positions, core_magics, symbol)
+                addon_positions = own_positions(positions, addon_magics, symbol)
+                (
+                    active_initial_risk_usd,
+                    active_direction_risk_usd,
+                ) = active_initial_risk(ours, state, symbol_info, mt5)
+                active_addon_risk, _ = active_initial_risk(
+                    addon_positions, state, symbol_info, mt5
+                )
+                atomic_write_json(state_path, state)
         processed += 1
 
     atomic_write_json(state_path, state)
@@ -1038,6 +1346,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "equity_usd": equity_usd,
         "activation_equity_usd": float(state["activation_equity_usd"]),
         "closed_pnl_usd": float(state["closed_pnl_usd"]),
+        "closed_pnl_attribution": dict(state["closed_pnl_attribution"]),
         "closed_drawdown_usd": float(state["closed_drawdown_usd"]),
         "floating_drawdown_usd": floating_drawdown(state, equity_usd),
         "drawdown_suspended": bool(state["drawdown_suspended"]),
@@ -1047,6 +1356,8 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "emergency_close_results": emergency_close_results,
         "emergency_close_failures": emergency_close_failures,
         "effective_risk_limits_usd": effective_risk_limits,
+        "risk_limit_mode": "ABSOLUTE_USD_ONLY",
+        "equity_fraction_limits_enabled": False,
         "core_open_positions": len(core_positions),
         "addon_open_positions": len(addon_positions),
         "addon_active_initial_risk_usd": active_addon_risk,
@@ -1066,8 +1377,9 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "broker_action_authorized": True,
         "execution_enabled": execution_enabled,
         "live_authorized": False,
-        "ml_runtime_authorized": False,
+        "ml_runtime_authorized": ml_authorized,
         "ml_shadow_authorized": False,
+        "ml_topup": ml_topup_status_snapshot(ml_runtime, state),
         "chart_profile_preflight": profile,
         "feed_preflight": feeds,
         "broker_geometry_preflight": broker_geometry,
@@ -1079,12 +1391,16 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Run the deterministic V59/V60 canonical demo portfolio"
+        description="Run the V59/V60 canonical demo portfolio"
     )
     parser.add_argument("--config", type=Path, default=CONFIG_PATH)
+    parser.add_argument("--ml-overlay", type=Path)
     parser.add_argument("--once", action="store_true")
     args = parser.parse_args()
-    config = load_config(args.config.resolve())
+    config = load_config(
+        args.config.resolve(),
+        None if args.ml_overlay is None else args.ml_overlay.resolve(),
+    )
     mt5 = load_mt5()
     terminal = str(Path(config["account"]["terminal_exe"]).resolve())
     if not mt5.initialize(path=terminal, portable=True):
@@ -1103,7 +1419,9 @@ def main() -> int:
                     "error": f"{type(exc).__name__}: {exc}",
                     "broker_action_authorized": True,
                     "execution_enabled": bool(config["runtime"]["execution_enabled"]),
-                    "ml_runtime_authorized": False,
+                    "ml_runtime_authorized": bool(
+                        config["authorization"].get("ml_runtime_authorized")
+                    ),
                     "ml_shadow_authorized": False,
                     "live_authorized": False,
                 }

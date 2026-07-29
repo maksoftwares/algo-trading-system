@@ -1,0 +1,12 @@
+{
+  "files": {
+    "PREREGISTRATION.md": "fe93b0c889474a0deb427683e8a4f29f5e529a8a6ddaace7de7f698bc1c66652",
+    "config/PORTABLE_MATURE_TOPUP_V2.json": "37351b2de88620794a5094d463b73c201916c4d838d13cf396d50437e342af00",
+    "run_experiment.py": "e012d1fc96e01ab1e7d8725dd12427633f7d033a10d5422943b1e9c7f35686b0",
+    "src/__init__.py": "64c7ae889ce2e6ed8b1845179d16c1cb5ef089c57f70737e984a0d5f6707e300",
+    "src/experiment.py": "8133cb0d7b96d5c370a4a4fe9f3ca7d340dcd9e11d4db934400af3c094044f29",
+    "tests/test_experiment.py": "8b229ace0df878263731194cc84aba796025d80f7276c855aee0cfb64fa08ac7"
+  },
+  "locked_before_result": true,
+  "schema_version": "codex_v60_portable_mature_topup_v2_implementation_lock"
+}
