@@ -64,10 +64,10 @@ def aggregate_resolution_bars(
     bars["mid_low"] = (bars["bid_low"] + bars["ask_low"]) / 2.0
     bars["mid_close"] = (bars["bid_close"] + bars["ask_close"]) / 2.0
     bars["complete_bar"] = bars["m5_bars"].eq(resolution_minutes // 5)
-    bars["body_fraction"] = (
-        (bars["mid_close"] - bars["mid_open"]).abs()
-        / (bars["mid_high"] - bars["mid_low"]).replace(0.0, pd.NA)
-    ).astype(float)
+    bar_range = bars["mid_high"] - bars["mid_low"]
+    bars["body_fraction"] = (bars["mid_close"] - bars["mid_open"]).abs() / (
+        bar_range.mask(bar_range.eq(0.0))
+    )
     bars["available_time"] = bars["timestamp"] + pd.Timedelta(
         minutes=resolution_minutes
     )
