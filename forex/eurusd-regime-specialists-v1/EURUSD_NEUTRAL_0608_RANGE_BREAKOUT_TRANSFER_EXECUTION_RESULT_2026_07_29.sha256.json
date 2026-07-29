@@ -1,0 +1,15 @@
+{
+  "all_performance_gates_passed": false,
+  "broker_action_allowed": false,
+  "family": "N48_NEUTRAL_0608_UTC_RANGE_BREAKOUT_TRANSFER_FRESH_V1_1",
+  "files": {
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_EXECUTION_PREREG_2026_07_29.sha256.json": "78dc960fbe4a7c84e80578fd4140b4b85ca51c39528afb9b0e7f207f66375ab4",
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_EXECUTION_RESULT_2026_07_29.md": "9b8fb7742708afb1b731a90d7ddf177438e1c5b37705890884b7d97d5179cb35",
+    "outputs/neutral_0608_range_breakout_transfer_execution/ORACLE_MATCHES.csv": "87eb5d324bc7674261630fa38655382052e24691e5c9ecbb2d0e2453b3bbc20c",
+    "outputs/neutral_0608_range_breakout_transfer_execution/RESULT.json": "7e3ab30f0ae69251cbc5a9cc9fba8cba1824bea5dd83047d1766c294976627e0",
+    "outputs/neutral_0608_range_breakout_transfer_execution/ROUTING.csv": "08fde6889d375706ce4362309773f987db44084e8999d85a31e0f3ba247c1928",
+    "outputs/neutral_0608_range_breakout_transfer_execution/TRADES.csv": "fd526d4d7e28cdb286a019e3f46855b6aafc8a9f7059dd28df7bb516608e49d5"
+  },
+  "historical_pass_can_authorize_demo": false,
+  "status": "REJECTED_EXACT_TRANSFER_EXECUTION"
+}
