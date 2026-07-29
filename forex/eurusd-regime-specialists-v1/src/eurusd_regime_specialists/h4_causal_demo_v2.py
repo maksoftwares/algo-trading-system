@@ -489,7 +489,67 @@ def run(config_path: Path, output_dir: Path) -> dict[str, Any]:
         ledgers[int(delay)], risk_caps[f"{delay}m"] = assemble(int(delay))
     portfolio = ledgers[0]
     if portfolio.empty:
-        raise RuntimeError("No standalone component passed the frozen admission gates")
+        result = {
+            "schema_version": "eurusd_h4_causal_demo_v2_result",
+            "frozen_config_sha256": hashlib.sha256(config_bytes).hexdigest(),
+            "source_sha256": anchor["source"]["sha256"],
+            "post_hoc_developmental_not_pristine_oos": True,
+            "broker_action_allowed": False,
+            "data_audit": data_audit,
+            "variants": variants,
+            "selected_components": [],
+            "portfolio": None,
+            "status": "NO_STANDALONE_COMPONENT_PASSED",
+        }
+        output_dir.mkdir(parents=True, exist_ok=True)
+        pd.DataFrame(
+            [
+                {
+                    "variant": name,
+                    "admitted": item["evaluation"]["admitted"],
+                    **item["evaluation"]["windows"]["FULL_AUDIT"],
+                    "extra_0p5pip_profit_factor": item["evaluation"][
+                        "extra_0p5pip"
+                    ]["profit_factor"],
+                    "latest_12_month_profit_factor": item["evaluation"][
+                        "windows"
+                    ]["LATEST_12_MONTHS"]["profit_factor"],
+                    "failed_checks": ",".join(
+                        name
+                        for name, passed in item["evaluation"]["checks"].items()
+                        if not passed
+                    ),
+                }
+                for name, item in variants.items()
+            ]
+        ).to_csv(output_dir / "VARIANTS.csv", index=False, lineterminator="\n")
+        (output_dir / "RESULT.json").write_text(
+            json.dumps(result, indent=2, allow_nan=False) + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        variant_lines = "\n".join(
+            f"| {name} | "
+            f"{item['evaluation']['windows']['FULL_AUDIT']['trades']} | "
+            f"{item['evaluation']['windows']['FULL_AUDIT']['profit_factor']:.3f} | "
+            f"{item['evaluation']['extra_0p5pip']['profit_factor']:.3f} | "
+            f"{item['evaluation']['windows']['LATEST_12_MONTHS']['profit_factor']:.3f} | "
+            f"{', '.join(check for check, passed in item['evaluation']['checks'].items() if not passed)} |"
+            for name, item in variants.items()
+        )
+        (
+            package_root / "EURUSD_H4_CAUSAL_DEMO_V2_RESULT_2026_07_30.md"
+        ).write_text(
+            "# EURUSD causal demo V2 historical result\n\n"
+            "Status: **NO_STANDALONE_COMPONENT_PASSED**\n\n"
+            "| Variant | Trades | PF | +0.5 pip PF | Latest-12M PF | Failed checks |\n"
+            "|---|---:|---:|---:|---:|---|\n"
+            f"{variant_lines}\n\n"
+            "No portfolio was assembled and no demo promotion is allowed.\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        return result
     plus_half = apply_weighted_cost(portfolio, 0.5)
     plus_one = apply_weighted_cost(portfolio, 1.0)
     rollover = apply_weighted_rollover(
