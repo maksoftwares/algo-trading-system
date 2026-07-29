@@ -1,0 +1,45 @@
+{
+  "schema_version": "eurusd_neutral_dukascopy_swfx_sentiment_semantics_audit_v1",
+  "observed_at_utc": "2026-07-29T05:33:30.8276123Z",
+  "verdict": "GENERIC_INDEX_SEMANTICS_VERIFIED_JSONP_FIELD_BINDING_STILL_UNVERIFIED",
+  "official_page": "https://www.dukascopy.com/swiss/english/marketwatch/sentiment/",
+  "official_claims_verified": {
+    "consumer_ratio_is_share_of_open_long_or_short_positions": true,
+    "index_is_long_share_minus_short_share_percentage_points": true,
+    "positive_index_is_long_majority": true,
+    "negative_index_is_short_majority": true,
+    "update_interval_minutes": 30
+  },
+  "derived_identity_not_strategy": {
+    "long_share_from_long_minus_short_index": "(100 + x) / 2",
+    "short_share_from_long_minus_short_index": "(100 - x) / 2"
+  },
+  "embedded_widget_observation": {
+    "official_page_loaded": true,
+    "realtime_iframe_declared": true,
+    "historical_iframe_declared": true,
+    "visible_eurusd_value_available": false,
+    "first_surface_result": "LOADING_WITHOUT_INSTRUMENT_ROWS",
+    "second_surface_result": "EMPTY_IFRAME",
+    "direct_widget_result": "HTTP_RESPONSE_CODE_FAILURE",
+    "counts_toward_manual_value_comparison_gate": false
+  },
+  "remaining_ambiguity": {
+    "exact_jsonp_long_short_property_mapping_verified": false,
+    "provider_settlement_timestamp_in_jsonp": false,
+    "visible_value_comparison_occasions": 0,
+    "required_visible_value_comparison_occasions": 3
+  },
+  "research_boundary": {
+    "source_only": true,
+    "direction_mapping_selected": false,
+    "threshold_selected": false,
+    "eurusd_prices_loaded": false,
+    "eurusd_returns_loaded": false,
+    "eurusd_pnl_loaded": false,
+    "oracle_rows_loaded": false,
+    "signal_generated": false,
+    "trade_created": false,
+    "broker_action_allowed": false
+  }
+}

@@ -66,6 +66,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 60. Dukascopy SWFX sentiment feasibility: the official no-login public endpoint returned 1,360 consumer-sentiment rows with exactly one EUR/USD record, an HTTP timestamp, and a reproducible response hash. The source is genuinely new but not yet strategy-ready: its JSONP payload lacks an explicit settlement timestamp, its signed field semantics are not formally bound to the documented percentage-long versus tendency definitions, and the raw diagnostic body was not preserved. Only a separately preregistered, source-only prospective capture census is allowed next; no direction, threshold, outcome, or P&L was selected.
 61. Prospective SWFX sentiment source census: before its `2026-07-29T06:30:00Z` start, a source-only half-hourly UTC-weekday capture was locked. It preserves immutable raw JSONP, headers, local observation clocks, hashes, and the exact EUR/USD row while loading no EURUSD price, return, oracle, outcome, or P&L. The source cannot qualify before 27 calendar days, 20 weekdays, 800 valid captures, the frozen coverage/variation gates, and three official-widget or JForex semantic comparisons. Passing would permit only a separately preregistered prospective strategy; this census cannot generate a signal or trade.
 62. GDELT daily operations restart: the missed `2026-07-29` boundary was recorded honestly as `CASH_MISSING_ON_TIME_SOURCE`, with no late backfill or trade. A hash-locked operations-only helper now schedules the unchanged source, ownership, decision, delayed path, and validator functions beginning with the `2026-07-30` entry date. It cannot change strategy logic or authorize broker action, and it skips source or ownership acquisition after the frozen decision deadline.
+63. SWFX semantics audit: the official Dukascopy page verifies that consumer sentiment is based on long/short open-position shares, that the index is the long-share-minus-short-share percentage-point difference, and that it updates every 30 minutes. The exact public JSONP `*_long`/`*_short` field binding remains unproven because the embedded instrument rows failed to load in both browser surfaces. This observation therefore counts as zero of the three frozen visible-value comparisons and does not authorize a strategy mapping.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -94,6 +95,7 @@ Key reports:
 - `EURUSD_NEUTRAL_DUKASCOPY_SWFX_SENTIMENT_SOURCE_FEASIBILITY_2026_07_28.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_SWFX_SENTIMENT_SOURCE_CENSUS_PREREG_2026_07_29.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_SWFX_SENTIMENT_SOURCE_CENSUS_STATE_2026_07_29.json`
+- `EURUSD_NEUTRAL_DUKASCOPY_SWFX_SENTIMENT_SEMANTICS_AUDIT_2026_07_29.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_PREREG_2026_07_28.md`
 - `EURUSD_NEUTRAL_SESSION_OCO_VERDICT_2026_07_28.md`
 - `EURUSD_NEUTRAL_FUTURES_PARTICIPATION_PREREG_2026_07_28.md`
