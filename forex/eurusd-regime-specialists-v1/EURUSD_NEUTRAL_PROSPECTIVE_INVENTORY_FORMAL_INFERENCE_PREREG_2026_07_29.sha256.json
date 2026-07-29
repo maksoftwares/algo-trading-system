@@ -1,0 +1,32 @@
+{
+  "schema_version": "eurusd_neutral_prospective_inventory_formal_inference_v1_lock",
+  "campaign_id": "eurusd-neutral-prospective-inventory-formal-inference-v1",
+  "locked_at_utc": "2026-07-29T12:22:26.0000000Z",
+  "prospective_start_utc": "2026-07-30T00:00:00Z",
+  "earliest_formal_evaluation_utc": "2027-07-30T00:00:00Z",
+  "locked_before_first_scheduled_operation": true,
+  "locked_before_first_portfolio_observation": true,
+  "locked_with_zero_source_records": true,
+  "locked_with_zero_decisions": true,
+  "locked_with_zero_trade_paths": true,
+  "locked_with_zero_oracle_records": true,
+  "locked_with_zero_formal_results": true,
+  "historical_backtest_allowed": false,
+  "historical_eurusd_pnl_allowed": false,
+  "economic_output_before_formal_readiness_allowed": false,
+  "repeated_formal_evaluation_allowed": false,
+  "network_request_allowed": false,
+  "broker_action_allowed": false,
+  "primary_scheduler_process_chain_count_at_lock": 3,
+  "transfer_scheduler_process_chain_count_at_lock": 3,
+  "files": {
+    "config/frozen_prospective_neutral_inventory_formal_inference_v1.json": "757420ac3fb0f1c9ec0f32a5365b2258333d139eb9d759732e62b4d699e678f4",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_FORMAL_INFERENCE_PREREG_2026_07_29.md": "4cc803ad7196fef925ae321080f6172d7e0641c9c633fe68900751e1def03320",
+    "validate_prospective_neutral_inventory_formal_inference.py": "609f87b872bb8b14ba296a8bd167dc9635ac700123b7a2741e77b25958fa32e7",
+    "tests/test_validate_prospective_neutral_inventory_formal_inference.py": "ba5ce8dc31c983ed0d9b30c37556f5275798bf30f2f5ef1eb63f4015c1e3da42",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_CLOCK_PORTFOLIO_PREREG_2026_07_29.sha256.json": "85852192d505ab1afb064d22f7964de314a2edd85f60a58fd65f773d28ca041a",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_PORTFOLIO_RISK_PREREG_2026_07_29.sha256.json": "120f7bc3af18aa54ecf886707c2e946b2d115ce1c4e435cf6c1c07b69379d18e",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_OPERATIONS_AUDIT_PREREG_2026_07_29.sha256.json": "e837cb357bc614d3c0f49ba3b8579f522561948d76e9eb52040d1567a12338a5"
+  },
+  "status": "FROZEN_BEFORE_FIRST_FORMAL_OUTCOME_OBSERVATION"
+}

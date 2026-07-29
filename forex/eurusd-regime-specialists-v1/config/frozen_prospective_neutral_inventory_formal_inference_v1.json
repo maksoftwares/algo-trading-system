@@ -1,0 +1,56 @@
+{
+  "schema_version": "eurusd_neutral_prospective_inventory_formal_inference_v1",
+  "campaign_id": "eurusd-neutral-prospective-inventory-formal-inference-v1",
+  "designed_at_utc": "2026-07-29T12:25:00Z",
+  "prospective_start_utc": "2026-07-30T00:00:00Z",
+  "earliest_formal_evaluation_utc": "2027-07-30T00:00:00Z",
+  "research_only": true,
+  "shadow_only": true,
+  "historical_backtest_forbidden": true,
+  "historical_eurusd_pnl_forbidden": true,
+  "economic_output_before_formal_readiness_forbidden": true,
+  "repeated_formal_evaluation_forbidden": true,
+  "network_requests_by_validator_forbidden": true,
+  "broker_action_allowed": false,
+  "sample_contract": {
+    "minimum_closed_trades": 90,
+    "minimum_0005_trades": 30,
+    "minimum_0605_trades": 20,
+    "minimum_1205_trades": 20,
+    "minimum_each_side_trades": 20,
+    "all_signal_paths_closed": true,
+    "all_closed_trade_oracle_dates_required": true,
+    "all_component_sample_and_oracle_readiness_required": true
+  },
+  "inference_contract": {
+    "resampling_unit": "UTC_ACTIVE_TRADING_DAY",
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP",
+    "block_length_active_days": 5,
+    "simulations": 20000,
+    "random_seed": 20260729,
+    "one_sided_alpha": 0.05,
+    "lower_confidence_quantile": 0.05,
+    "base_profit_factor_lower_bound_exclusive": 1.0,
+    "stressed_profit_factor_lower_bound_exclusive": 1.0,
+    "base_expectancy_r_lower_bound_exclusive": 0.0,
+    "stressed_expectancy_r_lower_bound_exclusive": 0.0,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "formal_verdict_contract": {
+    "all_three_clock_portfolio_gates_required": true,
+    "all_portfolio_risk_gates_required": true,
+    "all_inference_gates_required": true,
+    "first_complete_formal_result_is_authoritative": true,
+    "failure_is_rejected_without_retuning": true,
+    "passing_result_requires_independent_research_review": true,
+    "controlled_demo_ready_is_always_false": true
+  },
+  "output_root": "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-formal-inference-v1",
+  "unresolved_demo_requirements": {
+    "exact_mt5_parity_still_required": true,
+    "demo_account_and_server_guard_still_required": true,
+    "daily_and_rolling_loss_engine_still_required": true,
+    "broker_rejection_telemetry_still_required": true,
+    "live_authorization": false
+  }
+}
