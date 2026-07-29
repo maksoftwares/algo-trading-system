@@ -1,0 +1,25 @@
+{
+  "family": "EURUSD_NEUTRAL_RATES_DOLLAR_SIGN_CONSENSUS_H4_V1",
+  "frozen_at_utc": "2026-07-29T08:24:32Z",
+  "frozen_before_census_and_forward_outcomes": true,
+  "pnl_or_forward_path_loaded": false,
+  "oracle_decision_use_allowed": false,
+  "parameter_search_allowed": false,
+  "direction_deletion_allowed": false,
+  "calendar_or_window_selection_allowed": false,
+  "regime_substitution_allowed": false,
+  "broker_action_allowed": false,
+  "files": {
+    "config/frozen_neutral_rates_dollar_sign_consensus_h4.json": "9d3c1c92621833f8f0da31b94fbb4898250a6a0b0b70dab7814cca3d70564970",
+    "EURUSD_NEUTRAL_RATES_DOLLAR_SIGN_CONSENSUS_H4_PREREG_2026_07_29.md": "9e23fa434a261cfe6540433bc14c63400a6ac44571e97368008ba7a88698fecd"
+  },
+  "source_locks": {
+    "eurusd_m5": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "eurusd_m5_manifest": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "tlt_uup_reference": "c4bc715783dfaaf40eb6cdb014e0ddad648ea78fa1c8e46a54589bfe4be1538c",
+    "tlt_shy_reference": "3afdc1eb305211e8545deda7177ced9e6fc3d6fa1414e50a3baa54affb7e5fdf",
+    "tlt_uup_recent": "539b42f3137d9d5e168e3284b744508f089ac278670f33bfb6dc539ac66bc9f7",
+    "tlt_shy_recent": "9a7ad57e1e607e9b102642f72e3ca1ad1c855523894fdba9dddecfd54534cba7",
+    "causal_classifier_contract": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+  }
+}

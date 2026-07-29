@@ -1,0 +1,169 @@
+{
+  "campaign_id": "eurusd-neutral-rates-dollar-sign-consensus-h4-v1",
+  "frozen_at_utc": "2026-07-29T08:24:32Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "information_status": "ADAPTIVE_HISTORICAL_RESEARCH_NOT_PRISTINE_OOS",
+  "owned_regime": "NEUTRAL",
+  "hypothesis_origin": {
+    "independent_from_failed_offset_audit": true,
+    "description": "Replace the rejected extreme, short-only RatesDollar rule with a symmetric zero-threshold sign-consensus rule. No threshold is fitted and both directions are mandatory.",
+    "parent_diagnostic": "EURUSD_NEUTRAL_RATES_DOLLAR_MT5_AUDIT_2026_07_29.md",
+    "parent_diagnostic_sha256": "8a966c97a759aaf3b534829948587cf484f6ed6fcfe976ed137e4c514b90bacc"
+  },
+  "sources": {
+    "eurusd_m5": {
+      "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+      "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+      "manifest_path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json",
+      "manifest_sha256": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+      "start_utc": "2019-01-01T00:00:00Z",
+      "end_utc": "2026-06-30T23:59:59Z"
+    },
+    "tlt_uup_reference": {
+      "path": "../../xau-usd/xauusd-phase0/data/reference/etf/tlt_uup_daily_yahoo_2015_2025.csv",
+      "sha256": "c4bc715783dfaaf40eb6cdb014e0ddad648ea78fa1c8e46a54589bfe4be1538c"
+    },
+    "tlt_shy_reference": {
+      "path": "../../xau-usd/xauusd-phase0/data/reference/etf/tlt_shy_daily_yahoo_2015_2025.csv",
+      "sha256": "3afdc1eb305211e8545deda7177ced9e6fc3d6fa1414e50a3baa54affb7e5fdf"
+    },
+    "tlt_uup_recent": {
+      "path": "D:/AlgoTradingData/C_DRIVE/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/forex-research/data/external/yahoo_etf/rates_dollar/tlt_uup_daily_yahoo_20250701_20260702.csv",
+      "sha256": "539b42f3137d9d5e168e3284b744508f089ac278670f33bfb6dc539ac66bc9f7"
+    },
+    "tlt_shy_recent": {
+      "path": "D:/AlgoTradingData/C_DRIVE/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/forex-research/data/external/yahoo_etf/rates_dollar/tlt_shy_daily_yahoo_20250701_20260702.csv",
+      "sha256": "9a7ad57e1e607e9b102642f72e3ca1ad1c855523894fdba9dddecfd54534cba7"
+    },
+    "causal_classifier_contract": {
+      "path": "config/frozen_two_clock_ensemble.json",
+      "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6"
+    }
+  },
+  "availability": {
+    "daily_etf_observation_available_utc": "NEXT_CALENDAR_DATE_00_00",
+    "context_lookup_time": "COMPLETED_H4_BAR_START_UTC",
+    "regime_state_time": "ENTRY_TIME_FLOOR_HOUR_MINUS_ONE_HOUR",
+    "oracle_allowed_during_census_or_execution": false
+  },
+  "h4_construction": {
+    "timezone": "UTC",
+    "bar_rule": "4h",
+    "closed": "left",
+    "label": "left",
+    "price_for_signal": "BID",
+    "minimum_m5_rows_per_h4_bar": 1,
+    "ema_adjust": false,
+    "atr_method": "WILDER_EWM_ALPHA_1_OVER_PERIOD"
+  },
+  "strategy": {
+    "directions": [
+      "LONG",
+      "SHORT"
+    ],
+    "macro_rule": {
+      "long": "tlt_uup_5d_pct > 0 AND tlt_uup_20d_pct > 0 AND tlt_shy_20d_pct > 0",
+      "short": "tlt_uup_5d_pct < 0 AND tlt_uup_20d_pct < 0 AND tlt_shy_20d_pct < 0",
+      "zero_threshold_only": true
+    },
+    "ema_fast_period": 20,
+    "ema_mid_period": 50,
+    "ema_slow_period": 100,
+    "atr_period": 14,
+    "allowed_entry_hours_utc": [
+      0,
+      4,
+      8,
+      12,
+      16
+    ],
+    "long_price_rule": "EMA20 > EMA50 > EMA100; signal low <= EMA20 + 0.25 ATR; signal close > open and close > EMA20",
+    "short_price_rule": "EMA20 < EMA50 < EMA100; signal high >= EMA20 - 0.25 ATR; signal close < open and close < EMA20",
+    "recent_extreme_bars_including_signal": 6,
+    "stop_atr_multiple": 1.05,
+    "long_stop": "MIN(recent_6_bar_bid_low, signal_bid_close - 1.05 ATR)",
+    "short_stop": "MAX(recent_6_bar_bid_high, signal_bid_close + 1.05 ATR)",
+    "target_r": 1.5,
+    "maximum_hold_hours": 56,
+    "one_open_position": true,
+    "owned_regime_only": true
+  },
+  "execution": {
+    "entry": "FIRST_M5_BAR_AT_OR_AFTER_NEXT_H4_OPEN",
+    "long_entry_price": "ASK_OPEN",
+    "short_entry_price": "BID_OPEN",
+    "long_stop_and_target_trigger": "BID_LOW_AND_BID_HIGH",
+    "short_stop_and_target_trigger": "ASK_HIGH_AND_ASK_LOW",
+    "same_m5_bar_policy": "STOP_FIRST",
+    "time_exit": "EXECUTABLE_M5_OPEN_AT_OR_AFTER_56_WALL_CLOCK_HOURS",
+    "risk_normalization": "ONE_INITIAL_R_PER_TRADE",
+    "extra_round_trip_stress_pips": 0.5,
+    "minimum_initial_risk_pips": 1.0,
+    "maximum_initial_risk_pips": 100.0
+  },
+  "windows": {
+    "DEVELOPMENT_2019_2022": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "OOS_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "OOS_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "OOS_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "OOS_2026_H1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ],
+    "LATEST_SIX_MONTHS": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "outcome_blind_census": {
+    "minimum_neutral_signals_total": 40,
+    "minimum_neutral_signals_development": 20,
+    "minimum_neutral_signals_each_full_oos_year": 4,
+    "minimum_neutral_signals_recent_half_year": 2,
+    "minimum_neutral_signals_each_side": 10,
+    "pnl_or_forward_path_must_remain_unopened_on_failure": true
+  },
+  "admission": {
+    "minimum_executed_trades_total": 35,
+    "minimum_executed_trades_development": 15,
+    "minimum_executed_trades_each_full_oos_year": 3,
+    "minimum_executed_trades_recent_half_year": 2,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.25,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_chronological_window": 1.0,
+    "minimum_each_side_trades": 8,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_top_5pct_removed_profit_factor": 1.05,
+    "minimum_extra_half_pip_profit_factor": 1.05,
+    "minimum_same_side_15m_oracle_precision": 0.05,
+    "minimum_same_side_15m_oracle_recall": 0.005
+  },
+  "decision_policy": {
+    "census_before_forward_outcomes": true,
+    "no_parameter_search": true,
+    "no_threshold_change_after_census": true,
+    "no_direction_cut_after_outcome": true,
+    "no_hour_or_calendar_filter_after_outcome": true,
+    "no_activation_of_isolated_profitable_window": true,
+    "no_regime_substitution": true,
+    "failure_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING",
+    "historical_pass_can_authorize_demo": false
+  }
+}
