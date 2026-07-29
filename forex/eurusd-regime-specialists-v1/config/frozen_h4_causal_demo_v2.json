@@ -1,0 +1,101 @@
+{
+  "schema_version": "eurusd_h4_causal_demo_v2",
+  "frozen_at_utc": "2026-07-30T00:00:00Z",
+  "research_only": true,
+  "post_hoc_developmental_not_pristine_oos": true,
+  "broker_action_allowed": false,
+  "anchor_config": {
+    "path": "config/frozen_neutral_h4_quiet_state_transfer_v1.json",
+    "sha256": "fc9fea2f8b4fd026e58126cf3b53ce901d05760c39882f19c5cb5e9b837beca2"
+  },
+  "evaluation_window": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+  "reporting_windows": {
+    "EARLY_2017_2019": ["2017-01-01T00:00:00Z", "2020-01-01T00:00:00Z"],
+    "MIDDLE_2020_2022H1": ["2020-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "LATE_2022H2_2024H1": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "RECENT_2024H2_2026H1": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_AUDIT": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "causal_contract": {
+    "resolution_minutes": 15,
+    "reference_window_utc": ["00:00", "06:00"],
+    "decision_window_utc": ["06:00", "10:00"],
+    "first_break_only_per_regime_utc_date": true,
+    "break_body_threshold_applies_only_to_first_break_bar": true,
+    "next_close_requires_immediate_complete_m15_close_beyond_same_range_boundary": true,
+    "retest_requires_touch_and_rejection_close_within_four_complete_m15_bars": true,
+    "confirmation_must_remain_in_same_owned_h4_regime": true,
+    "entry_occurs_at_first_m5_open_after_confirmation": true,
+    "stop_target_hold_costs_and_quarantine_unchanged": true
+  },
+  "variant_ladders": {
+    "SHORT": ["H60_PROTECTED", "M15_NEXT_CLOSE", "M15_RETEST_REJECT_4"],
+    "LONG": ["M15_IMMEDIATE", "M15_NEXT_CLOSE", "M15_RETEST_REJECT_4"]
+  },
+  "selection_rule": {
+    "select_highest_trade_count_admitted_variant_per_side_and_regime": true,
+    "ties_follow_variant_ladder_order": true,
+    "no_parameter_interpolation_or_subgroup_selection_after_results": true,
+    "reject_side_regime_component_if_no_variant_passes": true
+  },
+  "component_admission": {
+    "minimum_trades": 50,
+    "minimum_full_profit_factor_exclusive": 1.0,
+    "minimum_extra_0p5pip_profit_factor": 1.0,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.0,
+    "minimum_latest_12_month_net_r_exclusive": 0.0,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_r": 18.0
+  },
+  "portfolio_risk": {
+    "fixed_research_lots_per_accepted_trade": 0.01,
+    "maximum_concurrent_initial_risk_units": 1.0,
+    "fixed_priority": [
+      "SHORT_CHOP",
+      "SHORT_COMPRESSION",
+      "LONG_CHOP",
+      "LONG_COMPRESSION"
+    ]
+  },
+  "stress_scenarios": {
+    "extra_round_trip_cost_pips": [0.5, 1.0],
+    "entry_delay_minutes": [5, 15],
+    "rollover_charge_pips_per_utc_21_crossing": 0.5
+  },
+  "bootstrap": {
+    "trade_block_trades": 5,
+    "calendar_block_months": 3,
+    "samples": 20000,
+    "seed": 20260730,
+    "lower_quantile": 0.05
+  },
+  "demo_historical_gates": {
+    "minimum_trades_per_fx_day": 1.0,
+    "minimum_full_profit_factor": 1.30,
+    "minimum_extra_0p5pip_profit_factor": 1.15,
+    "minimum_extra_1p0pip_profit_factor": 1.0,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.15,
+    "minimum_latest_12_month_net_r_exclusive": 0.0,
+    "minimum_latest_6_month_net_r_exclusive": 0.0,
+    "minimum_win_rate_inclusive": 0.45,
+    "maximum_win_rate_inclusive": 0.55,
+    "minimum_realized_payoff_ratio_inclusive": 1.35,
+    "maximum_realized_payoff_ratio_inclusive": 1.75,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_r": 15.0,
+    "minimum_5m_delay_profit_factor": 1.0,
+    "minimum_15m_delay_profit_factor": 1.0,
+    "minimum_trade_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_trade_bootstrap_probability_pf_lte_1": 0.05,
+    "minimum_calendar_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_calendar_bootstrap_probability_pf_lte_1": 0.05
+  },
+  "historical_pass_can_authorize_demo": false,
+  "prospective_confirmation_required": true
+}

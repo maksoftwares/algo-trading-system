@@ -1,0 +1,12 @@
+{
+  "campaign_id": "eurusd-h4-causal-demo-v2",
+  "frozen_before_first_causal_demo_v2_outcome": true,
+  "files": {
+    "EURUSD_H4_CAUSAL_DEMO_V2_PREREG_2026_07_30.md": "e9979cab3335ebe65ff28da29d0c169c618d4134e6eb9e6454affa351a4b2b96",
+    "config/frozen_h4_causal_demo_v2.json": "829d4afa053dc515e38f966c6d01cd297584da390e0e06a654672f5f79d5f156",
+    "run_h4_causal_demo_v2.py": "b6bf5f43f741fe287772ade3da501ee2bf21ad40c7186756cd04f39f314382af",
+    "src/eurusd_regime_specialists/h4_causal_demo_v2.py": "95aa70edbca9bf7072858c35e6bbe6f38f5fd3a8ab37ef50895ecc128fabea04",
+    "tests/test_h4_causal_demo_v2.py": "e42da8172170ff54adfe97af217424e9403c0039378f0db6e2e6693945a7c0ec"
+  },
+  "status": "FROZEN_BEFORE_FIRST_CAUSAL_DEMO_V2_OUTCOME"
+}
