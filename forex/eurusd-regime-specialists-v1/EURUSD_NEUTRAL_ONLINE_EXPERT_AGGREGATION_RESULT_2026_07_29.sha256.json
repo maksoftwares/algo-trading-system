@@ -1,0 +1,44 @@
+{
+  "schema_version": "eurusd_neutral_online_expert_aggregation_result_lock_v1",
+  "generated_at_utc": "2026-07-29T07:13:31.9909938Z",
+  "status": "REJECTED_EXACT_ONLINE_ALLOCATOR",
+  "preregistration_lock": {
+    "path": "EURUSD_NEUTRAL_ONLINE_EXPERT_AGGREGATION_PREREG_2026_07_29.sha256.json",
+    "sha256": "9a6a641f4323c3890355cfae76432c76887bd78a0b385f0190256e2e63c32aa3"
+  },
+  "primary_half_life_days": 126,
+  "primary_metrics": {
+    "trades": 137,
+    "win_rate": 0.40875912408759124,
+    "realized_payoff_ratio": 1.285159438901114,
+    "profit_factor": 0.8885052910921282,
+    "net_r": -8.820101357379603,
+    "max_drawdown_r": 15.637645012407692,
+    "extra_half_pip_profit_factor": 0.8190892313168897,
+    "top_5pct_winners_removed_profit_factor": 0.7559962371968586,
+    "latest_six_month_profit_factor": 0.8621846165932653,
+    "latest_six_month_net_r": -2.2362000103851702,
+    "same_side_oracle_precision_15m": 0.40145985401459855
+  },
+  "sensitivity_profit_factors_not_selectable": {
+    "63_calendar_days": 0.7818662514801447,
+    "252_calendar_days": 0.8981938559591747
+  },
+  "integrity": {
+    "selected_trades": 137,
+    "unique_utc_entry_dates": 137,
+    "duplicate_utc_entry_dates": 0,
+    "strict_prior_outcome_violations": 0,
+    "position_overlaps": 0,
+    "all_research_gates_passed": false,
+    "historical_pass_can_authorize_demo": false,
+    "broker_action_allowed": false
+  },
+  "artifacts": {
+    "outputs/neutral_online_expert_aggregation/PRIMARY_DECISIONS.csv": "11e33e70da82975803261a4476f5f537f650ab0882c408494cc36ef8dee03e9b",
+    "outputs/neutral_online_expert_aggregation/PRIMARY_ORACLE_MATCHES.csv": "7b31a005d64c236e98edc818c4e3c61761636b14c2361d7f7c22dc57402883c8",
+    "outputs/neutral_online_expert_aggregation/PRIMARY_SELECTED_TRADES.csv": "30ea4c7a1e02fc41e50e0a14bd5d3c05a6bf4ad043ae5c3d4b5458485a01f68e",
+    "outputs/neutral_online_expert_aggregation/RESULT.json": "10b2c7320fafb134265421cd88bf8ea1a49b9a9d3b74d5a6777a9e5ec6ea33b7",
+    "outputs/neutral_online_expert_aggregation/SENSITIVITY_SELECTED_TRADES.csv": "217a750b7dca11b868a1f3913ad443813d9eabb50c8f9a864b1c7f5f488f534c"
+  }
+}
