@@ -1,0 +1,18 @@
+{
+  "campaign_id": "eurusd-neutral-0608-range-breakout-transfer-v1-1",
+  "census_completed_after_prereg_push": true,
+  "census_pass": true,
+  "execution_allowed_only_after_separate_lock": true,
+  "family": "N48_NEUTRAL_0608_UTC_RANGE_BREAKOUT_TRANSFER_FRESH_V1_1",
+  "files": {
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_V1_1_CENSUS_2026_07_29.md": "fe9d8d2f4294ee4591cc22efb6927e82203dc8ed71465ad4b1615d6d9ab9bde5",
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_V1_1_PREREG_2026_07_29.sha256.json": "ad49df57bffbbac8c03e2ae1fd8e41ff20d0297f51806d9c8bab7046404aea5d",
+    "outputs/neutral_0608_range_breakout_transfer_v1_1/ALL_SESSION_SIGNALS.csv": "156020cedc47d28964795fd145a0f1ad3e7d588a2dc1d5b578a9c78c69f308a9",
+    "outputs/neutral_0608_range_breakout_transfer_v1_1/CANDIDATES.csv": "4d300cc8ed85e1a0cd6f1dc288ca7b586a540b238a07f8b2d91f89ce9e94f73b",
+    "outputs/neutral_0608_range_breakout_transfer_v1_1/CENSUS.json": "b8ee735a1416cf6c0493c7d09d3e76fcb8816ee7d079569e56f94582ff9b721c"
+  },
+  "oracle_loaded": false,
+  "performance_gate_evaluated": false,
+  "pnl_or_forward_path_loaded": false,
+  "status": "CENSUS_PASS_EXECUTION_MAY_BE_SEPARATELY_LOCKED"
+}
