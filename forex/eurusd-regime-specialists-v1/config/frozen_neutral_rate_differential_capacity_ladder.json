@@ -1,0 +1,42 @@
+{
+  "schema_version": "eurusd_neutral_rate_differential_capacity_ladder_v1",
+  "frozen_at_utc": "2026-07-29T07:58:13.8455891Z",
+  "research_only": true,
+  "adaptive_reason": "The exact 5bp rule failed only the frozen source-capacity gate. No EURUSD price, return, oracle, or P&L was loaded, so one descending source-only threshold ladder is permitted.",
+  "parent_census_contract": {
+    "config_path": "config/frozen_neutral_rate_differential_census.json",
+    "config_sha256": "8cb55cd535daef55cbc29fbbe16fa55b12e0bb2e21af1e4287e888fda8a9bf7e",
+    "preregistration_lock_path": "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_CENSUS_V1_1_PREREG_2026_07_29.sha256.json",
+    "preregistration_lock_sha256": "65ccf79c2354a16eaf13f6d72c33ed78aca8e026464e071a9bc59589b07a3e58",
+    "result_lock_path": "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_CENSUS_RESULT_2026_07_29.sha256.json",
+    "result_lock_sha256": "b0633da34104716d31b599259def0735d41393217fec43332d8306c319b6895f",
+    "required_result_status": "CENSUS_FAIL_NO_PNL_ALLOWED",
+    "required_pnl_loaded": false
+  },
+  "threshold_ladder_bps_descending": [
+    5.0,
+    4.0,
+    3.0
+  ],
+  "selection_rule": "HIGHEST_THRESHOLD_PASSING_ALL_UNCHANGED_PARENT_CAPACITY_GATES",
+  "unchanged_contract_fields": [
+    "official_sources",
+    "neutral_midnight_source",
+    "two_calendar_day_lag",
+    "us_minus_euro_spread_definition",
+    "widening_maps_short",
+    "narrowing_maps_long",
+    "one_candidate_per_date",
+    "capacity_gates"
+  ],
+  "failure_action": "CENSUS_FAIL_NO_PNL_ALLOWED",
+  "passing_action": "HASH_SELECTED_CANDIDATE_MANIFEST_THEN_FREEZE_SEPARATE_EXECUTION",
+  "boundaries": {
+    "eurusd_prices_allowed": false,
+    "eurusd_returns_allowed": false,
+    "oracle_rows_allowed": false,
+    "pnl_allowed": false,
+    "post_screen_threshold_change_allowed": false,
+    "broker_action_allowed": false
+  }
+}

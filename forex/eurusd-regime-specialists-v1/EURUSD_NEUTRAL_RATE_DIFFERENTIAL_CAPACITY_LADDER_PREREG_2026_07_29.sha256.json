@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_neutral_rate_differential_capacity_ladder_lock_v1",
+  "locked_at_utc": "2026-07-29T07:59:53.3184370Z",
+  "frozen_before_threshold_screen": true,
+  "threshold_screen_rows_loaded_before_lock": 0,
+  "selected_candidate_rows_loaded_before_lock": 0,
+  "eurusd_price_rows_loaded_before_lock": 0,
+  "eurusd_outcome_rows_loaded_before_lock": 0,
+  "oracle_rows_loaded_before_lock": 0,
+  "eurusd_outcome_use_allowed": false,
+  "post_screen_threshold_change_allowed": false,
+  "direction_change_allowed": false,
+  "broker_action_allowed": false,
+  "files": {
+    "config/frozen_neutral_rate_differential_capacity_ladder.json": "988e2ee7439077cd185beb3aaca32bc8b7d3473534d2dba389b419b92a292c9a",
+    "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_CAPACITY_LADDER_PREREG_2026_07_29.md": "8ab3e74ee5e986d60adb9bac2f477c074b33e3d4c4407cd38f097b829270566b",
+    "src/eurusd_regime_specialists/neutral_rate_differential_capacity_ladder.py": "4f62ce49eaa3cac4ce2575945a1e1cd53acec90b9cb79cc888935c983d611cdf",
+    "run_neutral_rate_differential_capacity_ladder.py": "f36642c008c6c7fe499b390fafc01a59705b78ef2df814b874249441e80bc1e3",
+    "tests/test_neutral_rate_differential_capacity_ladder.py": "ac6925a38b71ed0ea6770d1684b50f77b62e2a069ce99d3085decdc914ef50f8",
+    "src/eurusd_regime_specialists/neutral_rate_differential_census.py": "9e640f80e90d6f6cd57f9a165f856ea2ecda079c381c4797f48ecf099fdc1ccd"
+  }
+}
