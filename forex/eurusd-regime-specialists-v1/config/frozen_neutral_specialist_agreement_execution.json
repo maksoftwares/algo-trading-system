@@ -1,0 +1,110 @@
+{
+  "schema_version": "eurusd_neutral_specialist_agreement_execution_v1",
+  "frozen_at_utc": "2026-07-29T07:23:00.5868877Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "census_result_lock": {
+    "path": "EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_CENSUS_RESULT_2026_07_29.sha256.json",
+    "sha256": "48294a0190c235b52b96ba4f7bdc995fe06db780ee3606f3671e4eae50f4ca6a",
+    "required_status": "CENSUS_PASS_EXECUTION_FREEZE_ALLOWED"
+  },
+  "candidate_source": {
+    "path": "outputs/neutral_specialist_agreement_census/ROUTED_EARLIEST_DAILY_AGREEMENTS.csv",
+    "sha256": "a0c019596d996d498c0b498353efb39f9b7d8352000fb2ee2024e9c15c3abac2",
+    "rows": 214
+  },
+  "eurusd_m5_source": {
+    "bar_root": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars",
+    "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+    "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "manifest_path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json",
+    "manifest_sha256": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "start_utc": "2019-01-01T00:00:00Z",
+    "end_utc": "2026-06-30T23:59:59Z"
+  },
+  "execution": {
+    "entry": "EXACT_CANDIDATE_M5_OPEN",
+    "stop_pips": 4.0,
+    "target_pips": 6.0,
+    "nominal_target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "adverse_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "maximum_concurrent_positions": 1,
+    "missing_entry_bar_action": "CASH",
+    "required_final_bar_at_maximum_hold_clock": true,
+    "incomplete_maximum_hold_path_action": "CASH",
+    "extra_round_trip_stress_pips": 0.5,
+    "fixed_research_lots": 0.01
+  },
+  "quarantine": [
+    {
+      "start_utc": "2024-10-09T23:00:00Z",
+      "end_utc": "2024-10-10T01:00:00Z",
+      "action": "CASH_IF_ENTRY_TO_MAXIMUM_EXIT_PATH_OVERLAPS",
+      "reason": "Inherited known suspect EURUSD interval"
+    }
+  ],
+  "oracle": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230",
+    "required_regime": "NEUTRAL",
+    "same_side_tolerance_minutes": 15,
+    "evaluation_only": true
+  },
+  "windows": {
+    "DEVELOPMENT_2019_2022": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "OOS_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "OOS_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "OOS_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "OOS_2026_H1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ],
+    "LATEST_SIX_MONTHS": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "research_gates": {
+    "minimum_executed_trades": 80,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.15,
+    "minimum_profit_factor_each_window_exclusive": 1.0,
+    "minimum_latest_six_month_trades": 10,
+    "minimum_latest_six_month_profit_factor_exclusive": 1.0,
+    "minimum_trades_each_side": 20,
+    "minimum_profit_factor_each_side_exclusive": 1.0,
+    "maximum_drawdown_r": 20.0,
+    "minimum_extra_half_pip_profit_factor_exclusive": 1.0,
+    "minimum_top_5pct_winners_removed_profit_factor_exclusive": 1.0,
+    "minimum_same_side_oracle_precision_15m": 0.50,
+    "minimum_same_side_oracle_recall_15m": 0.02
+  },
+  "decision_policy": {
+    "parameter_search_allowed": false,
+    "direction_reversal_after_outcome_allowed": false,
+    "expert_combination_deletion_after_outcome_allowed": false,
+    "clock_filter_after_outcome_allowed": false,
+    "isolated_window_activation_allowed": false,
+    "failure_action": "REJECT_EXACT_AGREEMENT_EXECUTION"
+  },
+  "historical_pass_can_authorize_demo": false,
+  "broker_action_allowed": false
+}
