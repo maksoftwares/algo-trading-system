@@ -97,8 +97,9 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 91. Rolling Neutral subregime experts: six outcome-blind H4 clusters assigned one of ten simple specialists using only prior closed trades and both-half training admission. The 671-trade walk-forward improved the generic model to PF 0.975 but still lost 9.99R; latest-12-month PF was 0.740. The result rejects single-best past-expert selection.
 92. Cross-mechanism subregime consensus: replacing winner selection with at least two agreeing admitted mechanism groups and an opposite-side veto produced 102 trades, 43.14% wins, 1.488 payoff, PF 1.129, and +7.52R. Both directions were positive, but 2020-2021 lost and the latest 12 months had only three losing trades. It is positive evidence, not a historical qualifier.
 93. Composite-validated consensus: additionally requiring each subregime's training consensus to pass sample, stress, and both-half gates reduced the result to 76 trades at PF 0.820 and -8.87R. Stronger in-sample filtering made transfer worse. The H4 Neutral subregime/selector family is closed; selecting the favorable subregimes visible afterward is prohibited.
+94. Corrected H4 regime portfolio: the unchanged chop anchor reproduced all 349 prior trades and survived data, execution, cost, rollover, delay, concentration, and chronological checks, but missed its strict trade-block bootstrap gate by 0.22 percentage point (PF 5th percentile 0.998; P(PF <= 1) 5.22%). Adding the already-defined compression expert at half risk produced 507 trades, 47.93% wins, 1.309 payoff, PF 1.210, +42.94R, and 11.37R closed-trade drawdown. PF remained 1.155 with +0.5 pip cost, 1.102 with +1.0 pip, 1.179 at five-minute delay, and 1.186 at 15-minute delay. Trade-block/calendar-block PF lower bounds were 1.034/1.054. All inherited robustness thresholds passed, but the allocation is post-selection and requires fresh confirmation.
 
-Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
+Final status: `HISTORICALLY_ROBUST_POST_SELECTION_CANDIDATE_NOT_DEMO_READY`.
 
 Key reports:
 
@@ -114,6 +115,8 @@ Key reports:
 - `EURUSD_NEUTRAL_SYNCHRONOUS_CROSSASSET_VERDICT_2026_07_27.md`
 - `EURUSD_NEUTRAL_UTC_OPEN_VOTE_VERDICT_2026_07_27.md`
 - `EURUSD_NEUTRAL_COT_FLOW_VERDICT_2026_07_27.md`
+- `EURUSD_H4_CHOP_ANCHOR_VALIDATION_RESULT_2026_07_30.md`
+- `EURUSD_H4_DUAL_REGIME_PORTFOLIO_DIAGNOSTIC_RESULT_2026_07_30.md`
 - `EURUSD_NEUTRAL_COT_OPTIONS_FLOW_VERDICT_2026_07_27.md`
 - `EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_PREREG_2026_07_27.md`
 - `EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_DATA_AUDIT_2026_07_27.md`
@@ -408,4 +411,6 @@ uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn p
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python validate_prospective_neutral_inventory_portfolio_risk.py status
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python validate_prospective_neutral_inventory_formal_inference.py status
 uv run --offline --with pandas --with numpy --with pyarrow python verify_neutral_inventory_mt5_execution_parity.py status
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_chop_anchor_validation.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_dual_regime_portfolio_diagnostic.py
 ```

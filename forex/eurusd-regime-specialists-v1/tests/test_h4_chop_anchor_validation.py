@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from eurusd_regime_specialists.h4_chop_anchor_validation import (
+    _parity_check,
     apply_round_trip_cost,
     circular_block_bootstrap,
     count_utc_rollovers,
@@ -149,3 +150,45 @@ def test_cost_rollover_and_bootstrap_are_deterministic() -> None:
         values, samples=100, block_trades=2, seed=7, lower_quantile=0.05
     )
     assert first == second
+
+
+def test_parity_normalizes_equivalent_timestamp_resolutions(tmp_path: Path) -> None:
+    timestamp_columns = ("signal_time_utc", "entry_time_utc", "exit_time_utc")
+    numeric_columns = (
+        "entry",
+        "stop",
+        "target",
+        "exit",
+        "entry_spread_pips",
+        "stop_pips",
+        "net_pips",
+        "r",
+        "stress_r",
+        "pnl_usd_001_lot",
+    )
+    current = pd.DataFrame(
+        {
+            "specialist_id": ["FIXTURE"],
+            **{
+                column: pd.Series(
+                    [pd.Timestamp("2026-01-05T07:00:00Z")],
+                    dtype="datetime64[ms, UTC]",
+                )
+                for column in timestamp_columns
+            },
+            **{column: [1.0] for column in numeric_columns},
+            "exit_reason": ["TIME"],
+        }
+    )
+    prior = current.copy()
+    for column in timestamp_columns:
+        prior[column] = prior[column].astype("datetime64[us, UTC]")
+    path = tmp_path / "prior.csv"
+    prior.to_csv(path, index=False)
+    result = _parity_check(
+        current,
+        path,
+        "FIXTURE",
+        ["2026-01-01T00:00:00Z", "2026-02-01T00:00:00Z"],
+    )
+    assert result["all_checks_passed"]

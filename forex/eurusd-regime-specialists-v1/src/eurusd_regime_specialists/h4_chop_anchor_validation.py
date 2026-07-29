@@ -242,7 +242,12 @@ def _parity_check(
     )
     checks = {
         "row_count": len(current) == len(prior),
-        "timestamps": all(current[c].equals(prior[c]) for c in time_columns),
+        "timestamps": all(
+            current[c]
+            .astype("datetime64[ns, UTC]")
+            .equals(prior[c].astype("datetime64[ns, UTC]"))
+            for c in time_columns
+        ),
         "numeric_values": all(
             np.allclose(
                 current[c].to_numpy(dtype=float),

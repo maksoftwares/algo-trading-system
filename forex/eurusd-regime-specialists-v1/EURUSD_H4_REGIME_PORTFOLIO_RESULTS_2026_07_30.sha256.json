@@ -1,0 +1,29 @@
+{
+  "campaign_id": "eurusd-h4-regime-portfolio-results-2026-07-30",
+  "anchor_validation_was_preregistered": true,
+  "dual_regime_portfolio_is_post_hoc_developmental": true,
+  "broker_action_allowed": false,
+  "files": {
+    "README.md": "aa6bd0f2b121731ac7bc3caaa413fe08631ad78e9f7abddd14bcec0156e4ed2c",
+    "EURUSD_H4_CHOP_ANCHOR_VALIDATION_ERRATUM_2026_07_30.md": "3798f4c4bee8e44975d38e417d09038e7f2b3de9d492aeff2c4ccdf91f727a8d",
+    "EURUSD_H4_CHOP_ANCHOR_VALIDATION_RESULT_2026_07_30.md": "4ebdba66490b5d4507c4697822196e17e901397c4e5dddd356b39aa9683986b8",
+    "EURUSD_H4_DUAL_REGIME_PORTFOLIO_DIAGNOSTIC_RESULT_2026_07_30.md": "76e9e5ebdb700060e912b71215206747b879188a022463f235cead3c873d53cd",
+    "config/h4_dual_regime_portfolio_diagnostic_v1.json": "b73486608edadd4c6255ac34d3b099d818bbebcbfb6b3b41ef106977d4ee9e37",
+    "run_h4_dual_regime_portfolio_diagnostic.py": "3ecf1bc110743b6d744b9c119b48bcb6c1154a0e4a61c67eec5ae2262d4c344c",
+    "src/eurusd_regime_specialists/h4_chop_anchor_validation.py": "308878dfdd7e0c2367d9d885b6f6aa7aeac3507a660decb9821ecf69a8f415c1",
+    "src/eurusd_regime_specialists/h4_dual_regime_portfolio_diagnostic.py": "83baa153eeeb39fb763ad114c92d0ce9fe71e404f32fae82af19892d0e5afe47",
+    "tests/test_h4_chop_anchor_validation.py": "e52d0a8bc00fab096c698f08833b8b05423bf9428228a8bf76311e12a0e45837",
+    "tests/test_h4_dual_regime_portfolio_diagnostic.py": "0079e1461eff1f11461a082aa4aa41f24838138197e4b3206da4c6800f580326",
+    "outputs/h4_chop_anchor_validation/TRADES.csv": "143562d76a33d35abf2f6999ec0a8a9bd107184a49f06a0b9201c51f7585b937",
+    "outputs/h4_chop_anchor_validation/SCENARIO_METRICS.csv": "38cb2ac916d2c40582d488969f156f36ec3edc139074a69b897142756d0f17e2",
+    "outputs/h4_chop_anchor_validation/ROLLING_WINDOWS.csv": "00d9ecc5553a25f19b38058ab07c8ed930047e1540cc101e51847779f1004533",
+    "outputs/h4_chop_anchor_validation/YEARLY_METRICS.csv": "c6825535ea52b787ebae845e87291ac57adc99f8b5fb30ace1b6367a8d0aad8b",
+    "outputs/h4_chop_anchor_validation/RESULT.json": "07956c0315ae3789d3e38bb90897e583c362d6b498ad13e59bb7136544b09d89",
+    "outputs/h4_dual_regime_portfolio_diagnostic/TRADES.csv": "90077568cd4d0757f87647b9afd026a8220b44c55c2ec1709828c759718bb77d",
+    "outputs/h4_dual_regime_portfolio_diagnostic/SCENARIO_METRICS.csv": "fbc5794027826a9aa2e90b8124eec7889b50a339d7720261cbb1ea53f23382d7",
+    "outputs/h4_dual_regime_portfolio_diagnostic/MONTHLY_METRICS.csv": "db87ea908fbd30df49ec45dc0322c9858e6b1fffe32ab4000a904f03680e1131",
+    "outputs/h4_dual_regime_portfolio_diagnostic/YEARLY_METRICS.csv": "05fba573f89cc609d943eeeb7dd0c989b3f83e319052faeb80280568cba20654",
+    "outputs/h4_dual_regime_portfolio_diagnostic/RESULT.json": "83510a4920f5d964a585ec1293a235ac5df23726be822770588f3a51b3218a7c"
+  },
+  "status": "RESULTS_LOCKED_HISTORICAL_CANDIDATE_REQUIRES_FRESH_CONFIRMATION"
+}
