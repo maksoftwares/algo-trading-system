@@ -1,0 +1,151 @@
+{
+  "schema_version": "eurusd_neutral_specialist_meta_selector_v1",
+  "frozen_at_utc": "2026-07-29T07:35:00.4353903Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "reason_not_pristine": "Component and earlier meta-policy results were already known; this contract tests one new chronological regularized selector without claiming pristine holdout status.",
+  "signal_source": {
+    "census_result_lock_path": "EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_CENSUS_RESULT_2026_07_29.sha256.json",
+    "census_result_lock_sha256": "48294a0190c235b52b96ba4f7bdc995fe06db780ee3606f3671e4eae50f4ca6a",
+    "required_census_status": "CENSUS_PASS_EXECUTION_FREEZE_ALLOWED",
+    "path": "outputs/neutral_specialist_agreement_census/SIGNAL_ONLY_INPUTS.csv",
+    "sha256": "b7a336dc9f692f857c21dde8d8153d44643472fbcb556ecf5107193314d8df09",
+    "rows": 5044,
+    "columns_allowed": [
+      "entry_time_utc",
+      "side",
+      "expert_id"
+    ],
+    "expected_collapsed_clock_side_candidates": 4698
+  },
+  "experts": [
+    "CONSENSUS_EVENT_CONFIRMATION",
+    "FIVE_SESSION_REVERSAL",
+    "FUTURES_PARTICIPATION",
+    "OCC_FXE_FLOW",
+    "OPENING_DRIVE",
+    "POST_EVENT_DRIVE",
+    "PRECIOUS_METALS_CONSENSUS",
+    "SYMMETRIC_RSI"
+  ],
+  "eurusd_m5_source": {
+    "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+    "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "manifest_path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json",
+    "manifest_sha256": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "start_utc": "2019-01-01T00:00:00Z",
+    "end_utc": "2026-06-30T23:59:59Z"
+  },
+  "canonical_execution": {
+    "entry": "EXACT_CANDIDATE_M5_OPEN",
+    "stop_pips": 4.0,
+    "target_pips": 6.0,
+    "nominal_target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "minimum_retail_spread_pips": 0.7,
+    "adverse_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "required_final_bar_at_maximum_hold_clock": true,
+    "extra_round_trip_stress_pips": 0.5,
+    "fixed_research_lots": 0.01
+  },
+  "quarantine": [
+    {
+      "start_utc": "2024-10-09T23:00:00Z",
+      "end_utc": "2024-10-10T01:00:00Z",
+      "action": "CASH_IF_ENTRY_TO_MAXIMUM_EXIT_PATH_OVERLAPS",
+      "reason": "Inherited known suspect EURUSD interval"
+    }
+  ],
+  "model": {
+    "family": "STANDARDIZED_L2_LOGISTIC_REGRESSION",
+    "solver": "liblinear",
+    "c": 0.25,
+    "maximum_iterations": 1000,
+    "random_state": 0,
+    "class_weight": null,
+    "refit_frequency": "UTC_CALENDAR_MONTH_START",
+    "minimum_training_candidates": 600,
+    "training_label": "CANONICAL_R_GREATER_THAN_ZERO",
+    "training_outcome_known_rule": "exit_time_utc_strictly_before_month_boundary",
+    "selection_probability_minimum_inclusive": 0.5,
+    "feature_set": [
+      "eight_expert_membership_flags",
+      "side_long_flag",
+      "distinct_expert_count",
+      "opposite_side_present_at_exact_clock",
+      "utc_minute_of_day_sine",
+      "utc_minute_of_day_cosine",
+      "utc_weekday_sine",
+      "utc_weekday_cosine"
+    ],
+    "feature_or_threshold_search_allowed": false,
+    "post_result_expert_deletion_allowed": false,
+    "post_result_threshold_change_allowed": false
+  },
+  "routing": {
+    "evaluation_start_utc": "2023-01-01T00:00:00Z",
+    "evaluation_end_utc": "2026-06-30T23:59:59Z",
+    "maximum_selected_trades_per_utc_day": 1,
+    "maximum_concurrent_positions": 1,
+    "selection_tiebreak": [
+      "predicted_win_probability_descending",
+      "distinct_experts_descending",
+      "expert_combination_ascending",
+      "side_ascending",
+      "candidate_id_ascending"
+    ],
+    "no_qualifying_candidate_action": "CASH"
+  },
+  "oracle": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230",
+    "required_regime": "NEUTRAL",
+    "same_side_tolerance_minutes": 15,
+    "evaluation_only": true
+  },
+  "reporting_windows": {
+    "OOS_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "OOS_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "OOS_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "OOS_2026_H1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ],
+    "LATEST_SIX_MONTHS": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "research_gates": {
+    "minimum_selected_trades": 60,
+    "minimum_win_rate": 0.43,
+    "maximum_win_rate": 0.60,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_profit_factor": 1.15,
+    "minimum_each_full_year_profit_factor_exclusive": 1.0,
+    "minimum_latest_six_month_trades": 10,
+    "minimum_latest_six_month_profit_factor_exclusive": 1.0,
+    "minimum_trades_each_side": 10,
+    "minimum_profit_factor_each_side_exclusive": 1.0,
+    "maximum_drawdown_r": 20.0,
+    "minimum_extra_half_pip_profit_factor_exclusive": 1.0,
+    "minimum_top_5pct_winners_removed_profit_factor_exclusive": 1.0,
+    "minimum_same_side_oracle_precision_15m": 0.5
+  },
+  "promotion": {
+    "historical_pass_can_authorize_demo": false,
+    "separate_prospective_preregistration_required": true,
+    "broker_action_allowed": false
+  }
+}

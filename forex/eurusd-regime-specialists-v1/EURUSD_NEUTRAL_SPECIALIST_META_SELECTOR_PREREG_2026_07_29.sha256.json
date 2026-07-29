@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_neutral_specialist_meta_selector_lock_v1",
+  "locked_at_utc": "2026-07-29T07:39:19.2384604Z",
+  "frozen_before_combined_canonical_outcomes": true,
+  "combined_canonical_outcome_rows_loaded_before_lock": 0,
+  "meta_selector_trade_rows_loaded_before_lock": 0,
+  "meta_selector_result_loaded_before_lock": false,
+  "oracle_decision_use_allowed": false,
+  "parameter_search_allowed": false,
+  "post_result_expert_deletion_allowed": false,
+  "post_result_threshold_change_allowed": false,
+  "historical_pass_can_authorize_demo": false,
+  "broker_action_allowed": false,
+  "files": {
+    "config/frozen_neutral_specialist_meta_selector.json": "1bf4b88e203a43f519914af8430caf5c584c3d5125c2c3634bb91b3b67627985",
+    "EURUSD_NEUTRAL_SPECIALIST_META_SELECTOR_PREREG_2026_07_29.md": "8615a80a23ae8ea10a13b94125a97c248713574fd7828b2daf43098644654467",
+    "src/eurusd_regime_specialists/neutral_specialist_meta_selector.py": "4e08ac8e306f8f4f52728b04c3d4a22352c731aded76479205af3bb1f77efb2f",
+    "run_neutral_specialist_meta_selector.py": "1175312ca451dfa3b1a6b6130c266fa205bf6056267c11a61e81503e87345f3c",
+    "tests/test_neutral_specialist_meta_selector.py": "d8db030a1cb4c39dca7ddbc4c8f36455851a2afa8568bb84a1638994b4d73d63",
+    "src/eurusd_regime_specialists/neutral_specialist_agreement_execution.py": "ce5754f3137c4af160e75e06741f48e0141b3c21aaaa9340fa7139d33660deb7"
+  }
+}
