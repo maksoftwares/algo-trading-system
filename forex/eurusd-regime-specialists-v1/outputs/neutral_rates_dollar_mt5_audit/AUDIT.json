@@ -1,0 +1,520 @@
+{
+  "all_reports_by_causal_regime": {
+    "PRIMARY_OFFSET_0": {
+      "JOINT_COMPRESSION": {
+        "maximum_closed_trade_drawdown_usd": 29.53,
+        "net_pnl_usd": -6.040000000000003,
+        "positive_active_month_share": 0.4166666666666667,
+        "profit_factor": 0.9270707558560733,
+        "realized_payoff_ratio": 1.317416337269157,
+        "top_5pct_removed_profit_factor": 0.6615551799082345,
+        "top_5pct_winner_contribution_to_net": -3.6407284768211903,
+        "trades": 46,
+        "win_rate": 0.41304347826086957,
+        "wins": 19
+      },
+      "NEUTRAL": {
+        "maximum_closed_trade_drawdown_usd": 21.230000000000004,
+        "net_pnl_usd": 11.84,
+        "positive_active_month_share": 0.6666666666666666,
+        "profit_factor": 1.4610591900311525,
+        "realized_payoff_ratio": 0.7305295950155762,
+        "top_5pct_removed_profit_factor": 1.125778816199377,
+        "top_5pct_winner_contribution_to_net": 0.7271959459459459,
+        "trades": 12,
+        "win_rate": 0.6666666666666666,
+        "wins": 8
+      },
+      "SHOCK": {
+        "maximum_closed_trade_drawdown_usd": 3.3200000000000003,
+        "net_pnl_usd": 32.74,
+        "positive_active_month_share": 0.8181818181818182,
+        "profit_factor": 6.075968992248061,
+        "realized_payoff_ratio": 3.3755383290267007,
+        "top_5pct_removed_profit_factor": 4.872868217054263,
+        "top_5pct_winner_contribution_to_net": 0.23701893708002442,
+        "trades": 14,
+        "win_rate": 0.6428571428571429,
+        "wins": 9
+      },
+      "USD_UP": {
+        "maximum_closed_trade_drawdown_usd": 36.11,
+        "net_pnl_usd": -19.580000000000002,
+        "positive_active_month_share": 0.3333333333333333,
+        "profit_factor": 0.6540636042402825,
+        "realized_payoff_ratio": 1.1212518929833415,
+        "top_5pct_removed_profit_factor": 0.5024734982332154,
+        "top_5pct_winner_contribution_to_net": -0.4382022471910112,
+        "trades": 19,
+        "win_rate": 0.3684210526315789,
+        "wins": 7
+      }
+    },
+    "ROBUSTNESS_OFFSET_2": {
+      "JOINT_COMPRESSION": {
+        "maximum_closed_trade_drawdown_usd": 40.18,
+        "net_pnl_usd": -0.5800000000000005,
+        "positive_active_month_share": 0.375,
+        "profit_factor": 0.9937038645245327,
+        "realized_payoff_ratio": 1.3249384860327105,
+        "top_5pct_removed_profit_factor": 0.7502171081198435,
+        "top_5pct_winner_contribution_to_net": -38.672413793103416,
+        "trades": 49,
+        "win_rate": 0.42857142857142855,
+        "wins": 21
+      },
+      "NEUTRAL": {
+        "maximum_closed_trade_drawdown_usd": 24.1,
+        "net_pnl_usd": 3.639999999999998,
+        "positive_active_month_share": 0.5555555555555556,
+        "profit_factor": 1.1417445482866044,
+        "realized_payoff_ratio": 0.9133956386292835,
+        "top_5pct_removed_profit_factor": 0.8064641744548285,
+        "top_5pct_winner_contribution_to_net": 2.3653846153846168,
+        "trades": 9,
+        "win_rate": 0.5555555555555556,
+        "wins": 5
+      },
+      "SHOCK": {
+        "maximum_closed_trade_drawdown_usd": 3.7199999999999998,
+        "net_pnl_usd": 26.88,
+        "positive_active_month_share": 0.7272727272727273,
+        "profit_factor": 3.9185667752442987,
+        "realized_payoff_ratio": 3.9185667752442987,
+        "top_5pct_removed_profit_factor": 3.07600434310532,
+        "top_5pct_winner_contribution_to_net": 0.2886904761904762,
+        "trades": 16,
+        "win_rate": 0.5,
+        "wins": 8
+      },
+      "USD_UP": {
+        "maximum_closed_trade_drawdown_usd": 41.16,
+        "net_pnl_usd": -26.93,
+        "positive_active_month_share": 0.2727272727272727,
+        "profit_factor": 0.5245409604519772,
+        "realized_payoff_ratio": 1.0490819209039544,
+        "top_5pct_removed_profit_factor": 0.3730579096045197,
+        "top_5pct_winner_contribution_to_net": -0.31860378759747493,
+        "trades": 18,
+        "win_rate": 0.3333333333333333,
+        "wins": 6
+      }
+    },
+    "ROBUSTNESS_OFFSET_3": {
+      "JOINT_COMPRESSION": {
+        "maximum_closed_trade_drawdown_usd": 40.18,
+        "net_pnl_usd": -0.5800000000000005,
+        "positive_active_month_share": 0.375,
+        "profit_factor": 0.9937038645245327,
+        "realized_payoff_ratio": 1.3249384860327105,
+        "top_5pct_removed_profit_factor": 0.7502171081198435,
+        "top_5pct_winner_contribution_to_net": -38.672413793103416,
+        "trades": 49,
+        "win_rate": 0.42857142857142855,
+        "wins": 21
+      },
+      "NEUTRAL": {
+        "maximum_closed_trade_drawdown_usd": 24.1,
+        "net_pnl_usd": 3.639999999999998,
+        "positive_active_month_share": 0.5555555555555556,
+        "profit_factor": 1.1417445482866044,
+        "realized_payoff_ratio": 0.9133956386292835,
+        "top_5pct_removed_profit_factor": 0.8064641744548285,
+        "top_5pct_winner_contribution_to_net": 2.3653846153846168,
+        "trades": 9,
+        "win_rate": 0.5555555555555556,
+        "wins": 5
+      },
+      "SHOCK": {
+        "maximum_closed_trade_drawdown_usd": 3.7199999999999998,
+        "net_pnl_usd": 26.88,
+        "positive_active_month_share": 0.7272727272727273,
+        "profit_factor": 3.9185667752442987,
+        "realized_payoff_ratio": 3.9185667752442987,
+        "top_5pct_removed_profit_factor": 3.07600434310532,
+        "top_5pct_winner_contribution_to_net": 0.2886904761904762,
+        "trades": 16,
+        "win_rate": 0.5,
+        "wins": 8
+      },
+      "USD_UP": {
+        "maximum_closed_trade_drawdown_usd": 41.16,
+        "net_pnl_usd": -26.93,
+        "positive_active_month_share": 0.2727272727272727,
+        "profit_factor": 0.5245409604519772,
+        "realized_payoff_ratio": 1.0490819209039544,
+        "top_5pct_removed_profit_factor": 0.3730579096045197,
+        "top_5pct_winner_contribution_to_net": -0.31860378759747493,
+        "trades": 18,
+        "win_rate": 0.3333333333333333,
+        "wins": 6
+      }
+    }
+  },
+  "all_research_gates_passed": false,
+  "boundary": {
+    "broker_or_demo_action_performed": false,
+    "existing_mt5_reports_only": true,
+    "oracle_used_for_decisions": false,
+    "parameter_search_performed": false,
+    "regime_uses_prior_completed_hour": true,
+    "report_outcomes_known_before_this_audit": true,
+    "retrospective_not_pristine_oos": true
+  },
+  "candidate": {
+    "decision_inputs": "lagged TLT/UUP and TLT/SHY daily ratios plus completed EURUSD H4 EMA/ATR pullback state",
+    "max_hold_h4_bars": 14,
+    "offsets_are_robustness_not_selection": true,
+    "primary_variant_declared": "PRIMARY_OFFSET_0",
+    "side": "SHORT_ONLY",
+    "symbol": "EURUSD",
+    "target_r": 1.35,
+    "timeframe": "H4"
+  },
+  "decision_reasons": [
+    "Only 12 canonical Neutral trades exist; the latest six months contain one trade.",
+    "The canonical 66.7% win rate and 0.73 realized payoff do not match the requested approximately 50% / 1.5 profile.",
+    "Neutral PF falls from 1.46 at offset 0 to 1.14 at offsets 2/3.",
+    "Removing the top 5% of winners lowers canonical Neutral PF to 1.13.",
+    "The 2025 Neutral slice lost USD 17.75, while the latest-six-month result is a single winning trade.",
+    "The reports predate this audit, so no slice can be represented as pristine chronological out-of-sample evidence."
+  ],
+  "diagnostic_only": {
+    "do_not_switch_regime_or_cherry_pick_shock": true,
+    "shock_regime_was_profitable_but_is_out_of_scope": true
+  },
+  "historical_result_can_authorize_demo": false,
+  "neutral_offset_robustness": {
+    "PRIMARY_OFFSET_0": {
+      "maximum_closed_trade_drawdown_usd": 21.230000000000004,
+      "net_pnl_usd": 11.84,
+      "positive_active_month_share": 0.6666666666666666,
+      "profit_factor": 1.4610591900311525,
+      "realized_payoff_ratio": 0.7305295950155762,
+      "top_5pct_removed_profit_factor": 1.125778816199377,
+      "top_5pct_winner_contribution_to_net": 0.7271959459459459,
+      "trades": 12,
+      "win_rate": 0.6666666666666666,
+      "wins": 8
+    },
+    "ROBUSTNESS_OFFSET_2": {
+      "maximum_closed_trade_drawdown_usd": 24.1,
+      "net_pnl_usd": 3.639999999999998,
+      "positive_active_month_share": 0.5555555555555556,
+      "profit_factor": 1.1417445482866044,
+      "realized_payoff_ratio": 0.9133956386292835,
+      "top_5pct_removed_profit_factor": 0.8064641744548285,
+      "top_5pct_winner_contribution_to_net": 2.3653846153846168,
+      "trades": 9,
+      "win_rate": 0.5555555555555556,
+      "wins": 5
+    },
+    "ROBUSTNESS_OFFSET_3": {
+      "maximum_closed_trade_drawdown_usd": 24.1,
+      "net_pnl_usd": 3.639999999999998,
+      "positive_active_month_share": 0.5555555555555556,
+      "profit_factor": 1.1417445482866044,
+      "realized_payoff_ratio": 0.9133956386292835,
+      "top_5pct_removed_profit_factor": 0.8064641744548285,
+      "top_5pct_winner_contribution_to_net": 2.3653846153846168,
+      "trades": 9,
+      "win_rate": 0.5555555555555556,
+      "wins": 5
+    }
+  },
+  "offset_2_and_3_trade_ledgers_identical": true,
+  "primary_neutral": {
+    "chronological": {
+      "2022": {
+        "maximum_closed_trade_drawdown_usd": 1.58,
+        "net_pnl_usd": 17.75,
+        "positive_active_month_share": 0.8,
+        "profit_factor": 12.234177215189874,
+        "realized_payoff_ratio": 3.0585443037974684,
+        "top_5pct_removed_profit_factor": 6.784810126582278,
+        "top_5pct_winner_contribution_to_net": 0.4850704225352112,
+        "trades": 5,
+        "win_rate": 0.8,
+        "wins": 4
+      },
+      "2023": {
+        "maximum_closed_trade_drawdown_usd": 6.3500000000000005,
+        "net_pnl_usd": 3.249999999999999,
+        "positive_active_month_share": 0.6666666666666666,
+        "profit_factor": 1.511811023622047,
+        "realized_payoff_ratio": 0.7559055118110235,
+        "top_5pct_removed_profit_factor": 0.5385826771653542,
+        "top_5pct_winner_contribution_to_net": 1.901538461538462,
+        "trades": 3,
+        "win_rate": 0.6666666666666666,
+        "wins": 2
+      },
+      "2024": {
+        "maximum_closed_trade_drawdown_usd": 0.0,
+        "net_pnl_usd": 2.8699999999999997,
+        "positive_active_month_share": 1.0,
+        "profit_factor": null,
+        "realized_payoff_ratio": null,
+        "top_5pct_removed_profit_factor": null,
+        "top_5pct_winner_contribution_to_net": 1.0,
+        "trades": 1,
+        "win_rate": 1.0,
+        "wins": 1
+      },
+      "2025": {
+        "maximum_closed_trade_drawdown_usd": 17.75,
+        "net_pnl_usd": -17.75,
+        "positive_active_month_share": 0.0,
+        "profit_factor": 0.0,
+        "realized_payoff_ratio": null,
+        "top_5pct_removed_profit_factor": 0.0,
+        "top_5pct_winner_contribution_to_net": 0.1808450704225352,
+        "trades": 2,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "2026_H1": {
+        "maximum_closed_trade_drawdown_usd": 0.0,
+        "net_pnl_usd": 5.72,
+        "positive_active_month_share": 1.0,
+        "profit_factor": null,
+        "realized_payoff_ratio": null,
+        "top_5pct_removed_profit_factor": null,
+        "top_5pct_winner_contribution_to_net": 1.0,
+        "trades": 1,
+        "win_rate": 1.0,
+        "wins": 1
+      },
+      "DEVELOPMENT_2022_2023": {
+        "maximum_closed_trade_drawdown_usd": 6.350000000000001,
+        "net_pnl_usd": 21.0,
+        "positive_active_month_share": 0.75,
+        "profit_factor": 3.6481715006305167,
+        "realized_payoff_ratio": 1.2160571668768387,
+        "top_5pct_removed_profit_factor": 2.562421185372005,
+        "top_5pct_winner_contribution_to_net": 0.41,
+        "trades": 8,
+        "win_rate": 0.75,
+        "wins": 6
+      },
+      "LATEST_SIX_MONTHS": {
+        "maximum_closed_trade_drawdown_usd": 0.0,
+        "net_pnl_usd": 5.72,
+        "positive_active_month_share": 1.0,
+        "profit_factor": null,
+        "realized_payoff_ratio": null,
+        "top_5pct_removed_profit_factor": null,
+        "top_5pct_winner_contribution_to_net": 1.0,
+        "trades": 1,
+        "win_rate": 1.0,
+        "wins": 1
+      },
+      "RECENT_2024_2026_H1": {
+        "maximum_closed_trade_drawdown_usd": 17.75,
+        "net_pnl_usd": -9.16,
+        "positive_active_month_share": 0.5,
+        "profit_factor": 0.483943661971831,
+        "realized_payoff_ratio": 0.483943661971831,
+        "top_5pct_removed_profit_factor": 0.1616901408450704,
+        "top_5pct_winner_contribution_to_net": -0.6244541484716157,
+        "trades": 4,
+        "win_rate": 0.5,
+        "wins": 2
+      }
+    },
+    "extra_half_pip_round_trip": {
+      "maximum_closed_trade_drawdown_usd": 21.43,
+      "net_pnl_usd": 11.240000000000002,
+      "positive_active_month_share": 0.6666666666666666,
+      "profit_factor": 1.4343122102009274,
+      "realized_payoff_ratio": 0.7171561051004637,
+      "top_5pct_removed_profit_factor": 1.1035548686244203,
+      "top_5pct_winner_contribution_to_net": 0.7615658362989322,
+      "trades": 12,
+      "win_rate": 0.6666666666666666,
+      "wins": 8
+    },
+    "observed": {
+      "maximum_closed_trade_drawdown_usd": 21.230000000000004,
+      "net_pnl_usd": 11.84,
+      "positive_active_month_share": 0.6666666666666666,
+      "profit_factor": 1.4610591900311525,
+      "realized_payoff_ratio": 0.7305295950155762,
+      "top_5pct_removed_profit_factor": 1.125778816199377,
+      "top_5pct_winner_contribution_to_net": 0.7271959459459459,
+      "trades": 12,
+      "win_rate": 0.6666666666666666,
+      "wins": 8
+    },
+    "oracle_resemblance": {
+      "candidate_neutral_trades": 3,
+      "common_window_end_utc": "2026-06-30T23:59:59+00:00",
+      "common_window_start_utc": "2024-07-01T00:00:00+00:00",
+      "exact_precision": 0.0,
+      "exact_recall": 0.0,
+      "exact_same_side_matches": 0,
+      "oracle_neutral_trades": 600,
+      "oracle_used_for_signal_or_selection": false,
+      "same_side_15m_matches": 0,
+      "same_side_15m_precision": 0.0,
+      "same_side_15m_recall": 0.0
+    },
+    "top_5pct_winners_removed": {
+      "maximum_closed_trade_drawdown_usd": 21.230000000000004,
+      "net_pnl_usd": 3.2299999999999995,
+      "positive_active_month_share": 0.6363636363636364,
+      "profit_factor": 1.125778816199377,
+      "realized_payoff_ratio": 0.6433021806853583,
+      "top_5pct_removed_profit_factor": 0.8851246105919002,
+      "top_5pct_winner_contribution_to_net": 1.9133126934984521,
+      "trades": 11,
+      "win_rate": 0.6363636363636364,
+      "wins": 7
+    }
+  },
+  "report_reconciliation": {
+    "PRIMARY_OFFSET_0": {
+      "exact_accounting_checks": {
+        "gross_loss": true,
+        "gross_profit": true,
+        "net_pnl": true,
+        "trades": true
+      },
+      "reconstructed": {
+        "gross_loss_usd": 171.54999999999998,
+        "gross_profit_usd": 190.51,
+        "losses": 48,
+        "net_pnl_usd": 18.959999999999994,
+        "profit_factor": 1.1105217137860683,
+        "trades": 91,
+        "wins": 43
+      },
+      "reported": {
+        "Expected Payoff": "0.21",
+        "Gross Loss": "-171.55",
+        "Gross Profit": "190.51",
+        "History Quality": "99%",
+        "Loss Trades (% of total)": "48 (52.75%)",
+        "Profit Factor": "1.11",
+        "Profit Trades (% of total)": "43 (47.25%)",
+        "Total Net Profit": "18.96",
+        "Total Trades": "91"
+      }
+    },
+    "ROBUSTNESS_OFFSET_2": {
+      "exact_accounting_checks": {
+        "gross_loss": true,
+        "gross_profit": true,
+        "net_pnl": true,
+        "trades": true
+      },
+      "reconstructed": {
+        "gross_loss_usd": 183.64999999999998,
+        "gross_profit_usd": 186.66,
+        "losses": 52,
+        "net_pnl_usd": 3.0099999999999967,
+        "profit_factor": 1.016389872039205,
+        "trades": 92,
+        "wins": 40
+      },
+      "reported": {
+        "Expected Payoff": "0.03",
+        "Gross Loss": "-183.65",
+        "Gross Profit": "186.66",
+        "History Quality": "99%",
+        "Loss Trades (% of total)": "52 (56.52%)",
+        "Profit Factor": "1.02",
+        "Profit Trades (% of total)": "40 (43.48%)",
+        "Total Net Profit": "3.01",
+        "Total Trades": "92"
+      }
+    },
+    "ROBUSTNESS_OFFSET_3": {
+      "exact_accounting_checks": {
+        "gross_loss": true,
+        "gross_profit": true,
+        "net_pnl": true,
+        "trades": true
+      },
+      "reconstructed": {
+        "gross_loss_usd": 183.64999999999998,
+        "gross_profit_usd": 186.66,
+        "losses": 52,
+        "net_pnl_usd": 3.0099999999999967,
+        "profit_factor": 1.016389872039205,
+        "trades": 92,
+        "wins": 40
+      },
+      "reported": {
+        "Expected Payoff": "0.03",
+        "Gross Loss": "-183.65",
+        "Gross Profit": "186.66",
+        "History Quality": "99%",
+        "Loss Trades (% of total)": "52 (56.52%)",
+        "Profit Factor": "1.02",
+        "Profit Trades (% of total)": "40 (43.48%)",
+        "Total Net Profit": "3.01",
+        "Total Trades": "92"
+      }
+    }
+  },
+  "research_gates": {
+    "all_offset_profit_factors_at_least_1p15": false,
+    "minimum_30_neutral_trades": false,
+    "minimum_5_latest_six_month_trades": false,
+    "payoff_ratio_between_1p25_and_1p75": false,
+    "primary_profit_factor_at_least_1p15": true,
+    "recent_2024_2026_h1_positive": false,
+    "top_5pct_removed_profit_factor_at_least_1p15": false,
+    "win_rate_between_45_and_55_percent": false,
+    "year_2025_positive": false
+  },
+  "schema_version": "eurusd_neutral_rates_dollar_mt5_audit_v1",
+  "source_evidence": {
+    "causal_input_manifests": {
+      "BOND": {
+        "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+        "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644",
+        "empty_hours": 22272,
+        "files_seen": 65688,
+        "first_utc": "2019-01-02T20:00:00+00:00",
+        "last_utc": "2026-06-30T23:00:00+00:00",
+        "populated_hours": 43416,
+        "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+        "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+        "symbol": "USTBONDTRUSD"
+      },
+      "DXY": {
+        "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+        "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052",
+        "empty_hours": 25468,
+        "files_seen": 65688,
+        "first_utc": "2019-01-02T01:00:00+00:00",
+        "last_utc": "2026-06-30T20:00:00+00:00",
+        "populated_hours": 40220,
+        "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+        "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+        "symbol": "DOLLARIDXUSD"
+      }
+    },
+    "ea_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex-research\\mt5\\Experts\\ForexRatesDollarYieldPressureShortSessionV1.mq5",
+    "ea_source_sha256": "cc147c08b6edea62ea030381c1bf3d90752ee284225a51f6c41be08cd3069ea5",
+    "reports": {
+      "PRIMARY_OFFSET_0": {
+        "path": "D:\\AlgoTradingData\\C_DRIVE\\MT5A1M5MomentumBacktest\\Reports\\ForexRatesDollar_2022_2026_RATES_DOLLAR_V1_MT5_EURUSD_H4_offset0.htm",
+        "sha256": "f1ed0f85c8598e790dc0128a30ca00c6b789f386e33f2f8021e3e2688c3d0a2f"
+      },
+      "ROBUSTNESS_OFFSET_2": {
+        "path": "D:\\AlgoTradingData\\C_DRIVE\\MT5A1M5MomentumBacktest\\Reports\\ForexRatesDollar_2022_2026_RATES_DOLLAR_V1_MT5_OFFSET2_EURUSD_H4_offset2.htm",
+        "sha256": "129e62e3fe0e1e815ba1c49d59cf25612284aa7f6acbd93e1fdb438457851db4"
+      },
+      "ROBUSTNESS_OFFSET_3": {
+        "path": "D:\\AlgoTradingData\\C_DRIVE\\MT5A1M5MomentumBacktest\\Reports\\ForexRatesDollar_2022_2026_RATES_DOLLAR_V1_MT5_OFFSET3_EURUSD_H4_offset3.htm",
+        "sha256": "7ba9f23fa7542f3c6e563bdf9b8d6227d089c2f571a773f16c6f1eb22147b35f"
+      }
+    },
+    "runner_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex-research\\scripts\\run_forex_mt5_rates_dollar_backtest.py",
+    "runner_source_sha256": "0e34a1f00173b361e12e156cfae5296bd44d3f4e4b5470723a37620952375948"
+  },
+  "status": "REJECTED_RETROSPECTIVE_NEUTRAL_RATES_DOLLAR_MT5"
+}
