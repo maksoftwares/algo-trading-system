@@ -86,6 +86,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 80. Final inventory-unwind execution: the single permitted four-pip run executed all 89 candidates, won 37.08%, realized 1.470 payoff, returned PF 0.867, lost 7.52R, and drew down 20.34R. Development and 2023 lost; 2024, 2025, and 2026 H1 were profitable, with the latest six months returning nine trades at PF 1.155 / +0.79R. The rule achieved unusually strong same-side 15-minute oracle precision of 84.27%, but extra-cost PF was 0.742, best-5%-removed PF was 0.734, and the long side returned PF 0.592. Recent years and the short side are not selected after inspection; the exact family is rejected.
 81. Prospective 00:05 inventory unwind: because the historical 00:15 family is fully exposed, an earlier-clock successor is explicitly outcome-informed and historical backtesting is forbidden. Before the 30 July 2026 start and with zero source records, decisions, paths, or oracle labels, the complete pipeline was hash-locked: prior 20:00-00:00 displacement of at least four pips, opposite-side mapping, causal Neutral ownership by 00:04, shadow entry at 00:05, six-pip stop, nine-pip target, six-hour hold, immutable tick paths, and independent prospective oracle validation. It requires at least 12 calendar months and 30 closed trades; no historical or automatic broker activation is allowed.
 82. Prospective 06:05/12:05 clock transfer: the unchanged four-hour inventory fade, six-pip stop, nine-pip target, and six-hour hold are transferred to two additional sequential clocks without loading any historical outcome for either rule. The clocks are one pooled specialist: selecting, deleting, or reweighting the better clock after outcomes is forbidden. Each completed source hour is captured after publication, all decisions and paths are immutable, base PF must reach 1.30, stressed PF 1.15, both clocks and both sides must avoid failure, and each clock must independently pass a Bonferroni-controlled 15-minute oracle-resemblance test. The campaign is shadow-only and requires at least 12 months, 60 pooled trades, and 20 per clock before a verdict.
+83. Prospective three-clock inventory portfolio: a read-only observer combines the frozen 00:05 primary and 06:05/12:05 transfer campaigns before any component observation. All three clocks are mandatory, fixed at 0.01 shadow lots, and must remain individually positive; component deletion and reweighting are forbidden. The observer requires both component campaigns to pass, at least 12 months and 90 total trades, portfolio PF 1.30, stressed PF 1.15, positive trailing-six-month evidence, no duplicate timestamp or position overlap, and separate 1/60 Bonferroni oracle tests at every clock. It reports frequency but never forces trades and cannot create evidence or contact a broker.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -232,6 +233,8 @@ Key reports:
 - `EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_UNWIND_0005_PREREG_2026_07_29.sha256.json`
 - `EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_CLOCK_TRANSFER_PREREG_2026_07_29.md`
 - `EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_CLOCK_TRANSFER_PREREG_2026_07_29.sha256.json`
+- `EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_CLOCK_PORTFOLIO_PREREG_2026_07_29.md`
+- `EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_CLOCK_PORTFOLIO_PREREG_2026_07_29.sha256.json`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -390,4 +393,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python vali
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_prospective_neutral_inventory_unwind_0005_daily_operations.py
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python prospective_neutral_inventory_clock_transfer.py status
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python prospective_neutral_inventory_clock_transfer.py run
+uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python validate_prospective_neutral_inventory_clock_portfolio.py status
 ```
