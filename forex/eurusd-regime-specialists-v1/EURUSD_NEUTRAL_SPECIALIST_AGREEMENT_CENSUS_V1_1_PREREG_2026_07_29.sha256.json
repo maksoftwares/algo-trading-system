@@ -1,0 +1,27 @@
+{
+  "schema_version": "eurusd_neutral_specialist_agreement_census_v1_1_lock",
+  "locked_at_utc": "2026-07-29T07:19:44.9872776Z",
+  "frozen_before_signal_census": true,
+  "signal_census_rows_before_lock": 0,
+  "supersedes": {
+    "path": "EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_CENSUS_PREREG_2026_07_29.sha256.json",
+    "sha256": "e891f9fbbe2f00b16f094b3127eaefaef6219944831ebb32b4d081e1af9184ad",
+    "reason": "RETURN_VERIFIED_LOCK_METADATA_REQUIRED_BY_FROZEN_SAFETY_TEST",
+    "strategy_or_census_semantics_changed": false
+  },
+  "outcome_loading_allowed": false,
+  "eurusd_price_loading_allowed": false,
+  "pnl_loading_allowed": false,
+  "oracle_loading_allowed": false,
+  "post_census_expert_deletion_allowed": false,
+  "historical_pass_can_authorize_demo": false,
+  "broker_action_allowed": false,
+  "files": {
+    "config/frozen_neutral_specialist_agreement_census.json": "3d088892fd99197849a342ba0bf65e93d3642c57774caae49ee03469af2e95ee",
+    "EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_CENSUS_PREREG_2026_07_29.md": "5019fa06661178deeeeea414d919b805efe100254b432c1df53cd7c6ed70d0aa",
+    "EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_CENSUS_V1_1_PREREG_2026_07_29.md": "f58e8fc017ea3f890cac5f31dd29a633cae5bdecb419a744120f6eb9172bf0bd",
+    "src/eurusd_regime_specialists/neutral_specialist_agreement_census.py": "71f8ff4c599ab8f72d7263fcfc067a6fa1a9cf38e599f2241b998d897c4445af",
+    "run_neutral_specialist_agreement_census.py": "d13314310176ffa8a9e5222ee941c03530b48709d198c06d5c0c456c76978a1a",
+    "tests/test_neutral_specialist_agreement_census.py": "abdc2a870548c14d424c1d869a06e756532ce9bb71c52e7158cd5099d674801a"
+  }
+}

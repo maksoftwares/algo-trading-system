@@ -14,7 +14,7 @@ CONFIG_PATH = (
 )
 LOCK_PATH = (
     PACKAGE_ROOT
-    / "EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_CENSUS_PREREG_"
+    / "EURUSD_NEUTRAL_SPECIALIST_AGREEMENT_CENSUS_V1_1_PREREG_"
     "2026_07_29.sha256.json"
 )
 OUTPUT_ROOT = PACKAGE_ROOT / "outputs" / "neutral_specialist_agreement_census"
@@ -28,7 +28,7 @@ def load_config() -> dict[str, Any]:
     return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
 
-def verify_lock() -> dict[str, str]:
+def verify_lock() -> dict[str, Any]:
     lock = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
     if (
         lock.get("frozen_before_signal_census") is not True
@@ -43,7 +43,7 @@ def verify_lock() -> dict[str, str]:
         if actual != expected:
             raise RuntimeError(f"Specialist-agreement census drift: {relative}")
         checked[relative] = actual
-    return checked
+    return {**lock, "checked_files": checked}
 
 
 def load_signal_only_ledgers(
