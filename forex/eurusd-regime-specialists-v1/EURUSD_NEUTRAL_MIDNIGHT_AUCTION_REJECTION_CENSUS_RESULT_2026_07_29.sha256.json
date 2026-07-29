@@ -1,0 +1,18 @@
+{
+  "campaign_id": "eurusd-neutral-midnight-auction-rejection-v1",
+  "census_completed_after_prereg_push": true,
+  "execution_allowed": false,
+  "family": "N50_NEUTRAL_MIDNIGHT_AUCTION_REJECTION",
+  "files": {
+    "EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_CENSUS_2026_07_29.md": "cf21a27668bc7fb72bf6cca15a5ef5c9adca731589cb50efd96418eb60774210",
+    "EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_PREREG_2026_07_29.sha256.json": "42b0b1aff5a344ded0992dd68bc63d92b006387d6bc3a3a12666e69676d1cb4c",
+    "outputs/neutral_midnight_auction_rejection/ALL_AUCTION_POINTS.csv": "aa1654a2ae91ba58e9d9efd3b7c7d5bd5b5404798ed0eaaee8808e5acf269ba3",
+    "outputs/neutral_midnight_auction_rejection/ALL_FAILED_AUCTION_SIGNALS.csv": "ca773fc45e67d5caadde0a20167f476511b8379c658291c4afe915b19dffd382",
+    "outputs/neutral_midnight_auction_rejection/CANDIDATES.csv": "36369b253b36275a0019933245f91723062533de681b47167e64b74c04bcfbe4",
+    "outputs/neutral_midnight_auction_rejection/CENSUS.json": "96a6ff4fc263232b27954199a732f7bc827212932c963abb60e33a08ed7aaef1"
+  },
+  "oracle_loaded": false,
+  "performance_gate_evaluated": false,
+  "pnl_or_forward_path_loaded": false,
+  "status": "CENSUS_FAIL_NO_PNL_ALLOWED"
+}

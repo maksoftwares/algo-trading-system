@@ -78,6 +78,9 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 72. Existing MT5 rates/dollar lead audit: three EURUSD H4 tester reports were reconciled to exact deal ledgers, including swap, and the causal Neutral slice was isolated without changing the historical entry rule. The primary Neutral slice had only 12 trades, PF 1.461, 66.67% wins, 0.731 payoff, and +$11.84, but it deteriorated to PF 0.484 / -$9.16 from 2024 onward and depended heavily on its best trades. The alternate broker-time offsets had nine Neutral trades at PF 1.142 / +$3.64. Only three candidate Neutral trades occurred in the common 2024-07 through 2026-06 oracle window, with zero exact or 15-minute same-side matches. The lead is rejected retrospectively rather than promoted from a tiny favorable slice.
 73. Frozen symmetric rates/dollar sign consensus: a mirror-image H4 rule required concurrent five- and 20-day TLT/UUP plus 20-day TLT/SHY signs, causal Neutral ownership, EMA20/50/100 trend, pullback, and candle confirmation. The contract and census gates were pushed before signal counts. The outcome-blind census found 62 Neutral candidates on 57 dates, balanced 32 long / 30 short, with 23 in development, 15 in 2023, 12 in 2024, 11 in 2025, but only one in 2026 H1. It failed the frozen two-candidate recent minimum, so no forward stop/target path, return, P&L, or oracle comparison was opened.
 74. First successful SWFX widget comparison: the official visible Dukascopy EUR/USD row showed 55.67% long, 44.33% short, and a +11.34% index, exactly reconciling the immutable 08:32 UTC capture where `last_short=+11.34` and `last_long=-11.34000015258789`. The independent validator accepted the source-only evidence: 5/5 captures valid, five distinct states, full coverage, zero failures, and one of three required UTC-date comparison occasions. This resolves the JSONP field binding for the matched observation but does not admit the source or authorize strategy design; the 27-day/20-weekday/800-capture census continues.
+75. Neutral 06:00-08:00 range-breakout transfer: a completed European-morning range, causal Neutral ownership, fresh regime state, and asymmetric structure risk were locked before counting. The freshness-corrected census passed with 272 candidates on 127 dates, but the frozen execution returned 121 trades, 41.32% wins, 0.935 payoff, PF 0.658, and -20.06R. The latest six months were nearly flat at seven trades and PF 0.982, while full-history and robustness gates failed; the exact family is retired.
+76. Neutral prior-24-hour extreme fade: the fully completed prior day was faded only when its close remained in an outer quintile with sufficient body size. The outcome-blind census passed with 196 candidates on 196 dates. The single frozen run returned 196 trades, 41.33% wins, 0.929 payoff, PF 0.654, and -36.74R. It resembled the hindsight oracle materially better than most causal rules—57.65% same-side precision within 15 minutes—but every economic admission gate failed, so resemblance alone does not justify promotion.
+77. Neutral midnight-auction rejection: a new independent rule observed only the three completed 00:00-00:10 UTC M5 bars and required an excursion-and-wick rejection before a 00:15 decision. Its locked outcome-blind census found only 18 eligible dates across 7.5 years: 13 development, 2 in 2023, none in 2024, 2 in 2025, and 1 in 2026 H1. All capacity gates except state freshness failed. No post-entry path, P&L, or oracle row was opened, and the exact sparse family is retired without threshold repair.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -208,6 +211,9 @@ Key reports:
 - `EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_PREREG_2026_07_29.md`
 - `EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_RESULT_2026_07_29.md`
 - `EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_RESULT_2026_07_29.sha256.json`
+- `EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_PREREG_2026_07_29.md`
+- `EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_CENSUS_2026_07_29.md`
+- `EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_CENSUS_RESULT_2026_07_29.sha256.json`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -358,4 +364,5 @@ uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn p
 uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_0608_range_breakout_transfer_execution.py
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_prior24_extreme_fade.py census
 uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_prior24_extreme_fade_execution.py
+uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_midnight_auction_rejection.py census
 ```
