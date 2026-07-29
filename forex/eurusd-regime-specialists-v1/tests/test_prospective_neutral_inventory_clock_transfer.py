@@ -205,11 +205,12 @@ def test_two_clock_schedule_is_sequential_and_publication_safe() -> None:
     ) == transfer.entry_time("2026-07-30", "1205")
 
 
-def test_scheduler_starts_before_first_source_window() -> None:
+def test_scheduler_uses_single_shared_ownership_producer() -> None:
     operations = transfer.operations_for_entry_date(date(2026, 7, 30))
     first = min(operations, key=lambda row: row.due_at_utc)
-    assert first.due_at_utc == datetime(2026, 7, 29, 21, 2, tzinfo=timezone.utc)
-    assert first.name == "PREWARM_ENTRY_OWNERSHIP"
+    assert first.due_at_utc == datetime(2026, 7, 30, 3, 2, tzinfo=timezone.utc)
+    assert first.name == "PREWARM_SOURCE_HOUR"
+    assert not any("OWNERSHIP" in operation.name for operation in operations)
     assert (
         transfer.next_operation(datetime(2026, 7, 29, 11, 0, tzinfo=timezone.utc))
         == first

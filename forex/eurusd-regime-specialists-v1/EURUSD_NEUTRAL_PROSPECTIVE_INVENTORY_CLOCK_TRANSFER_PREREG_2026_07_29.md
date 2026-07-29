@@ -50,6 +50,12 @@ decisions, tick paths, executions, and completed hindsight-oracle dates are
 also immutable and hash-linked. Late evidence cannot be backfilled into a
 signal.
 
+The existing locked Neutral-ownership campaign is the single producer of the
+shared daily ownership cache. This scheduler may consume that cache but must
+not duplicate its prewarm or midnight capture operations; this prevents two
+processes from racing to write different request metadata for the same raw
+hour. Missing shared ownership remains a fail-closed cash decision.
+
 The same causal rule, costs, risk, clocks, gates, and code are master-locked
 before the first source window. The master lock must include every direct
 helper and configuration dependency used by the continuous scheduler.

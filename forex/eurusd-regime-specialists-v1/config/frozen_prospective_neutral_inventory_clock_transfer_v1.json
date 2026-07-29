@@ -51,8 +51,10 @@
     "post_outcome_clock_deletion_or_reweighting_forbidden": true
   },
   "neutral_ownership": {
+    "producer_campaign_id": "eurusd-prospective-neutral-ownership-v1",
     "reuse_config_path": "config/frozen_prospective_neutral_ownership_v1.json",
     "reuse_output_root": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership",
+    "this_scheduler_must_not_duplicate_shared_ownership_operations": true,
     "owned_state": "DIRECTION_NEUTRAL_AND_NOT_SHOCK_AND_NOT_JOINT_DXY_EURUSD_COMPRESSION",
     "daily_ownership_known_deadline_utc": "00:04:00",
     "maximum_state_staleness_hours_at_daily_cutoff": 4.0,

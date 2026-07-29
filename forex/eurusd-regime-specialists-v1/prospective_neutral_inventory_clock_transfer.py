@@ -34,7 +34,6 @@ from capture_prospective_neutral_ownership import (
 )
 from capture_prospective_neutral_ownership import (
     _validated_existing_ownership,
-    capture_ownership,
     decode_ticks,
     fetch_hour,
     sha256_bytes,
@@ -47,9 +46,6 @@ from eurusd_regime_specialists.prospective_neutral_validation_v1_1 import (
     temporal_oracle_metrics,
 )
 from eurusd_regime_specialists.research import PACKAGE_ROOT, sha256_file
-from prewarm_prospective_neutral_ownership import (
-    prewarm_capture as prewarm_ownership,
-)
 from validate_prospective_neutral_inventory_unwind_0005 import (
     _load_oracle,
     _monthly_metrics,
@@ -1083,23 +1079,8 @@ def operations_for_entry_date(
 ) -> list[ScheduledOperation]:
     if entry_date_utc.weekday() >= 5 or entry_date_utc < FIRST_ENTRY_DATE:
         return []
-    prior = entry_date_utc - timedelta(days=1)
     context = entry_date_utc + timedelta(days=1)
-    operations: list[ScheduledOperation] = [
-        *[
-            ScheduledOperation(
-                _at(prior, hour, 2),
-                "PREWARM_ENTRY_OWNERSHIP",
-                entry_date_utc,
-            )
-            for hour in (21, 22, 23)
-        ],
-        ScheduledOperation(
-            _at(entry_date_utc, 0, 2, 15),
-            "CAPTURE_ENTRY_OWNERSHIP",
-            entry_date_utc,
-        ),
-    ]
+    operations: list[ScheduledOperation] = []
     for slot in SLOTS:
         hour = _clock_hour(slot)
         for source_hour in range(hour - 4, hour):
@@ -1143,19 +1124,6 @@ def operations_for_entry_date(
         )
     operations.extend(
         [
-            *[
-                ScheduledOperation(
-                    _at(entry_date_utc, hour, 2),
-                    "PREWARM_ORACLE_CONTEXT",
-                    entry_date_utc,
-                )
-                for hour in (21, 22, 23)
-            ],
-            ScheduledOperation(
-                _at(context, 0, 2, 15),
-                "CAPTURE_ORACLE_CONTEXT",
-                entry_date_utc,
-            ),
             ScheduledOperation(
                 _at(context, 12, 2),
                 "CAPTURE_COMPLETED_ORACLE_DATE",
@@ -1213,21 +1181,7 @@ def execute_operation(
         else now_utc.astimezone(timezone.utc)
     )
     day_text = operation.entry_date_utc.isoformat()
-    context_text = (operation.entry_date_utc + timedelta(days=1)).isoformat()
-    if operation.name == "PREWARM_ENTRY_OWNERSHIP":
-        result = prewarm_ownership(day_text)
-    elif operation.name == "CAPTURE_ENTRY_OWNERSHIP":
-        deadline = _at(operation.entry_date_utc, 0, 4)
-        result = (
-            capture_ownership(day_text)
-            if observed <= deadline
-            else {
-                "status": "SKIPPED_LATE_OWNERSHIP_NO_BACKFILL",
-                "network_request_made": False,
-                "broker_action_allowed": False,
-            }
-        )
-    elif operation.name == "PREWARM_SOURCE_HOUR":
+    if operation.name == "PREWARM_SOURCE_HOUR":
         if operation.slot is None or operation.source_hour_utc is None:
             raise RuntimeError("Source prewarm operation is incomplete")
         result = prewarm_source_hour(
@@ -1252,10 +1206,6 @@ def execute_operation(
         "VALIDATE_WITH_ORACLE",
     ):
         result = build_validation_status(evaluated_at_utc=observed)
-    elif operation.name == "PREWARM_ORACLE_CONTEXT":
-        result = prewarm_ownership(context_text)
-    elif operation.name == "CAPTURE_ORACLE_CONTEXT":
-        result = capture_ownership(context_text)
     elif operation.name == "CAPTURE_COMPLETED_ORACLE_DATE":
         result = capture_oracle_date(
             day_text,
