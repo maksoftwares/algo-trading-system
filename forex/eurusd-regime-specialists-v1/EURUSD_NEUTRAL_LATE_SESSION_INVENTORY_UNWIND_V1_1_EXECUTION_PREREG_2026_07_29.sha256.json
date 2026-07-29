@@ -1,0 +1,22 @@
+{
+  "broker_action_allowed": false,
+  "family": "N51_1_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND",
+  "files": {
+    "config/frozen_neutral_late_session_inventory_unwind_v1_1_execution.json": "b2cce09880dbec0065fede8fb161c4003a8a922f5a5850387f7f5cc61108841b",
+    "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_EXECUTION_PREREG_2026_07_29.md": "c13ec3f6efffbb2c9b1966eaa7d6ac82e43633da7007d02567c519d56e5db918",
+    "src/eurusd_regime_specialists/neutral_late_session_inventory_unwind_v1_1_execution.py": "7477e5e54994a96afba4a18e5af33a828fdf01ffb8b4db88bb17dcb39a5c6fa9",
+    "run_neutral_late_session_inventory_unwind_v1_1_execution.py": "7baecead4af6b45191fb3a923d95fa0ef9c0800bbbc186d31c35044f6326b630",
+    "tests/test_neutral_late_session_inventory_unwind_v1_1_execution.py": "e7e6d1a6196add0b48f0ea25eb87ce531b806c44de5029c06807d58a254d158e",
+    "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_CENSUS_RESULT_2026_07_29.sha256.json": "6f9cfc4bfa7f38c59843ced657f93a04c74270343dec1de801bff93fd971284e",
+    "outputs/neutral_late_session_inventory_unwind_v1_1/CANDIDATES.csv": "2a93f07ab19424e62ddfd1b555198709d1490a90654ea288b9f01d4b1feb0220",
+    "src/eurusd_regime_specialists/neutral_0608_range_breakout_transfer_execution.py": "0f9f7d782737696dca583e35b53a6b8a7b349e80a20f1079aee6d2e126bab617",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230"
+  },
+  "frozen_at_utc": "2026-07-29T10:59:13.6803655Z",
+  "frozen_before_forward_price_path": true,
+  "frozen_before_pnl": true,
+  "oracle_decision_use_allowed": false,
+  "status": "FROZEN_BEFORE_FIRST_EXECUTION_OUTCOME"
+}

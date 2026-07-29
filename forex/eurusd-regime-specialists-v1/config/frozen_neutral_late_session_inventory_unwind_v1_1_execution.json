@@ -1,0 +1,129 @@
+{
+  "schema_version": "eurusd_neutral_late_session_inventory_unwind_execution_v1_1",
+  "frozen_at_utc": "2026-07-29T10:57:04.1854937Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "census_result_lock": {
+    "path": "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_CENSUS_RESULT_2026_07_29.sha256.json",
+    "sha256": "6f9cfc4bfa7f38c59843ced657f93a04c74270343dec1de801bff93fd971284e",
+    "required_status": "CENSUS_PASS_EXECUTION_MAY_BE_SEPARATELY_LOCKED"
+  },
+  "candidate_source": {
+    "path": "outputs/neutral_late_session_inventory_unwind_v1_1/CANDIDATES.csv",
+    "sha256": "2a93f07ab19424e62ddfd1b555198709d1490a90654ea288b9f01d4b1feb0220",
+    "rows": 89,
+    "family": "N51_1_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND",
+    "selected_displacement_threshold_pips": 4.0,
+    "maximum_state_known_lag_hours": 4.0
+  },
+  "generic_execution_engine": {
+    "path": "src/eurusd_regime_specialists/neutral_0608_range_breakout_transfer_execution.py",
+    "sha256": "0f9f7d782737696dca583e35b53a6b8a7b349e80a20f1079aee6d2e126bab617",
+    "selection_basis": "Already hash-locked and unit-tested variable-risk bid/ask evaluator; reused without modifying its simulation, metrics, stress, or oracle matching."
+  },
+  "eurusd_m5_source": {
+    "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+    "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "manifest_path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json",
+    "manifest_sha256": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "start_utc": "2019-01-01T00:00:00Z",
+    "end_utc": "2026-06-30T23:59:59Z"
+  },
+  "execution": {
+    "entry": "EXACT_CANDIDATE_00_15_M5_OPEN_VERIFIED_AGAINST_CENSUS_PRICE",
+    "stop": "FROZEN_CANDIDATE_FIRST_15_MINUTE_STRUCTURE_STOP",
+    "target_r": 1.5,
+    "maximum_hold_hours": 6,
+    "minimum_retail_spread_pips": 0.7,
+    "adverse_slippage_pips_per_side": 0.1,
+    "same_bar_policy": "STOP_FIRST",
+    "maximum_concurrent_positions": 1,
+    "maximum_trades_per_utc_day": 1,
+    "missing_entry_bar_action": "CASH",
+    "required_final_bar_at_maximum_hold_clock": true,
+    "incomplete_maximum_hold_path_action": "CASH",
+    "extra_round_trip_stress_pips": 0.5,
+    "entry_price_tolerance": 1e-12,
+    "fixed_research_lots": 0.01
+  },
+  "quarantine": [
+    {
+      "start_utc": "2024-10-09T23:00:00Z",
+      "end_utc": "2024-10-10T01:00:00Z",
+      "action": "CASH_IF_ENTRY_TO_MAXIMUM_EXIT_PATH_OVERLAPS",
+      "reason": "Inherited known suspect EURUSD interval"
+    }
+  ],
+  "oracle": {
+    "path": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "sha256": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230",
+    "required_regime": "NEUTRAL",
+    "same_side_tolerance_minutes": 15,
+    "exact_match_also_reported": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "windows": {
+    "DEVELOPMENT_2019_2022": [
+      "2019-01-02T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "OOS_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "OOS_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "OOS_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "OOS_2026_H1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ],
+    "LATEST_SIX_MONTHS": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "chronological_window_names": [
+    "DEVELOPMENT_2019_2022",
+    "OOS_2023",
+    "OOS_2024",
+    "OOS_2025",
+    "OOS_2026_H1"
+  ],
+  "performance_gates": {
+    "minimum_executed_trades_total": 40,
+    "minimum_executed_trades_development": 20,
+    "minimum_executed_trades_each_full_oos_year": 4,
+    "minimum_executed_trades_2026h1": 3,
+    "minimum_executed_trades_each_side": 12,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_chronological_window_exclusive": 1.0,
+    "minimum_each_side_profit_factor_exclusive": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_extra_half_pip_profit_factor_exclusive": 1.0,
+    "minimum_top_5pct_winners_removed_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "minimum_same_side_15m_oracle_precision": 0.05,
+    "minimum_same_side_15m_oracle_recall": 0.003
+  },
+  "decision_policy": {
+    "parameter_search_allowed": false,
+    "direction_reversal_after_outcome_allowed": false,
+    "threshold_or_confirmation_change_after_outcome_allowed": false,
+    "year_or_side_deletion_after_outcome_allowed": false,
+    "isolated_window_activation_allowed": false,
+    "failure_action": "REJECT_EXACT_LATE_SESSION_INVENTORY_UNWIND"
+  },
+  "historical_pass_can_authorize_demo": false,
+  "broker_action_allowed": false
+}
