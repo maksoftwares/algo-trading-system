@@ -1,0 +1,22 @@
+{
+  "broker_action_allowed": false,
+  "family": "N49_NEUTRAL_PRIOR24_EXTREME_FADE",
+  "files": {
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_CENSUS_RESULT_2026_07_29.sha256.json": "fbb0b265ef4dede2d179def28f0349571ec5275caaef4091fe1e131c15dbff3e",
+    "EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_PREREG_2026_07_29.md": "9081326536ff8ecaae5b3dcde7b9160a7fcbc583d36851f6e9a7470414b7bad5",
+    "config/frozen_neutral_prior24_extreme_fade_execution.json": "d9c3be65d785c212ef82d5b7395e9912adfab9a495e5d20f8d7c55da45f79902",
+    "outputs/neutral_prior24_extreme_fade/CANDIDATES.csv": "dae505d59e1c4eba1c1d0e360e6c8f65cd319ee9c37acbd5e098914261279b8d",
+    "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv": "cbdb02324177e89e43df30d66f04dbe453fae6f8dc8f65945ac524eeeefeb230",
+    "run_neutral_prior24_extreme_fade_execution.py": "2c03b07399036edc2118c5b371739591775b1b7c4f8c4e2d820e3cc61eccc447",
+    "src/eurusd_regime_specialists/neutral_0608_range_breakout_transfer_execution.py": "0f9f7d782737696dca583e35b53a6b8a7b349e80a20f1079aee6d2e126bab617",
+    "src/eurusd_regime_specialists/neutral_prior24_extreme_fade_execution.py": "70c6e0eccdd8e5ffee565ee733d5adb813823e3c4efbcac8d44570aaa3a45d0c",
+    "tests/test_neutral_prior24_extreme_fade_execution.py": "32631eb9ba28e41e9c5d13f276cf3f681552310806f8df9371e4a5614f142a4d"
+  },
+  "frozen_at_utc": "2026-07-29T09:39:44.2664534Z",
+  "frozen_before_forward_price_path": true,
+  "frozen_before_pnl": true,
+  "oracle_decision_use_allowed": false,
+  "status": "FROZEN_BEFORE_FIRST_EXECUTION_OUTCOME"
+}
