@@ -1,0 +1,21 @@
+{
+  "schema_version": "eurusd_neutral_0608_range_breakout_transfer_prereg_lock_v1",
+  "locked_at_utc": "2026-07-29T08:59:55.0621554Z",
+  "locked_before_first_eurusd_candidate_count": true,
+  "census_forbids_outcome_loading": true,
+  "eurusd_stop_or_target_path_loaded_before_lock": false,
+  "eurusd_return_loaded_before_lock": false,
+  "eurusd_pnl_loaded_before_lock": false,
+  "oracle_rows_loaded_before_lock": false,
+  "broker_action_allowed": false,
+  "files": {
+    "config/frozen_neutral_0608_range_breakout_transfer.json": "00fd250c6deeab465b41ec489065ccde8e0ff031a09601aeb10a73f46882142f",
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_PREREG_2026_07_29.md": "a6768dd6f9b5ae3f972f1b7619d6e8f896422a3a2479c70972c8e053deca6f13",
+    "src/eurusd_regime_specialists/neutral_0608_range_breakout_transfer.py": "dd0a1c58c750d9712cd70f221824cdd346dbf37a4a4b2577b3f642191b85af8f",
+    "run_neutral_0608_range_breakout_transfer.py": "64ebdcb92e7358ff8f79cac392f1529ab1bdd6811264966a9b972e347f87e551",
+    "tests/test_neutral_0608_range_breakout_transfer.py": "19fecffdbe8ee4ddfb7279a11c0a0e47282be93d6d0345d09e0f36bfc76aab22",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "../fx-regime-specialists-gold-trajectory-v1/config/frozen_seed_decomposition.json": "654f8aa63537e5109eff7e21259a78e701fab3d99cdca04c09fed9c5565e60b0",
+    "../fx-regime-specialists-gold-trajectory-v1/FOREX_SESSION_SEED_REGIME_DECOMPOSITION_PREREG_2026_07_27.sha256.json": "7868c5c3a7b9b87ccce753ac011f0ef4ac82be5e3754c9c87482d5c37d6d3325"
+  }
+}

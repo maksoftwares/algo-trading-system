@@ -1,0 +1,173 @@
+{
+  "schema_version": "eurusd_neutral_0608_range_breakout_transfer_config_v1",
+  "campaign_id": "eurusd-neutral-0608-range-breakout-transfer-v1",
+  "frozen_at_utc": "2026-07-29T08:53:13.1713191Z",
+  "research_only": true,
+  "information_status": "CROSS_SYMBOL_MECHANISM_TRANSFER_LOCKED_BEFORE_FIRST_EURUSD_CANDIDATE_COUNT",
+  "mechanism_source": {
+    "instrument": "USDJPY",
+    "specialist": "s4_neutral_normal_breakout",
+    "config_path": "../fx-regime-specialists-gold-trajectory-v1/config/frozen_seed_decomposition.json",
+    "config_sha256": "654f8aa63537e5109eff7e21259a78e701fab3d99cdca04c09fed9c5565e60b0",
+    "preregistration_lock_path": "../fx-regime-specialists-gold-trajectory-v1/FOREX_SESSION_SEED_REGIME_DECOMPOSITION_PREREG_2026_07_27.sha256.json",
+    "preregistration_lock_sha256": "7868c5c3a7b9b87ccce753ac011f0ef4ac82be5e3754c9c87482d5c37d6d3325",
+    "selection_basis": "The source mechanism was frozen and evaluated on USDJPY before this EURUSD transfer was proposed. No EURUSD outcome selects this family."
+  },
+  "parent_data_and_classifier": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "regime": "NEUTRAL",
+    "description": "Non-compressed, non-shock neutral USD state known from completed hourly information."
+  },
+  "transfer_disclosure": {
+    "unchanged_source_parameters": [
+      "fixed 06:00 UTC range start",
+      "120-minute range",
+      "08:00-12:00 UTC M15 breakout window",
+      "M15 ATR and prior-day ATR filters",
+      "bar-body and close-location confirmation",
+      "range-aware structure stop",
+      "maximum two entries per UTC date"
+    ],
+    "instrument_adaptations": {
+      "symbol": "EURUSD",
+      "point": 0.00001,
+      "stop_floor_points": 30,
+      "stop_ceiling_points": 900
+    },
+    "objective_adaptations_selected_before_eurusd_counts": {
+      "target_r": 1.5,
+      "maximum_hold_hours": 12,
+      "reason": "The user's fixed payoff objective and the existing canonical Neutral execution horizon, not an inspected EURUSD subgroup."
+    }
+  },
+  "strategy": {
+    "family": "N48_NEUTRAL_0608_UTC_RANGE_BREAKOUT_TRANSFER",
+    "symbol": "EURUSD",
+    "weekdays_only": true,
+    "signal_timeframe_minutes": 15,
+    "range_start_hour_utc": 6,
+    "range_minutes": 120,
+    "trade_start_hour_utc": 8,
+    "trade_end_hour_utc": 12,
+    "atr_period_m15": 14,
+    "d1_atr_period": 14,
+    "range_atr_min": 0.45,
+    "range_atr_max": 3.2,
+    "daily_range_atr_min": 0.2,
+    "body_fraction_min": 0.3,
+    "break_buffer_atr": 0.05,
+    "long_close_location_min": 0.65,
+    "short_close_location_max": 0.35,
+    "stop_atr_multiple": 1.0,
+    "stop_range_multiple": 1.0,
+    "stop_floor_points": 30,
+    "point": 0.00001,
+    "stop_ceiling_points": 900,
+    "maximum_trades_per_utc_day": 2
+  },
+  "neutral_ownership": {
+    "latest_state_timestamp": "signal completion hour minus one hour, then latest prior available state",
+    "state_known_at": "matched state timestamp plus one hour",
+    "requires_direction": "NEUTRAL",
+    "requires_phase": "UNRESOLVED",
+    "shock": false,
+    "joint_dxy_eurusd_compression": false
+  },
+  "execution_contract_locked_before_census": {
+    "entry": "first exact EURUSD M5 open at or after the completed M15 signal",
+    "long_entry": "maximum(actual ask open, bid open plus 0.7 pip) plus 0.1 pip adverse slippage",
+    "short_entry": "bid open minus 0.1 pip adverse slippage",
+    "long_stop": "minimum(session range low, entry minus maximum(M15 ATR, session range, 3 pips))",
+    "short_stop": "maximum(session range high, entry plus maximum(M15 ATR, session range, 3 pips))",
+    "maximum_risk_pips": 90.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "same_bar_policy": "STOP_FIRST",
+    "one_open_position": true,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-02T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_capacity_gates": {
+    "minimum_risk_eligible_candidates_total": 120,
+    "minimum_distinct_candidate_dates_total": 100,
+    "minimum_candidates_development_2019_2022": 60,
+    "minimum_candidates_each_full_oos_year": 12,
+    "minimum_candidates_pseudo_oos_2026h1": 5,
+    "minimum_candidates_each_side": 30,
+    "minimum_recent_six_month_candidates": 5,
+    "maximum_candidate_state_known_lag_hours": 4.0
+  },
+  "performance_gates_if_capacity_passes": {
+    "minimum_executed_trades_total": 80,
+    "minimum_executed_trades_development": 40,
+    "minimum_executed_trades_each_full_oos_year": 8,
+    "minimum_executed_trades_2026h1": 5,
+    "minimum_executed_trades_each_side": 20,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_chronological_window_exclusive": 1.0,
+    "minimum_each_side_profit_factor_exclusive": 1.0,
+    "maximum_drawdown_r": 20.0,
+    "minimum_extra_half_pip_profit_factor_exclusive": 1.0,
+    "minimum_top_5pct_winners_removed_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "minimum_same_side_15m_oracle_precision": 0.05,
+    "minimum_same_side_15m_oracle_recall": 0.005
+  },
+  "oracle_evaluation_if_capacity_passes": {
+    "source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "regime": "NEUTRAL",
+    "same_side_required": true,
+    "primary_tolerance_minutes": 15,
+    "exact_match_also_reported": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "census_boundaries": {
+    "stop_or_target_path_loaded": false,
+    "trade_exit_loaded": false,
+    "eurusd_return_loaded": false,
+    "eurusd_pnl_loaded": false,
+    "oracle_rows_loaded": false,
+    "performance_gate_evaluated": false,
+    "broker_action_allowed": false
+  },
+  "prohibitions": [
+    "Do not count an incomplete M15 bar or use the M5 entry bar in signal direction.",
+    "Do not use a state that was not fully known by signal completion.",
+    "Do not inspect stop, target, time-exit, return, P&L, or oracle membership unless every frozen capacity gate passes.",
+    "Do not change the range, hour, ATR, body, close-location, risk, target, hold, side, or capacity rule after candidate counts.",
+    "Do not select an hour, weekday, direction, year, or volatility subgroup after any EURUSD outcome is opened.",
+    "No historical result can authorize demo or live execution without separate prospective evidence."
+  ]
+}
