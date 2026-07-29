@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from eurusd_regime_specialists.h4_session_frequency_expansion import (
+    _fx_days,
     apply_causal_risk_cap,
     transferred_candidate,
 )
@@ -79,3 +80,24 @@ def test_risk_cap_uses_only_positions_open_at_entry() -> None:
     )
     assert accepted["specialist_id"].tolist() == ["A", "C"]
     assert diagnostics["risk_cap_rejections"] == 1
+
+
+def test_fx_day_denominator_excludes_weekend_utc_dates() -> None:
+    m5 = pd.DataFrame(
+        {
+            "timestamp": pd.to_datetime(
+                [
+                    "2026-01-02T12:00Z",
+                    "2026-01-03T12:00Z",
+                    "2026-01-04T22:00Z",
+                    "2026-01-05T12:00Z",
+                ],
+                utc=True,
+            )
+        }
+    )
+    assert _fx_days(
+        m5,
+        pd.Timestamp("2026-01-02T00:00Z"),
+        pd.Timestamp("2026-01-06T00:00Z"),
+    ) == 2

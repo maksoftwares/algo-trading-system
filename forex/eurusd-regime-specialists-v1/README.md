@@ -98,8 +98,9 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 92. Cross-mechanism subregime consensus: replacing winner selection with at least two agreeing admitted mechanism groups and an opposite-side veto produced 102 trades, 43.14% wins, 1.488 payoff, PF 1.129, and +7.52R. Both directions were positive, but 2020-2021 lost and the latest 12 months had only three losing trades. It is positive evidence, not a historical qualifier.
 93. Composite-validated consensus: additionally requiring each subregime's training consensus to pass sample, stress, and both-half gates reduced the result to 76 trades at PF 0.820 and -8.87R. Stronger in-sample filtering made transfer worse. The H4 Neutral subregime/selector family is closed; selecting the favorable subregimes visible afterward is prohibited.
 94. Corrected H4 regime portfolio: the unchanged chop anchor reproduced all 349 prior trades and survived data, execution, cost, rollover, delay, concentration, and chronological checks, but missed its strict trade-block bootstrap gate by 0.22 percentage point (PF 5th percentile 0.998; P(PF <= 1) 5.22%). Adding the already-defined compression expert at half risk produced 507 trades, 47.93% wins, 1.309 payoff, PF 1.210, +42.94R, and 11.37R closed-trade drawdown. PF remained 1.155 with +0.5 pip cost, 1.102 with +1.0 pip, 1.179 at five-minute delay, and 1.186 at 15-minute delay. Trade-block/calendar-block PF lower bounds were 1.034/1.054. All inherited robustness thresholds passed, but the allocation is post-selection and requires fresh confirmation.
+95. Frozen frequency expansion: later-session transfers and unused regimes lost money, while body-filter relaxation and same-day re-entry failed the predeclared frequency or robustness requirements. Moving only the causal first-break signal clock from H1 to M15 raised the protected chop-plus-compression portfolio from 507 to 672 trades (+32.54%). The selected M15 portfolio retained PF 1.190, +53.30R, +$105.21 at the research lot equivalents, and 11.68R closed-trade drawdown. PF remained 1.135 with +0.5 pip, 1.083 with +1.0 pip, 1.182 at five-minute delay, and 1.167 at 15-minute delay. Trade/calendar-block PF lower bounds were 1.049/1.082. Latest-six-month results were 28 trades, PF 1.994, +8.53R, and +$15.51. Every frozen edge-preservation gate passed, but this remains a post-selection historical candidate requiring fresh confirmation.
 
-Final status: `HISTORICALLY_ROBUST_POST_SELECTION_CANDIDATE_NOT_DEMO_READY`.
+Final status: `HISTORICALLY_ROBUST_HIGHER_FREQUENCY_POST_SELECTION_CANDIDATE_NOT_DEMO_READY`.
 
 Key reports:
 
@@ -117,6 +118,8 @@ Key reports:
 - `EURUSD_NEUTRAL_COT_FLOW_VERDICT_2026_07_27.md`
 - `EURUSD_H4_CHOP_ANCHOR_VALIDATION_RESULT_2026_07_30.md`
 - `EURUSD_H4_DUAL_REGIME_PORTFOLIO_DIAGNOSTIC_RESULT_2026_07_30.md`
+- `EURUSD_H4_FREQUENCY_EXPANSION_RESULT_2026_07_30.md`
+- `EURUSD_H4_INTRAHOUR_FREQUENCY_LADDER_RESULT_2026_07_30.md`
 - `EURUSD_NEUTRAL_COT_OPTIONS_FLOW_VERDICT_2026_07_27.md`
 - `EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_PREREG_2026_07_27.md`
 - `EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_DATA_AUDIT_2026_07_27.md`
@@ -413,4 +416,9 @@ uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn p
 uv run --offline --with pandas --with numpy --with pyarrow python verify_neutral_inventory_mt5_execution_parity.py status
 uv run --offline --with pandas --with numpy --with pyarrow python run_h4_chop_anchor_validation.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_h4_dual_regime_portfolio_diagnostic.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_session_frequency_expansion.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_unused_regime_frequency_expansion.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_body_frequency_ladder.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_reentry_frequency_ladder.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_intrahour_frequency_ladder.py
 ```

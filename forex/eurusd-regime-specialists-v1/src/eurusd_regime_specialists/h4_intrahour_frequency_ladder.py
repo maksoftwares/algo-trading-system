@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -172,9 +173,19 @@ def _render_report(result: dict[str, Any]) -> str:
     )
     selected = result["levels"][result["selected_level"]]
     latest = selected["windows"]["LATEST_6_MONTHS"]
+    monthly_lines = "\n".join(
+        f"| {item['period']} | {item['trades']} | {item['win_rate']:.1%} | "
+        f"{'infinite' if item['profit_factor_is_infinite'] else format(item['profit_factor'], '.3f')} | "
+        f"{item['net_r']:+.3f} | "
+        f"{item['pnl_usd_001_lot']:+.2f} |"
+        for item in result["selected_latest_6_months_by_month"]
+    )
     return f"""# EURUSD H4 intrahour frequency ladder result
 
 Status: **{result["status"]}**
+
+This is a post-selection historical validation. It is not a pristine out-of-sample
+test and does not authorize broker or demo trading.
 
 | Level | Minutes | Trades | Gain | PF | +0.5 pip PF | Latest-12M PF | Eligible |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -183,7 +194,44 @@ Status: **{result["status"]}**
 Selected level: **{result["selected_level"]}**.
 
 Selected latest six months: {latest["trades"]} trades, PF {latest["profit_factor"]:.3f}, {latest["net_r"]:+.3f}R, {latest["pnl_usd_001_lot"]:+.2f} USD.
+
+## Selected latest six months by calendar month
+
+| Month | Trades | Win rate | PF | Net R | USD |
+|---|---:|---:|---:|---:|---:|
+{monthly_lines}
 """
+
+
+def _period_metrics(
+    trades: pd.DataFrame,
+    period_format: str,
+) -> list[dict[str, Any]]:
+    work = trades.copy()
+    work["period"] = work["entry_time_utc"].dt.strftime(period_format)
+    rows = []
+    for period, group in work.groupby("period", sort=True):
+        metrics = _scenario_summary(group)
+        nonfinite_metrics = [
+            name
+            for name, value in metrics.items()
+            if isinstance(value, float) and not math.isfinite(value)
+        ]
+        infinite_profit_factor = (
+            "profit_factor" in nonfinite_metrics
+            and math.isinf(float(metrics["profit_factor"]))
+        )
+        for name in nonfinite_metrics:
+            metrics[name] = None
+        rows.append(
+            {
+                "period": period,
+                **metrics,
+                "profit_factor_is_infinite": infinite_profit_factor,
+                "nonfinite_metrics": nonfinite_metrics,
+            }
+        )
+    return rows
 
 
 def run(config_path: Path, output_dir: Path) -> dict[str, Any]:
@@ -337,9 +385,24 @@ def run(config_path: Path, output_dir: Path) -> dict[str, Any]:
     selected_level = eligible[-1] if eligible else "H60_PROTECTED"
     selected = level_results[selected_level]
     fx_days = _fx_days(m5, start, end)
-    for item in level_results.values():
+    for level_name, item in level_results.items():
+        ledger = level_ledgers[level_name]
+        active_trade_days = int(
+            ledger["entry_time_utc"].dt.strftime("%Y-%m-%d").nunique()
+        )
         item["frequency"]["fx_days"] = fx_days
         item["frequency"]["trades_per_fx_day"] = item["frequency"]["trades"] / fx_days
+        item["frequency"]["active_trade_days"] = active_trade_days
+        item["frequency"]["trades_per_active_trade_day"] = (
+            item["frequency"]["trades"] / active_trade_days
+        )
+    selected_ledger = level_ledgers[selected_level]
+    latest_6_ledger = _evaluation_subset(
+        selected_ledger,
+        config["reporting_windows"]["LATEST_6_MONTHS"],
+    )
+    selected_latest_6_months_by_month = _period_metrics(latest_6_ledger, "%Y-%m")
+    selected_years = _period_metrics(selected_ledger, "%Y")
     result = {
         "schema_version": "eurusd_h4_intrahour_frequency_ladder_result_v1",
         "frozen_config_sha256": hashlib.sha256(config_bytes).hexdigest(),
@@ -354,6 +417,8 @@ def run(config_path: Path, output_dir: Path) -> dict[str, Any]:
         ],
         "selected_level": selected_level,
         "selected_trade_count_gain": selected["frequency"]["trade_count_gain"],
+        "selected_latest_6_months_by_month": selected_latest_6_months_by_month,
+        "selected_years": selected_years,
         "status": (
             "INTRAHOUR_RESOLUTION_INCREASED_FREQUENCY_WITH_EDGE_PRESERVED_REQUIRES_FRESH_CONFIRMATION"
             if selected_level != "H60_PROTECTED"
@@ -361,7 +426,7 @@ def run(config_path: Path, output_dir: Path) -> dict[str, Any]:
         ),
     }
     output_dir.mkdir(parents=True, exist_ok=True)
-    level_ledgers[selected_level].to_csv(
+    selected_ledger.to_csv(
         output_dir / "SELECTED_TRADES.csv", index=False, lineterminator="\n"
     )
     pd.DataFrame(
@@ -382,6 +447,18 @@ def run(config_path: Path, output_dir: Path) -> dict[str, Any]:
             for name, item in level_results.items()
         ]
     ).to_csv(output_dir / "LEVELS.csv", index=False, lineterminator="\n")
+    pd.DataFrame(
+        [
+            {"scenario": name, **metrics}
+            for name, metrics in selected["scenarios"].items()
+        ]
+    ).to_csv(output_dir / "SCENARIO_METRICS.csv", index=False, lineterminator="\n")
+    pd.DataFrame(selected_latest_6_months_by_month).to_csv(
+        output_dir / "MONTHLY_METRICS.csv", index=False, lineterminator="\n"
+    )
+    pd.DataFrame(selected_years).to_csv(
+        output_dir / "YEARLY_METRICS.csv", index=False, lineterminator="\n"
+    )
     (output_dir / "RESULT.json").write_text(
         json.dumps(result, indent=2, allow_nan=False) + "\n",
         encoding="utf-8",

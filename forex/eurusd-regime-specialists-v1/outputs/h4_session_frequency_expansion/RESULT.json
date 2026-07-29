@@ -1,0 +1,763 @@
+{
+  "schema_version": "eurusd_h4_session_frequency_expansion_result_v1",
+  "frozen_config_sha256": "4459800d7718c443b0acdaa991edff51ac5dc5c2d55230355a0a031e408cbeb3",
+  "source_sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+  "post_hoc_developmental_not_pristine_oos": true,
+  "broker_action_allowed": false,
+  "data_audit": {
+    "checks": {
+      "expected_start": true,
+      "expected_last_bar": true,
+      "expected_rows": true,
+      "unique_chronological_timestamps": true,
+      "five_minute_timestamp_alignment": true,
+      "all_gaps_are_five_minute_multiples": true,
+      "finite_prices": true,
+      "bid_ohlc_envelope": true,
+      "ask_ohlc_envelope": true,
+      "ask_not_below_bid_all_fields": true
+    },
+    "all_checks_passed": true,
+    "rows": 747645,
+    "first_timestamp_utc": "2016-07-01T00:00:00+00:00",
+    "last_timestamp_utc": "2026-06-30T23:55:00+00:00",
+    "gaps_larger_than_5_minutes": 636,
+    "largest_gap_hours": 72.08333333333333
+  },
+  "baseline_parity": {
+    "chop": {
+      "checks": {
+        "row_count": true,
+        "timestamps": true,
+        "numeric_values": true,
+        "exit_reasons": true
+      },
+      "all_checks_passed": true,
+      "regenerated_rows": 349,
+      "prior_rows": 349
+    },
+    "compression": {
+      "checks": {
+        "row_count": true,
+        "timestamps": true,
+        "numeric_values": true,
+        "exit_reasons": true
+      },
+      "all_checks_passed": true,
+      "regenerated_rows": 158,
+      "prior_rows": 158
+    }
+  },
+  "diagnostics": {
+    "BASELINE_chop_0m": {
+      "signals": 367,
+      "missing_entry": 0,
+      "incomplete_path": 11,
+      "spread_rejection": 0,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    },
+    "BASELINE_compression_0m": {
+      "signals": 160,
+      "missing_entry": 0,
+      "incomplete_path": 1,
+      "spread_rejection": 0,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    },
+    "BASELINE_chop_5m": {
+      "signals": 367,
+      "missing_entry": 0,
+      "incomplete_path": 26,
+      "spread_rejection": 0,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    },
+    "BASELINE_compression_5m": {
+      "signals": 160,
+      "missing_entry": 0,
+      "incomplete_path": 7,
+      "spread_rejection": 0,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    },
+    "BASELINE_chop_15m": {
+      "signals": 367,
+      "missing_entry": 0,
+      "incomplete_path": 26,
+      "spread_rejection": 0,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    },
+    "BASELINE_compression_15m": {
+      "signals": 160,
+      "missing_entry": 0,
+      "incomplete_path": 7,
+      "spread_rejection": 0,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    },
+    "NEW_YORK_chop_0m": {
+      "signals": 291,
+      "missing_entry": 0,
+      "incomplete_path": 72,
+      "spread_rejection": 0,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    },
+    "NEW_YORK_compression_0m": {
+      "signals": 141,
+      "missing_entry": 0,
+      "incomplete_path": 22,
+      "spread_rejection": 0,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    },
+    "LATE_US_chop_0m": {
+      "signals": 124,
+      "missing_entry": 0,
+      "incomplete_path": 20,
+      "spread_rejection": 5,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    },
+    "LATE_US_compression_0m": {
+      "signals": 34,
+      "missing_entry": 0,
+      "incomplete_path": 3,
+      "spread_rejection": 3,
+      "overlap_rejection": 0,
+      "quarantine_rejection": 0
+    }
+  },
+  "session_bundles": {
+    "NEW_YORK": {
+      "windows": {
+        "EARLY_2017_2019": {
+          "trades": 101,
+          "wins": 53,
+          "win_rate": 0.5247524752475248,
+          "realized_payoff_ratio": 1.0331971755616847,
+          "profit_factor": 1.14082188134936,
+          "stress_profit_factor": 1.0841938737729302,
+          "net_r": 4.566130735564931,
+          "stress_net_r": 2.801498808394261,
+          "pnl_usd_001_lot": 7.66176184326328,
+          "maximum_drawdown_r": 8.041786589427522,
+          "positive_active_month_share": 0.5161290322580645,
+          "top_5pct_winners_removed_profit_factor": 0.9100735227262274
+        },
+        "MIDDLE_2020_2022H1": {
+          "trades": 80,
+          "wins": 38,
+          "win_rate": 0.475,
+          "realized_payoff_ratio": 1.083834714128357,
+          "profit_factor": 0.9806123604018468,
+          "stress_profit_factor": 0.9281555659324626,
+          "net_r": -0.5122073145419126,
+          "stress_net_r": -1.9561784690053146,
+          "pnl_usd_001_lot": 1.8491375401162813,
+          "maximum_drawdown_r": 6.436208471236735,
+          "positive_active_month_share": 0.4444444444444444,
+          "top_5pct_winners_removed_profit_factor": 0.7918339058730406
+        },
+        "LATE_2022H2_2024H1": {
+          "trades": 78,
+          "wins": 32,
+          "win_rate": 0.41025641025641024,
+          "realized_payoff_ratio": 1.1660940880293307,
+          "profit_factor": 0.8111958873247518,
+          "stress_profit_factor": 0.7750000489721273,
+          "net_r": -5.645835593483422,
+          "stress_net_r": -6.894620001391582,
+          "pnl_usd_001_lot": -17.233604118177702,
+          "maximum_drawdown_r": 8.328410695507877,
+          "positive_active_month_share": 0.391304347826087,
+          "top_5pct_winners_removed_profit_factor": 0.6444456556804088
+        },
+        "RECENT_2024H2_2026H1": {
+          "trades": 72,
+          "wins": 29,
+          "win_rate": 0.4027777777777778,
+          "realized_payoff_ratio": 1.0934229551518884,
+          "profit_factor": 0.7549825166524944,
+          "stress_profit_factor": 0.718165014267605,
+          "net_r": -6.882835007100183,
+          "stress_net_r": -8.136840357738935,
+          "pnl_usd_001_lot": -12.402294890282995,
+          "maximum_drawdown_r": 11.828421666076329,
+          "positive_active_month_share": 0.391304347826087,
+          "top_5pct_winners_removed_profit_factor": 0.5774412785184023
+        },
+        "LATEST_12_MONTHS": {
+          "trades": 38,
+          "wins": 21,
+          "win_rate": 0.5526315789473685,
+          "realized_payoff_ratio": 1.1594042439321255,
+          "profit_factor": 1.4322052425043903,
+          "stress_profit_factor": 1.3525586401649292,
+          "net_r": 4.129013591473752,
+          "stress_net_r": 3.4741270221755487,
+          "pnl_usd_001_lot": 9.961638233464077,
+          "maximum_drawdown_r": 4.301244028193239,
+          "positive_active_month_share": 0.6666666666666666,
+          "top_5pct_winners_removed_profit_factor": 1.1711670109197825
+        },
+        "LATEST_6_MONTHS": {
+          "trades": 19,
+          "wins": 11,
+          "win_rate": 0.5789473684210527,
+          "realized_payoff_ratio": 1.4576763609048857,
+          "profit_factor": 2.0043049962442177,
+          "stress_profit_factor": 1.8844701972915192,
+          "net_r": 3.9594610781565027,
+          "stress_net_r": 3.607428866536421,
+          "pnl_usd_001_lot": 8.300940808096401,
+          "maximum_drawdown_r": 1.8836536861804554,
+          "positive_active_month_share": 0.8333333333333334,
+          "top_5pct_winners_removed_profit_factor": 1.6880615205785237
+        },
+        "FULL_AUDIT": {
+          "trades": 331,
+          "wins": 152,
+          "win_rate": 0.459214501510574,
+          "realized_payoff_ratio": 1.0861116491484453,
+          "profit_factor": 0.9274661273627172,
+          "stress_profit_factor": 0.8817979795744394,
+          "net_r": -8.47474717956059,
+          "stress_net_r": -14.186140019741568,
+          "pnl_usd_001_lot": -20.124999625081138,
+          "maximum_drawdown_r": 18.772172175242975,
+          "positive_active_month_share": 0.4423076923076923,
+          "top_5pct_winners_removed_profit_factor": 0.7460413219506961
+        }
+      },
+      "extra_0p5pip": {
+        "trades": 331,
+        "wins": 151,
+        "win_rate": 0.4561933534743202,
+        "realized_payoff_ratio": 1.051149909426484,
+        "profit_factor": 0.8817979795744394,
+        "net_r": -14.186140019741568,
+        "pnl_usd_001_lot": -33.7249996250811,
+        "maximum_drawdown_r": 22.239165977454967,
+        "positive_active_month_share": 0.4230769230769231,
+        "top_5pct_winners_removed_profit_factor": 0.7073680875511176
+      },
+      "admission_checks": {
+        "minimum_trades": true,
+        "full_profit_factor": false,
+        "extra_0p5pip_profit_factor": false,
+        "chronological_blocks": false,
+        "latest_12_month_profit_factor": true,
+        "top_5pct_winners_removed_profit_factor": false,
+        "maximum_closed_trade_drawdown": true
+      },
+      "admitted": false
+    },
+    "LATE_US": {
+      "windows": {
+        "EARLY_2017_2019": {
+          "trades": 42,
+          "wins": 20,
+          "win_rate": 0.47619047619047616,
+          "realized_payoff_ratio": 0.8892886315188173,
+          "profit_factor": 0.8084442104716522,
+          "stress_profit_factor": 0.7619797992643186,
+          "net_r": -2.672810996445773,
+          "stress_net_r": -3.4147896292098165,
+          "pnl_usd_001_lot": -4.719828192411568,
+          "maximum_drawdown_r": 5.163909367480427,
+          "positive_active_month_share": 0.5,
+          "top_5pct_winners_removed_profit_factor": 0.5581391948997225
+        },
+        "MIDDLE_2020_2022H1": {
+          "trades": 28,
+          "wins": 11,
+          "win_rate": 0.39285714285714285,
+          "realized_payoff_ratio": 1.0704226371688015,
+          "profit_factor": 0.6926264122856951,
+          "stress_profit_factor": 0.6594767094743411,
+          "net_r": -3.718615640865425,
+          "stress_net_r": -4.229661363959951,
+          "pnl_usd_001_lot": -10.789536281397671,
+          "maximum_drawdown_r": 4.753412405701681,
+          "positive_active_month_share": 0.4117647058823529,
+          "top_5pct_winners_removed_profit_factor": 0.48652059535711056
+        },
+        "LATE_2022H2_2024H1": {
+          "trades": 30,
+          "wins": 13,
+          "win_rate": 0.43333333333333335,
+          "realized_payoff_ratio": 1.1858992792384095,
+          "profit_factor": 0.906864154711725,
+          "stress_profit_factor": 0.8441698793758616,
+          "net_r": -0.6776195742667624,
+          "stress_net_r": -1.1777117593309947,
+          "pnl_usd_001_lot": -3.1876470936531565,
+          "maximum_drawdown_r": 2.8815468147360863,
+          "positive_active_month_share": 0.5,
+          "top_5pct_winners_removed_profit_factor": 0.5643888726671064
+        },
+        "RECENT_2024H2_2026H1": {
+          "trades": 25,
+          "wins": 16,
+          "win_rate": 0.64,
+          "realized_payoff_ratio": 0.8183300795315582,
+          "profit_factor": 1.4548090302783256,
+          "stress_profit_factor": 1.3526821763463084,
+          "net_r": 2.4120353329336455,
+          "stress_net_r": 1.93295596669954,
+          "pnl_usd_001_lot": 4.659958436309619,
+          "maximum_drawdown_r": 1.829346685539718,
+          "positive_active_month_share": 0.5882352941176471,
+          "top_5pct_winners_removed_profit_factor": 0.984874237975526
+        },
+        "LATEST_12_MONTHS": {
+          "trades": 16,
+          "wins": 11,
+          "win_rate": 0.6875,
+          "realized_payoff_ratio": 0.9501933636778733,
+          "profit_factor": 2.090425400091321,
+          "stress_profit_factor": 1.935073490988606,
+          "net_r": 2.6946741341704863,
+          "stress_net_r": 2.397952038492333,
+          "pnl_usd_001_lot": 6.52809383685149,
+          "maximum_drawdown_r": 1.0039482722311266,
+          "positive_active_month_share": 0.6666666666666666,
+          "top_5pct_winners_removed_profit_factor": 1.585897517727027
+        },
+        "LATEST_6_MONTHS": {
+          "trades": 11,
+          "wins": 7,
+          "win_rate": 0.6363636363636364,
+          "realized_payoff_ratio": 1.0275857263755301,
+          "profit_factor": 1.798275021157178,
+          "stress_profit_factor": 1.6597203511691696,
+          "net_r": 1.5721693783783874,
+          "stress_net_r": 1.353507037527327,
+          "pnl_usd_001_lot": 4.410748421715627,
+          "maximum_drawdown_r": 1.0039482722311266,
+          "positive_active_month_share": 0.6,
+          "top_5pct_winners_removed_profit_factor": 1.165209482017129
+        },
+        "FULL_AUDIT": {
+          "trades": 125,
+          "wins": 60,
+          "win_rate": 0.48,
+          "realized_payoff_ratio": 0.9527336070175939,
+          "profit_factor": 0.8794464064777789,
+          "stress_profit_factor": 0.8269308611743317,
+          "net_r": -4.657010878644315,
+          "stress_net_r": -6.889206785801225,
+          "pnl_usd_001_lot": -14.037053131152774,
+          "maximum_drawdown_r": 10.038911164004997,
+          "positive_active_month_share": 0.5,
+          "top_5pct_winners_removed_profit_factor": 0.6535884094355054
+        }
+      },
+      "extra_0p5pip": {
+        "trades": 125,
+        "wins": 58,
+        "win_rate": 0.464,
+        "realized_payoff_ratio": 0.9552477189427625,
+        "profit_factor": 0.8269308611743317,
+        "net_r": -6.889206785801225,
+        "pnl_usd_001_lot": -19.587053131152775,
+        "maximum_drawdown_r": 11.402374267310098,
+        "positive_active_month_share": 0.4864864864864865,
+        "top_5pct_winners_removed_profit_factor": 0.6108922462193185
+      },
+      "admission_checks": {
+        "minimum_trades": true,
+        "full_profit_factor": false,
+        "extra_0p5pip_profit_factor": false,
+        "chronological_blocks": false,
+        "latest_12_month_profit_factor": true,
+        "top_5pct_winners_removed_profit_factor": false,
+        "maximum_closed_trade_drawdown": true
+      },
+      "admitted": false
+    }
+  },
+  "admitted_session_bundles": [],
+  "baseline": {
+    "windows": {
+      "EARLY_2017_2019": {
+        "trades": 162,
+        "wins": 81,
+        "win_rate": 0.5,
+        "realized_payoff_ratio": 1.355988268520469,
+        "profit_factor": 1.355988268520469,
+        "stress_profit_factor": 1.2956818917657917,
+        "net_r": 21.50586837496356,
+        "stress_net_r": 18.310370766287008,
+        "pnl_usd_001_lot": 37.628121443592065,
+        "maximum_drawdown_r": 11.155791796035306,
+        "positive_active_month_share": 0.45714285714285713,
+        "top_5pct_winners_removed_profit_factor": 1.1702640018011474
+      },
+      "MIDDLE_2020_2022H1": {
+        "trades": 144,
+        "wins": 67,
+        "win_rate": 0.4652777777777778,
+        "realized_payoff_ratio": 1.270462623527124,
+        "profit_factor": 1.1200131023199646,
+        "stress_profit_factor": 1.0681902681819297,
+        "net_r": 7.3884372010398485,
+        "stress_net_r": 4.310751389213055,
+        "pnl_usd_001_lot": 18.57031745747639,
+        "maximum_drawdown_r": 8.145298573006485,
+        "positive_active_month_share": 0.5357142857142857,
+        "top_5pct_winners_removed_profit_factor": 0.9579756402722333
+      },
+      "LATE_2022H2_2024H1": {
+        "trades": 111,
+        "wins": 51,
+        "win_rate": 0.4594594594594595,
+        "realized_payoff_ratio": 1.2160229724981317,
+        "profit_factor": 1.033619526623412,
+        "stress_profit_factor": 0.9875586326950602,
+        "net_r": 1.6860411532728463,
+        "stress_net_r": -0.6391428901191025,
+        "pnl_usd_001_lot": -2.0529831475776836,
+        "maximum_drawdown_r": 11.373045958940807,
+        "positive_active_month_share": 0.5,
+        "top_5pct_winners_removed_profit_factor": 0.8844273406637018
+      },
+      "RECENT_2024H2_2026H1": {
+        "trades": 90,
+        "wins": 44,
+        "win_rate": 0.4888888888888889,
+        "realized_payoff_ratio": 1.4401049663713765,
+        "profit_factor": 1.3774917069639256,
+        "stress_profit_factor": 1.3119405176189711,
+        "net_r": 12.359841820372909,
+        "stress_net_r": 10.505158235752655,
+        "pnl_usd_001_lot": 23.591976133900076,
+        "maximum_drawdown_r": 6.6001361173515045,
+        "positive_active_month_share": 0.6086956521739131,
+        "top_5pct_winners_removed_profit_factor": 1.1871934491472906
+      },
+      "LATEST_12_MONTHS": {
+        "trades": 52,
+        "wins": 25,
+        "win_rate": 0.4807692307692308,
+        "realized_payoff_ratio": 1.658183416784053,
+        "profit_factor": 1.5353550155407898,
+        "stress_profit_factor": 1.4621886328819207,
+        "net_r": 9.024832592637107,
+        "stress_net_r": 8.021742444128515,
+        "pnl_usd_001_lot": 20.064046399011268,
+        "maximum_drawdown_r": 6.600136117351499,
+        "positive_active_month_share": 0.6666666666666666,
+        "top_5pct_winners_removed_profit_factor": 1.3135760001951102
+      },
+      "LATEST_6_MONTHS": {
+        "trades": 23,
+        "wins": 11,
+        "win_rate": 0.4782608695652174,
+        "realized_payoff_ratio": 1.4111701088357573,
+        "profit_factor": 1.293572599766111,
+        "stress_profit_factor": 1.2285540861752458,
+        "net_r": 2.5200500430804085,
+        "stress_net_r": 2.019558474694425,
+        "pnl_usd_001_lot": 3.7431817873246898,
+        "maximum_drawdown_r": 4.004877687600647,
+        "positive_active_month_share": 0.6666666666666666,
+        "top_5pct_winners_removed_profit_factor": 1.003344823529402
+      },
+      "FULL_AUDIT": {
+        "trades": 507,
+        "wins": 243,
+        "win_rate": 0.47928994082840237,
+        "realized_payoff_ratio": 1.309154799180374,
+        "profit_factor": 1.2095993011438437,
+        "stress_profit_factor": 1.154559615648955,
+        "net_r": 42.94018854964917,
+        "stress_net_r": 32.48713750113361,
+        "pnl_usd_001_lot": 77.73743188739085,
+        "maximum_drawdown_r": 11.373045958940814,
+        "positive_active_month_share": 0.5181818181818182,
+        "top_5pct_winners_removed_profit_factor": 1.0513570254463285
+      }
+    },
+    "risk_cap": {
+      "candidate_trades": 507,
+      "accepted": 507,
+      "risk_cap_rejections": 0,
+      "risk_cap_rejections_by_sleeve": {}
+    },
+    "frequency": {
+      "trades": 507,
+      "fx_days": 2476,
+      "trades_per_fx_day": 0.20476575121163165
+    }
+  },
+  "final": {
+    "windows": {
+      "EARLY_2017_2019": {
+        "trades": 162,
+        "wins": 81,
+        "win_rate": 0.5,
+        "realized_payoff_ratio": 1.355988268520469,
+        "profit_factor": 1.355988268520469,
+        "stress_profit_factor": 1.2956818917657917,
+        "net_r": 21.50586837496356,
+        "stress_net_r": 18.310370766287008,
+        "pnl_usd_001_lot": 37.628121443592065,
+        "maximum_drawdown_r": 11.155791796035306,
+        "positive_active_month_share": 0.45714285714285713,
+        "top_5pct_winners_removed_profit_factor": 1.1702640018011474
+      },
+      "MIDDLE_2020_2022H1": {
+        "trades": 144,
+        "wins": 67,
+        "win_rate": 0.4652777777777778,
+        "realized_payoff_ratio": 1.270462623527124,
+        "profit_factor": 1.1200131023199646,
+        "stress_profit_factor": 1.0681902681819297,
+        "net_r": 7.3884372010398485,
+        "stress_net_r": 4.310751389213055,
+        "pnl_usd_001_lot": 18.57031745747639,
+        "maximum_drawdown_r": 8.145298573006485,
+        "positive_active_month_share": 0.5357142857142857,
+        "top_5pct_winners_removed_profit_factor": 0.9579756402722333
+      },
+      "LATE_2022H2_2024H1": {
+        "trades": 111,
+        "wins": 51,
+        "win_rate": 0.4594594594594595,
+        "realized_payoff_ratio": 1.2160229724981317,
+        "profit_factor": 1.033619526623412,
+        "stress_profit_factor": 0.9875586326950602,
+        "net_r": 1.6860411532728463,
+        "stress_net_r": -0.6391428901191025,
+        "pnl_usd_001_lot": -2.0529831475776836,
+        "maximum_drawdown_r": 11.373045958940807,
+        "positive_active_month_share": 0.5,
+        "top_5pct_winners_removed_profit_factor": 0.8844273406637018
+      },
+      "RECENT_2024H2_2026H1": {
+        "trades": 90,
+        "wins": 44,
+        "win_rate": 0.4888888888888889,
+        "realized_payoff_ratio": 1.4401049663713765,
+        "profit_factor": 1.3774917069639256,
+        "stress_profit_factor": 1.3119405176189711,
+        "net_r": 12.359841820372909,
+        "stress_net_r": 10.505158235752655,
+        "pnl_usd_001_lot": 23.591976133900076,
+        "maximum_drawdown_r": 6.6001361173515045,
+        "positive_active_month_share": 0.6086956521739131,
+        "top_5pct_winners_removed_profit_factor": 1.1871934491472906
+      },
+      "LATEST_12_MONTHS": {
+        "trades": 52,
+        "wins": 25,
+        "win_rate": 0.4807692307692308,
+        "realized_payoff_ratio": 1.658183416784053,
+        "profit_factor": 1.5353550155407898,
+        "stress_profit_factor": 1.4621886328819207,
+        "net_r": 9.024832592637107,
+        "stress_net_r": 8.021742444128515,
+        "pnl_usd_001_lot": 20.064046399011268,
+        "maximum_drawdown_r": 6.600136117351499,
+        "positive_active_month_share": 0.6666666666666666,
+        "top_5pct_winners_removed_profit_factor": 1.3135760001951102
+      },
+      "LATEST_6_MONTHS": {
+        "trades": 23,
+        "wins": 11,
+        "win_rate": 0.4782608695652174,
+        "realized_payoff_ratio": 1.4111701088357573,
+        "profit_factor": 1.293572599766111,
+        "stress_profit_factor": 1.2285540861752458,
+        "net_r": 2.5200500430804085,
+        "stress_net_r": 2.019558474694425,
+        "pnl_usd_001_lot": 3.7431817873246898,
+        "maximum_drawdown_r": 4.004877687600647,
+        "positive_active_month_share": 0.6666666666666666,
+        "top_5pct_winners_removed_profit_factor": 1.003344823529402
+      },
+      "FULL_AUDIT": {
+        "trades": 507,
+        "wins": 243,
+        "win_rate": 0.47928994082840237,
+        "realized_payoff_ratio": 1.309154799180374,
+        "profit_factor": 1.2095993011438437,
+        "stress_profit_factor": 1.154559615648955,
+        "net_r": 42.94018854964917,
+        "stress_net_r": 32.48713750113361,
+        "pnl_usd_001_lot": 77.73743188739085,
+        "maximum_drawdown_r": 11.373045958940814,
+        "positive_active_month_share": 0.5181818181818182,
+        "top_5pct_winners_removed_profit_factor": 1.0513570254463285
+      }
+    },
+    "scenarios": {
+      "BASE": {
+        "trades": 507,
+        "wins": 243,
+        "win_rate": 0.47928994082840237,
+        "realized_payoff_ratio": 1.309154799180374,
+        "profit_factor": 1.2095993011438437,
+        "net_r": 42.94018854964917,
+        "pnl_usd_001_lot": 77.73743188739085,
+        "maximum_drawdown_r": 11.373045958940814,
+        "positive_active_month_share": 0.5181818181818182,
+        "top_5pct_winners_removed_profit_factor": 1.0513570254463285
+      },
+      "COST_PLUS_0P5_PIP": {
+        "trades": 507,
+        "wins": 240,
+        "win_rate": 0.47337278106508873,
+        "realized_payoff_ratio": 1.2844475724094626,
+        "profit_factor": 1.154559615648955,
+        "net_r": 32.48713750113361,
+        "pnl_usd_001_lot": 56.33743188739089,
+        "maximum_drawdown_r": 14.60013372466825,
+        "positive_active_month_share": 0.5181818181818182,
+        "top_5pct_winners_removed_profit_factor": 1.0022573265892505
+      },
+      "COST_PLUS_1P0_PIP": {
+        "trades": 507,
+        "wins": 239,
+        "win_rate": 0.4714003944773176,
+        "realized_payoff_ratio": 1.2359545097608802,
+        "profit_factor": 1.1022131635554118,
+        "net_r": 22.034086452618062,
+        "pnl_usd_001_lot": 34.93743188739085,
+        "maximum_drawdown_r": 17.96096635718747,
+        "positive_active_month_share": 0.5,
+        "top_5pct_winners_removed_profit_factor": 0.9555946060135702
+      },
+      "ENTRY_DELAY_5M": {
+        "trades": 487,
+        "wins": 231,
+        "win_rate": 0.47433264887063653,
+        "realized_payoff_ratio": 1.3066287604909792,
+        "profit_factor": 1.1790282955992821,
+        "net_r": 35.6210301725239,
+        "pnl_usd_001_lot": 69.54839365863768,
+        "maximum_drawdown_r": 19.30790538825692,
+        "positive_active_month_share": 0.5181818181818182,
+        "top_5pct_winners_removed_profit_factor": 1.0223664164311057
+      },
+      "ENTRY_DELAY_15M": {
+        "trades": 487,
+        "wins": 233,
+        "win_rate": 0.4784394250513347,
+        "realized_payoff_ratio": 1.2934291722671518,
+        "profit_factor": 1.1864921147175054,
+        "net_r": 37.03770591405454,
+        "pnl_usd_001_lot": 79.30860397731237,
+        "maximum_drawdown_r": 13.110916331570081,
+        "positive_active_month_share": 0.5363636363636364,
+        "top_5pct_winners_removed_profit_factor": 1.0295197768686495
+      },
+      "ROLLOVER_0P5_PIP": {
+        "trades": 507,
+        "wins": 243,
+        "win_rate": 0.47928994082840237,
+        "realized_payoff_ratio": 1.3124105689037036,
+        "profit_factor": 1.20801427365,
+        "net_r": 42.64241722211372,
+        "pnl_usd_001_lot": 76.98743188739085,
+        "maximum_drawdown_r": 11.42601384559828,
+        "positive_active_month_share": 0.5181818181818182,
+        "top_5pct_winners_removed_profit_factor": 1.049872007327683
+      }
+    },
+    "trade_bootstrap": {
+      "method": "CIRCULAR_MOVING_BLOCK",
+      "samples": 20000,
+      "block_trades": 5,
+      "seed": 20260730,
+      "profit_factor": {
+        "q05": 1.0338884793065357,
+        "median": 1.2070745027063046,
+        "q95": 1.411814354135667
+      },
+      "mean_r": {
+        "q05": 0.014737716301117155,
+        "median": 0.0836573852425035,
+        "q95": 0.15445617012438373
+      },
+      "maximum_drawdown_r": {
+        "q05": 8.196089625325111,
+        "median": 13.369179025273743,
+        "q95": 24.253267475745798
+      },
+      "probability_profit_factor_lte_1": 0.02185,
+      "probability_mean_r_lte_0": 0.02185
+    },
+    "calendar_bootstrap": {
+      "method": "CIRCULAR_CALENDAR_MONTH_BLOCK",
+      "samples": 20000,
+      "block_months": 3,
+      "calendar_months": 114,
+      "seed": 20260730,
+      "profit_factor": {
+        "q05": 1.0542769715490021,
+        "median": 1.2089170418424904,
+        "q95": 1.3927994554201824
+      },
+      "mean_r_per_observed_trade": {
+        "q05": 0.023470782447345823,
+        "median": 0.08449833686477329,
+        "q95": 0.14660057046889025
+      },
+      "probability_profit_factor_lte_1": 0.0105
+    },
+    "risk_cap": {
+      "0m": {
+        "candidate_trades": 507,
+        "accepted": 507,
+        "risk_cap_rejections": 0,
+        "risk_cap_rejections_by_sleeve": {}
+      },
+      "5m": {
+        "candidate_trades": 487,
+        "accepted": 487,
+        "risk_cap_rejections": 0,
+        "risk_cap_rejections_by_sleeve": {}
+      },
+      "15m": {
+        "candidate_trades": 487,
+        "accepted": 487,
+        "risk_cap_rejections": 0,
+        "risk_cap_rejections_by_sleeve": {}
+      }
+    },
+    "concurrency": {
+      "maximum_concurrent_positions": 2,
+      "maximum_concurrent_initial_risk_units": 1.5
+    },
+    "frequency": {
+      "trades": 507,
+      "fx_days": 2476,
+      "trades_per_fx_day": 0.20476575121163165,
+      "trade_count_gain": 0.0
+    },
+    "gate_results": {
+      "minimum_trade_count_gain": false,
+      "full_profit_factor": true,
+      "extra_0p5pip_profit_factor": true,
+      "extra_1p0pip_profit_factor": true,
+      "each_chronological_block_profit_factor": true,
+      "latest_12_month_profit_factor": true,
+      "latest_6_month_net_r": true,
+      "top_5pct_winners_removed_profit_factor": true,
+      "maximum_closed_trade_drawdown": true,
+      "entry_delay_5m_profit_factor": true,
+      "entry_delay_15m_profit_factor": true,
+      "trade_bootstrap_pf_5pct": true,
+      "trade_bootstrap_probability_pf_lte_1": true,
+      "calendar_bootstrap_pf_5pct": true,
+      "calendar_bootstrap_probability_pf_lte_1": true
+    },
+    "all_frequency_preserving_edge_gates_passed": false
+  },
+  "status": "NO_SAFE_SESSION_FREQUENCY_EXPANSION"
+}

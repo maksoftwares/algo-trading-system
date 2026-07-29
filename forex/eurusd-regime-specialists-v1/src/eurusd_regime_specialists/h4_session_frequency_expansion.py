@@ -197,6 +197,7 @@ def evaluate_final_gates(
 
 def _fx_days(m5: pd.DataFrame, start: pd.Timestamp, end: pd.Timestamp) -> int:
     subset = m5[(m5["timestamp"] >= start) & (m5["timestamp"] < end)]
+    subset = subset[subset["timestamp"].dt.dayofweek < 5]
     return int(subset["timestamp"].dt.strftime("%Y-%m-%d").nunique())
 
 
