@@ -1,0 +1,120 @@
+{
+  "schema_version": "eurusd_neutral_prospective_inventory_unwind_0005_v1",
+  "campaign_id": "eurusd-neutral-prospective-inventory-unwind-0005-v1",
+  "frozen_at_utc": "2026-07-29T11:04:10Z",
+  "prospective_start_utc": "2026-07-30T00:00:00Z",
+  "research_only": true,
+  "shadow_only": true,
+  "historical_backtest_forbidden": true,
+  "historical_eurusd_pnl_forbidden": true,
+  "parameter_search_forbidden": true,
+  "broker_action_allowed": false,
+  "design_disclosure": {
+    "historical_parent_result_path": "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_V1_1_EXECUTION_RESULT_2026_07_29.sha256.json",
+    "historical_parent_status": "REJECTED_EXACT_LATE_SESSION_INVENTORY_UNWIND",
+    "outcome_informed_successor": true,
+    "observed_parent_lessons": [
+      "00:15 entries achieved 84.27 percent same-side oracle precision within 15 minutes",
+      "the exact parent lost overall and may not be repaired historically",
+      "the earlier 00:05 clock must therefore be evaluated only on future unseen dates"
+    ],
+    "historical_evaluation_of_this_rule_allowed": false
+  },
+  "eligible_dates": {
+    "calendar": "UTC_WEEKDAYS_ONLY",
+    "maximum_trades_per_eligible_date": 1,
+    "frequency_quota": null,
+    "frequency_is_not_an_admission_gate": true
+  },
+  "neutral_ownership": {
+    "reuse_config_path": "config/frozen_prospective_neutral_ownership_v1.json",
+    "reuse_output_root": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership",
+    "owned_state": "DIRECTION_NEUTRAL_AND_NOT_SHOCK_AND_NOT_JOINT_DXY_EURUSD_COMPRESSION",
+    "maximum_state_staleness_hours": 4.0,
+    "ownership_capture_due_utc": "00:02:15",
+    "ownership_observed_deadline_utc": "00:04:00",
+    "missing_late_or_nonowned_action": "CASH"
+  },
+  "inventory_source": {
+    "symbol": "EURUSD",
+    "completed_window_utc": "PREVIOUS_DATE_2000_THROUGH_CURRENT_DATE_0000",
+    "required_completed_hours_utc": [
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:00"
+    ],
+    "calculation": "LAST_MID_TICK_BEFORE_0000_MINUS_FIRST_MID_TICK_AT_OR_AFTER_2000",
+    "minimum_absolute_displacement_pips": 4.0,
+    "positive_displacement_side": "SHORT",
+    "negative_displacement_side": "LONG",
+    "zero_or_subthreshold_action": "CASH",
+    "source_capture_due_utc": "00:03:00",
+    "source_observed_deadline_utc": "00:04:00",
+    "all_raw_hours_must_be_immutable_and_hash_linked": true,
+    "late_source_backfill_for_signal_forbidden": true
+  },
+  "decision_and_entry": {
+    "decision_time_utc": "00:04:00",
+    "latest_decision_creation_utc": "00:04:59.999999999",
+    "shadow_entry_time_utc": "00:05:00",
+    "entry_price": "FIRST_DUKASCOPY_BID_ASK_TICK_AT_OR_AFTER_0005_UTC",
+    "all_signal_and_ownership_evidence_must_precede_decision": true,
+    "actual_spread_required": true,
+    "minimum_retail_spread_pips": 0.7,
+    "maximum_entry_spread_pips": 1.5,
+    "adverse_slippage_pips_per_side": 0.1,
+    "missing_entry_tick_or_excess_spread_action": "NO_TRADE",
+    "one_open_position_within_expert": true
+  },
+  "risk": {
+    "fixed_stop_pips": 6.0,
+    "target_r": 1.5,
+    "fixed_target_pips": 9.0,
+    "maximum_hold_hours": 6,
+    "long_barrier_observation_side": "BID",
+    "short_barrier_observation_side": "ASK",
+    "same_timestamp_policy": "STOP_FIRST",
+    "time_exit": "FIRST_AVAILABLE_BID_ASK_TICK_AT_OR_AFTER_0605_UTC",
+    "fixed_research_lots": 0.01,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "evidence_roots": {
+    "source": "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-unwind-0005-v1/source",
+    "ownership": "D:/AlgoTradingData/prospective/eurusd-neutral-macro-crossasset-agreement-v1/ownership",
+    "ledger": "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-unwind-0005-v1/ledger",
+    "entry_and_path": "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-unwind-0005-v1/path",
+    "oracle": "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-unwind-0005-v1/oracle"
+  },
+  "prospective_admission": {
+    "minimum_calendar_months": 12,
+    "minimum_executed_trades": 30,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_each_side_trades": 8,
+    "minimum_each_side_profit_factor": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "minimum_extra_half_pip_profit_factor": 1.0,
+    "minimum_positive_active_month_rate": 0.6,
+    "maximum_largest_month_share_of_positive_profit": 0.35,
+    "minimum_same_day_same_side_oracle_precision": 0.5,
+    "temporal_oracle_window_minutes": 15,
+    "minimum_temporal_oracle_precision": 0.5,
+    "minimum_temporal_lift_over_exact_uniform_time_and_side_null": 0.0,
+    "maximum_temporal_uniform_null_p_value": 0.1,
+    "all_applicable_checks_required": true,
+    "qualification_action": "RESEARCH_REVIEW_ONLY_NO_AUTOMATIC_BROKER_ACTIVATION"
+  },
+  "decision_policy": {
+    "signal_or_execution_change_after_start_forbidden": true,
+    "historical_pnl_loading_forbidden": true,
+    "oracle_may_not_change_or_filter_signals": true,
+    "insufficient_sample_action": "REMAIN_SHADOW_CASH",
+    "failed_admission_action": "REJECT_EXACT_RULE_WITHOUT_RETUNING",
+    "automatic_demo_or_broker_activation": false
+  }
+}
