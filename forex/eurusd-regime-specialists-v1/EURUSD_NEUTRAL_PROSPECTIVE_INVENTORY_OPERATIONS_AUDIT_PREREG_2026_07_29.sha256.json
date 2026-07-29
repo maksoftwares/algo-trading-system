@@ -1,0 +1,30 @@
+{
+  "schema_version": "eurusd_neutral_prospective_inventory_operations_audit_v1_lock",
+  "campaign_id": "eurusd-neutral-prospective-inventory-operations-audit-v1",
+  "locked_at_utc": "2026-07-29T12:05:46.5000000Z",
+  "first_scheduled_operation_utc": "2026-07-29T21:02:00Z",
+  "locked_before_first_scheduled_operation": true,
+  "locked_with_zero_operation_receipts": true,
+  "locked_with_zero_strategy_source_records": true,
+  "locked_with_zero_strategy_decisions": true,
+  "locked_with_zero_trade_paths": true,
+  "locked_with_zero_oracle_records": true,
+  "historical_backtest_allowed": false,
+  "historical_eurusd_pnl_allowed": false,
+  "network_request_allowed": false,
+  "broker_action_allowed": false,
+  "external_process_liveness_verified_at_lock": true,
+  "external_process_liveness_checked_at_utc": "2026-07-29T12:05:46.4589686Z",
+  "primary_scheduler_process_chain_count": 3,
+  "transfer_scheduler_process_chain_count": 3,
+  "files": {
+    "config/frozen_prospective_neutral_inventory_operations_audit_v1.json": "a8f224cb2855ce1cb59e888d6d7a0368a35b1e5c5c40c37c13e2b3c69c0c300c",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_OPERATIONS_AUDIT_PREREG_2026_07_29.md": "25e264706a3404b87e5ee291e8edd6aaa355111b0a7d5724c0136e486008ba1c",
+    "audit_prospective_neutral_inventory_operations.py": "a5ef512be35d66f391bea67a11bb5de725a92dccebd9da630aed228764a0e579",
+    "tests/test_audit_prospective_neutral_inventory_operations.py": "1912b25db1f4f287828a0b49171a0ccdc003f08480b38e7600cc796238cd15eb",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_CLOCK_PORTFOLIO_PREREG_2026_07_29.sha256.json": "85852192d505ab1afb064d22f7964de314a2edd85f60a58fd65f773d28ca041a",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_UNWIND_0005_PREREG_2026_07_29.sha256.json": "b36054a85d398082c894bb93963dd35e453054d9163396bea0c4a6db9af8b70f",
+    "EURUSD_NEUTRAL_PROSPECTIVE_INVENTORY_CLOCK_TRANSFER_PREREG_2026_07_29.sha256.json": "6174380a225dff7e864245d18b60e9612a0761ad1a3ce18a0bab630f90d5a004"
+  },
+  "status": "FROZEN_BEFORE_FIRST_PORTFOLIO_OPERATION"
+}

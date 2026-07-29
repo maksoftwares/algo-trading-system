@@ -1,0 +1,63 @@
+{
+  "schema_version": "eurusd_neutral_prospective_inventory_operations_audit_v1",
+  "campaign_id": "eurusd-neutral-prospective-inventory-operations-audit-v1",
+  "designed_at_utc": "2026-07-29T12:05:00Z",
+  "first_entry_date_utc": "2026-07-30",
+  "research_only": true,
+  "shadow_only": true,
+  "historical_backtest_forbidden": true,
+  "historical_eurusd_pnl_forbidden": true,
+  "network_requests_by_auditor_forbidden": true,
+  "broker_action_allowed": false,
+  "receipt_contract": {
+    "missing_receipt_grace_seconds": 300,
+    "maximum_dispatch_lag_seconds": 60,
+    "maximum_dispatch_early_seconds": 1,
+    "duplicate_operation_receipts_forbidden": true,
+    "malformed_stdout_records_forbidden": true,
+    "nonempty_stderr_forbidden": true,
+    "operation_failure_receipts_forbidden": true,
+    "late_or_missed_source_results_forbidden": true,
+    "historical_pnl_flag_must_be_false": true,
+    "strategy_logic_changed_flag_must_be_false": true,
+    "broker_action_flag_must_be_false": true
+  },
+  "components": {
+    "primary_0005": {
+      "first_scheduled_operation_utc": "2026-07-29T21:02:00Z",
+      "startup_status": "PROSPECTIVE_INVENTORY_OPERATIONS_HELPER_STARTED",
+      "operation_schema_version": "eurusd_neutral_prospective_inventory_operation_v1",
+      "stdout_globs": [
+        "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-unwind-0005-v1/operations*.stdout.log",
+        "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-unwind-0005-v1/operations/operations*.stdout.log"
+      ],
+      "stderr_globs": [
+        "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-unwind-0005-v1/operations*.stderr.log",
+        "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-unwind-0005-v1/operations/operations*.stderr.log"
+      ]
+    },
+    "transfer_0605_1205": {
+      "first_scheduled_operation_utc": "2026-07-30T03:02:00Z",
+      "startup_status": "PROSPECTIVE_INVENTORY_CLOCK_OPERATIONS_HELPER_STARTED",
+      "operation_schema_version": "eurusd_neutral_prospective_inventory_clock_operation_v1",
+      "stdout_globs": [
+        "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-clock-transfer-v1/operations/operations*.stdout.log"
+      ],
+      "stderr_globs": [
+        "D:/AlgoTradingData/prospective/eurusd-neutral-inventory-clock-transfer-v1/operations/operations*.stderr.log"
+      ]
+    }
+  },
+  "fail_closed_result_statuses": [
+    "MISSED_SOURCE_HOUR_PREWARM_NO_BACKFILL",
+    "MISSED_SOURCE_DEADLINE_NO_BACKFILL",
+    "SKIPPED_LATE_OWNERSHIP_NO_BACKFILL"
+  ],
+  "interpretation": {
+    "startup_receipt_is_not_process_liveness_proof": true,
+    "external_process_liveness_check_required_before_first_operation": true,
+    "missing_or_degraded_receipts_block_research_review": true,
+    "missing_operation_must_not_be_backfilled_as_on_time_evidence": true,
+    "auditor_cannot_authorize_demo_or_broker_action": true
+  }
+}
