@@ -1,0 +1,62 @@
+{
+  "schema_version": "eurusd_neutral_swfx_sentiment_source_census_config_v1",
+  "prospective_start_utc": "2026-07-29T06:30:00Z",
+  "provider": "DUKASCOPY_BANK_SA",
+  "source": {
+    "endpoint": "https://freeserv.dukascopy.com/2.0/index.php?path=historical_sentiment_index/data",
+    "query": {
+      "liquidity": "consumers",
+      "type": "swfx"
+    },
+    "official_referer": "https://freeserv.dukascopy.com/2.0/?path=historical_sentiment_index/index&liquidity=consumers&type=swfx",
+    "instrument_name": "EUR/USD",
+    "required_fields": [
+      "last_long",
+      "last_short",
+      "sixhours_long",
+      "sixhours_short",
+      "oneday_long",
+      "oneday_short",
+      "fivedays_long",
+      "fivedays_short"
+    ],
+    "maximum_response_bytes": 2000000,
+    "long_short_sum_tolerance": 0.0001
+  },
+  "capture_schedule": {
+    "utc_weekdays_only": true,
+    "minutes_each_hour_utc": [
+      2,
+      32
+    ],
+    "maximum_start_lateness_seconds": 300,
+    "request_timeout_seconds": 60
+  },
+  "census_gates": {
+    "minimum_elapsed_calendar_days": 27,
+    "minimum_distinct_utc_weekdays": 20,
+    "minimum_valid_captures": 800,
+    "minimum_schedule_coverage_ratio": 0.9,
+    "minimum_valid_capture_ratio": 0.9,
+    "minimum_days_with_valid_capture": 18,
+    "minimum_distinct_eurusd_states": 30,
+    "maximum_consecutive_failed_scheduled_captures": 6,
+    "minimum_manual_official_widget_comparisons": 3
+  },
+  "source_feasibility_audit": {
+    "path": "EURUSD_NEUTRAL_DUKASCOPY_SWFX_SENTIMENT_SOURCE_FEASIBILITY_2026_07_28.md",
+    "sha256": "1bd0cbc38aee5c35998368eb7b64d7fd6c800ef015fa0d71ad23b58c607c69e3"
+  },
+  "research_boundaries": {
+    "source_only": true,
+    "historical_backfill_forbidden": true,
+    "eurusd_prices_forbidden": true,
+    "eurusd_returns_forbidden": true,
+    "eurusd_pnl_forbidden": true,
+    "oracle_rows_forbidden": true,
+    "direction_mapping_forbidden": true,
+    "strategy_threshold_forbidden": true,
+    "trade_creation_forbidden": true,
+    "broker_action_allowed": false
+  }
+}

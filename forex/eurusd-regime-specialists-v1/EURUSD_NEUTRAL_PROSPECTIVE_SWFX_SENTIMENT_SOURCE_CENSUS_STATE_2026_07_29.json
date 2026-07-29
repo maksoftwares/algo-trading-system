@@ -1,0 +1,23 @@
+{
+  "schema_version": "eurusd_neutral_swfx_sentiment_source_census_state_v1",
+  "recorded_at_utc": "2026-07-29T05:21:04.615652Z",
+  "prospective_start_utc": "2026-07-29T06:30:00Z",
+  "first_scheduled_capture_utc": "2026-07-29T06:32:00Z",
+  "status": "LOCKED_WAITING_FOR_PROSPECTIVE_START",
+  "immutable_manifests": 0,
+  "valid_source_captures": 0,
+  "failed_source_captures": 0,
+  "distinct_eurusd_states": 0,
+  "census_evaluation_allowed": false,
+  "source_admitted": false,
+  "strategy_preregistered": false,
+  "direction_mapping_selected": false,
+  "threshold_selected": false,
+  "eurusd_prices_loaded": false,
+  "eurusd_returns_loaded": false,
+  "eurusd_pnl_loaded": false,
+  "oracle_rows_loaded": false,
+  "signal_generated": false,
+  "trade_created": false,
+  "broker_action_allowed": false
+}
