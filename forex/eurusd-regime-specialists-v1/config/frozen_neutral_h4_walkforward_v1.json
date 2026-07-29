@@ -1,0 +1,154 @@
+{
+  "schema_version": "eurusd_neutral_h4_walkforward_v1",
+  "frozen_at_utc": "2026-07-29T13:15:27.6900266Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "reason_not_pristine": "All archived EURUSD history has been inspected by the wider campaign. This is a strict past-only walk-forward replay, but not pristine untouched evidence.",
+  "source": {
+    "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+    "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "expected_rows": 747645,
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "quarantine": [
+      {
+        "start_utc": "2024-10-09T23:00:00Z",
+        "end_utc": "2024-10-10T01:00:00Z",
+        "action": "CASH_IF_ENTRY_TO_EXIT_PATH_OVERLAPS"
+      }
+    ]
+  },
+  "macro_sources": {
+    "real_yield_10y": {
+      "path": "D:/AlgoTradingData/research/eurusd-macro-pressure-audit-v1/raw/fred/FRED_DFII10.csv",
+      "sha256": "e29681efcaeb24e82f4f90697dfe687d959ecb8d23632a28f459618fbeae9daf",
+      "column": "DFII10",
+      "official_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFII10",
+      "latest_observation": "2026-07-27"
+    },
+    "dollar_index_broad": {
+      "path": "D:/AlgoTradingData/research/eurusd-macro-pressure-audit-v1/raw/fred/FRED_DTWEXBGS.csv",
+      "sha256": "d9cc6a2f607514cdcf528b36492812ddde37ec1447b3218533a0fc9705049bbb",
+      "column": "DTWEXBGS",
+      "official_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DTWEXBGS",
+      "latest_observation": "2026-07-24"
+    }
+  },
+  "candidate": {
+    "real_yield_score_scale": 0.20,
+    "dollar_score_scale_pct": 1.50
+  },
+  "ownership": {
+    "regime_1_label": "NEUTRAL_QUIET_STATE",
+    "neutral_regimes": ["chop", "compression"],
+    "causal_rule": "The completed signal H4 state owns the next-H4 entry."
+  },
+  "classifier": {
+    "atr_period": 14,
+    "adx_period": 14,
+    "ema_period": 50,
+    "slope_bars": 6,
+    "efficiency_lookback": 24,
+    "range_lookback": 24,
+    "volatility_baseline_bars": 504,
+    "trend_adx_min": 18.0,
+    "trend_efficiency_min": 0.25,
+    "trend_slope_atr_min": 0.1,
+    "compression_adx_max": 26.0,
+    "compression_atr_ratio_max": 0.9,
+    "compression_width_atr_max": 6.0,
+    "chop_adx_max": 30.0,
+    "chop_efficiency_max": 0.5,
+    "chop_displacement_atr_max": 2.5,
+    "chop_width_atr_min": 1.0,
+    "chop_width_atr_max": 10.0,
+    "unsafe_atr_percentile": 0.95,
+    "unsafe_gap_atr": 1.5
+  },
+  "model": {
+    "candidate_start_utc": "2017-01-01T00:00:00Z",
+    "evaluation_start_utc": "2020-01-01T00:00:00Z",
+    "evaluation_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "trailing_training_years": 3,
+    "monthly_refit": true,
+    "minimum_training_side_rows": 500,
+    "minimum_training_targets": 100,
+    "logistic_c": 0.10,
+    "maximum_iterations": 1000,
+    "random_state": 20260729,
+    "minimum_target_probability": 0.50,
+    "minimum_side_probability_gap": 0.03,
+    "stop_atr_multiple": 0.75,
+    "target_r_multiple": 1.50,
+    "maximum_hold_h4_bars": 12,
+    "training_label": "TARGET_HIT_BEFORE_STOP_OR_TIME",
+    "side_selection": "HIGHER_PREDICTED_TARGET_PROBABILITY",
+    "model_features": [
+      "range_atr",
+      "atr_ratio_126",
+      "efficiency_24",
+      "hour_sin",
+      "hour_cos",
+      "weekday_sin",
+      "weekday_cos",
+      "side_return_1_atr",
+      "side_return_3_atr",
+      "side_return_6_atr",
+      "side_return_24_atr",
+      "side_body_atr",
+      "side_ema20_distance_atr",
+      "side_ema_slope_6_atr",
+      "side_rsi_centered",
+      "side_prior24_location",
+      "side_macro_pressure_clipped",
+      "side_real_yield_delta_clipped",
+      "side_dollar_delta_clipped"
+    ],
+    "macro_feature_clipping": {
+      "macro_pressure_abs": 10.0,
+      "real_yield_delta_abs": 2.0,
+      "dollar_delta_abs_pct": 10.0
+    }
+  },
+  "execution": {
+    "minimum_retail_spread_pips": 0.7,
+    "maximum_entry_spread_pips": 2.0,
+    "adverse_slippage_pips_per_side": 0.1,
+    "extra_round_trip_stress_pips": 0.5,
+    "same_bar_policy": "STOP_FIRST",
+    "follow_available_complete_h4_bars_across_weekends": true,
+    "one_open_position": true,
+    "fixed_research_lots": 0.01
+  },
+  "reporting_windows": {
+    "OOS_2020_2021": ["2020-01-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+    "OOS_2022_2023": ["2022-01-01T00:00:00Z", "2024-01-01T00:00:00Z"],
+    "OOS_2024_2025": ["2024-01-01T00:00:00Z", "2026-01-01T00:00:00Z"],
+    "OOS_2026_H1": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_WALKFORWARD": ["2020-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "historical_quality_gates": {
+    "minimum_trades": 100,
+    "minimum_win_rate_inclusive": 0.45,
+    "maximum_win_rate_inclusive": 0.55,
+    "minimum_payoff_inclusive": 1.35,
+    "maximum_payoff_inclusive": 1.75,
+    "minimum_profit_factor": 1.30,
+    "minimum_stressed_profit_factor": 1.15,
+    "minimum_each_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.15,
+    "minimum_latest_12_month_net_r_exclusive": 0.0,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_drawdown_r": 15.0
+  },
+  "selection_rules": {
+    "no_model_or_threshold_change_after_result": true,
+    "no_direction_hour_year_or_feature_selection_after_result": true,
+    "all_monthly_training_labels_must_exit_before_refit_boundary": true,
+    "historical_pass_can_authorize_demo": false,
+    "broker_action_allowed": false
+  }
+}

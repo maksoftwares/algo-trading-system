@@ -1,0 +1,16 @@
+{
+  "schema_version": "eurusd_neutral_h4_quiet_state_transfer_prereg_lock_v1",
+  "frozen_at_utc": "2026-07-29T12:51:38.2941701Z",
+  "files": {
+    "config/frozen_neutral_h4_quiet_state_transfer_v1.json": "fc9fea2f8b4fd026e58126cf3b53ce901d05760c39882f19c5cb5e9b837beca2",
+    "EURUSD_NEUTRAL_H4_QUIET_STATE_TRANSFER_PREREG_2026_07_29.md": "aa9d0c4234d4335af07545a056cec436113038c3d795d3313dc8a0d8575e9622",
+    "src/eurusd_regime_specialists/neutral_h4_quiet_state_transfer.py": "8b2864895520641a105d67b3fb9897c501ffba09cec56a96e80bcaa6b54e90b5",
+    "run_neutral_h4_quiet_state_transfer.py": "a2e5686d045a178d56908b766c01fdabfcd7b7a6a72daea917d06610b441d429",
+    "tests/test_neutral_h4_quiet_state_transfer.py": "227975094209a566a1c52c73d89f4c1a9bab4cb6bbedfa419abe475081d666dd"
+  },
+  "mechanical_amendments_before_outcome": [
+    "Normalized merge_asof timestamps to datetime64[ns, UTC] after the first run stopped before signal generation with a pandas millisecond/microsecond dtype error. No strategy parameter, gate, signal, trade, or performance result was available."
+  ],
+  "historical_outcome_opened": false,
+  "broker_action_allowed": false
+}

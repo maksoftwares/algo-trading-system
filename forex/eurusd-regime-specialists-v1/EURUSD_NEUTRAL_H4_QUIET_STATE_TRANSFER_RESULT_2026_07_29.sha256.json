@@ -1,0 +1,13 @@
+{
+  "schema_version": "eurusd_neutral_h4_quiet_state_transfer_result_lock_v1",
+  "status": "REJECTED_EXACT_H4_CONTROLS_NO_HISTORICAL_QUALIFIER",
+  "files": {
+    "config/frozen_neutral_h4_quiet_state_transfer_v1.json": "fc9fea2f8b4fd026e58126cf3b53ce901d05760c39882f19c5cb5e9b837beca2",
+    "outputs/neutral_h4_quiet_state_transfer/RESULT.json": "c4ea9e82c4c5823d4009db04237f036630eec9765ae66e892ccaee052c20ff4a",
+    "outputs/neutral_h4_quiet_state_transfer/TRADES.csv": "db8f8efd9f0542005a0ff24fafaf4979a784cad3d6820370d052f59aeebe0450",
+    "outputs/neutral_h4_quiet_state_transfer/H4_REGIME_STATES.csv": "04152da584300f3588e1c4dcb40cef93d667bca6d1d4b846069f006c00a5e6dd",
+    "src/eurusd_regime_specialists/neutral_h4_quiet_state_transfer.py": "8b2864895520641a105d67b3fb9897c501ffba09cec56a96e80bcaa6b54e90b5"
+  },
+  "qualified_specialists": [],
+  "broker_action_allowed": false
+}

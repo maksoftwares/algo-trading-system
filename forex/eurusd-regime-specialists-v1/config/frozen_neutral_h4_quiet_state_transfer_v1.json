@@ -1,0 +1,129 @@
+{
+  "schema_version": "eurusd_neutral_h4_quiet_state_transfer_v1",
+  "frozen_at_utc": "2026-07-29T12:51:38.2941701Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "reason_not_pristine": "Both candidates and all archived EURUSD history were inspected in earlier campaigns. This is an exact full-history transfer and stability audit, not a new untouched holdout.",
+  "source": {
+    "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+    "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "expected_rows": 747645,
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "quarantine": [
+      {
+        "start_utc": "2024-10-09T23:00:00Z",
+        "end_utc": "2024-10-10T01:00:00Z",
+        "action": "CASH_IF_ENTRY_TO_EXIT_PATH_OVERLAPS"
+      }
+    ]
+  },
+  "provenance": {
+    "chop_candidate_config": {
+      "path": "../../eur-usd/eurusd-fast-research/regime-specialists-v2/config/eurusd_capital_v2_final_exam.json",
+      "sha256": "65fa3aedaff1785182a63157efe34e11752899762034db23394f8f33a7f45810"
+    },
+    "compression_candidate_config": {
+      "path": "../../eur-usd/eurusd-fast-research/regime-specialists-v2/config/eurusd_v4_final_exam.json",
+      "sha256": "2e140c80c26b82baa1becc81b922f97b2ce05a45c8a537de49774578d8a235e6"
+    },
+    "classifier_config": {
+      "path": "../../eur-usd/eurusd-fast-research/regime-specialists-v2/config/eurusd_regime_specialists_v2r_train_hunt.json",
+      "sha256": "782fbdfae938bfddbbb7dcf4efb68d21e37f41c720d1d393da8aff85bddfba57"
+    }
+  },
+  "classifier": {
+    "atr_period": 14,
+    "adx_period": 14,
+    "ema_period": 50,
+    "slope_bars": 6,
+    "efficiency_lookback": 24,
+    "range_lookback": 24,
+    "volatility_baseline_bars": 504,
+    "trend_adx_min": 18.0,
+    "trend_efficiency_min": 0.25,
+    "trend_slope_atr_min": 0.1,
+    "compression_adx_max": 26.0,
+    "compression_atr_ratio_max": 0.9,
+    "compression_width_atr_max": 6.0,
+    "chop_adx_max": 30.0,
+    "chop_efficiency_max": 0.5,
+    "chop_displacement_atr_max": 2.5,
+    "chop_width_atr_min": 1.0,
+    "chop_width_atr_max": 10.0,
+    "unsafe_atr_percentile": 0.95,
+    "unsafe_gap_atr": 1.5
+  },
+  "candidates": [
+    {
+      "specialist_id": "H4_CHOP_ASIA_LONDON_SHORT_CONTROL",
+      "owned_regime": "chop",
+      "reference_hours_utc": [0, 1, 2, 3, 4, 5],
+      "decision_hours_utc": [6, 7, 8, 9],
+      "direction": "SHORT",
+      "body_fraction_minimum": 0.35,
+      "stop_atr_multiple": 1.75,
+      "target_r_multiple": 1.25,
+      "maximum_hold_hours": 12,
+      "prior_evidence": "Capital.com MT5 real ticks 2024-07 through 2026-06: 62 trades, 53.23% wins, PF 1.45."
+    },
+    {
+      "specialist_id": "H4_COMPRESSION_ASIA_LONDON_SHORT_CONTROL",
+      "owned_regime": "compression",
+      "reference_hours_utc": [0, 1, 2, 3, 4, 5],
+      "decision_hours_utc": [6, 7, 8, 9],
+      "direction": "SHORT",
+      "body_fraction_minimum": 0.55,
+      "stop_atr_multiple": 1.75,
+      "target_r_multiple": 2.0,
+      "maximum_hold_hours": 12,
+      "prior_evidence": "Dukascopy exact M5 2024-07 through 2026-06: 27 trades, 48.15% wins, stressed PF 1.50; failed only the frozen 30-trade floor."
+    }
+  ],
+  "execution": {
+    "minimum_retail_spread_pips": 0.7,
+    "maximum_entry_spread_pips": 2.0,
+    "adverse_slippage_pips_per_side": 0.1,
+    "extra_round_trip_stress_pips": 0.5,
+    "same_bar_policy": "STOP_FIRST",
+    "require_complete_h1_signal_and_reference_hours": true,
+    "require_exact_complete_m5_hold_path": true,
+    "one_open_position_per_specialist": true,
+    "fixed_research_lots": 0.01
+  },
+  "reporting_windows": {
+    "EARLY_2017_2019": ["2017-01-01T00:00:00Z", "2020-01-01T00:00:00Z"],
+    "MIDDLE_2020_2022H1": ["2020-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "LATE_2022H2_2024H1": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "RECENT_2024H2_2026H1": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_AUDIT": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "historical_quality_gates": {
+    "minimum_full_audit_trades": 100,
+    "minimum_win_rate_inclusive": 0.45,
+    "maximum_win_rate_inclusive": 0.55,
+    "minimum_realized_payoff_ratio_inclusive": 1.35,
+    "maximum_realized_payoff_ratio_inclusive": 1.75,
+    "minimum_full_audit_profit_factor": 1.30,
+    "minimum_stressed_profit_factor": 1.15,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.15,
+    "minimum_latest_12_month_net_r_exclusive": 0.0,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_r": 15.0
+  },
+  "selection_rules": {
+    "candidate_parameter_changes_after_result": false,
+    "candidate_side_or_clock_selection_after_result": false,
+    "candidate_year_or_subgroup_selection_after_result": false,
+    "portfolio_combination_requires_each_candidate_to_pass_standalone": true
+  },
+  "promotion": {
+    "historical_pass_can_authorize_demo": false,
+    "separate_prospective_confirmation_required": true,
+    "broker_action_allowed": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "eurusd_neutral_h4_walkforward_prereg_lock_v1",
+  "locked_before_candidate_outcomes": true,
+  "config": {
+    "path": "config/frozen_neutral_h4_walkforward_v1.json",
+    "sha256": "98da6b0e580db7a7dd735d94383cc0690b86eb8581f6273dfd6a3acc77fa5e6f"
+  },
+  "implementation": {
+    "path": "src/eurusd_regime_specialists/neutral_h4_walkforward.py",
+    "sha256": "abd2e9d80311325cba6f82d042d0521279251de3419c5d40764053e7b0f829ec"
+  },
+  "runner": {
+    "path": "run_neutral_h4_walkforward.py",
+    "sha256": "b8629d5b53c29dc22e25700366a5517b0dca8748b3a68bc874c98f5388558a20"
+  },
+  "tests": {
+    "path": "tests/test_neutral_h4_walkforward.py",
+    "sha256": "a7b140077c124da40438bc2016d8da766bda8228dfe5839861f1a44d3230425e"
+  },
+  "price_source_sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+  "macro_source_sha256": {
+    "DFII10": "e29681efcaeb24e82f4f90697dfe687d959ecb8d23632a28f459618fbeae9daf",
+    "DTWEXBGS": "d9cc6a2f607514cdcf528b36492812ddde37ec1447b3218533a0fc9705049bbb"
+  }
+}

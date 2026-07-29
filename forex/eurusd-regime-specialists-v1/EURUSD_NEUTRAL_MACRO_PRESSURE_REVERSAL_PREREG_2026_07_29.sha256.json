@@ -1,0 +1,29 @@
+{
+  "schema_version": "eurusd_neutral_macro_pressure_reversal_prereg_lock_v1",
+  "locked_before_exact_replay": true,
+  "config": {
+    "path": "config/frozen_neutral_macro_pressure_reversal_v1.json",
+    "sha256": "30c702106fcae38fb1e39461b31d6156bfba6dac20ec65e097fffa28985561f9"
+  },
+  "implementation": {
+    "path": "src/eurusd_regime_specialists/neutral_macro_pressure_reversal.py",
+    "sha256_before_mechanical_amendment_1": "8f9c7a9a415762dab6ff2616400ae2a8889dbc1739ce16e68429edf451031253",
+    "sha256": "b0c7120949aa5c3c85e76769ad213a37e090ef5d974e737afa85bd7d82992b37"
+  },
+  "runner": {
+    "path": "run_neutral_macro_pressure_reversal.py",
+    "sha256": "cbdffa862194c7f9a83bfb821626301e1eceea88703e554ee76c8aa2feb235f9"
+  },
+  "tests": {
+    "path": "tests/test_neutral_macro_pressure_reversal.py",
+    "sha256": "3e8b93e572ce55955a3d0cdd91f47a7d7c78f1700edc8176a41eb0497226f0a2"
+  },
+  "price_source": {
+    "path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+    "sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45"
+  },
+  "macro_sources": {
+    "DFII10": "e29681efcaeb24e82f4f90697dfe687d959ecb8d23632a28f459618fbeae9daf",
+    "DTWEXBGS": "d9cc6a2f607514cdcf528b36492812ddde37ec1447b3218533a0fc9705049bbb"
+  }
+}

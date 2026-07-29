@@ -1,0 +1,14 @@
+{
+  "schema_version": "eurusd_neutral_h4_walkforward_result_lock_v1",
+  "result_outcomes_known": true,
+  "status": "REJECTED_H4_NEUTRAL_WALKFORWARD",
+  "frozen_config_sha256": "98da6b0e580db7a7dd735d94383cc0690b86eb8581f6273dfd6a3acc77fa5e6f",
+  "implementation_sha256": "abd2e9d80311325cba6f82d042d0521279251de3419c5d40764053e7b0f829ec",
+  "outputs": {
+    "outputs/neutral_h4_walkforward/RESULT.json": "eb639ce32c053f06027489b3769936c9e774e3eedb21b2e3617fbf835a95cceb",
+    "outputs/neutral_h4_walkforward/SIDE_CANDIDATES.csv": "9718d958e3546599888eb0741f3ed3b3213c05e93932718cb2a57d19a1422ae2",
+    "outputs/neutral_h4_walkforward/MODEL_SELECTIONS.csv": "324cbe9568c0e7f840e75ff2f37ac329de8fe9116d2208047e56e66022317553",
+    "outputs/neutral_h4_walkforward/TRADES.csv": "85e4e7a8ed06d3d7c9784ab0cf87a3ff049380cfe5c023d47abfaf3acc75de66",
+    "outputs/neutral_h4_walkforward/MONTHLY_MODELS.csv": "62f36af2fe784ab4c05358e10e82fcb81af95e7b52d194b18230ced140e88338"
+  }
+}

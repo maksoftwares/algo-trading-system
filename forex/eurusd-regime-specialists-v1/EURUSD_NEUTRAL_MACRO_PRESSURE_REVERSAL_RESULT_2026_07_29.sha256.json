@@ -1,0 +1,12 @@
+{
+  "schema_version": "eurusd_neutral_macro_pressure_reversal_result_lock_v1",
+  "result_outcomes_known": true,
+  "status": "REJECTED_NO_REGIME_1_HISTORICAL_QUALIFIER",
+  "frozen_config_sha256": "30c702106fcae38fb1e39461b31d6156bfba6dac20ec65e097fffa28985561f9",
+  "implementation_sha256": "b0c7120949aa5c3c85e76769ad213a37e090ef5d974e737afa85bd7d82992b37",
+  "outputs": {
+    "outputs/neutral_macro_pressure_reversal/RESULT.json": "95636b491566647dee14d2c485e8f460d6699f03796c1b507d5175630c817922",
+    "outputs/neutral_macro_pressure_reversal/TRADES.csv": "4cda4b4b9042d930d54c6d5ff08eed82444780468a57831d09a4db67c09a295b",
+    "outputs/neutral_macro_pressure_reversal/SIGNALS.csv": "783fec25977aa8a911e79c515c62c3cf39f7f6507926e1aca041640217c3f456"
+  }
+}
