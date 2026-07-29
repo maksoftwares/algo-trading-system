@@ -1,0 +1,16 @@
+{
+  "all_performance_gates_passed": false,
+  "broker_action_allowed": false,
+  "family": "N49_NEUTRAL_PRIOR24_EXTREME_FADE",
+  "files": {
+    "EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_PREREG_2026_07_29.sha256.json": "9c2047d88f91c25afff4d1d547cff24852bfcd9da0a2e3cedbc4e446f0d6d938",
+    "EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_RESULT_2026_07_29.md": "3276f73e1f20daa79b8587ed9450ab3ebde4b7c281171778e713be8edaabac20",
+    "outputs/neutral_prior24_extreme_fade_execution/ORACLE_MATCHES.csv": "197657c0873a0e54343c3cd3ec25d343f83c1e5cdcaa6a332e07cc45467453ef",
+    "outputs/neutral_prior24_extreme_fade_execution/RESULT.json": "c8fe58353b1217b8f53121da69632dfcc9783b5e7d36231d4f56bc98b900decc",
+    "outputs/neutral_prior24_extreme_fade_execution/ROUTING.csv": "115bc20ff0eb6a498bb96bdfef2ad80b38110aac5ac49292c4a9a6ac2c6bc20e",
+    "outputs/neutral_prior24_extreme_fade_execution/TRADES.csv": "18ed8526312839ac2f9690d26bf73f5e44ceb0a0916c214a30ed97c1ecc7bdee"
+  },
+  "historical_pass_can_authorize_demo": false,
+  "oracle_resemblance_gates_passed": true,
+  "status": "REJECTED_EXACT_PRIOR24_EXTREME_FADE"
+}

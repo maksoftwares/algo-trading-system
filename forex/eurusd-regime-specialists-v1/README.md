@@ -205,6 +205,9 @@ Key reports:
 - `EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_PREREG_2026_07_29.md`
 - `EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_CENSUS_2026_07_29.md`
 - `EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_CENSUS_RESULT_2026_07_29.sha256.json`
+- `EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_PREREG_2026_07_29.md`
+- `EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_RESULT_2026_07_29.md`
+- `EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_EXECUTION_RESULT_2026_07_29.sha256.json`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -354,4 +357,5 @@ uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn p
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_0608_range_breakout_transfer_v1_1.py census
 uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_0608_range_breakout_transfer_execution.py
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_prior24_extreme_fade.py census
+uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_prior24_extreme_fade_execution.py
 ```
