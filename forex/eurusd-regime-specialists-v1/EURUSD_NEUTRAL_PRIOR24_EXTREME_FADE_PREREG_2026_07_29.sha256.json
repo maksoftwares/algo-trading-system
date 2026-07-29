@@ -1,0 +1,20 @@
+{
+  "broker_action_allowed": false,
+  "census_forbids_outcome_loading": true,
+  "family": "N49_NEUTRAL_PRIOR24_EXTREME_FADE",
+  "files": {
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb",
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_EXECUTION_RESULT_2026_07_29.sha256.json": "f1783be2f721e47f477d2b8fd7484024d38c0474f4ecff12bb35cc1c2612acda",
+    "EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_PREREG_2026_07_29.md": "2437c9e9dd1bd39620436677a8106d27e7eb55ff626587a54d209559619493c6",
+    "config/frozen_neutral_prior24_extreme_fade.json": "84da2eb8dccf878fdd511c5876b948034df738532e57b8dac90ea9b874cd1c6f",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "run_neutral_prior24_extreme_fade.py": "294ac9c2f2ed1641196d787b826152186a9f42caa696283f8c004b4ea4755853",
+    "src/eurusd_regime_specialists/neutral_prior24_extreme_fade.py": "1302ee89c4ad6d5eec39a86b0306f31cb199abee0e0ef2017aa3269d07501bc9",
+    "tests/test_neutral_prior24_extreme_fade.py": "52feeaa1f76dbc4406d19435c519a0bd402100f0c658624a84e9148d8b0cee7a"
+  },
+  "locked_at_utc": "2026-07-29T09:31:53.1452696Z",
+  "locked_before_any_outcome": true,
+  "locked_before_first_candidate_count": true,
+  "status": "FROZEN_ORACLE_TIMING_INFORMED_DIRECTION_OUTCOME_BLIND"
+}
