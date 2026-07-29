@@ -1,0 +1,24 @@
+{
+  "package_id": "eurusd-h4-chop-controlled-demo-v1",
+  "status": "CONTROLLED_SHADOW_DEMO_ARTIFACT_READY",
+  "production_ready": false,
+  "live_ready": false,
+  "ordering_demo_armed": false,
+  "broker_action_performed": false,
+  "files": {
+    "EURUSD_H4_CHOP_CONTROLLED_DEMO_RUNBOOK_2026_07_30.md": "c24d031188ad600a5ac820735e951f8d99a5e886d560313ac95404b381e4d60f",
+    "EURUSD_H4_CHOP_CONTROLLED_DEMO_VERIFICATION_2026_07_30.md": "69e2a7d9e313d93492f2fa810748f938817e7140dd568a3b4c8296260ef8bee4",
+    "mt5/Config/EURUSD_H4_CHOP_CONTROLLED_PARITY_202407_202606.ini": "fe9c0b4e2835f9f09b499658e40cb29e55bfcdc7948418cc69dc1d10b0123ec0",
+    "mt5/EURUSD_H4_CHOP_CONTROLLED_DEMO_COMPILE.log": "626e5fd1b2afbef4c930d5c55af5142ada45981310d0100d62d49245725f87cf",
+    "mt5/Experts/EurUsdH4ChopControlledDemo.mq5": "bdb08b2d0f95c8104a8412cd6c938695fd5f90acccd0ee5202bcac2a3b363a9e",
+    "mt5/Experts/EurUsdH4ChopControlledDemo.ex5": "b922bebb492d07bc17c102eecebfb38a097b3cf851eb4f65fd3a56b0380a2eb8",
+    "mt5/Presets/EURUSD_H4_CHOP_CONTROLLED_SHADOW_DEMO.set": "68004a9281733fbe5f577b42ddeafb6afc7252d7da22259954c3d99af0e6b752",
+    "mt5/Presets/EURUSD_H4_CHOP_CONTROLLED_ORDERING_DEMO.template.set": "41dd3ef9663252e706b1973425f6f221c788c4d3dd7ee70e390271b11728f07b",
+    "outputs/h4_chop_controlled_demo/VERIFICATION.json": "3c5e7aa3cffbf32408c786c6cf2f7dd22aadc21f0b8d3c2cdba2a5c407902427",
+    "outputs/h4_chop_controlled_demo/TRADES.csv": "bfff13eb688b18fffe58193a4deab09fa531bd9e6daa925eada7a2e929bfa03a",
+    "outputs/h4_chop_controlled_demo/LATEST_12_MONTHS.csv": "60f622eb149d84cefdd64b0f3dfc2bf5878ad5e0a246d08ef4b4d9a2e457b69f",
+    "outputs/h4_chop_controlled_demo/EURUSD_H4_CHOP_CONTROLLED_PARITY_202407_202606.htm": "1d26f74350c7102bc1b9308e0722c8ba44f2a125fcd598cd0f9a6e05551d8166",
+    "tests/test_h4_chop_controlled_demo_package.py": "65789082deb2ad02092fc6f6bab29c4587c108b85657b6d28ef5a001217328f5",
+    "verify_h4_chop_controlled_demo.py": "bb5ed9e737c156d865b1f8a66e83161fb14b86d58b315a3010364ca6f1c1a0ba"
+  }
+}
