@@ -68,6 +68,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 62. GDELT daily operations restart: the missed `2026-07-29` boundary was recorded honestly as `CASH_MISSING_ON_TIME_SOURCE`, with no late backfill or trade. A hash-locked operations-only helper now schedules the unchanged source, ownership, decision, delayed path, and validator functions beginning with the `2026-07-30` entry date. It cannot change strategy logic or authorize broker action, and it skips source or ownership acquisition after the frozen decision deadline.
 63. SWFX semantics audit: the official Dukascopy page verifies that consumer sentiment is based on long/short open-position shares, that the index is the long-share-minus-short-share percentage-point difference, and that it updates every 30 minutes. The exact public JSONP `*_long`/`*_short` field binding remains unproven because the embedded instrument rows failed to load in both browser surfaces. This observation therefore counts as zero of the three frozen visible-value comparisons and does not authorize a strategy mapping.
 64. Independent SWFX source validation: before the first prospective capture, a separately hash-locked, network-free validator was frozen. It replays each EUR/USD row from immutable raw JSONP, independently verifies clocks, hashes, antipodal fields, normalized values, source-only boundaries, missing slots, failures, and every census gate. The collector can no longer certify its own output, and source admission still permits only a later separately preregistered strategy design.
+65. Immutable SWFX validation operations: a separately locked network-free helper snapshots the independent validator at UTC minute `08` and `38`, six minutes after every source clock. Each validation clock can produce only one content-addressed immutable snapshot, so a missing or failed source observation cannot be silently repaired by a later arrival.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -306,4 +307,5 @@ uv run --with pandas --with numpy --with pyarrow --with scikit-learn python vali
 uv run python capture_prospective_neutral_swfx_sentiment_source.py status
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_prospective_neutral_gdelt_daily_operations.py
 uv run python validate_prospective_neutral_swfx_sentiment_source.py status
+uv run python run_prospective_neutral_swfx_validation_helper.py
 ```
