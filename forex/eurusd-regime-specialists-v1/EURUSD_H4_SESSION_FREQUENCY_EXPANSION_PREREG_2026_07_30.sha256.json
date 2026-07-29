@@ -1,0 +1,12 @@
+{
+  "campaign_id": "eurusd-h4-session-frequency-expansion-v1",
+  "frozen_before_transferred_session_outcomes": true,
+  "files": {
+    "EURUSD_H4_SESSION_FREQUENCY_EXPANSION_PREREG_2026_07_30.md": "9d2d9bce2b4a42e192386cd40168af54e5b984a6d4702b09476c5997c1ec1999",
+    "config/frozen_h4_session_frequency_expansion_v1.json": "4459800d7718c443b0acdaa991edff51ac5dc5c2d55230355a0a031e408cbeb3",
+    "run_h4_session_frequency_expansion.py": "6929c254fce81aefcc07e6fe69a6876684ea1a48bab8a7d887d4411555e3bb08",
+    "src/eurusd_regime_specialists/h4_session_frequency_expansion.py": "119d0a62e7817876005452875a6adebcaf6374639a9fd218b808357f832cc185",
+    "tests/test_h4_session_frequency_expansion.py": "1edea0bf4d2655b6e9a3b7ca0b37cb1b9f5a2d512605b69bcc64ff291470182a"
+  },
+  "status": "FROZEN_BEFORE_FIRST_TRANSFERRED_SESSION_OUTCOME"
+}
