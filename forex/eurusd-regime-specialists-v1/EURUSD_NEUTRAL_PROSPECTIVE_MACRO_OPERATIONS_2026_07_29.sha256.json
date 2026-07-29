@@ -1,0 +1,19 @@
+{
+  "schema_version": "eurusd_neutral_prospective_macro_operations_lock_v1",
+  "locked_at_utc": "2026-07-29T05:54:40.3782343Z",
+  "first_future_operation_utc": "2026-07-29T06:01:00Z",
+  "first_future_forecast_poll_utc": "2026-07-29T15:50:54Z",
+  "locked_before_first_future_operation": true,
+  "strategy_or_signal_logic_changed": false,
+  "historical_pnl_allowed": false,
+  "broker_action_allowed": false,
+  "frozen_planner_contract": {
+    "path": "EURUSD_NEUTRAL_PROSPECTIVE_OPERATIONS_PLANNER_V1_4_PREREG_2026_07_28.sha256.json",
+    "sha256": "8d41c3bd71a495c1c34ae6f5e9ff9e562dc579302730b03353e73bc81c88b59a"
+  },
+  "files": {
+    "run_prospective_neutral_macro_operations.py": "7cef21b0fda9ba61c53015d263ac9b76e1a75b568a49e35618bef67fbf9c5060",
+    "tests/test_run_prospective_neutral_macro_operations.py": "70005da39fc1e49fc6cca1d208cc6f962a9ef3bda608c31aba37282b12b26aab",
+    "EURUSD_NEUTRAL_PROSPECTIVE_MACRO_OPERATIONS_PREREG_2026_07_29.md": "4bc269a71236582436026b728a750cba5c652d0c8d13bcc9dbfc23d5c00a97d7"
+  }
+}

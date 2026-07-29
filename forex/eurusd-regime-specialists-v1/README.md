@@ -69,6 +69,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 63. SWFX semantics audit: the official Dukascopy page verifies that consumer sentiment is based on long/short open-position shares, that the index is the long-share-minus-short-share percentage-point difference, and that it updates every 30 minutes. The exact public JSONP `*_long`/`*_short` field binding remains unproven because the embedded instrument rows failed to load in both browser surfaces. This observation therefore counts as zero of the three frozen visible-value comparisons and does not authorize a strategy mapping.
 64. Independent SWFX source validation: before the first prospective capture, a separately hash-locked, network-free validator was frozen. It replays each EUR/USD row from immutable raw JSONP, independently verifies clocks, hashes, antipodal fields, normalized values, source-only boundaries, missing slots, failures, and every census gate. The collector can no longer certify its own output, and source admission still permits only a later separately preregistered strategy design.
 65. Immutable SWFX validation operations: a separately locked network-free helper snapshots the independent validator at UTC minute `08` and `38`, six minutes after every source clock. Each validation clock can produce only one content-addressed immutable snapshot, so a missing or failed source observation cannot be silently repaired by a later arrival.
+66. Prospective macro operations runner: after clearing 45 newly safe ownership-cache gaps and before the next `2026-07-29T06:01:00Z` operation, an operations-only runner was hash-locked around the unchanged V1.4 planner. It executes one strictly allowlisted capture/process command, immediately replans, preserves a 15-second network-completion margin before forecast polling clocks, refuses late forecast backfill, loads no historical EURUSD P&L, and has no broker capability. The first scheduled forecast poll remains `2026-07-29T15:50:54Z`; the campaign still has zero signals and zero trades.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -308,4 +309,5 @@ uv run python capture_prospective_neutral_swfx_sentiment_source.py status
 uv run --with pandas --with numpy --with pyarrow --with scikit-learn python run_prospective_neutral_gdelt_daily_operations.py
 uv run python validate_prospective_neutral_swfx_sentiment_source.py status
 uv run python run_prospective_neutral_swfx_validation_helper.py
+uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_prospective_neutral_macro_operations.py
 ```
