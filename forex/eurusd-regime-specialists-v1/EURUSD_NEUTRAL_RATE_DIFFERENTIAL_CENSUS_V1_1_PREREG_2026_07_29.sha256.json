@@ -1,0 +1,29 @@
+{
+  "schema_version": "eurusd_neutral_rate_differential_census_lock_v1_1",
+  "locked_at_utc": "2026-07-29T07:54:32.7315456Z",
+  "supersedes": {
+    "path": "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_CENSUS_PREREG_2026_07_29.sha256.json",
+    "sha256": "f078fab88f6c88bb6344b948b9795266b372b72193afcc45d2dce2aaf0c6db30",
+    "reason": "The only change is a floating-point-tolerant unit-test assertion plus the lock path needed to preserve this supersession. Signal, lag, threshold, direction, gates, and implementation semantics are unchanged."
+  },
+  "frozen_before_candidate_count": true,
+  "candidate_rows_loaded_before_lock": 0,
+  "eurusd_price_rows_loaded_before_lock": 0,
+  "eurusd_outcome_rows_loaded_before_lock": 0,
+  "oracle_rows_loaded_before_lock": 0,
+  "eurusd_outcome_use_allowed": false,
+  "parameter_search_allowed": false,
+  "threshold_change_after_census_allowed": false,
+  "direction_reversal_after_census_allowed": false,
+  "broker_action_allowed": false,
+  "files": {
+    "download_neutral_rate_differential.py": "150955f1e9fe0c674c769ef6ad40066771dafcdf3fd7af8db01bcd981b41cd69",
+    "tests/test_download_neutral_rate_differential.py": "9280d2e490f6e8973a533173068a2ed689283a4230808d24c1ac7e8163db2057",
+    "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_SOURCE_AUDIT_2026_07_29.md": "529e6529510b75ed9f652e8365212aaf74aafa9aacef90d63ec0c7f43f4d9ae6",
+    "config/frozen_neutral_rate_differential_census.json": "8cb55cd535daef55cbc29fbbe16fa55b12e0bb2e21af1e4287e888fda8a9bf7e",
+    "EURUSD_NEUTRAL_RATE_DIFFERENTIAL_CENSUS_PREREG_2026_07_29.md": "eb4889599a124188539046be0cb2d487d350365cda0549d34fd1aa845a41d294",
+    "src/eurusd_regime_specialists/neutral_rate_differential_census.py": "9e640f80e90d6f6cd57f9a165f856ea2ecda079c381c4797f48ecf099fdc1ccd",
+    "run_neutral_rate_differential_census.py": "5c6a0d934f8004954337c6eec4d3a5a136a3a217ecc34cb2c377563c53472c76",
+    "tests/test_neutral_rate_differential_census.py": "df353a7d1f61cdd0a7aaabf59b63ee0d77eb11cc309c8c164843acbf9c4ea684"
+  }
+}

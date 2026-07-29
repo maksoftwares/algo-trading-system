@@ -1,0 +1,88 @@
+{
+  "schema_version": "eurusd_neutral_rate_differential_census_v1",
+  "frozen_at_utc": "2026-07-29T07:50:58.1335878Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "source_root": "D:/AlgoTradingData/research/eurusd-neutral-rate-differential-v1",
+  "source_manifest": {
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-rate-differential-v1/SOURCE_MANIFEST.json",
+    "sha256": "076b526298007f8a3bb092d61f43882b38b27e6fc33f7c2e056585e5583100fa"
+  },
+  "source_audit": {
+    "path": "D:/AlgoTradingData/research/eurusd-neutral-rate-differential-v1/SOURCE_AUDIT.json",
+    "sha256": "8603cb2f29a6a85ac35d21ee29707d7887ab913016de2bec39d651c3769a2f2d",
+    "required_status": "SOURCE_ACCEPTED_FOR_OUTCOME_BLIND_CENSUS"
+  },
+  "normalized_sources": {
+    "us_treasury_2y": {
+      "path": "D:/AlgoTradingData/research/eurusd-neutral-rate-differential-v1/normalized/US_TREASURY_2Y.csv",
+      "sha256": "51eaec6610f14d4b1ecf3a9ad07afb07cd988d7fb2b4ff67f5949f2ac8a77284"
+    },
+    "ecb_euro_area_aaa_2y": {
+      "path": "D:/AlgoTradingData/research/eurusd-neutral-rate-differential-v1/normalized/ECB_EURO_AREA_AAA_2Y.csv",
+      "sha256": "2658290c4272185298a152da1baddb33bcb5af38ef0170c464e4ecced07dac09"
+    }
+  },
+  "neutral_timestamp_source": {
+    "path": "outputs/neutral_oracle_imitation/LABELED_DATASET.parquet",
+    "sha256": "c082aa11b5cb94f6e5101479cefeeb81db749ca94afa9b806a2a309d8e8c7cd1",
+    "columns_allowed": [
+      "entry_time_utc",
+      "side"
+    ],
+    "required_clock_utc": "00:00",
+    "required_side_rows_per_clock": [
+      "LONG",
+      "SHORT"
+    ]
+  },
+  "signal": {
+    "entry_hour_utc": 0,
+    "entry_minute_utc": 0,
+    "minimum_observation_lag_calendar_days": 2,
+    "minimum_absolute_common_date_spread_change_bps_inclusive": 5.0,
+    "spread_definition": "US_TREASURY_2Y_PERCENT_MINUS_ECB_EURO_AREA_AAA_2Y_PERCENT",
+    "widening_spread_side": "SHORT",
+    "narrowing_spread_side": "LONG",
+    "zero_or_subthreshold_action": "CASH",
+    "daily_quota": 1,
+    "parameter_search_allowed": false
+  },
+  "windows": {
+    "DEVELOPMENT_2019_2022": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "OOS_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "OOS_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "OOS_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "OOS_2026_H1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "capacity_gates": {
+    "minimum_total_candidates": 80,
+    "minimum_development_candidates": 40,
+    "minimum_candidates_each_full_oos_year": 10,
+    "minimum_candidates_2026_h1": 5,
+    "minimum_candidates_each_side": 20
+  },
+  "census_boundaries": {
+    "eurusd_prices_allowed": false,
+    "eurusd_returns_allowed": false,
+    "oracle_rows_allowed": false,
+    "pnl_allowed": false,
+    "passing_census_allows_only_separate_execution_freeze": true,
+    "broker_action_allowed": false
+  }
+}
