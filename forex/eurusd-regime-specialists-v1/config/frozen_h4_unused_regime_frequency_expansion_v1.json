@@ -1,0 +1,109 @@
+{
+  "schema_version": "eurusd_h4_unused_regime_frequency_expansion_v1",
+  "frozen_at_utc": "2026-07-30T00:00:00Z",
+  "research_only": true,
+  "post_hoc_developmental_not_pristine_oos": true,
+  "broker_action_allowed": false,
+  "anchor_config": {
+    "path": "config/frozen_neutral_h4_quiet_state_transfer_v1.json",
+    "sha256": "fc9fea2f8b4fd026e58126cf3b53ce901d05760c39882f19c5cb5e9b837beca2"
+  },
+  "prior_unweighted_ledger": {
+    "path": "outputs/neutral_h4_quiet_state_transfer/TRADES.csv",
+    "sha256": "db8f8efd9f0542005a0ff24fafaf4979a784cad3d6820370d052f59aeebe0450"
+  },
+  "protected_baseline": {
+    "H4_CHOP_ASIA_LONDON_SHORT_CONTROL": 1.0,
+    "H4_COMPRESSION_ASIA_LONDON_SHORT_CONTROL": 0.5
+  },
+  "new_regime_experts": {
+    "TREND_DOWN_SHORT": {
+      "owned_regime": "trend_down",
+      "direction": "SHORT"
+    },
+    "TREND_UP_LONG": {
+      "owned_regime": "trend_up",
+      "direction": "LONG"
+    },
+    "TRANSITION_TWO_SIDED": {
+      "owned_regime": "transition",
+      "direction": "TWO_SIDED"
+    }
+  },
+  "transfer_contract": {
+    "source_parameter_template": "H4_CHOP_ASIA_LONDON_SHORT_CONTROL",
+    "copy_reference_decision_body_stop_target_and_hold_exactly": true,
+    "direction_alignment": {
+      "trend_down": "SHORT_BREAK_BELOW_REFERENCE_LOW",
+      "trend_up": "LONG_BREAK_ABOVE_REFERENCE_HIGH",
+      "transition": "FIRST_BREAK_OUTSIDE_EITHER_REFERENCE_BOUNDARY"
+    },
+    "unsafe_regime_action": "CASH",
+    "one_first_signal_per_expert_session_date": true,
+    "admitted_expert_portfolio_scale": 0.5,
+    "all_passing_experts_must_be_added": true,
+    "side_year_or_subgroup_selection_forbidden": true
+  },
+  "evaluation_window": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+  "reporting_windows": {
+    "EARLY_2017_2019": ["2017-01-01T00:00:00Z", "2020-01-01T00:00:00Z"],
+    "MIDDLE_2020_2022H1": ["2020-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "LATE_2022H2_2024H1": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "RECENT_2024H2_2026H1": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_AUDIT": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "expert_admission": {
+    "minimum_trades": 150,
+    "minimum_full_profit_factor": 1.10,
+    "minimum_extra_0p5pip_profit_factor": 1.05,
+    "minimum_each_chronological_block_profit_factor": 0.95,
+    "minimum_latest_12_month_profit_factor_exclusive": 1.0,
+    "minimum_top_5pct_winners_removed_profit_factor": 0.95,
+    "maximum_closed_trade_drawdown_r": 20.0,
+    "transition_minimum_trades_each_side": 50,
+    "transition_minimum_profit_factor_each_side": 0.90
+  },
+  "portfolio_risk": {
+    "maximum_concurrent_initial_risk_units": 2.0,
+    "fixed_priority": [
+      "BASELINE_CHOP",
+      "BASELINE_COMPRESSION",
+      "TREND_DOWN_SHORT",
+      "TREND_UP_LONG",
+      "TRANSITION_TWO_SIDED"
+    ]
+  },
+  "stress_scenarios": {
+    "extra_round_trip_cost_pips": [0.5, 1.0],
+    "entry_delay_minutes": [5, 15],
+    "rollover_charge_pips_per_utc_21_crossing": 0.5
+  },
+  "bootstrap": {
+    "trade_block_trades": 5,
+    "calendar_block_months": 3,
+    "samples": 20000,
+    "seed": 20260730,
+    "lower_quantile": 0.05
+  },
+  "frequency_preserving_edge_gates": {
+    "minimum_trade_count_gain": 0.50,
+    "minimum_full_profit_factor": 1.15,
+    "minimum_extra_0p5pip_profit_factor": 1.10,
+    "minimum_extra_1p0pip_profit_factor": 1.0,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.15,
+    "minimum_latest_6_month_net_r_exclusive": 0.0,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_r": 18.0,
+    "minimum_5m_delay_profit_factor": 1.0,
+    "minimum_15m_delay_profit_factor": 1.0,
+    "minimum_trade_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_trade_bootstrap_probability_pf_lte_1": 0.05,
+    "minimum_calendar_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_calendar_bootstrap_probability_pf_lte_1": 0.05
+  },
+  "historical_pass_can_authorize_demo": false,
+  "prospective_confirmation_required": true
+}

@@ -1,0 +1,12 @@
+{
+  "campaign_id": "eurusd-h4-unused-regime-frequency-expansion-v1",
+  "frozen_before_unused_regime_outcomes": true,
+  "files": {
+    "EURUSD_H4_UNUSED_REGIME_FREQUENCY_EXPANSION_PREREG_2026_07_30.md": "568dfbcdf8cbb8aaf70a69f102d1b59cf104d8158f29d1d6b1f1980360ffad84",
+    "config/frozen_h4_unused_regime_frequency_expansion_v1.json": "5dd88ae289285f62c789c7357f6763c30c181943dd4e5c423f13896996aa4b96",
+    "run_h4_unused_regime_frequency_expansion.py": "c4fc4eaef90d349c52a32a54a476bebb01c32e4440e01c495986369dee3fbf1c",
+    "src/eurusd_regime_specialists/h4_unused_regime_frequency_expansion.py": "554ac66fb82b8c3255ba7b72fcbcab59983ff2ebc84414f00a5826df5665216b",
+    "tests/test_h4_unused_regime_frequency_expansion.py": "48e96b51c135e64e86c05c92d0469a7e8fd4e6c128441b986433316616a59d31"
+  },
+  "status": "FROZEN_BEFORE_FIRST_UNUSED_REGIME_OUTCOME"
+}
