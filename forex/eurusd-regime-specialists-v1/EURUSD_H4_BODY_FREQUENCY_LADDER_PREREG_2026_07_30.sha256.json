@@ -1,0 +1,12 @@
+{
+  "campaign_id": "eurusd-h4-body-frequency-ladder-v1",
+  "frozen_before_body_ladder_outcomes": true,
+  "files": {
+    "EURUSD_H4_BODY_FREQUENCY_LADDER_PREREG_2026_07_30.md": "8721e7a7be60215e5c49e213de368bea3554d1f8fa2f141e92997d7d7b7c80ea",
+    "config/frozen_h4_body_frequency_ladder_v1.json": "6a7e90ebcf12978248e6f5aad05fa0a43cdc06eed09ce5ea451f9d4fe42fee90",
+    "run_h4_body_frequency_ladder.py": "11fa45a837240e90582fab38089425cb943d3d1c21ee3bad4d9a8547b25f34ef",
+    "src/eurusd_regime_specialists/h4_body_frequency_ladder.py": "a1174df0fce1c020f81211133f699bb54c8f398b635f73267bc18c02b64d45c2",
+    "tests/test_h4_body_frequency_ladder.py": "a4abb8a33f7723302d52396714363ac4f015edb40f95d6f786d18268ae012357"
+  },
+  "status": "FROZEN_BEFORE_FIRST_BODY_LADDER_OUTCOME"
+}
