@@ -1,0 +1,12 @@
+{
+  "campaign_id": "eurusd-h4-intrahour-frequency-ladder-v1",
+  "frozen_before_intrahour_outcomes": true,
+  "files": {
+    "EURUSD_H4_INTRAHOUR_FREQUENCY_LADDER_PREREG_2026_07_30.md": "cd8c34dd036e3b2bebf78d87d3c689aecb9995f7931a40d3ea2a1784dce14deb",
+    "config/frozen_h4_intrahour_frequency_ladder_v1.json": "f927f10e141cd9a9eb681107819a060453dff4d53e3ed1a409889dc2e54c443b",
+    "run_h4_intrahour_frequency_ladder.py": "3c091ddad6496c7245987e3e1af76f151c533a1d486e841c010db66a62969654",
+    "src/eurusd_regime_specialists/h4_intrahour_frequency_ladder.py": "1ff8da0c955f4c3a04f96ae3d53edfa651597773c96e5654801612c5b0f808e1",
+    "tests/test_h4_intrahour_frequency_ladder.py": "7e727472c1688e632ec1d7d86be3f7dc60648f734f633ad8324ce094237f620d"
+  },
+  "status": "FROZEN_BEFORE_FIRST_INTRAHOUR_OUTCOME"
+}
