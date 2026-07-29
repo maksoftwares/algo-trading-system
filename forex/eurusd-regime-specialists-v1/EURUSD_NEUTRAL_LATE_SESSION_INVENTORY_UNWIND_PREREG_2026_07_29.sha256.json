@@ -1,0 +1,21 @@
+{
+  "campaign_id": "eurusd-neutral-late-session-inventory-unwind-v1",
+  "locked_at_utc": "2026-07-29T10:13:21.6074492Z",
+  "locked_before_first_candidate_count": true,
+  "locked_before_any_outcome": true,
+  "census_forbids_outcome_loading": true,
+  "oracle_decision_use_allowed": false,
+  "broker_action_allowed": false,
+  "files": {
+    "config/frozen_neutral_late_session_inventory_unwind.json": "677a5ee4da095f6de4251c830b17daaa93512df434939e9515a46051ffb6162d",
+    "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_PREREG_2026_07_29.md": "89dc86cabbaefae97580cf8a03a29515279514d6cf9e81e4ad517464de69e079",
+    "src/eurusd_regime_specialists/neutral_late_session_inventory_unwind.py": "5e8b05346e310293dbfb1b8d50f0165fa86747d19c7199fac9deb429b6e109f2",
+    "run_neutral_late_session_inventory_unwind.py": "b45fa9c3cd0bbb75e476018a6ee1d18289b82f05d46fb32ffd6c61107d668d5c",
+    "tests/test_neutral_late_session_inventory_unwind.py": "e9b3eeb3fe953c8105d9b633626c1dffa746bd5b2043571bed2e2cc52947297a",
+    "config/frozen_two_clock_ensemble.json": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_CENSUS_RESULT_2026_07_29.sha256.json": "c6e667a39ff13136c526511f80caa09155173aab75f494375b55fefdd44e247b",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb"
+  },
+  "status": "FROZEN_BEFORE_OUTCOME_BLIND_THRESHOLD_LADDER_CENSUS"
+}

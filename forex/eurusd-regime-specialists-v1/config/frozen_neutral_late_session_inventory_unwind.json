@@ -1,0 +1,151 @@
+{
+  "schema_version": "eurusd_neutral_late_session_inventory_unwind_config_v1",
+  "campaign_id": "eurusd-neutral-late-session-inventory-unwind-v1",
+  "frozen_at_utc": "2026-07-29T10:10:18.0967291Z",
+  "research_only": true,
+  "information_status": "ORACLE_TIMING_INFORMED_INDEPENDENT_LATE_SESSION_INVENTORY_MECHANISM",
+  "closed_parent_family": {
+    "result_lock_path": "EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_CENSUS_RESULT_2026_07_29.sha256.json",
+    "result_lock_sha256": "c6e667a39ff13136c526511f80caa09155173aab75f494375b55fefdd44e247b",
+    "status": "CENSUS_FAIL_NO_PNL_ALLOWED",
+    "reuses_parent_signal_or_candidate": false
+  },
+  "data_and_classifier": {
+    "path": "config/frozen_two_clock_ensemble.json",
+    "sha256": "4dd6c409764dd81f6b879b6b4895587f1e874769ac8c69ab7f391d9d3264a7e6",
+    "eurusd_m5_path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+    "eurusd_m5_sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "manifest_path": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/MANIFEST.json",
+    "manifest_sha256": "881c0ebfe7b4ab3ae01d4f5eee69f21848aa140f9532c2e08f0d05a0e4c82bcb"
+  },
+  "strategy": {
+    "family": "N51_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND",
+    "symbol": "EURUSD",
+    "inventory_window_utc": "previous date 20:00 through 23:55 M5 bars",
+    "inventory_bars_m5": 48,
+    "confirmation_window_utc": "current date 00:00 through 00:10 M5 bars",
+    "confirmation_bars_m5": 3,
+    "signal_complete_utc": "00:15",
+    "entry_utc": "00:15",
+    "weekdays_only": true,
+    "absolute_inventory_displacement_threshold_ladder_pips": [
+      12.0,
+      10.0,
+      8.0
+    ],
+    "threshold_selection": "highest threshold in declared order that passes every outcome-blind capacity gate; if none passes, select 8 pips only for failure documentation and forbid outcomes",
+    "minimum_opposite_confirmation_pips": 1.5,
+    "minimum_retracement_fraction": 0.15,
+    "long_rule": "late-session close minus open is at or below negative selected threshold, and completed first-15-minute return is at least +1.5 pips and retraces at least 15 percent",
+    "short_rule": "late-session close minus open is at or above selected threshold, and completed first-15-minute return is at most -1.5 pips and retraces at least 15 percent",
+    "mapping": "follow the completed early-day unwind opposite the late-session inventory displacement",
+    "otherwise": "CASH",
+    "maximum_trades_per_utc_day": 1
+  },
+  "neutral_ownership": {
+    "latest_state_timestamp": "signal completion hour minus one hour, then latest prior available state",
+    "state_known_at": "matched state timestamp plus one hour",
+    "maximum_state_known_lag_hours": 4.0,
+    "requires_direction": "NEUTRAL",
+    "requires_phase": "UNRESOLVED",
+    "shock": false,
+    "joint_dxy_eurusd_compression": false
+  },
+  "execution_contract_locked_before_census": {
+    "entry": "exact 00:15 UTC M5 open after all confirmation bars complete",
+    "long_entry": "maximum(actual ask open, bid open plus 0.7 pip) plus 0.1 pip adverse slippage",
+    "short_entry": "bid open minus 0.1 pip adverse slippage",
+    "minimum_stop_distance_pips": 4.0,
+    "long_stop": "minimum(first-15-minute low, entry minus 4 pips)",
+    "short_stop": "maximum(first-15-minute high, entry plus 4 pips)",
+    "maximum_risk_pips": 12.0,
+    "target_r": 1.5,
+    "maximum_hold_hours": 6,
+    "same_bar_policy": "STOP_FIRST",
+    "one_open_position": true,
+    "minimum_retail_spread_pips": 0.7,
+    "extra_slippage_pips_per_side": 0.1,
+    "extra_round_trip_stress_pips": 0.5
+  },
+  "windows": {
+    "development_2019_2022": [
+      "2019-01-02T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "validation_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "validation_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "pseudo_oos_2026h1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "recent_six_months": [
+    "2026-01-01T00:00:00Z",
+    "2026-06-30T23:59:59Z"
+  ],
+  "outcome_blind_capacity_gates": {
+    "minimum_risk_eligible_candidates_total": 60,
+    "minimum_distinct_candidate_dates_total": 60,
+    "minimum_candidates_development_2019_2022": 30,
+    "minimum_candidates_each_full_oos_year": 5,
+    "minimum_candidates_pseudo_oos_2026h1": 3,
+    "minimum_candidates_each_side": 15,
+    "minimum_recent_six_month_candidates": 3,
+    "maximum_candidate_state_known_lag_hours": 4.0
+  },
+  "performance_gates_if_capacity_passes": {
+    "minimum_executed_trades_total": 40,
+    "minimum_executed_trades_development": 20,
+    "minimum_executed_trades_each_full_oos_year": 4,
+    "minimum_executed_trades_2026h1": 3,
+    "minimum_executed_trades_each_side": 12,
+    "minimum_overall_win_rate": 0.45,
+    "maximum_overall_win_rate": 0.55,
+    "minimum_overall_realized_payoff_ratio": 1.35,
+    "maximum_overall_realized_payoff_ratio": 1.75,
+    "minimum_overall_profit_factor": 1.15,
+    "minimum_profit_factor_each_chronological_window_exclusive": 1.0,
+    "minimum_each_side_profit_factor_exclusive": 1.0,
+    "maximum_drawdown_r": 15.0,
+    "minimum_extra_half_pip_profit_factor_exclusive": 1.0,
+    "minimum_top_5pct_winners_removed_profit_factor_exclusive": 1.0,
+    "minimum_recent_six_month_profit_factor_exclusive": 1.0,
+    "minimum_same_side_15m_oracle_precision": 0.05,
+    "minimum_same_side_15m_oracle_recall": 0.003
+  },
+  "oracle_evaluation_if_capacity_passes": {
+    "source": "outputs/retrospective_overfit/FULL_CALENDAR_PERFECT_FORESIGHT_TRADES.csv",
+    "regime": "NEUTRAL",
+    "same_side_required": true,
+    "primary_tolerance_minutes": 15,
+    "exact_match_also_reported": true,
+    "one_to_one": true,
+    "evaluation_only": true
+  },
+  "census_boundaries": {
+    "stop_or_target_path_loaded": false,
+    "trade_exit_loaded": false,
+    "eurusd_return_loaded": false,
+    "eurusd_pnl_loaded": false,
+    "oracle_rows_loaded": false,
+    "performance_gate_evaluated": false,
+    "broker_action_allowed": false
+  },
+  "prohibitions": [
+    "Do not choose the displacement threshold by P&L, oracle resemblance, forward path, or outcome count.",
+    "Do not alter the 12/10/8-pip order, confirmation, retracement, risk, target, hold, side, date, or clock after candidate counts.",
+    "Do not inspect stop/target paths, exits, returns, P&L, or oracle rows unless one ladder member passes every frozen capacity gate.",
+    "If capacity passes, freeze the selected candidate manifest plus a separate execution implementation and hash lock before opening any outcome.",
+    "No historical result can authorize demo or live execution without separate prospective evidence."
+  ]
+}
