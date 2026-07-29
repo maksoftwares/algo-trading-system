@@ -1,0 +1,19 @@
+{
+  "campaign_id": "eurusd-neutral-prior24-extreme-fade-v1",
+  "census_completed_after_prereg_push": true,
+  "census_pass": true,
+  "execution_allowed_only_after_separate_lock": true,
+  "family": "N49_NEUTRAL_PRIOR24_EXTREME_FADE",
+  "files": {
+    "EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_CENSUS_2026_07_29.md": "a4956c132fb518de601bc7ea9f43f9e655d24ea0da459ecbc33d3b3985ce7cb5",
+    "EURUSD_NEUTRAL_PRIOR24_EXTREME_FADE_PREREG_2026_07_29.sha256.json": "18ed1fa60bd704425267f646429924fe66ea35409aa8aa5b5a691cfa1979b452",
+    "outputs/neutral_prior24_extreme_fade/ALL_EXTREME_SIGNALS.csv": "dfe04198c99fc99051fcfb5ef85849516d9c87a0ae7ae830e8b8451537aed27f",
+    "outputs/neutral_prior24_extreme_fade/ALL_MIDNIGHT_POINTS.csv": "51112ea563e7846e17743f182613ecaa59c87bd1619002848cea821cf4dd595d",
+    "outputs/neutral_prior24_extreme_fade/CANDIDATES.csv": "dae505d59e1c4eba1c1d0e360e6c8f65cd319ee9c37acbd5e098914261279b8d",
+    "outputs/neutral_prior24_extreme_fade/CENSUS.json": "a6a933628511bdce5340ffb9157b49ff344bfb6aa1cdc36a81205e184ce69623"
+  },
+  "oracle_loaded": false,
+  "performance_gate_evaluated": false,
+  "pnl_or_forward_path_loaded": false,
+  "status": "CENSUS_PASS_EXECUTION_MAY_BE_SEPARATELY_LOCKED"
+}

@@ -1,0 +1,71 @@
+{
+  "broker_action_allowed": false,
+  "by_window": {
+    "development_2019_2022": 116,
+    "pseudo_oos_2025": 21,
+    "pseudo_oos_2026h1": 15,
+    "validation_2023": 25,
+    "validation_2024": 19
+  },
+  "campaign_id": "eurusd-neutral-prior24-extreme-fade-v1",
+  "candidate_manifest_sha256": "dae505d59e1c4eba1c1d0e360e6c8f65cd319ee9c37acbd5e098914261279b8d",
+  "census_pass": true,
+  "complete_prior24_points": 1507,
+  "distinct_candidate_dates_total": 196,
+  "eurusd_pnl_loaded": false,
+  "eurusd_return_loaded": false,
+  "extreme_fade_signals": 586,
+  "family": "N49_NEUTRAL_PRIOR24_EXTREME_FADE",
+  "gate_results": {
+    "maximum_candidate_state_known_lag_hours": true,
+    "minimum_candidates_development_2019_2022": true,
+    "minimum_candidates_each_full_oos_year": true,
+    "minimum_candidates_each_side": true,
+    "minimum_candidates_pseudo_oos_2026h1": true,
+    "minimum_distinct_candidate_dates_total": true,
+    "minimum_recent_six_month_candidates": true,
+    "minimum_risk_eligible_candidates_total": true
+  },
+  "long_candidates": 93,
+  "neutral_owned_signals": 210,
+  "oracle_rows_loaded": false,
+  "parent_source_manifests": {
+    "BOND": {
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\USTBONDTRUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "fb908092f30e329f717ba5985572b817b4bfd10cbc90d599c674428ed8e43644",
+      "empty_hours": 22272,
+      "files_seen": 65688,
+      "first_utc": "2019-01-02T20:00:00+00:00",
+      "last_utc": "2026-06-30T23:00:00+00:00",
+      "populated_hours": 43416,
+      "source_chain_sha256": "5dffdd2d88f3143184bcc621841b22cbaa40c8167ae59bbcb9e334d4a8daa71a",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\USTBONDTRUSD",
+      "symbol": "USTBONDTRUSD"
+    },
+    "DXY": {
+      "cache_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-forex-demo-readiness-v1\\forex\\eurusd-regime-specialists-v1\\outputs\\cache\\DOLLARIDXUSD_H1_MID_v2_source_rounded.parquet",
+      "cache_sha256": "2ed05a99a6a6fb40b0d289821df77c473184a0c65d5831d2ce073e82280ca052",
+      "empty_hours": 25468,
+      "files_seen": 65688,
+      "first_utc": "2019-01-02T01:00:00+00:00",
+      "last_utc": "2026-06-30T20:00:00+00:00",
+      "populated_hours": 40220,
+      "source_chain_sha256": "05c8d7aced9ae7c119b15a4dfb175060af516212466c211b2db9c36e88164d41",
+      "source_root": "D:\\AlgoTradingData\\C_DRIVE\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD",
+      "symbol": "DOLLARIDXUSD"
+    }
+  },
+  "performance_gate_evaluated": false,
+  "recent_six_month_candidates": 15,
+  "risk_eligible_candidates_total": 196,
+  "schema_version": "eurusd_neutral_prior24_extreme_fade_census_v1",
+  "short_candidates": 103,
+  "state_known_lag_hours": {
+    "maximum": 4.0,
+    "median": 3.0,
+    "minimum": 2.0
+  },
+  "status": "CENSUS_PASS_EXECUTION_MAY_BE_SEPARATELY_LOCKED",
+  "stop_or_target_path_loaded": false,
+  "trade_exit_loaded": false
+}
