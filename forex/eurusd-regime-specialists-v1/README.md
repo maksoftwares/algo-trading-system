@@ -81,6 +81,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 75. Neutral 06:00-08:00 range-breakout transfer: a completed European-morning range, causal Neutral ownership, fresh regime state, and asymmetric structure risk were locked before counting. The freshness-corrected census passed with 272 candidates on 127 dates, but the frozen execution returned 121 trades, 41.32% wins, 0.935 payoff, PF 0.658, and -20.06R. The latest six months were nearly flat at seven trades and PF 0.982, while full-history and robustness gates failed; the exact family is retired.
 76. Neutral prior-24-hour extreme fade: the fully completed prior day was faded only when its close remained in an outer quintile with sufficient body size. The outcome-blind census passed with 196 candidates on 196 dates. The single frozen run returned 196 trades, 41.33% wins, 0.929 payoff, PF 0.654, and -36.74R. It resembled the hindsight oracle materially better than most causal rules—57.65% same-side precision within 15 minutes—but every economic admission gate failed, so resemblance alone does not justify promotion.
 77. Neutral midnight-auction rejection: a new independent rule observed only the three completed 00:00-00:10 UTC M5 bars and required an excursion-and-wick rejection before a 00:15 decision. Its locked outcome-blind census found only 18 eligible dates across 7.5 years: 13 development, 2 in 2023, none in 2024, 2 in 2025, and 1 in 2026 H1. All capacity gates except state freshness failed. No post-entry path, P&L, or oracle row was opened, and the exact sparse family is retired without threshold repair.
+78. Neutral late-session inventory unwind: a simple 00:15 expert required the completed first 15 minutes to reverse at least 1.5 pips and 15% of the prior 20:00-23:55 displacement. Its 12/10/8-pip ladder was locked before counts and could select only by capacity. None passed: the broadest 8-pip version retained 46 candidates—26 development, 5 in 2023, 2 in 2024, 5 in 2025, and 8 in 2026 H1—against the frozen 60-total, 30-development, and five-per-full-OOS-year floors. Both sides, recent coverage, and state freshness passed, but no P&L or oracle row was opened.
 
 Final status: `RESEARCH_FAILURE_NOT_DEMO_READY`.
 
@@ -214,6 +215,9 @@ Key reports:
 - `EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_PREREG_2026_07_29.md`
 - `EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_CENSUS_2026_07_29.md`
 - `EURUSD_NEUTRAL_MIDNIGHT_AUCTION_REJECTION_CENSUS_RESULT_2026_07_29.sha256.json`
+- `EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_PREREG_2026_07_29.md`
+- `EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_CENSUS_2026_07_29.md`
+- `EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_CENSUS_RESULT_2026_07_29.sha256.json`
 - `outputs/two_clock/backtest_results.json`
 - `outputs/asymmetric_payoff/RESULT.json`
 - `outputs/confirmed_reversal/RESULT.json`
@@ -365,4 +369,5 @@ uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_06
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_prior24_extreme_fade.py census
 uv run --offline --with pandas --with numpy --with pyarrow python run_neutral_prior24_extreme_fade_execution.py
 uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_midnight_auction_rejection.py census
+uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_neutral_late_session_inventory_unwind.py census
 ```

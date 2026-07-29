@@ -1,0 +1,19 @@
+{
+  "campaign_id": "eurusd-neutral-late-session-inventory-unwind-v1",
+  "census_completed_after_prereg_push": true,
+  "execution_allowed": false,
+  "family": "N51_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND",
+  "files": {
+    "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_CENSUS_2026_07_29.md": "75659caa76ca0750149ceecc77248f002842da49feca4b2ae24effd255c25208",
+    "EURUSD_NEUTRAL_LATE_SESSION_INVENTORY_UNWIND_PREREG_2026_07_29.sha256.json": "c6dcff272c30c68b95c6c9e5aacc2116445da4fdb5ae4a2d3528dad891b3fac1",
+    "outputs/neutral_late_session_inventory_unwind/ALL_INVENTORY_POINTS.csv": "95ab3ba8d9df91216f64f498ba4bfe21c3c217a86a069d4b508d44f73a8c808d",
+    "outputs/neutral_late_session_inventory_unwind/ALL_CONFIRMED_SIGNALS.csv": "773e469f576eaf343c9eb0e50d20cede58dd6d01b2ae2a6c3fe95498958b91b2",
+    "outputs/neutral_late_session_inventory_unwind/CANDIDATES.csv": "83d9705e8145b39837c4ea8848051f3d7e203c0f537b58ae00891d8855fca970",
+    "outputs/neutral_late_session_inventory_unwind/CENSUS.json": "da484a2422e0f14883882c149ea190f12fe4590c6b9978f1f73c52ffbce56abc"
+  },
+  "oracle_loaded": false,
+  "performance_gate_evaluated": false,
+  "pnl_or_forward_path_loaded": false,
+  "selected_threshold_pips_for_failure_record_only": 8.0,
+  "status": "CENSUS_FAIL_NO_PNL_ALLOWED"
+}
