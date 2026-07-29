@@ -1,0 +1,123 @@
+{
+  "schema_version": "eurusd_neutral_specialist_agreement_census_v1",
+  "frozen_at_utc": "2026-07-29T07:16:18.8127458Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "experts": [
+    {
+      "expert_id": "CONSENSUS_EVENT_CONFIRMATION",
+      "mechanism": "POINT_IN_TIME_MACRO_CONSENSUS_AND_PRICE_CONFIRMATION",
+      "path": "outputs/neutral_consensus_event_confirmation/TRADES.csv",
+      "sha256": "ddf4e7b8b09fec9bdea5ee0f8e68e9a9e2782bd073808dcd0dd44d1a94417c90"
+    },
+    {
+      "expert_id": "FIVE_SESSION_REVERSAL",
+      "mechanism": "MULTI_SESSION_PRICE_MEAN_REVERSION",
+      "path": "outputs/neutral_five_session_reversal/TRADES.csv",
+      "sha256": "6a2b7df207ee8c030470fef22847ae05294cef230b0db5902ea112bb5adb24fc"
+    },
+    {
+      "expert_id": "FUTURES_PARTICIPATION",
+      "mechanism": "LISTED_FUTURES_AND_DOLLAR_ETF_PARTICIPATION",
+      "path": "outputs/neutral_futures_participation/TRADES.csv",
+      "sha256": "b8c0b01501866fd43007325dc52833aac69d81adaf8d4f587bf819992f1a36ca"
+    },
+    {
+      "expert_id": "OCC_FXE_FLOW",
+      "mechanism": "OFFICIAL_CUSTOMER_OPTIONS_FLOW",
+      "path": "outputs/neutral_occ_fxe_flow/TRADES.csv",
+      "sha256": "ea602294e62af104ea5864f5df0a9af726acff4d811465bf6b1d3adb02e2cb4e"
+    },
+    {
+      "expert_id": "OPENING_DRIVE",
+      "mechanism": "COMPLETED_SESSION_OPENING_DRIVE",
+      "path": "outputs/neutral_opening_drive/TRADES.csv",
+      "sha256": "cdb35564f7407036ef58b0013918243e4c50e124dabf5aff49047c7364fac85c"
+    },
+    {
+      "expert_id": "POST_EVENT_DRIVE",
+      "mechanism": "COMPLETED_POST_EVENT_PRICE_DRIVE",
+      "path": "outputs/neutral_post_event_drive/TRADES.csv",
+      "sha256": "18f2a6b9da7eafe25328851c7da78b775d17498e27bb5772ef3624fdaa124331"
+    },
+    {
+      "expert_id": "PRECIOUS_METALS_CONSENSUS",
+      "mechanism": "XAUUSD_XAGUSD_CROSS_ASSET_CONSENSUS",
+      "path": "outputs/neutral_precious_metals_consensus/TRADES.csv",
+      "sha256": "cf4d551dc62766c6e2cd2ae52736734f3e17ff78fa123c88ec6998592b7d2290"
+    },
+    {
+      "expert_id": "SYMMETRIC_RSI",
+      "mechanism": "PRICE_ONLY_SYMMETRIC_MEAN_REVERSION",
+      "path": "outputs/neutral_symmetric_rsi_1p5r/TRADES.csv",
+      "sha256": "b0c4842abaa91a1a19094dfe27eae471bbe14b42605a3a30726825ef046d8be0"
+    }
+  ],
+  "source_boundary": {
+    "csv_columns_allowed": [
+      "entry_time_utc",
+      "side"
+    ],
+    "outcome_columns_forbidden": [
+      "r",
+      "extra_half_pip_stress_r",
+      "exit_time_utc",
+      "exit_price",
+      "exit_reason",
+      "fixed_0p01_lot_usd",
+      "oracle_member",
+      "target_first"
+    ],
+    "eurusd_price_loading_allowed": false,
+    "oracle_loading_allowed": false,
+    "pnl_loading_allowed": false
+  },
+  "agreement_rule": {
+    "clock_matching": "EXACT_ENTRY_TIMESTAMP_ONLY",
+    "minimum_distinct_experts_same_side": 2,
+    "any_opposing_expert_action": "CASH_CONFLICT",
+    "duplicate_rows_from_one_expert_count_once": true,
+    "maximum_routed_candidates_per_utc_day": 1,
+    "daily_selection": "EARLIEST_EXACT_CLOCK_AGREEMENT",
+    "parameter_search_allowed": false,
+    "post_census_expert_deletion_allowed": false
+  },
+  "windows": {
+    "DEVELOPMENT_2019_2022": [
+      "2019-01-01T00:00:00Z",
+      "2022-12-31T23:59:59Z"
+    ],
+    "OOS_2023": [
+      "2023-01-01T00:00:00Z",
+      "2023-12-31T23:59:59Z"
+    ],
+    "OOS_2024": [
+      "2024-01-01T00:00:00Z",
+      "2024-12-31T23:59:59Z"
+    ],
+    "OOS_2025": [
+      "2025-01-01T00:00:00Z",
+      "2025-12-31T23:59:59Z"
+    ],
+    "OOS_2026_H1": [
+      "2026-01-01T00:00:00Z",
+      "2026-06-30T23:59:59Z"
+    ]
+  },
+  "capacity_gates": {
+    "minimum_routed_candidates_total": 80,
+    "minimum_routed_candidates_by_window": {
+      "DEVELOPMENT_2019_2022": 30,
+      "OOS_2023": 8,
+      "OOS_2024": 8,
+      "OOS_2025": 8,
+      "OOS_2026_H1": 4
+    },
+    "minimum_candidates_each_side": 20,
+    "minimum_distinct_expert_combinations": 3,
+    "minimum_contributing_experts": 4
+  },
+  "on_capacity_pass": "FREEZE_CANONICAL_4_PIP_STOP_6_PIP_TARGET_EXECUTION_BEFORE_LOADING_EURUSD_OUTCOMES",
+  "historical_pass_can_authorize_demo": false,
+  "broker_action_allowed": false
+}
