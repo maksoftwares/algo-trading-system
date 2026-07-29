@@ -1,0 +1,19 @@
+{
+  "broker_action_allowed": false,
+  "census_forbids_outcome_loading": true,
+  "family": "N48_NEUTRAL_0608_UTC_RANGE_BREAKOUT_TRANSFER_FRESH_V1_1",
+  "files": {
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_CENSUS_RESULT_2026_07_29.sha256.json": "e314e7cde072dc20f0dc626c2762a351198dab38fa66782f4a07086d8e527295",
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_PREREG_2026_07_29.sha256.json": "0c6e69a0a32919f485a1bdfb2f10ae68865dcde05dac6c51cb1dbbb2c4650bfe",
+    "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_V1_1_PREREG_2026_07_29.md": "b998cf868bccb4e200dba32b5b507719e2928af395d6c58c862ee88b30246e41",
+    "config/frozen_neutral_0608_range_breakout_transfer.json": "00fd250c6deeab465b41ec489065ccde8e0ff031a09601aeb10a73f46882142f",
+    "config/frozen_neutral_0608_range_breakout_transfer_v1_1.json": "68721abed376c1743a3f283c10dcd34242d2d23b6e2c664caa69a85a7c8064b7",
+    "run_neutral_0608_range_breakout_transfer_v1_1.py": "c1839c062b35357e121df6a869388678567c5ee54557a99a8ea13109d9fbff75",
+    "src/eurusd_regime_specialists/neutral_0608_range_breakout_transfer_v1_1.py": "f6e429da7689863e7382e5c04479acfdf994a5f25da520006e4b10b3deebe7e3",
+    "tests/test_neutral_0608_range_breakout_transfer_v1_1.py": "52c4b97ee76b0f903732f350d78ea1fecbe6e01668324c94b96449b2bd822fee"
+  },
+  "locked_at_utc": "2026-07-29T09:10:06.0795894Z",
+  "locked_before_any_outcome": true,
+  "locked_before_v1_1_census": true,
+  "status": "FROZEN_CAPACITY_AWARE_BUT_OUTCOME_BLIND"
+}

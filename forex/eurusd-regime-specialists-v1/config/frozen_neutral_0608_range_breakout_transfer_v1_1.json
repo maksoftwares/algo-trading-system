@@ -1,0 +1,58 @@
+{
+  "schema_version": "eurusd_neutral_0608_range_breakout_transfer_config_v1_1",
+  "campaign_id": "eurusd-neutral-0608-range-breakout-transfer-v1-1",
+  "frozen_at_utc": "2026-07-29T09:10:06.0795894Z",
+  "research_only": true,
+  "information_status": "CAPACITY_AWARE_BUT_OUTCOME_BLIND_CAUSAL_FRESHNESS_CORRECTION",
+  "family": "N48_NEUTRAL_0608_UTC_RANGE_BREAKOUT_TRANSFER_FRESH_V1_1",
+  "parent_candidate": {
+    "config_path": "config/frozen_neutral_0608_range_breakout_transfer.json",
+    "config_sha256": "00fd250c6deeab465b41ec489065ccde8e0ff031a09601aeb10a73f46882142f",
+    "preregistration_lock_path": "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_PREREG_2026_07_29.sha256.json",
+    "preregistration_lock_sha256": "0c6e69a0a32919f485a1bdfb2f10ae68865dcde05dac6c51cb1dbbb2c4650bfe",
+    "census_result_lock_path": "EURUSD_NEUTRAL_0608_RANGE_BREAKOUT_TRANSFER_CENSUS_RESULT_2026_07_29.sha256.json",
+    "census_result_lock_sha256": "e314e7cde072dc20f0dc626c2762a351198dab38fa66782f4a07086d8e527295",
+    "status": "CENSUS_FAIL_NO_PNL_ALLOWED"
+  },
+  "eligibility_revision": {
+    "maximum_state_known_lag_hours": 4.0,
+    "operation": "risk_eligible = parent_risk_eligible AND state_known_lag_hours <= 4.0",
+    "selection_basis": "The same four-hour maximum was frozen in v1 before its first candidate count. V1 incorrectly treated it only as a whole-census gate instead of excluding individually stale candidates.",
+    "changes_any_signal_or_execution_parameter": false,
+    "changes_any_performance_gate": false,
+    "uses_return_pnl_exit_or_oracle": false
+  },
+  "outcome_blind_capacity_gates": {
+    "minimum_risk_eligible_candidates_total": 120,
+    "minimum_distinct_candidate_dates_total": 100,
+    "minimum_candidates_development_2019_2022": 60,
+    "minimum_candidates_each_full_oos_year": 12,
+    "minimum_candidates_pseudo_oos_2026h1": 5,
+    "minimum_candidates_each_side": 30,
+    "minimum_recent_six_month_candidates": 5,
+    "maximum_candidate_state_known_lag_hours": 4.0
+  },
+  "inherited_contract": {
+    "signal_parameters": "unchanged from the hash-locked v1 parent",
+    "neutral_ownership": "unchanged except that the already-frozen maximum state lag is now enforced per candidate",
+    "execution_contract": "unchanged and still prohibited at census",
+    "performance_gates": "unchanged from the hash-locked v1 parent",
+    "oracle_evaluation": "unchanged and still prohibited at census"
+  },
+  "census_boundaries": {
+    "stop_or_target_path_loaded": false,
+    "trade_exit_loaded": false,
+    "eurusd_return_loaded": false,
+    "eurusd_pnl_loaded": false,
+    "oracle_rows_loaded": false,
+    "performance_gate_evaluated": false,
+    "broker_action_allowed": false
+  },
+  "prohibitions": [
+    "Do not alter the four-hour threshold after this lock.",
+    "Do not alter any inherited range, signal, direction, risk, target, hold, side, window, or capacity rule.",
+    "Do not inspect stop/target paths, exits, returns, P&L, or oracle rows unless every v1.1 capacity gate passes.",
+    "If capacity passes, freeze a separate execution implementation and hash lock before loading any outcome.",
+    "No historical result can authorize demo or live execution without separate prospective evidence."
+  ]
+}
