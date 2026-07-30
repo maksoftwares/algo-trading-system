@@ -1,0 +1,9 @@
+{
+  "schema_version": "eurusd_h4_confirmation_uniform_risk_result_lock_v1",
+  "status": "BACKTEST_GATES_PASSED_REQUIRES_PROSPECTIVE_CONFIRMATION",
+  "files": {
+    "outputs/h4_confirmation_uniform_risk/RESULT.json": "3e18f1b42ef2599d826fe21272501d19a257cd7edc8ee330bff0878fff46845e",
+    "outputs/h4_confirmation_uniform_risk/TRADES.csv": "f81a7aa368e4ffbc4196c12f15ad21ce40e2622b18c45a47f98a3c7d437dacf0",
+    "EURUSD_H4_CONFIRMATION_UNIFORM_RISK_RESULT_2026_07_30.md": "ac530fddc71bcff97fca0915e3a8d1f334f257b1cb72f2cde4f50607c2ce7ae8"
+  }
+}

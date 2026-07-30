@@ -1,0 +1,111 @@
+{
+  "schema_version": "eurusd_session_health_specialist_portfolio_v1",
+  "frozen_at_utc": "2026-07-30T20:30:00Z",
+  "research_only": true,
+  "adaptive_historical_development_not_pristine_oos": true,
+  "broker_action_allowed": false,
+  "anchor_config": {
+    "path": "config/frozen_neutral_h4_quiet_state_transfer_v1.json",
+    "sha256": "fc9fea2f8b4fd026e58126cf3b53ce901d05760c39882f19c5cb5e9b837beca2"
+  },
+  "h4_core_ledger": {
+    "path": "outputs/h4_intrahour_frequency_ladder/SELECTED_TRADES.csv",
+    "sha256": "ea1097b324da8e9b19a61499a15fcaab7609f9f26e379df49e373afa4dd52cee",
+    "expected_rows": 672,
+    "origin": "M15_FIRST_BREAK selected by the previously frozen resolution ladder"
+  },
+  "rsi_long_expert": {
+    "signal_timeframe_minutes": 15,
+    "direction": "LONG_ONLY",
+    "atr_period": 14,
+    "bands_period": 20,
+    "rsi_period": 14,
+    "rsi_oversold_inclusive": 30.0,
+    "require_close_below_band_mid": true,
+    "minimum_body_fraction": 0.4,
+    "blocked_entry_hours_utc": [1, 7, 21],
+    "maximum_entry_spread_pips": 10.0,
+    "maximum_trades_per_utc_day": 20,
+    "one_open_position": true,
+    "recent_stop_lookback_m15_bars": 6,
+    "stop_atr_multiple": 1.4,
+    "stop_floor_pips": 3.0,
+    "stop_ceiling_pips": 70.0,
+    "target_r": 1.5,
+    "same_m5_bar_policy": "STOP_FIRST",
+    "adverse_slippage_pips_per_side": 0.1,
+    "fixed_lot_reporting": 0.01
+  },
+  "session_health_gate": {
+    "buckets": {
+      "S00_03": [0, 1, 2, 3],
+      "S04_07": [4, 5, 6, 7],
+      "S08_11": [8, 9, 10, 11],
+      "S12_15": [12, 13, 14, 15],
+      "S16_19": [16, 17, 18, 19],
+      "S20_23": [20, 21, 22, 23]
+    },
+    "lookback_completed_shadow_trades_per_bucket": 30,
+    "minimum_trailing_profit_factor": 1.05,
+    "uses_only_same_bucket_outcomes_exited_no_later_than_candidate_entry": true,
+    "rejected_shadow_outcomes_remain_observable": true,
+    "parameters_inherited_without_search_from_global_health_gate": true
+  },
+  "evaluation_window": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+  "reporting_windows": {
+    "EARLY_2017_2019": ["2017-01-01T00:00:00Z", "2020-01-01T00:00:00Z"],
+    "MIDDLE_2020_2022H1": ["2020-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "LATE_2022H2_2024H1": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "RECENT_2024H2_2026H1": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_AUDIT": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "portfolio_risk": {
+    "maximum_concurrent_initial_risk_units": 2.0,
+    "rsi_risk_weight": 1.0,
+    "fixed_priority": [
+      "BASELINE_CHOP",
+      "BASELINE_COMPRESSION",
+      "RSI_SESSION_HEALTH"
+    ]
+  },
+  "stress": {
+    "extra_round_trip_cost_pips": [0.5, 1.0]
+  },
+  "bootstrap": {
+    "trade_block_trades": 5,
+    "calendar_block_months": 3,
+    "samples": 20000,
+    "seed": 20260730,
+    "lower_quantile": 0.05
+  },
+  "admission": {
+    "minimum_trades_per_fx_day": 0.35,
+    "minimum_full_profit_factor": 1.2,
+    "minimum_extra_0p5pip_profit_factor": 1.1,
+    "minimum_extra_1p0pip_profit_factor": 1.0,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_recent_block_profit_factor": 1.2,
+    "minimum_latest_12_month_profit_factor": 1.2,
+    "minimum_latest_6_month_net_r_exclusive": 0.0,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_r": 20.0,
+    "minimum_trade_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_trade_bootstrap_probability_pf_lte_1": 0.05,
+    "minimum_calendar_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_calendar_bootstrap_probability_pf_lte_1": 0.05
+  },
+  "decision_policy": {
+    "one_frozen_run": true,
+    "no_target_session_lookback_threshold_or_gate_search": true,
+    "no_post_result_session_deletion": true,
+    "failure_rejects_exact_candidate": true,
+    "historical_pass_cannot_authorize_broker_orders": true
+  }
+}

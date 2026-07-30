@@ -1,0 +1,10 @@
+{
+  "schema_version": "eurusd_h4_confirmation_ensemble_prereg_lock_v1",
+  "locked_before_combined_outcome": true,
+  "locked_at_utc": "2026-07-30T21:25:00Z",
+  "files": {
+    "config/frozen_h4_confirmation_ensemble_v1.json": "1618311f66ff8c7c3e96ba2db94ccf6c27faafa508b680ff091c6bbcaa2db3bc",
+    "EURUSD_H4_CONFIRMATION_ENSEMBLE_PREREG_2026_07_30.md": "c48c2f736899d5ea8db6629ccf933fe27bf7b58bbde87ff892c3ef8e48bd95a8",
+    "src/eurusd_regime_specialists/h4_confirmation_ensemble.py": "7621f2ff0c8294c1b7b0cf4e0e160addf80407d967c153f74201f1003824ea17"
+  }
+}

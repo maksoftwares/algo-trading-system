@@ -1,0 +1,10 @@
+{
+  "schema_version": "eurusd_h4_confirmation_correlation_cap_prereg_lock_v1",
+  "locked_before_outcome": true,
+  "locked_at_utc": "2026-07-30T22:25:00Z",
+  "files": {
+    "config/frozen_h4_confirmation_correlation_cap_v1.json": "39237bb6104a851608a1d9eb844e2dc868f8eb3bc202d0a889914803c5baa6bf",
+    "EURUSD_H4_CONFIRMATION_CORRELATION_CAP_PREREG_2026_07_30.md": "b5df0bc88610e83e80481dd85e2875835f26292e58d3591a51891f86fcf90fe7",
+    "src/eurusd_regime_specialists/h4_confirmation_ensemble.py": "7621f2ff0c8294c1b7b0cf4e0e160addf80407d967c153f74201f1003824ea17"
+  }
+}

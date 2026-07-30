@@ -1,0 +1,10 @@
+{
+  "schema_version": "eurusd_session_health_specialist_portfolio_prereg_lock_v1",
+  "locked_before_combined_outcome": true,
+  "locked_at_utc": "2026-07-30T20:45:00Z",
+  "files": {
+    "config/frozen_session_health_specialist_portfolio_v1.json": "fe9ff2b09e54fd62a3ea3bcf6f65927858a8dc1aa525f6fd65991c2696076960",
+    "EURUSD_SESSION_HEALTH_SPECIALIST_PORTFOLIO_PREREG_2026_07_30.md": "359b6334303c23da91472a8558b191fa61e45db7a60c592d7a703ba85aa99529",
+    "src/eurusd_regime_specialists/session_health_specialist_portfolio.py": "141cb328271f17c10c0044c6e827e867e6e5fcaa092ba2703e5d1281fa2720d5"
+  }
+}

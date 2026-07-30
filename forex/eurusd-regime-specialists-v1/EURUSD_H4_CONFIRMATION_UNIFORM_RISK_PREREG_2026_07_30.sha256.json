@@ -1,0 +1,10 @@
+{
+  "schema_version": "eurusd_h4_confirmation_uniform_risk_prereg_lock_v1",
+  "locked_before_outcome": true,
+  "locked_at_utc": "2026-07-30T23:05:00Z",
+  "files": {
+    "config/frozen_h4_confirmation_uniform_risk_v1.json": "43d9d55092268012787737c22bb2d1dab0556090cdf7cb93e71aac43db91ba8a",
+    "EURUSD_H4_CONFIRMATION_UNIFORM_RISK_PREREG_2026_07_30.md": "88a20d6b5460094180148e11e03204b869594e3389956c452b76e473211c5cea",
+    "src/eurusd_regime_specialists/h4_confirmation_uniform_risk.py": "02d5d1b664cb86c8273a7b4c27db11ca8d62c0cc943b3bfb25f1f0505512a5cd"
+  }
+}
