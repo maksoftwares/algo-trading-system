@@ -1,0 +1,99 @@
+{
+  "schema_version": "eurusd_preregistered_compression_failed_auction_v1",
+  "status": "PREREGISTERED_REGIME_SPECIALIST_CHRONOLOGICAL_RESEARCH_ONLY",
+  "created_at_utc": "2026-07-30T11:10:00Z",
+  "result_can_count_as_forward_evidence": false,
+  "demo_order_authorized": false,
+  "owned_regime": "CROSSPAIR_COMPRESSION",
+  "source": {
+    "frozen_residual_history_config": "config/frozen_residual_history_diagnostic_v1.json",
+    "frozen_residual_history_config_sha256": "22ba29bb2c5f8cb01e26fa5295410e89a596976bfa592baff17494d591b19f2a",
+    "frozen_residual_history_source": "src/eurusd_regime_specialists/frozen_residual_history_diagnostic.py",
+    "frozen_residual_history_source_sha256": "0fcb70a12284d07f74966633f9816d6f7b90cec4d6687cbffb0df5c85bd886e8",
+    "eurusd_m5_bidask": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+    "eurusd_m5_bidask_sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "threshold_provenance": "config/frozen_neutral_midnight_auction_rejection.json",
+    "threshold_provenance_sha256": "f0b617a2156e7da4fcdd88a0afb4d8fbd2e06a24e296823552e0d7f0bfdf4ae6"
+  },
+  "signal": {
+    "decision_clock_utc": "20:00:00",
+    "observation_bars_m5": 3,
+    "observation_window_minutes": 15,
+    "minimum_failed_excursion_pips": 3.0,
+    "maximum_observation_range_pips": 20.0,
+    "minimum_rejection_wick_fraction": 0.55,
+    "long_rule": "downward excursion dominates, close returns to or above observation open, lower rejection wick owns at least 55 percent of range",
+    "short_rule": "upward excursion dominates, close returns to or below observation open, upper rejection wick owns at least 55 percent of range",
+    "mapping": "FADE_ONLY_THE_COMPLETED_FAILED_AUCTION",
+    "otherwise": "CASH",
+    "exact_contiguous_m5_required": true,
+    "maximum_trades_per_utc_day": 1
+  },
+  "windows": {
+    "development": [
+      "2016-07-01",
+      "2022-01-01"
+    ],
+    "locked_validation": [
+      "2022-01-01",
+      "2026-07-01"
+    ],
+    "combined_broker_window": [
+      "2024-07-01",
+      "2026-07-01"
+    ],
+    "combined_broker_split": "2025-07-01",
+    "latest_12_months": [
+      "2025-07-01",
+      "2026-07-01"
+    ]
+  },
+  "execution_inherited_unchanged": {
+    "entry_clock_utc": "20:00:00",
+    "stop_pips": 8.0,
+    "target_pips": 12.0,
+    "maximum_hold_minutes": 360,
+    "same_bar_collision": "STOP_FIRST",
+    "residual_lots": 0.01,
+    "initial_risk_usd": 0.8,
+    "additional_round_trip_stress_usd": 0.05,
+    "retain_m15_and_daily_learner_ownership_vetoes": true
+  },
+  "outcome_blind_capacity_gates": {
+    "minimum_candidates_total": 40,
+    "minimum_candidates_development": 20,
+    "minimum_candidates_locked_validation": 15,
+    "minimum_candidates_each_side": 10
+  },
+  "development_edge_gates": {
+    "minimum_profit_factor": 1.1,
+    "minimum_stressed_profit_factor": 1.0,
+    "minimum_best_five_percent_removed_profit_factor": 0.9,
+    "minimum_each_trade_sequence_half_profit_factor": 0.9,
+    "minimum_net_r_exclusive": 0.0
+  },
+  "locked_validation_gates": {
+    "minimum_trades": 15,
+    "minimum_win_rate": 0.4,
+    "maximum_win_rate": 0.6,
+    "minimum_payoff_ratio": 1.25,
+    "minimum_profit_factor": 1.15,
+    "minimum_stressed_profit_factor": 1.05,
+    "minimum_best_five_percent_removed_profit_factor": 0.9,
+    "minimum_each_trade_sequence_half_profit_factor_exclusive": 0.9,
+    "minimum_latest_12_month_trades": 3,
+    "minimum_latest_12_month_profit_factor": 1.0,
+    "minimum_net_r_exclusive": 0.0
+  },
+  "prohibitions": [
+    "NO_THRESHOLD_GRID",
+    "NO_OBSERVATION_WINDOW_SEARCH",
+    "NO_VALIDATION_BASED_SIGNAL_CHANGE",
+    "NO_SIDE_INVERSION",
+    "NO_CLOCK_SEARCH",
+    "NO_STOP_TARGET_SEARCH",
+    "NO_POST_RESULT_REGIME_DELETION",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ]
+}
