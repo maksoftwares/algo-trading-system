@@ -1,0 +1,89 @@
+{
+  "schema_version": "eurusd_h4_chop_exhaustion_rejection_v1",
+  "frozen_at_utc": "2026-07-30T13:00:00Z",
+  "research_only": true,
+  "retrospective_causal_not_pristine_oos": true,
+  "broker_action_allowed": false,
+  "anchor_config": {
+    "path": "config/frozen_neutral_h4_quiet_state_transfer_v1.json",
+    "sha256": "fc9fea2f8b4fd026e58126cf3b53ce901d05760c39882f19c5cb5e9b837beca2"
+  },
+  "protected_broker_ledger": {
+    "path": "outputs/m15_regime_portfolio_mt5_transfer/TRADES.csv",
+    "sha256": "3b61273712c75d5aa5cf8ef9d46c71170687ec34fcd9156bfccccf15e8653e43",
+    "weekdays": 522
+  },
+  "hypothesis": {
+    "specialist_id": "H4_CHOP_H1_EXHAUSTION_REJECTION",
+    "owned_regime": "chop",
+    "economic_mechanism": "fade a later-session H1 failed auction beyond a fixed EMA20 plus or minus 0.75 H1 ATR envelope",
+    "h1_ema_period": 20,
+    "envelope_atr_multiple": 0.75,
+    "decision_hours_utc": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+    "body_fraction_minimum": 0.35,
+    "stop_h1_atr_multiple": 1.5,
+    "target_r_multiple": 1.5,
+    "maximum_hold_hours": 12,
+    "directions": ["LONG", "SHORT"],
+    "one_first_signal_across_both_sides_per_utc_date": true,
+    "long_signal": "completed H1 low crosses below EMA20 minus 0.75 ATR, then the candle closes back above that envelope with a bullish body",
+    "short_signal": "completed H1 high crosses above EMA20 plus 0.75 ATR, then the candle closes back below that envelope with a bearish body"
+  },
+  "execution": {
+    "entry": "first M5 open after the completed H1 signal",
+    "minimum_retail_spread_pips": 0.7,
+    "maximum_entry_spread_pips": 2.0,
+    "adverse_slippage_pips_per_side": 0.1,
+    "extra_round_trip_stress_pips": 0.5,
+    "same_bar_policy": "STOP_FIRST",
+    "one_open_position_across_both_sides": true,
+    "fixed_research_lots": 0.01,
+    "entry_delay_minutes": [5, 15]
+  },
+  "development_windows": {
+    "EARLY_2017_2019": ["2017-01-01T00:00:00Z", "2020-01-01T00:00:00Z"],
+    "MIDDLE_2020_2022H1": ["2020-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "FULL_DEVELOPMENT": ["2017-01-01T00:00:00Z", "2022-07-01T00:00:00Z"]
+  },
+  "locked_validation_windows": {
+    "LATE_2022H2_2024H1": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "RECENT_2024H2_2026H1": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_VALIDATION": ["2022-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "development_admission": {
+    "minimum_trades": 100,
+    "minimum_trades_each_side": 30,
+    "minimum_profit_factor": 1.1,
+    "minimum_stressed_profit_factor": 1.05,
+    "minimum_each_development_block_profit_factor_exclusive": 1.0,
+    "minimum_each_side_profit_factor": 0.9,
+    "minimum_top_5pct_winners_removed_profit_factor": 0.95,
+    "maximum_closed_trade_drawdown_r": 20.0
+  },
+  "locked_validation_admission": {
+    "minimum_trades": 70,
+    "minimum_trades_each_side": 20,
+    "minimum_profit_factor": 1.15,
+    "minimum_stressed_profit_factor": 1.1,
+    "minimum_each_validation_block_profit_factor_exclusive": 1.0,
+    "minimum_each_side_profit_factor": 0.9,
+    "minimum_latest_12_month_profit_factor": 1.1,
+    "minimum_latest_6_month_net_r_exclusive": 0.0,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_r": 15.0,
+    "minimum_5m_delay_profit_factor": 1.0,
+    "minimum_15m_delay_profit_factor": 1.0,
+    "minimum_unique_dates_per_broker_weekday": 0.1,
+    "maximum_protected_date_overlap_share": 0.4
+  },
+  "decision_policy": {
+    "single_symmetric_hypothesis": true,
+    "development_must_pass_before_validation_is_summarized": true,
+    "parameter_grid_forbidden": true,
+    "post_result_side_clock_envelope_body_stop_target_or_hold_change_forbidden": true,
+    "historical_pass_can_authorize_demo": false,
+    "fresh_prospective_confirmation_required": true
+  }
+}

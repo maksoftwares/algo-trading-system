@@ -117,6 +117,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 111. Frequency-edge gap diagnostic: the broker-tested protected sleeve supplies 106 trades over 522 weekdays (0.203/day) against the 444-trade minimum required for 0.85/day, leaving a 338-trade gap and 242-date coverage gap. Its edge is concentrated in chop (74 trades, PF 1.588, +$67.06), while compression loses (32 trades, PF 0.849, -$5.46). The H4 and M15 variants share 82 of 85 recent H4 active dates, so stacking them would double-count one economic mechanism. Dense and RSI constructions prove that frequency is available, but their locked residual edge is not. The missing asset is several genuinely independent positive-expectancy regime/session experts, not more signals from the protected breakout.
 112. H4 trend-pullback continuation preregistration: a single mirrored EMA-rejection hypothesis targets H4 trend-up longs and trend-down shorts only after the protected London decision window. Development selection, locked validation, cost stress, entry delays, and protected-date independence are frozen before outcomes; no parameter grid or post-result rescue is allowed.
 113. H4 trend-pullback continuation result: both later-session EMA-rejection experts failed development, so locked validation remained unopened. Trend-up long produced 86 trades at PF 1.067 and stressed PF 1.014; trend-down short produced 107 trades at PF 0.754 and stressed PF 0.706. The exact family is retired without parameter rescue. A causal-state census shows chop is the largest single state among the 424 protected-M15 empty weekdays and becomes the next distinct-mechanism target.
+114. H4 chop exhaustion-rejection preregistration: a single symmetric later-session failed-auction rule fades excursions beyond a fixed EMA20 plus or minus 0.75 H1-ATR envelope in causal H4 chop. Development, locked validation, both-side viability, stress, delay, and protected-date independence gates are frozen before outcomes; side deletion and all parameter rescue are forbidden.
 
 Final status: `PROTECTED_M15_EDGE_PRESENT_FREQUENCY_PORTFOLIO_NOT_DEMO_READY`.
 
@@ -400,6 +401,7 @@ uv run --offline --with pandas --with numpy --with pyarrow python run_compressio
 uv run --offline --with pandas --with numpy --with pyarrow python run_compression_failed_auction.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_rsi_regime_chronological_selector.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_h4_trend_pullback_continuation.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_chop_exhaustion_rejection.py
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_consensus.py capture --days-ahead 60
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_actuals.py capture
 uv run --with pandas --with pyarrow python capture_prospective_dukascopy_event_m5.py capture --event-time 2026-08-07T12:30:00Z
