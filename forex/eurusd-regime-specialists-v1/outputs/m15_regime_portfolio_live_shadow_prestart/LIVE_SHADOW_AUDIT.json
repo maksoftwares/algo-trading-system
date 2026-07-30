@@ -1,0 +1,34 @@
+{
+  "artifact": "EURUSD_M15_REGIME_PORTFOLIO_SHADOW_V1",
+  "audited_at_utc": "2026.07.30 06:57:52",
+  "before_forward_floor": true,
+  "blocked_signals": 0,
+  "checks": {
+    "account_exact": true,
+    "all_signals_blocked_in_shadow": true,
+    "emergency_stop_true": true,
+    "init_ok": true,
+    "no_init_failure": true,
+    "no_management_action": true,
+    "no_order_send": true,
+    "no_pre_floor_signal": true,
+    "orders_disabled": true,
+    "rows_present": true,
+    "run_id_exact": true,
+    "server_exact": true,
+    "shadow_true": true,
+    "startup_latch": true,
+    "symbol_exact": true,
+    "timestamps_parse": true
+  },
+  "event_counts": {
+    "INIT_OK": 1,
+    "STARTUP_LATCH": 1
+  },
+  "forward_floor_utc": "2026.08.01 00:00:00",
+  "header_present": false,
+  "latest_recorded_at_utc": "2026.07.30 06:55:19",
+  "rows": 2,
+  "signals": 0,
+  "status": "PASS_RUNNING_PRESTART"
+}
