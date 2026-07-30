@@ -1,0 +1,10 @@
+{
+  "campaign_id": "EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_V1",
+  "cash_decisions": 0,
+  "demo_order_authorized": false,
+  "eligible_signals": 0,
+  "last_decision_date": null,
+  "published_decisions": 0,
+  "schema_version": "eurusd_forward_residual_live_signal_summary_v1",
+  "status": "WAITING_FORWARD_FLOOR"
+}

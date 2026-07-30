@@ -82,3 +82,17 @@ installs the limited daily 06:15 Dubai / 02:15 UTC task. See
 `EURUSD_FORWARD_RESIDUAL_REGIME_PROTOCOL.md` for the admission boundary and
 `EURUSD_FORWARD_RESIDUAL_REGIME_DEPLOYMENT_2026_07_30.md` for the verified
 prestart deployment receipt.
+
+## Pre-outcome residual signal publication
+
+`run_forward_residual_live_signal_publisher.py` publishes the frozen residual
+decision from 20:01 through 20:10 UTC, before its six-hour outcome exists. It
+uses only completed prospective bars and prior terminal residual outcomes.
+Missing context or a late start becomes immutable cash; historical backfill and
+manual as-of clocks are prohibited.
+
+`scripts/install_forward_residual_live_signal_task.ps1` installs the limited
+00:03 Dubai / 20:03 UTC task. The publisher has no order path. See
+`EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_PROTOCOL.md` for the contract and
+`EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_DEPLOYMENT_2026_07_30.md` for the
+prestart deployment receipt.

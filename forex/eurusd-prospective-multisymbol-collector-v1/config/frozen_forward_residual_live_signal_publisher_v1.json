@@ -1,0 +1,25 @@
+{
+  "schema_version": "eurusd_forward_residual_live_signal_publisher_v1",
+  "campaign_id": "EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_V1",
+  "strategy_campaign_id": "EURUSD_FORWARD_RESIDUAL_REGIME_V1",
+  "frozen_at_utc": "2026-07-30T08:44:00Z",
+  "forward_floor_utc": "2026.08.01 00:00:00",
+  "decision_clock_utc": "20:00:00",
+  "publication_not_before_seconds": 60,
+  "publication_deadline_seconds": 600,
+  "maximum_decisions_per_utc_day": 1,
+  "source_of_training_history": "PRIOR_APPEND_ONLY_FORWARD_RESIDUAL_DECISIONS",
+  "requires_same_date_upstream_ownership_check": true,
+  "late_or_missing_data_action": "IMMUTABLE_CASH",
+  "prohibitions": [
+    "NO_PRE_FLOOR_DECISION",
+    "NO_HISTORICAL_BACKFILL",
+    "NO_MANUAL_AS_OF_OVERRIDE",
+    "NO_POST_OUTCOME_PUBLICATION",
+    "NO_LATE_SIGNAL_RECOVERY",
+    "NO_MISSING_DATA_IMPUTATION",
+    "NO_STRATEGY_PARAMETER_CHANGE",
+    "NO_ORDERS"
+  ],
+  "demo_order_authorized": false
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_forward_residual_live_signal_publisher_lock_v1",
+  "campaign_id": "EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_V1",
+  "status": "FROZEN_BEFORE_FORWARD_FLOOR",
+  "locked_at_utc": "2026-07-30T08:45:03Z",
+  "forward_floor_utc": "2026.08.01 00:00:00",
+  "locked_before_forward_floor": true,
+  "locked_with_zero_forward_feature_rows": true,
+  "locked_with_zero_live_decisions": true,
+  "historical_backfill_allowed": false,
+  "demo_order_authorized": false,
+  "files": {
+    "config/frozen_forward_residual_live_signal_publisher_v1.json": "5b6d5dd5bc087be4c15a60cae4675483e8a17fc67efcdd01e0a869542b026715",
+    "EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_PROTOCOL.md": "6b62c2b1873939977eb3b12fb7d666f22bad4036b8f6e26bb631ad16fe974cd6",
+    "run_forward_residual_live_signal_publisher.py": "2b068aa5e194a46634fbf7d4b822837f7a8b2407122ca06ecc5acd68701d355f",
+    "src/forward_residual_live_signal_publisher.py": "a66c42efd1b2d1fb3ffbcda13d8a77aeb92928512d2d178fbc0a4464f4837ac6",
+    "tests/test_forward_residual_live_signal_publisher.py": "7f4f534de86386f4961b9b6609fc2b5296585ed6cd793ec28dc96457a61e46e1",
+    "scripts/run_forward_residual_live_signal_cycle.ps1": "beac8cdf237633b2dc92f4013006014bf2d084e82a475e52194c141612f4fb79",
+    "scripts/install_forward_residual_live_signal_task.ps1": "b89fe1f0579cba166b19a73f1b1cb794f80b17fe7943fc54df33e3d50bc42363",
+    "EURUSD_FORWARD_RESIDUAL_REGIME_LOCK_2026_07_30.sha256.json": "b592d469343f95ea16eed76457b167d74944771f6a196cee9bda743eeebd4eaa"
+  }
+}
