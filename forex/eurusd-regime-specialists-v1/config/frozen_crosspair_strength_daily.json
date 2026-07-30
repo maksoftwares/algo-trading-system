@@ -1,0 +1,66 @@
+{
+  "schema_version": "eurusd_crosspair_strength_daily_v1",
+  "campaign_id": "EURUSD_CROSSPAIR_STRENGTH_DAILY_V1",
+  "status": "LOCKED_BEFORE_EURUSD_OUTCOME_INSPECTION",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "source_root": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars",
+  "source_sha256": {
+    "EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "EURGBP_M5_BIDASK.parquet": "0671ac86131ae822e80cfbed18d46fc7ff2db72129b90c74052f9471ca83cd72",
+    "GBPUSD_M5_BIDASK.parquet": "4e855855978964958d255ca69b47c6452909ebe2b991bf27b5c537ea9ac765fd",
+    "EURJPY_M5_BIDASK.parquet": "4b62fbf3b5c54c4728af53517fe6debfbd4380247c106fd149b1e78f4e536762",
+    "USDJPY_M5_BIDASK.parquet": "b112d958b52ab5650fb790129184608c54268138025ea04d2322ea2f06e231b2"
+  },
+  "period": {
+    "from_inclusive": "2016-07-01T00:00:00Z",
+    "to_exclusive": "2026-07-01T00:00:00Z"
+  },
+  "signal": {
+    "predictor_symbols": ["EURGBP", "EURJPY", "GBPUSD", "USDJPY"],
+    "eurusd_predictor_prohibited": true,
+    "return_minutes": 15,
+    "decision_hours_utc": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+    "minimum_agreeing_votes": 3,
+    "maximum_candidates_per_utc_date": 1,
+    "candidate_selection": "first qualifying decision"
+  },
+  "source_only_census": {
+    "synchronized_weekdays": 2601,
+    "candidates": 2594,
+    "candidates_per_synchronized_weekday": 0.9973087274,
+    "long": 1243,
+    "short": 1351
+  },
+  "execution": {
+    "risk_pips": 8.0,
+    "target_pips": 12.0,
+    "nominal_reward_risk": 1.5,
+    "maximum_hold_minutes": 360,
+    "entry_adverse_slippage_pips": 0.1,
+    "exit_adverse_slippage_pips": 0.1,
+    "ambiguous_bar_policy": "STOP_FIRST",
+    "fixed_lot": 0.01,
+    "maximum_open_positions": 1
+  },
+  "primary_stress": {
+    "additional_round_trip_pips": 0.5
+  },
+  "gates": {
+    "minimum_trades_per_synchronized_weekday": 0.85,
+    "maximum_trades_per_synchronized_weekday": 1.05,
+    "minimum_full_profit_factor": 1.25,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_payoff_ratio": 1.35,
+    "maximum_payoff_ratio": 1.65,
+    "minimum_stressed_profit_factor": 1.15,
+    "positive_stressed_net": true,
+    "positive_each_chronological_block": true,
+    "minimum_blocks_pf_1_15": 3,
+    "minimum_last_12_month_profit_factor": 1.2,
+    "minimum_positive_active_month_share": 0.6,
+    "minimum_top_5pct_removed_profit_factor": 1.0,
+    "maximum_drawdown_r": 25.0
+  }
+}
