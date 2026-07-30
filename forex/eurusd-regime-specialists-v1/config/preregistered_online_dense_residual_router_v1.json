@@ -1,0 +1,54 @@
+{
+  "schema_version": "eurusd_preregistered_online_dense_residual_router_v1",
+  "status": "PREREGISTERED_CAUSAL_HISTORICAL_RESEARCH_ONLY",
+  "created_at_utc": "2026-07-30T10:20:00Z",
+  "result_can_count_as_forward_evidence": false,
+  "demo_order_authorized": false,
+  "source": {
+    "dense_family_config": "config/preregistered_dense_residual_family_v1.json",
+    "dense_family_config_sha256": "530d30fb6f6dad6f530b5c7d567c0055a4f37d7aa1b19e3b63db21be5a2e9c7e",
+    "dense_family_source": "src/eurusd_regime_specialists/dense_residual_family.py",
+    "dense_family_source_sha256": "c96aaea62c5f7453f3a3afa07d0e114c1c575615920ba660ab199ff163122db2"
+  },
+  "candidate_rules": {
+    "inherit_exactly_from_dense_family_config": true,
+    "candidate_count": 12,
+    "regimes_inherit_exactly_from_dense_family_config": true
+  },
+  "online_router": {
+    "history_scope": "PRIOR_RESOLVED_DAYS_IN_SAME_CAUSAL_REGIME_ONLY",
+    "observes_both_side_shadow_outcomes_after_EURUSD_path_exit": true,
+    "minimum_prior_regime_observations_before_routing": 20,
+    "warmup_rule_id": "STRENGTH_60_MOMENTUM",
+    "recent_window_observations_per_rule": 60,
+    "zero_expectancy_prior_strength": 20.0,
+    "score": "SHRUNK_MEAN_RESULT_R_AFTER_ADDITIONAL_0P5_PIP_STRESS",
+    "ranking": [
+      "HIGHEST_SHRUNK_STRESSED_MEAN_R",
+      "HIGHEST_STRESSED_PROFIT_FACTOR",
+      "FIXED_RULE_ORDER"
+    ],
+    "current_day_outcome_may_enter_current_selection": false,
+    "current_day_outcome_enters_history_only_after_selection": true,
+    "no_cash_after_context_and_path_resolve": true
+  },
+  "execution_and_windows": {
+    "inherit_exactly_from_dense_family_config": true,
+    "historical_replay_from_inclusive": "2016-07-01",
+    "historical_replay_to_exclusive": "2026-07-01"
+  },
+  "admission_gates": {
+    "inherit_exactly_from_dense_family_config": true
+  },
+  "prohibitions": [
+    "NO_PARAMETER_GRID",
+    "NO_LOOKBACK_SEARCH",
+    "NO_CURRENT_OUTCOME_LEAKAGE",
+    "NO_CROSS_REGIME_HISTORY",
+    "NO_CLOCK_SEARCH",
+    "NO_STOP_TARGET_SEARCH",
+    "NO_POST_RESULT_REGIME_DELETION",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ]
+}
