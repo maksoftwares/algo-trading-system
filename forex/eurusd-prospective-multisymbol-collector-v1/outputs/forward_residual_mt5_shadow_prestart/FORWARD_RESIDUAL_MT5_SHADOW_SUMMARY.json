@@ -1,0 +1,13 @@
+{
+  "campaign_id": "EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_V1",
+  "cash_receipts": 0,
+  "demo_order_authorized": false,
+  "order_api_calls": 0,
+  "pending_receipts": 0,
+  "position_mutation_attempts": 0,
+  "published_decisions": 0,
+  "receipts": 0,
+  "schema_version": "eurusd_forward_residual_mt5_shadow_bridge_summary_v1",
+  "shadow_entries_captured": 0,
+  "status": "WAITING_SIGNALS"
+}

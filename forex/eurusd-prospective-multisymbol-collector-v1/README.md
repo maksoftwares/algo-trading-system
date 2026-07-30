@@ -96,3 +96,16 @@ manual as-of clocks are prohibited.
 `EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_PROTOCOL.md` for the contract and
 `EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_DEPLOYMENT_2026_07_30.md` for the
 prestart deployment receipt.
+
+## Read-only MT5 execution receipts
+
+`run_forward_residual_mt5_shadow_bridge.py` reads the immutable pre-outcome
+signal and captures the actual bid/ask from the exact Capital.com demo terminal
+within two minutes. It records a 0.01-lot would-enter receipt with the frozen
+8/12-pip geometry. Late signals become permanent cash.
+
+The bridge has no order-check, order-send, or position-mutation path.
+`scripts/install_forward_residual_mt5_shadow_task.ps1` installs the limited
+00:04 Dubai / 20:04 UTC task. See
+`EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_PROTOCOL.md` and
+`EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_DEPLOYMENT_2026_07_30.md`.

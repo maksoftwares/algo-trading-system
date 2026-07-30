@@ -17,6 +17,18 @@
       "bytes": 1511,
       "sha256": "58231473ee6b9795232edc8b7adbb6a8d95d663ab7fcba9e51f80677416b6b2a"
     },
+    "EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_DEPLOYMENT_2026_07_30.md": {
+      "bytes": 4194,
+      "sha256": "e51b7d71c481dab3963927bcbaa8a24b0d2f89d4bd88cd0e68f31e4db521c3be"
+    },
+    "EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_LOCK_2026_07_30.sha256.json": {
+      "bytes": 1556,
+      "sha256": "a32af960ac942aa7923173c666deb55c9fd05395769449284f5e231cf2e13862"
+    },
+    "EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_PROTOCOL.md": {
+      "bytes": 2085,
+      "sha256": "d74c5dc846031e0ee82e29b19f5e7700d90fb399ed98acf2eb9c91e8bac94de3"
+    },
     "EURUSD_FORWARD_RESIDUAL_REGIME_DEPLOYMENT_2026_07_30.md": {
       "bytes": 4522,
       "sha256": "5e2042245d4a6daf930ec114b508e6a7df0ae840252673ef713536e4dcecb59c"
@@ -46,12 +58,16 @@
       "sha256": "287435f02c632f5a98e4d6d2bd35d85a9db3a38bc6845db43a6a1e0edee16740"
     },
     "README.md": {
-      "bytes": 4513,
-      "sha256": "05b5cc7205c59aa55e4fc20de9f7ba2e808c2737b5b1f5d8e0a5160d1cf89412"
+      "bytes": 5151,
+      "sha256": "388c5af5e3a7ac0a503f744b10ddcc20fa60f416e4a8da4e56957c4477828ade"
     },
     "config/frozen_forward_residual_live_signal_publisher_v1.json": {
       "bytes": 927,
       "sha256": "5b6d5dd5bc087be4c15a60cae4675483e8a17fc67efcdd01e0a869542b026715"
+    },
+    "config/frozen_forward_residual_mt5_shadow_bridge_v1.json": {
+      "bytes": 1252,
+      "sha256": "39974fd2f9c70a7c990088e21df0b7917016485f4a0955668a7ef24503e2efd1"
     },
     "config/frozen_forward_residual_regime_specialist_v1.json": {
       "bytes": 4196,
@@ -109,6 +125,18 @@
       "bytes": 177,
       "sha256": "82ef771c5cb03f25042ab88d5bdfa9e09bb1f70ad1653ed8ec080c53223f4dae"
     },
+    "outputs/forward_residual_mt5_shadow_prestart/FORWARD_RESIDUAL_MT5_SHADOW_RECEIPTS.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "outputs/forward_residual_mt5_shadow_prestart/FORWARD_RESIDUAL_MT5_SHADOW_SUMMARY.json": {
+      "bytes": 392,
+      "sha256": "eaa7ec4d328d05a706ca54d86753327c3625064480082c99a7b4770d9a1d7cb7"
+    },
+    "outputs/forward_residual_mt5_shadow_prestart/FORWARD_RESIDUAL_MT5_SHADOW_SUMMARY.md": {
+      "bytes": 208,
+      "sha256": "0156345f76b6aa8b5b5815ef6dd0637f668ce480e94ebc94bab3ecb0d57698cb"
+    },
     "outputs/live-prestart/LIVE_DEMO_AUDIT.json": {
       "bytes": 1075,
       "sha256": "a35c8946f4fbe95adbc544308aa4e4dc8ae2b36674992881cb2b640a3ed7bd5b"
@@ -161,6 +189,10 @@
       "bytes": 1839,
       "sha256": "2b068aa5e194a46634fbf7d4b822837f7a8b2407122ca06ecc5acd68701d355f"
     },
+    "run_forward_residual_mt5_shadow_bridge.py": {
+      "bytes": 3052,
+      "sha256": "25f6ac6de603c4f1ae7c66282b387f7d289aab015718ad7f2a2f99382869d0cc"
+    },
     "run_forward_residual_regime_specialist.py": {
       "bytes": 1607,
       "sha256": "dc5269ecf30c932b11135aa31dcc8f05af2d2858c69468d3d33a2ce836ec018d"
@@ -181,6 +213,10 @@
       "bytes": 1535,
       "sha256": "b89fe1f0579cba166b19a73f1b1cb794f80b17fe7943fc54df33e3d50bc42363"
     },
+    "scripts/install_forward_residual_mt5_shadow_task.ps1": {
+      "bytes": 1534,
+      "sha256": "e3736c232109335b1b40d0c18da0725fcc3a9a5806ee2f8d6304d7af89f1b01d"
+    },
     "scripts/install_forward_residual_task.ps1": {
       "bytes": 1539,
       "sha256": "b673adc2ae80a051da9988ba4de617dc7354f76a9a5ff70e5e7b6862347bba51"
@@ -197,6 +233,10 @@
       "bytes": 2224,
       "sha256": "beac8cdf237633b2dc92f4013006014bf2d084e82a475e52194c141612f4fb79"
     },
+    "scripts/run_forward_residual_mt5_shadow_bridge.ps1": {
+      "bytes": 2221,
+      "sha256": "0746ddcc604ebc9a6609c397017655b8f466b121340bc740bfd6854c673ac284"
+    },
     "scripts/run_live_forward_cycle.ps1": {
       "bytes": 9205,
       "sha256": "c908907fe85d4b5171fc139328b60be0ca12097dcbc7a83a99f3604cf86eb9db"
@@ -204,6 +244,10 @@
     "src/forward_residual_live_signal_publisher.py": {
       "bytes": 11920,
       "sha256": "a66c42efd1b2d1fb3ffbcda13d8a77aeb92928512d2d178fbc0a4464f4837ac6"
+    },
+    "src/forward_residual_mt5_shadow_bridge.py": {
+      "bytes": 12818,
+      "sha256": "71de919cad415fd0e13ebde4610c7e356273e75ffe1f072ada452d2c7d9145b8"
     },
     "src/forward_residual_regime_specialist.py": {
       "bytes": 18645,
@@ -220,6 +264,10 @@
     "tests/test_forward_residual_live_signal_publisher.py": {
       "bytes": 8089,
       "sha256": "7f4f534de86386f4961b9b6609fc2b5296585ed6cd793ec28dc96457a61e46e1"
+    },
+    "tests/test_forward_residual_mt5_shadow_bridge.py": {
+      "bytes": 5710,
+      "sha256": "ddc7c58d50831fd8b02768b7b874c26b0b06740d281b49a80806a25a9ac08244"
     },
     "tests/test_forward_residual_regime_specialist.py": {
       "bytes": 4940,

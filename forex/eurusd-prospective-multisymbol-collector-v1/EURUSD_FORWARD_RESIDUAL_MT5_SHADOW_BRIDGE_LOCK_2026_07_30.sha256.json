@@ -1,0 +1,23 @@
+{
+  "schema_version": "eurusd_forward_residual_mt5_shadow_bridge_lock_v1",
+  "campaign_id": "EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_V1",
+  "status": "FROZEN_BEFORE_FORWARD_FLOOR",
+  "locked_at_utc": "2026-07-30T08:52:52Z",
+  "forward_floor_utc": "2026.08.01 00:00:00",
+  "locked_before_forward_floor": true,
+  "locked_with_zero_forward_feature_rows": true,
+  "locked_with_zero_live_signals": true,
+  "locked_with_zero_mt5_receipts": true,
+  "historical_backfill_allowed": false,
+  "demo_order_authorized": false,
+  "files": {
+    "config/frozen_forward_residual_mt5_shadow_bridge_v1.json": "39974fd2f9c70a7c990088e21df0b7917016485f4a0955668a7ef24503e2efd1",
+    "EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_PROTOCOL.md": "d74c5dc846031e0ee82e29b19f5e7700d90fb399ed98acf2eb9c91e8bac94de3",
+    "run_forward_residual_mt5_shadow_bridge.py": "25f6ac6de603c4f1ae7c66282b387f7d289aab015718ad7f2a2f99382869d0cc",
+    "src/forward_residual_mt5_shadow_bridge.py": "71de919cad415fd0e13ebde4610c7e356273e75ffe1f072ada452d2c7d9145b8",
+    "tests/test_forward_residual_mt5_shadow_bridge.py": "ddc7c58d50831fd8b02768b7b874c26b0b06740d281b49a80806a25a9ac08244",
+    "scripts/run_forward_residual_mt5_shadow_bridge.ps1": "0746ddcc604ebc9a6609c397017655b8f466b121340bc740bfd6854c673ac284",
+    "scripts/install_forward_residual_mt5_shadow_task.ps1": "e3736c232109335b1b40d0c18da0725fcc3a9a5806ee2f8d6304d7af89f1b01d",
+    "EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_PUBLISHER_LOCK_2026_07_30.sha256.json": "58231473ee6b9795232edc8b7adbb6a8d95d663ab7fcba9e51f80677416b6b2a"
+  }
+}
