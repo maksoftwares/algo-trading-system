@@ -1,0 +1,128 @@
+{
+  "schema_version": "eurusd_preregistered_compression_own_price_family_v1",
+  "status": "PREREGISTERED_REGIME_SPECIALIST_CHRONOLOGICAL_RESEARCH_ONLY",
+  "created_at_utc": "2026-07-30T10:45:00Z",
+  "result_can_count_as_forward_evidence": false,
+  "demo_order_authorized": false,
+  "owned_regime": "CROSSPAIR_COMPRESSION",
+  "source": {
+    "frozen_residual_history_config": "config/frozen_residual_history_diagnostic_v1.json",
+    "frozen_residual_history_config_sha256": "22ba29bb2c5f8cb01e26fa5295410e89a596976bfa592baff17494d591b19f2a",
+    "frozen_residual_history_source": "src/eurusd_regime_specialists/frozen_residual_history_diagnostic.py",
+    "frozen_residual_history_source_sha256": "0fcb70a12284d07f74966633f9816d6f7b90cec4d6687cbffb0df5c85bd886e8",
+    "eurusd_m5_bidask": "D:/AlgoTradingData/research/fx-multipair-portfolio-v1/bars/EURUSD_M5_BIDASK.parquet",
+    "eurusd_m5_bidask_sha256": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45"
+  },
+  "mechanism": {
+    "description": "EURUSD own-price displacement while cross-pair predictors are compressed",
+    "features_use_only_completed_bars_before_20utc": true,
+    "feature_horizons_minutes": [
+      15,
+      60,
+      240
+    ],
+    "return_definition": "LOG_LAST_MID_CLOSE_DIVIDED_BY_FIRST_MID_OPEN",
+    "exact_contiguous_m5_required": true,
+    "missing_feature_action": "CASH"
+  },
+  "candidate_rules_in_fixed_order": [
+    {
+      "id": "OWN_RETURN_15_FADE",
+      "feature": "own_return_15",
+      "orientation": "FADE"
+    },
+    {
+      "id": "OWN_RETURN_15_MOMENTUM",
+      "feature": "own_return_15",
+      "orientation": "MOMENTUM"
+    },
+    {
+      "id": "OWN_RETURN_60_FADE",
+      "feature": "own_return_60",
+      "orientation": "FADE"
+    },
+    {
+      "id": "OWN_RETURN_60_MOMENTUM",
+      "feature": "own_return_60",
+      "orientation": "MOMENTUM"
+    },
+    {
+      "id": "OWN_RETURN_240_FADE",
+      "feature": "own_return_240",
+      "orientation": "FADE"
+    },
+    {
+      "id": "OWN_RETURN_240_MOMENTUM",
+      "feature": "own_return_240",
+      "orientation": "MOMENTUM"
+    }
+  ],
+  "windows": {
+    "development": [
+      "2016-07-01",
+      "2022-01-01"
+    ],
+    "locked_validation": [
+      "2022-01-01",
+      "2026-07-01"
+    ],
+    "combined_broker_window": [
+      "2024-07-01",
+      "2026-07-01"
+    ],
+    "combined_broker_split": "2025-07-01",
+    "latest_12_months": [
+      "2025-07-01",
+      "2026-07-01"
+    ]
+  },
+  "execution_inherited_unchanged": {
+    "decision_clock_utc": "20:00:00",
+    "stop_pips": 8.0,
+    "target_pips": 12.0,
+    "maximum_hold_minutes": 360,
+    "same_bar_collision": "STOP_FIRST",
+    "residual_lots": 0.01,
+    "initial_risk_usd": 0.8,
+    "additional_round_trip_stress_usd": 0.05,
+    "retain_m15_and_daily_learner_ownership_vetoes": true
+  },
+  "development_selection": {
+    "minimum_observations": 300,
+    "minimum_stressed_profit_factor": 1.02,
+    "minimum_best_five_percent_removed_profit_factor": 0.98,
+    "minimum_each_trade_sequence_half_profit_factor": 0.95,
+    "minimum_net_r_exclusive": 0.0,
+    "ranking": [
+      "HIGHEST_STRESSED_PROFIT_FACTOR",
+      "HIGHEST_BEST_FIVE_PERCENT_REMOVED_PROFIT_FACTOR",
+      "HIGHEST_NET_R",
+      "FIXED_RULE_ORDER"
+    ],
+    "no_eligible_rule_action": "REJECT_SPECIALIST"
+  },
+  "locked_validation_gates": {
+    "minimum_trades": 200,
+    "minimum_trades_per_weekday": 0.15,
+    "minimum_win_rate": 0.4,
+    "maximum_win_rate": 0.6,
+    "minimum_payoff_ratio": 1.25,
+    "minimum_profit_factor": 1.15,
+    "minimum_stressed_profit_factor": 1.05,
+    "minimum_best_five_percent_removed_profit_factor": 1.0,
+    "minimum_each_trade_sequence_half_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.1,
+    "minimum_latest_12_month_best_five_percent_removed_profit_factor": 0.95,
+    "minimum_net_r_exclusive": 0.0
+  },
+  "prohibitions": [
+    "NO_PARAMETER_GRID",
+    "NO_VALIDATION_BASED_RULE_SELECTION",
+    "NO_OUTCOME_BASED_HORIZON_CHANGE",
+    "NO_CLOCK_SEARCH",
+    "NO_STOP_TARGET_SEARCH",
+    "NO_POST_RESULT_REGIME_DELETION",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ]
+}
