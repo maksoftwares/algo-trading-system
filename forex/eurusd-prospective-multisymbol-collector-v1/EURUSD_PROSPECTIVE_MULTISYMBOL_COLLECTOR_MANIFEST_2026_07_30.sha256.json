@@ -5,6 +5,10 @@
       "bytes": 8,
       "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
     },
+    "LIVE_DEMO_SHADOW_RUNBOOK.md": {
+      "bytes": 2376,
+      "sha256": "4c6452862fdd22c27176ca788d50f89d7794cac747c9946e9b9c216bd469c810"
+    },
     "PROSPECTIVE_DATA_PROTOCOL.md": {
       "bytes": 3215,
       "sha256": "287435f02c632f5a98e4d6d2bd35d85a9db3a38bc6845db43a6a1e0edee16740"
@@ -12,6 +16,10 @@
     "README.md": {
       "bytes": 2103,
       "sha256": "0854cb208e2b6f1e25305e83c3a4c4c83d23f9d26988b3e1d046ab7ff3d97dd8"
+    },
+    "mt5/Config/EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_LIVE_DEMO_SHADOW.ini": {
+      "bytes": 298,
+      "sha256": "c7f873b27a3a63c0207cc5f85cd78487763801b44c1cdedbb9b1e79a05927bdf"
     },
     "mt5/Config/EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_SMOKE.ini": {
       "bytes": 917,
@@ -32,6 +40,30 @@
     "mt5/Presets/EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_DEMO.set": {
       "bytes": 442,
       "sha256": "c2d240bcdfb6abfec9fb01e2b98839b2d0caf25a860821cdad0abf36393f5856"
+    },
+    "outputs/live-prestart/LIVE_DEMO_AUDIT.json": {
+      "bytes": 1075,
+      "sha256": "a35c8946f4fbe95adbc544308aa4e4dc8ae2b36674992881cb2b640a3ed7bd5b"
+    },
+    "outputs/live-prestart/LIVE_DEMO_AUDIT.md": {
+      "bytes": 792,
+      "sha256": "355ac5a59d399f778c6aadb04ae5d8efa343c8de9b2ed3bfaa00678dcca0e645"
+    },
+    "outputs/live-prestart/raw/EURUSD_PROSPECTIVE_M5_ENVIRONMENT_V1.csv": {
+      "bytes": 2111,
+      "sha256": "1ebc8da1d1fd19f344226d049e6a978979156c76fdb87a160ffd05704e53301c"
+    },
+    "outputs/live-prestart/raw/EURUSD_PROSPECTIVE_M5_FEATURES_V1.csv": {
+      "bytes": 582,
+      "sha256": "58e4453c1ae3076ff58b22d15b9592514d3a35a1dcf9ebcd53d68c4c42057ebf"
+    },
+    "outputs/live-prestart/raw/EURUSD_PROSPECTIVE_M5_HEARTBEAT_V1.csv": {
+      "bytes": 1066,
+      "sha256": "e92a4d3a227ec9cb9570db62bdcf2762324a0c2c6b2fd9f5a857d7f3e4e320db"
+    },
+    "outputs/live-prestart/raw/MT5_TERMINAL_20260730.log": {
+      "bytes": 4296,
+      "sha256": "1344de38bf95715d6ac66bb226b555d05dd7e6b0516e5032c84987e263479d33"
     },
     "outputs/smoke/EURUSD_PROSPECTIVE_M5_ENVIRONMENT_R2_SMOKE_ONLY.csv": {
       "bytes": 2381,
@@ -57,13 +89,17 @@
       "bytes": 1244,
       "sha256": "3546756efc39e352455bc42c8258e7475e7bbd813aacfce39e921e2823dadefc"
     },
+    "scripts/audit_live_demo_shadow.py": {
+      "bytes": 7424,
+      "sha256": "2f3119a7a192554b80f185797c561d7de2eda356f44d5a82a49b527eb0c3075c"
+    },
     "scripts/generate_manifest.py": {
       "bytes": 1089,
       "sha256": "1c01fa827beb29fb7931a038518bee242aea3ab784bbb5b5973593288284db28"
     },
     "tests/test_collector_safety.py": {
-      "bytes": 6840,
-      "sha256": "0a6638abf927d280b2650cfbee69a883f8dd4a4d68688dfbd5dc00140b17853e"
+      "bytes": 9016,
+      "sha256": "5ebe6a3c08d5a20f00ba8fb8d97dd60362336567f41849a1c1cb1c7635c47c55"
     }
   },
   "generated_on": "2026-07-30"

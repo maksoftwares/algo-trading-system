@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import importlib.util
 import json
+import sys
 from collections import Counter
+from datetime import datetime
 from pathlib import Path
 
 
@@ -17,6 +20,12 @@ PRESET = (
     / "Presets"
     / "EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_DEMO.set"
 )
+LIVE_CONFIG = (
+    ROOT
+    / "mt5"
+    / "Config"
+    / "EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_LIVE_DEMO_SHADOW.ini"
+)
 PROTOCOL = ROOT / "PROSPECTIVE_DATA_PROTOCOL.md"
 EX5 = ROOT / "mt5" / "Experts" / "EurUsdProspectiveMultiSymbolCollector.ex5"
 COMPILE_LOG = (
@@ -28,6 +37,7 @@ ENVIRONMENT = SMOKE / "EURUSD_PROSPECTIVE_M5_ENVIRONMENT_R2_SMOKE_ONLY.csv"
 HEARTBEAT = SMOKE / "EURUSD_PROSPECTIVE_M5_HEARTBEAT_R2_SMOKE_ONLY.csv"
 REPORT = SMOKE / "EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_R2_SMOKE.htm"
 VERIFICATION = SMOKE / "VERIFICATION.json"
+LIVE_PRESTART = ROOT / "outputs" / "live-prestart"
 MANIFEST = (
     ROOT
     / "EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_MANIFEST_2026_07_30.sha256.json"
@@ -98,6 +108,26 @@ def test_safe_preset_uses_frozen_forward_boundary() -> None:
     assert "EURGBP" in settings["InpReferenceSymbols"]
     assert "USDJPY" in settings["InpReferenceSymbols"]
     assert settings["InpFeatureLogName"].endswith("_V1.csv")
+
+
+def test_live_startup_config_cannot_enable_trading() -> None:
+    text = LIVE_CONFIG.read_text(encoding="utf-8")
+    required = (
+        "[Experts]",
+        "AllowLiveTrading=0",
+        "AllowDllImport=0",
+        "Enabled=1",
+        "[StartUp]",
+        "Expert=EurUsdProspectiveMultiSymbolCollector",
+        (
+            "ExpertParameters="
+            "EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_DEMO.set"
+        ),
+        "Symbol=EURUSD",
+        "Period=M5",
+    )
+    for token in required:
+        assert token in text
 
 
 def test_protocol_separates_discovery_and_untouched_validation() -> None:
@@ -203,3 +233,44 @@ def test_manifest_matches_every_packaged_file() -> None:
         entry = manifest["files"][relative]
         assert entry["bytes"] == path.stat().st_size
         assert entry["sha256"] == hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def test_live_demo_prestart_snapshot_passes_all_guards() -> None:
+    auditor = _load_live_auditor()
+    result = auditor.audit(
+        LIVE_PRESTART / "raw",
+        datetime.strptime("2026.07.30 06:14:50", "%Y.%m.%d %H:%M:%S"),
+    )
+    assert result["status"] == "PASS_RUNNING_PRESTART"
+    assert result["account_login"] == "1033669"
+    assert result["account_server"] == "Capital.ComMena-Demo"
+    assert result["feature_rows"] == 0
+    assert result["heartbeat_rows"] == 6
+    assert result["heartbeat_age_seconds"] == 5.0
+    assert result["heartbeat_events"] == {
+        "HEARTBEAT": 4,
+        "INTERVAL_REFUSED": 1,
+        "STARTUP_LATCH": 1,
+    }
+    assert all(result["checks"].values())
+
+    terminal_log = (
+        LIVE_PRESTART / "raw" / "MT5_TERMINAL_20260730.log"
+    ).read_text(encoding="utf-16")
+    assert "EurUsdProspectiveMultiSymbolCollector (EURUSD,M5) loaded successfully" in (
+        terminal_log
+    )
+    assert "authorized on Capital.ComMena-Demo" in terminal_log
+
+
+def _load_live_auditor():
+    path = ROOT / "scripts" / "audit_live_demo_shadow.py"
+    spec = importlib.util.spec_from_file_location(
+        "eurusd_prospective_live_demo_auditor", path
+    )
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module

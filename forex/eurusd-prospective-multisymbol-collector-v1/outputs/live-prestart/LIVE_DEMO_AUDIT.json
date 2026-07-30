@@ -1,0 +1,36 @@
+{
+  "account_login": "1033669",
+  "account_server": "Capital.ComMena-Demo",
+  "artifact": "EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_V1",
+  "audited_at_utc": "2026.07.30 06:14:50",
+  "before_forward_floor": true,
+  "checks": {
+    "account_is_demo": true,
+    "chart_is_eurusd_m5": true,
+    "environment_present": true,
+    "forward_floor_exact": true,
+    "heartbeat_fresh": true,
+    "heartbeat_present": true,
+    "no_feature_rows_before_floor": true,
+    "prestart_transition_refused": true,
+    "scope_is_prospective_demo": true,
+    "source_list_exact": true,
+    "startup_latch_present": true,
+    "trade_permission_is_none": true
+  },
+  "configured_broker_utc_offset_seconds": "0",
+  "environment_rows": 15,
+  "feature_rows": 0,
+  "heartbeat_age_seconds": 5.0,
+  "heartbeat_events": {
+    "HEARTBEAT": 4,
+    "INTERVAL_REFUSED": 1,
+    "STARTUP_LATCH": 1
+  },
+  "heartbeat_rows": 6,
+  "latest_heartbeat_utc": "2026.07.30 06:14:45",
+  "observed_current_minus_gmt_seconds": "16",
+  "source_status": {},
+  "status": "PASS_RUNNING_PRESTART",
+  "terminal_build": "5833"
+}
