@@ -100,19 +100,22 @@ def completed_return(
     decision_time: pd.Timestamp,
     horizon_minutes: int,
 ) -> float | None:
-    opens = pd.date_range(
-        decision_time - pd.Timedelta(minutes=horizon_minutes),
-        decision_time - pd.Timedelta(minutes=5),
-        freq="5min",
-        tz="UTC",
-    )
-    if len(opens) != horizon_minutes // 5:
-        raise RuntimeError("invalid compression feature horizon")
-    selected = bars.reindex(opens)
-    if selected.isna().any().any():
+    start_time = decision_time - pd.Timedelta(minutes=horizon_minutes)
+    end_time = decision_time - pd.Timedelta(minutes=5)
+    start_position = int(bars.index.searchsorted(start_time))
+    end_position = int(bars.index.searchsorted(end_time))
+    if (
+        start_position >= len(bars)
+        or end_position >= len(bars)
+        or bars.index[start_position] != start_time
+        or bars.index[end_position] != end_time
+        or end_position - start_position + 1 != horizon_minutes // 5
+    ):
         return None
-    start = float(selected.iloc[0]["mid_open"])
-    end = float(selected.iloc[-1]["mid_close"])
+    if horizon_minutes <= 0 or horizon_minutes % 5:
+        raise RuntimeError("invalid compression feature horizon")
+    start = float(bars.iloc[start_position]["mid_open"])
+    end = float(bars.iloc[end_position]["mid_close"])
     if start <= 0.0 or end <= 0.0:
         return None
     return math.log(end / start)
@@ -266,7 +269,10 @@ def trade_frame(
         "stressed_pnl_usd",
     ]
     if rule_id is None:
-        return pd.DataFrame(columns=columns)
+        empty = pd.DataFrame(columns=columns)
+        empty["entry_time"] = pd.Series([], dtype="datetime64[ns, UTC]")
+        empty["exit_time"] = pd.Series([], dtype="datetime64[ns, UTC]")
+        return empty
     rule = next(
         rule
         for rule in config["candidate_rules_in_fixed_order"]
@@ -329,6 +335,42 @@ def specialist_metrics(
         active / complete_weekdays if complete_weekdays else 0.0
     )
     return result
+
+
+def combined_portfolio(
+    residual_trades: pd.DataFrame,
+    m15: pd.DataFrame,
+    start: str,
+    end: str,
+    denominator: int,
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    if not residual_trades.empty:
+        return dense.combined_portfolio(
+            residual_trades,
+            m15,
+            start,
+            end,
+            denominator,
+        )
+    protected = m15[
+        m15["decision_date"].ge(start) & m15["decision_date"].lt(end)
+    ][
+        [
+            "entry_time",
+            "exit_time",
+            "decision_date",
+            "component",
+            "side",
+            "pnl_usd",
+            "stressed_pnl_usd",
+        ]
+    ].copy()
+    protected = protected.sort_values(
+        ["entry_time", "component"]
+    ).reset_index(drop=True)
+    result = base.portfolio_metrics(protected, denominator)
+    result["m15_residual_owned_date_overlaps"] = 0
+    return protected, result
 
 
 def _validation_checks(
@@ -423,21 +465,21 @@ def evaluate(
     portfolio_days = len(
         dense._records_in_window(all_records, portfolio_start, portfolio_end)
     )
-    combined, combined_metrics = dense.combined_portfolio(
+    combined, combined_metrics = combined_portfolio(
         trades,
         m15,
         portfolio_start,
         portfolio_end,
         portfolio_days,
     )
-    _, first = dense.combined_portfolio(
+    _, first = combined_portfolio(
         trades,
         m15,
         portfolio_start,
         split,
         len(dense._records_in_window(all_records, portfolio_start, split)),
     )
-    _, second = dense.combined_portfolio(
+    _, second = combined_portfolio(
         trades,
         m15,
         split,
@@ -626,6 +668,7 @@ def write_outputs(
 
 __all__ = [
     "candidate_passes",
+    "combined_portfolio",
     "completed_return",
     "development_table",
     "evaluate",

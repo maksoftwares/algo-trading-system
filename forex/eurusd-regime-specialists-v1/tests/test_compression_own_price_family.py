@@ -118,3 +118,35 @@ def test_config_is_research_only_and_never_authorizes_orders() -> None:
     assert config["demo_order_authorized"] is False
     assert "NO_VALIDATION_BASED_RULE_SELECTION" in config["prohibitions"]
     assert "NO_ORDER_AUTHORIZATION" in config["prohibitions"]
+
+
+def test_no_selected_rule_returns_datetime_typed_empty_frame() -> None:
+    frame = module.trade_frame([], None, _config())
+    assert frame.empty
+    assert isinstance(frame["entry_time"].dtype, pd.DatetimeTZDtype)
+    assert isinstance(frame["exit_time"].dtype, pd.DatetimeTZDtype)
+
+
+def test_empty_specialist_combines_as_protected_only() -> None:
+    empty = module.trade_frame([], None, _config())
+    m15 = pd.DataFrame(
+        {
+            "entry_time": pd.to_datetime(["2025-01-02T08:00:00Z"]),
+            "exit_time": pd.to_datetime(["2025-01-02T09:00:00Z"]),
+            "decision_date": ["2025-01-02"],
+            "component": ["M15_REGIME"],
+            "side": ["SHORT"],
+            "pnl_usd": [2.0],
+            "stressed_pnl_usd": [1.9],
+        }
+    )
+    combined, result = module.combined_portfolio(
+        empty,
+        m15,
+        "2025-01-01",
+        "2026-01-01",
+        261,
+    )
+    assert len(combined) == 1
+    assert result["trades"] == 1
+    assert result["m15_residual_owned_date_overlaps"] == 0
