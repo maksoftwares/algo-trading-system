@@ -1,0 +1,120 @@
+{
+  "schema_version": "eurusd_forward_residual_regime_specialist_v1",
+  "campaign_id": "EURUSD_FORWARD_RESIDUAL_REGIME_V1",
+  "frozen_at_utc": "2026-07-30T08:20:00Z",
+  "evidence_scope_required": "PROSPECTIVE_DEMO",
+  "forward_floor_utc": "2026.08.01 00:00:00",
+  "decision_clock_utc": "20:00:00",
+  "maximum_decisions_per_utc_day": 1,
+  "execution_symbol": "EURUSD",
+  "predictor_symbols": [
+    "EURGBP",
+    "EURJPY",
+    "GBPUSD",
+    "USDJPY"
+  ],
+  "oriented_return_signs": {
+    "EURGBP": 1.0,
+    "EURJPY": 1.0,
+    "GBPUSD": 1.0,
+    "USDJPY": -1.0
+  },
+  "features": {
+    "return_horizons_minutes": [
+      15,
+      60,
+      240
+    ],
+    "fixed_return_scales": {
+      "15": 0.0005,
+      "60": 0.001,
+      "240": 0.002
+    },
+    "activity_current_minutes": 60,
+    "activity_prior_minutes": 60,
+    "eurusd_spread_reference_pips": 1.0,
+    "feature_clip": 3.0,
+    "no_forward_fill": true,
+    "exact_contiguous_m5_required": true,
+    "eurusd_return_excluded_from_direction_features": true
+  },
+  "causal_regimes": {
+    "ordered_rules": [
+      "CROSSPAIR_COMPRESSION",
+      "BROAD_EUR_UP",
+      "BROAD_EUR_DOWN",
+      "SHORT_LONG_DISAGREEMENT",
+      "MIXED_TRANSITION"
+    ],
+    "compression_max_abs_strength_240": 0.25,
+    "compression_max_abs_agreement_240": 0.25,
+    "broad_trend_min_abs_strength_240": 0.5,
+    "broad_trend_min_abs_agreement_240": 0.5,
+    "disagreement_min_abs_strength_15": 0.5
+  },
+  "residual_ownership": {
+    "m15_signal_csv": "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/Common/Files/EURUSD_M15_REGIME_PORTFOLIO_SHADOW_DEMO.csv",
+    "m15_forward_config": "../eurusd-regime-specialists-v1/config/frozen_m15_regime_forward_adjudication_v1.json",
+    "m15_forward_module": "../eurusd-regime-specialists-v1/src/m15_regime_forward_adjudicator.py",
+    "daily_learner_decisions": "C:/MT5PortableProspectiveCollector/EURUSDForwardState/learner/FORWARD_DECISIONS.json",
+    "owned_only_when_no_m15_signal_same_utc_date": true,
+    "owned_only_when_no_daily_learner_eligible_side_same_utc_date": true,
+    "missing_upstream_ledger_action": "FAIL_CLOSED_CASH"
+  },
+  "execution": {
+    "entry_slippage_pips_each_side": 0.1,
+    "exit_slippage_pips_each_side": 0.1,
+    "stop_pips": 8.0,
+    "target_pips": 12.0,
+    "target_r": 1.5,
+    "maximum_hold_minutes": 360,
+    "same_bar_collision": "STOP_FIRST",
+    "entry_quote": "FIRST_TWO_SIDED_QUOTE_AT_OR_AFTER_20_00",
+    "long_exit_quote": "BID",
+    "short_exit_quote": "ASK"
+  },
+  "online_regime_selector": {
+    "observes_both_side_shadow_outcomes": true,
+    "training_scope": "PRIOR_RESOLVED_RESIDUAL_DAYS_IN_SAME_CAUSAL_REGIME_ONLY",
+    "global_warmup_resolved_residual_days": 20,
+    "minimum_prior_observations_per_regime_side": 10,
+    "zero_expectancy_prior_strength": 10.0,
+    "minimum_shrunk_expectancy_r": 0.02,
+    "minimum_profit_factor": 1.15,
+    "minimum_plus_0_5_pip_profit_factor": 1.05,
+    "recent_window_observations": 20,
+    "minimum_recent_profit_factor": 1.0,
+    "side_selection": "HIGHEST_SHRUNK_EXPECTANCY_THEN_STRESSED_PF_THEN_LONG",
+    "no_cross_regime_borrowing": true
+  },
+  "admission": {
+    "minimum_complete_weekdays": 160,
+    "minimum_residual_decisions": 80,
+    "minimum_eligible_trades": 50,
+    "minimum_incremental_weekday_coverage": 0.2,
+    "minimum_profit_factor": 1.15,
+    "minimum_payoff_ratio": 1.25,
+    "additional_round_trip_stress_pips": 0.5,
+    "minimum_stressed_profit_factor": 1.05,
+    "minimum_best_five_percent_removed_profit_factor": 1.0,
+    "minimum_each_trade_sequence_half_profit_factor_exclusive": 1.0,
+    "maximum_single_month_gross_profit_share": 0.5,
+    "requires_combined_portfolio_frequency_and_coverage": true,
+    "requires_mt5_signal_and_outcome_parity": true,
+    "requires_shadow_demo_soak": true
+  },
+  "prohibitions": [
+    "NO_PRE_FLOOR_ROWS",
+    "NO_ARCHIVED_OR_TESTER_ROWS",
+    "NO_RETROSPECTIVE_BACKTEST",
+    "NO_REGIME_THRESHOLD_TUNING",
+    "NO_SIDE_REVERSAL",
+    "NO_CLOCK_TUNING",
+    "NO_STOP_OR_TARGET_TUNING",
+    "NO_CROSS_REGIME_BORROWING",
+    "NO_MISSING_DATA_IMPUTATION",
+    "NO_UPSTREAM_DUPLICATE_OPPORTUNITY",
+    "NO_ORDERS"
+  ],
+  "demo_order_authorized": false
+}

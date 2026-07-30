@@ -65,3 +65,20 @@ Windows tasks:
 The terminal configuration continues to enforce `AllowLiveTrading=0` and
 `AllowDllImport=0`. See `LIVE_OPERATIONS_DEPLOYMENT_2026_07_30.md` for the
 verified deployment receipt.
+
+## Forward residual-regime campaign
+
+`run_forward_residual_regime_specialist.py` evaluates one forward-only,
+20:00 UTC opportunity on weekdays not owned by the protected M15 portfolio or
+the frozen daily learner. It separates those opportunities into five causal
+cross-pair regimes and allows each regime-side to learn only from its own prior
+resolved observations.
+
+The campaign was frozen before the August evidence floor with zero eligible
+feature rows. It has no order path and cannot authorize demo trading.
+`scripts/run_forward_residual_cycle.ps1` runs the append-only evaluator after
+the six-hour outcome window, and `scripts/install_forward_residual_task.ps1`
+installs the limited daily 06:15 Dubai / 02:15 UTC task. See
+`EURUSD_FORWARD_RESIDUAL_REGIME_PROTOCOL.md` for the admission boundary and
+`EURUSD_FORWARD_RESIDUAL_REGIME_DEPLOYMENT_2026_07_30.md` for the verified
+prestart deployment receipt.

@@ -1,0 +1,24 @@
+{
+  "schema_version": "eurusd_forward_residual_regime_lock_v1",
+  "campaign_id": "EURUSD_FORWARD_RESIDUAL_REGIME_V1",
+  "status": "FROZEN_BEFORE_FORWARD_FLOOR",
+  "locked_at_utc": "2026-07-30T08:20:07Z",
+  "forward_floor_utc": "2026.08.01 00:00:00",
+  "locked_before_forward_floor": true,
+  "locked_with_zero_forward_feature_rows": true,
+  "locked_with_zero_residual_decisions": true,
+  "historical_backtest_allowed": false,
+  "demo_order_authorized": false,
+  "files": {
+    "config/frozen_forward_residual_regime_specialist_v1.json": "e11e9db9f1fba5df077548f8c014688076f2c44ec7d5e6083dc03b4b4ff76e79",
+    "EURUSD_FORWARD_RESIDUAL_REGIME_PROTOCOL.md": "a3d912093ece6a9fd0b40b8170445d2301c89b13c03151640eedbcc2e4666476",
+    "run_forward_residual_regime_specialist.py": "dc5269ecf30c932b11135aa31dcc8f05af2d2858c69468d3d33a2ce836ec018d",
+    "src/forward_residual_regime_specialist.py": "084664f4d3f38cf9f300481915501afb8087b99b01235b5e64d163815f5a4741",
+    "tests/test_forward_residual_regime_specialist.py": "5074876c12e95900f7e66ff37e67e431b8a0af4c6c7136619e6506071f669ad6",
+    "scripts/run_forward_residual_cycle.ps1": "075d8069e5624ece17a5f221510c58d0dba1888673d58213026d2c9b604d083e",
+    "scripts/install_forward_residual_task.ps1": "b673adc2ae80a051da9988ba4de617dc7354f76a9a5ff70e5e7b6862347bba51",
+    "src/forward_selective_learner.py": "a65ae95867e521137bb41903b2d157dd151b91a9d0b5df08ad094ccc3fd66d60",
+    "../eurusd-regime-specialists-v1/config/frozen_m15_regime_forward_adjudication_v1.json": "34ecc7e9bf3e60fa4d268aada2a9764fc5e8b25d0af7d0de85b22566f18e13c5",
+    "../eurusd-regime-specialists-v1/src/m15_regime_forward_adjudicator.py": "dbfa9406323e01ae9a1ec99786c9be846ca5fa7a61a99467942271a3f3cbc418"
+  }
+}

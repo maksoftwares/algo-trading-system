@@ -4,7 +4,6 @@ import hashlib
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = (
     ROOT
@@ -19,6 +18,9 @@ def included_files() -> list[Path]:
         if path.is_file()
         and path != OUTPUT
         and "__pycache__" not in path.parts
+        and ".pytest_cache" not in path.parts
+        and ".ruff_cache" not in path.parts
+        and "forward_residual_regime_prestart" not in path.parts
         and path.suffix != ".pyc"
     ]
 

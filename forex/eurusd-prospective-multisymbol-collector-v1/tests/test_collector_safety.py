@@ -9,7 +9,6 @@ from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = (
     ROOT / "mt5" / "Experts" / "EurUsdProspectiveMultiSymbolCollector.mq5"
@@ -226,6 +225,9 @@ def test_manifest_matches_every_packaged_file() -> None:
         if path.is_file()
         and path != MANIFEST
         and "__pycache__" not in path.parts
+        and ".pytest_cache" not in path.parts
+        and ".ruff_cache" not in path.parts
+        and "forward_residual_regime_prestart" not in path.parts
         and path.suffix != ".pyc"
     }
     assert set(manifest["files"]) == set(packaged)

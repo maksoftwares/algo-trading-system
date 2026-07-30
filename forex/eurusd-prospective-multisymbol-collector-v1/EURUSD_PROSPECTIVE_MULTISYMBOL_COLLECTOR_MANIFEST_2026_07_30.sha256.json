@@ -5,21 +5,17 @@
       "bytes": 8,
       "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
     },
-    ".pytest_cache/.gitignore": {
-      "bytes": 37,
-      "sha256": "3ed731b65d06150c138e2dadb0be0697550888a6b47eb8c45ecc9adba8b8e9bd"
+    "EURUSD_FORWARD_RESIDUAL_REGIME_DEPLOYMENT_2026_07_30.md": {
+      "bytes": 4522,
+      "sha256": "5e2042245d4a6daf930ec114b508e6a7df0ae840252673ef713536e4dcecb59c"
     },
-    ".pytest_cache/CACHEDIR.TAG": {
-      "bytes": 191,
-      "sha256": "37dc88ef9a0abeddbe81053a6dd8fdfb13afb613045ea1eb4a5c815a74a3bde4"
+    "EURUSD_FORWARD_RESIDUAL_REGIME_LOCK_2026_07_30.sha256.json": {
+      "bytes": 1730,
+      "sha256": "b592d469343f95ea16eed76457b167d74944771f6a196cee9bda743eeebd4eaa"
     },
-    ".pytest_cache/README.md": {
-      "bytes": 302,
-      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
-    },
-    ".pytest_cache/v/cache/nodeids": {
-      "bytes": 1795,
-      "sha256": "8d39fb7bfcb798ed127f836c93e1135a38bdef6d51f97b3e8661234048bb3ea6"
+    "EURUSD_FORWARD_RESIDUAL_REGIME_PROTOCOL.md": {
+      "bytes": 3499,
+      "sha256": "a3d912093ece6a9fd0b40b8170445d2301c89b13c03151640eedbcc2e4666476"
     },
     "FORWARD_SELECTIVE_LEARNER_PROTOCOL.md": {
       "bytes": 3153,
@@ -38,8 +34,12 @@
       "sha256": "287435f02c632f5a98e4d6d2bd35d85a9db3a38bc6845db43a6a1e0edee16740"
     },
     "README.md": {
-      "bytes": 2895,
-      "sha256": "9805ed08ac85573e7b7fe64327d22040fc8697154faa5edae8287d7ec2ac5ed4"
+      "bytes": 3805,
+      "sha256": "0da2b313c47e2039bc844334f95598ad83701abb312ce7bd81c38d80fefa931a"
+    },
+    "config/frozen_forward_residual_regime_specialist_v1.json": {
+      "bytes": 4196,
+      "sha256": "e11e9db9f1fba5df077548f8c014688076f2c44ec7d5e6083dc03b4b4ff76e79"
     },
     "config/frozen_forward_selective_learner_v1.json": {
       "bytes": 2447,
@@ -129,6 +129,10 @@
       "bytes": 1244,
       "sha256": "3546756efc39e352455bc42c8258e7475e7bbd813aacfce39e921e2823dadefc"
     },
+    "run_forward_residual_regime_specialist.py": {
+      "bytes": 1607,
+      "sha256": "dc5269ecf30c932b11135aa31dcc8f05af2d2858c69468d3d33a2ce836ec018d"
+    },
     "run_forward_selective_learner.py": {
       "bytes": 1336,
       "sha256": "3d6e9bb11a0111863adee41bb65d97bd920c72ef9529a9900dd2b8ce36b797e5"
@@ -138,24 +142,40 @@
       "sha256": "89fef454f4b6a29f919faf292f81daeac7b7b6553ac0690f0ebae1033f681e6e"
     },
     "scripts/generate_manifest.py": {
-      "bytes": 1089,
-      "sha256": "1c01fa827beb29fb7931a038518bee242aea3ab784bbb5b5973593288284db28"
+      "bytes": 1243,
+      "sha256": "c27ee56763b5f432a8c12a93b84a3ec595b87840ab17e501f11a05457808bfdf"
+    },
+    "scripts/install_forward_residual_task.ps1": {
+      "bytes": 1539,
+      "sha256": "b673adc2ae80a051da9988ba4de617dc7354f76a9a5ff70e5e7b6862347bba51"
     },
     "scripts/install_live_operations_tasks.ps1": {
       "bytes": 2269,
       "sha256": "236f8e47cb703676ac128a51f48c0f1f6cdd766ffecbbb240a5c8c344d3bf551"
     },
+    "scripts/run_forward_residual_cycle.ps1": {
+      "bytes": 2283,
+      "sha256": "075d8069e5624ece17a5f221510c58d0dba1888673d58213026d2c9b604d083e"
+    },
     "scripts/run_live_forward_cycle.ps1": {
       "bytes": 9205,
       "sha256": "c908907fe85d4b5171fc139328b60be0ca12097dcbc7a83a99f3604cf86eb9db"
+    },
+    "src/forward_residual_regime_specialist.py": {
+      "bytes": 18645,
+      "sha256": "084664f4d3f38cf9f300481915501afb8087b99b01235b5e64d163815f5a4741"
     },
     "src/forward_selective_learner.py": {
       "bytes": 25767,
       "sha256": "a65ae95867e521137bb41903b2d157dd151b91a9d0b5df08ad094ccc3fd66d60"
     },
     "tests/test_collector_safety.py": {
-      "bytes": 9016,
-      "sha256": "5ebe6a3c08d5a20f00ba8fb8d97dd60362336567f41849a1c1cb1c7635c47c55"
+      "bytes": 9170,
+      "sha256": "3b57628580aa9cfa09b56154b239ed60fc3a4f79bb5f13372c83a9aeba707c34"
+    },
+    "tests/test_forward_residual_regime_specialist.py": {
+      "bytes": 4940,
+      "sha256": "5074876c12e95900f7e66ff37e67e431b8a0af4c6c7136619e6506071f669ad6"
     },
     "tests/test_forward_selective_learner.py": {
       "bytes": 8374,
