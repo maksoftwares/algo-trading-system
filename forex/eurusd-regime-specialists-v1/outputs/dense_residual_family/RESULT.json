@@ -1,0 +1,224 @@
+{
+  "combined_broker_window": {
+    "checks": {
+      "maximum_combined_trades_per_weekday": true,
+      "maximum_combined_win_rate": true,
+      "minimum_combined_best_removed_profit_factor": false,
+      "minimum_combined_payoff_ratio": true,
+      "minimum_combined_profit_factor": true,
+      "minimum_combined_stressed_profit_factor": true,
+      "minimum_combined_trades_per_weekday": false,
+      "minimum_combined_weekday_coverage": false,
+      "minimum_combined_win_rate": true,
+      "minimum_each_combined_half_profit_factor": true,
+      "minimum_each_residual_half_profit_factor": false,
+      "minimum_latest_12_month_best_removed_profit_factor": true,
+      "minimum_latest_12_month_profit_factor": true,
+      "minimum_net_pnl_usd": true,
+      "minimum_residual_best_removed_profit_factor": false,
+      "minimum_residual_profit_factor": false,
+      "minimum_residual_stressed_profit_factor": false,
+      "minimum_residual_trades": false,
+      "minimum_residual_trades_per_weekday": false,
+      "zero_m15_residual_owned_date_overlap": true
+    },
+    "components": {
+      "DENSE_RESIDUAL_RESEARCH": {
+        "active_weekdays": 44,
+        "best_5pct_removed_profit_factor": 0.6214185063409725,
+        "complete_weekdays": 522,
+        "maximum_closed_trade_drawdown": 7.537500000000652,
+        "net": -5.612500000000952,
+        "payoff_ratio": 1.2532810211918892,
+        "profit_factor": 0.7891028651948931,
+        "stressed_profit_factor": 0.7045053003533255,
+        "trade_sequence_half_profit_factors": [
+          0.8452041785374659,
+          0.7342007434944022
+        ],
+        "trades": 44,
+        "trades_per_weekday": 0.0842911877394636,
+        "weekday_coverage": 0.0842911877394636,
+        "win_rate": 0.38636363636363635
+      },
+      "M15_REGIME": {
+        "active_weekdays": 98,
+        "best_5pct_removed_profit_factor": 1.1067572970811677,
+        "maximum_closed_trade_drawdown": 25.770000000000003,
+        "maximum_single_month_gross_profit_share": 0.0998771614854011,
+        "net": 61.6,
+        "payoff_ratio": 1.4647525605142557,
+        "profit_factor": 1.4105024656803944,
+        "stressed_profit_factor": 1.340541240450602,
+        "trade_sequence_half_profit_factors": [
+          1.5598835597449403,
+          1.2722022587268993
+        ],
+        "trades": 106,
+        "trades_per_weekday": 0.20306513409961685,
+        "weekday_coverage": 0.18773946360153257,
+        "win_rate": 0.49056603773584906
+      }
+    },
+    "first_12_months": {
+      "active_weekdays": 68,
+      "best_5pct_removed_profit_factor": 0.9437557092522447,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 15.239999999999995,
+      "maximum_single_month_gross_profit_share": 0.17932575142160934,
+      "net": 21.849999999999515,
+      "payoff_ratio": 1.4798540013207826,
+      "profit_factor": 1.2851363695680482,
+      "stressed_profit_factor": 1.2101476713366086,
+      "trade_sequence_half_profit_factors": [
+        1.7195583596214445,
+        0.9786334297796512
+      ],
+      "trades": 71,
+      "trades_per_weekday": 0.2720306513409962,
+      "weekday_coverage": 0.26053639846743293,
+      "win_rate": 0.4647887323943662
+    },
+    "full": {
+      "active_weekdays": 142,
+      "best_5pct_removed_profit_factor": 0.9956229938721871,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 27.21000000000016,
+      "maximum_single_month_gross_profit_share": 0.09555283200560298,
+      "net": 57.10999999999924,
+      "payoff_ratio": 1.5651717181969216,
+      "profit_factor": 1.3332944266121924,
+      "stressed_profit_factor": 1.2592320722755461,
+      "trade_sequence_half_profit_factors": [
+        1.461228207129837,
+        1.229230606413376
+      ],
+      "trades": 150,
+      "trades_per_weekday": 0.28735632183908044,
+      "weekday_coverage": 0.2720306513409962,
+      "win_rate": 0.46
+    },
+    "latest_12_months": {
+      "active_weekdays": 74,
+      "best_5pct_removed_profit_factor": 1.0500422297297267,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 27.21000000000015,
+      "maximum_single_month_gross_profit_share": 0.16794891521772595,
+      "net": 35.25999999999972,
+      "payoff_ratio": 1.6390824418168126,
+      "profit_factor": 1.3722550675675642,
+      "stressed_profit_factor": 1.2989680188004462,
+      "trade_sequence_half_profit_factors": [
+        1.2846201614572508,
+        1.4634776987718143
+      ],
+      "trades": 79,
+      "trades_per_weekday": 0.30268199233716475,
+      "weekday_coverage": 0.2835249042145594,
+      "win_rate": 0.45569620253164556
+    },
+    "second_12_months": {
+      "active_weekdays": 74,
+      "best_5pct_removed_profit_factor": 1.0500422297297267,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 27.21000000000015,
+      "maximum_single_month_gross_profit_share": 0.16794891521772595,
+      "net": 35.25999999999972,
+      "payoff_ratio": 1.6390824418168126,
+      "profit_factor": 1.3722550675675642,
+      "stressed_profit_factor": 1.2989680188004462,
+      "trade_sequence_half_profit_factors": [
+        1.2846201614572508,
+        1.4634776987718143
+      ],
+      "trades": 79,
+      "trades_per_weekday": 0.30268199233716475,
+      "weekday_coverage": 0.2835249042145594,
+      "win_rate": 0.45569620253164556
+    }
+  },
+  "demo_order_authorized": false,
+  "dense_family_config_sha256": "530d30fb6f6dad6f530b5c7d567c0055a4f37d7aa1b19e3b63db21be5a2e9c7e",
+  "dense_family_source_sha256": "c96aaea62c5f7453f3a3afa07d0e114c1c575615920ba660ab199ff163122db2",
+  "locked_validation_residual": {
+    "active_weekdays": 140,
+    "best_5pct_removed_profit_factor": 0.6543901001767573,
+    "complete_weekdays": 1172,
+    "maximum_closed_trade_drawdown": 24.900000000001917,
+    "net": -18.91250000000253,
+    "payoff_ratio": 1.356127306550151,
+    "profit_factor": 0.7771066588096371,
+    "stressed_profit_factor": 0.6941257774706057,
+    "trade_sequence_half_profit_factors": [
+      0.7870911214953071,
+      0.7669441141497875
+    ],
+    "trades": 140,
+    "trades_per_weekday": 0.11945392491467577,
+    "weekday_coverage": 0.11945392491467577,
+    "win_rate": 0.36428571428571427
+  },
+  "prohibitions": [
+    "NO_CLOCK_SEARCH",
+    "NO_STOP_TARGET_SEARCH",
+    "NO_THRESHOLD_GRID",
+    "NO_VALIDATION_BASED_RULE_SELECTION",
+    "NO_POST_VALIDATION_REGIME_DELETION",
+    "NO_MISSING_DATA_IMPUTATION",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ],
+  "research_boundary": "PREREGISTERED_RETROSPECTIVE_CHRONOLOGICAL_RESEARCH_ONLY",
+  "result_can_count_as_forward_evidence": false,
+  "schema_version": "eurusd_preregistered_dense_residual_family_v1",
+  "selected_regime_experts": {
+    "BROAD_EUR_DOWN": {
+      "development_metrics": {
+        "best_5pct_removed_profit_factor": 1.0431676094074833,
+        "net": 9.249999999996753,
+        "payoff_ratio": 1.3365230581663132,
+        "profit_factor": 1.2203036618040253,
+        "stressed_profit_factor": 1.0835887433824833,
+        "trade_sequence_half_profit_factors": [
+          0.9809809809809459,
+          1.5716385011019718
+        ],
+        "trades": 88,
+        "win_rate": 0.4772727272727273
+      },
+      "selected_rule_id": "STRENGTH_240_FADE"
+    },
+    "BROAD_EUR_UP": {
+      "development_metrics": {
+        "best_5pct_removed_profit_factor": 1.2075651621105445,
+        "net": 15.599999999997396,
+        "payoff_ratio": 1.4632034632033821,
+        "profit_factor": 1.3966942148759558,
+        "stressed_profit_factor": 1.242874109263588,
+        "trade_sequence_half_profit_factors": [
+          1.1080928126768084,
+          1.7664974619287968
+        ],
+        "trades": 86,
+        "win_rate": 0.4883720930232558
+      },
+      "selected_rule_id": "STRENGTH_60_FADE"
+    },
+    "CROSSPAIR_COMPRESSION": {
+      "selected_rule_id": null
+    },
+    "MIXED_TRANSITION": {
+      "selected_rule_id": null
+    },
+    "SHORT_LONG_DISAGREEMENT": {
+      "selected_rule_id": null
+    }
+  },
+  "selection_uses_locked_validation": false,
+  "status": "HISTORICAL_VALIDATION_REJECTED",
+  "variants_evaluated": 12,
+  "verified_source_sha256": {
+    "frozen_residual_history_config": "22ba29bb2c5f8cb01e26fa5295410e89a596976bfa592baff17494d591b19f2a",
+    "frozen_residual_history_source": "0fcb70a12284d07f74966633f9816d6f7b90cec4d6687cbffb0df5c85bd886e8"
+  }
+}

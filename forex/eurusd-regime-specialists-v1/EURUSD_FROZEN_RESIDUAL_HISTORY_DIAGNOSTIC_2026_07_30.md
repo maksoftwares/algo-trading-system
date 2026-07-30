@@ -78,11 +78,11 @@ Run:
 uv run --offline --with pandas --with numpy --with pyarrow python run_frozen_residual_history_diagnostic.py
 ```
 
-Locked source hashes:
+Locked live-candidate hashes:
 
-- residual history config:
+- frozen live residual config:
   `e11e9db9f1fba5df077548f8c014688076f2c44ec7d5e6083dc03b4b4ff76e79`
-- residual replay source:
+- frozen live residual specialist source:
   `084664f4d3f38cf9f300481915501afb8087b99b01235b5e64d163815f5a4741`
 - protected M15 trades:
   `3b61273712c75d5aa5cf8ef9d46c71170687ec34fcd9156bfccccf15e8653e43`

@@ -151,9 +151,42 @@ def test_selected_rule_produces_one_trade_per_resolved_day() -> None:
     assert trades["side"].tolist() == ["LONG", "SHORT"]
 
 
+def test_residual_metrics_filters_the_requested_window() -> None:
+    config = _config()
+    records = [
+        _record("2024-01-02", _context(1.0, 1.0, 1.0)),
+        _record("2025-01-02", _context(1.0, 1.0, 1.0)),
+    ]
+    selections = {
+        regime: None for regime in config["regimes_in_fixed_order"]
+    }
+    selections["MIXED_TRANSITION"] = "STRENGTH_60_MOMENTUM"
+    trades = module.selected_trades(
+        records,
+        selections,
+        config,
+        "2024-01-01",
+        "2026-01-01",
+    )
+    result = module.residual_metrics(
+        trades,
+        records,
+        "2025-01-01",
+        "2026-01-01",
+        config,
+    )
+    assert result["trades"] == 1
+    assert result["complete_weekdays"] == 1
+
+
 def test_config_is_research_only_and_never_authorizes_orders() -> None:
     config = module.load_config()
     assert config["result_can_count_as_forward_evidence"] is False
     assert config["demo_order_authorized"] is False
     assert "NO_VALIDATION_BASED_RULE_SELECTION" in config["prohibitions"]
     assert "NO_ORDER_AUTHORIZATION" in config["prohibitions"]
+
+
+def test_safe_output_converts_pandas_scalars() -> None:
+    safe = module._safe({"trades": pd.Series([3]).iloc[0]})
+    assert safe == {"trades": 3}

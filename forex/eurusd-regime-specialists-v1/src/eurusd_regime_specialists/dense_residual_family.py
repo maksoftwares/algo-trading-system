@@ -303,6 +303,14 @@ def residual_metrics(
     config: dict[str, Any],
 ) -> dict[str, Any]:
     denominator = len(_records_in_window(records, start, end))
+    window_trades = (
+        trades[
+            trades["decision_date"].ge(start)
+            & trades["decision_date"].lt(end)
+        ]
+        if not trades.empty
+        else trades
+    )
     stress_r = (
         float(
             config["execution_inherited_unchanged"][
@@ -314,13 +322,15 @@ def residual_metrics(
         )
     )
     values = (
-        trades["result_r"].astype(float).tolist()
-        if not trades.empty
+        window_trades["result_r"].astype(float).tolist()
+        if not window_trades.empty
         else []
     )
     result = metrics(values, denominator, stress_r)
     active = (
-        int(trades["decision_date"].nunique()) if not trades.empty else 0
+        int(window_trades["decision_date"].nunique())
+        if not window_trades.empty
+        else 0
     )
     result.update(
         {
@@ -557,6 +567,13 @@ def evaluate(
         validation_end,
         config,
     )
+    portfolio_residual_metrics = residual_metrics(
+        validation_trades,
+        records,
+        portfolio_start,
+        portfolio_end,
+        config,
+    )
     portfolio_denominator = len(
         _records_in_window(records, portfolio_start, portfolio_end)
     )
@@ -593,6 +610,14 @@ def evaluate(
         latest_start,
         latest_end,
         len(_records_in_window(records, latest_start, latest_end)),
+    )
+    protected_window = m15[
+        m15["decision_date"].ge(portfolio_start)
+        & m15["decision_date"].lt(portfolio_end)
+    ]
+    protected_metrics = base.portfolio_metrics(
+        protected_window,
+        portfolio_denominator,
     )
     checks = _gate_checks(
         validation_metrics,
@@ -636,6 +661,10 @@ def evaluate(
             "first_12_months": first_metrics,
             "second_12_months": second_metrics,
             "latest_12_months": latest_metrics,
+            "components": {
+                "M15_REGIME": protected_metrics,
+                "DENSE_RESIDUAL_RESEARCH": portfolio_residual_metrics,
+            },
             "checks": checks,
         },
         "result_can_count_as_forward_evidence": False,
@@ -664,6 +693,8 @@ def run() -> tuple[
 
 
 def _safe(value: Any) -> Any:
+    if hasattr(value, "item") and not isinstance(value, (str, bytes)):
+        return _safe(value.item())
     if isinstance(value, float) and not math.isfinite(value):
         return None
     if isinstance(value, dict):
