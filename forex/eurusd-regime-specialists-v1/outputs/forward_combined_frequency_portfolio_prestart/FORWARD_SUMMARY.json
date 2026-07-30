@@ -1,0 +1,66 @@
+{
+  "admission": {
+    "best_5pct_removed_profit_factor": 0.0,
+    "checks": {
+      "both_component_economic_admissions": false,
+      "both_component_mt5_parity": false,
+      "both_component_shadow_soak": false,
+      "combined_demo_soak": false,
+      "combined_mt5_ordering_parity": false,
+      "maximum_closed_trade_drawdown_usd": true,
+      "maximum_risk_cap_rejection_share": true,
+      "maximum_single_month_gross_profit_share": false,
+      "maximum_trades_per_complete_weekday": true,
+      "minimum_best_5pct_removed_profit_factor": false,
+      "minimum_combined_profit_factor": false,
+      "minimum_combined_stressed_profit_factor": false,
+      "minimum_combined_trades": false,
+      "minimum_complete_validation_weekdays": false,
+      "minimum_daily_component_profit_factor": false,
+      "minimum_each_trade_sequence_half_profit_factor": false,
+      "minimum_m15_component_profit_factor": false,
+      "minimum_net_pnl_usd": false,
+      "minimum_trades_per_complete_weekday": false,
+      "minimum_weekday_trade_coverage": false
+    },
+    "combined_trades": 0,
+    "complete_validation_weekdays": 0,
+    "component_profit_factors": {
+      "DAILY_CROSSPAIR": 0.0,
+      "M15_REGIME": 0.0
+    },
+    "component_trade_counts": {
+      "DAILY_CROSSPAIR": 0,
+      "M15_REGIME": 0
+    },
+    "demo_order_authorized": false,
+    "maximum_closed_trade_drawdown_usd": 0.0,
+    "maximum_single_month_gross_profit_share": 1.0,
+    "net_pnl_usd": 0,
+    "payoff_ratio": null,
+    "profit_factor": 0.0,
+    "risk_cap_rejection_share": 0.0,
+    "risk_cap_rejections": 0,
+    "status": "WAITING_MINIMUM_EVIDENCE",
+    "stressed_profit_factor": 0.0,
+    "trade_sequence_half_profit_factors": [
+      0.0,
+      0.0
+    ],
+    "trades_per_complete_weekday": 0.0,
+    "weekday_trade_coverage": 0.0,
+    "win_rate": 0.0
+  },
+  "campaign_id": "EURUSD_FORWARD_COMBINED_FREQUENCY_PORTFOLIO_V1",
+  "causally_unfinalized_complete_weekdays": 0,
+  "complete_validation_dates": [],
+  "complete_validation_weekdays": 0,
+  "demo_order_authorized": false,
+  "normalized_daily_trades": 0,
+  "normalized_m15_trades": 0,
+  "pending_causal_cutoff_utc": null,
+  "portfolio_decisions": 0,
+  "raw_complete_validation_weekdays": 0,
+  "schema_version": "eurusd_forward_combined_frequency_portfolio_v1",
+  "validation_start_time_utc": null
+}

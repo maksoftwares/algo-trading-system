@@ -63,5 +63,15 @@ refuses any change to a prior terminal outcome. Its verified prestart state is
 zero signals, zero resolved trades, zero invalid outcomes, and
 `WAITING_MINIMUM_EVIDENCE`; demo-order authorization is false.
 
+The cycle now also runs the separately hash-locked combined frequency
+portfolio validator. It causally merges the M15 regime portfolio with the
+daily cross-pair learner, applies the frozen USD 15 / three-position risk cap,
+and measures both edge and the explicit 0.85-to-1.25-trades-per-complete-day
+target. It finalizes only complete days with terminal component evidence, so a
+late outcome can never reorder or rewrite the append-only portfolio ledger.
+The updated scheduled task ran at `2026-07-30 07:24:31 UTC` with result `0`;
+its prestart state is zero complete validation days, zero portfolio trades,
+`WAITING_MINIMUM_EVIDENCE`, and no order authorization.
+
 This proves a safe, unattended prospective shadow deployment. It does not
 authorize orders and does not close the remaining frequency gap.

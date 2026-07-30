@@ -1,5 +1,6 @@
 param(
     [string]$TerminalRoot = "C:\MT5PortableM15RegimeShadow",
+    [string]$CollectorStateRoot = "C:\MT5PortableProspectiveCollector\EURUSDForwardState",
     [string]$CommonFiles = "C:\Users\ZHAO ZHU INFORMATION\AppData\Roaming\MetaQuotes\Terminal\Common\Files",
     [string]$UvExecutable = "C:\Users\ZHAO ZHU INFORMATION\.local\bin\uv.exe"
 )
@@ -17,8 +18,12 @@ $AuditCsv = Join-Path $CommonFiles "EURUSD_M15_REGIME_PORTFOLIO_SHADOW_DEMO.csv"
 $FeatureCsv = Join-Path $CommonFiles "EURUSD_PROSPECTIVE_M5_FEATURES_V1.csv"
 $AuditScript = Join-Path $PSScriptRoot "audit_m15_regime_shadow.py"
 $AdjudicatorScript = Join-Path $PackageRoot "run_m15_regime_forward_adjudicator.py"
+$CombinedScript = Join-Path $PackageRoot "run_forward_combined_frequency_portfolio.py"
 $StateRoot = Join-Path $TerminalRoot "EURUSDM15ShadowState"
 $OperationsLog = Join-Path $StateRoot "OPERATIONS.log"
+$DailyLearnerRoot = Join-Path $CollectorStateRoot "learner"
+$DailyDecisions = Join-Path $DailyLearnerRoot "FORWARD_DECISIONS.json"
+$DailySummary = Join-Path $DailyLearnerRoot "FORWARD_SUMMARY.json"
 
 function Assert-ExactFile {
     param([string]$Expected, [string]$Actual)
@@ -58,9 +63,12 @@ try {
         $UvExecutable,
         $AuditScript,
         $AdjudicatorScript,
+        $CombinedScript,
         $TerminalExecutable,
         $TerminalConfig,
-        $FeatureCsv
+        $FeatureCsv,
+        $DailyDecisions,
+        $DailySummary
     )) {
         if (-not (Test-Path -LiteralPath $Path)) {
             throw "Required health path missing: $Path"
@@ -134,12 +142,37 @@ try {
     if ($Forward.demo_order_authorized) {
         throw "M15 forward process unexpectedly authorized demo orders"
     }
+    $M15Outcomes = Join-Path $AdjudicatorOutput "FORWARD_OUTCOMES.json"
+    $M15Summary = Join-Path $AdjudicatorOutput "FORWARD_SUMMARY.json"
+    $CombinedOutput = Join-Path $StateRoot "combined"
+    & $UvExecutable run python $CombinedScript `
+        --m15-outcomes $M15Outcomes `
+        --m15-summary $M15Summary `
+        --daily-decisions $DailyDecisions `
+        --daily-summary $DailySummary `
+        --feature-csv $FeatureCsv `
+        --output-dir $CombinedOutput `
+        --enforce-append-only | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+        throw "combined forward frequency portfolio failed"
+    }
+    $Combined = Get-Content -Raw -LiteralPath (
+        Join-Path $CombinedOutput "FORWARD_SUMMARY.json"
+    ) | ConvertFrom-Json
+    if ($Combined.demo_order_authorized) {
+        throw "combined forward portfolio unexpectedly authorized demo orders"
+    }
     Write-OperationsLog (
         "HEALTH_OK status=$($Audit.status) " +
         "signals=$($Audit.signals) blocked=$($Audit.blocked_signals) " +
         "resolved=$($Forward.admission.resolved_trades) " +
         "pending=$($Forward.admission.pending_signals) " +
-        "admission=$($Forward.admission.status) pid=$($Process.ProcessId)"
+        "admission=$($Forward.admission.status) " +
+        "combined_days=$($Combined.admission.complete_validation_weekdays) " +
+        "combined_trades=$($Combined.admission.combined_trades) " +
+        "frequency=$($Combined.admission.trades_per_complete_weekday) " +
+        "combined_admission=$($Combined.admission.status) " +
+        "pid=$($Process.ProcessId)"
     )
     exit 0
 }

@@ -4,7 +4,7 @@ import csv
 import json
 import math
 from collections import defaultdict
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -467,20 +467,45 @@ def process(
     bars: dict[datetime, Bar],
     config: dict[str, Any],
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    records: list[dict[str, Any]] = []
-    pending = 0
-    for signal in signals:
-        record = resolve_signal(signal, bars, config)
-        if record is None:
-            pending += 1
-        else:
-            records.append(record)
+    outcomes = [
+        resolve_signal(signal, bars, config)
+        for signal in signals
+    ]
+    first_pending = next(
+        (
+            index
+            for index, record in enumerate(outcomes)
+            if record is None
+        ),
+        len(outcomes),
+    )
+    # Only publish a chronological terminal prefix. A later short-duration
+    # signal can otherwise resolve before an older 12-hour signal and would
+    # have to be inserted into the append-only ledger retroactively.
+    records = [
+        record
+        for record in outcomes[:first_pending]
+        if record is not None
+    ]
+    pending = len(signals) - len(records)
+    unresolved = sum(record is None for record in outcomes)
+    withheld = sum(
+        record is not None for record in outcomes[first_pending:]
+    )
+    earliest_pending = (
+        signals[first_pending].entry_time.isoformat()
+        if first_pending < len(signals)
+        else None
+    )
     summary = {
         "schema_version": "eurusd_m15_regime_forward_summary_v1",
         "campaign_id": config["campaign_id"],
         "signals": len(signals),
         "terminal_outcomes": len(records),
         "pending_signals": pending,
+        "unresolved_signals": unresolved,
+        "causally_withheld_signals": withheld,
+        "earliest_pending_signal_entry_time_utc": earliest_pending,
         "admission": admission_metrics(records, pending, config),
         "demo_order_authorized": False,
     }

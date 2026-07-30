@@ -194,3 +194,41 @@ def test_admission_never_authorizes_orders() -> None:
     assert metrics["demo_order_authorized"] is False
     assert metrics["checks"]["mt5_signal_parity"] is False
     assert metrics["checks"]["shadow_soak"] is False
+
+
+def test_process_withholds_later_terminal_outcome_until_older_pending() -> None:
+    module = _module()
+    first = _signal(module)
+    second = module.Signal(
+        signal_id="2026.08.03 08:00:00|COMPRESSION|26073061",
+        entry_time=datetime(2026, 8, 3, 8, 0, tzinfo=UTC),
+        regime="COMPRESSION",
+        lots=0.01,
+        entry=1.1000,
+        stop=1.1020,
+        target=1.0995,
+    )
+    bars = {}
+    current = first.entry_time
+    while current <= second.entry_time:
+        bars[current] = _bar(module, current)
+        current += timedelta(minutes=5)
+    bars[second.entry_time] = _bar(
+        module,
+        second.entry_time,
+        low=1.0994,
+    )
+    records, summary = module.process(
+        [first, second],
+        bars,
+        _config(),
+    )
+    assert records == []
+    assert summary["terminal_outcomes"] == 0
+    assert summary["pending_signals"] == 2
+    assert summary["unresolved_signals"] == 1
+    assert summary["causally_withheld_signals"] == 1
+    assert (
+        summary["earliest_pending_signal_entry_time_utc"]
+        == first.entry_time.isoformat()
+    )

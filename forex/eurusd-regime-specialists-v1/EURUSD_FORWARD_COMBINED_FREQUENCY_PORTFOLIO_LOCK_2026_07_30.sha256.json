@@ -1,0 +1,15 @@
+{
+  "campaign_id": "EURUSD_FORWARD_COMBINED_FREQUENCY_PORTFOLIO_V1",
+  "locked_at_utc": "2026-07-30T07:23:08Z",
+  "locked_before_forward_floor": true,
+  "forward_floor_utc": "2026-08-01T00:00:00Z",
+  "demo_order_authorized": false,
+  "files": {
+    "config/frozen_forward_combined_frequency_portfolio_v1.json": "72d70c449f254ba92309221ec0ed2a8f3623d005f9b7721528c0679b53b707b1",
+    "EURUSD_FORWARD_COMBINED_FREQUENCY_PORTFOLIO_PROTOCOL.md": "ed67cc49e08dc80efbc0fcffad956155025cf1e262b1c3972d3e10df618b9b7b",
+    "src/forward_combined_frequency_portfolio.py": "19cf9e0599fbbd223932adf37c4264f81c17086f94b00d43a72d0ce5f3a35a21",
+    "run_forward_combined_frequency_portfolio.py": "e16f2dad62c721b613ff38e008cf067cd4d8665aabace4b8d9bf8fbecf367e6e",
+    "tests/test_forward_combined_frequency_portfolio.py": "acb83b649189a1ed6e6ae65a21708d55190820d6fd96f070ff1821243a608617",
+    "scripts/run_m15_regime_shadow_health.ps1": "191623d289157b316556f512113855c1d29cc1fe263faf3d7e1538cd49d13caa"
+  }
+}

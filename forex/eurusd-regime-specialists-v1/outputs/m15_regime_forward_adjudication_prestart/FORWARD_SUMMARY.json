@@ -40,9 +40,12 @@
     ]
   },
   "campaign_id": "EURUSD_M15_REGIME_FORWARD_V1",
+  "causally_withheld_signals": 0,
   "demo_order_authorized": false,
+  "earliest_pending_signal_entry_time_utc": null,
   "pending_signals": 0,
   "schema_version": "eurusd_m15_regime_forward_summary_v1",
   "signals": 0,
-  "terminal_outcomes": 0
+  "terminal_outcomes": 0,
+  "unresolved_signals": 0
 }
