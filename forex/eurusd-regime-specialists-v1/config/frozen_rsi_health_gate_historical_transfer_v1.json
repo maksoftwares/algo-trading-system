@@ -1,0 +1,119 @@
+{
+  "schema_version": "eurusd_rsi_health_gate_historical_transfer_v1",
+  "frozen_at_utc": "2026-07-30T16:30:00Z",
+  "research_only": true,
+  "retrospective_transfer_not_pristine_oos": true,
+  "broker_action_allowed": false,
+  "anchor_config": {
+    "path": "config/frozen_neutral_h4_quiet_state_transfer_v1.json",
+    "sha256": "fc9fea2f8b4fd026e58126cf3b53ce901d05760c39882f19c5cb5e9b837beca2"
+  },
+  "ea_source": {
+    "path": "../../forex-research/mt5/Experts/ForexMeanReversionScout.mq5",
+    "sha256": "0dd10b6d12b48598f891619f56c5bbab3a289dd8ecc9fef111ab45c6b5cdfcdd"
+  },
+  "broker_shadow_ledger": {
+    "path": "outputs/adaptive_frequency_fallback_audit/TRADES_WITH_CAUSAL_REGIME.csv",
+    "sha256": "ef0b5b5aeea84a21b9745e45b213937a0ef56972843e5b45250ad5f3efe61761",
+    "sleeve": "M15_RSI_LONG_H4_TREND_OVERLAY",
+    "expected_rows_before_transfer_end": 633
+  },
+  "rsi_rule": {
+    "signal_timeframe_minutes": 15,
+    "direction": "LONG_ONLY",
+    "atr_period": 14,
+    "bands_period": 20,
+    "rsi_period": 14,
+    "rsi_oversold_inclusive": 30.0,
+    "require_close_below_band_mid": true,
+    "minimum_body_fraction": 0.4,
+    "blocked_entry_hours_utc": [
+      1,
+      7,
+      21
+    ],
+    "maximum_entry_spread_pips": 10.0,
+    "maximum_trades_per_utc_day": 20,
+    "one_open_position": true,
+    "recent_stop_lookback_m15_bars": 6,
+    "stop_atr_multiple": 1.4,
+    "stop_floor_pips": 3.0,
+    "stop_ceiling_pips": 70.0,
+    "target_r": 0.8,
+    "same_m5_bar_policy": "STOP_FIRST",
+    "adverse_slippage_pips_per_side": 0.1,
+    "fixed_lot_reporting": 0.01
+  },
+  "health_gate": {
+    "mode": "GLOBAL",
+    "lookback_completed_shadow_trades": 30,
+    "minimum_trailing_profit_factor": 1.05,
+    "uses_only_outcomes_exited_no_later_than_candidate_entry": true,
+    "rejected_shadow_outcomes_remain_observable": true,
+    "within_period_reselection": false,
+    "origin": "selected retrospectively from 500 variants on the 2024-07 through 2026-06 broker ledger"
+  },
+  "windows": {
+    "EARLY_2017_2019": [
+      "2017-01-01T00:00:00Z",
+      "2020-01-01T00:00:00Z"
+    ],
+    "MIDDLE_2020_2022H1": [
+      "2020-01-01T00:00:00Z",
+      "2022-07-01T00:00:00Z"
+    ],
+    "LATE_2022H2_2024H1": [
+      "2022-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "FULL_EARLIER_TRANSFER": [
+      "2017-01-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "EARLIER_LATEST_12_MONTHS": [
+      "2023-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "BROKER_PORTABILITY": [
+      "2024-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ],
+    "FULL_TRANSFER": [
+      "2017-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  },
+  "parity_admission": {
+    "matching_tolerance_minutes": 15,
+    "minimum_broker_entry_signal_coverage": 0.6,
+    "minimum_raw_trade_count_ratio_to_broker": 0.5,
+    "maximum_raw_trade_count_ratio_to_broker": 1.5
+  },
+  "earlier_transfer_admission": {
+    "minimum_trades": 600,
+    "minimum_trades_per_weekday": 0.4,
+    "minimum_profit_factor": 1.15,
+    "minimum_stressed_profit_factor": 1.05,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.0,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "minimum_positive_active_month_share": 0.55,
+    "maximum_closed_trade_drawdown_r": 30.0
+  },
+  "broker_window_transfer_admission": {
+    "minimum_trades_per_weekday": 0.4,
+    "minimum_profit_factor": 1.0,
+    "minimum_stressed_profit_factor": 0.95
+  },
+  "stress": {
+    "extra_round_trip_pips": 0.5,
+    "cash_if_entry_to_exit_overlaps_anchor_quarantine": true
+  },
+  "decision_policy": {
+    "exact_rule_and_gate_only": true,
+    "no_indicator_hour_stop_target_cost_lookback_threshold_or_window_search": true,
+    "failure_retires_exact_transfer": true,
+    "historical_pass_can_authorize_demo": false,
+    "fresh_prospective_confirmation_required": true
+  }
+}
