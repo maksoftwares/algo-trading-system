@@ -5,6 +5,10 @@
       "bytes": 8,
       "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
     },
+    "FORWARD_SELECTIVE_LEARNER_PROTOCOL.md": {
+      "bytes": 3153,
+      "sha256": "d1d130c7d4581b5fe85752cb430feda7da2ee9ebd417d3352d5fc7ebf76c865f"
+    },
     "LIVE_DEMO_SHADOW_RUNBOOK.md": {
       "bytes": 2376,
       "sha256": "4c6452862fdd22c27176ca788d50f89d7794cac747c9946e9b9c216bd469c810"
@@ -16,6 +20,10 @@
     "README.md": {
       "bytes": 2103,
       "sha256": "0854cb208e2b6f1e25305e83c3a4c4c83d23f9d26988b3e1d046ab7ff3d97dd8"
+    },
+    "config/frozen_forward_selective_learner_v1.json": {
+      "bytes": 2447,
+      "sha256": "454cfc64745c5139eb81ef1b0b16cdb3c8c6a7d7b6d974fea6e939e959c60a9d"
     },
     "mt5/Config/EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_LIVE_DEMO_SHADOW.ini": {
       "bytes": 298,
@@ -40,6 +48,18 @@
     "mt5/Presets/EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_DEMO.set": {
       "bytes": 442,
       "sha256": "c2d240bcdfb6abfec9fb01e2b98839b2d0caf25a860821cdad0abf36393f5856"
+    },
+    "outputs/forward-learner-prestart/FORWARD_DECISIONS.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "outputs/forward-learner-prestart/FORWARD_SUMMARY.json": {
+      "bytes": 1663,
+      "sha256": "3842ab72766bf013dbcdef05ece3d8356e7e670b286560be91a2af1ca06cf437"
+    },
+    "outputs/forward-learner-prestart/FORWARD_SUMMARY.md": {
+      "bytes": 431,
+      "sha256": "09e082f6fad27df046420d115d8bd89542d3ffc628142de1a28ccf3628041e39"
     },
     "outputs/live-prestart/LIVE_DEMO_AUDIT.json": {
       "bytes": 1075,
@@ -89,6 +109,10 @@
       "bytes": 1244,
       "sha256": "3546756efc39e352455bc42c8258e7475e7bbd813aacfce39e921e2823dadefc"
     },
+    "run_forward_selective_learner.py": {
+      "bytes": 1081,
+      "sha256": "dc49ebb8ad64c39b62aaa41da82a5d15353ead15afdb6280035ce2c9b47121fe"
+    },
     "scripts/audit_live_demo_shadow.py": {
       "bytes": 7424,
       "sha256": "2f3119a7a192554b80f185797c561d7de2eda356f44d5a82a49b527eb0c3075c"
@@ -97,9 +121,17 @@
       "bytes": 1089,
       "sha256": "1c01fa827beb29fb7931a038518bee242aea3ab784bbb5b5973593288284db28"
     },
+    "src/forward_selective_learner.py": {
+      "bytes": 24653,
+      "sha256": "8da05e1ec3d20855df4a1419941950b08d19702c3bfa1c5997f8c26927afd2ab"
+    },
     "tests/test_collector_safety.py": {
       "bytes": 9016,
       "sha256": "5ebe6a3c08d5a20f00ba8fb8d97dd60362336567f41849a1c1cb1c7635c47c55"
+    },
+    "tests/test_forward_selective_learner.py": {
+      "bytes": 7569,
+      "sha256": "bda2d5f519ce8dff89c86ab4b59650717880034dcf9823feb8d6ef5732e5b3dd"
     }
   },
   "generated_on": "2026-07-30"

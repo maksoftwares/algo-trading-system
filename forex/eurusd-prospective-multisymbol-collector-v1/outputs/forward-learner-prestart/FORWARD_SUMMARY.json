@@ -1,0 +1,59 @@
+{
+  "admission": {
+    "best_five_removed_net_r": 0,
+    "best_five_removed_profit_factor": null,
+    "checks": {
+      "maximum_single_month_profit_share": false,
+      "minimum_active_validation_days": false,
+      "minimum_best_five_removed_profit_factor": false,
+      "minimum_eligible_trades": false,
+      "minimum_payoff_ratio": false,
+      "minimum_profit_factor": false,
+      "minimum_stressed_profit_factor": false,
+      "positive_net_expectancy": false
+    },
+    "demo_order_authorized": false,
+    "eligible_frequency_per_resolved_day": 0.0,
+    "eligible_net_r": 0,
+    "eligible_payoff": null,
+    "eligible_profit_factor": null,
+    "eligible_trades": 0,
+    "eligible_win_rate": 0.0,
+    "maximum_single_month_profit_share": null,
+    "monthly_net_r": {},
+    "mt5_parity_complete": false,
+    "research_economic_gates_pass": false,
+    "shadow_demo_soak_complete": false,
+    "status": "WAITING_MINIMUM_EVIDENCE",
+    "stress_r_per_trade": 0.0625,
+    "stressed_net_r": 0,
+    "stressed_profit_factor": null
+  },
+  "calendar_decisions": 0,
+  "campaign_id": "EURUSD_FORWARD_SELECTIVE_LEARNER_V1",
+  "final_weights": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "final_weights_hash": "feb6a4b84a8a7d860b0f07aefabd21844a755a5837e889234619103d68f77d73",
+  "prohibitions": [
+    "NO_ARCHIVED_OR_TESTER_ROWS",
+    "NO_THRESHOLD_TUNING",
+    "NO_SIDE_REVERSAL",
+    "NO_HORIZON_TUNING",
+    "NO_CLOCK_TUNING",
+    "NO_FEATURE_ADDITION",
+    "NO_MISSING_DATA_IMPUTATION",
+    "NO_ORDERS"
+  ],
+  "resolved_training_days": 0,
+  "shadow_frequency_per_resolved_day": 0.0,
+  "status": "WAITING_FORWARD_DATA"
+}

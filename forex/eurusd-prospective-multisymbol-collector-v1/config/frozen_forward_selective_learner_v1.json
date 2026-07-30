@@ -1,0 +1,87 @@
+{
+  "schema_version": "eurusd_forward_selective_learner_v1",
+  "campaign_id": "EURUSD_FORWARD_SELECTIVE_LEARNER_V1",
+  "evidence_scope_required": "PROSPECTIVE_DEMO",
+  "forward_floor_utc": "2026.08.01 00:00:00",
+  "decision_clock_utc": "08:00:00",
+  "maximum_decisions_per_utc_day": 1,
+  "execution_symbol": "EURUSD",
+  "predictor_symbols": [
+    "EURGBP",
+    "EURJPY",
+    "GBPUSD",
+    "USDJPY"
+  ],
+  "oriented_return_signs": {
+    "EURGBP": 1.0,
+    "EURJPY": 1.0,
+    "GBPUSD": 1.0,
+    "USDJPY": -1.0
+  },
+  "features": {
+    "return_horizons_minutes": [
+      15,
+      60,
+      240
+    ],
+    "fixed_return_scales": {
+      "15": 0.0005,
+      "60": 0.001,
+      "240": 0.002
+    },
+    "activity_current_minutes": 60,
+    "activity_prior_minutes": 60,
+    "eurusd_spread_reference_pips": 1.0,
+    "feature_clip": 3.0,
+    "no_forward_fill": true,
+    "exact_contiguous_m5_required": true,
+    "eurusd_return_excluded_from_direction_features": true
+  },
+  "execution": {
+    "entry_slippage_pips_each_side": 0.1,
+    "exit_slippage_pips_each_side": 0.1,
+    "stop_pips": 8.0,
+    "target_pips": 12.0,
+    "target_r": 1.5,
+    "maximum_hold_minutes": 360,
+    "same_bar_collision": "STOP_FIRST",
+    "entry_quote": "FIRST_TWO_SIDED_QUOTE_AT_OR_AFTER_08_00",
+    "long_exit_quote": "BID",
+    "short_exit_quote": "ASK"
+  },
+  "learner": {
+    "family": "FORWARD_ONLY_SIDE_STACKED_ONLINE_LOGISTIC",
+    "initial_weights": "ZERO",
+    "learning_rate": 0.05,
+    "learning_rate_decay_days": 20.0,
+    "l2_penalty": 0.01,
+    "weight_clip": 5.0,
+    "batch_update": "BOTH_SIDES_ONE_AVERAGED_GRADIENT_PER_RESOLVED_DAY",
+    "warmup_resolved_days": 20,
+    "minimum_probability": 0.45,
+    "minimum_side_margin": 0.03,
+    "tie_breaker": "FIXED_60_MINUTE_ORIENTED_STRENGTH_SIGN"
+  },
+  "admission": {
+    "minimum_eligible_trades": 50,
+    "minimum_active_validation_days": 40,
+    "minimum_profit_factor": 1.1,
+    "minimum_payoff_ratio": 1.25,
+    "additional_round_trip_stress_pips": 0.5,
+    "minimum_stressed_profit_factor": 1.0,
+    "minimum_best_five_removed_profit_factor": 1.0,
+    "maximum_single_month_profit_share": 0.5,
+    "requires_mt5_parity": true,
+    "requires_shadow_demo_soak": true
+  },
+  "prohibitions": [
+    "NO_ARCHIVED_OR_TESTER_ROWS",
+    "NO_THRESHOLD_TUNING",
+    "NO_SIDE_REVERSAL",
+    "NO_HORIZON_TUNING",
+    "NO_CLOCK_TUNING",
+    "NO_FEATURE_ADDITION",
+    "NO_MISSING_DATA_IMPUTATION",
+    "NO_ORDERS"
+  ]
+}
