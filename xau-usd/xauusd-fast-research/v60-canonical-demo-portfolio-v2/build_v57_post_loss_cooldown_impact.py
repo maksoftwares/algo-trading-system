@@ -35,6 +35,23 @@ def sha256_file(path: Path) -> str:
 
 
 def execution_source(row: pd.Series) -> str:
+    if str(row.get("sleeve_id")) == "V59_BROKER_CORE":
+        specialist = str(row.get("specialist_id"))
+        if specialist == "R1_UPTREND":
+            strategy = str(row.get("source_strategy"))
+            if strategy == "h4_d1_long_best_box2_atr80":
+                return "R1_BOX"
+            if strategy == "r1_h1_pullback_long_v1":
+                return "R1_PULLBACK"
+            raise ValueError(f"Unknown R1 source strategy: {strategy}")
+        mapping = {
+            "R2_DOWNTREND": "R2_DOWNTREND",
+            "R3_COMPRESSION": "R3_COMPRESSION",
+            "R4_CHOP": "R4_CHOP",
+        }
+        if specialist not in mapping:
+            raise ValueError(f"Unknown core specialist: {specialist}")
+        return mapping[specialist]
     specialist = row.get("specialist_id")
     if specialist is not None and not pd.isna(specialist):
         return str(specialist)

@@ -14,6 +14,7 @@
     "deviation_points": 80
   },
   "risk": {
+    "equity_fraction_limits_enabled": true,
     "maximum_core_open_positions": 10,
     "maximum_addon_open_positions": 2,
     "maximum_account_xau_positions": 12,
@@ -24,18 +25,18 @@
     "maximum_directional_concurrent_initial_risk_usd": 60.0,
     "maximum_directional_concurrent_initial_risk_fraction": 0.06,
     "closed_drawdown_suspend_usd": 225.0,
-    "closed_drawdown_suspend_fraction": 0.075,
+    "closed_drawdown_suspend_fraction": 0.25,
     "closed_drawdown_resume_usd": 180.0,
-    "closed_drawdown_resume_fraction": 0.06,
+    "closed_drawdown_resume_fraction": 0.20,
     "combined_closed_drawdown_hard_stop_usd": 300.0,
-    "combined_closed_drawdown_hard_stop_fraction": 0.10,
+    "combined_closed_drawdown_hard_stop_fraction": 0.25,
     "floating_drawdown_hard_stop_usd": 449.7675,
-    "floating_drawdown_hard_stop_fraction": 0.15,
+    "floating_drawdown_hard_stop_fraction": 0.25,
     "maximum_daily_entries": 12
   },
   "deployment_parity": {
     "artifact_path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_CANONICAL_DEMO_DEPLOYMENT_PARITY_V1.json",
-    "artifact_sha256": "0265c09ea0461233927828759899f8564ffc4e8899b1e3eb57deb8e84453a41d"
+    "artifact_sha256": "7de7351f683665e7f76638c287c4c7d048c0f4c586bf3b62001b8cf46570a0d2"
   },
   "runtime": {
     "directory": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2",
@@ -242,9 +243,13 @@
           "InpAllowedAccountLogin": "1033030",
           "InpOwnerAuthorizationToken": "A2_DAILY_PROFIT_LOSS_GUARDIAN_OWNER_AUTHORIZED_20260621",
           "InpRequiredOwnerAuthorizationToken": "A2_DAILY_PROFIT_LOSS_GUARDIAN_OWNER_AUTHORIZED_20260621",
+          "InpDailyProfitFloorEnabled": "false",
+          "InpNextDailyFloorEnabled": "false",
           "InpDailyLossStopEnabled": "true",
           "InpDailyLossStopAed": "-100.0",
-          "InpHaltEntriesWhenArmed": "true",
+          "InpHaltEntriesWhenArmed": "false",
+          "InpCloseScopeSymbol": "XAUUSD",
+          "InpAllowedPositionMagicsCsv": "961101,961102,961201,961301,961401,967007,968008,962525,965757",
           "InpEntryHaltFileName": "tier1_bestea_kill_switch.txt"
         }
       },

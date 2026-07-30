@@ -5,8 +5,14 @@ demo account `1033030`. It contains the five Core specialists plus the four
 canonical add-on sleeves. The frozen research packages and their ledgers are
 not modified.
 
+Complete-machine recovery is documented in `RECOVERY_RUNBOOK.md`. The Git tag
+`v60-demo-recovery-20260730`, SHA-256 recovery manifest, pinned Python
+environment, exact six-chart profile, EA sources, model bundle, and replay
+evidence are sufficient to reconstruct the current demo deployment after local
+machine loss. Broker credentials remain owner-managed and are never committed.
+
 The base configuration remains the exact deterministic portfolio and has no ML
-authority. The separately hashed V3 overlay enables one bounded portable-model
+authority. The separately hashed V4 overlay enables one bounded portable-model
 top-up after a deterministic baseline order has filled. The model can never
 skip, delay, or reduce that baseline order. Any model, feature, state, artifact,
 or risk-control failure produces baseline-only behavior. No ML shadow path is
@@ -41,13 +47,13 @@ authorize a live account. The exact demo login, server, MT5 trade mode, fixed
 lot, spread, position, daily-entry, drawdown, emergency-close, and guardian
 halt controls remain enforced.
 
-The demo uses explicit absolute-USD risk limits. Account balance and activation
-equity do not scale entry eligibility, concurrent-risk caps, or drawdown
-thresholds. Activation equity remains telemetry, and current equity is still
-used to measure floating drawdown against the fixed USD emergency stop. The
-fixed-lot portfolio also has aggregate initial-risk and same-direction-risk
+The demo uses the smaller of each explicit USD cap and its activation-equity
+fraction. There is no minimum-balance gate. At the current fixed 0.01-lot
+account size, concurrent initial risk is capped at 6%, the closed-drawdown
+suspension is capped at $225, and hard closed/equity stops are capped at 25%.
+The fixed-lot portfolio also has aggregate initial-risk and same-direction-risk
 caps, and every Core candidate has a $45 initial-risk ceiling. Broker margin
-requirements remain unavoidable. Startup verifies both this absolute-only mode
+requirements remain unavoidable. Startup verifies this equity-scaled mode
 and the exact-source historical parity artifact, and chart preflight requires
 every safety input to coexist on its intended chart rather than accepting
 settings scattered across the profile.
@@ -69,33 +75,39 @@ which guardian or operator closes it. The runtime rebuilds both cumulative and
 peak closed P/L from history on every cycle and fails closed when MT5 deal
 history is unavailable.
 
-The demo deployment observation for this repair is recorded in
-`evidence/POSITION_ORIGIN_REPAIR_DEMO_DEPLOYMENT_20260729.md`. The repair is
-active on demo, but its locked replay still rejects current-capital
-long-horizon operability; funding and state reinitialization remain separate
-decisions.
+The original position-origin deployment observation is recorded in
+`evidence/POSITION_ORIGIN_REPAIR_DEMO_DEPLOYMENT_20260729.md`. The later safety
+repair comparison is recorded in
+`evidence/V60_SAFETY_REPAIR_BEFORE_AFTER_20260730.json`. The repaired
+current-capital replay passes without a flat suspension deadlock: 1,619 trades,
+USD 2,628.44 net P/L, PF 1.4398, and USD 227.24 maximum lifetime equity
+drawdown. This is historical evidence, not a profit guarantee.
 
 The MT5 profile keeps both account guardians and attaches one passive telemetry
 collector plus three observer-only event sensors. Each collector/sensor has
 per-EA trading disabled. The Python portfolio executor is the only component
-authorized to open canonical trades; the armed daily guardian may close trades
-and create its halt file.
+authorized to open canonical trades. The daily guardian is loss-only: it has no
+daily profit target, can halt after a -100 AED account day, and may close only
+the nine canonical V60 magic numbers on XAUUSD.
 
-Use `start_portfolio.ps1` after a restart. It starts one feed process and one
-portfolio process and refuses duplicate launchers. Healthy execution reports
+Run `restore_v60_demo.ps1` once on a new machine to create the dedicated,
+version-locked V60 `.venv`; no unrelated research environment is required.
+Use `start_portfolio.ps1` after a normal restart. It starts one feed process
+and one portfolio process and refuses duplicate launchers. Healthy execution reports
 `ACTIVE_DEMO_BROKER_ACTION` in `status.json`; `feed_status.json` must report all
 eight required feed groups healthy. `set_terminal_algo_trading.ps1` changes the
 terminal-wide Algo Trading state only while that terminal is stopped, and keeps
 a backup of `common.ini`.
 
 The launcher supplies
-`config/v60_portable_ml_topup_v3_overlay.json` to the executor. That overlay is
+`config/v60_portable_ml_topup_v4_overlay.json` to the executor. That overlay is
 bound to the immutable deterministic base config, the exact forty-model 2026
 bundle, its implementation lock, and the outcome-free Capital/Dukascopy parity
-result. Only historically known-risk R2, R3, R4, V7, V8, V25, and V57 signals
-are score-eligible. A rank strictly above `0.80` may request one separate
+result. Only confirmed R2, R3, R4, V7, and V57 signals are score-eligible.
+Marginal V8 and V25 remain deterministic baseline-only probation sources. A
+rank strictly above `0.80` may request one separate
 `0.01`-lot top-up after the baseline fill. At most one ML top-up may be open and
-at most two may be opened per UTC day; every original absolute-USD account,
+at most two may be opened per UTC day; every original account,
 direction, source, add-on, position, drawdown, emergency-close, and guardian
 control remains in force.
 

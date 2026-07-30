@@ -29,8 +29,14 @@ def test_config_has_exact_canonical_sources_and_no_ml_authority() -> None:
     assert config["authorization"]["ml_shadow_authorized"] is False
     assert config["authorization"]["minimum_balance_requirement_enabled"] is False
     assert config["authorization"]["demo_balance_eligibility_waived"] is True
-    assert config["risk"]["equity_fraction_limits_enabled"] is False
-    assert RUN.verify_deployment_parity(config)["status"] == "PASS"
+    assert config["risk"]["equity_fraction_limits_enabled"] is True
+    parity = RUN.verify_deployment_parity(config)
+    assert parity["status"] == "PASS"
+    assert parity["unknown_execution_source_ids"] == []
+    assert parity["probation_source_ids"] == [
+        "V25_CHOP",
+        "V8_RETEST_HEALTH",
+    ]
     assert config["runtime"]["execution_enabled"] is True
     cooldowns = {
         str(source["source_id"]): int(
@@ -54,15 +60,30 @@ def test_portable_ml_overlay_preserves_base_and_authorizes_demo_topup_only() -> 
     assert config["ml_topup"]["topup_lot"] == config["account"]["fixed_lot"]
     assert "R1_BOX" not in config["ml_topup"]["eligible_source_ids"]
     assert "R1_PULLBACK" not in config["ml_topup"]["eligible_source_ids"]
+    assert "V25_CHOP" not in config["ml_topup"]["eligible_source_ids"]
+    assert "V8_RETEST_HEALTH" not in config["ml_topup"]["eligible_source_ids"]
+    assert config["ml_topup"]["probation_source_ids"] == [
+        "V8_RETEST_HEALTH",
+        "V25_CHOP",
+    ]
 
 
-def test_config_rejects_equity_scaled_demo_limits(tmp_path: Path) -> None:
+def test_config_rejects_absolute_only_demo_limits(tmp_path: Path) -> None:
     config = json.loads(RUN.CONFIG_PATH.read_text(encoding="utf-8"))
-    config["risk"]["equity_fraction_limits_enabled"] = True
+    config["risk"]["equity_fraction_limits_enabled"] = False
     path = tmp_path / "invalid.json"
     path.write_text(json.dumps(config), encoding="utf-8")
-    with pytest.raises(RuntimeError, match="absolute-USD-only"):
+    with pytest.raises(RuntimeError, match="activation-equity scaling"):
         RUN.load_config(path)
+
+
+def test_ml_overlay_rejects_probation_source(tmp_path: Path) -> None:
+    overlay = json.loads(RUN.ML_OVERLAY_PATH.read_text(encoding="utf-8"))
+    overlay["ml_topup"]["eligible_source_ids"].append("V8_RETEST_HEALTH")
+    path = tmp_path / "unsafe_overlay.json"
+    path.write_text(json.dumps(overlay), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="probation sources"):
+        RUN.load_config(ml_overlay_path=path)
 
 
 def test_ml_topup_risk_gate_rejects_double_source_risk() -> None:

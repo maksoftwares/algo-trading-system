@@ -1,0 +1,273 @@
+from __future__ import annotations
+
+from dataclasses import replace
+import json
+from pathlib import Path
+
+import numpy as np
+
+from replay import (
+    Candidate,
+    CONTRACT_PATH,
+    DAY_MS,
+    Scenario,
+    ScenarioSpec,
+    _decode_hour,
+    apply_runtime_risk_mode,
+    effective_threshold,
+    load_candidates,
+    load_json,
+    resolve_input,
+)
+
+
+def test_effective_threshold_supports_absolute_only_demo_mode():
+    risk = {
+        "equity_fraction_limits_enabled": False,
+        "floating_drawdown_hard_stop_usd": 449.7675,
+        "floating_drawdown_hard_stop_fraction": 0.15,
+    }
+    assert effective_threshold(
+        risk, 987.6623553437713, "floating_drawdown_hard_stop_usd"
+    ) == 449.7675
+
+
+def test_effective_threshold_supports_activation_equity_scaled_mode():
+    risk = {
+        "equity_fraction_limits_enabled": True,
+        "floating_drawdown_hard_stop_usd": 449.7675,
+        "floating_drawdown_hard_stop_fraction": 0.15,
+    }
+    assert np.isclose(
+        effective_threshold(
+            risk,
+            987.6623553437713,
+            "floating_drawdown_hard_stop_usd",
+        ),
+        148.14935330156568,
+    )
+
+
+def real_inputs():
+    contract = load_json(
+        CONTRACT_PATH.parent / "SAFETY_REPAIR_REPLAY_CONTRACT.json"
+    )
+    config = apply_runtime_risk_mode(
+        load_json(resolve_input(contract["inputs"]["demo_config"])),
+        required_equity_scaling=True,
+    )
+    return contract, config
+
+
+def candidate(
+    trade_id: str,
+    *,
+    entry_ms: int,
+    exit_ms: int,
+    pnl: float = 2.0,
+    source_id: str = "R4_CHOP",
+    sleeve_type: str = "CORE",
+    direction: str = "LONG",
+    cooldown: int = 0,
+    event_id: str | None = None,
+    risk: float = 3.0,
+    entry_price: float = 1000.1,
+) -> Candidate:
+    return Candidate(
+        trade_id=trade_id,
+        source_id=source_id,
+        specialist_id=source_id,
+        sleeve_type=sleeve_type,
+        entry_ms=entry_ms,
+        exit_ms=exit_ms,
+        direction=direction,
+        risk_usd=risk,
+        pnl_usd=pnl,
+        entry_price=entry_price,
+        exit_price=entry_price + pnl,
+        open_cost_usd=0.0,
+        maximum_risk_usd=45.0,
+        maximum_spread_r=0.15,
+        maximum_open_positions=4,
+        maximum_entries_per_utc_day=12,
+        maximum_entry_gap_minutes=10,
+        cooldown_minutes=cooldown,
+        event_id=event_id,
+    )
+
+
+def scenario(
+    rows: list[Candidate],
+    *,
+    guardian: bool = False,
+    activation: float = 3000.0,
+    rebaseline_days: int | None = None,
+    guardian_exit_attribution: str = "DEPLOYED_MAGIC_FILTER",
+) -> Scenario:
+    contract, config = real_inputs()
+    return Scenario(
+        ScenarioSpec(
+            scenario_id="test",
+            starting_equity_usd=activation,
+            activation_equity_usd=activation,
+            rebaseline_days=rebaseline_days,
+            guardian_enabled=guardian,
+            guardian_exit_attribution=guardian_exit_attribution,
+        ),
+        config,
+        contract,
+        rows,
+    )
+
+
+def test_locked_population_and_r1_risk_reconstruction():
+    contract, config = real_inputs()
+    rows, audit = load_candidates(contract, config)
+    assert len(rows) == 1703
+    assert audit["r1_native_risk_rows"] == 444
+    box = [row for row in rows if row.source_id == "R1_BOX"]
+    pullback = [row for row in rows if row.source_id == "R1_PULLBACK"]
+    assert len(box) == 31
+    assert len(pullback) == 413
+    assert sum(row.risk_usd > 45.0 for row in box) == 12
+    assert not any(row.risk_usd > 45.0 for row in pullback)
+
+
+def test_vector_decoder_matches_source_rounding():
+    root = Path(
+        "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/raw/"
+        "XAUUSD/year=2021/month=01"
+    )
+    path = root / "2021010400.json"
+    raw = path.read_bytes()
+    payload = json.loads(raw)
+    times, bids, asks = _decode_hour(raw)
+    timestamp = int(payload["timestamp"])
+    bid = float(payload["bid"])
+    ask = float(payload["ask"])
+    for index in range(len(payload["times"])):
+        timestamp += int(payload["times"][index])
+        bid = np.floor(
+            (bid + float(payload["bids"][index]) * payload["multiplier"])
+            * 1000.0
+            + 0.5
+            + 1e-9
+        ) / 1000.0
+        ask = np.floor(
+            (ask + float(payload["asks"][index]) * payload["multiplier"])
+            * 1000.0
+            + 0.5
+            + 1e-9
+        ) / 1000.0
+        if index in {0, 1, 50, 500, len(times) - 1}:
+            assert times[index] == timestamp
+            assert bids[index] == bid
+            assert asks[index] == ask
+
+
+def test_exit_settles_before_same_cycle_entry():
+    first = candidate("first", entry_ms=0, exit_ms=5000, pnl=-10.0)
+    second = replace(
+        candidate("second", entry_ms=5000, exit_ms=10000),
+        maximum_open_positions=1,
+    )
+    replay = scenario([first, second])
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+    replay.process_cycle(5000, 5000, 1000.0, 1000.1)
+    assert "first" not in replay.positions
+    assert "second" in replay.positions
+    assert replay.account_closed_pnl == -10.0
+    assert replay.v60_closed_pnl == -10.0
+
+
+def test_v57_cooldown_uses_only_accepted_loss():
+    first = candidate(
+        "loss",
+        entry_ms=0,
+        exit_ms=5000,
+        pnl=-3.0,
+        source_id="V57_BREAK_SWING_H4ADX_HIGH",
+        sleeve_type="ADDON",
+        cooldown=120,
+        event_id="one",
+    )
+    second = candidate(
+        "next",
+        entry_ms=5000,
+        exit_ms=10000,
+        source_id="V57_BREAK_SWING_H4ADX_HIGH",
+        sleeve_type="ADDON",
+        cooldown=120,
+        event_id="two",
+    )
+    replay = scenario([first, second])
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+    replay.process_cycle(5000, 5000, 1000.0, 1000.1)
+    assert replay.rejections["SAME_DIRECTION_POST_LOSS_COOLDOWN"] == 1
+    assert "next" not in replay.positions
+
+
+def test_guardian_daily_loss_locks_and_closes():
+    trade = candidate(
+        "guardian-loss",
+        entry_ms=0,
+        exit_ms=20000,
+        entry_price=1000.1,
+    )
+    replay = scenario([trade], guardian=True)
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+    replay.process_cycle(5000, 5000, 970.0, 970.1)
+    assert replay.guardian.locked
+    assert replay.guardian_locks == 1
+    assert not replay.positions
+    assert replay.account_closed_pnl < -29.0
+    assert replay.v60_closed_pnl == 0.0
+
+
+def test_position_attribution_counterfactual_tracks_guardian_close():
+    trade = candidate(
+        "guardian-loss-attributed",
+        entry_ms=0,
+        exit_ms=20000,
+        entry_price=1000.1,
+    )
+    replay = scenario(
+        [trade],
+        guardian=True,
+        guardian_exit_attribution="POSITION_ORIGIN",
+    )
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+    replay.process_cycle(5000, 5000, 970.0, 970.1)
+    assert replay.guardian.locked
+    assert replay.v60_closed_pnl == replay.account_closed_pnl
+
+
+def test_floating_hard_stop_closes_position():
+    trade = candidate(
+        "floating-stop",
+        entry_ms=0,
+        exit_ms=20000,
+        entry_price=1000.1,
+    )
+    replay = scenario([trade], activation=1000.0)
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+    replay.process_cycle(5000, 5000, 500.0, 500.1)
+    assert replay.first_hard_stop_ms == 5000
+    assert not replay.positions
+    assert replay.emergency_closes == 1
+
+
+def test_rebaseline_does_not_forgive_peak_equity():
+    replay = scenario([], activation=1000.0, rebaseline_days=14)
+    replay.account_closed_pnl = -100.0
+    replay.v60_closed_pnl = -100.0
+    replay.policy_peak_closed = 0.0
+    replay.lifetime_peak_closed = 0.0
+    replay.peak_equity = 1200.0
+    replay.drawdown_suspended = True
+    replay.flat_since_ms = 0
+    replay._maybe_rebaseline(14 * DAY_MS)
+    assert replay.policy_peak_closed == -100.0
+    assert replay.peak_equity == 1200.0
+    assert not replay.drawdown_suspended
+    assert replay.rebaselines == 1

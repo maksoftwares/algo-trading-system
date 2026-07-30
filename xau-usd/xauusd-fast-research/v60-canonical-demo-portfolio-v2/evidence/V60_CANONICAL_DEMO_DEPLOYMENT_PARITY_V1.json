@@ -13,8 +13,10 @@
   "checks": {
     "all_history_is_profitable_after_stress": true,
     "baseline_historical_trade_rows_match": true,
+    "exact_execution_source_set_present": true,
     "executable_historical_trade_rows_match": true,
     "final_twelve_month_window_is_profitable_after_stress": true,
+    "no_unknown_execution_sources": true,
     "r5_is_excluded": true,
     "v57_cooldown_is_exactly_120_minutes": true
   },
@@ -51,9 +53,258 @@
     "The new activation-equity risk controls are runtime safety controls and are not retroactively optimized into this ledger.",
     "R1 historical rows do not carry comparable initial-risk fields, so aggregate risk parity is enforced prospectively by the broker stop geometry and runtime caps."
   ],
+  "per_source": {
+    "R1_BOX": {
+      "all_history": {
+        "closed_trade_drawdown_usd": 219.53000000000003,
+        "gross_loss_usd": -743.6399999999999,
+        "gross_profit_usd": 1917.4199999999998,
+        "net_pnl_usd": 1173.78,
+        "profit_factor": 2.5784250443763113,
+        "trade_rows": 31,
+        "win_rate": 0.5483870967741935
+      },
+      "checks": {
+        "minimum_1_20_all_history_profit_factor": true,
+        "minimum_30_all_history_trades": true,
+        "recent_veto_not_triggered": true
+      },
+      "final_twelve_months": {
+        "closed_trade_drawdown_usd": 122.78,
+        "gross_loss_usd": -169.43,
+        "gross_profit_usd": 898.5999999999999,
+        "net_pnl_usd": 729.1700000000001,
+        "profit_factor": 5.303665230478663,
+        "trade_rows": 6,
+        "win_rate": 0.6666666666666666
+      },
+      "status": "CONFIRMED"
+    },
+    "R1_PULLBACK": {
+      "all_history": {
+        "closed_trade_drawdown_usd": 181.22000000000014,
+        "gross_loss_usd": -1889.8200000000002,
+        "gross_profit_usd": 3431.8599999999997,
+        "net_pnl_usd": 1542.04,
+        "profit_factor": 1.8159718915028942,
+        "trade_rows": 413,
+        "win_rate": 0.46973365617433416
+      },
+      "checks": {
+        "minimum_1_20_all_history_profit_factor": true,
+        "minimum_30_all_history_trades": true,
+        "recent_veto_not_triggered": true
+      },
+      "final_twelve_months": {
+        "closed_trade_drawdown_usd": 86.69000000000001,
+        "gross_loss_usd": -549.97,
+        "gross_profit_usd": 1058.72,
+        "net_pnl_usd": 508.75000000000006,
+        "profit_factor": 1.9250504572976708,
+        "trade_rows": 87,
+        "win_rate": 0.4942528735632184
+      },
+      "status": "CONFIRMED"
+    },
+    "R2_DOWNTREND": {
+      "all_history": {
+        "closed_trade_drawdown_usd": 107.16736601592447,
+        "gross_loss_usd": -477.583670559885,
+        "gross_profit_usd": 1239.849903591196,
+        "net_pnl_usd": 762.2662330313108,
+        "profit_factor": 2.5960893975660526,
+        "trade_rows": 118,
+        "win_rate": 0.3644067796610169
+      },
+      "checks": {
+        "minimum_1_20_all_history_profit_factor": true,
+        "minimum_30_all_history_trades": true,
+        "recent_veto_not_triggered": true
+      },
+      "final_twelve_months": {
+        "closed_trade_drawdown_usd": 46.99403654817206,
+        "gross_loss_usd": -46.99403654817205,
+        "gross_profit_usd": 604.8661701351675,
+        "net_pnl_usd": 557.8721335869955,
+        "profit_factor": 12.8711260952257,
+        "trade_rows": 4,
+        "win_rate": 0.75
+      },
+      "status": "CONFIRMED"
+    },
+    "R3_COMPRESSION": {
+      "all_history": {
+        "closed_trade_drawdown_usd": 38.739691106553664,
+        "gross_loss_usd": -415.80623525088237,
+        "gross_profit_usd": 684.0958517110233,
+        "net_pnl_usd": 268.28961646014085,
+        "profit_factor": 1.6452274971255896,
+        "trade_rows": 118,
+        "win_rate": 0.3728813559322034
+      },
+      "checks": {
+        "minimum_1_20_all_history_profit_factor": true,
+        "minimum_30_all_history_trades": true,
+        "recent_veto_not_triggered": true
+      },
+      "final_twelve_months": {
+        "closed_trade_drawdown_usd": 38.73969110655365,
+        "gross_loss_usd": -106.92880528515389,
+        "gross_profit_usd": 187.23800656581193,
+        "net_pnl_usd": 80.30920128065804,
+        "profit_factor": 1.7510530120157273,
+        "trade_rows": 12,
+        "win_rate": 0.4166666666666667
+      },
+      "status": "CONFIRMED"
+    },
+    "R4_CHOP": {
+      "all_history": {
+        "closed_trade_drawdown_usd": 26.666771583581948,
+        "gross_loss_usd": -289.71599875286927,
+        "gross_profit_usd": 470.4047195026101,
+        "net_pnl_usd": 180.68872074974072,
+        "profit_factor": 1.6236753286927388,
+        "trade_rows": 125,
+        "win_rate": 0.504
+      },
+      "checks": {
+        "minimum_1_20_all_history_profit_factor": true,
+        "minimum_30_all_history_trades": true,
+        "recent_veto_not_triggered": true
+      },
+      "final_twelve_months": {
+        "closed_trade_drawdown_usd": 14.421414003886024,
+        "gross_loss_usd": -55.56900028349569,
+        "gross_profit_usd": 85.80097542860541,
+        "net_pnl_usd": 30.231975145109747,
+        "profit_factor": 1.5440438912140875,
+        "trade_rows": 10,
+        "win_rate": 0.4
+      },
+      "status": "CONFIRMED"
+    },
+    "V25_CHOP": {
+      "all_history": {
+        "closed_trade_drawdown_usd": 44.80006384340213,
+        "gross_loss_usd": -332.8100111842641,
+        "gross_profit_usd": 364.82929559101615,
+        "net_pnl_usd": 32.01928440675202,
+        "profit_factor": 1.0962088979619793,
+        "trade_rows": 111,
+        "win_rate": 0.42342342342342343
+      },
+      "checks": {
+        "minimum_1_20_all_history_profit_factor": false,
+        "minimum_30_all_history_trades": true,
+        "recent_veto_not_triggered": true
+      },
+      "final_twelve_months": {
+        "closed_trade_drawdown_usd": 28.371503106522958,
+        "gross_loss_usd": -99.93874158534379,
+        "gross_profit_usd": 112.42275082970929,
+        "net_pnl_usd": 12.484009244365495,
+        "profit_factor": 1.1249166143812672,
+        "trade_rows": 13,
+        "win_rate": 0.3076923076923077
+      },
+      "status": "DEMO_PROBATION"
+    },
+    "V57_BREAK_SWING_H4ADX_HIGH": {
+      "all_history": {
+        "closed_trade_drawdown_usd": 104.66582841458035,
+        "gross_loss_usd": -2319.6202632389973,
+        "gross_profit_usd": 3101.8064295323957,
+        "net_pnl_usd": 782.1861662933986,
+        "profit_factor": 1.337204403103978,
+        "trade_rows": 579,
+        "win_rate": 0.44559585492227977
+      },
+      "checks": {
+        "minimum_1_20_all_history_profit_factor": true,
+        "minimum_30_all_history_trades": true,
+        "recent_veto_not_triggered": true
+      },
+      "final_twelve_months": {
+        "closed_trade_drawdown_usd": 104.66582841458023,
+        "gross_loss_usd": -1154.1267889463388,
+        "gross_profit_usd": 1471.4438796730435,
+        "net_pnl_usd": 317.3170907267048,
+        "profit_factor": 1.2749412748805524,
+        "trade_rows": 161,
+        "win_rate": 0.40372670807453415
+      },
+      "status": "CONFIRMED"
+    },
+    "V7_SWING_HEALTH": {
+      "all_history": {
+        "closed_trade_drawdown_usd": 71.14373684138832,
+        "gross_loss_usd": -1266.5142902456223,
+        "gross_profit_usd": 1939.5323932035014,
+        "net_pnl_usd": 673.0181029578795,
+        "profit_factor": 1.5313940064800666,
+        "trade_rows": 454,
+        "win_rate": 0.44273127753303965
+      },
+      "checks": {
+        "minimum_1_20_all_history_profit_factor": true,
+        "minimum_30_all_history_trades": true,
+        "recent_veto_not_triggered": true
+      },
+      "final_twelve_months": {
+        "closed_trade_drawdown_usd": 46.79740927733269,
+        "gross_loss_usd": -231.2583566980464,
+        "gross_profit_usd": 513.5638982879522,
+        "net_pnl_usd": 282.3055415899057,
+        "profit_factor": 2.220736606541365,
+        "trade_rows": 44,
+        "win_rate": 0.5
+      },
+      "status": "CONFIRMED"
+    },
+    "V8_RETEST_HEALTH": {
+      "all_history": {
+        "closed_trade_drawdown_usd": 114.96728022024432,
+        "gross_loss_usd": -503.2665632340951,
+        "gross_profit_usd": 521.4443950073392,
+        "net_pnl_usd": 18.177831773244154,
+        "profit_factor": 1.0361196890499331,
+        "trade_rows": 204,
+        "win_rate": 0.47058823529411764
+      },
+      "checks": {
+        "minimum_1_20_all_history_profit_factor": false,
+        "minimum_30_all_history_trades": true,
+        "recent_veto_not_triggered": false
+      },
+      "final_twelve_months": {
+        "closed_trade_drawdown_usd": 73.36393842690934,
+        "gross_loss_usd": -129.90191327550667,
+        "gross_profit_usd": 114.18521258419995,
+        "net_pnl_usd": -15.716700691306746,
+        "profit_factor": 0.8790110145801051,
+        "trade_rows": 19,
+        "win_rate": 0.3684210526315789
+      },
+      "status": "DEMO_PROBATION"
+    }
+  },
   "post_loss_cooldowns_minutes": {
     "V57_BREAK_SWING_H4ADX_HIGH": 120
   },
+  "probation_source_ids": [
+    "V25_CHOP",
+    "V8_RETEST_HEALTH"
+  ],
   "schema_version": "xauusd_v60_deployment_parity_v1",
-  "status": "PASS"
+  "source_evidence_policy": {
+    "minimum_all_history_profit_factor": 1.2,
+    "minimum_all_history_trades": 30,
+    "probation_baseline_demo_allowed": true,
+    "probation_ml_topup_allowed": false,
+    "recent_veto_minimum_trades": 10,
+    "recent_veto_profit_factor_below": 1.0
+  },
+  "status": "PASS",
+  "unknown_execution_source_ids": []
 }

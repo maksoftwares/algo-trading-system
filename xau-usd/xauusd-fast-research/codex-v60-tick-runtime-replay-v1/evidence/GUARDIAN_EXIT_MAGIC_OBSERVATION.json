@@ -1,0 +1,30 @@
+{
+  "schema_version": "mt5_guardian_exit_magic_observation_v1",
+  "observed_at_utc": "2026-07-29T07:34:00Z",
+  "method": "read_only_MetaTrader5_history_deals_get",
+  "account_login": 1033030,
+  "account_server": "Capital.ComMena-Demo",
+  "position_observations": [
+    {
+      "position_id": 4656050,
+      "entry_deal_ticket": 4303581,
+      "entry_magic": 920101,
+      "entry_comment": "P2DEMO_br_XAUUSD",
+      "exit_deal_ticket": 4303802,
+      "exit_magic": 919200,
+      "exit_comment": "A1_PROFIT_FLOOR_CLOSE",
+      "exit_profit_aed": -21.71
+    },
+    {
+      "position_id": 4686000,
+      "entry_deal_ticket": 4331631,
+      "entry_magic": 920101,
+      "entry_comment": "P2DEMO_br_XAUUSD",
+      "exit_deal_ticket": 4331934,
+      "exit_magic": 919200,
+      "exit_comment": "A1_PROFIT_FLOOR_CLOSE",
+      "exit_profit_aed": -32.74
+    }
+  ],
+  "conclusion": "The guardian close deal uses guardian magic 919200, not the originating position magic. V60 closed_pnl filters by its specialist magics and therefore omits equivalent guardian exit PnL."
+}

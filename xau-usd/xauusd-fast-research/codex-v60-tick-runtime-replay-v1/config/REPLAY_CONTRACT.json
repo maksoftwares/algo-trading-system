@@ -1,0 +1,64 @@
+{
+  "schema_version": "codex_v60_tick_runtime_replay_contract_v1",
+  "authorization": {
+    "account_changes_authorized": false,
+    "demo_runtime_changes_authorized": false,
+    "live_trading_authorized": false,
+    "ml_runtime_authorized": false,
+    "state_reset_authorized": false
+  },
+  "evaluation": {
+    "entry_start_utc": "2021-01-01T00:00:00Z",
+    "entry_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "deployed_activation_equity_usd": 987.6623553437713,
+    "funded_starting_equity_usd": 3000.0,
+    "rebaseline_days": [
+      14,
+      30,
+      60,
+      90
+    ],
+    "poll_seconds": 5,
+    "maximum_tick_age_seconds": 30,
+    "usd_to_aed": 3.6725
+  },
+  "guardian": {
+    "enabled_views": [
+      false,
+      true
+    ],
+    "dubai_utc_offset_minutes": 240,
+    "daily_floor_aed": 50.0,
+    "next_daily_floor_enabled": true,
+    "next_daily_floor_aed": 100.0,
+    "halt_entries_when_armed": true,
+    "daily_loss_stop_enabled": true,
+    "daily_loss_stop_aed": -100.0
+  },
+  "inputs": {
+    "demo_config": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+    "executor_source": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/src/executor.py",
+    "runtime_source": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_portfolio.py",
+    "guardian_source": "xau-usd/xauusd-phase1/mt5/Experts/Account1DailyProfitFloorGuardian.mq5",
+    "guardian_exit_magic_evidence": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/evidence/GUARDIAN_EXIT_MAGIC_OBSERVATION.json",
+    "guardian_chart": "C:/MT5PortableTier1BestEA/MQL5/Profiles/Charts/Default/chart03.chr",
+    "live_state": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/state.json",
+    "live_status": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/status.json",
+    "ledger": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet",
+    "r1_native_reconciliation": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_ROUTER_ENTRY_HOLD_PATH_INPUTS_20260710/A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_20260710_NATIVE_POSITION_RECONCILIATION.csv",
+    "dukascopy_decoder_source": "multi-asset/data-foundation/dukascopy-ticks-v1/src/dukascopy_tick_foundation/foundation.py",
+    "dukascopy_raw_root": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/raw/XAUUSD",
+    "capital_tick_glob": "C:/MT5PortableTier1BestEA/MQL5/Files/xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_*.csv"
+  },
+  "cache": {
+    "directory": "D:/AlgoTradingData/CodexReplayCache/v60_tick_runtime_replay_v1"
+  },
+  "population": {
+    "excluded_specialist_ids": [
+      "R5_TRANSITION"
+    ],
+    "post_loss_cooldowns_minutes": {
+      "V57_BREAK_SWING_H4ADX_HIGH": 120
+    }
+  }
+}

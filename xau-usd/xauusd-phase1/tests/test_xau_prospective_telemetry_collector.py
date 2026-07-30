@@ -55,6 +55,14 @@ def test_collector_captures_required_prospective_telemetry() -> None:
     assert "SYMBOL_TICKS_BOOKDEPTH" in text
 
 
+def test_tick_ledger_rotates_from_the_tick_timestamp() -> None:
+    text = SOURCE.read_text(encoding="utf-8")
+
+    assert "datetime tick_seconds=(datetime)(tick.time_msc / 1000);" in text
+    assert "EnsureDailyLedgers(DateToken(tick_seconds))" in text
+    assert 'base += "_" + DateToken(TimeGMT());' not in text
+
+
 def test_collector_refuses_unsafe_startup() -> None:
     text = SOURCE.read_text(encoding="utf-8")
 

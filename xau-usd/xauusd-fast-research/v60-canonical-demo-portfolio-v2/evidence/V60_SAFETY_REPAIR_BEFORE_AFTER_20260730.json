@@ -1,0 +1,74 @@
+{
+  "schema_version": "xauusd_v60_safety_repair_before_after_v1",
+  "generated_at_utc": "2026-07-30T18:00:00Z",
+  "basis": {
+    "evaluation_start_utc": "2021-01-01T00:00:00Z",
+    "evaluation_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "market_data": "Dukascopy XAUUSD tick data replayed on a five-second runtime grid",
+    "lot_size": 0.01,
+    "scenario_id": "deployed__position_origin_repair_full_runtime",
+    "position_pnl_attribution": "POSITION_ORIGIN"
+  },
+  "before": {
+    "description": "Absolute USD runtime limits with the daily profit-floor guardian enabled.",
+    "replay_result_path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_SAFETY_REPAIR_BEFORE_REPLAY_RESULT_20260730.json",
+    "replay_result_sha256": "4d9cf8d20efe301e61bce425ee577cf6253b06371d804a8cbd63f38689cb9d40",
+    "config_sha256": "053bbb0e0d0f8e365f8b93b8a7d61376c6762c861ad1ec2c1b3d796d3089a9df",
+    "trades_closed": 1431,
+    "net_pnl_usd": 1304.5561856638642,
+    "profit_factor": 1.3090193124977918,
+    "win_rate": 0.5052410901467506,
+    "maximum_lifetime_equity_drawdown_usd": 189.5152479150454,
+    "maximum_lifetime_closed_drawdown_usd": 184.1286962482951,
+    "guardian_arms": 251,
+    "guardian_locks": 272,
+    "effective_hard_closed_drawdown_limit_usd": 300.0,
+    "effective_hard_equity_drawdown_limit_usd": 449.7675,
+    "flat_suspended_deadlock": false,
+    "technically_running": true
+  },
+  "after": {
+    "description": "Loss-only scoped guardian with activation-equity-scaled runtime limits.",
+    "replay_result_path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_SAFETY_REPAIR_AFTER_REPLAY_RESULT_20260730.json",
+    "replay_result_sha256": "eff1c92cce12c4144111a2a4b3e93a67ad1acf915c90ca065ca6f2f2320636cd",
+    "config_sha256": "0e4f6a16e9e0e6fbd5e4798ad68bf126a020bbe4ec437bccf853b5e1b6018629",
+    "trades_closed": 1619,
+    "net_pnl_usd": 2628.439669181595,
+    "profit_factor": 1.4397739748801663,
+    "win_rate": 0.4329833230389129,
+    "maximum_lifetime_equity_drawdown_usd": 227.24491112425176,
+    "maximum_lifetime_closed_drawdown_usd": 215.7793718823774,
+    "guardian_arms": 0,
+    "guardian_locks": 66,
+    "effective_hard_closed_drawdown_limit_usd": 246.91558883594283,
+    "effective_hard_equity_drawdown_limit_usd": 246.91558883594283,
+    "flat_suspended_deadlock": false,
+    "technically_running": true
+  },
+  "delta_after_minus_before": {
+    "trades_closed": 188,
+    "net_pnl_usd": 1323.8834835177308,
+    "net_pnl_percent": 101.48152284020111,
+    "profit_factor": 0.13075466238237452,
+    "win_rate_percentage_points": -7.22577671078377,
+    "maximum_lifetime_equity_drawdown_usd": 37.72966320920636,
+    "maximum_lifetime_closed_drawdown_usd": 31.65067563408231,
+    "guardian_arms": -251,
+    "guardian_locks": -206
+  },
+  "deterministic_strategy_parity": {
+    "changed_by_safety_repair": false,
+    "trade_rows": 2153,
+    "net_pnl_usd": 5432.465955672466,
+    "profit_factor": 1.6593777127678904,
+    "win_rate": 0.447282861124013,
+    "closed_trade_drawdown_usd": 279.03947729639003
+  },
+  "decision": "PASS_FOR_CONTINUED_PROSPECTIVE_DEMO_OBSERVATION",
+  "limitations": [
+    "This is historical replay evidence, not a profit guarantee.",
+    "The higher replay profit comes from removing the arbitrary daily profit lock and permitting more valid baseline trades; the deterministic entry rules were not optimized.",
+    "The repaired replay has higher drawdown, but it remains below the current activation-equity-scaled 25% hard limit.",
+    "Dukascopy is not the Capital.com execution feed, so prospective demo fills remain the final broker-specific evidence."
+  ]
+}

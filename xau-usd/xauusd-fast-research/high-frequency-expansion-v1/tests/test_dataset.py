@@ -11,7 +11,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from dataset import label_action  # noqa: E402
+from dataset import _prior_event_features, label_action  # noqa: E402
 from evaluation import attempt_policies, model_specifications  # noqa: E402
 
 
@@ -83,6 +83,32 @@ def test_label_rejects_entry_gap_beyond_lock() -> None:
         "maximum_hold_hours": 4.0,
     }
     assert label_action(arrays(), row, action, execution()) is None
+
+
+def test_prior_event_windows_normalize_microsecond_timestamps() -> None:
+    events = pd.DataFrame(
+        {
+            "signal_time": pd.Series(
+                pd.to_datetime(
+                    [
+                        "2026-01-05T00:00:00Z",
+                        "2026-01-05T00:30:00Z",
+                        "2026-01-05T01:00:00Z",
+                        "2026-01-05T05:00:00Z",
+                    ],
+                    utc=True,
+                ),
+                dtype="datetime64[us, UTC]",
+            ),
+            "direction": ["LONG", "SHORT", "LONG", "LONG"],
+        }
+    )
+
+    result = _prior_event_features(events)
+
+    assert result["prior_events_1h"].tolist() == [0, 1, 2, 0]
+    assert result["prior_events_4h"].tolist() == [0, 1, 2, 1]
+    assert result["prior_same_direction_1h"].tolist() == [0, 0, 1, 0]
 
 
 def test_search_budget_is_exact_and_model_specs_are_unique() -> None:

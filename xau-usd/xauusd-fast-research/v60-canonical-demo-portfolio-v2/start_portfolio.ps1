@@ -4,10 +4,10 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..\..')).Path
-$python = Join-Path $repo 'xau-usd\xauusd-fast-research\balanced-horizon-ml-v5\.venv\Scripts\python.exe'
+$python = Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
 $runner = Join-Path $PSScriptRoot 'run_portfolio.py'
 $feedRunner = Join-Path $PSScriptRoot 'run_feeds.py'
-$mlOverlay = Join-Path $PSScriptRoot 'config\v60_portable_ml_topup_v3_overlay.json'
+$mlOverlay = Join-Path $PSScriptRoot 'config\v60_portable_ml_topup_v4_overlay.json'
 $runtime = 'C:\MT5PortableTier1BestEA\MQL5\Files\v60_canonical_demo_v2'
 
 if (-not (Test-Path -LiteralPath $python)) {

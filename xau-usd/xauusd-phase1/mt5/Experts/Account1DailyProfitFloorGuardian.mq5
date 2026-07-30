@@ -7,12 +7,15 @@ input long InpAllowedAccountLogin = 1025742;
 input string InpExpectedServerMarker = "Demo";
 input string InpOwnerAuthorizationToken = "";
 input string InpRequiredOwnerAuthorizationToken = "A1_DAILY_PROFIT_FLOOR_OWNER_AUTHORIZED_20260618";
+input bool InpDailyProfitFloorEnabled = true;
 input double InpDailyFloorAed = 50.0;
 input bool InpNextDailyFloorEnabled = false;
 input double InpNextDailyFloorAed = 100.0;
 input bool InpHaltEntriesWhenArmed = true;
 input bool InpDailyLossStopEnabled = false;
 input double InpDailyLossStopAed = -150.0;
+input string InpCloseScopeSymbol = "";
+input string InpAllowedPositionMagicsCsv = "";
 input int InpDubaiUtcOffsetMinutes = 240;
 input int InpTimerSeconds = 2;
 input int InpDeviationPoints = 100;
@@ -61,6 +64,23 @@ string TrimToken(string value)
    StringTrimLeft(value);
    StringTrimRight(value);
    return value;
+}
+
+bool CsvContainsLong(const string csv, const long expected)
+{
+   string normalized = TrimToken(csv);
+   if(normalized == "")
+      return true;
+   string tokens[];
+   ushort separator = StringGetCharacter(",", 0);
+   int count = StringSplit(normalized, separator, tokens);
+   for(int index = 0; index < count; index++)
+   {
+      string token = TrimToken(tokens[index]);
+      if(token != "" && (long)StringToInteger(token) == expected)
+         return true;
+   }
+   return false;
 }
 
 string CsvEscape(string value)
@@ -606,6 +626,16 @@ bool ClosePositionByTicket(const ulong ticket, const string reason)
    return done;
 }
 
+bool PositionInCloseScope()
+{
+   string symbol = PositionGetString(POSITION_SYMBOL);
+   long magic = PositionGetInteger(POSITION_MAGIC);
+   string target_symbol = TrimToken(InpCloseScopeSymbol);
+   if(target_symbol != "" && symbol != target_symbol)
+      return false;
+   return CsvContainsLong(InpAllowedPositionMagicsCsv, magic);
+}
+
 int CloseAllPositions(const string reason)
 {
    int attempted = 0;
@@ -615,6 +645,8 @@ int CloseAllPositions(const string reason)
       if(ticket == 0)
          continue;
       if(!PositionSelectByTicket(ticket))
+         continue;
+      if(!PositionInCloseScope())
          continue;
       attempted++;
       ClosePositionByTicket(ticket, reason);
@@ -667,6 +699,12 @@ void EvaluateFloor()
       return;
    }
 
+   if(!InpDailyProfitFloorEnabled)
+   {
+      SaveState();
+      return;
+   }
+
    bool just_armed = false;
    if(!g_armed && day_pnl >= InpDailyFloorAed)
    {
@@ -696,6 +734,36 @@ void EvaluateFloor()
       SaveState();
 }
 
+void ReconcileProfitFloorPolicy()
+{
+   if(InpDailyProfitFloorEnabled)
+      return;
+   bool changed = false;
+   if(g_armed || g_next_floor_armed)
+   {
+      g_armed = false;
+      g_next_floor_armed = false;
+      g_armed_time = "";
+      changed = true;
+   }
+   if(g_locked && ContainsText(g_trigger_reason, "DAILY_PROFIT_FLOOR"))
+   {
+      g_locked = false;
+      g_trigger_time = "";
+      g_trigger_reason = "";
+      g_locked_equity = 0.0;
+      g_locked_day_pnl = 0.0;
+      changed = true;
+   }
+   if(!g_locked)
+      RemoveEntryHaltFile("daily_profit_floor_disabled");
+   if(changed)
+   {
+      SaveState();
+      WriteEvent("PROFIT_FLOOR_DISABLED", "loss_only_guardian_active");
+   }
+}
+
 int OnInit()
 {
    EnsureEventHeader();
@@ -713,6 +781,7 @@ int OnInit()
    }
    bool restored = LoadState();
    EnsureCurrentDubaiDay();
+   ReconcileProfitFloorPolicy();
    WriteStartupRow("ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN", restored ? "state_restored" : "state_initialized");
    EventSetTimer(MathMax(InpTimerSeconds, 1));
    return INIT_SUCCEEDED;

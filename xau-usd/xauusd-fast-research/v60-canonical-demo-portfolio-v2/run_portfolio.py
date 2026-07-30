@@ -46,7 +46,7 @@ from ml_topup import (  # noqa: E402
 
 
 CONFIG_PATH = ROOT / "config" / "v60_canonical_demo_portfolio_v2.json"
-ML_OVERLAY_PATH = ROOT / "config" / "v60_portable_ml_topup_v3_overlay.json"
+ML_OVERLAY_PATH = ROOT / "config" / "v60_portable_ml_topup_v4_overlay.json"
 
 
 def sha256_file(path: Path) -> str:
@@ -76,6 +76,12 @@ def verify_deployment_parity(config: Mapping[str, Any]) -> dict[str, Any]:
         raise RuntimeError("Deployment parity source registry changed")
     if int(artifact.get("historical_trade_rows", 0)) <= 0:
         raise RuntimeError("Deployment parity has no historical trades")
+    probation_sources = set(artifact.get("probation_source_ids", []))
+    ml_settings = config.get("ml_topup")
+    if isinstance(ml_settings, Mapping):
+        eligible_sources = set(ml_settings.get("eligible_source_ids", []))
+        if overlap := sorted(probation_sources & eligible_sources):
+            raise RuntimeError(f"ML top-up includes probation sources: {overlap}")
     return artifact
 
 
@@ -83,7 +89,7 @@ def apply_ml_overlay(
     config: dict[str, Any], base_path: Path, overlay_path: Path
 ) -> dict[str, Any]:
     overlay = json.loads(overlay_path.read_text(encoding="utf-8"))
-    if overlay.get("schema_version") != "xauusd_v60_portable_ml_topup_v3_overlay":
+    if overlay.get("schema_version") != "xauusd_v60_portable_ml_topup_v4_overlay":
         raise RuntimeError("Unexpected portable ML overlay schema")
     expected_base = overlay["base_config"]
     expected_path = REPO_ROOT / str(expected_base["path"])
@@ -114,11 +120,10 @@ def load_config(
     if not auth.get("demo_balance_eligibility_waived"):
         raise RuntimeError("Demo balance eligibility waiver is absent")
     configured_equity_scaling = config["risk"].get("equity_fraction_limits_enabled")
-    if configured_equity_scaling not in (None, False):
+    if configured_equity_scaling is not True:
         raise RuntimeError(
-            "Canonical demo risk limits must use explicit absolute-USD-only mode"
+            "Canonical demo risk limits must use activation-equity scaling"
         )
-    config["risk"]["equity_fraction_limits_enabled"] = False
     if auth.get("ml_shadow_authorized"):
         raise RuntimeError("ML shadow must remain unauthorized")
     if auth.get("ml_runtime_authorized"):
@@ -1356,8 +1361,10 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "emergency_close_results": emergency_close_results,
         "emergency_close_failures": emergency_close_failures,
         "effective_risk_limits_usd": effective_risk_limits,
-        "risk_limit_mode": "ABSOLUTE_USD_ONLY",
-        "equity_fraction_limits_enabled": False,
+        "risk_limit_mode": "ACTIVATION_EQUITY_SCALED",
+        "equity_fraction_limits_enabled": bool(
+            config["risk"]["equity_fraction_limits_enabled"]
+        ),
         "core_open_positions": len(core_positions),
         "addon_open_positions": len(addon_positions),
         "addon_active_initial_risk_usd": active_addon_risk,

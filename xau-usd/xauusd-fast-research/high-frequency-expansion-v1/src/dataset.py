@@ -119,7 +119,9 @@ def _adx(frame: pd.DataFrame, period: int = 14) -> pd.Series:
     up = frame["mid_high"].diff()
     down = -frame["mid_low"].diff()
     plus_dm = pd.Series(np.where((up > down) & (up > 0), up, 0.0), index=frame.index)
-    minus_dm = pd.Series(np.where((down > up) & (down > 0), down, 0.0), index=frame.index)
+    minus_dm = pd.Series(
+        np.where((down > up) & (down > 0), down, 0.0), index=frame.index
+    )
     atr_value = _atr(frame, period)
     plus_di = 100.0 * _wilder(plus_dm, period) / atr_value.replace(0.0, np.nan)
     minus_di = 100.0 * _wilder(minus_dm, period) / atr_value.replace(0.0, np.nan)
@@ -141,7 +143,9 @@ def prepare_market_features(
     frame["atr_m5"] = _atr(frame, 14)
     atr_value = frame["atr_m5"].replace(0.0, np.nan)
     for bars, label in ((3, "15m"), (12, "1h"), (48, "4h"), (288, "24h")):
-        frame[f"return_{label}_atr"] = (frame["mid_close"] - frame["mid_close"].shift(bars)) / atr_value
+        frame[f"return_{label}_atr"] = (
+            frame["mid_close"] - frame["mid_close"].shift(bars)
+        ) / atr_value
     frame["range_1h_atr"] = (
         frame["mid_high"].rolling(12, min_periods=12).max()
         - frame["mid_low"].rolling(12, min_periods=12).min()
@@ -152,26 +156,37 @@ def prepare_market_features(
     ) / atr_value
     frame["efficiency_1h"] = _efficiency(frame["mid_close"], 12)
     frame["efficiency_4h"] = _efficiency(frame["mid_close"], 48)
-    frame["ema20_m5"] = frame["mid_close"].ewm(span=20, adjust=False, min_periods=20).mean()
-    frame["ema50_m5"] = frame["mid_close"].ewm(span=50, adjust=False, min_periods=50).mean()
+    frame["ema20_m5"] = (
+        frame["mid_close"].ewm(span=20, adjust=False, min_periods=20).mean()
+    )
+    frame["ema50_m5"] = (
+        frame["mid_close"].ewm(span=50, adjust=False, min_periods=50).mean()
+    )
     frame["ema20_distance_atr"] = (frame["mid_close"] - frame["ema20_m5"]) / atr_value
     frame["ema50_distance_atr"] = (frame["mid_close"] - frame["ema50_m5"]) / atr_value
     frame["spread_atr"] = (frame["ask_close"] - frame["bid_close"]) / atr_value
     if "atr_ratio" not in frame:
-        frame["atr_ratio"] = frame["atr_m5"] / frame["atr_m5"].shift(1).rolling(288, min_periods=144).median()
+        frame["atr_ratio"] = (
+            frame["atr_m5"]
+            / frame["atr_m5"].shift(1).rolling(288, min_periods=144).median()
+        )
 
     hourly = h1.copy()
     hourly["h1_atr"] = _atr(hourly, 14)
     hourly["h1_adx"] = _adx(hourly, 14)
     hourly["h1_efficiency"] = _efficiency(hourly["mid_close"], 24)
-    hourly["h1_ema20"] = hourly["mid_close"].ewm(span=20, adjust=False, min_periods=20).mean()
-    hourly["h1_ema50"] = hourly["mid_close"].ewm(span=50, adjust=False, min_periods=50).mean()
+    hourly["h1_ema20"] = (
+        hourly["mid_close"].ewm(span=20, adjust=False, min_periods=20).mean()
+    )
+    hourly["h1_ema50"] = (
+        hourly["mid_close"].ewm(span=50, adjust=False, min_periods=50).mean()
+    )
     hourly["h1_ema_slope_atr"] = (
         hourly["h1_ema20"] - hourly["h1_ema20"].shift(3)
     ) / hourly["h1_atr"].replace(0.0, np.nan)
-    hourly["h1_ema_distance_atr"] = (
-        hourly["mid_close"] - hourly["h1_ema50"]
-    ) / hourly["h1_atr"].replace(0.0, np.nan)
+    hourly["h1_ema_distance_atr"] = (hourly["mid_close"] - hourly["h1_ema50"]) / hourly[
+        "h1_atr"
+    ].replace(0.0, np.nan)
     h1_columns = [
         "timestamp_utc",
         "h1_adx",
@@ -237,8 +252,12 @@ def _read_source(repo_root: Path, source: dict[str, Any]) -> pd.DataFrame:
 
 
 def _prior_event_features(events: pd.DataFrame) -> pd.DataFrame:
-    result = events.sort_values(["signal_time", "direction"], kind="mergesort").reset_index(drop=True)
-    nanoseconds = result["signal_time"].astype("int64").to_numpy()
+    result = events.sort_values(
+        ["signal_time", "direction"], kind="mergesort"
+    ).reset_index(drop=True)
+    # Pandas 3 may store parsed timestamps as datetime64[us]. Normalize the
+    # integer representation before comparing it with nanosecond durations.
+    nanoseconds = result["signal_time"].dt.as_unit("ns").astype("int64").to_numpy()
     first_at_time = np.searchsorted(nanoseconds, nanoseconds, side="left")
     hour_ns = int(pd.Timedelta(hours=1).value)
     four_hour_ns = int(pd.Timedelta(hours=4).value)
@@ -256,9 +275,13 @@ def _prior_event_features(events: pd.DataFrame) -> pd.DataFrame:
     for index, row in enumerate(result.itertuples(index=False)):
         timestamp = int(pd.Timestamp(row.signal_time).value)
         history = direction_times[str(row.direction)]
-        same_direction_counts[index] = len(history) - int(np.searchsorted(history, timestamp - hour_ns, side="left"))
+        same_direction_counts[index] = len(history) - int(
+            np.searchsorted(history, timestamp - hour_ns, side="left")
+        )
         if prior_time is not None and timestamp > prior_time:
-            prior_minutes[index] = min(24.0 * 60.0, (timestamp - prior_time) / 60_000_000_000)
+            prior_minutes[index] = min(
+                24.0 * 60.0, (timestamp - prior_time) / 60_000_000_000
+            )
         history.append(timestamp)
         prior_time = timestamp if prior_time is None else max(prior_time, timestamp)
     result["prior_same_direction_1h"] = same_direction_counts
@@ -284,9 +307,13 @@ def build_candidate_events(
         & raw["direction"].isin(["LONG", "SHORT"])
     ].copy()
     raw["feature_time"] = raw["signal_time"].dt.floor("5min")
-    seconds_after_boundary = (raw["signal_time"] - raw["feature_time"]).dt.total_seconds()
+    seconds_after_boundary = (
+        raw["signal_time"] - raw["feature_time"]
+    ).dt.total_seconds()
     if seconds_after_boundary.max() >= 5 * 60:
-        raise ValueError("Candidate timestamp cannot be assigned to a completed M5 boundary")
+        raise ValueError(
+            "Candidate timestamp cannot be assigned to a completed M5 boundary"
+        )
 
     numeric = [
         "spread_points",
@@ -298,7 +325,9 @@ def build_candidate_events(
         "break_distance_atr",
         "estimated_cost_r",
     ]
-    grouped = raw.groupby(["signal_time", "feature_time", "direction"], sort=True, observed=True)
+    grouped = raw.groupby(
+        ["signal_time", "feature_time", "direction"], sort=True, observed=True
+    )
     events = grouped[numeric].median().reset_index()
     family_flags = (
         raw.assign(value=1)
@@ -323,8 +352,12 @@ def build_candidate_events(
         if family not in events:
             events[family] = 0
     events["mechanism_break_and_run"] = events["BREAK_AND_RUN"].astype(float)
-    events["mechanism_downside_impulse_retest"] = events["DOWNSIDE_IMPULSE_RETEST"].astype(float)
-    events["mechanism_opening_range_reversal"] = events["OPENING_RANGE_REVERSAL"].astype(float)
+    events["mechanism_downside_impulse_retest"] = events[
+        "DOWNSIDE_IMPULSE_RETEST"
+    ].astype(float)
+    events["mechanism_opening_range_reversal"] = events[
+        "OPENING_RANGE_REVERSAL"
+    ].astype(float)
     events["direction_sign"] = np.where(events["direction"].eq("LONG"), 1.0, -1.0)
     events["event_id"] = (
         events["signal_time"].dt.strftime("%Y%m%dT%H%M%SZ") + "_" + events["direction"]
@@ -391,7 +424,9 @@ def build_candidate_events(
     events["dir_tick_imbalance_15m"] = sign * events["tick_imbalance_15m"]
     events["dir_book_imbalance_mean"] = sign * events["tick_book_imbalance_mean"]
     events["dir_microprice_edge_atr"] = (
-        sign * events["tick_microprice_edge_mean"] / events["atr_m5"].replace(0.0, np.nan)
+        sign
+        * events["tick_microprice_edge_mean"]
+        / events["atr_m5"].replace(0.0, np.nan)
     )
     events["dir_h1_ema_slope_atr"] = sign * events["h1_ema_slope_atr"]
     events["dir_h1_ema_distance_atr"] = sign * events["h1_ema_distance_atr"]
@@ -409,11 +444,19 @@ def build_candidate_events(
     events["weekday_sin"] = np.sin(2.0 * np.pi * weekday / 5.0)
     events["weekday_cos"] = np.cos(2.0 * np.pi * weekday / 5.0)
     events["alignment_error_usd"] = (events["signal_close"] - events["mid_close"]).abs()
-    events["alignment_error_atr"] = events["alignment_error_usd"] / events["atr_m5"].replace(0.0, np.nan)
+    events["alignment_error_atr"] = events["alignment_error_usd"] / events[
+        "atr_m5"
+    ].replace(0.0, np.nan)
 
-    base_features = [column for column in MODEL_FEATURES if not column.startswith("action_")]
+    base_features = [
+        column for column in MODEL_FEATURES if not column.startswith("action_")
+    ]
     finite = np.isfinite(events[base_features]).all(axis=1)
-    events = events.loc[finite].sort_values(["signal_time", "direction"], kind="mergesort").reset_index(drop=True)
+    events = (
+        events.loc[finite]
+        .sort_values(["signal_time", "direction"], kind="mergesort")
+        .reset_index(drop=True)
+    )
     if events["event_id"].duplicated().any():
         raise ValueError("Duplicate candidate event IDs detected")
     evidence = {
@@ -462,15 +505,25 @@ def label_action(
     entry_index = int(np.searchsorted(arrays["starts"], signal_time, side="left"))
     if entry_index >= len(arrays["starts"]):
         return None
-    gap_minutes = float((arrays["starts"][entry_index] - signal_time) / np.timedelta64(1, "m"))
+    gap_minutes = float(
+        (arrays["starts"][entry_index] - signal_time) / np.timedelta64(1, "m")
+    )
     if gap_minutes < 0 or gap_minutes > float(execution["maximum_entry_gap_minutes"]):
         return None
     direction = str(row.direction)
     sign = 1.0 if direction == "LONG" else -1.0
-    entry = float(arrays["ask_open"][entry_index] if direction == "LONG" else arrays["bid_open"][entry_index])
+    entry = float(
+        arrays["ask_open"][entry_index]
+        if direction == "LONG"
+        else arrays["bid_open"][entry_index]
+    )
     atr_value = float(row.atr_m5)
     risk = max(float(action["stop_atr"]) * atr_value, float(action["minimum_stop_usd"]))
-    if not np.isfinite(risk) or risk <= 0 or risk > float(execution["maximum_research_risk_usd"]):
+    if (
+        not np.isfinite(risk)
+        or risk <= 0
+        or risk > float(execution["maximum_research_risk_usd"])
+    ):
         return None
     spread = float(arrays["ask_open"][entry_index] - arrays["bid_open"][entry_index])
     if spread / risk > float(execution["maximum_entry_spread_r"]):
@@ -497,7 +550,9 @@ def label_action(
             exit_reason = "MAX_HOLD"
             exit_at_open = True
             exit_price = float(
-                arrays["bid_open"][position] if direction == "LONG" else arrays["ask_open"][position]
+                arrays["bid_open"][position]
+                if direction == "LONG"
+                else arrays["ask_open"][position]
             )
             break
         if direction == "LONG":
@@ -512,7 +567,12 @@ def label_action(
                 )
                 break
             if arrays["bid_open"][position] >= target:
-                exit_index, exit_price, exit_reason, exit_at_open = position, target, "TARGET_GAP", True
+                exit_index, exit_price, exit_reason, exit_at_open = (
+                    position,
+                    target,
+                    "TARGET_GAP",
+                    True,
+                )
                 break
             stop_hit = arrays["bid_low"][position] <= stop
             target_hit = arrays["bid_high"][position] >= target
@@ -528,7 +588,12 @@ def label_action(
                 )
                 break
             if arrays["ask_open"][position] <= target:
-                exit_index, exit_price, exit_reason, exit_at_open = position, target, "TARGET_GAP", True
+                exit_index, exit_price, exit_reason, exit_at_open = (
+                    position,
+                    target,
+                    "TARGET_GAP",
+                    True,
+                )
                 break
             stop_hit = arrays["ask_high"][position] >= stop
             target_hit = arrays["ask_low"][position] <= target
@@ -544,9 +609,13 @@ def label_action(
             break
         exit_index = position
         exit_price = float(
-            arrays["bid_close"][position] if direction == "LONG" else arrays["ask_close"][position]
+            arrays["bid_close"][position]
+            if direction == "LONG"
+            else arrays["ask_close"][position]
         )
-    exit_time = arrays["starts"][exit_index] if exit_at_open else arrays["ends"][exit_index]
+    exit_time = (
+        arrays["starts"][exit_index] if exit_at_open else arrays["ends"][exit_index]
+    )
     net_r = sign * (exit_price - entry) / risk
     holding_days = max(
         0.0,
@@ -576,7 +645,8 @@ def label_action(
         ),
         "exit_reason": exit_reason,
         "ambiguous_m5": ambiguous,
-        "current_account_feasible": risk_usd <= float(execution["current_account_risk_usd"]),
+        "current_account_feasible": risk_usd
+        <= float(execution["current_account_risk_usd"]),
     }
 
 
@@ -607,9 +677,13 @@ def build_action_labels(
                 **outcome,
             }
             rows.append(row)
-    result = pd.DataFrame(rows).sort_values(
-        ["signal_time", "direction", "action_id"], kind="mergesort"
-    ).reset_index(drop=True)
-    if not result.empty and not np.isfinite(result[list(MODEL_FEATURES)]).all(axis=None):
+    result = (
+        pd.DataFrame(rows)
+        .sort_values(["signal_time", "direction", "action_id"], kind="mergesort")
+        .reset_index(drop=True)
+    )
+    if not result.empty and not np.isfinite(result[list(MODEL_FEATURES)]).all(
+        axis=None
+    ):
         raise ValueError("Non-finite model feature in action ledger")
     return result

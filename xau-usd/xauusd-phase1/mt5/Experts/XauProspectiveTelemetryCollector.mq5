@@ -116,7 +116,7 @@ string UtcTimestampMilliseconds(const long time_msc)
           + StringFormat(".%03dZ",milliseconds);
   }
 
-string LedgerFileName(const string ledger,const bool daily)
+string LedgerFileName(const string ledger,const bool daily,const string daily_token)
   {
    string base=SafeFileToken(InpFilePrefix)
                + "_" + SafeFileToken(LoginText())
@@ -124,7 +124,7 @@ string LedgerFileName(const string ledger,const bool daily)
                + "_" + SafeFileToken(InpTargetSymbol)
                + "_" + SafeFileToken(ledger);
    if(daily)
-      base += "_" + DateToken(TimeGMT());
+      base += "_" + daily_token;
    return base + ".csv";
   }
 
@@ -210,9 +210,9 @@ void WriteHeartbeatHeader(const int handle)
    );
   }
 
-int OpenDailyLedger(const string ledger)
+int OpenDailyLedger(const string ledger,const string daily_token)
   {
-   string file_name=LedgerFileName(ledger,true);
+   string file_name=LedgerFileName(ledger,true,daily_token);
    bool needs_header=!FileIsExist(file_name);
    int handle=OpenCsvForAppend(file_name);
    if(handle == INVALID_HANDLE)
@@ -232,10 +232,9 @@ int OpenDailyLedger(const string ledger)
    return handle;
   }
 
-bool EnsureDailyLedgers()
+bool EnsureDailyLedgers(const string daily_token)
   {
-   string today=DateToken(TimeGMT());
-   if(today == g_file_date
+   if(daily_token == g_file_date
       && g_tick_handle != INVALID_HANDLE
       && g_book_handle != INVALID_HANDLE
       && g_transaction_handle != INVALID_HANDLE
@@ -243,11 +242,11 @@ bool EnsureDailyLedgers()
       return true;
 
    CloseDailyLedgers();
-   g_file_date=today;
-   g_tick_handle=OpenDailyLedger("ticks");
-   g_book_handle=OpenDailyLedger("book");
-   g_transaction_handle=OpenDailyLedger("transactions");
-   g_heartbeat_handle=OpenDailyLedger("heartbeat");
+   g_file_date=daily_token;
+   g_tick_handle=OpenDailyLedger("ticks",daily_token);
+   g_book_handle=OpenDailyLedger("book",daily_token);
+   g_transaction_handle=OpenDailyLedger("transactions",daily_token);
+   g_heartbeat_handle=OpenDailyLedger("heartbeat",daily_token);
    return g_tick_handle != INVALID_HANDLE
           && g_book_handle != INVALID_HANDLE
           && g_transaction_handle != INVALID_HANDLE
@@ -277,7 +276,7 @@ void FlushAll()
 
 void WriteStartupRow(const string status,const string reason)
   {
-   string file_name=LedgerFileName("startup",false);
+   string file_name=LedgerFileName("startup",false,"");
    bool needs_header=!FileIsExist(file_name);
    int handle=OpenCsvForAppend(file_name);
    if(handle == INVALID_HANDLE)
@@ -325,10 +324,13 @@ void WriteStartupRow(const string status,const string reason)
 
 void WriteTickRow()
   {
-   if(!InpCollectTicks || !EnsureDailyLedgers())
+   if(!InpCollectTicks)
       return;
    MqlTick tick;
    if(!SymbolInfoTick(_Symbol,tick))
+      return;
+   datetime tick_seconds=(datetime)(tick.time_msc / 1000);
+   if(!EnsureDailyLedgers(DateToken(tick_seconds)))
       return;
    double point=SymbolInfoDouble(_Symbol,SYMBOL_POINT);
    double spread_price=tick.ask - tick.bid;
@@ -351,7 +353,16 @@ void WriteTickRow()
 
 void CaptureBookSnapshot(const string source_event)
   {
-   if(!InpCollectMarketDepth || !g_book_subscribed || !EnsureDailyLedgers())
+   if(!InpCollectMarketDepth || !g_book_subscribed)
+      return;
+   MqlTick tick;
+   long time_msc=0;
+   if(SymbolInfoTick(_Symbol,tick))
+      time_msc=tick.time_msc;
+   datetime event_seconds=time_msc > 0
+      ? (datetime)(time_msc / 1000)
+      : TimeGMT();
+   if(!EnsureDailyLedgers(DateToken(event_seconds)))
       return;
    MqlBookInfo book[];
    ResetLastError();
@@ -361,10 +372,6 @@ void CaptureBookSnapshot(const string source_event)
       return;
      }
    int level_count=ArraySize(book);
-   MqlTick tick;
-   long time_msc=0;
-   if(SymbolInfoTick(_Symbol,tick))
-      time_msc=tick.time_msc;
    g_book_snapshot_sequence++;
    string snapshot_id=LoginText() + "-" + StringFormat("%I64u",g_book_snapshot_sequence);
    if(level_count == 0)
@@ -400,17 +407,18 @@ void CaptureBookSnapshot(const string source_event)
 
 void WriteHeartbeatRow()
   {
-   if(!EnsureDailyLedgers())
-      return;
+   datetime observed_at=TimeGMT();
    MqlTick tick;
    bool tick_available=SymbolInfoTick(_Symbol,tick);
+   if(!EnsureDailyLedgers(DateToken(observed_at)))
+      return;
    long now_msc=(long)TimeCurrent() * 1000;
    long tick_time_msc=tick_available ? tick.time_msc : 0;
    long tick_age_msc=tick_available ? (now_msc >= tick_time_msc ? now_msc - tick_time_msc : 0) : -1;
    double point=SymbolInfoDouble(_Symbol,SYMBOL_POINT);
    double spread_points=tick_available && point > 0.0 ? (tick.ask - tick.bid) / point : 0.0;
    FileWrite(g_heartbeat_handle,
-      "xau_prospective_heartbeat_v1",UtcTimestamp(TimeGMT()),
+      "xau_prospective_heartbeat_v1",UtcTimestamp(observed_at),
       TimeToString(TimeTradeServer(),TIME_DATE | TIME_SECONDS),InpRunId,LoginText(),
       AccountInfoString(ACCOUNT_SERVER),AccountInfoString(ACCOUNT_COMPANY),_Symbol,
       BoolText((bool)TerminalInfoInteger(TERMINAL_CONNECTED)),
@@ -467,7 +475,7 @@ int OnInit()
       WriteStartupRow("REFUSED","EA-level trading permission must remain disabled");
       return INIT_FAILED;
      }
-   if(!EnsureDailyLedgers())
+   if(!EnsureDailyLedgers(DateToken(TimeGMT())))
      {
       WriteStartupRow("REFUSED","one or more telemetry ledgers could not be opened");
       return INIT_FAILED;
@@ -525,10 +533,12 @@ void OnTradeTransaction(
    const MqlTradeResult &result
 )
   {
-   if(!InpCollectTradeTransactions || !EnsureDailyLedgers())
+   datetime observed_at=TimeGMT();
+   if(!InpCollectTradeTransactions
+      || !EnsureDailyLedgers(DateToken(observed_at)))
       return;
    FileWrite(g_transaction_handle,
-      "xau_prospective_transaction_v1",UtcTimestamp(TimeGMT()),InpRunId,LoginText(),
+      "xau_prospective_transaction_v1",UtcTimestamp(observed_at),InpRunId,LoginText(),
       AccountInfoString(ACCOUNT_SERVER),EnumToString(trans.type),
       StringFormat("%I64u",trans.order),StringFormat("%I64u",trans.deal),
       StringFormat("%I64u",trans.position),StringFormat("%I64u",trans.position_by),

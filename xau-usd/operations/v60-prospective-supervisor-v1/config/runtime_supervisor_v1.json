@@ -1,0 +1,100 @@
+{
+  "schema_version": "xauusd_v60_prospective_runtime_supervisor_v1",
+  "poll_seconds": 60,
+  "runtime": {
+    "directory": "D:/AlgoTradingData/prospective/v60-prospective-supervisor-v1",
+    "process_state": "process_state.json",
+    "status": "status.json"
+  },
+  "terminal": {
+    "id": "CAPITAL_MT5_1033030",
+    "command_marker": "C:\\MT5PortableTier1BestEA\\terminal64.exe"
+  },
+  "workers": [
+    {
+      "id": "V60_FEEDS",
+      "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
+      "script": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_feeds.py",
+      "args": [],
+      "command_marker": "v60-canonical-demo-portfolio-v2*run_feeds.py"
+    },
+    {
+      "id": "V60_PORTFOLIO",
+      "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
+      "script": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_portfolio.py",
+      "args": [
+        "--ml-overlay",
+        "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_portable_ml_topup_v4_overlay.json"
+      ],
+      "command_marker": "v60-canonical-demo-portfolio-v2*run_portfolio.py"
+    },
+    {
+      "id": "V60_DEPLOYED_SPECIALIST_MONITOR",
+      "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
+      "script": "xau-usd/operations/v60-prospective-supervisor-v1/deployed_specialist_monitor.py",
+      "args": [
+        "--watch",
+        "--poll-seconds",
+        "60"
+      ],
+      "command_marker": "v60-prospective-supervisor-v1*deployed_specialist_monitor.py"
+    }
+  ],
+  "health_sources": [
+    {
+      "id": "V60_STATUS",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/status.json",
+      "timestamp_fields": [
+        "updated_at_utc"
+      ],
+      "maximum_age_seconds": 300,
+      "required_values": {
+        "status": "ACTIVE_DEMO_BROKER_ACTION",
+        "account_login": 1033030,
+        "execution_enabled": true,
+        "equity_fraction_limits_enabled": true,
+        "minimum_balance_requirement_enabled": false,
+        "drawdown_suspended": false,
+        "hard_floating_stop": false,
+        "combined_closed_drawdown_hard_stop": false,
+        "active_entry_halt_files": [],
+        "emergency_close_failures": 0,
+        "ml_runtime_authorized": true,
+        "ml_shadow_authorized": false,
+        "ml_topup.ready": true,
+        "ml_topup.failure_policy": "BASELINE_ONLY",
+        "live_authorized": false
+      }
+    },
+    {
+      "id": "V60_FEED_STATUS",
+      "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feed_status.json",
+      "timestamp_fields": [
+        "updated_at_utc"
+      ],
+      "maximum_age_seconds": 300,
+      "required_values": {
+        "all_requested_feeds_ok": true,
+        "ml_used": false
+      }
+    },
+    {
+      "id": "V60_DEPLOYED_SPECIALIST_STATUS",
+      "path": "D:/AlgoTradingData/prospective/v60-deployed-specialist-monitor-v1/status.json",
+      "timestamp_fields": [
+        "updated_at_utc"
+      ],
+      "maximum_age_seconds": 180,
+      "required_values": {
+        "status": "ACTIVE",
+        "healthy": true,
+        "account_login": 1033030,
+        "deployed_source_count": 9,
+        "all_deployed_sources_healthy": true,
+        "tick_transport.filename_day_matches_row": true,
+        "strategy_or_risk_parameters_changed": false,
+        "broker_action_added": false
+      }
+    }
+  ]
+}
