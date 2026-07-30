@@ -1,0 +1,71 @@
+{
+  "schema_version": "eurusd_high_frequency_regime_stability_audit_v1",
+  "status": "REGIME_ROUTER_CANNOT_RESCUE_FREQUENCY_SLEEVE",
+  "research_boundary": "retrospective diagnostic; not a new holdout",
+  "source": "outputs/adaptive_frequency_fallback_audit/TRADES_WITH_CAUSAL_REGIME.csv",
+  "normalization": {
+    "m15_lot_size": 0.01,
+    "overlay_removed": true,
+    "frequency_denominator": "business weekdays"
+  },
+  "whole_sleeve": {
+    "full": {
+      "trades": 635,
+      "trades_per_weekday": 1.216,
+      "net_usd": 73.0,
+      "profit_factor": 1.2533,
+      "top_5pct_removed_profit_factor": 1.0121
+    },
+    "first_12_months": {
+      "trades": 269,
+      "trades_per_weekday": 1.031,
+      "net_usd": 92.9,
+      "profit_factor": 1.9044,
+      "top_5pct_removed_profit_factor": 1.5396
+    },
+    "second_12_months": {
+      "trades": 364,
+      "trades_per_weekday": 1.395,
+      "net_usd": -19.79,
+      "profit_factor": 0.8928,
+      "top_5pct_removed_profit_factor": 0.7334
+    },
+    "plus_0_5_pip_full": {
+      "net_usd": 41.25,
+      "profit_factor": 1.1369,
+      "top_5pct_removed_profit_factor": 0.9115
+    }
+  },
+  "second_12_month_regime_profit_factor": {
+    "JOINT_COMPRESSION": 1.0231,
+    "NEUTRAL": 0.7552,
+    "SHOCK": 0.8029,
+    "USD_DOWN": 0.7861,
+    "USD_UP": 1.1856
+  },
+  "router_diagnostics": {
+    "exclude_usd_down_second_12_months": {
+      "trades": 340,
+      "trades_per_weekday": 1.303,
+      "net_usd": -16.65,
+      "profit_factor": 0.902
+    },
+    "neutral_shock_usd_up_second_12_months": {
+      "trades": 214,
+      "trades_per_weekday": 0.82,
+      "net_usd": -17.82,
+      "profit_factor": 0.851
+    },
+    "usd_up_only_second_12_months": {
+      "trades": 51,
+      "trades_per_weekday": 0.195,
+      "profit_factor": 1.1856
+    }
+  },
+  "decision": {
+    "implement_regime_filtered_m15": false,
+    "portfolio_admission": false,
+    "demo_authorized": false,
+    "reason": "broad chronological edge collapse across regimes; stable subset is too sparse"
+  }
+}

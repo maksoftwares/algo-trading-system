@@ -1,0 +1,81 @@
+{
+  "schema_version": "eurusd_v1r_immediate_reclaim_verdict_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_IMMEDIATE_NEXT_BAR_RECLAIM_V1",
+  "status": "KILL_FAMILY",
+  "frozen_before_run_commit": "7c94ae27",
+  "compile_zero_errors_zero_warnings": true,
+  "period": {
+    "from_inclusive": "2022-07-01",
+    "to_exclusive": "2026-07-02",
+    "model": "MT5 Model=0; may contain generated ticks"
+  },
+  "full": {
+    "trades": 599,
+    "trades_per_weekday": 0.5737547893,
+    "active_entry_dates": 445,
+    "wins": 345,
+    "losses": 254,
+    "win_rate_pct": 57.5959933222,
+    "payoff_ratio": 0.7686623446,
+    "net_usd": 19.32,
+    "profit_factor": 1.0440492476,
+    "equity_drawdown_maximal_usd": 24.56
+  },
+  "stress": {
+    "plus_0_5_pip": {
+      "net_usd": -15.3875,
+      "profit_factor": 0.9660818004
+    },
+    "plus_1_0_pip": {
+      "net_usd": -45.3375,
+      "profit_factor": 0.9027853720
+    }
+  },
+  "recent": {
+    "last_12_months": {
+      "trades": 172,
+      "net_usd": -9.57,
+      "profit_factor": 0.9191859483
+    },
+    "last_6_months": {
+      "trades": 103,
+      "net_usd": 9.32,
+      "profit_factor": 1.1528620633
+    }
+  },
+  "fatal_gate_failures": [
+    "full_period_profit_factor",
+    "primary_stress_profit_factor",
+    "primary_stress_net",
+    "severe_stress_profit_factor",
+    "severe_stress_net",
+    "last_12_month_profit_factor",
+    "last_6_month_profit_factor",
+    "2024_positive_net",
+    "2025_positive_net",
+    "two_years_profit_factor_at_least_1_15",
+    "top_winner_removal_profit_factor",
+    "best_month_removal_profit_factor",
+    "best_session_removal_profit_factor",
+    "rolling_100_positive_share",
+    "rolling_100_median_profit_factor",
+    "rolling_150_positive_share",
+    "rolling_150_median_profit_factor",
+    "rolling_250_positive_share",
+    "rolling_250_median_profit_factor",
+    "stage2_payoff_ratio"
+  ],
+  "artifact_sha256": {
+    "exact_result_json": "6370d00c260aafa02ecd2a77fe30e4a8446b11d48379aaeccaaba3419081a0ab",
+    "trade_ledger_csv": "b0aa4a4bf2d39656843ead5094106d0cb08a3e3d848a2b8530d979cc8f06ad0d",
+    "mt5_report_htm": "7ff1709e3e93208fc15ae6f23719aac81309be0255c2a76723d0dfcfab3036c7",
+    "compiled_ex5": "0916e6294f688922155bdb7dade3bf7f2d1b060952c50db12f3f532fe2065089"
+  },
+  "authorization": {
+    "portfolio_admission": false,
+    "shadow_demo": false,
+    "demo_ordering": false,
+    "live": false,
+    "family_rescue_permitted": false
+  }
+}

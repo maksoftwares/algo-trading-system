@@ -1,0 +1,247 @@
+{
+  "schema_version": "eurusd_v1r_compiled_input_schema_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_IMMEDIATE_NEXT_BAR_RECLAIM_V1",
+  "declared_input_count": 34,
+  "unknown_ini_keys": [],
+  "missing_ini_keys": [],
+  "inputs": [
+    {
+      "name": "InpRunId",
+      "type": "string",
+      "default": "\"EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_IMMEDIATE_NEXT_BAR_RECLAIM_V1\"",
+      "source_line": "25",
+      "executed": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_IMMEDIATE_NEXT_BAR_RECLAIM_V1"
+    },
+    {
+      "name": "InpTargetSymbol",
+      "type": "string",
+      "default": "\"EURUSD\"",
+      "source_line": "26",
+      "executed": "EURUSD"
+    },
+    {
+      "name": "InpSignalTimeframe",
+      "type": "ENUM_TIMEFRAMES",
+      "default": "PERIOD_M30",
+      "source_line": "27",
+      "executed": "30"
+    },
+    {
+      "name": "InpMagicNumber",
+      "type": "long",
+      "default": "26723004",
+      "source_line": "28",
+      "executed": "26723004"
+    },
+    {
+      "name": "InpSignalMode",
+      "type": "MeanReversionSignalMode",
+      "default": "MR_BB_CLOSE_FADE",
+      "source_line": "29",
+      "executed": "0"
+    },
+    {
+      "name": "InpDirectionMode",
+      "type": "DirectionMode",
+      "default": "DIR_LONG_ONLY",
+      "source_line": "30",
+      "executed": "1"
+    },
+    {
+      "name": "InpFixedLots",
+      "type": "double",
+      "default": "0.01",
+      "source_line": "31",
+      "executed": "0.01"
+    },
+    {
+      "name": "InpDeviationPoints",
+      "type": "int",
+      "default": "30",
+      "source_line": "32",
+      "executed": "30"
+    },
+    {
+      "name": "InpMaxSpreadPoints",
+      "type": "int",
+      "default": "100",
+      "source_line": "33",
+      "executed": "100"
+    },
+    {
+      "name": "InpMaxTradesPerDay",
+      "type": "int",
+      "default": "20",
+      "source_line": "34",
+      "executed": "20"
+    },
+    {
+      "name": "InpCooldownMinutes",
+      "type": "int",
+      "default": "0",
+      "source_line": "35",
+      "executed": "0"
+    },
+    {
+      "name": "InpBlockedEntryHoursCsv",
+      "type": "string",
+      "default": "\"\"",
+      "source_line": "36",
+      "executed": ""
+    },
+    {
+      "name": "InpAtrPeriod",
+      "type": "int",
+      "default": "14",
+      "source_line": "37",
+      "executed": "14"
+    },
+    {
+      "name": "InpBandsPeriod",
+      "type": "int",
+      "default": "20",
+      "source_line": "38",
+      "executed": "20"
+    },
+    {
+      "name": "InpBandsDeviation",
+      "type": "double",
+      "default": "2.0",
+      "source_line": "39",
+      "executed": "2.0"
+    },
+    {
+      "name": "InpRsiPeriod",
+      "type": "int",
+      "default": "14",
+      "source_line": "40",
+      "executed": "14"
+    },
+    {
+      "name": "InpUseRsiFilter",
+      "type": "bool",
+      "default": "true",
+      "source_line": "41",
+      "executed": "true"
+    },
+    {
+      "name": "InpRsiOversold",
+      "type": "double",
+      "default": "35.0",
+      "source_line": "42",
+      "executed": "35.0"
+    },
+    {
+      "name": "InpRsiOverbought",
+      "type": "double",
+      "default": "65.0",
+      "source_line": "43",
+      "executed": "65.0"
+    },
+    {
+      "name": "InpMinBandDistanceAtr",
+      "type": "double",
+      "default": "0.00",
+      "source_line": "44",
+      "executed": "0.0"
+    },
+    {
+      "name": "InpMinBodyFraction",
+      "type": "double",
+      "default": "0.40",
+      "source_line": "45",
+      "executed": "0.40"
+    },
+    {
+      "name": "InpStopAtrMultiple",
+      "type": "double",
+      "default": "1.40",
+      "source_line": "46",
+      "executed": "1.40"
+    },
+    {
+      "name": "InpStopFloorPoints",
+      "type": "int",
+      "default": "30",
+      "source_line": "47",
+      "executed": "30"
+    },
+    {
+      "name": "InpStopCeilingPoints",
+      "type": "int",
+      "default": "700",
+      "source_line": "48",
+      "executed": "700"
+    },
+    {
+      "name": "InpRiskReward",
+      "type": "double",
+      "default": "0.80",
+      "source_line": "49",
+      "executed": "0.80"
+    },
+    {
+      "name": "InpStartupLogFileName",
+      "type": "string",
+      "default": "\"eurusd_v1r_reclaim_startup_log.csv\"",
+      "source_line": "50",
+      "executed": "eurusd_v1r_reclaim_startup_log.csv"
+    },
+    {
+      "name": "InpSignalLogFileName",
+      "type": "string",
+      "default": "\"eurusd_v1r_reclaim_signal_log.csv\"",
+      "source_line": "51",
+      "executed": "eurusd_v1r_reclaim_signal_log.csv"
+    },
+    {
+      "name": "InpOrderLogFileName",
+      "type": "string",
+      "default": "\"eurusd_v1r_reclaim_order_log.csv\"",
+      "source_line": "52",
+      "executed": "eurusd_v1r_reclaim_order_log.csv"
+    },
+    {
+      "name": "InpStateLogFileName",
+      "type": "string",
+      "default": "\"eurusd_v1r_reclaim_state_log.csv\"",
+      "source_line": "53",
+      "executed": "eurusd_v1r_reclaim_state_log.csv"
+    },
+    {
+      "name": "InpEnvironmentLogFileName",
+      "type": "string",
+      "default": "\"eurusd_v1r_reclaim_environment_log.csv\"",
+      "source_line": "54",
+      "executed": "eurusd_v1r_reclaim_environment_log.csv"
+    },
+    {
+      "name": "InpExecutionLogFileName",
+      "type": "string",
+      "default": "\"eurusd_v1r_reclaim_execution_log.csv\"",
+      "source_line": "55",
+      "executed": "eurusd_v1r_reclaim_execution_log.csv"
+    },
+    {
+      "name": "InpTransactionLogFileName",
+      "type": "string",
+      "default": "\"eurusd_v1r_reclaim_transaction_log.csv\"",
+      "source_line": "56",
+      "executed": "eurusd_v1r_reclaim_transaction_log.csv"
+    },
+    {
+      "name": "InpManagementLogFileName",
+      "type": "string",
+      "default": "\"eurusd_v1r_reclaim_management_log.csv\"",
+      "source_line": "57",
+      "executed": "eurusd_v1r_reclaim_management_log.csv"
+    },
+    {
+      "name": "InpOrderComment",
+      "type": "string",
+      "default": "\"EU_M30_R1\"",
+      "source_line": "58",
+      "executed": "EU_M30_R1"
+    }
+  ]
+}

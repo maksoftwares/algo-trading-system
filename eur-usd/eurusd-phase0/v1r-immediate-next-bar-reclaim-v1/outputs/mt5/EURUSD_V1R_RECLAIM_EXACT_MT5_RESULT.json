@@ -1,0 +1,323 @@
+{
+  "schema_version": "eurusd_v1r_reclaim_exact_mt5_result_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_IMMEDIATE_NEXT_BAR_RECLAIM_V1",
+  "status": "RECLAIM_MT5_RUN_COMPLETE_NOT_YET_ADJUDICATED",
+  "boundary": {
+    "strategy_tester_only": true,
+    "chart_demo_live_touched": false,
+    "reclaim_implemented": true,
+    "reclaim_run": true,
+    "model": "Model=0 Every tick; may contain generated ticks",
+    "from_inclusive": "2022.07.01",
+    "to_exclusive": "2026.07.02"
+  },
+  "clean_run": {
+    "stale_artifacts_removed": [],
+    "compile": {
+      "prior_ex5_existed": false,
+      "ex5_absent_before_compile": true,
+      "metaeditor_process_returncode": 1,
+      "source_hash_before_copy": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591",
+      "source_hash_after_copy": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591",
+      "ex5_hash_after_compile": "0916e6294f688922155bdb7dade3bf7f2d1b060952c50db12f3f532fe2065089",
+      "compile_zero_errors_zero_warnings": true,
+      "command": [
+        "C:\\MT5A1M5MomentumBacktest\\MetaEditor64.exe",
+        "/compile:C:\\MT5A1M5MomentumBacktest\\MQL5\\Experts\\EurUsdM30RsiBbImmediateReclaimLongV1.mq5",
+        "/log:C:\\MT5A1M5MomentumBacktest\\Logs\\compile_EurUsdM30RsiBbImmediateReclaimLongV1_20260730T053518Z.log"
+      ]
+    },
+    "tester": {
+      "returncode": 0,
+      "started_at_utc": "2026-07-30T05:35:21Z",
+      "elapsed_seconds": 27.93,
+      "command": [
+        "C:\\MT5A1M5MomentumBacktest\\terminal64.exe",
+        "/portable",
+        "/config:C:\\MT5A1M5MomentumBacktest\\Config\\EURUSD_V1R_IMMEDIATE_RECLAIM_V1.ini"
+      ]
+    }
+  },
+  "input_contract": {
+    "declared_input_count": 34,
+    "unknown_ini_keys": [],
+    "missing_ini_keys": [],
+    "ini_leverage": "1:50",
+    "report_leverage": "1:50"
+  },
+  "environment": {
+    "account_server": "Capital.ComMena-Demo",
+    "account_currency": "USD",
+    "account_leverage": "50",
+    "account_margin_mode": "2",
+    "terminal_build": "6061",
+    "mql_program_path": "C:\\MT5A1M5MomentumBacktest\\Tester\\Agent-127.0.0.1-3000\\MQL5\\Experts\\EurUsdM30RsiBbImmediateReclaimLongV1.ex5",
+    "tester_model_annotation": "Model=0 may contain generated ticks; native-real-tick coverage not established",
+    "server_time": "2022.07.01 00:00:00",
+    "gmt_time": "2022.07.01 00:00:00",
+    "gmt_offset_seconds": "0",
+    "daylight_savings_seconds": "0",
+    "symbol_digits": "5",
+    "symbol_point": "0.0000100000",
+    "contract_size": "100000.00000000",
+    "tick_size": "0.0000100000",
+    "tick_value_profit": "1.00000000",
+    "tick_value_loss": "1.00000000",
+    "volume_min": "0.01000000",
+    "volume_max": "100.00000000",
+    "volume_step": "0.01000000",
+    "stops_level_points": "30",
+    "freeze_level_points": "0",
+    "spread_float": "true",
+    "trade_mode": "4",
+    "margin_calc_mode": "0",
+    "swap_mode": "1",
+    "swap_long": "-11.06219512",
+    "currency_base": "EUR",
+    "currency_profit": "USD",
+    "currency_margin": "EUR"
+  },
+  "deal_ledger": {
+    "trades": 599,
+    "wins": 345,
+    "losses": 254,
+    "net_usd": 19.32,
+    "gross_profit_usd": 457.92,
+    "gross_loss_usd": 438.6,
+    "profit_factor_unrounded": 1.044049247606019
+  },
+  "mt5_report_metrics": {
+    "History Quality": "99%",
+    "Bars": "294987",
+    "Ticks": "83131012",
+    "Total Net Profit": "19.32",
+    "Gross Profit": "457.92",
+    "Balance Drawdown Maximal": "21.94 (2.13%)",
+    "Equity Drawdown Maximal": "24.56 (2.38%)",
+    "Gross Loss": "-438.60",
+    "Balance Drawdown Relative": "2.13% (21.94)",
+    "Equity Drawdown Relative": "2.38% (24.56)",
+    "Profit Factor": "1.04",
+    "Expected Payoff": "0.03",
+    "Recovery Factor": "0.79",
+    "Sharpe Ratio": "0.75",
+    "Total Trades": "599",
+    "Short Trades (won %)": "0 (0.00%)",
+    "Long Trades (won %)": "599 (57.60%)",
+    "Total Deals": "1198",
+    "Profit Trades (% of total)": "345 (57.60%)",
+    "Loss Trades (% of total)": "254 (42.40%)"
+  },
+  "activity": {
+    "signals": 2642,
+    "decisions": 1827,
+    "state_rows": 54522,
+    "execution_rows": 3029,
+    "transaction_rows": 4193
+  },
+  "source_chain": {
+    "schema_version": "eurusd_v1r_source_ex5_chain_v1",
+    "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_IMMEDIATE_NEXT_BAR_RECLAIM_V1",
+    "compile_proof": {
+      "prior_ex5_existed": false,
+      "ex5_absent_before_compile": true,
+      "metaeditor_process_returncode": 1,
+      "source_hash_before_copy": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591",
+      "source_hash_after_copy": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591",
+      "ex5_hash_after_compile": "0916e6294f688922155bdb7dade3bf7f2d1b060952c50db12f3f532fe2065089",
+      "compile_zero_errors_zero_warnings": true,
+      "command": [
+        "C:\\MT5A1M5MomentumBacktest\\MetaEditor64.exe",
+        "/compile:C:\\MT5A1M5MomentumBacktest\\MQL5\\Experts\\EurUsdM30RsiBbImmediateReclaimLongV1.mq5",
+        "/log:C:\\MT5A1M5MomentumBacktest\\Logs\\compile_EurUsdM30RsiBbImmediateReclaimLongV1_20260730T053518Z.log"
+      ]
+    },
+    "repository_source": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/mt5/Experts/EurUsdM30RsiBbImmediateReclaimLongV1.mq5",
+      "bytes": 39166,
+      "sha256": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591"
+    },
+    "tester_source": {
+      "path": "MQL5/Experts/EurUsdM30RsiBbImmediateReclaimLongV1.mq5",
+      "bytes": 39166,
+      "sha256": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591"
+    },
+    "frozen_source": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/source/EurUsdM30RsiBbImmediateReclaimLongV1.mq5",
+      "bytes": 39166,
+      "sha256": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591"
+    },
+    "frozen_ex5": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/EurUsdM30RsiBbImmediateReclaimLongV1.ex5",
+      "bytes": 79918,
+      "sha256": "0916e6294f688922155bdb7dade3bf7f2d1b060952c50db12f3f532fe2065089"
+    },
+    "frozen_compile_log": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/compile_EurUsdM30RsiBbImmediateReclaimLongV1_20260730T053518Z.log",
+      "bytes": 6964,
+      "sha256": "89519c07110cb8e6ac121ef69b1716a4cf6195e4197438e2cbacdd94bb94698b"
+    },
+    "includes": [
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\Trade.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/96e678162453_Trade.mqh",
+          "bytes": 69541,
+          "sha256": "96e6781624534377fe7971cba52cca3d62d1b030bc10d5e4ebf3ed8c541399ed"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Object.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/dfad4fdb6d1b_Object.mqh",
+          "bytes": 2036,
+          "sha256": "dfad4fdb6d1bf47cf43fcbc2882e52979459f17a776f75f250a7c32d0623ab35"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\StdLibErr.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/04bb2c47b1b0_StdLibErr.mqh",
+          "bytes": 683,
+          "sha256": "04bb2c47b1b04dceb052e6dba1f85e0330c53abc602f341e2ea95ea1498ab28b"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\OrderInfo.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/d0e479578ef9_OrderInfo.mqh",
+          "bytes": 22087,
+          "sha256": "d0e479578ef91d2ef1b07ae63d28ae54e15cebb914dd10e5d4510c269a9ca999"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\HistoryOrderInfo.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/e88f6be45046_HistoryOrderInfo.mqh",
+          "bytes": 20018,
+          "sha256": "e88f6be450462a045470315887ef751a4510da65a5115325dc88542743fc52f8"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\PositionInfo.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/dd720b755c7f_PositionInfo.mqh",
+          "bytes": 15820,
+          "sha256": "dd720b755c7f23dcc109fc81bcf0772b907411d545e4a1117421737bb9ff6897"
+        }
+      },
+      {
+        "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\DealInfo.mqh",
+        "frozen": {
+          "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/9d6fb4e7d875_DealInfo.mqh",
+          "bytes": 16313,
+          "sha256": "9d6fb4e7d8754eaee761e43943dc49cdc3a32793ee8438119d939ea7bad71880"
+        }
+      }
+    ],
+    "compiler": {
+      "metaeditor": {
+        "path": "MetaEditor64.exe",
+        "bytes": 116680016,
+        "sha256": "bc62cabf758c7debf30073bb8e20c2b5a673bef4104eb856952aae77271cee23"
+      },
+      "terminal": {
+        "path": "terminal64.exe",
+        "bytes": 125065056,
+        "sha256": "88c459e08b028738e1d03eb48b24bcc9eecc1759a865ad8df6c1a9e1ce99c15a"
+      }
+    }
+  },
+  "artifacts": {
+    "report": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/EURUSD_V1R_IMMEDIATE_RECLAIM_V1.htm",
+      "bytes": 1224424,
+      "sha256": "7ff1709e3e93208fc15ae6f23719aac81309be0255c2a76723d0dfcfab3036c7"
+    },
+    "tester_ini": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/EURUSD_V1R_IMMEDIATE_RECLAIM_V1.ini",
+      "bytes": 1562,
+      "sha256": "1ecc76f4de7b76980ecf3a5f11213aab6c5b443d273be7a3e308ca948bd201db"
+    },
+    "trade_ledger": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/EURUSD_V1R_RECLAIM_TRADE_LEDGER.csv",
+      "bytes": 93801,
+      "sha256": "b0aa4a4bf2d39656843ead5094106d0cb08a3e3d848a2b8530d979cc8f06ad0d"
+    },
+    "htm": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/EURUSD_V1R_IMMEDIATE_RECLAIM_V1.htm",
+      "bytes": 1224424,
+      "sha256": "7ff1709e3e93208fc15ae6f23719aac81309be0255c2a76723d0dfcfab3036c7"
+    },
+    "ini": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/EURUSD_V1R_IMMEDIATE_RECLAIM_V1.ini",
+      "bytes": 1562,
+      "sha256": "1ecc76f4de7b76980ecf3a5f11213aab6c5b443d273be7a3e308ca948bd201db"
+    },
+    "EURUSD_V1R_IMMEDIATE_RECLAIM_V1.png": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/EURUSD_V1R_IMMEDIATE_RECLAIM_V1.png",
+      "bytes": 18976,
+      "sha256": "afc1ae6b5da63930ed6f1f41a699db152705aaa68fe346396213a22fcaf28c26"
+    },
+    "EURUSD_V1R_IMMEDIATE_RECLAIM_V1-holding.png": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/EURUSD_V1R_IMMEDIATE_RECLAIM_V1-holding.png",
+      "bytes": 21358,
+      "sha256": "6eb84ac761b2c480ea2813434b8906991fdbf00cb22438f10a772d54b4230cc7"
+    },
+    "EURUSD_V1R_IMMEDIATE_RECLAIM_V1-mfemae.png": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/EURUSD_V1R_IMMEDIATE_RECLAIM_V1-mfemae.png",
+      "bytes": 41187,
+      "sha256": "a3a46bcb7a54d9942864a9ace84dd8ffae19a2c8bc7c6894af58274c1c413feb"
+    },
+    "EURUSD_V1R_IMMEDIATE_RECLAIM_V1-hst.png": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/EURUSD_V1R_IMMEDIATE_RECLAIM_V1-hst.png",
+      "bytes": 40664,
+      "sha256": "8325a9db6ce0e8fe1d63f518f2e794a0d5dd1df0801f335f165b3ca9d1e5f821"
+    },
+    "InpEnvironmentLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/eurusd_v1r_reclaim_environment_log.csv",
+      "bytes": 3786,
+      "sha256": "3c02429ccbd661fe5c66469918d797874f79090221c90578cd3118bf0dc8fcbf"
+    },
+    "InpExecutionLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/eurusd_v1r_reclaim_execution_log.csv",
+      "bytes": 1080394,
+      "sha256": "8456bee19569ab9de232a135d73ad3e182a368a9d8d832f4b1138290c0734656"
+    },
+    "InpManagementLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/eurusd_v1r_reclaim_management_log.csv",
+      "bytes": 45,
+      "sha256": "b8cf07f87ced1e26e86685f694c330ec7c582b82b02cbf36bf9698e478c989c3"
+    },
+    "InpOrderLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/eurusd_v1r_reclaim_order_log.csv",
+      "bytes": 503110,
+      "sha256": "144f0a6b592f0d1b8306dd3f67328e4b8b0ce64aad6f62a9e938f1105efa394e"
+    },
+    "InpSignalLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/eurusd_v1r_reclaim_signal_log.csv",
+      "bytes": 742447,
+      "sha256": "8e82c86b3c236b2211129d7b1c35e1073fdf3e7e1ac44262e168ba2d13e99fec"
+    },
+    "InpStartupLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/eurusd_v1r_reclaim_startup_log.csv",
+      "bytes": 412,
+      "sha256": "b9fb0bd6235b3a5f77c28428e7b3a6dbfcea280487d937a23bf68b83ad9e79fb"
+    },
+    "InpStateLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/eurusd_v1r_reclaim_state_log.csv",
+      "bytes": 10292187,
+      "sha256": "47f4ca5cc28e56c1428380c1d86afd9569101385d8b83790e6ddeae3033f747a"
+    },
+    "InpTransactionLogFileName": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/mt5/eurusd_v1r_reclaim_transaction_log.csv",
+      "bytes": 886409,
+      "sha256": "7f626bec9a76b5f311c6b865efdc26d04efaa8d77d2c5d203f94f28641de0940"
+    },
+    "compiled_input_schema": {
+      "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/COMPILED_INPUT_SCHEMA.json",
+      "bytes": 5997,
+      "sha256": "40af7ec0543267b8c4020fbfbe67674edbf9dc41e85894d14511039c407d4fea"
+    }
+  }
+}

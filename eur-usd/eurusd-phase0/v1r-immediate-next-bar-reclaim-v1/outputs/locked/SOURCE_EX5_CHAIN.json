@@ -1,0 +1,113 @@
+{
+  "schema_version": "eurusd_v1r_source_ex5_chain_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_IMMEDIATE_NEXT_BAR_RECLAIM_V1",
+  "compile_proof": {
+    "prior_ex5_existed": false,
+    "ex5_absent_before_compile": true,
+    "metaeditor_process_returncode": 1,
+    "source_hash_before_copy": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591",
+    "source_hash_after_copy": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591",
+    "ex5_hash_after_compile": "0916e6294f688922155bdb7dade3bf7f2d1b060952c50db12f3f532fe2065089",
+    "compile_zero_errors_zero_warnings": true,
+    "command": [
+      "C:\\MT5A1M5MomentumBacktest\\MetaEditor64.exe",
+      "/compile:C:\\MT5A1M5MomentumBacktest\\MQL5\\Experts\\EurUsdM30RsiBbImmediateReclaimLongV1.mq5",
+      "/log:C:\\MT5A1M5MomentumBacktest\\Logs\\compile_EurUsdM30RsiBbImmediateReclaimLongV1_20260730T053518Z.log"
+    ]
+  },
+  "repository_source": {
+    "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/mt5/Experts/EurUsdM30RsiBbImmediateReclaimLongV1.mq5",
+    "bytes": 39166,
+    "sha256": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591"
+  },
+  "tester_source": {
+    "path": "MQL5/Experts/EurUsdM30RsiBbImmediateReclaimLongV1.mq5",
+    "bytes": 39166,
+    "sha256": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591"
+  },
+  "frozen_source": {
+    "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/source/EurUsdM30RsiBbImmediateReclaimLongV1.mq5",
+    "bytes": 39166,
+    "sha256": "fba359fddadce2bfee2c4da46cfc006580aeb75d06d01d483720a66e54056591"
+  },
+  "frozen_ex5": {
+    "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/EurUsdM30RsiBbImmediateReclaimLongV1.ex5",
+    "bytes": 79918,
+    "sha256": "0916e6294f688922155bdb7dade3bf7f2d1b060952c50db12f3f532fe2065089"
+  },
+  "frozen_compile_log": {
+    "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/compile_EurUsdM30RsiBbImmediateReclaimLongV1_20260730T053518Z.log",
+    "bytes": 6964,
+    "sha256": "89519c07110cb8e6ac121ef69b1716a4cf6195e4197438e2cbacdd94bb94698b"
+  },
+  "includes": [
+    {
+      "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\Trade.mqh",
+      "frozen": {
+        "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/96e678162453_Trade.mqh",
+        "bytes": 69541,
+        "sha256": "96e6781624534377fe7971cba52cca3d62d1b030bc10d5e4ebf3ed8c541399ed"
+      }
+    },
+    {
+      "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Object.mqh",
+      "frozen": {
+        "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/dfad4fdb6d1b_Object.mqh",
+        "bytes": 2036,
+        "sha256": "dfad4fdb6d1bf47cf43fcbc2882e52979459f17a776f75f250a7c32d0623ab35"
+      }
+    },
+    {
+      "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\StdLibErr.mqh",
+      "frozen": {
+        "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/04bb2c47b1b0_StdLibErr.mqh",
+        "bytes": 683,
+        "sha256": "04bb2c47b1b04dceb052e6dba1f85e0330c53abc602f341e2ea95ea1498ab28b"
+      }
+    },
+    {
+      "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\OrderInfo.mqh",
+      "frozen": {
+        "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/d0e479578ef9_OrderInfo.mqh",
+        "bytes": 22087,
+        "sha256": "d0e479578ef91d2ef1b07ae63d28ae54e15cebb914dd10e5d4510c269a9ca999"
+      }
+    },
+    {
+      "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\HistoryOrderInfo.mqh",
+      "frozen": {
+        "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/e88f6be45046_HistoryOrderInfo.mqh",
+        "bytes": 20018,
+        "sha256": "e88f6be450462a045470315887ef751a4510da65a5115325dc88542743fc52f8"
+      }
+    },
+    {
+      "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\PositionInfo.mqh",
+      "frozen": {
+        "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/dd720b755c7f_PositionInfo.mqh",
+        "bytes": 15820,
+        "sha256": "dd720b755c7f23dcc109fc81bcf0772b907411d545e4a1117421737bb9ff6897"
+      }
+    },
+    {
+      "original_path": "D:\\AlgoTradingData\\C_DRIVE\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\7C0C9FE236C7D27955642077E3C96329\\MQL5\\Include\\Trade\\DealInfo.mqh",
+      "frozen": {
+        "path": "eur-usd/eurusd-phase0/v1r-immediate-next-bar-reclaim-v1/outputs/locked/includes/9d6fb4e7d875_DealInfo.mqh",
+        "bytes": 16313,
+        "sha256": "9d6fb4e7d8754eaee761e43943dc49cdc3a32793ee8438119d939ea7bad71880"
+      }
+    }
+  ],
+  "compiler": {
+    "metaeditor": {
+      "path": "MetaEditor64.exe",
+      "bytes": 116680016,
+      "sha256": "bc62cabf758c7debf30073bb8e20c2b5a673bef4104eb856952aae77271cee23"
+    },
+    "terminal": {
+      "path": "terminal64.exe",
+      "bytes": 125065056,
+      "sha256": "88c459e08b028738e1d03eb48b24bcc9eecc1759a865ad8df6c1a9e1ce99c15a"
+    }
+  }
+}
