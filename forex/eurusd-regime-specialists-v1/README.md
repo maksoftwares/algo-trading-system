@@ -115,6 +115,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 109. Cross-Pair Compression failed-auction census: a one-variant symmetric rejection signal inherited fixed 3-pip excursion, 20-pip range, 55% wick, and three-M5-bar thresholds from an earlier preregistration. It found only 37 candidates in ten years versus the frozen 40 minimum, with 13 locked-validation candidates versus 15 required. P&L remained closed, thresholds were not weakened, and the exact pattern is rejected for insufficient capacity.
 110. RSI chronological regime selector: five causal regimes were evaluated on the first broker year only; Neutral, Joint Compression, and Shock passed every development gate and were frozen into the second year. Their locked validation produced 289 RSI trades but lost $20.31. With 61 protected M15 trades, the combined portfolio reached 1.341 trades/day but only PF 1.007, stress PF 0.924, best-5%-removed PF 0.730, 54.02% weekday coverage, and 0.951 payoff. The attractive retrospective RSI frontier does not survive honest regime transfer and is rejected.
 111. Frequency-edge gap diagnostic: the broker-tested protected sleeve supplies 106 trades over 522 weekdays (0.203/day) against the 444-trade minimum required for 0.85/day, leaving a 338-trade gap and 242-date coverage gap. Its edge is concentrated in chop (74 trades, PF 1.588, +$67.06), while compression loses (32 trades, PF 0.849, -$5.46). The H4 and M15 variants share 82 of 85 recent H4 active dates, so stacking them would double-count one economic mechanism. Dense and RSI constructions prove that frequency is available, but their locked residual edge is not. The missing asset is several genuinely independent positive-expectancy regime/session experts, not more signals from the protected breakout.
+112. H4 trend-pullback continuation preregistration: a single mirrored EMA-rejection hypothesis targets H4 trend-up longs and trend-down shorts only after the protected London decision window. Development selection, locked validation, cost stress, entry delays, and protected-date independence are frozen before outcomes; no parameter grid or post-result rescue is allowed.
 
 Final status: `PROTECTED_M15_EDGE_PRESENT_FREQUENCY_PORTFOLIO_NOT_DEMO_READY`.
 
@@ -397,6 +398,7 @@ uv run --offline --with pandas --with numpy --with pyarrow python run_online_den
 uv run --offline --with pandas --with numpy --with pyarrow python run_compression_own_price_family.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_compression_failed_auction.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_rsi_regime_chronological_selector.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_trend_pullback_continuation.py
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_consensus.py capture --days-ahead 60
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_actuals.py capture
 uv run --with pandas --with pyarrow python capture_prospective_dukascopy_event_m5.py capture --event-time 2026-08-07T12:30:00Z
