@@ -231,3 +231,31 @@ def test_admission_metrics_include_every_frozen_robustness_gate() -> None:
     assert "minimum_best_five_removed_profit_factor" in metrics["checks"]
     assert "maximum_single_month_profit_share" in metrics["checks"]
     assert metrics["demo_order_authorized"] is False
+
+
+def test_existing_forward_decisions_are_append_only() -> None:
+    module = _load_module()
+    existing = [
+        {
+            "decision_date": "2026-08-03",
+            "status": "RESOLVED",
+            "eligible_side": "CASH",
+        }
+    ]
+    appended = existing + [
+        {
+            "decision_date": "2026-08-04",
+            "status": "RESOLVED",
+            "eligible_side": "CASH",
+        }
+    ]
+    module.validate_append_only(existing, appended)
+
+    mutated = copy.deepcopy(appended)
+    mutated[0]["eligible_side"] = "LONG"
+    try:
+        module.validate_append_only(existing, mutated)
+    except ValueError as error:
+        assert "forward decision ledger mutation refused" in str(error)
+    else:
+        raise AssertionError("prior forward decision mutation was accepted")

@@ -667,20 +667,55 @@ def json_safe(value: Any) -> Any:
     return value
 
 
+def validate_append_only(
+    existing_records: list[dict[str, Any]],
+    new_records: list[dict[str, Any]],
+) -> None:
+    safe_new = json_safe(new_records)
+    if len(safe_new) < len(existing_records):
+        raise ValueError("forward decision ledger shrank")
+    for index, existing in enumerate(existing_records):
+        if existing != safe_new[index]:
+            raise ValueError(
+                "forward decision ledger mutation refused "
+                f"at index={index} date={existing.get('decision_date')}"
+            )
+
+
+def load_existing_decisions(output_dir: Path) -> list[dict[str, Any]]:
+    path = output_dir / "FORWARD_DECISIONS.json"
+    if not path.exists():
+        return []
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, list):
+        raise ValueError("existing forward decision ledger is not a list")
+    return payload
+
+
+def atomic_write_text(path: Path, value: str) -> None:
+    temporary = path.with_name(path.name + ".tmp")
+    with temporary.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(value)
+    temporary.replace(path)
+
+
 def write_outputs(
     records: list[dict[str, Any]],
     summary: dict[str, Any],
     output_dir: Path,
+    enforce_append_only: bool = False,
 ) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
-    with (output_dir / "FORWARD_DECISIONS.json").open(
-        "w", encoding="utf-8", newline="\n"
-    ) as handle:
-        handle.write(json.dumps(json_safe(records), indent=2, sort_keys=True) + "\n")
-    with (output_dir / "FORWARD_SUMMARY.json").open(
-        "w", encoding="utf-8", newline="\n"
-    ) as handle:
-        handle.write(json.dumps(json_safe(summary), indent=2, sort_keys=True) + "\n")
+    if enforce_append_only:
+        validate_append_only(load_existing_decisions(output_dir), records)
+    atomic_write_text(
+        output_dir / "FORWARD_DECISIONS.json",
+        json.dumps(json_safe(records), indent=2, sort_keys=True) + "\n",
+    )
+    atomic_write_text(
+        output_dir / "FORWARD_SUMMARY.json",
+        json.dumps(json_safe(summary), indent=2, sort_keys=True) + "\n",
+    )
 
     lines = [
         "# EURUSD forward-only selective learner",
@@ -705,7 +740,7 @@ def write_outputs(
             "does not alter the protected H4 sleeve."
         ),
     ]
-    with (output_dir / "FORWARD_SUMMARY.md").open(
-        "w", encoding="utf-8", newline="\n"
-    ) as handle:
-        handle.write("\n".join(lines) + "\n")
+    atomic_write_text(
+        output_dir / "FORWARD_SUMMARY.md",
+        "\n".join(lines) + "\n",
+    )

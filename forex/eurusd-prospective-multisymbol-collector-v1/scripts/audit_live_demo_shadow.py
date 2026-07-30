@@ -4,7 +4,7 @@ import argparse
 import csv
 import json
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import datetime, time, timezone
 from pathlib import Path
 
 
@@ -77,8 +77,20 @@ def audit(
 
     floor = datetime.strptime("2026.08.01 00:00:00", TIME_FORMAT)
     before_floor = now < floor
+    parsed_feature_times: list[datetime] = []
+    try:
+        parsed_feature_times = [
+            datetime.strptime(row["interval_open_configured_utc"], TIME_FORMAT)
+            for row in feature_rows
+        ]
+    except (KeyError, ValueError):
+        parsed_feature_times = []
     checks["no_feature_rows_before_floor"] = (
-        not before_floor or len(feature_rows) == 0
+        not feature_rows
+        or (
+            len(parsed_feature_times) == len(feature_rows)
+            and all(value >= floor for value in parsed_feature_times)
+        )
     )
     checks["prestart_transition_refused"] = (
         not before_floor
@@ -109,15 +121,55 @@ def audit(
         heartbeat_age_seconds is not None and heartbeat_age_seconds <= 300.0
     )
 
-    status = (
-        "PASS_RUNNING_PRESTART"
-        if before_floor and all(checks.values())
-        else (
-            "PASS_RUNNING_FORWARD"
-            if not before_floor and all(checks.values())
-            else "FAIL"
-        )
+    market_open_expected = (
+        now.weekday() < 5
+        and time(0, 15) <= now.time() <= time(21, 59, 59)
     )
+    latest_feature_utc: datetime | None = None
+    if feature_rows:
+        try:
+            latest_feature_utc = max(
+                datetime.strptime(row["recorded_at_utc"], TIME_FORMAT)
+                for row in feature_rows
+                if row.get("recorded_at_utc")
+            )
+        except (KeyError, ValueError):
+            latest_feature_utc = None
+    feature_age_seconds = (
+        max(0.0, (now - latest_feature_utc).total_seconds())
+        if latest_feature_utc is not None
+        else None
+    )
+    last_interval_rows: list[dict[str, str]] = []
+    if parsed_feature_times:
+        last_interval = max(parsed_feature_times)
+        last_interval_rows = [
+            row
+            for row, interval_open in zip(feature_rows, parsed_feature_times)
+            if interval_open == last_interval
+        ]
+    checks["forward_rows_available_when_expected"] = (
+        before_floor or not market_open_expected or bool(feature_rows)
+    )
+    checks["forward_features_fresh_when_expected"] = (
+        before_floor
+        or not market_open_expected
+        or (feature_age_seconds is not None and feature_age_seconds <= 600.0)
+    )
+    checks["last_interval_has_eight_source_rows_when_expected"] = (
+        before_floor
+        or not market_open_expected
+        or len(last_interval_rows) == 8
+    )
+
+    if not all(checks.values()):
+        status = "FAIL"
+    elif before_floor:
+        status = "PASS_RUNNING_PRESTART"
+    elif not market_open_expected:
+        status = "PASS_WAITING_MARKET_OPEN"
+    else:
+        status = "PASS_RUNNING_FORWARD"
     return {
         "artifact": "EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_V1",
         "audited_at_utc": utc_text(now),
@@ -138,6 +190,14 @@ def audit(
             else None
         ),
         "heartbeat_age_seconds": heartbeat_age_seconds,
+        "market_open_expected": market_open_expected,
+        "latest_feature_utc": (
+            utc_text(latest_feature_utc)
+            if latest_feature_utc is not None
+            else None
+        ),
+        "feature_age_seconds": feature_age_seconds,
+        "last_interval_source_rows": len(last_interval_rows),
         "observed_current_minus_gmt_seconds": environment.get(
             "observed_current_minus_gmt_seconds"
         ),
@@ -169,6 +229,9 @@ def markdown(result: dict[str, object]) -> str:
         f"- Heartbeat rows: `{result['heartbeat_rows']}`",
         f"- Latest heartbeat UTC: `{result['latest_heartbeat_utc']}`",
         f"- Heartbeat age seconds: `{result['heartbeat_age_seconds']}`",
+        f"- Market open expected: `{result['market_open_expected']}`",
+        f"- Latest feature UTC: `{result['latest_feature_utc']}`",
+        f"- Feature age seconds: `{result['feature_age_seconds']}`",
         "",
         "## Checks",
         "",

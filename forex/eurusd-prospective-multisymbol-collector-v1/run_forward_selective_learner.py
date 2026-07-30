@@ -23,6 +23,11 @@ def parse_args() -> argparse.Namespace:
         default=ROOT / "config" / "frozen_forward_selective_learner_v1.json",
     )
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--enforce-append-only",
+        action="store_true",
+        help="Refuse any mutation or deletion of an existing decision row.",
+    )
     return parser.parse_args()
 
 
@@ -31,7 +36,12 @@ def main() -> None:
     config = load_config(args.config)
     grouped = load_forward_bars(args.feature_csv, config)
     records, summary = process(grouped, config)
-    write_outputs(records, summary, args.output_dir)
+    write_outputs(
+        records,
+        summary,
+        args.output_dir,
+        enforce_append_only=args.enforce_append_only,
+    )
     print(
         f"{summary['status']} "
         f"resolved={summary['resolved_training_days']} "

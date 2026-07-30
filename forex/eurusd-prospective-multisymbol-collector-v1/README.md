@@ -48,3 +48,20 @@ separate protected sleeve.
 
 See `PROSPECTIVE_DATA_PROTOCOL.md` for the frozen evidence and admission rules.
 
+## Unattended demo-shadow operations
+
+`scripts/run_live_forward_cycle.ps1` verifies the deployed expert, preset, and
+terminal configuration by SHA-256, restarts only the exact collector terminal
+when necessary, audits data freshness, and runs the forward learner without any
+order path. Daily raw-ledger snapshots are checksum-verified, made read-only,
+and the decision ledger is append-only.
+
+`scripts/install_live_operations_tasks.ps1` installs two limited interactive
+Windows tasks:
+
+- `Codex-EURUSD-Prospective-Health` every five minutes; and
+- `Codex-EURUSD-Forward-Learner` at 18:10 Dubai / 14:10 UTC daily.
+
+The terminal configuration continues to enforce `AllowLiveTrading=0` and
+`AllowDllImport=0`. See `LIVE_OPERATIONS_DEPLOYMENT_2026_07_30.md` for the
+verified deployment receipt.
