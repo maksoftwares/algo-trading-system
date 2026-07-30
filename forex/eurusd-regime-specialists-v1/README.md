@@ -103,6 +103,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 97. Frozen combined forward validator: M15 first-break and the daily cross-pair learner are combined without component deletion or reweighting. Admission requires at least 160 complete weekdays, at least 136 trades, 0.85-1.25 trades per complete weekday, at least 65% weekday coverage, PF 1.15, stressed PF 1.05, positive chronological halves, component edge floors, risk limits, execution parity, and soak. The live portfolio is disarmed and starts with no pre-floor evidence.
 98. Frozen daily learner diagnostic: an exact causal replay from zero weights over 2,571 post-warmup weekdays produced only 34 qualified trades (0.013/day), 38.24% wins, 1.469 payoff, PF 0.909, stressed PF 0.821, and -1.925R. Combined with the broker-transferred M15 rate, projected frequency is only 0.216/day before overlap caps. Forced daily trading was also negative, so relaxing the learner would add losses rather than close the gap. This sleeve is rejected as the frequency solution and remains a disarmed forward experiment only.
 99. Frequency/edge frontier: 500 strictly causal global and regime health gates were diagnosed on the rejected RSI sleeve using only outcomes exited before each candidate. Four variants passed the diagnostic full/both-half stressed checks, but zero gated variants achieved trailing-12-month PF 1.15. The highest-frequency passing variant used 30 completed global shadow outcomes and PF 1.05. Combined with the fixed-0.01-lot protected M15 expert it produced 447 trades, 0.856/day, PF 1.487, stressed PF 1.374, and +$111.40. It nevertheless covered only 43.30% of weekdays; second-year best-5%-removed PF was 0.938, and the gate was selected retrospectively. It is a forward-only experiment, not demo admission.
+100. Prospective inventory operations repair: the locked 06:05/12:05 clock-transfer process had died on its first operation because its console serializer could not encode a Python datetime. The frozen module and preregistration hashes were not changed. An external fail-closed JSON-safe wrapper now runs it, and the existing 00:05 helper was migrated from an unmanaged background process. Both disarmed collectors are owned by restartable Windows tasks, running with empty current stderr logs and zero missed runs. The 00:05 campaign's first immutable decision was correctly CASH because the date was not Neutral; the clock transfer remains at zero decisions/trades. This restores forward evidence collection but does not promote either specialist.
 
 Final status: `PROTECTED_M15_EDGE_PRESENT_FREQUENCY_PORTFOLIO_NOT_DEMO_READY`.
 
@@ -121,6 +122,7 @@ Key reports:
 - `EURUSD_FORWARD_COMBINED_FREQUENCY_PORTFOLIO_PROTOCOL.md`
 - `EURUSD_FORWARD_DAILY_LEARNER_HISTORICAL_DIAGNOSTIC_2026_07_30.md`
 - `EURUSD_FREQUENCY_EDGE_FRONTIER_DIAGNOSTIC_2026_07_30.md`
+- `EURUSD_PROSPECTIVE_INVENTORY_OPERATIONS_REPAIR_2026_07_30.md`
 - `EURUSD_NEUTRAL_UTC_OPEN_VOTE_VERDICT_2026_07_27.md`
 - `EURUSD_NEUTRAL_COT_FLOW_VERDICT_2026_07_27.md`
 - `EURUSD_H4_CHOP_ANCHOR_VALIDATION_RESULT_2026_07_30.md`
