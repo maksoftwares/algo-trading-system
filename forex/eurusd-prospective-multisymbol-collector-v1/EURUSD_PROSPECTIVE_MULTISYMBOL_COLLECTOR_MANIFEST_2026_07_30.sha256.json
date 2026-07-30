@@ -1,0 +1,70 @@
+{
+  "artifact": "EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_V1",
+  "files": {
+    ".gitattributes": {
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    "PROSPECTIVE_DATA_PROTOCOL.md": {
+      "bytes": 3215,
+      "sha256": "287435f02c632f5a98e4d6d2bd35d85a9db3a38bc6845db43a6a1e0edee16740"
+    },
+    "README.md": {
+      "bytes": 2103,
+      "sha256": "0854cb208e2b6f1e25305e83c3a4c4c83d23f9d26988b3e1d046ab7ff3d97dd8"
+    },
+    "mt5/Config/EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_SMOKE.ini": {
+      "bytes": 917,
+      "sha256": "632b961909c9de0003ba39e442187e3a89f04ec5649f47063e7f299900d9c99e"
+    },
+    "mt5/EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_COMPILE.log": {
+      "bytes": 3088,
+      "sha256": "aa60ef6070fa9453961b2c5bd8638984a19372bb034df476809efd2b689bbd79"
+    },
+    "mt5/Experts/EurUsdProspectiveMultiSymbolCollector.ex5": {
+      "bytes": 31456,
+      "sha256": "4d4637c55d2a83c40205b89a29517ad06b1f4bcc69a96879842483459f64fd97"
+    },
+    "mt5/Experts/EurUsdProspectiveMultiSymbolCollector.mq5": {
+      "bytes": 18259,
+      "sha256": "1b8df20551e623c53e0e5e181fd93ec0fe8923879f4aa0014815ec5d704cc277"
+    },
+    "mt5/Presets/EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_DEMO.set": {
+      "bytes": 442,
+      "sha256": "c2d240bcdfb6abfec9fb01e2b98839b2d0caf25a860821cdad0abf36393f5856"
+    },
+    "outputs/smoke/EURUSD_PROSPECTIVE_M5_ENVIRONMENT_R2_SMOKE_ONLY.csv": {
+      "bytes": 2381,
+      "sha256": "6f4c9287eb3782aee61cea40ac797303a872fc1c3cd0d65c89a7bd47b3a14e58"
+    },
+    "outputs/smoke/EURUSD_PROSPECTIVE_M5_FEATURES_R2_SMOKE_ONLY.csv": {
+      "bytes": 1584627,
+      "sha256": "6c3b785446b1b3be84261d0643a3e09efb858688f5c74635e831387ce88e86fd"
+    },
+    "outputs/smoke/EURUSD_PROSPECTIVE_M5_HEARTBEAT_R2_SMOKE_ONLY.csv": {
+      "bytes": 636202,
+      "sha256": "4e61eb01f70cf57d54114670dee4ed091c791e3589b14ee3c3ef86d08e65ee2a"
+    },
+    "outputs/smoke/EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_R2_SMOKE.htm": {
+      "bytes": 26592,
+      "sha256": "81927ceeb5b144215db2a08e368b09bcb04c064c7063c59fa54bfbcdafa9fa65"
+    },
+    "outputs/smoke/VERIFICATION.json": {
+      "bytes": 1892,
+      "sha256": "e781df6a5ea4229a770f00438d2f50774951df75d9b607917d5b2ebaaf3e0811"
+    },
+    "outputs/smoke/VERIFICATION.md": {
+      "bytes": 1244,
+      "sha256": "3546756efc39e352455bc42c8258e7475e7bbd813aacfce39e921e2823dadefc"
+    },
+    "scripts/generate_manifest.py": {
+      "bytes": 1089,
+      "sha256": "1c01fa827beb29fb7931a038518bee242aea3ab784bbb5b5973593288284db28"
+    },
+    "tests/test_collector_safety.py": {
+      "bytes": 6840,
+      "sha256": "0a6638abf927d280b2650cfbee69a883f8dd4a4d68688dfbd5dc00140b17853e"
+    }
+  },
+  "generated_on": "2026-07-30"
+}

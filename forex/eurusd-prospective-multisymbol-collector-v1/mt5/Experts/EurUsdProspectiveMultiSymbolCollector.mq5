@@ -543,6 +543,8 @@ bool AcquireMutex()
 
 void WriteStartupEnvironment()
 {
+   string referenceSymbolsLog = InpReferenceSymbols;
+   StringReplace(referenceSymbolsLog, ",", "|");
    WriteEnvironment("STARTUP", "account_login",
       (string)AccountInfoInteger(ACCOUNT_LOGIN));
    WriteEnvironment("STARTUP", "account_server",
@@ -559,7 +561,7 @@ void WriteStartupEnvironment()
       TerminalInfoString(TERMINAL_PATH));
    WriteEnvironment("STARTUP", "target_symbol", InpTargetSymbol);
    WriteEnvironment("STARTUP", "chart_period", EnumToString(_Period));
-   WriteEnvironment("STARTUP", "reference_symbols", InpReferenceSymbols);
+   WriteEnvironment("STARTUP", "reference_symbols", referenceSymbolsLog);
    WriteEnvironment("STARTUP", "prospective_start_utc",
       InpProspectiveStartUtc);
    WriteEnvironment("STARTUP", "frozen_forward_floor_utc",
@@ -655,4 +657,3 @@ void OnTick()
 {
    CheckForNativeM5Transition();
 }
-

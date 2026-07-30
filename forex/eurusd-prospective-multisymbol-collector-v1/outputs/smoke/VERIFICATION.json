@@ -1,0 +1,68 @@
+{
+  "artifact": "EURUSD_PROSPECTIVE_MULTISYMBOL_COLLECTOR_V1",
+  "verification_date": "2026-07-30",
+  "scope": "TESTER_SMOKE_NOT_FORWARD",
+  "terminal": {
+    "build": 6061,
+    "server": "Capital.ComMena-Demo",
+    "symbol": "EURUSD",
+    "period": "M5",
+    "model": 0,
+    "from_date": "2026-06-01",
+    "to_date": "2026-06-03",
+    "generated_ticks": 134788,
+    "generated_bars": 574
+  },
+  "runtime": {
+    "test_passed": true,
+    "initial_balance_usd": 10000.0,
+    "final_balance_usd": 10000.0,
+    "total_trades": 0,
+    "total_deals": 0,
+    "feature_rows": 4592,
+    "captured_intervals": 574,
+    "eurusd_ok_rows": 573,
+    "ok_rows": 573,
+    "no_ticks_rows": 2871,
+    "symbol_unavailable_rows": 1148,
+    "startup_latch_rows": 1,
+    "evidence_scope_is_smoke_only": true,
+    "trade_permission": "NONE_READ_ONLY"
+  },
+  "source_status": {
+    "EURUSD": {
+      "OK": 573,
+      "NO_TICKS": 1
+    },
+    "EURGBP": {
+      "NO_TICKS": 574
+    },
+    "EURJPY": {
+      "NO_TICKS": 574
+    },
+    "GBPUSD": {
+      "NO_TICKS": 574
+    },
+    "USDJPY": {
+      "NO_TICKS": 574
+    },
+    "GBPJPY": {
+      "NO_TICKS": 574
+    },
+    "DOLLARIDXUSD": {
+      "SYMBOL_UNAVAILABLE": 574
+    },
+    "USTBONDTRUSD": {
+      "SYMBOL_UNAVAILABLE": 574
+    }
+  },
+  "sha256": {
+    "compiled_ex5": "4d4637c55d2a83c40205b89a29517ad06b1f4bcc69a96879842483459f64fd97",
+    "compile_log": "aa60ef6070fa9453961b2c5bd8638984a19372bb034df476809efd2b689bbd79",
+    "tester_report": "81927ceeb5b144215db2a08e368b09bcb04c064c7063c59fa54bfbcdafa9fa65",
+    "feature_ledger": "6c3b785446b1b3be84261d0643a3e09efb858688f5c74635e831387ce88e86fd",
+    "environment_log": "6f4c9287eb3782aee61cea40ac797303a872fc1c3cd0d65c89a7bd47b3a14e58",
+    "heartbeat_log": "4e61eb01f70cf57d54114670dee4ed091c791e3589b14ee3c3ef86d08e65ee2a"
+  },
+  "conclusion": "PASS_READ_ONLY_COLLECTOR_SMOKE_NOT_STRATEGY_ADMISSION"
+}
