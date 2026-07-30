@@ -14,7 +14,9 @@ $PackageExpert = Join-Path $PackageRoot "mt5\Experts\EurUsdM15RegimePortfolioCon
 $PackagePreset = Join-Path $PackageRoot "mt5\Presets\EURUSD_M15_REGIME_PORTFOLIO_SHADOW_DEMO.set"
 $PackageConfig = Join-Path $PackageRoot "mt5\Config\EURUSD_M15_REGIME_PORTFOLIO_LIVE_DEMO_SHADOW.ini"
 $AuditCsv = Join-Path $CommonFiles "EURUSD_M15_REGIME_PORTFOLIO_SHADOW_DEMO.csv"
+$FeatureCsv = Join-Path $CommonFiles "EURUSD_PROSPECTIVE_M5_FEATURES_V1.csv"
 $AuditScript = Join-Path $PSScriptRoot "audit_m15_regime_shadow.py"
+$AdjudicatorScript = Join-Path $PackageRoot "run_m15_regime_forward_adjudicator.py"
 $StateRoot = Join-Path $TerminalRoot "EURUSDM15ShadowState"
 $OperationsLog = Join-Path $StateRoot "OPERATIONS.log"
 
@@ -52,7 +54,14 @@ function Get-ShadowProcess {
 }
 
 try {
-    foreach ($Path in @($UvExecutable, $AuditScript, $TerminalExecutable, $TerminalConfig)) {
+    foreach ($Path in @(
+        $UvExecutable,
+        $AuditScript,
+        $AdjudicatorScript,
+        $TerminalExecutable,
+        $TerminalConfig,
+        $FeatureCsv
+    )) {
         if (-not (Test-Path -LiteralPath $Path)) {
             throw "Required health path missing: $Path"
         }
@@ -110,10 +119,27 @@ try {
     if ($Audit.status -eq "FAIL") {
         throw "M15 regime shadow health audit failed"
     }
+    $AdjudicatorOutput = Join-Path $StateRoot "adjudicator"
+    & $UvExecutable run python $AdjudicatorScript `
+        --signal-csv $AuditCsv `
+        --feature-csv $FeatureCsv `
+        --output-dir $AdjudicatorOutput `
+        --enforce-append-only | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+        throw "M15 regime forward adjudicator failed"
+    }
+    $Forward = Get-Content -Raw -LiteralPath (
+        Join-Path $AdjudicatorOutput "FORWARD_SUMMARY.json"
+    ) | ConvertFrom-Json
+    if ($Forward.demo_order_authorized) {
+        throw "M15 forward process unexpectedly authorized demo orders"
+    }
     Write-OperationsLog (
         "HEALTH_OK status=$($Audit.status) " +
         "signals=$($Audit.signals) blocked=$($Audit.blocked_signals) " +
-        "pid=$($Process.ProcessId)"
+        "resolved=$($Forward.admission.resolved_trades) " +
+        "pending=$($Forward.admission.pending_signals) " +
+        "admission=$($Forward.admission.status) pid=$($Process.ProcessId)"
     )
     exit 0
 }

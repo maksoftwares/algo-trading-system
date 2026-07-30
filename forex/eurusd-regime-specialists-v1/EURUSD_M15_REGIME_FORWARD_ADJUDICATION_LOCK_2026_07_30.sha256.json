@@ -1,0 +1,14 @@
+{
+  "campaign_id": "EURUSD_M15_REGIME_FORWARD_V1",
+  "locked_before_forward_floor": true,
+  "forward_floor_utc": "2026-08-01T00:00:00Z",
+  "demo_order_authorized": false,
+  "files": {
+    "config/frozen_m15_regime_forward_adjudication_v1.json": "34ecc7e9bf3e60fa4d268aada2a9764fc5e8b25d0af7d0de85b22566f18e13c5",
+    "EURUSD_M15_REGIME_FORWARD_ADJUDICATION_PROTOCOL.md": "12809dbc4651d3cbd2577e8b898585a4b7ca36c4e8752c01a2720588d5728ee7",
+    "src/m15_regime_forward_adjudicator.py": "d684ec73367f1f33c46857e326d9cadb2b3b68968ec4c0b151850426b21cbd23",
+    "run_m15_regime_forward_adjudicator.py": "97a2554cb864ef5da9f985056b41ef0dcfa345b86bf7d340baf64cf79d6924fd",
+    "tests/test_m15_regime_forward_adjudicator.py": "2ab8fb12840a1c88ed56f2dfceb674de2ee38cc9b5ea07d17bb513a5bdf19eda",
+    "scripts/run_m15_regime_shadow_health.ps1": "964375e03459b87f88ae48e96c197715cbf3aa46060541476c22e3b054e2376f"
+  }
+}

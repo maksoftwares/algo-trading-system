@@ -1,0 +1,48 @@
+{
+  "admission": {
+    "active_calendar_months": 0,
+    "best_5pct_removed_profit_factor": 0.0,
+    "checks": {
+      "maximum_single_month_gross_profit_share": false,
+      "minimum_active_calendar_months": false,
+      "minimum_best_5pct_removed_profit_factor": false,
+      "minimum_component_profit_factor": false,
+      "minimum_each_trade_sequence_half_profit_factor": false,
+      "minimum_observation_calendar_days": false,
+      "minimum_profit_factor": false,
+      "minimum_resolved_trades": false,
+      "minimum_stressed_profit_factor": false,
+      "minimum_trades_per_regime": false,
+      "mt5_signal_parity": false,
+      "shadow_soak": false,
+      "zero_invalid_outcomes": true
+    },
+    "demo_order_authorized": false,
+    "invalid_outcomes": 0,
+    "maximum_single_month_gross_profit_share": 1.0,
+    "observation_calendar_days": 0,
+    "pending_signals": 0,
+    "profit_factor": 0.0,
+    "regime_profit_factors": {
+      "CHOP": 0.0,
+      "COMPRESSION": 0.0
+    },
+    "regime_trade_counts": {
+      "CHOP": 0,
+      "COMPRESSION": 0
+    },
+    "resolved_trades": 0,
+    "status": "WAITING_MINIMUM_EVIDENCE",
+    "stressed_profit_factor": 0.0,
+    "trade_sequence_half_profit_factors": [
+      0.0,
+      0.0
+    ]
+  },
+  "campaign_id": "EURUSD_M15_REGIME_FORWARD_V1",
+  "demo_order_authorized": false,
+  "pending_signals": 0,
+  "schema_version": "eurusd_m15_regime_forward_summary_v1",
+  "signals": 0,
+  "terminal_outcomes": 0
+}

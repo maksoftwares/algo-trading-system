@@ -56,5 +56,12 @@ completed with result `0`. The guard:
 5. returns failure if any order action, pre-floor signal, identity mismatch,
    malformed row, or configuration drift appears.
 
+The same five-minute cycle also runs the hash-locked forward adjudicator. It
+matches future signals to the independent prospective EURUSD M5 bid/ask
+collector, resolves stop first then target, enforces the 12-hour hold, and
+refuses any change to a prior terminal outcome. Its verified prestart state is
+zero signals, zero resolved trades, zero invalid outcomes, and
+`WAITING_MINIMUM_EVIDENCE`; demo-order authorization is false.
+
 This proves a safe, unattended prospective shadow deployment. It does not
 authorize orders and does not close the remaining frequency gap.

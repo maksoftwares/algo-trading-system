@@ -118,6 +118,9 @@ def test_health_runner_and_task_are_fail_closed() -> None:
         "InpEmergencyStop=true",
         "InpTesterOrdersEnabled=false",
         "InpDemoArmToken=DISARMED",
+        "run_m15_regime_forward_adjudicator.py",
+        "--enforce-append-only",
+        "demo_order_authorized",
         "-WindowStyle Hidden",
     ):
         assert token in runner
