@@ -27,7 +27,7 @@ def _target(tmp_path: Path) -> Path:
     return target
 
 
-def test_bundle_is_deterministic_disarmed_and_contains_no_active_order_preset(
+def test_v2_bundle_is_deterministic_disarmed_ordering_candidate(
     tmp_path: Path,
 ) -> None:
     first = build_bundle(CONFIG, tmp_path / "one")
@@ -40,25 +40,27 @@ def test_bundle_is_deterministic_disarmed_and_contains_no_active_order_preset(
         assert "MANIFEST.json" in names
         assert (
             "MQL5/Presets/"
-            "EURUSD_H4_FREQUENCY_COMPLETION_SHADOW_DEMO.set"
+            "EURUSD_H4_FREQUENCY_COMPLETION_V2_ORDERING_DEMO.template.set"
         ) in names
         assert not any(name.endswith("ORDERING_DEMO.set") for name in names)
-        shadow = archive.read(
+        ordering = archive.read(
             "MQL5/Presets/"
-            "EURUSD_H4_FREQUENCY_COMPLETION_SHADOW_DEMO.set"
+            "EURUSD_H4_FREQUENCY_COMPLETION_V2_ORDERING_DEMO.template.set"
         ).decode("utf-8")
         startup = archive.read(
             "Config/"
-            "EURUSD_H4_FREQUENCY_COMPLETION_LIVE_DEMO_SHADOW.ini"
+            "EURUSD_H4_FREQUENCY_COMPLETION_V2_ORDERING_DEMO.ini"
         ).decode("utf-8")
         manifest = json.loads(archive.read("MANIFEST.json"))
-    assert "InpShadowMode=true" in shadow
-    assert "InpEnableDemoOrders=false" in shadow
-    assert "InpEmergencyStop=true" in shadow
-    assert "InpDemoArmToken=DISARMED" in shadow
+    assert "InpShadowMode=false" in ordering
+    assert "InpEnableDemoOrders=false" in ordering
+    assert "InpEmergencyStop=true" in ordering
+    assert "InpEnableCompressionSleeves=false" in ordering
+    assert "InpDemoArmToken=DISARMED" in ordering
     assert "AllowLiveTrading=0" in startup
     assert manifest["deployment_authorized"] is False
     assert manifest["demo_orders_authorized"] is False
+    assert manifest["default_install_mode"] == "DISARMED_ORDERING_CANDIDATE"
 
 
 def test_ready_preflight_is_read_only(tmp_path: Path) -> None:

@@ -1,17 +1,18 @@
 #property strict
-#property version   "1.00"
-#property description "EURUSD 12-sleeve H4 regime frequency-completion controlled demo EA"
+#property version   "2.00"
+#property description "EURUSD hardened chop-regime frequency-completion controlled demo EA"
 
 #include <Trade/Trade.mqh>
 
-input string InpRunId = "EURUSD_H4_FREQUENCY_COMPLETION_V1";
+input string InpRunId = "EURUSD_H4_FREQUENCY_COMPLETION_V2";
 input string InpTargetSymbol = "EURUSD";
 input long InpBaseMagicNumber = 26073100;
-input string InpOrderComment = "EUH4FREQV1";
+input string InpOrderComment = "EUH4FREQV2";
 input bool InpShadowMode = true;
 input bool InpEnableDemoOrders = false;
 input bool InpEmergencyStop = true;
 input bool InpTesterOrdersEnabled = false;
+input bool InpEnableCompressionSleeves = false;
 input long InpAllowedAccountLogin = 0;
 input string InpAllowedServer = "";
 input string InpDemoArmToken = "DISARMED";
@@ -20,11 +21,15 @@ input int InpBrokerUtcOffsetHours = 0;
 input double InpLotsPerTrade = 0.01;
 input double InpMaximumSpreadPips = 2.0;
 input int InpMaximumHoldM15Bars = 48;
-input int InpMaximumTradesPerUtcDay = 12;
-input int InpMaximumOwnPositions = 9;
+input int InpMaximumTradesPerUtcDay = 6;
+input int InpMaximumOwnPositions = 6;
 input double InpMaximumDailyClosedLossUsd = 20.0;
 input double InpMaximumRolling5DayClosedLossUsd = 40.0;
 input double InpMaximumSessionEquityDrawdownUsd = 60.0;
+input double InpMaximumAggregateInitialRiskUsd = 25.0;
+input double InpMinimumAccountEquityUsd = 5000.0;
+input double InpMinimumFreeMarginAfterOrderUsd = 2500.0;
+input int InpMaximumTickAgeSeconds = 10;
 input int InpDeviationPoints = 10;
 input int InpRestartExerciseUtcHour = -1;
 input string InpAuditLogName = "EURUSD_H4_FREQUENCY_COMPLETION_CONTROLLED_DEMO.csv";
@@ -41,7 +46,13 @@ const double COMPRESSION_TARGET_R = 2.0;
 const double STAGE_ONE_MAXIMUM_RISK = 2.0;
 const double STAGE_TWO_MAXIMUM_RISK = 2.5;
 const string ARM_TOKEN = "I_ACCEPT_DEMO_001";
-const double CONTRACT_SCHEMA_FINGERPRINT = 120260731.0;
+const double CONTRACT_SCHEMA_FINGERPRINT = 220260731.0;
+const double FROZEN_DAILY_LOSS_USD = 20.0;
+const double FROZEN_ROLLING_LOSS_USD = 40.0;
+const double FROZEN_EQUITY_DRAWDOWN_USD = 60.0;
+const double FROZEN_AGGREGATE_INITIAL_RISK_USD = 25.0;
+const double FROZEN_MINIMUM_ACCOUNT_EQUITY_USD = 5000.0;
+const double FROZEN_MINIMUM_FREE_MARGIN_USD = 2500.0;
 
 enum OwnedRegime
 {
@@ -81,11 +92,18 @@ int lastSignalDate[12];
 datetime lastTimeExitAttemptBar[12];
 int lastRestartExerciseDate = 0;
 double sessionStartEquity = 0.0;
-string mutexName = "";
+double sessionPeakEquity = 0.0;
+double mutexOwnerToken = 0.0;
+string mutexOwnerName = "";
+string mutexHeartbeatName = "";
 string schemaName = "";
+string peakEquityName = "";
+string breakerLatchName = "";
 string signalDateNames[12];
 bool mutexOwned = false;
 bool stateReady = false;
+bool auditHealthy = true;
+bool persistentBreakerLatched = false;
 
 string BoolText(const bool value)
 {
@@ -249,7 +267,7 @@ datetime UtcDayStart(const datetime brokerTime)
    return BrokerFromUtc(StructToTime(parts));
 }
 
-void Audit(
+bool Audit(
    const string eventName,
    const string detail,
    const int sleeve = -1,
@@ -268,11 +286,13 @@ void Audit(
    );
    if(handle == INVALID_HANDLE)
    {
+      auditHealthy = false;
       PrintFormat("EURUSD_H4_FREQ audit open failed err=%d", GetLastError());
-      return;
+      return false;
    }
-   if(FileSize(handle) == 0)
-      FileWrite(
+   bool okay = true;
+   if(FileSize(handle) <= 2)
+      okay = FileWrite(
          handle,
          "recorded_at_broker",
          "recorded_at_utc",
@@ -293,11 +313,11 @@ void Audit(
          "shadow",
          "orders_enabled",
          "emergency_stop"
-      );
+      ) > 0;
    FileSeek(handle, 0, SEEK_END);
    OwnedRegime regime =
       sleeve >= 0 ? SleeveRegime(sleeve) : REGIME_UNAVAILABLE;
-   FileWrite(
+   okay = FileWrite(
       handle,
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
       TimeToString(UtcNow(), TIME_DATE | TIME_SECONDS),
@@ -318,8 +338,16 @@ void Audit(
       BoolText(InpShadowMode),
       BoolText(InpEnableDemoOrders),
       BoolText(InpEmergencyStop)
-   );
+   ) > 0 && okay;
+   FileFlush(handle);
    FileClose(handle);
+   if(!okay)
+   {
+      auditHealthy = false;
+      Print("EURUSD_H4_FREQ audit write failed");
+      return false;
+   }
+   return true;
 }
 
 double Quantile(double &values[], const double q)
@@ -520,6 +548,8 @@ void AddM15Candidates(
    OwnedRegime regime = ClassifyRegime(barOpen);
    if(regime != REGIME_CHOP && regime != REGIME_COMPRESSION)
       return;
+   if(regime == REGIME_COMPRESSION && !InpEnableCompressionSleeves)
+      return;
    int slot = RegimeSlot(regime);
    double range = bar.high - bar.low;
    bool qualifiedBreak =
@@ -581,6 +611,8 @@ void AddM30Candidates(
       return;
    OwnedRegime regime = ClassifyRegime(barOpen);
    if(regime != REGIME_CHOP && regime != REGIME_COMPRESSION)
+      return;
+   if(regime == REGIME_COMPRESSION && !InpEnableCompressionSleeves)
       return;
    int slot = RegimeSlot(regime);
    if(m30BreakOpen[slot] != 0)
@@ -732,6 +764,161 @@ bool VolumeGridAllows(const double lots, string &reason)
    return true;
 }
 
+void LatchPersistentBreaker(const string detail)
+{
+   persistentBreakerLatched = true;
+   if(!(bool)MQLInfoInteger(MQL_TESTER) && breakerLatchName != "")
+      GlobalVariableSet(breakerLatchName, 1.0);
+   Audit("RISK_BREAKER_LATCHED", detail);
+}
+
+void RefreshPersistentEquityState()
+{
+   double equity = AccountInfoDouble(ACCOUNT_EQUITY);
+   if(equity <= 0.0)
+      return;
+   if(sessionPeakEquity <= 0.0 || equity > sessionPeakEquity)
+   {
+      sessionPeakEquity = equity;
+      if(!(bool)MQLInfoInteger(MQL_TESTER) && peakEquityName != "")
+         GlobalVariableSet(peakEquityName, sessionPeakEquity);
+   }
+   if(
+      !persistentBreakerLatched
+      && InpMaximumSessionEquityDrawdownUsd > 0.0
+      && sessionPeakEquity - equity >= InpMaximumSessionEquityDrawdownUsd
+   )
+      LatchPersistentBreaker("persistent_peak_equity_drawdown");
+}
+
+bool TickIsFresh(const MqlTick &tick, string &reason)
+{
+   if(!(bool)MQLInfoInteger(MQL_TESTER))
+   {
+      if(!TerminalInfoInteger(TERMINAL_CONNECTED))
+      {
+         reason = "terminal_disconnected";
+         return false;
+      }
+      if(tick.time <= 0 || TimeCurrent() - tick.time > InpMaximumTickAgeSeconds)
+      {
+         reason = "stale_tick";
+         return false;
+      }
+   }
+   reason = "tick_fresh";
+   return true;
+}
+
+double OpenInitialRiskUsd(bool &valid)
+{
+   valid = true;
+   double risk = 0.0;
+   for(int index = PositionsTotal() - 1; index >= 0; --index)
+   {
+      ulong ticket = PositionGetTicket(index);
+      if(ticket == 0 || !PositionSelectByTicket(ticket))
+         continue;
+      if(
+         PositionGetString(POSITION_SYMBOL) != InpTargetSymbol
+         || !IsOwnMagic(PositionGetInteger(POSITION_MAGIC))
+      )
+         continue;
+      double stop = PositionGetDouble(POSITION_SL);
+      double open = PositionGetDouble(POSITION_PRICE_OPEN);
+      double volume = PositionGetDouble(POSITION_VOLUME);
+      if(stop <= 0.0 || open <= 0.0 || volume <= 0.0)
+      {
+         valid = false;
+         return DBL_MAX;
+      }
+      ENUM_ORDER_TYPE orderType =
+         PositionGetInteger(POSITION_TYPE) == POSITION_TYPE_BUY
+            ? ORDER_TYPE_BUY
+            : ORDER_TYPE_SELL;
+      double atStop = 0.0;
+      if(
+         !OrderCalcProfit(
+            orderType,
+            InpTargetSymbol,
+            volume,
+            open,
+            stop,
+            atStop
+         )
+      )
+      {
+         valid = false;
+         return DBL_MAX;
+      }
+      risk += MathMax(0.0, -atStop);
+   }
+   return risk;
+}
+
+bool FundingAndCashRiskAllow(
+   const MqlTick &tick,
+   const double proposedStop,
+   string &reason
+)
+{
+   double equity = AccountInfoDouble(ACCOUNT_EQUITY);
+   if(equity < InpMinimumAccountEquityUsd)
+   {
+      reason = "minimum_account_equity";
+      return false;
+   }
+   double margin = 0.0;
+   if(
+      !OrderCalcMargin(
+         ORDER_TYPE_SELL,
+         InpTargetSymbol,
+         InpLotsPerTrade,
+         tick.bid,
+         margin
+      )
+      || margin < 0.0
+   )
+   {
+      reason = "margin_calculation_failed";
+      return false;
+   }
+   if(
+      AccountInfoDouble(ACCOUNT_MARGIN_FREE) - margin
+      < InpMinimumFreeMarginAfterOrderUsd
+   )
+   {
+      reason = "minimum_free_margin_after_order";
+      return false;
+   }
+   bool openRiskValid = false;
+   double openRisk = OpenInitialRiskUsd(openRiskValid);
+   double proposedAtStop = 0.0;
+   if(
+      !openRiskValid
+      || !OrderCalcProfit(
+         ORDER_TYPE_SELL,
+         InpTargetSymbol,
+         InpLotsPerTrade,
+         tick.bid,
+         proposedStop,
+         proposedAtStop
+      )
+   )
+   {
+      reason = "cash_risk_calculation_failed";
+      return false;
+   }
+   double totalRisk = openRisk + MathMax(0.0, -proposedAtStop);
+   if(totalRisk > InpMaximumAggregateInitialRiskUsd + 1e-9)
+   {
+      reason = "maximum_aggregate_initial_risk";
+      return false;
+   }
+   reason = "funding_and_cash_risk_ok";
+   return true;
+}
+
 bool IdentityAllowsManagement(string &reason)
 {
    if((bool)MQLInfoInteger(MQL_TESTER))
@@ -776,8 +963,23 @@ bool IdentityAllowsManagement(string &reason)
    return true;
 }
 
-bool NewOrderAllowed(const int sleeve, string &reason)
+bool NewOrderAllowed(
+   const int sleeve,
+   const double proposedStop,
+   string &reason
+)
 {
+   if(!auditHealthy)
+   {
+      reason = "audit_unavailable";
+      return false;
+   }
+   RefreshPersistentEquityState();
+   if(persistentBreakerLatched)
+   {
+      reason = "persistent_risk_breaker";
+      return false;
+   }
    if((bool)MQLInfoInteger(MQL_TESTER))
    {
       if(!InpTesterOrdersEnabled)
@@ -848,6 +1050,8 @@ bool NewOrderAllowed(const int sleeve, string &reason)
       reason = "tick_unavailable";
       return false;
    }
+   if(!TickIsFresh(tick, reason))
+      return false;
    if((tick.ask - tick.bid) / PipSize() > InpMaximumSpreadPips)
    {
       reason = "spread_limit";
@@ -884,15 +1088,8 @@ bool NewOrderAllowed(const int sleeve, string &reason)
       reason = "rolling_5day_loss_breaker";
       return false;
    }
-   if(
-      InpMaximumSessionEquityDrawdownUsd > 0.0
-      && sessionStartEquity - AccountInfoDouble(ACCOUNT_EQUITY)
-         >= InpMaximumSessionEquityDrawdownUsd
-   )
-   {
-      reason = "session_equity_drawdown_breaker";
+   if(!FundingAndCashRiskAllow(tick, proposedStop, reason))
       return false;
-   }
    reason = "all_order_guards_pass";
    return true;
 }
@@ -909,6 +1106,75 @@ void MarkCandidatesHandled(bool &candidate[])
    for(int sleeve = 0; sleeve < SLEEVE_COUNT; ++sleeve)
       if(candidate[sleeve])
          PersistSignalDate(sleeve, stateDateKey);
+}
+
+bool ConfirmSleevePosition(
+   const int sleeve,
+   const double expectedStop,
+   const double expectedTarget,
+   string &reason
+)
+{
+   if(trade.ResultRetcode() != TRADE_RETCODE_DONE)
+   {
+      reason = StringFormat(
+         "retcode_%u_%s",
+         trade.ResultRetcode(),
+         trade.ResultRetcodeDescription()
+      );
+      return false;
+   }
+   if(
+      trade.ResultDeal() == 0
+      || MathAbs(trade.ResultVolume() - InpLotsPerTrade) > 1e-9
+   )
+   {
+      reason = "missing_deal_or_wrong_fill_volume";
+      return false;
+   }
+   if(CountSleevePositions(sleeve) != 1)
+   {
+      reason = "confirmed_sleeve_position_count_not_one";
+      return false;
+   }
+   for(int index = PositionsTotal() - 1; index >= 0; --index)
+   {
+      ulong ticket = PositionGetTicket(index);
+      if(ticket == 0 || !PositionSelectByTicket(ticket))
+         continue;
+      if(
+         PositionGetString(POSITION_SYMBOL) != InpTargetSymbol
+         || PositionGetInteger(POSITION_MAGIC) != SleeveMagic(sleeve)
+      )
+         continue;
+      double volume = PositionGetDouble(POSITION_VOLUME);
+      double stop = PositionGetDouble(POSITION_SL);
+      double target = PositionGetDouble(POSITION_TP);
+      if(MathAbs(volume - InpLotsPerTrade) > 1e-9)
+      {
+         reason = "position_volume_mismatch";
+         return false;
+      }
+      if(
+         stop <= 0.0
+         || target <= 0.0
+         || MathAbs(stop - expectedStop) > 2.0 * _Point
+         || MathAbs(target - expectedTarget) > 2.0 * _Point
+      )
+      {
+         reason = "broker_side_stop_or_target_mismatch";
+         return false;
+      }
+      reason = StringFormat(
+         "deal_%I64u_position_%I64u_volume_%.2f",
+         trade.ResultDeal(),
+         ticket,
+         volume
+      );
+      return true;
+   }
+   reason = "owned_position_not_found_after_fill";
+   return false;
 }
 
 void ProcessCandidates(bool &candidate[])
@@ -997,7 +1263,7 @@ void ProcessCandidates(bool &candidate[])
          tick.bid - TargetR(regime) * stopDistance,
          _Digits
       );
-      Audit(
+      if(!Audit(
          "SIGNAL",
          "two_stage_causal_caps_passed",
          sleeve,
@@ -1006,9 +1272,10 @@ void ProcessCandidates(bool &candidate[])
          tick.bid,
          stop,
          target
-      );
+      ))
+         continue;
       string guardReason = "";
-      if(!NewOrderAllowed(sleeve, guardReason))
+      if(!NewOrderAllowed(sleeve, stop, guardReason))
       {
          Audit(
             "ORDER_BLOCKED",
@@ -1022,6 +1289,19 @@ void ProcessCandidates(bool &candidate[])
          );
          continue;
       }
+      if(
+         !Audit(
+            "ORDER_INTENT",
+            "all_pretrade_guards_passed",
+            sleeve,
+            "SHORT",
+            InpLotsPerTrade,
+            tick.bid,
+            stop,
+            target
+         )
+      )
+         continue;
       trade.SetExpertMagicNumber(SleeveMagic(sleeve));
       trade.SetDeviationInPoints(InpDeviationPoints);
       trade.SetTypeFillingBySymbol(_Symbol);
@@ -1034,9 +1314,19 @@ void ProcessCandidates(bool &candidate[])
          target,
          comment
       );
+      string executionReason = "";
+      bool confirmed = sent
+         && ConfirmSleevePosition(
+            sleeve,
+            stop,
+            target,
+            executionReason
+         );
       Audit(
-         sent ? "ORDER_SEND_OK" : "ORDER_SEND_FAILED",
-         trade.ResultRetcodeDescription(),
+         confirmed ? "ORDER_CONFIRMED" : "ORDER_EXECUTION_UNCERTAIN",
+         executionReason == ""
+            ? trade.ResultRetcodeDescription()
+            : executionReason,
          sleeve,
          "SHORT",
          InpLotsPerTrade,
@@ -1044,6 +1334,8 @@ void ProcessCandidates(bool &candidate[])
          stop,
          target
       );
+      if(!confirmed)
+         LatchPersistentBreaker("order_execution_not_confirmed");
    }
 }
 
@@ -1125,12 +1417,62 @@ void ManageTimeExits()
       trade.SetExpertMagicNumber(magic);
       bool closed = trade.PositionClose(ticket, InpDeviationPoints);
       string eventName = "TIME_EXIT_FAILED";
-      if(closed)
-         eventName = "TIME_EXIT_OK";
+      bool confirmedClosed = closed
+         && trade.ResultRetcode() == TRADE_RETCODE_DONE
+         && !PositionSelectByTicket(ticket);
+      if(confirmedClosed)
+         eventName = "TIME_EXIT_CONFIRMED";
       else if(trade.ResultRetcode() == TRADE_RETCODE_MARKET_CLOSED)
          eventName = "TIME_EXIT_DEFERRED";
       Audit(
          eventName,
+         trade.ResultRetcodeDescription(),
+         sleeve
+      );
+      if(!confirmedClosed && eventName != "TIME_EXIT_DEFERRED")
+         LatchPersistentBreaker("time_exit_not_confirmed");
+   }
+}
+
+void ManagePersistentBreakerExits()
+{
+   if(!persistentBreakerLatched)
+      return;
+   if((bool)MQLInfoInteger(MQL_TESTER))
+   {
+      if(!InpTesterOrdersEnabled)
+         return;
+   }
+   else
+   {
+      string identityReason = "";
+      if(!IdentityAllowsManagement(identityReason))
+      {
+         Audit("BREAKER_EXIT_BLOCKED", identityReason);
+         return;
+      }
+   }
+   for(int index = PositionsTotal() - 1; index >= 0; --index)
+   {
+      ulong ticket = PositionGetTicket(index);
+      if(ticket == 0 || !PositionSelectByTicket(ticket))
+         continue;
+      long magic = PositionGetInteger(POSITION_MAGIC);
+      int sleeve = MagicSleeve(magic);
+      if(
+         PositionGetString(POSITION_SYMBOL) != InpTargetSymbol
+         || sleeve < 0
+      )
+         continue;
+      trade.SetExpertMagicNumber(magic);
+      bool requested = trade.PositionClose(ticket, InpDeviationPoints);
+      bool confirmed = requested
+         && trade.ResultRetcode() == TRADE_RETCODE_DONE
+         && !PositionSelectByTicket(ticket);
+      Audit(
+         confirmed
+            ? "BREAKER_EXIT_CONFIRMED"
+            : "BREAKER_EXIT_RETRY_REQUIRED",
          trade.ResultRetcodeDescription(),
          sleeve
       );
@@ -1139,19 +1481,24 @@ void ManageTimeExits()
 
 bool AcquireMutex()
 {
-   mutexName = StringFormat(
-      "CODEX_EUH4FREQ_%I64d_%s",
+   string mutexBase = StringFormat(
+      "CODEX_EUH4FREQV2_%I64d_%s",
       AccountInfoInteger(ACCOUNT_LOGIN),
       InpTargetSymbol
    );
+   mutexOwnerName = mutexBase + "_OWNER";
+   mutexHeartbeatName = mutexBase + "_HEARTBEAT";
    double now = (double)TimeLocal();
-   if(GlobalVariableCheck(mutexName))
+   if(GlobalVariableCheck(mutexHeartbeatName))
    {
-      double heartbeat = GlobalVariableGet(mutexName);
+      double heartbeat = GlobalVariableGet(mutexHeartbeatName);
       if(now - heartbeat < 180.0)
          return false;
    }
-   GlobalVariableSet(mutexName, now);
+   mutexOwnerToken =
+      now * 1000.0 + (double)(GetTickCount() % 997);
+   GlobalVariableSet(mutexOwnerName, mutexOwnerToken);
+   GlobalVariableSet(mutexHeartbeatName, now);
    mutexOwned = true;
    EventSetTimer(60);
    return true;
@@ -1212,7 +1559,41 @@ int OnInit()
       Audit("INIT_FAILED", "ordering_configuration_not_fully_armed");
       return INIT_FAILED;
    }
-   if(InpMaximumOwnPositions != 9 || InpMaximumTradesPerUtcDay > 12)
+   if(
+      InpBaseMagicNumber != 26073100
+      || InpOrderComment != "EUH4FREQV2"
+      || InpEnableCompressionSleeves
+      || InpBrokerUtcOffsetHours != 0
+      || MathAbs(InpMaximumSpreadPips - 2.0) > 1e-9
+      || InpMaximumHoldM15Bars != 48
+      || InpMaximumOwnPositions != 6
+      || InpMaximumTradesPerUtcDay != 6
+      || MathAbs(
+         InpMaximumDailyClosedLossUsd - FROZEN_DAILY_LOSS_USD
+      ) > 1e-9
+      || MathAbs(
+         InpMaximumRolling5DayClosedLossUsd
+            - FROZEN_ROLLING_LOSS_USD
+      ) > 1e-9
+      || MathAbs(
+         InpMaximumSessionEquityDrawdownUsd
+            - FROZEN_EQUITY_DRAWDOWN_USD
+      ) > 1e-9
+      || MathAbs(
+         InpMaximumAggregateInitialRiskUsd
+            - FROZEN_AGGREGATE_INITIAL_RISK_USD
+      ) > 1e-9
+      || MathAbs(
+         InpMinimumAccountEquityUsd
+            - FROZEN_MINIMUM_ACCOUNT_EQUITY_USD
+      ) > 1e-9
+      || MathAbs(
+         InpMinimumFreeMarginAfterOrderUsd
+            - FROZEN_MINIMUM_FREE_MARGIN_USD
+      ) > 1e-9
+      || InpMaximumTickAgeSeconds != 10
+      || InpDeviationPoints != 10
+   )
    {
       Audit("INIT_FAILED", "frozen_exposure_limits_changed");
       return INIT_PARAMETERS_INCORRECT;
@@ -1247,7 +1628,17 @@ int OnInit()
       return INIT_FAILED;
    }
    schemaName = StringFormat(
-      "CODEX_EUH4FREQ_SCHEMA_%I64d_%s",
+      "CODEX_EUH4FREQV2_SCHEMA_%I64d_%s",
+      AccountInfoInteger(ACCOUNT_LOGIN),
+      InpTargetSymbol
+   );
+   peakEquityName = StringFormat(
+      "CODEX_EUH4FREQV2_PEAK_%I64d_%s",
+      AccountInfoInteger(ACCOUNT_LOGIN),
+      InpTargetSymbol
+   );
+   breakerLatchName = StringFormat(
+      "CODEX_EUH4FREQV2_BREAKER_%I64d_%s",
       AccountInfoInteger(ACCOUNT_LOGIN),
       InpTargetSymbol
    );
@@ -1268,7 +1659,7 @@ int OnInit()
       lastSignalDate[sleeve] = 0;
       lastTimeExitAttemptBar[sleeve] = 0;
       signalDateNames[sleeve] = StringFormat(
-         "CODEX_EUH4FREQ_SIG_%I64d_%s_%02d",
+         "CODEX_EUH4FREQV2_SIG_%I64d_%s_%02d",
          AccountInfoInteger(ACCOUNT_LOGIN),
          InpTargetSymbol,
          sleeve
@@ -1281,34 +1672,73 @@ int OnInit()
             (int)GlobalVariableGet(signalDateNames[sleeve]);
    }
    sessionStartEquity = AccountInfoDouble(ACCOUNT_EQUITY);
+   sessionPeakEquity = sessionStartEquity;
+   if(!(bool)MQLInfoInteger(MQL_TESTER))
+   {
+      if(GlobalVariableCheck(peakEquityName))
+         sessionPeakEquity = MathMax(
+            sessionPeakEquity,
+            GlobalVariableGet(peakEquityName)
+         );
+      GlobalVariableSet(peakEquityName, sessionPeakEquity);
+      persistentBreakerLatched =
+         GlobalVariableCheck(breakerLatchName)
+         && GlobalVariableGet(breakerLatchName) >= 0.5;
+   }
    lastM15Open = iTime(_Symbol, PERIOD_M15, 0);
    trade.SetDeviationInPoints(InpDeviationPoints);
-   Audit(
+   if(!Audit(
       "INIT_OK",
       ((bool)MQLInfoInteger(MQL_TESTER)
          ? "tester_"
          : (InpShadowMode ? "shadow_demo_" : "ordering_demo_"))
          + volumeReason
-   );
-   Audit(
+   ))
+      return INIT_FAILED;
+   if(!Audit(
       "STARTUP_LATCH",
       TimeToString(lastM15Open, TIME_DATE | TIME_MINUTES)
-   );
+   ))
+      return INIT_FAILED;
    return INIT_SUCCEEDED;
 }
 
 void OnTimer()
 {
-   if(mutexOwned)
-      GlobalVariableSet(mutexName, (double)TimeLocal());
+   RefreshPersistentEquityState();
+   if(!mutexOwned)
+      return;
+   if(
+      !GlobalVariableCheck(mutexOwnerName)
+      || MathAbs(
+         GlobalVariableGet(mutexOwnerName) - mutexOwnerToken
+      ) > 0.5
+   )
+   {
+      mutexOwned = false;
+      Audit("MUTEX_OWNERSHIP_LOST", "instance_removed_fail_closed");
+      ExpertRemove();
+      return;
+   }
+   GlobalVariableSet(mutexHeartbeatName, (double)TimeLocal());
 }
 
 void OnDeinit(const int reason)
 {
    Audit("DEINIT", IntegerToString(reason));
    EventKillTimer();
-   if(mutexOwned && GlobalVariableCheck(mutexName))
-      GlobalVariableDel(mutexName);
+   if(
+      mutexOwned
+      && GlobalVariableCheck(mutexOwnerName)
+      && MathAbs(
+         GlobalVariableGet(mutexOwnerName) - mutexOwnerToken
+      ) <= 0.5
+   )
+   {
+      GlobalVariableDel(mutexOwnerName);
+      if(GlobalVariableCheck(mutexHeartbeatName))
+         GlobalVariableDel(mutexHeartbeatName);
+   }
    if(h1Atr != INVALID_HANDLE)
       IndicatorRelease(h1Atr);
    if(h4Atr != INVALID_HANDLE)
@@ -1319,8 +1749,58 @@ void OnDeinit(const int reason)
       IndicatorRelease(h4Ema);
 }
 
+void OnTradeTransaction(
+   const MqlTradeTransaction &transaction,
+   const MqlTradeRequest &request,
+   const MqlTradeResult &result
+)
+{
+   if(
+      transaction.symbol != InpTargetSymbol
+      && request.symbol != InpTargetSymbol
+   )
+      return;
+   if(transaction.type == TRADE_TRANSACTION_REQUEST)
+      Audit(
+         "TRADE_TRANSACTION_REQUEST",
+         StringFormat(
+            "retcode_%u_deal_%I64u_order_%I64u_volume_%.2f",
+            result.retcode,
+            result.deal,
+            result.order,
+            result.volume
+         )
+      );
+   else if(transaction.type == TRADE_TRANSACTION_DEAL_ADD)
+      Audit(
+         "TRADE_TRANSACTION_DEAL",
+         StringFormat(
+            "deal_%I64u_order_%I64u_position_%I64u_volume_%.2f_price_%s",
+            transaction.deal,
+            transaction.order,
+            transaction.position,
+            transaction.volume,
+            DoubleToString(transaction.price, _Digits)
+         )
+      );
+   else if(transaction.type == TRADE_TRANSACTION_POSITION)
+      Audit(
+         "TRADE_TRANSACTION_POSITION",
+         StringFormat(
+            "position_%I64u_volume_%.2f_price_%s_sl_%s_tp_%s",
+            transaction.position,
+            transaction.volume,
+            DoubleToString(transaction.price, _Digits),
+            DoubleToString(transaction.price_sl, _Digits),
+            DoubleToString(transaction.price_tp, _Digits)
+         )
+      );
+}
+
 void OnTick()
 {
+   RefreshPersistentEquityState();
+   ManagePersistentBreakerExits();
    ManageTimeExits();
    datetime currentM15 = iTime(_Symbol, PERIOD_M15, 0);
    if(currentM15 == 0)

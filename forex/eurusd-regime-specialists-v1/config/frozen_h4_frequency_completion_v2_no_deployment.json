@@ -1,0 +1,84 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_v2_no_deployment_v1",
+  "frozen_at_utc": "2026-07-30T13:45:00Z",
+  "validation_only_not_pristine_oos": true,
+  "demo_deployment_authorized": false,
+  "demo_orders_authorized": false,
+  "implementation_hashes": {
+    "source_mq5": "46433193c3accf9316d856611b8a2d97f1589ea4d28acb2e3900bad134bff1f7",
+    "compiled_ex5": "81a53f3c85cadff699890ea2005ddcd24fc11afb06347d9bb2a9998caf3cbf23",
+    "compile_log": "a5b787d47b4984348638ec03bd204b69f5b14ba655d3cbd30deb9f692f4f3ef7",
+    "ordering_template": "bc87e91e4a1dbb9683e61cc44a37536ed6a9a0ccbb11edf19a5fb0a0f2de5d36",
+    "parity_tester_config": "bb540cc100d59882c087a6f7f66591cf1b4c71f8a1a5da05ddf922e3c4e914ad",
+    "restart_tester_config": "a411370efb64cfeb93e37b4715bc301e970f51765734659a2be6781a2af0a2d2",
+    "fail_closed_tester_config": "5bc601d089badb117162942789c7bcb6671d79af9eb14fa5ebcada783ac85212",
+    "mutated_limit_fault_config": "b5353ad587e15c008c2821ac39b51948795f64d64615ded792cdc084ab91a167",
+    "low_equity_fault_config": "a341dd93d2d76556d57c3c0c679eb8a9f6e5d02b03e61180d458e03d272da789"
+  },
+  "v1_broker_benchmark": {
+    "path": "outputs/h4_frequency_completion_mt5_step1/TRADES.csv",
+    "sha256": "38b10dd676914a250c9afa769531fef03858ae29e842e9fd37313c859e465910",
+    "expected_chop_trades": 306,
+    "minimum_preservation_ratio": 1.0
+  },
+  "transfer_window": ["2024-07-01", "2026-07-01"],
+  "first_12_month_window": ["2024-07-01", "2025-07-01"],
+  "latest_12_month_window": ["2025-07-01", "2026-07-01"],
+  "latest_6_month_window": ["2026-01-01", "2026-07-01"],
+  "transfer_gates": {
+    "minimum_trades": 300,
+    "minimum_trades_per_weekday": 0.55,
+    "minimum_latest_12_month_trades_per_weekday": 0.60,
+    "minimum_full_profit_factor": 1.35,
+    "minimum_first_12_month_profit_factor": 1.25,
+    "minimum_latest_12_month_profit_factor": 1.40,
+    "minimum_latest_6_month_profit_factor": 1.40,
+    "minimum_one_pip_plus_commission_profit_factor": 1.20,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.60,
+    "minimum_payoff_ratio": 1.20,
+    "maximum_payoff_ratio": 2.00,
+    "minimum_positive_month_share": 0.55,
+    "minimum_best_three_months_removed_profit_factor": 1.15,
+    "minimum_best_five_percent_days_removed_profit_factor": 1.15,
+    "minimum_each_sleeve_trades": 5,
+    "minimum_each_sleeve_profit_factor_exclusive": 1.0,
+    "maximum_balance_drawdown_percent": 1.0,
+    "required_history_quality_percent": 98,
+    "required_lot": 0.01,
+    "maximum_trades_per_active_day": 6,
+    "extra_one_pip_cost_usd_per_trade": 0.10,
+    "round_trip_commission_usd_per_trade": 0.07,
+    "required_sleeves": [
+      "BASELINE_CHOP",
+      "NEXT_CLOSE_CHOP",
+      "RETEST_CHOP",
+      "M15_FOLLOW_3_CHOP",
+      "M15_FOLLOW_5_CHOP",
+      "M30_FIRST_BREAK_CHOP"
+    ]
+  },
+  "restart_gates": {
+    "minimum_daily_restart_exercises": 100,
+    "exact_latest_6_month_trade_replay_required": true,
+    "zero_duplicate_sleeve_days_required": true
+  },
+  "fail_closed_gates": {
+    "minimum_observed_signals": 1,
+    "required_broker_trades": 0,
+    "every_signal_must_be_blocked": true
+  },
+  "fault_gates": {
+    "mutated_limit_must_fail_initialization": true,
+    "low_equity_must_block_every_signal": true,
+    "both_fault_cases_require_zero_trades": true
+  },
+  "decision_policy": {
+    "compression_sleeves_must_be_disabled": true,
+    "every_entry_and_time_exit_must_be_transaction_confirmed": true,
+    "persistent_peak_equity_breaker_required": true,
+    "audit_failure_must_block_new_orders": true,
+    "no_file_may_be_installed_in_a_demo_terminal_without_user_permission": true,
+    "historical_or_tester_pass_cannot_authorize_orders": true
+  }
+}

@@ -46,7 +46,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=(
             "Read-only preflight for the EURUSD frequency-completion "
-            "disarmed shadow package. This command never installs files."
+            "V2 disarmed ordering candidate. This command never installs "
+            "files."
         )
     )
     parser.add_argument("--target-root", type=Path, required=True)

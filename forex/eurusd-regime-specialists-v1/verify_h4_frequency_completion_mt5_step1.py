@@ -12,9 +12,6 @@ from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-import pandas as pd
-
-
 PACKAGE_ROOT = Path(__file__).resolve().parent
 REPO_ROOT = PACKAGE_ROOT.parents[1]
 sys.path.insert(0, str(REPO_ROOT / "forex-research" / "scripts"))
@@ -25,7 +22,7 @@ from run_forex_mt5_frequency_scout import parse_mt5_report
 CONFIG = (
     PACKAGE_ROOT
     / "config"
-    / "frozen_h4_frequency_completion_mt5_step1_v1.json"
+    / "frozen_h4_frequency_completion_v2_no_deployment.json"
 )
 SOURCE = (
     PACKAGE_ROOT
@@ -35,37 +32,45 @@ SOURCE = (
 )
 EX5 = SOURCE.with_suffix(".ex5")
 COMPILE_LOG = (
-    PACKAGE_ROOT / "mt5" / "EURUSD_H4_FREQUENCY_COMPLETION_COMPILE.log"
-)
-SHADOW = (
     PACKAGE_ROOT
     / "mt5"
-    / "Presets"
-    / "EURUSD_H4_FREQUENCY_COMPLETION_SHADOW_DEMO.set"
+    / "EURUSD_H4_FREQUENCY_COMPLETION_V2_COMPILE.log"
 )
 ORDERING = (
     PACKAGE_ROOT
     / "mt5"
     / "Presets"
-    / "EURUSD_H4_FREQUENCY_COMPLETION_ORDERING_DEMO.template.set"
+    / "EURUSD_H4_FREQUENCY_COMPLETION_V2_ORDERING_DEMO.template.set"
 )
 PARITY_CONFIG = (
     PACKAGE_ROOT
     / "mt5"
     / "Config"
-    / "EURUSD_H4_FREQUENCY_COMPLETION_PARITY_202407_202606.ini"
+    / "EURUSD_H4_FREQUENCY_COMPLETION_V2_PARITY_202407_202606.ini"
 )
 RESTART_CONFIG = (
     PACKAGE_ROOT
     / "mt5"
     / "Config"
-    / "EURUSD_H4_FREQUENCY_COMPLETION_RESTART_202601_202606.ini"
+    / "EURUSD_H4_FREQUENCY_COMPLETION_V2_RESTART_202601_202606.ini"
 )
 FAIL_CLOSED_CONFIG = (
     PACKAGE_ROOT
     / "mt5"
     / "Config"
-    / "EURUSD_H4_FREQUENCY_COMPLETION_FAIL_CLOSED_202606.ini"
+    / "EURUSD_H4_FREQUENCY_COMPLETION_V2_FAIL_CLOSED_202606.ini"
+)
+MUTATED_LIMIT_CONFIG = (
+    PACKAGE_ROOT
+    / "mt5"
+    / "Config"
+    / "EURUSD_H4_FREQUENCY_COMPLETION_V2_FAULT_MUTATED_LIMIT_202606.ini"
+)
+LOW_EQUITY_CONFIG = (
+    PACKAGE_ROOT
+    / "mt5"
+    / "Config"
+    / "EURUSD_H4_FREQUENCY_COMPLETION_V2_FAULT_LOW_EQUITY_202606.ini"
 )
 TEST_ROOT = Path("C:/MT5A1M5MomentumBacktest")
 COMMON_FILES = Path(
@@ -73,14 +78,20 @@ COMMON_FILES = Path(
     "MetaQuotes/Terminal/Common/Files"
 )
 CASES = {
-    "PARITY": "EURUSD_H4_FREQUENCY_COMPLETION_PARITY_202407_202606",
-    "RESTART": "EURUSD_H4_FREQUENCY_COMPLETION_RESTART_202601_202606",
-    "FAIL_CLOSED": "EURUSD_H4_FREQUENCY_COMPLETION_FAIL_CLOSED_202606",
+    "PARITY": "EURUSD_H4_FREQUENCY_COMPLETION_V2_PARITY_202407_202606",
+    "RESTART": "EURUSD_H4_FREQUENCY_COMPLETION_V2_RESTART_202601_202606",
+    "FAIL_CLOSED": "EURUSD_H4_FREQUENCY_COMPLETION_V2_FAIL_CLOSED_202606",
+    "MUTATED_LIMIT": (
+        "EURUSD_H4_FREQUENCY_COMPLETION_V2_FAULT_MUTATED_LIMIT_202606"
+    ),
+    "LOW_EQUITY": (
+        "EURUSD_H4_FREQUENCY_COMPLETION_V2_FAULT_LOW_EQUITY_202606"
+    ),
 }
-OUTPUT = PACKAGE_ROOT / "outputs" / "h4_frequency_completion_mt5_step1"
+OUTPUT = PACKAGE_ROOT / "outputs" / "h4_frequency_completion_v2_mt5"
 REPORT_MD = (
     PACKAGE_ROOT
-    / "EURUSD_H4_FREQUENCY_COMPLETION_MT5_STEP1_RESULT_2026_07_30.md"
+    / "EURUSD_H4_FREQUENCY_COMPLETION_V2_NO_DEPLOYMENT_RESULT_2026_07_30.md"
 )
 AUDIT_FIELDS = (
     "recorded_at_broker",
@@ -127,8 +138,15 @@ def load_audit(path: Path) -> tuple[list[dict[str, str]], bool]:
     ], header_present
 
 
-def summarize(trades: list[dict[str, Any]]) -> dict[str, Any]:
-    values = [float(row["profit"]) for row in trades]
+def summarize(
+    trades: list[dict[str, Any]],
+    *,
+    extra_cost_usd_per_trade: float = 0.0,
+) -> dict[str, Any]:
+    values = [
+        float(row["profit"]) - float(extra_cost_usd_per_trade)
+        for row in trades
+    ]
     wins = [value for value in values if value > 0.0]
     losses = [-value for value in values if value < 0.0]
     return {
@@ -145,6 +163,46 @@ def summarize(trades: list[dict[str, Any]]) -> dict[str, Any]:
         ),
         "net_pnl_usd": sum(values),
     }
+
+
+def sleeve_code(row: dict[str, Any]) -> str:
+    return str(row["entry_comment"]).rsplit("_", 1)[-1]
+
+
+def remove_best_groups(
+    trades: list[dict[str, Any]],
+    *,
+    group_key: str,
+    count: int,
+) -> dict[str, Any]:
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in trades:
+        value = (
+            str(row["entry_date"])[:7]
+            if group_key == "entry_month"
+            else str(row[group_key])
+        )
+        grouped[value].append(row)
+    ranked = sorted(
+        (
+            (summarize(rows)["net_pnl_usd"], name)
+            for name, rows in grouped.items()
+        ),
+        reverse=True,
+    )
+    removed = {name for _, name in ranked[:count]}
+    return summarize(
+        [
+            row
+            for row in trades
+            if (
+                str(row["entry_date"])[:7]
+                if group_key == "entry_month"
+                else str(row[group_key])
+            )
+            not in removed
+        ]
+    )
 
 
 def subset(
@@ -213,41 +271,49 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
 
 def render(result: dict[str, Any]) -> str:
     full = result["windows"]["FULL_TRANSFER"]
+    first12 = result["windows"]["FIRST_12_MONTHS"]
     latest12 = result["windows"]["LATEST_12_MONTHS"]
     latest6 = result["windows"]["LATEST_6_MONTHS"]
     failed = [
         name for name, passed in result["gate_results"].items() if not passed
     ]
-    return f"""# EURUSD H4 frequency-completion MT5 step-one result
+    return f"""# EURUSD H4 frequency-completion V2 no-deployment result
 
 Status: **{result["status"]}**
 
-The 12-sleeve EA compiled with zero errors/warnings and passed the isolated
-Capital.com broker-transfer, restart-recovery, and disarmed fail-closed checks.
-No file was installed into a demo terminal and no demo order was authorized.
+The hardened chop-only V2 compiled with zero errors/warnings and passed the
+isolated Capital.com broker-transfer, transaction-confirmation,
+restart-recovery, cost/outlier, and disarmed fail-closed checks. No file was
+installed into a demo terminal and no demo order was authorized.
 
 | Window | Trades | Trades/weekday | Win rate | Payoff | PF | 0.01-lot P&L |
 |---|---:|---:|---:|---:|---:|---:|
 | Two-year transfer | {full["trades"]} | {result["frequency"]["full_trades_per_weekday"]:.3f} | {full["win_rate"]:.2%} | {full["realized_payoff_ratio"]:.3f} | {full["profit_factor"]:.3f} | ${full["net_pnl_usd"]:+.2f} |
+| First 12 months | {first12["trades"]} | - | {first12["win_rate"]:.2%} | {first12["realized_payoff_ratio"]:.3f} | {first12["profit_factor"]:.3f} | ${first12["net_pnl_usd"]:+.2f} |
 | Latest 12 months | {latest12["trades"]} | {result["frequency"]["latest_12_month_trades_per_weekday"]:.3f} | {latest12["win_rate"]:.2%} | {latest12["realized_payoff_ratio"]:.3f} | {latest12["profit_factor"]:.3f} | ${latest12["net_pnl_usd"]:+.2f} |
 | Latest 6 months | {latest6["trades"]} | - | {latest6["win_rate"]:.2%} | {latest6["realized_payoff_ratio"]:.3f} | {latest6["profit_factor"]:.3f} | ${latest6["net_pnl_usd"]:+.2f} |
 
-Research-window count: {result["research_comparison"]["expected_trades"]}.
-MT5 count: {result["research_comparison"]["mt5_trades"]}
-({result["research_comparison"]["trade_count_ratio"]:.2%}).
-All 12 frozen sleeves traded. Every broker trade used exactly 0.01 lot.
-History quality was {result["broker_metrics"]["History Quality"]}; maximum
-balance drawdown was {result["broker_metrics"]["Balance Drawdown Maximal"]}.
+All six chop sleeves traded and every broker trade used exactly 0.01 lot.
+The failed compression sleeves placed zero trades. History quality was
+{result["broker_metrics"]["History Quality"]}; maximum balance drawdown was
+{result["broker_metrics"]["Balance Drawdown Maximal"]}.
 
 The restart exercise rebuilt state on
 {result["restart"]["restart_exercises"]} trading days and exactly replayed the
-unchanged 110-trade latest-six-month result, with zero duplicate sleeve-days.
+unchanged {latest6["trades"]}-trade latest-six-month result, with zero duplicate
+sleeve-days. All {full["trades"]} entry requests were transaction-confirmed.
 The disarmed test observed {result["fail_closed"]["signals"]} valid signals,
 blocked all of them, and placed zero trades.
 
-This is an aggregate broker transfer, not exact event-by-event replay against
-the research M5 ledger. It validates executable behavior on MT5 history; it is
-not fresh future evidence and does not authorize deployment.
+One-pip-plus-$0.07 stressed PF was
+{result["robustness"]["one_pip_plus_commission"]["profit_factor"]:.3f}.
+Removing the three best months left PF
+{result["robustness"]["best_three_months_removed"]["profit_factor"]:.3f};
+removing the best 5% of active days left PF
+{result["robustness"]["best_five_percent_days_removed"]["profit_factor"]:.3f}.
+
+This validates executable behavior on MT5 history. It is not fresh future
+evidence and does not authorize installation or orders.
 
 Failed gates: {", ".join(failed) if failed else "none"}.
 """
@@ -259,11 +325,12 @@ def main() -> None:
         "source_mq5": SOURCE,
         "compiled_ex5": EX5,
         "compile_log": COMPILE_LOG,
-        "shadow_preset": SHADOW,
         "ordering_template": ORDERING,
         "parity_tester_config": PARITY_CONFIG,
         "restart_tester_config": RESTART_CONFIG,
         "fail_closed_tester_config": FAIL_CLOSED_CONFIG,
+        "mutated_limit_fault_config": MUTATED_LIMIT_CONFIG,
+        "low_equity_fault_config": LOW_EQUITY_CONFIG,
     }
     actual_hashes = {name: sha256(path) for name, path in paths.items()}
     if actual_hashes != config["implementation_hashes"]:
@@ -271,29 +338,26 @@ def main() -> None:
     compile_text = COMPILE_LOG.read_text(encoding="utf-16")
     if "Result: 0 errors, 0 warnings" not in compile_text:
         raise RuntimeError("MQL5 compilation did not pass")
-    sizing_path = PACKAGE_ROOT / config["broker_sizing_result"]["path"]
-    ledger_path = PACKAGE_ROOT / config["broker_sizing_ledger"]["path"]
-    if (
-        sha256(sizing_path) != config["broker_sizing_result"]["sha256"]
-        or sha256(ledger_path) != config["broker_sizing_ledger"]["sha256"]
-    ):
-        raise RuntimeError("Frozen broker-sizing evidence hash mismatch")
-    sizing = json.loads(sizing_path.read_text(encoding="utf-8"))
-    if sizing["status"] != config["broker_sizing_result"]["expected_status"]:
-        raise RuntimeError("Unexpected broker-sizing status")
-    research = pd.read_csv(
-        ledger_path,
-        parse_dates=["entry_time_utc"],
+    benchmark_path = (
+        PACKAGE_ROOT / config["v1_broker_benchmark"]["path"]
     )
-    start, end = config["transfer_window"]
-    expected = research[
-        research["entry_time_utc"].ge(start)
-        & research["entry_time_utc"].lt(end)
+    if sha256(benchmark_path) != config["v1_broker_benchmark"]["sha256"]:
+        raise RuntimeError("Frozen V1 broker benchmark hash mismatch")
+    with benchmark_path.open(
+        "r", encoding="utf-8", newline=""
+    ) as handle:
+        benchmark = list(csv.DictReader(handle))
+    chop_codes = {"BC", "NC", "RC", "F3C", "F5C", "M30C"}
+    benchmark_chop = [
+        row
+        for row in benchmark
+        if str(row["entry_comment"]).rsplit("_", 1)[-1]
+        in chop_codes
     ]
-    if len(expected) != int(
-        config["broker_sizing_ledger"]["expected_recent_rows"]
+    if len(benchmark_chop) != int(
+        config["v1_broker_benchmark"]["expected_chop_trades"]
     ):
-        raise RuntimeError("Unexpected research comparison row count")
+        raise RuntimeError("Unexpected V1 chop benchmark count")
 
     parsed: dict[str, dict[str, Any]] = {}
     for name, stem in CASES.items():
@@ -319,6 +383,9 @@ def main() -> None:
     metrics = parity["metrics"]
     windows = {
         "FULL_TRANSFER": summarize(main_trades),
+        "FIRST_12_MONTHS": summarize(
+            subset(main_trades, *config["first_12_month_window"])
+        ),
         "LATEST_12_MONTHS": summarize(
             subset(main_trades, *config["latest_12_month_window"])
         ),
@@ -336,14 +403,57 @@ def main() -> None:
             windows["LATEST_12_MONTHS"]["trades"] / latest12_days
         ),
     }
+    active_day_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    monthly_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in main_trades:
+        active_day_groups[row["entry_date"]].append(row)
+        monthly_groups[row["entry_date"][:7]].append(row)
+    frequency.update(
+        {
+            "active_trade_days": len(active_day_groups),
+            "active_day_share": len(active_day_groups) / full_days,
+            "trades_per_active_day": (
+                len(main_trades) / len(active_day_groups)
+            ),
+            "maximum_trades_per_active_day": max(
+                map(len, active_day_groups.values())
+            ),
+        }
+    )
+    monthly = [
+        {"month": month, **summarize(rows)}
+        for month, rows in sorted(monthly_groups.items())
+    ]
+    positive_month_share = (
+        sum(row["net_pnl_usd"] > 0.0 for row in monthly) / len(monthly)
+    )
+    best_day_count = max(1, math.ceil(0.05 * len(active_day_groups)))
+    robustness = {
+        "one_pip_plus_commission": summarize(main_trades),
+        "best_three_months_removed": remove_best_groups(
+            main_trades,
+            group_key="entry_month",
+            count=3,
+        ),
+        "best_five_percent_days_removed": remove_best_groups(
+            main_trades,
+            group_key="entry_date",
+            count=best_day_count,
+        ),
+    }
     signal_rows = [
         row for row in parity["audit"] if row["event"] == "SIGNAL"
     ]
     sleeves = Counter(row["sleeve"] for row in signal_rows)
-    trade_count_ratio = len(main_trades) / len(expected)
     gates = config["transfer_gates"]
+    robustness["one_pip_plus_commission"] = summarize(
+        main_trades,
+        extra_cost_usd_per_trade=(
+            float(gates["extra_one_pip_cost_usd_per_trade"])
+            + float(gates["round_trip_commission_usd_per_trade"])
+        ),
+    )
     source_text = SOURCE.read_text(encoding="utf-8")
-    shadow_text = SHADOW.read_text(encoding="utf-8")
     ordering_text = ORDERING.read_text(encoding="utf-8")
     safe_defaults = all(
         item in source_text
@@ -352,44 +462,82 @@ def main() -> None:
             "input bool InpEnableDemoOrders = false;",
             "input bool InpEmergencyStop = true;",
             "input bool InpTesterOrdersEnabled = false;",
+            "input bool InpEnableCompressionSleeves = false;",
             'input string InpDemoArmToken = "DISARMED";',
             "input double InpLotsPerTrade = 0.01;",
+            "input int InpMaximumTradesPerUtcDay = 6;",
+            "input int InpMaximumOwnPositions = 6;",
+            "bool ConfirmSleevePosition(",
+            "void OnTradeTransaction(",
+            'reason = "audit_unavailable";',
+            "persistentBreakerLatched",
         )
     )
-    presets_disarmed = all(
-        all(
-            item in text
-            for item in (
-                "InpShadowMode=true",
-                "InpEnableDemoOrders=false",
-                "InpEmergencyStop=true",
-                "InpTesterOrdersEnabled=false",
-                "InpDemoArmToken=DISARMED",
-                "InpLotsPerTrade=0.01",
-            )
+    ordering_template_disarmed = all(
+        item in ordering_text
+        for item in (
+            "InpShadowMode=false",
+            "InpEnableDemoOrders=false",
+            "InpEmergencyStop=true",
+            "InpTesterOrdersEnabled=false",
+            "InpEnableCompressionSleeves=false",
+            "InpDemoArmToken=DISARMED",
+            "InpLotsPerTrade=0.01",
         )
-        for text in (shadow_text, ordering_text)
     )
     event_gate = (
         parity["events"]["SIGNAL"] == len(main_trades)
-        and parity["events"]["ORDER_SEND_OK"] == len(main_trades)
-        and parity["events"]["ORDER_SEND_FAILED"] == 0
+        and parity["events"]["ORDER_INTENT"] == len(main_trades)
+        and parity["events"]["ORDER_CONFIRMED"] == len(main_trades)
+        and parity["events"]["ORDER_EXECUTION_UNCERTAIN"] == 0
         and parity["events"]["ORDER_BLOCKED"] == 0
         and parity["events"]["INIT_FAILED"] == 0
         and parity["events"]["TIME_EXIT_FAILED"] == 0
+        and parity["events"]["BREAKER_EXIT_RETRY_REQUIRED"] == 0
+        and parity["events"]["RISK_BREAKER_LATCHED"] == 0
     )
     required_sleeves = set(gates["required_sleeves"])
+    code_to_sleeve = {
+        "BC": "BASELINE_CHOP",
+        "NC": "NEXT_CLOSE_CHOP",
+        "RC": "RETEST_CHOP",
+        "F3C": "M15_FOLLOW_3_CHOP",
+        "F5C": "M15_FOLLOW_5_CHOP",
+        "M30C": "M30_FIRST_BREAK_CHOP",
+    }
+    trades_by_sleeve: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in main_trades:
+        code = sleeve_code(row)
+        if code not in code_to_sleeve:
+            raise RuntimeError(f"Unexpected V2 sleeve code: {code}")
+        trades_by_sleeve[code_to_sleeve[code]].append(row)
+    sleeve_metrics = {
+        name: summarize(rows)
+        for name, rows in sorted(trades_by_sleeve.items())
+    }
+    benchmark_keys = {
+        (row["entry_time"], sleeve_code(row)) for row in benchmark_chop
+    }
+    v2_keys = {
+        (row["entry_time"], sleeve_code(row)) for row in main_trades
+    }
+    preserved_benchmark = len(benchmark_keys & v2_keys)
+    preservation_ratio = preserved_benchmark / len(benchmark_keys)
     transfer_gate_results = {
         "compile_zero_errors_and_warnings": True,
         "safe_source_defaults": safe_defaults,
-        "both_presets_disarmed": presets_disarmed,
+        "ordering_template_disarmed": ordering_template_disarmed,
         "observed_legal_0p01_volume_grid": any(
             row["event"] == "INIT_OK"
             and "min_0.01_step_0.01" in row["detail"]
             for row in parity["audit"]
         ),
-        "minimum_research_trade_count_ratio": trade_count_ratio
-        >= float(gates["minimum_research_trade_count_ratio"]),
+        "v1_chop_entries_preserved": preservation_ratio
+        >= float(
+            config["v1_broker_benchmark"]["minimum_preservation_ratio"]
+        ),
+        "minimum_trade_count": len(main_trades)
+        >= int(gates["minimum_trades"]),
         "minimum_trades_per_weekday": (
             frequency["full_trades_per_weekday"]
             >= float(gates["minimum_trades_per_weekday"])
@@ -401,6 +549,10 @@ def main() -> None:
         "minimum_full_profit_factor": (
             windows["FULL_TRANSFER"]["profit_factor"]
             >= float(gates["minimum_full_profit_factor"])
+        ),
+        "minimum_first_12_month_profit_factor": (
+            windows["FIRST_12_MONTHS"]["profit_factor"]
+            >= float(gates["minimum_first_12_month_profit_factor"])
         ),
         "minimum_latest_12_month_profit_factor": (
             windows["LATEST_12_MONTHS"]["profit_factor"]
@@ -420,20 +572,53 @@ def main() -> None:
             <= windows["FULL_TRANSFER"]["realized_payoff_ratio"]
             <= float(gates["maximum_payoff_ratio"])
         ),
-        "positive_net_pnl": (
-            windows["FULL_TRANSFER"]["net_pnl_usd"]
-            > float(gates["minimum_net_pnl_usd_exclusive"])
+        "positive_net_pnl": windows["FULL_TRANSFER"]["net_pnl_usd"] > 0.0,
+        "one_pip_plus_commission_profit_factor": robustness[
+            "one_pip_plus_commission"
+        ]["profit_factor"]
+        >= float(
+            gates["minimum_one_pip_plus_commission_profit_factor"]
+        ),
+        "positive_month_share": positive_month_share
+        >= float(gates["minimum_positive_month_share"]),
+        "best_three_months_removed_profit_factor": robustness[
+            "best_three_months_removed"
+        ]["profit_factor"]
+        >= float(
+            gates["minimum_best_three_months_removed_profit_factor"]
+        ),
+        "best_five_percent_days_removed_profit_factor": robustness[
+            "best_five_percent_days_removed"
+        ]["profit_factor"]
+        >= float(
+            gates[
+                "minimum_best_five_percent_days_removed_profit_factor"
+            ]
         ),
         "maximum_balance_drawdown": balance_drawdown_percent(metrics)
         <= float(gates["maximum_balance_drawdown_percent"]),
         "history_quality": history_quality_percent(metrics)
         >= int(gates["required_history_quality_percent"]),
-        "all_12_sleeves_present": set(sleeves) == required_sleeves,
+        "only_required_chop_sleeves_present": (
+            set(sleeves) == required_sleeves
+            and set(trades_by_sleeve) == required_sleeves
+            and all(row["regime"] == "CHOP" for row in signal_rows)
+        ),
+        "each_sleeve_minimum_trades_and_profit_factor": all(
+            summary["trades"] >= int(gates["minimum_each_sleeve_trades"])
+            and summary["profit_factor"]
+            > float(gates["minimum_each_sleeve_profit_factor_exclusive"])
+            for summary in sleeve_metrics.values()
+        ),
         "every_trade_exactly_0p01_lot": (
             {float(row["volume"]) for row in main_trades}
             == {float(gates["required_lot"])}
         ),
         "audit_and_broker_trades_reconcile": event_gate,
+        "maximum_trades_per_active_day": (
+            frequency["maximum_trades_per_active_day"]
+            <= int(gates["maximum_trades_per_active_day"])
+        ),
         "zero_duplicate_sleeve_days": duplicate_sleeve_days(
             parity["audit"]
         )
@@ -463,8 +648,10 @@ def main() -> None:
         ),
         "restart_audit_and_broker_trades_reconcile": (
             restart["events"]["SIGNAL"] == len(restart["trades"])
-            and restart["events"]["ORDER_SEND_OK"] == len(restart["trades"])
-            and restart["events"]["ORDER_SEND_FAILED"] == 0
+            and restart["events"]["ORDER_INTENT"] == len(restart["trades"])
+            and restart["events"]["ORDER_CONFIRMED"]
+            == len(restart["trades"])
+            and restart["events"]["ORDER_EXECUTION_UNCERTAIN"] == 0
             and restart["events"]["INIT_FAILED"] == 0
         ),
     }
@@ -480,13 +667,38 @@ def main() -> None:
         == int(config["fail_closed_gates"]["required_broker_trades"]),
         "every_signal_blocked": (
             fail_closed["events"]["ORDER_BLOCKED"] == fail_signals
-            and fail_closed["events"]["ORDER_SEND_OK"] == 0
-            and fail_closed["events"]["ORDER_SEND_FAILED"] == 0
+            and fail_closed["events"]["ORDER_CONFIRMED"] == 0
+            and fail_closed["events"]["ORDER_EXECUTION_UNCERTAIN"] == 0
         ),
         "all_blocks_are_tester_disarmed": all(
             row["detail"] == "tester_disarmed"
             for row in fail_closed["audit"]
             if row["event"] == "ORDER_BLOCKED"
+        ),
+    }
+    mutated_limit = parsed["MUTATED_LIMIT"]
+    low_equity = parsed["LOW_EQUITY"]
+    low_equity_signals = low_equity["events"]["SIGNAL"]
+    fault_gate_results = {
+        "mutated_limit_zero_trades": len(mutated_limit["trades"]) == 0,
+        "mutated_limit_failed_initialization": (
+            mutated_limit["events"]["INIT_FAILED"] == 1
+            and any(
+                row["event"] == "INIT_FAILED"
+                and row["detail"] == "frozen_exposure_limits_changed"
+                for row in mutated_limit["audit"]
+            )
+        ),
+        "low_equity_zero_trades": len(low_equity["trades"]) == 0,
+        "low_equity_every_signal_blocked": (
+            low_equity_signals > 0
+            and low_equity["events"]["ORDER_BLOCKED"]
+            == low_equity_signals
+            and all(
+                row["detail"] == "minimum_account_equity"
+                for row in low_equity["audit"]
+                if row["event"] == "ORDER_BLOCKED"
+            )
         ),
     }
     prohibited_demo_targets = [
@@ -510,51 +722,49 @@ def main() -> None:
         "demo_deployment_not_authorized": not bool(
             config["demo_deployment_authorized"]
         ),
+        "demo_orders_not_authorized": not bool(
+            config["demo_orders_authorized"]
+        ),
     }
     all_gates = {
         **{f"transfer_{k}": v for k, v in transfer_gate_results.items()},
         **{f"restart_{k}": v for k, v in restart_gate_results.items()},
         **{f"fail_closed_{k}": v for k, v in fail_gate_results.items()},
+        **{f"fault_{k}": v for k, v in fault_gate_results.items()},
         **{f"deployment_{k}": v for k, v in deployment_gate_results.items()},
     }
-    monthly_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for row in main_trades:
-        monthly_groups[row["entry_date"][:7]].append(row)
-    monthly = [
-        {"month": month, **summarize(rows)}
-        for month, rows in sorted(monthly_groups.items())
-    ]
     result = {
         "schema_version": (
-            "eurusd_h4_frequency_completion_mt5_step1_result_v1"
+            "eurusd_h4_frequency_completion_v2_no_deployment_result_v1"
         ),
         "generated_at_utc": datetime.now(UTC)
         .isoformat(timespec="seconds")
         .replace("+00:00", "Z"),
         "status": (
-            "MT5_STEP1_VALIDATION_PASSED_NO_DEPLOYMENT"
+            "V2_PREDEPLOYMENT_VALIDATION_PASSED_NO_DEPLOYMENT"
             if all(all_gates.values())
-            else "MT5_STEP1_VALIDATION_REJECTED"
+            else "V2_PREDEPLOYMENT_VALIDATION_REJECTED"
         ),
         "demo_deployment_performed": False,
         "demo_order_authorized": False,
-        "implementation_ready_for_permissioned_demo_install": all(
+        "implementation_ready_for_permissioned_ordering_demo": all(
             all_gates.values()
         ),
         "validation_only_not_pristine_oos": True,
         "implementation_hashes": actual_hashes,
-        "broker_sizing_result_sha256": sha256(sizing_path),
-        "broker_sizing_ledger_sha256": sha256(ledger_path),
-        "research_comparison": {
-            "expected_trades": len(expected),
-            "mt5_trades": len(main_trades),
-            "trade_count_ratio": trade_count_ratio,
-            "aggregate_transfer_not_exact_event_replay": True,
+        "v1_broker_benchmark_sha256": sha256(benchmark_path),
+        "v1_chop_preservation": {
+            "benchmark_trades": len(benchmark_chop),
+            "preserved_entries": preserved_benchmark,
+            "preservation_ratio": preservation_ratio,
         },
         "broker_metrics": metrics,
         "frequency": frequency,
         "windows": windows,
+        "robustness": robustness,
         "by_sleeve": dict(sorted(sleeves.items())),
+        "sleeve_metrics": sleeve_metrics,
+        "positive_month_share": positive_month_share,
         "monthly": monthly,
         "audit": {
             "events": dict(sorted(parity["events"].items())),
@@ -578,9 +788,21 @@ def main() -> None:
             "orders_blocked": fail_closed["events"]["ORDER_BLOCKED"],
             "events": dict(sorted(fail_closed["events"].items())),
         },
+        "fault_tests": {
+            "mutated_limit": {
+                "trades": len(mutated_limit["trades"]),
+                "events": dict(sorted(mutated_limit["events"].items())),
+            },
+            "low_equity": {
+                "trades": len(low_equity["trades"]),
+                "signals": low_equity_signals,
+                "events": dict(sorted(low_equity["events"].items())),
+            },
+        },
         "transfer_gate_results": transfer_gate_results,
         "restart_gate_results": restart_gate_results,
         "fail_closed_gate_results": fail_gate_results,
+        "fault_gate_results": fault_gate_results,
         "deployment_gate_results": deployment_gate_results,
         "gate_results": all_gates,
     }

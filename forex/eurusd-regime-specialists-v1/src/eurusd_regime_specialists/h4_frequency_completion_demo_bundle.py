@@ -9,8 +9,8 @@ from pathlib import Path
 from typing import Any, Iterable
 
 
-ARCHIVE_NAME = "EURUSD_H4_FREQUENCY_COMPLETION_DEMO_BUNDLE_V1.zip"
-ZIP_TIMESTAMP = (2026, 7, 30, 13, 30, 0)
+ARCHIVE_NAME = "EURUSD_H4_FREQUENCY_COMPLETION_ORDERING_BUNDLE_V2.zip"
+ZIP_TIMESTAMP = (2026, 7, 30, 13, 55, 0)
 
 
 def sha256_file(path: Path) -> str:
@@ -80,7 +80,7 @@ def _manifest_bytes(
 ) -> bytes:
     manifest = {
         "schema_version": (
-            "eurusd_h4_frequency_completion_demo_bundle_manifest_v1"
+            "eurusd_h4_frequency_completion_demo_bundle_manifest_v2"
         ),
         "package_id": config["package_id"],
         "frozen_at_utc": config["frozen_at_utc"],
@@ -92,8 +92,11 @@ def _manifest_bytes(
         "files": {
             item["bundle_path"]: {
                 "sha256": item["sha256"],
-                "install_in_shadow_phase": bool(
-                    item["install_in_shadow_phase"]
+                "install_in_preinstall_phase": bool(
+                    item.get(
+                        "install_in_preinstall_phase",
+                        item.get("install_in_shadow_phase", False),
+                    )
                 ),
             }
             for item in sorted(files, key=lambda row: row["bundle_path"])
@@ -255,7 +258,10 @@ def plan_shadow_install(
     planned: list[dict[str, Any]] = []
     collision_free = True
     for item in files:
-        if not item["install_in_shadow_phase"]:
+        if not item.get(
+            "install_in_preinstall_phase",
+            item.get("install_in_shadow_phase", False),
+        ):
             continue
         bundle_path = Path(item["bundle_path"])
         if bundle_path.parts[0] == "MQL5":
