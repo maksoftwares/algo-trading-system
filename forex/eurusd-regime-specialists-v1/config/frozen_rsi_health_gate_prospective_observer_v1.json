@@ -6,22 +6,23 @@
   "shadow_observation_only": true,
   "broker_action_allowed": false,
   "demo_order_authorized": false,
+  "observer_id": 26073093,
   "implementation": {
     "source_mq5": {
       "path": "mt5/Experts/EurUsdRsiHealthGateProspectiveObserver.mq5",
-      "sha256": "6441c9840e4d846afb12566bfb42d3257787d3ac1cd496b8a1edcaaf589bcdf5"
+      "sha256": "f952efc397067b1d087f44056d629040e338b9502cdb459cea8c80dca89ceb74"
     },
     "compiled_ex5": {
       "path": "mt5/Experts/EurUsdRsiHealthGateProspectiveObserver.ex5",
-      "sha256": "08683bd6c9270fcc84ebabc70563302e1e82f787d8f5125667e53f5b32b325ad"
+      "sha256": "9a46d95174468c9f7bd89bdb6ba110af9920769f6db35149ff4319cad658845c"
     },
     "compile_log": {
       "path": "mt5/EURUSD_RSI_HEALTH_GATE_PROSPECTIVE_OBSERVER_COMPILE.log",
-      "sha256": "e42c1755c251c493c77526c5b4a781d9932aeecc73ba57855ec27bada7636635"
+      "sha256": "948fda873b633416e6cff43dba0e32b8064804f70a3e7ff397bea6937609fd1e"
     },
     "shadow_preset": {
       "path": "mt5/Presets/EURUSD_RSI_HEALTH_GATE_PROSPECTIVE_OBSERVER.set",
-      "sha256": "81f393a018f8780190e2af2590679e42966c3a9b19aae88e6ceb3d607cfb7813"
+      "sha256": "8bba249a99d397fc839425c327744a0594089d345ebdb524b86ddcd8208aa4c4"
     },
     "live_config": {
       "path": "mt5/Config/EURUSD_RSI_HEALTH_GATE_PROSPECTIVE_OBSERVER_LIVE_DEMO.ini",
@@ -29,7 +30,7 @@
     },
     "parity_config": {
       "path": "mt5/Config/EURUSD_RSI_HEALTH_GATE_OBSERVER_PARITY_202407_202606.ini",
-      "sha256": "a8244020a531249804784bdd0195fbb272c6a1d3d26b0fdd6f3fd2a4bdc60c12"
+      "sha256": "a05a1bf9dc06d9e9c654803df297d8392f1182ebe38ffe94f15e0f81ce6e7960"
     },
     "parity_audit": {
       "path": "outputs/rsi_health_gate_prospective_observer_parity/PARITY_AUDIT.csv",
@@ -37,7 +38,7 @@
     },
     "parity_report": {
       "path": "outputs/rsi_health_gate_prospective_observer_parity/MT5_TESTER_REPORT.htm",
-      "sha256": "6fdb088213d542e276f494a9c7a4d9a90a64fa0551a294e7898b5b1e527f99d8"
+      "sha256": "83547394469efd0aa625f664188bea3e9f8067b25ca9667e9d2472e5e249a14b"
     }
   },
   "frozen_rule": {

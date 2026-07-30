@@ -103,6 +103,13 @@ def test_source_is_restart_safe_and_fail_closed() -> None:
         "state_prospective_floor_mismatch",
         "state_health_ring_incomplete",
         "duplicate_instance_mutex",
+        "now - heartbeat < 6.0",
+        "EventSetTimer(2)",
+        "now - lastPeriodicStateSave >= 30",
+        "bool stateReady = false",
+        "|| !stateReady",
+        "stateReady = true",
+        "lastM15Open <= 0",
         "ACCOUNT_TRADE_MODE_DEMO",
         "InpAllowedAccountLogin",
         "InpAllowedServer",
@@ -118,6 +125,7 @@ def test_source_is_restart_safe_and_fail_closed() -> None:
 def test_preset_and_terminal_are_safely_disarmed() -> None:
     settings = _settings(PRESET)
     assert settings["InpTargetSymbol"] == "EURUSD"
+    assert settings["InpObserverId"] == "26073093"
     assert settings["InpRequireDemoAccount"] == "true"
     assert settings["InpAllowedAccountLogin"] == "0"
     assert settings["InpAllowedServer"] == ""

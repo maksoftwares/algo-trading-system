@@ -4,7 +4,7 @@
 
 input string InpRunId = "EURUSD_RSI_HEALTH_GATE_FORWARD_V1";
 input string InpTargetSymbol = "EURUSD";
-input long InpObserverId = 26073091;
+input long InpObserverId = 26073093;
 input long InpAllowedAccountLogin = 0;
 input string InpAllowedServer = "";
 input bool InpRequireDemoAccount = true;
@@ -56,6 +56,8 @@ int healthHead = 0;
 string statePrefix = "";
 string mutexName = "";
 bool mutexOwned = false;
+bool stateReady = false;
+datetime lastPeriodicStateSave = 0;
 
 string BoolText(const bool value)
 {
@@ -211,7 +213,7 @@ bool ReadRequiredState(const string suffix, double &value)
 
 void SaveState()
 {
-   if((bool)MQLInfoInteger(MQL_TESTER))
+   if((bool)MQLInfoInteger(MQL_TESTER) || !stateReady)
       return;
    GlobalVariableDel(StateName("SCHEMA"));
    GlobalVariablesFlush();
@@ -287,12 +289,24 @@ bool RestoreState(string &reason)
    if((bool)MQLInfoInteger(MQL_TESTER))
    {
       InitializeEmptyState();
+      if(lastM15Open <= 0)
+      {
+         reason = "tester_m15_bar_unavailable";
+         return false;
+      }
+      stateReady = true;
       reason = "tester_empty_state";
       return true;
    }
    if(!GlobalVariableCheck(StateName("SCHEMA")))
    {
       InitializeEmptyState();
+      if(lastM15Open <= 0)
+      {
+         reason = "new_state_m15_bar_unavailable";
+         return false;
+      }
+      stateReady = true;
       SaveState();
       reason = "new_empty_state";
       return true;
@@ -397,7 +411,8 @@ bool RestoreState(string &reason)
    }
    healthHead = (int)value;
    if(
-      healthCount < 0
+      lastM15Open <= 0
+      || healthCount < 0
       || healthCount > HEALTH_LOOKBACK_COMPLETED_TRADES
       || healthHead < 0
       || healthHead >= HEALTH_LOOKBACK_COMPLETED_TRADES
@@ -436,6 +451,7 @@ bool RestoreState(string &reason)
       reason = "state_active_virtual_trade_invalid";
       return false;
    }
+   stateReady = true;
    reason = "persistent_state_restored";
    return true;
 }
@@ -447,12 +463,12 @@ bool AcquireMutex()
    if(GlobalVariableCheck(mutexName))
    {
       double heartbeat = GlobalVariableGet(mutexName);
-      if(now - heartbeat < 180.0)
+      if(now - heartbeat < 6.0)
          return false;
    }
    GlobalVariableSet(mutexName, now);
    mutexOwned = true;
-   EventSetTimer(60);
+   EventSetTimer(2);
    return true;
 }
 
@@ -787,7 +803,12 @@ void OnTimer()
 {
    if(mutexOwned)
       GlobalVariableSet(mutexName, (double)TimeLocal());
-   SaveState();
+   datetime now = TimeLocal();
+   if(now - lastPeriodicStateSave >= 30)
+   {
+      SaveState();
+      lastPeriodicStateSave = now;
+   }
 }
 
 void OnDeinit(const int reason)

@@ -52,6 +52,16 @@ function Get-ObserverProcess {
         Select-Object -First 1
 }
 
+function Start-ObserverProcess {
+    $Started = Start-Process `
+        -FilePath $TerminalExecutable `
+        -ArgumentList @("/portable", "/config:`"$TerminalConfig`"") `
+        -WindowStyle Hidden `
+        -PassThru
+    Write-OperationsLog "OBSERVER_RESTARTED pid=$($Started.Id)"
+    return $Started
+}
+
 try {
     foreach ($Path in @(
         $TerminalExecutable,
@@ -86,16 +96,22 @@ try {
 
     $Process = Get-ObserverProcess
     if (-not $Process) {
-        $Process = Start-Process `
-            -FilePath $TerminalExecutable `
-            -ArgumentList @("/portable", "/config:`"$TerminalConfig`"") `
-            -WindowStyle Hidden `
-            -PassThru
-        Write-OperationsLog "OBSERVER_RESTARTED pid=$($Process.Id)"
-        Start-Sleep -Seconds 8
+        $Process = Get-ObserverProcess
+        Start-Sleep -Seconds 7
         $Process = Get-ObserverProcess
         if (-not $Process) {
-            throw "RSI health-gate observer terminal failed to remain running"
+            $Process = Start-ObserverProcess
+            Start-Sleep -Seconds 8
+            $Process = Get-ObserverProcess
+        }
+        if (-not $Process) {
+            Write-OperationsLog "OBSERVER_RESTART_RETRY stale_mutex_recovery"
+            $Process = Start-ObserverProcess
+            Start-Sleep -Seconds 8
+            $Process = Get-ObserverProcess
+            if (-not $Process) {
+                throw "RSI health-gate observer terminal failed to remain running"
+            }
         }
     }
     if (-not (Test-Path -LiteralPath $AuditCsv)) {

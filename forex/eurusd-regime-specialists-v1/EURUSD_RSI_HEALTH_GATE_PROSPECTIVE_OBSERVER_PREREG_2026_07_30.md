@@ -4,6 +4,8 @@ Frozen before prospective observation begins: 2026-07-30.
 
 Prospective floor: 2026-08-01 00:00 UTC.
 
+Persistent observer identity: 26073093.
+
 This package is a disarmed observer, not a trading EA. Its MQL5 source has no
 trade library, order object, or order-send path. The terminal startup
 configuration also sets `AllowLiveTrading=0` and `AllowDllImport=0`.

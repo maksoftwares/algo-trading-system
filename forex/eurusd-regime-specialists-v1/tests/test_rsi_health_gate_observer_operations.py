@@ -103,6 +103,8 @@ def test_health_runner_and_task_are_fail_closed() -> None:
         "InpRequireDemoAccount=true",
         "InpResetPersistentState=false",
         "demo_order_authorized",
+        "OBSERVER_RESTART_RETRY stale_mutex_recovery",
+        "Start-Sleep -Seconds 7",
         "-WindowStyle Hidden",
     ):
         assert token in runner
