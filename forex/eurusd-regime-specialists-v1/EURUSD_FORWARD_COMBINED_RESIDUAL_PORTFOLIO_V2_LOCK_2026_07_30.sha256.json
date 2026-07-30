@@ -1,0 +1,25 @@
+{
+  "schema_version": "eurusd_forward_combined_residual_portfolio_v2_lock",
+  "campaign_id": "EURUSD_FORWARD_COMBINED_RESIDUAL_PORTFOLIO_V2",
+  "status": "FROZEN_BEFORE_FORWARD_FLOOR",
+  "locked_at_utc": "2026-07-30T08:35:09Z",
+  "forward_floor_utc": "2026.08.01 00:00:00",
+  "locked_before_forward_floor": true,
+  "locked_with_zero_forward_feature_rows": true,
+  "locked_with_zero_portfolio_decisions": true,
+  "historical_backtest_allowed": false,
+  "demo_order_authorized": false,
+  "files": {
+    "config/frozen_forward_combined_residual_portfolio_v2.json": "553f93e4288b76105c0d0b4db2db6f7b8144919fb76339f5b4e1288c4f358948",
+    "EURUSD_FORWARD_COMBINED_RESIDUAL_PORTFOLIO_V2_PROTOCOL.md": "6857baa40fcdd82491052e0b4eb933c8180b636087257065f3698405cf40f884",
+    "run_forward_combined_residual_portfolio.py": "44822ae35ec24af365b6cddd4a9c4b8bc1c30eaf48f682da983444ec742c920c",
+    "src/forward_combined_residual_portfolio.py": "3fe72d5cb2468b22ed52f0fcf4822f7cac82b52588b5776927430812afdf505a",
+    "tests/test_forward_combined_residual_portfolio.py": "0bd7b07a280a5633e5dc6f174c0ee16ec93cba3a26e157353de09b6e17429acd",
+    "scripts/run_forward_combined_residual_cycle.ps1": "1bb95420a55595ea57a20a6e6f23c0b0954105c9f7d8a693f35bb4358d759b55",
+    "scripts/install_forward_combined_residual_task.ps1": "19c6e0eaef922d3063c024e5a6a11ef47ff3e023a6e4e99229d3d537ae5647a2",
+    "src/forward_combined_frequency_portfolio.py": "19cf9e0599fbbd223932adf37c4264f81c17086f94b00d43a72d0ce5f3a35a21",
+    "EURUSD_FORWARD_COMBINED_FREQUENCY_PORTFOLIO_LOCK_2026_07_30.sha256.json": "aed06ee3599b55448c904fad082a08d06d75a603fdde9ceb31ca3244e4c4ad61",
+    "EURUSD_M15_REGIME_FORWARD_ADJUDICATION_LOCK_2026_07_30.sha256.json": "7de0be7b8b24452ba8d1c1537285ea7422fd26a8a09abb4b474d22fa93a2df09",
+    "../eurusd-prospective-multisymbol-collector-v1/EURUSD_FORWARD_RESIDUAL_REGIME_LOCK_2026_07_30.sha256.json": "b592d469343f95ea16eed76457b167d74944771f6a196cee9bda743eeebd4eaa"
+  }
+}
