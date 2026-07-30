@@ -2,7 +2,7 @@
   "schema_version": "eurusd_forward_residual_live_outcome_adjudicator_lock_v1",
   "campaign_id": "EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_V1",
   "status": "FROZEN_BEFORE_FORWARD_FLOOR",
-  "locked_at_utc": "2026-07-30T09:01:39Z",
+  "locked_at_utc": "2026-07-30T09:26:01Z",
   "forward_floor_utc": "2026.08.01 00:00:00",
   "locked_before_forward_floor": true,
   "locked_with_zero_live_signals": true,
@@ -12,13 +12,14 @@
   "demo_order_authorized": false,
   "files": {
     "config/frozen_forward_residual_live_outcome_adjudicator_v1.json": "d16749a4f3ce2e1cbf8d779da12913d4457620d67239d257fc4c9e10cbef6c47",
-    "EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_PROTOCOL.md": "600cdc093095af49c777b493cd67c9049be06687e7ede2b767b6ff782d31b5be",
+    "EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_PROTOCOL.md": "1cfadaf968024ed92a59926473b805cf7a2048a44f40412a41af6cd165dcb58f",
     "run_forward_residual_live_outcome_adjudicator.py": "92499e0a23cf1fe51a753270b879b14f2ade509e1e332ab5eb44b7446aabcdbb",
-    "src/forward_residual_live_outcome_adjudicator.py": "5fd5379a8c65ed8ffdfeab887fcff9a65be4964a78cec1fba9c19580935afca4",
-    "tests/test_forward_residual_live_outcome_adjudicator.py": "bc2eae686f60c42e0edfc9c840ed10a6de95e142a0f4992ceabdadefa70aa470",
+    "src/forward_residual_live_outcome_adjudicator.py": "53c261a3d1c361697aa5e2c24328e692c5736e0a0882b05b953490fdc2f7a532",
+    "tests/test_forward_residual_live_outcome_adjudicator.py": "962d63f5e744c0d5b2d3cbb478940d49edc9daec36aaacfa7e4cbc4562c8e4b1",
     "scripts/run_forward_residual_live_outcome_cycle.ps1": "03f85ff879c540e6c9dcc26faac7634c7cd75c39aa8015a4bd7a8cf404acbd6a",
     "scripts/install_forward_residual_live_outcome_task.ps1": "42dc0cc76357a07e2931f55b6e52d1d710a00c06a92166c588beb80f3e5bc096",
-    "EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_LOCK_2026_07_30.sha256.json": "a32af960ac942aa7923173c666deb55c9fd05395769449284f5e231cf2e13862",
+    "EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_PUBLISHER_LOCK_2026_07_30.sha256.json": "c6227aeb75b16c2e306a0bd2749f71cc9e5345314b9299d4156a901d56405864",
+    "EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_LOCK_2026_07_30.sha256.json": "17c1a8c9ee38b98d90fea8a4d74a4d25ea42997923dc68003e3f0528fbae1de6",
     "EURUSD_FORWARD_RESIDUAL_REGIME_LOCK_2026_07_30.sha256.json": "b592d469343f95ea16eed76457b167d74944771f6a196cee9bda743eeebd4eaa"
   }
 }

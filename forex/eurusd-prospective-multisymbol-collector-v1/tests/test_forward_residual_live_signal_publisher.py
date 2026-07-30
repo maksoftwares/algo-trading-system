@@ -162,6 +162,27 @@ def test_signal_is_published_before_outcome_exists() -> None:
     assert summary["demo_order_authorized"] is False
 
 
+def test_friday_is_terminal_cash_before_context_or_side_selection() -> None:
+    strategy, publisher = _configs()
+    records, summary = process_once(
+        {},
+        _prior_records(20),
+        set(),
+        [],
+        datetime(2026, 9, 4, 20, 3, tzinfo=UTC),
+        strategy,
+        publisher,
+    )
+    assert records[0]["status"] == "CASH_MARKET_CLOSURE"
+    assert records[0]["eligible_side"] == "CASH"
+    assert records[0]["eligibility_reason"] == (
+        "IMMUTABLE_CASH_MARKET_CLOSURE"
+    )
+    assert records[0]["training_days_before"] is None
+    assert "context" not in records[0]
+    assert summary["cash_decisions"] == 1
+
+
 def test_upstream_owned_date_is_immutable_cash() -> None:
     strategy, publisher = _configs()
     day = date(2026, 9, 1)
@@ -248,6 +269,7 @@ def test_contract_has_no_order_or_backfill_authorization() -> None:
     assert publisher["demo_order_authorized"] is False
     assert "NO_HISTORICAL_BACKFILL" in publisher["prohibitions"]
     assert "NO_POST_OUTCOME_PUBLICATION" in publisher["prohibitions"]
+    assert "NO_FRIDAY_20UTC_ENTRY" in publisher["prohibitions"]
     assert "NO_ORDERS" in publisher["prohibitions"]
 
 

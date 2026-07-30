@@ -30,7 +30,9 @@ A residual weekday becomes final only when:
 - no earlier M15 signal remains pending.
 
 A cash publisher decision needs no outcome, but still counts in the calendar
-denominator. Missing days and missing ticks are not imputed.
+denominator. Friday market-closure cash carries a self-terminal operational
+parity record, so a nonexistent post-close six-hour path cannot freeze the
+calendar. Missing days and missing ticks are not imputed.
 
 Validation starts with the first terminal residual decision whose prior online
 training count is at least 20. All accepted P&L comes from broker-observed

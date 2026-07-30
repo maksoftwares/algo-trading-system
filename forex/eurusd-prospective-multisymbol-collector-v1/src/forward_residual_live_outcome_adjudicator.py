@@ -21,6 +21,7 @@ LOCK_PATH = (
     / "EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_ADJUDICATOR_LOCK_2026_07_30.sha256.json"
 )
 TickProvider = Callable[[datetime, datetime], list[dict[str, Any]]]
+SELF_TERMINAL_PUBLISHER_STATUSES = {"CASH_MARKET_CLOSURE"}
 
 
 def sha256(path: Path) -> str:
@@ -407,9 +408,12 @@ def process(
         if decision_id in parity_ids:
             continue
         terminal = terminal_by_date.get(str(signal["decision_date"]))
-        if terminal is None:
+        if (
+            terminal is None
+            and signal.get("status") not in SELF_TERMINAL_PUBLISHER_STATUSES
+        ):
             continue
-        parity_rows.append(selection_parity(signal, terminal, config))
+        parity_rows.append(selection_parity(signal, terminal or {}, config))
         parity_ids.add(decision_id)
 
     outcome_ids = {str(item["decision_id"]) for item in existing_outcomes}

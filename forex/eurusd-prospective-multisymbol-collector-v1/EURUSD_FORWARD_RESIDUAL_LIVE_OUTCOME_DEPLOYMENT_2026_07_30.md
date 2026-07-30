@@ -10,7 +10,7 @@ research entry is explicitly forbidden as a substitute.
 
 ## Frozen boundary
 
-The implementation was locked at `2026-07-30T09:01:39Z`, before the
+The implementation was re-locked at `2026-07-30T09:26:01Z`, before the
 `2026.08.01 00:00:00` UTC evidence floor. At lock time:
 
 - live published signals: 0;
@@ -48,6 +48,10 @@ tick creates an invalid outcome. Nothing is imputed.
 Friday 20:00 UTC receipts are non-evaluable cash because the six-hour window
 crosses the weekly market close. They cannot enter future demo ordering or
 live P&L.
+
+The publisher now writes Friday market-closure cash before side selection.
+That state receives self-terminal operational parity without waiting for a
+research path that cannot exist after the weekly close.
 
 ## Selection parity
 
@@ -105,7 +109,7 @@ Repository and deployed prestart outputs match:
 | `FORWARD_RESIDUAL_LIVE_OUTCOME_SUMMARY.json` | `9066fe6a41ed7c359dc9e4140c64fa58aa76bc7f6d8a616a64f0d627c6712f19` |
 | `FORWARD_RESIDUAL_LIVE_OUTCOME_SUMMARY.md` | `d933eda5432e3d5b991070746f80cb2472ecbf03b20b989f8a56b630c7d88347` |
 
-Nine focused tests pass. Ruff and both PowerShell parser checks pass.
+Ten focused tests pass. Ruff and both PowerShell parser checks pass.
 
 ## Unattended deployment
 

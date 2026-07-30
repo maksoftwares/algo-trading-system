@@ -55,7 +55,7 @@ force a trade on a cash day.
 
 ## Frozen prestart boundary
 
-The contract was frozen at `2026-07-30T09:15:29Z`, before the
+The contract was re-frozen at `2026-07-30T09:26:19Z`, before the
 `2026.08.01 00:00:00` UTC floor, with:
 
 - post-floor feature rows: 0;
@@ -65,6 +65,11 @@ The contract was frozen at `2026-07-30T09:15:29Z`, before the
 - portfolio decisions: 0;
 - historical backtesting prohibited; and
 - demo-order authorization false.
+
+The pre-floor audit also repaired a calendar deadlock: Friday 20:00 UTC is now
+immutable market-closure cash with self-terminal operational parity. V3 counts
+the complete Friday denominator but waits for neither a trade nor a
+nonexistent six-hour post-close research path.
 
 The lock covers the V3 contract, implementation, tests, operations scripts,
 the unchanged M15 normalization engine, the protected M15 lock, and all three
@@ -93,9 +98,9 @@ The result is:
 
 Verification completed with:
 
-- 12 focused V3 tests;
-- 32 combined-validator regression tests;
-- 50 prospective residual-pipeline tests;
+- 13 focused V3 tests;
+- 33 combined-validator regression tests;
+- 52 prospective residual-pipeline tests;
 - Ruff clean;
 - both PowerShell parsers clean; and
 - frozen hash verification clean.

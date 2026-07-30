@@ -2,7 +2,7 @@
   "schema_version": "eurusd_forward_residual_mt5_shadow_bridge_lock_v1",
   "campaign_id": "EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_V1",
   "status": "FROZEN_BEFORE_FORWARD_FLOOR",
-  "locked_at_utc": "2026-07-30T08:52:52Z",
+  "locked_at_utc": "2026-07-30T09:25:46Z",
   "forward_floor_utc": "2026.08.01 00:00:00",
   "locked_before_forward_floor": true,
   "locked_with_zero_forward_feature_rows": true,
@@ -18,6 +18,6 @@
     "tests/test_forward_residual_mt5_shadow_bridge.py": "ddc7c58d50831fd8b02768b7b874c26b0b06740d281b49a80806a25a9ac08244",
     "scripts/run_forward_residual_mt5_shadow_bridge.ps1": "0746ddcc604ebc9a6609c397017655b8f466b121340bc740bfd6854c673ac284",
     "scripts/install_forward_residual_mt5_shadow_task.ps1": "e3736c232109335b1b40d0c18da0725fcc3a9a5806ee2f8d6304d7af89f1b01d",
-    "EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_PUBLISHER_LOCK_2026_07_30.sha256.json": "58231473ee6b9795232edc8b7adbb6a8d95d663ab7fcba9e51f80677416b6b2a"
+    "EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_PUBLISHER_LOCK_2026_07_30.sha256.json": "c6227aeb75b16c2e306a0bd2749f71cc9e5345314b9299d4156a901d56405864"
   }
 }

@@ -38,6 +38,11 @@ Friday 20:00 UTC receipts are non-evaluable cash because the six-hour path
 crosses the weekly market close. They are never counted as live outcomes or
 future demo entries.
 
+The publisher now writes Friday market-closure cash before side selection. Its
+parity record is self-terminal because no six-hour research outcome can exist
+across the weekly close. This operational mapping is not an economic trade and
+does not count toward the 50-outcome gate.
+
 ## Selection parity
 
 For each terminal research decision, the adjudicator compares the immutable
@@ -46,6 +51,8 @@ context, and regime-side statistics. Upstream-owned and missing-context cash
 states have their own exact mappings.
 
 Operational missed-deadline cash is not converted into a strategy signal.
+Friday market-closure cash is terminal without waiting for a nonexistent
+research path.
 
 ## Admission
 

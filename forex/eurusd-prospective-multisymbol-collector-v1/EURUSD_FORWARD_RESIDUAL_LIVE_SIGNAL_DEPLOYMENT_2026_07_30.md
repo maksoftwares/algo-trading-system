@@ -43,7 +43,7 @@ clock.
 
 ## Frozen boundary
 
-The implementation was locked at `2026-07-30T08:45:03Z`, before the
+The implementation was re-locked at `2026-07-30T09:24:30Z`, before the
 `2026.08.01 00:00:00` UTC evidence floor. At lock time:
 
 - post-floor feature rows: 0;
@@ -73,8 +73,9 @@ Repository and deployed prestart outputs match:
 | `FORWARD_RESIDUAL_LIVE_SIGNAL_SUMMARY.json` | `00016f5a64eefe94aa6e8c97b1988b1412e6cb298b4c12117b9fe439243c28c6` |
 | `FORWARD_RESIDUAL_LIVE_SIGNAL_SUMMARY.md` | `82ef771c5cb03f25042ab88d5bdfa9e09bb1f70ad1653ed8ec080c53223f4dae` |
 
-Nine focused tests pass, including pre-floor refusal, pre-outcome publication,
-prior-only regime histories, upstream veto, missing-data cash, late cash,
+Ten focused tests pass, including pre-floor refusal, pre-outcome publication,
+terminal Friday market-closure cash, prior-only regime histories, upstream
+veto, missing-data cash, late cash,
 append-only mutation refusal, no-order/no-backfill guards, and hash-lock
 verification. Ruff and both PowerShell parser checks pass.
 

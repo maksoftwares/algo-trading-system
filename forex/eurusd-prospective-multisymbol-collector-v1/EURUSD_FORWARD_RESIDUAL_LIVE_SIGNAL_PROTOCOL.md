@@ -20,6 +20,8 @@ The decision clock is 20:00 UTC. Publication is allowed from 20:01 through
 - If required context is missing inside the window, immutable cash is written.
 - If the publisher starts after the deadline, immutable missed-deadline cash is
   written.
+- Friday always publishes immutable market-closure cash. A six-hour 20:00 UTC
+  path would cross the weekly close, so no Friday side or quote is selected.
 - A cash decision cannot later be replaced with a signal.
 - Manual as-of clocks and historical backfill are prohibited.
 
@@ -60,5 +62,5 @@ combined portfolio.
 ## Prohibitions
 
 No pre-floor decision, backfill, manual as-of override, post-outcome
-publication, late signal recovery, imputation, strategy change, or order is
-allowed.
+publication, late signal recovery, Friday entry, imputation, strategy change,
+or order is allowed.

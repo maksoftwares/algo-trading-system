@@ -223,6 +223,14 @@ def process_once(
                 "training_days_before": None,
             }
         )
+    elif day.weekday() == 4:
+        record.update(
+            {
+                "status": "CASH_MARKET_CLOSURE",
+                "eligibility_reason": publisher_config["friday_utc_action"],
+                "training_days_before": None,
+            }
+        )
     elif day_text in upstream_owned_dates:
         record.update(
             {

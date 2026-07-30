@@ -165,6 +165,43 @@ def test_friday_receipt_is_cash_without_tick_query() -> None:
     assert summary["resolved_live_outcomes"] == 0
 
 
+def test_friday_publisher_cash_gets_terminal_parity_without_research_record() -> None:
+    signal = _signal(day="2026-09-04", side="CASH")
+    signal.update(
+        {
+            "status": "CASH_MARKET_CLOSURE",
+            "eligible_side": "CASH",
+            "eligibility_reason": "IMMUTABLE_CASH_MARKET_CLOSURE",
+            "regime": None,
+            "training_days_before": None,
+        }
+    )
+
+    def forbidden_provider(_start, _end):
+        raise AssertionError("Friday publisher cash queried ticks")
+
+    outcomes, parity, summary, artifacts = process(
+        [signal],
+        [],
+        [],
+        [],
+        [],
+        datetime(2026, 9, 5, 2, 20, tzinfo=UTC),
+        forbidden_provider,
+        _config(),
+    )
+    assert outcomes == []
+    assert len(parity) == 1
+    assert parity[0]["parity_pass"] is True
+    assert parity[0]["terminal_status"] is None
+    assert parity[0]["comparisons"] == {
+        "operational_cash_not_comparable": True
+    }
+    assert summary["selection_parity_rows"] == 1
+    assert summary["pending_selection_parity"] == 0
+    assert artifacts == {}
+
+
 def test_selection_parity_compares_pre_outcome_and_terminal_state() -> None:
     signal = _signal()
     terminal = {

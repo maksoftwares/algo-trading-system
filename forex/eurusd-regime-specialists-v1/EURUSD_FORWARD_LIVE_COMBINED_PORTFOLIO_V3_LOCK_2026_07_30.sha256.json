@@ -2,7 +2,7 @@
   "schema_version": "eurusd_forward_live_combined_portfolio_v3_lock",
   "campaign_id": "EURUSD_FORWARD_LIVE_COMBINED_PORTFOLIO_V3",
   "status": "FROZEN_BEFORE_FORWARD_FLOOR",
-  "locked_at_utc": "2026-07-30T09:15:29Z",
+  "locked_at_utc": "2026-07-30T09:26:19Z",
   "forward_floor_utc": "2026.08.01 00:00:00",
   "locked_before_forward_floor": true,
   "locked_with_zero_forward_feature_rows": true,
@@ -12,16 +12,16 @@
   "demo_order_authorized": false,
   "files": {
     "config/frozen_forward_live_combined_portfolio_v3.json": "db78ebf195fe14418089c59cb849d0bf7ad5d6468bef8c4ec6f3c46e9d9a8aa6",
-    "EURUSD_FORWARD_LIVE_COMBINED_PORTFOLIO_V3_PROTOCOL.md": "11ae49c199360984201f478253228ff8f185751c8b633cfd17ba80ae1131e759",
+    "EURUSD_FORWARD_LIVE_COMBINED_PORTFOLIO_V3_PROTOCOL.md": "bcd3bbb7ea7742166c20e2dd5b193535b43b7d2c79c8b5c98837f9bbb5ac4b91",
     "run_forward_live_combined_portfolio.py": "0ad0fdc2f650cb427a8615b2f3aa53b205ceca7f22700b568958ea557edcc846",
-    "src/forward_live_combined_portfolio.py": "8f612a5eb9130d3d810236f36e308de4f98e880f8627509f23ad4b1882e51f63",
-    "tests/test_forward_live_combined_portfolio.py": "20797cf5d0146087209867b7360d037446a441a66ba2afeb3c74e63dc02a9d31",
+    "src/forward_live_combined_portfolio.py": "6d5449a7c9f85fa869a0bd46ce69e94f73105f316da6943c0398521f169c97d2",
+    "tests/test_forward_live_combined_portfolio.py": "59a508e572e414be6fb32110299f6b9a5809e4c2ab91a018437da79b3c00088d",
     "scripts/run_forward_live_combined_cycle.ps1": "ddcbcfb6d378eef5b7046eee2d97a3cc88b780d324983f62b2dd15e072343325",
     "scripts/install_forward_live_combined_task.ps1": "8a84f2732a77141ec5702cc668a922df1013e505b6dbb810ddfc28ee0c4520aa",
     "src/forward_combined_frequency_portfolio.py": "19cf9e0599fbbd223932adf37c4264f81c17086f94b00d43a72d0ce5f3a35a21",
     "EURUSD_M15_REGIME_FORWARD_ADJUDICATION_LOCK_2026_07_30.sha256.json": "7de0be7b8b24452ba8d1c1537285ea7422fd26a8a09abb4b474d22fa93a2df09",
-    "../eurusd-prospective-multisymbol-collector-v1/EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_PUBLISHER_LOCK_2026_07_30.sha256.json": "58231473ee6b9795232edc8b7adbb6a8d95d663ab7fcba9e51f80677416b6b2a",
-    "../eurusd-prospective-multisymbol-collector-v1/EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_LOCK_2026_07_30.sha256.json": "a32af960ac942aa7923173c666deb55c9fd05395769449284f5e231cf2e13862",
-    "../eurusd-prospective-multisymbol-collector-v1/EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_ADJUDICATOR_LOCK_2026_07_30.sha256.json": "81dccaebb344db4c446056509b5cf6b168e34c5a6724255064a7e2d41f95397d"
+    "../eurusd-prospective-multisymbol-collector-v1/EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_PUBLISHER_LOCK_2026_07_30.sha256.json": "c6227aeb75b16c2e306a0bd2749f71cc9e5345314b9299d4156a901d56405864",
+    "../eurusd-prospective-multisymbol-collector-v1/EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_LOCK_2026_07_30.sha256.json": "17c1a8c9ee38b98d90fea8a4d74a4d25ea42997923dc68003e3f0528fbae1de6",
+    "../eurusd-prospective-multisymbol-collector-v1/EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_ADJUDICATOR_LOCK_2026_07_30.sha256.json": "41c4b60bc943738f0e03f0bf1c017e042b84003c6b02afcda127cff97debcc74"
   }
 }

@@ -195,6 +195,18 @@ def test_cash_decision_finalizes_without_an_outcome() -> None:
     ) == [day]
 
 
+def test_friday_market_closure_cash_finalizes_without_an_outcome() -> None:
+    day = date(2026, 9, 4)
+    signal = _signal(day, "CASH_MARKET_CLOSURE")
+    assert module.finalized_validation_days(
+        [day],
+        {day.isoformat(): signal},
+        {},
+        {signal["decision_id"]: _parity(day)},
+        None,
+    ) == [day]
+
+
 def test_protected_m15_has_same_timestamp_priority() -> None:
     config = copy.deepcopy(_config())
     config["causal_portfolio_risk"]["maximum_concurrent_positions"] = 1

@@ -118,6 +118,9 @@ path, and compares the pre-outcome selection with the later terminal research
 decision. Ambiguous entry ticks and missing paths are invalid, never imputed.
 Friday 20:00 receipts are non-evaluable cash because the hold crosses the
 weekly close.
+The publisher writes Friday market-closure cash before side selection, and the
+outcome layer gives that state self-terminal operational parity so the combined
+calendar cannot stall on a nonexistent post-close path.
 
 `scripts/install_forward_residual_live_outcome_task.ps1` installs the limited
 06:20 Dubai / 02:20 UTC task. See
