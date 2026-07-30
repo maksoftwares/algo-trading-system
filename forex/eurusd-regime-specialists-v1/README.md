@@ -112,6 +112,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 106. Preregistered dense residual regime family: twelve deterministic direction rules were frozen before rule-level inspection, selected independently inside five causal regimes on 2016H2-2021, and judged on locked 2022-2026H1 validation. Only the two broad-EUR regimes selected experts; those experts then lost 18.91R in validation at PF 0.777. The combined two-year broker window retained PF 1.333 because of protected M15, but reached only 0.287 trades per weekday and the residual component itself lost. Static late-session cross-pair experts are therefore rejected; gates remain unchanged and no order is authorized.
 107. Causal online dense residual router: one preregistered same-regime router used only completed prior shadow outcomes to select among the frozen direction rules, then traded every resolved residual opportunity. It closed most of the activity gap at 430 combined trades, 0.824/day, and 80.84% weekday coverage, but its residual sleeve lost 43.35R in the two-year broker window at PF 0.764. Protected M15 carried the combined PF to only 1.091; stress PF was 1.006 and best-5%-removed PF 0.669. The result proves that adaptive routing over the same weak signals creates frequency without edge and is rejected.
 108. Cross-Pair Compression own-price specialist: six preregistered EURUSD displacement rules tested an independent mechanism inside the highest-capacity failed regime. All six lost during 2016H2-2021 development; the best PF was 0.893 and best stressed PF 0.783 over 418 trades. The protocol therefore selected cash and did not use locked validation outcomes to rescue a rule. Simple late-session own-price momentum or mean reversion is rejected before promotion.
+109. Cross-Pair Compression failed-auction census: a one-variant symmetric rejection signal inherited fixed 3-pip excursion, 20-pip range, 55% wick, and three-M5-bar thresholds from an earlier preregistration. It found only 37 candidates in ten years versus the frozen 40 minimum, with 13 locked-validation candidates versus 15 required. P&L remained closed, thresholds were not weakened, and the exact pattern is rejected for insufficient capacity.
 
 Final status: `PROTECTED_M15_EDGE_PRESENT_FREQUENCY_PORTFOLIO_NOT_DEMO_READY`.
 
@@ -392,6 +393,7 @@ uv run --offline --with pandas --with numpy --with pyarrow python run_frozen_res
 uv run --offline --with pandas --with numpy --with pyarrow python run_dense_residual_family.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_online_dense_residual_router.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_compression_own_price_family.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_compression_failed_auction.py
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_consensus.py capture --days-ahead 60
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_actuals.py capture
 uv run --with pandas --with pyarrow python capture_prospective_dukascopy_event_m5.py capture --event-time 2026-08-07T12:30:00Z

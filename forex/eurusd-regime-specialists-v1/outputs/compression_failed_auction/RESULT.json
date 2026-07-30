@@ -1,0 +1,162 @@
+{
+  "combined_broker_window": {
+    "first_12_months": {
+      "active_weekdays": 42,
+      "best_5pct_removed_profit_factor": 1.025124069478908,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 15.139999999999993,
+      "maximum_single_month_gross_profit_share": 0.2025229357798165,
+      "net": 22.72,
+      "payoff_ratio": 1.4138281073764944,
+      "profit_factor": 1.3523573200992556,
+      "stressed_profit_factor": 1.28373285089703,
+      "trade_sequence_half_profit_factors": [
+        1.8604247941048981,
+        1.0693069306930691
+      ],
+      "trades": 45,
+      "trades_per_weekday": 0.1724137931034483,
+      "weekday_coverage": 0.16091954022988506,
+      "win_rate": 0.4888888888888889
+    },
+    "full": {
+      "active_weekdays": 98,
+      "best_5pct_removed_profit_factor": 1.1067572970811677,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 25.770000000000003,
+      "maximum_single_month_gross_profit_share": 0.0998771614854011,
+      "net": 61.6,
+      "payoff_ratio": 1.4647525605142557,
+      "profit_factor": 1.4105024656803944,
+      "stressed_profit_factor": 1.340541240450602,
+      "trade_sequence_half_profit_factors": [
+        1.5598835597449403,
+        1.2722022587268993
+      ],
+      "trades": 106,
+      "trades_per_weekday": 0.20306513409961685,
+      "weekday_coverage": 0.18773946360153257,
+      "win_rate": 0.49056603773584906
+    },
+    "second_12_months": {
+      "active_weekdays": 56,
+      "best_5pct_removed_profit_factor": 1.0976863753213368,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 25.77,
+      "maximum_single_month_gross_profit_share": 0.16985376827896512,
+      "net": 38.88,
+      "payoff_ratio": 1.5027888135857286,
+      "profit_factor": 1.4543117550829632,
+      "stressed_profit_factor": 1.3832974015658688,
+      "trade_sequence_half_profit_factors": [
+        1.3167210060549606,
+        1.5928705440900564
+      ],
+      "trades": 61,
+      "trades_per_weekday": 0.23371647509578544,
+      "weekday_coverage": 0.21455938697318008,
+      "win_rate": 0.4918032786885246
+    }
+  },
+  "demo_order_authorized": false,
+  "development": {
+    "checks": {},
+    "metrics": {
+      "active_weekdays": 0,
+      "best_5pct_removed_profit_factor": 0.0,
+      "maximum_closed_trade_drawdown": 0.0,
+      "net": 0,
+      "payoff_ratio": null,
+      "profit_factor": 0.0,
+      "stressed_profit_factor": 0.0,
+      "trade_sequence_half_profit_factors": [
+        0.0,
+        0.0
+      ],
+      "trades": 0,
+      "trades_per_weekday": 0.0,
+      "weekday_coverage": 0.0,
+      "win_rate": 0.0
+    },
+    "passed": false
+  },
+  "failed_auction_config_sha256": "b35a4a1971795f6aa0abe2abdec42c23a2d47bc569ead7da22a78aeac4a9ae6e",
+  "failed_auction_source_sha256": "a7881786b9ad85436403227c939b1fa3a61ae2e00f30eacda899b33211fdeb28",
+  "locked_validation": {
+    "checks": {},
+    "latest_12_months": {
+      "active_weekdays": 0,
+      "best_5pct_removed_profit_factor": 0.0,
+      "maximum_closed_trade_drawdown": 0.0,
+      "net": 0,
+      "payoff_ratio": null,
+      "profit_factor": 0.0,
+      "stressed_profit_factor": 0.0,
+      "trade_sequence_half_profit_factors": [
+        0.0,
+        0.0
+      ],
+      "trades": 0,
+      "trades_per_weekday": 0.0,
+      "weekday_coverage": 0.0,
+      "win_rate": 0.0
+    },
+    "metrics": {
+      "active_weekdays": 0,
+      "best_5pct_removed_profit_factor": 0.0,
+      "maximum_closed_trade_drawdown": 0.0,
+      "net": 0,
+      "payoff_ratio": null,
+      "profit_factor": 0.0,
+      "stressed_profit_factor": 0.0,
+      "trade_sequence_half_profit_factors": [
+        0.0,
+        0.0
+      ],
+      "trades": 0,
+      "trades_per_weekday": 0.0,
+      "weekday_coverage": 0.0,
+      "win_rate": 0.0
+    },
+    "passed": false
+  },
+  "outcome_blind_capacity": {
+    "checks": {
+      "minimum_candidates_development": true,
+      "minimum_candidates_each_side": true,
+      "minimum_candidates_locked_validation": false,
+      "minimum_candidates_total": false
+    },
+    "metrics": {
+      "development": 24,
+      "locked_validation": 13,
+      "long": 16,
+      "short": 21,
+      "total": 37
+    },
+    "passed": false
+  },
+  "owned_regime": "CROSSPAIR_COMPRESSION",
+  "prohibitions": [
+    "NO_THRESHOLD_GRID",
+    "NO_OBSERVATION_WINDOW_SEARCH",
+    "NO_VALIDATION_BASED_SIGNAL_CHANGE",
+    "NO_SIDE_INVERSION",
+    "NO_CLOCK_SEARCH",
+    "NO_STOP_TARGET_SEARCH",
+    "NO_POST_RESULT_REGIME_DELETION",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ],
+  "research_boundary": "PREREGISTERED_REGIME_SPECIALIST_CHRONOLOGICAL_RESEARCH_ONLY",
+  "result_can_count_as_forward_evidence": false,
+  "schema_version": "eurusd_preregistered_compression_failed_auction_v1",
+  "status": "CENSUS_CAPACITY_REJECTED",
+  "variants_evaluated": 1,
+  "verified_source_sha256": {
+    "eurusd_m5_bidask": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "frozen_residual_history_config": "22ba29bb2c5f8cb01e26fa5295410e89a596976bfa592baff17494d591b19f2a",
+    "frozen_residual_history_source": "0fcb70a12284d07f74966633f9816d6f7b90cec4d6687cbffb0df5c85bd886e8",
+    "threshold_provenance": "f0b617a2156e7da4fcdd88a0afb4d8fbd2e06a24e296823552e0d7f0bfdf4ae6"
+  }
+}
