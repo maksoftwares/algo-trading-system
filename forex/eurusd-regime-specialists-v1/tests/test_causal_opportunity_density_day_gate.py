@@ -45,8 +45,9 @@ def test_daily_count_feature_is_lagged() -> None:
         start_date="2026-01-01",
         target_count=4,
     )
-    assert daily.loc[pd.Timestamp("2026-01-29"), "prior_opportunity_count"] == 2
-    assert daily.loc[pd.Timestamp("2026-01-29"), "opportunity_count"] == 1
+    day = pd.Timestamp("2026-01-29T00:00Z")
+    assert daily.loc[day, "prior_opportunity_count"] == 2
+    assert daily.loc[day, "opportunity_count"] == 1
 
 
 def test_selected_trades_use_earliest_four_without_future_ranking() -> None:

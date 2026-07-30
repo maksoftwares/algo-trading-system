@@ -20,6 +20,13 @@ from .neutral_h4_quiet_state_transfer import (
 from .retrospective_overfit import maximum_concurrent_positions
 
 
+def utc_timestamp(value: str | pd.Timestamp) -> pd.Timestamp:
+    result = pd.Timestamp(value)
+    if result.tzinfo is None:
+        return result.tz_localize("UTC")
+    return result.tz_convert("UTC")
+
+
 def load_opportunities(path: Path, expected_rows: int) -> pd.DataFrame:
     frame = pd.read_csv(path)
     if len(frame) != int(expected_rows):
@@ -70,13 +77,13 @@ def build_daily_dataset(
     daily_market["absolute_daily_return_pips"] = daily_market[
         "daily_return_pips"
     ].abs()
-    daily_market.index = pd.to_datetime(daily_market.index)
+    daily_market.index = pd.to_datetime(daily_market.index, utc=True)
     daily_market = daily_market[daily_market.index.weekday < 5].copy()
 
     counts = opportunities.groupby("entry_date").size().rename(
         "opportunity_count"
     )
-    counts.index = pd.to_datetime(counts.index)
+    counts.index = pd.to_datetime(counts.index, utc=True)
     owner_counts = (
         opportunities.pivot_table(
             index="entry_date",
@@ -87,13 +94,13 @@ def build_daily_dataset(
         )
         .add_prefix("owner_count_")
     )
-    owner_counts.index = pd.to_datetime(owner_counts.index)
+    owner_counts.index = pd.to_datetime(owner_counts.index, utc=True)
     frame = daily_market.join(counts, how="left").join(
         owner_counts, how="left"
     )
     count_columns = ["opportunity_count", *owner_counts.columns.tolist()]
     frame[count_columns] = frame[count_columns].fillna(0.0)
-    frame = frame[frame.index >= pd.Timestamp(start_date)].copy()
+    frame = frame[frame.index >= utc_timestamp(start_date)].copy()
     frame["target_exact_four"] = frame["opportunity_count"].eq(
         int(target_count)
     ).astype(int)
@@ -167,9 +174,9 @@ def predict_window(
     training_start: str,
     window: list[str],
 ) -> pd.DataFrame:
-    start, end = map(pd.Timestamp, window)
+    start, end = map(utc_timestamp, window)
     training = daily[
-        (daily.index >= pd.Timestamp(training_start)) & (daily.index < start)
+        (daily.index >= utc_timestamp(training_start)) & (daily.index < start)
     ]
     inference = daily[(daily.index >= start) & (daily.index < end)].copy()
     if training["target_exact_four"].nunique() != 2:
@@ -488,8 +495,14 @@ def run(config_path: Path, output_dir: Path) -> dict[str, Any]:
         )
         validation_trades = val_result["trades"]
         latest_decisions = validation_decisions[
-            (validation_decisions["date"] >= pd.Timestamp("2025-07-01"))
-            & (validation_decisions["date"] < pd.Timestamp("2026-07-01"))
+            (
+                validation_decisions["date"]
+                >= utc_timestamp("2025-07-01")
+            )
+            & (
+                validation_decisions["date"]
+                < utc_timestamp("2026-07-01")
+            )
         ].copy()
         latest = window_result(
             opportunities, latest_decisions, config["execution"]
