@@ -1,0 +1,238 @@
+{
+  "combined_broker_window": {
+    "checks": {
+      "maximum_combined_trades_per_weekday": true,
+      "maximum_combined_win_rate": true,
+      "minimum_combined_best_removed_profit_factor": false,
+      "minimum_combined_payoff_ratio": true,
+      "minimum_combined_profit_factor": false,
+      "minimum_combined_stressed_profit_factor": false,
+      "minimum_combined_trades_per_weekday": false,
+      "minimum_combined_weekday_coverage": true,
+      "minimum_combined_win_rate": false,
+      "minimum_each_combined_half_profit_factor": true,
+      "minimum_each_residual_half_profit_factor": false,
+      "minimum_latest_12_month_best_removed_profit_factor": false,
+      "minimum_latest_12_month_profit_factor": true,
+      "minimum_net_pnl_usd": true,
+      "minimum_residual_best_removed_profit_factor": false,
+      "minimum_residual_profit_factor": false,
+      "minimum_residual_stressed_profit_factor": false,
+      "minimum_residual_trades": true,
+      "minimum_residual_trades_per_weekday": true,
+      "zero_m15_residual_owned_date_overlap": true
+    },
+    "components": {
+      "M15_REGIME": {
+        "active_weekdays": 98,
+        "best_5pct_removed_profit_factor": 1.1067572970811677,
+        "maximum_closed_trade_drawdown": 25.770000000000003,
+        "maximum_single_month_gross_profit_share": 0.0998771614854011,
+        "net": 61.6,
+        "payoff_ratio": 1.4647525605142557,
+        "profit_factor": 1.4105024656803944,
+        "stressed_profit_factor": 1.340541240450602,
+        "trade_sequence_half_profit_factors": [
+          1.5598835597449403,
+          1.2722022587268993
+        ],
+        "trades": 106,
+        "trades_per_weekday": 0.20306513409961685,
+        "weekday_coverage": 0.18773946360153257,
+        "win_rate": 0.49056603773584906
+      },
+      "ONLINE_DENSE_RESIDUAL_RESEARCH": {
+        "active_weekdays": 324,
+        "best_5pct_removed_profit_factor": 0.6263354882612604,
+        "complete_weekdays": 522,
+        "maximum_closed_trade_drawdown": 45.312500000011084,
+        "net": -43.350000000011,
+        "payoff_ratio": 1.179088714625115,
+        "profit_factor": 0.7640013610070898,
+        "stressed_profit_factor": 0.6757996686631342,
+        "trade_sequence_half_profit_factors": [
+          0.7003032809483711,
+          0.8260986426555178
+        ],
+        "trades": 324,
+        "trades_per_weekday": 0.6206896551724138,
+        "weekday_coverage": 0.6206896551724138,
+        "win_rate": 0.39197530864197533
+      }
+    },
+    "first_12_months": {
+      "active_weekdays": 208,
+      "best_5pct_removed_profit_factor": 0.5915381857296168,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 17.920000000001437,
+      "maximum_single_month_gross_profit_share": 0.14878942452762617,
+      "net": -0.2600000000057532,
+      "payoff_ratio": 1.4391721630658056,
+      "profit_factor": 0.9981355324488651,
+      "stressed_profit_factor": 0.9149488054607129,
+      "trade_sequence_half_profit_factors": [
+        1.1653393351799706,
+        0.8799118619169898
+      ],
+      "trades": 211,
+      "trades_per_weekday": 0.8084291187739464,
+      "weekday_coverage": 0.7969348659003831,
+      "win_rate": 0.4075829383886256
+    },
+    "full": {
+      "active_weekdays": 422,
+      "best_5pct_removed_profit_factor": 0.669438739436356,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 30.86000000000161,
+      "maximum_single_month_gross_profit_share": 0.08347482480783043,
+      "net": 26.91999999999119,
+      "payoff_ratio": 1.523235585055405,
+      "profit_factor": 1.09063667889967,
+      "stressed_profit_factor": 1.0055234425176338,
+      "trade_sequence_half_profit_factors": [
+        1.018572339973022,
+        1.1558291650634656
+      ],
+      "trades": 430,
+      "trades_per_weekday": 0.8237547892720306,
+      "weekday_coverage": 0.8084291187739464,
+      "win_rate": 0.41627906976744183
+    },
+    "latest_12_months": {
+      "active_weekdays": 214,
+      "best_5pct_removed_profit_factor": 0.740035542015722,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 30.86000000000161,
+      "maximum_single_month_gross_profit_share": 0.1463678683555285,
+      "net": 27.179999999996944,
+      "payoff_ratio": 1.588556126084045,
+      "profit_factor": 1.1725057121096523,
+      "stressed_profit_factor": 1.0859915100060453,
+      "trade_sequence_half_profit_factors": [
+        1.0681629260182735,
+        1.2922972051806123
+      ],
+      "trades": 219,
+      "trades_per_weekday": 0.8390804597701149,
+      "weekday_coverage": 0.8199233716475096,
+      "win_rate": 0.4246575342465753
+    },
+    "second_12_months": {
+      "active_weekdays": 214,
+      "best_5pct_removed_profit_factor": 0.740035542015722,
+      "m15_residual_owned_date_overlaps": 0,
+      "maximum_closed_trade_drawdown": 30.86000000000161,
+      "maximum_single_month_gross_profit_share": 0.1463678683555285,
+      "net": 27.179999999996944,
+      "payoff_ratio": 1.588556126084045,
+      "profit_factor": 1.1725057121096523,
+      "stressed_profit_factor": 1.0859915100060453,
+      "trade_sequence_half_profit_factors": [
+        1.0681629260182735,
+        1.2922972051806123
+      ],
+      "trades": 219,
+      "trades_per_weekday": 0.8390804597701149,
+      "weekday_coverage": 0.8199233716475096,
+      "win_rate": 0.4246575342465753
+    }
+  },
+  "demo_order_authorized": false,
+  "locked_validation_residual": {
+    "active_weekdays": 821,
+    "best_5pct_removed_profit_factor": 0.6333538198433618,
+    "complete_weekdays": 1172,
+    "maximum_closed_trade_drawdown": 115.0625000000274,
+    "net": -109.03750000002712,
+    "payoff_ratio": 1.2270528819174527,
+    "profit_factor": 0.7669080511984079,
+    "stressed_profit_factor": 0.6790352040432887,
+    "trade_sequence_half_profit_factors": [
+      0.7723059686290162,
+      0.7609490077021791
+    ],
+    "trades": 821,
+    "trades_per_weekday": 0.7005119453924915,
+    "weekday_coverage": 0.7005119453924915,
+    "win_rate": 0.38367844092570036
+  },
+  "locked_validation_router_activity": {
+    "BROAD_EUR_DOWN": {
+      "rule_changes": 7,
+      "rule_trade_counts": {
+        "MAJORITY_STRENGTH_MOMENTUM": 6,
+        "STRENGTH_15_MOMENTUM": 3,
+        "STRENGTH_240_FADE": 60
+      },
+      "trades": 69
+    },
+    "BROAD_EUR_UP": {
+      "rule_changes": 7,
+      "rule_trade_counts": {
+        "STRENGTH_15_MOMENTUM": 19,
+        "STRENGTH_240_FADE": 37,
+        "STRENGTH_60_FADE": 11,
+        "STRENGTH_60_MOMENTUM": 4
+      },
+      "trades": 71
+    },
+    "CROSSPAIR_COMPRESSION": {
+      "rule_changes": 34,
+      "rule_trade_counts": {
+        "MAJORITY_STRENGTH_FADE": 47,
+        "STRENGTH_15_FADE": 87,
+        "STRENGTH_15_MOMENTUM": 32,
+        "STRENGTH_240_FADE": 58,
+        "STRENGTH_240_MOMENTUM": 3,
+        "STRENGTH_60_FADE": 38,
+        "STRENGTH_60_MOMENTUM": 12
+      },
+      "trades": 277
+    },
+    "MIXED_TRANSITION": {
+      "rule_changes": 52,
+      "rule_trade_counts": {
+        "MAJORITY_STRENGTH_FADE": 33,
+        "MAJORITY_STRENGTH_MOMENTUM": 20,
+        "STRENGTH_15_FADE": 128,
+        "STRENGTH_15_MOMENTUM": 8,
+        "STRENGTH_240_FADE": 31,
+        "STRENGTH_240_MOMENTUM": 98,
+        "STRENGTH_60_FADE": 65,
+        "STRENGTH_60_MOMENTUM": 7
+      },
+      "trades": 390
+    },
+    "SHORT_LONG_DISAGREEMENT": {
+      "rule_changes": 1,
+      "rule_trade_counts": {
+        "STRENGTH_15_FADE": 9,
+        "STRENGTH_60_MOMENTUM": 5
+      },
+      "trades": 14
+    }
+  },
+  "online_router_config_sha256": "57fd19ba086a51dd0c45201d2c8893bb5cbd2824bc8211f2aa0c5f060fee7feb",
+  "online_router_source_sha256": "83ed3c4a1d34879ac69f4ce7dc9ce5722856691e66c2f656e882181ca2c5ba89",
+  "online_selection_uses_current_outcome": false,
+  "prohibitions": [
+    "NO_PARAMETER_GRID",
+    "NO_LOOKBACK_SEARCH",
+    "NO_CURRENT_OUTCOME_LEAKAGE",
+    "NO_CROSS_REGIME_HISTORY",
+    "NO_CLOCK_SEARCH",
+    "NO_STOP_TARGET_SEARCH",
+    "NO_POST_RESULT_REGIME_DELETION",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ],
+  "research_boundary": "PREREGISTERED_CAUSAL_HISTORICAL_RESEARCH_ONLY",
+  "result_can_count_as_forward_evidence": false,
+  "router_variants_evaluated": 1,
+  "schema_version": "eurusd_preregistered_online_dense_residual_router_v1",
+  "status": "HISTORICAL_VALIDATION_REJECTED",
+  "verified_source_sha256": {
+    "dense_family_config": "530d30fb6f6dad6f530b5c7d567c0055a4f37d7aa1b19e3b63db21be5a2e9c7e",
+    "dense_family_source": "c96aaea62c5f7453f3a3afa07d0e114c1c575615920ba660ab199ff163122db2"
+  }
+}
