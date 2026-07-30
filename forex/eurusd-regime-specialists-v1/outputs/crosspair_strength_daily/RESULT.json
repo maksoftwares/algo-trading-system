@@ -1,0 +1,124 @@
+{
+  "schema_version": "eurusd_crosspair_strength_daily_result_v1",
+  "campaign_id": "EURUSD_CROSSPAIR_STRENGTH_DAILY_V1",
+  "status": "REJECT_CROSSPAIR_STRENGTH",
+  "synchronized_weekdays": 2601,
+  "primary": {
+    "trades": 2593,
+    "wins": 965,
+    "losses": 1628,
+    "win_rate": 0.37215580408792903,
+    "net_r": -229.66249999993317,
+    "net_usd_0_01_lot": -183.72999999994656,
+    "profit_factor": 0.859905297109388,
+    "payoff_ratio": 1.4507003354342836,
+    "maximum_drawdown_r": 233.5249999999226,
+    "trades_per_synchronized_weekday": 0.9969242599000384
+  },
+  "stress_plus_0_5_pip": {
+    "trades": 2593,
+    "wins": 964,
+    "losses": 1629,
+    "win_rate": 0.3717701504049364,
+    "net_r": -391.7249999999332,
+    "net_usd_0_01_lot": -313.37999999994656,
+    "profit_factor": 0.7750161533491609,
+    "payoff_ratio": 1.309648665773634,
+    "maximum_drawdown_r": 394.8999999999383
+  },
+  "chronological_blocks": {
+    "B1_2016H2_2018": {
+      "trades": 647,
+      "wins": 229,
+      "losses": 418,
+      "win_rate": 0.35394126738794435,
+      "net_r": -83.61249999998125,
+      "net_usd_0_01_lot": -66.88999999998501,
+      "profit_factor": 0.8024396006852538,
+      "payoff_ratio": 1.46471507898007,
+      "maximum_drawdown_r": 94.63749999998419
+    },
+    "B2_2019_2021": {
+      "trades": 780,
+      "wins": 302,
+      "losses": 478,
+      "win_rate": 0.3871794871794872,
+      "net_r": -47.13749999998268,
+      "net_usd_0_01_lot": -37.709999999986145,
+      "profit_factor": 0.901643192488297,
+      "payoff_ratio": 1.42710412585896,
+      "maximum_drawdown_r": 60.73749999998914
+    },
+    "B3_2022_2024": {
+      "trades": 779,
+      "wins": 291,
+      "losses": 488,
+      "win_rate": 0.3735558408215661,
+      "net_r": -62.22499999997951,
+      "net_usd_0_01_lot": -49.77999999998361,
+      "profit_factor": 0.8731590480558918,
+      "payoff_ratio": 1.4642667197638324,
+      "maximum_drawdown_r": 82.1874999999889
+    },
+    "B4_2025_2026H1": {
+      "trades": 387,
+      "wins": 143,
+      "losses": 244,
+      "win_rate": 0.3695090439276486,
+      "net_r": -36.687499999989704,
+      "net_usd_0_01_lot": -29.349999999991766,
+      "profit_factor": 0.8510379130082095,
+      "payoff_ratio": 1.4521206347832387,
+      "maximum_drawdown_r": 54.924999999991485
+    }
+  },
+  "latest_12_months": {
+    "trades": 259,
+    "wins": 94,
+    "losses": 165,
+    "win_rate": 0.36293436293436293,
+    "net_r": -29.58749999999344,
+    "net_usd_0_01_lot": -23.669999999994754,
+    "profit_factor": 0.8220835838845816,
+    "payoff_ratio": 1.4430190568186805,
+    "maximum_drawdown_r": 46.27499999999503
+  },
+  "positive_active_month_share": 0.425,
+  "top_5pct_removed": {
+    "trades": 2463,
+    "wins": 835,
+    "losses": 1628,
+    "win_rate": 0.3390174583840844,
+    "net_r": -423.0374999999371,
+    "net_usd_0_01_lot": -338.4299999999497,
+    "profit_factor": 0.7419460605275315,
+    "payoff_ratio": 1.4465726784896065,
+    "maximum_drawdown_r": 422.49999999997357
+  },
+  "gates": {
+    "minimum_frequency": true,
+    "maximum_frequency": true,
+    "full_profit_factor": false,
+    "win_rate_floor": false,
+    "win_rate_ceiling": true,
+    "payoff_floor": true,
+    "payoff_ceiling": true,
+    "positive_full_net": false,
+    "stressed_profit_factor": false,
+    "positive_stressed_net": false,
+    "positive_each_block": false,
+    "minimum_blocks_pf_1_15": false,
+    "last_12_month_profit_factor": false,
+    "positive_active_month_share": false,
+    "top_5pct_removed_profit_factor": false,
+    "maximum_drawdown": false
+  },
+  "all_gates_pass": false,
+  "source_sha256_verified": {
+    "EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "EURGBP_M5_BIDASK.parquet": "0671ac86131ae822e80cfbed18d46fc7ff2db72129b90c74052f9471ca83cd72",
+    "GBPUSD_M5_BIDASK.parquet": "4e855855978964958d255ca69b47c6452909ebe2b991bf27b5c537ea9ac765fd",
+    "EURJPY_M5_BIDASK.parquet": "4b62fbf3b5c54c4728af53517fe6debfbd4380247c106fd149b1e78f4e536762",
+    "USDJPY_M5_BIDASK.parquet": "b112d958b52ab5650fb790129184608c54268138025ea04d2322ea2f06e231b2"
+  }
+}
