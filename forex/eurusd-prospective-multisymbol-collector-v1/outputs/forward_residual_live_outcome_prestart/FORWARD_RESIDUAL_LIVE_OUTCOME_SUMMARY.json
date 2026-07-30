@@ -1,0 +1,42 @@
+{
+  "best_5pct_removed_profit_factor": 0.0,
+  "campaign_id": "EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_V1",
+  "checks": {
+    "maximum_invalid_outcomes": true,
+    "maximum_selection_mismatches": true,
+    "maximum_win_rate": true,
+    "minimum_best_5pct_removed_profit_factor": false,
+    "minimum_each_trade_sequence_half_profit_factor": false,
+    "minimum_live_executable_outcomes": false,
+    "minimum_matched_live_selection_decisions": false,
+    "minimum_net_pnl_usd": false,
+    "minimum_payoff_ratio": false,
+    "minimum_profit_factor": false,
+    "minimum_stressed_profit_factor": false,
+    "minimum_win_rate": false,
+    "mt5_ordering_parity": false,
+    "shadow_demo_soak": false
+  },
+  "demo_order_authorized": false,
+  "invalid_outcomes": 0,
+  "mt5_receipts": 0,
+  "net_pnl_usd": 0,
+  "order_api_calls": 0,
+  "payoff_ratio": null,
+  "pending_selection_parity": 0,
+  "position_mutation_attempts": 0,
+  "profit_factor": 0.0,
+  "published_decisions": 0,
+  "resolved_live_outcomes": 0,
+  "schema_version": "eurusd_forward_residual_live_outcome_summary_v1",
+  "selection_mismatches": 0,
+  "selection_parity_rows": 0,
+  "status": "WAITING_MINIMUM_LIVE_EVIDENCE",
+  "stressed_profit_factor": 0.0,
+  "terminal_outcomes": 0,
+  "trade_sequence_half_profit_factors": [
+    0.0,
+    0.0
+  ],
+  "win_rate": 0.0
+}

@@ -109,3 +109,17 @@ The bridge has no order-check, order-send, or position-mutation path.
 00:04 Dubai / 20:04 UTC task. See
 `EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_PROTOCOL.md` and
 `EURUSD_FORWARD_RESIDUAL_MT5_SHADOW_BRIDGE_DEPLOYMENT_2026_07_30.md`.
+
+## Raw-tick live outcomes and selection parity
+
+`run_forward_residual_live_outcome_adjudicator.py` preserves and hashes raw
+broker ticks from the captured MT5 quote, resolves the frozen stop/target/hold
+path, and compares the pre-outcome selection with the later terminal research
+decision. Ambiguous entry ticks and missing paths are invalid, never imputed.
+Friday 20:00 receipts are non-evaluable cash because the hold crosses the
+weekly close.
+
+`scripts/install_forward_residual_live_outcome_task.ps1` installs the limited
+06:20 Dubai / 02:20 UTC task. See
+`EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_PROTOCOL.md` and
+`EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_DEPLOYMENT_2026_07_30.md`.
