@@ -126,8 +126,11 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 120. Confirmation half-risk repair: retaining all experts but halving only add-on risk raised accepted frequency to 0.582/day and reduced drawdown to 18.068R, but best-5%-removed PF fell below 1 and positive-month share failed. Selective add-on resizing is rejected.
 121. Confirmation correlation cap: retaining original weights while lowering the concurrent cap to 1.5R rejected most chop confirmations. Frequency remained 0.376/day, but win-rate, positive-month, and drawdown gates failed. Event-level admission changes are rejected.
 122. Uniform-risk confirmation portfolio: the exact 1,288 parent trades were retained in the same order and every sleeve was uniformly scaled to 75%, reducing aggregate initial risk from 2.0R to 1.5R. All 16 frozen gates passed: 0.520 trades/day, 45.73% wins, 1.413 payoff, PF 1.190, stressed PF 1.136, best-5%-removed PF 1.037, 17.924R maximum drawdown, and positive PF in all four chronological blocks. Recent 2024H2-2026H1 PF was 1.480; latest-six-month PF was 1.929 over 53 trades. This is the first higher-frequency backtest candidate to clear the complete frozen gate set, but it remains adaptive historical research requiring prospective confirmation.
+123. Fixed-horizon follow-through census: every M15 close from the first break through the 10:00 UTC decision boundary was evaluated under one predeclared standalone rule. Chop +3/+5 and compression +5/+7 were the only new horizons to pass full, stressed, chronological, latest-12-month, and best-5%-removed PF requirements. Later horizons decayed and were not admitted.
+124. Frequency-completion v1: the protected portfolio, four qualified follow-through experts, and the locked M30 first-break family produced 2,532 trades and 1.023/day while retaining PF 1.210 and stressed PF 1.154. The exact risk allocation was rejected because best-5%-removed PF was 0.988 and its smallest order was only 0.0075-lot equivalent.
+125. Frequency-completion equal-risk v2: the immutable 2,532-trade v1 ledger was retained without filtering or reordering and every trade was assigned 0.15R, or 0.015 lot at the 0.1-lot reference. All 20 frozen gates passed: 1.023 trades/day, 47.24% wins, 1.360 payoff, PF 1.218, 0.5-pip PF 1.162, 1.0-pip PF 1.109, best-5%-removed PF 1.020, 10.741R drawdown, positive PF in every chronological block, and bootstrap lower bounds above 1. The latest 12 months produced 266 trades, PF 1.594, and +$224.10; the latest six months produced 111 trades, PF 1.848, and +$106.48 at 0.015 lot. The average-frequency backtest goal is met, but activity remains clustered on 26.78% of FX days and demo/MT5 parity is still pending.
 
-Final status: `PROTECTED_M15_EDGE_PRESENT_FREQUENCY_PORTFOLIO_NOT_DEMO_READY`.
+Final status: `BACKTEST_FREQUENCY_AND_EDGE_GATES_PASSED_DEMO_TRANSFER_PENDING`.
 
 Key reports:
 
@@ -150,6 +153,8 @@ Key reports:
 - `EURUSD_H4_CHOP_ANCHOR_VALIDATION_RESULT_2026_07_30.md`
 - `EURUSD_H4_DUAL_REGIME_PORTFOLIO_DIAGNOSTIC_RESULT_2026_07_30.md`
 - `EURUSD_H4_FREQUENCY_EXPANSION_RESULT_2026_07_30.md`
+- `EURUSD_H4_FREQUENCY_COMPLETION_PORTFOLIO_RESULT_2026_07_30.md`
+- `EURUSD_H4_FREQUENCY_COMPLETION_EQUAL_RISK_RESULT_2026_07_31.md`
 - `EURUSD_H4_INTRAHOUR_FREQUENCY_LADDER_RESULT_2026_07_30.md`
 - `EURUSD_NEUTRAL_COT_OPTIONS_FLOW_VERDICT_2026_07_27.md`
 - `EURUSD_NEUTRAL_CME_OPTIONS_SURFACE_PREREG_2026_07_27.md`
@@ -466,4 +471,6 @@ uv run --offline --with pandas --with numpy --with pyarrow python run_h4_confirm
 uv run --offline --with pandas --with numpy --with pyarrow python run_h4_confirmation_risk_repair.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_h4_confirmation_correlation_cap.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_h4_confirmation_uniform_risk.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_frequency_completion_portfolio.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_h4_frequency_completion_equal_risk.py
 ```

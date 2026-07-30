@@ -1,0 +1,70 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_equal_risk_v1",
+  "frozen_at_utc": "2026-07-31T00:10:00Z",
+  "research_only": true,
+  "adaptive_historical_development_not_pristine_oos": true,
+  "broker_action_allowed": false,
+  "rejected_parent_result": {
+    "path": "outputs/h4_frequency_completion_portfolio/RESULT.json",
+    "sha256": "8ecdcdac6a23816d3588fb9e110a60d9ba1e59733c60e932dbfa0856303c7576",
+    "expected_status": "REJECTED_H4_FREQUENCY_COMPLETION_PORTFOLIO"
+  },
+  "immutable_parent_ledger": {
+    "path": "outputs/h4_frequency_completion_portfolio/TRADES.csv",
+    "sha256": "eb25560bd0e539998bd5509f6d59c8ab0a33679532fb50f2438f4f499ac0abda",
+    "expected_rows": 2532
+  },
+  "equal_trade_risk_weight": 0.15,
+  "risk_limits": {
+    "maximum_concurrent_initial_risk_units": 1.5
+  },
+  "execution": {
+    "reference_full_risk_lot": 0.1,
+    "minimum_broker_lot": 0.01
+  },
+  "evaluation_window": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+  "reporting_windows": {
+    "EARLY_2017_2019": ["2017-01-01T00:00:00Z", "2020-01-01T00:00:00Z"],
+    "MIDDLE_2020_2022H1": ["2020-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "LATE_2022H2_2024H1": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "RECENT_2024H2_2026H1": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_AUDIT": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "bootstrap": {
+    "trade_block_trades": 5,
+    "calendar_block_months": 3,
+    "samples": 20000,
+    "seed": 20260730,
+    "lower_quantile": 0.05
+  },
+  "admission": {
+    "minimum_trades_per_fx_day": 0.85,
+    "minimum_full_profit_factor": 1.15,
+    "minimum_extra_0p5pip_profit_factor": 1.1,
+    "minimum_extra_1p0pip_profit_factor": 1.0,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_recent_block_profit_factor": 1.2,
+    "minimum_latest_12_month_profit_factor": 1.2,
+    "minimum_latest_6_month_net_r_exclusive": 0.0,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_r": 18.0,
+    "minimum_trade_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_trade_bootstrap_probability_pf_lte_1": 0.05,
+    "minimum_calendar_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_calendar_bootstrap_probability_pf_lte_1": 0.05
+  },
+  "decision_policy": {
+    "all_2532_parent_trades_are_mandatory": true,
+    "same_0p15r_weight_for_every_trade": true,
+    "no_trade_filter_reorder_or_identity_change": true,
+    "all_edge_and_frequency_gates_unchanged": true,
+    "historical_pass_cannot_authorize_broker_orders": true
+  }
+}

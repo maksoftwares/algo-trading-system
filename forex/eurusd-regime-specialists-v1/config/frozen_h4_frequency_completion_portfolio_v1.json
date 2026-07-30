@@ -1,0 +1,101 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_portfolio_v1",
+  "frozen_at_utc": "2026-07-30T23:45:00Z",
+  "research_only": true,
+  "adaptive_historical_development_not_pristine_oos": true,
+  "broker_action_allowed": false,
+  "anchor_config": {
+    "path": "config/frozen_neutral_h4_quiet_state_transfer_v1.json",
+    "sha256": "fc9fea2f8b4fd026e58126cf3b53ce901d05760c39882f19c5cb5e9b837beca2"
+  },
+  "protected_parent_ledger": {
+    "path": "outputs/h4_confirmation_uniform_risk/TRADES.csv",
+    "sha256": "f81a7aa368e4ffbc4196c12f15ad21ce40e2622b18c45a47f98a3c7d437dacf0",
+    "expected_rows": 1288
+  },
+  "followthrough_offsets_bars": {
+    "chop": [3, 5],
+    "compression": [5, 7]
+  },
+  "m30_first_break_family_is_mandatory": true,
+  "added_component_risk_weight": 0.25,
+  "m30_risk_weights": {
+    "chop": 0.25,
+    "compression": 0.125
+  },
+  "fixed_added_priority": [
+    "M30_FIRST_BREAK_CHOP",
+    "M30_FIRST_BREAK_COMPRESSION",
+    "M15_FOLLOW_3_CHOP",
+    "M15_FOLLOW_5_CHOP",
+    "M15_FOLLOW_5_COMPRESSION",
+    "M15_FOLLOW_7_COMPRESSION"
+  ],
+  "candidate_risk_cap": {
+    "maximum_concurrent_initial_risk_units": 2.5
+  },
+  "final_risk_targets": {
+    "maximum_concurrent_initial_risk_units": 1.5,
+    "maximum_drawdown_r": 17.5,
+    "one_uniform_scale_after_trade_admission": true
+  },
+  "evaluation_window": [
+    "2017-01-01T00:00:00Z",
+    "2026-07-01T00:00:00Z"
+  ],
+  "reporting_windows": {
+    "EARLY_2017_2019": ["2017-01-01T00:00:00Z", "2020-01-01T00:00:00Z"],
+    "MIDDLE_2020_2022H1": ["2020-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "LATE_2022H2_2024H1": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "RECENT_2024H2_2026H1": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_AUDIT": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "added_component_admission": {
+    "minimum_trades": 50,
+    "minimum_full_profit_factor_exclusive": 1.0,
+    "minimum_stressed_profit_factor_exclusive": 1.0,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor_exclusive": 1.0,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0
+  },
+  "bootstrap": {
+    "trade_block_trades": 5,
+    "calendar_block_months": 3,
+    "samples": 20000,
+    "seed": 20260730,
+    "lower_quantile": 0.05
+  },
+  "admission": {
+    "minimum_trades_per_fx_day": 0.85,
+    "minimum_full_profit_factor": 1.15,
+    "minimum_extra_0p5pip_profit_factor": 1.1,
+    "minimum_extra_1p0pip_profit_factor": 1.0,
+    "minimum_each_chronological_block_profit_factor_exclusive": 1.0,
+    "minimum_recent_block_profit_factor": 1.2,
+    "minimum_latest_12_month_profit_factor": 1.2,
+    "minimum_latest_6_month_net_r_exclusive": 0.0,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_realized_payoff_ratio": 1.35,
+    "maximum_realized_payoff_ratio": 1.75,
+    "minimum_positive_active_month_share": 0.55,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_r": 18.0,
+    "minimum_trade_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_trade_bootstrap_probability_pf_lte_1": 0.05,
+    "minimum_calendar_bootstrap_pf_5pct_exclusive": 1.0,
+    "maximum_calendar_bootstrap_probability_pf_lte_1": 0.05
+  },
+  "execution": {
+    "reference_full_risk_lot": 0.1,
+    "minimum_broker_lot": 0.01
+  },
+  "decision_policy": {
+    "all_frozen_added_experts_are_mandatory": true,
+    "no_year_session_regime_or_loser_deletion_after_result": true,
+    "candidate_risk_cap_precedes_one_uniform_risk_scale": true,
+    "historical_pass_cannot_authorize_broker_orders": true
+  }
+}

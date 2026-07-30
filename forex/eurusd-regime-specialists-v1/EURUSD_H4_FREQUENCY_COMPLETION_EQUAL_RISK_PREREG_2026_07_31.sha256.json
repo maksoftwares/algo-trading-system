@@ -1,0 +1,15 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_equal_risk_prereg_lock_v1",
+  "config": {
+    "path": "config/frozen_h4_frequency_completion_equal_risk_v1.json",
+    "sha256": "fb0cf4c16a48b03d13731292ca1e2db3bf6b947e3d80d2283413f2a521810c68"
+  },
+  "preregistration": {
+    "path": "EURUSD_H4_FREQUENCY_COMPLETION_EQUAL_RISK_PREREG_2026_07_31.md",
+    "sha256": "daa48e10f0f11e1397a0df7c37b57f8e1ffe568bdb5ad36b8c39f603bf47b200"
+  },
+  "immutable_parent_ledger": {
+    "path": "outputs/h4_frequency_completion_portfolio/TRADES.csv",
+    "sha256": "eb25560bd0e539998bd5509f6d59c8ab0a33679532fb50f2438f4f499ac0abda"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_equal_risk_result_lock_v1",
+  "config_sha256": "fb0cf4c16a48b03d13731292ca1e2db3bf6b947e3d80d2283413f2a521810c68",
+  "parent_result_sha256": "8ecdcdac6a23816d3588fb9e110a60d9ba1e59733c60e932dbfa0856303c7576",
+  "parent_ledger_sha256": "eb25560bd0e539998bd5509f6d59c8ab0a33679532fb50f2438f4f499ac0abda",
+  "result_json": {
+    "path": "outputs/h4_frequency_completion_equal_risk/RESULT.json",
+    "sha256": "7cdf8aff49c453138b7174fb68494fe3978b6e93165abb536cfdca8a21becc7f"
+  },
+  "trade_ledger": {
+    "path": "outputs/h4_frequency_completion_equal_risk/TRADES.csv",
+    "sha256": "5c045beefa1fb35954b713beaf0abf64a69ea61149ba65d60346dda243b88128"
+  },
+  "generated_report": {
+    "path": "outputs/h4_frequency_completion_equal_risk/RESULT.md",
+    "sha256": "d6adb30231593647f8ee7a70932a8040612ecfabf2d6555477a888106cb03efd"
+  }
+}

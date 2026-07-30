@@ -1,0 +1,11 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_portfolio_prereg_lock_v1",
+  "config": {
+    "path": "config/frozen_h4_frequency_completion_portfolio_v1.json",
+    "sha256": "f541102ea88add7d0bb88db10e230a6e16111e8dce7d67eb79cfba2e8ebe5ce7"
+  },
+  "preregistration": {
+    "path": "EURUSD_H4_FREQUENCY_COMPLETION_PORTFOLIO_PREREG_2026_07_30.md",
+    "sha256": "f9e023d4fd9bc191694f8262d23e2a15ab18b983cec03c7dba388a290ec7d49b"
+  }
+}
