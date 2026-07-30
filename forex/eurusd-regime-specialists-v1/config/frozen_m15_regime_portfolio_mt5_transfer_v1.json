@@ -1,0 +1,70 @@
+{
+  "schema_version": "eurusd_m15_regime_portfolio_mt5_transfer_v1",
+  "frozen_at_utc": "2026-07-30T06:45:00Z",
+  "research_only": true,
+  "source_candidate": {
+    "config": "config/frozen_h4_intrahour_frequency_ladder_v1.json",
+    "selected_level": "M15_FIRST_BREAK",
+    "historical_result": "EURUSD_H4_FREQUENCY_EXPANSION_RESULT_2026_07_30.md"
+  },
+  "transfer_data": {
+    "broker": "Capital.com",
+    "symbol": "EURUSD",
+    "model": "Every tick based on real ticks",
+    "start_inclusive": "2024-07-01",
+    "end_inclusive": "2026-06-30",
+    "time_basis": "UTC"
+  },
+  "implementation_hashes": {
+    "source_mq5": "8650a1b152fd5dfdeb9eb8aba6f017f20f123d687f53240a5c2f26396a606e31",
+    "compiled_ex5": "72fc36da10691e6fa9077300748abb632b70134cba0ba04f91aadcb8ee7fdf90",
+    "shadow_preset": "3aaf4de220bdc18dacf145a12daedec35882c937c18d2acc2dda8deff896f131",
+    "ordering_template": "e363772bd705a0f3aeaf1672c977c9947d8db7d4f558b6308d7659cc579f8da8",
+    "tester_config": "a307e4ac845e80c812a23155d475c9154a5f6ac0b6021a8b45f1af7d130a95c1",
+    "compile_log": "7dbd83897a3fa07817cfe6d45fac0f6ab38b883ac43a578faf9eb51a27ecad38"
+  },
+  "frozen_rule": {
+    "reference_window_utc": ["00:00", "06:00"],
+    "decision_window_utc": ["06:00", "10:00"],
+    "signal_resolution_minutes": 15,
+    "direction": "SHORT",
+    "first_break_per_regime_date": true,
+    "regimes": ["chop", "compression"],
+    "body_fraction_minimum": {
+      "chop": 0.35,
+      "compression": 0.55
+    },
+    "stop_h1_atr_multiple": 1.75,
+    "target_r_multiple": {
+      "chop": 1.25,
+      "compression": 2.0
+    },
+    "maximum_hold_hours": 12,
+    "tester_lots": {
+      "chop": 0.02,
+      "compression": 0.01
+    },
+    "research_equivalent_scale": 0.5
+  },
+  "one_shot_transfer_gates": {
+    "minimum_trades": 100,
+    "minimum_trades_per_weekday": 0.20,
+    "minimum_full_profit_factor": 1.10,
+    "minimum_each_12_month_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.10,
+    "minimum_net_pnl_usd_exclusive": 0.0,
+    "minimum_best_5pct_removed_profit_factor": 1.0,
+    "maximum_balance_drawdown_percent": 2.0
+  },
+  "selection_forbidden_after_result": {
+    "regime_deletion": true,
+    "side_change": true,
+    "clock_change": true,
+    "threshold_change": true,
+    "target_or_stop_change": true,
+    "allocation_change": true
+  },
+  "historical_pass_can_authorize_demo_orders": false,
+  "prospective_shadow_confirmation_required": true,
+  "broker_action_allowed": false
+}
