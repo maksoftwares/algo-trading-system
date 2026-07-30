@@ -1,0 +1,59 @@
+{
+  "schema_version": "eurusd_frozen_residual_history_diagnostic_v1",
+  "status": "POST_FREEZE_RETROSPECTIVE_FALSIFICATION_ONLY",
+  "campaign_under_test": "EURUSD_FORWARD_RESIDUAL_REGIME_V1",
+  "candidate_parameters_may_change": false,
+  "result_can_count_as_forward_evidence": false,
+  "source": {
+    "residual_lock": "../eurusd-prospective-multisymbol-collector-v1/EURUSD_FORWARD_RESIDUAL_REGIME_LOCK_2026_07_30.sha256.json",
+    "residual_lock_sha256": "b592d469343f95ea16eed76457b167d74944771f6a196cee9bda743eeebd4eaa",
+    "publisher_config": "../eurusd-prospective-multisymbol-collector-v1/config/frozen_forward_residual_live_signal_publisher_v1.json",
+    "publisher_config_sha256": "aab1f1855f11e07d6c7d9e52fc9666b19fdb17e3a3740418622ce04cf981bc66",
+    "historical_bar_contract": "config/frozen_crosspair_strength_daily.json",
+    "historical_bar_contract_sha256": "1e547df36602aecdc5fa14097ba0416ab106faf2cff8d7d03ce4f32336f1bedf",
+    "protected_m15_trades": "outputs/m15_regime_portfolio_mt5_transfer/TRADES.csv",
+    "protected_m15_trades_sha256": "3b61273712c75d5aa5cf8ef9d46c71170687ec34fcd9156bfccccf15e8653e43"
+  },
+  "period": {
+    "standalone_from_inclusive": "2016-07-01",
+    "standalone_to_exclusive": "2026-07-01",
+    "portfolio_from_inclusive": "2024-07-01",
+    "portfolio_to_exclusive": "2026-07-01",
+    "portfolio_split": "2025-07-01",
+    "portfolio_weekdays": 522,
+    "portfolio_half_weekdays": 261
+  },
+  "execution": {
+    "residual_lots": 0.01,
+    "residual_initial_risk_usd": 0.8,
+    "protected_m15_use_native_locked_lots": true,
+    "additional_round_trip_stress_usd_per_trade": 0.05,
+    "friday_20utc_action": "CASH_MARKET_CLOSURE"
+  },
+  "portfolio_gates": {
+    "minimum_trades_per_weekday": 0.85,
+    "maximum_trades_per_weekday": 1.25,
+    "minimum_weekday_coverage": 0.65,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.60,
+    "minimum_payoff_ratio": 1.25,
+    "minimum_profit_factor": 1.15,
+    "minimum_stressed_profit_factor": 1.05,
+    "minimum_best_5pct_removed_profit_factor": 1.0,
+    "minimum_each_half_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.15,
+    "minimum_latest_12_month_best_5pct_removed_profit_factor": 1.0,
+    "minimum_net_pnl_usd_exclusive": 0.0
+  },
+  "prohibitions": [
+    "NO_PARAMETER_GRID",
+    "NO_THRESHOLD_SEARCH",
+    "NO_CLOCK_SEARCH",
+    "NO_SIDE_REVERSAL",
+    "NO_STOP_TARGET_CHANGE",
+    "NO_POST_RESULT_REGIME_DELETION",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ],
+  "demo_order_authorized": false
+}

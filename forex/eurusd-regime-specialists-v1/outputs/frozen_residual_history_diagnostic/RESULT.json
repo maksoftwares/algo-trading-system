@@ -1,0 +1,363 @@
+{
+  "campaign_under_test": "EURUSD_FORWARD_RESIDUAL_REGIME_V1",
+  "candidate_parameters_changed": false,
+  "combined_portfolio": {
+    "checks": {
+      "maximum_trades_per_weekday": true,
+      "maximum_win_rate": true,
+      "minimum_best_5pct_removed_profit_factor": true,
+      "minimum_each_half_profit_factor": true,
+      "minimum_latest_12_month_best_5pct_removed_profit_factor": true,
+      "minimum_latest_12_month_profit_factor": true,
+      "minimum_net_pnl_usd": true,
+      "minimum_payoff_ratio": true,
+      "minimum_profit_factor": true,
+      "minimum_stressed_profit_factor": true,
+      "minimum_trades_per_weekday": false,
+      "minimum_weekday_coverage": false,
+      "minimum_win_rate": true,
+      "zero_m15_residual_owned_date_overlap": true,
+      "zero_missing_residual_context": false,
+      "zero_missing_residual_outcome_paths": false
+    },
+    "components": {
+      "M15_REGIME": {
+        "active_weekdays": 98,
+        "best_5pct_removed_profit_factor": 1.1067572970811677,
+        "maximum_closed_trade_drawdown": 25.770000000000003,
+        "maximum_single_month_gross_profit_share": 0.0998771614854011,
+        "net": 61.6,
+        "payoff_ratio": 1.4647525605142557,
+        "profit_factor": 1.4105024656803944,
+        "stressed_profit_factor": 1.340541240450602,
+        "trade_sequence_half_profit_factors": [
+          1.5598835597449403,
+          1.2722022587268993
+        ],
+        "trades": 106,
+        "trades_per_weekday": 0.20306513409961685,
+        "weekday_coverage": 0.18773946360153257,
+        "win_rate": 0.49056603773584906
+      },
+      "RESIDUAL_LIVE": {
+        "active_weekdays": 3,
+        "best_5pct_removed_profit_factor": 0.7901234567900912,
+        "maximum_closed_trade_drawdown": 0.81,
+        "maximum_single_month_gross_profit_share": 0.6502732240437251,
+        "net": 1.019999999999974,
+        "payoff_ratio": 1.1296296296296136,
+        "profit_factor": 2.259259259259227,
+        "stressed_profit_factor": 2.0116279069767136,
+        "trade_sequence_half_profit_factors": [
+          null,
+          1.4691358024691359
+        ],
+        "trades": 3,
+        "trades_per_weekday": 0.005747126436781609,
+        "weekday_coverage": 0.005747126436781609,
+        "win_rate": 0.6666666666666666
+      }
+    },
+    "first_12_months": {
+      "active_weekdays": 45,
+      "best_5pct_removed_profit_factor": 1.0404349823862762,
+      "maximum_closed_trade_drawdown": 15.14,
+      "maximum_single_month_gross_profit_share": 0.19836010333595425,
+      "net": 23.739999999999974,
+      "payoff_ratio": 1.3636085158523505,
+      "profit_factor": 1.3636085158523505,
+      "stressed_profit_factor": 1.293049560946569,
+      "trade_sequence_half_profit_factors": [
+        1.9152612093788566,
+        1.036359199609565
+      ],
+      "trades": 48,
+      "trades_per_weekday": 0.1839080459770115,
+      "weekday_coverage": 0.1724137931034483,
+      "win_rate": 0.5
+    },
+    "full": {
+      "active_weekdays": 101,
+      "best_5pct_removed_profit_factor": 1.1129449194670906,
+      "maximum_closed_trade_drawdown": 25.770000000000003,
+      "maximum_single_month_gross_profit_share": 0.09902103143004357,
+      "net": 62.619999999999976,
+      "payoff_ratio": 1.441264124865901,
+      "profit_factor": 1.4150593225956118,
+      "stressed_profit_factor": 1.3442570177697657,
+      "trade_sequence_half_profit_factors": [
+        1.5410019591379789,
+        1.3017252235234857
+      ],
+      "trades": 109,
+      "trades_per_weekday": 0.20881226053639848,
+      "weekday_coverage": 0.19348659003831417,
+      "win_rate": 0.4954128440366973
+    },
+    "m15_residual_owned_date_overlaps": 0,
+    "second_12_months": {
+      "active_weekdays": 56,
+      "best_5pct_removed_profit_factor": 1.0976863753213368,
+      "maximum_closed_trade_drawdown": 25.77,
+      "maximum_single_month_gross_profit_share": 0.16985376827896512,
+      "net": 38.88,
+      "payoff_ratio": 1.5027888135857286,
+      "profit_factor": 1.4543117550829632,
+      "stressed_profit_factor": 1.3832974015658688,
+      "trade_sequence_half_profit_factors": [
+        1.3167210060549606,
+        1.5928705440900564
+      ],
+      "trades": 61,
+      "trades_per_weekday": 0.23371647509578544,
+      "weekday_coverage": 0.21455938697318008,
+      "win_rate": 0.4918032786885246
+    }
+  },
+  "daily_learner": {
+    "eligible_dates": 34,
+    "portfolio_trades_consumed": 0,
+    "records_replayed": 2608,
+    "used_only_as_frozen_same_date_ownership_veto": true
+  },
+  "demo_order_authorized": false,
+  "prohibitions": [
+    "NO_PARAMETER_GRID",
+    "NO_THRESHOLD_SEARCH",
+    "NO_CLOCK_SEARCH",
+    "NO_SIDE_REVERSAL",
+    "NO_STOP_TARGET_CHANGE",
+    "NO_POST_RESULT_REGIME_DELETION",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ],
+  "publisher_friday_action_verified": "IMMUTABLE_CASH_MARKET_CLOSURE",
+  "research_boundary": "POST_FREEZE_RETROSPECTIVE_FALSIFICATION_ONLY",
+  "residual_config_sha256": "e11e9db9f1fba5df077548f8c014688076f2c44ec7d5e6083dc03b4b4ff76e79",
+  "residual_source_sha256": "084664f4d3f38cf9f300481915501afb8087b99b01235b5e64d163815f5a4741",
+  "resolved_residual_training_days": 1918,
+  "result_can_count_as_forward_evidence": false,
+  "schema_version": "eurusd_frozen_residual_history_diagnostic_v1",
+  "standalone_residual": {
+    "by_regime": {
+      "BROAD_EUR_DOWN": {
+        "best_5pct_removed_profit_factor": 0.8497506234413068,
+        "maximum_closed_trade_drawdown": 5.562500000000646,
+        "net": 1.4499999999981121,
+        "payoff_ratio": 1.298070612941214,
+        "profit_factor": 1.072319201994916,
+        "stressed_profit_factor": 0.9453170447933982,
+        "trade_sequence_half_profit_factors": [
+          1.208333333333215,
+          0.9680616740087299
+        ],
+        "trades": 42,
+        "trades_per_weekday": 0.016104294478527608,
+        "win_rate": 0.4523809523809524
+      },
+      "BROAD_EUR_UP": {
+        "best_5pct_removed_profit_factor": 1.0116348448686916,
+        "maximum_closed_trade_drawdown": 8.100000000000001,
+        "net": 7.9249999999981915,
+        "payoff_ratio": 1.5194577035268544,
+        "profit_factor": 1.189140811455799,
+        "stressed_profit_factor": 1.062534896705709,
+        "trade_sequence_half_profit_factors": [
+          1.18922155688616,
+          1.1890606420927177
+        ],
+        "trades": 82,
+        "trades_per_weekday": 0.03144171779141104,
+        "win_rate": 0.43902439024390244
+      },
+      "CROSSPAIR_COMPRESSION": {
+        "best_5pct_removed_profit_factor": 0.36728395061728397,
+        "maximum_closed_trade_drawdown": 2.025,
+        "net": -1.0749999999999997,
+        "payoff_ratio": 1.4691358024691359,
+        "profit_factor": 0.7345679012345679,
+        "stressed_profit_factor": 0.6627906976744187,
+        "trade_sequence_half_profit_factors": [
+          0.7345679012345679,
+          0.7345679012345679
+        ],
+        "trades": 6,
+        "trades_per_weekday": 0.0023006134969325155,
+        "win_rate": 0.3333333333333333
+      },
+      "MIXED_TRANSITION": {
+        "best_5pct_removed_profit_factor": 0.0,
+        "maximum_closed_trade_drawdown": 1.0125,
+        "net": -1.0125,
+        "payoff_ratio": null,
+        "profit_factor": 0.0,
+        "stressed_profit_factor": 0.0,
+        "trade_sequence_half_profit_factors": [
+          0.0,
+          0.0
+        ],
+        "trades": 1,
+        "trades_per_weekday": 0.0003834355828220859,
+        "win_rate": 0.0
+      },
+      "SHORT_LONG_DISAGREEMENT": {
+        "best_5pct_removed_profit_factor": 0.0,
+        "maximum_closed_trade_drawdown": 3.3625000000002148,
+        "net": -3.3625000000002143,
+        "payoff_ratio": 0.6790123456788005,
+        "profit_factor": 0.16975308641970013,
+        "stressed_profit_factor": 0.14534883720925246,
+        "trade_sequence_half_profit_factors": [
+          0.6790123456788005,
+          0.0
+        ],
+        "trades": 5,
+        "trades_per_weekday": 0.0019171779141104294,
+        "win_rate": 0.2
+      }
+    },
+    "chronological_blocks": {
+      "B1_2016H2_2018": {
+        "best_5pct_removed_profit_factor": 0.4499078057774887,
+        "complete_weekdays": 652,
+        "friday_market_closure_cash": 131,
+        "maximum_closed_trade_drawdown": 10.125,
+        "missing_context": 4,
+        "missing_outcome_path": 2,
+        "net": -8.212500000000485,
+        "payoff_ratio": 1.3911083794304027,
+        "profit_factor": 0.5961893054701725,
+        "stressed_profit_factor": 0.5340646651270047,
+        "trade_sequence_half_profit_factors": [
+          0.6711956521738707,
+          0.5342312008978676
+        ],
+        "trades": 30,
+        "trades_per_weekday": 0.046012269938650305,
+        "upstream_owned_cash": 17,
+        "weekday_coverage": 0.046012269938650305,
+        "win_rate": 0.3
+      },
+      "B2_2019_2021": {
+        "best_5pct_removed_profit_factor": 1.042892591279594,
+        "complete_weekdays": 784,
+        "friday_market_closure_cash": 157,
+        "maximum_closed_trade_drawdown": 9.625000000001219,
+        "missing_context": 3,
+        "missing_outcome_path": 20,
+        "net": 7.4624999999967425,
+        "payoff_ratio": 1.4193345824681056,
+        "profit_factor": 1.2116270825947242,
+        "stressed_profit_factor": 1.071711830799647,
+        "trade_sequence_half_profit_factors": [
+          2.097097097096841,
+          0.7261251372118036
+        ],
+        "trades": 76,
+        "trades_per_weekday": 0.09693877551020408,
+        "upstream_owned_cash": 5,
+        "weekday_coverage": 0.09693877551020408,
+        "win_rate": 0.4605263157894737
+      },
+      "B3_2022_2024": {
+        "best_5pct_removed_profit_factor": 1.0294117647058727,
+        "complete_weekdays": 782,
+        "friday_market_closure_cash": 156,
+        "maximum_closed_trade_drawdown": 8.637499999999996,
+        "missing_context": 6,
+        "missing_outcome_path": 19,
+        "net": 3.399999999999865,
+        "payoff_ratio": 1.5441176470588092,
+        "profit_factor": 1.2352941176470473,
+        "stressed_profit_factor": 1.1112916328188367,
+        "trade_sequence_half_profit_factors": [
+          4.041509433962099,
+          0.40067340067340074
+        ],
+        "trades": 27,
+        "trades_per_weekday": 0.034526854219948847,
+        "upstream_owned_cash": 23,
+        "weekday_coverage": 0.034526854219948847,
+        "win_rate": 0.4444444444444444
+      },
+      "B4_2025_2026H1": {
+        "best_5pct_removed_profit_factor": 0.7901234567900913,
+        "complete_weekdays": 390,
+        "friday_market_closure_cash": 78,
+        "maximum_closed_trade_drawdown": 1.0125,
+        "missing_context": 3,
+        "missing_outcome_path": 3,
+        "net": 1.2749999999999675,
+        "payoff_ratio": 1.1296296296296138,
+        "profit_factor": 2.2592592592592275,
+        "stressed_profit_factor": 2.011627906976714,
+        "trade_sequence_half_profit_factors": [
+          null,
+          1.4691358024691359
+        ],
+        "trades": 3,
+        "trades_per_weekday": 0.007692307692307693,
+        "upstream_owned_cash": 63,
+        "weekday_coverage": 0.007692307692307693,
+        "win_rate": 0.6666666666666666
+      },
+      "LATEST_12_MONTHS": {
+        "best_5pct_removed_profit_factor": 0.0,
+        "complete_weekdays": 261,
+        "friday_market_closure_cash": 52,
+        "maximum_closed_trade_drawdown": 0.0,
+        "missing_context": 2,
+        "missing_outcome_path": 3,
+        "net": 0,
+        "payoff_ratio": null,
+        "profit_factor": 0.0,
+        "stressed_profit_factor": 0.0,
+        "trade_sequence_half_profit_factors": [
+          0.0,
+          0.0
+        ],
+        "trades": 0,
+        "trades_per_weekday": 0.0,
+        "upstream_owned_cash": 46,
+        "weekday_coverage": 0.0,
+        "win_rate": 0.0
+      }
+    },
+    "full": {
+      "best_5pct_removed_profit_factor": 0.9087071240105014,
+      "complete_weekdays": 2608,
+      "friday_market_closure_cash": 522,
+      "maximum_closed_trade_drawdown": 10.125,
+      "missing_context": 16,
+      "missing_outcome_path": 44,
+      "net": 3.9249999999960896,
+      "payoff_ratio": 1.4191065417158735,
+      "profit_factor": 1.0552330694810341,
+      "stressed_profit_factor": 0.9397530864197029,
+      "trade_sequence_half_profit_factors": [
+        1.1671744097485837,
+        0.9591369728669136
+      ],
+      "trades": 136,
+      "trades_per_weekday": 0.05214723926380368,
+      "upstream_owned_cash": 108,
+      "weekday_coverage": 0.05214723926380368,
+      "win_rate": 0.4264705882352941
+    }
+  },
+  "status": "HISTORICAL_FALSIFICATION_FAILED",
+  "variants_evaluated": 1,
+  "verified_contract_sha256": {
+    "historical_bar_contract": "1e547df36602aecdc5fa14097ba0416ab106faf2cff8d7d03ce4f32336f1bedf",
+    "protected_m15_trades": "3b61273712c75d5aa5cf8ef9d46c71170687ec34fcd9156bfccccf15e8653e43",
+    "publisher_config": "aab1f1855f11e07d6c7d9e52fc9666b19fdb17e3a3740418622ce04cf981bc66",
+    "residual_lock": "b592d469343f95ea16eed76457b167d74944771f6a196cee9bda743eeebd4eaa"
+  },
+  "verified_historical_bar_sha256": {
+    "EURGBP_M5_BIDASK.parquet": "0671ac86131ae822e80cfbed18d46fc7ff2db72129b90c74052f9471ca83cd72",
+    "EURJPY_M5_BIDASK.parquet": "4b62fbf3b5c54c4728af53517fe6debfbd4380247c106fd149b1e78f4e536762",
+    "EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "GBPUSD_M5_BIDASK.parquet": "4e855855978964958d255ca69b47c6452909ebe2b991bf27b5c537ea9ac765fd",
+    "USDJPY_M5_BIDASK.parquet": "b112d958b52ab5650fb790129184608c54268138025ea04d2322ea2f06e231b2"
+  }
+}
