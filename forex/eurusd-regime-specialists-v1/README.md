@@ -113,6 +113,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 107. Causal online dense residual router: one preregistered same-regime router used only completed prior shadow outcomes to select among the frozen direction rules, then traded every resolved residual opportunity. It closed most of the activity gap at 430 combined trades, 0.824/day, and 80.84% weekday coverage, but its residual sleeve lost 43.35R in the two-year broker window at PF 0.764. Protected M15 carried the combined PF to only 1.091; stress PF was 1.006 and best-5%-removed PF 0.669. The result proves that adaptive routing over the same weak signals creates frequency without edge and is rejected.
 108. Cross-Pair Compression own-price specialist: six preregistered EURUSD displacement rules tested an independent mechanism inside the highest-capacity failed regime. All six lost during 2016H2-2021 development; the best PF was 0.893 and best stressed PF 0.783 over 418 trades. The protocol therefore selected cash and did not use locked validation outcomes to rescue a rule. Simple late-session own-price momentum or mean reversion is rejected before promotion.
 109. Cross-Pair Compression failed-auction census: a one-variant symmetric rejection signal inherited fixed 3-pip excursion, 20-pip range, 55% wick, and three-M5-bar thresholds from an earlier preregistration. It found only 37 candidates in ten years versus the frozen 40 minimum, with 13 locked-validation candidates versus 15 required. P&L remained closed, thresholds were not weakened, and the exact pattern is rejected for insufficient capacity.
+110. RSI chronological regime selector: five causal regimes were evaluated on the first broker year only; Neutral, Joint Compression, and Shock passed every development gate and were frozen into the second year. Their locked validation produced 289 RSI trades but lost $20.31. With 61 protected M15 trades, the combined portfolio reached 1.341 trades/day but only PF 1.007, stress PF 0.924, best-5%-removed PF 0.730, 54.02% weekday coverage, and 0.951 payoff. The attractive retrospective RSI frontier does not survive honest regime transfer and is rejected.
 
 Final status: `PROTECTED_M15_EDGE_PRESENT_FREQUENCY_PORTFOLIO_NOT_DEMO_READY`.
 
@@ -394,6 +395,7 @@ uv run --offline --with pandas --with numpy --with pyarrow python run_dense_resi
 uv run --offline --with pandas --with numpy --with pyarrow python run_online_dense_residual_router.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_compression_own_price_family.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_compression_failed_auction.py
+uv run --offline --with pandas --with numpy --with pyarrow python run_rsi_regime_chronological_selector.py
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_consensus.py capture --days-ahead 60
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_actuals.py capture
 uv run --with pandas --with pyarrow python capture_prospective_dukascopy_event_m5.py capture --event-time 2026-08-07T12:30:00Z

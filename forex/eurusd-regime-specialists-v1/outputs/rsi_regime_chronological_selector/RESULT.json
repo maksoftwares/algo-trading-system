@@ -1,0 +1,139 @@
+{
+  "demo_order_authorized": false,
+  "development_regimes_evaluated": 5,
+  "locked_validation": {
+    "checks": {
+      "JOINT_COMPRESSION_minimum_profit_factor": true,
+      "JOINT_COMPRESSION_minimum_stressed_profit_factor": false,
+      "JOINT_COMPRESSION_minimum_trades": true,
+      "NEUTRAL_minimum_profit_factor": false,
+      "NEUTRAL_minimum_stressed_profit_factor": false,
+      "NEUTRAL_minimum_trades": true,
+      "SHOCK_minimum_profit_factor": false,
+      "SHOCK_minimum_stressed_profit_factor": false,
+      "SHOCK_minimum_trades": true,
+      "maximum_concurrent_positions": false,
+      "maximum_same_entry_overlap_timestamps": false,
+      "maximum_trades_per_weekday": false,
+      "maximum_win_rate": true,
+      "minimum_best_removed_profit_factor": false,
+      "minimum_net_pnl_usd": true,
+      "minimum_one_selected_regime": true,
+      "minimum_payoff_ratio": false,
+      "minimum_profit_factor": false,
+      "minimum_stressed_profit_factor": false,
+      "minimum_trades_per_weekday": true,
+      "minimum_weekday_coverage": false,
+      "minimum_win_rate": true
+    },
+    "combined": {
+      "active_trading_dates": 141,
+      "maximum_closed_trade_drawdown_usd": 31.990000000000002,
+      "net_pnl_usd": 1.3900000000000023,
+      "payoff_ratio": 0.9509255373711941,
+      "plus_0_5_pip_profit_factor": 0.923669185757267,
+      "positive_active_month_share": 0.5,
+      "profit_factor": 1.0068623336871467,
+      "top_5pct_removed_profit_factor": 0.7296043050035794,
+      "trade_sequence_half_profit_factors": [
+        0.8505995415270675,
+        1.2056992202838395
+      ],
+      "trades": 350,
+      "trades_per_active_trading_date": 2.482269503546099,
+      "trades_per_weekday": 1.3409961685823755,
+      "weekday_coverage": 0.5402298850574713,
+      "win_rate": 0.5142857142857142
+    },
+    "maximum_concurrent_positions": 3,
+    "protected_m15_trades": 61,
+    "rsi_source_trades": 364,
+    "same_entry_overlap_timestamps": 7,
+    "selected_regime_metrics": {
+      "JOINT_COMPRESSION": {
+        "active_trading_dates": 83,
+        "maximum_closed_trade_drawdown_usd": 6.905000000000001,
+        "net_pnl_usd": 1.1649999999999985,
+        "payoff_ratio": 0.8185049141268739,
+        "plus_0_5_pip_profit_factor": 0.9034139001222607,
+        "positive_active_month_share": 0.45454545454545453,
+        "profit_factor": 1.0231311426585923,
+        "top_5pct_removed_profit_factor": 0.8432443164896258,
+        "trade_sequence_half_profit_factors": [
+          0.8723148307269292,
+          1.2294311236483313
+        ],
+        "trades": 126,
+        "trades_per_active_trading_date": 1.5180722891566265,
+        "trades_per_weekday": 0.4827586206896552,
+        "weekday_coverage": 0.31800766283524906,
+        "win_rate": 0.5555555555555556
+      },
+      "NEUTRAL": {
+        "active_trading_dates": 40,
+        "maximum_closed_trade_drawdown_usd": 12.259999999999998,
+        "net_pnl_usd": -8.89,
+        "payoff_ratio": 0.9256847398299588,
+        "plus_0_5_pip_profit_factor": 0.6770478932216696,
+        "positive_active_month_share": 0.4166666666666667,
+        "profit_factor": 0.7551638667033875,
+        "top_5pct_removed_profit_factor": 0.5632057284494631,
+        "trade_sequence_half_profit_factors": [
+          0.6486997635933806,
+          0.9036939313984169
+        ],
+        "trades": 69,
+        "trades_per_active_trading_date": 1.725,
+        "trades_per_weekday": 0.26436781609195403,
+        "weekday_coverage": 0.1532567049808429,
+        "win_rate": 0.4492753623188406
+      },
+      "SHOCK": {
+        "active_trading_dates": 58,
+        "maximum_closed_trade_drawdown_usd": 19.259999999999998,
+        "net_pnl_usd": -12.58,
+        "payoff_ratio": 0.7365725204322483,
+        "plus_0_5_pip_profit_factor": 0.737386018237082,
+        "positive_active_month_share": 0.3333333333333333,
+        "profit_factor": 0.8020456333595595,
+        "top_5pct_removed_profit_factor": 0.6860739575137689,
+        "trade_sequence_half_profit_factors": [
+          0.7659508247743543,
+          0.8389560789306174
+        ],
+        "trades": 94,
+        "trades_per_active_trading_date": 1.6206896551724137,
+        "trades_per_weekday": 0.36015325670498083,
+        "weekday_coverage": 0.2222222222222222,
+        "win_rate": 0.5212765957446809
+      }
+    },
+    "selected_rsi_trades": 289
+  },
+  "prohibitions": [
+    "NO_TRAILING_PF_GRID",
+    "NO_VALIDATION_BASED_REGIME_SELECTION",
+    "NO_POST_VALIDATION_REGIME_DELETION",
+    "NO_RSI_PARAMETER_CHANGE",
+    "NO_SIDE_INVERSION",
+    "NO_PNL_RESCALING_BEYOND_FIXED_0P01_LOT",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ],
+  "research_boundary": "PREREGISTERED_CHRONOLOGICAL_REGIME_SELECTION_RESEARCH_ONLY",
+  "result_can_count_as_forward_evidence": false,
+  "schema_version": "eurusd_preregistered_rsi_regime_chronological_selector_v1",
+  "selected_regimes_from_development_only": [
+    "NEUTRAL",
+    "JOINT_COMPRESSION",
+    "SHOCK"
+  ],
+  "selector_config_sha256": "030734fc1053c9712c368b1fc15a489212b048df24a2386107763e5a5bfd7a6b",
+  "selector_source_sha256": "1a3e8490b978fc5b9b07374bb67d4e1356041cfa11d38490c80c7229018e84f6",
+  "status": "HISTORICAL_VALIDATION_REJECTED",
+  "verified_source_sha256": {
+    "metric_source": "f36c8816af96e0dc95750f0b2d202230b222d46ba6917913868d2a6f53a8c238",
+    "protected_m15_trade_ledger": "3b61273712c75d5aa5cf8ef9d46c71170687ec34fcd9156bfccccf15e8653e43",
+    "rsi_trade_ledger": "ef0b5b5aeea84a21b9745e45b213937a0ef56972843e5b45250ad5f3efe61761"
+  }
+}
