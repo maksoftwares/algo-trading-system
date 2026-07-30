@@ -1,0 +1,99 @@
+{
+  "schema_version": "eurusd_rsi_health_gate_prospective_observer_v1",
+  "frozen_at_utc": "2026-07-30T16:30:00Z",
+  "prospective_start_utc": "2026-08-01T00:00:00Z",
+  "research_only": false,
+  "shadow_observation_only": true,
+  "broker_action_allowed": false,
+  "demo_order_authorized": false,
+  "implementation": {
+    "source_mq5": {
+      "path": "mt5/Experts/EurUsdRsiHealthGateProspectiveObserver.mq5",
+      "sha256": "6441c9840e4d846afb12566bfb42d3257787d3ac1cd496b8a1edcaaf589bcdf5"
+    },
+    "compiled_ex5": {
+      "path": "mt5/Experts/EurUsdRsiHealthGateProspectiveObserver.ex5",
+      "sha256": "08683bd6c9270fcc84ebabc70563302e1e82f787d8f5125667e53f5b32b325ad"
+    },
+    "compile_log": {
+      "path": "mt5/EURUSD_RSI_HEALTH_GATE_PROSPECTIVE_OBSERVER_COMPILE.log",
+      "sha256": "e42c1755c251c493c77526c5b4a781d9932aeecc73ba57855ec27bada7636635"
+    },
+    "shadow_preset": {
+      "path": "mt5/Presets/EURUSD_RSI_HEALTH_GATE_PROSPECTIVE_OBSERVER.set",
+      "sha256": "81f393a018f8780190e2af2590679e42966c3a9b19aae88e6ceb3d607cfb7813"
+    },
+    "live_config": {
+      "path": "mt5/Config/EURUSD_RSI_HEALTH_GATE_PROSPECTIVE_OBSERVER_LIVE_DEMO.ini",
+      "sha256": "ed59e553359380a6e65501307205a22a22bb5ead1ac548437886ac07a4131538"
+    },
+    "parity_config": {
+      "path": "mt5/Config/EURUSD_RSI_HEALTH_GATE_OBSERVER_PARITY_202407_202606.ini",
+      "sha256": "a8244020a531249804784bdd0195fbb272c6a1d3d26b0fdd6f3fd2a4bdc60c12"
+    },
+    "parity_audit": {
+      "path": "outputs/rsi_health_gate_prospective_observer_parity/PARITY_AUDIT.csv",
+      "sha256": "925c83c583bdea0a0f62fc63c17c8499e9d12eb46ab710186531fcd91fc9d3e1"
+    },
+    "parity_report": {
+      "path": "outputs/rsi_health_gate_prospective_observer_parity/MT5_TESTER_REPORT.htm",
+      "sha256": "6fdb088213d542e276f494a9c7a4d9a90a64fa0551a294e7898b5b1e527f99d8"
+    }
+  },
+  "frozen_rule": {
+    "symbol": "EURUSD",
+    "timeframe": "M15",
+    "direction": "LONG_ONLY",
+    "atr_period": 14,
+    "bands_period": 20,
+    "rsi_period": 14,
+    "rsi_oversold_inclusive": 30.0,
+    "require_close_below_band_mid": true,
+    "minimum_body_fraction": 0.4,
+    "blocked_entry_hours_utc": [
+      1,
+      7,
+      21
+    ],
+    "maximum_entry_spread_pips": 10.0,
+    "maximum_trades_per_utc_day": 20,
+    "one_virtual_position": true,
+    "recent_stop_lookback_m15_bars": 6,
+    "stop_atr_multiple": 1.4,
+    "stop_floor_pips": 3.0,
+    "stop_ceiling_pips": 70.0,
+    "target_r": 0.8,
+    "same_tick_policy": "STOP_FIRST",
+    "adverse_slippage_pips_per_side": 0.1,
+    "reporting_lot": 0.01
+  },
+  "health_gate": {
+    "lookback_completed_virtual_trades": 30,
+    "minimum_trailing_profit_factor": 1.05,
+    "uses_only_completed_prior_outcomes": true,
+    "rejected_virtual_outcomes_remain_observable": true,
+    "persistent_across_restarts": true
+  },
+  "parity_acceptance": {
+    "minimum_exact_minute_broker_entry_coverage": 0.99,
+    "maximum_absolute_observer_to_broker_count_difference": 5,
+    "require_zero_compile_errors": true,
+    "require_zero_compile_warnings": true,
+    "require_zero_order_capability": true
+  },
+  "prospective_decision_checkpoint": {
+    "minimum_completed_raw_virtual_trades": 120,
+    "minimum_health_admitted_trades": 60,
+    "minimum_complete_weekdays": 60,
+    "minimum_profit_factor": 1.15,
+    "minimum_stressed_profit_factor": 1.05,
+    "stress_extra_round_trip_pips": 0.5,
+    "minimum_top_5pct_winners_removed_profit_factor": 1.0,
+    "require_state_and_source_integrity": true
+  },
+  "decision_policy": {
+    "no_reselection_after_prospective_start": true,
+    "historical_or_parity_pass_can_authorize_orders": false,
+    "all_prospective_checks_required": true
+  }
+}

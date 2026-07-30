@@ -1,0 +1,10 @@
+InpRunId=EURUSD_RSI_HEALTH_GATE_FORWARD_V1
+InpTargetSymbol=EURUSD
+InpObserverId=26073091
+InpAllowedAccountLogin=0
+InpAllowedServer=
+InpRequireDemoAccount=true
+InpProspectiveStartUtc=2026.08.01 00:00
+InpBrokerUtcOffsetHours=0
+InpResetPersistentState=false
+InpAuditLogName=EURUSD_RSI_HEALTH_GATE_PROSPECTIVE_OBSERVER.csv

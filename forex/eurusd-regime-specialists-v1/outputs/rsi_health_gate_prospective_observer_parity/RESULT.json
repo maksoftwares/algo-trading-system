@@ -1,0 +1,66 @@
+{
+  "schema_version": "eurusd_rsi_health_gate_observer_parity_result_v1",
+  "generated_at_utc": "2026-07-30T16:30:00Z",
+  "status": "PARITY_PASSED_PROSPECTIVE_SHADOW_ONLY",
+  "demo_order_authorized": false,
+  "broker_action_performed": false,
+  "compile": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "entry_parity": {
+    "broker_rows": 630,
+    "observer_virtual_opens": 632,
+    "exact_minute_matches": 629,
+    "broker_coverage": 0.9984126984126984,
+    "observer_coverage": 0.995253164556962
+  },
+  "raw_virtual": {
+    "trades": 632,
+    "wins": 366,
+    "win_rate": 0.5791139240506329,
+    "payoff_ratio": 0.893485269184177,
+    "profit_factor": 1.22938198692259,
+    "net_pips": 652.500000000001
+  },
+  "health_admitted": {
+    "trades": 344,
+    "active_dates": 177,
+    "wins": 218,
+    "win_rate": 0.6337209302325582,
+    "payoff_ratio": 0.937386814785208,
+    "profit_factor": 1.62182798113631,
+    "net_pips": 830.700000000001,
+    "pnl_usd_001_lot": 830.700000000001,
+    "stressed_profit_factor_0p5_pips": 1.47086996926156,
+    "top_5pct_winners_removed_count": 18,
+    "top_5pct_winners_removed_profit_factor": 1.32247922748709,
+    "first_12_months": {
+      "trades": 216,
+      "win_rate": 0.662037037037037,
+      "payoff_ratio": 0.954582861542833,
+      "profit_factor": 1.86993629041952,
+      "net_pips": 723.7
+    },
+    "second_12_months": {
+      "trades": 128,
+      "win_rate": 0.5859375,
+      "payoff_ratio": 0.856693121693122,
+      "profit_factor": 1.21230158730159,
+      "net_pips": 107.0
+    }
+  },
+  "concentration_warning": {
+    "first_12_month_net_pips_share": 0.8713133495281088,
+    "no_admitted_trades_2025_08_through_2025_12": true,
+    "historical_demo_readiness": false
+  },
+  "parity_checks": {
+    "minimum_exact_minute_broker_entry_coverage": true,
+    "maximum_absolute_observer_to_broker_count_difference": true,
+    "zero_compile_errors": true,
+    "zero_compile_warnings": true,
+    "zero_order_capability": true
+  },
+  "all_parity_checks_passed": true
+}
