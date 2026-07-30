@@ -1,0 +1,405 @@
+{
+  "schema_version": "eurusd_m15_regime_portfolio_mt5_transfer_result_v1",
+  "generated_at_utc": "2026-07-30T06:53:58Z",
+  "status": "BROKER_TRANSFER_PASSED_PROSPECTIVE_SHADOW_ONLY",
+  "broker_action_performed": false,
+  "demo_order_authorized": false,
+  "prospective_shadow_authorized": true,
+  "implementation_hashes": {
+    "source_mq5": "8650a1b152fd5dfdeb9eb8aba6f017f20f123d687f53240a5c2f26396a606e31",
+    "compiled_ex5": "72fc36da10691e6fa9077300748abb632b70134cba0ba04f91aadcb8ee7fdf90",
+    "shadow_preset": "3aaf4de220bdc18dacf145a12daedec35882c937c18d2acc2dda8deff896f131",
+    "ordering_template": "e363772bd705a0f3aeaf1672c977c9947d8db7d4f558b6308d7659cc579f8da8",
+    "tester_config": "a307e4ac845e80c812a23155d475c9154a5f6ac0b6021a8b45f1af7d130a95c1",
+    "compile_log": "7dbd83897a3fa07817cfe6d45fac0f6ab38b883ac43a578faf9eb51a27ecad38"
+  },
+  "report_sha256": "98932f4ec8c376b1966cb1203c8e57257a09b4b1b971086993dd14e7f26ad721",
+  "audit_sha256": "bfc52cd13cce42e839136bddab930500aba2eb2ee85031c8beb8971507228083",
+  "broker_metrics": {
+    "History Quality": "98%",
+    "Bars": "48531",
+    "Ticks": "34740064",
+    "Total Net Profit": "61.60",
+    "Gross Profit": "211.66",
+    "Balance Drawdown Maximal": "25.77 (0.26%)",
+    "Equity Drawdown Maximal": "26.79 (0.27%)",
+    "Gross Loss": "-150.06",
+    "Balance Drawdown Relative": "0.26% (25.77)",
+    "Equity Drawdown Relative": "0.27% (26.79)",
+    "Profit Factor": "1.41",
+    "Expected Payoff": "0.58",
+    "Recovery Factor": "2.30",
+    "Sharpe Ratio": "6.70",
+    "Total Trades": "106",
+    "Short Trades (won %)": "106 (49.06%)",
+    "Long Trades (won %)": "0 (0.00%)",
+    "Total Deals": "212",
+    "Profit Trades (% of total)": "52 (49.06%)",
+    "Loss Trades (% of total)": "54 (50.94%)"
+  },
+  "weekdays": 522,
+  "trades_per_weekday": 0.20306513409961685,
+  "windows": {
+    "FULL": {
+      "trades": 106,
+      "wins": 52,
+      "win_rate": 0.49056603773584906,
+      "realized_payoff_ratio": 1.4647525605142557,
+      "profit_factor": 1.4105024656803944,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 61.6,
+      "net_pnl_usd_research_equivalent": 30.8
+    },
+    "FIRST_12_MONTHS": {
+      "trades": 45,
+      "wins": 22,
+      "win_rate": 0.4888888888888889,
+      "realized_payoff_ratio": 1.4138281073764944,
+      "profit_factor": 1.3523573200992556,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 22.72,
+      "net_pnl_usd_research_equivalent": 11.36
+    },
+    "SECOND_12_MONTHS": {
+      "trades": 61,
+      "wins": 30,
+      "win_rate": 0.4918032786885246,
+      "realized_payoff_ratio": 1.5027888135857286,
+      "profit_factor": 1.4543117550829632,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 38.88,
+      "net_pnl_usd_research_equivalent": 19.44
+    }
+  },
+  "by_regime": {
+    "CHOP": {
+      "trades": 74,
+      "wins": 40,
+      "win_rate": 0.5405405405405406,
+      "realized_payoff_ratio": 1.3500087719298246,
+      "profit_factor": 1.5882456140350878,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 67.06,
+      "net_pnl_usd_research_equivalent": 33.53
+    },
+    "COMPRESSION": {
+      "trades": 32,
+      "wins": 12,
+      "win_rate": 0.375,
+      "realized_payoff_ratio": 1.4143094841930117,
+      "profit_factor": 0.848585690515807,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": -5.459999999999999,
+      "net_pnl_usd_research_equivalent": -2.7299999999999995
+    }
+  },
+  "best_5pct_removed_count": 6,
+  "best_5pct_removed": {
+    "trades": 100,
+    "wins": 46,
+    "win_rate": 0.46,
+    "realized_payoff_ratio": 1.2992368270083272,
+    "profit_factor": 1.1067572970811677,
+    "profit_factor_is_infinite": false,
+    "net_pnl_usd_executable": 16.02,
+    "net_pnl_usd_research_equivalent": 8.01
+  },
+  "balance_drawdown_percent": 0.26,
+  "gate_results": {
+    "minimum_trades": true,
+    "minimum_trades_per_weekday": true,
+    "minimum_full_profit_factor": true,
+    "minimum_each_12_month_profit_factor": true,
+    "minimum_latest_12_month_profit_factor": true,
+    "minimum_net_pnl_usd": true,
+    "minimum_best_5pct_removed_profit_factor": true,
+    "maximum_balance_drawdown_percent": true
+  },
+  "all_transfer_gates_passed": true,
+  "audit": {
+    "rows": 218,
+    "header_present": false,
+    "signals": 106,
+    "orders_sent": 106,
+    "order_send_failures": 0,
+    "initialization_failures": 0,
+    "event_counts": {
+      "DEINIT": 1,
+      "INIT_OK": 1,
+      "ORDER_SEND_OK": 106,
+      "SIGNAL": 106,
+      "STARTUP_LATCH": 1,
+      "TIME_EXIT_OK": 3
+    },
+    "regime_signal_counts": {
+      "CHOP": 74,
+      "COMPRESSION": 32
+    }
+  },
+  "monthly": [
+    {
+      "month": "2024-07",
+      "trades": 6,
+      "wins": 4,
+      "win_rate": 0.6666666666666666,
+      "realized_payoff_ratio": 1.4876543209876543,
+      "profit_factor": 2.9753086419753085,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 6.4,
+      "net_pnl_usd_research_equivalent": 3.2
+    },
+    {
+      "month": "2024-08",
+      "trades": 4,
+      "wins": 2,
+      "win_rate": 0.5,
+      "realized_payoff_ratio": 2.567335243553009,
+      "profit_factor": 2.567335243553009,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 5.47,
+      "net_pnl_usd_research_equivalent": 2.735
+    },
+    {
+      "month": "2024-09",
+      "trades": 2,
+      "wins": 2,
+      "win_rate": 1.0,
+      "realized_payoff_ratio": 0.0,
+      "profit_factor": null,
+      "profit_factor_is_infinite": true,
+      "net_pnl_usd_executable": 7.08,
+      "net_pnl_usd_research_equivalent": 3.54
+    },
+    {
+      "month": "2024-10",
+      "trades": 2,
+      "wins": 1,
+      "win_rate": 0.5,
+      "realized_payoff_ratio": 1.0970873786407767,
+      "profit_factor": 1.0970873786407767,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 0.19999999999999973,
+      "net_pnl_usd_research_equivalent": 0.09999999999999987
+    },
+    {
+      "month": "2024-11",
+      "trades": 3,
+      "wins": 2,
+      "win_rate": 0.6666666666666666,
+      "realized_payoff_ratio": 1.6946902654867257,
+      "profit_factor": 3.3893805309734515,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 5.4,
+      "net_pnl_usd_research_equivalent": 2.7
+    },
+    {
+      "month": "2024-12",
+      "trades": 9,
+      "wins": 3,
+      "win_rate": 0.3333333333333333,
+      "realized_payoff_ratio": 1.3204819277108433,
+      "profit_factor": 0.6602409638554216,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": -5.640000000000001,
+      "net_pnl_usd_research_equivalent": -2.8200000000000003
+    },
+    {
+      "month": "2025-01",
+      "trades": 5,
+      "wins": 3,
+      "win_rate": 0.6,
+      "realized_payoff_ratio": 1.3418259023354564,
+      "profit_factor": 2.0127388535031843,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 6.359999999999999,
+      "net_pnl_usd_research_equivalent": 3.1799999999999997
+    },
+    {
+      "month": "2025-02",
+      "trades": 1,
+      "wins": 1,
+      "win_rate": 1.0,
+      "realized_payoff_ratio": 0.0,
+      "profit_factor": null,
+      "profit_factor_is_infinite": true,
+      "net_pnl_usd_executable": 1.84,
+      "net_pnl_usd_research_equivalent": 0.92
+    },
+    {
+      "month": "2025-03",
+      "trades": 5,
+      "wins": 3,
+      "win_rate": 0.6,
+      "realized_payoff_ratio": 1.7038109020742884,
+      "profit_factor": 2.555716353111433,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 10.749999999999998,
+      "net_pnl_usd_research_equivalent": 5.374999999999999
+    },
+    {
+      "month": "2025-04",
+      "trades": 4,
+      "wins": 0,
+      "win_rate": 0.0,
+      "realized_payoff_ratio": 0.0,
+      "profit_factor": 0.0,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": -12.540000000000001,
+      "net_pnl_usd_research_equivalent": -6.2700000000000005
+    },
+    {
+      "month": "2025-05",
+      "trades": 2,
+      "wins": 1,
+      "win_rate": 0.5,
+      "realized_payoff_ratio": 1.7276422764227644,
+      "profit_factor": 1.7276422764227644,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 3.58,
+      "net_pnl_usd_research_equivalent": 1.79
+    },
+    {
+      "month": "2025-06",
+      "trades": 2,
+      "wins": 0,
+      "win_rate": 0.0,
+      "realized_payoff_ratio": 0.0,
+      "profit_factor": 0.0,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": -6.18,
+      "net_pnl_usd_research_equivalent": -3.09
+    },
+    {
+      "month": "2025-07",
+      "trades": 4,
+      "wins": 4,
+      "win_rate": 1.0,
+      "realized_payoff_ratio": 0.0,
+      "profit_factor": null,
+      "profit_factor_is_infinite": true,
+      "net_pnl_usd_executable": 21.09,
+      "net_pnl_usd_research_equivalent": 10.545
+    },
+    {
+      "month": "2025-08",
+      "trades": 5,
+      "wins": 1,
+      "win_rate": 0.2,
+      "realized_payoff_ratio": 1.8555798687089715,
+      "profit_factor": 0.4638949671772429,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": -4.9,
+      "net_pnl_usd_research_equivalent": -2.45
+    },
+    {
+      "month": "2025-09",
+      "trades": 11,
+      "wins": 3,
+      "win_rate": 0.2727272727272727,
+      "realized_payoff_ratio": 1.612509534706331,
+      "profit_factor": 0.6046910755148741,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": -6.91,
+      "net_pnl_usd_research_equivalent": -3.455
+    },
+    {
+      "month": "2025-10",
+      "trades": 8,
+      "wins": 5,
+      "win_rate": 0.625,
+      "realized_payoff_ratio": 1.3174468085106383,
+      "profit_factor": 2.195744680851064,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 11.24,
+      "net_pnl_usd_research_equivalent": 5.62
+    },
+    {
+      "month": "2025-11",
+      "trades": 1,
+      "wins": 0,
+      "win_rate": 0.0,
+      "realized_payoff_ratio": 0.0,
+      "profit_factor": 0.0,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": -3.02,
+      "net_pnl_usd_research_equivalent": -1.51
+    },
+    {
+      "month": "2025-12",
+      "trades": 5,
+      "wins": 1,
+      "win_rate": 0.2,
+      "realized_payoff_ratio": 1.2725430597771026,
+      "profit_factor": 0.31813576494427565,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": -6.7299999999999995,
+      "net_pnl_usd_research_equivalent": -3.3649999999999998
+    },
+    {
+      "month": "2026-01",
+      "trades": 3,
+      "wins": 1,
+      "win_rate": 0.3333333333333333,
+      "realized_payoff_ratio": 1.0519031141868513,
+      "profit_factor": 0.5259515570934257,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": -2.7399999999999998,
+      "net_pnl_usd_research_equivalent": -1.3699999999999999
+    },
+    {
+      "month": "2026-02",
+      "trades": 4,
+      "wins": 2,
+      "win_rate": 0.5,
+      "realized_payoff_ratio": 1.292225201072386,
+      "profit_factor": 1.292225201072386,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 2.18,
+      "net_pnl_usd_research_equivalent": 1.09
+    },
+    {
+      "month": "2026-03",
+      "trades": 7,
+      "wins": 3,
+      "win_rate": 0.42857142857142855,
+      "realized_payoff_ratio": 1.69187675070028,
+      "profit_factor": 1.26890756302521,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 4.48,
+      "net_pnl_usd_research_equivalent": 2.24
+    },
+    {
+      "month": "2026-04",
+      "trades": 3,
+      "wins": 2,
+      "win_rate": 0.6666666666666666,
+      "realized_payoff_ratio": 0.9446721311475411,
+      "profit_factor": 1.8893442622950822,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 2.1700000000000004,
+      "net_pnl_usd_research_equivalent": 1.0850000000000002
+    },
+    {
+      "month": "2026-05",
+      "trades": 6,
+      "wins": 4,
+      "win_rate": 0.6666666666666666,
+      "realized_payoff_ratio": 1.4226327944572748,
+      "profit_factor": 2.8452655889145495,
+      "profit_factor_is_infinite": false,
+      "net_pnl_usd_executable": 7.99,
+      "net_pnl_usd_research_equivalent": 3.995
+    },
+    {
+      "month": "2026-06",
+      "trades": 4,
+      "wins": 4,
+      "win_rate": 1.0,
+      "realized_payoff_ratio": 0.0,
+      "profit_factor": null,
+      "profit_factor_is_infinite": true,
+      "net_pnl_usd_executable": 14.03,
+      "net_pnl_usd_research_equivalent": 7.015
+    }
+  ]
+}

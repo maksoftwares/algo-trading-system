@@ -26,6 +26,13 @@ EX5 = (
     ROOT / "mt5" / "Experts" / "EurUsdM15RegimePortfolioControlledDemo.ex5"
 )
 COMPILE_LOG = ROOT / "mt5" / "EURUSD_M15_REGIME_PORTFOLIO_COMPILE.log"
+LIVE_CONFIG = (
+    ROOT
+    / "mt5"
+    / "Config"
+    / "EURUSD_M15_REGIME_PORTFOLIO_LIVE_DEMO_SHADOW.ini"
+)
+RESULT = ROOT / "outputs" / "m15_regime_portfolio_mt5_transfer" / "RESULT.json"
 
 
 def _settings(path: Path) -> dict[str, str]:
@@ -123,3 +130,26 @@ def test_compiled_implementation_is_pinned_before_transfer_outcome() -> None:
         "Result: 0 errors, 0 warnings"
         in COMPILE_LOG.read_text(encoding="utf-16")
     )
+
+
+def test_live_startup_config_globally_disables_trading_and_dlls() -> None:
+    text = LIVE_CONFIG.read_text(encoding="utf-8")
+    assert "AllowLiveTrading=0" in text
+    assert "AllowDllImport=0" in text
+    assert "Expert=EurUsdM15RegimePortfolioControlledDemo" in text
+    assert "ExpertParameters=EURUSD_M15_REGIME_PORTFOLIO_SHADOW_DEMO.set" in text
+    assert "Symbol=EURUSD" in text
+    assert "Period=M15" in text
+
+
+def test_frozen_broker_transfer_passed_but_orders_remain_unauthorized() -> None:
+    result = json.loads(RESULT.read_text(encoding="utf-8"))
+    assert result["status"] == "BROKER_TRANSFER_PASSED_PROSPECTIVE_SHADOW_ONLY"
+    assert result["all_transfer_gates_passed"] is True
+    assert result["windows"]["FULL"]["trades"] == 106
+    assert result["windows"]["FULL"]["profit_factor"] == 1.4105024656803944
+    assert result["windows"]["FIRST_12_MONTHS"]["profit_factor"] > 1.0
+    assert result["windows"]["SECOND_12_MONTHS"]["profit_factor"] > 1.0
+    assert result["best_5pct_removed"]["profit_factor"] > 1.0
+    assert result["prospective_shadow_authorized"] is True
+    assert result["demo_order_authorized"] is False
