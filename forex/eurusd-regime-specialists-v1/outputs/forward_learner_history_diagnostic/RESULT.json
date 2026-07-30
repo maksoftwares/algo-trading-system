@@ -1,0 +1,105 @@
+{
+  "campaign_id": "EURUSD_FORWARD_SELECTIVE_LEARNER_V1",
+  "chronological_blocks": {
+    "B1_2016H2_2018": {
+      "maximum_drawdown_r": 6.737500000000001,
+      "net_r": -6.262499999999999,
+      "net_usd_0_01_lot": -5.01,
+      "payoff_ratio": 1.4691358024691359,
+      "profit_factor": 0.5876543209876544,
+      "trades": 21,
+      "win_rate": 0.2857142857142857
+    },
+    "B2_2019_2021": {
+      "maximum_drawdown_r": 2.0250000000000004,
+      "net_r": 6.9,
+      "net_usd_0_01_lot": 5.5200000000000005,
+      "payoff_ratio": 1.4691358024691359,
+      "profit_factor": 4.407407407407408,
+      "trades": 8,
+      "win_rate": 0.75
+    },
+    "B3_2022_2024": {
+      "maximum_drawdown_r": 3.0374999999999996,
+      "net_r": -3.0374999999999996,
+      "net_usd_0_01_lot": -2.4299999999999997,
+      "payoff_ratio": null,
+      "profit_factor": 0.0,
+      "trades": 3,
+      "win_rate": 0.0
+    },
+    "B4_2025_2026H1": {
+      "maximum_drawdown_r": 1.0125,
+      "net_r": 0.4750000000000001,
+      "net_usd_0_01_lot": 0.3800000000000001,
+      "payoff_ratio": 1.4691358024691359,
+      "profit_factor": 1.4691358024691359,
+      "trades": 2,
+      "win_rate": 0.5
+    }
+  },
+  "demo_order_authorized": false,
+  "diagnostic_edge_sufficient": false,
+  "diagnostic_frequency_sufficient": false,
+  "diagnostic_period": {
+    "from_inclusive": "2016-07-01T00:00:00Z",
+    "to_exclusive": "2026-07-01T00:00:00Z"
+  },
+  "final_weights_hash": "0653a58d3e741dae1ef5256be062d87fd9639f292cc8609b791f329d9fc5d945",
+  "historical_bar_adapter": {
+    "outcome_path": "native bid/ask bar highs and lows",
+    "source": "hash-verified M5 bid/ask OHLC bars",
+    "spread_mean_points_proxy": "mean of bar-open and bar-close bid/ask spread; intrabar tick-mean spread was unavailable"
+  },
+  "historical_source_sha256_verified": {
+    "EURGBP_M5_BIDASK.parquet": "0671ac86131ae822e80cfbed18d46fc7ff2db72129b90c74052f9471ca83cd72",
+    "EURJPY_M5_BIDASK.parquet": "4b62fbf3b5c54c4728af53517fe6debfbd4380247c106fd149b1e78f4e536762",
+    "EURUSD_M5_BIDASK.parquet": "8281d96ccbc3488f98586894fe58f6988eaa5376601a0bfaec874fd9f08f1f45",
+    "GBPUSD_M5_BIDASK.parquet": "4e855855978964958d255ca69b47c6452909ebe2b991bf27b5c537ea9ac765fd",
+    "USDJPY_M5_BIDASK.parquet": "b112d958b52ab5650fb790129184608c54268138025ea04d2322ea2f06e231b2"
+  },
+  "latest_12_months": {
+    "maximum_drawdown_r": 0.0,
+    "net_r": 0,
+    "net_usd_0_01_lot": 0.0,
+    "payoff_ratio": null,
+    "profit_factor": 0.0,
+    "trades": 0,
+    "win_rate": 0.0
+  },
+  "learner_config_sha256": "454cfc64745c5139eb81ef1b0b16cdb3c8c6a7d7b6d974fea6e939e959c60a9d",
+  "learner_source_sha256": "a65ae95867e521137bb41903b2d157dd151b91a9d0b5df08ad094ccc3fd66d60",
+  "minimum_daily_frequency_needed_for_combined_0_85": 0.646935,
+  "missing_context_days": 14,
+  "pending_outcome_days": 3,
+  "positive_active_month_share": 0.5,
+  "primary": {
+    "maximum_drawdown_r": 6.737500000000001,
+    "net_r": -1.9249999999999985,
+    "net_usd_0_01_lot": -1.539999999999999,
+    "payoff_ratio": 1.469135802469136,
+    "profit_factor": 0.9094650205761318,
+    "trades": 34,
+    "trades_per_validation_weekday": 0.013224426293271101,
+    "win_rate": 0.38235294117647056
+  },
+  "prohibitions": [
+    "NO_THRESHOLD_TUNING_FROM_THIS_DIAGNOSTIC",
+    "NO_RETROSPECTIVE_RESULT_COUNTS_AS_FORWARD_EVIDENCE",
+    "NO_ORDER_AUTHORIZATION"
+  ],
+  "projected_m15_plus_daily_trades_per_weekday_before_overlap_caps": 0.2162894262932711,
+  "resolved_training_days": 2591,
+  "schema_version": "eurusd_forward_learner_history_diagnostic_v1",
+  "status": "RETROSPECTIVE_DIAGNOSTIC_ONLY_NO_ADMISSION",
+  "stress_plus_0_5_pip": {
+    "maximum_drawdown_r": 7.925000000000001,
+    "net_r": -4.049999999999999,
+    "net_usd_0_01_lot": -3.2399999999999993,
+    "payoff_ratio": 1.3255813953488376,
+    "profit_factor": 0.8205980066445184,
+    "trades": 34,
+    "win_rate": 0.38235294117647056
+  },
+  "validation_weekdays_after_warmup": 2571
+}
