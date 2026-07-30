@@ -1,0 +1,31 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_mt5_step1_lock_v1",
+  "config_sha256": "77586f8eaa89d0b84ad2fe67241ee908c2c95a2422ccba009e45d305e266a930",
+  "verifier_sha256": "30e57d8c6bcd68a01b023637d1a4ec1b65751d2144ad71adaac206fb8b9e4bde",
+  "result_json": {
+    "path": "outputs/h4_frequency_completion_mt5_step1/RESULT.json",
+    "sha256": "32316f363419b73ce6a2bedbe73adf0081ea4b9e4c99d33c481d223886c1a84c"
+  },
+  "trade_ledger": {
+    "path": "outputs/h4_frequency_completion_mt5_step1/TRADES.csv",
+    "sha256": "38b10dd676914a250c9afa769531fef03858ae29e842e9fd37313c859e465910"
+  },
+  "monthly_metrics": {
+    "path": "outputs/h4_frequency_completion_mt5_step1/MONTHLY_METRICS.csv",
+    "sha256": "560be8677c2df6d72031c8d61e7864a762da90dd6fd21b0d01da60fc9ca042f7"
+  },
+  "tracked_report": {
+    "path": "EURUSD_H4_FREQUENCY_COMPLETION_MT5_STEP1_RESULT_2026_07_30.md",
+    "sha256": "bc90c5988cb36f73dfe31864b3655f6542d3aea64a8e051a03b33eb9a5b1dc2f"
+  },
+  "mt5_evidence": {
+    "parity_report_sha256": "fb2f1e14bf9db7efce1f6983a740eea7cebe6a792ead1bddb22a2da1ffd60aa7",
+    "parity_audit_sha256": "2f37e7cbb1fea4386e954313bbf5bc3f15e56272b61553e02b98fae092a5baeb",
+    "restart_report_sha256": "7e292cf255c530f3a12c891b17f42b1369ba2b70adbf9218e722e95d6e61796b",
+    "restart_audit_sha256": "0c7f312bda1f3f009b5050f93779ce5fa3e8041e3d201f4c2250e6a70ea7d0e8",
+    "fail_closed_report_sha256": "8377a8df5a227aac8dd1cf56ea1bc76c4fa24f5c33ba2484e8f5c99a930181a8",
+    "fail_closed_audit_sha256": "808872fb399e4e201231dc449340cbe852f369e2652bab96291cfd88b871002c"
+  },
+  "demo_deployment_performed": false,
+  "demo_order_authorized": false
+}

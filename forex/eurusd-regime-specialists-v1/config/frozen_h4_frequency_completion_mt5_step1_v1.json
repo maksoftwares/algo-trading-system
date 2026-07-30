@@ -1,0 +1,77 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_mt5_step1_v1",
+  "frozen_at_utc": "2026-07-30T13:10:00Z",
+  "validation_only_not_pristine_oos": true,
+  "demo_deployment_authorized": false,
+  "implementation_hashes": {
+    "source_mq5": "c1386483c3efd591d4b0be433d93e67d087ac9b4fa02cffee6996c7fa42b5038",
+    "compiled_ex5": "cdf05a1d7876162ccfb1c830640914add252d55e594e926968274cf377b536eb",
+    "compile_log": "e4c32a27e02af76f1bed4e17734d4841960e976eb5338600f5bf63a5749a0593",
+    "shadow_preset": "9d60c740865edf4d9e0e136515b8c8dfea53637365a01dac7c2c9ae3c9ba40fa",
+    "ordering_template": "b62b7afc7282a67800918ed55a1244d29db67412b997de2962c83effc7767dec",
+    "parity_tester_config": "1cbfa65df7af0a0a22c79dd4d86f3997768b74217ebeee5e82ed9acce49623d6",
+    "restart_tester_config": "304b8a806734f47adb81ce77e0a66d50451a83d9bae6b3279c590d64916d6da3",
+    "fail_closed_tester_config": "39bc98f3f86534c1c7c3f22c48fe80ad5b31dafb471883ea26e1134bee32ef48"
+  },
+  "broker_sizing_result": {
+    "path": "outputs/h4_frequency_completion_broker_sizing/RESULT.json",
+    "sha256": "e45cc937c995e04759dfc95df8d58a1bdad18138eb1085714ea0dceb6cf09b01",
+    "expected_status": "BROKER_SIZING_AND_RESEARCH_EDGE_LOCKED"
+  },
+  "broker_sizing_ledger": {
+    "path": "outputs/h4_frequency_completion_broker_sizing/TRADES.csv",
+    "sha256": "9985ea06566b35c99c3a3c8462c82cc4106ebccd4fcb09161f3849adb27b811f",
+    "expected_recent_rows": 462
+  },
+  "transfer_window": ["2024-07-01", "2026-07-01"],
+  "latest_12_month_window": ["2025-07-01", "2026-07-01"],
+  "latest_6_month_window": ["2026-01-01", "2026-07-01"],
+  "transfer_gates": {
+    "minimum_research_trade_count_ratio": 0.85,
+    "minimum_trades_per_weekday": 0.75,
+    "minimum_latest_12_month_trades_per_weekday": 0.85,
+    "minimum_full_profit_factor": 1.15,
+    "minimum_latest_12_month_profit_factor": 1.2,
+    "minimum_latest_6_month_profit_factor": 1.2,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.55,
+    "minimum_payoff_ratio": 1.35,
+    "maximum_payoff_ratio": 1.75,
+    "minimum_net_pnl_usd_exclusive": 0.0,
+    "maximum_balance_drawdown_percent": 2.0,
+    "required_history_quality_percent": 98,
+    "required_lot": 0.01,
+    "required_sleeves": [
+      "BASELINE_CHOP",
+      "BASELINE_COMPRESSION",
+      "NEXT_CLOSE_CHOP",
+      "NEXT_CLOSE_COMPRESSION",
+      "RETEST_CHOP",
+      "RETEST_COMPRESSION",
+      "M15_FOLLOW_3_CHOP",
+      "M15_FOLLOW_5_CHOP",
+      "M15_FOLLOW_5_COMPRESSION",
+      "M15_FOLLOW_7_COMPRESSION",
+      "M30_FIRST_BREAK_CHOP",
+      "M30_FIRST_BREAK_COMPRESSION"
+    ]
+  },
+  "restart_gates": {
+    "minimum_daily_restart_exercises": 100,
+    "exact_latest_6_month_trade_replay_required": true,
+    "zero_duplicate_sleeve_days_required": true
+  },
+  "fail_closed_gates": {
+    "minimum_observed_signals": 1,
+    "required_broker_trades": 0,
+    "every_signal_must_be_blocked": true
+  },
+  "decision_policy": {
+    "aggregate_broker_transfer_not_exact_event_replay": true,
+    "all_12_sleeves_are_mandatory": true,
+    "0p01_lot_is_mandatory": true,
+    "restart_and_fail_closed_tests_are_mandatory": true,
+    "no_file_may_be_installed_in_a_demo_terminal_without_user_permission": true,
+    "historical_or_tester_pass_cannot_authorize_orders": true
+  }
+}

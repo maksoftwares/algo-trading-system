@@ -1,0 +1,22 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_broker_sizing_lock_v1",
+  "config_sha256": "20fe8060732d09b7b736b96c8c04ccb92d1e16ebb3ad1aec2ba1b31167897fc4",
+  "parent_result_sha256": "7cdf8aff49c453138b7174fb68494fe3978b6e93165abb536cfdca8a21becc7f",
+  "parent_ledger_sha256": "5c045beefa1fb35954b713beaf0abf64a69ea61149ba65d60346dda243b88128",
+  "result_json": {
+    "path": "outputs/h4_frequency_completion_broker_sizing/RESULT.json",
+    "sha256": "e45cc937c995e04759dfc95df8d58a1bdad18138eb1085714ea0dceb6cf09b01"
+  },
+  "trade_ledger": {
+    "path": "outputs/h4_frequency_completion_broker_sizing/TRADES.csv",
+    "sha256": "9985ea06566b35c99c3a3c8462c82cc4106ebccd4fcb09161f3849adb27b811f"
+  },
+  "generated_report": {
+    "path": "outputs/h4_frequency_completion_broker_sizing/RESULT.md",
+    "sha256": "95bde726a8f4bc5b6da9597d776fe794142db4b5b18d3b9c1882db8a36bb77e5"
+  },
+  "tracked_report": {
+    "path": "EURUSD_H4_FREQUENCY_COMPLETION_BROKER_SIZING_RESULT_2026_07_30.md",
+    "sha256": "fa04862452b0bf86d5f42cb87bce180426f19636de3945340e9849c094cfb1a2"
+  }
+}

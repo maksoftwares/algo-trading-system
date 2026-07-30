@@ -1,0 +1,47 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_broker_sizing_v1",
+  "frozen_at_utc": "2026-07-30T13:00:00Z",
+  "research_only": true,
+  "broker_action_allowed": false,
+  "adaptive_historical_development_not_pristine_oos": true,
+  "passed_parent_result": {
+    "path": "outputs/h4_frequency_completion_equal_risk/RESULT.json",
+    "sha256": "7cdf8aff49c453138b7174fb68494fe3978b6e93165abb536cfdca8a21becc7f",
+    "expected_status": "BACKTEST_FREQUENCY_AND_EDGE_GATES_PASSED"
+  },
+  "immutable_parent_ledger": {
+    "path": "outputs/h4_frequency_completion_equal_risk/TRADES.csv",
+    "sha256": "5c045beefa1fb35954b713beaf0abf64a69ea61149ba65d60346dda243b88128",
+    "expected_rows": 2532
+  },
+  "research_risk_weight_per_trade": 0.1,
+  "execution": {
+    "reference_full_risk_lot": 0.1,
+    "required_lot_per_trade": 0.01,
+    "broker_volume_minimum": 0.01,
+    "broker_volume_maximum": 100.0,
+    "broker_volume_step": 0.01,
+    "grid_observed_in_isolated_capital_com_demo_tester": true,
+    "ea_must_revalidate_grid_at_every_initialization": true
+  },
+  "risk_limits": {
+    "maximum_concurrent_positions": 9,
+    "maximum_concurrent_initial_risk_units": 0.9
+  },
+  "reporting_windows": {
+    "EARLY_2017_2019": ["2017-01-01T00:00:00Z", "2020-01-01T00:00:00Z"],
+    "MIDDLE_2020_2022H1": ["2020-01-01T00:00:00Z", "2022-07-01T00:00:00Z"],
+    "LATE_2022H2_2024H1": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "RECENT_2024H2_2026H1": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_12_MONTHS": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "LATEST_6_MONTHS": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "FULL_AUDIT": ["2017-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "decision_policy": {
+    "all_2532_trade_identities_are_mandatory": true,
+    "all_signals_exits_and_costs_unchanged": true,
+    "only_uniform_risk_and_cash_scaling_is_allowed": true,
+    "illegal_0p015_lot_interpretation_is_superseded": true,
+    "historical_pass_cannot_authorize_demo_or_live_orders": true
+  }
+}
