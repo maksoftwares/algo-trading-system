@@ -119,6 +119,7 @@ Outcome-locked causal experiments and one intentionally contaminated control wer
 113. H4 trend-pullback continuation result: both later-session EMA-rejection experts failed development, so locked validation remained unopened. Trend-up long produced 86 trades at PF 1.067 and stressed PF 1.014; trend-down short produced 107 trades at PF 0.754 and stressed PF 0.706. The exact family is retired without parameter rescue. A causal-state census shows chop is the largest single state among the 424 protected-M15 empty weekdays and becomes the next distinct-mechanism target.
 114. H4 chop exhaustion-rejection preregistration: a single symmetric later-session failed-auction rule fades excursions beyond a fixed EMA20 plus or minus 0.75 H1-ATR envelope in causal H4 chop. Development, locked validation, both-side viability, stress, delay, and protected-date independence gates are frozen before outcomes; side deletion and all parameter rescue are forbidden.
 115. H4 chop exhaustion-rejection result: the symmetric later-session failed-auction expert produced ample development capacity (321 trades) but lost 15.95R at PF 0.895; stressed PF was 0.848, best-5%-removed PF 0.727, and both long and short lost. Locked validation remained unopened and the exact family is retired. The next distinct hypothesis targets the only remaining profitable hindsight clue that does not directly select winners: predicting exact four-opportunity days causally before the day begins.
+116. Causal opportunity-density day-gate preregistration: a fixed random forest uses only lagged completed-day opportunity counts, EURUSD market features, and calendar cycles at 00:00 UTC to predict an exact-four-opportunity date. The 0.50 threshold, model, earliest-four execution, annual expanding refits, 2022-2023 development, and 2024-2026 locked validation are frozen without any threshold or feature search.
 
 Final status: `PROTECTED_M15_EDGE_PRESENT_FREQUENCY_PORTFOLIO_NOT_DEMO_READY`.
 
@@ -403,6 +404,7 @@ uv run --offline --with pandas --with numpy --with pyarrow python run_compressio
 uv run --offline --with pandas --with numpy --with pyarrow python run_rsi_regime_chronological_selector.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_h4_trend_pullback_continuation.py
 uv run --offline --with pandas --with numpy --with pyarrow python run_h4_chop_exhaustion_rejection.py
+uv run --offline --with pandas --with numpy --with pyarrow --with scikit-learn python run_causal_opportunity_density_day_gate.py
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_consensus.py capture --days-ahead 60
 uv run --with pandas --with pyarrow python capture_prospective_tradingview_actuals.py capture
 uv run --with pandas --with pyarrow python capture_prospective_dukascopy_event_m5.py capture --event-time 2026-08-07T12:30:00Z
