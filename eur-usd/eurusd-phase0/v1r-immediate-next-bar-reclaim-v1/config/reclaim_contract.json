@@ -1,0 +1,34 @@
+{
+  "schema_version": "eurusd_v1r_immediate_reclaim_contract_v1",
+  "candidate_id": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_IMMEDIATE_NEXT_BAR_RECLAIM_V1",
+  "status": "FROZEN_IMPLEMENTED_NOT_RUN",
+  "parent": "EURUSD_M30_RSI_BB_CLOSE_FADE_LONG_V1R_UNMASKED_CONTRACT",
+  "only_alpha_change": "delay entry and require immediate next completed M30 bar close above its lower Bollinger band",
+  "test": {
+    "symbol": "EURUSD",
+    "chart_period": "M5",
+    "signal_timeframe": "M30",
+    "from_inclusive": "2022.07.01",
+    "to_exclusive": "2026.07.02",
+    "model": 0,
+    "deposit_usd": 1000,
+    "leverage": 50
+  },
+  "stage1_core": {
+    "full_pf_min": 1.2100021357,
+    "trades_min": 400,
+    "primary_stress_pf_min": 1.15,
+    "severe_stress_pf_min": 1.0,
+    "severe_stress_net_strictly_positive": true,
+    "last_12_month_pf_min": 1.22,
+    "last_6_month_pf_min": 1.20,
+    "positive_years_required": [2023, 2024, 2025],
+    "years_pf_1_15_min_count": 2
+  },
+  "boundary": {
+    "strategy_tester_only": true,
+    "demo_or_live_authorized": false,
+    "one_candidate_one_run": true
+  }
+}
+
