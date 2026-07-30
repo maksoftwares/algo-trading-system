@@ -1,0 +1,98 @@
+{
+  "schema_version": "eurusd_h4_frequency_completion_demo_bundle_v1",
+  "package_id": "eurusd-h4-frequency-completion-demo-v1",
+  "frozen_at_utc": "2026-07-30T13:30:00Z",
+  "deployment_authorized": false,
+  "demo_orders_authorized": false,
+  "default_install_mode": "DISARMED_SHADOW",
+  "known_strategy_tester_roots": [
+    "C:/MT5A1M5MomentumBacktest"
+  ],
+  "prohibited_existing_demo_roots": [
+    "C:/MT5PortableM15RegimeShadow",
+    "C:/MT5PortableProspectiveCollector",
+    "C:/MT5PortableTier1BestEA"
+  ],
+  "files": [
+    {
+      "source": "mt5/Experts/EurUsdH4FrequencyCompletionControlledDemo.mq5",
+      "bundle_path": "MQL5/Experts/EurUsdH4FrequencyCompletionControlledDemo.mq5",
+      "sha256": "c1386483c3efd591d4b0be433d93e67d087ac9b4fa02cffee6996c7fa42b5038",
+      "install_in_shadow_phase": false
+    },
+    {
+      "source": "mt5/Experts/EurUsdH4FrequencyCompletionControlledDemo.ex5",
+      "bundle_path": "MQL5/Experts/EurUsdH4FrequencyCompletionControlledDemo.ex5",
+      "sha256": "cdf05a1d7876162ccfb1c830640914add252d55e594e926968274cf377b536eb",
+      "install_in_shadow_phase": true
+    },
+    {
+      "source": "mt5/Presets/EURUSD_H4_FREQUENCY_COMPLETION_SHADOW_DEMO.set",
+      "bundle_path": "MQL5/Presets/EURUSD_H4_FREQUENCY_COMPLETION_SHADOW_DEMO.set",
+      "sha256": "9d60c740865edf4d9e0e136515b8c8dfea53637365a01dac7c2c9ae3c9ba40fa",
+      "install_in_shadow_phase": true
+    },
+    {
+      "source": "mt5/Presets/EURUSD_H4_FREQUENCY_COMPLETION_ORDERING_DEMO.template.set",
+      "bundle_path": "MQL5/Presets/EURUSD_H4_FREQUENCY_COMPLETION_ORDERING_DEMO.template.set",
+      "sha256": "b62b7afc7282a67800918ed55a1244d29db67412b997de2962c83effc7767dec",
+      "install_in_shadow_phase": false
+    },
+    {
+      "source": "mt5/Config/EURUSD_H4_FREQUENCY_COMPLETION_LIVE_DEMO_SHADOW.template.ini",
+      "bundle_path": "Config/EURUSD_H4_FREQUENCY_COMPLETION_LIVE_DEMO_SHADOW.ini",
+      "sha256": "fda55fd1b5e1ba54e4aa190106c9cefee8a5c26a5fac3e63407c4bddb288ea68",
+      "install_in_shadow_phase": true
+    },
+    {
+      "source": "EURUSD_H4_FREQUENCY_COMPLETION_MT5_STEP1_RESULT_2026_07_30.md",
+      "bundle_path": "Evidence/EURUSD_H4_FREQUENCY_COMPLETION_MT5_STEP1_RESULT_2026_07_30.md",
+      "sha256": "bc90c5988cb36f73dfe31864b3655f6542d3aea64a8e051a03b33eb9a5b1dc2f",
+      "install_in_shadow_phase": false
+    },
+    {
+      "source": "EURUSD_H4_FREQUENCY_COMPLETION_MT5_STEP1_RESULT_2026_07_30.sha256.json",
+      "bundle_path": "Evidence/EURUSD_H4_FREQUENCY_COMPLETION_MT5_STEP1_RESULT_2026_07_30.sha256.json",
+      "sha256": "c47999fcc0b0985fa3d90b2a82446a0bd0b36534cc39583e316e497d30c1aa82",
+      "install_in_shadow_phase": false
+    },
+    {
+      "source": "EURUSD_H4_FREQUENCY_COMPLETION_BROKER_SIZING_RESULT_2026_07_30.md",
+      "bundle_path": "Evidence/EURUSD_H4_FREQUENCY_COMPLETION_BROKER_SIZING_RESULT_2026_07_30.md",
+      "sha256": "fa04862452b0bf86d5f42cb87bce180426f19636de3945340e9849c094cfb1a2",
+      "install_in_shadow_phase": false
+    },
+    {
+      "source": "EURUSD_H4_FREQUENCY_COMPLETION_BROKER_SIZING_RESULT_2026_07_30.sha256.json",
+      "bundle_path": "Evidence/EURUSD_H4_FREQUENCY_COMPLETION_BROKER_SIZING_RESULT_2026_07_30.sha256.json",
+      "sha256": "8fd48f57044efbcaefbba7481a61701a78b82d547a3b60f42afbb3200949f075",
+      "install_in_shadow_phase": false
+    },
+    {
+      "source": "EURUSD_H4_FREQUENCY_COMPLETION_DEMO_RUNBOOK_2026_07_30.md",
+      "bundle_path": "README.md",
+      "sha256": "780f7d5b7c608530f63da128d5e62674db8e0beed0f9b49832d114bd2e94ae7a",
+      "install_in_shadow_phase": false
+    }
+  ],
+  "safety_contract": {
+    "shadow_mode": true,
+    "demo_orders_enabled": false,
+    "emergency_stop": true,
+    "tester_orders_enabled": false,
+    "demo_arm_token": "DISARMED",
+    "terminal_allow_live_trading": false,
+    "terminal_allow_dll_import": false,
+    "required_symbol": "EURUSD",
+    "required_period": "M15",
+    "required_lot": 0.01
+  },
+  "decision_policy": {
+    "bundle_creation_may_write_only_inside_workspace_outputs": true,
+    "preflight_is_read_only_for_target_terminal": true,
+    "existing_demo_terminal_reuse_is_prohibited": true,
+    "bundle_contains_no_armed_ordering_preset": true,
+    "installation_requires_new_explicit_user_permission": true,
+    "order_enablement_requires_separate_explicit_user_permission": true
+  }
+}
