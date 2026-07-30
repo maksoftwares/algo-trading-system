@@ -1,0 +1,171 @@
+{
+  "schema_version": "eurusd_preregistered_dense_residual_family_v1",
+  "status": "PREREGISTERED_RETROSPECTIVE_CHRONOLOGICAL_RESEARCH_ONLY",
+  "created_at_utc": "2026-07-30T09:45:00Z",
+  "result_can_count_as_forward_evidence": false,
+  "demo_order_authorized": false,
+  "source": {
+    "frozen_residual_history_config": "config/frozen_residual_history_diagnostic_v1.json",
+    "frozen_residual_history_config_sha256": "22ba29bb2c5f8cb01e26fa5295410e89a596976bfa592baff17494d591b19f2a",
+    "frozen_residual_history_source": "src/eurusd_regime_specialists/frozen_residual_history_diagnostic.py",
+    "frozen_residual_history_source_sha256": "0fcb70a12284d07f74966633f9816d6f7b90cec4d6687cbffb0df5c85bd886e8"
+  },
+  "execution_inherited_unchanged": {
+    "decision_clock_utc": "20:00:00",
+    "eligible_weekdays": [
+      "MONDAY",
+      "TUESDAY",
+      "WEDNESDAY",
+      "THURSDAY"
+    ],
+    "friday_action": "CASH_MARKET_CLOSURE",
+    "stop_pips": 8.0,
+    "target_pips": 12.0,
+    "maximum_hold_minutes": 360,
+    "same_bar_collision": "STOP_FIRST",
+    "residual_lots": 0.01,
+    "initial_risk_usd": 0.8,
+    "additional_round_trip_stress_usd": 0.05,
+    "retain_m15_and_daily_learner_ownership_vetoes": true
+  },
+  "windows": {
+    "development": [
+      "2016-07-01",
+      "2022-01-01"
+    ],
+    "locked_validation": [
+      "2022-01-01",
+      "2026-07-01"
+    ],
+    "combined_broker_window": [
+      "2024-07-01",
+      "2026-07-01"
+    ],
+    "combined_broker_split": "2025-07-01",
+    "latest_12_months": [
+      "2025-07-01",
+      "2026-07-01"
+    ]
+  },
+  "regimes_in_fixed_order": [
+    "CROSSPAIR_COMPRESSION",
+    "BROAD_EUR_UP",
+    "BROAD_EUR_DOWN",
+    "SHORT_LONG_DISAGREEMENT",
+    "MIXED_TRANSITION"
+  ],
+  "candidate_rules_in_fixed_order": [
+    {
+      "id": "STRENGTH_15_MOMENTUM",
+      "signal": "strength_15",
+      "orientation": "MOMENTUM"
+    },
+    {
+      "id": "STRENGTH_15_FADE",
+      "signal": "strength_15",
+      "orientation": "FADE"
+    },
+    {
+      "id": "STRENGTH_60_MOMENTUM",
+      "signal": "strength_60",
+      "orientation": "MOMENTUM"
+    },
+    {
+      "id": "STRENGTH_60_FADE",
+      "signal": "strength_60",
+      "orientation": "FADE"
+    },
+    {
+      "id": "STRENGTH_240_MOMENTUM",
+      "signal": "strength_240",
+      "orientation": "MOMENTUM"
+    },
+    {
+      "id": "STRENGTH_240_FADE",
+      "signal": "strength_240",
+      "orientation": "FADE"
+    },
+    {
+      "id": "AGREEMENT_60_MOMENTUM",
+      "signal": "agreement_60",
+      "zero_tie_break_signal": "strength_60",
+      "orientation": "MOMENTUM"
+    },
+    {
+      "id": "AGREEMENT_60_FADE",
+      "signal": "agreement_60",
+      "zero_tie_break_signal": "strength_60",
+      "orientation": "FADE"
+    },
+    {
+      "id": "AGREEMENT_240_MOMENTUM",
+      "signal": "agreement_240",
+      "zero_tie_break_signal": "strength_240",
+      "orientation": "MOMENTUM"
+    },
+    {
+      "id": "AGREEMENT_240_FADE",
+      "signal": "agreement_240",
+      "zero_tie_break_signal": "strength_240",
+      "orientation": "FADE"
+    },
+    {
+      "id": "MAJORITY_STRENGTH_MOMENTUM",
+      "signal": "majority_strength_15_60_240",
+      "zero_tie_break_signal": "strength_60",
+      "orientation": "MOMENTUM"
+    },
+    {
+      "id": "MAJORITY_STRENGTH_FADE",
+      "signal": "majority_strength_15_60_240",
+      "zero_tie_break_signal": "strength_60",
+      "orientation": "FADE"
+    }
+  ],
+  "development_selection": {
+    "scope": "EACH_CAUSAL_REGIME_INDEPENDENTLY",
+    "minimum_observations_per_regime_rule": 60,
+    "minimum_stressed_profit_factor": 1.02,
+    "minimum_best_five_percent_removed_profit_factor": 0.98,
+    "minimum_each_trade_sequence_half_profit_factor": 0.95,
+    "minimum_net_r_exclusive": 0.0,
+    "ranking": [
+      "HIGHEST_STRESSED_PROFIT_FACTOR",
+      "HIGHEST_BEST_FIVE_PERCENT_REMOVED_PROFIT_FACTOR",
+      "HIGHEST_NET_R",
+      "FIXED_RULE_ORDER"
+    ],
+    "no_eligible_rule_action": "REGIME_CASH"
+  },
+  "locked_validation_gates": {
+    "minimum_residual_trades": 300,
+    "minimum_residual_trades_per_weekday": 0.55,
+    "minimum_residual_profit_factor": 1.15,
+    "minimum_residual_stressed_profit_factor": 1.05,
+    "minimum_residual_best_five_percent_removed_profit_factor": 1.0,
+    "minimum_each_residual_trade_sequence_half_profit_factor_exclusive": 1.0,
+    "minimum_combined_trades_per_weekday": 0.85,
+    "maximum_combined_trades_per_weekday": 1.25,
+    "minimum_combined_weekday_coverage": 0.65,
+    "minimum_combined_win_rate": 0.45,
+    "maximum_combined_win_rate": 0.6,
+    "minimum_combined_payoff_ratio": 1.25,
+    "minimum_combined_profit_factor": 1.15,
+    "minimum_combined_stressed_profit_factor": 1.05,
+    "minimum_combined_best_five_percent_removed_profit_factor": 1.0,
+    "minimum_each_combined_trade_sequence_half_profit_factor_exclusive": 1.0,
+    "minimum_latest_12_month_profit_factor": 1.15,
+    "minimum_latest_12_month_best_five_percent_removed_profit_factor": 1.0,
+    "minimum_net_pnl_usd_exclusive": 0.0
+  },
+  "prohibitions": [
+    "NO_CLOCK_SEARCH",
+    "NO_STOP_TARGET_SEARCH",
+    "NO_THRESHOLD_GRID",
+    "NO_VALIDATION_BASED_RULE_SELECTION",
+    "NO_POST_VALIDATION_REGIME_DELETION",
+    "NO_MISSING_DATA_IMPUTATION",
+    "NO_FORWARD_EVIDENCE_CREDIT",
+    "NO_ORDER_AUTHORIZATION"
+  ]
+}
