@@ -1,0 +1,102 @@
+{
+  "schema_version": "eurusd_forward_live_combined_portfolio_v3",
+  "campaign_id": "EURUSD_FORWARD_LIVE_COMBINED_PORTFOLIO_V3",
+  "frozen_at_utc": "2026-07-30T09:06:16Z",
+  "forward_floor_utc": "2026.08.01 00:00:00",
+  "components": {
+    "M15_REGIME": {
+      "campaign_id": "EURUSD_M15_REGIME_FORWARD_V1",
+      "pip_value_usd_per_standard_lot": 10.0,
+      "required_economic_statuses": [
+        "WAITING_EXTERNAL_PARITY_AND_SOAK",
+        "READY_FOR_GUARDED_DEMO_IMPLEMENTATION"
+      ]
+    },
+    "RESIDUAL_LIVE": {
+      "campaign_id": "EURUSD_FORWARD_RESIDUAL_LIVE_OUTCOME_V1",
+      "publisher_campaign_id": "EURUSD_FORWARD_RESIDUAL_LIVE_SIGNAL_V1",
+      "warmup_resolved_residual_days": 20,
+      "fixed_lots": 0.01,
+      "fixed_stop_pips": 8.0,
+      "pip_value_usd_per_standard_lot": 10.0,
+      "additional_round_trip_stress_pips": 0.5,
+      "required_economic_statuses": [
+        "WAITING_MT5_PARITY_AND_SOAK",
+        "READY_FOR_COMBINED_LIVE_ADMISSION"
+      ]
+    }
+  },
+  "excluded_components": {
+    "DAILY_CROSSPAIR": {
+      "campaign_id": "EURUSD_FORWARD_SELECTIVE_LEARNER_V1",
+      "reason": "REJECTED_HISTORICAL_DIAGNOSTIC_PF_0_909_AND_FREQUENCY_0_013_PER_WEEKDAY",
+      "may_participate": false
+    }
+  },
+  "frequency_denominator": {
+    "source_symbol": "EURUSD",
+    "required_evidence_scope": "PROSPECTIVE_DEMO",
+    "minimum_valid_m5_intervals_per_weekday": 240,
+    "begin_after_residual_online_warmup": true,
+    "exclude_weekends": true,
+    "no_missing_day_imputation": true
+  },
+  "causal_portfolio_risk": {
+    "account_equity_reference_usd": 10000.0,
+    "maximum_concurrent_positions": 3,
+    "maximum_concurrent_initial_risk_usd": 15.0,
+    "same_timestamp_priority": [
+      "M15_CHOP",
+      "M15_COMPRESSION",
+      "RESIDUAL_LIVE"
+    ],
+    "protected_sources": [
+      "M15_CHOP",
+      "M15_COMPRESSION"
+    ],
+    "maximum_risk_cap_rejection_share": 0.05,
+    "hedging_account_required": true
+  },
+  "final_admission": {
+    "minimum_complete_validation_weekdays": 160,
+    "minimum_combined_trades": 136,
+    "minimum_residual_component_trades": 50,
+    "minimum_trades_per_complete_weekday": 0.85,
+    "maximum_trades_per_complete_weekday": 1.25,
+    "minimum_weekday_trade_coverage": 0.65,
+    "minimum_win_rate": 0.45,
+    "maximum_win_rate": 0.60,
+    "minimum_payoff_ratio": 1.25,
+    "minimum_combined_profit_factor": 1.15,
+    "minimum_combined_stressed_profit_factor": 1.05,
+    "minimum_best_5pct_removed_profit_factor": 1.0,
+    "minimum_each_trade_sequence_half_profit_factor_exclusive": 1.0,
+    "minimum_net_pnl_usd_exclusive": 0.0,
+    "maximum_closed_trade_drawdown_usd": 75.0,
+    "maximum_single_month_gross_profit_share": 0.4,
+    "minimum_m15_component_profit_factor": 1.15,
+    "minimum_residual_component_profit_factor": 1.15,
+    "requires_zero_invalid_component_outcomes": true,
+    "requires_zero_selection_mismatches": true,
+    "requires_m15_and_residual_economic_admission": true,
+    "requires_all_component_mt5_parity": true,
+    "requires_all_component_shadow_soak": true,
+    "requires_combined_mt5_ordering_parity": true,
+    "requires_combined_demo_soak": true
+  },
+  "prohibitions": [
+    "NO_RESEARCH_RESIDUAL_OUTCOME_INPUT",
+    "NO_DAILY_LEARNER_PARTICIPATION",
+    "NO_PROTECTED_COMPONENT_DELETION",
+    "NO_RESIDUAL_COMPONENT_DELETION",
+    "NO_COMPONENT_REWEIGHTING",
+    "NO_FREQUENCY_DENOMINATOR_CHANGE",
+    "NO_POST_RESULT_RISK_PRIORITY_CHANGE",
+    "NO_THRESHOLD_TUNING",
+    "NO_FORCE_TRADE_ON_CASH_DAY",
+    "NO_OUTCOME_REWRITE",
+    "NO_ORDER_ROUTING_BEFORE_ALL_GATES"
+  ],
+  "historical_backtest_allowed": false,
+  "demo_order_authorized": false
+}
