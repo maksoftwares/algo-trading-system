@@ -1,0 +1,37 @@
+{
+  "codex_reported_pf_on_matched": 1.1905,
+  "entry_price_diff_pips_median": -0.10000000000065512,
+  "independent": {
+    "correct": {
+      "agree_with_codex_pct": 89.21,
+      "net_r": 82.85,
+      "profit_factor": 1.1117,
+      "stop_share_pct": 55.51,
+      "target_share_pct": 44.49,
+      "trades": 1288,
+      "win_rate_pct": 44.49
+    },
+    "mid": {
+      "agree_with_codex_pct": 89.13,
+      "net_r": 85.1,
+      "profit_factor": 1.1149,
+      "stop_share_pct": 55.43,
+      "target_share_pct": 44.57,
+      "trades": 1288,
+      "win_rate_pct": 44.57
+    },
+    "optimistic": {
+      "agree_with_codex_pct": 88.59,
+      "net_r": 104.6,
+      "profit_factor": 1.1428,
+      "stop_share_pct": 54.81,
+      "target_share_pct": 45.19,
+      "trades": 1288,
+      "win_rate_pct": 45.19
+    }
+  },
+  "ledger_trades": 1288,
+  "matched_trades": 1288,
+  "purpose": "re-resolve Codex trade decisions on independent Dukascopy data",
+  "schema_version": "fx_codex_replication_v1"
+}
