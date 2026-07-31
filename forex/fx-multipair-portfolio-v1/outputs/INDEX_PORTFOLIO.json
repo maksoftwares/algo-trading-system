@@ -1,0 +1,377 @@
+{
+  "all_gates_passed": false,
+  "cost_pct": 0.02,
+  "cost_stress_validation": {
+    "1x": {
+      "active_days": 4614,
+      "annual_pct": 18.46,
+      "label": "  1x cost (0.020%)",
+      "max_drawdown_pct": 87.6,
+      "months_positive_pct": 65.4,
+      "pf_excluding_best_5pct": 0.75,
+      "profit_factor": 1.1028,
+      "sharpe": 0.522,
+      "t_stat": 2.23,
+      "trades": 11109,
+      "trades_per_day": 4.17,
+      "win_rate_pct": 53.49
+    },
+    "2x": {
+      "active_days": 4614,
+      "annual_pct": 9.73,
+      "label": "  2x cost (0.040%)",
+      "max_drawdown_pct": 106.3,
+      "months_positive_pct": 61.4,
+      "pf_excluding_best_5pct": 0.7104,
+      "profit_factor": 1.053,
+      "sharpe": 0.275,
+      "t_stat": 1.18,
+      "trades": 11109,
+      "trades_per_day": 4.17,
+      "win_rate_pct": 52.69
+    },
+    "4x": {
+      "active_days": 4614,
+      "annual_pct": -7.74,
+      "label": "  4x cost (0.080%)",
+      "max_drawdown_pct": 154.95,
+      "months_positive_pct": 48.0,
+      "pf_excluding_best_5pct": 0.6367,
+      "profit_factor": 0.9597,
+      "sharpe": -0.219,
+      "t_stat": -0.94,
+      "trades": 11109,
+      "trades_per_day": 4.17,
+      "win_rate_pct": 50.72
+    }
+  },
+  "forex_bar_gates": {
+    "max_dd_le_15pct": {
+      "passed": false,
+      "value": 87.6
+    },
+    "months_positive_ge_55pct": {
+      "passed": true,
+      "value": 65.4
+    },
+    "pf_at_2x_cost_ge_1.15": {
+      "passed": false,
+      "value": 1.053
+    },
+    "pf_ex_best5pct_ge_1.20": {
+      "passed": false,
+      "value": 0.75
+    },
+    "profit_factor_ge_1.40": {
+      "passed": false,
+      "value": 1.1028
+    },
+    "trades_per_day_ge_0.50": {
+      "passed": true,
+      "value": 4.17
+    }
+  },
+  "gates_passed": 2,
+  "members": [
+    "US500",
+    "US30",
+    "US2000",
+    "DE40",
+    "UK100",
+    "JP225",
+    "FR40",
+    "EU50",
+    "IT40"
+  ],
+  "schema_version": "index_reversal_portfolio_v1",
+  "windows": {
+    "design": {
+      "per_index": {
+        "DE40": {
+          "active_days": 2343,
+          "annual_pct": 2.63,
+          "label": "  DE40",
+          "max_drawdown_pct": 61.49,
+          "months_positive_pct": 59.2,
+          "pf_excluding_best_5pct": 0.7196,
+          "profit_factor": 1.038,
+          "sharpe": 0.212,
+          "t_stat": 0.65,
+          "trades": 2343,
+          "trades_per_day": 0.47,
+          "win_rate_pct": 54.25
+        },
+        "EU50": {
+          "active_days": 1082,
+          "annual_pct": 1.51,
+          "label": "  EU50",
+          "max_drawdown_pct": 24.36,
+          "months_positive_pct": 56.2,
+          "pf_excluding_best_5pct": 0.7035,
+          "profit_factor": 1.0477,
+          "sharpe": 0.258,
+          "t_stat": 0.54,
+          "trades": 1082,
+          "trades_per_day": 0.21,
+          "win_rate_pct": 51.85
+        },
+        "FR40": {
+          "active_days": 2445,
+          "annual_pct": 2.34,
+          "label": "  FR40",
+          "max_drawdown_pct": 67.56,
+          "months_positive_pct": 57.9,
+          "pf_excluding_best_5pct": 0.7122,
+          "profit_factor": 1.0344,
+          "sharpe": 0.193,
+          "t_stat": 0.6,
+          "trades": 2445,
+          "trades_per_day": 0.49,
+          "win_rate_pct": 53.17
+        },
+        "IT40": {
+          "active_days": 2197,
+          "annual_pct": 1.56,
+          "label": "  IT40",
+          "max_drawdown_pct": 86.49,
+          "months_positive_pct": 60.2,
+          "pf_excluding_best_5pct": 0.7078,
+          "profit_factor": 1.0235,
+          "sharpe": 0.131,
+          "t_stat": 0.39,
+          "trades": 2197,
+          "trades_per_day": 0.44,
+          "win_rate_pct": 52.89
+        },
+        "JP225": {
+          "active_days": 2401,
+          "annual_pct": 3.06,
+          "label": "  JP225",
+          "max_drawdown_pct": 64.33,
+          "months_positive_pct": 54.2,
+          "pf_excluding_best_5pct": 0.7367,
+          "profit_factor": 1.0449,
+          "sharpe": 0.251,
+          "t_stat": 0.77,
+          "trades": 2401,
+          "trades_per_day": 0.48,
+          "win_rate_pct": 52.44
+        },
+        "UK100": {
+          "active_days": 2421,
+          "annual_pct": 0.46,
+          "label": "  UK100",
+          "max_drawdown_pct": 83.89,
+          "months_positive_pct": 56.2,
+          "pf_excluding_best_5pct": 0.6802,
+          "profit_factor": 1.0086,
+          "sharpe": 0.048,
+          "t_stat": 0.15,
+          "trades": 2421,
+          "trades_per_day": 0.48,
+          "win_rate_pct": 51.05
+        },
+        "US2000": {
+          "active_days": 2340,
+          "annual_pct": 0.11,
+          "label": "  US2000",
+          "max_drawdown_pct": 137.69,
+          "months_positive_pct": 54.2,
+          "pf_excluding_best_5pct": 0.6814,
+          "profit_factor": 1.0017,
+          "sharpe": 0.01,
+          "t_stat": 0.03,
+          "trades": 2340,
+          "trades_per_day": 0.46,
+          "win_rate_pct": 52.05
+        },
+        "US30": {
+          "active_days": 2375,
+          "annual_pct": 5.04,
+          "label": "  US30",
+          "max_drawdown_pct": 51.72,
+          "months_positive_pct": 61.3,
+          "pf_excluding_best_5pct": 0.7516,
+          "profit_factor": 1.1015,
+          "sharpe": 0.526,
+          "t_stat": 1.62,
+          "trades": 2375,
+          "trades_per_day": 0.47,
+          "win_rate_pct": 54.27
+        },
+        "US500": {
+          "active_days": 2349,
+          "annual_pct": 6.39,
+          "label": "  US500",
+          "max_drawdown_pct": 38.95,
+          "months_positive_pct": 60.4,
+          "pf_excluding_best_5pct": 0.7569,
+          "profit_factor": 1.1241,
+          "sharpe": 0.637,
+          "t_stat": 1.94,
+          "trades": 2349,
+          "trades_per_day": 0.47,
+          "win_rate_pct": 54.66
+        }
+      },
+      "portfolio": {
+        "active_days": 8686,
+        "annual_pct": 11.59,
+        "label": "PORTFOLIO (9 idx)",
+        "max_drawdown_pct": 134.98,
+        "months_positive_pct": 57.1,
+        "pf_excluding_best_5pct": 0.7267,
+        "profit_factor": 1.0525,
+        "sharpe": 0.287,
+        "t_stat": 1.69,
+        "trades": 19953,
+        "trades_per_day": 3.96,
+        "win_rate_pct": 52.79
+      }
+    },
+    "validation": {
+      "per_index": {
+        "DE40": {
+          "active_days": 1261,
+          "annual_pct": 5.39,
+          "label": "  DE40",
+          "max_drawdown_pct": 38.44,
+          "months_positive_pct": 62.2,
+          "pf_excluding_best_5pct": 0.7649,
+          "profit_factor": 1.1088,
+          "sharpe": 0.552,
+          "t_stat": 1.23,
+          "trades": 1261,
+          "trades_per_day": 0.47,
+          "win_rate_pct": 53.93
+        },
+        "EU50": {
+          "active_days": 1248,
+          "annual_pct": 5.7,
+          "label": "  EU50",
+          "max_drawdown_pct": 38.26,
+          "months_positive_pct": 54.3,
+          "pf_excluding_best_5pct": 0.7693,
+          "profit_factor": 1.1166,
+          "sharpe": 0.593,
+          "t_stat": 1.32,
+          "trades": 1248,
+          "trades_per_day": 0.47,
+          "win_rate_pct": 53.85
+        },
+        "FR40": {
+          "active_days": 1286,
+          "annual_pct": 3.06,
+          "label": "  FR40",
+          "max_drawdown_pct": 44.22,
+          "months_positive_pct": 56.7,
+          "pf_excluding_best_5pct": 0.7322,
+          "profit_factor": 1.0607,
+          "sharpe": 0.318,
+          "t_stat": 0.72,
+          "trades": 1286,
+          "trades_per_day": 0.48,
+          "win_rate_pct": 52.72
+        },
+        "IT40": {
+          "active_days": 1214,
+          "annual_pct": 6.35,
+          "label": "  IT40",
+          "max_drawdown_pct": 37.09,
+          "months_positive_pct": 55.9,
+          "pf_excluding_best_5pct": 0.7885,
+          "profit_factor": 1.1127,
+          "sharpe": 0.598,
+          "t_stat": 1.31,
+          "trades": 1214,
+          "trades_per_day": 0.46,
+          "win_rate_pct": 55.52
+        },
+        "JP225": {
+          "active_days": 1210,
+          "annual_pct": 5.06,
+          "label": "  JP225",
+          "max_drawdown_pct": 30.13,
+          "months_positive_pct": 61.4,
+          "pf_excluding_best_5pct": 0.7438,
+          "profit_factor": 1.0909,
+          "sharpe": 0.47,
+          "t_stat": 1.03,
+          "trades": 1210,
+          "trades_per_day": 0.45,
+          "win_rate_pct": 52.98
+        },
+        "UK100": {
+          "active_days": 1237,
+          "annual_pct": 0.66,
+          "label": "  UK100",
+          "max_drawdown_pct": 43.17,
+          "months_positive_pct": 55.1,
+          "pf_excluding_best_5pct": 0.7039,
+          "profit_factor": 1.0163,
+          "sharpe": 0.085,
+          "t_stat": 0.19,
+          "trades": 1237,
+          "trades_per_day": 0.46,
+          "win_rate_pct": 53.76
+        },
+        "US2000": {
+          "active_days": 1245,
+          "annual_pct": 9.85,
+          "label": "  US2000",
+          "max_drawdown_pct": 39.05,
+          "months_positive_pct": 61.4,
+          "pf_excluding_best_5pct": 0.8245,
+          "profit_factor": 1.1677,
+          "sharpe": 0.874,
+          "t_stat": 1.94,
+          "trades": 1245,
+          "trades_per_day": 0.47,
+          "win_rate_pct": 54.46
+        },
+        "US30": {
+          "active_days": 1206,
+          "annual_pct": 5.17,
+          "label": "  US30",
+          "max_drawdown_pct": 25.69,
+          "months_positive_pct": 61.4,
+          "pf_excluding_best_5pct": 0.7277,
+          "profit_factor": 1.1246,
+          "sharpe": 0.581,
+          "t_stat": 1.27,
+          "trades": 1206,
+          "trades_per_day": 0.45,
+          "win_rate_pct": 53.4
+        },
+        "US500": {
+          "active_days": 1202,
+          "annual_pct": 9.59,
+          "label": "  US500",
+          "max_drawdown_pct": 24.26,
+          "months_positive_pct": 67.7,
+          "pf_excluding_best_5pct": 0.8163,
+          "profit_factor": 1.225,
+          "sharpe": 1.041,
+          "t_stat": 2.27,
+          "trades": 1202,
+          "trades_per_day": 0.45,
+          "win_rate_pct": 55.74
+        }
+      },
+      "portfolio": {
+        "active_days": 4614,
+        "annual_pct": 18.46,
+        "label": "PORTFOLIO (9 idx)",
+        "max_drawdown_pct": 87.6,
+        "months_positive_pct": 65.4,
+        "pf_excluding_best_5pct": 0.75,
+        "profit_factor": 1.1028,
+        "sharpe": 0.522,
+        "t_stat": 2.23,
+        "trades": 11109,
+        "trades_per_day": 4.17,
+        "win_rate_pct": 53.49
+      }
+    }
+  }
+}

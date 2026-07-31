@@ -86,3 +86,50 @@ tails; it does not add information.
 validation is −0.0120% (t −0.32). Consistent with equity indices' upward drift
 making the short side structurally disadvantaged. The reversal effect is
 long-only.
+
+## U4 — Intraday reversal (2026-07-31)
+
+**Tested:** the same reversal rule at M15/M30/H1/H4 — after N consecutive down
+*bars*, long the next bar — as the route to higher frequency. 82,632 broker M5
+bars, design/validation split.
+
+**Result: REJECTED, decisively.** Zero of 24 cells passed
+`PF > 1.15 & exTop5 > 1.0 & >= 0.5 trades/day`. M15 and M30 are strongly
+**negative** (PF 0.78–0.93, t as low as −6.32); H1 is breakeven; H4 looks
+positive in design (PF 1.69 at N=3) and collapses in validation (1.100,
+`exTop5` 0.676).
+
+The effect is **horizon-specific to the daily bar**. Short intraday horizons
+show continuation, not reversal — the opposite sign. This is consistent with the
+daily effect being driven by overnight risk-bearing and multi-day positioning
+rather than by minute-scale microstructure, and it closes the intraday route to
+frequency.
+
+## U5 — Multi-index reversal portfolio (2026-07-31)
+
+**Tested:** the confirmed daily rule run across 9 index CFDs (US500, US30,
+US2000, DE40, UK100, JP225, FR40, EU50, IT40), members chosen on the design
+window only. Intended to fix frequency, concentration and drawdown at once.
+
+**Result: REJECTED — dilution, not diversification.**
+
+| | Validation SR | exTop5 | trades/day |
+|---|---:|---:|---:|
+| US500 alone | **1.04** | **0.816** | 0.45 |
+| 9-index portfolio | **0.52** | 0.750 | 4.17 |
+
+Frequency rises 9x, but risk-adjusted return **halves** and the concentration
+test gets *worse*. Equity indices are far too correlated for this to diversify —
+they fall together, which is exactly when the signal fires — and the weak
+members (UK100 SR 0.09, FR40 SR 0.32) drag the aggregate down. The 4x cost
+stress also fails outright (PF 0.960).
+
+**Construction caveat, recorded honestly.** The portfolio equity used
+`mean(axis=1)` across whichever indices signalled that day, so capital scaled
+with signal count rather than being fixed at 1/9 per member — roughly 2.4x
+average leverage. That inflates the reported annual return (+18.46%) and
+drawdown (87.60%) alike. Sharpe is invariant to uniform leverage, so the
+SR 0.52 vs 1.04 comparison stands and is the basis for this rejection.
+
+**Conclusion: US500 alone is the better system.** Breadth does not help when the
+breadth is correlated.
