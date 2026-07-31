@@ -39,3 +39,11 @@ xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/**/*.json text
 xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/**/*.csv text eol=lf
 xau-usd/xauusd-phase1/docs/A1_XAU_R5_PRE_DOWNTREND_BREAK_SHORT_V1_PREREG_2026_07_11.md whitespace=-blank-at-eol
 xau-usd/xauusd-phase1/docs/A1_XAU_H4_PROFIT_PRESERVING_HEDGE_INDEPENDENT_REVIEW_ADDF272A_2026_07_11.md whitespace=-blank-at-eol,-blank-at-eof
+
+# MT5 terminal .ini configs are hash-addressed inside deployment bundles; without
+# an explicit eol they fall through to `* text=auto` and gain CRLF on Windows
+# checkout, which breaks the bundles' own sha256 integrity gate.
+*.ini text eol=lf
+
+# MT5 deployment bundles are hash-addressed evidence; preserve their exact bytes.
+forex/**/mt5/** -text -diff
