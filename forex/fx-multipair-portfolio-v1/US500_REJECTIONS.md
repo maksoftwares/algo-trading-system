@@ -133,3 +133,58 @@ SR 0.52 vs 1.04 comparison stands and is the basis for this rejection.
 
 **Conclusion: US500 alone is the better system.** Breadth does not help when the
 breadth is correlated.
+
+## U6 — 200-day trend filter (2026-07-31)
+
+**Tested:** take the reversal signal only when price is above its 100- or
+200-day moving average, the standard "don't buy dips in a bear market" filter,
+aimed at the 21.4% drawdown gate.
+
+**Result: REJECTED — worse on every axis, including the one it targeted.**
+
+| US500 validation | /day | PF | exTop5 | SR | maxDD |
+|---|---:|---:|---:|---:|---:|
+| no filter | 0.45 | **1.225** | 0.816 | **1.04** | **24.26%** |
+| MA(100) | 0.34 | 1.115 | 0.831 | 0.62 | 33.69% |
+| MA(200) | 0.36 | 1.124 | 0.852 | 0.67 | 27.52% |
+
+Drawdown *rises*. The filter removes the below-trend panic bounces that supply
+most of the edge, leaving a thinner signal with worse risk-adjusted return. The
+`exTop5` improvement (0.816 → 0.852) is not from better trades but from a lower
+base. Nothing here is worth the Sharpe.
+
+## U7 — US-only fixed-weight portfolio (2026-07-31)
+
+**Tested:** US500 + US30 + US2000 at a fixed 1/3 weight each (correcting the U5
+leverage error), as the least-correlated subset with the strongest individual
+Sharpes.
+
+**Result: frequency gate met, quality gates lost.**
+
+| | /day | PF | exTop5 | SR | maxDD |
+|---|---:|---:|---:|---:|---:|
+| US500 alone | 0.45 | **1.225** | **0.816** | **1.04** | **24.26%** |
+| US3 fixed weight | **1.37** | 1.179 | 0.754 | 0.79 | 26.49% |
+
+Frequency triples and clears the 0.50/day gate, but Sharpe falls 1.04 → 0.79 and
+both PF and concentration worsen. Consistent with U5: US index correlation is too
+high for breadth to pay, and this is now confirmed with correct fixed weights
+rather than the variable-leverage construction that flawed U5.
+
+## Standing conclusion on the forex bar
+
+Eight approaches have now been tested against it (U1–U7 plus H1). Each attempt
+to lift one gate lowers another: filters cut drawdown-driving trades that carry
+the edge, breadth buys frequency and costs Sharpe, sizing buys return and costs
+drawdown.
+
+The bar itself is the mismatch. `PF >= 1.40`, `exTop5 >= 1.20` and
+`maxDD <= 15%` were set for a **stop-based intraday** system, where capped
+losses raise profit factor mechanically and drawdown is bounded by the stop. A
+**no-stop daily-hold** system is a structurally different instrument: its PF is
+lower for the same quality, and its drawdown is market exposure rather than a
+risk-control failure.
+
+On the metric that *is* comparable across both designs — Sharpe — the US500
+system returns **1.19 out-of-sample over ten years**, above what the EURUSD V2
+candidate achieved. That is the honest statement of what has been built.
