@@ -275,3 +275,51 @@ both filters were silent no-ops in the first run — C and D came out byte
 identical to B, which is what exposed it. Both sides are now normalised to
 calendar dates (9,212 overlapping days). Any filter result produced before this
 fix was meaningless.
+
+## U10 — CFD stress test invalidates the index-level backtest (2026-07-31)
+
+**This is the most important finding in the US500 lane and it is negative.**
+
+The 2022 Dukascopy year completed, giving the first look at the system on
+CFD-like bid/ask quotes during a bear market. The same rule, the same year, two
+data paths:
+
+| 2022 | n | WR | PF | Net | Gapped stops | Worst trade |
+|---|---:|---:|---:|---:|---:|---:|
+| **Index** (Yahoo cash-session) | 142 | 27.5% | **1.059** | **+3.54%** | 17.6% | −1.65% |
+| **CFD** (Dukascopy bid/ask, 24h) | 136 | 24.3% | **0.734** | **−19.29%** | 25.7% | −2.81% |
+
+A 23-point swing in annual return, on identical logic. Buy-and-hold was −19.90%
+that year, so on realistic execution the system captured essentially the whole
+drawdown while being invested only about half the days.
+
+**Cause: the index daily bar hides the overnight path.** An equity index CFD
+trades ~24 hours; the cash index prints only 09:30–16:00. Two consequences, both
+adverse and both invisible in the index backtest:
+
+- Opening gaps are larger on the CFD (2022 5th-percentile gap −1.328% vs
+  −0.990% on the index), because the CFD tracks futures overnight while the cash
+  open is a staggered, smoothed print of constituent opens.
+- Gap-through rate rises from 17.6% to 25.7%, so the 0.5% stop fails far more
+  often and fills far worse than intended.
+
+The earlier 14-month broker confirmation (PF 1.582) did not catch this because
+2025-06 → 2026-07 was calm: its gap-through rate was 14.7%, versus 25.7% in
+2022.
+
+**Consequence: the headline validation numbers are not trustworthy.** PF 1.397
+and +12.50%/yr over 2016–2026 were measured on index levels and are optimistic
+by an unknown but clearly material amount — roughly 23 points of annual return in
+the one bear year that can be checked. The system is **not** demonstrated to be
+profitable on the instrument that would actually be traded.
+
+**Not yet a full rejection**, because only 2022 and a thin 2016 are available on
+CFD quotes and 2022 is the worst case by construction. But the burden of proof
+has moved: the system must now be re-validated end-to-end on CFD data before any
+of its metrics are quoted again. 2018 and 2020 are downloading.
+
+A further known-adverse detail not yet modelled: this test still checks the stop
+against the *cash-session* low. A CFD position held from close to close is live
+overnight and can be stopped out on the overnight path at a price the cash
+session never printed. Correcting that will make the CFD result worse, not
+better.
