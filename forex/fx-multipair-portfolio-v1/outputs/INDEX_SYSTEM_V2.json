@@ -1,0 +1,138 @@
+{
+  "chosen": "A_baseline",
+  "design": {
+    "A_baseline": {
+      "annual_pct": 13.4,
+      "max_drawdown_pct": 11.26,
+      "months_positive_pct": 69.6,
+      "pf_excluding_best_5pct": 0.8718,
+      "profit_factor": 1.4301,
+      "return_over_maxdd": 1.19,
+      "sharpe": 1.91,
+      "trades": 7064,
+      "trades_per_day": 1.4,
+      "worst_month_pct": -4.87
+    },
+    "B_volscale": {
+      "annual_pct": 11.05,
+      "max_drawdown_pct": 8.51,
+      "months_positive_pct": 69.6,
+      "pf_excluding_best_5pct": 0.9016,
+      "profit_factor": 1.3791,
+      "return_over_maxdd": 1.299,
+      "sharpe": 1.861,
+      "trades": 7064,
+      "trades_per_day": 1.4,
+      "worst_month_pct": -4.41
+    },
+    "C_volscale_skip_high_vix": {
+      "annual_pct": 9.02,
+      "max_drawdown_pct": 8.71,
+      "months_positive_pct": 63.1,
+      "pf_excluding_best_5pct": 0.9075,
+      "profit_factor": 1.368,
+      "return_over_maxdd": 1.036,
+      "sharpe": 1.842,
+      "trades": 5587,
+      "trades_per_day": 1.11,
+      "worst_month_pct": -4.41
+    },
+    "D_volscale_skip_vix_spike": {
+      "annual_pct": 10.6,
+      "max_drawdown_pct": 8.63,
+      "months_positive_pct": 67.5,
+      "pf_excluding_best_5pct": 0.8993,
+      "profit_factor": 1.372,
+      "return_over_maxdd": 1.227,
+      "sharpe": 1.839,
+      "trades": 6896,
+      "trades_per_day": 1.37,
+      "worst_month_pct": -4.41
+    }
+  },
+  "gates": {
+    "max_dd_le_15pct": {
+      "passed": true,
+      "value": 11.97
+    },
+    "months_positive_ge_55pct": {
+      "passed": true,
+      "value": 72.4
+    },
+    "pf_ex_best5pct_ge_1.20": {
+      "passed": false,
+      "value": 0.8556
+    },
+    "profit_factor_ge_1.40": {
+      "passed": false,
+      "value": 1.3965
+    },
+    "trades_per_day_ge_0.50": {
+      "passed": true,
+      "value": 1.37
+    }
+  },
+  "parameters_fixed_in_advance": {
+    "vix_pctl": 0.9,
+    "vix_pctl_window": 504,
+    "vix_spike_pct": 20.0,
+    "vol_clip": [
+      0.25,
+      1.5
+    ],
+    "vol_lookback": 20,
+    "vol_target_window": 750
+  },
+  "schema_version": "index_system_v2_refinement",
+  "selection_rule": "best design Sharpe, tie-break return/maxDD; validation read once",
+  "validation": {
+    "A_baseline": {
+      "annual_pct": 12.5,
+      "max_drawdown_pct": 11.97,
+      "months_positive_pct": 72.4,
+      "pf_excluding_best_5pct": 0.8556,
+      "profit_factor": 1.3965,
+      "return_over_maxdd": 1.044,
+      "sharpe": 1.686,
+      "trades": 3653,
+      "trades_per_day": 1.37,
+      "worst_month_pct": -6.68
+    },
+    "B_volscale": {
+      "annual_pct": 10.0,
+      "max_drawdown_pct": 9.92,
+      "months_positive_pct": 71.7,
+      "pf_excluding_best_5pct": 0.8849,
+      "profit_factor": 1.3461,
+      "return_over_maxdd": 1.008,
+      "sharpe": 1.718,
+      "trades": 3653,
+      "trades_per_day": 1.37,
+      "worst_month_pct": -6.36
+    },
+    "C_volscale_skip_high_vix": {
+      "annual_pct": 7.73,
+      "max_drawdown_pct": 9.92,
+      "months_positive_pct": 63.9,
+      "pf_excluding_best_5pct": 0.8566,
+      "profit_factor": 1.3032,
+      "return_over_maxdd": 0.779,
+      "sharpe": 1.539,
+      "trades": 3114,
+      "trades_per_day": 1.18,
+      "worst_month_pct": -6.36
+    },
+    "D_volscale_skip_vix_spike": {
+      "annual_pct": 9.58,
+      "max_drawdown_pct": 8.8,
+      "months_positive_pct": 71.7,
+      "pf_excluding_best_5pct": 0.8885,
+      "profit_factor": 1.3507,
+      "return_over_maxdd": 1.089,
+      "sharpe": 1.742,
+      "trades": 3465,
+      "trades_per_day": 1.3,
+      "worst_month_pct": -6.36
+    }
+  }
+}

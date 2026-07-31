@@ -238,3 +238,40 @@ U8 cannot be fixed without destroying the system.
 Still research only: this is measured on index levels, not tradeable CFD quotes.
 The Dukascopy `USA500.IDX-USD` archive from 2016 is downloading for confirmation
 on the actual instrument.
+
+## U9 — Volatility scaling and VIX event filters (2026-07-31)
+
+**Tested:** four variants, all parameters fixed before running, selection by
+**design** Sharpe with return/maxDD as tie-break, validation read once.
+
+| design 1996-2015 | /day | PF | exTop5 | ann | SR | maxDD | ret/DD |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| A baseline | 1.40 | 1.430 | 0.872 | +13.40% | **1.91** | 11.26% | 1.19 |
+| B vol-scaled | 1.40 | 1.379 | 0.902 | +11.05% | 1.86 | **8.51%** | **1.30** |
+| C skip high VIX | 1.11 | 1.368 | 0.907 | +9.02% | 1.84 | 8.71% | 1.04 |
+| D skip VIX spike | 1.37 | 1.372 | 0.899 | +10.60% | 1.84 | 8.63% | 1.23 |
+
+**Result: NO REFINEMENT ADOPTED.** The baseline wins design Sharpe, so it
+stands. Validation agrees closely enough to confirm nothing was lost by keeping
+it (A 1.69, B 1.72, C 1.54, D 1.74).
+
+The VIX filters are clearly not worth it. **C is actively harmful** — it cuts
+frequency 1.40 → 1.11/day and return/maxDD to 0.78 in validation, because the
+high-VIX days it removes are exactly when the largest reversal bounces occur.
+This is the same lesson as U6 (trend filter): filters aimed at the drawdown
+remove the trades that carry the edge.
+
+**Vol scaling (B) is a legitimate risk/return trade, not an improvement.** It is
+Sharpe-neutral (1.91 → 1.86 design, 1.69 → 1.72 validation) while cutting max
+drawdown 11.26% → 8.51% design and 11.97% → 9.92% validation, and improving
+`exTop5` 0.872 → 0.902. If the objective were drawdown rather than Sharpe it
+would win on return/maxDD (1.30 vs 1.19). It is recorded as an available option,
+**not** adopted, because switching the selection criterion after seeing results
+is the exact overfitting this lane is trying to avoid.
+
+**Bug found and fixed.** Yahoo stamps `^VIX` at a different intraday time than
+the index series, so `frame["date"].map(vix_flags)` matched **zero rows** and
+both filters were silent no-ops in the first run — C and D came out byte
+identical to B, which is what exposed it. Both sides are now normalised to
+calendar dates (9,212 overlapping days). Any filter result produced before this
+fix was meaningless.
