@@ -1,0 +1,141 @@
+{
+  "overnight_path_bias": {
+    "net_pct_difference": 68.44,
+    "note": "cash_low is what the index-level backtest effectively assumed; full_path is what a 24h CFD position actually experiences.",
+    "profit_factor_cash_low": 1.4432,
+    "profit_factor_full_path": 0.9509
+  },
+  "pooled": {
+    "cash_low": {
+      "max_drawdown_pct": 14.34,
+      "net_pct": 60.87,
+      "profit_factor": 1.4432,
+      "trades": 473,
+      "win_rate_pct": 37.42,
+      "worst_trade_pct": -0.5
+    },
+    "full_path": {
+      "max_drawdown_pct": 27.28,
+      "net_pct": -7.57,
+      "profit_factor": 0.9509,
+      "trades": 473,
+      "win_rate_pct": 30.66,
+      "worst_trade_pct": -0.5
+    },
+    "no_stop": {
+      "max_drawdown_pct": 39.86,
+      "net_pct": 2.79,
+      "profit_factor": 1.0112,
+      "trades": 473,
+      "win_rate_pct": 52.22,
+      "worst_trade_pct": -9.45
+    }
+  },
+  "schema_version": "cfd_full_validation_v1",
+  "years": {
+    "2016": {
+      "cash_low": {
+        "max_drawdown_pct": 4.17,
+        "net_pct": 4.48,
+        "profit_factor": 1.1636,
+        "trades": 115,
+        "win_rate_pct": 42.61,
+        "worst_trade_pct": -0.5
+      },
+      "full_path": {
+        "max_drawdown_pct": 6.0,
+        "net_pct": 1.45,
+        "profit_factor": 1.0511,
+        "trades": 115,
+        "win_rate_pct": 40.87,
+        "worst_trade_pct": -0.5
+      },
+      "no_stop": {
+        "max_drawdown_pct": 4.05,
+        "net_pct": 12.06,
+        "profit_factor": 1.4516,
+        "trades": 115,
+        "win_rate_pct": 56.52,
+        "worst_trade_pct": -2.46
+      }
+    },
+    "2018": {
+      "cash_low": {
+        "max_drawdown_pct": 6.68,
+        "net_pct": -1.22,
+        "profit_factor": 0.9605,
+        "trades": 112,
+        "win_rate_pct": 40.18,
+        "worst_trade_pct": -0.5
+      },
+      "full_path": {
+        "max_drawdown_pct": 6.87,
+        "net_pct": -2.71,
+        "profit_factor": 0.915,
+        "trades": 112,
+        "win_rate_pct": 38.39,
+        "worst_trade_pct": -0.5
+      },
+      "no_stop": {
+        "max_drawdown_pct": 23.96,
+        "net_pct": -18.43,
+        "profit_factor": 0.6814,
+        "trades": 112,
+        "win_rate_pct": 50.89,
+        "worst_trade_pct": -4.17
+      }
+    },
+    "2020": {
+      "cash_low": {
+        "max_drawdown_pct": 3.0,
+        "net_pct": 54.61,
+        "profit_factor": 2.9009,
+        "trades": 110,
+        "win_rate_pct": 45.45,
+        "worst_trade_pct": -0.5
+      },
+      "full_path": {
+        "max_drawdown_pct": 8.0,
+        "net_pct": 7.08,
+        "profit_factor": 1.184,
+        "trades": 110,
+        "win_rate_pct": 28.18,
+        "worst_trade_pct": -0.5
+      },
+      "no_stop": {
+        "max_drawdown_pct": 22.89,
+        "net_pct": 21.03,
+        "profit_factor": 1.2692,
+        "trades": 110,
+        "win_rate_pct": 61.82,
+        "worst_trade_pct": -9.45
+      }
+    },
+    "2022": {
+      "cash_low": {
+        "max_drawdown_pct": 12.86,
+        "net_pct": 3.0,
+        "profit_factor": 1.0597,
+        "trades": 136,
+        "win_rate_pct": 24.26,
+        "worst_trade_pct": -0.5
+      },
+      "full_path": {
+        "max_drawdown_pct": 21.09,
+        "net_pct": -13.38,
+        "profit_factor": 0.7579,
+        "trades": 136,
+        "win_rate_pct": 17.65,
+        "worst_trade_pct": -0.5
+      },
+      "no_stop": {
+        "max_drawdown_pct": 21.38,
+        "net_pct": -11.87,
+        "profit_factor": 0.8642,
+        "trades": 136,
+        "win_rate_pct": 41.91,
+        "worst_trade_pct": -3.98
+      }
+    }
+  }
+}

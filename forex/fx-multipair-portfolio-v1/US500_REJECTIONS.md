@@ -323,3 +323,52 @@ against the *cash-session* low. A CFD position held from close to close is live
 overnight and can be stopped out on the overnight path at a price the cash
 session never printed. Correcting that will make the CFD result worse, not
 better.
+
+## U11 — REJECTED: the stopped system fails on realistic CFD execution (2026-07-31)
+
+U10 flagged that the earlier CFD test still checked the stop against the
+*cash-session* low, and predicted that modelling the true overnight path would
+make things worse. It does — decisively.
+
+Three stop models on the same trades, US500 CFD quotes, 2016/2018/2020/2022:
+
+| Pooled (473 trades) | WR | PF | Net | maxDD |
+|---|---:|---:|---:|---:|
+| `cash_low` (what the index backtest assumed) | 37.4% | **1.443** | **+60.87%** | 14.34% |
+| `full_path` (what a 24h CFD position experiences) | 30.7% | **0.951** | **−7.57%** | 27.28% |
+| `no_stop` (control) | 52.2% | 1.011 | +2.79% | 39.86% |
+
+**The overnight-path bias is 68.44 percentage points of hidden loss.**
+
+Per year on `full_path`: 2016 +1.45% (PF 1.051), 2018 −2.71% (0.915),
+2020 +7.08% (1.184), 2022 −13.38% (0.758). Two of four years lose; pooled PF is
+below 1.
+
+**Mechanism.** The position is held from one cash close to the next, so it is
+live through the entire overnight session. The 0.5% stop is breached on the
+overnight path far more often than the next cash session's low implies — win rate
+falls 37.4% → 30.7% pooled, and in 2020 collapses 45.5% → 28.2%. Trades that the
+index data scored as winners were in fact stopped out hours earlier, at night, at
+a price the cash session never printed.
+
+**What this invalidates.** The 0.5% stop was the "unlock" that took this system
+from 2/6 to 4/6 forex gates — drawdown 24.3% → 13.8%, PF 1.225 → 1.332, Sharpe
+1.04 → 1.57. **That entire improvement was an artefact of testing a 24-hour
+instrument against a 6.5-hour price bar.** On real quotes the stop destroys more
+value than it saves.
+
+Every previously reported figure for the stopped system — PF 1.396 index, PF
+1.582 broker-CFD, 5/6 gates — is withdrawn. They were measured with the
+optimistic stop model.
+
+**Caveat on severity.** The four available CFD years are adversely selected:
+2018, 2020 and 2022 are all stress years and only 2016 is calm, so pooled results
+over-weight stress. A full decade would likely score better than PF 0.951. That
+does not rescue the conclusion — it bounds how bad it is, not whether the bias is
+real, and the bias is real in every year including calm 2016 (PF 1.164 → 1.051).
+
+**Status: the US500 system is not demonstrated profitable on the instrument that
+would be traded.** The unstopped variant (`no_stop`, pooled PF 1.011) is the only
+version not yet refuted, and it is merely breakeven across these adverse years.
+Any future work must model the overnight path from the outset, and no result
+measured on daily index bars should be trusted for a 24-hour CFD again.
