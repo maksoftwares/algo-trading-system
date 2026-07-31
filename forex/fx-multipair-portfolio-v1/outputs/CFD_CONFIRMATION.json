@@ -1,0 +1,61 @@
+{
+  "basis": "Capital.com demo M5 bid/ask, session-close anchored",
+  "per_symbol": {
+    "US2000": {
+      "annual_pct": 23.12,
+      "max_drawdown_pct": 5.71,
+      "months_positive_pct": 64.3,
+      "pf_excluding_best_5pct": 1.1163,
+      "profit_factor": 1.5501,
+      "sharpe": 2.808,
+      "t_stat": 2.01,
+      "trades": 129,
+      "trades_per_day": 0.45,
+      "win_rate_pct": 45.74
+    },
+    "US30": {
+      "annual_pct": 17.22,
+      "max_drawdown_pct": 5.87,
+      "months_positive_pct": 64.3,
+      "pf_excluding_best_5pct": 1.1728,
+      "profit_factor": 1.6256,
+      "sharpe": 3.039,
+      "t_stat": 2.17,
+      "trades": 129,
+      "trades_per_day": 0.45,
+      "win_rate_pct": 55.81
+    },
+    "US500": {
+      "annual_pct": 11.92,
+      "max_drawdown_pct": 5.98,
+      "months_positive_pct": 64.3,
+      "pf_excluding_best_5pct": 1.0071,
+      "profit_factor": 1.4194,
+      "sharpe": 2.239,
+      "t_stat": 1.57,
+      "trades": 124,
+      "trades_per_day": 0.44,
+      "win_rate_pct": 53.23
+    }
+  },
+  "portfolio": {
+    "annual_pct": 17.4,
+    "max_drawdown_pct": 5.51,
+    "months_positive_pct": 71.4,
+    "pf_excluding_best_5pct": 1.0765,
+    "profit_factor": 1.5819,
+    "sharpe": 2.652,
+    "t_stat": 2.21,
+    "trades": 382,
+    "trades_per_day": 1.34,
+    "win_rate_pct": 50.86
+  },
+  "schema_version": "cfd_confirmation_v1",
+  "stop_pct": 0.5,
+  "verdict": {
+    "cfd_profit_factor": 1.5819,
+    "direction_confirmed": true,
+    "index_profit_factor": 1.396,
+    "note": "14 months of CFD history vs 10 years of index history; this checks that real spread does not destroy the edge, not that the effect size matches."
+  }
+}

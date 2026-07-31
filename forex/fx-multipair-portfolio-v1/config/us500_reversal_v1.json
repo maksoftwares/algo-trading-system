@@ -1,78 +1,131 @@
 {
-  "schema_version": "index_reversal_system_v1",
-  "system_id": "US_INDEX_SHORT_TERM_REVERSAL_V1",
-  "frozen_at_utc": "2026-07-31T13:00:00Z",
-  "research_only": true,
+  "authorization": {
+    "expected_discount": "This repo's measured selection-leak ladder is PF 1.99 -> 1.45 -> 0.82. Expect realised below backtest.",
+    "note": "No broker order, chart attachment, preset or demo authority. CFD confirmation now complete on 14 months of real Capital.com bid/ask; Dukascopy USA500.IDX-USD 2016+ still downloading for a long-history CFD-proxy check.",
+    "status": "RESEARCH_BACKTEST_ONLY"
+  },
   "broker_action_allowed": false,
+  "cfd_confirmation": {
+    "annual_pct": 17.4,
+    "basis": "Capital.com demo M5 bid/ask, 2025-06..2026-07, session-close anchored",
+    "caveat": "14 months and 382 trades (t=2.21) versus 10 years of index history. This test establishes that the real spread does not destroy the edge - it does not estimate effect size better than the 10-year index test, and the window was a favourable regime.",
+    "execution": "entry pays the ask; 0.5% stop tested on the bid low (gap-through fills at the bid open); exit receives the bid; no cost model on top",
+    "extra_cost_stress": {
+      "+0.02pct": {
+        "pf": 1.489,
+        "sharpe": 2.31
+      },
+      "+0.04pct": {
+        "pf": 1.403,
+        "sharpe": 1.97
+      }
+    },
+    "gates_passed_on_cfd": 5,
+    "max_drawdown_pct": 5.51,
+    "months_positive_pct": 71.4,
+    "per_symbol": {
+      "US2000": {
+        "exTop5": 1.116,
+        "pf": 1.55
+      },
+      "US30": {
+        "exTop5": 1.173,
+        "pf": 1.626
+      },
+      "US500": {
+        "exTop5": 1.007,
+        "pf": 1.419
+      }
+    },
+    "pf_excluding_best_5pct": 1.077,
+    "profit_factor": 1.582,
+    "sharpe": 2.65,
+    "t_stat": 2.21,
+    "trades": 382,
+    "trades_per_day": 1.34
+  },
+  "cost_model": {
+    "basis": "uniform, ~2.5x the measured US500 spread of 0.008% (6 points at p95, point 0.1)",
+    "measured_us500_spread_points": 6,
+    "round_trip_pct": 0.02,
+    "stress_multiples": [
+      2,
+      4
+    ]
+  },
   "demo_orders_authorized": false,
-
+  "forex_bar_gates": {
+    "max_drawdown_le_15pct": {
+      "passed": true,
+      "value": 11.97
+    },
+    "months_positive_ge_55pct": {
+      "passed": true,
+      "value": 72.4
+    },
+    "passed": "4/6 on index levels, 5/6 on CFD quotes",
+    "pf_excluding_best_5pct_ge_1.20": {
+      "note": "closer on CFD but still short; U8 shows capping the tail destroys the system",
+      "passed": false,
+      "value_cfd": 1.077,
+      "value_index": 0.856
+    },
+    "profit_factor_at_2x_cost_ge_1.15": {
+      "passed": true,
+      "value": 1.311
+    },
+    "profit_factor_ge_1.40": {
+      "passed_on_cfd": true,
+      "value_cfd": 1.582,
+      "value_index": 1.396
+    },
+    "total": 6,
+    "trades_per_day_ge_0.50": {
+      "passed": true,
+      "value": 1.37
+    }
+  },
+  "frozen_at_utc": "2026-07-31T13:00:00Z",
+  "independent_confirmation": {
+    "indices_with_positive_effect": 9,
+    "indices_with_t_gt_2_after_3_down_days": 6,
+    "only_negative": "HangSeng",
+    "strongest": {
+      "index": "S&P500",
+      "t": 4.02
+    },
+    "world_indices_tested": 10
+  },
   "instrument_selection": {
     "basis": "measured range/cost screen on live Capital.com demo, 21 days of ticks",
     "evidence": "outputs/INSTRUMENT_SCREEN.json",
     "rejected": {
-      "BTCUSD": {"ratio": 16.0, "spread_points": 5000, "note": "$500 spread; worst on the account, below EURUSD"},
-      "ETHUSD": {"ratio": 19.8}
+      "BTCUSD": {
+        "note": "$500 spread; worst on the account, below EURUSD",
+        "ratio": 16.0,
+        "spread_points": 5000
+      },
+      "ETHUSD": {
+        "ratio": 19.8
+      }
     },
-    "selected": {"US500": 74.0, "US30": 141.5, "US2000": null}
+    "selected": {
+      "US2000": null,
+      "US30": 141.5,
+      "US500": 74.0
+    }
   },
-
-  "rule": {
-    "universe": ["US500", "US30", "US2000"],
-    "weighting": "fixed 1/3 of risk capital per index, always",
-    "direction": "long only",
-    "entry_signal": "previous daily close below the close before it",
-    "entry": "at the daily close of the signal day",
-    "stop_loss_pct": 0.5,
-    "stop_fill_rule": "if the next day opens at or below the stop, fill at the open; otherwise fill at the stop level",
-    "target": null,
-    "exit": "next daily close if the stop was not hit",
-    "max_hold_days": 1,
-    "short_side": "disabled (rejected, U3: validation t = -0.32)"
-  },
-
-  "cost_model": {
-    "round_trip_pct": 0.02,
-    "basis": "uniform, ~2.5x the measured US500 spread of 0.008% (6 points at p95, point 0.1)",
-    "measured_us500_spread_points": 6,
-    "stress_multiples": [2, 4]
-  },
-
   "partitions": {
-    "design": ["1996-01-01", "2016-01-01"],
-    "validation": ["2016-01-01", "2026-08-01"],
-    "note": "stop level and universe both selected on design only; validation used once for reporting"
+    "design": [
+      "1996-01-01",
+      "2016-01-01"
+    ],
+    "note": "stop level and universe both selected on design only; validation used once for reporting",
+    "validation": [
+      "2016-01-01",
+      "2026-08-01"
+    ]
   },
-
-  "validation_result": {
-    "trades_per_day": 1.37,
-    "profit_factor": 1.396,
-    "pf_excluding_best_5pct": 0.856,
-    "annual_pct": 12.5,
-    "sharpe": 1.69,
-    "months_positive_pct": 72.4,
-    "max_drawdown_pct": 11.97,
-    "profit_factor_at_2x_cost": 1.311
-  },
-
-  "forex_bar_gates": {
-    "trades_per_day_ge_0.50": {"value": 1.37, "passed": true},
-    "months_positive_ge_55pct": {"value": 72.4, "passed": true},
-    "max_drawdown_le_15pct": {"value": 11.97, "passed": true},
-    "profit_factor_at_2x_cost_ge_1.15": {"value": 1.311, "passed": true},
-    "profit_factor_ge_1.40": {"value": 1.396, "passed": false, "note": "0.004 short of the bar"},
-    "pf_excluding_best_5pct_ge_1.20": {"value": 0.856, "passed": false, "note": "structural: dip-buying has an uncapped right tail; capping it with a target destroys the edge (PF 0.725, see U8)"},
-    "passed": 4,
-    "total": 6
-  },
-
-  "independent_confirmation": {
-    "world_indices_tested": 10,
-    "indices_with_positive_effect": 9,
-    "indices_with_t_gt_2_after_3_down_days": 6,
-    "strongest": {"index": "S&P500", "t": 4.02},
-    "only_negative": "HangSeng"
-  },
-
   "rejected_variants": {
     "U2_conviction_ladder": "leverage not edge; drawdown doubled, exTop5 worsened",
     "U3_short_side": "validation t = -0.32",
@@ -81,10 +134,34 @@
     "U6_trend_filter": "worse on every axis including drawdown",
     "U8_profit_target": "PF 0.725 design; capping upside against a 0.5% stop destroys the payoff asymmetry"
   },
-
-  "authorization": {
-    "status": "RESEARCH_BACKTEST_ONLY",
-    "note": "No broker order, chart attachment, preset or demo authority. Confirmation on the tradeable CFD (Dukascopy USA500.IDX-USD from 2016) is still downloading; this result is on index levels, not CFD quotes.",
-    "expected_discount": "This repo's measured selection-leak ladder is PF 1.99 -> 1.45 -> 0.82. Expect realised below backtest."
+  "research_only": true,
+  "rule": {
+    "direction": "long only",
+    "entry": "at the daily close of the signal day",
+    "entry_signal": "previous daily close below the close before it",
+    "exit": "next daily close if the stop was not hit",
+    "max_hold_days": 1,
+    "short_side": "disabled (rejected, U3: validation t = -0.32)",
+    "stop_fill_rule": "if the next day opens at or below the stop, fill at the open; otherwise fill at the stop level",
+    "stop_loss_pct": 0.5,
+    "target": null,
+    "universe": [
+      "US500",
+      "US30",
+      "US2000"
+    ],
+    "weighting": "fixed 1/3 of risk capital per index, always"
+  },
+  "schema_version": "index_reversal_system_v1",
+  "system_id": "US_INDEX_SHORT_TERM_REVERSAL_V1",
+  "validation_result": {
+    "annual_pct": 12.5,
+    "max_drawdown_pct": 11.97,
+    "months_positive_pct": 72.4,
+    "pf_excluding_best_5pct": 0.856,
+    "profit_factor": 1.396,
+    "profit_factor_at_2x_cost": 1.311,
+    "sharpe": 1.69,
+    "trades_per_day": 1.37
   }
 }
