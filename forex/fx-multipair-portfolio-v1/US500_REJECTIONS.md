@@ -66,3 +66,23 @@ sources that would have tested it over decades are now gated (Stooq serves a
 JavaScript bot-check, Yahoo's download endpoint requires authentication).
 
 It is therefore pending, not rejected.
+
+## U2 — Conviction-sized ladder (2026-07-31)
+
+**Tested:** the same reversal signal, sized 1x/2x/3x by the number of
+consecutive down days, as the natural way to buy both frequency and quality.
+
+**Result: REJECTED — it is leverage, not edge.** Validation PF rises 1.261 →
+1.360 and annual return 10.95% → 24.73%, but the concentration test gets
+*worse* (`exTop5` 0.845 → 0.811) and max drawdown doubles, 21.36% → 44.25%.
+Return per unit of drawdown falls. Scaling into the worst streaks amplifies both
+tails; it does not add information.
+
+## U3 — Short side after consecutive up days (2026-07-31)
+
+**Tested:** the mirror rule — short after three consecutive up closes.
+
+**Result: REJECTED.** Design +0.0536%/trade (t +1.43) does not survive:
+validation is −0.0120% (t −0.32). Consistent with equity indices' upward drift
+making the short side structurally disadvantaged. The reversal effect is
+long-only.

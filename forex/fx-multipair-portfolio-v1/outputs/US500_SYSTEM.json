@@ -1,0 +1,183 @@
+{
+  "N1": {
+    "design": {
+      "annual_net_pct": 7.88,
+      "max_drawdown_pct_of_account": 32.71,
+      "mean_net_pct": 0.0671,
+      "months_active": 240,
+      "months_positive_pct": 62.5,
+      "pf_excluding_best_5pct": 0.7813,
+      "profit_factor": 1.1551,
+      "sharpe": 0.786,
+      "t_stat": 2.4,
+      "total_net_pct": 157.5,
+      "trades": 2348,
+      "trades_per_trading_day": 0.466,
+      "trades_per_year": 117.4,
+      "win_rate_pct": 55.11
+    },
+    "validation": {
+      "annual_net_pct": 10.94,
+      "max_drawdown_pct_of_account": 21.36,
+      "mean_net_pct": 0.0962,
+      "months_active": 127,
+      "months_positive_pct": 69.3,
+      "pf_excluding_best_5pct": 0.8441,
+      "profit_factor": 1.2603,
+      "sharpe": 1.187,
+      "t_stat": 2.59,
+      "total_net_pct": 115.5,
+      "trades": 1201,
+      "trades_per_trading_day": 0.451,
+      "trades_per_year": 113.7,
+      "win_rate_pct": 56.37
+    }
+  },
+  "N2": {
+    "design": {
+      "annual_net_pct": 5.92,
+      "max_drawdown_pct_of_account": 21.94,
+      "mean_net_pct": 0.1136,
+      "months_active": 235,
+      "months_positive_pct": 66.0,
+      "pf_excluding_best_5pct": 0.8296,
+      "profit_factor": 1.2481,
+      "sharpe": 1.185,
+      "t_stat": 2.41,
+      "total_net_pct": 118.3,
+      "trades": 1041,
+      "trades_per_trading_day": 0.207,
+      "trades_per_year": 52.1,
+      "win_rate_pct": 56.1
+    },
+    "validation": {
+      "annual_net_pct": 7.52,
+      "max_drawdown_pct_of_account": 16.15,
+      "mean_net_pct": 0.1536,
+      "months_active": 124,
+      "months_positive_pct": 71.0,
+      "pf_excluding_best_5pct": 0.9453,
+      "profit_factor": 1.3876,
+      "sharpe": 1.681,
+      "t_stat": 2.41,
+      "total_net_pct": 79.4,
+      "trades": 517,
+      "trades_per_trading_day": 0.194,
+      "trades_per_year": 48.9,
+      "win_rate_pct": 56.48
+    }
+  },
+  "N3": {
+    "design": {
+      "annual_net_pct": 5.08,
+      "max_drawdown_pct_of_account": 20.16,
+      "mean_net_pct": 0.2242,
+      "months_active": 184,
+      "months_positive_pct": 75.0,
+      "pf_excluding_best_5pct": 1.0207,
+      "profit_factor": 1.4961,
+      "sharpe": 2.11,
+      "t_stat": 2.83,
+      "total_net_pct": 101.6,
+      "trades": 453,
+      "trades_per_trading_day": 0.09,
+      "trades_per_year": 22.7,
+      "win_rate_pct": 60.26
+    },
+    "validation": {
+      "annual_net_pct": 6.22,
+      "max_drawdown_pct_of_account": 13.1,
+      "mean_net_pct": 0.2934,
+      "months_active": 98,
+      "months_positive_pct": 78.6,
+      "pf_excluding_best_5pct": 1.2769,
+      "profit_factor": 1.8621,
+      "sharpe": 3.279,
+      "t_stat": 3.09,
+      "total_net_pct": 65.7,
+      "trades": 224,
+      "trades_per_trading_day": 0.084,
+      "trades_per_year": 21.2,
+      "win_rate_pct": 58.48
+    }
+  },
+  "all_gates_passed": false,
+  "cost_pct": 0.008,
+  "cost_stress_N1": {
+    "1x": {
+      "annual_net_pct": 8.89,
+      "max_drawdown_pct_of_account": 32.71,
+      "mean_net_pct": 0.0765,
+      "months_active": 367,
+      "months_positive_pct": 64.9,
+      "pf_excluding_best_5pct": 0.8004,
+      "profit_factor": 1.186,
+      "sharpe": 0.912,
+      "t_stat": 3.42,
+      "total_net_pct": 271.7,
+      "trades": 3551,
+      "trades_per_trading_day": 0.461,
+      "trades_per_year": 116.2,
+      "win_rate_pct": 55.53
+    },
+    "2x": {
+      "annual_net_pct": 7.96,
+      "max_drawdown_pct_of_account": 36.87,
+      "mean_net_pct": 0.0685,
+      "months_active": 367,
+      "months_positive_pct": 63.5,
+      "pf_excluding_best_5pct": 0.7838,
+      "profit_factor": 1.1651,
+      "sharpe": 0.816,
+      "t_stat": 3.06,
+      "total_net_pct": 243.3,
+      "trades": 3551,
+      "trades_per_trading_day": 0.461,
+      "trades_per_year": 116.2,
+      "win_rate_pct": 55.14
+    },
+    "4x": {
+      "annual_net_pct": 6.1,
+      "max_drawdown_pct_of_account": 45.23,
+      "mean_net_pct": 0.0525,
+      "months_active": 367,
+      "months_positive_pct": 59.7,
+      "pf_excluding_best_5pct": 0.7515,
+      "profit_factor": 1.1244,
+      "sharpe": 0.626,
+      "t_stat": 2.35,
+      "total_net_pct": 186.5,
+      "trades": 3551,
+      "trades_per_trading_day": 0.461,
+      "trades_per_year": 116.2,
+      "win_rate_pct": 54.38
+    }
+  },
+  "forex_bar_gates": {
+    "max_dd_le_15pct": {
+      "passed": false,
+      "value": 21.36
+    },
+    "months_positive_ge_55pct": {
+      "passed": true,
+      "value": 69.3
+    },
+    "pf_at_2x_cost_ge_1.15": {
+      "passed": true,
+      "value": 1.1651
+    },
+    "pf_ex_best5pct_ge_1.20": {
+      "passed": false,
+      "value": 0.8441
+    },
+    "profit_factor_ge_1.40": {
+      "passed": false,
+      "value": 1.2603
+    },
+    "trades_per_day_ge_0.50": {
+      "passed": false,
+      "value": 0.451
+    }
+  },
+  "schema_version": "us500_reversal_system_v1"
+}

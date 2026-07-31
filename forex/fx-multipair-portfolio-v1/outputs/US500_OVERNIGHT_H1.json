@@ -1,0 +1,244 @@
+{
+  "cost_index_points": 0.9,
+  "per_year": [
+    {
+      "buy_hold": 120.0,
+      "overnight_net": -227.8,
+      "year": 1996
+    },
+    {
+      "buy_hold": 229.7,
+      "overnight_net": -227.7,
+      "year": 1997
+    },
+    {
+      "buy_hold": 258.8,
+      "overnight_net": -226.6,
+      "year": 1998
+    },
+    {
+      "buy_hold": 240.0,
+      "overnight_net": -226.8,
+      "year": 1999
+    },
+    {
+      "buy_hold": -149.0,
+      "overnight_net": -224.5,
+      "year": 2000
+    },
+    {
+      "buy_hold": -172.2,
+      "overnight_net": -220.6,
+      "year": 2001
+    },
+    {
+      "buy_hold": -268.3,
+      "overnight_net": -238.8,
+      "year": 2002
+    },
+    {
+      "buy_hold": 232.1,
+      "overnight_net": -226.7,
+      "year": 2003
+    },
+    {
+      "buy_hold": 100.0,
+      "overnight_net": -226.1,
+      "year": 2004
+    },
+    {
+      "buy_hold": 36.4,
+      "overnight_net": -226.3,
+      "year": 2005
+    },
+    {
+      "buy_hold": 170.0,
+      "overnight_net": -231.2,
+      "year": 2006
+    },
+    {
+      "buy_hold": 50.1,
+      "overnight_net": -232.6,
+      "year": 2007
+    },
+    {
+      "buy_hold": -565.1,
+      "overnight_net": -290.6,
+      "year": 2008
+    },
+    {
+      "buy_hold": 211.8,
+      "overnight_net": -273.1,
+      "year": 2009
+    },
+    {
+      "buy_hold": 142.5,
+      "overnight_net": -234.4,
+      "year": 2010
+    },
+    {
+      "buy_hold": -0.0,
+      "overnight_net": -232.0,
+      "year": 2011
+    },
+    {
+      "buy_hold": 168.6,
+      "overnight_net": -224.8,
+      "year": 2012
+    },
+    {
+      "buy_hold": 422.2,
+      "overnight_net": -182.7,
+      "year": 2013
+    },
+    {
+      "buy_hold": 210.5,
+      "overnight_net": -172.9,
+      "year": 2014
+    },
+    {
+      "buy_hold": -15.0,
+      "overnight_net": -191.3,
+      "year": 2015
+    },
+    {
+      "buy_hold": 194.9,
+      "overnight_net": -173.0,
+      "year": 2016
+    },
+    {
+      "buy_hold": 434.8,
+      "overnight_net": 8.0,
+      "year": 2017
+    },
+    {
+      "buy_hold": -166.8,
+      "overnight_net": 33.2,
+      "year": 2018
+    },
+    {
+      "buy_hold": 723.9,
+      "overnight_net": 61.5,
+      "year": 2019
+    },
+    {
+      "buy_hold": 525.3,
+      "overnight_net": 270.9,
+      "year": 2020
+    },
+    {
+      "buy_hold": 1010.1,
+      "overnight_net": 225.1,
+      "year": 2021
+    },
+    {
+      "buy_hold": -926.7,
+      "overnight_net": -622.5,
+      "year": 2022
+    },
+    {
+      "buy_hold": 930.3,
+      "overnight_net": -23.6,
+      "year": 2023
+    },
+    {
+      "buy_hold": 1111.8,
+      "overnight_net": 798.3,
+      "year": 2024
+    },
+    {
+      "buy_hold": 963.9,
+      "overnight_net": 358.7,
+      "year": 2025
+    },
+    {
+      "buy_hold": 592.1,
+      "overnight_net": 118.6,
+      "year": 2026
+    }
+  ],
+  "results": {
+    "buy_and_hold": {
+      "exposure_share": 1.0,
+      "label": "BUY & HOLD (close->close)",
+      "max_drawdown_points": 1219.5,
+      "mean_points": 0.8861,
+      "n": 7693,
+      "sharpe": 0.331,
+      "sharpe_per_exposure": 0.331,
+      "t": 2.76,
+      "total_points": 6816.9,
+      "win_pct": 53.79
+    },
+    "intraday": {
+      "exposure_share": 0.27,
+      "label": "INTRADAY (open->close)",
+      "max_drawdown_points": 800.8,
+      "mean_points": 0.4394,
+      "n": 7694,
+      "sharpe": 0.236,
+      "sharpe_per_exposure": 0.875,
+      "t": 1.64,
+      "total_points": 3380.5,
+      "win_pct": 53.56
+    },
+    "intraday_net": {
+      "exposure_share": 0.27,
+      "label": "INTRADAY net of cost",
+      "max_drawdown_points": 4446.5,
+      "mean_points": -0.4606,
+      "n": 7694,
+      "sharpe": -0.616,
+      "sharpe_per_exposure": -2.281,
+      "t": -1.72,
+      "total_points": -3544.1,
+      "win_pct": 50.25
+    },
+    "overnight": {
+      "exposure_share": 0.73,
+      "label": "OVERNIGHT (prev close->open)",
+      "max_drawdown_points": 815.5,
+      "mean_points": 0.4473,
+      "n": 7693,
+      "sharpe": 0.421,
+      "sharpe_per_exposure": 0.577,
+      "t": 3.08,
+      "total_points": 3441.2,
+      "win_pct": 33.52
+    },
+    "overnight_net": {
+      "exposure_share": 0.73,
+      "label": "OVERNIGHT net of cost",
+      "max_drawdown_points": 5276.5,
+      "mean_points": -0.4527,
+      "n": 7693,
+      "sharpe": -2.393,
+      "sharpe_per_exposure": -3.278,
+      "t": -3.12,
+      "total_points": -3482.5,
+      "win_pct": 25.22
+    }
+  },
+  "schema_version": "us500_overnight_h1_v1",
+  "source": "Stooq ^SPX daily",
+  "verdict_inputs": {
+    "bear_years": {
+      "2018": {
+        "buy_hold": -166.8,
+        "overnight_net": 33.2
+      },
+      "2020": {
+        "buy_hold": 525.3,
+        "overnight_net": 270.9
+      },
+      "2022": {
+        "buy_hold": -926.7,
+        "overnight_net": -622.5
+      }
+    },
+    "overnight_beats_intraday": true,
+    "overnight_sharpe_beats_buy_hold_net": false,
+    "positive_years_2016plus": "8/11",
+    "positive_years_all": "8/31"
+  }
+}

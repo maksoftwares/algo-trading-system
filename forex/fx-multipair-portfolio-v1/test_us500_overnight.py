@@ -28,22 +28,34 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 CACHE = Path(r"D:\AlgoTradingData\research\fx-multipair-portfolio-v1")
-STOOQ = "https://stooq.com/q/d/l/?s=^spx&i=d"
+YAHOO = ("https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC"
+         "?period1=0&period2=1790000000&interval=1d")
 # measured: 5 pts spread + 2 entry + 2 stop slippage, point = 0.1 -> 0.9 index pts
 COST_INDEX_POINTS = 0.9
 BEAR_YEARS = (2018, 2020, 2022)
 
 
 def load() -> pd.DataFrame:
-    request = urllib.request.Request(STOOQ, headers={"User-Agent": "us500-research/1.0"})
-    with urllib.request.urlopen(request, timeout=60) as response:
-        raw = response.read()
-    frame = pd.read_csv(io.BytesIO(raw))
-    frame.columns = [c.lower() for c in frame.columns]
-    frame["date"] = pd.to_datetime(frame["date"])
+    """Daily OHLC from Yahoo's chart API (v7 download now requires auth)."""
+    request = urllib.request.Request(
+        YAHOO, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+    )
+    with urllib.request.urlopen(request, timeout=90) as response:
+        payload = json.loads(response.read())
+    result = payload["chart"]["result"][0]
+    quote = result["indicators"]["quote"][0]
+    frame = pd.DataFrame(
+        {
+            "date": pd.to_datetime(result["timestamp"], unit="s", utc=True).tz_localize(None),
+            "open": quote["open"],
+            "high": quote["high"],
+            "low": quote["low"],
+            "close": quote["close"],
+        }
+    ).dropna()
     frame = frame.sort_values("date").reset_index(drop=True)
     (CACHE / "index").mkdir(parents=True, exist_ok=True)
-    frame.to_parquet(CACHE / "index" / "SPX_DAILY_STOOQ.parquet", index=False)
+    frame.to_parquet(CACHE / "index" / "SPX_DAILY.parquet", index=False)
     return frame
 
 
