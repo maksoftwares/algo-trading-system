@@ -87,10 +87,23 @@ INSTRUMENTS: dict[str, dict[str, object]] = {
         "contract_size": 100_000.0,
         "synthetic": True,
     },
+    # Index CFD. Selected over BTCUSD by the measured range/cost screen:
+    # US500 74.0x vs BTCUSD 16.0x (Capital.com charges a $500 BTC spread).
+    # contract_size 1 means one lot is one unit of the index, so a 1.0-point
+    # index move is $1 per lot and a 0.1 "point" is $0.10.
+    "US500": {
+        "source_code": "USA500.IDX-USD",
+        "pip_size": 1.0,
+        "point_size": 0.1,
+        "price_scale": 1,
+        "quote_ccy": "USD",
+        "contract_size": 1.0,
+    },
 }
 
 MAJORS = ("EURUSD", "GBPUSD", "USDJPY")
 SYNTHETIC_CROSSES = ("EURGBP", "EURJPY", "GBPJPY")
+INDICES = ("US500",)
 
 BAR_COLUMNS = (
     "timestamp_ms",

@@ -1,0 +1,18 @@
+{
+  "cost_points_round_trip": 9.0,
+  "grid_points": 81,
+  "partitions": {
+    "design": [
+      "2025-06-06",
+      "2026-02-01"
+    ],
+    "validation": [
+      "2026-02-01",
+      "2026-08-01"
+    ]
+  },
+  "schema_version": "us500_search_v1",
+  "source": "Capital.com broker M5 (measured spread)",
+  "survivors": [],
+  "survivors_both_windows": 0
+}
