@@ -188,3 +188,53 @@ risk-control failure.
 On the metric that *is* comparable across both designs — Sharpe — the US500
 system returns **1.19 out-of-sample over ten years**, above what the EURUSD V2
 candidate achieved. That is the honest statement of what has been built.
+
+## U8 — Profit target (2026-07-31)
+
+**Tested:** adding a target to the 0.5%-stopped system, aimed at the `exTop5`
+gate — capping the right tail should reduce concentration.
+
+**Result: REJECTED — it destroys the edge.** Design PF with a 0.5% target is
+**0.725** (SR −2.49); 0.75% gives 0.936; 1.0% gives 1.061; 1.5% gives 1.200. All
+are below the no-target result of **1.410**. Validation agrees.
+
+The system's payoff is asymmetric by construction: a tight 0.5% stop against an
+uncapped hold-to-close. Capping the upside at or near the stop distance removes
+the asymmetry that makes a ~55% win rate profitable. `exTop5` does improve
+(0.898 → 0.932 at a 1.5% target) but only by shrinking everything.
+
+**Consequence:** `exTop5 >= 1.20` is not reachable for this system without
+killing it. Dip-buying is paid in the violent bounces; that concentration is the
+mechanism, not a defect to be engineered away. It is the one forex-bar gate this
+lane accepts it cannot meet.
+
+## ACCEPTED — US index short-term reversal V1 (2026-07-31)
+
+Not a rejection. Recorded here so the accepted configuration sits beside the
+variants that failed.
+
+**Rule:** long US500, US30 and US2000 at the daily close after a down close;
+0.5% stop (gap-through fills at the open); exit next close; fixed 1/3 weight; no
+target; long only.
+
+Stop level and universe were both selected on the **design** window (1996–2015),
+where the three-index combination was also the best performer (PF 1.430).
+
+| | design 96–15 | validation 16–26 | 2x cost |
+|---|---:|---:|---:|
+| trades/day | 1.40 | **1.37** | 1.37 |
+| profit factor | 1.430 | **1.396** | 1.311 |
+| exTop5 | 0.872 | 0.856 | 0.795 |
+| annual | +13.40% | **+12.50%** | +10.19% |
+| Sharpe | 1.91 | **1.69** | 1.38 |
+| months positive | 69.6% | **72.4%** | 66.9% |
+| max drawdown | 11.26% | **11.97%** | 13.42% |
+
+**Forex bar: 4 of 6 gates pass.** Frequency (1.37 vs 0.50), months positive
+(72.4% vs 55%), drawdown (11.97% vs 15%) and 2x-cost PF (1.311 vs 1.15) all
+pass. Profit factor 1.396 is 0.004 short of 1.40. `exTop5` 0.856 fails and per
+U8 cannot be fixed without destroying the system.
+
+Still research only: this is measured on index levels, not tradeable CFD quotes.
+The Dukascopy `USA500.IDX-USD` archive from 2016 is downloading for confirmation
+on the actual instrument.
