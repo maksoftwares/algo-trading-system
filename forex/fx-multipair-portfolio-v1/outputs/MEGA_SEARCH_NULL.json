@@ -1,0 +1,861 @@
+{
+  "configurations": 14400,
+  "gates": {
+    "stage1": {
+      "min_pf": 1.2,
+      "min_trades": 100
+    },
+    "stage2": {
+      "min_pf": 1.1,
+      "min_trades": 30
+    }
+  },
+  "mode": "NULL",
+  "schema_version": "mega_search_v1",
+  "stage1_design_survivors": 349,
+  "stage2_validation_survivors": 116,
+  "stage3_holdout_survivors": 29,
+  "survivors": [
+    {
+      "config": {
+        "atr_mult": 1.5,
+        "direction": 1,
+        "family": "rsi_extreme",
+        "param": 25,
+        "rr": 1.0,
+        "session": "us",
+        "timeframe": 30
+      },
+      "design": {
+        "net": 114.62,
+        "profit_factor": 1.212,
+        "trades": 154,
+        "win_rate": 55.19
+      },
+      "holdout": {
+        "net": 248.06,
+        "profit_factor": 1.2896,
+        "trades": 111,
+        "win_rate": 52.25
+      },
+      "validation": {
+        "net": 100.47,
+        "profit_factor": 1.1024,
+        "trades": 117,
+        "win_rate": 52.99
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": 1,
+        "family": "rsi_extreme",
+        "param": 25,
+        "rr": 3.0,
+        "session": "non_us",
+        "timeframe": 30
+      },
+      "design": {
+        "net": 382.6,
+        "profit_factor": 1.4837,
+        "trades": 114,
+        "win_rate": 30.7
+      },
+      "holdout": {
+        "net": 203.22,
+        "profit_factor": 1.1617,
+        "trades": 74,
+        "win_rate": 28.38
+      },
+      "validation": {
+        "net": 365.37,
+        "profit_factor": 1.2322,
+        "trades": 101,
+        "win_rate": 26.73
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "rsi_extreme",
+        "param": 25,
+        "rr": 1.5,
+        "session": "non_us",
+        "timeframe": 30
+      },
+      "design": {
+        "net": 326.61,
+        "profit_factor": 1.376,
+        "trades": 102,
+        "win_rate": 44.12
+      },
+      "holdout": {
+        "net": 287.28,
+        "profit_factor": 1.2285,
+        "trades": 61,
+        "win_rate": 42.62
+      },
+      "validation": {
+        "net": 332.46,
+        "profit_factor": 1.2831,
+        "trades": 58,
+        "win_rate": 41.38
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "rsi_extreme",
+        "param": 25,
+        "rr": 2.0,
+        "session": "non_us",
+        "timeframe": 30
+      },
+      "design": {
+        "net": 311.32,
+        "profit_factor": 1.3265,
+        "trades": 100,
+        "win_rate": 38.0
+      },
+      "holdout": {
+        "net": 348.7,
+        "profit_factor": 1.2543,
+        "trades": 60,
+        "win_rate": 38.33
+      },
+      "validation": {
+        "net": 493.08,
+        "profit_factor": 1.398,
+        "trades": 55,
+        "win_rate": 34.55
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 1.0,
+        "direction": -1,
+        "family": "rsi_extreme",
+        "param": 25,
+        "rr": 0.75,
+        "session": "all",
+        "timeframe": 120
+      },
+      "design": {
+        "net": 102.2,
+        "profit_factor": 1.2706,
+        "trades": 114,
+        "win_rate": 60.53
+      },
+      "holdout": {
+        "net": 126.05,
+        "profit_factor": 1.1731,
+        "trades": 84,
+        "win_rate": 58.33
+      },
+      "validation": {
+        "net": 74.04,
+        "profit_factor": 1.1468,
+        "trades": 59,
+        "win_rate": 57.63
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 1.0,
+        "direction": -1,
+        "family": "rsi_extreme",
+        "param": 25,
+        "rr": 1.0,
+        "session": "all",
+        "timeframe": 120
+      },
+      "design": {
+        "net": 131.85,
+        "profit_factor": 1.3333,
+        "trades": 104,
+        "win_rate": 57.69
+      },
+      "holdout": {
+        "net": 134.42,
+        "profit_factor": 1.1676,
+        "trades": 79,
+        "win_rate": 51.9
+      },
+      "validation": {
+        "net": 68.34,
+        "profit_factor": 1.1286,
+        "trades": 53,
+        "win_rate": 47.17
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": -1,
+        "family": "rsi_extreme",
+        "param": 30,
+        "rr": 1.0,
+        "session": "non_us",
+        "timeframe": 120
+      },
+      "design": {
+        "net": 242.98,
+        "profit_factor": 1.2694,
+        "trades": 108,
+        "win_rate": 55.56
+      },
+      "holdout": {
+        "net": 230.45,
+        "profit_factor": 1.1535,
+        "trades": 73,
+        "win_rate": 54.79
+      },
+      "validation": {
+        "net": 204.12,
+        "profit_factor": 1.1567,
+        "trades": 71,
+        "win_rate": 52.11
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 1.5,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 0.75,
+        "session": "non_us",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 323.02,
+        "profit_factor": 1.3324,
+        "trades": 156,
+        "win_rate": 60.26
+      },
+      "holdout": {
+        "net": 585.4,
+        "profit_factor": 1.5742,
+        "trades": 82,
+        "win_rate": 65.85
+      },
+      "validation": {
+        "net": 466.7,
+        "profit_factor": 1.4685,
+        "trades": 77,
+        "win_rate": 57.14
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 1.5,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 1.0,
+        "session": "all",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 252.68,
+        "profit_factor": 1.2112,
+        "trades": 177,
+        "win_rate": 52.54
+      },
+      "holdout": {
+        "net": 532.74,
+        "profit_factor": 1.4359,
+        "trades": 95,
+        "win_rate": 63.16
+      },
+      "validation": {
+        "net": 277.54,
+        "profit_factor": 1.189,
+        "trades": 92,
+        "win_rate": 50.0
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 1.5,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 1.0,
+        "session": "non_us",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 333.26,
+        "profit_factor": 1.3336,
+        "trades": 148,
+        "win_rate": 56.08
+      },
+      "holdout": {
+        "net": 445.53,
+        "profit_factor": 1.3986,
+        "trades": 79,
+        "win_rate": 59.49
+      },
+      "validation": {
+        "net": 611.64,
+        "profit_factor": 1.6044,
+        "trades": 75,
+        "win_rate": 53.33
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 0.75,
+        "session": "all",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 273.61,
+        "profit_factor": 1.2555,
+        "trades": 157,
+        "win_rate": 57.32
+      },
+      "holdout": {
+        "net": 551.45,
+        "profit_factor": 1.4557,
+        "trades": 92,
+        "win_rate": 65.22
+      },
+      "validation": {
+        "net": 243.83,
+        "profit_factor": 1.1615,
+        "trades": 88,
+        "win_rate": 51.14
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 0.75,
+        "session": "non_us",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 367.0,
+        "profit_factor": 1.4056,
+        "trades": 136,
+        "win_rate": 61.76
+      },
+      "holdout": {
+        "net": 458.48,
+        "profit_factor": 1.4108,
+        "trades": 76,
+        "win_rate": 63.16
+      },
+      "validation": {
+        "net": 606.14,
+        "profit_factor": 1.5957,
+        "trades": 72,
+        "win_rate": 55.56
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 1.0,
+        "session": "all",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 268.49,
+        "profit_factor": 1.228,
+        "trades": 155,
+        "win_rate": 53.55
+      },
+      "holdout": {
+        "net": 548.44,
+        "profit_factor": 1.4281,
+        "trades": 92,
+        "win_rate": 61.96
+      },
+      "validation": {
+        "net": 313.83,
+        "profit_factor": 1.2012,
+        "trades": 85,
+        "win_rate": 47.06
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 1.5,
+        "session": "all",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 295.11,
+        "profit_factor": 1.2507,
+        "trades": 151,
+        "win_rate": 50.33
+      },
+      "holdout": {
+        "net": 545.5,
+        "profit_factor": 1.4312,
+        "trades": 90,
+        "win_rate": 61.11
+      },
+      "validation": {
+        "net": 386.87,
+        "profit_factor": 1.2423,
+        "trades": 85,
+        "win_rate": 44.71
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 2.0,
+        "session": "all",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 316.42,
+        "profit_factor": 1.2688,
+        "trades": 151,
+        "win_rate": 50.33
+      },
+      "holdout": {
+        "net": 368.77,
+        "profit_factor": 1.2829,
+        "trades": 89,
+        "win_rate": 59.55
+      },
+      "validation": {
+        "net": 586.02,
+        "profit_factor": 1.3671,
+        "trades": 85,
+        "win_rate": 44.71
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 3.0,
+        "session": "all",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 314.45,
+        "profit_factor": 1.2671,
+        "trades": 151,
+        "win_rate": 50.33
+      },
+      "holdout": {
+        "net": 275.0,
+        "profit_factor": 1.2109,
+        "trades": 89,
+        "win_rate": 59.55
+      },
+      "validation": {
+        "net": 917.43,
+        "profit_factor": 1.5747,
+        "trades": 85,
+        "win_rate": 44.71
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 0.75,
+        "session": "all",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 398.7,
+        "profit_factor": 1.3915,
+        "trades": 138,
+        "win_rate": 55.8
+      },
+      "holdout": {
+        "net": 419.44,
+        "profit_factor": 1.3235,
+        "trades": 86,
+        "win_rate": 61.63
+      },
+      "validation": {
+        "net": 696.86,
+        "profit_factor": 1.5352,
+        "trades": 80,
+        "win_rate": 51.25
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 0.75,
+        "session": "non_us",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 269.7,
+        "profit_factor": 1.2896,
+        "trades": 119,
+        "win_rate": 57.98
+      },
+      "holdout": {
+        "net": 365.15,
+        "profit_factor": 1.3363,
+        "trades": 71,
+        "win_rate": 60.56
+      },
+      "validation": {
+        "net": 1046.12,
+        "profit_factor": 2.3368,
+        "trades": 66,
+        "win_rate": 53.03
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 1.0,
+        "session": "all",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 363.55,
+        "profit_factor": 1.3553,
+        "trades": 137,
+        "win_rate": 54.01
+      },
+      "holdout": {
+        "net": 396.19,
+        "profit_factor": 1.3001,
+        "trades": 86,
+        "win_rate": 60.47
+      },
+      "validation": {
+        "net": 672.01,
+        "profit_factor": 1.5021,
+        "trades": 80,
+        "win_rate": 48.75
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 1.0,
+        "session": "non_us",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 246.67,
+        "profit_factor": 1.2684,
+        "trades": 118,
+        "win_rate": 55.93
+      },
+      "holdout": {
+        "net": 412.24,
+        "profit_factor": 1.3718,
+        "trades": 71,
+        "win_rate": 59.15
+      },
+      "validation": {
+        "net": 1076.22,
+        "profit_factor": 2.3221,
+        "trades": 66,
+        "win_rate": 51.52
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 1.5,
+        "session": "non_us",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 266.47,
+        "profit_factor": 1.29,
+        "trades": 118,
+        "win_rate": 55.93
+      },
+      "holdout": {
+        "net": 127.25,
+        "profit_factor": 1.1109,
+        "trades": 70,
+        "win_rate": 57.14
+      },
+      "validation": {
+        "net": 1259.27,
+        "profit_factor": 2.547,
+        "trades": 66,
+        "win_rate": 51.52
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 2.0,
+        "session": "non_us",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 250.95,
+        "profit_factor": 1.2731,
+        "trades": 118,
+        "win_rate": 55.93
+      },
+      "holdout": {
+        "net": 127.25,
+        "profit_factor": 1.1109,
+        "trades": 70,
+        "win_rate": 57.14
+      },
+      "validation": {
+        "net": 1337.85,
+        "profit_factor": 2.6436,
+        "trades": 66,
+        "win_rate": 51.52
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "bollinger",
+        "param": 20,
+        "rr": 3.0,
+        "session": "non_us",
+        "timeframe": 240
+      },
+      "design": {
+        "net": 250.95,
+        "profit_factor": 1.2731,
+        "trades": 118,
+        "win_rate": 55.93
+      },
+      "holdout": {
+        "net": 127.25,
+        "profit_factor": 1.1109,
+        "trades": 70,
+        "win_rate": 57.14
+      },
+      "validation": {
+        "net": 1339.22,
+        "profit_factor": 2.6452,
+        "trades": 66,
+        "win_rate": 51.52
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": -1,
+        "family": "fade",
+        "param": 10,
+        "rr": 2.0,
+        "session": "non_us",
+        "timeframe": 120
+      },
+      "design": {
+        "net": 452.61,
+        "profit_factor": 1.2184,
+        "trades": 212,
+        "win_rate": 43.4
+      },
+      "holdout": {
+        "net": 567.09,
+        "profit_factor": 1.1996,
+        "trades": 130,
+        "win_rate": 41.54
+      },
+      "validation": {
+        "net": 675.25,
+        "profit_factor": 1.2281,
+        "trades": 144,
+        "win_rate": 45.14
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 2.0,
+        "direction": -1,
+        "family": "fade",
+        "param": 20,
+        "rr": 2.0,
+        "session": "non_us",
+        "timeframe": 120
+      },
+      "design": {
+        "net": 521.25,
+        "profit_factor": 1.3459,
+        "trades": 161,
+        "win_rate": 45.34
+      },
+      "holdout": {
+        "net": 368.02,
+        "profit_factor": 1.1605,
+        "trades": 99,
+        "win_rate": 41.41
+      },
+      "validation": {
+        "net": 945.45,
+        "profit_factor": 1.4235,
+        "trades": 109,
+        "win_rate": 45.87
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "fade",
+        "param": 20,
+        "rr": 0.75,
+        "session": "non_us",
+        "timeframe": 120
+      },
+      "design": {
+        "net": 539.08,
+        "profit_factor": 1.4284,
+        "trades": 144,
+        "win_rate": 60.42
+      },
+      "holdout": {
+        "net": 651.37,
+        "profit_factor": 1.3508,
+        "trades": 94,
+        "win_rate": 62.77
+      },
+      "validation": {
+        "net": 382.52,
+        "profit_factor": 1.191,
+        "trades": 99,
+        "win_rate": 59.6
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "fade",
+        "param": 20,
+        "rr": 1.0,
+        "session": "non_us",
+        "timeframe": 120
+      },
+      "design": {
+        "net": 501.0,
+        "profit_factor": 1.3595,
+        "trades": 142,
+        "win_rate": 54.93
+      },
+      "holdout": {
+        "net": 641.89,
+        "profit_factor": 1.3322,
+        "trades": 92,
+        "win_rate": 58.7
+      },
+      "validation": {
+        "net": 741.49,
+        "profit_factor": 1.359,
+        "trades": 98,
+        "win_rate": 57.14
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "fade",
+        "param": 20,
+        "rr": 1.5,
+        "session": "non_us",
+        "timeframe": 120
+      },
+      "design": {
+        "net": 310.2,
+        "profit_factor": 1.2116,
+        "trades": 139,
+        "win_rate": 51.08
+      },
+      "holdout": {
+        "net": 336.15,
+        "profit_factor": 1.1687,
+        "trades": 90,
+        "win_rate": 54.44
+      },
+      "validation": {
+        "net": 534.8,
+        "profit_factor": 1.2338,
+        "trades": 97,
+        "win_rate": 48.45
+      }
+    },
+    {
+      "config": {
+        "atr_mult": 3.0,
+        "direction": -1,
+        "family": "fade",
+        "param": 40,
+        "rr": 0.75,
+        "session": "all",
+        "timeframe": 120
+      },
+      "design": {
+        "net": 310.06,
+        "profit_factor": 1.2351,
+        "trades": 143,
+        "win_rate": 56.64
+      },
+      "holdout": {
+        "net": 253.72,
+        "profit_factor": 1.1341,
+        "trades": 87,
+        "win_rate": 59.77
+      },
+      "validation": {
+        "net": 291.62,
+        "profit_factor": 1.138,
+        "trades": 98,
+        "win_rate": 54.08
+      }
+    }
+  ]
+}
