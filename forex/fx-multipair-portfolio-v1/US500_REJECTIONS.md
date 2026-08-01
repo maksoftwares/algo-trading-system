@@ -372,3 +372,48 @@ would be traded.** The unstopped variant (`no_stop`, pooled PF 1.011) is the onl
 version not yet refuted, and it is merely breakeven across these adverse years.
 Any future work must model the overnight path from the outset, and no result
 measured on daily index bars should be trusted for a 24-hour CFD again.
+
+## U12 — FINAL: the US500 reversal system is rejected (2026-08-01)
+
+Eight complete Dukascopy years now available (2016–2023), deliberately balanced:
+four stress years (2016, 2018, 2020, 2022) and four calm (2017, 2019, 2021,
+2023). 895 trades on real CFD bid/ask with the overnight path modelled.
+
+| Pooled, 8 years | WR | PF | Total | Per year | maxDD | ret/DD |
+|---|---:|---:|---:|---:|---:|---:|
+| `cash_low` (index-bar assumption) | 42.7% | 1.451 | +101.00% | +12.6% | 13.81% | — |
+| `full_path` stopped | 37.0% | **1.018** | +4.46% | **+0.56%** | 27.11% | 0.021 |
+| `no_stop` unstopped | 54.2% | **1.117** | +41.28% | **+5.16%** | 30.30% | 0.170 |
+| **buy & hold S&P** | — | — | **+136.99%** | **+17.16%** | 33.92% | **0.506** |
+
+**Verdict: rejected.** The best surviving variant returns **+5.16%/yr with a
+30.30% drawdown**, against buy-and-hold's **+17.16%/yr with 33.92%**. It delivers
+less than a third of the return for essentially the same risk — return over
+drawdown 0.170 versus 0.506. There is no dimension on which trading this beats
+simply holding the index.
+
+The stopped variant is worse still at +0.56%/yr: on a 24-hour instrument the stop
+is breached overnight so often that it destroys more value than it protects.
+
+**The overnight-path bias is confirmed at +96.5 percentage points** (PF 1.451 →
+1.018) on the full balanced sample, larger than the +68.4pp measured on the
+stress-only subset. Every figure this lane reported from index-level daily bars
+was inflated by roughly this much.
+
+**What is true and worth keeping.** The signal itself carries real information —
+54.2% win rate and PF 1.117 across 895 trades over eight balanced years is not
+noise, and it matches the 9-of-10-index confirmation. Short-term reversal in
+equity indices is real. It is simply too small to survive realistic execution on
+a 24-hour CFD, and far too small to justify the drawdown when the alternative is
+holding the same index.
+
+**Per year, unstopped:** 2016 +12.06%, 2017 +7.83%, 2018 −18.43%, 2019 +9.57%,
+2020 +21.03%, 2021 +8.78%, 2022 −11.87%, 2023 +12.32%. Six of eight positive, but
+the two losses are large and both land in the years an investor most needs
+protection.
+
+**Lane status: `NO_DEPLOYABLE_US500_EDGE_FOUND_STOP`.** Twelve hypotheses tested
+and closed (U1–U12 plus H1). The core methodological lesson is recorded in the
+project README: *validate on the instrument and the price path you will actually
+trade*. This lane spent most of its effort on daily index bars for a 24-hour CFD,
+and that single mismatch produced every false positive it generated.

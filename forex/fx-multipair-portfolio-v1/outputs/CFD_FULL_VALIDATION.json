@@ -1,33 +1,33 @@
 {
   "overnight_path_bias": {
-    "net_pct_difference": 68.44,
+    "net_pct_difference": 96.54,
     "note": "cash_low is what the index-level backtest effectively assumed; full_path is what a 24h CFD position actually experiences.",
-    "profit_factor_cash_low": 1.4432,
-    "profit_factor_full_path": 0.9509
+    "profit_factor_cash_low": 1.4507,
+    "profit_factor_full_path": 1.0177
   },
   "pooled": {
     "cash_low": {
-      "max_drawdown_pct": 14.34,
-      "net_pct": 60.87,
-      "profit_factor": 1.4432,
-      "trades": 473,
-      "win_rate_pct": 37.42,
+      "max_drawdown_pct": 13.81,
+      "net_pct": 101.0,
+      "profit_factor": 1.4507,
+      "trades": 895,
+      "win_rate_pct": 42.68,
       "worst_trade_pct": -0.5
     },
     "full_path": {
-      "max_drawdown_pct": 27.28,
-      "net_pct": -7.57,
-      "profit_factor": 0.9509,
-      "trades": 473,
-      "win_rate_pct": 30.66,
+      "max_drawdown_pct": 27.11,
+      "net_pct": 4.46,
+      "profit_factor": 1.0177,
+      "trades": 895,
+      "win_rate_pct": 36.98,
       "worst_trade_pct": -0.5
     },
     "no_stop": {
-      "max_drawdown_pct": 39.86,
-      "net_pct": 2.79,
-      "profit_factor": 1.0112,
-      "trades": 473,
-      "win_rate_pct": 52.22,
+      "max_drawdown_pct": 30.3,
+      "net_pct": 41.28,
+      "profit_factor": 1.1167,
+      "trades": 895,
+      "win_rate_pct": 54.19,
       "worst_trade_pct": -9.45
     }
   },
@@ -59,6 +59,32 @@
         "worst_trade_pct": -2.46
       }
     },
+    "2017": {
+      "cash_low": {
+        "max_drawdown_pct": 1.78,
+        "net_pct": 9.07,
+        "profit_factor": 1.8038,
+        "trades": 108,
+        "win_rate_pct": 56.48,
+        "worst_trade_pct": -0.5
+      },
+      "full_path": {
+        "max_drawdown_pct": 1.78,
+        "net_pct": 8.24,
+        "profit_factor": 1.6995,
+        "trades": 108,
+        "win_rate_pct": 55.56,
+        "worst_trade_pct": -0.5
+      },
+      "no_stop": {
+        "max_drawdown_pct": 2.0,
+        "net_pct": 7.83,
+        "profit_factor": 1.6251,
+        "trades": 108,
+        "win_rate_pct": 56.48,
+        "worst_trade_pct": -1.79
+      }
+    },
     "2018": {
       "cash_low": {
         "max_drawdown_pct": 6.68,
@@ -83,6 +109,32 @@
         "trades": 112,
         "win_rate_pct": 50.89,
         "worst_trade_pct": -4.17
+      }
+    },
+    "2019": {
+      "cash_low": {
+        "max_drawdown_pct": 2.77,
+        "net_pct": 12.73,
+        "profit_factor": 1.5528,
+        "trades": 103,
+        "win_rate_pct": 48.54,
+        "worst_trade_pct": -0.5
+      },
+      "full_path": {
+        "max_drawdown_pct": 7.87,
+        "net_pct": 2.82,
+        "profit_factor": 1.1038,
+        "trades": 103,
+        "win_rate_pct": 42.72,
+        "worst_trade_pct": -0.5
+      },
+      "no_stop": {
+        "max_drawdown_pct": 6.87,
+        "net_pct": 9.57,
+        "profit_factor": 1.3326,
+        "trades": 103,
+        "win_rate_pct": 56.31,
+        "worst_trade_pct": -3.2
       }
     },
     "2020": {
@@ -111,6 +163,32 @@
         "worst_trade_pct": -9.45
       }
     },
+    "2021": {
+      "cash_low": {
+        "max_drawdown_pct": 2.76,
+        "net_pct": 10.83,
+        "profit_factor": 1.4437,
+        "trades": 104,
+        "win_rate_pct": 45.19,
+        "worst_trade_pct": -0.5
+      },
+      "full_path": {
+        "max_drawdown_pct": 4.5,
+        "net_pct": 0.17,
+        "profit_factor": 1.0063,
+        "trades": 104,
+        "win_rate_pct": 39.42,
+        "worst_trade_pct": -0.5
+      },
+      "no_stop": {
+        "max_drawdown_pct": 4.81,
+        "net_pct": 8.78,
+        "profit_factor": 1.2703,
+        "trades": 104,
+        "win_rate_pct": 54.81,
+        "worst_trade_pct": -2.17
+      }
+    },
     "2022": {
       "cash_low": {
         "max_drawdown_pct": 12.86,
@@ -135,6 +213,32 @@
         "trades": 136,
         "win_rate_pct": 41.91,
         "worst_trade_pct": -3.98
+      }
+    },
+    "2023": {
+      "cash_low": {
+        "max_drawdown_pct": 6.03,
+        "net_pct": 7.5,
+        "profit_factor": 1.2674,
+        "trades": 107,
+        "win_rate_pct": 43.93,
+        "worst_trade_pct": -0.5
+      },
+      "full_path": {
+        "max_drawdown_pct": 9.86,
+        "net_pct": 0.79,
+        "profit_factor": 1.0251,
+        "trades": 107,
+        "win_rate_pct": 38.32,
+        "worst_trade_pct": -0.5
+      },
+      "no_stop": {
+        "max_drawdown_pct": 7.46,
+        "net_pct": 12.32,
+        "profit_factor": 1.4114,
+        "trades": 107,
+        "win_rate_pct": 57.94,
+        "worst_trade_pct": -1.93
       }
     }
   }
