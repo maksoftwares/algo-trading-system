@@ -1,0 +1,29 @@
+{
+  "config": {
+    "atr_mult": 3.0,
+    "direction": 1,
+    "family": "fade",
+    "param": 10,
+    "rr": 2.0,
+    "session": "non_us",
+    "timeframe": 240
+  },
+  "design": {
+    "net": 498.22,
+    "profit_factor": 1.3657,
+    "trades": 153,
+    "win_rate": 58.17
+  },
+  "holdout": {
+    "net": 578.69,
+    "profit_factor": 1.3192,
+    "trades": 116,
+    "win_rate": 55.17
+  },
+  "validation": {
+    "net": 336.26,
+    "profit_factor": 1.1801,
+    "trades": 100,
+    "win_rate": 60.0
+  }
+}
