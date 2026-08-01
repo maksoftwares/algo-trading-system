@@ -1,0 +1,374 @@
+{
+  "cost_stress": {
+    "BROKER 2025-08..2026-07": {
+      "max_drawdown_pct": 5.02,
+      "months": 14,
+      "months_positive": 10,
+      "net_pct": 4.88,
+      "net_usd_on_account": 488.0,
+      "payoff": 0.84,
+      "profit_factor": 1.1356,
+      "trades": 3181,
+      "trades_per_active_day": 8.84,
+      "win_rate_pct": 57.59
+    },
+    "HOLDOUT 2022-2023": {
+      "max_drawdown_pct": 16.4,
+      "months": 24,
+      "months_positive": 11,
+      "net_pct": -10.83,
+      "net_usd_on_account": -1083.0,
+      "payoff": 0.77,
+      "profit_factor": 0.8934,
+      "trades": 5772,
+      "trades_per_active_day": 9.31,
+      "win_rate_pct": 53.55
+    },
+    "design 2016-2019": {
+      "max_drawdown_pct": 9.38,
+      "months": 48,
+      "months_positive": 35,
+      "net_pct": 10.13,
+      "net_usd_on_account": 1013.0,
+      "payoff": 0.78,
+      "profit_factor": 1.1059,
+      "trades": 8635,
+      "trades_per_active_day": 7.69,
+      "win_rate_pct": 58.76
+    },
+    "validation 2020-2021": {
+      "max_drawdown_pct": 11.37,
+      "months": 24,
+      "months_positive": 16,
+      "net_pct": 10.15,
+      "net_usd_on_account": 1015.0,
+      "payoff": 0.8,
+      "profit_factor": 1.1208,
+      "trades": 5257,
+      "trades_per_active_day": 8.44,
+      "win_rate_pct": 58.32
+    }
+  },
+  "members": [
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "ma_reversion",
+      "param": 50,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 60
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "consecutive",
+      "param": 2,
+      "rr": 0.75,
+      "session": "non_us",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "ma_reversion",
+      "param": 50,
+      "rr": 0.75,
+      "session": "non_us",
+      "timeframe": 60
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "ma_reversion",
+      "param": 20,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "fade",
+      "param": 40,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 60
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "breakout",
+      "param": 10,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 240
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "ma_reversion",
+      "param": 20,
+      "rr": 1.0,
+      "session": "all",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "bollinger",
+      "param": 14,
+      "rr": 0.75,
+      "session": "us",
+      "timeframe": 60
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "fade",
+      "param": 10,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 1.5,
+      "direction": 1,
+      "family": "ma_reversion",
+      "param": 100,
+      "rr": 1.0,
+      "session": "non_us",
+      "timeframe": 240
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "rsi_extreme",
+      "param": 35,
+      "rr": 0.75,
+      "session": "us",
+      "timeframe": 60
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "ma_reversion",
+      "param": 50,
+      "rr": 0.75,
+      "session": "non_us",
+      "timeframe": 240
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "range_break",
+      "param": 12,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 240
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "breakout",
+      "param": 20,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "breakout",
+      "param": 10,
+      "rr": 0.75,
+      "session": "non_us",
+      "timeframe": 240
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "fade",
+      "param": 40,
+      "rr": 1.0,
+      "session": "all",
+      "timeframe": 60
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "range_break",
+      "param": 12,
+      "rr": 1.0,
+      "session": "all",
+      "timeframe": 240
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "range_break",
+      "param": 24,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "bollinger",
+      "param": 14,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "breakout",
+      "param": 20,
+      "rr": 1.0,
+      "session": "all",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "bollinger",
+      "param": 20,
+      "rr": 0.75,
+      "session": "non_us",
+      "timeframe": 60
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "range_break",
+      "param": 12,
+      "rr": 0.75,
+      "session": "non_us",
+      "timeframe": 240
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "bollinger",
+      "param": 14,
+      "rr": 1.0,
+      "session": "all",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "vol_expansion",
+      "param": 10,
+      "rr": 0.75,
+      "session": "non_us",
+      "timeframe": 30
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "vol_expansion",
+      "param": 10,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 60
+    },
+    {
+      "atr_mult": 3.0,
+      "direction": 1,
+      "family": "range_break",
+      "param": 24,
+      "rr": 1.0,
+      "session": "all",
+      "timeframe": 120
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "fade",
+      "param": 10,
+      "rr": 0.75,
+      "session": "all",
+      "timeframe": 240
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "fade",
+      "param": 10,
+      "rr": 1.0,
+      "session": "all",
+      "timeframe": 240
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "vol_expansion",
+      "param": 10,
+      "rr": 1.0,
+      "session": "all",
+      "timeframe": 60
+    },
+    {
+      "atr_mult": 2.0,
+      "direction": 1,
+      "family": "fade",
+      "param": 40,
+      "rr": 0.75,
+      "session": "us",
+      "timeframe": 60
+    }
+  ],
+  "windows": {
+    "BROKER 2025-08..2026-07": {
+      "max_drawdown_pct": 4.72,
+      "months": 14,
+      "months_positive": 10,
+      "net_pct": 5.81,
+      "net_usd_on_account": 581.0,
+      "payoff": 0.86,
+      "profit_factor": 1.1633,
+      "trades": 3181,
+      "trades_per_active_day": 8.84,
+      "win_rate_pct": 57.59
+    },
+    "HOLDOUT 2022-2023": {
+      "max_drawdown_pct": 15.24,
+      "months": 24,
+      "months_positive": 12,
+      "net_pct": -8.06,
+      "net_usd_on_account": -806.0,
+      "payoff": 0.8,
+      "profit_factor": 0.9197,
+      "trades": 5772,
+      "trades_per_active_day": 9.31,
+      "win_rate_pct": 53.55
+    },
+    "design 2016-2019": {
+      "max_drawdown_pct": 8.62,
+      "months": 48,
+      "months_positive": 40,
+      "net_pct": 16.54,
+      "net_usd_on_account": 1654.0,
+      "payoff": 0.83,
+      "profit_factor": 1.1779,
+      "trades": 8635,
+      "trades_per_active_day": 7.69,
+      "win_rate_pct": 58.76
+    },
+    "validation 2020-2021": {
+      "max_drawdown_pct": 11.18,
+      "months": 24,
+      "months_positive": 16,
+      "net_pct": 12.96,
+      "net_usd_on_account": 1296.0,
+      "payoff": 0.83,
+      "profit_factor": 1.1565,
+      "trades": 5257,
+      "trades_per_active_day": 8.44,
+      "win_rate_pct": 58.32
+    }
+  }
+}
