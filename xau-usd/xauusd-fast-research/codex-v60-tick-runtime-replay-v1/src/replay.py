@@ -94,6 +94,26 @@ def apply_runtime_risk_mode(
     return config
 
 
+def apply_portfolio_protection(
+    contract: Mapping[str, Any], config: dict[str, Any]
+) -> dict[str, Any]:
+    relative = contract["inputs"].get("portfolio_protection_overlay")
+    if not relative:
+        return config
+    path = resolve_input(str(relative))
+    overlay = load_json(path)
+    if overlay.get("schema_version") != "xauusd_v60_drawdown_protection_v1_overlay":
+        raise ValueError("Unexpected drawdown-protection overlay schema")
+    base_path = resolve_input(contract["inputs"]["demo_config"])
+    expected = overlay["base_config"]
+    if resolve_input(str(expected["path"])).resolve() != base_path.resolve():
+        raise ValueError("Drawdown protection is bound to another config")
+    if sha256_file(base_path) != str(expected["sha256"]):
+        raise ValueError("Drawdown-protection base config identity changed")
+    config["portfolio_protection"] = overlay["portfolio_protection"]
+    return config
+
+
 @dataclass(frozen=True)
 class Candidate:
     trade_id: str
@@ -564,6 +584,11 @@ class Scenario:
         self.guardian_arms = 0
         self.guardian_locks = 0
         self.maximum_open_positions = 0
+        self.profit_protection_arms = 0
+        self.profit_giveback_closes = 0
+        self.profit_protection_armed = False
+        self.profit_protection_peak_open_pnl = 0.0
+        self.profit_protection_tickets: set[str] = set()
         self.first_suspend_ms: int | None = None
         self.first_hard_stop_ms: int | None = None
         self.first_guardian_lock_ms: int | None = None
@@ -681,6 +706,60 @@ class Scenario:
                 "SOURCE_EXIT",
                 counted_by_v60=True,
             )
+
+    def _evaluate_profit_protection(
+        self, now_ms: int, bid: float, ask: float
+    ) -> None:
+        settings = self.config.get("portfolio_protection")
+        if not isinstance(settings, Mapping) or not bool(settings.get("enabled")):
+            return
+        tickets = set(self.positions)
+        if not tickets:
+            self.profit_protection_armed = False
+            self.profit_protection_peak_open_pnl = 0.0
+            self.profit_protection_tickets = set()
+            return
+        if self.profit_protection_tickets and not self.profit_protection_tickets.intersection(
+            tickets
+        ):
+            self.profit_protection_armed = False
+            self.profit_protection_peak_open_pnl = 0.0
+        self.profit_protection_tickets = tickets
+        active_risk = sum(
+            position.candidate.risk_usd for position in self.positions.values()
+        )
+        open_pnl = sum(
+            self._market_pnl(position, bid, ask)
+            for position in self.positions.values()
+        )
+        self.profit_protection_peak_open_pnl = max(
+            self.profit_protection_peak_open_pnl, open_pnl
+        )
+        arm = float(settings["open_profit_arm_r"]) * active_risk
+        retain = float(settings["open_profit_retain_r"]) * active_risk
+        if not self.profit_protection_armed and open_pnl >= arm:
+            self.profit_protection_armed = True
+            self.profit_protection_arms += 1
+            self._record(
+                "OPEN_PROFIT_PROTECTION_ARMED",
+                now_ms,
+                open_pnl_usd=open_pnl,
+                active_initial_risk_usd=active_risk,
+            )
+        elif self.profit_protection_armed and open_pnl <= retain:
+            for trade_id in sorted(list(self.positions)):
+                position = self.positions[trade_id]
+                self._close(
+                    trade_id,
+                    now_ms,
+                    self._market_pnl(position, bid, ask),
+                    "OPEN_PROFIT_GIVEBACK",
+                    counted_by_v60=True,
+                )
+                self.profit_giveback_closes += 1
+            self.profit_protection_armed = False
+            self.profit_protection_peak_open_pnl = 0.0
+            self.profit_protection_tickets = set()
 
     def _refresh_drawdown(self, now_ms: int, equity: float) -> tuple[float, float]:
         self.peak_equity = max(self.peak_equity, equity)
@@ -891,6 +970,8 @@ class Scenario:
         ask: float,
         floating_hard: bool,
         closed_hard: bool,
+        floating_dd: float,
+        closed_dd: float,
     ) -> str | None:
         age_ms = now_ms - candidate.entry_ms
         utc_day = candidate.entry_ms // DAY_MS
@@ -899,6 +980,30 @@ class Scenario:
             position.candidate.source_id == candidate.source_id
             for position in self.positions.values()
         )
+        protection = self.config.get("portfolio_protection")
+        if isinstance(protection, Mapping) and bool(protection.get("enabled")):
+            drawdown_fraction = max(floating_dd, closed_dd) / float(
+                self.spec.activation_equity_usd
+            )
+            if candidate.sleeve_type == "ADDON" and drawdown_fraction >= float(
+                protection["soft_addon_block_drawdown_fraction"]
+            ):
+                return "SOFT_DRAWDOWN_ADDON_BLOCK"
+            if candidate.sleeve_type == "CORE" and drawdown_fraction >= float(
+                protection["soft_core_concurrency_drawdown_fraction"]
+            ):
+                if core_count >= int(protection["soft_core_maximum_open_positions"]):
+                    return "SOFT_DRAWDOWN_CORE_CONCURRENCY"
+            for family in protection["same_direction_source_families"]:
+                if candidate.source_id not in family:
+                    continue
+                if any(
+                    position.candidate.source_id in family
+                    and position.candidate.source_id != candidate.source_id
+                    and position.candidate.direction == candidate.direction
+                    for position in self.positions.values()
+                ):
+                    return "SAME_DIRECTION_PROTECTION_FAMILY"
         if candidate.risk_usd > candidate.maximum_risk_usd:
             return "SOURCE_MAXIMUM_RISK"
         if age_ms > candidate.maximum_entry_gap_minutes * 60_000:
@@ -1032,6 +1137,7 @@ class Scenario:
         self._guardian_reset(now_ms, pre_equity)
         self._maybe_rebaseline(now_ms)
         self._settle_normal_exits(now_ms)
+        self._evaluate_profit_protection(now_ms, bid, ask)
         equity = self.equity(bid, ask)
         self._guardian_evaluate(now_ms, bid, ask, equity)
         equity = self.equity(bid, ask)
@@ -1090,6 +1196,8 @@ class Scenario:
                 ask,
                 floating_hard,
                 closed_hard,
+                floating_dd,
+                closed_dd,
             )
             if reason is not None:
                 self._reject(candidate, now_ms, reason)
@@ -1172,6 +1280,8 @@ class Scenario:
             "maximum_lifetime_equity_drawdown_usd": self.max_lifetime_equity_dd,
             "ending_policy_closed_drawdown_usd": policy_closed_dd,
             "maximum_open_positions": self.maximum_open_positions,
+            "profit_protection_arms": self.profit_protection_arms,
+            "profit_giveback_closes": self.profit_giveback_closes,
             "suspensions": self.suspensions,
             "rebaselines": self.rebaselines,
             "emergency_position_closes": self.emergency_closes,
@@ -1330,6 +1440,11 @@ def input_hashes(contract: Mapping[str, Any]) -> dict[str, str]:
     for key in keys:
         path = resolve_input(contract["inputs"][key])
         result[key] = sha256_file(path)
+    protection = contract["inputs"].get("portfolio_protection_overlay")
+    if protection:
+        result["portfolio_protection_overlay"] = sha256_file(
+            resolve_input(str(protection))
+        )
     return result
 
 
@@ -1340,7 +1455,10 @@ def build_result(
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     contract = load_json(contract_path)
     config = apply_runtime_risk_mode(
-        load_json(resolve_input(contract["inputs"]["demo_config"])),
+        apply_portfolio_protection(
+            contract,
+            load_json(resolve_input(contract["inputs"]["demo_config"])),
+        ),
         bool(
             contract["evaluation"].get(
                 "required_equity_fraction_limits_enabled",

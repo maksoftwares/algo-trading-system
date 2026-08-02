@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 import time
 from datetime import UTC, datetime, timedelta
@@ -47,6 +48,52 @@ from ml_topup import (  # noqa: E402
 
 CONFIG_PATH = ROOT / "config" / "v60_canonical_demo_portfolio_v2.json"
 ML_OVERLAY_PATH = ROOT / "config" / "v60_portable_ml_topup_v4_overlay.json"
+PROTECTION_OVERLAY_PATH = ROOT / "config" / "v60_drawdown_protection_v1_overlay.json"
+
+
+class SingleInstanceLock:
+    def __init__(self, path: Path) -> None:
+        self.path = path
+        self.handle: Any | None = None
+
+    def __enter__(self) -> SingleInstanceLock:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        handle = self.path.open("a+b")
+        if handle.seek(0, os.SEEK_END) == 0:
+            handle.write(b"\0")
+            handle.flush()
+        handle.seek(0)
+        try:
+            if os.name == "nt":
+                import msvcrt
+
+                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+
+                fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError as exc:
+            handle.close()
+            raise RuntimeError("Another V60 portfolio executor is already running") from exc
+        self.handle = handle
+        return self
+
+    def __exit__(self, *_args: Any) -> None:
+        if self.handle is None:
+            return
+        try:
+            self.handle.seek(0)
+            if os.name == "nt":
+                import msvcrt
+
+                msvcrt.locking(self.handle.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                import fcntl
+
+                fcntl.flock(self.handle.fileno(), fcntl.LOCK_UN)
+        finally:
+            self.handle.close()
+            self.handle = None
 
 
 def sha256_file(path: Path) -> str:
@@ -103,11 +150,47 @@ def apply_ml_overlay(
     return config
 
 
+def apply_protection_overlay(
+    config: dict[str, Any], base_path: Path, overlay_path: Path
+) -> dict[str, Any]:
+    overlay = json.loads(overlay_path.read_text(encoding="utf-8"))
+    if overlay.get("schema_version") != "xauusd_v60_drawdown_protection_v1_overlay":
+        raise RuntimeError("Unexpected drawdown-protection overlay schema")
+    expected_base = overlay["base_config"]
+    expected_path = REPO_ROOT / str(expected_base["path"])
+    if expected_path.resolve() != base_path.resolve():
+        raise RuntimeError("Drawdown-protection overlay is bound to another config")
+    if sha256_file(base_path) != str(expected_base["sha256"]):
+        raise RuntimeError("Drawdown-protection base config identity changed")
+    settings = overlay["portfolio_protection"]
+    expected = {
+        "enabled": True,
+        "open_profit_arm_r": 1.5,
+        "open_profit_retain_r": 0.5,
+        "same_direction_source_families": [["R4_CHOP", "V25_CHOP"]],
+        "soft_addon_block_drawdown_fraction": 0.20,
+        "soft_core_concurrency_drawdown_fraction": 0.22,
+        "soft_core_maximum_open_positions": 1,
+        "soft_ml_topup_block_drawdown_fraction": 0.10,
+    }
+    if settings != expected:
+        raise RuntimeError("Drawdown-protection policy differs from the locked candidate")
+    config["portfolio_protection"] = settings
+    config["_protection_overlay_path"] = str(overlay_path)
+    return config
+
+
 def load_config(
-    path: Path = CONFIG_PATH, ml_overlay_path: Path | None = None
+    path: Path = CONFIG_PATH,
+    ml_overlay_path: Path | None = None,
+    protection_overlay_path: Path | None = None,
 ) -> dict[str, Any]:
     path = path.resolve()
     config = json.loads(path.read_text(encoding="utf-8"))
+    if protection_overlay_path is not None:
+        config = apply_protection_overlay(
+            config, path, protection_overlay_path.resolve()
+        )
     if ml_overlay_path is not None:
         config = apply_ml_overlay(config, path, ml_overlay_path.resolve())
     auth = config["authorization"]
@@ -173,6 +256,47 @@ def load_mt5() -> Any:
     import MetaTrader5 as mt5
 
     return mt5
+
+
+def mt5_session_problem(mt5: Any, config: Mapping[str, Any]) -> str | None:
+    terminal = mt5.terminal_info()
+    if terminal is None:
+        return "terminal information is unavailable"
+    if not bool(getattr(terminal, "connected", False)):
+        return "terminal is disconnected"
+    account = mt5.account_info()
+    if account is None:
+        return "account information is unavailable"
+    if int(getattr(account, "login", 0)) != int(config["account"]["expected_login"]):
+        return "terminal is connected to the wrong account"
+    if str(getattr(account, "server", "")) != str(config["account"]["expected_server"]):
+        return "terminal is connected to the wrong server"
+    symbol = mt5.symbol_info(str(config["account"]["symbol"]))
+    if symbol is None:
+        return "symbol information is unavailable"
+    return None
+
+
+def initialize_mt5_session(mt5: Any, config: Mapping[str, Any]) -> None:
+    terminal = str(Path(config["account"]["terminal_exe"]).resolve())
+    attempts = max(1, int(config["runtime"].get("mt5_initialize_attempts", 3)))
+    delay = max(0.0, float(config["runtime"].get("mt5_reconnect_delay_seconds", 2)))
+    problems: list[str] = []
+    for attempt in range(1, attempts + 1):
+        try:
+            mt5.shutdown()
+        except Exception:
+            pass
+        if not mt5.initialize(path=terminal, portable=True):
+            problems.append(f"attempt {attempt}: initialize failed: {mt5.last_error()}")
+        else:
+            problem = mt5_session_problem(mt5, config)
+            if problem is None:
+                return
+            problems.append(f"attempt {attempt}: {problem}")
+        if attempt < attempts and delay > 0.0:
+            time.sleep(delay)
+    raise RuntimeError("MT5 session recovery failed; " + "; ".join(problems))
 
 
 def _read_chart_text(path: Path) -> str:
@@ -672,7 +796,13 @@ def open_candidate(
     return result, comment, close_deadline(candidate, utc_now()), position
 
 
-def close_position(mt5: Any, position: Any, config: Mapping[str, Any]) -> Any:
+def close_position(
+    mt5: Any,
+    position: Any,
+    config: Mapping[str, Any],
+    *,
+    comment: str = "V60_HORIZON_EXIT",
+) -> Any:
     symbol = config["account"]["symbol"]
     tick = mt5.symbol_info_tick(symbol)
     if tick is None:
@@ -687,7 +817,7 @@ def close_position(mt5: Any, position: Any, config: Mapping[str, Any]) -> Any:
         "price": float(tick.bid if is_buy else tick.ask),
         "deviation": int(config["account"]["deviation_points"]),
         "magic": int(position.magic),
-        "comment": "V60_HORIZON_EXIT",
+        "comment": comment[:31],
         "type_time": mt5.ORDER_TIME_GTC,
     }
     return send_request(mt5, request)
@@ -778,6 +908,182 @@ def active_initial_risk(
     return total, by_direction
 
 
+def position_source_id(
+    position: Any, config: Mapping[str, Any], state: Mapping[str, Any]
+) -> str | None:
+    ticket = int(getattr(position, "ticket", 0) or 0)
+    for metadata in state.get("positions", {}).values():
+        if int(metadata.get("ticket", 0) or 0) == ticket:
+            return str(metadata.get("source_id", "")) or None
+    magic = int(getattr(position, "magic", -1))
+    for source in config["sources"]:
+        if int(source["magic"]) == magic:
+            return str(source["source_id"])
+    return None
+
+
+def protection_drawdown_fraction(
+    state: Mapping[str, Any], equity_usd: float
+) -> float:
+    activation = float(state["activation_equity_usd"])
+    if activation <= 0.0:
+        raise ValueError("Activation equity must be positive")
+    return max(
+        float(state["closed_drawdown_usd"]),
+        floating_drawdown(state, equity_usd),
+    ) / activation
+
+
+def protection_entry_reason(
+    candidate: Any,
+    config: Mapping[str, Any],
+    state: Mapping[str, Any],
+    positions: list[Any],
+    mt5: Any,
+    equity_usd: float,
+) -> str | None:
+    settings = config.get("portfolio_protection")
+    if not isinstance(settings, Mapping) or not bool(settings.get("enabled")):
+        return None
+    drawdown_fraction = protection_drawdown_fraction(state, equity_usd)
+    if candidate.sleeve_type == "ADDON" and drawdown_fraction >= float(
+        settings["soft_addon_block_drawdown_fraction"]
+    ):
+        return "SOFT_DRAWDOWN_ADDON_BLOCK"
+    if candidate.sleeve_type == "CORE" and drawdown_fraction >= float(
+        settings["soft_core_concurrency_drawdown_fraction"]
+    ):
+        core_magics = {
+            int(source["magic"])
+            for source in config["sources"]
+            if str(source.get("sleeve_type", "CORE")).upper() == "CORE"
+        }
+        core_count = sum(
+            int(getattr(position, "magic", -1)) in core_magics
+            for position in positions
+        )
+        if core_count >= int(settings["soft_core_maximum_open_positions"]):
+            return "SOFT_DRAWDOWN_CORE_CONCURRENCY"
+    for family in settings["same_direction_source_families"]:
+        if candidate.source_id not in family:
+            continue
+        for position in positions:
+            source_id = position_source_id(position, config, state)
+            if source_id not in family or source_id == candidate.source_id:
+                continue
+            direction = (
+                "LONG"
+                if int(position.type) == int(mt5.POSITION_TYPE_BUY)
+                else "SHORT"
+            )
+            if direction == candidate.direction:
+                return "SAME_DIRECTION_PROTECTION_FAMILY"
+    return None
+
+
+def open_position_pnl_usd(
+    positions: list[Any], config: Mapping[str, Any]
+) -> float:
+    account_value = sum(
+        float(getattr(position, "profit", 0.0) or 0.0)
+        + float(getattr(position, "swap", 0.0) or 0.0)
+        for position in positions
+    )
+    return account_value_usd(account_value, config)
+
+
+def manage_open_profit_giveback(
+    mt5: Any,
+    config: Mapping[str, Any],
+    state: dict[str, Any],
+    positions: list[Any],
+    active_risk_usd: float,
+    events_path: Path,
+    now: datetime,
+) -> dict[str, Any]:
+    settings = config.get("portfolio_protection")
+    result: dict[str, Any] = {
+        "enabled": bool(isinstance(settings, Mapping) and settings.get("enabled")),
+        "policy": None if not isinstance(settings, Mapping) else dict(settings),
+        "armed": False,
+        "open_pnl_usd": 0.0,
+        "active_initial_risk_usd": float(active_risk_usd),
+        "triggered": False,
+        "close_results": [],
+    }
+    if not result["enabled"]:
+        return result
+    protection = state.setdefault(
+        "open_profit_protection",
+        {"armed": False, "peak_open_pnl_usd": 0.0, "tickets": []},
+    )
+    tickets = sorted(int(position.ticket) for position in positions)
+    prior_tickets = {int(value) for value in protection.get("tickets", [])}
+    if not positions or active_risk_usd <= 0.0:
+        protection.update(
+            {"armed": False, "peak_open_pnl_usd": 0.0, "tickets": []}
+        )
+        return result
+    if prior_tickets and not prior_tickets.intersection(tickets):
+        protection.update({"armed": False, "peak_open_pnl_usd": 0.0})
+    protection["tickets"] = tickets
+    open_pnl = open_position_pnl_usd(positions, config)
+    protection["peak_open_pnl_usd"] = max(
+        float(protection.get("peak_open_pnl_usd", 0.0)), open_pnl
+    )
+    arm_threshold = float(settings["open_profit_arm_r"]) * active_risk_usd
+    retain_threshold = float(settings["open_profit_retain_r"]) * active_risk_usd
+    if not bool(protection.get("armed")) and open_pnl >= arm_threshold:
+        protection["armed"] = True
+        append_event(
+            events_path,
+            {
+                "event": "OPEN_PROFIT_PROTECTION_ARMED",
+                "at_utc": utc_text(now),
+                "open_pnl_usd": open_pnl,
+                "active_initial_risk_usd": active_risk_usd,
+                "arm_threshold_usd": arm_threshold,
+                "tickets": tickets,
+            },
+        )
+    elif bool(protection.get("armed")) and open_pnl <= retain_threshold:
+        result["triggered"] = True
+        for position in positions:
+            close_result = close_position(
+                mt5,
+                position,
+                config,
+                comment="V60_PROFIT_GIVEBACK_EXIT",
+            )
+            record = {
+                "event": "OPEN_PROFIT_GIVEBACK_CLOSE",
+                "at_utc": utc_text(now),
+                "ticket": int(position.ticket),
+                "magic": int(position.magic),
+                "open_pnl_usd": open_pnl,
+                "active_initial_risk_usd": active_risk_usd,
+                "retain_threshold_usd": retain_threshold,
+                "retcode": (
+                    None if close_result is None else int(close_result.retcode)
+                ),
+                "comment": (
+                    None if close_result is None else str(close_result.comment)
+                ),
+            }
+            result["close_results"].append(record)
+            append_event(events_path, record)
+    result.update(
+        {
+            "armed": bool(protection.get("armed")),
+            "open_pnl_usd": open_pnl,
+            "peak_open_pnl_usd": float(protection["peak_open_pnl_usd"]),
+            "arm_threshold_usd": arm_threshold,
+            "retain_threshold_usd": retain_threshold,
+        }
+    )
+    return result
+
+
 def ml_topup_risk_reason(
     candidate: Any,
     config: Mapping[str, Any],
@@ -788,6 +1094,7 @@ def ml_topup_risk_reason(
     active_direction_risk_usd: Mapping[str, float],
     active_addon_risk_usd: float,
     effective_risk_limits: Mapping[str, float],
+    equity_usd: float | None = None,
 ) -> str | None:
     settings = config["ml_topup"]
     source = next(
@@ -800,6 +1107,15 @@ def ml_topup_risk_reason(
     )
     if source is None:
         return "ML_TOPUP_UNKNOWN_SOURCE"
+    protection = config.get("portfolio_protection")
+    if (
+        isinstance(protection, Mapping)
+        and bool(protection.get("enabled"))
+        and equity_usd is not None
+        and protection_drawdown_fraction(state, equity_usd)
+        >= float(protection["soft_ml_topup_block_drawdown_fraction"])
+    ):
+        return "ML_TOPUP_SOFT_DRAWDOWN_BLOCK"
     additional_risk = float(candidate.initial_risk_usd)
     maximum_source_risk = source.get("maximum_risk_usd")
     if maximum_source_risk is None:
@@ -920,6 +1236,26 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     active_addon_risk, _ = active_initial_risk(
         addon_positions, state, symbol_info, mt5
     )
+    profit_protection = manage_open_profit_giveback(
+        mt5,
+        config,
+        state,
+        ours,
+        active_initial_risk_usd,
+        events_path,
+        now,
+    )
+    if profit_protection["triggered"]:
+        positions = list(mt5.positions_get(symbol=symbol) or [])
+        ours = own_positions(positions, magics, symbol)
+        core_positions = own_positions(positions, core_magics, symbol)
+        addon_positions = own_positions(positions, addon_magics, symbol)
+        active_initial_risk_usd, active_direction_risk_usd = active_initial_risk(
+            ours, state, symbol_info, mt5
+        )
+        active_addon_risk, _ = active_initial_risk(
+            addon_positions, state, symbol_info, mt5
+        )
     risk = config["risk"]
     effective_risk_limits = {
         key: effective_risk_threshold_usd(state, risk, key)
@@ -983,8 +1319,13 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     for candidate in pending:
         age = now - candidate.scheduled_at
         reason: str | None = None
+        protection_reason = protection_entry_reason(
+            candidate, config, state, ours, mt5, equity_usd
+        )
         if age > timedelta(minutes=candidate.maximum_entry_gap_minutes):
             reason = "STALE_CANDIDATE"
+        elif profit_protection["triggered"]:
+            reason = "OPEN_PROFIT_GIVEBACK_CYCLE_LOCK"
         elif entry_halts:
             reason = "ENTRY_HALT_FILE_ACTIVE"
         elif bool(state["drawdown_suspended"]):
@@ -993,6 +1334,8 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
             reason = "FLOATING_DRAWDOWN_HARD_STOP"
         elif combined_closed_stop:
             reason = "COMBINED_CLOSED_DRAWDOWN_HARD_STOP"
+        elif protection_reason is not None:
+            reason = protection_reason
         elif (
             active_initial_risk_usd + candidate.initial_risk_usd
             > float(
@@ -1191,6 +1534,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
                         active_direction_risk_usd=active_direction_risk_usd,
                         active_addon_risk_usd=active_addon_risk,
                         effective_risk_limits=effective_risk_limits,
+                        equity_usd=equity_usd,
                     )
                 )
                 topup_tick = mt5.symbol_info_tick(symbol)
@@ -1329,16 +1673,24 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         record["retcode"] not in SUCCESS_RETCODES
         for record in emergency_close_results
     )
+    profit_protection_close_failures = sum(
+        record["retcode"] not in SUCCESS_RETCODES
+        for record in profit_protection["close_results"]
+    )
     status = {
         "schema_version": "xauusd_v60_canonical_demo_status_v2",
         "updated_at_utc": utc_text(now),
         "status": (
-            "ACTIVE_DEMO_BROKER_ACTION"
-            if execution_enabled
+            "FAILED_CLOSED"
+            if profit_protection_close_failures
             else (
-                "READY_EXECUTION_DISABLED"
-                if profile["ready"] and feeds["ready"]
-                else "PREFLIGHT_PENDING_EXECUTION_DISABLED"
+                "ACTIVE_DEMO_BROKER_ACTION"
+                if execution_enabled
+                else (
+                    "READY_EXECUTION_DISABLED"
+                    if profile["ready"] and feeds["ready"]
+                    else "PREFLIGHT_PENDING_EXECUTION_DISABLED"
+                )
             )
         ),
         "account_login": int(account.login),
@@ -1360,6 +1712,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "active_entry_halt_files": entry_halts,
         "emergency_close_results": emergency_close_results,
         "emergency_close_failures": emergency_close_failures,
+        "profit_protection_close_failures": profit_protection_close_failures,
         "effective_risk_limits_usd": effective_risk_limits,
         "risk_limit_mode": "ACTIVATION_EQUITY_SCALED",
         "equity_fraction_limits_enabled": bool(
@@ -1387,6 +1740,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "ml_runtime_authorized": ml_authorized,
         "ml_shadow_authorized": False,
         "ml_topup": ml_topup_status_snapshot(ml_runtime, state),
+        "portfolio_protection": profit_protection,
         "chart_profile_preflight": profile,
         "feed_preflight": feeds,
         "broker_geometry_preflight": broker_geometry,
@@ -1402,47 +1756,73 @@ def main() -> int:
     )
     parser.add_argument("--config", type=Path, default=CONFIG_PATH)
     parser.add_argument("--ml-overlay", type=Path)
+    parser.add_argument("--protection-overlay", type=Path)
     parser.add_argument("--once", action="store_true")
     args = parser.parse_args()
     config = load_config(
         args.config.resolve(),
         None if args.ml_overlay is None else args.ml_overlay.resolve(),
+        (
+            None
+            if args.protection_overlay is None
+            else args.protection_overlay.resolve()
+        ),
     )
     mt5 = load_mt5()
-    terminal = str(Path(config["account"]["terminal_exe"]).resolve())
-    if not mt5.initialize(path=terminal, portable=True):
-        raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
-    try:
-        while True:
-            try:
-                status = run_cycle(mt5, config)
-                print(json.dumps(status, sort_keys=True), flush=True)
-            except Exception as exc:
-                runtime = Path(config["runtime"]["directory"])
-                failure = {
-                    "schema_version": "xauusd_v60_canonical_demo_status_v2",
-                    "updated_at_utc": utc_text(datetime.now(UTC)),
-                    "status": "FAILED_CLOSED",
-                    "error": f"{type(exc).__name__}: {exc}",
-                    "broker_action_authorized": True,
-                    "execution_enabled": bool(config["runtime"]["execution_enabled"]),
-                    "ml_runtime_authorized": bool(
-                        config["authorization"].get("ml_runtime_authorized")
-                    ),
-                    "ml_shadow_authorized": False,
-                    "live_authorized": False,
-                }
-                atomic_write_json(
-                    runtime / config["runtime"]["status_filename"], failure
-                )
-                print(json.dumps(failure, sort_keys=True), flush=True)
+    runtime = Path(config["runtime"]["directory"])
+    lock_path = runtime / str(
+        config["runtime"].get("single_instance_lock_filename", "portfolio.lock")
+    )
+    maximum_failures = max(
+        1, int(config["runtime"].get("maximum_consecutive_cycle_failures", 3))
+    )
+    with SingleInstanceLock(lock_path):
+        initialize_mt5_session(mt5, config)
+        consecutive_failures = 0
+        try:
+            while True:
+                try:
+                    problem = mt5_session_problem(mt5, config)
+                    if problem is not None:
+                        initialize_mt5_session(mt5, config)
+                    status = run_cycle(mt5, config)
+                    consecutive_failures = 0
+                    print(json.dumps(status, sort_keys=True), flush=True)
+                except Exception as exc:
+                    consecutive_failures += 1
+                    failure = {
+                        "schema_version": "xauusd_v60_canonical_demo_status_v2",
+                        "updated_at_utc": utc_text(datetime.now(UTC)),
+                        "status": "FAILED_CLOSED",
+                        "error": f"{type(exc).__name__}: {exc}",
+                        "consecutive_cycle_failures": consecutive_failures,
+                        "broker_action_authorized": True,
+                        "execution_enabled": bool(
+                            config["runtime"]["execution_enabled"]
+                        ),
+                        "ml_runtime_authorized": bool(
+                            config["authorization"].get("ml_runtime_authorized")
+                        ),
+                        "ml_shadow_authorized": False,
+                        "live_authorized": False,
+                    }
+                    atomic_write_json(
+                        runtime / config["runtime"]["status_filename"], failure
+                    )
+                    print(json.dumps(failure, sort_keys=True), flush=True)
+                    if args.once:
+                        return 1
+                    try:
+                        initialize_mt5_session(mt5, config)
+                        consecutive_failures = 0
+                    except Exception:
+                        if consecutive_failures >= maximum_failures:
+                            return 1
                 if args.once:
-                    return 1
-            if args.once:
-                return 0
-            time.sleep(int(config["runtime"]["poll_seconds"]))
-    finally:
-        mt5.shutdown()
+                    return 0
+                time.sleep(int(config["runtime"]["poll_seconds"]))
+        finally:
+            mt5.shutdown()
 
 
 if __name__ == "__main__":

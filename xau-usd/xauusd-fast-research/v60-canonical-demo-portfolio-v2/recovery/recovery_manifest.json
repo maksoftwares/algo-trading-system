@@ -1,6 +1,7 @@
 {
   "schema_version": "xauusd_v60_demo_recovery_manifest_v1",
   "recovery_tag": "v60-demo-recovery-20260730",
+  "recovery_variant": "drawdown-protection-v1-20260802",
   "account_login": 1033030,
   "account_server": "Capital.ComMena-Demo",
   "terminal_root": "C:/MT5PortableTier1BestEA",
@@ -13,18 +14,18 @@
     },
     {
       "path": "xau-usd/operations/v60-prospective-supervisor-v1/README.md",
-      "bytes": 1759,
-      "sha256": "2438bc216220418f79e603b04adc95a08577bd7872741a126e3b3e18d405a3cb"
+      "bytes": 2101,
+      "sha256": "8a91c2ea0e15bb36bb9af5852a540e325b93d10d99f47ee79285e3b83df04d3b"
     },
     {
       "path": "xau-usd/operations/v60-prospective-supervisor-v1/config/runtime_supervisor_v1.json",
-      "bytes": 3485,
-      "sha256": "43d4c1db2c7f8b053391c6137e4a4ebd92e85c6966f01354e11bcf47357ccea1"
+      "bytes": 4425,
+      "sha256": "689b133a52c2c248f161ac697a91646442ad9f1ce3a1ded7030c2915cd8019d6"
     },
     {
       "path": "xau-usd/operations/v60-prospective-supervisor-v1/deployed_specialist_monitor.py",
-      "bytes": 9147,
-      "sha256": "2fe9ed11488ac2969e1d85c646dc795ea2f7030e7389c41e9f81491dbf5fb581"
+      "bytes": 10867,
+      "sha256": "efa0457f7d0c4ebc327d74e8c67f459c3bbeea955d7b5e538b04690dfee84a5f"
     },
     {
       "path": "xau-usd/operations/v60-prospective-supervisor-v1/runtime_status.py",
@@ -33,8 +34,8 @@
     },
     {
       "path": "xau-usd/operations/v60-prospective-supervisor-v1/runtime_supervisor.ps1",
-      "bytes": 6211,
-      "sha256": "fa7a9cdbdbc8f65cc79eb40994b75203ddf72c542806251ad5bc298aefab176e"
+      "bytes": 10152,
+      "sha256": "499f2846d8eca4216b02c86bc6fb5b6f221719e821ddaf839cbc5b0aef3fb1ac"
     },
     {
       "path": "xau-usd/operations/v60-prospective-supervisor-v1/start_supervisor.ps1",
@@ -522,6 +523,11 @@
       "sha256": "1030ca80e424c5972b9e7da459f6044f3807ec34afb4db4fe9cc22dbd3d6bf30"
     },
     {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/config/DRAWDOWN_PROTECTION_V1_REPLAY_CONTRACT.json",
+      "bytes": 3016,
+      "sha256": "6e28c7220746640fc5dd0f3d2486ee0ed781c694372253631cf3a30fa4c97799"
+    },
+    {
       "path": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/config/SAFETY_REPAIR_REPLAY_CONTRACT.json",
       "bytes": 2929,
       "sha256": "6b33123f3f625fac93b88199a1ecf06fb6a826eae8e0a8d1cfc948335d3243ef"
@@ -538,8 +544,8 @@
     },
     {
       "path": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/src/replay.py",
-      "bytes": 60944,
-      "sha256": "0eff27c5fa4caae0cde7f7956d861c739be53b07c2b69177f3bf1a2f6751a3ef"
+      "bytes": 66292,
+      "sha256": "fd6fa9d8d2810bafae004d18b0a375896a09686c281de10d2f02f162298b247a"
     },
     {
       "path": "xau-usd/xauusd-fast-research/high-frequency-expansion-v1/outputs/HIGH_FREQUENCY_EXPANSION_ACTION_LABELS.parquet",
@@ -568,8 +574,8 @@
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/RECOVERY_RUNBOOK.md",
-      "bytes": 9441,
-      "sha256": "92d760e04368cfb2143c2318bcc0e4b9e7f0380357ac552b4dc05999eef73afd"
+      "bytes": 9578,
+      "sha256": "a222da9271049fc1377f2bad24f857ce8965851029eeb83450e95d0b7dd8b181"
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/apply_safety_repair.ps1",
@@ -577,9 +583,19 @@
       "sha256": "708ab89c8b4f4924c0a18973d894884d5eca769eb9b1a4a3be6384532c445afe"
     },
     {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/build_drawdown_protection_comparison.py",
+      "bytes": 10118,
+      "sha256": "c24f83b76b10b89b7879b2ca0d0570adf9781f55bfc409a6ca7384ae94ec682e"
+    },
+    {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
       "bytes": 11430,
       "sha256": "0e4f6a16e9e0e6fbd5e4798ad68bf126a020bbe4ec437bccf853b5e1b6018629"
+    },
+    {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_drawdown_protection_v1_overlay.json",
+      "bytes": 703,
+      "sha256": "61c99d712158f84b6b26e18f4ce4b19326ef0362ae2c672d9a840eb41aea4cb9"
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_portable_ml_topup_v4_overlay.json",
@@ -590,6 +606,16 @@
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_CANONICAL_DEMO_DEPLOYMENT_PARITY_V1.json",
       "bytes": 11332,
       "sha256": "7de7351f683665e7f76638c287c4c7d048c0f4c586bf3b62001b8cf46570a0d2"
+    },
+    {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_DRAWDOWN_PROTECTION_V1_COMPARISON_20260802.json",
+      "bytes": 15434,
+      "sha256": "da29d137a8148866947fd4143b857fce8a9ecb8e3764ee05d2ab769ae8a66903"
+    },
+    {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_DRAWDOWN_PROTECTION_V1_COMPARISON_20260802.md",
+      "bytes": 1004,
+      "sha256": "e2472f93280763a9cbc0c7f46a9c18c0545f79bec4474bbc6d6ddc40aa5f190d"
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_SAFETY_REPAIR_AFTER_REPLAY_RESULT_20260730.json",
@@ -608,8 +634,8 @@
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/recovery/build_recovery_manifest.py",
-      "bytes": 7643,
-      "sha256": "1ed965d2a2aa8c23f10c1a2f4fd0595bff82e2d57a7dbb99b1d4cbc6eab8ed9b"
+      "bytes": 8305,
+      "sha256": "28b981db135081abc5e57b8293d3b136a317ff01f7984f6bb0e0bcc003ad6e62"
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/recovery/mt5-profile/Default/chart01.chr",
@@ -643,8 +669,8 @@
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/recovery/verify_recovery.py",
-      "bytes": 5624,
-      "sha256": "d35d3d6314adac2d31333d92559aaf5a670c103b2b0ee33eae71fd53f0e46170"
+      "bytes": 6888,
+      "sha256": "54a7e862648fa083d4999bcb1b306a9c367b9f5480f04962177fd3428e6b93e3"
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/requirements-runtime.lock.txt",
@@ -673,8 +699,8 @@
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_portfolio.py",
-      "bytes": 58202,
-      "sha256": "912e25bde0c57308193408c04dcde8fb21be095bbd1ef52e132f283b34a7782f"
+      "bytes": 72703,
+      "sha256": "526a7c26304521dcda17416dbc790b7a7ebf8d466299d7110a62f99ecd56ecc8"
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/set_terminal_algo_trading.ps1",
@@ -703,8 +729,8 @@
     },
     {
       "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/start_portfolio.ps1",
-      "bytes": 2047,
-      "sha256": "ed56e4a0008d08363a85e832558d0c01a5b6f95232655c1df75cd6b9d51932d0"
+      "bytes": 2277,
+      "sha256": "7b39653b56b30f16f089d5fd8347f13e330ac64dca8142734e335157c8174ff6"
     },
     {
       "path": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",

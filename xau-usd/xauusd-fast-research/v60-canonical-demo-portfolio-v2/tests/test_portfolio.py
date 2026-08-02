@@ -68,6 +68,119 @@ def test_portable_ml_overlay_preserves_base_and_authorizes_demo_topup_only() -> 
     ]
 
 
+def test_drawdown_protection_overlay_is_exact_and_hash_bound() -> None:
+    base = RUN.load_config()
+    config = RUN.load_config(protection_overlay_path=RUN.PROTECTION_OVERLAY_PATH)
+
+    assert "portfolio_protection" not in base
+    assert config["portfolio_protection"] == {
+        "enabled": True,
+        "open_profit_arm_r": 1.5,
+        "open_profit_retain_r": 0.5,
+        "same_direction_source_families": [["R4_CHOP", "V25_CHOP"]],
+        "soft_addon_block_drawdown_fraction": 0.20,
+        "soft_core_concurrency_drawdown_fraction": 0.22,
+        "soft_core_maximum_open_positions": 1,
+        "soft_ml_topup_block_drawdown_fraction": 0.10,
+    }
+
+
+def test_protection_rejects_same_direction_r4_v25_overlap() -> None:
+    config = RUN.load_config(protection_overlay_path=RUN.PROTECTION_OVERLAY_PATH)
+    state = {
+        "activation_equity_usd": 1000.0,
+        "peak_equity_usd": 1000.0,
+        "closed_drawdown_usd": 0.0,
+        "positions": {},
+    }
+    existing = SimpleNamespace(ticket=4, magic=961401, type=0)
+    candidate = SimpleNamespace(
+        source_id="V25_CHOP",
+        sleeve_type="ADDON",
+        direction="LONG",
+    )
+    mt5 = SimpleNamespace(POSITION_TYPE_BUY=0)
+
+    reason = RUN.protection_entry_reason(
+        candidate, config, state, [existing], mt5, 1000.0
+    )
+
+    assert reason == "SAME_DIRECTION_PROTECTION_FAMILY"
+
+
+def test_soft_drawdown_blocks_addons_but_not_single_core() -> None:
+    config = RUN.load_config(protection_overlay_path=RUN.PROTECTION_OVERLAY_PATH)
+    state = {
+        "activation_equity_usd": 1000.0,
+        "peak_equity_usd": 1000.0,
+        "closed_drawdown_usd": 200.0,
+        "positions": {},
+    }
+    mt5 = SimpleNamespace(POSITION_TYPE_BUY=0)
+    addon = SimpleNamespace(
+        source_id="V7_SWING_HEALTH",
+        sleeve_type="ADDON",
+        direction="LONG",
+    )
+    core = SimpleNamespace(
+        source_id="R2_DOWNTREND",
+        sleeve_type="CORE",
+        direction="SHORT",
+    )
+
+    assert RUN.protection_entry_reason(
+        addon, config, state, [], mt5, 800.0
+    ) == "SOFT_DRAWDOWN_ADDON_BLOCK"
+    assert RUN.protection_entry_reason(core, config, state, [], mt5, 800.0) is None
+
+
+def test_open_profit_giveback_arms_then_closes(monkeypatch, tmp_path: Path) -> None:
+    config = RUN.load_config(protection_overlay_path=RUN.PROTECTION_OVERLAY_PATH)
+    state = {
+        "activation_equity_usd": 1000.0,
+        "peak_equity_usd": 1000.0,
+        "closed_drawdown_usd": 0.0,
+        "positions": {},
+    }
+    position = SimpleNamespace(
+        ticket=8,
+        magic=967007,
+        profit=15.0 * 3.6725,
+        swap=0.0,
+    )
+    sent: list[str] = []
+
+    def fake_close(_mt5, _position, _config, *, comment):
+        sent.append(comment)
+        return SimpleNamespace(retcode=10009, comment="done")
+
+    monkeypatch.setattr(RUN, "close_position", fake_close)
+    first = RUN.manage_open_profit_giveback(
+        SimpleNamespace(),
+        config,
+        state,
+        [position],
+        10.0,
+        tmp_path / "events.jsonl",
+        datetime.now(UTC),
+    )
+    position.profit = 5.0 * 3.6725
+    second = RUN.manage_open_profit_giveback(
+        SimpleNamespace(),
+        config,
+        state,
+        [position],
+        10.0,
+        tmp_path / "events.jsonl",
+        datetime.now(UTC),
+    )
+
+    assert first["armed"] is True
+    assert first["triggered"] is False
+    assert second["triggered"] is True
+    assert sent == ["V60_PROFIT_GIVEBACK_EXIT"]
+
+
 def test_config_rejects_absolute_only_demo_limits(tmp_path: Path) -> None:
     config = json.loads(RUN.CONFIG_PATH.read_text(encoding="utf-8"))
     config["risk"]["equity_fraction_limits_enabled"] = False
@@ -75,6 +188,53 @@ def test_config_rejects_absolute_only_demo_limits(tmp_path: Path) -> None:
     path.write_text(json.dumps(config), encoding="utf-8")
     with pytest.raises(RuntimeError, match="activation-equity scaling"):
         RUN.load_config(path)
+
+
+def test_mt5_session_initializer_retries_and_verifies_identity() -> None:
+    config = RUN.load_config()
+    config["runtime"]["mt5_initialize_attempts"] = 2
+    config["runtime"]["mt5_reconnect_delay_seconds"] = 0
+
+    class FakeMt5:
+        def __init__(self) -> None:
+            self.initialize_calls = 0
+            self.shutdown_calls = 0
+
+        def initialize(self, **_kwargs):
+            self.initialize_calls += 1
+            return self.initialize_calls == 2
+
+        def shutdown(self):
+            self.shutdown_calls += 1
+
+        def last_error(self):
+            return (1, "disconnected")
+
+        def terminal_info(self):
+            return SimpleNamespace(connected=True)
+
+        def account_info(self):
+            return SimpleNamespace(
+                login=1033030,
+                server="Capital.ComMena-Demo",
+            )
+
+        def symbol_info(self, _symbol):
+            return SimpleNamespace(visible=True)
+
+    mt5 = FakeMt5()
+    RUN.initialize_mt5_session(mt5, config)
+
+    assert mt5.initialize_calls == 2
+    assert mt5.shutdown_calls == 2
+
+
+def test_single_instance_lock_rejects_second_executor(tmp_path: Path) -> None:
+    path = tmp_path / "portfolio.lock"
+    with RUN.SingleInstanceLock(path):
+        with pytest.raises(RuntimeError, match="already running"):
+            with RUN.SingleInstanceLock(path):
+                pass
 
 
 def test_ml_overlay_rejects_probation_source(tmp_path: Path) -> None:

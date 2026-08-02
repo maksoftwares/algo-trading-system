@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 from typing import Any
@@ -12,6 +13,9 @@ REPO_ROOT = PACKAGE_ROOT.parents[2]
 MANIFEST = PACKAGE_ROOT / "recovery" / "recovery_manifest.json"
 CONFIG = PACKAGE_ROOT / "config" / "v60_canonical_demo_portfolio_v2.json"
 OVERLAY = PACKAGE_ROOT / "config" / "v60_portable_ml_topup_v4_overlay.json"
+PROTECTION_OVERLAY = (
+    PACKAGE_ROOT / "config" / "v60_drawdown_protection_v1_overlay.json"
+)
 
 
 def sha256_file(path: Path) -> str:
@@ -50,6 +54,7 @@ def verify_repo(errors: list[str]) -> int:
 
     config = read_json(CONFIG)
     overlay = read_json(OVERLAY)
+    protection_overlay = read_json(PROTECTION_OVERLAY)
     require(
         int(config["account"]["expected_login"]) == 1033030,
         "Wrong recovery account login",
@@ -78,6 +83,16 @@ def verify_repo(errors: list[str]) -> int:
     require(
         sha256_file(CONFIG) == overlay["base_config"]["sha256"],
         "ML overlay is not bound to the current base config",
+        errors,
+    )
+    require(
+        sha256_file(CONFIG) == protection_overlay["base_config"]["sha256"],
+        "Protection overlay is not bound to the current base config",
+        errors,
+    )
+    require(
+        protection_overlay.get("portfolio_protection", {}).get("enabled") is True,
+        "Drawdown protection is not enabled",
         errors,
     )
     parity = config["deployment_parity"]
@@ -119,15 +134,22 @@ def verify_terminal(terminal_root: Path, errors: list[str]) -> None:
             f"Deployed EA source differs: {name}",
             errors,
         )
-    snapshot_root = PACKAGE_ROOT / "recovery" / "mt5-profile" / "Default"
     profile_root = terminal_root / "MQL5" / "Profiles" / "Charts" / "Default"
-    for snapshot in sorted(snapshot_root.glob("chart*.chr")):
-        deployed = profile_root / snapshot.name
-        require(
-            deployed.is_file() and sha256_file(snapshot) == sha256_file(deployed),
-            f"Deployed chart differs: {snapshot.name}",
-            errors,
+    try:
+        spec = importlib.util.spec_from_file_location(
+            "v60_recovery_runtime",
+            PACKAGE_ROOT / "run_portfolio.py",
         )
+        if spec is None or spec.loader is None:
+            raise RuntimeError("Cannot load portfolio runtime")
+        runtime = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(runtime)
+        config = read_json(CONFIG)
+        config["preflight"]["chart_profile_directory"] = str(profile_root)
+        profile = runtime.audit_chart_profile(config, require_ready=True)
+        require(profile["chart_count"] == 6, "Deployed profile must have six charts", errors)
+    except Exception as exc:
+        errors.append(f"Deployed chart profile failed semantic audit: {type(exc).__name__}: {exc}")
     status_path = terminal_root / "MQL5" / "Files" / "v60_canonical_demo_v2" / "status.json"
     if status_path.is_file():
         status = read_json(status_path)
@@ -138,6 +160,16 @@ def verify_terminal(terminal_root: Path, errors: list[str]) -> None:
             errors,
         )
         require(status.get("live_authorized") is False, "Live account is authorized", errors)
+        require(
+            status.get("portfolio_protection", {}).get("enabled") is True,
+            "Drawdown protection is not active",
+            errors,
+        )
+        require(
+            status.get("profit_protection_close_failures") == 0,
+            "Drawdown-protection close failure is active",
+            errors,
+        )
 
 
 def main() -> int:

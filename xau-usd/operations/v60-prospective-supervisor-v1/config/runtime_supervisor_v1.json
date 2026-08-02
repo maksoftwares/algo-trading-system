@@ -23,10 +23,22 @@
       "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
       "script": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_portfolio.py",
       "args": [
+        "--protection-overlay",
+        "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_drawdown_protection_v1_overlay.json",
         "--ml-overlay",
         "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_portable_ml_topup_v4_overlay.json"
       ],
-      "command_marker": "v60-canonical-demo-portfolio-v2*run_portfolio.py"
+      "command_marker": "v60-canonical-demo-portfolio-v2*run_portfolio.py",
+      "restart_health_path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/status.json",
+      "restart_health_status_field": "status",
+      "restart_unhealthy_status_values": [
+        "FAILED_CLOSED"
+      ],
+      "restart_healthy_status_values": [
+        "ACTIVE_DEMO_BROKER_ACTION"
+      ],
+      "restart_health_max_age_seconds": 300,
+      "restart_after_consecutive_unhealthy": 3
     },
     {
       "id": "V60_DEPLOYED_SPECIALIST_MONITOR",
@@ -59,6 +71,12 @@
         "combined_closed_drawdown_hard_stop": false,
         "active_entry_halt_files": [],
         "emergency_close_failures": 0,
+        "profit_protection_close_failures": 0,
+        "portfolio_protection.enabled": true,
+        "portfolio_protection.policy.open_profit_arm_r": 1.5,
+        "portfolio_protection.policy.open_profit_retain_r": 0.5,
+        "portfolio_protection.policy.soft_addon_block_drawdown_fraction": 0.2,
+        "portfolio_protection.policy.soft_core_concurrency_drawdown_fraction": 0.22,
         "ml_runtime_authorized": true,
         "ml_shadow_authorized": false,
         "ml_topup.ready": true,

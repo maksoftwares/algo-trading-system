@@ -150,6 +150,14 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
     assert workers["V60_PORTFOLIO"]["args"][-1].endswith(
         "v60_portable_ml_topup_v4_overlay.json"
     )
+    assert "--protection-overlay" in workers["V60_PORTFOLIO"]["args"]
+    assert workers["V60_PORTFOLIO"]["restart_unhealthy_status_values"] == [
+        "FAILED_CLOSED"
+    ]
+    assert workers["V60_PORTFOLIO"]["restart_healthy_status_values"] == [
+        "ACTIVE_DEMO_BROKER_ACTION"
+    ]
+    assert workers["V60_PORTFOLIO"]["restart_after_consecutive_unhealthy"] == 3
 
 
 def test_v60_health_requires_clear_risk_state_and_no_entry_halt() -> None:
@@ -163,6 +171,14 @@ def test_v60_health_requires_clear_risk_state_and_no_entry_halt() -> None:
     assert required["combined_closed_drawdown_hard_stop"] is False
     assert required["active_entry_halt_files"] == []
     assert required["emergency_close_failures"] == 0
+    assert required["profit_protection_close_failures"] == 0
+    assert required["portfolio_protection.enabled"] is True
+    assert required["portfolio_protection.policy.open_profit_arm_r"] == 1.5
+    assert required["portfolio_protection.policy.open_profit_retain_r"] == 0.5
+    assert (
+        required["portfolio_protection.policy.soft_addon_block_drawdown_fraction"]
+        == 0.2
+    )
     assert required["equity_fraction_limits_enabled"] is True
     assert required["minimum_balance_requirement_enabled"] is False
     assert required["ml_runtime_authorized"] is True

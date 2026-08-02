@@ -12,6 +12,19 @@ $processStatePath = Join-Path $runtime ([string]$config.runtime.process_state)
 
 New-Item -ItemType Directory -Force -Path $runtime | Out-Null
 
+$previousWorkerState = @{}
+if (Test-Path -LiteralPath $processStatePath) {
+    try {
+        $prior = Get-Content -Raw -LiteralPath $processStatePath | ConvertFrom-Json
+        foreach ($row in @($prior.workers)) {
+            $previousWorkerState[[string]$row.id] = $row
+        }
+    }
+    catch {
+        $previousWorkerState = @{}
+    }
+}
+
 function Resolve-RepoPath {
     param([string]$Value)
     if ([System.IO.Path]::IsPathRooted($Value)) {
@@ -69,6 +82,61 @@ function Test-FreshStatusFallback {
     }
 }
 
+function Get-WorkerRestartHealth {
+    param([object]$Worker)
+    if (-not $Worker.restart_health_path) {
+        return [pscustomobject]@{
+            evaluated = $false
+            healthy = $true
+            status = $null
+            error = $null
+        }
+    }
+    try {
+        $path = Resolve-RepoPath ([string]$Worker.restart_health_path)
+        $payload = Get-Content -Raw -LiteralPath $path | ConvertFrom-Json
+        $updated = [DateTimeOffset]::Parse([string]$payload.updated_at_utc)
+        $age = ([DateTimeOffset]::UtcNow - $updated.ToUniversalTime()).TotalSeconds
+        $maximumAge = [double]$Worker.restart_health_max_age_seconds
+        $statusField = if ($Worker.restart_health_status_field) {
+            [string]$Worker.restart_health_status_field
+        }
+        else {
+            'status'
+        }
+        $statusValue = [string]$payload.$statusField
+        $forbidden = @($Worker.restart_unhealthy_status_values | ForEach-Object {
+            [string]$_
+        })
+        $allowed = @($Worker.restart_healthy_status_values | ForEach-Object {
+            [string]$_
+        })
+        if ($age -gt $maximumAge) {
+            throw "Health status is stale by $([Math]::Round($age, 1)) seconds"
+        }
+        if ($forbidden -contains $statusValue) {
+            throw "Health status is $statusValue"
+        }
+        if ($allowed.Count -gt 0 -and $allowed -notcontains $statusValue) {
+            throw "Health status is not restart-healthy: $statusValue"
+        }
+        return [pscustomobject]@{
+            evaluated = $true
+            healthy = $true
+            status = $statusValue
+            error = $null
+        }
+    }
+    catch {
+        return [pscustomobject]@{
+            evaluated = $true
+            healthy = $false
+            status = $null
+            error = $_.Exception.Message
+        }
+    }
+}
+
 function Reconcile-Workers {
     $processes = Get-AllProcesses
     $workerState = @()
@@ -77,8 +145,44 @@ function Reconcile-Workers {
         $marker = [string]$worker.command_marker
         $matches = Get-MatchingProcesses -Processes $processes -Marker $marker -Name 'python.exe'
         $started = $false
+        $restarted = $false
         $statusFallback = $false
         $errorText = $null
+        $restartHealth = Get-WorkerRestartHealth -Worker $worker
+        $priorUnhealthy = 0
+        if ($previousWorkerState.ContainsKey([string]$worker.id)) {
+            $priorUnhealthy = [int](
+                $previousWorkerState[[string]$worker.id].consecutive_unhealthy
+            )
+        }
+        $consecutiveUnhealthy = 0
+        if ($matches.Count -gt 0 -and $restartHealth.evaluated) {
+            $consecutiveUnhealthy = if ($restartHealth.healthy) {
+                0
+            }
+            else {
+                $priorUnhealthy + 1
+            }
+        }
+        $restartThreshold = if ($worker.restart_after_consecutive_unhealthy) {
+            [int]$worker.restart_after_consecutive_unhealthy
+        }
+        else {
+            0
+        }
+        if (
+            $matches.Count -gt 0 -and
+            $restartThreshold -gt 0 -and
+            $consecutiveUnhealthy -ge $restartThreshold
+        ) {
+            foreach ($process in $matches) {
+                Stop-Process -Id ([int]$process.ProcessId) -Force -ErrorAction SilentlyContinue
+            }
+            Start-Sleep -Seconds 1
+            $matches = @()
+            $restarted = $true
+            $consecutiveUnhealthy = 0
+        }
 
         if ($matches.Count -eq 0) {
             $statusFallback = Test-FreshStatusFallback -Worker $worker
@@ -117,7 +221,13 @@ function Reconcile-Workers {
             running = (($matches.Count -gt 0) -or $statusFallback)
             process_ids = @($matches | ForEach-Object { [int]$_.ProcessId })
             started_this_cycle = $started
+            restarted_this_cycle = $restarted
             status_fallback = $statusFallback
+            restart_health_evaluated = [bool]$restartHealth.evaluated
+            restart_health_healthy = [bool]$restartHealth.healthy
+            restart_health_status = $restartHealth.status
+            restart_health_error = $restartHealth.error
+            consecutive_unhealthy = $consecutiveUnhealthy
             error = $errorText
         }
     }
@@ -154,6 +264,10 @@ function Reconcile-Workers {
         broker_action_added = $false
     }
     Write-JsonAtomic -Path $processStatePath -Payload $statePayload
+    $previousWorkerState.Clear()
+    foreach ($row in $workerState) {
+        $previousWorkerState[[string]$row.id] = $row
+    }
 }
 
 $statusPython = Resolve-RepoPath 'xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe'

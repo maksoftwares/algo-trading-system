@@ -11,15 +11,21 @@ The supervisor watches:
 
 - the Capital.com MT5 terminal for demo account `1033030`;
 - the V60 canonical feed worker;
-- the V60 canonical portfolio worker with the V4 ML overlay; and
+- the V60 canonical portfolio worker with the drawdown-protection V1 and V4 ML
+  overlays; and
 - the read-only monitor covering all nine deployed source IDs and telemetry
   date transport.
 
-Missing Python workers are restarted with their existing commands. The MT5
+Missing Python workers are restarted with their existing commands. A running
+portfolio worker that reports anything other than
+`ACTIVE_DEMO_BROKER_ACTION`, or a stale status, for three consecutive
+supervisor cycles is stopped and restarted as one process group.
+The executor independently reconnects a stale MT5 API session and holds a
+single-instance lock. The MT5
 terminal is monitored but is never started, stopped, or restarted by this
 package. Each cycle writes:
 
-- `process_state.json`, containing process presence only; and
+- `process_state.json`, containing process presence and worker-recovery state; and
 - `status.json`, containing the consolidated readiness decision.
 
 Runtime files are stored outside the repository at:

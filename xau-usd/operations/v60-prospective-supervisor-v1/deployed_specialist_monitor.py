@@ -30,6 +30,7 @@ FEED_BY_SOURCE = {
     "V57_BREAK_SWING_H4ADX_HIGH": "ADDONS",
 }
 DATE_PATTERN = re.compile(r"_(\d{8})\.csv$")
+TAIL_BYTES = 64 * 1024
 
 
 def utc_text(value: datetime) -> str:
@@ -112,31 +113,68 @@ def jsonl_summary(
     return result
 
 
+def last_complete_csv_row(path: Path) -> dict[str, str] | None:
+    with path.open("rb") as stream:
+        header_raw = stream.readline()
+        data_start = stream.tell()
+        stream.seek(0, os.SEEK_END)
+        end = stream.tell()
+        if end <= data_start:
+            return None
+        start = max(data_start, end - TAIL_BYTES)
+        stream.seek(start)
+        tail = stream.read()
+    lines = tail.splitlines()
+    if start > data_start and lines:
+        lines = lines[1:]
+    if tail and not tail.endswith((b"\n", b"\r")) and lines:
+        lines = lines[:-1]
+    header = next(csv.reader([header_raw.decode("utf-8-sig").strip()]), [])
+    if not header:
+        return None
+    for raw in reversed(lines):
+        if not raw.strip():
+            continue
+        values = next(csv.reader([raw.decode("utf-8-sig")]), [])
+        if len(values) == len(header):
+            return dict(zip(header, values, strict=True))
+    return None
+
+
 def latest_tick_transport(config: Mapping[str, Any]) -> dict[str, Any]:
     feed = config["feeds"]
     directory = Path(str(feed["terminal_files_directory"]))
     paths = sorted(directory.glob(str(feed["tick_filename_glob"])))
     result: dict[str, Any] = {
         "latest_path": str(paths[-1]) if paths else None,
+        "newest_path": str(paths[-1]) if paths else None,
         "timestamp_utc": None,
         "filename_day_matches_row": False,
+        "market_state": "NO_TICKS",
+        "skipped_empty_paths": [],
         "errors": [],
     }
     if not paths:
         result["errors"].append("no prospective tick ledger exists")
         return result
-    path = paths[-1]
+    path = None
+    last = None
+    for candidate in reversed(paths):
+        last = last_complete_csv_row(candidate)
+        if last is not None:
+            path = candidate
+            break
+        result["skipped_empty_paths"].append(str(candidate))
+    if path is None or last is None:
+        result["errors"].append("prospective tick ledgers have no complete data rows")
+        return result
+    result["latest_path"] = str(path)
+    result["market_state"] = (
+        "MARKET_CLOSED_OR_IDLE" if path != paths[-1] else "ACTIVE"
+    )
     match = DATE_PATTERN.search(path.name)
     if match is None:
         result["errors"].append("latest tick filename has no UTC date")
-        return result
-    with path.open("r", encoding="utf-8-sig", newline="") as stream:
-        reader = csv.DictReader(stream)
-        last = None
-        for row in reader:
-            last = row
-    if last is None:
-        result["errors"].append("latest tick ledger has no data rows")
         return result
     timestamp = str(last.get("timestamp_utc", ""))
     result["timestamp_utc"] = timestamp
@@ -179,6 +217,12 @@ def build_status() -> dict[str, Any]:
         "execution_enabled": True,
         "equity_fraction_limits_enabled": True,
         "minimum_balance_requirement_enabled": False,
+        "profit_protection_close_failures": 0,
+        "portfolio_protection.enabled": True,
+        "portfolio_protection.policy.open_profit_arm_r": 1.5,
+        "portfolio_protection.policy.open_profit_retain_r": 0.5,
+        "portfolio_protection.policy.soft_addon_block_drawdown_fraction": 0.2,
+        "portfolio_protection.policy.soft_core_concurrency_drawdown_fraction": 0.22,
         "ml_runtime_authorized": True,
         "ml_shadow_authorized": False,
         "live_authorized": False,

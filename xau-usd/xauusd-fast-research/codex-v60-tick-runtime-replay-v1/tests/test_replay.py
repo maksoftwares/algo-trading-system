@@ -13,6 +13,7 @@ from replay import (
     Scenario,
     ScenarioSpec,
     _decode_hour,
+    apply_portfolio_protection,
     apply_runtime_risk_mode,
     effective_threshold,
     load_candidates,
@@ -103,8 +104,15 @@ def scenario(
     activation: float = 3000.0,
     rebaseline_days: int | None = None,
     guardian_exit_attribution: str = "DEPLOYED_MAGIC_FILTER",
+    protection: bool = False,
 ) -> Scenario:
     contract, config = real_inputs()
+    if protection:
+        contract["inputs"]["portfolio_protection_overlay"] = (
+            "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/"
+            "config/v60_drawdown_protection_v1_overlay.json"
+        )
+        config = apply_portfolio_protection(contract, config)
     return Scenario(
         ScenarioSpec(
             scenario_id="test",
@@ -271,3 +279,50 @@ def test_rebaseline_does_not_forgive_peak_equity():
     assert replay.peak_equity == 1200.0
     assert not replay.drawdown_suspended
     assert replay.rebaselines == 1
+
+
+def test_profit_protection_closes_after_locked_giveback():
+    trade = candidate(
+        "protected",
+        entry_ms=0,
+        exit_ms=30000,
+        risk=10.0,
+        entry_price=1000.1,
+    )
+    replay = scenario([trade], protection=True)
+
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+    replay.process_cycle(5000, 5000, 1015.2, 1015.3)
+    replay.process_cycle(10000, 10000, 1005.0, 1005.1)
+
+    assert replay.profit_protection_arms == 1
+    assert replay.profit_giveback_closes == 1
+    assert not replay.positions
+    assert replay.close_pnls[0] > 4.0
+
+
+def test_protection_deduplicates_same_direction_r4_v25():
+    r4 = candidate(
+        "r4",
+        entry_ms=0,
+        exit_ms=20000,
+        source_id="R4_CHOP",
+        direction="LONG",
+    )
+    v25 = candidate(
+        "v25",
+        entry_ms=5000,
+        exit_ms=20000,
+        source_id="V25_CHOP",
+        sleeve_type="ADDON",
+        direction="LONG",
+        event_id="v25",
+    )
+    replay = scenario([r4, v25], protection=True)
+
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+    replay.process_cycle(5000, 5000, 1000.0, 1000.1)
+
+    assert "r4" in replay.positions
+    assert "v25" not in replay.positions
+    assert replay.rejections["SAME_DIRECTION_PROTECTION_FAMILY"] == 1

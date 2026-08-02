@@ -18,6 +18,14 @@ skip, delay, or reduce that baseline order. Any model, feature, state, artifact,
 or risk-control failure produces baseline-only behavior. No ML shadow path is
 enabled.
 
+The separately hash-bound drawdown-protection V1 overlay does not alter signal
+generation. It protects an open portfolio episode after aggregate profit reaches
+`1.5R`, exits that episode if profit returns to `0.5R`, prevents simultaneous
+same-direction R4/V25 exposure, blocks add-ons from 20% drawdown, and limits
+Core concurrency from 22% drawdown. ML top-ups remain blocked from 10%
+drawdown. A failed protection close reports
+`FAILED_CLOSED` and is escalated to the supervisor.
+
 Demo broker action is enabled for exact account `1033030` after the feed,
 profile, account, historical-parity, currency-conversion, guardian-halt, and
 broker `order_check` gates passed. Live trading remains unauthorized. Runtime files live beneath
@@ -100,7 +108,17 @@ terminal-wide Algo Trading state only while that terminal is stopped, and keeps
 a backup of `common.ini`.
 
 The launcher supplies
-`config/v60_portable_ml_topup_v4_overlay.json` to the executor. That overlay is
+`config/v60_drawdown_protection_v1_overlay.json` and
+`config/v60_portable_ml_topup_v4_overlay.json` to the executor. The protection
+comparison is recorded in
+`evidence/V60_DRAWDOWN_PROTECTION_V1_COMPARISON_20260802.json`. Its latest
+six-month replay changes net P/L from USD 474.26 to USD 600.14, PF from 1.4047
+to 1.5878, and maximum equity drawdown from USD 198.84 to USD 127.83. Over the
+full replay, drawdown falls from USD 227.24 to USD 218.55 while net P/L remains
+effectively unchanged. These are exposed-history diagnostics and authorize prospective demo
+observation only.
+
+The ML overlay is
 bound to the immutable deterministic base config, the exact forty-model 2026
 bundle, its implementation lock, and the outcome-free Capital/Dukascopy parity
 result. Only confirmed R2, R3, R4, V7, and V57 signals are score-eligible.

@@ -1,0 +1,22 @@
+{
+  "schema_version": "xauusd_v60_drawdown_protection_v1_overlay",
+  "base_config": {
+    "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+    "sha256": "0e4f6a16e9e0e6fbd5e4798ad68bf126a020bbe4ec437bccf853b5e1b6018629"
+  },
+  "portfolio_protection": {
+    "enabled": true,
+    "open_profit_arm_r": 1.5,
+    "open_profit_retain_r": 0.5,
+    "same_direction_source_families": [
+      [
+        "R4_CHOP",
+        "V25_CHOP"
+      ]
+    ],
+    "soft_addon_block_drawdown_fraction": 0.2,
+    "soft_core_concurrency_drawdown_fraction": 0.22,
+    "soft_core_maximum_open_positions": 1,
+    "soft_ml_topup_block_drawdown_fraction": 0.1
+  }
+}

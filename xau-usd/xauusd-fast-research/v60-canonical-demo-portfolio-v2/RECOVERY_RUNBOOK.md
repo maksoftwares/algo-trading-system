@@ -13,6 +13,7 @@ The recovery target is:
 - terminal root `C:\MT5PortableTier1BestEA`;
 - nine deterministic source IDs;
 - bounded V4 ML top-ups for confirmed sources only;
+- hash-bound drawdown-protection V1 overlay;
 - no minimum-balance gate;
 - activation-equity-scaled risk limits;
 - loss-only `-100 AED` daily guardian;
@@ -90,6 +91,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File `
 - `live_authorized` is `false`;
 - all nine deployed sources are healthy;
 - no hard stop, suspension, or entry-halt file is active.
+- `portfolio_protection.enabled` is `true` and
+  `profit_protection_close_failures` is `0`.
 
 Runtime status files:
 

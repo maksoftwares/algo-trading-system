@@ -8,6 +8,7 @@ $python = Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
 $runner = Join-Path $PSScriptRoot 'run_portfolio.py'
 $feedRunner = Join-Path $PSScriptRoot 'run_feeds.py'
 $mlOverlay = Join-Path $PSScriptRoot 'config\v60_portable_ml_topup_v4_overlay.json'
+$protectionOverlay = Join-Path $PSScriptRoot 'config\v60_drawdown_protection_v1_overlay.json'
 $runtime = 'C:\MT5PortableTier1BestEA\MQL5\Files\v60_canonical_demo_v2'
 
 if (-not (Test-Path -LiteralPath $python)) {
@@ -17,7 +18,7 @@ if (-not (Test-Path -LiteralPath $python)) {
 if ($Once) {
     & $python $feedRunner --once
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-    & $python $runner --once --ml-overlay $mlOverlay
+    & $python $runner --once --protection-overlay $protectionOverlay --ml-overlay $mlOverlay
     exit $LASTEXITCODE
 }
 
@@ -48,7 +49,13 @@ New-Item -ItemType Directory -Force -Path $runtime | Out-Null
 $stdout = Join-Path $runtime 'executor_stdout.log'
 $stderr = Join-Path $runtime 'executor_stderr.log'
 $process = Start-Process -FilePath $python `
-    -ArgumentList @("`"$runner`"", "--ml-overlay", "`"$mlOverlay`"") `
+    -ArgumentList @(
+        "`"$runner`"",
+        "--protection-overlay",
+        "`"$protectionOverlay`"",
+        "--ml-overlay",
+        "`"$mlOverlay`""
+    ) `
     -WorkingDirectory $repo `
     -WindowStyle Hidden `
     -RedirectStandardOutput $stdout `
