@@ -1,5 +1,5 @@
 {
-  "schema_version": "eurusd_v20r6_shared_account_deployment_v1",
+  "schema_version": "eurusd_v20r6_1_shared_account_deployment_v2",
   "account_login": 1033030,
   "server": "Capital.ComMena-Demo",
   "account_currency": "AED",
@@ -11,16 +11,17 @@
   "minimum_account_equity_usd": 0.0,
   "minimum_free_margin_after_order_usd": 0.0,
   "drawdown_scope": "STRATEGY_ONLY",
+  "core_broker_stops_validation": true,
   "usd_conversion": {
     "account_currency": "AED",
     "aed_per_usd": 3.6725
   },
   "artifacts": {
-    "mt5/Experts/EurUsdUnifiedPortfolioControlledDemoV20.mq5": "ab6a15f6122077599111ae5e97ea53923d7c725bb036436ab3387e53506d4d84",
-    "mt5/Experts/EurUsdUnifiedPortfolioControlledDemoV20.ex5": "1b313d8371cd7259af7f527fadbcce4e15c2c4ef9b3e24182bd5d485e4fbd03b",
+    "mt5/Experts/EurUsdUnifiedPortfolioControlledDemoV20.mq5": "0d93cdd3f240b0ad3dacaad026413a39ca96fee5868cebd48986611ea4806db0",
+    "mt5/Experts/EurUsdUnifiedPortfolioControlledDemoV20.ex5": "3afb4a954562b1021bb66cde70cd0b5dd8f9d8f7f0fc1869afe2afa5f0b895df",
     "mt5/Presets/EURUSD_UNIFIED_PORTFOLIO_V20R6_ACCOUNT_1033030_ARMED.set": "df2a72073f3aa0944bf9d4c1ad7c2795c420d50a56ef465a573cd56b3a6d52df",
     "mt5/Presets/EURUSD_UNIFIED_PORTFOLIO_V20R6_ACCOUNT_1033030_RESET.set": "ec1cd923e2272aa748244c74af86c2e379b2539c0334eb00b2d91b8c3411f478",
     "mt5/Config/EURUSD_UNIFIED_PORTFOLIO_V20R6_ACCOUNT_1033030_ARMED.ini": "c2711634a7a02d22b2e9724f2e633e5db32c3385a6669b0ac7178e9b8fb39bca",
-    "mt5/EURUSD_UNIFIED_PORTFOLIO_V20R6_SHARED_ACCOUNT_COMPILE.log": "43504a768ce7ee56faa48a30fd22d3f7deaf397b4a8b3adc5bb0d1ba0b54ea21"
+    "mt5/EURUSD_UNIFIED_PORTFOLIO_V20R6_1_BROKER_STOPS_COMPILE.log": "22a9474e51e9cc54a08cccb7f8e148fdd4a16cbf7a1fc694da6a9e01ac705da2"
   }
 }

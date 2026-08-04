@@ -12,7 +12,7 @@ DEPLOYMENT = ROOT / "config/frozen_eurusd_v20r6_shared_account_deployment.json"
 
 def test_v20r5_identifies_the_account_migration_candidate() -> None:
     text = SOURCE.read_text(encoding="utf-8")
-    assert '#property version   "20.66"' in text
+    assert '#property version   "20.67"' in text
     assert "EURUSD_UNIFIED_PORTFOLIO_V20R6_ACCOUNT_1033030" in text
     assert "strategy-scoped USD risk" in text
 
@@ -143,6 +143,7 @@ def test_v20r6_deployment_artifacts_are_hash_bound() -> None:
     deployment = json.loads(DEPLOYMENT.read_text(encoding="utf-8"))
 
     assert deployment["drawdown_scope"] == "STRATEGY_ONLY"
+    assert deployment["core_broker_stops_validation"] is True
     assert deployment["minimum_account_equity_usd"] == 0.0
     assert deployment["minimum_free_margin_after_order_usd"] == 0.0
     for relative, expected in deployment["artifacts"].items():
@@ -159,3 +160,21 @@ def test_v20r4_makes_rsi_stops_broker_valid_before_order_submission() -> None:
     assert '"RSI_STOPS_ADJUSTED"' in block
     assert "TRADE_RETCODE_INVALID_STOPS" in block
     assert '"ORDER_REJECTED"' in block
+
+
+def test_v20r6_1_makes_core_stops_broker_valid_before_order_submission() -> None:
+    text = SOURCE.read_text(encoding="utf-8")
+    validator = text[
+        text.index("bool CoreEnsureBrokerStopDistances(") : text.index("void ProcessCandidates(")
+    ]
+    process = text[text.index("void ProcessCandidates(") : text.index("void EvaluateCompletedAt(")]
+
+    assert "SYMBOL_TRADE_STOPS_LEVEL" in validator
+    assert "tick.bid - minimumDistance" in validator
+    assert "tick.ask + minimumDistance" in validator
+    assert "entry + targetR * riskDistance" in validator
+    assert "entry - targetR * riskDistance" in validator
+    assert "CoreEnsureBrokerStopDistances(" in process
+    assert process.index("CoreEnsureBrokerStopDistances(") < process.index("NewOrderAllowed(")
+    assert process.index("CoreEnsureBrokerStopDistances(") < process.index("trade.Buy(")
+    assert '"CORE_STOPS_ADJUSTED"' in process

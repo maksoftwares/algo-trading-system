@@ -1,6 +1,6 @@
 #property strict
-#property version   "20.66"
-#property description "EURUSD V20R6 shared account; strategy-scoped USD risk; no artificial funding floor"
+#property version   "20.67"
+#property description "EURUSD V20R6.1 shared account; strategy-scoped USD risk and broker-valid core stops"
 
 #include <Trade/Trade.mqh>
 
@@ -1856,6 +1856,108 @@ bool ConfirmSleevePosition(
    return false;
 }
 
+bool CoreEnsureBrokerStopDistances(
+   const bool isLong,
+   const MqlTick &tick,
+   const double targetR,
+   double &stop,
+   double &target,
+   bool &adjusted,
+   string &reason
+)
+{
+   adjusted = false;
+   int stopsLevelPoints = (int)SymbolInfoInteger(
+      InpTargetSymbol,
+      SYMBOL_TRADE_STOPS_LEVEL
+   );
+   double point = SymbolInfoDouble(InpTargetSymbol, SYMBOL_POINT);
+   int digits = (int)SymbolInfoInteger(InpTargetSymbol, SYMBOL_DIGITS);
+   if(stopsLevelPoints < 0 || point <= 0.0 || digits < 0 || targetR <= 0.0)
+   {
+      reason = "core_symbol_geometry_unavailable";
+      return false;
+   }
+
+   // Keep a two-point buffer so normalization and a one-tick quote change do
+   // not turn a locally valid SL/TP into a broker-side INVALID_STOPS rejection.
+   double minimumDistance = (stopsLevelPoints + 2) * point;
+   double entry = isLong ? tick.ask : tick.bid;
+   if(entry <= 0.0 || tick.ask <= tick.bid)
+   {
+      reason = "core_quote_geometry_invalid";
+      return false;
+   }
+
+   if(isLong)
+   {
+      double maximumStop = tick.bid - minimumDistance;
+      if(stop > maximumStop)
+      {
+         stop = NormalizeDouble(maximumStop, digits);
+         adjusted = true;
+      }
+      double riskDistance = entry - stop;
+      if(stop <= 0.0 || riskDistance <= 0.0)
+      {
+         reason = "core_long_stop_geometry_invalid";
+         return false;
+      }
+      double requiredTarget = MathMax(
+         entry + minimumDistance,
+         entry + targetR * riskDistance
+      );
+      if(target < requiredTarget)
+      {
+         target = NormalizeDouble(requiredTarget, digits);
+         adjusted = true;
+      }
+      if(target <= entry)
+      {
+         reason = "core_long_target_geometry_invalid";
+         return false;
+      }
+   }
+   else
+   {
+      double minimumStop = tick.ask + minimumDistance;
+      if(stop < minimumStop)
+      {
+         stop = NormalizeDouble(minimumStop, digits);
+         adjusted = true;
+      }
+      double riskDistance = stop - entry;
+      if(riskDistance <= 0.0)
+      {
+         reason = "core_short_stop_geometry_invalid";
+         return false;
+      }
+      double requiredTarget = MathMin(
+         entry - minimumDistance,
+         entry - targetR * riskDistance
+      );
+      if(target > requiredTarget)
+      {
+         target = NormalizeDouble(requiredTarget, digits);
+         adjusted = true;
+      }
+      if(target <= 0.0 || target >= entry)
+      {
+         reason = "core_short_target_geometry_invalid";
+         return false;
+      }
+   }
+
+   reason = StringFormat(
+      "%s_broker_min_%d_points_stop_%.5f_target_%.5f",
+      isLong ? "long" : "short",
+      stopsLevelPoints,
+      stop,
+      target
+   );
+   return true;
+}
+
 void ProcessCandidates(bool &candidate[])
 {
    bool eligible[];
@@ -1959,12 +2061,48 @@ void ProcessCandidates(bool &candidate[])
          isLong ? entry - stopDistance : entry + stopDistance,
          _Digits
       );
+      double targetR = TargetR(regime, sleeve);
       double target = NormalizeDouble(
          isLong
-            ? entry + TargetR(regime, sleeve) * stopDistance
-            : entry - TargetR(regime, sleeve) * stopDistance,
+            ? entry + targetR * stopDistance
+            : entry - targetR * stopDistance,
          _Digits
       );
+      bool stopsAdjusted = false;
+      string stopReason = "";
+      if(!CoreEnsureBrokerStopDistances(
+         isLong,
+         tick,
+         targetR,
+         stop,
+         target,
+         stopsAdjusted,
+         stopReason
+      ))
+      {
+         Audit(
+            "ENTRY_FILTER_REJECTED",
+            stopReason,
+            sleeve,
+            side,
+            requestedLots,
+            entry,
+            stop,
+            target
+         );
+         continue;
+      }
+      if(stopsAdjusted)
+         Audit(
+            "CORE_STOPS_ADJUSTED",
+            stopReason,
+            sleeve,
+            side,
+            requestedLots,
+            entry,
+            stop,
+            target
+         );
       if(!Audit(
          "SIGNAL",
          sleeve == BASELINE_CHOP
