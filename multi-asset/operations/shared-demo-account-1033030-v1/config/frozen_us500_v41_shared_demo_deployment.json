@@ -1,0 +1,18 @@
+{
+  "schema_version": "us500_v41_shared_demo_deployment_v1",
+  "account_login": 1033030,
+  "server": "Capital.ComMena-Demo",
+  "symbol": "US500",
+  "period": "M5",
+  "terminal_root": "C:/MT5PortableTier1BestEA",
+  "expert_path": "MQL5/Experts/SharedAccount1033030/US500V41CausalSharedDemoEA.ex5",
+  "demo_orders_authorized": true,
+  "live_orders_authorized": false,
+  "artifacts": {
+    "mql5/US500V41CausalSharedDemoEA.mq5": "91926cd40f33840096478471ab806b8f2b3e91e10775e721eaaf7613bcbb40b7",
+    "mql5/US500V41CausalSharedDemoEA.ex5": "f09c4881b095bf150a03c650924885de7860f352681d57d92293b33d1f223cba",
+    "config/us500_v41_shared_demo_1033030.json": "48e8b4f9545b8d37ca131abc3126eacf42609ae1fd7318e2a605c7fbe520b16e",
+    "compile_US500V41CausalSharedDemoEA.log": "cd4792899667fa1bd5f3f70dbebaf56b5f6b6bcb11f593731853fce6615428a4",
+    "presets/US500_SHARED_1033030_DISARMED.set": "49f70ff0a9e8fe267b134595c1b08380bbb96edac79a443a884dc91d5806940e"
+  }
+}

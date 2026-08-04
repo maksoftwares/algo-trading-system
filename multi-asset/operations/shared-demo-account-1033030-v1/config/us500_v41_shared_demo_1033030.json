@@ -1,0 +1,29 @@
+{
+  "schema_version": "us500_v41_shared_demo_1033030_v1",
+  "account_login": 1033030,
+  "server": "Capital.ComMena-Demo",
+  "symbol": "US500",
+  "context_symbols": [
+    "US100",
+    "US30"
+  ],
+  "magics": [
+    65005041,
+    65005042
+  ],
+  "initial_stop_risk_usd": 20.0,
+  "intraday_retry_risk_scale": 0.2,
+  "maximum_margin_fraction": 1.0,
+  "minimum_balance_requirement_enabled": false,
+  "minimum_equity_requirement_usd": 0.0,
+  "minimum_free_margin_reserve_usd": 0.0,
+  "maximum_orders_per_new_york_day": 3,
+  "daily_loss_limit_r": 3.0,
+  "maximum_spread_points": 15,
+  "maximum_deviation_points": 10,
+  "emergency_stop_file": "SHARED_1033030_US500_V41_EMERGENCY_STOP.txt",
+  "audit_log_file": "SHARED_1033030_US500_V41_AUDIT.csv",
+  "position_scope": "US500_AND_OWN_MAGICS_ONLY",
+  "order_authority_default": false,
+  "live_authority": false
+}
