@@ -166,6 +166,7 @@ def test_v60_health_requires_clear_risk_state_and_no_entry_halt() -> None:
     )
     sources = {str(row["id"]): row for row in config["health_sources"]}
     required = sources["V60_STATUS"]["required_values"]
+    assert required["drawdown_equity_scope"] == "STRATEGY_ONLY"
     assert required["drawdown_suspended"] is False
     assert required["hard_floating_stop"] is False
     assert required["combined_closed_drawdown_hard_stop"] is False

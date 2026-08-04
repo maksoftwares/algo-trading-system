@@ -992,6 +992,35 @@ def open_position_pnl_usd(
     return account_value_usd(account_value, config)
 
 
+def strategy_drawdown_equity_usd(
+    state: Mapping[str, Any],
+    closed_pnl_usd: float,
+    positions: list[Any],
+    config: Mapping[str, Any],
+) -> float:
+    """Build an equity curve from V60-owned P/L only."""
+    return (
+        float(state["activation_equity_usd"])
+        + float(closed_pnl_usd)
+        + open_position_pnl_usd(positions, config)
+    )
+
+
+def ensure_strategy_drawdown_scope(
+    state: dict[str, Any],
+    strategy_equity_usd: float,
+    reconstructed_peak_closed_pnl_usd: float,
+) -> None:
+    if state.get("drawdown_equity_scope") == "STRATEGY_ONLY":
+        return
+    state["peak_equity_usd"] = max(
+        float(strategy_equity_usd),
+        float(state["activation_equity_usd"])
+        + float(reconstructed_peak_closed_pnl_usd),
+    )
+    state["drawdown_equity_scope"] = "STRATEGY_ONLY"
+
+
 def manage_open_profit_giveback(
     mt5: Any,
     config: Mapping[str, Any],
@@ -1191,8 +1220,8 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         mt5, config, require_trading=execution_enabled
     )
     broker_geometry = broker_geometry_preflight(mt5, config, symbol_info)
-    equity_usd = account_value_usd(float(account.equity), config)
-    state = load_state(state_path, now, equity_usd)
+    account_equity_usd = account_value_usd(float(account.equity), config)
+    state = load_state(state_path, now, account_equity_usd)
     ml_authorized = bool(config["authorization"].get("ml_runtime_authorized"))
     ml_runtime = (
         prepare_ml_topup_runtime(mt5, REPO_ROOT, config, symbol_info)
@@ -1208,9 +1237,18 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     addon_magics = magics - core_magics
     symbol = config["account"]["symbol"]
     pnl = closed_pnl(mt5, state, magics, symbol, config)
+    drawdown_positions = own_positions(
+        list(mt5.positions_get(symbol=symbol) or []), magics, symbol
+    )
+    drawdown_equity_usd = strategy_drawdown_equity_usd(
+        state, pnl.closed_pnl, drawdown_positions, config
+    )
+    ensure_strategy_drawdown_scope(
+        state, drawdown_equity_usd, pnl.peak_closed_pnl
+    )
     refresh_drawdown_state(
         state,
-        equity=equity_usd,
+        equity=drawdown_equity_usd,
         closed_pnl=pnl.closed_pnl,
         reconstructed_peak_closed_pnl=pnl.peak_closed_pnl,
         risk=config["risk"],
@@ -1268,7 +1306,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
             "maximum_directional_concurrent_initial_risk_usd",
         )
     }
-    hard_floating_stop = floating_drawdown(state, equity_usd) >= float(
+    hard_floating_stop = floating_drawdown(state, drawdown_equity_usd) >= float(
         effective_risk_limits["floating_drawdown_hard_stop_usd"]
     )
     combined_closed_stop = float(state["closed_drawdown_usd"]) >= float(
@@ -1320,7 +1358,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         age = now - candidate.scheduled_at
         reason: str | None = None
         protection_reason = protection_entry_reason(
-            candidate, config, state, ours, mt5, equity_usd
+            candidate, config, state, ours, mt5, drawdown_equity_usd
         )
         if age > timedelta(minutes=candidate.maximum_entry_gap_minutes):
             reason = "STALE_CANDIDATE"
@@ -1534,7 +1572,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
                         active_direction_risk_usd=active_direction_risk_usd,
                         active_addon_risk_usd=active_addon_risk,
                         effective_risk_limits=effective_risk_limits,
-                        equity_usd=equity_usd,
+                        equity_usd=drawdown_equity_usd,
                     )
                 )
                 topup_tick = mt5.symbol_info_tick(symbol)
@@ -1700,12 +1738,14 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "balance_account_currency": float(account.balance),
         "equity_account_currency": float(account.equity),
         "balance_usd": account_value_usd(float(account.balance), config),
-        "equity_usd": equity_usd,
+        "equity_usd": account_equity_usd,
+        "strategy_equity_usd": drawdown_equity_usd,
+        "drawdown_equity_scope": str(state["drawdown_equity_scope"]),
         "activation_equity_usd": float(state["activation_equity_usd"]),
         "closed_pnl_usd": float(state["closed_pnl_usd"]),
         "closed_pnl_attribution": dict(state["closed_pnl_attribution"]),
         "closed_drawdown_usd": float(state["closed_drawdown_usd"]),
-        "floating_drawdown_usd": floating_drawdown(state, equity_usd),
+        "floating_drawdown_usd": floating_drawdown(state, drawdown_equity_usd),
         "drawdown_suspended": bool(state["drawdown_suspended"]),
         "hard_floating_stop": hard_floating_stop,
         "combined_closed_drawdown_hard_stop": combined_closed_stop,

@@ -16,6 +16,7 @@ input bool InpDailyLossStopEnabled = false;
 input double InpDailyLossStopAed = -150.0;
 input string InpCloseScopeSymbol = "";
 input string InpAllowedPositionMagicsCsv = "";
+input bool InpStrategyScopedPnl = true;
 input int InpDubaiUtcOffsetMinutes = 240;
 input int InpTimerSeconds = 2;
 input int InpDeviationPoints = 100;
@@ -31,6 +32,7 @@ string MARKER = "A1_DAILY_PROFIT_FLOOR_GUARDIAN";
 
 string g_dubai_date = "";
 double g_day_start_equity = 0.0;
+double g_day_start_strategy_open_pnl = 0.0;
 double g_peak_day_pnl = 0.0;
 bool g_armed = false;
 bool g_next_floor_armed = false;
@@ -317,7 +319,8 @@ void WriteEvent(
 {
    EnsureEventHeader();
    double equity = AccountInfoDouble(ACCOUNT_EQUITY);
-   double day_pnl = equity - g_day_start_equity;
+   bool day_pnl_valid = false;
+   double day_pnl = CurrentDayPnlAed(day_pnl_valid);
    string row[] = {
       NowBroker(),
       NowUtc(),
@@ -366,6 +369,7 @@ void SaveState()
    string content = "";
    content += StateLine("dubai_date", g_dubai_date);
    content += StateLine("day_start_equity", DoubleToString(g_day_start_equity, 2));
+   content += StateLine("day_start_strategy_open_pnl", DoubleToString(g_day_start_strategy_open_pnl, 2));
    content += StateLine("peak_day_pnl", DoubleToString(g_peak_day_pnl, 2));
    content += StateLine("armed", BoolText(g_armed));
    content += StateLine("next_floor_armed", BoolText(g_next_floor_armed));
@@ -399,6 +403,7 @@ void ApplyStateLine(const string line)
    string value = ValueAfterEquals(line);
    if(key == "dubai_date") g_dubai_date = value;
    else if(key == "day_start_equity") g_day_start_equity = StringToDouble(value);
+   else if(key == "day_start_strategy_open_pnl") g_day_start_strategy_open_pnl = StringToDouble(value);
    else if(key == "peak_day_pnl") g_peak_day_pnl = StringToDouble(value);
    else if(key == "armed") g_armed = ContainsText(value, "true");
    else if(key == "next_floor_armed") g_next_floor_armed = ContainsText(value, "true");
@@ -432,7 +437,8 @@ void WriteDailySummary(const string date_to_write)
 {
    EnsureSummaryHeader();
    double equity = AccountInfoDouble(ACCOUNT_EQUITY);
-   double ending_day_pnl = equity - g_day_start_equity;
+   bool day_pnl_valid = false;
+   double ending_day_pnl = CurrentDayPnlAed(day_pnl_valid);
    string row[] = {
       NowBroker(),
       NowUtc(),
@@ -463,6 +469,10 @@ void ResetForNewDubaiDay(const string new_date, const bool write_summary)
       RemoveEntryHaltFile("new_dubai_day_reset");
    g_dubai_date = new_date;
    g_day_start_equity = AccountInfoDouble(ACCOUNT_EQUITY);
+   bool strategy_open_pnl_valid = false;
+   g_day_start_strategy_open_pnl = OpenScopedPnlAed(strategy_open_pnl_valid);
+   if(!strategy_open_pnl_valid)
+      g_day_start_strategy_open_pnl = 0.0;
    g_peak_day_pnl = 0.0;
    g_armed = false;
    g_next_floor_armed = false;
@@ -626,14 +636,122 @@ bool ClosePositionByTicket(const ulong ticket, const string reason)
    return done;
 }
 
-bool PositionInCloseScope()
+bool IdentityInCloseScope(const string symbol, const long magic)
 {
-   string symbol = PositionGetString(POSITION_SYMBOL);
-   long magic = PositionGetInteger(POSITION_MAGIC);
    string target_symbol = TrimToken(InpCloseScopeSymbol);
    if(target_symbol != "" && symbol != target_symbol)
       return false;
    return CsvContainsLong(InpAllowedPositionMagicsCsv, magic);
+}
+
+bool PositionInCloseScope()
+{
+   return IdentityInCloseScope(
+      PositionGetString(POSITION_SYMBOL),
+      PositionGetInteger(POSITION_MAGIC)
+   );
+}
+
+datetime DubaiDayStartBroker()
+{
+   string date_value = g_dubai_date != "" ? g_dubai_date : DubaiDate();
+   datetime dubai_midnight = StringToTime(date_value + " 00:00");
+   datetime utc_start = dubai_midnight - InpDubaiUtcOffsetMinutes * 60;
+   long broker_utc_offset = (long)(TimeCurrent() - TimeGMT());
+   return (datetime)(utc_start + broker_utc_offset);
+}
+
+bool PositionIdPresent(const ulong &values[], const ulong expected)
+{
+   for(int index = 0; index < ArraySize(values); index++)
+   {
+      if(values[index] == expected)
+         return true;
+   }
+   return false;
+}
+
+void AddPositionId(ulong &values[], const ulong value)
+{
+   if(value == 0 || PositionIdPresent(values, value))
+      return;
+   int size = ArraySize(values);
+   ArrayResize(values, size + 1);
+   values[size] = value;
+}
+
+double OpenScopedPnlAed(bool &valid)
+{
+   double pnl = 0.0;
+   for(int index = PositionsTotal() - 1; index >= 0; index--)
+   {
+      ulong ticket = PositionGetTicket(index);
+      if(ticket == 0 || !PositionSelectByTicket(ticket) || !PositionInCloseScope())
+         continue;
+      pnl += PositionGetDouble(POSITION_PROFIT);
+      pnl += PositionGetDouble(POSITION_SWAP);
+   }
+   valid = true;
+   return pnl;
+}
+
+double StrategyDayPnlAed(bool &valid)
+{
+   valid = false;
+   datetime day_start = DubaiDayStartBroker();
+   datetime now = TimeCurrent();
+   if(day_start <= 0 || now < day_start)
+      return 0.0;
+   datetime origin_lookback = day_start - 60 * 24 * 60 * 60;
+   if(!HistorySelect(origin_lookback, now))
+      return 0.0;
+
+   ulong owned_position_ids[];
+   int total = HistoryDealsTotal();
+   for(int index = 0; index < total; index++)
+   {
+      ulong ticket = HistoryDealGetTicket(index);
+      if(ticket == 0)
+         continue;
+      if(IdentityInCloseScope(
+         HistoryDealGetString(ticket, DEAL_SYMBOL),
+         HistoryDealGetInteger(ticket, DEAL_MAGIC)
+      ))
+         AddPositionId(
+            owned_position_ids,
+            (ulong)HistoryDealGetInteger(ticket, DEAL_POSITION_ID)
+         );
+   }
+
+   double pnl = 0.0;
+   for(int index = 0; index < total; index++)
+   {
+      ulong ticket = HistoryDealGetTicket(index);
+      if(ticket == 0 || (datetime)HistoryDealGetInteger(ticket, DEAL_TIME) < day_start)
+         continue;
+      ulong position_id = (ulong)HistoryDealGetInteger(ticket, DEAL_POSITION_ID);
+      if(!PositionIdPresent(owned_position_ids, position_id))
+         continue;
+      pnl += HistoryDealGetDouble(ticket, DEAL_PROFIT);
+      pnl += HistoryDealGetDouble(ticket, DEAL_COMMISSION);
+      pnl += HistoryDealGetDouble(ticket, DEAL_SWAP);
+      pnl += HistoryDealGetDouble(ticket, DEAL_FEE);
+   }
+
+   bool open_pnl_valid = false;
+   pnl += OpenScopedPnlAed(open_pnl_valid) - g_day_start_strategy_open_pnl;
+   if(!open_pnl_valid)
+      return 0.0;
+   valid = true;
+   return pnl;
+}
+
+double CurrentDayPnlAed(bool &valid)
+{
+   if(InpStrategyScopedPnl)
+      return StrategyDayPnlAed(valid);
+   valid = true;
+   return AccountInfoDouble(ACCOUNT_EQUITY) - g_day_start_equity;
 }
 
 int CloseAllPositions(const string reason)
@@ -662,7 +780,8 @@ void TriggerLock(const string reason)
       g_trigger_time = NowDubai();
       g_trigger_reason = reason;
       g_locked_equity = AccountInfoDouble(ACCOUNT_EQUITY);
-      g_locked_day_pnl = g_locked_equity - g_day_start_equity;
+      bool day_pnl_valid = false;
+      g_locked_day_pnl = CurrentDayPnlAed(day_pnl_valid);
       SaveState();
       WriteEvent("LOCKED", reason);
    }
@@ -680,8 +799,13 @@ double ActiveProfitFloorAed()
 
 void EvaluateFloor()
 {
-   double equity = AccountInfoDouble(ACCOUNT_EQUITY);
-   double day_pnl = equity - g_day_start_equity;
+   bool day_pnl_valid = false;
+   double day_pnl = CurrentDayPnlAed(day_pnl_valid);
+   if(!day_pnl_valid)
+   {
+      WriteEvent("EVALUATION_SKIPPED", "strategy_pnl_history_unavailable");
+      return;
+   }
    if(day_pnl > g_peak_day_pnl)
       g_peak_day_pnl = day_pnl;
 
@@ -802,9 +926,11 @@ void OnTimer()
    }
    EnsureCurrentDubaiDay();
    EvaluateFloor();
+   bool day_pnl_valid = false;
+   double day_pnl = CurrentDayPnlAed(day_pnl_valid);
    Comment(StringFormat("A1 Profit Floor Guardian: date=%s pnl=%.2f peak=%.2f armed=%s locked=%s",
       g_dubai_date,
-      AccountInfoDouble(ACCOUNT_EQUITY) - g_day_start_equity,
+      day_pnl,
       g_peak_day_pnl,
       BoolText(g_armed),
       BoolText(g_locked)));

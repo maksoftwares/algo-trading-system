@@ -65,6 +65,7 @@
         "account_login": 1033030,
         "execution_enabled": true,
         "equity_fraction_limits_enabled": true,
+        "drawdown_equity_scope": "STRATEGY_ONLY",
         "minimum_balance_requirement_enabled": false,
         "drawdown_suspended": false,
         "hard_floating_stop": false,

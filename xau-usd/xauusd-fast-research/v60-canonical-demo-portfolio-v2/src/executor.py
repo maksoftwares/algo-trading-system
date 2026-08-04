@@ -113,6 +113,7 @@ def initial_state(now: datetime, equity: float) -> dict[str, Any]:
         "activated_at_utc": utc_text(now),
         "activation_equity_usd": float(equity),
         "peak_equity_usd": float(equity),
+        "drawdown_equity_scope": "STRATEGY_ONLY",
         "closed_pnl_usd": 0.0,
         "peak_closed_pnl_usd": 0.0,
         "closed_drawdown_usd": 0.0,

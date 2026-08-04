@@ -181,6 +181,28 @@ def test_open_profit_giveback_arms_then_closes(monkeypatch, tmp_path: Path) -> N
     assert sent == ["V60_PROFIT_GIVEBACK_EXIT"]
 
 
+def test_drawdown_equity_uses_only_v60_closed_and_open_pnl() -> None:
+    config = RUN.load_config()
+    state = {"activation_equity_usd": 1000.0}
+    own = [SimpleNamespace(profit=36.725, swap=0.0)]
+
+    equity = RUN.strategy_drawdown_equity_usd(state, 25.0, own, config)
+
+    assert equity == pytest.approx(1035.0)
+
+
+def test_drawdown_scope_migration_discards_the_old_account_equity_peak() -> None:
+    state = {
+        "activation_equity_usd": 1000.0,
+        "peak_equity_usd": 2000.0,
+    }
+
+    RUN.ensure_strategy_drawdown_scope(state, 1035.0, 30.0)
+
+    assert state["drawdown_equity_scope"] == "STRATEGY_ONLY"
+    assert state["peak_equity_usd"] == pytest.approx(1035.0)
+
+
 def test_config_rejects_absolute_only_demo_limits(tmp_path: Path) -> None:
     config = json.loads(RUN.CONFIG_PATH.read_text(encoding="utf-8"))
     config["risk"]["equity_fraction_limits_enabled"] = False

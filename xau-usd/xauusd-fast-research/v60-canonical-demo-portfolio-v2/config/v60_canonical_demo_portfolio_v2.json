@@ -250,6 +250,7 @@
           "InpHaltEntriesWhenArmed": "false",
           "InpCloseScopeSymbol": "XAUUSD",
           "InpAllowedPositionMagicsCsv": "961101,961102,961201,961301,961401,967007,968008,962525,965757",
+          "InpStrategyScopedPnl": "true",
           "InpEntryHaltFileName": "tier1_bestea_kill_switch.txt"
         }
       },

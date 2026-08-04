@@ -76,6 +76,12 @@ The account is AED-denominated. Every USD drawdown threshold is converted using
 the AED peg (`3.6725 AED/USD`) before it is compared with MT5 equity or deal
 values.
 
+Portfolio drawdown uses synthetic V60 equity: activation equity plus closed and
+open P/L attributable to the nine canonical XAUUSD magics. Forex, US500, manual,
+and other account activity cannot move the V60 drawdown peak or trigger its
+floating stop. Broker margin remains shared because that is an account-level MT5
+constraint.
+
 Closed P/L is reconstructed from complete MT5 position-ID lifecycles. A
 position belongs to V60 only when its opening deal has one of the canonical
 source magics; all later deals on that position are then counted regardless of
@@ -95,8 +101,9 @@ The MT5 profile keeps both account guardians and attaches one passive telemetry
 collector plus three observer-only event sensors. Each collector/sensor has
 per-EA trading disabled. The Python portfolio executor is the only component
 authorized to open canonical trades. The daily guardian is loss-only: it has no
-daily profit target, can halt after a -100 AED account day, and may close only
-the nine canonical V60 magic numbers on XAUUSD.
+daily profit target, can halt after a -100 AED V60 strategy day, and may close
+only the nine canonical V60 magic numbers on XAUUSD. Its daily P/L follows
+position-origin ownership, so another instrument cannot trigger the Gold halt.
 
 Run `restore_v60_demo.ps1` once on a new machine to create the dedicated,
 version-locked V60 `.venv`; no unrelated research environment is required.

@@ -2,7 +2,7 @@
   "schema_version": "xauusd_v60_portable_ml_topup_v4_overlay",
   "base_config": {
     "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
-    "sha256": "0e4f6a16e9e0e6fbd5e4798ad68bf126a020bbe4ec437bccf853b5e1b6018629"
+    "sha256": "5d7745719fca67691993956261416b963ea151e1ad73fc444c79d614ac3e18dd"
   },
   "authorization": {
     "ml_runtime_authorized": true,

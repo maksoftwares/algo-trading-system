@@ -34,6 +34,7 @@ def test_v60_guardian_is_loss_only_and_has_no_minimum_balance_gate() -> None:
     assert inputs["InpHaltEntriesWhenArmed"] == "false"
     assert inputs["InpDailyLossStopEnabled"] == "true"
     assert inputs["InpDailyLossStopAed"] == "-100.0"
+    assert inputs["InpStrategyScopedPnl"] == "true"
 
 
 def test_v60_guardian_can_only_close_deployed_xau_positions() -> None:
@@ -56,3 +57,17 @@ def test_v60_guardian_can_only_close_deployed_xau_positions() -> None:
     assert "bool PositionInCloseScope()" in source
     assert "PositionGetInteger(POSITION_MAGIC)" in source
     assert "if(!PositionInCloseScope())" in source
+
+
+def test_v60_guardian_daily_pnl_is_strategy_scoped() -> None:
+    source = SOURCE.read_text(encoding="utf-8")
+
+    assert "input bool InpStrategyScopedPnl = true;" in source
+    assert "double StrategyDayPnlAed(bool &valid)" in source
+    assert "DEAL_POSITION_ID" in source
+    assert "PositionGetDouble(POSITION_PROFIT)" in source
+    assert "g_day_start_strategy_open_pnl" in source
+    assert "OpenScopedPnlAed(open_pnl_valid) - g_day_start_strategy_open_pnl" in source
+    evaluate = source[source.index("void EvaluateFloor()") : source.index("void ReconcileProfitFloorPolicy()")]
+    assert "CurrentDayPnlAed(day_pnl_valid)" in evaluate
+    assert "ACCOUNT_EQUITY) - g_day_start_equity" not in evaluate

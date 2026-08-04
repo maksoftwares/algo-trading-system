@@ -16,7 +16,7 @@ The recovery target is:
 - hash-bound drawdown-protection V1 overlay;
 - no minimum-balance gate;
 - activation-equity-scaled risk limits;
-- loss-only `-100 AED` daily guardian;
+- strategy-scoped floating drawdown and loss-only `-100 AED` daily guardian;
 - no live-account authorization.
 
 Passwords, broker credentials, MT5 installation files, current open positions,
@@ -270,3 +270,5 @@ Pop-Location
 7. The ML layer can only add one bounded top-up after a baseline fill. Failure
    always falls back to the deterministic baseline.
 8. A successful historical replay is not a profit guarantee.
+9. `status.json` must report `drawdown_equity_scope=STRATEGY_ONLY`; account-wide
+   drawdown accounting is not permitted on the shared multi-instrument account.
