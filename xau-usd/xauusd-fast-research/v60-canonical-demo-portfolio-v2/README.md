@@ -6,8 +6,8 @@ canonical add-on sleeves. The frozen research packages and their ledgers are
 not modified.
 
 Complete-machine recovery is documented in `RECOVERY_RUNBOOK.md`. The Git tag
-`v60-demo-recovery-20260730`, SHA-256 recovery manifest, pinned Python
-environment, exact six-chart profile, EA sources, model bundle, and replay
+`v60-demo-recovery-20260806`, SHA-256 recovery manifest, pinned Python
+environment, six required Gold chart definitions, EA sources, model bundle, and replay
 evidence are sufficient to reconstruct the current demo deployment after local
 machine loss. Broker credentials remain owner-managed and are never committed.
 
@@ -36,6 +36,8 @@ cycles are in progress. The executor still fails closed after 180 seconds
 without a heartbeat or when one feed cycle exceeds 20 minutes. Actionable fast
 feeds and add-ons run before the slow R5 transition refresh so their candidates
 are available to the executor without waiting for that refresh to finish.
+The portfolio executor also appends a 60-second `EXECUTOR_HEARTBEAT` event, so
+an idle market is distinguishable from a stopped executor.
 
 R5 transition collection, causal resolution, and routing remain active as
 read-only research feeds. R5 is deliberately absent from the executor source
@@ -55,16 +57,16 @@ authorize a live account. The exact demo login, server, MT5 trade mode, fixed
 lot, spread, position, daily-entry, drawdown, emergency-close, and guardian
 halt controls remain enforced.
 
-The demo uses the smaller of each explicit USD cap and its activation-equity
-fraction. There is no minimum-balance gate. At the current fixed 0.01-lot
-account size, concurrent initial risk is capped at 6%, the closed-drawdown
-suspension is capped at $225, and hard closed/equity stops are capped at 25%.
-The fixed-lot portfolio also has aggregate initial-risk and same-direction-risk
-caps, and every Core candidate has a $45 initial-risk ceiling. Broker margin
-requirements remain unavoidable. Startup verifies this equity-scaled mode
-and the exact-source historical parity artifact, and chart preflight requires
-every safety input to coexist on its intended chart rather than accepting
-settings scattered across the profile.
+There is no minimum-balance gate. Concurrent account and directional initial
+risk still use the smaller of the explicit USD cap and 6% of activation equity.
+Because the broker minimum is a fixed 0.01 lot, drawdown limits instead use
+explicit USD values: recovery mode begins at $225, resumes normal operation
+below $180, and the final closed/equity hard stop is $420. Recovery permits
+only R1 pullback or R2 downtrend, one position, one entry per UTC day, and at
+most $30 initial risk. Add-ons and ML top-ups are blocked in recovery mode.
+Broker margin requirements remain unavoidable. Startup verifies this mixed
+risk mode and the exact-source historical parity artifact, and chart preflight
+requires every safety input to coexist on its intended chart.
 
 V57 has one additional deterministic replay guard. After an accepted V57 trade
 closes with negative realized net P/L, another V57 trade in the same direction
@@ -97,6 +99,14 @@ current-capital replay passes without a flat suspension deadlock: 1,619 trades,
 USD 2,628.44 net P/L, PF 1.4398, and USD 227.24 maximum lifetime equity
 drawdown. This is historical evidence, not a profit guarantee.
 
+The later recovery V2 replay includes the deployed protection overlay. It
+preserves the exact 1,584 trades, USD 2,628.49 net P/L, PF 1.4897, 46.53% win
+rate, and USD 218.55 maximum equity drawdown while moving the final hard stop
+from USD 246.92 to USD 420. The latter is 1.505 times the fee-stressed USD
+279.04 historical closed drawdown. Evidence is in
+`evidence/V60_DRAWDOWN_RECOVERY_V2_REPLAY_20260806.json`. The USD 420 limit is
+demo-only at the current account size; live authorization remains false.
+
 The MT5 profile keeps both account guardians and attaches one passive telemetry
 collector plus three observer-only event sensors. Each collector/sensor has
 per-EA trading disabled. The Python portfolio executor is the only component
@@ -104,6 +114,8 @@ authorized to open canonical trades. The daily guardian is loss-only: it has no
 daily profit target, can halt after a -100 AED V60 strategy day, and may close
 only the nine canonical V60 magic numbers on XAUUSD. Its daily P/L follows
 position-origin ownership, so another instrument cannot trigger the Gold halt.
+The six required Gold charts may coexist with separately isolated instruments
+on the shared demo terminal.
 
 Run `restore_v60_demo.ps1` once on a new machine to create the dedicated,
 version-locked V60 `.venv`; no unrelated research environment is required.

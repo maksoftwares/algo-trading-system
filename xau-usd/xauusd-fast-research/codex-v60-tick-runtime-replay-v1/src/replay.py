@@ -23,6 +23,12 @@ DAY_MS = 86_400_000
 HOUR_MS = 3_600_000
 PNL_COLUMN = "fee_stress_pnl_usd"
 OPEN_COST_COLUMN = "fee_stress_open_cost_usd"
+_DRAWDOWN_LIMIT_KEYS = {
+    "closed_drawdown_suspend_usd",
+    "closed_drawdown_resume_usd",
+    "combined_closed_drawdown_hard_stop_usd",
+    "floating_drawdown_hard_stop_usd",
+}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -69,7 +75,17 @@ def effective_threshold(
     risk: Mapping[str, Any], activation_equity: float, absolute_key: str
 ) -> float:
     absolute = float(risk[absolute_key])
-    if not bool(risk.get("equity_fraction_limits_enabled", True)):
+    fraction_limits_enabled = bool(
+        risk.get("equity_fraction_limits_enabled", True)
+    )
+    if absolute_key in _DRAWDOWN_LIMIT_KEYS:
+        fraction_limits_enabled = bool(
+            risk.get(
+                "drawdown_equity_fraction_limits_enabled",
+                fraction_limits_enabled,
+            )
+        )
+    if not fraction_limits_enabled:
         return absolute
     fraction_key = absolute_key.removesuffix("_usd") + "_fraction"
     return min(
@@ -573,6 +589,7 @@ class Scenario:
         self.exit_heap: list[tuple[int, str]] = []
         self.candidate_index = 0
         self.daily_entries: Counter[tuple[str, int]] = Counter()
+        self.recovery_daily_entries: Counter[int] = Counter()
         self.addon_events: set[str] = set()
         self.last_losses: dict[tuple[str, str], int] = {}
         self.rejections: Counter[str] = Counter()
@@ -580,6 +597,7 @@ class Scenario:
         self.event_rows: list[dict[str, Any]] = []
         self.suspensions = 0
         self.rebaselines = 0
+        self.recovery_entries = 0
         self.emergency_closes = 0
         self.guardian_arms = 0
         self.guardian_locks = 0
@@ -1014,12 +1032,37 @@ class Scenario:
             and (self.guardian.armed or self.guardian.locked)
         ):
             return "ENTRY_HALT_FILE_ACTIVE"
-        if self.drawdown_suspended:
-            return "CLOSED_DRAWDOWN_SUSPENDED"
         if floating_hard:
             return "FLOATING_DRAWDOWN_HARD_STOP"
         if closed_hard:
             return "COMBINED_CLOSED_DRAWDOWN_HARD_STOP"
+        if self.drawdown_suspended:
+            recovery = self.risk.get("closed_drawdown_recovery")
+            if not isinstance(recovery, Mapping) or not bool(
+                recovery.get("enabled")
+            ):
+                return "CLOSED_DRAWDOWN_SUSPENDED"
+            if candidate.sleeve_type != "CORE":
+                return "DRAWDOWN_RECOVERY_CORE_ONLY"
+            if candidate.source_id not in set(recovery["eligible_source_ids"]):
+                return "DRAWDOWN_RECOVERY_SOURCE_NOT_ELIGIBLE"
+            if len(self.positions) >= int(recovery["maximum_open_positions"]):
+                return "DRAWDOWN_RECOVERY_MAXIMUM_OPEN_POSITIONS"
+            if candidate.risk_usd > float(recovery["maximum_initial_risk_usd"]):
+                return "DRAWDOWN_RECOVERY_MAXIMUM_INITIAL_RISK"
+            hard_limit = min(
+                self.limits["combined_closed_drawdown_hard_stop_usd"],
+                self.limits["floating_drawdown_hard_stop_usd"],
+            )
+            required_headroom = candidate.risk_usd * float(
+                recovery["minimum_hard_stop_headroom_multiple"]
+            )
+            if hard_limit - max(floating_dd, closed_dd) < required_headroom:
+                return "DRAWDOWN_RECOVERY_INSUFFICIENT_HARD_STOP_HEADROOM"
+            if self.recovery_daily_entries[utc_day] >= int(
+                recovery["maximum_entries_per_utc_day"]
+            ):
+                return "DRAWDOWN_RECOVERY_MAXIMUM_DAILY_ENTRIES"
         if (
             total + candidate.risk_usd
             > self.limits["maximum_account_concurrent_initial_risk_usd"]
@@ -1117,6 +1160,10 @@ class Scenario:
         heapq.heappush(self.exit_heap, (candidate.exit_ms, candidate.trade_id))
         utc_day = candidate.entry_ms // DAY_MS
         self.daily_entries[(candidate.source_id, utc_day)] += 1
+        recovery_entry = self.drawdown_suspended
+        if recovery_entry:
+            self.recovery_daily_entries[utc_day] += 1
+            self.recovery_entries += 1
         if candidate.sleeve_type == "ADDON" and candidate.event_id is not None:
             self.addon_events.add(candidate.event_id)
         self.maximum_open_positions = max(
@@ -1128,6 +1175,7 @@ class Scenario:
             candidate,
             initial_risk_usd=candidate.risk_usd,
             basis_offset=position.basis_offset,
+            drawdown_recovery_entry=recovery_entry,
         )
 
     def process_cycle(
@@ -1284,6 +1332,7 @@ class Scenario:
             "profit_giveback_closes": self.profit_giveback_closes,
             "suspensions": self.suspensions,
             "rebaselines": self.rebaselines,
+            "drawdown_recovery_entries": self.recovery_entries,
             "emergency_position_closes": self.emergency_closes,
             "guardian_arms": self.guardian_arms,
             "guardian_locks": self.guardian_locks,
@@ -1572,19 +1621,31 @@ def build_result(
             "funded_reinitialized": funded_repair,
         },
         "risk_mode": (
-            "ACTIVATION_EQUITY_SCALED"
-            if config["risk"]["equity_fraction_limits_enabled"]
-            else "ABSOLUTE_USD_ONLY"
+            "MIXED_ENTRY_EQUITY_SCALED_DRAWDOWN_ABSOLUTE_USD"
+            if config["risk"].get("equity_fraction_limits_enabled")
+            and not config["risk"].get(
+                "drawdown_equity_fraction_limits_enabled",
+                True,
+            )
+            else (
+                "ACTIVATION_EQUITY_SCALED"
+                if config["risk"]["equity_fraction_limits_enabled"]
+                else "ABSOLUTE_USD_ONLY"
+            )
         ),
         "confirmed_findings": [
             (
-                "The canonical runtime uses activation-equity-scaled risk thresholds."
-                if config["risk"]["equity_fraction_limits_enabled"]
+                "The canonical runtime uses activation-equity-scaled entry-risk limits and absolute-USD fixed-lot drawdown limits."
+                if config["risk"].get("equity_fraction_limits_enabled")
+                and not config["risk"].get(
+                    "drawdown_equity_fraction_limits_enabled",
+                    True,
+                )
                 else "The canonical runtime uses the same fixed USD risk thresholds at deployed and funded activation capital."
             ),
-            "Funding and state reinitialization alone still end in a flat closed-drawdown suspension under the deployed guardian accounting.",
-            "Guardian exits use magic 919200 and are omitted by V60 closed_pnl, which filters only specialist magics.",
-            "The 30-day re-baseline remains operational only by repeatedly forgiving V60 tracked drawdown; lifetime V60 closed drawdown exceeds the nominal absolute cap.",
+            "No tested scenario ends in a flat suspension or floating-peak deadlock under the bounded recovery policy.",
+            "The legacy specialist-magic view omits guardian exits using magic 919200; the deployed position-origin repair counts the complete lifecycle.",
+            "Re-baseline scenarios are retained as historical counterfactuals; the deployed recovery policy does not forgive or reset the lifetime drawdown peak.",
             "The repaired runtime attributes every exit to the source position lifecycle and reconstructs the historical closed-P/L peak.",
             "The repair is evaluated separately at actual deployed activation capital and at the proposed funded activation capital.",
         ],

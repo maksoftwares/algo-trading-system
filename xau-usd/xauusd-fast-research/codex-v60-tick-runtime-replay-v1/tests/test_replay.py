@@ -49,6 +49,28 @@ def test_effective_threshold_supports_activation_equity_scaled_mode():
     )
 
 
+def test_effective_threshold_supports_mixed_fixed_lot_drawdown_mode():
+    risk = {
+        "equity_fraction_limits_enabled": True,
+        "drawdown_equity_fraction_limits_enabled": False,
+        "floating_drawdown_hard_stop_usd": 420.0,
+        "floating_drawdown_hard_stop_fraction": 0.25,
+        "maximum_account_concurrent_initial_risk_usd": 60.0,
+        "maximum_account_concurrent_initial_risk_fraction": 0.06,
+    }
+    assert effective_threshold(
+        risk, 987.6623553437713, "floating_drawdown_hard_stop_usd"
+    ) == 420.0
+    assert np.isclose(
+        effective_threshold(
+            risk,
+            987.6623553437713,
+            "maximum_account_concurrent_initial_risk_usd",
+        ),
+        59.259741320626276,
+    )
+
+
 def real_inputs():
     contract = load_json(
         CONTRACT_PATH.parent / "SAFETY_REPAIR_REPLAY_CONTRACT.json"
@@ -263,6 +285,46 @@ def test_floating_hard_stop_closes_position():
     assert replay.first_hard_stop_ms == 5000
     assert not replay.positions
     assert replay.emergency_closes == 1
+
+
+def test_closed_drawdown_recovery_accepts_one_bounded_confirmed_core():
+    trade = candidate(
+        "recovery-core",
+        entry_ms=0,
+        exit_ms=5000,
+        source_id="R1_PULLBACK",
+        risk=20.0,
+        pnl=30.0,
+    )
+    replay = scenario([trade], activation=1000.0)
+    replay.account_closed_pnl = -230.0
+    replay.v60_closed_pnl = -230.0
+
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+
+    assert replay.drawdown_suspended
+    assert replay.recovery_entries == 1
+    assert "recovery-core" in replay.positions
+
+
+def test_closed_drawdown_recovery_rejects_addons():
+    trade = candidate(
+        "recovery-addon",
+        entry_ms=0,
+        exit_ms=5000,
+        source_id="V7_SWING_HEALTH",
+        sleeve_type="ADDON",
+        risk=20.0,
+    )
+    replay = scenario([trade], activation=1000.0)
+    replay.account_closed_pnl = -230.0
+    replay.v60_closed_pnl = -230.0
+
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+
+    assert replay.drawdown_suspended
+    assert replay.recovery_entries == 0
+    assert replay.rejections["DRAWDOWN_RECOVERY_CORE_ONLY"] == 1
 
 
 def test_rebaseline_does_not_forgive_peak_equity():

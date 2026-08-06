@@ -30,6 +30,13 @@ def test_config_has_exact_canonical_sources_and_no_ml_authority() -> None:
     assert config["authorization"]["minimum_balance_requirement_enabled"] is False
     assert config["authorization"]["demo_balance_eligibility_waived"] is True
     assert config["risk"]["equity_fraction_limits_enabled"] is True
+    assert config["risk"]["drawdown_equity_fraction_limits_enabled"] is False
+    assert config["risk"]["combined_closed_drawdown_hard_stop_usd"] == 420.0
+    assert config["risk"]["floating_drawdown_hard_stop_usd"] == 420.0
+    assert config["risk"]["closed_drawdown_recovery"]["eligible_source_ids"] == [
+        "R1_PULLBACK",
+        "R2_DOWNTREND",
+    ]
     parity = RUN.verify_deployment_parity(config)
     assert parity["status"] == "PASS"
     assert parity["unknown_execution_source_ids"] == []
@@ -208,8 +215,127 @@ def test_config_rejects_absolute_only_demo_limits(tmp_path: Path) -> None:
     config["risk"]["equity_fraction_limits_enabled"] = False
     path = tmp_path / "invalid.json"
     path.write_text(json.dumps(config), encoding="utf-8")
-    with pytest.raises(RuntimeError, match="activation-equity scaling"):
+    with pytest.raises(RuntimeError, match="entry-risk limits"):
         RUN.load_config(path)
+
+
+def test_config_rejects_equity_scaled_fixed_lot_drawdown(tmp_path: Path) -> None:
+    config = json.loads(RUN.CONFIG_PATH.read_text(encoding="utf-8"))
+    config["risk"]["drawdown_equity_fraction_limits_enabled"] = True
+    path = tmp_path / "invalid.json"
+    path.write_text(json.dumps(config), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="fixed-lot drawdown limits"):
+        RUN.load_config(path)
+
+
+def test_config_rejects_floating_stop_below_historical_headroom(tmp_path: Path) -> None:
+    config = json.loads(RUN.CONFIG_PATH.read_text(encoding="utf-8"))
+    config["risk"]["floating_drawdown_hard_stop_usd"] = 300.0
+    path = tmp_path / "invalid.json"
+    path.write_text(json.dumps(config), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="hard drawdown limits"):
+        RUN.load_config(path)
+
+
+def test_drawdown_recovery_allows_only_bounded_confirmed_core() -> None:
+    config = RUN.load_config()
+    state = {
+        "activation_equity_usd": 1000.0,
+        "peak_equity_usd": 1000.0,
+        "closed_drawdown_usd": 225.0,
+        "drawdown_suspended": True,
+        "drawdown_recovery_daily_entries": {},
+    }
+    limits = {
+        "combined_closed_drawdown_hard_stop_usd": 420.0,
+        "floating_drawdown_hard_stop_usd": 420.0,
+    }
+    eligible = SimpleNamespace(
+        source_id="R1_PULLBACK",
+        sleeve_type="CORE",
+        initial_risk_usd=20.0,
+        scheduled_at=datetime(2026, 8, 6, tzinfo=UTC),
+    )
+    addon = SimpleNamespace(
+        source_id="V7_SWING_HEALTH",
+        sleeve_type="ADDON",
+        initial_risk_usd=20.0,
+        scheduled_at=datetime(2026, 8, 6, tzinfo=UTC),
+    )
+
+    assert RUN.closed_drawdown_recovery_entry_reason(
+        eligible, config, state, [], 775.0, limits
+    ) is None
+    assert RUN.closed_drawdown_recovery_entry_reason(
+        addon, config, state, [], 775.0, limits
+    ) == "DRAWDOWN_RECOVERY_CORE_ONLY"
+
+    state["closed_drawdown_usd"] = 400.0
+    assert RUN.closed_drawdown_recovery_entry_reason(
+        eligible, config, state, [], 600.0, limits
+    ) == "DRAWDOWN_RECOVERY_INSUFFICIENT_HARD_STOP_HEADROOM"
+
+
+def test_drawdown_recovery_blocks_ml_topup() -> None:
+    config = RUN.load_config(ml_overlay_path=RUN.ML_OVERLAY_PATH)
+    candidate = SimpleNamespace(
+        candidate_id="recovery",
+        source_id="R2_DOWNTREND",
+        sleeve_type="CORE",
+        direction="SHORT",
+        initial_risk_usd=10.0,
+        scheduled_at=datetime(2026, 8, 6, tzinfo=UTC),
+    )
+
+    assert RUN.ml_topup_risk_reason(
+        candidate,
+        config,
+        {
+            "drawdown_suspended": True,
+            "positions": {},
+            "ml_topup": {"orders": {}, "daily_topups": {}},
+        },
+        [],
+        active_initial_risk_usd=0.0,
+        active_direction_risk_usd={"LONG": 0.0, "SHORT": 0.0},
+        active_addon_risk_usd=0.0,
+        effective_risk_limits={
+            "maximum_account_concurrent_initial_risk_usd": 60.0,
+            "maximum_directional_concurrent_initial_risk_usd": 60.0,
+        },
+    ) == "ML_TOPUP_DRAWDOWN_RECOVERY_BLOCK"
+
+
+def test_executor_heartbeat_is_rate_limited(tmp_path: Path, monkeypatch) -> None:
+    state: dict[str, object] = {}
+    config = RUN.load_config()
+    path = tmp_path / "events.jsonl"
+    now = datetime(2026, 8, 6, tzinfo=UTC)
+    monkeypatch.setattr(RUN.os, "getpid", lambda: 123)
+
+    assert RUN.append_runtime_heartbeat(
+        state, path, config, now, positions=0, processed_candidates=0
+    ) is True
+    assert RUN.append_runtime_heartbeat(
+        state,
+        path,
+        config,
+        now + timedelta(seconds=30),
+        positions=0,
+        processed_candidates=0,
+    ) is False
+    assert RUN.append_runtime_heartbeat(
+        state,
+        path,
+        config,
+        now + timedelta(seconds=60),
+        positions=1,
+        processed_candidates=2,
+    ) is True
+    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+    assert len(rows) == 2
+    assert rows[-1]["event"] == "EXECUTOR_HEARTBEAT"
+    assert rows[-1]["process_id"] == 123
 
 
 def test_mt5_session_initializer_retries_and_verifies_identity() -> None:

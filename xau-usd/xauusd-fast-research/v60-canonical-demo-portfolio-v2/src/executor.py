@@ -12,6 +12,12 @@ from typing import Any, Iterable, Mapping
 
 SUCCESS_RETCODES = {10008, 10009, 10010}
 RETRYABLE_RETCODES = {10004, 10012, 10020, 10021, 10024}
+_DRAWDOWN_LIMIT_KEYS = {
+    "closed_drawdown_suspend_usd",
+    "closed_drawdown_resume_usd",
+    "combined_closed_drawdown_hard_stop_usd",
+    "floating_drawdown_hard_stop_usd",
+}
 
 
 @dataclass(frozen=True)
@@ -360,7 +366,17 @@ def effective_risk_threshold_usd(
     state: Mapping[str, Any], risk: Mapping[str, Any], absolute_key: str
 ) -> float:
     absolute = _finite_positive(risk[absolute_key], absolute_key)
-    if not bool(risk.get("equity_fraction_limits_enabled", True)):
+    fraction_limits_enabled = bool(
+        risk.get("equity_fraction_limits_enabled", True)
+    )
+    if absolute_key in _DRAWDOWN_LIMIT_KEYS:
+        fraction_limits_enabled = bool(
+            risk.get(
+                "drawdown_equity_fraction_limits_enabled",
+                fraction_limits_enabled,
+            )
+        )
+    if not fraction_limits_enabled:
         return absolute
     fraction_key = absolute_key.removesuffix("_usd") + "_fraction"
     fraction = _finite_positive(risk[fraction_key], fraction_key)

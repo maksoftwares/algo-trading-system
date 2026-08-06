@@ -205,7 +205,11 @@ def load_config(
     configured_equity_scaling = config["risk"].get("equity_fraction_limits_enabled")
     if configured_equity_scaling is not True:
         raise RuntimeError(
-            "Canonical demo risk limits must use activation-equity scaling"
+            "Canonical demo entry-risk limits must use activation-equity scaling"
+        )
+    if config["risk"].get("drawdown_equity_fraction_limits_enabled") is not False:
+        raise RuntimeError(
+            "Canonical fixed-lot drawdown limits must use explicit USD thresholds"
         )
     if auth.get("ml_shadow_authorized"):
         raise RuntimeError("ML shadow must remain unauthorized")
@@ -248,7 +252,28 @@ def load_config(
     }
     if cooldowns != {"V57_BREAK_SWING_H4ADX_HIGH": 120}:
         raise RuntimeError(f"Canonical post-loss cooldowns changed: {cooldowns}")
-    verify_deployment_parity(config)
+    parity = verify_deployment_parity(config)
+    historical_drawdown = float(parity["all_history"]["closed_trade_drawdown_usd"])
+    hard_closed_limit = float(
+        config["risk"]["combined_closed_drawdown_hard_stop_usd"]
+    )
+    hard_floating_limit = float(config["risk"]["floating_drawdown_hard_stop_usd"])
+    if min(hard_closed_limit, hard_floating_limit) < historical_drawdown * 1.5:
+        raise RuntimeError(
+            "Canonical hard drawdown limits lack 1.5x historical headroom"
+        )
+    recovery = config["risk"].get("closed_drawdown_recovery")
+    if not isinstance(recovery, Mapping) or recovery.get("enabled") is not True:
+        raise RuntimeError("Canonical closed-drawdown recovery mode is not enabled")
+    source_sleeves = {
+        str(source["source_id"]): str(source.get("sleeve_type", "CORE")).upper()
+        for source in config["sources"]
+    }
+    recovery_sources = {str(value) for value in recovery["eligible_source_ids"]}
+    if not recovery_sources or any(
+        source_sleeves.get(source_id) != "CORE" for source_id in recovery_sources
+    ):
+        raise RuntimeError("Closed-drawdown recovery sources must be known CORE sleeves")
     return config
 
 
@@ -981,6 +1006,79 @@ def protection_entry_reason(
     return None
 
 
+def closed_drawdown_recovery_entry_reason(
+    candidate: Any,
+    config: Mapping[str, Any],
+    state: Mapping[str, Any],
+    positions: list[Any],
+    equity_usd: float,
+    effective_risk_limits: Mapping[str, float],
+) -> str | None:
+    if not bool(state.get("drawdown_suspended")):
+        return None
+    settings = config["risk"]["closed_drawdown_recovery"]
+    if not bool(settings.get("enabled")):
+        return "CLOSED_DRAWDOWN_SUSPENDED"
+    if candidate.sleeve_type != "CORE":
+        return "DRAWDOWN_RECOVERY_CORE_ONLY"
+    if candidate.source_id not in set(settings["eligible_source_ids"]):
+        return "DRAWDOWN_RECOVERY_SOURCE_NOT_ELIGIBLE"
+    if len(positions) >= int(settings["maximum_open_positions"]):
+        return "DRAWDOWN_RECOVERY_MAXIMUM_OPEN_POSITIONS"
+    candidate_risk = float(candidate.initial_risk_usd)
+    if candidate_risk > float(settings["maximum_initial_risk_usd"]):
+        return "DRAWDOWN_RECOVERY_MAXIMUM_INITIAL_RISK"
+    current_drawdown = max(
+        float(state["closed_drawdown_usd"]),
+        floating_drawdown(state, equity_usd),
+    )
+    hard_limit = min(
+        float(effective_risk_limits["combined_closed_drawdown_hard_stop_usd"]),
+        float(effective_risk_limits["floating_drawdown_hard_stop_usd"]),
+    )
+    required_headroom = candidate_risk * float(
+        settings["minimum_hard_stop_headroom_multiple"]
+    )
+    if hard_limit - current_drawdown < required_headroom:
+        return "DRAWDOWN_RECOVERY_INSUFFICIENT_HARD_STOP_HEADROOM"
+    date_key = candidate.scheduled_at.date().isoformat()
+    entries = state.get("drawdown_recovery_daily_entries", {})
+    if int(entries.get(date_key, 0)) >= int(
+        settings["maximum_entries_per_utc_day"]
+    ):
+        return "DRAWDOWN_RECOVERY_MAXIMUM_DAILY_ENTRIES"
+    return None
+
+
+def append_runtime_heartbeat(
+    state: dict[str, Any],
+    events_path: Path,
+    config: Mapping[str, Any],
+    now: datetime,
+    *,
+    positions: int,
+    processed_candidates: int,
+) -> bool:
+    interval = max(1, int(config["runtime"]["event_heartbeat_seconds"]))
+    previous = state.get("last_event_heartbeat_at_utc")
+    if previous is not None and (now - parse_utc(previous)).total_seconds() < interval:
+        return False
+    append_event(
+        events_path,
+        {
+            "event": "EXECUTOR_HEARTBEAT",
+            "at_utc": utc_text(now),
+            "process_id": os.getpid(),
+            "drawdown_suspended": bool(state.get("drawdown_suspended")),
+            "closed_drawdown_usd": float(state.get("closed_drawdown_usd", 0.0)),
+            "open_positions": int(positions),
+            "processed_candidates": int(processed_candidates),
+        },
+    )
+    state["last_event_heartbeat_at_utc"] = utc_text(now)
+    return True
+
+
 def open_position_pnl_usd(
     positions: list[Any], config: Mapping[str, Any]
 ) -> float:
@@ -1126,6 +1224,8 @@ def ml_topup_risk_reason(
     equity_usd: float | None = None,
 ) -> str | None:
     settings = config["ml_topup"]
+    if bool(state.get("drawdown_suspended")):
+        return "ML_TOPUP_DRAWDOWN_RECOVERY_BLOCK"
     source = next(
         (
             value
@@ -1357,6 +1457,15 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     for candidate in pending:
         age = now - candidate.scheduled_at
         reason: str | None = None
+        recovery_mode = bool(state["drawdown_suspended"])
+        recovery_reason = closed_drawdown_recovery_entry_reason(
+            candidate,
+            config,
+            state,
+            ours,
+            drawdown_equity_usd,
+            effective_risk_limits,
+        )
         protection_reason = protection_entry_reason(
             candidate, config, state, ours, mt5, drawdown_equity_usd
         )
@@ -1366,12 +1475,12 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
             reason = "OPEN_PROFIT_GIVEBACK_CYCLE_LOCK"
         elif entry_halts:
             reason = "ENTRY_HALT_FILE_ACTIVE"
-        elif bool(state["drawdown_suspended"]):
-            reason = "CLOSED_DRAWDOWN_SUSPENDED"
         elif hard_floating_stop:
             reason = "FLOATING_DRAWDOWN_HARD_STOP"
         elif combined_closed_stop:
             reason = "COMBINED_CLOSED_DRAWDOWN_HARD_STOP"
+        elif recovery_mode and recovery_reason is not None:
+            reason = recovery_reason
         elif protection_reason is not None:
             reason = protection_reason
         elif (
@@ -1536,9 +1645,18 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
             "status": (
                 "OPEN" if ticket is not None else "POSITION_IDENTITY_UNRESOLVED"
             ),
+            "drawdown_recovery_entry": recovery_mode,
         }
         key = daily_key(candidate)
         state["daily_entries"][key] = int(state["daily_entries"].get(key, 0)) + 1
+        if recovery_mode:
+            recovery_date = candidate.scheduled_at.date().isoformat()
+            recovery_entries = state.setdefault(
+                "drawdown_recovery_daily_entries", {}
+            )
+            recovery_entries[recovery_date] = int(
+                recovery_entries.get(recovery_date, 0)
+            ) + 1
         append_event(
             events_path,
             state["seen"][candidate.candidate_id] | {"event": "ORDER_FILLED"},
@@ -1555,7 +1673,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         )
         # The deterministic fill is durable before any optional model work.
         atomic_write_json(state_path, state)
-        if ml_authorized:
+        if ml_authorized and not recovery_mode:
             ml_decision = evaluate_ml_topup_candidate(
                 ml_runtime, config, state, candidate, now
             )
@@ -1706,6 +1824,14 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
                 atomic_write_json(state_path, state)
         processed += 1
 
+    heartbeat_written = append_runtime_heartbeat(
+        state,
+        events_path,
+        config,
+        now,
+        positions=len(ours),
+        processed_candidates=processed,
+    )
     atomic_write_json(state_path, state)
     emergency_close_failures = sum(
         record["retcode"] not in SUCCESS_RETCODES
@@ -1747,6 +1873,10 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "closed_drawdown_usd": float(state["closed_drawdown_usd"]),
         "floating_drawdown_usd": floating_drawdown(state, drawdown_equity_usd),
         "drawdown_suspended": bool(state["drawdown_suspended"]),
+        "drawdown_recovery_mode": bool(state["drawdown_suspended"]),
+        "drawdown_recovery_policy": dict(
+            config["risk"]["closed_drawdown_recovery"]
+        ),
         "hard_floating_stop": hard_floating_stop,
         "combined_closed_drawdown_hard_stop": combined_closed_stop,
         "active_entry_halt_files": entry_halts,
@@ -1754,10 +1884,15 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "emergency_close_failures": emergency_close_failures,
         "profit_protection_close_failures": profit_protection_close_failures,
         "effective_risk_limits_usd": effective_risk_limits,
-        "risk_limit_mode": "ACTIVATION_EQUITY_SCALED",
+        "risk_limit_mode": "MIXED_ENTRY_EQUITY_SCALED_DRAWDOWN_ABSOLUTE_USD",
         "equity_fraction_limits_enabled": bool(
             config["risk"]["equity_fraction_limits_enabled"]
         ),
+        "drawdown_equity_fraction_limits_enabled": bool(
+            config["risk"]["drawdown_equity_fraction_limits_enabled"]
+        ),
+        "event_heartbeat_written_this_cycle": heartbeat_written,
+        "last_event_heartbeat_at_utc": state.get("last_event_heartbeat_at_utc"),
         "core_open_positions": len(core_positions),
         "addon_open_positions": len(addon_positions),
         "addon_active_initial_risk_usd": active_addon_risk,

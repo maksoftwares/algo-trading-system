@@ -1,0 +1,84 @@
+{
+  "schema_version": "xauusd_v60_drawdown_recovery_v2_replay_v1",
+  "generated_at_utc": "2026-08-06T06:52:32Z",
+  "decision": "PASS_FOR_PROSPECTIVE_DEMO_DEPLOYMENT",
+  "basis": {
+    "scenario_id": "deployed__position_origin_repair_full_runtime",
+    "evaluation_start_utc": "2021-01-01T00:00:00Z",
+    "evaluation_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "market_data": "Dukascopy XAUUSD tick data on the locked five-second runtime grid",
+    "lot_size": 0.01,
+    "position_pnl_attribution": "POSITION_ORIGIN",
+    "full_result_path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_DRAWDOWN_RECOVERY_V2_FULL_REPLAY_RESULT_20260806.json",
+    "full_result_sha256": "8bcf8fba0e7c5848ecdcdd4df3baa75bbf09847ab4ba10e8616d35177cf2aa1b"
+  },
+  "before": {
+    "risk_mode": "ACTIVATION_EQUITY_SCALED",
+    "trades_closed": 1584,
+    "net_pnl_usd": 2628.4914187835216,
+    "profit_factor": 1.4897400130919507,
+    "win_rate": 0.4652777777777778,
+    "maximum_lifetime_closed_drawdown_usd": 203.67582692769201,
+    "maximum_lifetime_equity_drawdown_usd": 218.55285726742545,
+    "effective_closed_hard_stop_usd": 246.91558883594283,
+    "effective_floating_hard_stop_usd": 246.91558883594283,
+    "flat_suspended_deadlock": false
+  },
+  "after": {
+    "risk_mode": "MIXED_ENTRY_EQUITY_SCALED_DRAWDOWN_ABSOLUTE_USD",
+    "trades_closed": 1584,
+    "net_pnl_usd": 2628.4914187835216,
+    "profit_factor": 1.4897400130919507,
+    "win_rate": 0.4652777777777778,
+    "maximum_lifetime_closed_drawdown_usd": 203.67582692769201,
+    "maximum_lifetime_equity_drawdown_usd": 218.55285726742545,
+    "effective_closed_hard_stop_usd": 420.0,
+    "effective_floating_hard_stop_usd": 420.0,
+    "closed_drawdown_suspend_usd": 225.0,
+    "closed_drawdown_resume_usd": 180.0,
+    "suspensions": 0,
+    "drawdown_recovery_entries": 0,
+    "first_hard_stop_at_utc": null,
+    "flat_suspended_deadlock": false
+  },
+  "delta_after_minus_before": {
+    "trades_closed": 0,
+    "net_pnl_usd": 0.0,
+    "profit_factor": 0.0,
+    "win_rate": 0.0,
+    "maximum_lifetime_closed_drawdown_usd": 0.0,
+    "maximum_lifetime_equity_drawdown_usd": 0.0,
+    "effective_closed_hard_stop_usd": 173.08441116405717,
+    "effective_floating_hard_stop_usd": 173.08441116405717
+  },
+  "historical_headroom": {
+    "fee_stressed_closed_drawdown_usd": 279.03947729639003,
+    "hard_stop_multiple": 1.505163370804308,
+    "replay_equity_drawdown_multiple": 1.921731862514234
+  },
+  "recovery_policy": {
+    "eligible_source_ids": [
+      "R1_PULLBACK",
+      "R2_DOWNTREND"
+    ],
+    "maximum_open_positions": 1,
+    "maximum_entries_per_utc_day": 1,
+    "maximum_initial_risk_usd": 30.0,
+    "minimum_hard_stop_headroom_multiple": 1.5,
+    "addons_blocked": true,
+    "ml_topups_blocked": true
+  },
+  "input_sha256": {
+    "demo_config": "37e6fbae77af5c615977cd0341ef0053349c70f96829db4a63d78c168e3f840f",
+    "executor_source": "0581f089b068da1c0ac93970fa9fad04a50a7b18211827befa50c0863f8eb1c5",
+    "runtime_source": "69c836e6a123206b357509ff0bae2b5dca5e61ee26582a4e844a7e9cbfcb6afe",
+    "replay_source": "5e0aaa722e8c029392a21f3bd94af9f07f81e0af874293978e0f00bd700870bb",
+    "portfolio_protection_overlay": "6fc095b778883667ed39bf64cd470564035d32a23ca6d4406fe61fa13b26a82d"
+  },
+  "limitations": [
+    "This is historical replay evidence, not a profit guarantee.",
+    "Dukascopy is not the Capital.com execution feed.",
+    "The 420 USD hard limit is demo-only at the current account size; live authorization remains false.",
+    "The recovery branch was not entered on the observed historical path and is covered by focused synthetic tests."
+  ]
+}

@@ -77,7 +77,12 @@ def verify_repo(errors: list[str]) -> int:
     )
     require(
         config["risk"]["equity_fraction_limits_enabled"] is True,
-        "Equity-scaled risk limits must remain enabled",
+        "Equity-scaled entry-risk limits must remain enabled",
+        errors,
+    )
+    require(
+        config["risk"]["drawdown_equity_fraction_limits_enabled"] is False,
+        "Fixed-lot drawdown limits must remain absolute USD",
         errors,
     )
     require(
@@ -100,6 +105,18 @@ def verify_repo(errors: list[str]) -> int:
     require(
         sha256_file(parity_path) == parity["artifact_sha256"],
         "Deployment parity identity changed",
+        errors,
+    )
+    historical_drawdown = float(
+        read_json(parity_path)["all_history"]["closed_trade_drawdown_usd"]
+    )
+    require(
+        min(
+            float(config["risk"]["combined_closed_drawdown_hard_stop_usd"]),
+            float(config["risk"]["floating_drawdown_hard_stop_usd"]),
+        )
+        >= 1.5 * historical_drawdown,
+        "Hard drawdown limits lack 1.5x historical headroom",
         errors,
     )
     for key in ("serving_source", "implementation_lock", "model_bundle", "parity_result"):
@@ -147,7 +164,11 @@ def verify_terminal(terminal_root: Path, errors: list[str]) -> None:
         config = read_json(CONFIG)
         config["preflight"]["chart_profile_directory"] = str(profile_root)
         profile = runtime.audit_chart_profile(config, require_ready=True)
-        require(profile["chart_count"] == 6, "Deployed profile must have six charts", errors)
+        require(
+            profile["chart_count"] >= 6,
+            "Deployed profile must contain the six required Gold charts",
+            errors,
+        )
     except Exception as exc:
         errors.append(f"Deployed chart profile failed semantic audit: {type(exc).__name__}: {exc}")
     status_path = terminal_root / "MQL5" / "Files" / "v60_canonical_demo_v2" / "status.json"

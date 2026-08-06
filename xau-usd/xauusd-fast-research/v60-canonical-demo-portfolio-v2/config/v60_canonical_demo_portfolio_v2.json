@@ -15,6 +15,7 @@
   },
   "risk": {
     "equity_fraction_limits_enabled": true,
+    "drawdown_equity_fraction_limits_enabled": false,
     "maximum_core_open_positions": 10,
     "maximum_addon_open_positions": 2,
     "maximum_account_xau_positions": 12,
@@ -28,10 +29,21 @@
     "closed_drawdown_suspend_fraction": 0.25,
     "closed_drawdown_resume_usd": 180.0,
     "closed_drawdown_resume_fraction": 0.20,
-    "combined_closed_drawdown_hard_stop_usd": 300.0,
+    "combined_closed_drawdown_hard_stop_usd": 420.0,
     "combined_closed_drawdown_hard_stop_fraction": 0.25,
-    "floating_drawdown_hard_stop_usd": 449.7675,
+    "floating_drawdown_hard_stop_usd": 420.0,
     "floating_drawdown_hard_stop_fraction": 0.25,
+    "closed_drawdown_recovery": {
+      "enabled": true,
+      "eligible_source_ids": [
+        "R1_PULLBACK",
+        "R2_DOWNTREND"
+      ],
+      "maximum_open_positions": 1,
+      "maximum_entries_per_utc_day": 1,
+      "maximum_initial_risk_usd": 30.0,
+      "minimum_hard_stop_headroom_multiple": 1.5
+    },
     "maximum_daily_entries": 12
   },
   "deployment_parity": {
@@ -44,6 +56,7 @@
     "feed_poll_seconds": 60,
     "slow_feed_poll_seconds": 300,
     "feed_heartbeat_seconds": 30,
+    "event_heartbeat_seconds": 60,
     "maximum_feed_status_age_seconds": 180,
     "maximum_feed_cycle_seconds": 1200,
     "entry_halt_files": [

@@ -349,6 +349,25 @@ def test_risk_threshold_uses_absolute_limit_when_equity_scaling_is_disabled() ->
     ) == pytest.approx(449.7675)
 
 
+def test_drawdown_threshold_can_be_absolute_while_entry_risk_stays_scaled() -> None:
+    state = {"activation_equity_usd": 987.6623553437713}
+    risk = {
+        "equity_fraction_limits_enabled": True,
+        "drawdown_equity_fraction_limits_enabled": False,
+        "floating_drawdown_hard_stop_usd": 420.0,
+        "floating_drawdown_hard_stop_fraction": 0.25,
+        "maximum_account_concurrent_initial_risk_usd": 60.0,
+        "maximum_account_concurrent_initial_risk_fraction": 0.06,
+    }
+
+    assert effective_risk_threshold_usd(
+        state, risk, "floating_drawdown_hard_stop_usd"
+    ) == pytest.approx(420.0)
+    assert effective_risk_threshold_usd(
+        state, risk, "maximum_account_concurrent_initial_risk_usd"
+    ) == pytest.approx(59.259741320626276)
+
+
 def test_addon_candidate_carries_initial_risk_and_event_identity() -> None:
     candidate = normalize_candidate(
         {

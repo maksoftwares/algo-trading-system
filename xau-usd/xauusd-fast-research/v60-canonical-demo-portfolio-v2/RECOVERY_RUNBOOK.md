@@ -1,8 +1,8 @@
 # V60 Demo Disaster-Recovery Runbook
 
 This runbook rebuilds the XAUUSD V60 demo system represented by Git tag
-`v60-demo-recovery-20260730`. The tag, recovery manifest, model bundle, source
-code, tests, evidence, and six-chart MT5 profile are the durable source of
+`v60-demo-recovery-20260806`. The tag, recovery manifest, model bundle, source
+code, tests, evidence, and six required Gold chart definitions are the durable source of
 truth.
 
 The recovery target is:
@@ -15,7 +15,9 @@ The recovery target is:
 - bounded V4 ML top-ups for confirmed sources only;
 - hash-bound drawdown-protection V1 overlay;
 - no minimum-balance gate;
-- activation-equity-scaled risk limits;
+- activation-equity-scaled entry-risk limits and absolute-USD fixed-lot
+  drawdown limits;
+- bounded core-only drawdown recovery and a `$420` final hard stop;
 - strategy-scoped floating drawdown and loss-only `-100 AED` daily guardian;
 - no live-account authorization.
 
@@ -29,7 +31,7 @@ Git contains:
 1. All deterministic portfolio, feed, execution, risk, and monitoring code.
 2. The exact ML serving code, implementation lock, model bundle, and parity
    result.
-3. The four required EA sources and exact six-chart MT5 profile snapshot.
+3. The four required EA sources and six required Gold chart definitions.
 4. Fixed Python package versions.
 5. Exact source-to-specialist mappings and guardian inputs.
 6. The deployment parity artifact.
@@ -67,7 +69,8 @@ Start-Process "C:\MT5PortableTier1BestEA\terminal64.exe" -ArgumentList "/portabl
 ```
 
 2. Verify the terminal shows account `1033030`, server
-   `Capital.ComMena-Demo`, and the `Default` profile with six XAUUSD charts.
+   `Capital.ComMena-Demo`, and the `Default` profile with the six required
+   XAUUSD charts. Isolated charts for other instruments may coexist.
 3. Start the supervisor from the repository root:
 
 ```powershell
@@ -110,7 +113,7 @@ Use this when the repository and terminals are lost.
 ```powershell
 git clone https://github.com/maksoftwares/algo-trading-system.git
 Set-Location .\algo-trading-system
-git checkout v60-demo-recovery-20260730
+git checkout v60-demo-recovery-20260806
 ```
 
 Do not recover from a moving branch without first comparing it to this tag.
@@ -206,12 +209,12 @@ V60 positions are open.
 
 ## Historical replay restoration
 
-The committed after-repair result is:
+The committed protection-plus-recovery result is:
 
-- 1,619 closed trades;
-- `$2,628.44` net P/L;
-- profit factor `1.4398`;
-- maximum lifetime equity drawdown `$227.24`;
+- 1,584 closed trades;
+- `$2,628.49` net P/L;
+- profit factor `1.4897`;
+- maximum lifetime equity drawdown `$218.55`;
 - no flat suspended deadlock.
 
 The full result and its SHA-256 identity are in `evidence/`.
@@ -233,7 +236,7 @@ Then run:
 ```powershell
 & .\xau-usd\xauusd-fast-research\v60-canonical-demo-portfolio-v2\.venv\Scripts\python.exe `
   .\xau-usd\xauusd-fast-research\codex-v60-tick-runtime-replay-v1\run_replay.py `
-  --contract .\xau-usd\xauusd-fast-research\codex-v60-tick-runtime-replay-v1\config\SAFETY_REPAIR_REPLAY_CONTRACT.json `
+  --contract .\xau-usd\xauusd-fast-research\codex-v60-tick-runtime-replay-v1\config\DRAWDOWN_PROTECTION_V1_REPLAY_CONTRACT.json `
   --output-directory .\xau-usd\xauusd-fast-research\codex-v60-tick-runtime-replay-v1\outputs\recovery-check
 ```
 
@@ -272,3 +275,7 @@ Pop-Location
 8. A successful historical replay is not a profit guarantee.
 9. `status.json` must report `drawdown_equity_scope=STRATEGY_ONLY`; account-wide
    drawdown accounting is not permitted on the shared multi-instrument account.
+10. During drawdown recovery, only R1 pullback or R2 downtrend may enter; add-ons
+    and ML top-ups must remain blocked.
+11. The `$420` hard stop is demo-only at the current account size. Do not infer
+    live-account readiness from this replay.
