@@ -19,6 +19,11 @@ SPEC.loader.exec_module(MODULE)
 def test_us500_deployment_manifest_hashes_every_rollback_artifact() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
 
+    assert manifest["schema_version"] == "us500_v41_shared_demo_deployment_v2"
+    assert manifest["change_class"] == "observability_only"
+    assert manifest["pre_observability_strategy_source_sha256"] == (
+        "91926cd40f33840096478471ab806b8f2b3e91e10775e721eaaf7613bcbb40b7"
+    )
     assert manifest["account_login"] == 1033030
     assert manifest["server"] == "Capital.ComMena-Demo"
     assert manifest["symbol"] == "US500"

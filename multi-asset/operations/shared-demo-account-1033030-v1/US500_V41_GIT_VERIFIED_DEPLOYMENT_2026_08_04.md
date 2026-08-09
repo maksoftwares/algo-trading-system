@@ -9,6 +9,14 @@
 - EA: `SharedAccount1033030\US500V41CausalSharedDemoEA.ex5`
 - Contract: `SHARED_1033030_US500_V41_CAUSAL_CORE_20260804`
 - Source and binary compile result: `0 errors, 0 warnings`
+- Deployment revision: `2026-08-10-observability-only`
+
+The 2026-08-10 revision adds best-effort runtime telemetry for terminal
+connectivity, trading permissions, broker ping, tick freshness, server-clock
+lag, and entry/exit request latency. It adds no retry, order gate, signal,
+threshold, stop, target, sizing, or trading-window change. The regression test
+removes only the instrumentation and recovers the exact prior frozen source
+SHA-256 `91926cd40f33840096478471ab806b8f2b3e91e10775e721eaaf7613bcbb40b7`.
 
 The checked-in preset is intentionally disarmed. The authorized preset remains
 terminal-local. The authorization token is not included in this document or in
@@ -27,6 +35,17 @@ python multi-asset\operations\shared-demo-account-1033030-v1\verify_us500_git_de
 `VERIFIED` means every artifact exists in the resolved commit with the frozen
 hash and the deployed EX5 is byte-for-byte identical to the committed binary.
 The verifier is read-only and never connects to MT5 or submits an order.
+
+Verify the attached EA's fresh operational heartbeat with:
+
+```powershell
+python multi-asset\operations\shared-demo-account-1033030-v1\verify_us500_runtime_health.py
+```
+
+The runtime verifier reads
+`SHARED_1033030_US500_V41_HEALTH.csv` from MT5 Common Files. `DEGRADED`
+reports high broker-request latency for diagnosis only; it never changes or
+blocks trading behavior.
 
 ## Recovery
 

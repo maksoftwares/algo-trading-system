@@ -39,6 +39,7 @@ const string ORDER_AUTH_TOKEN = "AUTHORIZE_SHARED_1033030_US500_V41_DEMO_V1";
 const string RESET_TOKEN = "RESET_US500_V41_PERSISTENT_STATE";
 const string EXPECTED_SERVER = "Capital.ComMena-Demo";
 const string EXPECTED_SYMBOL = "US500";
+const string OPERATIONAL_HEALTH_LOG = "SHARED_1033030_US500_V41_HEALTH.csv";
 const long EXPECTED_ACCOUNT_LOGIN = 1033030;
 const ulong MAGIC_V6 = 65005041;
 const ulong MAGIC_V19 = 65005042;
@@ -89,6 +90,7 @@ int g_lock_handle=INVALID_HANDLE;
 bool g_integrity_failed=false;
 bool g_timer_set=false;
 ulong g_audit_sequence=0;
+ulong g_health_sequence=0;
 int g_last_mutex_refresh=0;
 
 int NthSundayDay(const int year,const int month,const int occurrence)
@@ -385,6 +387,68 @@ bool Audit(const string event_name,const string detail,const int date_key,
       return false;
    }
    return true;
+}
+
+// Best-effort operational telemetry only.  This function is deliberately
+// non-blocking with respect to trading state: a telemetry I/O failure is
+// printed, but never changes integrity, authorization, or order decisions.
+void OperationalHealth(const string event_name,const double order_check_ms=-1.0,
+                       const double order_send_ms=-1.0,
+                       const double requested_price=0.0,
+                       const double fill_price=0.0,const uint retcode=0)
+{
+   datetime utc_now=RuntimeUtcNow();
+   MqlTick tick={};
+   bool have_tick=SymbolInfoTick(_Symbol,tick) && tick.time_msc>0;
+   long tick_age_ms=-1;
+   if(have_tick)
+   {
+      long raw_tick_age_ms=(long)utc_now*1000-tick.time_msc;
+      tick_age_ms=raw_tick_age_ms>0 ? raw_tick_age_ms : 0;
+   }
+   long server_lag_seconds=(long)utc_now-(long)ServerToUtc(TimeCurrent());
+   long ping_us=TerminalInfoInteger(TERMINAL_PING_LAST);
+   double ping_ms=ping_us>=0 ? (double)ping_us/1000.0 : -1.0;
+   int handle=FileOpen(OPERATIONAL_HEALTH_LOG,
+      FILE_READ|FILE_WRITE|FILE_CSV|FILE_COMMON|FILE_SHARE_READ,',');
+   if(handle==INVALID_HANDLE)
+   {
+      PrintFormat("V41 health telemetry open failed err=%d",GetLastError());
+      return;
+   }
+   bool ok=true;
+   if(FileSize(handle)<=2)
+   {
+      if(FileWrite(handle,"utc_time","server_time","event","contract_id",
+         "config_sha256","instance_id","account","server","symbol","connected",
+         "terminal_trade_allowed","mql_trade_allowed","account_trade_allowed",
+         "ping_ms","tick_time_msc","tick_age_ms","server_lag_seconds",
+         "order_check_ms","order_send_ms","requested_price","fill_price",
+         "retcode","event_id")==0)
+         ok=false;
+   }
+   if(ok && !FileSeek(handle,0,SEEK_END))
+      ok=false;
+   ++g_health_sequence;
+   string event_id=StringFormat("V41H-%I64d-%I64u-%I64u",(long)utc_now,
+      GetTickCount64(),g_health_sequence);
+   uint bytes=0;
+   if(ok)
+      bytes=FileWrite(handle,TimeToString(utc_now,TIME_DATE|TIME_SECONDS),
+         TimeToString(TimeCurrent(),TIME_DATE|TIME_SECONDS),event_name,CONTRACT_ID,
+         CONFIG_SHA256,InpInstanceId,AccountInfoInteger(ACCOUNT_LOGIN),
+         AccountInfoString(ACCOUNT_SERVER),_Symbol,
+         TerminalInfoInteger(TERMINAL_CONNECTED),
+         TerminalInfoInteger(TERMINAL_TRADE_ALLOWED),MQLInfoInteger(MQL_TRADE_ALLOWED),
+         AccountInfoInteger(ACCOUNT_TRADE_ALLOWED),DoubleToString(ping_ms,3),
+         have_tick ? tick.time_msc : (long)0,tick_age_ms,server_lag_seconds,
+         DoubleToString(order_check_ms,3),DoubleToString(order_send_ms,3),
+         DoubleToString(requested_price,_Digits),DoubleToString(fill_price,_Digits),
+         retcode,event_id);
+   FileFlush(handle);
+   FileClose(handle);
+   if(!ok || bytes==0)
+      PrintFormat("V41 health telemetry write failed err=%d event=%s",GetLastError(),event_name);
 }
 
 bool TesterTrace(const string event_name,const int date_key,const int minute,
@@ -1072,7 +1136,9 @@ bool SubmitEntry(const SignalState &signal,const RouteState &route,const int min
    request.comment=StringFormat("V41|%s|%d|%d",
       signal.component=="V6_PROTECTED" ? "V6" : "V19",signal.exit_minute,route.date_key);
    ResetLastError();
+   ulong check_started=GetTickCount64();
    bool check_ok=OrderCheck(request,check);
+   double check_ms=(double)(GetTickCount64()-check_started);
    int check_error=GetLastError();
    // MqlTradeCheckResult uses retcode 0 for a successful "Done" check.
    // TRADE_RETCODE_DONE/PLACED belong to the later MqlTradeResult from OrderSend.
@@ -1087,13 +1153,16 @@ bool SubmitEntry(const SignalState &signal,const RouteState &route,const int min
       // remains fail-closed; only Strategy Tester may continue to OrderSend.
       if(!(bool)MQLInfoInteger(MQL_TESTER))
       {
+         OperationalHealth("ORDER_CHECK_FAILED",check_ms,-1.0,price,0.0,check.retcode);
          Audit("ENTRY_BLOCK","ORDER_CHECK_"+IntegerToString((int)check.retcode)
             +"_ERR_"+IntegerToString(check_error),route.date_key,minute,
             signal.component,signal.action_id,route,signal,volume,price,stop,target,0);
          return false;
       }
    }
+   ulong send_started=GetTickCount64();
    bool sent=OrderSend(request,result);
+   double send_ms=(double)(GetTickCount64()-send_started);
    bool filled=sent && (result.retcode==TRADE_RETCODE_DONE
       || result.retcode==TRADE_RETCODE_PLACED || result.retcode==TRADE_RETCODE_DONE_PARTIAL);
    Audit(filled?"ENTRY_SENT":"ENTRY_FAILED",IntegerToString((int)result.retcode),
@@ -1106,6 +1175,7 @@ bool SubmitEntry(const SignalState &signal,const RouteState &route,const int min
          signal.component,signal.action_id,route,signal,volume,price,stop,target,
          result.deal!=0 ? result.deal : result.order,scale);
    }
+   OperationalHealth("ORDER_EXECUTION",check_ms,send_ms,price,result.price,result.retcode);
    return filled;
 }
 
@@ -1152,7 +1222,10 @@ bool ClosePositionTicket(const ulong ticket,const string reason)
    request.deviation=InpMaxDeviationPoints;
    request.type_filling=FillPolicy();
    request.comment="V41_CLOSE_"+reason;
+   ulong close_send_started=GetTickCount64();
    bool sent=OrderSend(request,result);
+   double close_send_ms=(double)(GetTickCount64()-close_send_started);
+   OperationalHealth("CLOSE_EXECUTION",-1.0,close_send_ms,request.price,result.price,result.retcode);
    return sent && (result.retcode==TRADE_RETCODE_DONE
       || result.retcode==TRADE_RETCODE_DONE_PARTIAL || result.retcode==TRADE_RETCODE_PLACED);
 }
@@ -1363,6 +1436,7 @@ int OnInit()
    }
    PrintFormat("V41_INIT_OK|contract=%s|config=%s|tester=%s",
       CONTRACT_ID,CONFIG_SHA256,tester?"true":"false");
+   OperationalHealth("INIT_HEALTH");
    return INIT_SUCCEEDED;
 }
 
@@ -1387,6 +1461,7 @@ void OnTimer()
    Audit("HEARTBEAT",EmergencyStopPresent()?"EMERGENCY_STOP":
       (g_integrity_failed?"INTEGRITY_FAILED":"OK"),DateKey(ny),ny.hour*60+ny.min,
       "","",route,signal,0.0,0.0,0.0,0.0,0);
+   OperationalHealth("HEARTBEAT_HEALTH");
 }
 
 void ProcessWindow(const int window_index,const int date_key,const int minute)
