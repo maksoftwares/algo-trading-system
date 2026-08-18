@@ -1,6 +1,6 @@
 {
-  "schema_version": "us500_v41_shared_demo_deployment_v2",
-  "deployment_revision": "2026-08-10-observability-only",
+  "schema_version": "us500_v41_shared_demo_deployment_v3",
+  "deployment_revision": "2026-08-18-runtime-health-gates",
   "change_class": "observability_only",
   "pre_observability_strategy_source_sha256": "91926cd40f33840096478471ab806b8f2b3e91e10775e721eaaf7613bcbb40b7",
   "account_login": 1033030,
@@ -17,6 +17,6 @@
     "config/us500_v41_shared_demo_1033030.json": "48e8b4f9545b8d37ca131abc3126eacf42609ae1fd7318e2a605c7fbe520b16e",
     "compile_US500V41CausalSharedDemoEA.log": "fc6c44a00c4d824593c301d64770e7b90f46b3d72cff8f41dda2993101728f72",
     "presets/US500_SHARED_1033030_DISARMED.set": "49f70ff0a9e8fe267b134595c1b08380bbb96edac79a443a884dc91d5806940e",
-    "verify_us500_runtime_health.py": "fb58f1bf1c736985162b973af2dc7c0f65e3995d34f0a8ede7cf08f5931b8b8e"
+    "verify_us500_runtime_health.py": "214854eb0d08264ab764bc8aabf63d379c86bb3923105bd68bdcf73789e841d7"
   }
 }

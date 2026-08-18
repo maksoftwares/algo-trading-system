@@ -9,7 +9,7 @@
 - EA: `SharedAccount1033030\US500V41CausalSharedDemoEA.ex5`
 - Contract: `SHARED_1033030_US500_V41_CAUSAL_CORE_20260804`
 - Source and binary compile result: `0 errors, 0 warnings`
-- Deployment revision: `2026-08-10-observability-only`
+- Deployment revision: `2026-08-18-runtime-health-gates`
 
 The 2026-08-10 revision adds best-effort runtime telemetry for terminal
 connectivity, trading permissions, broker ping, tick freshness, server-clock
@@ -17,6 +17,14 @@ lag, and entry/exit request latency. It adds no retry, order gate, signal,
 threshold, stop, target, sizing, or trading-window change. The regression test
 removes only the instrumentation and recovers the exact prior frozen source
 SHA-256 `91926cd40f33840096478471ab806b8f2b3e91e10775e721eaaf7613bcbb40b7`.
+
+The 2026-08-18 verifier revision is Python-only. It joins the health stream to
+the existing EA audit stream and fails closed when the attached EA is disarmed,
+broker action is disabled, the latest initialization is not order-authorized,
+integrity fails, or an emergency stop is active. It also checks server-clock
+lag and requires fresh US500 ticks during the New York decision session. The
+MQ5 source, compiled EX5, strategy logic, thresholds, risk, and terminal state
+are unchanged.
 
 The checked-in preset is intentionally disarmed. The authorized preset remains
 terminal-local. The authorization token is not included in this document or in
@@ -42,10 +50,11 @@ Verify the attached EA's fresh operational heartbeat with:
 python multi-asset\operations\shared-demo-account-1033030-v1\verify_us500_runtime_health.py
 ```
 
-The runtime verifier reads
-`SHARED_1033030_US500_V41_HEALTH.csv` from MT5 Common Files. `DEGRADED`
-reports high broker-request latency for diagnosis only; it never changes or
-blocks trading behavior.
+The runtime verifier reads both `SHARED_1033030_US500_V41_HEALTH.csv` and
+`SHARED_1033030_US500_V41_AUDIT.csv` from MT5 Common Files. `FAILED` now covers
+platform permissions, EA order authorization, fail-closed state, clock lag,
+and decision-session tick freshness. `DEGRADED` reports high broker-request
+latency for diagnosis only; the verifier never changes or blocks trading.
 
 ## Recovery
 
