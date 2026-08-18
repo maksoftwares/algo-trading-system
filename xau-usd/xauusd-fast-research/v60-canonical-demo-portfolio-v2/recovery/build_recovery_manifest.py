@@ -42,6 +42,7 @@ CRITICAL_FILES = [
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/restore_v60_demo.ps1",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_feeds.py",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_portfolio.py",
+    "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_research_feeds.py",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/set_terminal_algo_trading.ps1",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/src/addons.py",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/src/executor.py",
@@ -130,8 +131,8 @@ def main() -> int:
         raise FileNotFoundError(f"Missing recovery inputs: {missing}")
     payload = {
         "schema_version": "xauusd_v60_demo_recovery_manifest_v1",
-        "recovery_tag": "v60-demo-recovery-20260806",
-        "recovery_variant": "drawdown-recovery-v2-20260806",
+        "recovery_tag": "v60-demo-recovery-20260818-runtime-isolation",
+        "recovery_variant": "runtime-feed-isolation-v3-20260818",
         "account_login": 1033030,
         "account_server": "Capital.ComMena-Demo",
         "terminal_root": "C:/MT5PortableTier1BestEA",

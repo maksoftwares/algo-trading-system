@@ -10,7 +10,8 @@ prospective contracts, or their output ledgers.
 The supervisor watches:
 
 - the Capital.com MT5 terminal for demo account `1033030`;
-- the V60 canonical feed worker;
+- the V60 canonical execution-feed worker;
+- the read-only outcome/R5 research-feed worker;
 - the V60 canonical portfolio worker with the drawdown-protection V1 and V4 ML
   overlays; and
 - the read-only monitor covering all nine deployed source IDs and telemetry
@@ -39,7 +40,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File `
   xau-usd\operations\v60-prospective-supervisor-v1\start_supervisor.ps1
 ```
 
-Stop only the supervisor and its three Python workers:
+Stop only the supervisor and its four Python workers:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File `

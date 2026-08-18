@@ -6,7 +6,7 @@ canonical add-on sleeves. The frozen research packages and their ledgers are
 not modified.
 
 Complete-machine recovery is documented in `RECOVERY_RUNBOOK.md`. The Git tag
-`v60-demo-recovery-20260806`, SHA-256 recovery manifest, pinned Python
+`v60-demo-recovery-20260818-runtime-isolation`, SHA-256 recovery manifest, pinned Python
 environment, six required Gold chart definitions, EA sources, model bundle, and replay
 evidence are sufficient to reconstruct the current demo deployment after local
 machine loss. Broker credentials remain owner-managed and are never committed.
@@ -31,11 +31,14 @@ profile, account, historical-parity, currency-conversion, guardian-halt, and
 broker `order_check` gates passed. Live trading remains unauthorized. Runtime files live beneath
 `C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2`.
 
-The feed runner emits a 30-second process heartbeat while bounded slow-feed
-cycles are in progress. The executor still fails closed after 180 seconds
-without a heartbeat or when one feed cycle exceeds 20 minutes. Actionable fast
-feeds and add-ons run before the slow R5 transition refresh so their candidates
-are available to the executor without waiting for that refresh to finish.
+The execution-feed runner emits a 30-second process heartbeat and owns only the
+five feed groups that can create canonical candidates. The executor fails
+closed after 180 seconds without that heartbeat or when an execution-feed cycle
+exceeds 20 minutes. `CORE_OUTCOMES` and the three R5 research groups run in a
+separate supervised process and publish `research_feed_status.json`; their
+latency or failure cannot block deterministic broker action. V25 refreshes are
+scheduled five minutes after the previous V25 cycle completes, preventing a
+long refresh from immediately starting another one.
 The portfolio executor also appends a 60-second `EXECUTOR_HEARTBEAT` event, so
 an idle market is distinguishable from a stopped executor.
 
@@ -119,10 +122,12 @@ on the shared demo terminal.
 
 Run `restore_v60_demo.ps1` once on a new machine to create the dedicated,
 version-locked V60 `.venv`; no unrelated research environment is required.
-Use `start_portfolio.ps1` after a normal restart. It starts one feed process
-and one portfolio process and refuses duplicate launchers. Healthy execution reports
-`ACTIVE_DEMO_BROKER_ACTION` in `status.json`; `feed_status.json` must report all
-eight required feed groups healthy. `set_terminal_algo_trading.ps1` changes the
+Use `start_portfolio.ps1` after a normal restart. It starts one execution-feed
+process, one research-feed process, and one portfolio process and refuses
+duplicate launchers. Healthy execution reports `ACTIVE_DEMO_BROKER_ACTION` in
+`status.json`; `feed_status.json` must report all five execution feed groups
+healthy. Research health is recorded separately and is not an order gate.
+`set_terminal_algo_trading.ps1` changes the
 terminal-wide Algo Trading state only while that terminal is stopped, and keeps
 a backup of `common.ini`.
 
@@ -146,7 +151,9 @@ rank strictly above `0.80` may request one separate
 `0.01`-lot top-up after the baseline fill. At most one ML top-up may be open and
 at most two may be opened per UTC day; every original account,
 direction, source, add-on, position, drawdown, emergency-close, and guardian
-control remains in force.
+control remains in force. A top-up order gets at most three broker-send attempts
+one second apart. Every fill-mode check, send retcode, and `mt5.last_error()`
+snapshot is retained in the append-only order event for diagnosis.
 
 The older `v60-core-demo-executor-v1` package is superseded and must not run at
 the same time as this full canonical package.

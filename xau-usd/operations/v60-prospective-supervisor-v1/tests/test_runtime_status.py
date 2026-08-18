@@ -139,6 +139,7 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
     sources = {str(row["id"]): row for row in config["health_sources"]}
     assert set(workers) == {
         "V60_FEEDS",
+        "V60_RESEARCH_FEEDS",
         "V60_PORTFOLIO",
         "V60_DEPLOYED_SPECIALIST_MONITOR",
     }
@@ -158,6 +159,9 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
         "ACTIVE_DEMO_BROKER_ACTION"
     ]
     assert workers["V60_PORTFOLIO"]["restart_after_consecutive_unhealthy"] == 3
+    assert workers["V60_RESEARCH_FEEDS"]["script"].endswith(
+        "run_research_feeds.py"
+    )
 
 
 def test_v60_health_requires_clear_risk_state_and_no_entry_halt() -> None:

@@ -19,6 +19,13 @@
       "command_marker": "v60-canonical-demo-portfolio-v2*run_feeds.py"
     },
     {
+      "id": "V60_RESEARCH_FEEDS",
+      "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
+      "script": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_research_feeds.py",
+      "args": [],
+      "command_marker": "v60-canonical-demo-portfolio-v2*run_research_feeds.py"
+    },
+    {
       "id": "V60_PORTFOLIO",
       "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
       "script": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_portfolio.py",
@@ -93,6 +100,7 @@
       ],
       "maximum_age_seconds": 300,
       "required_values": {
+        "execution_feeds_ok": true,
         "all_requested_feeds_ok": true,
         "ml_used": false
       }

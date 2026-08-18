@@ -271,25 +271,10 @@ def run_r5_router(config: Mapping[str, Any]) -> dict[str, Any]:
     return module.run_cycle(REPO_ROOT, package)
 
 
-def run_core_feeds(config: Mapping[str, Any], *, include_slow: bool = True) -> dict[str, Any]:
-    from addons import run_addon_feeds
-
-    runners: list[tuple[str, Callable[[Mapping[str, Any]], dict[str, Any]]]] = [
-        ("R1_BOX", run_r1_box),
-        ("R1_PULLBACK", run_r1_pullback),
-        ("R2_R3", run_r2_r3),
-        ("R4", run_r4),
-        ("CORE_OUTCOMES", run_core_outcomes),
-        ("ADDONS", lambda value: run_addon_feeds(value, include_v25=include_slow)),
-    ]
-    if include_slow:
-        runners.extend(
-            [
-                ("R5_COMPONENTS", run_r5_components),
-                ("R5_RESOLVER", run_r5_resolver),
-                ("R5_ROUTER", run_r5_router),
-            ]
-        )
+def _run_feed_group(
+    config: Mapping[str, Any],
+    runners: list[tuple[str, Callable[[Mapping[str, Any]], dict[str, Any]]]],
+) -> dict[str, Any]:
     results: dict[str, Any] = {}
     checked_at = datetime.now(UTC).isoformat().replace("+00:00", "Z")
     for name, runner in runners:
@@ -308,4 +293,54 @@ def run_core_feeds(config: Mapping[str, Any], *, include_slow: bool = True) -> d
         "ml_used": False,
         "feeds": results,
         "all_requested_feeds_ok": all(item["ok"] for item in results.values()),
+    }
+
+
+def run_execution_feeds(
+    config: Mapping[str, Any], *, include_v25: bool = True
+) -> dict[str, Any]:
+    from addons import run_addon_feeds
+
+    return _run_feed_group(
+        config,
+        [
+            ("R1_BOX", run_r1_box),
+            ("R1_PULLBACK", run_r1_pullback),
+            ("R2_R3", run_r2_r3),
+            ("R4", run_r4),
+            (
+                "ADDONS",
+                lambda value: run_addon_feeds(value, include_v25=include_v25),
+            ),
+        ],
+    )
+
+
+def run_research_feeds(config: Mapping[str, Any]) -> dict[str, Any]:
+    return _run_feed_group(
+        config,
+        [
+            ("CORE_OUTCOMES", run_core_outcomes),
+            ("R5_COMPONENTS", run_r5_components),
+            ("R5_RESOLVER", run_r5_resolver),
+            ("R5_ROUTER", run_r5_router),
+        ],
+    )
+
+
+def run_core_feeds(
+    config: Mapping[str, Any], *, include_slow: bool = True
+) -> dict[str, Any]:
+    """Compatibility entry point for one-shot callers outside the live runtime."""
+    execution = run_execution_feeds(config, include_v25=include_slow)
+    if not include_slow:
+        return execution
+    research = run_research_feeds(config)
+    feeds = dict(execution["feeds"])
+    feeds.update(research["feeds"])
+    return {
+        **execution,
+        "updated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+        "feeds": feeds,
+        "all_requested_feeds_ok": all(item["ok"] for item in feeds.values()),
     }

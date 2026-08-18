@@ -1,7 +1,7 @@
 # V60 Demo Disaster-Recovery Runbook
 
 This runbook rebuilds the XAUUSD V60 demo system represented by Git tag
-`v60-demo-recovery-20260806`. The tag, recovery manifest, model bundle, source
+`v60-demo-recovery-20260818-runtime-isolation`. The tag, recovery manifest, model bundle, source
 code, tests, evidence, and six required Gold chart definitions are the durable source of
 truth.
 
@@ -101,6 +101,7 @@ Runtime status files:
 
 - `C:\MT5PortableTier1BestEA\MQL5\Files\v60_canonical_demo_v2\status.json`
 - `C:\MT5PortableTier1BestEA\MQL5\Files\v60_canonical_demo_v2\feed_status.json`
+- `C:\MT5PortableTier1BestEA\MQL5\Files\v60_canonical_demo_v2\research_feed_status.json`
 - `D:\AlgoTradingData\prospective\v60-prospective-supervisor-v1\status.json`
 - `D:\AlgoTradingData\prospective\v60-deployed-specialist-monitor-v1\status.json`
 
@@ -113,7 +114,7 @@ Use this when the repository and terminals are lost.
 ```powershell
 git clone https://github.com/maksoftwares/algo-trading-system.git
 Set-Location .\algo-trading-system
-git checkout v60-demo-recovery-20260806
+git checkout v60-demo-recovery-20260818-runtime-isolation
 ```
 
 Do not recover from a moving branch without first comparing it to this tag.
@@ -265,7 +266,8 @@ Pop-Location
 1. This package is demo-only. `live_authorized` must remain `false`.
 2. Never commit broker passwords or API keys.
 3. Never run the superseded V60 core executor beside this canonical executor.
-4. Never run two copies of the V60 feed or portfolio worker.
+4. Never run two copies of the V60 execution feed, research feed, or portfolio
+   worker.
 5. Never bypass the profile, parity, model-hash, account, server, currency,
    spread, drawdown, or order-check gates.
 6. V8 and V25 remain baseline-only probation sources and cannot receive ML

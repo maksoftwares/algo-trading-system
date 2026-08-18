@@ -17,6 +17,14 @@ RUN = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = RUN
 SPEC.loader.exec_module(RUN)
 
+FEED_SPEC = importlib.util.spec_from_file_location(
+    "v60_execution_feed_run", ROOT / "run_feeds.py"
+)
+assert FEED_SPEC is not None and FEED_SPEC.loader is not None
+FEED_RUN = importlib.util.module_from_spec(FEED_SPEC)
+sys.modules[FEED_SPEC.name] = FEED_RUN
+FEED_SPEC.loader.exec_module(FEED_RUN)
+
 
 def test_config_has_exact_canonical_sources_and_no_ml_authority() -> None:
     config = RUN.load_config()
@@ -530,6 +538,134 @@ def test_guardian_entry_halt_file_is_enforced(tmp_path) -> None:
     assert RUN.active_entry_halts(config) == [str(halt)]
 
 
+def test_send_request_retries_transient_none_and_records_last_error(
+    monkeypatch,
+) -> None:
+    class FakeMt5:
+        ORDER_FILLING_IOC = 1
+        ORDER_FILLING_RETURN = 2
+        ORDER_FILLING_FOK = 3
+
+        def __init__(self) -> None:
+            self.send_calls = 0
+
+        def order_check(self, request):
+            if request["type_filling"] != self.ORDER_FILLING_FOK:
+                return SimpleNamespace(retcode=10030, comment="invalid fill")
+            return SimpleNamespace(retcode=0, comment="check accepted")
+
+        def order_send(self, _request):
+            self.send_calls += 1
+            if self.send_calls == 1:
+                return None
+            return SimpleNamespace(retcode=10009, comment="filled")
+
+        @staticmethod
+        def last_error():
+            return (-10001, "IPC send failed")
+
+    mt5 = FakeMt5()
+    sleeps = []
+    monkeypatch.setattr(RUN.time, "sleep", sleeps.append)
+    diagnostics = {}
+
+    result = RUN.send_request(
+        mt5,
+        {"action": 1},
+        maximum_attempts=2,
+        retry_delay_seconds=1.0,
+        diagnostics=diagnostics,
+    )
+
+    assert result.retcode == 10009
+    assert mt5.send_calls == 2
+    assert sleeps == [1.0]
+    assert diagnostics["attempts_used"] == 2
+    assert diagnostics["requests"][2]["order_send"] == "NONE"
+    assert diagnostics["requests"][2]["last_error"] == {
+        "code": -10001,
+        "message": "IPC send failed",
+    }
+
+
+def test_send_request_keeps_last_meaningful_check_when_send_returns_none() -> None:
+    accepted_check = SimpleNamespace(retcode=0, comment="check accepted")
+
+    class FakeMt5:
+        ORDER_FILLING_IOC = 1
+        ORDER_FILLING_RETURN = 2
+        ORDER_FILLING_FOK = 3
+
+        def __init__(self) -> None:
+            self.send_calls = 0
+
+        @staticmethod
+        def order_check(request):
+            if request["type_filling"] == 3:
+                return accepted_check
+            return SimpleNamespace(retcode=10030, comment="invalid fill")
+
+        def order_send(self, _request):
+            self.send_calls += 1
+            return None
+
+        @staticmethod
+        def last_error():
+            return (-10002, "order send returned no result")
+
+    diagnostics = {}
+    mt5 = FakeMt5()
+    result = RUN.send_request(
+        mt5, {}, maximum_attempts=3, diagnostics=diagnostics
+    )
+
+    assert result is accepted_check
+    assert mt5.send_calls == 1
+    assert diagnostics["attempts_used"] == 1
+    assert diagnostics["requests"][-1]["last_error"]["code"] == -10002
+
+
+def test_successful_reconnect_does_not_erase_cycle_failure_count(
+    tmp_path, monkeypatch
+) -> None:
+    config = {
+        "runtime": {
+            "directory": str(tmp_path),
+            "single_instance_lock_filename": "portfolio.lock",
+            "maximum_consecutive_cycle_failures": 2,
+            "execution_enabled": True,
+            "status_filename": "status.json",
+            "poll_seconds": 0,
+        },
+        "authorization": {"ml_runtime_authorized": False},
+    }
+    mt5 = SimpleNamespace(shutdown=lambda: None)
+    calls = {"initialize": 0, "cycles": 0}
+
+    def initialize(_mt5, _config):
+        calls["initialize"] += 1
+
+    def fail_cycle(_mt5, _config):
+        calls["cycles"] += 1
+        raise RuntimeError("persistent feed failure")
+
+    monkeypatch.setattr(RUN, "load_config", lambda *_args, **_kwargs: config)
+    monkeypatch.setattr(RUN, "load_mt5", lambda: mt5)
+    monkeypatch.setattr(RUN, "initialize_mt5_session", initialize)
+    monkeypatch.setattr(RUN, "mt5_session_problem", lambda *_args: None)
+    monkeypatch.setattr(RUN, "run_cycle", fail_cycle)
+    monkeypatch.setattr(RUN.time, "sleep", lambda _seconds: None)
+    monkeypatch.setattr(sys, "argv", ["run_portfolio.py"])
+
+    assert RUN.main() == 1
+    assert calls == {"initialize": 3, "cycles": 2}
+
+
+def test_slow_execution_feed_is_rescheduled_from_completion(monkeypatch) -> None:
+    monkeypatch.setattr(FEED_RUN.time, "monotonic", lambda: 900.0)
+    assert FEED_RUN.next_slow_deadline(300) == 1200.0
+
+
 def test_balance_waiver_still_refuses_non_demo_trade_mode() -> None:
     config = RUN.load_config()
     account = SimpleNamespace(
@@ -564,10 +700,6 @@ def test_feed_heartbeat_keeps_executor_ready_during_bounded_slow_cycle(tmp_path)
         "R1_PULLBACK",
         "R2_R3",
         "R4",
-        "CORE_OUTCOMES",
-        "R5_COMPONENTS",
-        "R5_RESOLVER",
-        "R5_ROUTER",
         "ADDONS",
     }
     status = {
@@ -577,6 +709,7 @@ def test_feed_heartbeat_keeps_executor_ready_during_bounded_slow_cycle(tmp_path)
         "account_login": 1033030,
         "ml_used": False,
         "feeds": {name: {"ok": True} for name in required},
+        "execution_feeds_ok": True,
         "all_requested_feeds_ok": True,
     }
     (tmp_path / config["runtime"]["feed_status_filename"]).write_text(
@@ -590,6 +723,40 @@ def test_feed_heartbeat_keeps_executor_ready_during_bounded_slow_cycle(tmp_path)
     assert result["cycle_within_deadline"] is True
 
 
+def test_research_feed_failure_does_not_block_execution(tmp_path) -> None:
+    config = RUN.load_config()
+    config["runtime"]["directory"] = str(tmp_path)
+    now = datetime.now(UTC)
+    execution = {"R1_BOX", "R1_PULLBACK", "R2_R3", "R4", "ADDONS"}
+    feeds = {name: {"ok": True} for name in execution}
+    feeds.update(
+        {
+            "CORE_OUTCOMES": {"ok": False},
+            "R5_COMPONENTS": {"ok": False},
+            "R5_RESOLVER": {"ok": False},
+            "R5_ROUTER": {"ok": False},
+        }
+    )
+    status = {
+        "updated_at_utc": now.isoformat(),
+        "cycle_in_progress": False,
+        "cycle_started_at_utc": now.isoformat(),
+        "account_login": 1033030,
+        "ml_used": False,
+        "feeds": feeds,
+        "execution_feeds_ok": True,
+        "all_requested_feeds_ok": False,
+    }
+    (tmp_path / config["runtime"]["feed_status_filename"]).write_text(
+        json.dumps(status), encoding="utf-8"
+    )
+
+    result = RUN.feed_preflight(config, require_ready=True)
+
+    assert result["ready"] is True
+    assert result["execution_feeds_ok"] is True
+
+
 def test_feed_heartbeat_cannot_hide_cycle_that_exceeds_deadline(tmp_path) -> None:
     config = RUN.load_config()
     config["runtime"]["directory"] = str(tmp_path)
@@ -599,10 +766,6 @@ def test_feed_heartbeat_cannot_hide_cycle_that_exceeds_deadline(tmp_path) -> Non
         "R1_PULLBACK",
         "R2_R3",
         "R4",
-        "CORE_OUTCOMES",
-        "R5_COMPONENTS",
-        "R5_RESOLVER",
-        "R5_ROUTER",
         "ADDONS",
     }
     status = {
@@ -612,6 +775,7 @@ def test_feed_heartbeat_cannot_hide_cycle_that_exceeds_deadline(tmp_path) -> Non
         "account_login": 1033030,
         "ml_used": False,
         "feeds": {name: {"ok": True} for name in required},
+        "execution_feeds_ok": True,
         "all_requested_feeds_ok": True,
     }
     (tmp_path / config["runtime"]["feed_status_filename"]).write_text(

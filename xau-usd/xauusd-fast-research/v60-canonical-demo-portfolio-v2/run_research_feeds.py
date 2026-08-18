@@ -13,17 +13,17 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from executor import atomic_write_json  # noqa: E402
-from feeds import run_execution_feeds  # noqa: E402
+from feeds import run_research_feeds  # noqa: E402
 
 
 CONFIG_PATH = ROOT / "config" / "v60_canonical_demo_portfolio_v2.json"
-REQUIRED_EXECUTION_FEEDS = {
-    "R1_BOX",
-    "R1_PULLBACK",
-    "R2_R3",
-    "R4",
-    "ADDONS",
+REQUIRED_RESEARCH_FEEDS = {
+    "CORE_OUTCOMES",
+    "R5_COMPONENTS",
+    "R5_RESOLVER",
+    "R5_ROUTER",
 }
+STATUS_FILENAME = "research_feed_status.json"
 
 
 def load_config(path: Path) -> dict:
@@ -37,45 +37,40 @@ def utc_text() -> str:
 def status_payload(
     config: dict,
     accumulated: dict[str, dict],
-    required: set[str],
     *,
     cycle_in_progress: bool,
     cycle_started_at_utc: str,
     last_completed_at_utc: str | None,
 ) -> dict:
-    execution_feeds_ok = required.issubset(accumulated) and all(
-        bool(accumulated[name].get("ok")) for name in required
+    ready = REQUIRED_RESEARCH_FEEDS.issubset(accumulated) and all(
+        bool(accumulated[name].get("ok")) for name in REQUIRED_RESEARCH_FEEDS
     )
     return {
-        "schema_version": "xauusd_v60_canonical_feed_status_v2",
+        "schema_version": "xauusd_v60_research_feed_status_v1",
         "updated_at_utc": utc_text(),
         "last_completed_at_utc": last_completed_at_utc,
         "cycle_in_progress": cycle_in_progress,
         "cycle_started_at_utc": cycle_started_at_utc,
         "account_login": int(config["account"]["expected_login"]),
+        "broker_action_authorized": False,
         "ml_used": False,
         "feeds": accumulated,
-        "required_feeds": sorted(required),
-        "execution_feeds_ok": execution_feeds_ok,
-        "all_requested_feeds_ok": execution_feeds_ok,
+        "required_feeds": sorted(REQUIRED_RESEARCH_FEEDS),
+        "research_feeds_ok": ready,
+        "all_requested_feeds_ok": ready,
     }
-
-
-def next_slow_deadline(interval_seconds: int) -> float:
-    return time.monotonic() + max(0, int(interval_seconds))
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Run deterministic V59/V60 execution feeds"
+        description="Run outcome and R5 research feeds without gating execution"
     )
     parser.add_argument("--config", type=Path, default=CONFIG_PATH)
     parser.add_argument("--once", action="store_true")
     args = parser.parse_args()
     config = load_config(args.config.resolve())
     runtime = Path(config["runtime"]["directory"])
-    status_path = runtime / config["runtime"]["feed_status_filename"]
-    required = REQUIRED_EXECUTION_FEEDS
+    status_path = runtime / STATUS_FILENAME
     accumulated: dict[str, dict] = {}
     if status_path.is_file():
         previous = load_config(status_path)
@@ -85,10 +80,8 @@ def main() -> int:
         )
     else:
         last_completed_at_utc = None
-    next_slow_at = 0.0
+
     while True:
-        current = time.monotonic()
-        include_slow = current >= next_slow_at
         cycle_started_at_utc = utc_text()
         stop_heartbeat = threading.Event()
 
@@ -100,7 +93,6 @@ def main() -> int:
                     status_payload(
                         config,
                         accumulated,
-                        required,
                         cycle_in_progress=True,
                         cycle_started_at_utc=cycle_started_at_utc,
                         last_completed_at_utc=last_completed_at_utc,
@@ -112,27 +104,25 @@ def main() -> int:
             status_payload(
                 config,
                 accumulated,
-                required,
                 cycle_in_progress=True,
                 cycle_started_at_utc=cycle_started_at_utc,
                 last_completed_at_utc=last_completed_at_utc,
             ),
         )
         heartbeat_thread = threading.Thread(
-            target=heartbeat, name="v60-feed-heartbeat", daemon=True
+            target=heartbeat, name="v60-research-feed-heartbeat", daemon=True
         )
         heartbeat_thread.start()
         try:
-            status = run_execution_feeds(config, include_v25=include_slow)
+            result = run_research_feeds(config)
         finally:
             stop_heartbeat.set()
             heartbeat_thread.join()
-        accumulated.update(status["feeds"])
-        last_completed_at_utc = status["updated_at_utc"]
+        accumulated.update(result["feeds"])
+        last_completed_at_utc = result["updated_at_utc"]
         status = status_payload(
             config,
             accumulated,
-            required,
             cycle_in_progress=False,
             cycle_started_at_utc=cycle_started_at_utc,
             last_completed_at_utc=last_completed_at_utc,
@@ -140,12 +130,8 @@ def main() -> int:
         atomic_write_json(status_path, status)
         print(json.dumps(status, sort_keys=True), flush=True)
         if args.once:
-            return 0 if status["all_requested_feeds_ok"] else 1
-        if include_slow:
-            next_slow_at = next_slow_deadline(
-                int(config["runtime"]["slow_feed_poll_seconds"])
-            )
-        time.sleep(int(config["runtime"]["feed_poll_seconds"]))
+            return 0 if status["research_feeds_ok"] else 1
+        time.sleep(int(config["runtime"]["slow_feed_poll_seconds"]))
 
 
 if __name__ == "__main__":

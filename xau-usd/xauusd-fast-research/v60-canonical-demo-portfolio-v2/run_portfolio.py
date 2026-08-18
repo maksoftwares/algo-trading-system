@@ -49,6 +49,10 @@ from ml_topup import (  # noqa: E402
 CONFIG_PATH = ROOT / "config" / "v60_canonical_demo_portfolio_v2.json"
 ML_OVERLAY_PATH = ROOT / "config" / "v60_portable_ml_topup_v4_overlay.json"
 PROTECTION_OVERLAY_PATH = ROOT / "config" / "v60_drawdown_protection_v1_overlay.json"
+ML_TOPUP_SEND_ATTEMPTS = 3
+ML_TOPUP_SEND_RETRY_SECONDS = 1.0
+SAFE_ORDER_SEND_RETRY_RETCODES = RETRYABLE_RETCODES - {10012}
+MT5_IPC_SEND_FAILED = -10001
 
 
 class SingleInstanceLock:
@@ -422,16 +426,19 @@ def feed_preflight(config: Mapping[str, Any], *, require_ready: bool) -> dict[st
         "R1_PULLBACK",
         "R2_R3",
         "R4",
-        "CORE_OUTCOMES",
-        "R5_COMPONENTS",
-        "R5_RESOLVER",
-        "R5_ROUTER",
         "ADDONS",
     }
-    observed = set(status.get("feeds", {}))
+    feed_rows = status.get("feeds", {})
+    observed = set(feed_rows)
+    execution_feeds_ok = required.issubset(observed) and all(
+        bool(feed_rows[name].get("ok")) for name in required
+    )
+    if "execution_feeds_ok" in status:
+        execution_feeds_ok = execution_feeds_ok and bool(
+            status["execution_feeds_ok"]
+        )
     ready = (
-        required.issubset(observed)
-        and bool(status.get("all_requested_feeds_ok"))
+        execution_feeds_ok
         and age_seconds
         <= int(config["runtime"]["maximum_feed_status_age_seconds"])
         and cycle_within_deadline
@@ -439,7 +446,7 @@ def feed_preflight(config: Mapping[str, Any], *, require_ready: bool) -> dict[st
     if require_ready and not ready:
         raise RuntimeError(
             f"Canonical feeds are not ready: age={age_seconds:.1f}s "
-            f"all_ok={status.get('all_requested_feeds_ok')} "
+            f"execution_ok={execution_feeds_ok} "
             f"cycle_age={cycle_age_seconds:.1f}s"
         )
     return {
@@ -448,7 +455,8 @@ def feed_preflight(config: Mapping[str, Any], *, require_ready: bool) -> dict[st
         "cycle_age_seconds": cycle_age_seconds,
         "cycle_in_progress": bool(status.get("cycle_in_progress")),
         "cycle_within_deadline": cycle_within_deadline,
-        "all_requested_feeds_ok": bool(status.get("all_requested_feeds_ok")),
+        "execution_feeds_ok": execution_feeds_ok,
+        "all_requested_feeds_ok": execution_feeds_ok,
         "ml_used": bool(status.get("ml_used", True)),
         "required_feeds_present": required.issubset(observed),
     }
@@ -674,31 +682,133 @@ def active_entry_halts(config: Mapping[str, Any]) -> list[str]:
     ]
 
 
-def send_request(mt5: Any, request: dict[str, Any]) -> Any:
+def mt5_last_error_snapshot(mt5: Any) -> dict[str, Any] | None:
+    try:
+        value = mt5.last_error()
+    except Exception as exc:
+        return {"exception": f"{type(exc).__name__}: {exc}"}
+    if value is None:
+        return None
+    if isinstance(value, (list, tuple)):
+        code = value[0] if value else None
+        message = value[1] if len(value) > 1 else ""
+        try:
+            code = None if code is None else int(code)
+        except (TypeError, ValueError):
+            code = str(code)
+        return {"code": code, "message": str(message)}
+    return {"value": str(value)}
+
+
+def send_request(
+    mt5: Any,
+    request: dict[str, Any],
+    *,
+    maximum_attempts: int = 1,
+    retry_delay_seconds: float = 0.0,
+    diagnostics: dict[str, Any] | None = None,
+) -> Any:
     fill_modes = [
         mt5.ORDER_FILLING_IOC,
         mt5.ORDER_FILLING_RETURN,
         mt5.ORDER_FILLING_FOK,
     ]
+    maximum_attempts = max(1, int(maximum_attempts))
+    request_records: list[dict[str, Any]] = []
     last = None
-    for filling in fill_modes:
-        attempt = dict(request, type_filling=filling)
-        check = mt5.order_check(attempt)
-        if check is None:
-            last = None
-            continue
-        if int(check.retcode) not in {0, *SUCCESS_RETCODES}:
+    attempts_used = 0
+
+    def finish() -> None:
+        if diagnostics is None:
+            return
+        diagnostics.clear()
+        diagnostics.update(
+            {
+                "maximum_attempts": maximum_attempts,
+                "attempts_used": attempts_used,
+                "requests": request_records,
+                "last_error": mt5_last_error_snapshot(mt5),
+            }
+        )
+
+    for request_attempt in range(1, maximum_attempts + 1):
+        attempts_used = request_attempt
+        retryable_round = False
+        for filling in fill_modes:
+            attempt = dict(request, type_filling=filling)
+            record: dict[str, Any] = {
+                "attempt": request_attempt,
+                "fill_mode": int(filling),
+            }
+            check = mt5.order_check(attempt)
+            if check is None:
+                retryable_round = True
+                record.update(
+                    {
+                        "order_check": "NONE",
+                        "last_error": mt5_last_error_snapshot(mt5),
+                    }
+                )
+                request_records.append(record)
+                continue
             last = check
-            continue
-        result = mt5.order_send(attempt)
-        last = result
-        if result is not None and int(result.retcode) in SUCCESS_RETCODES:
+            check_retcode = int(check.retcode)
+            record.update(
+                {
+                    "check_retcode": check_retcode,
+                    "check_comment": str(getattr(check, "comment", "")),
+                }
+            )
+            if check_retcode not in {0, *SUCCESS_RETCODES}:
+                retryable_round = retryable_round or check_retcode in {
+                    10030,
+                    *RETRYABLE_RETCODES,
+                }
+                request_records.append(record)
+                continue
+            result = mt5.order_send(attempt)
+            if result is None:
+                last_error = mt5_last_error_snapshot(mt5)
+                record.update(
+                    {
+                        "order_send": "NONE",
+                        "last_error": last_error,
+                    }
+                )
+                request_records.append(record)
+                if (
+                    last_error is not None
+                    and last_error.get("code") == MT5_IPC_SEND_FAILED
+                ):
+                    retryable_round = True
+                    break
+                finish()
+                return last
+            last = result
+            result_retcode = int(result.retcode)
+            record.update(
+                {
+                    "send_retcode": result_retcode,
+                    "send_comment": str(getattr(result, "comment", "")),
+                }
+            )
+            request_records.append(record)
+            if result_retcode in SUCCESS_RETCODES:
+                finish()
+                return result
+            if result_retcode == 10030:
+                retryable_round = True
+                continue
+            if result_retcode in SAFE_ORDER_SEND_RETRY_RETCODES:
+                retryable_round = True
+                break
+            finish()
             return result
-        if result is not None and int(result.retcode) not in {
-            10030,
-            *RETRYABLE_RETCODES,
-        }:
-            return result
+        if request_attempt < maximum_attempts and retryable_round:
+            time.sleep(max(0.0, float(retry_delay_seconds)))
+        else:
+            break
+    finish()
     return last
 
 
@@ -763,6 +873,9 @@ def open_candidate(
     *,
     volume: float | None = None,
     comment_override: str | None = None,
+    send_attempts: int = 1,
+    send_retry_delay_seconds: float = 0.0,
+    request_diagnostics: dict[str, Any] | None = None,
 ) -> tuple[Any, str, str | None, Any | None]:
     point = float(symbol_info.point)
     minimum_stop = max(point, float(symbol_info.trade_stops_level) * point)
@@ -800,7 +913,13 @@ def open_candidate(
         "comment": comment,
         "type_time": mt5.ORDER_TIME_GTC,
     }
-    result = send_request(mt5, request)
+    result = send_request(
+        mt5,
+        request,
+        maximum_attempts=send_attempts,
+        retry_delay_seconds=send_retry_delay_seconds,
+        diagnostics=request_diagnostics,
+    )
     position = None
     if result is not None and int(result.retcode) in SUCCESS_RETCODES:
         for _ in range(10):
@@ -1716,6 +1835,8 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
                     "reason": topup_reason,
                 }
                 if topup_reason is None:
+                    topup_request_diagnostics: dict[str, Any] = {}
+                    order_record["request_diagnostics"] = topup_request_diagnostics
                     try:
                         (
                             topup_result,
@@ -1730,6 +1851,9 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
                             topup_tick,
                             volume=float(config["ml_topup"]["topup_lot"]),
                             comment_override=topup_comment(candidate),
+                            send_attempts=ML_TOPUP_SEND_ATTEMPTS,
+                            send_retry_delay_seconds=ML_TOPUP_SEND_RETRY_SECONDS,
+                            request_diagnostics=topup_request_diagnostics,
                         )
                         topup_retcode = (
                             None
@@ -1989,10 +2113,10 @@ def main() -> int:
                         return 1
                     try:
                         initialize_mt5_session(mt5, config)
-                        consecutive_failures = 0
                     except Exception:
-                        if consecutive_failures >= maximum_failures:
-                            return 1
+                        pass
+                    if consecutive_failures >= maximum_failures:
+                        return 1
                 if args.once:
                     return 0
                 time.sleep(int(config["runtime"]["poll_seconds"]))
