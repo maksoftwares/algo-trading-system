@@ -41,6 +41,8 @@ def test_config_has_exact_canonical_sources_and_no_ml_authority() -> None:
     assert config["risk"]["drawdown_equity_fraction_limits_enabled"] is False
     assert config["risk"]["combined_closed_drawdown_hard_stop_usd"] == 420.0
     assert config["risk"]["floating_drawdown_hard_stop_usd"] == 420.0
+    assert RUN.quarantined_source_ids(config) == {"V8_RETEST_HEALTH"}
+    assert "V8_RETEST_HEALTH" not in RUN.execution_source_ids(config)
     assert config["risk"]["closed_drawdown_recovery"]["eligible_source_ids"] == [
         "R1_PULLBACK",
         "R2_DOWNTREND",
@@ -48,10 +50,11 @@ def test_config_has_exact_canonical_sources_and_no_ml_authority() -> None:
     parity = RUN.verify_deployment_parity(config)
     assert parity["status"] == "PASS"
     assert parity["unknown_execution_source_ids"] == []
-    assert parity["probation_source_ids"] == [
-        "V25_CHOP",
-        "V8_RETEST_HEALTH",
-    ]
+    assert parity["probation_source_ids"] == ["V25_CHOP"]
+    assert parity["execution_quarantined_source_ids"] == ["V8_RETEST_HEALTH"]
+    assert parity["quarantined_source_evidence"]["V8_RETEST_HEALTH"]["status"] == (
+        "DEMO_PROBATION"
+    )
     assert config["runtime"]["execution_enabled"] is True
     cooldowns = {
         str(source["source_id"]): int(

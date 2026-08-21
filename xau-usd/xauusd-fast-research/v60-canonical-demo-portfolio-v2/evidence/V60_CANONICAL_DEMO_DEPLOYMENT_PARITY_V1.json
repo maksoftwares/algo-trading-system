@@ -1,15 +1,15 @@
 {
   "all_history": {
-    "closed_trade_drawdown_usd": 279.03947729639003,
-    "gross_loss_usd": -8238.777032466616,
-    "gross_profit_usd": 13671.242988139082,
-    "net_pnl_usd": 5432.465955672466,
-    "profit_factor": 1.6593777127678904,
-    "trade_rows": 2153,
-    "win_rate": 0.447282861124013
+    "closed_trade_drawdown_usd": 257.96477167849093,
+    "gross_loss_usd": -7735.51046923252,
+    "gross_profit_usd": 13149.798593131742,
+    "net_pnl_usd": 5414.288123899222,
+    "profit_factor": 1.6999264166772436,
+    "trade_rows": 1949,
+    "win_rate": 0.4448435094920472
   },
-  "baseline_historical_trade_rows": 2184,
-  "basis": "Frozen V60 account-routed price ledger filtered to the exact current executable source population, with the V57 same-direction 120-minute post-realized-loss cooldown applied path-dependently; R5 is excluded because it is not executable.",
+  "baseline_historical_trade_rows": 1980,
+  "basis": "Frozen V60 account-routed price ledger filtered to the exact current executable source population, with the V57 same-direction 120-minute post-realized-loss cooldown applied path-dependently; R5 is excluded because it is not executable, and V8 remains observed but is quarantined from broker execution.",
   "checks": {
     "all_history_is_profitable_after_stress": true,
     "baseline_historical_trade_rows_match": true,
@@ -17,6 +17,7 @@
     "executable_historical_trade_rows_match": true,
     "final_twelve_month_window_is_profitable_after_stress": true,
     "no_unknown_execution_sources": true,
+    "quarantined_sources_absent_from_execution": true,
     "r5_is_excluded": true,
     "v57_cooldown_is_exactly_120_minutes": true
   },
@@ -31,23 +32,25 @@
     "R4_CHOP",
     "V25_CHOP",
     "V57_BREAK_SWING_H4ADX_HIGH",
-    "V7_SWING_HEALTH",
+    "V7_SWING_HEALTH"
+  ],
+  "execution_quarantined_source_ids": [
     "V8_RETEST_HEALTH"
   ],
   "final_twelve_months": {
     "closed_trade_drawdown_usd": 208.4143543521311,
     "end_exclusive_utc": "2026-07-01T00:00:00Z",
-    "gross_loss_usd": -2544.1176426220572,
-    "gross_profit_usd": 5046.84089350449,
-    "net_pnl_usd": 2502.7232508824322,
-    "profit_factor": 1.9837293720046052,
+    "gross_loss_usd": -2414.2157293465507,
+    "gross_profit_usd": 4932.65568092029,
+    "net_pnl_usd": 2518.4399515737396,
+    "profit_factor": 2.0431710476243974,
     "start_inclusive_utc": "2025-07-01T00:00:00Z",
-    "trade_rows": 356,
-    "win_rate": 0.4410112359550562
+    "trade_rows": 337,
+    "win_rate": 0.44510385756676557
   },
   "historical_ledger_path": "xau-usd/xauusd-fast-research/one-trade-per-day-floating-equity-v60/outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet",
   "historical_ledger_sha256": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf",
-  "historical_trade_rows": 2153,
+  "historical_trade_rows": 1949,
   "limitations": [
     "This is fixed-0.01-lot historical research evidence, not a profit promise.",
     "The new activation-equity risk controls are runtime safety controls and are not retroactively optimized into this ledger.",
@@ -261,7 +264,15 @@
         "win_rate": 0.5
       },
       "status": "CONFIRMED"
-    },
+    }
+  },
+  "post_loss_cooldowns_minutes": {
+    "V57_BREAK_SWING_H4ADX_HIGH": 120
+  },
+  "probation_source_ids": [
+    "V25_CHOP"
+  ],
+  "quarantined_source_evidence": {
     "V8_RETEST_HEALTH": {
       "all_history": {
         "closed_trade_drawdown_usd": 114.96728022024432,
@@ -289,11 +300,15 @@
       "status": "DEMO_PROBATION"
     }
   },
-  "post_loss_cooldowns_minutes": {
-    "V57_BREAK_SWING_H4ADX_HIGH": 120
-  },
-  "probation_source_ids": [
+  "registered_source_ids": [
+    "R1_BOX",
+    "R1_PULLBACK",
+    "R2_DOWNTREND",
+    "R3_COMPRESSION",
+    "R4_CHOP",
     "V25_CHOP",
+    "V57_BREAK_SWING_H4ADX_HIGH",
+    "V7_SWING_HEALTH",
     "V8_RETEST_HEALTH"
   ],
   "schema_version": "xauusd_v60_deployment_parity_v1",

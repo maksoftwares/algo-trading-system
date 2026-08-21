@@ -23,8 +23,8 @@ LEDGER_PATH = (
     / "outputs/ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet"
 )
 OUTPUT_PATH = ROOT / "evidence" / "V60_CANONICAL_DEMO_DEPLOYMENT_PARITY_V1.json"
-EXPECTED_BASELINE_ROWS = 2184
-EXPECTED_EXECUTABLE_ROWS = 2153
+EXPECTED_BASELINE_ROWS = 1980
+EXPECTED_EXECUTABLE_ROWS = 1949
 FINAL_WINDOW_START = pd.Timestamp("2025-07-01T00:00:00Z")
 FINAL_WINDOW_END = pd.Timestamp("2026-07-01T00:00:00Z")
 
@@ -93,7 +93,17 @@ def source_evidence(
 
 def main() -> int:
     config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
-    source_ids = sorted(str(row["source_id"]) for row in config["sources"])
+    registered_source_ids = sorted(
+        str(row["source_id"]) for row in config["sources"]
+    )
+    source_ids = sorted(
+        str(row["source_id"])
+        for row in config["sources"]
+        if bool(row.get("execution_enabled", True))
+    )
+    quarantined_source_ids = sorted(
+        set(registered_source_ids) - set(source_ids)
+    )
     cooldowns = {
         str(source["source_id"]): int(
             source.get("same_direction_post_loss_cooldown_minutes", 0)
@@ -110,7 +120,7 @@ def main() -> int:
         axis=1,
     )
     unknown_sources = sorted(
-        set(candidate_population["execution_source_id"]) - set(source_ids)
+        set(candidate_population["execution_source_id"]) - set(registered_source_ids)
     )
     baseline = candidate_population.loc[
         candidate_population["execution_source_id"].isin(source_ids)
@@ -127,6 +137,19 @@ def main() -> int:
             window.loc[window["execution_source_id"].eq(source_id)],
         )
         for source_id in source_ids
+    }
+    quarantined_source_evidence = {
+        source_id: source_evidence(
+            candidate_population.loc[
+                candidate_population["execution_source_id"].eq(source_id)
+            ],
+            candidate_population.loc[
+                candidate_population["execution_source_id"].eq(source_id)
+                & candidate_population["entry_time"].ge(FINAL_WINDOW_START)
+                & candidate_population["entry_time"].lt(FINAL_WINDOW_END)
+            ],
+        )
+        for source_id in quarantined_source_ids
     }
     probation_sources = sorted(
         source_id
@@ -148,6 +171,9 @@ def main() -> int:
             filtered["execution_source_id"].unique().tolist()
         )
         == source_ids,
+        "quarantined_sources_absent_from_execution": not filtered[
+            "execution_source_id"
+        ].isin(quarantined_source_ids).any(),
         "all_history_is_profitable_after_stress": float(
             filtered["fee_stress_pnl_usd"].sum()
         )
@@ -164,11 +190,14 @@ def main() -> int:
             "Frozen V60 account-routed price ledger filtered to the exact current "
             "executable source population, with the V57 same-direction 120-minute "
             "post-realized-loss cooldown applied path-dependently; R5 is excluded "
-            "because it is not executable."
+            "because it is not executable, and V8 remains observed but is quarantined "
+            "from broker execution."
         ),
         "historical_ledger_path": LEDGER_PATH.relative_to(REPO_ROOT).as_posix(),
         "historical_ledger_sha256": sha256_file(LEDGER_PATH),
         "executable_source_ids": source_ids,
+        "registered_source_ids": registered_source_ids,
+        "execution_quarantined_source_ids": quarantined_source_ids,
         "unknown_execution_source_ids": unknown_sources,
         "excluded_specialist_ids": ["R5_TRANSITION"],
         "post_loss_cooldowns_minutes": cooldowns,
@@ -193,6 +222,7 @@ def main() -> int:
             "probation_ml_topup_allowed": False,
         },
         "per_source": per_source,
+        "quarantined_source_evidence": quarantined_source_evidence,
         "probation_source_ids": probation_sources,
         "checks": checks,
         "limitations": [

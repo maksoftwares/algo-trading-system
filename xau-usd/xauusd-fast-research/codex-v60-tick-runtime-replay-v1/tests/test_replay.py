@@ -127,8 +127,13 @@ def scenario(
     rebaseline_days: int | None = None,
     guardian_exit_attribution: str = "DEPLOYED_MAGIC_FILTER",
     protection: bool = False,
+    guardian_close_positions: bool | None = None,
 ) -> Scenario:
     contract, config = real_inputs()
+    if guardian_close_positions is not None:
+        contract["guardian"]["daily_loss_stop_close_positions"] = (
+            guardian_close_positions
+        )
     if protection:
         contract["inputs"]["portfolio_protection_overlay"] = (
             "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/"
@@ -270,6 +275,48 @@ def test_position_attribution_counterfactual_tracks_guardian_close():
     replay.process_cycle(5000, 5000, 970.0, 970.1)
     assert replay.guardian.locked
     assert replay.v60_closed_pnl == replay.account_closed_pnl
+
+
+def test_guardian_daily_loss_halt_only_preserves_open_position():
+    trade = candidate(
+        "guardian-halt-only",
+        entry_ms=0,
+        exit_ms=20000,
+        pnl=2.0,
+        entry_price=1000.1,
+    )
+    replay = scenario(
+        [trade],
+        guardian=True,
+        guardian_exit_attribution="POSITION_ORIGIN",
+        guardian_close_positions=False,
+    )
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+    replay.process_cycle(5000, 5000, 970.0, 970.1)
+
+    assert replay.guardian.locked
+    assert "guardian-halt-only" in replay.positions
+    assert replay.account_closed_pnl == 0.0
+    replay.process_cycle(20000, 20000, 1002.0, 1002.1)
+    assert not replay.positions
+    assert replay.account_closed_pnl == 2.0
+
+
+def test_execution_quarantine_rejects_v8_but_keeps_candidate_observable():
+    trade = candidate(
+        "v8-quarantine",
+        entry_ms=0,
+        exit_ms=5000,
+        source_id="V8_RETEST_HEALTH",
+        sleeve_type="ADDON",
+        event_id="v8",
+    )
+    replay = scenario([trade])
+
+    replay.process_cycle(0, 0, 1000.0, 1000.1)
+
+    assert "v8-quarantine" not in replay.positions
+    assert replay.rejections["SOURCE_EXECUTION_QUARANTINED"] == 1
 
 
 def test_floating_hard_stop_closes_position():

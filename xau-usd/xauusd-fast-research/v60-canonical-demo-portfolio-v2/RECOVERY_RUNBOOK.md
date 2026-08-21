@@ -1,7 +1,7 @@
 # V60 Demo Disaster-Recovery Runbook
 
 This runbook rebuilds the XAUUSD V60 demo system represented by Git tag
-`v60-demo-recovery-20260818-runtime-isolation`. The tag, recovery manifest, model bundle, source
+`v60-demo-recovery-20260821-v8-guardian-halt`. The tag, recovery manifest, model bundle, source
 code, tests, evidence, and six required Gold chart definitions are the durable source of
 truth.
 
@@ -11,14 +11,15 @@ The recovery target is:
 - server `Capital.ComMena-Demo`;
 - symbol `XAUUSD`;
 - terminal root `C:\MT5PortableTier1BestEA`;
-- nine deterministic source IDs;
+- nine registered deterministic source IDs, of which eight may execute;
 - bounded V4 ML top-ups for confirmed sources only;
 - hash-bound drawdown-protection V1 overlay;
 - no minimum-balance gate;
 - activation-equity-scaled entry-risk limits and absolute-USD fixed-lot
   drawdown limits;
 - bounded core-only drawdown recovery and a `$420` final hard stop;
-- strategy-scoped floating drawdown and loss-only `-100 AED` daily guardian;
+- strategy-scoped floating drawdown and a loss-only `-100 AED` daily guardian
+  that halts new entries without force-closing existing positions;
 - no live-account authorization.
 
 Passwords, broker credentials, MT5 installation files, current open positions,
@@ -92,8 +93,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File `
 - supervisor `status.json` reports `READY`;
 - account login is `1033030`;
 - `live_authorized` is `false`;
-- all nine deployed sources are healthy;
-- no hard stop, suspension, or entry-halt file is active.
+- all eight executable sources are healthy and `V8_RETEST_HEALTH` is reported
+  as execution-quarantined;
+- no hard stop or unexplained suspension is active; if a daily entry-halt file
+  exists, its reason and Dubai trading date match the current guardian state;
 - `portfolio_protection.enabled` is `true` and
   `profit_protection_close_failures` is `0`.
 
@@ -114,7 +117,7 @@ Use this when the repository and terminals are lost.
 ```powershell
 git clone https://github.com/maksoftwares/algo-trading-system.git
 Set-Location .\algo-trading-system
-git checkout v60-demo-recovery-20260818-runtime-isolation
+git checkout v60-demo-recovery-20260821-v8-guardian-halt
 ```
 
 Do not recover from a moving branch without first comparing it to this tag.
@@ -270,8 +273,8 @@ Pop-Location
    worker.
 5. Never bypass the profile, parity, model-hash, account, server, currency,
    spread, drawdown, or order-check gates.
-6. V8 and V25 remain baseline-only probation sources and cannot receive ML
-   top-ups.
+6. V8 is execution-quarantined. V25 remains a baseline-only probation source.
+   Neither can receive ML top-ups.
 7. The ML layer can only add one bounded top-up after a baseline fill. Failure
    always falls back to the deterministic baseline.
 8. A successful historical replay is not a profit guarantee.

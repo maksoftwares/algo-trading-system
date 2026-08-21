@@ -14,6 +14,7 @@ input double InpNextDailyFloorAed = 100.0;
 input bool InpHaltEntriesWhenArmed = true;
 input bool InpDailyLossStopEnabled = false;
 input double InpDailyLossStopAed = -150.0;
+input bool InpDailyLossStopClosePositions = true;
 input string InpCloseScopeSymbol = "";
 input string InpAllowedPositionMagicsCsv = "";
 input bool InpStrategyScopedPnl = true;
@@ -239,6 +240,7 @@ void EnsureStartupHeader()
       "next_daily_floor_aed",
       "daily_loss_stop_enabled",
       "daily_loss_stop_aed",
+      "daily_loss_stop_close_positions",
       "guardian_kill_switch_file",
       "entry_halt_file",
       "state_file",
@@ -294,6 +296,7 @@ void WriteStartupRow(const string status, const string detail)
       DoubleToString(InpNextDailyFloorAed, 2),
       BoolText(InpDailyLossStopEnabled),
       DoubleToString(InpDailyLossStopAed, 2),
+      BoolText(InpDailyLossStopClosePositions),
       InpGuardianKillSwitchFileName,
       InpEntryHaltFileName,
       InpStateFileName,
@@ -772,6 +775,13 @@ int CloseAllPositions(const string reason)
    return attempted;
 }
 
+bool LockedStateRequiresPositionClose()
+{
+   if(ContainsText(g_trigger_reason, "DAILY_LOSS_STOP"))
+      return InpDailyLossStopClosePositions;
+   return true;
+}
+
 void TriggerLock(const string reason)
 {
    if(!g_locked)
@@ -786,7 +796,8 @@ void TriggerLock(const string reason)
       WriteEvent("LOCKED", reason);
    }
    WriteEntryHaltFile(reason);
-   CloseAllPositions(reason);
+   if(LockedStateRequiresPositionClose())
+      CloseAllPositions(reason);
    SaveState();
 }
 
@@ -811,8 +822,15 @@ void EvaluateFloor()
 
    if(g_locked)
    {
-      WriteEntryHaltFile("keep_flat_locked_today");
-      CloseAllPositions("keep_flat_locked_today");
+      if(LockedStateRequiresPositionClose())
+      {
+         WriteEntryHaltFile("keep_flat_locked_today");
+         CloseAllPositions("keep_flat_locked_today");
+      }
+      else
+      {
+         WriteEntryHaltFile("keep_entries_halted_today");
+      }
       SaveState();
       return;
    }

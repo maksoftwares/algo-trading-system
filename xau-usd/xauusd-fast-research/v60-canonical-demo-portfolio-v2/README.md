@@ -6,7 +6,7 @@ canonical add-on sleeves. The frozen research packages and their ledgers are
 not modified.
 
 Complete-machine recovery is documented in `RECOVERY_RUNBOOK.md`. The Git tag
-`v60-demo-recovery-20260818-runtime-isolation`, SHA-256 recovery manifest, pinned Python
+`v60-demo-recovery-20260821-v8-guardian-halt`, SHA-256 recovery manifest, pinned Python
 environment, six required Gold chart definitions, EA sources, model bundle, and replay
 evidence are sufficient to reconstruct the current demo deployment after local
 machine loss. Broker credentials remain owner-managed and are never committed.
@@ -82,7 +82,7 @@ the AED peg (`3.6725 AED/USD`) before it is compared with MT5 equity or deal
 values.
 
 Portfolio drawdown uses synthetic V60 equity: activation equity plus closed and
-open P/L attributable to the nine canonical XAUUSD magics. Forex, US500, manual,
+open P/L attributable to the nine registered canonical XAUUSD magics. Forex, US500, manual,
 and other account activity cannot move the V60 drawdown peak or trigger its
 floating stop. Broker margin remains shared because that is an account-level MT5
 constraint.
@@ -93,6 +93,16 @@ source magics; all later deals on that position are then counted regardless of
 which guardian or operator closes it. The runtime rebuilds both cumulative and
 peak closed P/L from history on every cycle and fails closed when MT5 deal
 history is unavailable.
+
+On 2026-08-21, `V8_RETEST_HEALTH` was execution-quarantined after its current
+evidence failed to justify continued demo orders. It remains registered and
+observed, but only the other eight canonical sources may execute. The daily
+`-100 AED` strategy-loss guardian now halts new V60 entries for the rest of the
+Dubai day without force-closing existing positions; each existing position
+remains under its source stop, target, portfolio protection, and hard-stop
+controls. Other guardian reasons and the `$420` final hard stop retain close-all
+authority. Exact replay and deployment evidence is in
+`evidence/V60_V8_QUARANTINE_GUARDIAN_HALT_DEPLOYMENT_20260821.md`.
 
 The original position-origin deployment observation is recorded in
 `evidence/POSITION_ORIGIN_REPAIR_DEMO_DEPLOYMENT_20260729.md`. The later safety
@@ -114,8 +124,10 @@ The MT5 profile keeps both account guardians and attaches one passive telemetry
 collector plus three observer-only event sensors. Each collector/sensor has
 per-EA trading disabled. The Python portfolio executor is the only component
 authorized to open canonical trades. The daily guardian is loss-only: it has no
-daily profit target, can halt after a -100 AED V60 strategy day, and may close
-only the nine canonical V60 magic numbers on XAUUSD. Its daily P/L follows
+daily profit target and halts new entries after a -100 AED V60 strategy day.
+That daily-loss action does not force-close existing trades. Other configured
+guardian emergencies may close only the nine registered canonical V60 magic
+numbers on XAUUSD. Its daily P/L follows
 position-origin ownership, so another instrument cannot trigger the Gold halt.
 The six required Gold charts may coexist with separately isolated instruments
 on the shared demo terminal.
@@ -146,7 +158,8 @@ The ML overlay is
 bound to the immutable deterministic base config, the exact forty-model 2026
 bundle, its implementation lock, and the outcome-free Capital/Dukascopy parity
 result. Only confirmed R2, R3, R4, V7, and V57 signals are score-eligible.
-Marginal V8 and V25 remain deterministic baseline-only probation sources. A
+V8 is execution-quarantined and V25 remains a deterministic baseline-only
+probation source; neither can receive an ML top-up. A
 rank strictly above `0.80` may request one separate
 `0.01`-lot top-up after the baseline fill. At most one ML top-up may be open and
 at most two may be opened per UTC day; every original account,

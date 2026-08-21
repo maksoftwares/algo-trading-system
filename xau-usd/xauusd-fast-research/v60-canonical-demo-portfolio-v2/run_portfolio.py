@@ -108,6 +108,22 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def execution_source_ids(config: Mapping[str, Any]) -> set[str]:
+    return {
+        str(source["source_id"])
+        for source in config["sources"]
+        if bool(source.get("execution_enabled", True))
+    }
+
+
+def quarantined_source_ids(config: Mapping[str, Any]) -> set[str]:
+    return {
+        str(source["source_id"])
+        for source in config["sources"]
+        if not bool(source.get("execution_enabled", True))
+    }
+
+
 def verify_deployment_parity(config: Mapping[str, Any]) -> dict[str, Any]:
     if not bool(config["authorization"].get("full_v59_v60_forward_parity_required")):
         raise RuntimeError("Full V59/V60 deployment parity must remain required")
@@ -118,16 +134,24 @@ def verify_deployment_parity(config: Mapping[str, Any]) -> dict[str, Any]:
     if not path.is_file() or sha256_file(path) != str(settings["artifact_sha256"]):
         raise RuntimeError("Deployment parity artifact identity changed")
     artifact = json.loads(path.read_text(encoding="utf-8"))
-    observed_sources = sorted(str(row["source_id"]) for row in config["sources"])
+    registered_sources = sorted(str(row["source_id"]) for row in config["sources"])
+    observed_sources = sorted(execution_source_ids(config))
+    observed_quarantine = sorted(quarantined_source_ids(config))
     if artifact.get("schema_version") != "xauusd_v60_deployment_parity_v1":
         raise RuntimeError("Deployment parity artifact schema changed")
     if artifact.get("status") != "PASS":
         raise RuntimeError("Deployment parity artifact does not pass")
     if list(artifact.get("executable_source_ids", [])) != observed_sources:
         raise RuntimeError("Deployment parity source registry changed")
+    if list(artifact.get("registered_source_ids", [])) != registered_sources:
+        raise RuntimeError("Deployment parity registered source registry changed")
+    if list(artifact.get("execution_quarantined_source_ids", [])) != observed_quarantine:
+        raise RuntimeError("Deployment parity execution quarantine changed")
     if int(artifact.get("historical_trade_rows", 0)) <= 0:
         raise RuntimeError("Deployment parity has no historical trades")
-    probation_sources = set(artifact.get("probation_source_ids", []))
+    probation_sources = set(artifact.get("probation_source_ids", [])) | set(
+        artifact.get("execution_quarantined_source_ids", [])
+    )
     ml_settings = config.get("ml_topup")
     if isinstance(ml_settings, Mapping):
         eligible_sources = set(ml_settings.get("eligible_source_ids", []))
@@ -247,6 +271,10 @@ def load_config(
     observed = {str(source["source_id"]) for source in config["sources"]}
     if observed != expected:
         raise RuntimeError(f"Canonical source set changed: {sorted(observed)}")
+    if quarantined_source_ids(config) != {"V8_RETEST_HEALTH"}:
+        raise RuntimeError(
+            "Canonical execution quarantine must contain only V8_RETEST_HEALTH"
+        )
     cooldowns = {
         str(source["source_id"]): int(
             source.get("same_direction_post_loss_cooldown_minutes", 0)
@@ -1573,6 +1601,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         for source in config["sources"]
         if str(source.get("sleeve_type", "CORE")).upper() == "ADDON"
     }
+    execution_quarantine = quarantined_source_ids(config)
     for candidate in pending:
         age = now - candidate.scheduled_at
         reason: str | None = None
@@ -1590,6 +1619,8 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         )
         if age > timedelta(minutes=candidate.maximum_entry_gap_minutes):
             reason = "STALE_CANDIDATE"
+        elif candidate.source_id in execution_quarantine:
+            reason = "SOURCE_EXECUTION_QUARANTINED"
         elif profit_protection["triggered"]:
             reason = "OPEN_PROFIT_GIVEBACK_CYCLE_LOCK"
         elif entry_halts:
@@ -2044,6 +2075,8 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         "feed_preflight": feeds,
         "broker_geometry_preflight": broker_geometry,
         "canonical_sources": sorted(source["source_id"] for source in config["sources"]),
+        "execution_sources": sorted(execution_source_ids(config)),
+        "execution_quarantined_sources": sorted(quarantined_source_ids(config)),
     }
     atomic_write_json(status_path, status)
     return status

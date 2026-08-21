@@ -574,6 +574,11 @@ class Scenario:
         self.contract = contract
         self.candidates = candidates
         self.risk = config["risk"]
+        self.execution_quarantined_sources = {
+            str(source["source_id"])
+            for source in config["sources"]
+            if not bool(source.get("execution_enabled", True))
+        }
         self.account_closed_pnl = 0.0
         self.v60_closed_pnl = 0.0
         self.policy_peak_closed = 0.0
@@ -881,7 +886,9 @@ class Scenario:
         day_pnl = equity - state.day_start_equity
         state.peak_day_pnl = max(state.peak_day_pnl, day_pnl)
         if state.locked:
-            if self.positions:
+            if self.positions and bool(
+                settings.get("daily_loss_stop_close_positions", True)
+            ):
                 self._close_all(
                     now_ms,
                     bid,
@@ -904,15 +911,16 @@ class Scenario:
                 reason="DAILY_LOSS_STOP",
                 day_pnl_usd=day_pnl,
             )
-            self._close_all(
-                now_ms,
-                bid,
-                ask,
-                "GUARDIAN_DAILY_LOSS_STOP",
-                counted_by_v60=(
-                    self.spec.guardian_exit_attribution == "POSITION_ORIGIN"
-                ),
-            )
+            if bool(settings.get("daily_loss_stop_close_positions", True)):
+                self._close_all(
+                    now_ms,
+                    bid,
+                    ask,
+                    "GUARDIAN_DAILY_LOSS_STOP",
+                    counted_by_v60=(
+                        self.spec.guardian_exit_attribution == "POSITION_ORIGIN"
+                    ),
+                )
             return
         if not bool(settings.get("daily_profit_floor_enabled", True)):
             return
@@ -1022,6 +1030,8 @@ class Scenario:
                     for position in self.positions.values()
                 ):
                     return "SAME_DIRECTION_PROTECTION_FAMILY"
+        if candidate.source_id in self.execution_quarantined_sources:
+            return "SOURCE_EXECUTION_QUARANTINED"
         if candidate.risk_usd > candidate.maximum_risk_usd:
             return "SOURCE_MAXIMUM_RISK"
         if age_ms > candidate.maximum_entry_gap_minutes * 60_000:

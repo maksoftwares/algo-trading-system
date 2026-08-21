@@ -48,7 +48,7 @@
   },
   "deployment_parity": {
     "artifact_path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_CANONICAL_DEMO_DEPLOYMENT_PARITY_V1.json",
-    "artifact_sha256": "7de7351f683665e7f76638c287c4c7d048c0f4c586bf3b62001b8cf46570a0d2"
+    "artifact_sha256": "7c36cea133d95d2b77a4ce984c64e5aacab296b2273f4b705b6895430498d664"
   },
   "runtime": {
     "directory": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2",
@@ -176,6 +176,7 @@
     },
     {
       "source_id": "V8_RETEST_HEALTH",
+      "execution_enabled": false,
       "path": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/addons/addon_candidates.jsonl",
       "specialist_id": "V8_RETEST_HEALTH",
       "sleeve_type": "ADDON",
@@ -260,6 +261,7 @@
           "InpNextDailyFloorEnabled": "false",
           "InpDailyLossStopEnabled": "true",
           "InpDailyLossStopAed": "-100.0",
+          "InpDailyLossStopClosePositions": "false",
           "InpHaltEntriesWhenArmed": "false",
           "InpCloseScopeSymbol": "XAUUSD",
           "InpAllowedPositionMagicsCsv": "961101,961102,961201,961301,961401,967007,968008,962525,965757",

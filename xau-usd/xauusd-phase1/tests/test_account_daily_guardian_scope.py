@@ -34,6 +34,7 @@ def test_v60_guardian_is_loss_only_and_has_no_minimum_balance_gate() -> None:
     assert inputs["InpHaltEntriesWhenArmed"] == "false"
     assert inputs["InpDailyLossStopEnabled"] == "true"
     assert inputs["InpDailyLossStopAed"] == "-100.0"
+    assert inputs["InpDailyLossStopClosePositions"] == "false"
     assert inputs["InpStrategyScopedPnl"] == "true"
 
 
@@ -71,3 +72,15 @@ def test_v60_guardian_daily_pnl_is_strategy_scoped() -> None:
     evaluate = source[source.index("void EvaluateFloor()") : source.index("void ReconcileProfitFloorPolicy()")]
     assert "CurrentDayPnlAed(day_pnl_valid)" in evaluate
     assert "ACCOUNT_EQUITY) - g_day_start_equity" not in evaluate
+
+
+def test_v60_daily_loss_lock_halts_entries_without_forced_liquidation() -> None:
+    source = SOURCE.read_text(encoding="utf-8")
+
+    assert "input bool InpDailyLossStopClosePositions = true;" in source
+    assert "bool LockedStateRequiresPositionClose()" in source
+    assert 'if(ContainsText(g_trigger_reason, "DAILY_LOSS_STOP"))' in source
+    assert "return InpDailyLossStopClosePositions;" in source
+    locked = source[source.index("if(g_locked)") : source.index("if(InpDailyLossStopEnabled")]
+    assert "LockedStateRequiresPositionClose()" in locked
+    assert 'WriteEntryHaltFile("keep_entries_halted_today")' in locked

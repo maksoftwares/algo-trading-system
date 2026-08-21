@@ -27,7 +27,8 @@
     "next_daily_floor_aed": 100.0,
     "halt_entries_when_armed": false,
     "daily_loss_stop_enabled": true,
-    "daily_loss_stop_aed": -100.0
+    "daily_loss_stop_aed": -100.0,
+    "daily_loss_stop_close_positions": false
   },
   "inputs": {
     "demo_config": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
