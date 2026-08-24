@@ -2,7 +2,7 @@
   "schema_version": "xauusd_v60_drawdown_protection_v1_overlay",
   "base_config": {
     "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
-    "sha256": "ccc8e6ed662afd9ce0f4118865495979e26fa3178edbd5729edca4060823fd09"
+    "sha256": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120"
   },
   "portfolio_protection": {
     "enabled": true,

@@ -579,6 +579,13 @@ class Scenario:
             for source in config["sources"]
             if not bool(source.get("execution_enabled", True))
         }
+        self.allowed_entry_weekdays_utc = {
+            str(source["source_id"]): {
+                int(value) for value in source["allowed_entry_weekdays_utc"]
+            }
+            for source in config["sources"]
+            if "allowed_entry_weekdays_utc" in source
+        }
         self.account_closed_pnl = 0.0
         self.v60_closed_pnl = 0.0
         self.policy_peak_closed = 0.0
@@ -1032,6 +1039,13 @@ class Scenario:
                     return "SAME_DIRECTION_PROTECTION_FAMILY"
         if candidate.source_id in self.execution_quarantined_sources:
             return "SOURCE_EXECUTION_QUARANTINED"
+        allowed_weekdays = self.allowed_entry_weekdays_utc.get(candidate.source_id)
+        if allowed_weekdays is not None:
+            weekday = datetime.fromtimestamp(
+                candidate.entry_ms / 1000.0, UTC
+            ).weekday()
+            if weekday not in allowed_weekdays:
+                return "OUTSIDE_SOURCE_ENTRY_WEEKDAY_DOMAIN"
         if candidate.risk_usd > candidate.maximum_risk_usd:
             return "SOURCE_MAXIMUM_RISK"
         if age_ms > candidate.maximum_entry_gap_minutes * 60_000:

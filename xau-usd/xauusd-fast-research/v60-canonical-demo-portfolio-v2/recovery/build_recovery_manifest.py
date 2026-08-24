@@ -34,6 +34,7 @@ CRITICAL_FILES = [
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_SAFETY_REPAIR_BEFORE_AFTER_20260730.json",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_SAFETY_REPAIR_BEFORE_REPLAY_RESULT_20260730.json",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_V8_QUARANTINE_GUARDIAN_HALT_DEPLOYMENT_20260821.md",
+    "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_RECENT_GOLD_LOSS_FORENSIC_20260824.md",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/requirements-runtime.txt",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/requirements-runtime.lock.txt",
     "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/RECOVERY_RUNBOOK.md",
@@ -137,8 +138,8 @@ def main() -> int:
         raise FileNotFoundError(f"Missing recovery inputs: {missing}")
     payload = {
         "schema_version": "xauusd_v60_demo_recovery_manifest_v1",
-        "recovery_tag": "v60-demo-recovery-20260821-v8-guardian-halt",
-        "recovery_variant": "v8-quarantine-guardian-halt-only-v1-20260821",
+        "recovery_tag": "v60-demo-recovery-20260824-weekend-domain",
+        "recovery_variant": "v57-weekday-domain-health-observability-v1-20260824",
         "account_login": 1033030,
         "account_server": "Capital.ComMena-Demo",
         "terminal_root": "C:/MT5PortableTier1BestEA",

@@ -64,6 +64,36 @@ def test_config_has_exact_canonical_sources_and_no_ml_authority() -> None:
     }
     assert cooldowns["V57_BREAK_SWING_H4ADX_HIGH"] == 120
     assert all(value == 0 for key, value in cooldowns.items() if key != "V57_BREAK_SWING_H4ADX_HIGH")
+    weekday_domains = {
+        str(source["source_id"]): source.get("allowed_entry_weekdays_utc")
+        for source in config["sources"]
+        if "allowed_entry_weekdays_utc" in source
+    }
+    assert weekday_domains == {
+        "V57_BREAK_SWING_H4ADX_HIGH": [0, 1, 2, 3, 4]
+    }
+
+
+def test_v57_rejects_unsupported_weekend_entries_only() -> None:
+    config = RUN.load_config()
+    sunday_v57 = SimpleNamespace(
+        source_id="V57_BREAK_SWING_H4ADX_HIGH",
+        scheduled_at=datetime(2026, 8, 23, 23, 35, tzinfo=UTC),
+    )
+    monday_v57 = SimpleNamespace(
+        source_id="V57_BREAK_SWING_H4ADX_HIGH",
+        scheduled_at=datetime(2026, 8, 24, 0, 5, tzinfo=UTC),
+    )
+    sunday_r4 = SimpleNamespace(
+        source_id="R4_CHOP",
+        scheduled_at=datetime(2026, 8, 23, 23, 35, tzinfo=UTC),
+    )
+
+    assert RUN.source_entry_domain_reason(sunday_v57, config) == (
+        "OUTSIDE_SOURCE_ENTRY_WEEKDAY_DOMAIN"
+    )
+    assert RUN.source_entry_domain_reason(monday_v57, config) is None
+    assert RUN.source_entry_domain_reason(sunday_r4, config) is None
 
 
 def test_portable_ml_overlay_preserves_base_and_authorizes_demo_topup_only() -> None:

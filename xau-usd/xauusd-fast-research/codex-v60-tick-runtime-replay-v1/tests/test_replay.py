@@ -242,6 +242,26 @@ def test_v57_cooldown_uses_only_accepted_loss():
     assert "next" not in replay.positions
 
 
+def test_v57_weekend_entry_is_outside_historical_domain():
+    sunday_ms = int(
+        np.datetime64("2026-08-23T23:35:00", "ms").astype(np.int64)
+    )
+    trade = candidate(
+        "v57-weekend",
+        entry_ms=sunday_ms,
+        exit_ms=sunday_ms + 5000,
+        source_id="V57_BREAK_SWING_H4ADX_HIGH",
+        sleeve_type="ADDON",
+        event_id="weekend",
+    )
+    replay = scenario([trade])
+
+    replay.process_cycle(sunday_ms, sunday_ms, 1000.0, 1000.1)
+
+    assert "v57-weekend" not in replay.positions
+    assert replay.rejections["OUTSIDE_SOURCE_ENTRY_WEEKDAY_DOMAIN"] == 1
+
+
 def test_guardian_daily_loss_locks_and_closes():
     trade = candidate(
         "guardian-loss",

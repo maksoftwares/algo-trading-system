@@ -330,6 +330,55 @@ def _health(sleeve: Mapping[str, Any]) -> tuple[bool, float, float, int]:
     return len(values) >= 100 and pf >= 1.0 and net > 0.0, pf, net, len(values)
 
 
+def _health_snapshot(sleeve: Mapping[str, Any]) -> dict[str, Any]:
+    history = [float(item["pnl_usd"]) for item in sleeve["history"]]
+    windows: dict[str, Any] = {}
+    for size in (5, 10, 20, 100):
+        values = history[-size:]
+        pf = _profit_factor(values)
+        windows[str(size)] = {
+            "completed_count": len(values),
+            "net_pnl_usd": sum(values),
+            "profit_factor": pf if math.isfinite(pf) else None,
+            "win_rate": (
+                sum(value > 0.0 for value in values) / len(values)
+                if values
+                else None
+            ),
+        }
+    recent = windows["20"]
+    return {
+        "windows": windows,
+        "recent_20_degraded": bool(
+            recent["completed_count"] >= 20
+            and (
+                recent["net_pnl_usd"] <= 0.0
+                or (
+                    recent["profit_factor"] is not None
+                    and recent["profit_factor"] < 1.0
+                )
+            )
+        ),
+        "policy_effect": "OBSERVABILITY_ONLY",
+    }
+
+
+def _source_entry_weekday_allowed(
+    config: Mapping[str, Any], source_id: str, entry_time: pd.Timestamp
+) -> bool:
+    sources = [
+        source
+        for source in config["sources"]
+        if str(source["source_id"]) == source_id
+    ]
+    if len(sources) != 1:
+        raise ValueError(f"Canonical source lookup failed: {source_id}")
+    allowed = sources[0].get("allowed_entry_weekdays_utc")
+    return allowed is None or entry_time.weekday() in {
+        int(value) for value in allowed
+    }
+
+
 def _event_features(event: Any, market: pd.DataFrame) -> dict[str, Any] | None:
     feature_time = pd.Timestamp(event.signal_time).floor("5min")
     selected = market.loc[market["timestamp_utc"].eq(feature_time)]
@@ -398,6 +447,11 @@ def _process_health_events(
                 sleeve["seen_events"][event.event_id] = "RULE_INELIGIBLE"
                 continue
             entry_time = pd.Timestamp(event.signal_time).ceil("5min")
+            if not _source_entry_weekday_allowed(config, sleeve_id, entry_time):
+                reason = "OUTSIDE_SOURCE_ENTRY_WEEKDAY_DOMAIN"
+                sleeve["seen_events"][event.event_id] = reason
+                decisions[reason] = decisions.get(reason, 0) + 1
+                continue
             entry_rows = raw_m5.loc[raw_m5["bar_start_utc"].eq(entry_time)]
             if entry_rows.empty:
                 continue
@@ -459,7 +513,15 @@ def _process_health_events(
     now = pd.Timestamp.now(tz="UTC")
     for sleeve_id in HEALTH_SLEEVES:
         _resolve_bar_pending(state["sleeves"][sleeve_id], complete_bars, now, inclusive=True)
-    return {"events_observed": int(len(events)), "candidates_emitted": emitted, "decision_counts": decisions}
+    return {
+        "events_observed": int(len(events)),
+        "candidates_emitted": emitted,
+        "decision_counts": decisions,
+        "health_snapshot": {
+            sleeve_id: _health_snapshot(state["sleeves"][sleeve_id])
+            for sleeve_id in HEALTH_SLEEVES
+        },
+    }
 
 
 def _process_v25(

@@ -1,7 +1,7 @@
 # V60 Demo Disaster-Recovery Runbook
 
 This runbook rebuilds the XAUUSD V60 demo system represented by Git tag
-`v60-demo-recovery-20260821-v8-guardian-halt`. The tag, recovery manifest, model bundle, source
+`v60-demo-recovery-20260824-weekend-domain`. The tag, recovery manifest, model bundle, source
 code, tests, evidence, and six required Gold chart definitions are the durable source of
 truth.
 
@@ -95,10 +95,17 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File `
 - `live_authorized` is `false`;
 - all eight executable sources are healthy and `V8_RETEST_HEALTH` is reported
   as execution-quarantined;
+- V57's source configuration allows entries only Monday through Friday UTC;
 - no hard stop or unexplained suspension is active; if a daily entry-halt file
   exists, its reason and Dubai trading date match the current guardian state;
 - `portfolio_protection.enabled` is `true` and
   `profit_protection_close_failures` is `0`.
+- the newest `A2_DAILY_PROFIT_LOSS_GUARDIAN_STARTUP.csv` attachment row records
+  `daily_loss_stop_close_positions=false`.
+
+Compiling an EX5 does not reload an EA that is already attached. After any EA
+compile or binary replacement, restart the target terminal and verify a fresh
+startup row before treating the change as deployed.
 
 Runtime status files:
 
@@ -284,3 +291,6 @@ Pop-Location
     and ML top-ups must remain blocked.
 11. The `$420` hard stop is demo-only at the current account size. Do not infer
     live-account readiness from this replay.
+12. V57 must not execute Saturday or Sunday UTC. Its 610-trade source corpus
+    contains no weekend entries; this is a source-specific evidence-domain rule,
+    not a global weekend restriction.

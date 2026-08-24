@@ -284,6 +284,19 @@ def load_config(
     }
     if cooldowns != {"V57_BREAK_SWING_H4ADX_HIGH": 120}:
         raise RuntimeError(f"Canonical post-loss cooldowns changed: {cooldowns}")
+    weekday_domains = {
+        str(source["source_id"]): tuple(
+            int(value) for value in source.get("allowed_entry_weekdays_utc", [])
+        )
+        for source in config["sources"]
+        if "allowed_entry_weekdays_utc" in source
+    }
+    if weekday_domains != {
+        "V57_BREAK_SWING_H4ADX_HIGH": (0, 1, 2, 3, 4)
+    }:
+        raise RuntimeError(
+            f"Canonical source weekday domains changed: {weekday_domains}"
+        )
     parity = verify_deployment_parity(config)
     historical_drawdown = float(parity["all_history"]["closed_trade_drawdown_usd"])
     hard_closed_limit = float(
@@ -427,6 +440,27 @@ def audit_chart_profile(config: Mapping[str, Any], *, require_ready: bool) -> di
 
 def account_value_usd(value: float, config: Mapping[str, Any]) -> float:
     return float(value) / float(config["account"]["usd_to_account_currency"])
+
+
+def source_entry_domain_reason(
+    candidate: Candidate, config: Mapping[str, Any]
+) -> str | None:
+    source = next(
+        (
+            row
+            for row in config["sources"]
+            if str(row["source_id"]) == candidate.source_id
+        ),
+        None,
+    )
+    if source is None:
+        return "UNKNOWN_CANDIDATE_SOURCE"
+    allowed = source.get("allowed_entry_weekdays_utc")
+    if allowed is not None and candidate.scheduled_at.weekday() not in {
+        int(value) for value in allowed
+    }:
+        return "OUTSIDE_SOURCE_ENTRY_WEEKDAY_DOMAIN"
+    return None
 
 
 def feed_preflight(config: Mapping[str, Any], *, require_ready: bool) -> dict[str, Any]:
@@ -1605,6 +1639,7 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     for candidate in pending:
         age = now - candidate.scheduled_at
         reason: str | None = None
+        source_domain_reason = source_entry_domain_reason(candidate, config)
         recovery_mode = bool(state["drawdown_suspended"])
         recovery_reason = closed_drawdown_recovery_entry_reason(
             candidate,
@@ -1621,6 +1656,8 @@ def run_cycle(mt5: Any, config: Mapping[str, Any]) -> dict[str, Any]:
             reason = "STALE_CANDIDATE"
         elif candidate.source_id in execution_quarantine:
             reason = "SOURCE_EXECUTION_QUARANTINED"
+        elif source_domain_reason is not None:
+            reason = source_domain_reason
         elif profit_protection["triggered"]:
             reason = "OPEN_PROFIT_GIVEBACK_CYCLE_LOCK"
         elif entry_halts:

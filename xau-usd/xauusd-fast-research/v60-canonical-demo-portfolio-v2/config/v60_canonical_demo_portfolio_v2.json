@@ -219,6 +219,13 @@
       "maximum_open_positions": 1,
       "maximum_entries_per_utc_day": 2,
       "same_direction_post_loss_cooldown_minutes": 120,
+      "allowed_entry_weekdays_utc": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
       "maximum_risk_usd": 30.0
     }
   ],

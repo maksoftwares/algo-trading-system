@@ -7,7 +7,12 @@ import sys
 
 import pandas as pd
 
-from addons import REPO_ROOT, historical_rule_frames
+from addons import (
+    REPO_ROOT,
+    _health_snapshot,
+    _source_entry_weekday_allowed,
+    historical_rule_frames,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -98,3 +103,37 @@ def test_v25_frozen_candidate_identity_and_origin() -> None:
     assert set(candidates["stop_atr"].astype(float)) == {1.0}
     assert set(candidates["target_r"].astype(float)) == {2.0}
     assert set(candidates["hold_hours"].astype(float)) == {12.0}
+
+
+def test_health_snapshot_exposes_recent_degradation_without_policy_action() -> None:
+    values = [2.0] * 80 + [1.0] * 5 + [-2.0] * 15
+    snapshot = _health_snapshot(
+        {
+            "history": [
+                {
+                    "event_id": str(index),
+                    "exit_time_utc": f"2026-01-{index + 1:02d}T00:00:00Z",
+                    "pnl_usd": value,
+                }
+                for index, value in enumerate(values)
+            ]
+        }
+    )
+
+    assert snapshot["windows"]["20"]["completed_count"] == 20
+    assert snapshot["windows"]["20"]["net_pnl_usd"] == -25.0
+    assert snapshot["recent_20_degraded"] is True
+    assert snapshot["policy_effect"] == "OBSERVABILITY_ONLY"
+
+
+def test_v57_source_generation_rejects_weekend_without_global_block() -> None:
+    sunday = pd.Timestamp("2026-08-23T23:35:00Z")
+    monday = pd.Timestamp("2026-08-24T00:05:00Z")
+
+    assert not _source_entry_weekday_allowed(
+        CONFIG, "V57_BREAK_SWING_H4ADX_HIGH", sunday
+    )
+    assert _source_entry_weekday_allowed(
+        CONFIG, "V57_BREAK_SWING_H4ADX_HIGH", monday
+    )
+    assert _source_entry_weekday_allowed(CONFIG, "R4_CHOP", sunday)
