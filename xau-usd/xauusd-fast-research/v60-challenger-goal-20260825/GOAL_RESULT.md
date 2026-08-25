@@ -231,6 +231,16 @@ Component counts are evaluated only after immutable timing annotation. A score o
 execution decision recorded outside the 120-second budget is treated as a retained
 baseline trade and contributes zero V2, anti-chase, or union veto evidence.
 
+The 2,000-trade floor is an arithmetic minimum, not a forecast. At the historical
+event rates and about 253 V60 trades per year, 10 V2 events take about 4.58 expected
+years, while 10 anti-chase events take about 54.93 expected years. A simple Poisson
+planning approximation raises the respective 90% horizons to 6.50 and 78.03 years.
+Pooling the three exposed August anti-chase events reduces its expected horizon to
+13.97 years, but that rate is selection-contaminated and cannot support authorization.
+The practical action is to keep frozen V6 collection intact while researching a
+higher-support August mechanism under a separate preregistration; its gates must not
+be weakened to manufacture a quicker decision.
+
 The clean observer writes each score decision, execution decision, and broker
 outcome to a hash-linked evidence chain. Any later change to an immutable event
 fails collection closed. The chain was initialized and verified empty before

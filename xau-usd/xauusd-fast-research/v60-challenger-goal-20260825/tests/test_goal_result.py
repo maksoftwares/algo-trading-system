@@ -35,4 +35,8 @@ def test_forward_union_requires_evidence_for_each_component() -> None:
     assert forward["requires_component_specific_positive_avoided_pnl"]
     assert forward["requires_component_specific_veto_profit_factor_below_0_8"]
     assert forward["component_evidence_requires_effective_immutable_timing"]
+    horizon = forward["component_evidence_horizon"]
+    assert horizon["anti_chase_expected_years_to_10_events_at_historical_rate"] > 50
+    assert horizon["pooled_anti_chase_estimate_selection_contaminated"]
+    assert horizon["planning_action"].startswith("KEEP_V6_FROZEN")
     assert forward["deployment_authorized"] is False

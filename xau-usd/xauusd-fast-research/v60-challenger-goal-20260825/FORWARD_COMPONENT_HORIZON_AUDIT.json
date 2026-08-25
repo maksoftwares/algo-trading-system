@@ -1,0 +1,74 @@
+{
+  "annualized_baseline_trades": 253.05905443126312,
+  "arithmetic_retention_floor": {
+    "minimum_resolved_baseline_executions": 2000,
+    "minimum_resolved_union_vetoes": 20,
+    "minimum_trade_retention": 0.99,
+    "years_at_historical_frequency": 7.903293579022076
+  },
+  "deployment_authorized": false,
+  "evidence_status": "DESCRIPTIVE_PLANNING_APPROXIMATION_NOT_AN_ACCEPTANCE_GATE",
+  "exposed_august_diagnostic": {
+    "anti_chase_events": 3,
+    "baseline_trades": 24,
+    "selection_contaminated": true,
+    "v2_events": 0
+  },
+  "historical_baseline_trades": 1390,
+  "historical_rate_scenarios": {
+    "union": {
+      "event_rate_per_trade": 0.00935251798561151,
+      "expected_trades_to_required_events": 2138.4615384615386,
+      "expected_years_to_required_events": 8.450444672954374,
+      "observed_events": 13,
+      "observed_trades": 1390,
+      "required_events": 20,
+      "trades_for_90_percent_poisson_probability": 2769.5780587119752,
+      "years_for_90_percent_poisson_probability": 10.944394244009391
+    },
+    "v2_source_health": {
+      "event_rate_per_trade": 0.008633093525179856,
+      "expected_trades_to_required_events": 1158.3333333333333,
+      "expected_years_to_required_events": 4.577324197850285,
+      "observed_events": 12,
+      "observed_trades": 1390,
+      "required_events": 10,
+      "trades_for_90_percent_poisson_probability": 1645.5272088410347,
+      "years_for_90_percent_poisson_probability": 6.5025423118697345
+    },
+    "v57_weak_followthrough_anti_chase": {
+      "event_rate_per_trade": 0.0007194244604316547,
+      "expected_trades_to_required_events": 13900.0,
+      "expected_years_to_required_events": 54.92789037420343,
+      "observed_events": 1,
+      "observed_trades": 1390,
+      "required_events": 10,
+      "trades_for_90_percent_poisson_probability": 19746.326506092417,
+      "years_for_90_percent_poisson_probability": 78.03050774243681
+    }
+  },
+  "input_sha256": {
+    "august_trade_audit": "2bc27436fae7f7ab66b93c9666c6d742de86ee3c99a641c6644be2ee3892780d",
+    "prospective_contract": "23ce7ca7e152e41a3dfa8fa7b0a22d600824eca89bed638556bc45577433c0dc",
+    "v6_result": "032af1f2b7328f3aaf68feef8d4c404a90487c0b9f915789e1ac50fb0ed4dd13"
+  },
+  "limitations": [
+    "Event arrivals are clustered and not truly Poisson; the 90% horizon is a planning approximation.",
+    "The August anti-chase rate is selection-contaminated and cannot estimate authorization evidence.",
+    "No horizon estimate substitutes for actual causal forward outcomes."
+  ],
+  "planning_conclusion": "The anti-chase component is the evidence bottleneck. Preserve frozen V6 collection, but research a higher-support causal August mechanism under a separate preregistration instead of weakening V6's component gates.",
+  "pooled_historical_plus_exposed_anti_chase_scenario": {
+    "event_rate_per_trade": 0.002828854314002829,
+    "expected_trades_to_required_events": 3535.0,
+    "expected_years_to_required_events": 13.96907140092152,
+    "not_usable_for_authorization": true,
+    "observed_events": 4,
+    "observed_trades": 1414,
+    "required_events": 10,
+    "selection_contaminated": true,
+    "trades_for_90_percent_poisson_probability": 5021.817568276021,
+    "years_for_90_percent_poisson_probability": 19.84444927118807
+  },
+  "schema_version": "v60_dynamic_v6_forward_component_horizon_v1"
+}
