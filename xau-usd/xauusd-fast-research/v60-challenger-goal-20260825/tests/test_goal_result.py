@@ -40,3 +40,24 @@ def test_forward_union_requires_evidence_for_each_component() -> None:
     assert horizon["pooled_anti_chase_estimate_selection_contaminated"]
     assert horizon["planning_action"].startswith("KEEP_V6_FROZEN")
     assert forward["deployment_authorized"] is False
+
+
+def test_august_improvement_cannot_sacrifice_established_edge() -> None:
+    result = json.loads((ROOT / "GOAL_RESULT.json").read_text(encoding="utf-8"))
+    research = result["higher_support_august_research"]
+
+    assert research["hard_objective"] == (
+        "IMPROVE_AUGUST_WITHOUT_HARMING_ESTABLISHED_EDGE"
+    )
+    assert research["best_retrospective_candidate_remains"] == (
+        "v60-dynamic-followthrough-union-v6"
+    )
+    assert research["v9_rank_independent"]["decision"] == "REJECT"
+    assert research["v9_rank_independent"]["antichase_avoided_pnl_usd"] < 0.0
+    assert research["v10_dual_extension"]["decision"] == "REJECT"
+    assert research["v10_dual_extension"]["nominal_2023_delta_pnl_usd"] < 0.0
+    assert not research["v9_rank_independent"]["preserved_frozen_v6_edge"]
+    assert not research["v10_dual_extension"]["preserved_frozen_v6_edge"]
+    assert research["conclusion"] == (
+        "KEEP_V6_FROZEN_AND_REQUIRE_CLEAN_FORWARD_CONFIRMATION"
+    )

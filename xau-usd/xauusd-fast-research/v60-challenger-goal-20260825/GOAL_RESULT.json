@@ -344,6 +344,40 @@
     "year_2024_delta_pnl_usd": -21.87,
     "deployment_authorized": false
   },
+  "higher_support_august_research": {
+    "hard_objective": "IMPROVE_AUGUST_WITHOUT_HARMING_ESTABLISHED_EDGE",
+    "best_retrospective_candidate_remains": "v60-dynamic-followthrough-union-v6",
+    "v9_rank_independent": {
+      "decision": "REJECT",
+      "preregistered_code_commit": "8fc7f6bf15bd7010e321d3ca252b26ef3c95fdd9",
+      "august_net_pnl_usd": 17.5030633083731,
+      "full_delta_net_pnl_usd_vs_v60": 34.51705917173422,
+      "trade_retention": 0.9798561151079137,
+      "antichase_executed_vetoes": 17,
+      "antichase_avoided_pnl_usd": -16.0030205319131,
+      "antichase_veto_profit_factor": 1.1475344100557,
+      "preserved_frozen_v6_edge": false,
+      "deployment_authorized": false
+    },
+    "v10_dual_extension": {
+      "decision": "REJECT",
+      "preregistered_code_commit": "19b16aae27a6fecf0823687503d09ee7720fde4c",
+      "nomination_method": "OUTCOME_BLIND_FEATURE_DENSITY",
+      "matching_candidates": 10,
+      "executable_antichase_vetoes": 9,
+      "august_net_pnl_usd": 17.5030633083731,
+      "full_delta_net_pnl_usd_vs_v60": 58.86335074674389,
+      "trade_retention": 0.9848920863309353,
+      "antichase_avoided_pnl_usd": 20.3237435029166,
+      "antichase_veto_profit_factor": 0.671954022463517,
+      "nominal_2023_delta_pnl_usd": -8.199608364711708,
+      "nominal_2026_delta_pnl_usd": -5.32342223050432,
+      "dukascopy_2023_delta_pnl_usd": -20.692999999999756,
+      "preserved_frozen_v6_edge": false,
+      "deployment_authorized": false
+    },
+    "conclusion": "KEEP_V6_FROZEN_AND_REQUIRE_CLEAN_FORWARD_CONFIRMATION"
+  },
   "runtime": {
     "status": "READY",
     "supervised_workers": 8,

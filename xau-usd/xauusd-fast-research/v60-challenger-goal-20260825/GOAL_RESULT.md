@@ -194,6 +194,26 @@ removes 58 trades, excludes a profitable cohort with PF 1.14, hurts 2023 by
 $47.23, and hurts 2024 by $21.87. Loosening V2 to fit the recent losses would
 discard established edge.
 
+Two separately preregistered higher-support August mechanisms were then tested
+without changing V60 or frozen V6. V9 removed the bottom-decile rank requirement.
+It retained 97.99% of trades, but its 17 anti-chase vetoes lost $16.00 at PF
+1.148, reduced six- and twelve-month profit, and failed cross-feed and cost gates.
+This proved that causal rank was carrying useful selectivity.
+
+V10 retained rank and weak follow-through but treated ATR expansion and proximity
+to the prior 24-hour high as alternative extension signals. This structure was
+nominated from outcome-blind feature counts: it produced 10 matching candidates,
+of which nine were executable on the exact portfolio path. Those nine vetoes
+avoided $20.32 at PF 0.672 and the full portfolio retained 98.49% of trades, but
+V10 still harmed nominal 2023 and 2026, reduced six- and twelve-month profit below
+frozen V6, failed both cost scenarios, and harmed Dukascopy 2023 by $20.69.
+
+V9 and V10 are rejected without tuning. Dynamic V6 remains the best retrospective
+August challenger because it is still the only tested mechanism that makes exposed
+August positive while preserving every nominal year, recent window, long-run edge,
+drawdown, and more than 99% of trades. This does not upgrade its evidence status:
+clean forward confirmation is still mandatory.
+
 New candidates now persist their recent-20 source health for future research.
 This field is observability only and cannot affect an order.
 

@@ -1,0 +1,29 @@
+{
+  "schema_version": "v60_dual_extension_followthrough_union_v10_result_manifest",
+  "preregistered_code_commit": "19b16aae27a6fecf0823687503d09ee7720fde4c",
+  "decision": "REJECT_V10_KEEP_DEPLOYED_V60",
+  "deployment_authorized": false,
+  "broker_action_authorized": false,
+  "artifacts": {
+    "ANNUAL.csv": {
+      "bytes": 504,
+      "sha256": "f55226179eb929b8d4fdad2345023761e0bee44c0b304a9e76cc5c7a48df0ab0"
+    },
+    "AUGUST_2026_TRADE_AUDIT.csv": {
+      "bytes": 13884,
+      "sha256": "203e0bfff8239626178f6aaa2eb8fbca9eccf004f6a0eec33b0649a7a072eb44"
+    },
+    "HISTORICAL_VETOES.csv": {
+      "bytes": 4691,
+      "sha256": "8dc92eae63882922bd3f9a71b8823cca9252ae729da7b966477bd50c87b51c1e"
+    },
+    "RESULT.json": {
+      "bytes": 43795,
+      "sha256": "1a3bbcc44849b0dcf08e607d521556db412d2b2b17f02189864fafb84881ce20"
+    },
+    "RESULT.md": {
+      "bytes": 684,
+      "sha256": "a77a26f776e6727ec67075ba8298abdd9233ae3966b9899686b47fea36734bca"
+    }
+  }
+}
