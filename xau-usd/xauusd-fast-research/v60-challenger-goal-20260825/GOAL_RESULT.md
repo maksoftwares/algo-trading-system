@@ -281,6 +281,41 @@ confirmation remains mandatory.
 New candidates now persist their recent-20 source health for future research.
 This field is observability only and cannot affect an order.
 
+## Exit and cluster decomposition
+
+V17 independently reconstructed July's silent R1/R2/R3 sources and confirmed
+that they genuinely emitted zero core candidates. It also showed that a
+same-source, same-direction cluster veto is not defensible: later cluster
+trades earned `$1,097.97` at PF `1.8218` across 355 historical trades and were
+positive in every fixed historical fold.
+
+On the fixed V60 accepted set, deployed profit protection reduced net P/L by
+`$33.32`, but improved PF from `1.6368` to `1.7107`, closed drawdown from
+`$253.18` to `$223.28`, net/DD from `14.36` to `16.14`, and aggregate
+losing-month severity. Only V7's protection actions qualified for a separate
+targeted experiment.
+
+V18 fully exempted V7 from account profit protection. V20 tested the narrower
+structural alternative of bypassing protection only while the open basket was
+entirely V7, preserving unchanged full-basket protection during overlap. Both
+were preregistered and replayed path-dependently without parameter searches.
+
+| Metric | Dynamic V6 | V18 full exemption | V20 V7-only bypass |
+|---|---:|---:|---:|
+| Closed trades | 1,377 | 1,375 | 1,375 |
+| Net P/L | $3,681.34 | $3,736.47 | $3,720.84 |
+| Profit factor | 1.7377 | 1.7374 | 1.7347 |
+| Closed drawdown | $217.46 | $218.71 | $218.71 |
+| Equity drawdown | $238.28 | $239.53 | $239.53 |
+| Losing-month P/L | -$525.26 | -$546.33 | -$546.33 |
+
+V20 changed the path across 315 V7 trades, bypassed 809,334 solo cycles, and
+delegated 145,412 mixed-basket cycles to unchanged protection. It still harmed
+2022, 2023, and 2024 versus V6, missed the canonical retention floor, and
+failed both cost stresses. V18 and V20 are rejected. The evidence says the
+extra net from loosening V7 protection is compensation for worse risk quality,
+not a free improvement. Frozen Dynamic V6 remains the canonical challenger.
+
 ## Runtime improvement
 
 R4 previously reparsed about 2.15 GB of CSV ticks each cycle, taking roughly
@@ -362,11 +397,18 @@ the contract hash, both hash chains, post-boundary timestamps, the first equity
 mark, read-only authorization, supervisor health, and unchanged V60/MT5 process
 identities. Any pre-boundary record or unresolved mismatch fails the audit.
 
-The runtime supervisor is healthy on demo account 1033030. It supervises eight
+The runtime supervisor is healthy on demo account 1033030. It supervises nine
 workers, both execution feeds pass, and all research observers explicitly
 report `broker_action_authorized=false` and `deployment_authorized=false`.
 The deployed V60 processes remain `19888, 4888`, and MT5 remains `24168`;
 adding V6 changed neither broker action nor strategy/risk parameters.
+
+The read-only V19 capacity twin is also supervised under operative contract
+`fdabc9e2997592b06568bb5e405154abdb3888b921a61d70620e06bde2cb4905`.
+It independently resolves baseline and V6 replacement-capacity paths from raw
+ticks and cannot place orders. Its first empty lock was transparently
+superseded before the boundary after an integration test found a missing frozen
+currency-conversion input.
 
 The deployed portfolio currently loads the existing ML top-up overlay, but it
 has filled zero top-ups. V2, anti-chase, and dynamic V6 are not deployed.
