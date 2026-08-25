@@ -22,6 +22,17 @@ def load_module(name: str, path: Path):
     return module
 
 
+def rename_v14_labels(value):
+    if isinstance(value, dict):
+        return {
+            str(key).replace("v14", "v16"): rename_v14_labels(item)
+            for key, item in value.items()
+        }
+    if isinstance(value, list):
+        return [rename_v14_labels(item) for item in value]
+    return value
+
+
 def main() -> int:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     scenario = load_module("v16_local_scenario", ROOT / "src" / "scenario.py")
@@ -39,21 +50,48 @@ def main() -> int:
     result = int(shared.main())
 
     result_path = OUTPUTS / "RESULT.json"
-    payload = json.loads(result_path.read_text(encoding="utf-8"))
-    if "v14" in payload["monthly"]:
-        payload["monthly"]["v16"] = payload["monthly"].pop("v14")
-    for section in ("august_2026_through_25", "dukascopy_crossfeed"):
-        if "v14" in payload[section]:
-            payload[section]["v16"] = payload[section].pop("v14")
-    result_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    payload = rename_v14_labels(
+        json.loads(result_path.read_text(encoding="utf-8"))
+    )
+    retention_vs_v60 = (
+        payload["historical"]["challenger"]["trades_closed"]
+        / payload["historical"]["baseline"]["trades_closed"]
+    )
+    retention_vs_v6 = (
+        payload["historical"]["challenger"]["trades_closed"]
+        / payload["frozen_v6"]["challenger"]["trades_closed"]
+    )
+    payload["canonical_goal_trade_retention"] = {
+        "required_fraction_vs_v60": 0.99,
+        "observed_fraction_vs_v60": retention_vs_v60,
+        "observed_fraction_vs_v6": retention_vs_v6,
+        "passes": retention_vs_v60 >= 0.99,
+    }
+    payload["canonical_goal_authorized"] = False
+    caveat = (
+        "V16 passes its preregistered 98% retention floor but not the canonical "
+        "99% V60 retention goal; it cannot replace V6 without a separate decision."
+    )
+    if caveat not in payload["limitations"]:
+        payload["limitations"].append(caveat)
+    result_path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8"
+    )
     monthly_path = OUTPUTS / "MONTHLY.csv"
     monthly_path.write_text(
-        monthly_path.read_text(encoding="utf-8").replace("V14", "V16"),
+        monthly_path.read_text(encoding="utf-8")
+        .replace("V14", "V16")
+        .replace("v14_", "v16_"),
         encoding="utf-8",
     )
     markdown_path = OUTPUTS / "RESULT.md"
     markdown_path.write_text(
-        markdown_path.read_text(encoding="utf-8").replace("V14", "V16"),
+        markdown_path.read_text(encoding="utf-8").replace("V14", "V16")
+        + "\n## Canonical Goal Caveat\n\n"
+        + f"V16 retains {retention_vs_v60:.3%} of V60 trades and "
+        + f"{retention_vs_v6:.3%} of V6 trades. It passes the V16 98% floor but "
+        + "does not pass the original 99% V60-retention goal. V6 therefore "
+        + "remains the canonical forward challenger.\n",
         encoding="utf-8",
     )
     return result

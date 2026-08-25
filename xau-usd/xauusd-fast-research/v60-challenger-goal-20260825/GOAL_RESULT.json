@@ -424,6 +424,71 @@
     },
     "conclusion": "KEEP_V6_FROZEN_AND_REQUIRE_CLEAN_FORWARD_CONFIRMATION"
   },
+  "losing_month_risk_overlay_research": {
+    "objective": "REDUCE_LOSING_MONTH_SEVERITY_AND_IMPROVE_PERFORMANCE_WITHOUT_WEAKENING_EDGE",
+    "v14_global_bottom_40_percent": {
+      "decision": "REJECT",
+      "trades": 1361,
+      "net_pnl_usd": 3789.3338838555888,
+      "profit_factor": 1.7791061512929385,
+      "closed_drawdown_usd": 210.11325741500275,
+      "equity_drawdown_usd": 228.26613935944693,
+      "negative_months": 20,
+      "negative_month_pnl_usd": -439.64562349975364,
+      "worst_month_pnl_usd": -113.12813018211739,
+      "failed_gates": [
+        "trade_retention",
+        "frequency_retention",
+        "nominal_2022_vs_v6",
+        "dukascopy_every_year",
+        "additional_cost_0_10"
+      ],
+      "deployment_authorized": false
+    },
+    "v15_global_bottom_30_percent": {
+      "decision": "REJECT",
+      "trades": 1381,
+      "net_pnl_usd": 3784.722236739672,
+      "profit_factor": 1.7673288833476957,
+      "closed_drawdown_usd": 215.29778810100493,
+      "equity_drawdown_usd": 233.4506700454492,
+      "negative_months": 20,
+      "negative_month_pnl_usd": -444.69727061566863,
+      "worst_month_pnl_usd": -113.12813018211739,
+      "failed_gates": [
+        "nominal_2022_vs_v6",
+        "dukascopy_every_year",
+        "additional_cost_0_10"
+      ],
+      "deployment_authorized": false
+    },
+    "v16_r1_bottom_20_percent": {
+      "decision": "QUALIFIED_READ_ONLY_RESEARCH_COMPONENT_FORWARD_CONFIRMATION_REQUIRED",
+      "eligible_source_ids": ["R1_PULLBACK", "R1_BOX"],
+      "monthly_overlay_vetoes": 3,
+      "trades": 1374,
+      "net_pnl_usd": 3721.791858420809,
+      "profit_factor": 1.7519321124657787,
+      "closed_drawdown_usd": 217.45931309847566,
+      "equity_drawdown_usd": 238.27919504292004,
+      "delta_net_pnl_usd_vs_v6": 40.44999999999891,
+      "negative_months": 20,
+      "negative_month_pnl_usd": -492.2126989814408,
+      "worst_month_pnl_usd": -120.69813018211738,
+      "trade_retention_vs_v60": 0.9884892086330935,
+      "trade_retention_vs_v6": 0.9978213507625272,
+      "canonical_99_percent_retention_pass": false,
+      "all_v16_preregistered_gates_pass": true,
+      "all_cost_stress_gates_pass": true,
+      "dukascopy_delta_net_pnl_usd_vs_v6": 39.59699999999975,
+      "dukascopy_every_year_not_below_v6": true,
+      "august_matches_v6": true,
+      "clean_forward_evidence_available": false,
+      "deployment_authorized": false
+    },
+    "canonical_best_challenger_remains": "v60-dynamic-followthrough-union-v6",
+    "conclusion": "KEEP_V60_DEPLOYED_KEEP_V6_CANONICAL_FORWARD_V16_RESEARCH_ONLY"
+  },
   "runtime": {
     "status": "READY",
     "supervised_workers": 8,

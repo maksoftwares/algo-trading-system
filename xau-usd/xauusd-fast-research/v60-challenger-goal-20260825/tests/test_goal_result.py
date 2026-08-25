@@ -79,3 +79,24 @@ def test_august_improvement_cannot_sacrifice_established_edge() -> None:
     assert research["conclusion"] == (
         "KEEP_V6_FROZEN_AND_REQUIRE_CLEAN_FORWARD_CONFIRMATION"
     )
+
+
+def test_losing_month_overlay_improves_risk_but_does_not_relax_canonical_gate() -> None:
+    result = json.loads((ROOT / "GOAL_RESULT.json").read_text(encoding="utf-8"))
+    research = result["losing_month_risk_overlay_research"]
+    candidate = research["v16_r1_bottom_20_percent"]
+
+    assert research["v14_global_bottom_40_percent"]["decision"] == "REJECT"
+    assert research["v15_global_bottom_30_percent"]["decision"] == "REJECT"
+    assert candidate["all_v16_preregistered_gates_pass"]
+    assert candidate["all_cost_stress_gates_pass"]
+    assert candidate["dukascopy_every_year_not_below_v6"]
+    assert candidate["delta_net_pnl_usd_vs_v6"] > 0.0
+    assert candidate["negative_month_pnl_usd"] > -525.2626989814407
+    assert candidate["trade_retention_vs_v6"] >= 0.99
+    assert candidate["trade_retention_vs_v60"] < 0.99
+    assert not candidate["canonical_99_percent_retention_pass"]
+    assert not candidate["deployment_authorized"]
+    assert research["canonical_best_challenger_remains"] == (
+        "v60-dynamic-followthrough-union-v6"
+    )

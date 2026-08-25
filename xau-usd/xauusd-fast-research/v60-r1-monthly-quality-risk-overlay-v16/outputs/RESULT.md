@@ -59,3 +59,9 @@ Monthly-quality vetoes: `3`.
 - `all_cost_stress_gates`: PASS
 
 Clean forward evidence remains mandatory.
+
+## Canonical Goal Caveat
+
+V16 retains 98.849% of V60 trades and 99.782% of V6 trades. It passes the V16
+98% floor but does not pass the original 99% V60-retention goal. V6 therefore
+remains the canonical forward challenger.

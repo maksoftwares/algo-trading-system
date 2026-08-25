@@ -240,6 +240,44 @@ These results preserve the hard objective: make August good without sacrificing
 the established portfolio. V6 remains the best exposed retrospective candidate;
 the management and health-accounting findings remain research inputs only.
 
+## Losing-month risk overlay research
+
+A separate bounded program tested whether causal month-to-date portfolio health
+can reduce ordinary losing-month damage. V14 applied a global bottom-40% quality
+gate after eight resolved UTC-month trades and worse than -$20 canonical P/L.
+It improved V6 net by $107.99 and reduced both drawdowns, but failed retention,
+nominal 2022, Dukascopy 2023, and +$0.10 cost-stress gates. V15 retained more
+medium-rank candidates but still failed the annual cross-feed and cost gates.
+Both are rejected.
+
+V16 narrowed the same mechanism to low-rank R1 pullback and box candidates only.
+It executed three additional vetoes, all losses, and passed every V16 nominal,
+annual, 3/6/12-month, cost-stress, Dukascopy, August, frequency, and drawdown
+gate.
+
+| Metric | Dynamic V6 | R1 monthly V16 | Change |
+|---|---:|---:|---:|
+| Closed trades | 1,377 | 1,374 | -3 |
+| Net P/L | $3,681.34 | $3,721.79 | +$40.45 |
+| Profit factor | 1.7377 | 1.7519 | +0.0142 |
+| Closed drawdown | $217.46 | $217.46 | $0.00 |
+| Equity drawdown | $238.28 | $238.28 | $0.00 |
+| Losing months | 20 | 20 | 0 |
+| P/L inside losing months | -$525.26 | -$492.21 | +$33.05 |
+| Worst month | -$136.77 | -$120.70 | +$16.07 |
+
+On same-timing Dukascopy quotes, V16 improves V6 by $39.60, raises PF from
+2.0310 to 2.0501, reduces closed drawdown from $180.66 to $164.63, and harms no
+calendar year. The +$0.10 and +$0.20 stress paths also pass every V6 floor.
+August is unchanged from V6 because the R1 monthly rule makes no August veto.
+
+V16 passes its preregistered 98% retention floor, but the combined V6+V16 policy
+retains 98.849% of V60 trades, below the original canonical 99% requirement. It
+retains 99.782% of V6 trades. V16 is therefore a qualified read-only research
+component, not a replacement for the canonical V6 forward challenger and not a
+deployment authorization. Its historical selection is exposed and clean forward
+confirmation remains mandatory.
+
 New candidates now persist their recent-20 source health for future research.
 This field is observability only and cannot affect an order.
 

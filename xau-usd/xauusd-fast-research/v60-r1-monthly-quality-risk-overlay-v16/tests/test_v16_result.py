@@ -41,3 +41,12 @@ def test_external_and_stress_gates_pass() -> None:
     assert all(item["all_gates_pass"] for item in result["cost_stress"].values())
     assert "v16" in result["august_2026_through_25"]
     assert "v16" in result["dukascopy_crossfeed"]
+
+
+def test_canonical_99_percent_retention_caveat_is_explicit() -> None:
+    result = load_result()
+    retention = result["canonical_goal_trade_retention"]
+    assert retention["observed_fraction_vs_v6"] >= 0.99
+    assert retention["observed_fraction_vs_v60"] < 0.99
+    assert retention["passes"] is False
+    assert result["canonical_goal_authorized"] is False

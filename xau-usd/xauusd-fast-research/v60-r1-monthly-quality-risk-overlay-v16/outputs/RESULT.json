@@ -344,6 +344,13 @@
     }
   },
   "decision": "RESEARCH_CHALLENGER_PASSES_FORWARD_CONFIRMATION_REQUIRED",
+  "canonical_goal_authorized": false,
+  "canonical_goal_trade_retention": {
+    "observed_fraction_vs_v6": 0.9978213507625272,
+    "observed_fraction_vs_v60": 0.9884892086330935,
+    "passes": false,
+    "required_fraction_vs_v60": 0.99
+  },
   "delta_vs_v6": {
     "closed_drawdown_usd": 0.0,
     "equity_drawdown_usd": 0.0,
@@ -356,37 +363,37 @@
     "annual": [
       {
         "delta_net_pnl_usd": 0.0,
-        "v14_net_pnl_usd": 334.87999999999874,
+        "v16_net_pnl_usd": 334.87999999999874,
         "v6_net_pnl_usd": 334.87999999999874,
         "year": 2021
       },
       {
         "delta_net_pnl_usd": 0.0,
-        "v14_net_pnl_usd": 141.19699999999966,
+        "v16_net_pnl_usd": 141.19699999999966,
         "v6_net_pnl_usd": 141.19699999999966,
         "year": 2022
       },
       {
         "delta_net_pnl_usd": 0.0,
-        "v14_net_pnl_usd": 401.27500000000055,
+        "v16_net_pnl_usd": 401.27500000000055,
         "v6_net_pnl_usd": 401.27500000000055,
         "year": 2023
       },
       {
         "delta_net_pnl_usd": 23.346999999999753,
-        "v14_net_pnl_usd": 846.9270000000013,
+        "v16_net_pnl_usd": 846.9270000000013,
         "v6_net_pnl_usd": 823.5800000000015,
         "year": 2024
       },
       {
         "delta_net_pnl_usd": 16.25,
-        "v14_net_pnl_usd": 1421.7179999999917,
+        "v16_net_pnl_usd": 1421.7179999999917,
         "v6_net_pnl_usd": 1405.4679999999917,
         "year": 2025
       },
       {
         "delta_net_pnl_usd": 0.0,
-        "v14_net_pnl_usd": 1285.8669999999943,
+        "v16_net_pnl_usd": 1285.8669999999943,
         "v6_net_pnl_usd": 1285.8669999999943,
         "year": 2026
       }
@@ -1194,7 +1201,8 @@
     "All historical and August outcomes were exposed before evaluation.",
     "The fixed rule was nominated after a bounded endpoint screen.",
     "Calendar-month boundaries are operational conventions, not market regimes.",
-    "Clean prospective evidence is mandatory before deployment."
+    "Clean prospective evidence is mandatory before deployment.",
+    "V16 passes its preregistered 98% retention floor but not the canonical 99% V60 retention goal; it cannot replace V6 without a separate decision."
   ],
   "monthly": {
     "v16": {
