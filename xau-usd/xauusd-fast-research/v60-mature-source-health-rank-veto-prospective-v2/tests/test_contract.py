@@ -53,3 +53,4 @@ def test_v2_observer_is_read_only_and_hash_locked() -> None:
     assert acceptance["minimum_resolved_baseline_executions"] >= 100
     assert acceptance["minimum_resolved_rank_coverage"] == 1.0
     assert acceptance["minimum_trade_retention"] >= 0.95
+    assert acceptance["minimum_equity_marks"] >= 5000

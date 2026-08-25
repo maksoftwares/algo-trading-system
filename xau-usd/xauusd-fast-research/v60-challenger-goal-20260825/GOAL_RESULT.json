@@ -98,9 +98,12 @@
     "minimum_resolved_vetoes": 10,
     "minimum_resolved_rank_coverage": 1.0,
     "minimum_trade_retention": 0.95,
+    "minimum_sampled_equity_marks": 5000,
     "requires_whole_portfolio_net_pnl_not_worse": true,
     "requires_whole_portfolio_profit_factor_not_worse": true,
-    "requires_whole_portfolio_closed_drawdown_not_worse": true
+    "requires_whole_portfolio_closed_drawdown_not_worse": true,
+    "requires_sampled_equity_drawdown_not_worse": true,
+    "requires_final_exact_tick_equity_replay": true
   },
   "rejected_posthoc_rank_only_audit": {
     "trades_removed": 58,

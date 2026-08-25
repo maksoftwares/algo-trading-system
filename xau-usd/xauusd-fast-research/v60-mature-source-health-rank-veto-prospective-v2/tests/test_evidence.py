@@ -4,7 +4,13 @@ from datetime import UTC, datetime
 
 import pytest
 
-from src.evidence import add_forward_comparison, load_chain, update_evidence_chain
+from src.evidence import (
+    add_forward_comparison,
+    build_equity_mark,
+    load_chain,
+    update_equity_marks,
+    update_evidence_chain,
+)
 
 
 def candidate(
@@ -73,3 +79,68 @@ def test_forward_comparison_measures_whole_resolved_portfolio() -> None:
     assert comparison["trade_retention"] == pytest.approx(2 / 3)
     assert all(status["gates"].values())
     assert status["decision"] == "PROSPECTIVE_CONFIRMATION_PASSES_REVIEW_REQUIRED"
+
+
+def test_equity_marks_include_open_pnl_and_measure_sampled_drawdown(tmp_path) -> None:
+    rows = [
+        dict(
+            candidate("1", 0.0, would_veto=True),
+            broker_outcome_resolved=False,
+            broker_exit_time_utc=None,
+            broker_pnl_usd=None,
+        ),
+        dict(
+            candidate("2", 0.0, would_veto=False),
+            broker_outcome_resolved=False,
+            broker_exit_time_utc=None,
+            broker_pnl_usd=None,
+        ),
+    ]
+    state = {"positions": {"1": {"ticket": 101}, "2": {"ticket": 102}}}
+    deals = [
+        {"position_id": 101, "profit": 0.0, "commission": -1.0, "swap": 0.0, "fee": 0.0},
+        {"position_id": 102, "profit": 0.0, "commission": -1.0, "swap": 0.0, "fee": 0.0},
+    ]
+    positions = [
+        {"ticket": 101, "profit": -9.0, "swap": 0.0},
+        {"ticket": 102, "profit": 21.0, "swap": 0.0},
+    ]
+    first_time = datetime(2026, 8, 26, 12, tzinfo=UTC)
+    first = build_equity_mark(
+        rows,
+        state,
+        deals,
+        positions,
+        account_currency_per_usd=1.0,
+        observed_at=first_time,
+    )
+    assert first["baseline_v60_equity_pnl_usd"] == 10.0
+    assert first["challenger_v2_equity_pnl_usd"] == 20.0
+
+    first_audit = update_equity_marks(
+        tmp_path,
+        first,
+        boundary=datetime(2026, 8, 26, tzinfo=UTC),
+        minimum_marks=2,
+    )
+    assert first_audit["marks"] == 1
+    assert first_audit["minimum_marks_gate"] is False
+
+    second = dict(
+        first,
+        observed_at_utc="2026-08-26T12:05:00Z",
+        baseline_v60_equity_pnl_usd=-5.0,
+        challenger_v2_equity_pnl_usd=15.0,
+        delta_equity_pnl_usd=20.0,
+    )
+    second_audit = update_equity_marks(
+        tmp_path,
+        second,
+        boundary=datetime(2026, 8, 26, tzinfo=UTC),
+        minimum_marks=2,
+    )
+    assert second_audit["marks"] == 2
+    assert second_audit["baseline_v60_sampled_equity_drawdown_usd"] == 15.0
+    assert second_audit["challenger_v2_sampled_equity_drawdown_usd"] == 5.0
+    assert second_audit["minimum_marks_gate"] is True
+    assert second_audit["challenger_drawdown_not_worse_gate"] is True

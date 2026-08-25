@@ -191,6 +191,147 @@ def update_evidence_chain(
     return audit
 
 
+def object_value(value: Any, name: str) -> Any:
+    return value[name] if isinstance(value, Mapping) else getattr(value, name)
+
+
+def build_equity_mark(
+    rows: Sequence[Mapping[str, Any]],
+    state: Mapping[str, Any],
+    deals: Sequence[Any],
+    open_positions: Sequence[Any],
+    *,
+    account_currency_per_usd: float,
+    observed_at: datetime,
+) -> dict[str, Any]:
+    rate = float(account_currency_per_usd)
+    if rate <= 0.0:
+        raise ValueError("Account-currency conversion rate must be positive")
+    deals_by_position: dict[int, list[Any]] = {}
+    for deal in deals:
+        deals_by_position.setdefault(int(object_value(deal, "position_id")), []).append(
+            deal
+        )
+    positions_by_ticket = {
+        int(object_value(position, "ticket")): position for position in open_positions
+    }
+    state_positions = state.get("positions", {})
+    baseline_pnl = 0.0
+    challenger_pnl = 0.0
+    resolved = 0
+    open_count = 0
+    for row in rows:
+        if not bool(row.get("baseline_executed")):
+            continue
+        candidate_id = str(row["candidate_id"])
+        if bool(row.get("broker_outcome_resolved")):
+            pnl_usd = float(row["broker_pnl_usd"])
+            resolved += 1
+        else:
+            state_position = state_positions.get(candidate_id)
+            if state_position is None:
+                raise ValueError(
+                    f"Executed unresolved candidate has no portfolio state: {candidate_id}"
+                )
+            ticket = int(state_position["ticket"])
+            position = positions_by_ticket.get(ticket)
+            if position is None:
+                raise ValueError(
+                    f"Executed unresolved candidate has no open MT5 position: {candidate_id}"
+                )
+            realized_account = sum(
+                sum(
+                    float(object_value(deal, key))
+                    for key in ("profit", "commission", "swap", "fee")
+                )
+                for deal in deals_by_position.get(ticket, [])
+            )
+            floating_account = float(object_value(position, "profit")) + float(
+                object_value(position, "swap")
+            )
+            pnl_usd = (realized_account + floating_account) / rate
+            open_count += 1
+        baseline_pnl += pnl_usd
+        if not bool(row["would_veto"]):
+            challenger_pnl += pnl_usd
+    return {
+        "observed_at_utc": observed_at.astimezone(UTC)
+        .isoformat()
+        .replace("+00:00", "Z"),
+        "baseline_v60_equity_pnl_usd": baseline_pnl,
+        "challenger_v2_equity_pnl_usd": challenger_pnl,
+        "delta_equity_pnl_usd": challenger_pnl - baseline_pnl,
+        "resolved_baseline_positions": resolved,
+        "open_baseline_positions": open_count,
+    }
+
+
+def update_equity_marks(
+    output_directory: Path,
+    mark: Mapping[str, Any],
+    *,
+    boundary: datetime,
+    minimum_marks: int,
+) -> dict[str, Any]:
+    path = output_directory / "EQUITY_MARKS.jsonl"
+    head_path = output_directory / "EQUITY_HEAD.json"
+    observed_at = datetime.fromisoformat(
+        str(mark["observed_at_utc"]).replace("Z", "+00:00")
+    ).astimezone(UTC)
+    records = load_chain(path)
+    if observed_at >= boundary.astimezone(UTC):
+        if records:
+            last_observed = datetime.fromisoformat(
+                str(records[-1]["payload"]["observed_at_utc"]).replace(
+                    "Z", "+00:00"
+                )
+            ).astimezone(UTC)
+            if observed_at <= last_observed:
+                raise ValueError("Prospective equity marks are not strictly chronological")
+        previous_hash = str(records[-1]["event_hash"]) if records else GENESIS_HASH
+        unsigned = {
+            "sequence": len(records) + 1,
+            "previous_hash": previous_hash,
+            "observed_at_utc": str(mark["observed_at_utc"]),
+            "event_type": "PORTFOLIO_EQUITY_MARK",
+            "payload": dict(mark),
+        }
+        digest = event_hash(previous_hash, unsigned)
+        records.append({**unsigned, "event_hash": digest})
+
+    atomic_write(
+        path,
+        "".join(json.dumps(row, sort_keys=True) + "\n" for row in records),
+    )
+    baseline_values = [
+        float(record["payload"]["baseline_v60_equity_pnl_usd"])
+        for record in records
+    ]
+    challenger_values = [
+        float(record["payload"]["challenger_v2_equity_pnl_usd"])
+        for record in records
+    ]
+    baseline_dd = closed_drawdown_from_equity_marks(baseline_values)
+    challenger_dd = closed_drawdown_from_equity_marks(challenger_values)
+    audit = {
+        "schema_version": "v60_v2_prospective_equity_marks_v1",
+        "status": "VERIFIED",
+        "chain_path": str(path),
+        "marks": len(records),
+        "head_sha256": (
+            str(records[-1]["event_hash"]) if records else GENESIS_HASH
+        ),
+        "baseline_v60_sampled_equity_drawdown_usd": baseline_dd,
+        "challenger_v2_sampled_equity_drawdown_usd": challenger_dd,
+        "delta_sampled_equity_drawdown_usd": challenger_dd - baseline_dd,
+        "minimum_marks_gate": len(records) >= int(minimum_marks),
+        "challenger_drawdown_not_worse_gate": challenger_dd <= baseline_dd,
+        "latest_mark": dict(records[-1]["payload"]) if records else None,
+    }
+    atomic_write(head_path, json.dumps(audit, indent=2, sort_keys=True) + "\n")
+    return audit
+
+
 def profit_factor(values: Sequence[float]) -> float:
     gross_profit = sum(value for value in values if value > 0.0)
     gross_loss = -sum(value for value in values if value < 0.0)
@@ -207,6 +348,15 @@ def closed_drawdown(values: Sequence[float]) -> float:
         equity += value
         peak = max(peak, equity)
         maximum = max(maximum, peak - equity)
+    return maximum
+
+
+def closed_drawdown_from_equity_marks(values: Sequence[float]) -> float:
+    peak = 0.0
+    maximum = 0.0
+    for value in values:
+        peak = max(peak, value)
+        maximum = max(maximum, peak - value)
     return maximum
 
 

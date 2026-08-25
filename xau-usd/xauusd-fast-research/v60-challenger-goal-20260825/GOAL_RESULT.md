@@ -138,8 +138,11 @@ closed-trade drawdown no higher.
 The clean observer writes each score decision, execution decision, and broker
 outcome to a hash-linked evidence chain. Any later change to an immutable event
 fails collection closed. The chain was initialized and verified empty before
-the prospective boundary. Passing every gate still does not auto-authorize
-deployment.
+the prospective boundary. A second hash-linked series records five-minute
+XAU-only V60 and hypothetical V2 equity marks. At least 5,000 marks are required,
+V2 sampled equity drawdown cannot be worse, and the final review must reconstruct
+exact between-sample drawdown from the stored ticks. Passing every gate still
+does not auto-authorize deployment.
 
 The runtime supervisor is healthy on demo account 1033030. It supervises six
 workers, both execution feeds pass, and both V1 and V2 observers explicitly

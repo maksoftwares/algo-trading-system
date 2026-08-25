@@ -93,13 +93,16 @@ def read_mt5_observation(config: dict):
         )
         if deals is None:
             raise RuntimeError(f"MT5 history read failed: {mt5.last_error()}")
+        positions = mt5.positions_get(symbol=str(account["symbol"]))
+        if positions is None:
+            raise RuntimeError(f"MT5 positions read failed: {mt5.last_error()}")
         ranker = load_ranker()
         runtime = ranker.prepare_runtime(mt5, REPO_ROOT, config)
         candidates, _ = load_candidate_rows(config["read_only_inputs"])
         decisions, rank_audit = ranker.score_candidates(
             runtime, candidates, config["observer_ranker"]
         )
-        return list(deals), decisions, rank_audit
+        return list(deals), list(positions), decisions, rank_audit
     finally:
         mt5.shutdown()
 
@@ -109,15 +112,51 @@ def run_once(config_path: Path) -> dict:
     verify_shared_observer(config)
     verify_ranker(config)
     verify_evidence(config)
-    deals, rank_decisions, rank_audit = read_mt5_observation(config)
+    observed_at = datetime.now(UTC)
+    deals, open_positions, rank_decisions, rank_audit = read_mt5_observation(config)
     status, rows = build_snapshot(
-        config, deals, rank_decisions=rank_decisions
+        config, deals, now=observed_at, rank_decisions=rank_decisions
     )
     status["observer_ranker"] = rank_audit
     evidence = load_evidence()
     evidence.add_forward_comparison(status, rows, config["acceptance"])
     status["evidence_chain"] = evidence.update_evidence_chain(
-        Path(config["outputs"]["runtime_directory"]), rows
+        Path(config["outputs"]["runtime_directory"]),
+        rows,
+        observed_at=observed_at,
+    )
+    state = json.loads(
+        Path(config["read_only_inputs"]["portfolio_state"]).read_text(
+            encoding="utf-8"
+        )
+    )
+    equity_mark = evidence.build_equity_mark(
+        rows,
+        state,
+        deals,
+        open_positions,
+        account_currency_per_usd=float(
+            config["account"]["account_currency_per_usd"]
+        ),
+        observed_at=observed_at,
+    )
+    equity_audit = evidence.update_equity_marks(
+        Path(config["outputs"]["runtime_directory"]),
+        equity_mark,
+        boundary=utc_time(config["lock"]["evidence_start_inclusive_utc"]),
+        minimum_marks=int(config["acceptance"]["minimum_equity_marks"]),
+    )
+    status["forward_comparison"]["sampled_equity"] = equity_audit
+    status["gates"]["minimum_equity_marks"] = bool(
+        equity_audit["minimum_marks_gate"]
+    )
+    status["gates"]["challenger_sampled_equity_drawdown_not_worse"] = bool(
+        equity_audit["challenger_drawdown_not_worse_gate"]
+    )
+    status["decision"] = (
+        "PROSPECTIVE_CONFIRMATION_PASSES_REVIEW_REQUIRED"
+        if all(status["gates"].values())
+        else "KEEP_DEPLOYED_V60_CONTINUE_COLLECTION"
     )
     write_snapshot(config, status, rows)
     return status

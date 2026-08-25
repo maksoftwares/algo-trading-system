@@ -15,6 +15,13 @@ match the original immutable payload exactly. A changed score, rank, source,
 entry time, policy decision, exit time, or broker P/L fails the observer closed.
 The evidence recorder implementation is hash-locked before the clean boundary.
 
+The observer also records a hash-linked XAU-only equity mark every five-minute
+cycle. The baseline mark includes closed P/L and current MT5 floating P/L; the
+V2 mark removes positions the locked policy would have vetoed. At least 5,000
+marks are required and V2 sampled equity drawdown cannot exceed V60. Before any
+deployment decision, stored prospective ticks must also be replayed to measure
+the exact between-sample equity drawdown.
+
 ## All-source causal ranking
 
 The deployed ML top-up scorer intentionally ranks only sources eligible for an
