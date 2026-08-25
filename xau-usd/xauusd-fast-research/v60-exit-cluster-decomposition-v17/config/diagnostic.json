@@ -1,0 +1,56 @@
+{
+  "schema_version": "v60_exit_cluster_decomposition_v17",
+  "report_title": "V60 Exit And Cluster Decomposition V17",
+  "authorization": {
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "evidence_status": "RETROSPECTIVE_EXPOSED_DIAGNOSTIC",
+  "inputs": {
+    "v6_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/config/experiment.json",
+      "sha256": "369dba6fecbd3c9e851bcd0a8f7652089254677ca42a4f5b2c9a17fd344849d6"
+    },
+    "v6_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/outputs/RESULT.json",
+      "sha256": "032af1f2b7328f3aaf68feef8d4c404a90487c0b9f915789e1ac50fb0ed4dd13"
+    },
+    "v6_scenario": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/src/scenario.py",
+      "sha256": "6d762645a27330c985a85b0c4612036b904ea61a7bd889d423e5f33c8d4a5c87"
+    },
+    "shared_evaluator": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
+      "sha256": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
+    },
+    "july_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_JULY_2026_EXTENSION_COMPARISON_20260802.json",
+      "sha256": "5abfe24722fcd2f4a34139fe21fda7deb8a8ee331597237ff453bf2ca2408b42"
+    },
+    "july_audit": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/evidence/V60_JULY_2026_CANDIDATE_AUDIT_20260802.csv",
+      "sha256": "f5c262b7b01acf00926d8a5d8daef21897061659ca40582c3a3f2e6b417b894c"
+    },
+    "august_v16_audit": {
+      "path": "xau-usd/xauusd-fast-research/v60-r1-monthly-quality-risk-overlay-v16/outputs/AUGUST_2026_AUDIT.csv",
+      "sha256": "df12c094d231beb8fd1d752f44dc6ff68971c1a4100a254997e68f6abde4d7e6"
+    },
+    "august_features": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-volatility-antichase-v1/outputs/AUGUST_2026_TRADE_AUDIT.csv",
+      "sha256": "d069aed9f5970188d05886a2e995f1340ec9386d05067f4b39822ca10adc94ce"
+    }
+  },
+  "folds": [
+    {"fold_id": "2021-2023", "start": "2021-01-01T00:00:00Z", "end": "2024-01-01T00:00:00Z"},
+    {"fold_id": "2024-2025", "start": "2024-01-01T00:00:00Z", "end": "2026-01-01T00:00:00Z"},
+    {"fold_id": "2026H1", "start": "2026-01-01T00:00:00Z", "end": "2026-07-01T00:00:00Z"}
+  ],
+  "tolerance_usd": 1e-9,
+  "eligibility": {
+    "minimum_cohort_trades": 30,
+    "maximum_cluster_profit_factor_exclusive": 1.0,
+    "minimum_negative_historical_folds": 2
+  }
+}
