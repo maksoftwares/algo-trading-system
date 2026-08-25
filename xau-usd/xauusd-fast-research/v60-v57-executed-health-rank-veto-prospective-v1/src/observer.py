@@ -97,6 +97,7 @@ def load_candidate_rows(
                 )
             normalized = dict(raw)
             normalized["specialist_id"] = source_id
+            normalized["sleeve_type"] = str(source.get("sleeve_type", "CORE")).upper()
             normalized["scheduled_entry_time_utc"] = raw[time_field]
             normalized["event_id"] = str(
                 raw.get("event_id", raw["candidate_id"])
@@ -222,6 +223,7 @@ def build_snapshot(
     deals: Sequence[Any],
     *,
     now: datetime | None = None,
+    rank_decisions: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     now = (now or datetime.now(UTC)).astimezone(UTC)
     inputs = config["read_only_inputs"]
@@ -261,7 +263,11 @@ def build_snapshot(
                 "warm_start": True,
             }
             warm_start_count += 1
-    decisions = state.get("ml_topup", {}).get("decisions", {})
+    decisions = (
+        rank_decisions
+        if rank_decisions is not None
+        else state.get("ml_topup", {}).get("decisions", {})
+    )
     positions = state.get("positions", {})
     source_candidates = sorted(
         (
@@ -314,6 +320,11 @@ def build_snapshot(
             if model.get("reason") == "SCORE_COMPLETE" and model.get("rank") is not None
             else None
         )
+        score = (
+            float(model["score"])
+            if model.get("reason") == "SCORE_COMPLETE" and model.get("score") is not None
+            else None
+        )
         would_veto = bool(
             baseline_executed
             and prior_pf is not None
@@ -345,6 +356,7 @@ def build_snapshot(
                 "source_id": candidate_source,
                 "entry_time_utc": entry.isoformat().replace("+00:00", "Z"),
                 "baseline_executed": baseline_executed,
+                "causal_score": score,
                 "causal_rank": rank,
                 "prior_source_executed_count": len(eligible_prior),
                 "prior_health_window_count": len(prior_values),

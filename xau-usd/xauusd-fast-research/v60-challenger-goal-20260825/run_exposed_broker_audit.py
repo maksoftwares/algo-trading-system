@@ -78,15 +78,67 @@ def summarize(status: dict, rows: list[dict]) -> dict:
     }
 
 
+def runtime_rank_parity(config: dict, rows: list[dict]) -> dict:
+    state = json.loads(
+        Path(config["read_only_inputs"]["portfolio_state"]).read_text(
+            encoding="utf-8"
+        )
+    )
+    runtime = state.get("ml_topup", {}).get("decisions", {})
+    observer = {str(row["candidate_id"]): row for row in rows}
+    comparisons = []
+    for candidate_id, decision in runtime.items():
+        row = observer.get(str(candidate_id))
+        if (
+            decision.get("reason") != "SCORE_COMPLETE"
+            or row is None
+            or row.get("causal_score") is None
+        ):
+            continue
+        comparisons.append(
+            {
+                "score_difference": abs(
+                    float(decision["score"]) - float(row["causal_score"])
+                ),
+                "rank_difference": abs(
+                    float(decision["rank"]) - float(row["causal_rank"])
+                ),
+            }
+        )
+    return {
+        "overlap_candidates": len(comparisons),
+        "maximum_absolute_score_difference": max(
+            (row["score_difference"] for row in comparisons), default=None
+        ),
+        "mean_absolute_rank_difference": (
+            sum(row["rank_difference"] for row in comparisons) / len(comparisons)
+            if comparisons
+            else None
+        ),
+        "maximum_absolute_rank_difference": max(
+            (row["rank_difference"] for row in comparisons), default=None
+        ),
+        "rank_difference_expected": (
+            "Observer ranks append all-source prior scores; deployed top-up ranks append "
+            "only top-up-eligible prior scores."
+        ),
+    }
+
+
 def main() -> int:
     runner = load_module("v60_v2_exposed_audit_runner", V2_RUNNER)
     config = runner.load_locked_config(V2_CONFIG)
     runner.verify_shared_observer(config)
     exposed_config = deepcopy(config)
     exposed_config["lock"]["evidence_start_inclusive_utc"] = EXPOSED_START_UTC
-    deals = runner.read_mt5_deals(exposed_config)
-    status, rows = runner.build_snapshot(exposed_config, deals)
+    deals, rank_decisions, rank_audit = runner.read_mt5_observation(exposed_config)
+    status, rows = runner.build_snapshot(
+        exposed_config, deals, rank_decisions=rank_decisions
+    )
+    status["observer_ranker"] = rank_audit
     result = summarize(status, rows)
+    result["observer_ranker"] = rank_audit
+    result["runtime_rank_parity"] = runtime_rank_parity(exposed_config, rows)
     (ROOT / "EXPOSED_BROKER_AUDIT.json").write_text(
         json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )

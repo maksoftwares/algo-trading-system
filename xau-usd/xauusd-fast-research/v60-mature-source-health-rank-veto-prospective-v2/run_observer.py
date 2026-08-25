@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from datetime import UTC, datetime
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import sys
@@ -12,6 +13,7 @@ import time
 ROOT = Path(__file__).resolve().parent
 REPO_ROOT = ROOT.parents[2]
 CONFIG = ROOT / "config" / "prospective.json"
+RANKER = ROOT / "src" / "ranker.py"
 SHARED_ROOT = (
     REPO_ROOT
     / "xau-usd"
@@ -20,7 +22,13 @@ SHARED_ROOT = (
 )
 sys.path.insert(0, str(SHARED_ROOT))
 
-from src.observer import build_snapshot, load_locked_config, utc_time, write_snapshot
+from src.observer import (
+    build_snapshot,
+    load_candidate_rows,
+    load_locked_config,
+    utc_time,
+    write_snapshot,
+)
 
 
 def verify_shared_observer(config: dict) -> None:
@@ -30,7 +38,23 @@ def verify_shared_observer(config: dict) -> None:
         raise ValueError("Shared prospective observer changed")
 
 
-def read_mt5_deals(config: dict):
+def load_ranker():
+    spec = importlib.util.spec_from_file_location("v60_v2_all_source_ranker", RANKER)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Cannot load observer ranker: {RANKER}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def verify_ranker(config: dict) -> None:
+    actual = hashlib.sha256(RANKER.read_bytes()).hexdigest()
+    if actual != str(config["lock"]["observer_ranker_sha256"]):
+        raise ValueError("All-source observer ranker changed")
+
+
+def read_mt5_observation(config: dict):
     import MetaTrader5 as mt5
 
     account = config["account"]
@@ -52,7 +76,13 @@ def read_mt5_deals(config: dict):
         )
         if deals is None:
             raise RuntimeError(f"MT5 history read failed: {mt5.last_error()}")
-        return list(deals)
+        ranker = load_ranker()
+        runtime = ranker.prepare_runtime(mt5, REPO_ROOT, config)
+        candidates, _ = load_candidate_rows(config["read_only_inputs"])
+        decisions, rank_audit = ranker.score_candidates(
+            runtime, candidates, config["observer_ranker"]
+        )
+        return list(deals), decisions, rank_audit
     finally:
         mt5.shutdown()
 
@@ -60,7 +90,12 @@ def read_mt5_deals(config: dict):
 def run_once(config_path: Path) -> dict:
     config = load_locked_config(config_path)
     verify_shared_observer(config)
-    status, rows = build_snapshot(config, read_mt5_deals(config))
+    verify_ranker(config)
+    deals, rank_decisions, rank_audit = read_mt5_observation(config)
+    status, rows = build_snapshot(
+        config, deals, rank_decisions=rank_decisions
+    )
+    status["observer_ranker"] = rank_audit
     write_snapshot(config, status, rows)
     return status
 

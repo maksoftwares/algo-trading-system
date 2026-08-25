@@ -89,6 +89,24 @@ boundary: the observer now hash-locks the deployed source configuration, merges
 all core and add-on ledgers, normalizes source/time fields, rejects ambiguous or
 duplicate candidates, and reports per-source ledger coverage.
 
+A second pre-boundary audit found that the deployed top-up scorer intentionally
+does not rank R1, V25, or V8, while historical V2 can act on those sources. V2
+now has a separate observer-only rank path using the same frozen model. It scores
+all sources chronologically, batches simultaneous candidates against the same
+strictly earlier reference, and cannot affect an order. All 45 exposed
+candidates scored successfully against 1,676 frozen historical reference scores;
+all 30 executed broker candidates are now evaluable. On the 23 candidates also
+ranked by the deployed top-up path, raw model scores match exactly; mean rank
+difference is 0.0010 and maximum difference is 0.0026 because the observer
+correctly expands with all-source scores.
+
+A fixed post-hoc rank-only audit was also run because three recent V57 losses had
+bottom-decile scores but source PF above 1.0. It is rejected: although net P/L
+improves by $72.33, PF rises to 1.7655, and equity drawdown falls by $6.05, it
+removes 58 trades, excludes a profitable cohort with PF 1.14, hurts 2023 by
+$47.23, and hurts 2024 by $21.87. Loosening V2 to fit the recent losses would
+discard established edge.
+
 New candidates now persist their recent-20 source health for future research.
 This field is observability only and cannot affect an order.
 

@@ -136,6 +136,7 @@ def test_source_config_merges_and_normalizes_dedicated_and_shared_ledgers(
         {"candidate_source_config": str(source_config)}
     )
     assert [row["specialist_id"] for row in rows] == ["A", "B", "C"]
+    assert [row["sleeve_type"] for row in rows] == ["CORE", "CORE", "CORE"]
     assert rows[0]["scheduled_entry_time_utc"] == "2026-01-01T00:00:00Z"
     assert rows[0]["event_id"] == "a"
     assert [item["rows"] for item in audit] == [1, 1, 1]
@@ -240,3 +241,65 @@ def test_snapshot_excludes_hypothetical_vetoes_from_future_health(tmp_path: Path
     assert observed[1]["would_veto"] is True
     assert status["counts"]["resolved_vetoes"] == 2
     assert status["deployment_authorized"] is False
+
+
+def test_snapshot_can_use_observer_only_rank_decisions(tmp_path: Path) -> None:
+    candidates = tmp_path / "candidates.jsonl"
+    state_path = tmp_path / "state.json"
+    entry = "2026-01-01T00:00:00+00:00"
+    candidates.write_text(
+        json.dumps(
+            {
+                "candidate_id": "candidate",
+                "event_id": "event",
+                "specialist_id": "V57",
+                "scheduled_entry_time_utc": entry,
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    state_path.write_text(
+        json.dumps(
+            {
+                "positions": {"candidate": {"source_id": "V57", "ticket": 1}},
+                "ml_topup": {"decisions": {}},
+            }
+        ),
+        encoding="utf-8",
+    )
+    config = {
+        "schema_version": "test",
+        "lock": {
+            "evidence_start_inclusive_utc": entry,
+            "policy": {
+                "source_id": "V57",
+                "lookback_closed_trades": 1,
+                "maximum_prior_profit_factor_exclusive": 1.0,
+                "maximum_causal_rank_exclusive": 0.1,
+            },
+        },
+        "account": {"magic": 57, "account_currency_per_usd": 3.6725},
+        "read_only_inputs": {
+            "candidate_ledger": str(candidates),
+            "portfolio_state": str(state_path),
+        },
+        "acceptance": {
+            "minimum_elapsed_days": 0,
+            "minimum_scored_executed_candidates": 1,
+            "minimum_resolved_vetoes": 0,
+            "maximum_veto_broker_profit_factor_exclusive": 0.8,
+            "minimum_avoided_broker_pnl_usd_exclusive": 0.0,
+        },
+    }
+    _, observed = build_snapshot(
+        config,
+        [deal(1, 0, 1_000), deal(1, 1, 2_000, -3.6725)],
+        now=datetime(2026, 1, 2, tzinfo=UTC),
+        rank_decisions={
+            "candidate": {"reason": "SCORE_COMPLETE", "score": 0.4, "rank": 0.5}
+        },
+    )
+    assert observed[0]["causal_score"] == 0.4
+    assert observed[0]["causal_rank"] == 0.5
+    assert observed[0]["evidence_status"] == "RETAIN"

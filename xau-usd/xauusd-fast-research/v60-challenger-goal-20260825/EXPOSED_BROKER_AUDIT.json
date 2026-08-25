@@ -11,9 +11,9 @@
     "resolved_executions": 30,
     "wins": 12
   },
-  "end_inclusive_utc": "2026-08-25T04:18:20.694810Z",
+  "end_inclusive_utc": "2026-08-25T04:37:04.103042Z",
   "evidence_status": "RETROSPECTIVE_EXPOSED_NOT_PROSPECTIVE",
-  "generated_at_utc": "2026-08-25T04:18:20.705006Z",
+  "generated_at_utc": "2026-08-25T04:37:04.111350Z",
   "limitations": [
     "These outcomes were visible before the clean V2 evidence boundary.",
     "This audit cannot authorize deployment or count toward prospective gates.",
@@ -21,10 +21,35 @@
   ],
   "observer_counts": {
     "candidates": 45,
-    "executed_scored_candidates": 23,
+    "executed_scored_candidates": 30,
     "resolved_vetoes": 0,
     "veto_opportunities": 0,
     "warm_start_outcomes": 332
+  },
+  "observer_ranker": {
+    "broker_action_authorized": false,
+    "candidate_rows": 45,
+    "expanding_observer_score_rows": 45,
+    "feature_rows": 60000,
+    "historical_reference_rows": 1676,
+    "latest_completed_feature_bar_utc": "2026-08-25T04:35:00+00:00",
+    "maximum_rank": 1.0,
+    "minimum_rank": 0.05930232558139535,
+    "model_sha256": "573187af78f1e9617eaac87453d14af2e1e0428914321058ecf89b5b2e7dffcd",
+    "observer_only": true,
+    "reason_counts": {
+      "SCORE_COMPLETE": 45
+    },
+    "schema_version": "v60_v2_all_source_observer_ranker_v1",
+    "score_start_inclusive_utc": "2026-07-21T00:00:00+00:00",
+    "scored_candidate_rows": 45
+  },
+  "runtime_rank_parity": {
+    "maximum_absolute_rank_difference": 0.0025688155498876375,
+    "maximum_absolute_score_difference": 0.0,
+    "mean_absolute_rank_difference": 0.0010282318633877106,
+    "overlap_candidates": 23,
+    "rank_difference_expected": "Observer ranks append all-source prior scores; deployed top-up ranks append only top-up-eligible prior scores."
   },
   "schema_version": "xauusd_v60_v2_exposed_broker_audit_20260825",
   "start_inclusive_utc": "2026-07-21T00:00:00Z",
