@@ -1,0 +1,60 @@
+{
+  "schema_version": "v60_causal_protection_action_utility_v21",
+  "report_title": "V60 Causal Protection-Action Utility V21",
+  "authorization": {
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "evidence_status": "RETROSPECTIVE_EXPOSED_PSEUDO_OUT_OF_TIME_DIAGNOSTIC",
+  "inputs": {
+    "preregistration": {
+      "path": "xau-usd/xauusd-fast-research/v60-causal-protection-action-utility-v21/PREREGISTRATION.md",
+      "sha256": "155d6b07245424ad4f6a09eb38a6a869d13eae9c4b62e3b18789e4a6d8b847bb"
+    },
+    "v6_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/config/experiment.json",
+      "sha256": "369dba6fecbd3c9e851bcd0a8f7652089254677ca42a4f5b2c9a17fd344849d6"
+    },
+    "v6_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/outputs/RESULT.json",
+      "sha256": "032af1f2b7328f3aaf68feef8d4c404a90487c0b9f915789e1ac50fb0ed4dd13"
+    },
+    "v6_scenario": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/src/scenario.py",
+      "sha256": "6d762645a27330c985a85b0c4612036b904ea61a7bd889d423e5f33c8d4a5c87"
+    },
+    "shared_evaluator": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
+      "sha256": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
+    },
+    "v17_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-exit-cluster-decomposition-v17/outputs/RESULT.json",
+      "sha256": "2e18a2e86e43fde091f3e2d64aef0a2e7a55edc5b437a5bde841daa0a1029bac"
+    }
+  },
+  "model": {
+    "estimator": "Ridge",
+    "alpha": 10.0,
+    "fit_intercept": true,
+    "prediction_threshold_exclusive": 0.0
+  },
+  "folds": [
+    {"fold": "F1", "train_year_end": 2022, "evaluation_year": 2023},
+    {"fold": "F2", "train_year_end": 2023, "evaluation_year": 2024},
+    {"fold": "F3", "train_year_end": 2024, "evaluation_year": 2025},
+    {"fold": "F4", "train_year_end": 2025, "evaluation_year": 2026}
+  ],
+  "acceptance": {
+    "minimum_nominated_rows": 20,
+    "minimum_nominated_actions": 12,
+    "minimum_nominated_actions_per_fold": 3,
+    "minimum_positive_utility_folds": 3,
+    "maximum_single_action_positive_utility_share_exclusive": 0.5,
+    "bootstrap_seed": 20260825,
+    "bootstrap_resamples": 10000,
+    "bootstrap_percentile": 10.0
+  }
+}
+

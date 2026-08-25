@@ -538,8 +538,29 @@
       "preserved_frozen_v6_edge": false,
       "deployment_authorized": false
     },
+    "v21_causal_protection_action_utility": {
+      "decision": "NO_STABLE_PROTECTION_UTILITY_KEEP_V6",
+      "preregistered_commit": "9a568c9c",
+      "dynamic_v6_behavioral_parity": true,
+      "giveback_close_rows": 160,
+      "distinct_protection_actions": 121,
+      "nominated_rows": 45,
+      "nominated_actions": 37,
+      "positive_utility_folds": 2,
+      "annual_action_utility_r": {
+        "2023": -12.603477128431063,
+        "2024": 2.7500060218658264,
+        "2025": 4.195216517293111,
+        "2026": -3.041034942763792
+      },
+      "combined_action_utility_r": -8.699289532035918,
+      "cluster_bootstrap_tenth_percentile_utility_r": -0.533013934560386,
+      "weighted_r_squared_negative_every_fold": true,
+      "path_dependent_v22_nominated": false,
+      "deployment_authorized": false
+    },
     "canonical_best_challenger_remains": "v60-dynamic-followthrough-union-v6",
-    "conclusion": "REJECT_CLUSTER_CONTROL_AND_V7_PROTECTION_RELAXATION_KEEP_V6_FROZEN"
+    "conclusion": "CLOSE_PROTECTION_LANE_KEEP_V60_AND_V6_UNCHANGED"
   },
   "runtime": {
     "status": "READY",

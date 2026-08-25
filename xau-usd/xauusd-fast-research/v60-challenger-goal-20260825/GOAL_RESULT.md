@@ -316,6 +316,20 @@ failed both cost stresses. V18 and V20 are rejected. The evidence says the
 extra net from loosening V7 protection is compensation for worse risk quality,
 not a free improvement. Frozen Dynamic V6 remains the canonical challenger.
 
+V21 then tested whether the causal state immediately before a frozen Dynamic
+V6 profit-giveback close could identify only the closes worth bypassing. It
+observed all 160 V6 giveback closes across 121 basket actions with exact
+1,377-trade, event-stream, veto, P/L, and drawdown parity. One preregistered
+weighted ridge model was evaluated in four expanding annual folds without a
+threshold or feature search.
+
+The model nominated 45 rows across 37 actions, but realized keep-open utility
+was negative in 2023 and 2026, positive in only two of four folds, and negative
+overall at `-8.6993R`. Its year-stratified action-cluster bootstrap had a 10th
+percentile of `-0.5330R`; weighted R-squared was negative in every fold. V21 is
+rejected and no path-dependent V22 is nominated. The profit-protection research
+lane is closed without changing V60 or Dynamic V6.
+
 ## Runtime improvement
 
 R4 previously reparsed about 2.15 GB of CSV ticks each cycle, taking roughly
