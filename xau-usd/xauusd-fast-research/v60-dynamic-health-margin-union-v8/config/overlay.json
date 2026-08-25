@@ -1,0 +1,20 @@
+{
+  "schema_version": "v60_dynamic_health_margin_union_v8_overlay",
+  "authorization": {
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "parent_config": {
+    "path": "xau-usd/xauusd-fast-research/v60-dynamic-health-margin-union-v7/config/experiment.json",
+    "sha256": "df392fb17a8906204a5cc5ae72406743f07d4e3390f66bb63343b246d45c89cc"
+  },
+  "dynamic_runner": {
+    "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/run_experiment.py",
+    "sha256": "f776cf8255a0b260298a8c1f6d430a944573430db1dab70b0eeb7e5423edc206"
+  },
+  "v2_policy_overrides": {
+    "maximum_prior_profit_factor_exclusive": 0.95
+  }
+}

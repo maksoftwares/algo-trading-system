@@ -59,6 +59,16 @@
       "command_marker": "v60-v57-volatility-antichase-prospective-v1*run_observer.py"
     },
     {
+      "id": "V60_DYNAMIC_V6_PROSPECTIVE",
+      "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
+      "script": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-prospective-v6/run_observer.py",
+      "args": [
+        "--poll-seconds",
+        "30"
+      ],
+      "command_marker": "v60-dynamic-followthrough-union-prospective-v6*run_observer.py"
+    },
+    {
       "id": "V60_PORTFOLIO",
       "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
       "script": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_portfolio.py",
@@ -199,6 +209,24 @@
         "evidence_chain.status": "VERIFIED",
         "decision_timing.maximum_delay_seconds": 120,
         "observation_timing.cycle_within_recording_delay_budget": true
+      }
+    },
+    {
+      "id": "V60_DYNAMIC_V6_PROSPECTIVE_STATUS",
+      "path": "D:/AlgoTradingData/prospective/v60-dynamic-followthrough-union-v6/STATUS.json",
+      "timestamp_fields": [
+        "generated_at_utc"
+      ],
+      "maximum_age_seconds": 300,
+      "required_values": {
+        "deployment_authorized": false,
+        "broker_action_authorized": false,
+        "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+        "prospective_contract_sha256": "ab9797424c91bc3a4104da113324c7b94f8d11a7db8012c330c2bc4d73992587",
+        "evidence_chain.status": "VERIFIED",
+        "decision_timing.maximum_delay_seconds": 120,
+        "observation_timing.cycle_within_recording_delay_budget": true,
+        "policy_audit.state_recomputed_from_hypothetical_retained_path": true
       }
     }
   ]

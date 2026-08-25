@@ -1,0 +1,45 @@
+{
+  "additional_cost_usd_per_trade": 0.1,
+  "baseline": {
+    "closed_drawdown_usd": 220.40733031422565,
+    "interval_pnl_usd": -220.4073303142256,
+    "interval_trades": 88,
+    "peak_event_sequence": 446,
+    "peak_exit_time_utc": "2023-04-04T14:03:20.000Z",
+    "trough_event_sequence": 534,
+    "trough_exit_time_utc": "2023-11-06T02:23:20.000Z"
+  },
+  "baseline_only_trade_ids": [
+    "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1",
+    "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1",
+    "V7_20210813T105500Z_SHORT",
+    "V7_20241007T082500Z_SHORT",
+    "V7_20250704T073500Z_LONG",
+    "V9_BREAK_20210618T014000Z_LONG",
+    "V9_BREAK_20220802T132500Z_SHORT",
+    "V9_BREAK_20240717T024000Z_SHORT",
+    "V9_BREAK_20240718T070500Z_LONG",
+    "V9_BREAK_20241024T075000Z_SHORT",
+    "V9_BREAK_20250924T000500Z_SHORT",
+    "V9_BREAK_20250924T011000Z_LONG",
+    "V9_BREAK_20260325T013500Z_LONG"
+  ],
+  "challenger": {
+    "closed_drawdown_usd": 221.8128819809766,
+    "interval_pnl_usd": -221.81288198097656,
+    "interval_trades": 93,
+    "peak_event_sequence": 443,
+    "peak_exit_time_utc": "2023-04-04T14:03:20.000Z",
+    "trough_event_sequence": 536,
+    "trough_exit_time_utc": "2023-11-28T12:15:20.000Z"
+  },
+  "challenger_only_trade_ids": [
+    "2023-11-28 09:00:00|LONG|r1_h1_pullback_long_v1",
+    "2023-11-28 10:00:00|LONG|r1_h1_pullback_long_v1",
+    "2023-11-28 10:15:00|LONG|r1_h1_pullback_long_v1",
+    "V7_20231130T152500Z_LONG",
+    "V9_BREAK_20231201T135000Z_LONG"
+  ],
+  "common_trade_count": 1370,
+  "schema_version": "v60_v5_cost_stress_drawdown_trace_v1"
+}

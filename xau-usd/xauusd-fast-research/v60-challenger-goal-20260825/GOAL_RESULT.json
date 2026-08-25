@@ -1,7 +1,18 @@
 {
   "schema_version": "xauusd_v60_challenger_goal_result_20260825",
-  "decision": "KEEP_V60_DEPLOYED_COLLECT_V2_AND_ANTICHASE_FORWARD_EVIDENCE",
+  "decision": "KEEP_V60_DEPLOYED_COLLECT_DYNAMIC_V6_FORWARD_EVIDENCE",
   "account_login": 1033030,
+  "goal_acceptance": {
+    "improve_august_2026_net_pnl": true,
+    "improve_august_2026_profit_factor": true,
+    "reduce_or_preserve_august_2026_drawdown": true,
+    "preserve_nominal_long_run_edge": true,
+    "preserve_every_calendar_year": true,
+    "preserve_recent_3m_6m_12m_windows": true,
+    "preserve_at_least_99_percent_of_trades": true,
+    "require_causal_out_of_sample_confirmation": true,
+    "august_is_optimization_only": false
+  },
   "benchmark": {
     "name": "deployed_v60",
     "trades": 1390,
@@ -13,21 +24,27 @@
     "trades_per_weekday": 0.9699930216329379
   },
   "best_historical_challenger": {
-    "name": "v60-mature-source-health-rank-veto-v2",
-    "decision": "HISTORICAL_CHALLENGER_PASSES_PROSPECTIVE_CONFIRMATION_REQUIRED",
-    "trades": 1378,
-    "net_pnl_usd": 3655.750649700279,
-    "profit_factor": 1.728864506587069,
-    "win_rate": 0.488388969521045,
+    "name": "v60-dynamic-followthrough-union-v6",
+    "decision": "BEST_HISTORICAL_CHALLENGER_FORWARD_CONFIRMATION_REQUIRED",
+    "trades": 1377,
+    "net_pnl_usd": 3681.34185842081,
+    "profit_factor": 1.7377308294344829,
+    "win_rate": 0.4887436456063907,
     "closed_drawdown_usd": 217.45931309847566,
     "equity_drawdown_usd": 238.27919504292004,
-    "trades_per_weekday": 0.9616189811584089,
-    "vetoes": 12,
+    "trades_per_weekday": 0.9609211444521982,
+    "vetoes": 13,
     "veto_runtime_wins": 1,
-    "veto_runtime_losses": 11,
-    "veto_baseline_runtime_profit_factor": 0.04114738656623422,
+    "veto_runtime_losses": 12,
+    "veto_baseline_runtime_profit_factor": 0.027987366778580113,
     "veto_endpoint_profit_factor": 0.0,
-    "source_year_stratified_permutation_p": 0.0011299887001129988,
+    "nominal_delta_net_pnl_usd": 77.77650484879541,
+    "nominal_delta_profit_factor": 0.026983022211974017,
+    "trade_retention": 0.9906474820143885,
+    "proposal_rule_counts": {
+      "V2_SOURCE_HEALTH": 12,
+      "V57_WEAK_FOLLOWTHROUGH_ANTICHASE": 1
+    },
     "deployment_authorized": false
   },
   "independent_crossfeed_diagnostic": {
@@ -101,21 +118,22 @@
     "evidence_status": "EXPOSED_NOT_PROSPECTIVE"
   },
   "august_robustness_candidate": {
-    "name": "v60-v57-volatility-antichase-v1",
-    "decision": "PROMISING_POSTHOC_FORWARD_CONFIRMATION_REQUIRED",
-    "rule": "Mature V57 long, causal rank below 0.10, ATR ratio at least 1.20, distance to prior 24-hour high below 1.00 ATR",
-    "variants_screened": 5,
+    "name": "v60-dynamic-followthrough-union-v6",
+    "decision": "PROMISING_EXPOSED_RESULT_FORWARD_CONFIRMATION_REQUIRED",
+    "rule": "Dynamic V2 source-health veto unioned with a mature V57 weak-followthrough anti-chase veto; state advances only from retained closed outcomes",
+    "anti_chase_rule": "V57 long, causal rank below 0.10, ATR ratio at least 1.20, distance to the prior 24-hour high below 1.00 ATR, positive 24-hour return, and 4-hour/24-hour return ratio below 0.70",
     "historical_exact_replay": {
-      "trades": 1388,
-      "net_pnl_usd": 3622.0425276842548,
-      "delta_net_pnl_usd": 18.47717411224039,
-      "profit_factor": 1.7180163127388488,
-      "delta_profit_factor": 0.0072685055163399515,
-      "closed_drawdown_usd": 223.2793130984756,
+      "trades": 1377,
+      "net_pnl_usd": 3681.34185842081,
+      "delta_net_pnl_usd": 77.77650484879541,
+      "profit_factor": 1.7377308294344829,
+      "delta_profit_factor": 0.026983022211974017,
+      "closed_drawdown_usd": 217.45931309847566,
       "equity_drawdown_usd": 238.27919504292004,
-      "executed_vetoes": 2,
-      "veto_profit_factor": 0.27798744037371004,
-      "all_frozen_preservation_gates_pass": true
+      "executed_vetoes": 13,
+      "veto_profit_factor": 0.027987366778580113,
+      "trade_retention": 0.9906474820143885,
+      "all_nominal_preservation_gates_pass": true
     },
     "august_2026_through_25": {
       "v60_trades": 24,
@@ -133,26 +151,14 @@
       "evidence_status": "RETROSPECTIVE_EXPOSED_NOT_PROSPECTIVE"
     },
     "dukascopy_same_timing": {
-      "covered_vetoes": 2,
-      "veto_net_pnl_usd": -14.27700000000004,
-      "veto_profit_factor": 0.3706968748622512,
-      "challenger_delta_net_pnl_usd": 14.277000000000044,
+      "challenger_delta_net_pnl_usd": 61.488,
       "every_calendar_year_delta_nonnegative": true
     },
-    "combined_with_v2_diagnostic": {
-      "trades": 1376,
-      "trade_retention": 0.9899280575539569,
-      "net_pnl_usd": 3674.2278238125195,
-      "delta_net_pnl_usd": 70.66247024050517,
-      "profit_factor": 1.736305196376202,
-      "closed_drawdown_usd": 217.45931309847566,
-      "equity_drawdown_usd": 238.27919504292004,
-      "every_calendar_year_delta_nonnegative": true,
-      "recent_windows_not_worse": true,
-      "locked_99_percent_trade_retention_gate": false,
-      "adopted": false
-    },
-    "minimum_pre_august_cohort_gate_pass": false,
+    "august_acceptance_gates_pass": true,
+    "nominal_preservation_gates_pass": true,
+    "additional_cost_0_10_all_comparative_gates_pass": true,
+    "additional_cost_0_20_all_comparative_gates_pass": false,
+    "additional_cost_0_20_only_failure": "2021 challenger delta -3.57 USD",
     "clean_forward_evidence_available": false,
     "deployment_authorized": false
   },
@@ -162,10 +168,10 @@
     "passing_case": {
       "additional_cost_usd_per_trade": 0.1,
       "baseline_net_pnl_usd": 3468.486316484168,
-      "challenger_net_pnl_usd": 3552.4396563582286,
-      "delta_net_pnl_usd": 83.95333987406048,
+      "challenger_net_pnl_usd": 3578.1308650787596,
+      "delta_net_pnl_usd": 109.64454859459147,
       "baseline_profit_factor": 1.6759995200980862,
-      "challenger_profit_factor": 1.6955106296188132,
+      "challenger_profit_factor": 1.704082036236693,
       "baseline_closed_drawdown_usd": 220.40733031422565,
       "challenger_closed_drawdown_usd": 215.150818075075,
       "baseline_equity_drawdown_usd": 242.13276392542093,
@@ -173,12 +179,11 @@
     },
     "first_tested_failure": {
       "additional_cost_usd_per_trade": 0.2,
-      "delta_net_pnl_usd": 39.48499985951639,
-      "minimum_annual_delta_pnl_usd": -6.9140346082897395,
-      "final_6m_delta_pnl_usd": -6.9140346082897395,
+      "delta_net_pnl_usd": 65.2762085800473,
+      "minimum_annual_delta_pnl_usd": -3.56625124149474,
+      "final_6m_delta_pnl_usd": 18.877174112241164,
       "failed_comparative_gates": [
-        "no_negative_calendar_year_delta",
-        "recent_windows_not_worse"
+        "no_negative_calendar_year_delta"
       ]
     }
   },
@@ -189,6 +194,9 @@
     "reason": "Frozen ranker requires 200 earlier training rows and has no valid pre-2021 rank coverage."
   },
   "forward_observer": {
+    "name": "v60-dynamic-followthrough-union-prospective-v6",
+    "prospective_contract_sha256": "ab9797424c91bc3a4104da113324c7b94f8d11a7db8012c330c2bc4d73992587",
+    "prospective_contract_supervisor_anchored": true,
     "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
     "warm_start_outcomes": 332,
     "source_ledgers_covered": 9,
@@ -214,7 +222,8 @@
     "minimum_resolved_prospective_timing_coverage": 1.0,
     "maximum_decision_recording_delay_seconds": 120,
     "minimum_resolved_execution_detail_coverage": 1.0,
-    "minimum_trade_retention": 0.95,
+    "minimum_resolved_causal_feature_coverage": 1.0,
+    "minimum_trade_retention": 0.99,
     "minimum_sampled_equity_marks": 5000,
     "requires_whole_portfolio_net_pnl_not_worse": true,
     "requires_whole_portfolio_profit_factor_not_worse": true,
@@ -223,7 +232,10 @@
     "requires_final_exact_tick_equity_replay": true,
     "exact_tick_replay_hash_locked": true,
     "exact_tick_replay_supports_partial_fills": true,
-    "exact_tick_replay_current_status": "NOT_READY_NO_RESOLVED_TRADES"
+    "exact_tick_replay_current_status": "NOT_READY_NO_RESOLVED_TRADES",
+    "dynamic_policy_state_recomputed_from_hypothetical_retained_path": true,
+    "current_evidence_records": 0,
+    "current_status": "KEEP_DEPLOYED_V60_CONTINUE_COLLECTION"
   },
   "rejected_posthoc_rank_only_audit": {
     "trades_removed": 58,
@@ -237,9 +249,17 @@
   },
   "runtime": {
     "status": "READY",
+    "supervised_workers": 8,
+    "dynamic_v6_observer_running": true,
+    "dynamic_v6_contract_hash_verified": true,
+    "broker_action_added": false,
+    "strategy_or_risk_parameters_changed": false,
+    "deployed_v60_process_ids": [19888, 4888],
+    "terminal_process_ids": [24168],
     "feed_poll_seconds": 5,
     "r4_warm_cycle_seconds_approx": 1.3,
     "v2_deployed": false,
+    "dynamic_v6_deployed": false,
     "existing_ml_topup_filled": 0
   }
 }

@@ -2,46 +2,51 @@
 
 Date: 2026-08-25
 
-Decision: **keep V60 deployed; collect V2 forward evidence read-only**.
+Decision: **keep V60 deployed; collect dynamic V6 forward evidence read-only**.
 
-## Best validated historical challenger
+August is now an explicit acceptance objective, but not a standalone optimization
+target. A challenger must improve August P/L, profit factor, and drawdown while
+also preserving the nominal long-run edge, every calendar year, the final
+3/6/12-month windows, at least 99% of trades, and causal forward validity.
 
-`v60-mature-source-health-rank-veto-v2` applies one causal rule to every mature
-specialist: after at least 50 earlier source executions, veto only a candidate
-whose latest-20 executed source PF is below 1.0 and whose pre-existing causal ML
-rank is below 0.10. Missing information retains the baseline trade.
+## Best research challenger
 
-| Metric | Deployed V60 | V2 challenger | Change |
+`v60-dynamic-followthrough-union-v6` combines the validated V2 source-health
+veto with one tightly bounded V57 weak-followthrough anti-chase veto. Its state
+is path-dependent: only retained trades enter future challenger source health;
+vetoed outcomes do not leak into later decisions. Missing information retains
+the baseline trade.
+
+| Metric | Deployed V60 | Dynamic V6 | Change |
 |---|---:|---:|---:|
-| Closed trades | 1,390 | 1,378 | -12 |
-| Net P/L | $3,603.57 | $3,655.75 | +$52.19 |
-| Profit factor | 1.7107 | 1.7289 | +0.0181 |
-| Win rate | 48.49% | 48.84% | +0.35 pp |
+| Closed trades | 1,390 | 1,377 | -13 |
+| Net P/L | $3,603.57 | $3,681.34 | +$77.78 |
+| Profit factor | 1.7107 | 1.7377 | +0.0270 |
+| Win rate | 48.49% | 48.87% | +0.39 pp |
 | Closed drawdown | $223.28 | $217.46 | -$5.82 |
 | Floating-equity drawdown | $238.28 | $238.28 | $0.00 |
-| Trades per weekday | 0.970 | 0.962 | -0.008 |
+| Trades per weekday | 0.970 | 0.961 | -0.009 |
 
-The full five-second runtime replay covers 2021-01-01 through 2026-06-30. V2
-passed baseline identity, P/L, PF, both drawdowns, trade retention, frequency,
-every calendar year, recent-window, cohort-size, and veto-cohort gates. All 12
-candidate endpoints were losers; under the actual V60 runtime exits, the cohort
-contains 11 losses and one small winner, with PF 0.0411 and net -$52.19.
+The full five-second runtime replay covers 2021-01-01 through 2026-06-30. All
+nominal preservation gates pass. Dynamic V6 vetoes 13 baseline executions: 12
+from V2 and one additional weak-followthrough V57 trade. Their baseline-runtime
+PF is 0.028. Trade retention is 99.065%.
 
-| Year | V60 P/L | V2 P/L | Change |
+| Year | V60 P/L | Dynamic V6 P/L | Change |
 |---|---:|---:|---:|
 | 2021 | $165.93 | $173.92 | +$7.99 |
 | 2022 | $57.12 | $63.45 | +$6.33 |
 | 2023 | $341.96 | $351.59 | +$9.63 |
 | 2024 | $731.53 | $742.66 | +$11.14 |
 | 2025 | $1,167.09 | $1,184.19 | +$17.10 |
-| 2026 through June | $1,139.94 | $1,139.94 | $0.00 |
+| 2026 through June | $1,139.94 | $1,165.53 | +$25.59 |
 
-Final 3- and 6-month replay results are unchanged. The final 12 months improve
-from $1,711.59 on 310 trades to $1,728.69 on 307 trades.
+The final three months remain unchanged. The final six months improve by $25.59
+and the final 12 months improve from $1,711.59 to $1,754.28.
 
 ## Robustness
 
-The nominated result reproduced exactly. Maturity thresholds of 40, 50, and 60
+The V2 component reproduced exactly. Maturity thresholds of 40, 50, and 60
 all pass every original gate. Stricter health and rank thresholds remain
 profitable in every year but have too few vetoes for the locked cohort gate.
 A 30-trade health window, looser health threshold, and looser rank threshold
@@ -121,40 +126,34 @@ XAU-only floating-equity drawdown. V2 is identical in this exposed interval
 because it vetoed zero trades. This validates the replay machinery on genuine
 broker records but is not prospective evidence of improvement.
 
-## August robustness candidate
+## August robustness objective
 
-A separate post-hoc V57 anti-chase candidate now addresses the concentrated
-August failure pattern. After 50 earlier closed V60 V57 executions, it vetoes
-only a V57 long whose causal rank is below 0.10, ATR ratio is at least 1.20, and
-distance to the prior 24-hour high is below 1.00 ATR. Five bounded mechanism
-variants were screened after August was exposed; this was the only one that
-preserved every original historical gate.
+Dynamic V6 specifically addresses the concentrated August failure pattern. Its
+V57 anti-chase side requires a bottom-decile causal rank, ATR ratio at least
+1.20, proximity to the prior 24-hour high, positive 24-hour return, and a
+4-hour/24-hour return ratio below 0.70. This describes a weak late-stage chase,
+not every strong V57 long.
 
-| Metric | V60 history | Anti-chase history | Change |
+| Metric through August 25 | Deployed V60 | Dynamic V6 | Change |
 |---|---:|---:|---:|
-| Trades | 1,390 | 1,388 | -2 |
-| Net P/L | $3,603.57 | $3,622.04 | +$18.48 |
-| Profit factor | 1.7107 | 1.7180 | +0.0073 |
-| Closed drawdown | $223.28 | $223.28 | $0.00 |
-| Equity drawdown | $238.28 | $238.28 | $0.00 |
+| Trades | 24 | 21 | -3 |
+| Net P/L | -$24.87 | +$17.50 | +$42.38 |
+| Profit factor | 0.8346 | 1.1621 | +0.3275 |
+| Win rate | 41.67% | 47.62% | +5.95 pp |
+| Closed drawdown | $86.59 | $56.69 | -$29.90 |
 
-On the exposed August 1-25 broker outcomes, it skips three losses and changes
-P/L from -$24.87 to +$17.50, PF from 0.8346 to 1.1621, win rate from 41.67% to
-47.62%, and closed drawdown from $86.59 to $56.69. The same two pre-August
-holding intervals lose $14.28 at PF 0.3707 when repriced on independent
-Dukascopy bid/ask ticks.
+This August result is exposed and therefore cannot prove the rule. What makes
+V6 worth forwarding is that the exact dynamic replay also improves all six
+calendar years, the final 6/12-month windows, long-run P/L/PF, and closed
+drawdown while retaining more than 99% of trades. On same-timing Dukascopy
+quotes, the combined delta is +$61.49 and no covered calendar year is harmed.
 
-An exact union diagnostic with V2 reaches $3,674.23, PF 1.7363, closed drawdown
-$217.46, and unchanged equity drawdown $238.28. Every year and recent window is
-nonnegative, but 1,376/1,390 trades is 98.993% retention and narrowly fails the
-locked 99% gate. The policies therefore remain separate observers; the gate was
-not weakened after seeing the result.
-
-This is promising but sparse: only two pre-August baseline executions satisfy
-the rule, and August outcomes were visible before nomination. It is therefore
-not deployed. A separate hash-locked read-only observer starts at
-`2026-08-26T00:00:00Z` and requires at least ten resolved veto opportunities
-plus the complete portfolio and exact-equity gates before review.
+At an additional $0.10 cost on every candidate, V6 still passes every
+comparative gate: it is $109.64 ahead, PF is 1.7041 versus 1.6760, closed
+drawdown is $215.15 versus $220.41, and equity drawdown is $232.80 versus
+$242.13. At an additional $0.20, V6 remains $65.28 ahead and lowers both
+drawdowns, but 2021 is $3.57 worse. That single harsh-stress annual failure and
+the lack of clean forward outcomes keep deployment locked.
 
 The first V2 observer configuration read only the shared add-on ledger despite
 targeting every source. That coverage defect was fixed before the clean evidence
@@ -199,26 +198,29 @@ Immutable parity evidence:
 
 ## Forward state
 
-V60 remains the only broker-action policy. V2 is supervised read-only from the
+V60 remains the only broker-action policy. Dynamic V6 is supervised read-only from the
 locked evidence boundary `2026-08-26T00:00:00Z`, with 332 hash-locked replay
 outcomes used only to establish source maturity. It requires at least 90 days,
 100 scored and resolved baseline executions, 10 resolved veto opportunities,
-complete causal-rank coverage, at least 95% trade retention, veto PF below 0.8,
+complete causal-rank and feature coverage, at least 99% trade retention, veto PF below 0.8,
 and positive avoided broker P/L before review. Across the entire resolved
-forward portfolio, V2 must also have net P/L and PF no worse than V60 and
+forward portfolio, V6 must also have net P/L and PF no worse than V60 and
 closed-trade drawdown no higher.
 
 The clean observer writes each score decision, execution decision, and broker
 outcome to a hash-linked evidence chain. Any later change to an immutable event
 fails collection closed. The chain was initialized and verified empty before
-the prospective boundary. A reconstructed veto can count only if its score and
+the prospective boundary. Its exact prospective contract hash
+`ab9797424c91bc3a4104da113324c7b94f8d11a7db8012c330c2bc4d73992587`
+is required by the supervisor and written into every immutable score and
+execution decision. A reconstructed veto can count only if its score and
 execution decision are immutably recorded within 120 seconds of scheduled entry
-and strictly before the actual broker exit; a late decision is retained by V2
+and strictly before the actual broker exit; a late decision is retained by V6
 in every P/L, equity, and exact-replay calculation. The observer runner is
 hash-locked, records actual score-completion time, and uses a 30-second pause
 between cycles. A second hash-linked series records XAU-only V60 and hypothetical
-V2 equity marks after each completed cycle. At least 5,000
-marks are required, V2 sampled equity drawdown cannot be worse, and the final review must reconstruct
+V6 equity marks after each completed cycle. At least 5,000
+marks are required, V6 sampled equity drawdown cannot be worse, and the final review must reconstruct
 exact between-sample drawdown from the stored ticks. Passing every gate still
 does not auto-authorize deployment.
 
@@ -230,9 +232,11 @@ daily tick file it uses. It also handles multiple entry fills and partial exits
 at their actual times and volumes. With no post-boundary trades yet, its status is
 `NOT_READY_NO_RESOLVED_TRADES`, as expected.
 
-The runtime supervisor is healthy on demo account 1033030. It supervises six
-workers, both execution feeds pass, and both V1 and V2 observers explicitly
+The runtime supervisor is healthy on demo account 1033030. It supervises eight
+workers, both execution feeds pass, and all research observers explicitly
 report `broker_action_authorized=false` and `deployment_authorized=false`.
+The deployed V60 processes remain `19888, 4888`, and MT5 remains `24168`;
+adding V6 changed neither broker action nor strategy/risk parameters.
 
 The deployed portfolio currently loads the existing ML top-up overlay, but it
-has filled zero top-ups. V2 itself is not deployed.
+has filled zero top-ups. V2, anti-chase, and dynamic V6 are not deployed.
