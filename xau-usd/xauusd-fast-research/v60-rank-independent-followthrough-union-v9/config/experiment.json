@@ -1,0 +1,63 @@
+{
+  "schema_version": "v60_rank_independent_followthrough_union_v9",
+  "authorization": {
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "evidence_status": "RETROSPECTIVE_EXPOSED_SINGLE_CANDIDATE_FORWARD_CONFIRMATION_REQUIRED",
+  "inputs": {
+    "base_challenger_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-v2/config/challenger.json",
+      "sha256": "fc459e0566002fb8d2e2bf88e4fef446cca3b0e33e25e8054a592acc589a00a6"
+    },
+    "causal_feature_ledger": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-portable-mature-topup-v2/outputs/PRIMARY_DECISIONS.parquet",
+      "sha256": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17"
+    },
+    "shared_evaluator": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
+      "sha256": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
+    },
+    "exposed_broker_audit": {
+      "path": "xau-usd/xauusd-fast-research/v60-challenger-goal-20260825/EXPOSED_BROKER_AUDIT.csv",
+      "sha256": "101ba1ff550689d03aef9d445a0713393bdeb13c620ab632248c439d8c4ed98d"
+    },
+    "antichase_august_audit": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-volatility-antichase-v1/outputs/AUGUST_2026_TRADE_AUDIT.csv",
+      "sha256": "d069aed9f5970188d05886a2e995f1340ec9386d05067f4b39822ca10adc94ce"
+    },
+    "crossfeed_priced_runtime": {
+      "path": "xau-usd/xauusd-fast-research/v60-challenger-goal-20260825/CROSSFEED_VETO_AUDIT.csv",
+      "sha256": "d36f3c9648e3cea224b71e1300759f2eec19de167304f38a66154510605a82f2"
+    },
+    "antichase_experiment_source": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-volatility-antichase-v1/src/experiment.py",
+      "sha256": "fc97f98754a208e4af8e5ff30281c20654454c6d3f9c7882a1eb9976f0e06db4"
+    },
+    "frozen_v6_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/outputs/RESULT.json",
+      "sha256": "032af1f2b7328f3aaf68feef8d4c404a90487c0b9f915789e1ac50fb0ed4dd13"
+    }
+  },
+  "anti_chase": {
+    "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+    "direction": "LONG",
+    "minimum_prior_source_closed_trades": 50,
+    "minimum_atr_ratio_inclusive": 1.2,
+    "maximum_distance_to_24h_high_atr_exclusive": 1.0,
+    "minimum_ret_24h_exclusive": 0.0,
+    "maximum_ret_4h_to_ret_24h_exclusive": 0.7,
+    "missing_feature_action": "RETAIN"
+  },
+  "acceptance": {
+    "minimum_trade_retention_fraction": 0.98,
+    "minimum_frequency_retention_fraction": 0.98,
+    "minimum_union_executed_vetoes": 20,
+    "minimum_antichase_executed_vetoes": 10,
+    "maximum_antichase_veto_profit_factor_exclusive": 0.8,
+    "minimum_antichase_avoided_pnl_usd_exclusive": 0.0,
+    "additional_cost_stress_usd_per_trade": [0.1, 0.2]
+  }
+}
