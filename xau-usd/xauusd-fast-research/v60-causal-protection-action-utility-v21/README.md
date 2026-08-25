@@ -12,4 +12,3 @@ V21 first replays unmodified Dynamic V6 and an observational subclass against
 the same immutable quote cache. Any event-path difference invalidates the
 diagnostic. Only then does it run the single preregistered expanding-year ridge
 model.
-
