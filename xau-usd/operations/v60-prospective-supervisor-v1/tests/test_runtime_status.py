@@ -216,7 +216,7 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
         "deployment_authorized": False,
         "broker_action_authorized": False,
         "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
-        "prospective_contract_sha256": "86cb376fdd545c2652edab395cb96bb1598a14784a35d2a3bd367380bce3d0b4",
+        "prospective_contract_sha256": "fdef9c39358a822784aaf0a7aaaac3dcb457e0072fdbb1ab50acb2078ba19ccc",
         "evidence_chain.status": "VERIFIED",
         "decision_timing.maximum_delay_seconds": 120,
         "observation_timing.cycle_within_recording_delay_budget": True,

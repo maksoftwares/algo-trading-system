@@ -209,9 +209,12 @@ Immutable parity evidence:
 V60 remains the only broker-action policy. Dynamic V6 is supervised read-only from the
 locked evidence boundary `2026-08-26T00:00:00Z`, with 332 hash-locked replay
 outcomes used only to establish source maturity. It requires at least 90 days,
-100 scored and resolved baseline executions, 10 resolved veto opportunities,
+but the 90-day/100-trade milestone is diagnostic only. Authorization review requires
+at least 1,000 scored and resolved baseline executions, 10 resolved veto opportunities,
 complete causal-rank and feature coverage, at least 99% trade retention, veto PF below 0.8,
-and positive avoided broker P/L before review. Across the entire resolved
+and positive avoided broker P/L. The 1,000-trade floor is the mathematical minimum
+that can combine 10 vetoes with 99% retention and is expected to require roughly four
+years at the historical frequency. Across the entire resolved
 forward portfolio, V6 must also have net P/L and PF no worse than V60 and
 closed-trade drawdown no higher.
 
@@ -219,7 +222,7 @@ The clean observer writes each score decision, execution decision, and broker
 outcome to a hash-linked evidence chain. Any later change to an immutable event
 fails collection closed. The chain was initialized and verified empty before
 the prospective boundary. Its exact prospective contract hash
-`86cb376fdd545c2652edab395cb96bb1598a14784a35d2a3bd367380bce3d0b4`
+`fdef9c39358a822784aaf0a7aaaac3dcb457e0072fdbb1ab50acb2078ba19ccc`
 is required by the supervisor and written into every immutable score and
 execution decision. A reconstructed veto can count only if its score and
 execution decision are immutably recorded within 120 seconds of scheduled entry
@@ -241,7 +244,7 @@ at their actual times and volumes. With no post-boundary trades yet, its status 
 `NOT_READY_NO_RESOLVED_TRADES`, as expected.
 
 The final pre-boundary audit passed all ten readiness checks at
-`2026-08-25T09:28:51Z`: the evidence and equity chains were physically empty,
+`2026-08-25T09:36:16Z`: the evidence and equity chains were physically empty,
 the exact replay contained no trades, the contract matched both runtime and
 supervisor anchors, all eight workers were healthy, and V60/MT5 process
 identities were unchanged. This authorizes clean read-only collection only.

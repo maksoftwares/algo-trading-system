@@ -31,11 +31,20 @@ portfolio capacity. Any future deployment must either preserve shadow capacity
 until the vetoed baseline trade's original exit or complete a separate causal
 replacement-trade validation.
 
-## Minimum decision evidence
+## Monitoring and minimum decision evidence
 
-At least 90 elapsed days, 100 scored/resolved baseline executions, 10 resolved vetoes,
-99% trade retention, complete rank/feature/timing/execution coverage, and 5,000 equity
-marks. Whole-portfolio net, PF, closed drawdown, sampled equity drawdown, avoided P/L,
+The first 90 elapsed days and 100 scored baseline executions form a diagnostic
+checkpoint only. They cannot authorize deployment.
+
+Final review requires at least 1,000 scored/resolved baseline executions, 10 resolved
+vetoes, 99% trade retention, complete rank/feature/timing/execution coverage, and 5,000
+equity marks. The 1,000-execution floor is mathematically required because retaining
+99% of 1,000 baseline executions permits at most 10 vetoes. If more than 10 vetoes
+occur, the retention gate requires a correspondingly larger baseline sample.
+At V60's historical frequency and V6's historical veto rate, this evidence is expected
+to require roughly four years; 90 days is not presented as proof.
+
+Whole-portfolio net, PF, closed drawdown, sampled equity drawdown, avoided P/L,
 and veto PF must pass. A final exact tick replay and human review remain mandatory.
 
 Passing evidence does not authorize deployment.

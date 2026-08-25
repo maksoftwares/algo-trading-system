@@ -103,10 +103,16 @@
     "forward_observer_validates_replacement_capacity_trades": false,
     "evidence_status": "EXPOSED_AND_HISTORICAL_NOT_DEPLOYMENT_PROOF"
   },
-  "acceptance": {
+  "monitoring_checkpoint": {
     "minimum_elapsed_days": 90,
     "minimum_scored_executed_candidates": 100,
-    "minimum_resolved_baseline_executions": 100,
+    "review_scope": "DIAGNOSTIC_ONLY",
+    "deployment_authorization": false
+  },
+  "acceptance": {
+    "minimum_elapsed_days": 90,
+    "minimum_scored_executed_candidates": 1000,
+    "minimum_resolved_baseline_executions": 1000,
     "minimum_resolved_vetoes": 10,
     "minimum_resolved_rank_coverage": 1.0,
     "minimum_resolved_causal_feature_coverage": 1.0,

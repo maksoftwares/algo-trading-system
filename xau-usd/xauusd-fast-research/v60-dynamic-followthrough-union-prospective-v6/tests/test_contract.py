@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from pathlib import Path
 
 
@@ -43,6 +44,21 @@ def test_acceptance_requires_full_coverage_and_retention() -> None:
     assert acceptance["minimum_resolved_causal_feature_coverage"] == 1.0
     assert acceptance["minimum_resolved_prospective_timing_coverage"] == 1.0
     assert acceptance["minimum_resolved_execution_detail_coverage"] == 1.0
+
+
+def test_authorization_sample_is_consistent_with_veto_and_retention_gates() -> None:
+    config = json.loads((ROOT / "config" / "prospective.json").read_text())
+    checkpoint = config["monitoring_checkpoint"]
+    acceptance = config["acceptance"]
+    implied_minimum = math.ceil(
+        acceptance["minimum_resolved_vetoes"]
+        / (1.0 - acceptance["minimum_trade_retention"])
+    )
+
+    assert checkpoint["review_scope"] == "DIAGNOSTIC_ONLY"
+    assert checkpoint["deployment_authorization"] is False
+    assert acceptance["minimum_resolved_baseline_executions"] >= implied_minimum
+    assert acceptance["minimum_scored_executed_candidates"] >= implied_minimum
 
 
 def test_august_improvement_cannot_override_preservation_or_forward_proof() -> None:
