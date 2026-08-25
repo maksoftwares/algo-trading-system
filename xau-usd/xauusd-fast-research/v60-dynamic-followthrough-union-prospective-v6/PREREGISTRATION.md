@@ -36,13 +36,19 @@ replacement-trade validation.
 The first 90 elapsed days and 100 scored baseline executions form a diagnostic
 checkpoint only. They cannot authorize deployment.
 
-Final review requires at least 1,000 scored/resolved baseline executions, 10 resolved
-vetoes, 99% trade retention, complete rank/feature/timing/execution coverage, and 5,000
-equity marks. The 1,000-execution floor is mathematically required because retaining
-99% of 1,000 baseline executions permits at most 10 vetoes. If more than 10 vetoes
-occur, the retention gate requires a correspondingly larger baseline sample.
-At V60's historical frequency and V6's historical veto rate, this evidence is expected
-to require roughly four years; 90 days is not presented as proof.
+Final review requires at least 2,000 scored/resolved baseline executions and 20 distinct
+resolved union vetoes. At least 10 resolved vetoes must independently exercise V2 source
+health and at least 10 must independently exercise the V57 weak-followthrough anti-chase
+rule. Each component, as well as the union, must produce positive avoided broker P/L and
+veto PF below 0.8. This prevents one mechanism from borrowing evidence from the other.
+
+The contract also requires 99% trade retention, complete rank/feature/timing/execution
+coverage, and 5,000 equity marks. The 2,000-execution floor is mathematically required
+because retaining 99% of 2,000 baseline executions permits at most 20 vetoes. If more
+than 20 vetoes occur, the retention gate requires a correspondingly larger baseline
+sample. At V60's historical frequency, the arithmetic floor alone is roughly eight
+years, and the anti-chase event rate may require longer; 90 days is not presented as
+proof.
 
 Whole-portfolio net, PF, closed drawdown, sampled equity drawdown, avoided P/L,
 and veto PF must pass. A final exact tick replay and human review remain mandatory.

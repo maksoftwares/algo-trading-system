@@ -7,7 +7,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.policy import apply_dynamic_union
+from src.policy import apply_dynamic_union, refresh_status
 
 
 V2 = {
@@ -128,3 +128,64 @@ def test_retained_closed_outcome_enters_future_dynamic_state() -> None:
     )
     assert not rows[0]["would_veto"]
     assert rows[1]["prior_source_executed_count"] == 51
+
+
+def component_acceptance():
+    return {
+        "minimum_scored_executed_candidates": 20,
+        "minimum_resolved_vetoes": 20,
+        "minimum_resolved_v2_vetoes": 10,
+        "minimum_resolved_anti_chase_vetoes": 10,
+        "maximum_veto_broker_profit_factor_exclusive": 0.8,
+        "minimum_avoided_broker_pnl_usd_exclusive": 0.0,
+        "maximum_v2_veto_broker_profit_factor_exclusive": 0.8,
+        "minimum_v2_avoided_broker_pnl_usd_exclusive": 0.0,
+        "maximum_anti_chase_veto_broker_profit_factor_exclusive": 0.8,
+        "minimum_anti_chase_avoided_broker_pnl_usd_exclusive": 0.0,
+    }
+
+
+def resolved_component_row(index: int, component: str):
+    return {
+        "candidate_id": f"resolved-{index}",
+        "baseline_executed": True,
+        "causal_rank": 0.01,
+        "would_veto": True,
+        "v2_veto_proposal": component == "V2",
+        "anti_chase_veto_proposal": component == "ANTI_CHASE",
+        "broker_outcome_resolved": True,
+        "broker_pnl_usd": -1.0,
+    }
+
+
+def test_component_gates_require_independent_v2_and_antichase_evidence() -> None:
+    rows = [
+        *[resolved_component_row(index, "V2") for index in range(10)],
+        *[
+            resolved_component_row(index + 10, "ANTI_CHASE")
+            for index in range(10)
+        ],
+    ]
+    status = {"counts": {}, "gates": {}}
+
+    refresh_status(status, rows, component_acceptance())
+
+    assert status["counts"]["resolved_v2_vetoes"] == 10
+    assert status["counts"]["resolved_anti_chase_vetoes"] == 10
+    assert status["gates"]["minimum_resolved_v2_vetoes"]
+    assert status["gates"]["minimum_resolved_anti_chase_vetoes"]
+    assert status["gates"]["positive_v2_avoided_broker_pnl"]
+    assert status["gates"]["positive_anti_chase_avoided_broker_pnl"]
+
+
+def test_union_cannot_pass_without_antichase_component_evidence() -> None:
+    rows = [resolved_component_row(index, "V2") for index in range(20)]
+    status = {"counts": {}, "gates": {}}
+
+    refresh_status(status, rows, component_acceptance())
+
+    assert status["gates"]["minimum_resolved_vetoes"]
+    assert status["gates"]["minimum_resolved_v2_vetoes"]
+    assert not status["gates"]["minimum_resolved_anti_chase_vetoes"]
+    assert not status["gates"]["anti_chase_veto_broker_profit_factor"]
+    assert not status["gates"]["positive_anti_chase_avoided_broker_pnl"]

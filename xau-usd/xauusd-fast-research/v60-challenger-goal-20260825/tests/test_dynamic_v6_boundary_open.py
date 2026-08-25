@@ -39,6 +39,18 @@ def fixtures():
         "deployment_authorized": False,
         "evidence_chain": {"status": "VERIFIED"},
         "forward_comparison": {"sampled_equity": {"status": "VERIFIED"}},
+        "component_evidence": {
+            "v2_source_health": {},
+            "v57_weak_followthrough_anti_chase": {},
+        },
+        "gates": {
+            "minimum_resolved_v2_vetoes": False,
+            "minimum_resolved_anti_chase_vetoes": False,
+            "v2_veto_broker_profit_factor": False,
+            "anti_chase_veto_broker_profit_factor": False,
+            "positive_v2_avoided_broker_pnl": False,
+            "positive_anti_chase_avoided_broker_pnl": False,
+        },
     }
     supervisor_config = {
         "health_sources": [

@@ -59,6 +59,12 @@ def test_authorization_sample_is_consistent_with_veto_and_retention_gates() -> N
     assert checkpoint["deployment_authorization"] is False
     assert acceptance["minimum_resolved_baseline_executions"] >= implied_minimum
     assert acceptance["minimum_scored_executed_candidates"] >= implied_minimum
+    assert acceptance["minimum_resolved_v2_vetoes"] >= 10
+    assert acceptance["minimum_resolved_anti_chase_vetoes"] >= 10
+    assert acceptance["minimum_resolved_vetoes"] >= (
+        acceptance["minimum_resolved_v2_vetoes"]
+        + acceptance["minimum_resolved_anti_chase_vetoes"]
+    )
 
 
 def test_august_improvement_cannot_override_preservation_or_forward_proof() -> None:

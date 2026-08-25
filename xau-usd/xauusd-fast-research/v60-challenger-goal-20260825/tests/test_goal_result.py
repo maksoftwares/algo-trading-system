@@ -22,3 +22,16 @@ def test_retrospective_fragility_is_supportive_but_never_authorizing() -> None:
     assert result["decision"] == (
         "KEEP_V60_DEPLOYED_COLLECT_DYNAMIC_V6_FORWARD_EVIDENCE"
     )
+
+
+def test_forward_union_requires_evidence_for_each_component() -> None:
+    result = json.loads((ROOT / "GOAL_RESULT.json").read_text(encoding="utf-8"))
+    forward = result["forward_observer"]
+
+    assert forward["minimum_resolved_vetoes"] == 20
+    assert forward["minimum_resolved_v2_vetoes"] == 10
+    assert forward["minimum_resolved_anti_chase_vetoes"] == 10
+    assert forward["minimum_resolved_baseline_executions"] >= 2000
+    assert forward["requires_component_specific_positive_avoided_pnl"]
+    assert forward["requires_component_specific_veto_profit_factor_below_0_8"]
+    assert forward["deployment_authorized"] is False

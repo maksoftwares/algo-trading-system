@@ -261,22 +261,78 @@ def refresh_status(
     ]
     vetoes = [row for row in rows if row["would_veto"]]
     resolved = [row for row in vetoes if row["broker_outcome_resolved"]]
+    resolved_v2 = [row for row in resolved if row.get("v2_veto_proposal")]
+    resolved_anti_chase = [
+        row for row in resolved if row.get("anti_chase_veto_proposal")
+    ]
     values = [float(row["broker_pnl_usd"]) for row in resolved]
+    v2_values = [float(row["broker_pnl_usd"]) for row in resolved_v2]
+    anti_chase_values = [
+        float(row["broker_pnl_usd"]) for row in resolved_anti_chase
+    ]
     veto_pf = profit_factor(values) if values else None
+    v2_pf = profit_factor(v2_values) if v2_values else None
+    anti_chase_pf = profit_factor(anti_chase_values) if anti_chase_values else None
     avoided = -sum(values)
+    v2_avoided = -sum(v2_values)
+    anti_chase_avoided = -sum(anti_chase_values)
     status["counts"]["executed_scored_candidates"] = len(executed_scored)
     status["counts"]["veto_opportunities"] = len(vetoes)
     status["counts"]["resolved_vetoes"] = len(resolved)
+    status["counts"]["resolved_v2_vetoes"] = len(resolved_v2)
+    status["counts"]["resolved_anti_chase_vetoes"] = len(resolved_anti_chase)
     status["veto_broker_net_pnl_usd"] = sum(values)
     status["avoided_broker_pnl_usd"] = avoided
     status["veto_broker_profit_factor"] = (
         veto_pf if veto_pf is not None and math.isfinite(veto_pf) else None
     )
+    status["component_evidence"] = {
+        "v2_source_health": {
+            "resolved_vetoes": len(resolved_v2),
+            "veto_broker_net_pnl_usd": sum(v2_values),
+            "avoided_broker_pnl_usd": v2_avoided,
+            "veto_broker_profit_factor": (
+                v2_pf if v2_pf is not None and math.isfinite(v2_pf) else None
+            ),
+        },
+        "v57_weak_followthrough_anti_chase": {
+            "resolved_vetoes": len(resolved_anti_chase),
+            "veto_broker_net_pnl_usd": sum(anti_chase_values),
+            "avoided_broker_pnl_usd": anti_chase_avoided,
+            "veto_broker_profit_factor": (
+                anti_chase_pf
+                if anti_chase_pf is not None and math.isfinite(anti_chase_pf)
+                else None
+            ),
+        },
+    }
     status["gates"]["minimum_scored_executed_candidates"] = len(executed_scored) >= int(
         acceptance["minimum_scored_executed_candidates"]
     )
     status["gates"]["minimum_resolved_vetoes"] = len(resolved) >= int(
         acceptance["minimum_resolved_vetoes"]
+    )
+    status["gates"]["minimum_resolved_v2_vetoes"] = len(resolved_v2) >= int(
+        acceptance["minimum_resolved_v2_vetoes"]
+    )
+    status["gates"]["minimum_resolved_anti_chase_vetoes"] = len(
+        resolved_anti_chase
+    ) >= int(acceptance["minimum_resolved_anti_chase_vetoes"])
+    status["gates"]["v2_veto_broker_profit_factor"] = (
+        v2_pf is not None
+        and v2_pf < float(acceptance["maximum_v2_veto_broker_profit_factor_exclusive"])
+    )
+    status["gates"]["positive_v2_avoided_broker_pnl"] = v2_avoided > float(
+        acceptance["minimum_v2_avoided_broker_pnl_usd_exclusive"]
+    )
+    status["gates"]["anti_chase_veto_broker_profit_factor"] = (
+        anti_chase_pf is not None
+        and anti_chase_pf
+        < float(acceptance["maximum_anti_chase_veto_broker_profit_factor_exclusive"])
+    )
+    status["gates"]["positive_anti_chase_avoided_broker_pnl"] = (
+        anti_chase_avoided
+        > float(acceptance["minimum_anti_chase_avoided_broker_pnl_usd_exclusive"])
     )
     status["gates"]["veto_broker_profit_factor"] = veto_pf is not None and veto_pf < float(
         acceptance["maximum_veto_broker_profit_factor_exclusive"]

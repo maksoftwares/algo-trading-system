@@ -135,6 +135,8 @@ def evaluate_boundary_opening(
     candidate_contract_ok = all(
         row.get("prospective_contract_sha256") == contract_hash for row in candidates
     )
+    component_evidence = observer.get("component_evidence", {})
+    component_gates = observer.get("gates", {})
     observer_generated = utc_time(observer["generated_at_utc"])
     checks = {
         "clock_reached_clean_boundary": now >= boundary,
@@ -188,6 +190,19 @@ def evaluate_boundary_opening(
             evidence_records, contract_hash
         ),
         "candidate_snapshot_uses_locked_contract": candidate_contract_ok,
+        "component_evidence_blocks_are_active": set(component_evidence)
+        == {"v2_source_health", "v57_weak_followthrough_anti_chase"},
+        "component_specific_gates_are_active": all(
+            name in component_gates
+            for name in (
+                "minimum_resolved_v2_vetoes",
+                "minimum_resolved_anti_chase_vetoes",
+                "v2_veto_broker_profit_factor",
+                "anti_chase_veto_broker_profit_factor",
+                "positive_v2_avoided_broker_pnl",
+                "positive_anti_chase_avoided_broker_pnl",
+            )
+        ),
         "first_postboundary_equity_mark_exists": len(equity_records) > 0,
     }
     opening_checks = {
