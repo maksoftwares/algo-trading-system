@@ -1,0 +1,26 @@
+{
+  "schema_version": "v60_dynamic_capacity_twin_v19_replay_contract_snapshot",
+  "authorization": {
+    "account_changes_authorized": false,
+    "demo_runtime_changes_authorized": false,
+    "live_trading_authorized": false,
+    "ml_runtime_authorized": false,
+    "state_reset_authorized": false
+  },
+  "evaluation": {
+    "entry_start_utc": "2026-08-26T00:00:00Z",
+    "entry_end_exclusive_utc": "2026-08-27T00:00:00Z",
+    "poll_seconds": 5,
+    "maximum_tick_age_seconds": 30
+  },
+  "guardian": {
+    "enabled_views": [false, true],
+    "dubai_utc_offset_minutes": 240,
+    "daily_floor_aed": 50.0,
+    "next_daily_floor_enabled": true,
+    "next_daily_floor_aed": 100.0,
+    "halt_entries_when_armed": true,
+    "daily_loss_stop_enabled": true,
+    "daily_loss_stop_aed": -100.0
+  }
+}

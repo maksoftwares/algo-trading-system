@@ -113,10 +113,12 @@ All gates are comparative against the V60 twin over the same clean interval:
 9. V6 closed and sampled-equity drawdown are not higher.
 10. V6 trade retention is at least 99% of V60.
 11. V6 losing-month burden and worst month are not worse.
-12. No completed calendar month has lower V6 P/L than V60.
+12. No fully observed calendar month after the boundary has lower V6 P/L than
+    V60. The partial boundary month and the currently open month are excluded.
 13. The same comparative gates pass after an additional `$0.10` and `$0.20`
     cost per accepted trade.
-14. No open-position accounting error, restart discontinuity, evidence-chain
+14. The same comparative gates pass under the locked `0.05R` slippage stress.
+15. No open-position accounting error, restart discontinuity, evidence-chain
     break, input mutation, or non-finite metric exists.
 
 The sample floors are necessary but not sufficient. A pass remains a review

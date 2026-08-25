@@ -1,0 +1,102 @@
+{
+  "schema_version": "v60_dynamic_capacity_twin_prospective_v19",
+  "authorization": {
+    "read_only_inputs": true,
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "boundary": {
+    "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+    "consume_completed_utc_days_only": true,
+    "maximum_decision_recording_delay_seconds": 120,
+    "maximum_feature_bar_age_minutes": 10
+  },
+  "inputs": {
+    "v60_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120"
+    },
+    "protection_overlay": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_drawdown_protection_v1_overlay.json",
+      "sha256": "872bb92ff4c24c442fda195217bf95d6835bdf1f805f951c8aab3c534ae1c44e"
+    },
+    "deployed_executor": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/src/executor.py",
+      "sha256": "0581f089b068da1c0ac93970fa9fad04a50a7b18211827befa50c0863f8eb1c5"
+    },
+    "tick_replay": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/src/replay.py",
+      "sha256": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a"
+    },
+    "tick_replay_contract": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-capacity-twin-prospective-v19/config/replay_contract_snapshot.json",
+      "sha256": "16b02b9d08141dd93b59d5c3e1873cd087c016c70f322de25e1e2765784af709"
+    },
+    "v6_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/config/experiment.json",
+      "sha256": "369dba6fecbd3c9e851bcd0a8f7652089254677ca42a4f5b2c9a17fd344849d6"
+    },
+    "v6_scenario": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/src/scenario.py",
+      "sha256": "6d762645a27330c985a85b0c4612036b904ea61a7bd889d423e5f33c8d4a5c87"
+    },
+    "shared_evaluator": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
+      "sha256": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
+    },
+    "warm_start": {
+      "path": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-v2/outputs/PROSPECTIVE_WARM_START.json",
+      "sha256": "046d5e963489adb7b3b4dceb740be61db8c70d04307076ecb6501315a8e1d8e6"
+    },
+    "sealed_v6_prospective_contract": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-prospective-v6/config/prospective.json",
+      "sha256": "23ce7ca7e152e41a3dfa8fa7b0a22d600824eca89bed638556bc45577433c0dc"
+    },
+    "sealed_v6_evidence_reader": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-prospective-v6/src/evidence.py",
+      "sha256": "907072107e022b7d378a184f1a78ddaa80fedf40c4a1ef048729a47ee5591400"
+    },
+    "sealed_v6_evidence_chain": "D:/AlgoTradingData/prospective/v60-dynamic-followthrough-union-v6/EVIDENCE_CHAIN.jsonl"
+  },
+  "ticks": {
+    "directory": "C:/MT5PortableTier1BestEA/MQL5/Files",
+    "filename_glob": "xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_*.csv",
+    "schema_version": "xau_prospective_tick_v1",
+    "point_size": 0.01,
+    "poll_seconds": 5,
+    "maximum_horizon_gap_minutes": 5760
+  },
+  "economics": {
+    "lot_size": 0.01,
+    "ounces_at_lot_size": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "additional_cost_stress_usd_per_trade": [0.1, 0.2]
+  },
+  "scenario": {
+    "starting_equity_usd": 987.6623553437713,
+    "activation_equity_usd": 987.6623553437713,
+    "guardian_enabled": true,
+    "guardian_exit_attribution": "DEPLOYED_MAGIC_FILTER"
+  },
+  "acceptance": {
+    "minimum_elapsed_days": 90,
+    "minimum_resolved_candidates": 100,
+    "minimum_routing_divergences": 20,
+    "minimum_v6_vetoes": 10,
+    "minimum_v6_replacement_accepts": 10,
+    "minimum_coverage": 1.0,
+    "minimum_trade_retention": 0.99
+  },
+  "outputs": {
+    "runtime_directory": "D:/AlgoTradingData/prospective/v60-dynamic-capacity-twin-v19",
+    "contract_lock": "CONTRACT_LOCK.json",
+    "state": "STATE.json",
+    "status": "STATUS.json",
+    "resolved_candidates": "RESOLVED_CANDIDATES.jsonl",
+    "portfolio_events": "PORTFOLIO_EVENTS.jsonl"
+  }
+}
