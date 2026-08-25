@@ -1,0 +1,37 @@
+{
+  "broker_action_authorized": false,
+  "checks": {
+    "clock_reached_clean_boundary": false,
+    "contract_was_locked_before_boundary_without_economics": true,
+    "deployed_v60_remains_active": true,
+    "locked_package_and_inputs_match": true,
+    "no_broker_or_risk_change_added": true,
+    "observer_is_strictly_read_only": true,
+    "operative_contract_identity": true,
+    "portfolio_events_have_no_preboundary_timestamps": true,
+    "resolved_rows_have_no_preboundary_entries": true,
+    "state_self_hash_and_boundary_match": true,
+    "status_self_hash_matches": true,
+    "supervisor_anchor_matches_contract": true,
+    "supervisor_and_v19_worker_are_healthy": true,
+    "v19_advanced_from_preboundary_wait_state": false,
+    "v19_completed_postboundary_cycle": false
+  },
+  "contract_sha256": "fdabc9e2997592b06568bb5e405154abdb3888b921a61d70620e06bde2cb4905",
+  "decision": "WAIT_FOR_CLEAN_BOUNDARY",
+  "deployment_authorized": false,
+  "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+  "generated_at_utc": "2026-08-25T21:31:31.561178Z",
+  "locked_file_failures": [],
+  "runtime": {
+    "portfolio_events": 0,
+    "resolved_candidates": 0,
+    "supervised_workers": 9,
+    "v19_process_ids": [
+      6476,
+      3288
+    ],
+    "v19_run_sequence": 3
+  },
+  "schema_version": "v60_dynamic_capacity_twin_v19_boundary_audit_v1"
+}
