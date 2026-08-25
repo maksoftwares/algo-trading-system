@@ -44,7 +44,7 @@
       "script": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-prospective-v2/run_observer.py",
       "args": [
         "--poll-seconds",
-        "300"
+        "30"
       ],
       "command_marker": "v60-mature-source-health-rank-veto-prospective-v2*run_observer.py"
     },
@@ -165,11 +165,14 @@
       "timestamp_fields": [
         "generated_at_utc"
       ],
-      "maximum_age_seconds": 900,
+      "maximum_age_seconds": 300,
       "required_values": {
         "deployment_authorized": false,
         "broker_action_authorized": false,
-        "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z"
+        "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+        "evidence_chain.status": "VERIFIED",
+        "decision_timing.maximum_delay_seconds": 120,
+        "observation_timing.cycle_within_recording_delay_budget": true
       }
     }
   ]

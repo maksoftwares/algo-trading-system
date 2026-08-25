@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 import hashlib
 import json
 import math
@@ -11,6 +11,12 @@ from typing import Any, Mapping, Sequence
 
 
 GENESIS_HASH = "0" * 64
+EVENT_ORDER = {
+    "SCORE_DECISION": 0,
+    "BASELINE_EXECUTION_DECISION": 1,
+    "BROKER_EXECUTION": 2,
+    "BROKER_OUTCOME": 3,
+}
 
 
 def canonical_json(value: Mapping[str, Any]) -> str:
@@ -162,6 +168,14 @@ def update_evidence_chain(
     pending: list[tuple[str, dict[str, Any]]] = []
     for row in rows:
         for event_type, payload in immutable_events(row):
+            if event_type == "BROKER_EXECUTION" and observed_at < utc_time(
+                payload["broker_entry_time_utc"]
+            ):
+                raise ValueError("Broker execution was observed before its entry time")
+            if event_type == "BROKER_OUTCOME" and observed_at < utc_time(
+                payload["broker_exit_time_utc"]
+            ):
+                raise ValueError("Broker outcome was observed before its exit time")
             key = (event_type, str(payload["candidate_id"]))
             if key in existing:
                 if canonical_json(existing[key]) != canonical_json(payload):
@@ -177,7 +191,7 @@ def update_evidence_chain(
         key=lambda item: (
             str(item[1]["entry_time_utc"]),
             str(item[1]["candidate_id"]),
-            item[0],
+            EVENT_ORDER[item[0]],
         )
     )
     previous_hash = str(records[-1]["event_hash"]) if records else GENESIS_HASH
@@ -213,6 +227,98 @@ def update_evidence_chain(
     }
     atomic_write(head_path, json.dumps(audit, indent=2, sort_keys=True) + "\n")
     return audit
+
+
+def utc_time(value: Any) -> datetime:
+    parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    if parsed.tzinfo is None:
+        raise ValueError(f"Prospective timestamp is not timezone-aware: {value}")
+    return parsed.astimezone(UTC)
+
+
+def annotate_decision_timing(
+    output_directory: Path,
+    rows: Sequence[dict[str, Any]],
+    *,
+    maximum_delay_seconds: int,
+) -> dict[str, Any]:
+    maximum_delay = int(maximum_delay_seconds)
+    if maximum_delay <= 0:
+        raise ValueError("Maximum decision recording delay must be positive")
+    records = load_chain(output_directory / "EVIDENCE_CHAIN.jsonl")
+    event_records: dict[tuple[str, str], Mapping[str, Any]] = {}
+    for record in records:
+        key = (str(record["event_type"]), str(record["payload"]["candidate_id"]))
+        if key in event_records:
+            raise ValueError(f"Duplicate immutable timing event: {key}")
+        event_records[key] = record
+
+    executed = 0
+    valid = 0
+    reasons: dict[str, int] = {}
+    for row in rows:
+        candidate_id = str(row["candidate_id"])
+        row["prospective_score_recorded_at_utc"] = None
+        row["prospective_execution_decision_recorded_at_utc"] = None
+        row["prospective_decision_latest_recorded_at_utc"] = None
+        row["prospective_decision_recording_delay_seconds"] = None
+        row["prospective_decision_timing_valid"] = False
+        row["prospective_veto_effective"] = False
+        if not bool(row.get("baseline_executed")):
+            reason = "BASELINE_NOT_EXECUTED"
+        else:
+            executed += 1
+            score = event_records.get(("SCORE_DECISION", candidate_id))
+            decision = event_records.get(
+                ("BASELINE_EXECUTION_DECISION", candidate_id)
+            )
+            if row.get("causal_rank") is None:
+                reason = "MISSING_CAUSAL_RANK"
+            elif score is None:
+                reason = "SCORE_NOT_IMMUTABLY_RECORDED"
+            elif decision is None:
+                reason = "EXECUTION_DECISION_NOT_IMMUTABLY_RECORDED"
+            else:
+                score_observed = utc_time(score["observed_at_utc"])
+                decision_observed = utc_time(decision["observed_at_utc"])
+                latest_observed = max(score_observed, decision_observed)
+                entry = utc_time(row["entry_time_utc"])
+                delay_seconds = max(
+                    0.0, (latest_observed - entry).total_seconds()
+                )
+                row[
+                    "prospective_score_recorded_at_utc"
+                ] = score_observed.isoformat().replace("+00:00", "Z")
+                row[
+                    "prospective_execution_decision_recorded_at_utc"
+                ] = decision_observed.isoformat().replace("+00:00", "Z")
+                row[
+                    "prospective_decision_latest_recorded_at_utc"
+                ] = latest_observed.isoformat().replace("+00:00", "Z")
+                row[
+                    "prospective_decision_recording_delay_seconds"
+                ] = delay_seconds
+                if latest_observed > entry + timedelta(seconds=maximum_delay):
+                    reason = "RECORDED_AFTER_MAXIMUM_DELAY"
+                elif bool(
+                    row.get("broker_outcome_resolved")
+                ) and latest_observed >= utc_time(row["broker_exit_time_utc"]):
+                    reason = "RECORDED_AFTER_OR_AT_BROKER_EXIT"
+                else:
+                    reason = "VALID"
+                    row["prospective_decision_timing_valid"] = True
+                    row["prospective_veto_effective"] = bool(row["would_veto"])
+                    valid += 1
+        row["prospective_decision_timing_reason"] = reason
+        reasons[reason] = reasons.get(reason, 0) + 1
+    return {
+        "schema_version": "v60_v2_prospective_decision_timing_v1",
+        "maximum_delay_seconds": maximum_delay,
+        "executed_candidates": executed,
+        "valid_executed_candidates": valid,
+        "valid_executed_fraction": valid / executed if executed else None,
+        "reason_counts": dict(sorted(reasons.items())),
+    }
 
 
 def object_value(value: Any, name: str) -> Any:
@@ -391,7 +497,7 @@ def build_equity_mark(
             pnl_usd = (realized_account + floating_account) / rate
             open_count += 1
         baseline_pnl += pnl_usd
-        if not bool(row["would_veto"]):
+        if not bool(row.get("prospective_veto_effective", False)):
             challenger_pnl += pnl_usd
     return {
         "observed_at_utc": observed_at.astimezone(UTC)
@@ -541,7 +647,11 @@ def add_forward_comparison(
         if bool(row.get("baseline_executed"))
         and bool(row.get("broker_outcome_resolved"))
     ]
-    challenger_rows = [row for row in resolved if not bool(row["would_veto"])]
+    challenger_rows = [
+        row
+        for row in resolved
+        if not bool(row.get("prospective_veto_effective", False))
+    ]
     baseline = metrics(resolved)
     challenger = metrics(challenger_rows)
     resolved_count = int(baseline["trades"])
@@ -550,7 +660,15 @@ def add_forward_comparison(
     )
     scored_resolved = sum(row.get("causal_rank") is not None for row in resolved)
     rank_coverage = scored_resolved / resolved_count if resolved_count else None
-    detailed_resolved = sum(row.get("broker_execution") is not None for row in resolved)
+    valid_timing_resolved = sum(
+        bool(row.get("prospective_decision_timing_valid")) for row in resolved
+    )
+    timing_coverage = (
+        valid_timing_resolved / resolved_count if resolved_count else None
+    )
+    detailed_resolved = sum(
+        row.get("broker_execution") is not None for row in resolved
+    )
     execution_detail_coverage = (
         detailed_resolved / resolved_count if resolved_count else None
     )
@@ -563,18 +681,68 @@ def add_forward_comparison(
         - float(baseline["closed_drawdown_usd"]),
         "trade_retention": retention,
         "resolved_rank_coverage": rank_coverage,
+        "resolved_prospective_decision_timing_coverage": timing_coverage,
         "resolved_execution_detail_coverage": execution_detail_coverage,
     }
+    executed = [row for row in rows if bool(row.get("baseline_executed"))]
+    valid_scored_executed = sum(
+        row.get("causal_rank") is not None
+        and bool(row.get("prospective_decision_timing_valid"))
+        for row in executed
+    )
+    raw_vetoes = [row for row in executed if bool(row.get("would_veto"))]
+    effective_vetoes = [
+        row for row in executed if bool(row.get("prospective_veto_effective"))
+    ]
+    resolved_effective_vetoes = [
+        row for row in effective_vetoes if bool(row.get("broker_outcome_resolved"))
+    ]
+    veto_values = [
+        float(row["broker_pnl_usd"]) for row in resolved_effective_vetoes
+    ]
+    veto_pf = profit_factor(veto_values) if veto_values else None
+    avoided_pnl = -sum(veto_values)
     status["forward_comparison"] = comparison
+    status["counts"]["raw_executed_scored_candidates"] = status["counts"].get(
+        "executed_scored_candidates", 0
+    )
+    status["counts"]["executed_scored_candidates"] = valid_scored_executed
+    status["counts"]["raw_veto_opportunities"] = len(raw_vetoes)
+    status["counts"]["veto_opportunities"] = len(effective_vetoes)
+    status["counts"]["resolved_vetoes"] = len(resolved_effective_vetoes)
     status["counts"]["resolved_baseline_executions"] = resolved_count
     status["counts"]["resolved_scored_baseline_executions"] = scored_resolved
+    status["counts"][
+        "resolved_prospective_timing_valid_executions"
+    ] = valid_timing_resolved
     status["counts"]["resolved_detailed_baseline_executions"] = detailed_resolved
+    status["veto_broker_net_pnl_usd"] = sum(veto_values)
+    status["avoided_broker_pnl_usd"] = avoided_pnl
+    status["veto_broker_profit_factor"] = (
+        veto_pf if veto_pf is not None and math.isfinite(veto_pf) else None
+    )
     status["gates"].update(
         {
+            "minimum_scored_executed_candidates": valid_scored_executed
+            >= int(acceptance["minimum_scored_executed_candidates"]),
+            "minimum_resolved_vetoes": len(resolved_effective_vetoes)
+            >= int(acceptance["minimum_resolved_vetoes"]),
+            "veto_broker_profit_factor": veto_pf is not None
+            and veto_pf
+            < float(acceptance["maximum_veto_broker_profit_factor_exclusive"]),
+            "positive_avoided_broker_pnl": avoided_pnl
+            > float(acceptance["minimum_avoided_broker_pnl_usd_exclusive"]),
             "minimum_resolved_baseline_executions": resolved_count
             >= int(acceptance["minimum_resolved_baseline_executions"]),
             "complete_resolved_rank_coverage": rank_coverage is not None
             and rank_coverage >= float(acceptance["minimum_resolved_rank_coverage"]),
+            "complete_resolved_prospective_decision_timing_coverage": (
+                timing_coverage is not None
+                and timing_coverage
+                >= float(
+                    acceptance["minimum_resolved_prospective_timing_coverage"]
+                )
+            ),
             "complete_resolved_execution_detail_coverage": (
                 execution_detail_coverage is not None
                 and execution_detail_coverage

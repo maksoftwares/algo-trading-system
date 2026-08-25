@@ -35,7 +35,11 @@ class FrozenTrade:
     exit_fills: tuple[ExitFill, ...]
 
 
-def trades_from_evidence(records: Sequence[Mapping[str, Any]]) -> list[FrozenTrade]:
+def trades_from_evidence(
+    records: Sequence[Mapping[str, Any]],
+    *,
+    maximum_decision_recording_delay_seconds: int | None = None,
+) -> list[FrozenTrade]:
     grouped: dict[str, dict[str, Mapping[str, Any]]] = {}
     for record in records:
         payload = record["payload"]
@@ -46,7 +50,7 @@ def trades_from_evidence(records: Sequence[Mapping[str, Any]]) -> list[FrozenTra
             raise ValueError(
                 f"Duplicate replay evidence event: {candidate_id}: {event_type}"
             )
-        candidate_events[event_type] = payload
+        candidate_events[event_type] = record
     trades: list[FrozenTrade] = []
     for candidate_id, events in sorted(grouped.items()):
         required = {
@@ -56,9 +60,12 @@ def trades_from_evidence(records: Sequence[Mapping[str, Any]]) -> list[FrozenTra
         }
         if not required.issubset(events):
             continue
-        decision = events["BASELINE_EXECUTION_DECISION"]
-        execution = events["BROKER_EXECUTION"]
-        outcome = events["BROKER_OUTCOME"]
+        decision_record = events["BASELINE_EXECUTION_DECISION"]
+        execution_record = events["BROKER_EXECUTION"]
+        outcome_record = events["BROKER_OUTCOME"]
+        decision = decision_record["payload"]
+        execution = execution_record["payload"]
+        outcome = outcome_record["payload"]
         direction = str(execution["direction"]).upper()
         if direction not in ("LONG", "SHORT"):
             raise ValueError(f"Unsupported replay direction: {candidate_id}: {direction}")
@@ -92,6 +99,23 @@ def trades_from_evidence(records: Sequence[Mapping[str, Any]]) -> list[FrozenTra
         )
         if abs(lifecycle_pnl - final_pnl) > 1e-8:
             raise ValueError(f"Replay lifecycle P/L does not reconcile: {candidate_id}")
+        effective_veto = bool(decision["would_veto"])
+        if maximum_decision_recording_delay_seconds is not None:
+            maximum_delay_ms = int(maximum_decision_recording_delay_seconds) * 1000
+            if maximum_delay_ms <= 0:
+                raise ValueError("Replay decision recording delay must be positive")
+            score_record = events.get("SCORE_DECISION")
+            timing_valid = score_record is not None
+            if timing_valid:
+                score_observed = time_msc(score_record["observed_at_utc"])
+                decision_observed = time_msc(decision_record["observed_at_utc"])
+                latest_observed = max(score_observed, decision_observed)
+                scheduled_entry = time_msc(decision["entry_time_utc"])
+                timing_valid = (
+                    latest_observed <= scheduled_entry + maximum_delay_ms
+                    and latest_observed < exit_
+                )
+            effective_veto = effective_veto and timing_valid
         trades.append(
             FrozenTrade(
                 candidate_id=candidate_id,
@@ -102,7 +126,7 @@ def trades_from_evidence(records: Sequence[Mapping[str, Any]]) -> list[FrozenTra
                 entry_price=float(execution["entry_price"]),
                 entry_cost_usd=float(execution["entry_cost_usd"]),
                 final_pnl_usd=final_pnl,
-                would_veto=bool(decision["would_veto"]),
+                would_veto=effective_veto,
                 exit_fills=fills,
             )
         )

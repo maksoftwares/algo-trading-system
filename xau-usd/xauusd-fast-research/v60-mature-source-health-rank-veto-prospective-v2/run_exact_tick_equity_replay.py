@@ -27,7 +27,12 @@ def main() -> int:
         raise ValueError("Locked exact tick replay changed")
     runtime = Path(config["outputs"]["runtime_directory"])
     records = load_chain(runtime / "EVIDENCE_CHAIN.jsonl")
-    trades = trades_from_evidence(records)
+    trades = trades_from_evidence(
+        records,
+        maximum_decision_recording_delay_seconds=int(
+            config["acceptance"]["maximum_decision_recording_delay_seconds"]
+        ),
+    )
     output_path = runtime / "EXACT_TICK_EQUITY_REPLAY.json"
     if not trades:
         result = {

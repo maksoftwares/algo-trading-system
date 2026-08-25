@@ -39,6 +39,10 @@ def test_v2_observer_is_read_only_and_hash_locked() -> None:
     assert hashlib.sha256(ranker.read_bytes()).hexdigest() == config["lock"][
         "observer_ranker_sha256"
     ]
+    observer_runner = ROOT / "run_observer.py"
+    assert hashlib.sha256(observer_runner.read_bytes()).hexdigest() == config["lock"][
+        "observer_runner_sha256"
+    ]
     evidence = ROOT / "src" / "evidence.py"
     assert hashlib.sha256(evidence.read_bytes()).hexdigest() == config["lock"][
         "evidence_recorder_sha256"
@@ -60,6 +64,8 @@ def test_v2_observer_is_read_only_and_hash_locked() -> None:
     acceptance = config["acceptance"]
     assert acceptance["minimum_resolved_baseline_executions"] >= 100
     assert acceptance["minimum_resolved_rank_coverage"] == 1.0
+    assert acceptance["minimum_resolved_prospective_timing_coverage"] == 1.0
     assert acceptance["minimum_resolved_execution_detail_coverage"] == 1.0
+    assert 0 < acceptance["maximum_decision_recording_delay_seconds"] <= 120
     assert acceptance["minimum_trade_retention"] >= 0.95
     assert acceptance["minimum_equity_marks"] >= 5000

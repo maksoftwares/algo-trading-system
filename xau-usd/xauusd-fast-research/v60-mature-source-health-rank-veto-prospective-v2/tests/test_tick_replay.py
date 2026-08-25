@@ -99,3 +99,64 @@ def test_exact_tick_replay_reconciles_pnl_and_portfolio_drawdown() -> None:
     assert result["all_trades_have_tick_coverage"] is True
     assert result["baseline_v60_equity_drawdown_usd"] >= 0.0
     assert result["challenger_v2_equity_drawdown_usd"] >= 0.0
+
+
+def test_exact_replay_retains_a_veto_recorded_after_the_timing_deadline() -> None:
+    common = {
+        "candidate_id": "late",
+        "event_id": "late",
+        "source_id": "R1_PULLBACK",
+        "entry_time_utc": "2026-08-26T00:00:00Z",
+    }
+    records = [
+        {
+            "event_type": "SCORE_DECISION",
+            "observed_at_utc": "2026-08-26T00:07:00Z",
+            "payload": {**common, "causal_score": 0.1, "causal_rank": 0.01},
+        },
+        {
+            "event_type": "BASELINE_EXECUTION_DECISION",
+            "observed_at_utc": "2026-08-26T00:07:00Z",
+            "payload": {**common, "would_veto": True},
+        },
+        {
+            "event_type": "BROKER_EXECUTION",
+            "observed_at_utc": "2026-08-26T00:07:00Z",
+            "payload": {
+                **common,
+                "broker_entry_time_utc": "2026-08-26T00:00:01Z",
+                "direction": "LONG",
+                "volume_lots": 0.01,
+                "entry_price": 4700.0,
+                "entry_cost_usd": 0.0,
+            },
+        },
+        {
+            "event_type": "BROKER_OUTCOME",
+            "observed_at_utc": "2026-08-26T01:01:00Z",
+            "payload": {
+                **common,
+                "broker_exit_time_utc": "2026-08-26T01:00:00Z",
+                "broker_pnl_usd": -5.0,
+                "exit_fills": [
+                    {
+                        "exit_time_utc": "2026-08-26T01:00:00Z",
+                        "volume_lots": 0.01,
+                        "pnl_usd": -5.0,
+                    }
+                ],
+            },
+        },
+    ]
+    trades = trades_from_evidence(
+        records, maximum_decision_recording_delay_seconds=360
+    )
+    assert len(trades) == 1
+    assert trades[0].would_veto is False
+
+    records[0]["observed_at_utc"] = "2026-08-26T00:05:00Z"
+    records[1]["observed_at_utc"] = "2026-08-26T00:05:00Z"
+    trades = trades_from_evidence(
+        records, maximum_decision_recording_delay_seconds=360
+    )
+    assert trades[0].would_veto is True

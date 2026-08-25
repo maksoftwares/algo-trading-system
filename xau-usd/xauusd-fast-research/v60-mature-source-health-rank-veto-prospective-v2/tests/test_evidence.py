@@ -6,6 +6,7 @@ import pytest
 
 from src.evidence import (
     add_forward_comparison,
+    annotate_decision_timing,
     attach_execution_details,
     build_equity_mark,
     load_chain,
@@ -33,6 +34,8 @@ def candidate(
         "prior_health_window_count": 20,
         "prior_executed_profit_factor": 0.7,
         "would_veto": would_veto,
+        "prospective_decision_timing_valid": True,
+        "prospective_veto_effective": would_veto,
         "broker_outcome_resolved": True,
         "broker_exit_time_utc": f"2026-08-26T1{candidate_id}:00:00Z",
         "broker_pnl_usd": pnl,
@@ -57,21 +60,94 @@ def candidate(
 
 
 def test_evidence_chain_is_idempotent_and_rejects_decision_drift(tmp_path) -> None:
-    rows = [candidate("1", -10.0, would_veto=True)]
-    now = datetime(2026, 8, 26, 12, tzinfo=UTC)
-    first = update_evidence_chain(tmp_path, rows, observed_at=now)
-    assert first["records"] == 4
-    assert first["new_records"] == 4
-    assert len(load_chain(tmp_path / "EVIDENCE_CHAIN.jsonl")) == 4
+    resolved_row = candidate("1", -10.0, would_veto=True)
+    open_row = dict(
+        resolved_row,
+        broker_outcome_resolved=False,
+        broker_exit_time_utc=None,
+        broker_pnl_usd=None,
+    )
+    open_row.pop("broker_exit_fills")
+    rows = [open_row]
+    first_observation = datetime(2026, 8, 26, 1, 1, tzinfo=UTC)
+    first = update_evidence_chain(tmp_path, rows, observed_at=first_observation)
+    assert first["records"] == 3
+    assert first["new_records"] == 3
+    assert len(load_chain(tmp_path / "EVIDENCE_CHAIN.jsonl")) == 3
 
-    second = update_evidence_chain(tmp_path, rows, observed_at=now)
-    assert second["records"] == 4
+    timing = annotate_decision_timing(
+        tmp_path, rows, maximum_delay_seconds=120
+    )
+    assert timing["valid_executed_candidates"] == 1
+    assert rows[0]["prospective_decision_timing_valid"] is True
+    assert rows[0]["prospective_veto_effective"] is True
+
+    second = update_evidence_chain(
+        tmp_path, rows, observed_at=first_observation
+    )
+    assert second["records"] == 3
     assert second["new_records"] == 0
     assert second["head_sha256"] == first["head_sha256"]
 
-    changed = [dict(rows[0], causal_rank=0.06)]
+    resolved = update_evidence_chain(
+        tmp_path,
+        [resolved_row],
+        observed_at=datetime(2026, 8, 26, 12, 1, tzinfo=UTC),
+    )
+    assert resolved["records"] == 4
+    assert resolved["new_records"] == 1
+    assert [
+        row["event_type"] for row in load_chain(tmp_path / "EVIDENCE_CHAIN.jsonl")
+    ] == [
+        "SCORE_DECISION",
+        "BASELINE_EXECUTION_DECISION",
+        "BROKER_EXECUTION",
+        "BROKER_OUTCOME",
+    ]
+
+    changed = [dict(resolved_row, causal_rank=0.06)]
     with pytest.raises(ValueError, match="Immutable prospective evidence changed"):
-        update_evidence_chain(tmp_path, changed, observed_at=now)
+        update_evidence_chain(
+            tmp_path,
+            changed,
+            observed_at=datetime(2026, 8, 26, 12, 2, tzinfo=UTC),
+        )
+
+
+def test_late_reconstructed_decision_is_fail_safe_retained(tmp_path) -> None:
+    open_row = dict(
+        candidate("1", -10.0, would_veto=True),
+        broker_outcome_resolved=False,
+        broker_exit_time_utc=None,
+        broker_pnl_usd=None,
+    )
+    open_row.pop("broker_exit_fills")
+    rows = [open_row]
+    update_evidence_chain(
+        tmp_path,
+        rows,
+        observed_at=datetime(2026, 8, 26, 1, 7, tzinfo=UTC),
+    )
+    audit = annotate_decision_timing(
+        tmp_path, rows, maximum_delay_seconds=360
+    )
+    assert audit["valid_executed_candidates"] == 0
+    assert rows[0]["prospective_decision_timing_valid"] is False
+    assert rows[0]["prospective_veto_effective"] is False
+    assert (
+        rows[0]["prospective_decision_timing_reason"]
+        == "RECORDED_AFTER_MAXIMUM_DELAY"
+    )
+
+
+def test_evidence_rejects_a_broker_outcome_observed_before_exit(tmp_path) -> None:
+    rows = [candidate("1", -10.0, would_veto=True)]
+    with pytest.raises(ValueError, match="observed before its exit time"):
+        update_evidence_chain(
+            tmp_path,
+            rows,
+            observed_at=datetime(2026, 8, 26, 1, 1, tzinfo=UTC),
+        )
 
 
 def test_forward_comparison_measures_whole_resolved_portfolio() -> None:
@@ -82,10 +158,15 @@ def test_forward_comparison_measures_whole_resolved_portfolio() -> None:
     ]
     status = {"counts": {}, "gates": {"existing": True}}
     acceptance = {
+        "minimum_scored_executed_candidates": 3,
         "minimum_resolved_baseline_executions": 3,
+        "minimum_resolved_vetoes": 1,
         "minimum_resolved_rank_coverage": 1.0,
+        "minimum_resolved_prospective_timing_coverage": 1.0,
         "minimum_resolved_execution_detail_coverage": 1.0,
         "minimum_trade_retention": 0.60,
+        "maximum_veto_broker_profit_factor_exclusive": 0.8,
+        "minimum_avoided_broker_pnl_usd_exclusive": 0.0,
     }
     add_forward_comparison(status, rows, acceptance)
 

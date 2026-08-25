@@ -177,10 +177,17 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
     assert workers["V60_MATURE_SOURCE_V2_PROSPECTIVE"]["script"].endswith(
         "run_observer.py"
     )
+    assert workers["V60_MATURE_SOURCE_V2_PROSPECTIVE"]["args"] == [
+        "--poll-seconds",
+        "30",
+    ]
     assert sources["V60_MATURE_SOURCE_V2_PROSPECTIVE_STATUS"]["required_values"] == {
         "deployment_authorized": False,
         "broker_action_authorized": False,
         "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+        "evidence_chain.status": "VERIFIED",
+        "decision_timing.maximum_delay_seconds": 120,
+        "observation_timing.cycle_within_recording_delay_budget": True,
     }
 
 

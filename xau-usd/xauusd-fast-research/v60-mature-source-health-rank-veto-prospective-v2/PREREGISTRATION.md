@@ -17,8 +17,18 @@ changed score, rank, source, entry, policy decision, exit, or broker P/L fails
 the observer closed. The evidence recorder implementation is hash-locked before
 the clean boundary, and every resolved execution requires complete fill details.
 
-The observer also records a hash-linked XAU-only equity mark every five-minute
-cycle. The baseline mark includes closed P/L and current MT5 floating P/L; the
+A reconstructed decision counts only when both its causal score and baseline
+execution decision were immutably recorded no later than 120 seconds after the
+scheduled entry and strictly before the actual broker exit. A missing or late
+record is fail-safe retained by V2 and cannot improve the veto cohort, portfolio
+P/L, sampled equity, or exact-tick replay. One hundred percent of resolved
+baseline executions must satisfy this prospective timing gate. The observer
+runner, evidence recorder, ranker, and exact replay are all hash-locked.
+
+The observer runs with a 30-second pause between completed cycles and records
+the actual score-completion time, not the earlier cycle-start time. It also
+records a hash-linked XAU-only equity mark after every completed cycle. The
+baseline mark includes closed P/L and current MT5 floating P/L; the
 V2 mark removes positions the locked policy would have vetoed. At least 5,000
 marks are required and V2 sampled equity drawdown cannot exceed V60. Before any
 deployment decision, the hash-locked exact replay must process stored prospective
@@ -51,7 +61,8 @@ simulated health so the shadow policy remains causally implementable.
 Collection must continue for at least 90 days, 100 scored executed candidates,
 100 resolved baseline executions, and 10 resolved veto opportunities. Every
 resolved execution must have a causal rank and V2 must retain at least 95% of
-baseline trades. On the entire resolved forward portfolio, V2 net P/L and PF
+baseline trades. Every resolved decision must also pass the immutable timing
+gate above. On the entire resolved forward portfolio, V2 net P/L and PF
 must be no worse than V60 and V2 closed-trade drawdown must be no higher. The
 veto cohort must have PF below 0.8 and positive avoided P/L. Passing every gate
 still requires review and explicit authorization; the observer never authorizes

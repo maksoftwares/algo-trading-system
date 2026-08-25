@@ -71,6 +71,12 @@ def verify_evidence(config: dict) -> None:
         raise ValueError("Prospective evidence recorder changed")
 
 
+def verify_runner(config: dict) -> None:
+    actual = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    if actual != str(config["lock"]["observer_runner_sha256"]):
+        raise ValueError("Prospective observer runner changed")
+
+
 def read_mt5_observation(config: dict):
     import MetaTrader5 as mt5
 
@@ -109,14 +115,28 @@ def read_mt5_observation(config: dict):
 
 def run_once(config_path: Path) -> dict:
     config = load_locked_config(config_path)
+    verify_runner(config)
     verify_shared_observer(config)
     verify_ranker(config)
     verify_evidence(config)
-    observed_at = datetime.now(UTC)
+    cycle_started_at = datetime.now(UTC)
     deals, open_positions, rank_decisions, rank_audit = read_mt5_observation(config)
+    decision_observed_at = datetime.now(UTC)
     status, rows = build_snapshot(
-        config, deals, now=observed_at, rank_decisions=rank_decisions
+        config, deals, now=decision_observed_at, rank_decisions=rank_decisions
     )
+    decision_cycle_seconds = (
+        decision_observed_at - cycle_started_at
+    ).total_seconds()
+    status["observation_timing"] = {
+        "cycle_started_at_utc": cycle_started_at.isoformat().replace("+00:00", "Z"),
+        "decision_completed_at_utc": decision_observed_at.isoformat().replace(
+            "+00:00", "Z"
+        ),
+        "decision_cycle_seconds": decision_cycle_seconds,
+        "cycle_within_recording_delay_budget": decision_cycle_seconds
+        < float(config["acceptance"]["maximum_decision_recording_delay_seconds"]),
+    }
     status["observer_ranker"] = rank_audit
     evidence = load_evidence()
     state = json.loads(
@@ -132,12 +152,19 @@ def run_once(config_path: Path) -> dict:
             config["account"]["account_currency_per_usd"]
         ),
     )
-    evidence.add_forward_comparison(status, rows, config["acceptance"])
     status["evidence_chain"] = evidence.update_evidence_chain(
         Path(config["outputs"]["runtime_directory"]),
         rows,
-        observed_at=observed_at,
+        observed_at=decision_observed_at,
     )
+    status["decision_timing"] = evidence.annotate_decision_timing(
+        Path(config["outputs"]["runtime_directory"]),
+        rows,
+        maximum_delay_seconds=int(
+            config["acceptance"]["maximum_decision_recording_delay_seconds"]
+        ),
+    )
+    evidence.add_forward_comparison(status, rows, config["acceptance"])
     equity_mark = evidence.build_equity_mark(
         rows,
         state,
@@ -146,7 +173,7 @@ def run_once(config_path: Path) -> dict:
         account_currency_per_usd=float(
             config["account"]["account_currency_per_usd"]
         ),
-        observed_at=observed_at,
+        observed_at=datetime.now(UTC),
     )
     equity_audit = evidence.update_equity_marks(
         Path(config["outputs"]["runtime_directory"]),
@@ -174,7 +201,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run the read-only V60 V2 observer")
     parser.add_argument("--config", type=Path, default=CONFIG)
     parser.add_argument("--once", action="store_true")
-    parser.add_argument("--poll-seconds", type=int, default=300)
+    parser.add_argument("--poll-seconds", type=int, default=30)
     args = parser.parse_args()
     while True:
         try:
