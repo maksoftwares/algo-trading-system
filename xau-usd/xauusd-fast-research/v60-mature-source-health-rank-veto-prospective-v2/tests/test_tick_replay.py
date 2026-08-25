@@ -89,7 +89,7 @@ def test_exact_tick_replay_reconciles_pnl_and_portfolio_drawdown() -> None:
         {"tick_time_msc": 200, "bid": 104.0, "ask": 106.0},
         {"tick_time_msc": 250, "bid": 90.0, "ask": 92.0},
         {"tick_time_msc": 300, "bid": 105.0, "ask": 107.0},
-        {"tick_time_msc": 400, "bid": 100.0, "ask": 102.0},
+        {"tick_time_msc": 401, "bid": 100.0, "ask": 102.0},
     ]
     result = replay_ticks(trades, ticks, contract_units_per_lot=1.0)
     assert result["ticks_evaluated"] == 5

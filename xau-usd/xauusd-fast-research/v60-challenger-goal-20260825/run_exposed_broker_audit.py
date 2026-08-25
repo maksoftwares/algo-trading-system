@@ -20,6 +20,7 @@ V2_ROOT = (
 )
 V2_RUNNER = V2_ROOT / "run_observer.py"
 V2_CONFIG = V2_ROOT / "config" / "prospective.json"
+TICK_REPLAY = V2_ROOT / "src" / "tick_replay.py"
 EXPOSED_START_UTC = "2026-07-21T00:00:00Z"
 
 
@@ -70,6 +71,12 @@ def summarize(status: dict, rows: list[dict]) -> dict:
             ),
         },
         "observer_counts": status["counts"],
+        "resolved_execution_detail_coverage": (
+            sum(row.get("broker_execution") is not None for row in executed_resolved)
+            / len(executed_resolved)
+            if executed_resolved
+            else None
+        ),
         "limitations": [
             "These outcomes were visible before the clean V2 evidence boundary.",
             "This audit cannot authorize deployment or count toward prospective gates.",
@@ -125,20 +132,79 @@ def runtime_rank_parity(config: dict, rows: list[dict]) -> dict:
     }
 
 
+def exact_tick_replay(config: dict, rows: list[dict], evidence) -> dict:
+    replay = load_module("v60_v2_exposed_tick_replay", TICK_REPLAY)
+    records = []
+    for row in rows:
+        for event_type, payload in evidence.immutable_events(row):
+            records.append({"event_type": event_type, "payload": payload})
+    trades = replay.trades_from_evidence(records)
+    portfolio_path = Path(config["read_only_inputs"]["candidate_source_config"])
+    if not portfolio_path.is_absolute():
+        portfolio_path = REPO_ROOT / portfolio_path
+    portfolio = json.loads(portfolio_path.read_text(encoding="utf-8"))
+    tick_directory = Path(portfolio["feeds"]["terminal_files_directory"])
+    tick_paths = list(
+        tick_directory.glob(portfolio["feeds"]["tick_filename_glob"])
+    )
+    account = portfolio["account"]
+    contract_units_per_lot = float(account["expected_ounces_at_fixed_lot"]) / float(
+        account["fixed_lot"]
+    )
+    result = replay.replay_ticks(
+        trades,
+        replay.iter_tick_files(
+            tick_paths,
+            first_time_msc=min(trade.entry_time_msc for trade in trades),
+            final_time_msc=max(trade.exit_time_msc for trade in trades),
+        ),
+        contract_units_per_lot=contract_units_per_lot,
+    )
+    result.update(
+        {
+            "evidence_status": "RETROSPECTIVE_EXPOSED_NOT_PROSPECTIVE",
+            "deployment_authorized": False,
+            "tick_files_considered": len(tick_paths),
+        }
+    )
+    return result
+
+
 def main() -> int:
     runner = load_module("v60_v2_exposed_audit_runner", V2_RUNNER)
     config = runner.load_locked_config(V2_CONFIG)
     runner.verify_shared_observer(config)
+    runner.verify_ranker(config)
+    runner.verify_evidence(config)
     exposed_config = deepcopy(config)
     exposed_config["lock"]["evidence_start_inclusive_utc"] = EXPOSED_START_UTC
-    deals, rank_decisions, rank_audit = runner.read_mt5_observation(exposed_config)
+    deals, _open_positions, rank_decisions, rank_audit = runner.read_mt5_observation(
+        exposed_config
+    )
     status, rows = runner.build_snapshot(
         exposed_config, deals, rank_decisions=rank_decisions
     )
     status["observer_ranker"] = rank_audit
+    state = json.loads(
+        Path(config["read_only_inputs"]["portfolio_state"]).read_text(
+            encoding="utf-8"
+        )
+    )
+    evidence = runner.load_evidence()
+    evidence.attach_execution_details(
+        rows,
+        state,
+        deals,
+        account_currency_per_usd=float(
+            config["account"]["account_currency_per_usd"]
+        ),
+    )
     result = summarize(status, rows)
     result["observer_ranker"] = rank_audit
     result["runtime_rank_parity"] = runtime_rank_parity(exposed_config, rows)
+    result["exact_tick_replay"] = exact_tick_replay(
+        exposed_config, rows, evidence
+    )
     (ROOT / "EXPOSED_BROKER_AUDIT.json").write_text(
         json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )

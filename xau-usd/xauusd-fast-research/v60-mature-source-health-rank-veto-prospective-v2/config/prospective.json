@@ -17,7 +17,7 @@
     "candidate_source_config_sha256": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
     "observer_ranker_sha256": "2e903dc0d0a7db0ee26b33de4b8b8671a281f1216f7784f3f848eb4be01ae891",
     "evidence_recorder_sha256": "772f63f8b3042c859f03d73b69ffc76d2b68193786f0dd546033ffade315285b",
-    "tick_replay_sha256": "328aac25e2558416fd139a072adb6b8aec61e453ec28fbc1d73d5d4c53d67c11",
+    "tick_replay_sha256": "aca185abeb48b545a8dc23145e2f80325acb7b72e040cc79afd5deb398aed514",
     "tick_replay_runner_sha256": "4873f7e225ca10a3da6e122b13c45dba2e7e2d7d6c80c900227439cf60717afc",
     "policy": {
       "source_id": "*",

@@ -11,9 +11,29 @@
     "resolved_executions": 30,
     "wins": 12
   },
-  "end_inclusive_utc": "2026-08-25T04:37:04.103042Z",
+  "end_inclusive_utc": "2026-08-25T05:09:16.774607Z",
   "evidence_status": "RETROSPECTIVE_EXPOSED_NOT_PROSPECTIVE",
-  "generated_at_utc": "2026-08-25T04:37:04.111350Z",
+  "exact_tick_replay": {
+    "all_trades_have_tick_coverage": true,
+    "baseline_v60_equity_drawdown_usd": 95.84951667801323,
+    "baseline_v60_net_pnl_usd": -19.191286589516675,
+    "baseline_worst_drawdown_time_msc": 1787619666711,
+    "challenger_v2_equity_drawdown_usd": 95.84951667801323,
+    "challenger_v2_net_pnl_usd": -19.191286589516675,
+    "challenger_worst_drawdown_time_msc": 1787619666711,
+    "delta_equity_drawdown_usd": 0.0,
+    "delta_net_pnl_usd": 0.0,
+    "deployment_authorized": false,
+    "evidence_status": "RETROSPECTIVE_EXPOSED_NOT_PROSPECTIVE",
+    "final_exit_time_msc": 1787619666651,
+    "first_entry_time_msc": 1784764253027,
+    "schema_version": "v60_v2_exact_tick_equity_replay_v1",
+    "tick_files_considered": 36,
+    "ticks_evaluated": 8359662,
+    "trades": 30,
+    "vetoed_trades": 0
+  },
+  "generated_at_utc": "2026-08-25T05:09:16.784625Z",
   "limitations": [
     "These outcomes were visible before the clean V2 evidence boundary.",
     "This audit cannot authorize deployment or count toward prospective gates.",
@@ -32,7 +52,7 @@
     "expanding_observer_score_rows": 45,
     "feature_rows": 60000,
     "historical_reference_rows": 1676,
-    "latest_completed_feature_bar_utc": "2026-08-25T04:35:00+00:00",
+    "latest_completed_feature_bar_utc": "2026-08-25T05:05:00Z",
     "maximum_rank": 1.0,
     "minimum_rank": 0.05930232558139535,
     "model_sha256": "573187af78f1e9617eaac87453d14af2e1e0428914321058ecf89b5b2e7dffcd",
@@ -41,9 +61,10 @@
       "SCORE_COMPLETE": 45
     },
     "schema_version": "v60_v2_all_source_observer_ranker_v1",
-    "score_start_inclusive_utc": "2026-07-21T00:00:00+00:00",
+    "score_start_inclusive_utc": "2026-07-21T00:00:00Z",
     "scored_candidate_rows": 45
   },
+  "resolved_execution_detail_coverage": 1.0,
   "runtime_rank_parity": {
     "maximum_absolute_rank_difference": 0.0025688155498876375,
     "maximum_absolute_score_difference": 0.0,

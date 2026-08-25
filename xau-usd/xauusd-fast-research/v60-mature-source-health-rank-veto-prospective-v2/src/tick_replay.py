@@ -291,7 +291,12 @@ def iter_tick_files(
                 if tick_msc < first_time_msc:
                     continue
                 if tick_msc > final_time_msc:
-                    break
+                    yield {
+                        "tick_time_msc": tick_msc,
+                        "bid": float(row["bid"]),
+                        "ask": float(row["ask"]),
+                    }
+                    return
                 yield {
                     "tick_time_msc": tick_msc,
                     "bid": float(row["bid"]),

@@ -83,6 +83,13 @@ broker improvement is claimed. V57's causal virtual source health is currently
 degraded (recent-20 PF 0.814 and net -$28.13), but using that signal as a veto
 failed the long replay gates in V3.
 
+The exact replay independently reconstructed all 30 exposed broker lifecycles
+with 100% execution-detail and active-tick coverage. It evaluated 8,359,662
+recorded quotes, reconciled final P/L exactly to -$19.19, and measured $95.85 of
+XAU-only floating-equity drawdown. V2 is identical in this exposed interval
+because it vetoed zero trades. This validates the replay machinery on genuine
+broker records but is not prospective evidence of improvement.
+
 The first V2 observer configuration read only the shared add-on ledger despite
 targeting every source. That coverage defect was fixed before the clean evidence
 boundary: the observer now hash-locks the deployed source configuration, merges
