@@ -1,0 +1,497 @@
+{
+  "august_through_25": {
+    "broker": {
+      "losses": 14,
+      "net_pnl_usd": -24.87406398910823,
+      "profit_factor": 0.8345947707684508,
+      "trades": 24,
+      "win_rate": 0.4166666666666667,
+      "wins": 10
+    },
+    "cluster_cohorts": [
+      {
+        "cohort": "ALL_ACCEPTED",
+        "fold_id": "ALL",
+        "losses": 14,
+        "net_pnl_usd": -24.87406398910823,
+        "profit_factor": 0.8345947707684508,
+        "trades": 24,
+        "win_rate": 0.4166666666666667,
+        "wins": 10
+      },
+      {
+        "cohort": "CLUSTER_ALL",
+        "fold_id": "ALL",
+        "losses": 4,
+        "net_pnl_usd": 7.253914227365561,
+        "profit_factor": 1.1667292527224935,
+        "trades": 8,
+        "win_rate": 0.5,
+        "wins": 4
+      },
+      {
+        "cohort": "CLUSTER_FIRST",
+        "fold_id": "ALL",
+        "losses": 0,
+        "net_pnl_usd": 50.76106194690266,
+        "profit_factor": null,
+        "trades": 4,
+        "win_rate": 1.0,
+        "wins": 4
+      },
+      {
+        "cohort": "CLUSTER_LATER",
+        "fold_id": "ALL",
+        "losses": 4,
+        "net_pnl_usd": -43.5071477195371,
+        "profit_factor": 0.0,
+        "trades": 4,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      {
+        "cohort": "POST_PRIOR_LOSS_SAME_DAY",
+        "fold_id": "ALL",
+        "losses": 0,
+        "net_pnl_usd": 0.0,
+        "profit_factor": null,
+        "trades": 0,
+        "win_rate": null,
+        "wins": 0
+      },
+      {
+        "cohort": "NOT_POST_PRIOR_LOSS_SAME_DAY",
+        "fold_id": "ALL",
+        "losses": 14,
+        "net_pnl_usd": -24.87406398910823,
+        "profit_factor": 0.8345947707684508,
+        "trades": 24,
+        "win_rate": 0.4166666666666667,
+        "wins": 10
+      },
+      {
+        "cohort": "ALL_ACCEPTED",
+        "fold_id": "2026-08-through-25",
+        "losses": 14,
+        "net_pnl_usd": -24.87406398910823,
+        "profit_factor": 0.8345947707684508,
+        "trades": 24,
+        "win_rate": 0.4166666666666667,
+        "wins": 10
+      },
+      {
+        "cohort": "CLUSTER_ALL",
+        "fold_id": "2026-08-through-25",
+        "losses": 4,
+        "net_pnl_usd": 7.253914227365561,
+        "profit_factor": 1.1667292527224935,
+        "trades": 8,
+        "win_rate": 0.5,
+        "wins": 4
+      },
+      {
+        "cohort": "CLUSTER_FIRST",
+        "fold_id": "2026-08-through-25",
+        "losses": 0,
+        "net_pnl_usd": 50.76106194690266,
+        "profit_factor": null,
+        "trades": 4,
+        "win_rate": 1.0,
+        "wins": 4
+      },
+      {
+        "cohort": "CLUSTER_LATER",
+        "fold_id": "2026-08-through-25",
+        "losses": 4,
+        "net_pnl_usd": -43.5071477195371,
+        "profit_factor": 0.0,
+        "trades": 4,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      {
+        "cohort": "POST_PRIOR_LOSS_SAME_DAY",
+        "fold_id": "2026-08-through-25",
+        "losses": 0,
+        "net_pnl_usd": 0.0,
+        "profit_factor": null,
+        "trades": 0,
+        "win_rate": null,
+        "wins": 0
+      },
+      {
+        "cohort": "NOT_POST_PRIOR_LOSS_SAME_DAY",
+        "fold_id": "2026-08-through-25",
+        "losses": 14,
+        "net_pnl_usd": -24.87406398910823,
+        "profit_factor": 0.8345947707684508,
+        "trades": 24,
+        "win_rate": 0.4166666666666667,
+        "wins": 10
+      }
+    ],
+    "evidence_status": "EXPOSED_BROKER_OUTCOMES"
+  },
+  "broker_action_authorized": false,
+  "cluster_eligibility": [
+    {
+      "cohort": "CLUSTER_LATER",
+      "eligible": false,
+      "fold_pnl_usd": {
+        "2021-2023": 113.43027467907368,
+        "2024-2025": 899.9680991103563,
+        "2026H1": 84.57579277811516
+      },
+      "negative_historical_folds": 0,
+      "net_pnl_usd": 1097.9741665675451,
+      "profit_factor": 1.8218009241342976,
+      "trades": 355
+    },
+    {
+      "cohort": "POST_PRIOR_LOSS_SAME_DAY",
+      "eligible": false,
+      "fold_pnl_usd": {
+        "2021-2023": -20.322496252405863,
+        "2024-2025": 413.0461094056847,
+        "2026H1": -23.701991919254553
+      },
+      "negative_historical_folds": 2,
+      "net_pnl_usd": 369.0216212340244,
+      "profit_factor": 1.811452467073005,
+      "trades": 116
+    }
+  ],
+  "decision": "DIAGNOSTIC_SUPPORTS_TARGETED_PROTECTION_RESEARCH",
+  "deployment_authorized": false,
+  "evidence_status": "RETROSPECTIVE_EXPOSED_DIAGNOSTIC",
+  "generated_at_utc": "2026-08-25T19:57:30.238776Z",
+  "input_identity": {
+    "v60_net": true,
+    "v60_trades": true,
+    "v6_net": true,
+    "v6_trades": true
+  },
+  "july": {
+    "cluster_cohorts": [
+      {
+        "cohort": "ALL_ACCEPTED",
+        "fold_id": "ALL",
+        "losses": 15,
+        "net_pnl_usd": -44.99832777872246,
+        "profit_factor": 0.7334613818969367,
+        "trades": 25,
+        "win_rate": 0.4,
+        "wins": 10
+      },
+      {
+        "cohort": "CLUSTER_ALL",
+        "fold_id": "ALL",
+        "losses": 4,
+        "net_pnl_usd": -36.199092409052966,
+        "profit_factor": 0.3294714248440767,
+        "trades": 6,
+        "win_rate": 0.3333333333333333,
+        "wins": 2
+      },
+      {
+        "cohort": "CLUSTER_FIRST",
+        "fold_id": "ALL",
+        "losses": 2,
+        "net_pnl_usd": -11.548220665600176,
+        "profit_factor": 0.5423296862868754,
+        "trades": 3,
+        "win_rate": 0.3333333333333333,
+        "wins": 1
+      },
+      {
+        "cohort": "CLUSTER_LATER",
+        "fold_id": "ALL",
+        "losses": 2,
+        "net_pnl_usd": -24.650871743452786,
+        "profit_factor": 0.14267638176920225,
+        "trades": 3,
+        "win_rate": 0.3333333333333333,
+        "wins": 1
+      },
+      {
+        "cohort": "POST_PRIOR_LOSS_SAME_DAY",
+        "fold_id": "ALL",
+        "losses": 2,
+        "net_pnl_usd": -28.753286646089567,
+        "profit_factor": 0.0,
+        "trades": 2,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      {
+        "cohort": "NOT_POST_PRIOR_LOSS_SAME_DAY",
+        "fold_id": "ALL",
+        "losses": 13,
+        "net_pnl_usd": -16.2450411326329,
+        "profit_factor": 0.8840232305003882,
+        "trades": 23,
+        "win_rate": 0.43478260869565216,
+        "wins": 10
+      },
+      {
+        "cohort": "ALL_ACCEPTED",
+        "fold_id": "2026-07",
+        "losses": 15,
+        "net_pnl_usd": -44.99832777872246,
+        "profit_factor": 0.7334613818969367,
+        "trades": 25,
+        "win_rate": 0.4,
+        "wins": 10
+      },
+      {
+        "cohort": "CLUSTER_ALL",
+        "fold_id": "2026-07",
+        "losses": 4,
+        "net_pnl_usd": -36.199092409052966,
+        "profit_factor": 0.3294714248440767,
+        "trades": 6,
+        "win_rate": 0.3333333333333333,
+        "wins": 2
+      },
+      {
+        "cohort": "CLUSTER_FIRST",
+        "fold_id": "2026-07",
+        "losses": 2,
+        "net_pnl_usd": -11.548220665600176,
+        "profit_factor": 0.5423296862868754,
+        "trades": 3,
+        "win_rate": 0.3333333333333333,
+        "wins": 1
+      },
+      {
+        "cohort": "CLUSTER_LATER",
+        "fold_id": "2026-07",
+        "losses": 2,
+        "net_pnl_usd": -24.650871743452786,
+        "profit_factor": 0.14267638176920225,
+        "trades": 3,
+        "win_rate": 0.3333333333333333,
+        "wins": 1
+      },
+      {
+        "cohort": "POST_PRIOR_LOSS_SAME_DAY",
+        "fold_id": "2026-07",
+        "losses": 2,
+        "net_pnl_usd": -28.753286646089567,
+        "profit_factor": 0.0,
+        "trades": 2,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      {
+        "cohort": "NOT_POST_PRIOR_LOSS_SAME_DAY",
+        "fold_id": "2026-07",
+        "losses": 13,
+        "net_pnl_usd": -16.2450411326329,
+        "profit_factor": 0.8840232305003882,
+        "trades": 23,
+        "win_rate": 0.43478260869565216,
+        "wins": 10
+      }
+    ],
+    "endpoint": {
+      "losses": 17,
+      "net_pnl_usd": -44.34926418619957,
+      "profit_factor": 0.7684095647146,
+      "trades": 25,
+      "win_rate": 0.32,
+      "wins": 8
+    },
+    "evidence_status": "EXPOSED_MIXED_RECONSTRUCTION_AND_PROSPECTIVE_LOGS",
+    "feed_integrity": {
+      "duplicate_signals_removed": 0,
+      "independent_reconstruction_present": true,
+      "interpretation": "FROZEN_RECONSTRUCTION_CONFIRMS_ZERO_CORE_CANDIDATES",
+      "reconstructed_candidate_counts": {
+        "R1_BOX": 0,
+        "R1_PULLBACK": 0,
+        "R2_DOWNTREND": 0,
+        "R3_COMPRESSION": 0
+      }
+    },
+    "protected": {
+      "losses": 15,
+      "net_pnl_usd": -44.99832777872246,
+      "profit_factor": 0.7334613818969367,
+      "trades": 25,
+      "win_rate": 0.4,
+      "wins": 10
+    },
+    "protection_delta_usd": -0.6490635925229071
+  },
+  "limitations": [
+    "Every historical, July, and August outcome was exposed before this diagnostic.",
+    "Endpoint attribution uses V60's fixed accepted set; removing protection can change capacity and later fills.",
+    "July combines retrospective reconstruction with prospective candidate logs.",
+    "August has broker outcomes but no frozen source-endpoint counterfactual in this package.",
+    "Eligibility supports only a separately preregistered research lane and cannot authorize deployment."
+  ],
+  "monthly_downside": {
+    "endpoint": {
+      "negative_month_pnl_usd": -602.960489557915,
+      "negative_months": 22,
+      "worst_month_pnl_usd": -143.8681301821173
+    },
+    "protected": {
+      "negative_month_pnl_usd": -527.8244869239121,
+      "negative_months": 21,
+      "worst_month_pnl_usd": -136.7681301821174
+    }
+  },
+  "portfolio_attribution": {
+    "changed_trades": 563,
+    "delta_usd": -33.32260775826444,
+    "endpoint": {
+      "closed_drawdown_usd": 253.18357685068707,
+      "losses": 770,
+      "net_pnl_usd": 3636.8879613302784,
+      "net_to_closed_drawdown": 14.364628253415912,
+      "profit_factor": 1.636823059195504,
+      "trades": 1390,
+      "win_rate": 0.4460431654676259,
+      "wins": 620
+    },
+    "fixed_accepted_set": true,
+    "pnl_changed_trades": 161,
+    "protected": {
+      "closed_drawdown_usd": 223.2793130984756,
+      "losses": 716,
+      "net_pnl_usd": 3603.565353572014,
+      "net_to_closed_drawdown": 16.139271048288695,
+      "profit_factor": 1.7107478072225089,
+      "trades": 1390,
+      "win_rate": 0.4848920863309353,
+      "wins": 674
+    },
+    "protection_action_trades": 161
+  },
+  "protection_eligibility": [
+    {
+      "changed_trades": 15,
+      "eligible": false,
+      "fold_delta_usd": {
+        "2021-2023": 10.931000000000267,
+        "2024-2025": -55.057000000000244,
+        "2026H1": 0.0
+      },
+      "negative_historical_folds": 1,
+      "pnl_changed_trades": 5,
+      "protection_action_trades": 5,
+      "protection_delta_usd": -44.125999999999976,
+      "source_id": "R1_BOX",
+      "trades": 17
+    },
+    {
+      "changed_trades": 303,
+      "eligible": false,
+      "fold_delta_usd": {
+        "2021-2023": 119.49600000000078,
+        "2024-2025": -36.25699999999961,
+        "2026H1": 27.840000000000146
+      },
+      "negative_historical_folds": 1,
+      "pnl_changed_trades": 48,
+      "protection_action_trades": 48,
+      "protection_delta_usd": 111.07900000000132,
+      "source_id": "R1_PULLBACK",
+      "trades": 360
+    },
+    {
+      "changed_trades": 35,
+      "eligible": false,
+      "fold_delta_usd": {
+        "2021-2023": -22.764999999999873,
+        "2024-2025": -15.699999999999818,
+        "2026H1": 0.0
+      },
+      "negative_historical_folds": 2,
+      "pnl_changed_trades": 7,
+      "protection_action_trades": 7,
+      "protection_delta_usd": -38.46499999999969,
+      "source_id": "R2_DOWNTREND",
+      "trades": 35
+    },
+    {
+      "changed_trades": 46,
+      "eligible": false,
+      "fold_delta_usd": {
+        "2021-2023": -12.763999999999896,
+        "2024-2025": -31.205999999999676,
+        "2026H1": 40.41299999999865
+      },
+      "negative_historical_folds": 2,
+      "pnl_changed_trades": 8,
+      "protection_action_trades": 8,
+      "protection_delta_usd": -3.557000000000926,
+      "source_id": "R3_COMPRESSION",
+      "trades": 46
+    },
+    {
+      "changed_trades": 46,
+      "eligible": false,
+      "fold_delta_usd": {
+        "2021-2023": -13.525367022397177,
+        "2024-2025": -26.548169173636325,
+        "2026H1": 0.0
+      },
+      "negative_historical_folds": 2,
+      "pnl_changed_trades": 8,
+      "protection_action_trades": 8,
+      "protection_delta_usd": -40.0735361960335,
+      "source_id": "R4_CHOP",
+      "trades": 46
+    },
+    {
+      "changed_trades": 38,
+      "eligible": false,
+      "fold_delta_usd": {
+        "2021-2023": -9.508155309833683,
+        "2024-2025": 18.110000000000582,
+        "2026H1": -15.818303566325085
+      },
+      "negative_historical_folds": 2,
+      "pnl_changed_trades": 5,
+      "protection_action_trades": 5,
+      "protection_delta_usd": -7.216458876158185,
+      "source_id": "V25_CHOP",
+      "trades": 38
+    },
+    {
+      "changed_trades": 40,
+      "eligible": false,
+      "fold_delta_usd": {
+        "2021-2023": 13.337065031478232,
+        "2024-2025": -62.5027936280228,
+        "2026H1": 57.66022110651102
+      },
+      "negative_historical_folds": 1,
+      "pnl_changed_trades": 40,
+      "protection_action_trades": 40,
+      "protection_delta_usd": 8.494492509966449,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trades": 474
+    },
+    {
+      "changed_trades": 40,
+      "eligible": true,
+      "fold_delta_usd": {
+        "2021-2023": 22.388802013518443,
+        "2024-2025": -8.557935904708756,
+        "2026H1": -33.28897130484984
+      },
+      "negative_historical_folds": 2,
+      "pnl_changed_trades": 40,
+      "protection_action_trades": 40,
+      "protection_delta_usd": -19.45810519604015,
+      "source_id": "V7_SWING_HEALTH",
+      "trades": 374
+    }
+  ],
+  "report_title": "V60 Exit And Cluster Decomposition V17",
+  "schema_version": "v60_exit_cluster_decomposition_v17"
+}
