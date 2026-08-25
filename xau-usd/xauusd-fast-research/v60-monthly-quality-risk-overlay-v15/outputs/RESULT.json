@@ -1,0 +1,1456 @@
+{
+  "annual": [
+    {
+      "baseline_net_pnl_usd": 165.92842872914736,
+      "baseline_trades": 230,
+      "challenger_net_pnl_usd": 193.64521983716037,
+      "challenger_trades": 224,
+      "delta_pnl_usd": 27.716791108013012,
+      "year": 2021
+    },
+    {
+      "baseline_net_pnl_usd": 57.11887127926752,
+      "baseline_trades": 110,
+      "challenger_net_pnl_usd": 63.092813309052424,
+      "challenger_trades": 105,
+      "delta_pnl_usd": 5.973942029784901,
+      "year": 2022
+    },
+    {
+      "baseline_net_pnl_usd": 341.959366499673,
+      "baseline_trades": 242,
+      "challenger_net_pnl_usd": 381.60089149714366,
+      "challenger_trades": 254,
+      "delta_pnl_usd": 39.64152499747064,
+      "year": 2023
+    },
+    {
+      "baseline_net_pnl_usd": 731.5260613265943,
+      "baseline_trades": 326,
+      "challenger_net_pnl_usd": 779.679453159007,
+      "challenger_trades": 321,
+      "delta_pnl_usd": 48.153391832412694,
+      "year": 2024
+    },
+    {
+      "baseline_net_pnl_usd": 1167.0903446200266,
+      "baseline_trades": 350,
+      "challenger_net_pnl_usd": 1201.170369099474,
+      "challenger_trades": 346,
+      "delta_pnl_usd": 34.0800244794475,
+      "year": 2025
+    },
+    {
+      "baseline_net_pnl_usd": 1139.9422811173051,
+      "baseline_trades": 132,
+      "challenger_net_pnl_usd": 1165.5334898378358,
+      "challenger_trades": 131,
+      "delta_pnl_usd": 25.59120872053063,
+      "year": 2026
+    }
+  ],
+  "august_2026_through_25": {
+    "gates": {
+      "closed_drawdown_not_above_v6": true,
+      "net_not_below_v6": true,
+      "positive_net": true,
+      "profit_factor_not_below_v6": true,
+      "v6_identity": true
+    },
+    "identity": {
+      "net": true,
+      "trades": true
+    },
+    "monthly_overlay_vetoes": 0,
+    "v14": {
+      "closed_drawdown_usd": 56.6861810755616,
+      "losses": 11,
+      "net_pnl_usd": 17.503063308373065,
+      "profit_factor": 1.1620572292953486,
+      "trades": 21,
+      "win_rate": 0.47619047619047616,
+      "wins": 10
+    },
+    "v6": {
+      "closed_drawdown_usd": 56.6861810755616,
+      "losses": 11,
+      "net_pnl_usd": 17.503063308373065,
+      "profit_factor": 1.1620572292953486,
+      "trades": 21,
+      "win_rate": 0.47619047619047616,
+      "wins": 10
+    },
+    "v60": {
+      "closed_drawdown_usd": 86.58951667801225,
+      "losses": 14,
+      "net_pnl_usd": -24.87406398910823,
+      "profit_factor": 0.8345947707684508,
+      "trades": 24,
+      "win_rate": 0.4166666666666667,
+      "wins": 10
+    }
+  },
+  "broker_action_authorized": false,
+  "cost_stress": {
+    "0.1": {
+      "additional_cost_usd_per_trade": 0.1,
+      "all_gates_pass": false,
+      "annual": [
+        {
+          "baseline_net_pnl_usd": 155.97692647481253,
+          "baseline_trades": 230,
+          "challenger_net_pnl_usd": 184.2937175828256,
+          "challenger_trades": 224,
+          "delta_pnl_usd": 28.316791108013064,
+          "year": 2021
+        },
+        {
+          "baseline_net_pnl_usd": 48.959871279267404,
+          "baseline_trades": 110,
+          "challenger_net_pnl_usd": 49.00587242844473,
+          "challenger_trades": 106,
+          "delta_pnl_usd": 0.04600114917732867,
+          "year": 2022
+        },
+        {
+          "baseline_net_pnl_usd": 302.8318316661633,
+          "baseline_trades": 235,
+          "challenger_net_pnl_usd": 329.6885190656242,
+          "challenger_trades": 249,
+          "delta_pnl_usd": 26.856687399460895,
+          "year": 2023
+        },
+        {
+          "baseline_net_pnl_usd": 702.6920613265947,
+          "baseline_trades": 326,
+          "challenger_net_pnl_usd": 750.8854531590075,
+          "challenger_trades": 321,
+          "delta_pnl_usd": 48.19339183241277,
+          "year": 2024
+        },
+        {
+          "baseline_net_pnl_usd": 1131.193344620026,
+          "baseline_trades": 350,
+          "challenger_net_pnl_usd": 1153.5433690994732,
+          "challenger_trades": 345,
+          "delta_pnl_usd": 22.350024479447256,
+          "year": 2025
+        },
+        {
+          "baseline_net_pnl_usd": 1126.8322811173043,
+          "baseline_trades": 132,
+          "challenger_net_pnl_usd": 1152.523489837835,
+          "challenger_trades": 131,
+          "delta_pnl_usd": 25.691208720530767,
+          "year": 2026
+        }
+      ],
+      "challenger": {
+        "candidate_rows": 1703,
+        "drawdown_recovery_entries": 0,
+        "effective_limits_usd": {
+          "closed_drawdown_resume_usd": 180.0,
+          "closed_drawdown_suspend_usd": 225.0,
+          "combined_closed_drawdown_hard_stop_usd": 420.0,
+          "floating_drawdown_hard_stop_usd": 420.0,
+          "maximum_account_concurrent_initial_risk_usd": 59.259741320626276,
+          "maximum_directional_concurrent_initial_risk_usd": 59.259741320626276
+        },
+        "emergency_position_closes": 0,
+        "ending_drawdown_suspended": false,
+        "ending_guardian_armed": false,
+        "ending_guardian_locked": true,
+        "ending_policy_closed_drawdown_usd": 76.45053093576234,
+        "final_equity_usd": 4607.602776516979,
+        "first_guardian_lock_at_utc": "2022-12-02T13:34:15.000Z",
+        "first_hard_stop_at_utc": null,
+        "first_suspend_at_utc": null,
+        "flat_suspended_deadlock": false,
+        "floating_peak_deadlock": false,
+        "gross_loss_usd": 4996.583647980712,
+        "gross_profit_usd": 8616.524069153922,
+        "guardian_arms": 0,
+        "guardian_locks": 45,
+        "guardian_magic_excluded_pnl_usd": 0.0,
+        "maximum_lifetime_closed_drawdown_usd": 215.45199863063056,
+        "maximum_lifetime_equity_drawdown_usd": 233.10488057507496,
+        "maximum_open_positions": 7,
+        "maximum_policy_closed_drawdown_usd": 215.45199863063056,
+        "net_pnl_usd": 3619.940421173208,
+        "open_positions_at_end": 0,
+        "profit_factor": 1.7244831020963993,
+        "profit_giveback_closes": 158,
+        "profit_protection_arms": 466,
+        "rebaselines": 0,
+        "rejection_counts": {
+          "MAXIMUM_ACCOUNT_CONCURRENT_INITIAL_RISK": 29,
+          "SAME_DIRECTION_POST_LOSS_COOLDOWN": 25,
+          "SAME_DIRECTION_PROTECTION_FAMILY": 40,
+          "SOFT_DRAWDOWN_ADDON_BLOCK": 1,
+          "SOFT_DRAWDOWN_CORE_CONCURRENCY": 11,
+          "SOURCE_EXECUTION_QUARANTINED": 152,
+          "SOURCE_MAXIMUM_RISK": 12,
+          "SPREAD_R_EXCEEDED": 16,
+          "V60_DYNAMIC_FOLLOWTHROUGH_UNION_VETO": 20,
+          "V60_MONTHLY_QUALITY_RISK_OVERLAY": 21
+        },
+        "scenario": {
+          "activation_equity_usd": 987.6623553437713,
+          "guardian_enabled": true,
+          "guardian_exit_attribution": "DEPLOYED_MAGIC_FILTER",
+          "rebaseline_days": null,
+          "scenario_id": "deployed__full_runtime",
+          "starting_equity_usd": 987.6623553437713
+        },
+        "suspensions": 0,
+        "trades_accepted": 1376,
+        "trades_closed": 1376,
+        "trades_per_weekday": 0.9602233077459874,
+        "v60_tracked_closed_pnl_usd": 3619.940421173208,
+        "win_rate": 0.4883720930232558
+      },
+      "gates": {
+        "closed_drawdown_not_above_v6": false,
+        "equity_drawdown_not_above_v6": false,
+        "every_year_not_below_v6": false,
+        "net_not_below_v6": true,
+        "profit_factor_not_below_v6": true
+      }
+    },
+    "0.2": {
+      "additional_cost_usd_per_trade": 0.2,
+      "all_gates_pass": true,
+      "annual": [
+        {
+          "baseline_net_pnl_usd": 128.78792647481237,
+          "baseline_trades": 230,
+          "challenger_net_pnl_usd": 145.7495774524418,
+          "challenger_trades": 223,
+          "delta_pnl_usd": 16.961650977629432,
+          "year": 2021
+        },
+        {
+          "baseline_net_pnl_usd": 71.29087127926593,
+          "baseline_trades": 110,
+          "challenger_net_pnl_usd": 78.26481330905085,
+          "challenger_trades": 105,
+          "delta_pnl_usd": 6.973942029784922,
+          "year": 2022
+        },
+        {
+          "baseline_net_pnl_usd": 282.9609027169833,
+          "baseline_trades": 233,
+          "challenger_net_pnl_usd": 319.0067364117773,
+          "challenger_trades": 247,
+          "delta_pnl_usd": 36.045833694794,
+          "year": 2023
+        },
+        {
+          "baseline_net_pnl_usd": 670.8100613265952,
+          "baseline_trades": 326,
+          "challenger_net_pnl_usd": 719.5034531590077,
+          "challenger_trades": 321,
+          "delta_pnl_usd": 48.69339183241243,
+          "year": 2024
+        },
+        {
+          "baseline_net_pnl_usd": 1107.877867389521,
+          "baseline_trades": 350,
+          "challenger_net_pnl_usd": 1130.7278918689688,
+          "challenger_trades": 345,
+          "delta_pnl_usd": 22.85002447944771,
+          "year": 2025
+        },
+        {
+          "baseline_net_pnl_usd": 1096.9287350107845,
+          "baseline_trades": 132,
+          "challenger_net_pnl_usd": 1115.8059091230257,
+          "challenger_trades": 130,
+          "delta_pnl_usd": 18.877174112241164,
+          "year": 2026
+        }
+      ],
+      "challenger": {
+        "candidate_rows": 1703,
+        "drawdown_recovery_entries": 0,
+        "effective_limits_usd": {
+          "closed_drawdown_resume_usd": 180.0,
+          "closed_drawdown_suspend_usd": 225.0,
+          "combined_closed_drawdown_hard_stop_usd": 420.0,
+          "floating_drawdown_hard_stop_usd": 420.0,
+          "maximum_account_concurrent_initial_risk_usd": 59.259741320626276,
+          "maximum_directional_concurrent_initial_risk_usd": 59.259741320626276
+        },
+        "emergency_position_closes": 0,
+        "ending_drawdown_suspended": false,
+        "ending_guardian_armed": false,
+        "ending_guardian_locked": true,
+        "ending_policy_closed_drawdown_usd": 77.75053093576298,
+        "final_equity_usd": 4496.720736668048,
+        "first_guardian_lock_at_utc": "2022-12-02T13:31:05.000Z",
+        "first_hard_stop_at_utc": null,
+        "first_suspend_at_utc": null,
+        "flat_suspended_deadlock": false,
+        "floating_peak_deadlock": false,
+        "gross_loss_usd": 5057.48720503173,
+        "gross_profit_usd": 8566.545586356002,
+        "guardian_arms": 0,
+        "guardian_locks": 46,
+        "guardian_magic_excluded_pnl_usd": 0.0,
+        "maximum_lifetime_closed_drawdown_usd": 213.55578128447732,
+        "maximum_lifetime_equity_drawdown_usd": 230.70866322892175,
+        "maximum_open_positions": 7,
+        "maximum_policy_closed_drawdown_usd": 213.55578128447732,
+        "net_pnl_usd": 3509.058381324276,
+        "open_positions_at_end": 0,
+        "profit_factor": 1.6938343566807414,
+        "profit_giveback_closes": 150,
+        "profit_protection_arms": 462,
+        "rebaselines": 0,
+        "rejection_counts": {
+          "MAXIMUM_ACCOUNT_CONCURRENT_INITIAL_RISK": 29,
+          "SAME_DIRECTION_POST_LOSS_COOLDOWN": 25,
+          "SAME_DIRECTION_PROTECTION_FAMILY": 40,
+          "SOFT_DRAWDOWN_ADDON_BLOCK": 2,
+          "SOFT_DRAWDOWN_CORE_CONCURRENCY": 12,
+          "SOURCE_EXECUTION_QUARANTINED": 152,
+          "SOURCE_MAXIMUM_RISK": 12,
+          "SPREAD_R_EXCEEDED": 16,
+          "V60_DYNAMIC_FOLLOWTHROUGH_UNION_VETO": 26,
+          "V60_MONTHLY_QUALITY_RISK_OVERLAY": 18
+        },
+        "scenario": {
+          "activation_equity_usd": 987.6623553437713,
+          "guardian_enabled": true,
+          "guardian_exit_attribution": "DEPLOYED_MAGIC_FILTER",
+          "rebaseline_days": null,
+          "scenario_id": "deployed__full_runtime",
+          "starting_equity_usd": 987.6623553437713
+        },
+        "suspensions": 0,
+        "trades_accepted": 1371,
+        "trades_closed": 1371,
+        "trades_per_weekday": 0.9567341242149338,
+        "v60_tracked_closed_pnl_usd": 3509.058381324276,
+        "win_rate": 0.487964989059081
+      },
+      "gates": {
+        "closed_drawdown_not_above_v6": true,
+        "equity_drawdown_not_above_v6": true,
+        "every_year_not_below_v6": true,
+        "net_not_below_v6": true,
+        "profit_factor_not_below_v6": true
+      }
+    }
+  },
+  "decision": "REJECT_KEEP_DEPLOYED_V60",
+  "delta_vs_v6": {
+    "closed_drawdown_usd": -2.1615249974707353,
+    "equity_drawdown_usd": -4.828524997470822,
+    "net_pnl_usd": 103.38037831886231,
+    "profit_factor": 0.029598053913212796,
+    "trades": 4
+  },
+  "deployment_authorized": false,
+  "dukascopy_crossfeed": {
+    "annual": [
+      {
+        "delta_net_pnl_usd": 17.846000000000004,
+        "v14_net_pnl_usd": 352.72599999999875,
+        "v6_net_pnl_usd": 334.87999999999874,
+        "year": 2021
+      },
+      {
+        "delta_net_pnl_usd": 0.1710000000000491,
+        "v14_net_pnl_usd": 141.3679999999997,
+        "v6_net_pnl_usd": 141.19699999999966,
+        "year": 2022
+      },
+      {
+        "delta_net_pnl_usd": -8.332999999999856,
+        "v14_net_pnl_usd": 392.9420000000007,
+        "v6_net_pnl_usd": 401.27500000000055,
+        "year": 2023
+      },
+      {
+        "delta_net_pnl_usd": 63.97699999999941,
+        "v14_net_pnl_usd": 887.5570000000009,
+        "v6_net_pnl_usd": 823.5800000000015,
+        "year": 2024
+      },
+      {
+        "delta_net_pnl_usd": 16.25,
+        "v14_net_pnl_usd": 1421.7179999999917,
+        "v6_net_pnl_usd": 1405.4679999999917,
+        "year": 2025
+      },
+      {
+        "delta_net_pnl_usd": 0.0,
+        "v14_net_pnl_usd": 1285.8669999999943,
+        "v6_net_pnl_usd": 1285.8669999999943,
+        "year": 2026
+      }
+    ],
+    "evidence_status": "INDEPENDENT_PRICE_PATH_POST_SELECTED_TIMING",
+    "gates": {
+      "closed_drawdown_not_above_v6": true,
+      "every_year_not_below_v6": false,
+      "net_not_below_v6": true,
+      "profit_factor_not_below_v6": true,
+      "v6_identity": true
+    },
+    "identity": {
+      "net": true,
+      "trades": true
+    },
+    "monthly_overlay_vetoes": 16,
+    "v14": {
+      "closed_drawdown_usd": 162.9100000000003,
+      "losses": 652,
+      "net_pnl_usd": 4482.177999999986,
+      "profit_factor": 2.0815573324479106,
+      "trades": 1337,
+      "win_rate": 0.512341062079282,
+      "wins": 685
+    },
+    "v6": {
+      "closed_drawdown_usd": 180.6619999999989,
+      "losses": 664,
+      "net_pnl_usd": 4392.266999999986,
+      "profit_factor": 2.0310086581153493,
+      "trades": 1353,
+      "win_rate": 0.5092387287509239,
+      "wins": 689
+    },
+    "v60": {
+      "closed_drawdown_usd": 180.6619999999989,
+      "losses": 675,
+      "net_pnl_usd": 4330.778999999987,
+      "profit_factor": 2.0012861785399796,
+      "trades": 1366,
+      "win_rate": 0.5058565153733529,
+      "wins": 691
+    }
+  },
+  "evidence_status": "RETROSPECTIVE_POSTHOC_FORWARD_CONFIRMATION_REQUIRED",
+  "frozen_v6": {
+    "annual": [
+      {
+        "baseline_net_pnl_usd": 165.92842872914736,
+        "baseline_trades": 230,
+        "challenger_net_pnl_usd": 173.9173176180362,
+        "challenger_trades": 228,
+        "delta_pnl_usd": 7.988888888888852,
+        "year": 2021
+      },
+      {
+        "baseline_net_pnl_usd": 57.11887127926752,
+        "baseline_trades": 110,
+        "challenger_net_pnl_usd": 63.44681215987511,
+        "challenger_trades": 109,
+        "delta_pnl_usd": 6.327940880607585,
+        "year": 2022
+      },
+      {
+        "baseline_net_pnl_usd": 341.959366499673,
+        "baseline_trades": 242,
+        "challenger_net_pnl_usd": 351.589366499673,
+        "challenger_trades": 240,
+        "delta_pnl_usd": 9.629999999999995,
+        "year": 2023
+      },
+      {
+        "baseline_net_pnl_usd": 731.5260613265943,
+        "baseline_trades": 326,
+        "challenger_net_pnl_usd": 742.6645032059149,
+        "challenger_trades": 322,
+        "delta_pnl_usd": 11.138441879320567,
+        "year": 2024
+      },
+      {
+        "baseline_net_pnl_usd": 1167.0903446200266,
+        "baseline_trades": 350,
+        "challenger_net_pnl_usd": 1184.190369099474,
+        "challenger_trades": 347,
+        "delta_pnl_usd": 17.100024479447484,
+        "year": 2025
+      },
+      {
+        "baseline_net_pnl_usd": 1139.9422811173051,
+        "baseline_trades": 132,
+        "challenger_net_pnl_usd": 1165.5334898378358,
+        "challenger_trades": 131,
+        "delta_pnl_usd": 25.59120872053063,
+        "year": 2026
+      }
+    ],
+    "challenger": {
+      "candidate_rows": 1703,
+      "drawdown_recovery_entries": 0,
+      "effective_limits_usd": {
+        "closed_drawdown_resume_usd": 180.0,
+        "closed_drawdown_suspend_usd": 225.0,
+        "combined_closed_drawdown_hard_stop_usd": 420.0,
+        "floating_drawdown_hard_stop_usd": 420.0,
+        "maximum_account_concurrent_initial_risk_usd": 59.259741320626276,
+        "maximum_directional_concurrent_initial_risk_usd": 59.259741320626276
+      },
+      "emergency_position_closes": 0,
+      "ending_drawdown_suspended": false,
+      "ending_guardian_armed": false,
+      "ending_guardian_locked": true,
+      "ending_policy_closed_drawdown_usd": 75.15053093576262,
+      "final_equity_usd": 4669.004213764581,
+      "first_guardian_lock_at_utc": "2022-12-02T13:34:15.000Z",
+      "first_hard_stop_at_utc": null,
+      "first_suspend_at_utc": null,
+      "flat_suspended_deadlock": false,
+      "floating_peak_deadlock": false,
+      "gross_loss_usd": 4990.088134506712,
+      "gross_profit_usd": 8671.42999292752,
+      "guardian_arms": 0,
+      "guardian_locks": 49,
+      "guardian_magic_excluded_pnl_usd": 0.0,
+      "maximum_lifetime_closed_drawdown_usd": 217.45931309847566,
+      "maximum_lifetime_equity_drawdown_usd": 238.27919504292004,
+      "maximum_open_positions": 7,
+      "maximum_policy_closed_drawdown_usd": 217.45931309847566,
+      "net_pnl_usd": 3681.34185842081,
+      "open_positions_at_end": 0,
+      "profit_factor": 1.7377308294344829,
+      "profit_giveback_closes": 160,
+      "profit_protection_arms": 467,
+      "rebaselines": 0,
+      "rejection_counts": {
+        "MAXIMUM_ACCOUNT_CONCURRENT_INITIAL_RISK": 33,
+        "SAME_DIRECTION_POST_LOSS_COOLDOWN": 23,
+        "SAME_DIRECTION_PROTECTION_FAMILY": 40,
+        "SOFT_DRAWDOWN_ADDON_BLOCK": 21,
+        "SOFT_DRAWDOWN_CORE_CONCURRENCY": 16,
+        "SOURCE_EXECUTION_QUARANTINED": 152,
+        "SOURCE_MAXIMUM_RISK": 12,
+        "SPREAD_R_EXCEEDED": 16,
+        "V60_DYNAMIC_FOLLOWTHROUGH_UNION_VETO": 13
+      },
+      "scenario": {
+        "activation_equity_usd": 987.6623553437713,
+        "guardian_enabled": true,
+        "guardian_exit_attribution": "DEPLOYED_MAGIC_FILTER",
+        "rebaseline_days": null,
+        "scenario_id": "deployed__full_runtime",
+        "starting_equity_usd": 987.6623553437713
+      },
+      "suspensions": 0,
+      "trades_accepted": 1377,
+      "trades_closed": 1377,
+      "trades_per_weekday": 0.9609211444521982,
+      "v60_tracked_closed_pnl_usd": 3681.34185842081,
+      "win_rate": 0.4887436456063907
+    },
+    "windows": {
+      "12m": {
+        "baseline": {
+          "net_pnl_usd": 1711.5915386542117,
+          "profit_factor": 1.891705097584028,
+          "trades": 310,
+          "win_rate": 0.47419354838709676
+        },
+        "challenger": {
+          "net_pnl_usd": 1754.28277185419,
+          "profit_factor": 1.9347361091950863,
+          "trades": 306,
+          "win_rate": 0.4803921568627451
+        },
+        "start_utc": "2025-07-01T00:00:00+00:00"
+      },
+      "3m": {
+        "baseline": {
+          "net_pnl_usd": 420.3587659474823,
+          "profit_factor": 2.1265375492952776,
+          "trades": 56,
+          "win_rate": 0.5535714285714286
+        },
+        "challenger": {
+          "net_pnl_usd": 420.3587659474823,
+          "profit_factor": 2.1265375492952776,
+          "trades": 56,
+          "win_rate": 0.5535714285714286
+        },
+        "start_utc": "2026-04-01T00:00:00+00:00"
+      },
+      "6m": {
+        "baseline": {
+          "net_pnl_usd": 1139.9422811173051,
+          "profit_factor": 2.1196397654765926,
+          "trades": 132,
+          "win_rate": 0.48484848484848486
+        },
+        "challenger": {
+          "net_pnl_usd": 1165.5334898378358,
+          "profit_factor": 2.1742915089526433,
+          "trades": 131,
+          "win_rate": 0.48854961832061067
+        },
+        "start_utc": "2026-01-01T00:00:00+00:00"
+      }
+    }
+  },
+  "frozen_v6_monthly_reference": {
+    "months": 66,
+    "negative_month_pnl_usd": -525.2626989814407,
+    "negative_months": 20,
+    "worst_month_pnl_usd": -136.76813018211737
+  },
+  "gates": {
+    "all_cost_stress_gates": false,
+    "august_all_gates": true,
+    "baseline_net_identity": true,
+    "baseline_trade_identity": true,
+    "closed_drawdown_not_above_baseline": true,
+    "crossfeed_all_gates": false,
+    "equity_drawdown_not_above_baseline": true,
+    "frequency_retention": true,
+    "monthly_overlay_vetoes_present": true,
+    "negative_month_count_not_above_v6": true,
+    "negative_month_pnl_better_than_v6": true,
+    "net_not_below_baseline": true,
+    "no_flat_deadlock": true,
+    "no_floating_deadlock": true,
+    "no_negative_calendar_year_delta": true,
+    "no_open_positions": true,
+    "profit_factor_not_below_baseline": true,
+    "recent_windows_not_worse": true,
+    "trade_retention": true,
+    "v6_annual_floor_2021_pnl_not_lower": true,
+    "v6_annual_floor_2022_pnl_not_lower": false,
+    "v6_annual_floor_2023_pnl_not_lower": true,
+    "v6_annual_floor_2024_pnl_not_lower": true,
+    "v6_annual_floor_2025_pnl_not_lower": true,
+    "v6_annual_floor_2026_pnl_not_lower": true,
+    "v6_floor_12m_net_not_lower": true,
+    "v6_floor_12m_profit_factor_not_lower": true,
+    "v6_floor_3m_net_not_lower": true,
+    "v6_floor_3m_profit_factor_not_lower": true,
+    "v6_floor_6m_net_not_lower": true,
+    "v6_floor_6m_profit_factor_not_lower": true,
+    "v6_floor_closed_drawdown_not_higher": true,
+    "v6_floor_equity_drawdown_not_higher": true,
+    "v6_floor_net_not_lower": true,
+    "v6_floor_profit_factor_not_lower": true,
+    "veto_cohort_large_enough": true,
+    "veto_cohort_profit_factor_below_one": true,
+    "worst_month_not_below_v6": true
+  },
+  "generated_at_utc": "2026-08-25T12:48:39.702917Z",
+  "historical": {
+    "additional_cost_usd_per_trade": 0.0,
+    "annual": [
+      {
+        "baseline_net_pnl_usd": 165.92842872914736,
+        "baseline_trades": 230,
+        "challenger_net_pnl_usd": 193.64521983716037,
+        "challenger_trades": 224,
+        "delta_pnl_usd": 27.716791108013012,
+        "year": 2021
+      },
+      {
+        "baseline_net_pnl_usd": 57.11887127926752,
+        "baseline_trades": 110,
+        "challenger_net_pnl_usd": 63.092813309052424,
+        "challenger_trades": 105,
+        "delta_pnl_usd": 5.973942029784901,
+        "year": 2022
+      },
+      {
+        "baseline_net_pnl_usd": 341.959366499673,
+        "baseline_trades": 242,
+        "challenger_net_pnl_usd": 381.60089149714366,
+        "challenger_trades": 254,
+        "delta_pnl_usd": 39.64152499747064,
+        "year": 2023
+      },
+      {
+        "baseline_net_pnl_usd": 731.5260613265943,
+        "baseline_trades": 326,
+        "challenger_net_pnl_usd": 779.679453159007,
+        "challenger_trades": 321,
+        "delta_pnl_usd": 48.153391832412694,
+        "year": 2024
+      },
+      {
+        "baseline_net_pnl_usd": 1167.0903446200266,
+        "baseline_trades": 350,
+        "challenger_net_pnl_usd": 1201.170369099474,
+        "challenger_trades": 346,
+        "delta_pnl_usd": 34.0800244794475,
+        "year": 2025
+      },
+      {
+        "baseline_net_pnl_usd": 1139.9422811173051,
+        "baseline_trades": 132,
+        "challenger_net_pnl_usd": 1165.5334898378358,
+        "challenger_trades": 131,
+        "delta_pnl_usd": 25.59120872053063,
+        "year": 2026
+      }
+    ],
+    "baseline": {
+      "candidate_rows": 1703,
+      "drawdown_recovery_entries": 0,
+      "effective_limits_usd": {
+        "closed_drawdown_resume_usd": 180.0,
+        "closed_drawdown_suspend_usd": 225.0,
+        "combined_closed_drawdown_hard_stop_usd": 420.0,
+        "floating_drawdown_hard_stop_usd": 420.0,
+        "maximum_account_concurrent_initial_risk_usd": 59.259741320626276,
+        "maximum_directional_concurrent_initial_risk_usd": 59.259741320626276
+      },
+      "emergency_position_closes": 0,
+      "ending_drawdown_suspended": false,
+      "ending_guardian_armed": false,
+      "ending_guardian_locked": true,
+      "ending_policy_closed_drawdown_usd": 75.15053093576262,
+      "final_equity_usd": 4591.227708915786,
+      "first_guardian_lock_at_utc": "2022-12-02T13:34:15.000Z",
+      "first_hard_stop_at_utc": null,
+      "first_suspend_at_utc": null,
+      "flat_suspended_deadlock": false,
+      "floating_peak_deadlock": false,
+      "gross_loss_usd": 5070.104074825337,
+      "gross_profit_usd": 8673.669428397352,
+      "guardian_arms": 0,
+      "guardian_locks": 51,
+      "guardian_magic_excluded_pnl_usd": 0.0,
+      "maximum_lifetime_closed_drawdown_usd": 223.2793130984756,
+      "maximum_lifetime_equity_drawdown_usd": 238.27919504292004,
+      "maximum_open_positions": 7,
+      "maximum_policy_closed_drawdown_usd": 223.2793130984756,
+      "net_pnl_usd": 3603.5653535720144,
+      "open_positions_at_end": 0,
+      "profit_factor": 1.7107478072225089,
+      "profit_giveback_closes": 161,
+      "profit_protection_arms": 468,
+      "rebaselines": 0,
+      "rejection_counts": {
+        "MAXIMUM_ACCOUNT_CONCURRENT_INITIAL_RISK": 33,
+        "SAME_DIRECTION_POST_LOSS_COOLDOWN": 23,
+        "SAME_DIRECTION_PROTECTION_FAMILY": 40,
+        "SOFT_DRAWDOWN_ADDON_BLOCK": 21,
+        "SOFT_DRAWDOWN_CORE_CONCURRENCY": 16,
+        "SOURCE_EXECUTION_QUARANTINED": 152,
+        "SOURCE_MAXIMUM_RISK": 12,
+        "SPREAD_R_EXCEEDED": 16
+      },
+      "scenario": {
+        "activation_equity_usd": 987.6623553437713,
+        "guardian_enabled": true,
+        "guardian_exit_attribution": "DEPLOYED_MAGIC_FILTER",
+        "rebaseline_days": null,
+        "scenario_id": "deployed__full_runtime",
+        "starting_equity_usd": 987.6623553437713
+      },
+      "suspensions": 0,
+      "trades_accepted": 1390,
+      "trades_closed": 1390,
+      "trades_per_weekday": 0.9699930216329379,
+      "v60_tracked_closed_pnl_usd": 3603.5653535720144,
+      "win_rate": 0.4848920863309353
+    },
+    "baseline_executed_veto_count": 28,
+    "challenger": {
+      "candidate_rows": 1703,
+      "drawdown_recovery_entries": 0,
+      "effective_limits_usd": {
+        "closed_drawdown_resume_usd": 180.0,
+        "closed_drawdown_suspend_usd": 225.0,
+        "combined_closed_drawdown_hard_stop_usd": 420.0,
+        "floating_drawdown_hard_stop_usd": 420.0,
+        "maximum_account_concurrent_initial_risk_usd": 59.259741320626276,
+        "maximum_directional_concurrent_initial_risk_usd": 59.259741320626276
+      },
+      "emergency_position_closes": 0,
+      "ending_drawdown_suspended": false,
+      "ending_guardian_armed": false,
+      "ending_guardian_locked": true,
+      "ending_policy_closed_drawdown_usd": 75.15053093576262,
+      "final_equity_usd": 4772.384592083444,
+      "first_guardian_lock_at_utc": "2022-12-02T13:34:15.000Z",
+      "first_hard_stop_at_utc": null,
+      "first_suspend_at_utc": null,
+      "flat_suspended_deadlock": false,
+      "floating_peak_deadlock": false,
+      "gross_loss_usd": 4932.333864753951,
+      "gross_profit_usd": 8717.056101493625,
+      "guardian_arms": 0,
+      "guardian_locks": 46,
+      "guardian_magic_excluded_pnl_usd": 0.0,
+      "maximum_lifetime_closed_drawdown_usd": 215.29778810100493,
+      "maximum_lifetime_equity_drawdown_usd": 233.45067004544921,
+      "maximum_open_positions": 7,
+      "maximum_policy_closed_drawdown_usd": 215.29778810100493,
+      "net_pnl_usd": 3784.722236739672,
+      "open_positions_at_end": 0,
+      "profit_factor": 1.7673288833476957,
+      "profit_giveback_closes": 161,
+      "profit_protection_arms": 471,
+      "rebaselines": 0,
+      "rejection_counts": {
+        "MAXIMUM_ACCOUNT_CONCURRENT_INITIAL_RISK": 30,
+        "SAME_DIRECTION_POST_LOSS_COOLDOWN": 24,
+        "SAME_DIRECTION_PROTECTION_FAMILY": 40,
+        "SOFT_DRAWDOWN_ADDON_BLOCK": 2,
+        "SOFT_DRAWDOWN_CORE_CONCURRENCY": 11,
+        "SOURCE_EXECUTION_QUARANTINED": 152,
+        "SOURCE_MAXIMUM_RISK": 12,
+        "SPREAD_R_EXCEEDED": 16,
+        "V60_DYNAMIC_FOLLOWTHROUGH_UNION_VETO": 14,
+        "V60_MONTHLY_QUALITY_RISK_OVERLAY": 21
+      },
+      "scenario": {
+        "activation_equity_usd": 987.6623553437713,
+        "guardian_enabled": true,
+        "guardian_exit_attribution": "DEPLOYED_MAGIC_FILTER",
+        "rebaseline_days": null,
+        "scenario_id": "deployed__full_runtime",
+        "starting_equity_usd": 987.6623553437713
+      },
+      "suspensions": 0,
+      "trades_accepted": 1381,
+      "trades_closed": 1381,
+      "trades_per_weekday": 0.9637124912770412,
+      "v60_tracked_closed_pnl_usd": 3784.722236739672,
+      "win_rate": 0.49167270094134685
+    },
+    "decision": "HISTORICAL_CHALLENGER_PASSES_PROSPECTIVE_CONFIRMATION_REQUIRED",
+    "delta": {
+      "closed_drawdown_usd": -7.981524997470672,
+      "equity_drawdown_usd": -4.828524997470822,
+      "net_pnl_usd": 181.15688316765772,
+      "profit_factor": 0.05658107612518681,
+      "trades": -9,
+      "win_rate_percentage_points": 0.6780614610411573
+    },
+    "deployment_authorized": false,
+    "evidence_boundary": "RETROSPECTIVE_EXPOSED_OUTCOMES",
+    "gates": {
+      "baseline_net_identity": true,
+      "baseline_trade_identity": true,
+      "closed_drawdown_not_above_baseline": true,
+      "equity_drawdown_not_above_baseline": true,
+      "frequency_retention": true,
+      "net_not_below_baseline": true,
+      "no_negative_calendar_year_delta": true,
+      "profit_factor_not_below_baseline": true,
+      "recent_windows_not_worse": true,
+      "trade_retention": true,
+      "veto_cohort_large_enough": true,
+      "veto_cohort_profit_factor_below_one": true
+    },
+    "generated_at_utc": "2026-08-25T12:44:44.428481Z",
+    "input_sha256": {
+      "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
+      "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
+      "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
+      "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
+      "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
+    },
+    "limitations": [
+      "All historical and recent demo outcomes were exposed before nomination.",
+      "The historical causal replay cannot authorize demo deployment.",
+      "The causal rank ledger has no rank for some candidates; those trades retain baseline behavior.",
+      "Capital.com broker-specific future fills and slippage remain unknown."
+    ],
+    "policy": {
+      "lookback_closed_trades": 20,
+      "maximum_causal_rank_exclusive": 0.1,
+      "maximum_prior_profit_factor_exclusive": 1.0,
+      "minimum_prior_source_closed_trades": 50,
+      "missing_rank_action": "RETAIN",
+      "source_id": "*",
+      "source_scope": "EACH_SOURCE_INDEPENDENT",
+      "state_condition": "ROLLING_PROFIT_FACTOR"
+    },
+    "population_audit": {
+      "evaluation_candidate_rows": 1703,
+      "first_entry_utc": "2021-01-04T16:20:00.000Z",
+      "last_entry_utc": "2026-06-29T00:45:00.000Z",
+      "last_exit_utc": "2026-06-29T01:15:00.000Z",
+      "population_sha256": "b7294cbfb41485d4c6e05d443f540e8e2c7c09ab62571cf0269cd1d29fbdc50a",
+      "r1_native_risk_rows": 444,
+      "raw_ledger_rows": 2194,
+      "source_counts": {
+        "R1_BOX": 31,
+        "R1_PULLBACK": 413,
+        "R2_DOWNTREND": 35,
+        "R3_COMPRESSION": 46,
+        "R4_CHOP": 70,
+        "V25_CHOP": 55,
+        "V57_BREAK_SWING_H4ADX_HIGH": 520,
+        "V7_SWING_HEALTH": 381,
+        "V8_RETEST_HEALTH": 152
+      }
+    },
+    "quote_cache_audit": {
+      "array_paths": {
+        "ask": "D:\\AlgoTradingData\\CodexReplayCache\\v60_tick_runtime_replay_v1\\ask.npy",
+        "bid": "D:\\AlgoTradingData\\CodexReplayCache\\v60_tick_runtime_replay_v1\\bid.npy",
+        "cycle_ms": "D:\\AlgoTradingData\\CodexReplayCache\\v60_tick_runtime_replay_v1\\cycle_ms.npy",
+        "tick_ms": "D:\\AlgoTradingData\\CodexReplayCache\\v60_tick_runtime_replay_v1\\tick_ms.npy"
+      },
+      "cycles": 10483972,
+      "first_cycle_utc": "2021-01-04T15:00:05.000Z",
+      "identity": {
+        "poll_seconds": 5,
+        "population_sha256": "b7294cbfb41485d4c6e05d443f540e8e2c7c09ab62571cf0269cd1d29fbdc50a",
+        "raw_root": "D:/AlgoTradingData/C_DRIVE/DukascopyTickDataFoundationV1/raw/XAUUSD",
+        "schema_version": "v60_tick_quote_cache_v1"
+      },
+      "last_cycle_utc": "2026-06-29T01:59:55.000Z",
+      "manifest_sha256": "8105960feca1a5af08a4d6d602fc3297d9151e51421fea197cf4f093157de1b5",
+      "missing_source_files": 0,
+      "source_bytes": 2374468868,
+      "source_files": 14579,
+      "source_ticks": 107229569
+    },
+    "rank_coverage": {
+      "candidate_rows": 1703,
+      "ranked_candidate_rows": 1676,
+      "ranked_targeted_candidate_rows": 1676,
+      "targeted_candidate_rows": 1703
+    },
+    "report_title": "V60 Monthly Quality Risk Overlay V15",
+    "schema_version": "v60_monthly_quality_risk_overlay_v15_result",
+    "veto_audit": [
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -4.380720825497047,
+        "candidate_endpoint_pnl_usd": -4.380720825497047,
+        "causal_rank": 0.030690537084398978,
+        "entry_time_utc": "2021-05-20T02:05:00.000Z",
+        "prior_month_closed_pnl_usd": -47.00239949518322,
+        "prior_month_closed_trades": 13,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20210520T020500Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -5.57730151501526,
+        "candidate_endpoint_pnl_usd": -5.57730151501526,
+        "causal_rank": 0.21739130434782608,
+        "entry_time_utc": "2021-05-20T13:50:00.000Z",
+        "prior_month_closed_pnl_usd": -47.00239949518322,
+        "prior_month_closed_trades": 13,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20210520T135000Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -5.791234045278524,
+        "candidate_endpoint_pnl_usd": -5.791234045278524,
+        "causal_rank": 0.2071611253196931,
+        "entry_time_utc": "2021-05-21T13:50:00.000Z",
+        "prior_month_closed_pnl_usd": -50.99684393962767,
+        "prior_month_closed_trades": 14,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20210521T135000Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -3.9786458333333337,
+        "candidate_endpoint_pnl_usd": -3.9786458333333337,
+        "causal_rank": 0.23273657289002558,
+        "entry_time_utc": "2021-05-26T12:35:00.000Z",
+        "prior_month_closed_pnl_usd": -50.655474984924766,
+        "prior_month_closed_trades": 17,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20210526T123500Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -3.982291666666667,
+        "candidate_endpoint_pnl_usd": -3.982291666666667,
+        "causal_rank": 0.0,
+        "entry_time_utc": "2021-06-18T01:40:00.000Z",
+        "prior_20_profit_factor": 0.6757322169236656,
+        "prior_consecutive_losses": 0,
+        "prior_source_closed_count": 57,
+        "prior_virtual_profit_factor": 0.38329598432346945,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20210618T014000Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -4.006597222222222,
+        "candidate_endpoint_pnl_usd": -4.006597222222222,
+        "causal_rank": 0.03888888888888889,
+        "entry_time_utc": "2021-08-13T10:55:00.000Z",
+        "prior_20_profit_factor": 0.47977070225939067,
+        "prior_consecutive_losses": 1,
+        "prior_source_closed_count": 64,
+        "prior_virtual_profit_factor": 0.8860630426114865,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V7_SWING_HEALTH",
+        "trade_id": "V7_20210813T105500Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": 16.239556851396983,
+        "candidate_endpoint_pnl_usd": 16.239556851396983,
+        "causal_rank": 0.2611464968152866,
+        "entry_time_utc": "2022-07-13T13:40:00.000Z",
+        "prior_month_closed_pnl_usd": -35.79461528621127,
+        "prior_month_closed_trades": 8,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20220713T134000Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -4.419286742386917,
+        "candidate_endpoint_pnl_usd": -4.419286742386917,
+        "causal_rank": 0.2302839116719243,
+        "entry_time_utc": "2022-07-15T12:35:00.000Z",
+        "prior_month_closed_pnl_usd": -33.52289069869856,
+        "prior_month_closed_trades": 10,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20220715T123500Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -6.933625447804608,
+        "candidate_endpoint_pnl_usd": -6.933625447804608,
+        "causal_rank": 0.1069182389937107,
+        "entry_time_utc": "2022-07-15T13:15:00.000Z",
+        "prior_month_closed_pnl_usd": -33.52289069869856,
+        "prior_month_closed_trades": 10,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20220715T131500Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -4.532645810382768,
+        "candidate_endpoint_pnl_usd": -4.532645810382768,
+        "causal_rank": 0.2222222222222222,
+        "entry_time_utc": "2022-07-21T12:25:00.000Z",
+        "prior_month_closed_pnl_usd": -44.16522804738813,
+        "prior_month_closed_trades": 14,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20220721T122500Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -6.327940880607618,
+        "candidate_endpoint_pnl_usd": -6.327940880607618,
+        "causal_rank": 0.08868501529051988,
+        "entry_time_utc": "2022-08-02T13:25:00.000Z",
+        "prior_20_profit_factor": 0.9282750498944018,
+        "prior_consecutive_losses": 5,
+        "prior_source_closed_count": 98,
+        "prior_virtual_profit_factor": 0.6547633580550127,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20220802T132500Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -3.9786458333333337,
+        "candidate_endpoint_pnl_usd": -3.9786458333333337,
+        "causal_rank": 0.17975567190226877,
+        "entry_time_utc": "2023-05-18T12:35:00.000Z",
+        "prior_month_closed_pnl_usd": -24.971952574441996,
+        "prior_month_closed_trades": 13,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20230518T123500Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": false,
+        "baseline_runtime_pnl_usd": null,
+        "candidate_endpoint_pnl_usd": 6.736495754182175,
+        "causal_rank": 0.0974124809741248,
+        "entry_time_utc": "2023-10-09T14:20:00.000Z",
+        "prior_month_closed_pnl_usd": -47.432275705639896,
+        "prior_month_closed_trades": 9,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20231009T142000Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": false,
+        "baseline_runtime_pnl_usd": null,
+        "candidate_endpoint_pnl_usd": 6.4605902777777775,
+        "causal_rank": 0.045454545454545456,
+        "entry_time_utc": "2023-10-12T12:40:00.000Z",
+        "prior_month_closed_pnl_usd": -45.688004872306564,
+        "prior_month_closed_trades": 10,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20231012T124000Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": false,
+        "baseline_runtime_pnl_usd": null,
+        "candidate_endpoint_pnl_usd": -4.164776356418451,
+        "causal_rank": 0.09939759036144578,
+        "entry_time_utc": "2023-10-16T12:25:00.000Z",
+        "prior_month_closed_pnl_usd": -34.0302460800629,
+        "prior_month_closed_trades": 13,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20231016T122500Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": false,
+        "baseline_runtime_pnl_usd": null,
+        "candidate_endpoint_pnl_usd": 6.407118055555555,
+        "causal_rank": 0.20150375939849624,
+        "entry_time_utc": "2023-10-18T01:30:00.000Z",
+        "prior_month_closed_pnl_usd": -34.0302460800629,
+        "prior_month_closed_trades": 13,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20231018T013000Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": false,
+        "baseline_runtime_pnl_usd": null,
+        "candidate_endpoint_pnl_usd": 7.751915888833644,
+        "causal_rank": 0.05405405405405406,
+        "entry_time_utc": "2023-10-18T13:35:00.000Z",
+        "prior_month_closed_pnl_usd": -34.0302460800629,
+        "prior_month_closed_trades": 13,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20231018T133500Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": false,
+        "baseline_runtime_pnl_usd": null,
+        "candidate_endpoint_pnl_usd": -4.043590533833685,
+        "causal_rank": 0.01649175412293853,
+        "entry_time_utc": "2023-10-19T12:40:00.000Z",
+        "prior_month_closed_pnl_usd": -34.0302460800629,
+        "prior_month_closed_trades": 13,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20231019T124000Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": false,
+        "baseline_runtime_pnl_usd": null,
+        "candidate_endpoint_pnl_usd": -5.531389213194221,
+        "causal_rank": 0.05223880597014925,
+        "entry_time_utc": "2023-10-26T15:10:00.000Z",
+        "prior_20_profit_factor": 0.9158966829540378,
+        "prior_consecutive_losses": 1,
+        "prior_source_closed_count": 164,
+        "prior_virtual_profit_factor": 1.1525791604849234,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20231026T151000Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -11.940000000000001,
+        "candidate_endpoint_pnl_usd": -11.940000000000001,
+        "causal_rank": 0.23964497041420119,
+        "entry_time_utc": "2023-10-31T13:15:00.000Z",
+        "prior_month_closed_pnl_usd": -49.634082189987865,
+        "prior_month_closed_trades": 19,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "R1_PULLBACK",
+        "trade_id": "2023-10-31 13:15:00|LONG|r1_h1_pullback_long_v1"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -5.819999999999999,
+        "candidate_endpoint_pnl_usd": -5.819999999999999,
+        "causal_rank": 0.03012912482065997,
+        "entry_time_utc": "2023-11-27T14:30:00.000Z",
+        "prior_20_profit_factor": 0.2083401205408047,
+        "prior_consecutive_losses": 12,
+        "prior_source_closed_count": 97,
+        "prior_virtual_profit_factor": 1.2594074074074075,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "R1_PULLBACK",
+        "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -3.8099999999999996,
+        "candidate_endpoint_pnl_usd": -3.8099999999999996,
+        "causal_rank": 0.09943181818181818,
+        "entry_time_utc": "2023-11-29T11:45:00.000Z",
+        "prior_20_profit_factor": 0.6556572923479398,
+        "prior_consecutive_losses": 0,
+        "prior_source_closed_count": 102,
+        "prior_virtual_profit_factor": 5.247393364928909,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "R1_PULLBACK",
+        "trade_id": "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -5.9749499530922225,
+        "candidate_endpoint_pnl_usd": -5.9749499530922225,
+        "causal_rank": 0.22234513274336284,
+        "entry_time_utc": "2024-07-08T14:05:00.000Z",
+        "prior_month_closed_pnl_usd": -46.65225548422821,
+        "prior_month_closed_trades": 13,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20240708T140500Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -7.3999999999999995,
+        "candidate_endpoint_pnl_usd": -7.3999999999999995,
+        "causal_rank": 0.17420066152149946,
+        "entry_time_utc": "2024-07-12T09:00:00.000Z",
+        "prior_month_closed_pnl_usd": -54.72621381756155,
+        "prior_month_closed_trades": 15,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "R1_PULLBACK",
+        "trade_id": "2024-07-12 09:00:00|LONG|r1_h1_pullback_long_v1"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": 2.2394354698303482,
+        "candidate_endpoint_pnl_usd": -5.910688466892245,
+        "causal_rank": 0.08178844056706652,
+        "entry_time_utc": "2024-07-17T02:40:00.000Z",
+        "prior_20_profit_factor": 0.5963778321722616,
+        "prior_consecutive_losses": 0,
+        "prior_source_closed_count": 210,
+        "prior_virtual_profit_factor": 0.4008078105987337,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20240717T024000Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -4.417077028974225,
+        "candidate_endpoint_pnl_usd": -4.417077028974225,
+        "causal_rank": 0.09229098805646037,
+        "entry_time_utc": "2024-07-18T07:05:00.000Z",
+        "prior_20_profit_factor": 0.7336665600165694,
+        "prior_consecutive_losses": 0,
+        "prior_source_closed_count": 211,
+        "prior_virtual_profit_factor": 0.511974920098254,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20240718T070500Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -16.07,
+        "candidate_endpoint_pnl_usd": -16.07,
+        "causal_rank": 0.10851063829787234,
+        "entry_time_utc": "2024-08-13T13:45:00.000Z",
+        "prior_month_closed_pnl_usd": -43.474255322912974,
+        "prior_month_closed_trades": 8,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "R1_PULLBACK",
+        "trade_id": "2024-08-13 13:45:00|LONG|r1_h1_pullback_long_v1"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -35.29,
+        "candidate_endpoint_pnl_usd": -35.29,
+        "causal_rank": 0.20572640509013787,
+        "entry_time_utc": "2024-08-26T08:00:00.000Z",
+        "prior_month_closed_pnl_usd": -43.474255322912974,
+        "prior_month_closed_trades": 8,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "R1_BOX",
+        "trade_id": "2024-08-26 08:00:00|LONG|h4_d1_long_best_box2_atr80"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -4.839140796303192,
+        "candidate_endpoint_pnl_usd": -4.839140796303192,
+        "causal_rank": 0.03788634097706879,
+        "entry_time_utc": "2024-10-07T08:25:00.000Z",
+        "prior_20_profit_factor": 0.40861652353488476,
+        "prior_consecutive_losses": 1,
+        "prior_source_closed_count": 236,
+        "prior_virtual_profit_factor": 0.3638869043959852,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V7_SWING_HEALTH",
+        "trade_id": "V7_20241007T082500Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -4.121659523873351,
+        "candidate_endpoint_pnl_usd": -4.121659523873351,
+        "causal_rank": 0.0647342995169082,
+        "entry_time_utc": "2024-10-24T07:50:00.000Z",
+        "prior_20_profit_factor": 0.7135240672209707,
+        "prior_consecutive_losses": 1,
+        "prior_source_closed_count": 233,
+        "prior_virtual_profit_factor": 0.6430693745893092,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20241024T075000Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -16.98,
+        "candidate_endpoint_pnl_usd": -16.98,
+        "causal_rank": 0.18223583460949463,
+        "entry_time_utc": "2025-06-13T12:30:00.000Z",
+        "prior_month_closed_pnl_usd": -34.902888160053635,
+        "prior_month_closed_trades": 8,
+        "proposal_rule": "V14_MONTHLY_QUALITY_RISK",
+        "source_id": "R1_PULLBACK",
+        "trade_id": "2025-06-13 12:30:00|LONG|r1_h1_pullback_long_v1"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -4.8879749332363716,
+        "candidate_endpoint_pnl_usd": -4.8879749332363716,
+        "causal_rank": 0.014328808446455505,
+        "entry_time_utc": "2025-07-04T07:35:00.000Z",
+        "prior_20_profit_factor": 0.8733288666257494,
+        "prior_consecutive_losses": 2,
+        "prior_source_closed_count": 330,
+        "prior_virtual_profit_factor": 1.5181844322047024,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V7_SWING_HEALTH",
+        "trade_id": "V7_20250704T073500Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -5.680395270063707,
+        "candidate_endpoint_pnl_usd": -5.680395270063707,
+        "causal_rank": 0.09795630725863284,
+        "entry_time_utc": "2025-09-24T00:05:00.000Z",
+        "prior_20_profit_factor": 0.9817135707692763,
+        "prior_consecutive_losses": 0,
+        "prior_source_closed_count": 340,
+        "prior_virtual_profit_factor": 1.1786210768167134,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20250924T000500Z_SHORT"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -6.53165427614743,
+        "candidate_endpoint_pnl_usd": -6.53165427614743,
+        "causal_rank": 0.03943661971830986,
+        "entry_time_utc": "2025-09-24T01:10:00.000Z",
+        "prior_20_profit_factor": 0.9817135707692763,
+        "prior_consecutive_losses": 0,
+        "prior_source_closed_count": 340,
+        "prior_virtual_profit_factor": 1.207387183554094,
+        "proposal_rule": "V2_SOURCE_HEALTH",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20250924T011000Z_LONG"
+      },
+      {
+        "baseline_runtime_executed": true,
+        "baseline_runtime_pnl_usd": -25.591208720530712,
+        "candidate_endpoint_pnl_usd": -25.591208720530712,
+        "causal_rank": 0.026200873362445413,
+        "entry_time_utc": "2026-03-25T01:35:00.000Z",
+        "prior_20_profit_factor": 1.3802389121984873,
+        "prior_consecutive_losses": 1,
+        "prior_source_closed_count": 423,
+        "prior_virtual_profit_factor": 1.5858922629934187,
+        "proposal_rule": "V57_WEAK_FOLLOWTHROUGH_ANTICHASE",
+        "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+        "trade_id": "V9_BREAK_20260325T013500Z_LONG"
+      }
+    ],
+    "veto_baseline_runtime_profit_factor": 0.08664884503961559,
+    "veto_endpoint_profit_factor": 0.18717544449220117,
+    "windows": {
+      "12m": {
+        "baseline": {
+          "net_pnl_usd": 1711.5915386542117,
+          "profit_factor": 1.891705097584028,
+          "trades": 310,
+          "win_rate": 0.47419354838709676
+        },
+        "challenger": {
+          "net_pnl_usd": 1754.28277185419,
+          "profit_factor": 1.9347361091950863,
+          "trades": 306,
+          "win_rate": 0.4803921568627451
+        },
+        "start_utc": "2025-07-01T00:00:00+00:00"
+      },
+      "3m": {
+        "baseline": {
+          "net_pnl_usd": 420.3587659474823,
+          "profit_factor": 2.1265375492952776,
+          "trades": 56,
+          "win_rate": 0.5535714285714286
+        },
+        "challenger": {
+          "net_pnl_usd": 420.3587659474823,
+          "profit_factor": 2.1265375492952776,
+          "trades": 56,
+          "win_rate": 0.5535714285714286
+        },
+        "start_utc": "2026-04-01T00:00:00+00:00"
+      },
+      "6m": {
+        "baseline": {
+          "net_pnl_usd": 1139.9422811173051,
+          "profit_factor": 2.1196397654765926,
+          "trades": 132,
+          "win_rate": 0.48484848484848486
+        },
+        "challenger": {
+          "net_pnl_usd": 1165.5334898378358,
+          "profit_factor": 2.1742915089526433,
+          "trades": 131,
+          "win_rate": 0.48854961832061067
+        },
+        "start_utc": "2026-01-01T00:00:00+00:00"
+      }
+    }
+  },
+  "limitations": [
+    "All historical and August outcomes were exposed before evaluation.",
+    "The fixed rule was nominated after a bounded endpoint screen.",
+    "Calendar-month boundaries are operational conventions, not market regimes.",
+    "Clean prospective evidence is mandatory before deployment."
+  ],
+  "monthly": {
+    "v14": {
+      "months": 66,
+      "negative_month_pnl_usd": -444.69727061566863,
+      "negative_months": 20,
+      "positive_months": 46,
+      "worst_month_pnl_usd": -113.12813018211739
+    },
+    "v60": {
+      "months": 66,
+      "negative_month_pnl_usd": -527.8244869239121,
+      "negative_months": 21,
+      "positive_months": 45,
+      "worst_month_pnl_usd": -136.7681301821174
+    }
+  },
+  "monthly_overlay_vetoes": 21,
+  "policy": {
+    "canonical_lot_size": 0.01,
+    "maximum_causal_rank_exclusive": 0.3,
+    "maximum_month_pnl_usd_exclusive": -20.0,
+    "minimum_closed_trades_in_month": 8,
+    "missing_rank_action": "RETAIN",
+    "month_timezone": "UTC"
+  },
+  "report_title": "V60 Monthly Quality Risk Overlay V15",
+  "schema_version": "v60_monthly_quality_risk_overlay_v15"
+}
