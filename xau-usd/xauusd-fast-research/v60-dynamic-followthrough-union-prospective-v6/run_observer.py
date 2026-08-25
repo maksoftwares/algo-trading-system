@@ -152,7 +152,6 @@ def run_once(config_path: Path) -> dict:
         v2_policy=config["lock"]["policy"],
         anti_rule=config["lock"]["anti_chase"],
     )
-    policy.refresh_status(status, rows, config["acceptance"])
     for row in rows:
         row["prospective_contract_sha256"] = prospective_contract_sha256
     status["prospective_contract_sha256"] = prospective_contract_sha256
@@ -186,6 +185,7 @@ def run_once(config_path: Path) -> dict:
             config["acceptance"]["maximum_decision_recording_delay_seconds"]
         ),
     )
+    policy.refresh_status(status, rows, config["acceptance"])
     evidence.add_forward_comparison(status, rows, config["acceptance"])
     resolved = [
         row for row in rows if row["baseline_executed"] and row["broker_outcome_resolved"]

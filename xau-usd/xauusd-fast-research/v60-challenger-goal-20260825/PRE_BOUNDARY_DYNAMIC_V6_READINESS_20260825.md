@@ -3,7 +3,7 @@
 Decision: **READY_FOR_CLEAN_READ_ONLY_COLLECTION**
 
 Boundary: `2026-08-26T00:00:00Z`
-Contract: `b9c0ae850e10228b7660d17fa3788f992f81d3f9a035ec08ce37e8af3178eb56`
+Contract: `23ce7ca7e152e41a3dfa8fa7b0a22d600824eca89bed638556bc45577433c0dc`
 
 - clock_is_before_clean_boundary: **PASS**
 - observer_is_strictly_read_only: **PASS**

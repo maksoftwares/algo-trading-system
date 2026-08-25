@@ -222,7 +222,7 @@
         "deployment_authorized": false,
         "broker_action_authorized": false,
         "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
-        "prospective_contract_sha256": "b9c0ae850e10228b7660d17fa3788f992f81d3f9a035ec08ce37e8af3178eb56",
+        "prospective_contract_sha256": "23ce7ca7e152e41a3dfa8fa7b0a22d600824eca89bed638556bc45577433c0dc",
         "evidence_chain.status": "VERIFIED",
         "decision_timing.maximum_delay_seconds": 120,
         "observation_timing.cycle_within_recording_delay_budget": true,

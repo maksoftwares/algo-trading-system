@@ -227,11 +227,15 @@ historical frequency; anti-chase rarity may require longer. Across the entire re
 forward portfolio, V6 must also have net P/L and PF no worse than V60 and
 closed-trade drawdown no higher.
 
+Component counts are evaluated only after immutable timing annotation. A score or
+execution decision recorded outside the 120-second budget is treated as a retained
+baseline trade and contributes zero V2, anti-chase, or union veto evidence.
+
 The clean observer writes each score decision, execution decision, and broker
 outcome to a hash-linked evidence chain. Any later change to an immutable event
 fails collection closed. The chain was initialized and verified empty before
 the prospective boundary. Its exact prospective contract hash
-`b9c0ae850e10228b7660d17fa3788f992f81d3f9a035ec08ce37e8af3178eb56`
+`23ce7ca7e152e41a3dfa8fa7b0a22d600824eca89bed638556bc45577433c0dc`
 is required by the supervisor and written into every immutable score and
 execution decision. A reconstructed veto can count only if its score and
 execution decision are immutably recorded within 120 seconds of scheduled entry
@@ -253,7 +257,7 @@ at their actual times and volumes. With no post-boundary trades yet, its status 
 `NOT_READY_NO_RESOLVED_TRADES`, as expected.
 
 The final pre-boundary audit passed all ten readiness checks at
-`2026-08-25T09:58:13Z`: the evidence and equity chains were physically empty,
+`2026-08-25T10:03:31Z`: the evidence and equity chains were physically empty,
 the exact replay contained no trades, the contract matched both runtime and
 supervisor anchors, all eight workers were healthy, and V60/MT5 process
 identities were unchanged. This authorizes clean read-only collection only.

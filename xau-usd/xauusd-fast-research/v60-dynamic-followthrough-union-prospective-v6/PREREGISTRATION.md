@@ -41,6 +41,9 @@ resolved union vetoes. At least 10 resolved vetoes must independently exercise V
 health and at least 10 must independently exercise the V57 weak-followthrough anti-chase
 rule. Each component, as well as the union, must produce positive avoided broker P/L and
 veto PF below 0.8. This prevents one mechanism from borrowing evidence from the other.
+Only vetoes whose score and execution decisions were immutably recorded within the
+locked timing budget count toward either component; late or missing decisions count as
+retained baseline trades and contribute no veto evidence.
 
 The contract also requires 99% trade retention, complete rank/feature/timing/execution
 coverage, and 5,000 equity marks. The 2,000-execution floor is mathematically required

@@ -34,4 +34,5 @@ def test_forward_union_requires_evidence_for_each_component() -> None:
     assert forward["minimum_resolved_baseline_executions"] >= 2000
     assert forward["requires_component_specific_positive_avoided_pnl"]
     assert forward["requires_component_specific_veto_profit_factor_below_0_8"]
+    assert forward["component_evidence_requires_effective_immutable_timing"]
     assert forward["deployment_authorized"] is False

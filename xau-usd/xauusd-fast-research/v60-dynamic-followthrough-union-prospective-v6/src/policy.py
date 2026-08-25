@@ -259,7 +259,7 @@ def refresh_status(
     executed_scored = [
         row for row in rows if row["baseline_executed"] and row.get("causal_rank") is not None
     ]
-    vetoes = [row for row in rows if row["would_veto"]]
+    vetoes = [row for row in rows if row.get("prospective_veto_effective")]
     resolved = [row for row in vetoes if row["broker_outcome_resolved"]]
     resolved_v2 = [row for row in resolved if row.get("v2_veto_proposal")]
     resolved_anti_chase = [

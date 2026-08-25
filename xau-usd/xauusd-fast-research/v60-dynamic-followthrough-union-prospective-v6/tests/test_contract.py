@@ -99,3 +99,13 @@ def test_contract_hash_is_reported_and_written_into_immutable_decisions() -> Non
     assert 'status["prospective_contract_sha256"]' in runner
     assert 'row["prospective_contract_sha256"]' in runner
     assert evidence.count('"prospective_contract_sha256"') >= 2
+
+
+def test_component_evidence_is_evaluated_only_after_immutable_timing() -> None:
+    runner = (ROOT / "run_observer.py").read_text(encoding="utf-8")
+    assert runner.index("evidence.annotate_decision_timing(") < runner.index(
+        "policy.refresh_status("
+    )
+    assert runner.index("policy.refresh_status(") < runner.index(
+        "evidence.add_forward_comparison("
+    )

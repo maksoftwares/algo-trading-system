@@ -153,6 +153,7 @@ def resolved_component_row(index: int, component: str):
         "would_veto": True,
         "v2_veto_proposal": component == "V2",
         "anti_chase_veto_proposal": component == "ANTI_CHASE",
+        "prospective_veto_effective": True,
         "broker_outcome_resolved": True,
         "broker_pnl_usd": -1.0,
     }
@@ -189,3 +190,19 @@ def test_union_cannot_pass_without_antichase_component_evidence() -> None:
     assert not status["gates"]["minimum_resolved_anti_chase_vetoes"]
     assert not status["gates"]["anti_chase_veto_broker_profit_factor"]
     assert not status["gates"]["positive_anti_chase_avoided_broker_pnl"]
+
+
+def test_late_or_unrecorded_veto_cannot_count_as_component_evidence() -> None:
+    rows = [resolved_component_row(index, "ANTI_CHASE") for index in range(10)]
+    for row in rows:
+        row["prospective_veto_effective"] = False
+    status = {"counts": {}, "gates": {}}
+
+    refresh_status(status, rows, component_acceptance())
+
+    assert status["counts"]["resolved_vetoes"] == 0
+    assert status["counts"]["resolved_anti_chase_vetoes"] == 0
+    assert not status["gates"]["minimum_resolved_anti_chase_vetoes"]
+    assert status["component_evidence"]["v57_weak_followthrough_anti_chase"][
+        "resolved_vetoes"
+    ] == 0

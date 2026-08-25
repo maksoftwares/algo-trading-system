@@ -15,8 +15,8 @@
   "decision": "READY_FOR_CLEAN_READ_ONLY_COLLECTION",
   "deployment_authorized": false,
   "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
-  "generated_at_utc": "2026-08-25T09:58:13.309236Z",
-  "prospective_contract_sha256": "b9c0ae850e10228b7660d17fa3788f992f81d3f9a035ec08ce37e8af3178eb56",
+  "generated_at_utc": "2026-08-25T10:03:31.200917Z",
+  "prospective_contract_sha256": "23ce7ca7e152e41a3dfa8fa7b0a22d600824eca89bed638556bc45577433c0dc",
   "runtime": {
     "dynamic_worker_process_ids": [
       15532,
