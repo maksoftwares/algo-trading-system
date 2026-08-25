@@ -1,0 +1,58 @@
+{
+  "schema_version": "v60_r1_monthly_quality_risk_overlay_v16",
+  "report_title": "V60 R1 Monthly Quality Risk Overlay V16",
+  "authorization": {
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "evidence_status": "RETROSPECTIVE_POSTHOC_FORWARD_CONFIRMATION_REQUIRED",
+  "inputs": {
+    "v6_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/config/experiment.json",
+      "sha256": "369dba6fecbd3c9e851bcd0a8f7652089254677ca42a4f5b2c9a17fd344849d6"
+    },
+    "v6_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/outputs/RESULT.json",
+      "sha256": "032af1f2b7328f3aaf68feef8d4c404a90487c0b9f915789e1ac50fb0ed4dd13"
+    },
+    "v6_scenario": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/src/scenario.py",
+      "sha256": "6d762645a27330c985a85b0c4612036b904ea61a7bd889d423e5f33c8d4a5c87"
+    },
+    "v14_runner": {
+      "path": "xau-usd/xauusd-fast-research/v60-monthly-quality-risk-overlay-v14/run_experiment.py",
+      "sha256": "38de7fe18f570c8f79291e4da8b12b7b7eee6f86ea2722c00e3be4c1b4225664"
+    },
+    "v14_scenario": {
+      "path": "xau-usd/xauusd-fast-research/v60-monthly-quality-risk-overlay-v14/src/scenario.py",
+      "sha256": "a1c0d30c433ce43f46f45818ca37bf020974a07c2e3db744bf817b93e8bc7490"
+    },
+    "v16_scenario": {
+      "path": "xau-usd/xauusd-fast-research/v60-r1-monthly-quality-risk-overlay-v16/src/scenario.py",
+      "sha256": "9a06acf166c2905b98b7d212da969eedaa4ac152bdab43ed5ec54198d7d97c62"
+    }
+  },
+  "monthly_quality_policy": {
+    "month_timezone": "UTC",
+    "minimum_closed_trades_in_month": 8,
+    "maximum_month_pnl_usd_exclusive": -20.0,
+    "maximum_causal_rank_exclusive": 0.2,
+    "eligible_source_ids": ["R1_PULLBACK", "R1_BOX"],
+    "canonical_lot_size": 0.01,
+    "missing_rank_action": "RETAIN"
+  },
+  "frozen_v6_monthly_reference": {
+    "months": 66,
+    "negative_months": 20,
+    "negative_month_pnl_usd": -525.2626989814407,
+    "worst_month_pnl_usd": -136.76813018211737
+  },
+  "acceptance": {
+    "minimum_trade_retention_fraction": 0.98,
+    "minimum_frequency_retention_fraction": 0.98,
+    "minimum_monthly_overlay_vetoes": 1,
+    "additional_cost_stress_usd_per_trade": [0.1, 0.2]
+  }
+}
