@@ -56,6 +56,39 @@ def load_config() -> dict[str, Any]:
     return config
 
 
+def feature_map(frame: pd.DataFrame) -> dict[str, dict[str, Any]]:
+    if frame["trade_id"].duplicated().any():
+        raise ValueError("Causal feature ledger has duplicate trade IDs")
+    return {str(row["trade_id"]): row for row in frame.to_dict("records")}
+
+
+def comparative_gates(gates: Mapping[str, Any]) -> dict[str, bool]:
+    return {
+        name: bool(value)
+        for name, value in gates.items()
+        if name not in {"baseline_net_identity", "baseline_trade_identity"}
+    }
+
+
+def pnl_series_metrics(values: pd.Series) -> dict[str, Any]:
+    pnl = pd.to_numeric(values, errors="raise").astype(float)
+    wins = pnl.loc[pnl.gt(0.0)]
+    losses = pnl.loc[pnl.lt(0.0)]
+    gross_profit = float(wins.sum())
+    gross_loss = -float(losses.sum())
+    equity = pd.Series([0.0, *pnl.cumsum().tolist()])
+    drawdown = equity.cummax() - equity
+    return {
+        "trades": int(len(pnl)),
+        "wins": int(len(wins)),
+        "losses": int(len(losses)),
+        "net_pnl_usd": float(pnl.sum()),
+        "profit_factor": gross_profit / gross_loss if gross_loss else None,
+        "win_rate": float(len(wins) / len(pnl)) if len(pnl) else None,
+        "closed_drawdown_usd": float(drawdown.max()),
+    }
+
+
 def floor_gates(
     observed: Mapping[str, Any], reference: Mapping[str, Any], prefix: str
 ) -> dict[str, bool]:
@@ -208,7 +241,6 @@ def main() -> int:
     v12_config = json.loads(resolve(inputs["v12_config"]["path"]).read_text())
     frozen_v12 = json.loads(resolve(inputs["frozen_v12_result"]["path"]).read_text())
     frozen_v6 = json.loads(resolve(inputs["frozen_v6_result"]["path"]).read_text())
-    v12_runner = load_module("v13_v12_runner", resolve(inputs["v12_runner"]["path"]))
     v12_scenario = load_module(
         "v13_v12_scenario", resolve(inputs["v12_scenario"]["path"])
     )
@@ -223,7 +255,7 @@ def main() -> int:
     features = pd.read_parquet(
         resolve(v12_config["inputs"]["causal_feature_ledger"]["path"])
     )
-    features_by_trade = v12_runner.feature_map(features)
+    features_by_trade = feature_map(features)
     base = json.loads(
         resolve(v12_config["inputs"]["base_challenger_config"]["path"]).read_text()
     )
@@ -260,7 +292,7 @@ def main() -> int:
             stressed, stressed_annual, stressed_vetoes = evaluator.run(
                 replay_path, additional_cost_usd_per_trade=float(cost)
             )
-            comparative = v12_runner.comparative_gates(stressed["gates"])
+            comparative = comparative_gates(stressed["gates"])
             item = {
                 "additional_cost_usd_per_trade": float(cost),
                 "baseline_net_pnl_usd": stressed["baseline"]["net_pnl_usd"],
@@ -376,10 +408,10 @@ def main() -> int:
             "V2_SOURCE_HEALTH", regex=False
         )
     ]
-    anti_component = v12_runner.closed_metrics(
+    anti_component = pnl_series_metrics(
         anti_component_rows["baseline_runtime_pnl_usd"]
     )
-    v2_component = v12_runner.closed_metrics(
+    v2_component = pnl_series_metrics(
         v2_component_rows["baseline_runtime_pnl_usd"]
     )
     anti_component["avoided_pnl_usd"] = -anti_component["net_pnl_usd"]
