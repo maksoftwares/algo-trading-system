@@ -121,6 +121,41 @@ XAU-only floating-equity drawdown. V2 is identical in this exposed interval
 because it vetoed zero trades. This validates the replay machinery on genuine
 broker records but is not prospective evidence of improvement.
 
+## August robustness candidate
+
+A separate post-hoc V57 anti-chase candidate now addresses the concentrated
+August failure pattern. After 50 earlier closed V60 V57 executions, it vetoes
+only a V57 long whose causal rank is below 0.10, ATR ratio is at least 1.20, and
+distance to the prior 24-hour high is below 1.00 ATR. Five bounded mechanism
+variants were screened after August was exposed; this was the only one that
+preserved every original historical gate.
+
+| Metric | V60 history | Anti-chase history | Change |
+|---|---:|---:|---:|
+| Trades | 1,390 | 1,388 | -2 |
+| Net P/L | $3,603.57 | $3,622.04 | +$18.48 |
+| Profit factor | 1.7107 | 1.7180 | +0.0073 |
+| Closed drawdown | $223.28 | $223.28 | $0.00 |
+| Equity drawdown | $238.28 | $238.28 | $0.00 |
+
+On the exposed August 1-25 broker outcomes, it skips three losses and changes
+P/L from -$24.87 to +$17.50, PF from 0.8346 to 1.1621, win rate from 41.67% to
+47.62%, and closed drawdown from $86.59 to $56.69. The same two pre-August
+holding intervals lose $14.28 at PF 0.3707 when repriced on independent
+Dukascopy bid/ask ticks.
+
+An exact union diagnostic with V2 reaches $3,674.23, PF 1.7363, closed drawdown
+$217.46, and unchanged equity drawdown $238.28. Every year and recent window is
+nonnegative, but 1,376/1,390 trades is 98.993% retention and narrowly fails the
+locked 99% gate. The policies therefore remain separate observers; the gate was
+not weakened after seeing the result.
+
+This is promising but sparse: only two pre-August baseline executions satisfy
+the rule, and August outcomes were visible before nomination. It is therefore
+not deployed. A separate hash-locked read-only observer starts at
+`2026-08-26T00:00:00Z` and requires at least ten resolved veto opportunities
+plus the complete portfolio and exact-equity gates before review.
+
 The first V2 observer configuration read only the shared add-on ledger despite
 targeting every source. That coverage defect was fixed before the clean evidence
 boundary: the observer now hash-locks the deployed source configuration, merges

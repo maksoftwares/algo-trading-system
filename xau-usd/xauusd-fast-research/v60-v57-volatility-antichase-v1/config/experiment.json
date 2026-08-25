@@ -1,0 +1,67 @@
+{
+  "schema_version": "v60_v57_volatility_antichase_v1",
+  "authorization": {
+    "mt5_read_only": true,
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "evidence_status": "POST_HOC_AFTER_AUGUST_2026_OUTCOMES",
+  "rule": {
+    "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+    "direction": "LONG",
+    "minimum_prior_source_closed_trades": 50,
+    "maximum_causal_rank_exclusive": 0.1,
+    "minimum_atr_ratio_inclusive": 1.2,
+    "maximum_distance_to_24h_high_atr_exclusive": 1.0,
+    "missing_feature_action": "RETAIN"
+  },
+  "screened_variants": [
+    {"id": "R10_A120_E100", "rank": 0.1, "atr": 1.2, "extreme": 1.0},
+    {"id": "R15_A120_E100", "rank": 0.15, "atr": 1.2, "extreme": 1.0},
+    {"id": "R15_A130_E100", "rank": 0.15, "atr": 1.3, "extreme": 1.0},
+    {"id": "R20_A120_E100", "rank": 0.2, "atr": 1.2, "extreme": 1.0},
+    {"id": "R15_A120_E150", "rank": 0.15, "atr": 1.2, "extreme": 1.5}
+  ],
+  "inputs": {
+    "base_challenger_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-v2/config/challenger.json",
+      "sha256": "fc459e0566002fb8d2e2bf88e4fef446cca3b0e33e25e8054a592acc589a00a6"
+    },
+    "causal_feature_ledger": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-portable-mature-topup-v2/outputs/PRIMARY_DECISIONS.parquet",
+      "sha256": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17"
+    },
+    "shared_evaluator": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
+      "sha256": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
+    },
+    "prospective_observer_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-prospective-v2/config/prospective.json",
+      "sha256": "f41b6d6a377c6e88668c75d5dc5a6fa15e3c6e9729c4e632c0a045578e527065"
+    },
+    "exposed_broker_audit": {
+      "path": "xau-usd/xauusd-fast-research/v60-challenger-goal-20260825/EXPOSED_BROKER_AUDIT.csv",
+      "sha256": "101ba1ff550689d03aef9d445a0713393bdeb13c620ab632248c439d8c4ed98d"
+    },
+    "crossfeed_priced_runtime": {
+      "path": "xau-usd/xauusd-fast-research/v60-challenger-goal-20260825/CROSSFEED_VETO_AUDIT.csv",
+      "sha256": "d36f3c9648e3cea224b71e1300759f2eec19de167304f38a66154510605a82f2"
+    },
+    "august_causal_features": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-volatility-antichase-v1/inputs/AUGUST_2026_CAUSAL_FEATURES.csv",
+      "sha256": "3bd3724f5e853c7e677ffab1375b4dd0b689ad22d3558d0fb8a8713b46764610"
+    }
+  },
+  "acceptance": {
+    "minimum_historical_executed_vetoes_for_deployment": 10,
+    "minimum_historical_trade_retention": 0.99,
+    "minimum_august_net_pnl_usd_exclusive": 0.0,
+    "minimum_forward_elapsed_days": 90,
+    "minimum_forward_resolved_executions": 100,
+    "minimum_forward_resolved_vetoes": 10,
+    "minimum_forward_trade_retention": 0.99,
+    "maximum_forward_veto_profit_factor_exclusive": 0.8
+  }
+}
