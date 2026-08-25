@@ -1,7 +1,7 @@
 {
   "aggregate_economics_present_at_lock": false,
   "broker_action_authorized": false,
-  "contract_sha256": "fdabc9e2997592b06568bb5e405154abdb3888b921a61d70620e06bde2cb4905",
+  "contract_sha256": "564888356ed4c56153c4c903e3bf484f2423a03e5e01479e63bbfe9f85f7601b",
   "deployment_authorized": false,
   "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
   "input_files": {
@@ -36,9 +36,9 @@
       "sha256": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a"
     },
     "tick_replay_contract": {
-      "bytes": 817,
+      "bytes": 791,
       "path": "xau-usd/xauusd-fast-research/v60-dynamic-capacity-twin-prospective-v19/config/replay_contract_snapshot.json",
-      "sha256": "3d9037b4cb820070fd2bb82ef9ec63248b72aa9503bc2cbed15d0ffd116dfdb6"
+      "sha256": "16b02b9d08141dd93b59d5c3e1873cd087c016c70f322de25e1e2765784af709"
     },
     "v60_config": {
       "bytes": 12060,
@@ -61,31 +61,27 @@
       "sha256": "046d5e963489adb7b3b4dceb740be61db8c70d04307076ecb6501315a8e1d8e6"
     }
   },
-  "locked_at_utc": "2026-08-25T21:04:25.766292Z",
+  "locked_at_utc": "2026-08-25T20:54:08.374250Z",
   "package_files": {
     "PREREGISTRATION.md": {
-      "bytes": 6749,
-      "sha256": "5eb278a6d239c564f0676ae51b9765a032cbd4a29dcb128c4b172e08aa6e34f3"
+      "bytes": 6082,
+      "sha256": "75f0cf1d1f06cd01c1d60897c1965db8db8cd65ddd52f6045c4959f3ff9c78c3"
     },
     "README.md": {
       "bytes": 1063,
       "sha256": "f032360cff6a2063643ed2580bd3ab1a41ec1241ed37e84a8dc874d102633e15"
     },
-    "SUPERSEDED_LOCK_NOTICE.md": {
-      "bytes": 774,
-      "sha256": "ffb4633b745bf6daa16d33d7f20366beef68f186c75c715eaba9f29a7305e88f"
-    },
     "config/prospective.json": {
       "bytes": 4389,
-      "sha256": "03bbe67b78ae51dde709474e95c656410a7a3c455a10e23a0133c1c8257a6cad"
+      "sha256": "efdf5d87817aa303506d3e581c02749d6ad0b8417539f5ea37ab2ab271c2d1d3"
     },
     "config/replay_contract_snapshot.json": {
-      "bytes": 817,
-      "sha256": "3d9037b4cb820070fd2bb82ef9ec63248b72aa9503bc2cbed15d0ffd116dfdb6"
+      "bytes": 791,
+      "sha256": "16b02b9d08141dd93b59d5c3e1873cd087c016c70f322de25e1e2765784af709"
     },
     "lock_contract.py": {
-      "bytes": 3549,
-      "sha256": "b2a807759162986c639393d56cf61023716f891ff6d4763562ac0537c63f92dc"
+      "bytes": 3483,
+      "sha256": "1008008f5d2cd2d8b9d455459814b8a5995365549d7e1df4a5cfbe88e8a09152"
     },
     "requirements.txt": {
       "bytes": 41,
@@ -110,10 +106,6 @@
     "tests/test_capacity.py": {
       "bytes": 8204,
       "sha256": "e0b8cd0f1200bd120fbb479aac3e5ddd1c86a48cdfb0baade09be4e19949d4a3"
-    },
-    "tests/test_integration.py": {
-      "bytes": 5023,
-      "sha256": "b479768106aa021e860aa9d6851b01f27127b7dbf1df2e6dce177ca55f53fa8e"
     },
     "tests/test_runner.py": {
       "bytes": 3074,

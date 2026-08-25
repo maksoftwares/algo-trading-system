@@ -1,4 +1,6 @@
 **/outputs/** -text whitespace=-trailing-space
+v60-dynamic-capacity-twin-prospective-v19/outputs/*.json text eol=lf
+v60-dynamic-capacity-twin-v19-mechanism-audit/outputs/*.json text eol=lf
 high-frequency-expansion-v1/** -text whitespace=-trailing-space,-blank-at-eof
 pullback-swing-replication-v7/** -text whitespace=-trailing-space,-blank-at-eof
 one-trade-per-day-health-portfolio-v53/** -text whitespace=-trailing-space,-blank-at-eof

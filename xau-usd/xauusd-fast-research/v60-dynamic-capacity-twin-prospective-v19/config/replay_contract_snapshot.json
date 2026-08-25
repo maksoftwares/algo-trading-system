@@ -11,7 +11,8 @@
     "entry_start_utc": "2026-08-26T00:00:00Z",
     "entry_end_exclusive_utc": "2026-08-27T00:00:00Z",
     "poll_seconds": 5,
-    "maximum_tick_age_seconds": 30
+    "maximum_tick_age_seconds": 30,
+    "usd_to_aed": 3.6725
   },
   "guardian": {
     "enabled_views": [false, true],

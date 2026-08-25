@@ -1,7 +1,7 @@
 {
   "analysis_cutoff_msc": null,
   "broker_action_authorized": false,
-  "contract_sha256": "fdabc9e2997592b06568bb5e405154abdb3888b921a61d70620e06bde2cb4905",
+  "contract_sha256": "564888356ed4c56153c4c903e3bf484f2423a03e5e01479e63bbfe9f85f7601b",
   "counts": {
     "analysis_candidate_facts": 0,
     "candidate_facts": 0,
@@ -19,10 +19,10 @@
   "evidence_files": {
     "portfolio_events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "resolved_candidates_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "state_sha256": "cd95c82cde379905180f1dbcdd0b7abec9eabe4e486973e61bfd395f25c6b261"
+    "state_sha256": "7cb367f9645202dc17c2e0bb4ab06d55bb37d2d13481dda3f92d399b344d26ac"
   },
   "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
-  "generated_at_utc": "2026-08-25T21:07:01.667507Z",
+  "generated_at_utc": "2026-08-25T20:56:01.909260Z",
   "limitations": [
     "V19 is a read-only raw-tick portfolio twin and never calls MT5 order_send.",
     "Only completed UTC tick days enter economic metrics.",
@@ -35,5 +35,5 @@
     "late_score_rows": 0,
     "timely_score_rows": 0
   },
-  "status_sha256": "adb83bc5cda63fd84f6201e3587e7904facc4eae409f7a613fcee334e238d7b7"
+  "status_sha256": "444ead81058767d7f05dd8dcfc824f4eb4dbbe9433d4d37207f05f8ae7e43684"
 }

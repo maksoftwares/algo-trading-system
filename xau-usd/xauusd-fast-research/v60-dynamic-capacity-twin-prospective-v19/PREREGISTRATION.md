@@ -136,3 +136,15 @@ candidate and does not authorize demo or live deployment.
   `V6_CAPACITY_TWIN_PASSES_REVIEW_REQUIRED`.
 
 `deployment_authorized` and `broker_action_authorized` are always `false`.
+
+## Pre-boundary implementation correction
+
+The first implementation lock, `564888356ed4c561...`, was superseded before
+the evidence boundary and before any candidate or economic result existed. An
+independent end-to-end mechanism audit showed that its committed replay
+snapshot omitted `evaluation.usd_to_aed`, a field consumed by the frozen
+guardian path. The original lock, empty state, and empty status are retained as
+superseded evidence. The missing frozen value (`3.6725`) and an integration test
+covering the full guardian and replacement-capacity path were added before
+issuing the operative lock. No threshold, policy, boundary, or acceptance gate
+changed.

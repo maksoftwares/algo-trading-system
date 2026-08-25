@@ -15,6 +15,7 @@ LOCK = ROOT / "outputs" / "CONTRACT_LOCK.json"
 PACKAGE_FILES = (
     "PREREGISTRATION.md",
     "README.md",
+    "SUPERSEDED_LOCK_NOTICE.md",
     "requirements.txt",
     "lock_contract.py",
     "run_evaluation.py",
@@ -24,6 +25,7 @@ PACKAGE_FILES = (
     "src/capacity.py",
     "tests/conftest.py",
     "tests/test_capacity.py",
+    "tests/test_integration.py",
     "tests/test_runner.py",
 )
 

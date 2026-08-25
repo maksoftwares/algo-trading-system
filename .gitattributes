@@ -52,6 +52,8 @@ xau-usd/xauusd-fast-research/v60-generic-source-health-rank-veto-v1/**/*.json te
 xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-v2/**/*.json text eol=lf
 xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-prospective-v2/**/*.json text eol=lf
 xau-usd/xauusd-fast-research/v60-mature-virtual-health-rank-veto-v3/**/*.json text eol=lf
+xau-usd/xauusd-fast-research/v60-dynamic-capacity-twin-prospective-v19/**/*.json text eol=lf
+xau-usd/xauusd-fast-research/v60-dynamic-capacity-twin-v19-mechanism-audit/**/*.json text eol=lf
 
 # MT5 deployment bundles are hash-addressed evidence; preserve their exact bytes.
 forex/**/mt5/** -text -diff

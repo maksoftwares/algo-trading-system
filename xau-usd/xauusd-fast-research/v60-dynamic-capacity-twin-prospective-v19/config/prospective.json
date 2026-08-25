@@ -32,7 +32,7 @@
     },
     "tick_replay_contract": {
       "path": "xau-usd/xauusd-fast-research/v60-dynamic-capacity-twin-prospective-v19/config/replay_contract_snapshot.json",
-      "sha256": "16b02b9d08141dd93b59d5c3e1873cd087c016c70f322de25e1e2765784af709"
+      "sha256": "3d9037b4cb820070fd2bb82ef9ec63248b72aa9503bc2cbed15d0ffd116dfdb6"
     },
     "v6_config": {
       "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/config/experiment.json",

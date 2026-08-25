@@ -233,7 +233,7 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
         "broker_action_authorized": False,
         "runtime_changes_authorized": False,
         "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
-        "contract_sha256": "564888356ed4c56153c4c903e3bf484f2423a03e5e01479e63bbfe9f85f7601b",
+        "contract_sha256": "fdabc9e2997592b06568bb5e405154abdb3888b921a61d70620e06bde2cb4905",
     }
     prospective_contract = (
         ROOT.parents[2]
