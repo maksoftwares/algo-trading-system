@@ -68,7 +68,7 @@
     "minimum_historical_protection_closes": 1,
     "additional_cost_stress_usd_per_trade": [0.1, 0.2],
     "august_minimum_net_pnl_usd": 17.5030633083731,
-    "august_minimum_profit_factor": 1.162107226253869,
-    "august_maximum_closed_drawdown_usd": 56.6896231591343
+    "august_minimum_profit_factor": 1.1620572292953486,
+    "august_maximum_closed_drawdown_usd": 56.6861810755616
   }
 }
