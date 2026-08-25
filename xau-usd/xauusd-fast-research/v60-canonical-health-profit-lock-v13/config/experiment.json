@@ -1,0 +1,74 @@
+{
+  "schema_version": "v60_canonical_health_profit_lock_v13",
+  "authorization": {
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "evidence_status": "RETROSPECTIVE_POSTHOC_PROTECTION_COMPOSITION_FORWARD_CONFIRMATION_REQUIRED",
+  "inputs": {
+    "v12_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-alpha-health-union-v12/config/experiment.json",
+      "sha256": "8872ccc8caef5c2b6f244a71ab7869bdd0a12ea56748cf35be9932e18f789265"
+    },
+    "v12_scenario": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-alpha-health-union-v12/src/scenario.py",
+      "sha256": "c219b1f1d6267081b2704dcff8a147cfa7da9929af29b4c02d970d4567c16f80"
+    },
+    "v12_runner": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-alpha-health-union-v12/run_experiment.py",
+      "sha256": "3bc0545758373634cfdcff3c4c85d9896462848d9ff5a019b686cc6c0255e6ae"
+    },
+    "frozen_v12_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-alpha-health-union-v12/outputs/RESULT.json",
+      "sha256": "6950f58a900ca416a5162380b24af30960588b74416727309bb5a4ccb0e1250d"
+    },
+    "frozen_v6_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/outputs/RESULT.json",
+      "sha256": "032af1f2b7328f3aaf68feef8d4c404a90487c0b9f915789e1ac50fb0ed4dd13"
+    },
+    "exposed_individual_protection_source": {
+      "path": "xau-usd/xauusd-fast-research/v60-individual-profit-protection-v1/src/experiment.py",
+      "sha256": "e260980010e6d71bd80e4b67880eda3cbf1389f44633050e9a4fbbecf283e170"
+    },
+    "exposed_individual_protection_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-individual-profit-protection-v1/outputs/RESULT.json",
+      "sha256": "3f04f0244f1e6517deca2531fa028ac9ae640259198c50cd2e7b34d235781ca7"
+    },
+    "august_trade_snapshot": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-health-profit-lock-v13/inputs/AUGUST_BROKER_TRADES.parquet",
+      "sha256": "916f4a2703ad4a2409813ae99f6138e7a68cc0db4c74cb0c919348db59b95fc4"
+    },
+    "august_quote_snapshot": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-health-profit-lock-v13/inputs/AUGUST_BROKER_5S_QUOTES.parquet",
+      "sha256": "e881f2f297ce29a17ea6148b692ba261768519f0373b8d36ceb19944972f6695"
+    },
+    "august_input_manifest": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-health-profit-lock-v13/inputs/AUGUST_INPUT_MANIFEST.json",
+      "sha256": "96d7ba1696926a69f449910cc8de6928e23d237a7b4f4e578cfdcdc304e39c42"
+    },
+    "antichase_august_audit": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-volatility-antichase-v1/outputs/AUGUST_2026_TRADE_AUDIT.csv",
+      "sha256": "d069aed9f5970188d05886a2e995f1340ec9386d05067f4b39822ca10adc94ce"
+    }
+  },
+  "individual_profit_lock": {
+    "enabled": true,
+    "arm_r": 1.5,
+    "retain_r": 0.25,
+    "giveback_r": null,
+    "poll_seconds": 5,
+    "missing_quote_action": "PRESERVE_SOURCE_EXIT"
+  },
+  "acceptance": {
+    "minimum_trade_retention_fraction": 0.99,
+    "minimum_frequency_retention_fraction": 0.99,
+    "minimum_historical_protection_arms": 1,
+    "minimum_historical_protection_closes": 1,
+    "additional_cost_stress_usd_per_trade": [0.1, 0.2],
+    "august_minimum_net_pnl_usd": 17.5030633083731,
+    "august_minimum_profit_factor": 1.162107226253869,
+    "august_maximum_closed_drawdown_usd": 56.6896231591343
+  }
+}

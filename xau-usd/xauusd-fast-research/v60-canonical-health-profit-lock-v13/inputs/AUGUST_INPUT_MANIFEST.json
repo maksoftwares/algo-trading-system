@@ -1,0 +1,107 @@
+{
+  "first_cycle_utc": "2026-08-04T11:47:15Z",
+  "generated_at_utc": "2026-08-25T11:21:14.379730Z",
+  "inputs": {
+    "broker_audit": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\v60-challenger-goal-20260825\\EXPOSED_BROKER_AUDIT.csv",
+      "sha256": "101ba1ff550689d03aef9d445a0713393bdeb13c620ab632248c439d8c4ed98d"
+    },
+    "runtime_state": {
+      "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\v60_canonical_demo_v2\\state.json",
+      "sha256_at_snapshot": "d1f71ac68f488a1cdba42d26d2399b4db931d0f167529ebc213d53f5af6dce53"
+    },
+    "source_tick_files": [
+      {
+        "bytes": 80052491,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260804.csv",
+        "sha256": "159beaf8eb566973745518f6c5830848fa489bc7ddf5f94cd6846cc6e06377b9"
+      },
+      {
+        "bytes": 94419260,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260806.csv",
+        "sha256": "53a874a8aa0409fd931ab3c666b2a6ba5971c76fef95f9e8aed4e06d1bf1bcb4"
+      },
+      {
+        "bytes": 94430594,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260807.csv",
+        "sha256": "b795bc4eb14855c0ea1d97e67eaa879c54c9ffe44848d95d5d290229693bd6fb"
+      },
+      {
+        "bytes": 85005864,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260810.csv",
+        "sha256": "ad82dbbb4090ec25ae70f5ee551120acf3455e86007c265adbd2f49c7c41f460"
+      },
+      {
+        "bytes": 89795702,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260811.csv",
+        "sha256": "d0636e0f1e171e1178bda463ac5aaf7e260840f040451914fb74d72f6139a00f"
+      },
+      {
+        "bytes": 66549288,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260812.csv",
+        "sha256": "0f944247519ce98ae02675b1b43c3486054291f5830f8fd5d74a7e1a263a29de"
+      },
+      {
+        "bytes": 94624278,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260813.csv",
+        "sha256": "57fb442f411ee2501a0a22879b7680f2259330876e3c9e13e26c6dd210dab138"
+      },
+      {
+        "bytes": 72939367,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260814.csv",
+        "sha256": "171eff268948fa11486b6d8ad0421c2b106de2b7c239ba5f7ffe4b0d7d51ea8f"
+      },
+      {
+        "bytes": 75062629,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260817.csv",
+        "sha256": "04ac25217591daf5899b23f2a02eece451e70340c6d7c28b8a526b9cdcdff9a7"
+      },
+      {
+        "bytes": 82700130,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260818.csv",
+        "sha256": "7e54da257e486ef745445afec274eb57e9213e66db043044fb6630c5b3f5317c"
+      },
+      {
+        "bytes": 94907354,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260820.csv",
+        "sha256": "9a91ca7b187a789c3f9479095e804411989336a899182342ca428222af2c722c"
+      },
+      {
+        "bytes": 88179512,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260821.csv",
+        "sha256": "854d85844f6a4f037153c6e8d23dbe4693da91042e4e00a0f2b8521eb722d3e7"
+      },
+      {
+        "bytes": 5651478,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260823.csv",
+        "sha256": "4ba20656a61916a472ce3059334128f146494e7650360e68ba5dd5172417b943"
+      },
+      {
+        "bytes": 110009751,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260824.csv",
+        "sha256": "c061f91befd0bcd737f4a45c5c79afc1db7ab596c8e8588df59dd25e8f36c467"
+      },
+      {
+        "bytes": 53350289,
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260825.csv",
+        "sha256": "30dd12850d562e5a96ec6fa6fdaeafacd712d58b138519013743177c6c774371"
+      }
+    ]
+  },
+  "last_cycle_utc": "2026-08-25T01:01:05Z",
+  "outputs": {
+    "quotes": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\v60-canonical-health-profit-lock-v13\\inputs\\AUGUST_BROKER_5S_QUOTES.parquet",
+      "sha256": "e881f2f297ce29a17ea6148b692ba261768519f0373b8d36ceb19944972f6695"
+    },
+    "trades": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\v60-canonical-health-profit-lock-v13\\inputs\\AUGUST_BROKER_TRADES.parquet",
+      "sha256": "916f4a2703ad4a2409813ae99f6138e7a68cc0db4c74cb0c919348db59b95fc4"
+    }
+  },
+  "policy_evaluated": false,
+  "poll_seconds": 5,
+  "quote_rows": 19754,
+  "schema_version": "xauusd_v13_august_broker_input_snapshot_v1",
+  "trade_rows": 24
+}
