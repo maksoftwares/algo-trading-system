@@ -55,8 +55,19 @@ def test_august_improvement_cannot_override_preservation_or_forward_proof() -> N
     assert eligibility["every_calendar_year_preserved"]
     assert eligibility["recent_3m_6m_12m_windows_preserved"]
     assert eligibility["minimum_99_percent_trade_retention_passed"]
-    assert eligibility["additional_cost_0_10_all_comparative_gates_passed"]
-    assert not eligibility["additional_cost_0_20_all_comparative_gates_passed"]
+    assert eligibility[
+        "full_dynamic_additional_cost_0_10_all_comparative_gates_passed"
+    ]
+    assert not eligibility[
+        "full_dynamic_additional_cost_0_20_all_comparative_gates_passed"
+    ]
+    assert not eligibility[
+        "veto_only_common_path_additional_cost_0_10_all_comparative_gates_passed"
+    ]
+    assert not eligibility[
+        "veto_only_common_path_additional_cost_0_20_all_comparative_gates_passed"
+    ]
+    assert not eligibility["forward_observer_validates_replacement_capacity_trades"]
     assert config["authorization"]["demo_deployment"] is False
 
 

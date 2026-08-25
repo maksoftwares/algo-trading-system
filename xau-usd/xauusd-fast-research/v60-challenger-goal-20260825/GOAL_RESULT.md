@@ -148,12 +148,20 @@ calendar years, the final 6/12-month windows, long-run P/L/PF, and closed
 drawdown while retaining more than 99% of trades. On same-timing Dukascopy
 quotes, the combined delta is +$61.49 and no covered calendar year is harmed.
 
-At an additional $0.10 cost on every candidate, V6 still passes every
-comparative gate: it is $109.64 ahead, PF is 1.7041 versus 1.6760, closed
-drawdown is $215.15 versus $220.41, and equity drawdown is $232.80 versus
-$242.13. At an additional $0.20, V6 remains $65.28 ahead and lowers both
-drawdowns, but 2021 is $3.57 worse. That single harsh-stress annual failure and
-the lack of clean forward outcomes keep deployment locked.
+Nominal historical-to-runtime parity is exact: the prospective policy produces
+the same 13 veto IDs, 1,377 trades, and $3,681.34 P/L as full dynamic V6, with
+zero replacement-capacity trades. Stress behavior is now separated. At +$0.10,
+the full dynamic replay admits 22 replacement-capacity trades; at +$0.20 it
+admits 11. Those trades cannot be validated by the read-only observer.
+
+On the conservative veto-only common path, +$0.10 still improves net by $73.78,
+PF to 1.7034, closed drawdown to $206.71, and equity drawdown from $242.13 to
+$228.43, but retains only 98.843% of trades and therefore fails the locked
+retention/frequency gates. At +$0.20 it improves net by $68.19, closed drawdown
+to $208.49, and equity drawdown from $244.02 to $230.22, but retains 98.697% and
+harms 2021 by $1.08. The fixed-lifecycle reconstruction matches V60's equity
+drawdown exactly in every scenario. These limitations and the lack of clean
+forward outcomes keep deployment locked.
 
 The first V2 observer configuration read only the shared add-on ledger despite
 targeting every source. That coverage defect was fixed before the clean evidence
@@ -211,7 +219,7 @@ The clean observer writes each score decision, execution decision, and broker
 outcome to a hash-linked evidence chain. Any later change to an immutable event
 fails collection closed. The chain was initialized and verified empty before
 the prospective boundary. Its exact prospective contract hash
-`ab9797424c91bc3a4104da113324c7b94f8d11a7db8012c330c2bc4d73992587`
+`86cb376fdd545c2652edab395cb96bb1598a14784a35d2a3bd367380bce3d0b4`
 is required by the supervisor and written into every immutable score and
 execution decision. A reconstructed veto can count only if its score and
 execution decision are immutably recorded within 120 seconds of scheduled entry

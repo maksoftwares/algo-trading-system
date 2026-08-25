@@ -96,8 +96,11 @@
     "every_calendar_year_preserved": true,
     "recent_3m_6m_12m_windows_preserved": true,
     "minimum_99_percent_trade_retention_passed": true,
-    "additional_cost_0_10_all_comparative_gates_passed": true,
-    "additional_cost_0_20_all_comparative_gates_passed": false,
+    "full_dynamic_additional_cost_0_10_all_comparative_gates_passed": true,
+    "full_dynamic_additional_cost_0_20_all_comparative_gates_passed": false,
+    "veto_only_common_path_additional_cost_0_10_all_comparative_gates_passed": false,
+    "veto_only_common_path_additional_cost_0_20_all_comparative_gates_passed": false,
+    "forward_observer_validates_replacement_capacity_trades": false,
     "evidence_status": "EXPOSED_AND_HISTORICAL_NOT_DEPLOYMENT_PROOF"
   },
   "acceptance": {

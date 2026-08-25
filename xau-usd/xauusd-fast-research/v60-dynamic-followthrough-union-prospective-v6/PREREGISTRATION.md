@@ -24,6 +24,13 @@ and clean forward evidence must also pass.
 - Hash-chain immutable scores, features, policy state, decisions, and execution detail.
 - Never send, modify, or close a broker order.
 
+The observer validates the conservative veto-only common path: actual V60
+executions that V6 would retain or veto. It cannot prove P/L from hypothetical
+replacement trades that a deployed challenger might admit after a veto frees
+portfolio capacity. Any future deployment must either preserve shadow capacity
+until the vetoed baseline trade's original exit or complete a separate causal
+replacement-trade validation.
+
 ## Minimum decision evidence
 
 At least 90 elapsed days, 100 scored/resolved baseline executions, 10 resolved vetoes,

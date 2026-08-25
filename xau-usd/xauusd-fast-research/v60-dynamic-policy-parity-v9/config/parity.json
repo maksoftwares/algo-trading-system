@@ -1,0 +1,59 @@
+{
+  "schema_version": "v60_dynamic_policy_parity_v9",
+  "authorization": {
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "inputs": {
+    "prospective_policy": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-prospective-v6/src/policy.py",
+      "sha256": "938d2c7b25c2c225fcd05f82e728ea5b910c7de663d677f63ce55d38058f078c"
+    },
+    "v6_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/config/experiment.json",
+      "sha256": "369dba6fecbd3c9e851bcd0a8f7652089254677ca42a4f5b2c9a17fd344849d6"
+    },
+    "v6_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/outputs/RESULT.json",
+      "sha256": "56eb13bcd43a50d0b149beb3d85b86b8d91e412b7a2d7099b0a77eca3754ac34"
+    },
+    "v6_vetoes": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/outputs/HISTORICAL_VETOES.csv",
+      "sha256": "9b911d07ae7ba477f12656f86d478716c3e2ba093757c8ef087c16a1fe72c96f"
+    },
+    "base_challenger_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-v2/config/challenger.json",
+      "sha256": "fc459e0566002fb8d2e2bf88e4fef446cca3b0e33e25e8054a592acc589a00a6"
+    },
+    "shared_evaluator": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
+      "sha256": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
+    },
+    "replay_source": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/src/replay.py",
+      "sha256": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a"
+    },
+    "replay_contract": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/config/DRAWDOWN_PROTECTION_V1_REPLAY_CONTRACT.json",
+      "sha256": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0"
+    },
+    "deployed_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120"
+    },
+    "causal_features": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-portable-mature-topup-v2/outputs/PRIMARY_DECISIONS.parquet",
+      "sha256": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17"
+    }
+  },
+  "additional_cost_usd_per_trade": [0.0, 0.1, 0.2],
+  "metric_tolerance_usd": 0.000001,
+  "acceptance": {
+    "minimum_trade_retention_fraction": 0.99,
+    "minimum_frequency_retention_fraction": 0.99,
+    "minimum_veto_cohort_rows": 10,
+    "maximum_veto_profit_factor_exclusive": 1.0
+  }
+}
