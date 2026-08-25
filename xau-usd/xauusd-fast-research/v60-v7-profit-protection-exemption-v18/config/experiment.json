@@ -1,0 +1,58 @@
+{
+  "schema_version": "v60_v7_profit_protection_exemption_v18",
+  "report_title": "V60 V7 Profit-Protection Exemption V18",
+  "authorization": {
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "evidence_status": "RETROSPECTIVE_POSTHOC_FORWARD_CONFIRMATION_REQUIRED",
+  "inputs": {
+    "v6_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/config/experiment.json",
+      "sha256": "369dba6fecbd3c9e851bcd0a8f7652089254677ca42a4f5b2c9a17fd344849d6"
+    },
+    "v6_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/outputs/RESULT.json",
+      "sha256": "032af1f2b7328f3aaf68feef8d4c404a90487c0b9f915789e1ac50fb0ed4dd13"
+    },
+    "v6_scenario": {
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/src/scenario.py",
+      "sha256": "6d762645a27330c985a85b0c4612036b904ea61a7bd889d423e5f33c8d4a5c87"
+    },
+    "shared_evaluator": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
+      "sha256": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
+    },
+    "v17_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-exit-cluster-decomposition-v17/outputs/RESULT.json",
+      "sha256": "2e18a2e86e43fde091f3e2d64aef0a2e7a55edc5b437a5bde841daa0a1029bac"
+    },
+    "v16_result": {
+      "path": "xau-usd/xauusd-fast-research/v60-r1-monthly-quality-risk-overlay-v16/outputs/RESULT.json",
+      "sha256": "432caefd752238460771d3819905b9ae9be02aad55768568350a94e41b80a192"
+    },
+    "v18_scenario": {
+      "path": "xau-usd/xauusd-fast-research/v60-v7-profit-protection-exemption-v18/src/scenario.py",
+      "sha256": "e991e5f80f596f3dd5bc256b729c2a9a8f6627e86aef6f0f440e5398baa7324c"
+    }
+  },
+  "policy": {
+    "exempt_source_ids": ["V7_SWING_HEALTH"],
+    "account_profit_protection_arm_r": 1.5,
+    "account_profit_protection_retain_r": 0.5,
+    "all_other_controls": "UNCHANGED"
+  },
+  "acceptance": {
+    "minimum_trade_retention_fraction_vs_v60": 0.99,
+    "minimum_frequency_retention_fraction_vs_v60": 0.99,
+    "minimum_changed_aggregate_metrics": 1,
+    "additional_cost_stress_usd_per_trade": [0.1, 0.2],
+    "v6_monthly_reference": {
+      "negative_months": 20,
+      "negative_month_pnl_usd": -525.2626989814407,
+      "worst_month_pnl_usd": -136.76813018211737
+    }
+  }
+}
