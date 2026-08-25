@@ -10,10 +10,11 @@
   "lock": {
     "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
     "challenger_config": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-v2/config/challenger.json",
-    "challenger_config_sha256": "d14fdd1c8467eccff750c71c2e4cc056ba4c50e392f30801355fd88b4255db75",
+    "challenger_config_sha256": "fc459e0566002fb8d2e2bf88e4fef446cca3b0e33e25e8054a592acc589a00a6",
     "shared_observer": "xau-usd/xauusd-fast-research/v60-v57-executed-health-rank-veto-prospective-v1/src/observer.py",
-    "shared_observer_sha256": "be6f1dd88fecace34717862702cfc678c85ba334e010699ce82e525d563e465b",
-    "warm_start_sha256": "a6b6407070530ca8d44d24a5065f2bf940f95c7b92f45b77dd0d0c090aa04c5e",
+    "shared_observer_sha256": "8980ebe46b9c2b4d69e450e6cc2e3e4ddfc8d31fe823868511c040aa08c077ec",
+    "warm_start_sha256": "046d5e963489adb7b3b4dceb740be61db8c70d04307076ecb6501315a8e1d8e6",
+    "candidate_source_config_sha256": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
     "policy": {
       "source_id": "*",
       "source_scope": "EACH_SOURCE_INDEPENDENT",
@@ -46,7 +47,7 @@
     "history_start_utc": "2026-07-21T00:00:00Z"
   },
   "read_only_inputs": {
-    "candidate_ledger": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/addons/addon_candidates.jsonl",
+    "candidate_source_config": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
     "portfolio_state": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/state.json",
     "warm_start": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-v2/outputs/PROSPECTIVE_WARM_START.json"
   },

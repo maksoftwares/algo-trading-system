@@ -25,7 +25,7 @@
     },
     "shared_evaluator": {
       "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
-      "sha256": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+      "sha256": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
     }
   },
   "policy": {

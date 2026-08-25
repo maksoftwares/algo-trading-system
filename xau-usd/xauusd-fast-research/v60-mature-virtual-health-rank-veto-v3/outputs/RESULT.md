@@ -14,7 +14,7 @@ Retrospective research only. No demo or live deployment is authorized.
 | Equity drawdown | $238.28 | $236.21 | $-2.07 |
 | Trades/weekday | 0.970 | 0.975 | +0.005 |
 
-Veto decisions: `16`. Veto endpoint PF: `1.046066391442134`.
+Veto decisions: `16`; baseline-executed cohort: `14`. Baseline runtime PF: `0.7376929949186495`. Candidate endpoint PF: `1.046066391442134`.
 
 ## Gates
 
@@ -29,4 +29,4 @@ Veto decisions: `16`. Veto endpoint PF: `1.046066391442134`.
 - `no_negative_calendar_year_delta`: FAIL
 - `recent_windows_not_worse`: FAIL
 - `veto_cohort_large_enough`: PASS
-- `veto_cohort_profit_factor_below_one`: FAIL
+- `veto_cohort_profit_factor_below_one`: PASS

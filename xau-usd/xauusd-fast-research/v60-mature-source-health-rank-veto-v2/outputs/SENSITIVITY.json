@@ -1,6 +1,7 @@
 {
   "details": {
     "HEALTH_080": {
+      "additional_cost_usd_per_trade": 0.0,
       "annual": [
         {
           "baseline_net_pnl_usd": 165.92842872914736,
@@ -113,6 +114,7 @@
         "v60_tracked_closed_pnl_usd": 3603.5653535720144,
         "win_rate": 0.4848920863309353
       },
+      "baseline_executed_veto_count": 8,
       "challenger": {
         "candidate_rows": 1703,
         "drawdown_recovery_entries": 0,
@@ -201,13 +203,13 @@
         "veto_cohort_large_enough": false,
         "veto_cohort_profit_factor_below_one": true
       },
-      "generated_at_utc": "2026-08-25T02:52:42.891362Z",
+      "generated_at_utc": "2026-08-25T04:13:17.362989Z",
       "input_sha256": {
         "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
         "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
         "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
         "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
-        "shared_evaluator": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+        "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
       },
       "limitations": [
         "All historical and recent demo outcomes were exposed before nomination.",
@@ -277,6 +279,8 @@
       "schema_version": "v60_mature_source_health_rank_veto_v2_sensitivity_health_080_result",
       "veto_audit": [
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.982291666666667,
           "candidate_endpoint_pnl_usd": -3.982291666666667,
           "causal_rank": 0.0,
           "entry_time_utc": "2021-06-18T01:40:00.000Z",
@@ -287,6 +291,8 @@
           "trade_id": "V9_BREAK_20210618T014000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.006597222222222,
           "candidate_endpoint_pnl_usd": -4.006597222222222,
           "causal_rank": 0.03888888888888889,
           "entry_time_utc": "2021-08-13T10:55:00.000Z",
@@ -297,6 +303,8 @@
           "trade_id": "V7_20210813T105500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.819999999999999,
           "candidate_endpoint_pnl_usd": -5.819999999999999,
           "causal_rank": 0.03012912482065997,
           "entry_time_utc": "2023-11-27T14:30:00.000Z",
@@ -307,6 +315,8 @@
           "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.8099999999999996,
           "candidate_endpoint_pnl_usd": -3.8099999999999996,
           "causal_rank": 0.09943181818181818,
           "entry_time_utc": "2023-11-29T11:45:00.000Z",
@@ -317,6 +327,8 @@
           "trade_id": "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 2.2394354698303482,
           "candidate_endpoint_pnl_usd": -5.910688466892245,
           "causal_rank": 0.08178844056706652,
           "entry_time_utc": "2024-07-17T02:40:00.000Z",
@@ -327,6 +339,8 @@
           "trade_id": "V9_BREAK_20240717T024000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.417077028974225,
           "candidate_endpoint_pnl_usd": -4.417077028974225,
           "causal_rank": 0.09229098805646037,
           "entry_time_utc": "2024-07-18T07:05:00.000Z",
@@ -337,6 +351,8 @@
           "trade_id": "V9_BREAK_20240718T070500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.839140796303192,
           "candidate_endpoint_pnl_usd": -4.839140796303192,
           "causal_rank": 0.03788634097706879,
           "entry_time_utc": "2024-10-07T08:25:00.000Z",
@@ -347,6 +363,8 @@
           "trade_id": "V7_20241007T082500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.121659523873351,
           "candidate_endpoint_pnl_usd": -4.121659523873351,
           "causal_rank": 0.0647342995169082,
           "entry_time_utc": "2024-10-24T07:50:00.000Z",
@@ -357,6 +375,7 @@
           "trade_id": "V9_BREAK_20241024T075000Z_SHORT"
         }
       ],
+      "veto_baseline_runtime_profit_factor": 0.07224739034493484,
       "veto_endpoint_profit_factor": 0.0,
       "windows": {
         "12m": {
@@ -407,6 +426,7 @@
       }
     },
     "HEALTH_120": {
+      "additional_cost_usd_per_trade": 0.0,
       "annual": [
         {
           "baseline_net_pnl_usd": 165.92842872914736,
@@ -519,6 +539,7 @@
         "v60_tracked_closed_pnl_usd": 3603.5653535720144,
         "win_rate": 0.4848920863309353
       },
+      "baseline_executed_veto_count": 24,
       "challenger": {
         "candidate_rows": 1703,
         "drawdown_recovery_entries": 0,
@@ -607,13 +628,13 @@
         "veto_cohort_large_enough": true,
         "veto_cohort_profit_factor_below_one": true
       },
-      "generated_at_utc": "2026-08-25T02:54:12.232731Z",
+      "generated_at_utc": "2026-08-25T04:14:18.143719Z",
       "input_sha256": {
         "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
         "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
         "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
         "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
-        "shared_evaluator": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+        "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
       },
       "limitations": [
         "All historical and recent demo outcomes were exposed before nomination.",
@@ -683,6 +704,8 @@
       "schema_version": "v60_mature_source_health_rank_veto_v2_sensitivity_health_120_result",
       "veto_audit": [
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.982291666666667,
           "candidate_endpoint_pnl_usd": -3.982291666666667,
           "causal_rank": 0.0,
           "entry_time_utc": "2021-06-18T01:40:00.000Z",
@@ -693,6 +716,8 @@
           "trade_id": "V9_BREAK_20210618T014000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.006597222222222,
           "candidate_endpoint_pnl_usd": -4.006597222222222,
           "causal_rank": 0.03888888888888889,
           "entry_time_utc": "2021-08-13T10:55:00.000Z",
@@ -703,6 +728,8 @@
           "trade_id": "V7_20210813T105500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 9.669140130383505,
           "candidate_endpoint_pnl_usd": 9.669140130383505,
           "causal_rank": 0.08823529411764706,
           "entry_time_utc": "2021-11-18T14:45:00.000Z",
@@ -713,6 +740,8 @@
           "trade_id": "V9_BREAK_20211118T144500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.053993055555555,
           "candidate_endpoint_pnl_usd": -4.053993055555555,
           "causal_rank": 0.07317073170731707,
           "entry_time_utc": "2021-11-29T03:30:00.000Z",
@@ -723,6 +752,8 @@
           "trade_id": "V7_20211129T033000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.327940880607618,
           "candidate_endpoint_pnl_usd": -6.327940880607618,
           "causal_rank": 0.08868501529051988,
           "entry_time_utc": "2022-08-02T13:25:00.000Z",
@@ -733,6 +764,8 @@
           "trade_id": "V9_BREAK_20220802T132500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 6.507986111111111,
           "candidate_endpoint_pnl_usd": 6.507986111111111,
           "causal_rank": 0.09397590361445783,
           "entry_time_utc": "2023-01-03T01:35:00.000Z",
@@ -743,6 +776,8 @@
           "trade_id": "V7_20230103T013500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 12.75,
           "candidate_endpoint_pnl_usd": 12.75,
           "causal_rank": 0.05628517823639775,
           "entry_time_utc": "2023-04-04T13:30:00.000Z",
@@ -753,6 +788,8 @@
           "trade_id": "2023-04-04 13:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -13.600000000000001,
           "candidate_endpoint_pnl_usd": -13.600000000000001,
           "causal_rank": 0.06039076376554174,
           "entry_time_utc": "2023-05-04T14:00:00.000Z",
@@ -763,6 +800,8 @@
           "trade_id": "2023-05-04 14:00:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.620475112052762,
           "candidate_endpoint_pnl_usd": -5.620475112052762,
           "causal_rank": 0.021406727828746176,
           "entry_time_utc": "2023-10-04T15:20:00.000Z",
@@ -773,6 +812,8 @@
           "trade_id": "V9_BREAK_20231004T152000Z_LONG"
         },
         {
+          "baseline_runtime_executed": false,
+          "baseline_runtime_pnl_usd": null,
           "candidate_endpoint_pnl_usd": 6.736495754182175,
           "causal_rank": 0.0974124809741248,
           "entry_time_utc": "2023-10-09T14:20:00.000Z",
@@ -783,6 +824,8 @@
           "trade_id": "V9_BREAK_20231009T142000Z_LONG"
         },
         {
+          "baseline_runtime_executed": false,
+          "baseline_runtime_pnl_usd": null,
           "candidate_endpoint_pnl_usd": 6.4605902777777775,
           "causal_rank": 0.045454545454545456,
           "entry_time_utc": "2023-10-12T12:40:00.000Z",
@@ -793,6 +836,8 @@
           "trade_id": "V9_BREAK_20231012T124000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": false,
+          "baseline_runtime_pnl_usd": null,
           "candidate_endpoint_pnl_usd": -4.164776356418451,
           "causal_rank": 0.09939759036144578,
           "entry_time_utc": "2023-10-16T12:25:00.000Z",
@@ -803,6 +848,8 @@
           "trade_id": "V9_BREAK_20231016T122500Z_LONG"
         },
         {
+          "baseline_runtime_executed": false,
+          "baseline_runtime_pnl_usd": null,
           "candidate_endpoint_pnl_usd": 7.751915888833644,
           "causal_rank": 0.05405405405405406,
           "entry_time_utc": "2023-10-18T13:35:00.000Z",
@@ -813,6 +860,8 @@
           "trade_id": "V9_BREAK_20231018T133500Z_LONG"
         },
         {
+          "baseline_runtime_executed": false,
+          "baseline_runtime_pnl_usd": null,
           "candidate_endpoint_pnl_usd": -4.043590533833685,
           "causal_rank": 0.01649175412293853,
           "entry_time_utc": "2023-10-19T12:40:00.000Z",
@@ -823,6 +872,8 @@
           "trade_id": "V9_BREAK_20231019T124000Z_LONG"
         },
         {
+          "baseline_runtime_executed": false,
+          "baseline_runtime_pnl_usd": null,
           "candidate_endpoint_pnl_usd": -5.531389213194221,
           "causal_rank": 0.05223880597014925,
           "entry_time_utc": "2023-10-26T15:10:00.000Z",
@@ -833,6 +884,8 @@
           "trade_id": "V9_BREAK_20231026T151000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.819999999999999,
           "candidate_endpoint_pnl_usd": -5.819999999999999,
           "causal_rank": 0.03012912482065997,
           "entry_time_utc": "2023-11-27T14:30:00.000Z",
@@ -843,6 +896,8 @@
           "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.8099999999999996,
           "candidate_endpoint_pnl_usd": -3.8099999999999996,
           "causal_rank": 0.09943181818181818,
           "entry_time_utc": "2023-11-29T11:45:00.000Z",
@@ -853,6 +908,8 @@
           "trade_id": "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 2.2394354698303482,
           "candidate_endpoint_pnl_usd": -5.910688466892245,
           "causal_rank": 0.08178844056706652,
           "entry_time_utc": "2024-07-17T02:40:00.000Z",
@@ -863,6 +920,8 @@
           "trade_id": "V9_BREAK_20240717T024000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.417077028974225,
           "candidate_endpoint_pnl_usd": -4.417077028974225,
           "causal_rank": 0.09229098805646037,
           "entry_time_utc": "2024-07-18T07:05:00.000Z",
@@ -873,6 +932,8 @@
           "trade_id": "V9_BREAK_20240718T070500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.839140796303192,
           "candidate_endpoint_pnl_usd": -4.839140796303192,
           "causal_rank": 0.03788634097706879,
           "entry_time_utc": "2024-10-07T08:25:00.000Z",
@@ -883,6 +944,8 @@
           "trade_id": "V7_20241007T082500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.9835069444444446,
           "candidate_endpoint_pnl_usd": -3.9835069444444446,
           "causal_rank": 0.07170542635658915,
           "entry_time_utc": "2024-10-23T06:40:00.000Z",
@@ -893,6 +956,8 @@
           "trade_id": "V9_BREAK_20241023T064000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.121659523873351,
           "candidate_endpoint_pnl_usd": -4.121659523873351,
           "causal_rank": 0.0647342995169082,
           "entry_time_utc": "2024-10-24T07:50:00.000Z",
@@ -903,6 +968,8 @@
           "trade_id": "V9_BREAK_20241024T075000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.5780226367749295,
           "candidate_endpoint_pnl_usd": -4.5780226367749295,
           "causal_rank": 0.08593012275731822,
           "entry_time_utc": "2024-11-11T09:15:00.000Z",
@@ -913,6 +980,8 @@
           "trade_id": "V7_20241111T091500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 12.229999999999999,
           "candidate_endpoint_pnl_usd": 12.229999999999999,
           "causal_rank": 0.03281519861830743,
           "entry_time_utc": "2025-01-31T10:30:00.000Z",
@@ -923,6 +992,8 @@
           "trade_id": "2025-01-31 10:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": false,
+          "baseline_runtime_pnl_usd": null,
           "candidate_endpoint_pnl_usd": -10.14,
           "causal_rank": 0.013805004314063849,
           "entry_time_utc": "2025-01-31T11:00:00.000Z",
@@ -933,6 +1004,8 @@
           "trade_id": "2025-01-31 11:00:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -11.08,
           "candidate_endpoint_pnl_usd": -11.08,
           "causal_rank": 0.008620689655172414,
           "entry_time_utc": "2025-01-31T11:15:00.000Z",
@@ -943,6 +1016,8 @@
           "trade_id": "2025-01-31 11:15:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": false,
+          "baseline_runtime_pnl_usd": null,
           "candidate_endpoint_pnl_usd": -13.98,
           "causal_rank": 0.009474590869939707,
           "entry_time_utc": "2025-01-31T11:30:00.000Z",
@@ -953,6 +1028,8 @@
           "trade_id": "2025-01-31 11:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.8879749332363716,
           "candidate_endpoint_pnl_usd": -4.8879749332363716,
           "causal_rank": 0.014328808446455505,
           "entry_time_utc": "2025-07-04T07:35:00.000Z",
@@ -963,6 +1040,8 @@
           "trade_id": "V7_20250704T073500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.680395270063707,
           "candidate_endpoint_pnl_usd": -5.680395270063707,
           "causal_rank": 0.09795630725863284,
           "entry_time_utc": "2025-09-24T00:05:00.000Z",
@@ -973,6 +1052,8 @@
           "trade_id": "V9_BREAK_20250924T000500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.53165427614743,
           "candidate_endpoint_pnl_usd": -6.53165427614743,
           "causal_rank": 0.03943661971830986,
           "entry_time_utc": "2025-09-24T01:10:00.000Z",
@@ -983,6 +1064,8 @@
           "trade_id": "V9_BREAK_20250924T011000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -7.549916076467221,
           "candidate_endpoint_pnl_usd": -7.549916076467221,
           "causal_rank": 0.0020905923344947735,
           "entry_time_utc": "2025-09-30T03:45:00.000Z",
@@ -993,6 +1076,8 @@
           "trade_id": "V9_BREAK_20250930T034500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 7.1140346082897,
           "candidate_endpoint_pnl_usd": 34.89570583224341,
           "causal_rank": 0.016613418530351438,
           "entry_time_utc": "2026-01-26T01:15:00.000Z",
@@ -1003,6 +1088,7 @@
           "trade_id": "V9_BREAK_20260126T011500Z_LONG"
         }
       ],
+      "veto_baseline_runtime_profit_factor": 0.4815548242241175,
       "veto_endpoint_profit_factor": 0.6525031802109343,
       "windows": {
         "12m": {
@@ -1053,6 +1139,7 @@
       }
     },
     "LOOKBACK_30": {
+      "additional_cost_usd_per_trade": 0.0,
       "annual": [
         {
           "baseline_net_pnl_usd": 165.92842872914736,
@@ -1165,6 +1252,7 @@
         "v60_tracked_closed_pnl_usd": 3603.5653535720144,
         "win_rate": 0.4848920863309353
       },
+      "baseline_executed_veto_count": 15,
       "challenger": {
         "candidate_rows": 1703,
         "drawdown_recovery_entries": 0,
@@ -1253,13 +1341,13 @@
         "veto_cohort_large_enough": true,
         "veto_cohort_profit_factor_below_one": true
       },
-      "generated_at_utc": "2026-08-25T02:51:06.959735Z",
+      "generated_at_utc": "2026-08-25T04:12:12.519048Z",
       "input_sha256": {
         "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
         "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
         "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
         "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
-        "shared_evaluator": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+        "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
       },
       "limitations": [
         "All historical and recent demo outcomes were exposed before nomination.",
@@ -1329,6 +1417,8 @@
       "schema_version": "v60_mature_source_health_rank_veto_v2_sensitivity_lookback_30_result",
       "veto_audit": [
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.982291666666667,
           "candidate_endpoint_pnl_usd": -3.982291666666667,
           "causal_rank": 0.0,
           "entry_time_utc": "2021-06-18T01:40:00.000Z",
@@ -1339,6 +1429,8 @@
           "trade_id": "V9_BREAK_20210618T014000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.006597222222222,
           "candidate_endpoint_pnl_usd": -4.006597222222222,
           "causal_rank": 0.03888888888888889,
           "entry_time_utc": "2021-08-13T10:55:00.000Z",
@@ -1349,6 +1441,8 @@
           "trade_id": "V7_20210813T105500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.987152777777778,
           "candidate_endpoint_pnl_usd": -3.987152777777778,
           "causal_rank": 0.06521739130434782,
           "entry_time_utc": "2021-11-10T12:45:00.000Z",
@@ -1359,6 +1453,8 @@
           "trade_id": "V9_BREAK_20211110T124500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.053993055555555,
           "candidate_endpoint_pnl_usd": -4.053993055555555,
           "causal_rank": 0.07317073170731707,
           "entry_time_utc": "2021-11-29T03:30:00.000Z",
@@ -1369,6 +1465,8 @@
           "trade_id": "V7_20211129T033000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.819999999999999,
           "candidate_endpoint_pnl_usd": -5.819999999999999,
           "causal_rank": 0.03012912482065997,
           "entry_time_utc": "2023-11-27T14:30:00.000Z",
@@ -1379,6 +1477,8 @@
           "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.8099999999999996,
           "candidate_endpoint_pnl_usd": -3.8099999999999996,
           "causal_rank": 0.09943181818181818,
           "entry_time_utc": "2023-11-29T11:45:00.000Z",
@@ -1389,6 +1489,8 @@
           "trade_id": "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 9.69,
           "candidate_endpoint_pnl_usd": 9.69,
           "causal_rank": 0.009485094850948509,
           "entry_time_utc": "2023-12-27T11:30:00.000Z",
@@ -1399,6 +1501,8 @@
           "trade_id": "2023-12-27 11:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 9.549999999999999,
           "candidate_endpoint_pnl_usd": 9.549999999999999,
           "causal_rank": 0.04864864864864865,
           "entry_time_utc": "2023-12-27T14:00:00.000Z",
@@ -1409,6 +1513,8 @@
           "trade_id": "2023-12-27 14:00:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 12.91,
           "candidate_endpoint_pnl_usd": 12.91,
           "causal_rank": 0.0728744939271255,
           "entry_time_utc": "2023-12-27T14:15:00.000Z",
@@ -1419,6 +1525,8 @@
           "trade_id": "2023-12-27 14:15:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 2.2394354698303482,
           "candidate_endpoint_pnl_usd": -5.910688466892245,
           "causal_rank": 0.08178844056706652,
           "entry_time_utc": "2024-07-17T02:40:00.000Z",
@@ -1429,6 +1537,8 @@
           "trade_id": "V9_BREAK_20240717T024000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.417077028974225,
           "candidate_endpoint_pnl_usd": -4.417077028974225,
           "causal_rank": 0.09229098805646037,
           "entry_time_utc": "2024-07-18T07:05:00.000Z",
@@ -1439,6 +1549,8 @@
           "trade_id": "V9_BREAK_20240718T070500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.9835069444444446,
           "candidate_endpoint_pnl_usd": -3.9835069444444446,
           "causal_rank": 0.07170542635658915,
           "entry_time_utc": "2024-10-23T06:40:00.000Z",
@@ -1449,6 +1561,8 @@
           "trade_id": "V9_BREAK_20241023T064000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.121659523873351,
           "candidate_endpoint_pnl_usd": -4.121659523873351,
           "causal_rank": 0.0647342995169082,
           "entry_time_utc": "2024-10-24T07:50:00.000Z",
@@ -1459,6 +1573,8 @@
           "trade_id": "V9_BREAK_20241024T075000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.5780226367749295,
           "candidate_endpoint_pnl_usd": -4.5780226367749295,
           "causal_rank": 0.08593012275731822,
           "entry_time_utc": "2024-11-11T09:15:00.000Z",
@@ -1469,6 +1585,8 @@
           "trade_id": "V7_20241111T091500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.53165427614743,
           "candidate_endpoint_pnl_usd": -6.53165427614743,
           "causal_rank": 0.03943661971830986,
           "entry_time_utc": "2025-09-24T01:10:00.000Z",
@@ -1479,6 +1597,7 @@
           "trade_id": "V9_BREAK_20250924T011000Z_LONG"
         }
       ],
+      "veto_baseline_runtime_profit_factor": 0.6976683188450027,
       "veto_endpoint_profit_factor": 0.5823996443603451,
       "windows": {
         "12m": {
@@ -1529,6 +1648,7 @@
       }
     },
     "MATURITY_40": {
+      "additional_cost_usd_per_trade": 0.0,
       "annual": [
         {
           "baseline_net_pnl_usd": 165.92842872914736,
@@ -1641,6 +1761,7 @@
         "v60_tracked_closed_pnl_usd": 3603.5653535720144,
         "win_rate": 0.4848920863309353
       },
+      "baseline_executed_veto_count": 13,
       "challenger": {
         "candidate_rows": 1703,
         "drawdown_recovery_entries": 0,
@@ -1729,13 +1850,13 @@
         "veto_cohort_large_enough": true,
         "veto_cohort_profit_factor_below_one": true
       },
-      "generated_at_utc": "2026-08-25T02:48:01.363357Z",
+      "generated_at_utc": "2026-08-25T04:09:59.998713Z",
       "input_sha256": {
         "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
         "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
         "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
         "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
-        "shared_evaluator": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+        "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
       },
       "limitations": [
         "All historical and recent demo outcomes were exposed before nomination.",
@@ -1805,6 +1926,8 @@
       "schema_version": "v60_mature_source_health_rank_veto_v2_sensitivity_maturity_40_result",
       "veto_audit": [
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.380720825497047,
           "candidate_endpoint_pnl_usd": -4.380720825497047,
           "causal_rank": 0.030690537084398978,
           "entry_time_utc": "2021-05-20T02:05:00.000Z",
@@ -1815,6 +1938,8 @@
           "trade_id": "V9_BREAK_20210520T020500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.982291666666667,
           "candidate_endpoint_pnl_usd": -3.982291666666667,
           "causal_rank": 0.0,
           "entry_time_utc": "2021-06-18T01:40:00.000Z",
@@ -1825,6 +1950,8 @@
           "trade_id": "V9_BREAK_20210618T014000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.006597222222222,
           "candidate_endpoint_pnl_usd": -4.006597222222222,
           "causal_rank": 0.03888888888888889,
           "entry_time_utc": "2021-08-13T10:55:00.000Z",
@@ -1835,6 +1962,8 @@
           "trade_id": "V7_20210813T105500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.327940880607618,
           "candidate_endpoint_pnl_usd": -6.327940880607618,
           "causal_rank": 0.08868501529051988,
           "entry_time_utc": "2022-08-02T13:25:00.000Z",
@@ -1845,6 +1974,8 @@
           "trade_id": "V9_BREAK_20220802T132500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.819999999999999,
           "candidate_endpoint_pnl_usd": -5.819999999999999,
           "causal_rank": 0.03012912482065997,
           "entry_time_utc": "2023-11-27T14:30:00.000Z",
@@ -1855,6 +1986,8 @@
           "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.8099999999999996,
           "candidate_endpoint_pnl_usd": -3.8099999999999996,
           "causal_rank": 0.09943181818181818,
           "entry_time_utc": "2023-11-29T11:45:00.000Z",
@@ -1865,6 +1998,8 @@
           "trade_id": "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 2.2394354698303482,
           "candidate_endpoint_pnl_usd": -5.910688466892245,
           "causal_rank": 0.08178844056706652,
           "entry_time_utc": "2024-07-17T02:40:00.000Z",
@@ -1875,6 +2010,8 @@
           "trade_id": "V9_BREAK_20240717T024000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.417077028974225,
           "candidate_endpoint_pnl_usd": -4.417077028974225,
           "causal_rank": 0.09229098805646037,
           "entry_time_utc": "2024-07-18T07:05:00.000Z",
@@ -1885,6 +2022,8 @@
           "trade_id": "V9_BREAK_20240718T070500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.839140796303192,
           "candidate_endpoint_pnl_usd": -4.839140796303192,
           "causal_rank": 0.03788634097706879,
           "entry_time_utc": "2024-10-07T08:25:00.000Z",
@@ -1895,6 +2034,8 @@
           "trade_id": "V7_20241007T082500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.121659523873351,
           "candidate_endpoint_pnl_usd": -4.121659523873351,
           "causal_rank": 0.0647342995169082,
           "entry_time_utc": "2024-10-24T07:50:00.000Z",
@@ -1905,6 +2046,8 @@
           "trade_id": "V9_BREAK_20241024T075000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.8879749332363716,
           "candidate_endpoint_pnl_usd": -4.8879749332363716,
           "causal_rank": 0.014328808446455505,
           "entry_time_utc": "2025-07-04T07:35:00.000Z",
@@ -1915,6 +2058,8 @@
           "trade_id": "V7_20250704T073500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.680395270063707,
           "candidate_endpoint_pnl_usd": -5.680395270063707,
           "causal_rank": 0.09795630725863284,
           "entry_time_utc": "2025-09-24T00:05:00.000Z",
@@ -1925,6 +2070,8 @@
           "trade_id": "V9_BREAK_20250924T000500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.53165427614743,
           "candidate_endpoint_pnl_usd": -6.53165427614743,
           "causal_rank": 0.03943661971830986,
           "entry_time_utc": "2025-09-24T01:10:00.000Z",
@@ -1935,6 +2082,7 @@
           "trade_id": "V9_BREAK_20250924T011000Z_LONG"
         }
       ],
+      "veto_baseline_runtime_profit_factor": 0.038082105953357516,
       "veto_endpoint_profit_factor": 0.0,
       "windows": {
         "12m": {
@@ -1985,6 +2133,7 @@
       }
     },
     "MATURITY_60": {
+      "additional_cost_usd_per_trade": 0.0,
       "annual": [
         {
           "baseline_net_pnl_usd": 165.92842872914736,
@@ -2097,6 +2246,7 @@
         "v60_tracked_closed_pnl_usd": 3603.5653535720144,
         "win_rate": 0.4848920863309353
       },
+      "baseline_executed_veto_count": 12,
       "challenger": {
         "candidate_rows": 1703,
         "drawdown_recovery_entries": 0,
@@ -2185,13 +2335,13 @@
         "veto_cohort_large_enough": true,
         "veto_cohort_profit_factor_below_one": true
       },
-      "generated_at_utc": "2026-08-25T02:49:30.578896Z",
+      "generated_at_utc": "2026-08-25T04:11:02.006478Z",
       "input_sha256": {
         "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
         "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
         "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
         "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
-        "shared_evaluator": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+        "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
       },
       "limitations": [
         "All historical and recent demo outcomes were exposed before nomination.",
@@ -2261,6 +2411,8 @@
       "schema_version": "v60_mature_source_health_rank_veto_v2_sensitivity_maturity_60_result",
       "veto_audit": [
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.982291666666667,
           "candidate_endpoint_pnl_usd": -3.982291666666667,
           "causal_rank": 0.0,
           "entry_time_utc": "2021-06-18T01:40:00.000Z",
@@ -2271,6 +2423,8 @@
           "trade_id": "V9_BREAK_20210618T014000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.006597222222222,
           "candidate_endpoint_pnl_usd": -4.006597222222222,
           "causal_rank": 0.03888888888888889,
           "entry_time_utc": "2021-08-13T10:55:00.000Z",
@@ -2281,6 +2435,8 @@
           "trade_id": "V7_20210813T105500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.327940880607618,
           "candidate_endpoint_pnl_usd": -6.327940880607618,
           "causal_rank": 0.08868501529051988,
           "entry_time_utc": "2022-08-02T13:25:00.000Z",
@@ -2291,6 +2447,8 @@
           "trade_id": "V9_BREAK_20220802T132500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.819999999999999,
           "candidate_endpoint_pnl_usd": -5.819999999999999,
           "causal_rank": 0.03012912482065997,
           "entry_time_utc": "2023-11-27T14:30:00.000Z",
@@ -2301,6 +2459,8 @@
           "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.8099999999999996,
           "candidate_endpoint_pnl_usd": -3.8099999999999996,
           "causal_rank": 0.09943181818181818,
           "entry_time_utc": "2023-11-29T11:45:00.000Z",
@@ -2311,6 +2471,8 @@
           "trade_id": "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 2.2394354698303482,
           "candidate_endpoint_pnl_usd": -5.910688466892245,
           "causal_rank": 0.08178844056706652,
           "entry_time_utc": "2024-07-17T02:40:00.000Z",
@@ -2321,6 +2483,8 @@
           "trade_id": "V9_BREAK_20240717T024000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.417077028974225,
           "candidate_endpoint_pnl_usd": -4.417077028974225,
           "causal_rank": 0.09229098805646037,
           "entry_time_utc": "2024-07-18T07:05:00.000Z",
@@ -2331,6 +2495,8 @@
           "trade_id": "V9_BREAK_20240718T070500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.839140796303192,
           "candidate_endpoint_pnl_usd": -4.839140796303192,
           "causal_rank": 0.03788634097706879,
           "entry_time_utc": "2024-10-07T08:25:00.000Z",
@@ -2341,6 +2507,8 @@
           "trade_id": "V7_20241007T082500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.121659523873351,
           "candidate_endpoint_pnl_usd": -4.121659523873351,
           "causal_rank": 0.0647342995169082,
           "entry_time_utc": "2024-10-24T07:50:00.000Z",
@@ -2351,6 +2519,8 @@
           "trade_id": "V9_BREAK_20241024T075000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.8879749332363716,
           "candidate_endpoint_pnl_usd": -4.8879749332363716,
           "causal_rank": 0.014328808446455505,
           "entry_time_utc": "2025-07-04T07:35:00.000Z",
@@ -2361,6 +2531,8 @@
           "trade_id": "V7_20250704T073500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.680395270063707,
           "candidate_endpoint_pnl_usd": -5.680395270063707,
           "causal_rank": 0.09795630725863284,
           "entry_time_utc": "2025-09-24T00:05:00.000Z",
@@ -2371,6 +2543,8 @@
           "trade_id": "V9_BREAK_20250924T000500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.53165427614743,
           "candidate_endpoint_pnl_usd": -6.53165427614743,
           "causal_rank": 0.03943661971830986,
           "entry_time_utc": "2025-09-24T01:10:00.000Z",
@@ -2381,6 +2555,7 @@
           "trade_id": "V9_BREAK_20250924T011000Z_LONG"
         }
       ],
+      "veto_baseline_runtime_profit_factor": 0.04114738656623422,
       "veto_endpoint_profit_factor": 0.0,
       "windows": {
         "12m": {
@@ -2431,6 +2606,7 @@
       }
     },
     "NOMINATED": {
+      "additional_cost_usd_per_trade": 0.0,
       "annual": [
         {
           "baseline_net_pnl_usd": 165.92842872914736,
@@ -2543,6 +2719,7 @@
         "v60_tracked_closed_pnl_usd": 3603.5653535720144,
         "win_rate": 0.4848920863309353
       },
+      "baseline_executed_veto_count": 12,
       "challenger": {
         "candidate_rows": 1703,
         "drawdown_recovery_entries": 0,
@@ -2631,13 +2808,13 @@
         "veto_cohort_large_enough": true,
         "veto_cohort_profit_factor_below_one": true
       },
-      "generated_at_utc": "2026-08-25T02:46:32.108886Z",
+      "generated_at_utc": "2026-08-25T04:09:00.149312Z",
       "input_sha256": {
         "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
         "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
         "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
         "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
-        "shared_evaluator": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+        "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
       },
       "limitations": [
         "All historical and recent demo outcomes were exposed before nomination.",
@@ -2707,6 +2884,8 @@
       "schema_version": "v60_mature_source_health_rank_veto_v2_sensitivity_nominated_result",
       "veto_audit": [
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.982291666666667,
           "candidate_endpoint_pnl_usd": -3.982291666666667,
           "causal_rank": 0.0,
           "entry_time_utc": "2021-06-18T01:40:00.000Z",
@@ -2717,6 +2896,8 @@
           "trade_id": "V9_BREAK_20210618T014000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.006597222222222,
           "candidate_endpoint_pnl_usd": -4.006597222222222,
           "causal_rank": 0.03888888888888889,
           "entry_time_utc": "2021-08-13T10:55:00.000Z",
@@ -2727,6 +2908,8 @@
           "trade_id": "V7_20210813T105500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.327940880607618,
           "candidate_endpoint_pnl_usd": -6.327940880607618,
           "causal_rank": 0.08868501529051988,
           "entry_time_utc": "2022-08-02T13:25:00.000Z",
@@ -2737,6 +2920,8 @@
           "trade_id": "V9_BREAK_20220802T132500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.819999999999999,
           "candidate_endpoint_pnl_usd": -5.819999999999999,
           "causal_rank": 0.03012912482065997,
           "entry_time_utc": "2023-11-27T14:30:00.000Z",
@@ -2747,6 +2932,8 @@
           "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.8099999999999996,
           "candidate_endpoint_pnl_usd": -3.8099999999999996,
           "causal_rank": 0.09943181818181818,
           "entry_time_utc": "2023-11-29T11:45:00.000Z",
@@ -2757,6 +2944,8 @@
           "trade_id": "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 2.2394354698303482,
           "candidate_endpoint_pnl_usd": -5.910688466892245,
           "causal_rank": 0.08178844056706652,
           "entry_time_utc": "2024-07-17T02:40:00.000Z",
@@ -2767,6 +2956,8 @@
           "trade_id": "V9_BREAK_20240717T024000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.417077028974225,
           "candidate_endpoint_pnl_usd": -4.417077028974225,
           "causal_rank": 0.09229098805646037,
           "entry_time_utc": "2024-07-18T07:05:00.000Z",
@@ -2777,6 +2968,8 @@
           "trade_id": "V9_BREAK_20240718T070500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.839140796303192,
           "candidate_endpoint_pnl_usd": -4.839140796303192,
           "causal_rank": 0.03788634097706879,
           "entry_time_utc": "2024-10-07T08:25:00.000Z",
@@ -2787,6 +2980,8 @@
           "trade_id": "V7_20241007T082500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.121659523873351,
           "candidate_endpoint_pnl_usd": -4.121659523873351,
           "causal_rank": 0.0647342995169082,
           "entry_time_utc": "2024-10-24T07:50:00.000Z",
@@ -2797,6 +2992,8 @@
           "trade_id": "V9_BREAK_20241024T075000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.8879749332363716,
           "candidate_endpoint_pnl_usd": -4.8879749332363716,
           "causal_rank": 0.014328808446455505,
           "entry_time_utc": "2025-07-04T07:35:00.000Z",
@@ -2807,6 +3004,8 @@
           "trade_id": "V7_20250704T073500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.680395270063707,
           "candidate_endpoint_pnl_usd": -5.680395270063707,
           "causal_rank": 0.09795630725863284,
           "entry_time_utc": "2025-09-24T00:05:00.000Z",
@@ -2817,6 +3016,8 @@
           "trade_id": "V9_BREAK_20250924T000500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.53165427614743,
           "candidate_endpoint_pnl_usd": -6.53165427614743,
           "causal_rank": 0.03943661971830986,
           "entry_time_utc": "2025-09-24T01:10:00.000Z",
@@ -2827,6 +3028,7 @@
           "trade_id": "V9_BREAK_20250924T011000Z_LONG"
         }
       ],
+      "veto_baseline_runtime_profit_factor": 0.04114738656623422,
       "veto_endpoint_profit_factor": 0.0,
       "windows": {
         "12m": {
@@ -2877,6 +3079,7 @@
       }
     },
     "RANK_005": {
+      "additional_cost_usd_per_trade": 0.0,
       "annual": [
         {
           "baseline_net_pnl_usd": 165.92842872914736,
@@ -2989,6 +3192,7 @@
         "v60_tracked_closed_pnl_usd": 3603.5653535720144,
         "win_rate": 0.4848920863309353
       },
+      "baseline_executed_veto_count": 5,
       "challenger": {
         "candidate_rows": 1703,
         "drawdown_recovery_entries": 0,
@@ -3077,13 +3281,13 @@
         "veto_cohort_large_enough": false,
         "veto_cohort_profit_factor_below_one": true
       },
-      "generated_at_utc": "2026-08-25T02:55:40.505028Z",
+      "generated_at_utc": "2026-08-25T04:15:21.173083Z",
       "input_sha256": {
         "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
         "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
         "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
         "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
-        "shared_evaluator": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+        "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
       },
       "limitations": [
         "All historical and recent demo outcomes were exposed before nomination.",
@@ -3153,6 +3357,8 @@
       "schema_version": "v60_mature_source_health_rank_veto_v2_sensitivity_rank_005_result",
       "veto_audit": [
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.982291666666667,
           "candidate_endpoint_pnl_usd": -3.982291666666667,
           "causal_rank": 0.0,
           "entry_time_utc": "2021-06-18T01:40:00.000Z",
@@ -3163,6 +3369,8 @@
           "trade_id": "V9_BREAK_20210618T014000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.006597222222222,
           "candidate_endpoint_pnl_usd": -4.006597222222222,
           "causal_rank": 0.03888888888888889,
           "entry_time_utc": "2021-08-13T10:55:00.000Z",
@@ -3173,6 +3381,8 @@
           "trade_id": "V7_20210813T105500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.819999999999999,
           "candidate_endpoint_pnl_usd": -5.819999999999999,
           "causal_rank": 0.03012912482065997,
           "entry_time_utc": "2023-11-27T14:30:00.000Z",
@@ -3183,6 +3393,8 @@
           "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.839140796303192,
           "candidate_endpoint_pnl_usd": -4.839140796303192,
           "causal_rank": 0.03788634097706879,
           "entry_time_utc": "2024-10-07T08:25:00.000Z",
@@ -3193,6 +3405,8 @@
           "trade_id": "V7_20241007T082500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.8879749332363716,
           "candidate_endpoint_pnl_usd": -4.8879749332363716,
           "causal_rank": 0.014328808446455505,
           "entry_time_utc": "2025-07-04T07:35:00.000Z",
@@ -3203,6 +3417,7 @@
           "trade_id": "V7_20250704T073500Z_LONG"
         }
       ],
+      "veto_baseline_runtime_profit_factor": 0.0,
       "veto_endpoint_profit_factor": 0.0,
       "windows": {
         "12m": {
@@ -3253,6 +3468,7 @@
       }
     },
     "RANK_015": {
+      "additional_cost_usd_per_trade": 0.0,
       "annual": [
         {
           "baseline_net_pnl_usd": 165.92842872914736,
@@ -3365,6 +3581,7 @@
         "v60_tracked_closed_pnl_usd": 3603.5653535720144,
         "win_rate": 0.4848920863309353
       },
+      "baseline_executed_veto_count": 28,
       "challenger": {
         "candidate_rows": 1703,
         "drawdown_recovery_entries": 0,
@@ -3453,13 +3670,13 @@
         "veto_cohort_large_enough": true,
         "veto_cohort_profit_factor_below_one": true
       },
-      "generated_at_utc": "2026-08-25T02:57:09.964362Z",
+      "generated_at_utc": "2026-08-25T04:16:20.945279Z",
       "input_sha256": {
         "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
         "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
         "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
         "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
-        "shared_evaluator": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+        "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
       },
       "limitations": [
         "All historical and recent demo outcomes were exposed before nomination.",
@@ -3529,6 +3746,8 @@
       "schema_version": "v60_mature_source_health_rank_veto_v2_sensitivity_rank_015_result",
       "veto_audit": [
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.982291666666667,
           "candidate_endpoint_pnl_usd": -3.982291666666667,
           "causal_rank": 0.0,
           "entry_time_utc": "2021-06-18T01:40:00.000Z",
@@ -3539,6 +3758,8 @@
           "trade_id": "V9_BREAK_20210618T014000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 7.929351888002732,
           "candidate_endpoint_pnl_usd": 7.929351888002732,
           "causal_rank": 0.10191082802547771,
           "entry_time_utc": "2021-06-23T13:35:00.000Z",
@@ -3549,6 +3770,8 @@
           "trade_id": "V9_BREAK_20210623T133500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.032118055555555,
           "candidate_endpoint_pnl_usd": -4.032118055555555,
           "causal_rank": 0.12048192771084337,
           "entry_time_utc": "2021-07-07T08:25:00.000Z",
@@ -3559,6 +3782,8 @@
           "trade_id": "V7_20210707T082500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 7.661433215149934,
           "candidate_endpoint_pnl_usd": 7.661433215149934,
           "causal_rank": 0.1340782122905028,
           "entry_time_utc": "2021-08-12T15:25:00.000Z",
@@ -3569,6 +3794,8 @@
           "trade_id": "V9_BREAK_20210812T152500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.006597222222222,
           "candidate_endpoint_pnl_usd": -4.006597222222222,
           "causal_rank": 0.03888888888888889,
           "entry_time_utc": "2021-08-13T10:55:00.000Z",
@@ -3579,6 +3806,8 @@
           "trade_id": "V7_20210813T105500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 2.142372469322483,
           "candidate_endpoint_pnl_usd": -5.177011477560653,
           "causal_rank": 0.13973799126637554,
           "entry_time_utc": "2021-11-09T14:05:00.000Z",
@@ -3589,6 +3818,8 @@
           "trade_id": "V7_20211109T140500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.987152777777778,
           "candidate_endpoint_pnl_usd": -3.987152777777778,
           "causal_rank": 0.06521739130434782,
           "entry_time_utc": "2021-11-10T12:45:00.000Z",
@@ -3599,6 +3830,8 @@
           "trade_id": "V9_BREAK_20211110T124500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.327940880607618,
           "candidate_endpoint_pnl_usd": -6.327940880607618,
           "causal_rank": 0.08868501529051988,
           "entry_time_utc": "2022-08-02T13:25:00.000Z",
@@ -3609,6 +3842,8 @@
           "trade_id": "V9_BREAK_20220802T132500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 7.210956676876681,
           "candidate_endpoint_pnl_usd": 7.210956676876681,
           "causal_rank": 0.11517367458866545,
           "entry_time_utc": "2023-04-21T12:25:00.000Z",
@@ -3619,6 +3854,8 @@
           "trade_id": "V7_20230421T122500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 0.14059027777775057,
           "candidate_endpoint_pnl_usd": 6.110590277777778,
           "causal_rank": 0.13495934959349593,
           "entry_time_utc": "2023-08-03T08:10:00.000Z",
@@ -3629,6 +3866,8 @@
           "trade_id": "V7_20230803T081000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.819999999999999,
           "candidate_endpoint_pnl_usd": -5.819999999999999,
           "causal_rank": 0.03012912482065997,
           "entry_time_utc": "2023-11-27T14:30:00.000Z",
@@ -3639,6 +3878,8 @@
           "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.8099999999999996,
           "candidate_endpoint_pnl_usd": -3.8099999999999996,
           "causal_rank": 0.1489971346704871,
           "entry_time_utc": "2023-11-28T09:00:00.000Z",
@@ -3649,6 +3890,8 @@
           "trade_id": "2023-11-28 09:00:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.8099999999999996,
           "candidate_endpoint_pnl_usd": -3.8099999999999996,
           "causal_rank": 0.09943181818181818,
           "entry_time_utc": "2023-11-29T11:45:00.000Z",
@@ -3659,6 +3902,8 @@
           "trade_id": "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.8099999999999996,
           "candidate_endpoint_pnl_usd": -3.8099999999999996,
           "causal_rank": 0.1375886524822695,
           "entry_time_utc": "2023-11-29T12:30:00.000Z",
@@ -3669,6 +3914,8 @@
           "trade_id": "2023-11-29 12:30:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 9.61,
           "candidate_endpoint_pnl_usd": 9.61,
           "causal_rank": 0.10511756569847856,
           "entry_time_utc": "2023-12-19T13:15:00.000Z",
@@ -3679,6 +3926,8 @@
           "trade_id": "2023-12-19 13:15:00|LONG|r1_h1_pullback_long_v1"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -3.9956597222222223,
           "candidate_endpoint_pnl_usd": -3.9956597222222223,
           "causal_rank": 0.128099173553719,
           "entry_time_utc": "2023-12-20T12:40:00.000Z",
@@ -3689,6 +3938,8 @@
           "trade_id": "V7_20231220T124000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 2.2824010554558605,
           "candidate_endpoint_pnl_usd": -5.197994502095359,
           "causal_rank": 0.13537117903930132,
           "entry_time_utc": "2024-07-17T01:25:00.000Z",
@@ -3699,6 +3950,8 @@
           "trade_id": "V9_BREAK_20240717T012500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 2.2394354698303482,
           "candidate_endpoint_pnl_usd": -5.910688466892245,
           "causal_rank": 0.08178844056706652,
           "entry_time_utc": "2024-07-17T02:40:00.000Z",
@@ -3709,6 +3962,8 @@
           "trade_id": "V9_BREAK_20240717T024000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.417077028974225,
           "candidate_endpoint_pnl_usd": -4.417077028974225,
           "causal_rank": 0.09229098805646037,
           "entry_time_utc": "2024-07-18T07:05:00.000Z",
@@ -3719,6 +3974,8 @@
           "trade_id": "V9_BREAK_20240718T070500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.839140796303192,
           "candidate_endpoint_pnl_usd": -4.839140796303192,
           "causal_rank": 0.03788634097706879,
           "entry_time_utc": "2024-10-07T08:25:00.000Z",
@@ -3729,6 +3986,8 @@
           "trade_id": "V7_20241007T082500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.121659523873351,
           "candidate_endpoint_pnl_usd": -4.121659523873351,
           "causal_rank": 0.0647342995169082,
           "entry_time_utc": "2024-10-24T07:50:00.000Z",
@@ -3739,6 +3998,8 @@
           "trade_id": "V9_BREAK_20241024T075000Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.298846107800144,
           "candidate_endpoint_pnl_usd": -4.298846107800144,
           "causal_rank": 0.14946962391513982,
           "entry_time_utc": "2024-10-29T03:10:00.000Z",
@@ -3749,6 +4010,8 @@
           "trade_id": "V7_20241029T031000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -4.8879749332363716,
           "candidate_endpoint_pnl_usd": -4.8879749332363716,
           "causal_rank": 0.014328808446455505,
           "entry_time_utc": "2025-07-04T07:35:00.000Z",
@@ -3759,6 +4022,8 @@
           "trade_id": "V7_20250704T073500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 3.3163022225666072,
           "candidate_endpoint_pnl_usd": 12.673379986568195,
           "causal_rank": 0.13196894848270996,
           "entry_time_utc": "2025-09-23T03:50:00.000Z",
@@ -3769,6 +4034,8 @@
           "trade_id": "V9_BREAK_20250923T035000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": 12.126322250761357,
           "candidate_endpoint_pnl_usd": 12.126322250761357,
           "causal_rank": 0.13469675599435826,
           "entry_time_utc": "2025-09-23T08:35:00.000Z",
@@ -3779,6 +4046,8 @@
           "trade_id": "V9_BREAK_20250923T083500Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -5.680395270063707,
           "candidate_endpoint_pnl_usd": -5.680395270063707,
           "causal_rank": 0.09795630725863284,
           "entry_time_utc": "2025-09-24T00:05:00.000Z",
@@ -3789,6 +4058,8 @@
           "trade_id": "V9_BREAK_20250924T000500Z_SHORT"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -6.53165427614743,
           "candidate_endpoint_pnl_usd": -6.53165427614743,
           "causal_rank": 0.03943661971830986,
           "entry_time_utc": "2025-09-24T01:10:00.000Z",
@@ -3799,6 +4070,8 @@
           "trade_id": "V9_BREAK_20250924T011000Z_LONG"
         },
         {
+          "baseline_runtime_executed": true,
+          "baseline_runtime_pnl_usd": -7.549916076467221,
           "candidate_endpoint_pnl_usd": -7.549916076467221,
           "causal_rank": 0.0020905923344947735,
           "entry_time_utc": "2025-09-30T03:45:00.000Z",
@@ -3809,6 +4082,7 @@
           "trade_id": "V9_BREAK_20250930T034500Z_LONG"
         }
       ],
+      "veto_baseline_runtime_profit_factor": 0.6362491914732817,
       "veto_endpoint_profit_factor": 0.6196250336938366,
       "windows": {
         "12m": {
@@ -3859,11 +4133,12 @@
       }
     }
   },
-  "generated_at_utc": "2026-08-25T02:57:09.995337Z",
+  "generated_at_utc": "2026-08-25T04:16:20.974447Z",
   "nominated_policy_unchanged": true,
   "rows": [
     {
       "all_original_gates_pass": true,
+      "baseline_executed_vetoes": 12,
       "closed_drawdown_usd": 217.45931309847566,
       "core_direction_robust": true,
       "delta_net_pnl_usd": 52.18529612826478,
@@ -3877,6 +4152,7 @@
     },
     {
       "all_original_gates_pass": true,
+      "baseline_executed_vetoes": 13,
       "closed_drawdown_usd": 217.45931309847566,
       "core_direction_robust": true,
       "delta_net_pnl_usd": 56.5660169537623,
@@ -3890,6 +4166,7 @@
     },
     {
       "all_original_gates_pass": true,
+      "baseline_executed_vetoes": 12,
       "closed_drawdown_usd": 217.45931309847566,
       "core_direction_robust": true,
       "delta_net_pnl_usd": 52.18529612826478,
@@ -3903,6 +4180,7 @@
     },
     {
       "all_original_gates_pass": false,
+      "baseline_executed_vetoes": 15,
       "closed_drawdown_usd": 217.45931309847566,
       "core_direction_robust": false,
       "delta_net_pnl_usd": 25.260325671566534,
@@ -3916,6 +4194,7 @@
     },
     {
       "all_original_gates_pass": false,
+      "baseline_executed_vetoes": 8,
       "closed_drawdown_usd": 217.45931309847566,
       "core_direction_robust": true,
       "delta_net_pnl_usd": 28.757330768209613,
@@ -3929,6 +4208,7 @@
     },
     {
       "all_original_gates_pass": false,
+      "baseline_executed_vetoes": 24,
       "closed_drawdown_usd": 197.54779129627133,
       "core_direction_robust": false,
       "delta_net_pnl_usd": 86.0085441271749,
@@ -3942,6 +4222,7 @@
     },
     {
       "all_original_gates_pass": false,
+      "baseline_executed_vetoes": 5,
       "closed_drawdown_usd": 217.45931309847566,
       "core_direction_robust": true,
       "delta_net_pnl_usd": 23.536004618428706,
@@ -3955,6 +4236,7 @@
     },
     {
       "all_original_gates_pass": false,
+      "baseline_executed_vetoes": 28,
       "closed_drawdown_usd": 218.28483327432633,
       "core_direction_robust": false,
       "delta_net_pnl_usd": 75.07753993318602,

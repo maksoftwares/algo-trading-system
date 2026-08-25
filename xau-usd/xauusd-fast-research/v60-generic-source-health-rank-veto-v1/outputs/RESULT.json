@@ -1,4 +1,5 @@
 {
+  "additional_cost_usd_per_trade": 0.0,
   "annual": [
     {
       "baseline_net_pnl_usd": 165.92842872914736,
@@ -111,6 +112,7 @@
     "v60_tracked_closed_pnl_usd": 3603.5653535720144,
     "win_rate": 0.4848920863309353
   },
+  "baseline_executed_veto_count": 14,
   "challenger": {
     "candidate_rows": 1703,
     "drawdown_recovery_entries": 0,
@@ -199,13 +201,13 @@
     "veto_cohort_large_enough": true,
     "veto_cohort_profit_factor_below_one": true
   },
-  "generated_at_utc": "2026-08-25T02:33:07.368865Z",
+  "generated_at_utc": "2026-08-25T03:57:02.534796Z",
   "input_sha256": {
     "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
     "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
     "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
     "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
-    "shared_evaluator": "9a0a24ad4de9ac07e1a29575bc293ff1619d78a2a7da2c254b4453411642bc78"
+    "shared_evaluator": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
   },
   "limitations": [
     "All historical and recent demo outcomes were exposed before nomination.",
@@ -274,6 +276,8 @@
   "schema_version": "v60_generic_source_health_rank_veto_v1_result",
   "veto_audit": [
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -4.380720825497047,
       "candidate_endpoint_pnl_usd": -4.380720825497047,
       "causal_rank": 0.030690537084398978,
       "entry_time_utc": "2021-05-20T02:05:00.000Z",
@@ -284,6 +288,8 @@
       "trade_id": "V9_BREAK_20210520T020500Z_LONG"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -3.982291666666667,
       "candidate_endpoint_pnl_usd": -3.982291666666667,
       "causal_rank": 0.0,
       "entry_time_utc": "2021-06-18T01:40:00.000Z",
@@ -294,6 +300,8 @@
       "trade_id": "V9_BREAK_20210618T014000Z_LONG"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -4.006597222222222,
       "candidate_endpoint_pnl_usd": -4.006597222222222,
       "causal_rank": 0.03888888888888889,
       "entry_time_utc": "2021-08-13T10:55:00.000Z",
@@ -304,6 +312,8 @@
       "trade_id": "V7_20210813T105500Z_SHORT"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": 5.92425871872599,
       "candidate_endpoint_pnl_usd": 5.92425871872599,
       "causal_rank": 0.04697986577181208,
       "entry_time_utc": "2022-06-10T16:00:00.033Z",
@@ -314,6 +324,8 @@
       "trade_id": "a1a64ef87b27ca6af501bc8f"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -6.327940880607618,
       "candidate_endpoint_pnl_usd": -6.327940880607618,
       "causal_rank": 0.08868501529051988,
       "entry_time_utc": "2022-08-02T13:25:00.000Z",
@@ -324,6 +336,8 @@
       "trade_id": "V9_BREAK_20220802T132500Z_SHORT"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -5.819999999999999,
       "candidate_endpoint_pnl_usd": -5.819999999999999,
       "causal_rank": 0.03012912482065997,
       "entry_time_utc": "2023-11-27T14:30:00.000Z",
@@ -334,6 +348,8 @@
       "trade_id": "2023-11-27 14:30:00|LONG|r1_h1_pullback_long_v1"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -3.8099999999999996,
       "candidate_endpoint_pnl_usd": -3.8099999999999996,
       "causal_rank": 0.09943181818181818,
       "entry_time_utc": "2023-11-29T11:45:00.000Z",
@@ -344,6 +360,8 @@
       "trade_id": "2023-11-29 11:45:00|LONG|r1_h1_pullback_long_v1"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": 2.2394354698303482,
       "candidate_endpoint_pnl_usd": -5.910688466892245,
       "causal_rank": 0.08178844056706652,
       "entry_time_utc": "2024-07-17T02:40:00.000Z",
@@ -354,6 +372,8 @@
       "trade_id": "V9_BREAK_20240717T024000Z_SHORT"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -4.417077028974225,
       "candidate_endpoint_pnl_usd": -4.417077028974225,
       "causal_rank": 0.09229098805646037,
       "entry_time_utc": "2024-07-18T07:05:00.000Z",
@@ -364,6 +384,8 @@
       "trade_id": "V9_BREAK_20240718T070500Z_LONG"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -4.839140796303192,
       "candidate_endpoint_pnl_usd": -4.839140796303192,
       "causal_rank": 0.03788634097706879,
       "entry_time_utc": "2024-10-07T08:25:00.000Z",
@@ -374,6 +396,8 @@
       "trade_id": "V7_20241007T082500Z_SHORT"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -4.121659523873351,
       "candidate_endpoint_pnl_usd": -4.121659523873351,
       "causal_rank": 0.0647342995169082,
       "entry_time_utc": "2024-10-24T07:50:00.000Z",
@@ -384,6 +408,8 @@
       "trade_id": "V9_BREAK_20241024T075000Z_SHORT"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -4.8879749332363716,
       "candidate_endpoint_pnl_usd": -4.8879749332363716,
       "causal_rank": 0.014328808446455505,
       "entry_time_utc": "2025-07-04T07:35:00.000Z",
@@ -394,6 +420,8 @@
       "trade_id": "V7_20250704T073500Z_LONG"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -5.680395270063707,
       "candidate_endpoint_pnl_usd": -5.680395270063707,
       "causal_rank": 0.09795630725863284,
       "entry_time_utc": "2025-09-24T00:05:00.000Z",
@@ -404,6 +432,8 @@
       "trade_id": "V9_BREAK_20250924T000500Z_SHORT"
     },
     {
+      "baseline_runtime_executed": true,
+      "baseline_runtime_pnl_usd": -6.53165427614743,
       "candidate_endpoint_pnl_usd": -6.53165427614743,
       "causal_rank": 0.03943661971830986,
       "entry_time_utc": "2025-09-24T01:10:00.000Z",
@@ -414,6 +444,7 @@
       "trade_id": "V9_BREAK_20250924T011000Z_LONG"
     }
   ],
+  "veto_baseline_runtime_profit_factor": 0.13882546349190558,
   "veto_endpoint_profit_factor": 0.09154221245595161,
   "windows": {
     "12m": {

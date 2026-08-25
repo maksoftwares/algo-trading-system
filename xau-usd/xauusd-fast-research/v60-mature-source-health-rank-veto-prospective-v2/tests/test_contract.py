@@ -27,3 +27,11 @@ def test_v2_observer_is_read_only_and_hash_locked() -> None:
         assert hashlib.sha256(path.read_bytes()).hexdigest() == config["lock"][hash_key]
     warm_start = REPO_ROOT / config["read_only_inputs"]["warm_start"]
     assert hashlib.sha256(warm_start.read_bytes()).hexdigest() == config["lock"]["warm_start_sha256"]
+    source_config = REPO_ROOT / config["read_only_inputs"]["candidate_source_config"]
+    assert hashlib.sha256(source_config.read_bytes()).hexdigest() == config["lock"][
+        "candidate_source_config_sha256"
+    ]
+    sources = json.loads(source_config.read_text(encoding="utf-8"))["sources"]
+    assert {source["source_id"] for source in sources} == set(
+        config["account"]["source_magics"]
+    )

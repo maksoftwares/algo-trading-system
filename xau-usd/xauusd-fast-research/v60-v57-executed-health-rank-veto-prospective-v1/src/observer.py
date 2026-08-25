@@ -54,6 +54,70 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
+def load_candidate_rows(
+    inputs: Mapping[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    source_config_text = inputs.get("candidate_source_config")
+    if not source_config_text:
+        path = Path(str(inputs["candidate_ledger"]))
+        rows = read_jsonl(path)
+        return rows, [{"path": str(path), "exists": True, "rows": len(rows)}]
+
+    source_config = read_json(resolve_repo(str(source_config_text)))
+    sources = list(source_config["sources"])
+    path_counts: dict[str, int] = {}
+    for source in sources:
+        key = str(Path(str(source["path"])).resolve())
+        path_counts[key] = path_counts.get(key, 0) + 1
+
+    cache: dict[str, list[dict[str, Any]]] = {}
+    candidates: list[dict[str, Any]] = []
+    audit: list[dict[str, Any]] = []
+    for source in sources:
+        source_id = str(source["source_id"])
+        specialist_id = str(source["specialist_id"])
+        time_field = str(source["time_field"])
+        path = Path(str(source["path"]))
+        key = str(path.resolve())
+        exists = path.exists()
+        if key not in cache:
+            cache[key] = read_jsonl(path) if exists else []
+        accepted = []
+        for raw in cache[key]:
+            row_specialist = raw.get("specialist_id")
+            if row_specialist is None and path_counts[key] > 1:
+                raise ValueError(
+                    f"Shared candidate ledger row has no specialist_id: {path}"
+                )
+            if row_specialist is not None and str(row_specialist) != specialist_id:
+                continue
+            if "candidate_id" not in raw or time_field not in raw:
+                raise ValueError(
+                    f"Candidate row for {source_id} lacks candidate_id or {time_field}"
+                )
+            normalized = dict(raw)
+            normalized["specialist_id"] = source_id
+            normalized["scheduled_entry_time_utc"] = raw[time_field]
+            normalized["event_id"] = str(
+                raw.get("event_id", raw["candidate_id"])
+            )
+            accepted.append(normalized)
+        candidates.extend(accepted)
+        audit.append(
+            {
+                "source_id": source_id,
+                "path": str(path),
+                "exists": exists,
+                "rows": len(accepted),
+            }
+        )
+
+    candidate_ids = [str(row["candidate_id"]) for row in candidates]
+    if len(set(candidate_ids)) != len(candidate_ids):
+        raise ValueError("Candidate ledgers contain duplicate candidate_id values")
+    return candidates, audit
+
+
 def profit_factor(values: Sequence[float]) -> float:
     gross_profit = sum(value for value in values if value > 0.0)
     gross_loss = -sum(value for value in values if value < 0.0)
@@ -84,6 +148,14 @@ def load_locked_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
         expected = str(config["lock"]["warm_start_sha256"])
         if sha256_file(warm_start_path) != expected:
             raise ValueError("Locked prospective warm start changed")
+    source_config_text = config.get("read_only_inputs", {}).get(
+        "candidate_source_config"
+    )
+    if source_config_text:
+        source_config_path = resolve_repo(str(source_config_text))
+        expected = str(config["lock"]["candidate_source_config_sha256"])
+        if sha256_file(source_config_path) != expected:
+            raise ValueError("Locked candidate source config changed")
     return config
 
 
@@ -153,7 +225,7 @@ def build_snapshot(
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     now = (now or datetime.now(UTC)).astimezone(UTC)
     inputs = config["read_only_inputs"]
-    candidates = read_jsonl(Path(inputs["candidate_ledger"]))
+    candidates, candidate_ledger_audit = load_candidate_rows(inputs)
     state = read_json(Path(inputs["portfolio_state"]))
     policy = config["lock"]["policy"]
     source_id = str(policy["source_id"])
@@ -331,6 +403,7 @@ def build_snapshot(
             "resolved_vetoes": len(resolved_vetoes),
             "warm_start_outcomes": warm_start_count,
         },
+        "candidate_ledger_audit": candidate_ledger_audit,
         "veto_broker_net_pnl_usd": sum(veto_values),
         "avoided_broker_pnl_usd": avoided_pnl,
         "veto_broker_profit_factor": (

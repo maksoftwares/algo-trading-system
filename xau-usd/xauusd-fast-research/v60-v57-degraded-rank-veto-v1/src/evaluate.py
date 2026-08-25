@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict, deque
+from dataclasses import replace
 from datetime import UTC, datetime
 import hashlib
 import importlib.util
@@ -58,6 +59,24 @@ def profit_factor(values: Sequence[float]) -> float:
     gross_profit = float(array[array > 0.0].sum())
     gross_loss = -float(array[array < 0.0].sum())
     return gross_profit / gross_loss if gross_loss > 0.0 else float("inf")
+
+
+def apply_additional_cost(
+    candidates: Sequence[Any], additional_cost_usd_per_trade: float
+) -> list[Any]:
+    additional_cost = float(additional_cost_usd_per_trade)
+    if not np.isfinite(additional_cost) or additional_cost < 0.0:
+        raise ValueError("Additional per-trade cost must be finite and nonnegative")
+    if additional_cost == 0.0:
+        return list(candidates)
+    return [
+        replace(
+            candidate,
+            pnl_usd=float(candidate.pnl_usd) - additional_cost,
+            open_cost_usd=float(candidate.open_cost_usd) + additional_cost,
+        )
+        for candidate in candidates
+    ]
 
 
 def policy_targets_source(source_id: str, policy: Mapping[str, Any]) -> bool:
@@ -286,8 +305,28 @@ def window_metrics(frame: pd.DataFrame, start: pd.Timestamp) -> dict[str, Any]:
     }
 
 
+def attach_baseline_runtime_pnl(
+    veto_rows: Sequence[Mapping[str, Any]], baseline_trades: pd.DataFrame
+) -> list[dict[str, Any]]:
+    if baseline_trades["trade_id"].duplicated().any():
+        raise ValueError("Baseline runtime trade IDs are not unique")
+    runtime_pnl = baseline_trades.set_index("trade_id")["pnl_usd"].to_dict()
+    attached: list[dict[str, Any]] = []
+    for source in veto_rows:
+        row = dict(source)
+        trade_id = str(row["trade_id"])
+        row["baseline_runtime_executed"] = trade_id in runtime_pnl
+        row["baseline_runtime_pnl_usd"] = (
+            float(runtime_pnl[trade_id]) if trade_id in runtime_pnl else None
+        )
+        attached.append(row)
+    return attached
+
+
 def run(
     config_path: Path = CONFIG_PATH,
+    *,
+    additional_cost_usd_per_trade: float = 0.0,
 ) -> tuple[dict[str, Any], pd.DataFrame, pd.DataFrame]:
     config = load_config(config_path)
     replay = load_module(
@@ -310,6 +349,7 @@ def run(
         ),
     )
     candidates, population = replay.load_candidates(contract, deployed)
+    candidates = apply_additional_cost(candidates, additional_cost_usd_per_trade)
     cache_meta = replay.prepare_quote_cache(
         contract, candidates, population, force=False
     )
@@ -345,6 +385,9 @@ def run(
     challenger_trades["entry_year"] = pd.to_datetime(
         challenger_trades["entry_time_utc"], utc=True, format="mixed"
     ).dt.year
+    veto_audit = attach_baseline_runtime_pnl(
+        challenger_scenario.veto_audit, baseline_trades
+    )
     years = sorted(
         set(baseline_trades["entry_year"]) | set(challenger_trades["entry_year"])
     )
@@ -381,8 +424,16 @@ def run(
     identity = config["benchmark_identity"]
     gates_config = config["gates"]
     metric_tolerance = float(gates_config["metric_tolerance_usd"])
-    veto_values = np.asarray(
-        [row["candidate_endpoint_pnl_usd"] for row in challenger_scenario.veto_audit],
+    veto_runtime_values = np.asarray(
+        [
+            row["baseline_runtime_pnl_usd"]
+            for row in veto_audit
+            if row["baseline_runtime_executed"]
+        ],
+        dtype=float,
+    )
+    veto_endpoint_values = np.asarray(
+        [row["candidate_endpoint_pnl_usd"] for row in veto_audit],
         dtype=float,
     )
     gates = {
@@ -416,10 +467,10 @@ def run(
             >= item["baseline"]["net_pnl_usd"]
             for item in windows.values()
         ),
-        "veto_cohort_large_enough": len(veto_values)
+        "veto_cohort_large_enough": len(veto_runtime_values)
         >= int(gates_config["minimum_veto_cohort_rows"]),
-        "veto_cohort_profit_factor_below_one": len(veto_values) > 0
-        and profit_factor(veto_values) < 1.0,
+        "veto_cohort_profit_factor_below_one": len(veto_runtime_values) > 0
+        and profit_factor(veto_runtime_values) < 1.0,
     }
     passed = bool(all(gates.values()))
     result = {
@@ -433,6 +484,7 @@ def run(
         ),
         "deployment_authorized": False,
         "evidence_boundary": "RETROSPECTIVE_EXPOSED_OUTCOMES",
+        "additional_cost_usd_per_trade": float(additional_cost_usd_per_trade),
         "input_sha256": {
             name: str(item["sha256"]) for name, item in config["inputs"].items()
         },
@@ -473,9 +525,13 @@ def run(
         },
         "windows": windows,
         "annual": annual.to_dict(orient="records"),
-        "veto_audit": challenger_scenario.veto_audit,
-        "veto_endpoint_profit_factor": profit_factor(veto_values)
-        if len(veto_values)
+        "veto_audit": veto_audit,
+        "baseline_executed_veto_count": len(veto_runtime_values),
+        "veto_baseline_runtime_profit_factor": profit_factor(veto_runtime_values)
+        if len(veto_runtime_values)
+        else None,
+        "veto_endpoint_profit_factor": profit_factor(veto_endpoint_values)
+        if len(veto_endpoint_values)
         else None,
         "gates": gates,
         "limitations": [
@@ -485,7 +541,7 @@ def run(
             "Capital.com broker-specific future fills and slippage remain unknown.",
         ],
     }
-    veto_frame = pd.DataFrame(challenger_scenario.veto_audit)
+    veto_frame = pd.DataFrame(veto_audit)
     return result, annual, veto_frame
 
 
@@ -521,7 +577,10 @@ def write_outputs(
         f"| Equity drawdown | ${base['maximum_lifetime_equity_drawdown_usd']:.2f} | ${challenger['maximum_lifetime_equity_drawdown_usd']:.2f} | ${delta['equity_drawdown_usd']:+.2f} |",
         f"| Trades/weekday | {base['trades_per_weekday']:.3f} | {challenger['trades_per_weekday']:.3f} | {challenger['trades_per_weekday']-base['trades_per_weekday']:+.3f} |",
         "",
-        f"Veto decisions: `{len(result['veto_audit'])}`. Veto endpoint PF: `{result['veto_endpoint_profit_factor']}`.",
+        f"Veto decisions: `{len(result['veto_audit'])}`; "
+        f"baseline-executed cohort: `{result['baseline_executed_veto_count']}`. "
+        f"Baseline runtime PF: `{result['veto_baseline_runtime_profit_factor']}`. "
+        f"Candidate endpoint PF: `{result['veto_endpoint_profit_factor']}`.",
         "",
         "## Gates",
         "",

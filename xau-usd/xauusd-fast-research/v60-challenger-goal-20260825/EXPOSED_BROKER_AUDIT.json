@@ -1,0 +1,36 @@
+{
+  "authorization": {
+    "broker_actions": false,
+    "deployment": false,
+    "read_only_mt5": true
+  },
+  "baseline": {
+    "losses": 18,
+    "net_pnl_usd": -19.191286589516675,
+    "profit_factor": 0.8966629523195121,
+    "resolved_executions": 30,
+    "wins": 12
+  },
+  "end_inclusive_utc": "2026-08-25T04:18:20.694810Z",
+  "evidence_status": "RETROSPECTIVE_EXPOSED_NOT_PROSPECTIVE",
+  "generated_at_utc": "2026-08-25T04:18:20.705006Z",
+  "limitations": [
+    "These outcomes were visible before the clean V2 evidence boundary.",
+    "This audit cannot authorize deployment or count toward prospective gates.",
+    "Only candidates emitted to the locked V2 observer ledgers are evaluated."
+  ],
+  "observer_counts": {
+    "candidates": 45,
+    "executed_scored_candidates": 23,
+    "resolved_vetoes": 0,
+    "veto_opportunities": 0,
+    "warm_start_outcomes": 332
+  },
+  "schema_version": "xauusd_v60_v2_exposed_broker_audit_20260825",
+  "start_inclusive_utc": "2026-07-21T00:00:00Z",
+  "v2": {
+    "avoided_broker_pnl_usd": 0,
+    "vetoed_broker_pnl_usd": 0,
+    "would_veto_resolved": 0
+  }
+}

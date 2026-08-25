@@ -1,0 +1,55 @@
+{
+  "diagnostics": {
+    "deployment_authorized": false,
+    "fisher_exact_one_sided_p": 0.004446144085085728,
+    "iterations_per_permutation": 100000,
+    "post_selection_inference": true,
+    "source_stratified_permutation_p": 0.001999980000199998,
+    "source_year_stratified_permutation_p": 0.0011299887001129988,
+    "year_stratified_permutation_p": 0.0008999910000899991
+  },
+  "eligible_cohort": {
+    "net_pnl_usd": 479.9954282530834,
+    "trades": 255,
+    "wins": 121
+  },
+  "generated_at_utc": "2026-08-25T04:16:29.169620Z",
+  "input_sha256": {
+    "baseline_events": "f16e289a9b62df3ad143d72afd68aec705d07ebda00d4d76e472c76c88b44aa6",
+    "causal_ranks": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
+    "v2_result": "075704a34866bba3234fe291883aa44723cd3defdb711128c5588a9fbe3410ae"
+  },
+  "limitations": [
+    "The policy was nominated after historical outcomes were exposed.",
+    "P-values are descriptive post-selection diagnostics, not untouched proof.",
+    "Only new forward broker outcomes can satisfy deployment authorization."
+  ],
+  "other_degraded_ranked_cohort": {
+    "losses": 123,
+    "net_pnl_usd": 532.1807243813479,
+    "profit_factor": 1.8727085016865266,
+    "trades": 243,
+    "wins": 120
+  },
+  "schema_version": "v60_mature_source_health_rank_veto_v2_cohort_audit",
+  "selected_cohort": {
+    "distinct_entry_dates": 11,
+    "losses": 11,
+    "net_pnl_usd": -52.18529612826443,
+    "profit_factor": 0.04114738656623421,
+    "source_counts": {
+      "R1_PULLBACK": 2,
+      "V57_BREAK_SWING_H4ADX_HIGH": 7,
+      "V7_SWING_HEALTH": 3
+    },
+    "trades": 12,
+    "wins": 1,
+    "year_counts": {
+      "2021": 2,
+      "2022": 1,
+      "2023": 2,
+      "2024": 4,
+      "2025": 3
+    }
+  }
+}

@@ -4,7 +4,7 @@ from datetime import UTC, datetime
 import json
 from pathlib import Path
 
-from src.observer import broker_outcomes, build_snapshot
+from src.observer import broker_outcomes, build_snapshot, load_candidate_rows
 
 
 def deal(position_id, entry, time_msc, profit=0.0, magic=57):
@@ -74,6 +74,105 @@ def test_wildcard_outcomes_use_each_source_magic() -> None:
     assert observed["a"]["pnl_usd"] == -1.0
     assert observed["b"]["source_id"] == "B"
     assert observed["b"]["pnl_usd"] == 1.0
+
+
+def test_source_config_merges_and_normalizes_dedicated_and_shared_ledgers(
+    tmp_path: Path,
+) -> None:
+    dedicated = tmp_path / "dedicated.jsonl"
+    shared = tmp_path / "shared.jsonl"
+    dedicated.write_text(
+        json.dumps({"candidate_id": "a", "decision_time_utc": "2026-01-01T00:00:00Z"})
+        + "\n",
+        encoding="utf-8",
+    )
+    shared.write_text(
+        "".join(
+            json.dumps(row) + "\n"
+            for row in [
+                {
+                    "candidate_id": "b",
+                    "specialist_id": "B_MODEL",
+                    "entry_utc": "2026-01-01T01:00:00Z",
+                },
+                {
+                    "candidate_id": "c",
+                    "specialist_id": "C_MODEL",
+                    "entry_utc": "2026-01-01T02:00:00Z",
+                },
+            ]
+        ),
+        encoding="utf-8",
+    )
+    source_config = tmp_path / "sources.json"
+    source_config.write_text(
+        json.dumps(
+            {
+                "sources": [
+                    {
+                        "source_id": "A",
+                        "specialist_id": "A_MODEL",
+                        "path": str(dedicated),
+                        "time_field": "decision_time_utc",
+                    },
+                    {
+                        "source_id": "B",
+                        "specialist_id": "B_MODEL",
+                        "path": str(shared),
+                        "time_field": "entry_utc",
+                    },
+                    {
+                        "source_id": "C",
+                        "specialist_id": "C_MODEL",
+                        "path": str(shared),
+                        "time_field": "entry_utc",
+                    },
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    rows, audit = load_candidate_rows(
+        {"candidate_source_config": str(source_config)}
+    )
+    assert [row["specialist_id"] for row in rows] == ["A", "B", "C"]
+    assert rows[0]["scheduled_entry_time_utc"] == "2026-01-01T00:00:00Z"
+    assert rows[0]["event_id"] == "a"
+    assert [item["rows"] for item in audit] == [1, 1, 1]
+
+
+def test_shared_source_ledger_requires_specialist_identity(tmp_path: Path) -> None:
+    shared = tmp_path / "shared.jsonl"
+    shared.write_text(
+        json.dumps(
+            {"candidate_id": "a", "scheduled_entry_time_utc": "2026-01-01T00:00:00Z"}
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    source_config = tmp_path / "sources.json"
+    source_config.write_text(
+        json.dumps(
+            {
+                "sources": [
+                    {
+                        "source_id": source_id,
+                        "specialist_id": source_id,
+                        "path": str(shared),
+                        "time_field": "scheduled_entry_time_utc",
+                    }
+                    for source_id in ("A", "B")
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    try:
+        load_candidate_rows({"candidate_source_config": str(source_config)})
+    except ValueError as error:
+        assert "no specialist_id" in str(error)
+    else:
+        raise AssertionError("Ambiguous shared-ledger row was accepted")
 
 
 def test_snapshot_excludes_hypothetical_vetoes_from_future_health(tmp_path: Path) -> None:

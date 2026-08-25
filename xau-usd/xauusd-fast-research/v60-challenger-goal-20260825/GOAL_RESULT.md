@@ -23,8 +23,9 @@ rank is below 0.10. Missing information retains the baseline trade.
 
 The full five-second runtime replay covers 2021-01-01 through 2026-06-30. V2
 passed baseline identity, P/L, PF, both drawdowns, trade retention, frequency,
-every calendar year, recent-window, cohort-size, and veto-cohort gates. Its 12
-vetoes were all endpoint losers.
+every calendar year, recent-window, cohort-size, and veto-cohort gates. All 12
+candidate endpoints were losers; under the actual V60 runtime exits, the cohort
+contains 11 losses and one small winner, with PF 0.0411 and net -$52.19.
 
 | Year | V60 P/L | V2 P/L | Change |
 |---|---:|---:|---:|
@@ -46,17 +47,47 @@ profitable in every year but have too few vetoes for the locked cohort gate.
 A 30-trade health window, looser health threshold, and looser rank threshold
 each fail at least one risk or annual-stability gate; none replaces V2.
 
+Among 255 mature, degraded-health, causally ranked baseline executions, the 12
+V2 selections are distributed across 11 entry dates, three specialists, and
+five calendar years. The other 243 trades have PF 1.8727. Descriptive
+post-selection diagnostics give Fisher p 0.00445 and source-year-conditioned
+permutation p 0.00113. These strengthen the mechanism but are not untouched
+deployment proof.
+
+An exact path-dependent execution-cost replay adds the same surcharge to every
+candidate in V60 and V2. The replay population already models a mean opening
+cost of $0.572 per candidate. V2 passes every comparative gate with another
+$0.10 per trade (about 17% above that existing mean): net $3,552.44 versus
+$3,468.49, PF 1.6955 versus 1.6760, closed drawdown $215.15 versus $220.41, and
+equity drawdown $232.80 versus $242.13. At another $0.20, V2 remains $39.48
+ahead overall but fails the locked annual/recent-window gate: 2026 and the final
+six months are $6.91 worse. V2 therefore has a measurable but limited
+execution-cost buffer.
+
+There is no valid unchanged earlier-era replay. V60 price candidates extend to
+2010, but the frozen causal-rank ledger starts in 2021 and requires 200 earlier
+training rows. Lowering that requirement or rebuilding the ranker after seeing
+the outcome would create a different experiment, not independent validation.
+
 The directly live-responsive virtual-health V3 is rejected. Although it adds
 $28.61 overall and lowers both drawdowns, it hurts 2025 by $12.23, hurts 2026 by
-$7.11, worsens recent windows, and its veto cohort PF is 1.046.
+$7.11, and worsens recent windows. Its 16 decisions include only 14 common-path
+baseline executions, so it remains rejected regardless of cohort PF.
 
 ## Real demo evidence
 
-The exposed pre-boundary audit contains 28 resolved XAUUSD broker executions
-since 2026-07-21 with combined P/L of -$11.06. V2 would have vetoed none, so no
-recent broker improvement is claimed. V57's causal virtual source health is
-currently degraded (recent-20 PF 0.814 and net -$28.13), but using that signal as
-a veto failed the long replay gates in V3.
+The exposed pre-boundary audit now covers all nine source ledgers and reconciles
+to 30 resolved XAUUSD broker executions since 2026-07-21: 12 wins, 18 losses,
+PF 0.8967, and combined P/L of -$19.19. V2 would have vetoed none, so no recent
+broker improvement is claimed. V57's causal virtual source health is currently
+degraded (recent-20 PF 0.814 and net -$28.13), but using that signal as a veto
+failed the long replay gates in V3.
+
+The first V2 observer configuration read only the shared add-on ledger despite
+targeting every source. That coverage defect was fixed before the clean evidence
+boundary: the observer now hash-locks the deployed source configuration, merges
+all core and add-on ledgers, normalizes source/time fields, rejects ambiguous or
+duplicate candidates, and reports per-source ledger coverage.
 
 New candidates now persist their recent-20 source health for future research.
 This field is observability only and cannot affect an order.

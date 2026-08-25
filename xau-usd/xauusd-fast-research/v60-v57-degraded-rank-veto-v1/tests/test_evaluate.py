@@ -1,6 +1,10 @@
 from dataclasses import dataclass
 
+import pandas as pd
+
 from src.evaluate import (
+    apply_additional_cost,
+    attach_baseline_runtime_pnl,
     causal_virtual_profit_factors,
     profit_factor,
     should_veto,
@@ -166,6 +170,31 @@ class CandidateStub:
     pnl_usd: float
 
 
+@dataclass(frozen=True)
+class CostCandidateStub:
+    trade_id: str
+    pnl_usd: float
+    open_cost_usd: float
+
+
+def test_additional_cost_updates_normal_and_path_dependent_pnl_once() -> None:
+    original = CostCandidateStub("a", pnl_usd=2.5, open_cost_usd=0.4)
+    stressed = apply_additional_cost([original], 0.75)[0]
+    assert original.pnl_usd == 2.5
+    assert original.open_cost_usd == 0.4
+    assert stressed.pnl_usd == 1.75
+    assert stressed.open_cost_usd == 1.15
+
+
+def test_additional_cost_rejects_negative_values() -> None:
+    try:
+        apply_additional_cost([], -0.01)
+    except ValueError as error:
+        assert "nonnegative" in str(error)
+    else:
+        raise AssertionError("Negative execution-cost stress was accepted")
+
+
 def test_virtual_health_reveals_outcome_only_after_exit() -> None:
     source = POLICY["source_id"]
     candidates = [
@@ -190,3 +219,25 @@ def test_wildcard_virtual_health_is_source_local() -> None:
     assert health["a"] is None
     assert health["b"] is None
     assert health["c"] == 0.0
+
+
+def test_veto_audit_uses_runtime_pnl_not_candidate_endpoint() -> None:
+    rows = attach_baseline_runtime_pnl(
+        [{"trade_id": "a", "candidate_endpoint_pnl_usd": -5.0}],
+        pd.DataFrame([{"trade_id": "a", "pnl_usd": 2.0}]),
+    )
+    assert rows == [
+        {
+            "trade_id": "a",
+            "candidate_endpoint_pnl_usd": -5.0,
+            "baseline_runtime_executed": True,
+            "baseline_runtime_pnl_usd": 2.0,
+        }
+    ]
+
+    absent = attach_baseline_runtime_pnl(
+        [{"trade_id": "b", "candidate_endpoint_pnl_usd": -1.0}],
+        pd.DataFrame([{"trade_id": "a", "pnl_usd": 2.0}]),
+    )
+    assert absent[0]["baseline_runtime_executed"] is False
+    assert absent[0]["baseline_runtime_pnl_usd"] is None
