@@ -1,0 +1,117 @@
+{
+  "aggregate_economics_present_at_lock": false,
+  "broker_action_authorized": false,
+  "contract_sha256": "564888356ed4c56153c4c903e3bf484f2423a03e5e01479e63bbfe9f85f7601b",
+  "deployment_authorized": false,
+  "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+  "input_files": {
+    "deployed_executor": {
+      "bytes": 16140,
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/src/executor.py",
+      "sha256": "0581f089b068da1c0ac93970fa9fad04a50a7b18211827befa50c0863f8eb1c5"
+    },
+    "protection_overlay": {
+      "bytes": 703,
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_drawdown_protection_v1_overlay.json",
+      "sha256": "872bb92ff4c24c442fda195217bf95d6835bdf1f805f951c8aab3c534ae1c44e"
+    },
+    "sealed_v6_evidence_reader": {
+      "bytes": 2728,
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-prospective-v6/src/evidence.py",
+      "sha256": "907072107e022b7d378a184f1a78ddaa80fedf40c4a1ef048729a47ee5591400"
+    },
+    "sealed_v6_prospective_contract": {
+      "bytes": 6277,
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-prospective-v6/config/prospective.json",
+      "sha256": "23ce7ca7e152e41a3dfa8fa7b0a22d600824eca89bed638556bc45577433c0dc"
+    },
+    "shared_evaluator": {
+      "bytes": 23802,
+      "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
+      "sha256": "8be567eb5a0f355a3c47b524838aeb6608f12e6b3d5f3da5a0c9b69dd5ca6dad"
+    },
+    "tick_replay": {
+      "bytes": 70217,
+      "path": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/src/replay.py",
+      "sha256": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a"
+    },
+    "tick_replay_contract": {
+      "bytes": 791,
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-capacity-twin-prospective-v19/config/replay_contract_snapshot.json",
+      "sha256": "16b02b9d08141dd93b59d5c3e1873cd087c016c70f322de25e1e2765784af709"
+    },
+    "v60_config": {
+      "bytes": 12060,
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120"
+    },
+    "v6_config": {
+      "bytes": 2536,
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/config/experiment.json",
+      "sha256": "369dba6fecbd3c9e851bcd0a8f7652089254677ca42a4f5b2c9a17fd344849d6"
+    },
+    "v6_scenario": {
+      "bytes": 5625,
+      "path": "xau-usd/xauusd-fast-research/v60-dynamic-followthrough-union-v6/src/scenario.py",
+      "sha256": "6d762645a27330c985a85b0c4612036b904ea61a7bd889d423e5f33c8d4a5c87"
+    },
+    "warm_start": {
+      "bytes": 85007,
+      "path": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-v2/outputs/PROSPECTIVE_WARM_START.json",
+      "sha256": "046d5e963489adb7b3b4dceb740be61db8c70d04307076ecb6501315a8e1d8e6"
+    }
+  },
+  "locked_at_utc": "2026-08-25T20:54:08.374250Z",
+  "package_files": {
+    "PREREGISTRATION.md": {
+      "bytes": 6082,
+      "sha256": "75f0cf1d1f06cd01c1d60897c1965db8db8cd65ddd52f6045c4959f3ff9c78c3"
+    },
+    "README.md": {
+      "bytes": 1063,
+      "sha256": "f032360cff6a2063643ed2580bd3ab1a41ec1241ed37e84a8dc874d102633e15"
+    },
+    "config/prospective.json": {
+      "bytes": 4389,
+      "sha256": "efdf5d87817aa303506d3e581c02749d6ad0b8417539f5ea37ab2ab271c2d1d3"
+    },
+    "config/replay_contract_snapshot.json": {
+      "bytes": 791,
+      "sha256": "16b02b9d08141dd93b59d5c3e1873cd087c016c70f322de25e1e2765784af709"
+    },
+    "lock_contract.py": {
+      "bytes": 3483,
+      "sha256": "1008008f5d2cd2d8b9d455459814b8a5995365549d7e1df4a5cfbe88e8a09152"
+    },
+    "requirements.txt": {
+      "bytes": 41,
+      "sha256": "e51b65046c543583f7096d46cd931b342bba4ecd08f327f58f41a1346ae109db"
+    },
+    "run_evaluation.py": {
+      "bytes": 37508,
+      "sha256": "56aadcd24f56f6594a72046ac2e4c3ec6cbad98484dddd392186e277c4b23585"
+    },
+    "src/__init__.py": {
+      "bytes": 50,
+      "sha256": "704e015191f7336977653a12325d1f65d8f1969aee33cd66bc3985e5efee7813"
+    },
+    "src/capacity.py": {
+      "bytes": 23143,
+      "sha256": "2ef8731aa26705757398f346e24bcc9a8c6262a9ccde042862536dc75e260bd4"
+    },
+    "tests/conftest.py": {
+      "bytes": 145,
+      "sha256": "e8a0538e2788a7c32f84214b11f92f3f90ceeb16ada73e95af98f5af489cb826"
+    },
+    "tests/test_capacity.py": {
+      "bytes": 8204,
+      "sha256": "e0b8cd0f1200bd120fbb479aac3e5ddd1c86a48cdfb0baade09be4e19949d4a3"
+    },
+    "tests/test_runner.py": {
+      "bytes": 3074,
+      "sha256": "2ba3231e20d239b5dd1e45ff6954c94dba95607f55c408f0559a922bd545d606"
+    }
+  },
+  "runtime_changes_authorized": false,
+  "schema_version": "v60_dynamic_capacity_twin_prospective_v19_contract_lock"
+}

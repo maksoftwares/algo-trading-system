@@ -69,6 +69,16 @@
       "command_marker": "v60-dynamic-followthrough-union-prospective-v6*run_observer.py"
     },
     {
+      "id": "V60_DYNAMIC_CAPACITY_TWIN_V19",
+      "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
+      "script": "xau-usd/xauusd-fast-research/v60-dynamic-capacity-twin-prospective-v19/run_evaluation.py",
+      "args": [
+        "--poll-seconds",
+        "3600"
+      ],
+      "command_marker": "v60-dynamic-capacity-twin-prospective-v19*run_evaluation.py"
+    },
+    {
       "id": "V60_PORTFOLIO",
       "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
       "script": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_portfolio.py",
@@ -227,6 +237,34 @@
         "decision_timing.maximum_delay_seconds": 120,
         "observation_timing.cycle_within_recording_delay_budget": true,
         "policy_audit.state_recomputed_from_hypothetical_retained_path": true
+      }
+    },
+    {
+      "id": "V60_DYNAMIC_CAPACITY_TWIN_V19_STATUS",
+      "path": "D:/AlgoTradingData/prospective/v60-dynamic-capacity-twin-v19/STATUS.json",
+      "timestamp_fields": [
+        "generated_at_utc"
+      ],
+      "maximum_age_seconds": 4500,
+      "required_values": {
+        "deployment_authorized": false,
+        "broker_action_authorized": false,
+        "runtime_changes_authorized": false,
+        "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+        "contract_sha256": "564888356ed4c56153c4c903e3bf484f2423a03e5e01479e63bbfe9f85f7601b"
+      },
+      "allowed_status_values": {
+        "decision": [
+          "AWAITING_PROSPECTIVE_BOUNDARY",
+          "CONTINUE_PROSPECTIVE_CAPACITY_COLLECTION",
+          "KEEP_DEPLOYED_V60_CAPACITY_TWIN_REJECTS_V6",
+          "V6_CAPACITY_TWIN_PASSES_REVIEW_REQUIRED"
+        ]
+      },
+      "forbidden_status_values": {
+        "decision": [
+          "FAILED_CLOSED"
+        ]
       }
     }
   ]

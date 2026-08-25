@@ -1,0 +1,39 @@
+{
+  "analysis_cutoff_msc": null,
+  "broker_action_authorized": false,
+  "contract_sha256": "564888356ed4c56153c4c903e3bf484f2423a03e5e01479e63bbfe9f85f7601b",
+  "counts": {
+    "analysis_candidate_facts": 0,
+    "candidate_facts": 0,
+    "completed_tick_days": 0,
+    "executed_candidate_endpoints": 0,
+    "inventory_resolved_candidates": 0,
+    "inventory_unresolved_candidates": 0,
+    "rejected_candidate_endpoints": 0,
+    "resolved_candidates": 0,
+    "timely_score_rows": 0
+  },
+  "decision": "AWAITING_PROSPECTIVE_BOUNDARY",
+  "deployment_authorized": false,
+  "elapsed_days": 0.0,
+  "evidence_files": {
+    "portfolio_events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "resolved_candidates_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "state_sha256": "7cb367f9645202dc17c2e0bb4ab06d55bb37d2d13481dda3f92d399b344d26ac"
+  },
+  "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+  "generated_at_utc": "2026-08-25T20:56:01.909260Z",
+  "limitations": [
+    "V19 is a read-only raw-tick portfolio twin and never calls MT5 order_send.",
+    "Only completed UTC tick days enter economic metrics.",
+    "A passing V19 result requires review and does not authorize deployment."
+  ],
+  "runtime_changes_authorized": false,
+  "schema_version": "v60_dynamic_capacity_twin_prospective_v19_status",
+  "score_audit": {
+    "incomplete_feature_rows": 0,
+    "late_score_rows": 0,
+    "timely_score_rows": 0
+  },
+  "status_sha256": "444ead81058767d7f05dd8dcfc824f4eb4dbbe9433d4d37207f05f8ae7e43684"
+}

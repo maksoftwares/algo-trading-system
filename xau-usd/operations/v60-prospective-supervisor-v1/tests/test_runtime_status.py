@@ -145,6 +145,7 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
         "V60_MATURE_SOURCE_V2_PROSPECTIVE",
         "V60_V57_ANTICHASE_V1_PROSPECTIVE",
         "V60_DYNAMIC_V6_PROSPECTIVE",
+        "V60_DYNAMIC_CAPACITY_TWIN_V19",
         "V60_PORTFOLIO",
         "V60_DEPLOYED_SPECIALIST_MONITOR",
     }
@@ -156,6 +157,7 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
         "V60_MATURE_SOURCE_V2_PROSPECTIVE_STATUS",
         "V60_V57_ANTICHASE_V1_PROSPECTIVE_STATUS",
         "V60_DYNAMIC_V6_PROSPECTIVE_STATUS",
+        "V60_DYNAMIC_CAPACITY_TWIN_V19_STATUS",
     }
     assert workers["V60_PORTFOLIO"]["args"][-1].endswith(
         "v60_portable_ml_topup_v4_overlay.json"
@@ -221,6 +223,17 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
         "decision_timing.maximum_delay_seconds": 120,
         "observation_timing.cycle_within_recording_delay_budget": True,
         "policy_audit.state_recomputed_from_hypothetical_retained_path": True,
+    }
+    assert workers["V60_DYNAMIC_CAPACITY_TWIN_V19"]["args"] == [
+        "--poll-seconds",
+        "3600",
+    ]
+    assert sources["V60_DYNAMIC_CAPACITY_TWIN_V19_STATUS"]["required_values"] == {
+        "deployment_authorized": False,
+        "broker_action_authorized": False,
+        "runtime_changes_authorized": False,
+        "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+        "contract_sha256": "564888356ed4c56153c4c903e3bf484f2423a03e5e01479e63bbfe9f85f7601b",
     }
     prospective_contract = (
         ROOT.parents[2]
