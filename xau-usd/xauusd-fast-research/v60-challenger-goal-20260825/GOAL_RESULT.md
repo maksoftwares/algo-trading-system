@@ -129,9 +129,17 @@ Immutable parity evidence:
 V60 remains the only broker-action policy. V2 is supervised read-only from the
 locked evidence boundary `2026-08-26T00:00:00Z`, with 332 hash-locked replay
 outcomes used only to establish source maturity. It requires at least 90 days,
-100 scored executed candidates, 10 resolved veto opportunities, veto PF below
-0.8, and positive avoided broker P/L before review. Passing those gates still
-does not auto-authorize deployment.
+100 scored and resolved baseline executions, 10 resolved veto opportunities,
+complete causal-rank coverage, at least 95% trade retention, veto PF below 0.8,
+and positive avoided broker P/L before review. Across the entire resolved
+forward portfolio, V2 must also have net P/L and PF no worse than V60 and
+closed-trade drawdown no higher.
+
+The clean observer writes each score decision, execution decision, and broker
+outcome to a hash-linked evidence chain. Any later change to an immutable event
+fails collection closed. The chain was initialized and verified empty before
+the prospective boundary. Passing every gate still does not auto-authorize
+deployment.
 
 The runtime supervisor is healthy on demo account 1033030. It supervises six
 workers, both execution feeds pass, and both V1 and V2 observers explicitly

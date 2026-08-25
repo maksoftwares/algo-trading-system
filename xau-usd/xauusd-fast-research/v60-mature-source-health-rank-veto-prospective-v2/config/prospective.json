@@ -15,7 +15,8 @@
     "shared_observer_sha256": "08d4e49c10935df0151772770c69207224777f62f48f93d7b71894227a6ee58a",
     "warm_start_sha256": "046d5e963489adb7b3b4dceb740be61db8c70d04307076ecb6501315a8e1d8e6",
     "candidate_source_config_sha256": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
-    "observer_ranker_sha256": "34ea38b893b34f68d8797f293be522744f8c314e275b6cc84d9d73f748cb00e6",
+    "observer_ranker_sha256": "2e903dc0d0a7db0ee26b33de4b8b8671a281f1216f7784f3f848eb4be01ae891",
+    "evidence_recorder_sha256": "61e7f155eb94b343d43fc53c31e60c0485acc255fdf9fe027f4f163c571cacfa",
     "policy": {
       "source_id": "*",
       "source_scope": "EACH_SOURCE_INDEPENDENT",
@@ -73,7 +74,10 @@
   "acceptance": {
     "minimum_elapsed_days": 90,
     "minimum_scored_executed_candidates": 100,
+    "minimum_resolved_baseline_executions": 100,
     "minimum_resolved_vetoes": 10,
+    "minimum_resolved_rank_coverage": 1.0,
+    "minimum_trade_retention": 0.95,
     "maximum_veto_broker_profit_factor_exclusive": 0.8,
     "minimum_avoided_broker_pnl_usd_exclusive": 0.0
   }

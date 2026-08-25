@@ -7,6 +7,14 @@ This observer is read-only. It may inspect candidate decisions, V60 state, and
 MT5 deal history. It cannot place, modify, or close an order and cannot change
 the deployed V60 policy.
 
+## Immutable evidence protocol
+
+Each first-seen causal score, baseline execution decision, and resolved broker
+outcome is written to a hash-linked evidence chain. Repeated observations must
+match the original immutable payload exactly. A changed score, rank, source,
+entry time, policy decision, exit time, or broker P/L fails the observer closed.
+The evidence recorder implementation is hash-locked before the clean boundary.
+
 ## All-source causal ranking
 
 The deployed ML top-up scorer intentionally ranks only sources eligible for an
@@ -29,5 +37,10 @@ the real broker outcome. Hypothetically vetoed trades are excluded from later
 simulated health so the shadow policy remains causally implementable.
 
 Collection must continue for at least 90 days, 100 scored executed candidates,
-and 10 resolved veto opportunities. Passing those gates still requires review
-and explicit authorization; the observer never authorizes deployment itself.
+100 resolved baseline executions, and 10 resolved veto opportunities. Every
+resolved execution must have a causal rank and V2 must retain at least 95% of
+baseline trades. On the entire resolved forward portfolio, V2 net P/L and PF
+must be no worse than V60 and V2 closed-trade drawdown must be no higher. The
+veto cohort must have PF below 0.8 and positive avoided P/L. Passing every gate
+still requires review and explicit authorization; the observer never authorizes
+deployment itself.

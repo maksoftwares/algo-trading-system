@@ -39,9 +39,17 @@ def test_v2_observer_is_read_only_and_hash_locked() -> None:
     assert hashlib.sha256(ranker.read_bytes()).hexdigest() == config["lock"][
         "observer_ranker_sha256"
     ]
+    evidence = ROOT / "src" / "evidence.py"
+    assert hashlib.sha256(evidence.read_bytes()).hexdigest() == config["lock"][
+        "evidence_recorder_sha256"
+    ]
     ranker_config = config["observer_ranker"]
     assert ranker_config["observer_only"] is True
     assert ranker_config["broker_action_authorized"] is False
     for item in (ranker_config["ml_overlay"], ranker_config["ml_runtime_source"]):
         path = REPO_ROOT / item["path"]
         assert hashlib.sha256(path.read_bytes()).hexdigest() == item["sha256"]
+    acceptance = config["acceptance"]
+    assert acceptance["minimum_resolved_baseline_executions"] >= 100
+    assert acceptance["minimum_resolved_rank_coverage"] == 1.0
+    assert acceptance["minimum_trade_retention"] >= 0.95

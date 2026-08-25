@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parent
 REPO_ROOT = ROOT.parents[2]
 CONFIG = ROOT / "config" / "prospective.json"
 RANKER = ROOT / "src" / "ranker.py"
+EVIDENCE = ROOT / "src" / "evidence.py"
 SHARED_ROOT = (
     REPO_ROOT
     / "xau-usd"
@@ -48,10 +49,26 @@ def load_ranker():
     return module
 
 
+def load_evidence():
+    spec = importlib.util.spec_from_file_location("v60_v2_prospective_evidence", EVIDENCE)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Cannot load evidence recorder: {EVIDENCE}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def verify_ranker(config: dict) -> None:
     actual = hashlib.sha256(RANKER.read_bytes()).hexdigest()
     if actual != str(config["lock"]["observer_ranker_sha256"]):
         raise ValueError("All-source observer ranker changed")
+
+
+def verify_evidence(config: dict) -> None:
+    actual = hashlib.sha256(EVIDENCE.read_bytes()).hexdigest()
+    if actual != str(config["lock"]["evidence_recorder_sha256"]):
+        raise ValueError("Prospective evidence recorder changed")
 
 
 def read_mt5_observation(config: dict):
@@ -91,11 +108,17 @@ def run_once(config_path: Path) -> dict:
     config = load_locked_config(config_path)
     verify_shared_observer(config)
     verify_ranker(config)
+    verify_evidence(config)
     deals, rank_decisions, rank_audit = read_mt5_observation(config)
     status, rows = build_snapshot(
         config, deals, rank_decisions=rank_decisions
     )
     status["observer_ranker"] = rank_audit
+    evidence = load_evidence()
+    evidence.add_forward_comparison(status, rows, config["acceptance"])
+    status["evidence_chain"] = evidence.update_evidence_chain(
+        Path(config["outputs"]["runtime_directory"]), rows
+    )
     write_snapshot(config, status, rows)
     return status
 

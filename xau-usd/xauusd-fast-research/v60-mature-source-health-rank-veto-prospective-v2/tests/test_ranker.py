@@ -39,6 +39,7 @@ def test_same_timestamp_scores_do_not_enter_each_others_reference() -> None:
         "feature_bars": pd.DataFrame(),
         "model_sha256": "model",
         "feature_rows": 10,
+        "latest_completed_feature_bar_utc": "2026-07-21T04:00:00+04:00",
     }
     candidates = [
         {
@@ -58,7 +59,7 @@ def test_same_timestamp_scores_do_not_enter_each_others_reference() -> None:
         {
             "candidate_id": "c",
             "specialist_id": "C",
-            "scheduled_entry_time_utc": "2026-07-21T00:05:00Z",
+            "scheduled_entry_time_utc": "2026-07-21T04:05:00+04:00",
             "direction": "LONG",
             "sleeve_type": "CORE",
         },
@@ -75,4 +76,7 @@ def test_same_timestamp_scores_do_not_enter_each_others_reference() -> None:
     assert set(decisions) == {"a", "b", "c"}
     assert all(not row["topup"] for row in decisions.values())
     assert all(not row["broker_action_authorized"] for row in decisions.values())
+    assert decisions["c"]["decision_time_utc"] == "2026-07-21T00:05:00Z"
+    assert audit["score_start_inclusive_utc"] == "2026-07-21T00:00:00Z"
+    assert audit["latest_completed_feature_bar_utc"] == "2026-07-21T00:00:00Z"
     assert audit["scored_candidate_rows"] == 3

@@ -14,6 +14,13 @@ import numpy as np
 import pandas as pd
 
 
+def utc_timestamp(value: Any) -> pd.Timestamp:
+    parsed = pd.Timestamp(value)
+    if parsed.tzinfo is None:
+        raise ValueError(f"Observer-ranker timestamp is not timezone-aware: {value}")
+    return parsed.tz_convert("UTC")
+
+
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -74,17 +81,19 @@ def score_candidates(
     candidates: Sequence[Mapping[str, Any]],
     settings: Mapping[str, Any],
 ) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
-    start = pd.Timestamp(settings["score_start_inclusive_utc"])
-    if start.tzinfo is None:
-        raise ValueError("Observer rank start must be timezone-aware")
+    start = utc_timestamp(settings["score_start_inclusive_utc"])
     maximum_age = pd.Timedelta(
         minutes=int(settings["maximum_feature_bar_age_minutes"])
     )
     ordered = sorted(
         (
-            (pd.Timestamp(row["scheduled_entry_time_utc"]), str(row["candidate_id"]), row)
+            (
+                utc_timestamp(row["scheduled_entry_time_utc"]),
+                str(row["candidate_id"]),
+                row,
+            )
             for row in candidates
-            if pd.Timestamp(row["scheduled_entry_time_utc"]) >= start
+            if utc_timestamp(row["scheduled_entry_time_utc"]) >= start
         ),
         key=lambda item: (item[0], item[1]),
     )
@@ -123,7 +132,7 @@ def score_candidates(
                 **result,
                 "candidate_id": candidate_id,
                 "source_id": str(candidate["specialist_id"]),
-                "decision_time_utc": timestamp.isoformat(),
+                "decision_time_utc": timestamp.isoformat().replace("+00:00", "Z"),
                 "observer_only": True,
                 "broker_action_authorized": False,
                 "topup": False,
@@ -145,7 +154,7 @@ def score_candidates(
         "schema_version": "v60_v2_all_source_observer_ranker_v1",
         "observer_only": True,
         "broker_action_authorized": False,
-        "score_start_inclusive_utc": start.isoformat(),
+        "score_start_inclusive_utc": start.isoformat().replace("+00:00", "Z"),
         "candidate_rows": len(ordered),
         "scored_candidate_rows": len(ranks),
         "reason_counts": dict(sorted(reasons.items())),
@@ -155,8 +164,12 @@ def score_candidates(
         "maximum_rank": max(ranks) if ranks else None,
         "model_sha256": str(runtime.get("model_sha256")),
         "feature_rows": int(runtime.get("feature_rows", 0)),
-        "latest_completed_feature_bar_utc": runtime.get(
-            "latest_completed_feature_bar_utc"
+        "latest_completed_feature_bar_utc": (
+            utc_timestamp(runtime["latest_completed_feature_bar_utc"])
+            .isoformat()
+            .replace("+00:00", "Z")
+            if runtime.get("latest_completed_feature_bar_utc") is not None
+            else None
         ),
     }
     return decisions, audit

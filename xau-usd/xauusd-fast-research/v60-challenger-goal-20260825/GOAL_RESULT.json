@@ -88,11 +88,19 @@
     "runtime_score_parity_maximum_absolute_error": 0.0,
     "runtime_rank_mean_absolute_difference": 0.0010282318633877106,
     "runtime_rank_maximum_absolute_difference": 0.0025688155498876375,
+    "hash_linked_immutable_evidence": true,
+    "evidence_chain_initialized_before_boundary": true,
     "broker_action_authorized": false,
     "deployment_authorized": false,
     "minimum_elapsed_days": 90,
     "minimum_scored_executed_candidates": 100,
-    "minimum_resolved_vetoes": 10
+    "minimum_resolved_baseline_executions": 100,
+    "minimum_resolved_vetoes": 10,
+    "minimum_resolved_rank_coverage": 1.0,
+    "minimum_trade_retention": 0.95,
+    "requires_whole_portfolio_net_pnl_not_worse": true,
+    "requires_whole_portfolio_profit_factor_not_worse": true,
+    "requires_whole_portfolio_closed_drawdown_not_worse": true
   },
   "rejected_posthoc_rank_only_audit": {
     "trades_removed": 58,
