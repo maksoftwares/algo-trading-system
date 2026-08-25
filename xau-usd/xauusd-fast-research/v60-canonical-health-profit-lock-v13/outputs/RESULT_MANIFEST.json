@@ -1,0 +1,44 @@
+{
+  "schema_version": "v60_canonical_health_profit_lock_v13_result_manifest_v1",
+  "decision": "KEEP_DEPLOYED_V60",
+  "deployment_authorized": false,
+  "broker_action_authorized": false,
+  "files": {
+    "PREREGISTRATION.md": {
+      "bytes": 3742,
+      "sha256": "b143ca4d22297e211309eec5a49f6d389345ba9a9113b55699c8520d812c1117"
+    },
+    "config/experiment.json": {
+      "bytes": 3458,
+      "sha256": "b7444e76047bd7886c7d9d4b722c3e72862ed166aefd66f5bf0f0af05b23060b"
+    },
+    "run_experiment.py": {
+      "bytes": 23801,
+      "sha256": "b5a8ed13be3068aab66f6471f39dd9593803dca88e5dc497c69ee1a7446fdc67"
+    },
+    "src/scenario.py": {
+      "bytes": 5797,
+      "sha256": "7acf4d085ecc94e2164f419b10b2a913267c7ea77d6e113fb2ff7df044827986"
+    },
+    "outputs/RESULT.json": {
+      "bytes": 43089,
+      "sha256": "04ce773774dc7fc280021a17dc42067eeb1597fdcd86af4844c4ce0057b9de16"
+    },
+    "outputs/RESULT.md": {
+      "bytes": 367,
+      "sha256": "cf5eab9f24695e9e5f1018d2d3d36b542f1166e76a60d1b2d5265e6255c8646d"
+    },
+    "outputs/ANNUAL.csv": {
+      "bytes": 510,
+      "sha256": "3857482eaf4053667fcb946978d8b6b9626ccb95813fd5ca1f1dbb9873a6ec28"
+    },
+    "outputs/HISTORICAL_VETOES.csv": {
+      "bytes": 4535,
+      "sha256": "bc08584bc0b7cd58f759614a0eed788858d78d4deda4560da5961b47e1126f73"
+    },
+    "outputs/AUGUST_2026_TRADE_AUDIT.csv": {
+      "bytes": 7138,
+      "sha256": "030e89ae4a4927c4b2ce238199e812f008c61cff8cb8cd40b3124dc071c4ec77"
+    }
+  }
+}

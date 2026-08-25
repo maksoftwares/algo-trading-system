@@ -214,6 +214,32 @@ August positive while preserving every nominal year, recent window, long-run edg
 drawdown, and more than 99% of trades. This does not upgrade its evidence status:
 clean forward confirmation is still mandatory.
 
+V11 then tested two-window persistence for the V2 source-health state. It kept
+August at +$17.50 and retained 99.14% of V60 trades, but it removed a useful 2022
+veto and did not remove the harmful 2021 cost-stress decision. Both locked
+cost-drawdown gates failed, so V11 is rejected.
+
+V12 separated canonical alpha-health P/L from the explicitly injected research
+cost surcharge while still charging the full surcharge to portfolio P/L and
+drawdown. Nominal V12 reproduced V6 exactly and August remained +$17.50. It fixed
+the stressed annual instability: every year was nonnegative at both +$0.10 and
++$0.20. It nevertheless missed the locked closed-drawdown gate by $1.41 at
++$0.10 and $1.91 at +$0.20. The gate was not relaxed; V12 is rejected.
+
+V13 added the previously studied conservative individual profit lock to V12:
+arm at 1.50R and close on a return to 0.25R. It reduced nominal closed drawdown
+from $217.46 to $213.83 and equity drawdown from $238.28 to $231.99, but reduced
+net from $3,681.34 to $3,649.55, reduced PF from 1.7377 to 1.7338, and harmed
+2022 by $19.77. Its earlier exits freed capacity and changed the dynamic path,
+raising total closes to 1,395. On frozen Capital.com five-second August paths it
+made zero managed closes, so August remained exactly V6: 21 trades, +$17.50,
+PF 1.1621, and $56.69 closed drawdown. V13 is rejected because lower drawdown
+cannot be purchased by weakening the established edge.
+
+These results preserve the hard objective: make August good without sacrificing
+the established portfolio. V6 remains the best exposed retrospective candidate;
+the management and health-accounting findings remain research inputs only.
+
 New candidates now persist their recent-20 source health for future research.
 This field is observability only and cannot affect an order.
 

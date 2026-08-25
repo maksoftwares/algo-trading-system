@@ -56,8 +56,26 @@ def test_august_improvement_cannot_sacrifice_established_edge() -> None:
     assert research["v9_rank_independent"]["antichase_avoided_pnl_usd"] < 0.0
     assert research["v10_dual_extension"]["decision"] == "REJECT"
     assert research["v10_dual_extension"]["nominal_2023_delta_pnl_usd"] < 0.0
+    assert research["v11_persistent_source_health"]["decision"] == "REJECT"
+    assert research["v12_canonical_alpha_health"]["decision"] == "REJECT"
+    assert research["v13_canonical_health_profit_lock"]["decision"] == "REJECT"
+    assert research["v13_canonical_health_profit_lock"][
+        "august_hard_objective_pass"
+    ]
+    assert research["v13_canonical_health_profit_lock"][
+        "year_2022_delta_vs_v60_usd"
+    ] < 0.0
     assert not research["v9_rank_independent"]["preserved_frozen_v6_edge"]
     assert not research["v10_dual_extension"]["preserved_frozen_v6_edge"]
+    assert not research["v11_persistent_source_health"][
+        "preserved_frozen_v6_edge"
+    ]
+    assert not research["v12_canonical_alpha_health"][
+        "preserved_frozen_v6_edge"
+    ]
+    assert not research["v13_canonical_health_profit_lock"][
+        "preserved_frozen_v6_edge"
+    ]
     assert research["conclusion"] == (
         "KEEP_V6_FROZEN_AND_REQUIRE_CLEAN_FORWARD_CONFIRMATION"
     )
