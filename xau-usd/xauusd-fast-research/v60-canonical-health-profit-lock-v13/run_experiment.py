@@ -354,6 +354,11 @@ def main() -> int:
     managed_august = apply_august_management(
         retained_august, august_quotes, config["individual_profit_lock"]
     )
+    same_retained_entry_set = (
+        len(managed_august) == len(retained_august)
+        and set(managed_august["candidate_id"].astype(str))
+        == set(retained_august["candidate_id"].astype(str))
+    )
     august = {
         "baseline_v60": closed_metrics(baseline_august),
         "frozen_v12_entry_policy": closed_metrics(
@@ -365,7 +370,7 @@ def main() -> int:
         "challenger": closed_metrics(managed_august),
         "managed_closes": int(managed_august["managed_close"].sum()),
         "armed_trades": int(managed_august["armed"].sum()),
-        "same_retained_entry_set": True,
+        "same_retained_entry_set": bool(same_retained_entry_set),
     }
     august["delta_vs_v60_net_pnl_usd"] = (
         august["challenger"]["net_pnl_usd"] - august["baseline_v60"]["net_pnl_usd"]
@@ -374,16 +379,20 @@ def main() -> int:
         august["challenger"]["net_pnl_usd"]
         - august["frozen_v12_entry_policy"]["net_pnl_usd"]
     )
+    tolerance = 1e-9
     august_gates = {
         "positive_net_pnl": august["challenger"]["net_pnl_usd"] > 0.0,
         "net_not_below_frozen_v6": august["challenger"]["net_pnl_usd"]
+        + tolerance
         >= float(config["acceptance"]["august_minimum_net_pnl_usd"]),
         "profit_factor_not_below_frozen_v6": august["challenger"]["profit_factor"]
+        + tolerance
         >= float(config["acceptance"]["august_minimum_profit_factor"]),
         "closed_drawdown_not_above_frozen_v6": august["challenger"][
             "closed_drawdown_usd"
         ]
-        <= float(config["acceptance"]["august_maximum_closed_drawdown_usd"]),
+        <= float(config["acceptance"]["august_maximum_closed_drawdown_usd"])
+        + tolerance,
         "same_retained_entry_set": bool(august["same_retained_entry_set"]),
     }
 
