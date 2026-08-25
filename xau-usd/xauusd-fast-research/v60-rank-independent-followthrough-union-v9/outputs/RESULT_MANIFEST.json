@@ -1,0 +1,29 @@
+{
+  "schema_version": "v60_rank_independent_followthrough_union_v9_result_manifest",
+  "preregistered_code_commit": "8fc7f6bf15bd7010e321d3ca252b26ef3c95fdd9",
+  "decision": "REJECT_V9_KEEP_DEPLOYED_V60",
+  "deployment_authorized": false,
+  "broker_action_authorized": false,
+  "artifacts": {
+    "ANNUAL.csv": {
+      "bytes": 503,
+      "sha256": "8eedc7ce8a87722cb48cde9bec3bbba65b8ae1e28bf0ea4764da1daee7904c3e"
+    },
+    "AUGUST_2026_TRADE_AUDIT.csv": {
+      "bytes": 13886,
+      "sha256": "b7894c6bc47a2bb7a9698377b7534bfb5ed749cda89f06be4fb2e101dc4f5000"
+    },
+    "HISTORICAL_VETOES.csv": {
+      "bytes": 6434,
+      "sha256": "a3633c42a7da79ef7a7f72db2a46a139d7651ba07c69cdc90c5b800f0e997d67"
+    },
+    "RESULT.json": {
+      "bytes": 49376,
+      "sha256": "fa9b56b884dd042091d445b7c10043d0ce5dbf15b28e24b94cac9cdd575cf09a"
+    },
+    "RESULT.md": {
+      "bytes": 687,
+      "sha256": "b3dd8f92a97b99aac6cb492c1e0a3a64c07dd1ecc42e02340fab373e490c4c90"
+    }
+  }
+}
