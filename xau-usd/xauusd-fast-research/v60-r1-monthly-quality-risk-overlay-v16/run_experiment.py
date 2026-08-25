@@ -42,7 +42,10 @@ def main() -> int:
     payload = json.loads(result_path.read_text(encoding="utf-8"))
     if "v14" in payload["monthly"]:
         payload["monthly"]["v16"] = payload["monthly"].pop("v14")
-        result_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    for section in ("august_2026_through_25", "dukascopy_crossfeed"):
+        if "v14" in payload[section]:
+            payload[section]["v16"] = payload[section].pop("v14")
+    result_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
     monthly_path = OUTPUTS / "MONTHLY.csv"
     monthly_path.write_text(
         monthly_path.read_text(encoding="utf-8").replace("V14", "V16"),
