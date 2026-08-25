@@ -271,7 +271,19 @@
     "dynamic_policy_state_recomputed_from_hypothetical_retained_path": true,
     "validates_replacement_capacity_trades": false,
     "current_evidence_records": 0,
-    "current_status": "KEEP_DEPLOYED_V60_CONTINUE_COLLECTION"
+    "current_status": "KEEP_DEPLOYED_V60_CONTINUE_COLLECTION",
+    "pre_boundary_readiness": {
+      "decision": "READY_FOR_CLEAN_READ_ONLY_COLLECTION",
+      "generated_at_utc": "2026-08-25T09:28:51.811836Z",
+      "checks_passed": 10,
+      "checks_total": 10,
+      "evidence_records": 0,
+      "equity_marks": 0,
+      "v60_process_ids": [4888, 19888],
+      "terminal_process_ids": [24168],
+      "broker_action_authorized": false,
+      "deployment_authorized": false
+    }
   },
   "rejected_posthoc_rank_only_audit": {
     "trades_removed": 58,

@@ -1,0 +1,38 @@
+{
+  "broker_action_authorized": false,
+  "checks": {
+    "clock_is_before_clean_boundary": true,
+    "contract_hash_matches_observer_status": true,
+    "contract_hash_matches_supervisor_anchor": true,
+    "equity_chain_is_verified_and_empty": true,
+    "evidence_chain_is_verified_and_empty": true,
+    "exact_replay_has_no_preboundary_trades": true,
+    "no_broker_or_risk_change_added": true,
+    "observer_is_strictly_read_only": true,
+    "supervisor_and_dynamic_worker_are_healthy": true,
+    "v60_and_terminal_process_identity_unchanged": true
+  },
+  "decision": "READY_FOR_CLEAN_READ_ONLY_COLLECTION",
+  "deployment_authorized": false,
+  "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+  "generated_at_utc": "2026-08-25T09:28:51.811836Z",
+  "prospective_contract_sha256": "86cb376fdd545c2652edab395cb96bb1598a14784a35d2a3bd367380bce3d0b4",
+  "runtime": {
+    "dynamic_worker_process_ids": [
+      15532,
+      21460
+    ],
+    "equity_marks": 0,
+    "evidence_records": 0,
+    "supervisor_status": "READY",
+    "terminal_process_ids": [
+      24168
+    ],
+    "v60_process_ids": [
+      4888,
+      19888
+    ],
+    "worker_count": 8
+  },
+  "schema_version": "v60_dynamic_v6_preboundary_readiness_v1"
+}

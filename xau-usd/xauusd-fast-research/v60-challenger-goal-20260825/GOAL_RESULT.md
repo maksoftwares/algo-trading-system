@@ -240,6 +240,12 @@ daily tick file it uses. It also handles multiple entry fills and partial exits
 at their actual times and volumes. With no post-boundary trades yet, its status is
 `NOT_READY_NO_RESOLVED_TRADES`, as expected.
 
+The final pre-boundary audit passed all ten readiness checks at
+`2026-08-25T09:28:51Z`: the evidence and equity chains were physically empty,
+the exact replay contained no trades, the contract matched both runtime and
+supervisor anchors, all eight workers were healthy, and V60/MT5 process
+identities were unchanged. This authorizes clean read-only collection only.
+
 The runtime supervisor is healthy on demo account 1033030. It supervises eight
 workers, both execution feeds pass, and all research observers explicitly
 report `broker_action_authorized=false` and `deployment_authorized=false`.
