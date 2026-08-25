@@ -119,16 +119,24 @@ def run_once(config_path: Path) -> dict:
     )
     status["observer_ranker"] = rank_audit
     evidence = load_evidence()
+    state = json.loads(
+        Path(config["read_only_inputs"]["portfolio_state"]).read_text(
+            encoding="utf-8"
+        )
+    )
+    evidence.attach_execution_details(
+        rows,
+        state,
+        deals,
+        account_currency_per_usd=float(
+            config["account"]["account_currency_per_usd"]
+        ),
+    )
     evidence.add_forward_comparison(status, rows, config["acceptance"])
     status["evidence_chain"] = evidence.update_evidence_chain(
         Path(config["outputs"]["runtime_directory"]),
         rows,
         observed_at=observed_at,
-    )
-    state = json.loads(
-        Path(config["read_only_inputs"]["portfolio_state"]).read_text(
-            encoding="utf-8"
-        )
     )
     equity_mark = evidence.build_equity_mark(
         rows,

@@ -6,6 +6,7 @@ import pytest
 
 from src.evidence import (
     add_forward_comparison,
+    attach_execution_details,
     build_equity_mark,
     load_chain,
     update_equity_marks,
@@ -35,6 +36,23 @@ def candidate(
         "broker_outcome_resolved": True,
         "broker_exit_time_utc": f"2026-08-26T1{candidate_id}:00:00Z",
         "broker_pnl_usd": pnl,
+        "broker_exit_fills": [
+            {
+                "deal_ticket": 1000 + int(candidate_id),
+                "exit_time_utc": f"2026-08-26T1{candidate_id}:00:00Z",
+                "volume_lots": 0.01,
+                "exit_price": 4702.0,
+                "pnl_usd": pnl,
+            }
+        ],
+        "broker_execution": {
+            "ticket": int(candidate_id),
+            "broker_entry_time_utc": f"2026-08-26T0{candidate_id}:00:01Z",
+            "direction": "LONG",
+            "volume_lots": 0.01,
+            "entry_price": 4700.0,
+            "entry_cost_usd": 0.0,
+        },
     }
 
 
@@ -42,12 +60,12 @@ def test_evidence_chain_is_idempotent_and_rejects_decision_drift(tmp_path) -> No
     rows = [candidate("1", -10.0, would_veto=True)]
     now = datetime(2026, 8, 26, 12, tzinfo=UTC)
     first = update_evidence_chain(tmp_path, rows, observed_at=now)
-    assert first["records"] == 3
-    assert first["new_records"] == 3
-    assert len(load_chain(tmp_path / "EVIDENCE_CHAIN.jsonl")) == 3
+    assert first["records"] == 4
+    assert first["new_records"] == 4
+    assert len(load_chain(tmp_path / "EVIDENCE_CHAIN.jsonl")) == 4
 
     second = update_evidence_chain(tmp_path, rows, observed_at=now)
-    assert second["records"] == 3
+    assert second["records"] == 4
     assert second["new_records"] == 0
     assert second["head_sha256"] == first["head_sha256"]
 
@@ -66,6 +84,7 @@ def test_forward_comparison_measures_whole_resolved_portfolio() -> None:
     acceptance = {
         "minimum_resolved_baseline_executions": 3,
         "minimum_resolved_rank_coverage": 1.0,
+        "minimum_resolved_execution_detail_coverage": 1.0,
         "minimum_trade_retention": 0.60,
     }
     add_forward_comparison(status, rows, acceptance)
@@ -79,6 +98,74 @@ def test_forward_comparison_measures_whole_resolved_portfolio() -> None:
     assert comparison["trade_retention"] == pytest.approx(2 / 3)
     assert all(status["gates"].values())
     assert status["decision"] == "PROSPECTIVE_CONFIRMATION_PASSES_REVIEW_REQUIRED"
+
+
+def test_execution_details_are_derived_from_broker_entry_deals() -> None:
+    rows = [candidate("1", 2.0, would_veto=False)]
+    rows[0].pop("broker_execution")
+    state = {"positions": {"1": {"ticket": 101}}}
+    deals = [
+        {
+            "position_id": 101,
+            "entry": 0,
+            "type": 0,
+            "volume": 0.004,
+            "price": 4700.0,
+            "profit": 0.0,
+            "commission": -0.2,
+            "swap": 0.0,
+            "fee": 0.0,
+            "time_msc": 1787731201000,
+        },
+        {
+            "position_id": 101,
+            "entry": 0,
+            "type": 0,
+            "volume": 0.006,
+            "price": 4710.0,
+            "profit": 0.0,
+            "commission": -0.3,
+            "swap": 0.0,
+            "fee": 0.0,
+            "time_msc": 1787731202000,
+        },
+        {
+            "ticket": 201,
+            "position_id": 101,
+            "entry": 1,
+            "type": 1,
+            "volume": 0.004,
+            "price": 4712.0,
+            "profit": 1.0,
+            "commission": 0.0,
+            "swap": 0.0,
+            "fee": 0.0,
+            "time_msc": 1787763600000,
+        },
+        {
+            "ticket": 202,
+            "position_id": 101,
+            "entry": 1,
+            "type": 1,
+            "volume": 0.006,
+            "price": 4713.0,
+            "profit": 1.5,
+            "commission": 0.0,
+            "swap": 0.0,
+            "fee": 0.0,
+            "time_msc": 1787763601000,
+        },
+    ]
+    attach_execution_details(
+        rows, state, deals, account_currency_per_usd=1.0
+    )
+    execution = rows[0]["broker_execution"]
+    assert execution["direction"] == "LONG"
+    assert execution["volume_lots"] == pytest.approx(0.01)
+    assert execution["entry_price"] == pytest.approx(4706.0)
+    assert execution["entry_cost_usd"] == pytest.approx(-0.5)
+    assert len(rows[0]["broker_exit_fills"]) == 2
+    assert sum(fill["pnl_usd"] for fill in rows[0]["broker_exit_fills"]) == 2.5
 
 
 def test_equity_marks_include_open_pnl_and_measure_sampled_drawdown(tmp_path) -> None:

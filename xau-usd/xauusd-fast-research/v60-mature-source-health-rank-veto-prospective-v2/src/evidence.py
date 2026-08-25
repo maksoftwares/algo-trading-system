@@ -104,7 +104,30 @@ def immutable_events(row: Mapping[str, Any]) -> list[tuple[str, dict[str, Any]]]
                 },
             )
         )
+    execution = row.get("broker_execution")
+    if execution is not None:
+        events.append(
+            (
+                "BROKER_EXECUTION",
+                {
+                    **common,
+                    "ticket": int(execution["ticket"]),
+                    "broker_entry_time_utc": str(
+                        execution["broker_entry_time_utc"]
+                    ),
+                    "direction": str(execution["direction"]),
+                    "volume_lots": float(execution["volume_lots"]),
+                    "entry_price": float(execution["entry_price"]),
+                    "entry_cost_usd": float(execution["entry_cost_usd"]),
+                },
+            )
+        )
     if bool(row.get("broker_outcome_resolved")):
+        exit_fills = row.get("broker_exit_fills")
+        if exit_fills is None:
+            raise ValueError(
+                f"Resolved broker outcome lacks exit fills: {candidate_id}"
+            )
         events.append(
             (
                 "BROKER_OUTCOME",
@@ -112,6 +135,7 @@ def immutable_events(row: Mapping[str, Any]) -> list[tuple[str, dict[str, Any]]]
                     **common,
                     "broker_exit_time_utc": str(row["broker_exit_time_utc"]),
                     "broker_pnl_usd": float(row["broker_pnl_usd"]),
+                    "exit_fills": list(exit_fills),
                 },
             )
         )
@@ -193,6 +217,121 @@ def update_evidence_chain(
 
 def object_value(value: Any, name: str) -> Any:
     return value[name] if isinstance(value, Mapping) else getattr(value, name)
+
+
+def attach_execution_details(
+    rows: Sequence[dict[str, Any]],
+    state: Mapping[str, Any],
+    deals: Sequence[Any],
+    *,
+    account_currency_per_usd: float,
+) -> None:
+    rate = float(account_currency_per_usd)
+    if rate <= 0.0:
+        raise ValueError("Account-currency conversion rate must be positive")
+    deals_by_position: dict[int, list[Any]] = {}
+    for deal in deals:
+        deals_by_position.setdefault(int(object_value(deal, "position_id")), []).append(
+            deal
+        )
+    state_positions = state.get("positions", {})
+    for row in rows:
+        if not bool(row.get("baseline_executed")):
+            continue
+        candidate_id = str(row["candidate_id"])
+        state_position = state_positions.get(candidate_id)
+        if state_position is None:
+            raise ValueError(
+                f"Executed candidate has no portfolio state: {candidate_id}"
+            )
+        ticket = int(state_position["ticket"])
+        entries = [
+            deal
+            for deal in deals_by_position.get(ticket, [])
+            if int(object_value(deal, "entry")) == 0
+        ]
+        if not entries:
+            continue
+        direction_types = {int(object_value(deal, "type")) for deal in entries}
+        if len(direction_types) != 1 or next(iter(direction_types)) not in (0, 1):
+            raise ValueError(f"Ambiguous broker entry direction: {candidate_id}")
+        volume = sum(float(object_value(deal, "volume")) for deal in entries)
+        if volume <= 0.0:
+            raise ValueError(f"Nonpositive broker entry volume: {candidate_id}")
+        weighted_price = sum(
+            float(object_value(deal, "price"))
+            * float(object_value(deal, "volume"))
+            for deal in entries
+        ) / volume
+        entry_cost_account = sum(
+            sum(
+                float(object_value(deal, key))
+                for key in ("profit", "commission", "swap", "fee")
+            )
+            for deal in entries
+        )
+        row["broker_execution"] = {
+            "ticket": ticket,
+            "broker_entry_time_utc": datetime.fromtimestamp(
+                min(int(object_value(deal, "time_msc")) for deal in entries)
+                / 1000.0,
+                UTC,
+            )
+            .isoformat()
+            .replace("+00:00", "Z"),
+            "direction": "LONG" if next(iter(direction_types)) == 0 else "SHORT",
+            "volume_lots": volume,
+            "entry_price": weighted_price,
+            "entry_cost_usd": entry_cost_account / rate,
+        }
+        if bool(row.get("broker_outcome_resolved")):
+            exits = [
+                deal
+                for deal in deals_by_position.get(ticket, [])
+                if int(object_value(deal, "entry")) != 0
+            ]
+            if not exits:
+                raise ValueError(f"Resolved candidate has no exit fills: {candidate_id}")
+            closed_volume = sum(float(object_value(deal, "volume")) for deal in exits)
+            if abs(closed_volume - volume) > 1e-8:
+                raise ValueError(
+                    f"Resolved candidate volume does not reconcile: {candidate_id}: "
+                    f"entry={volume}: exit={closed_volume}"
+                )
+            exit_fills = []
+            for deal in sorted(
+                exits,
+                key=lambda item: (
+                    int(object_value(item, "time_msc")),
+                    int(object_value(item, "ticket")),
+                ),
+            ):
+                exit_fills.append(
+                    {
+                        "deal_ticket": int(object_value(deal, "ticket")),
+                        "exit_time_utc": datetime.fromtimestamp(
+                            int(object_value(deal, "time_msc")) / 1000.0,
+                            UTC,
+                        )
+                        .isoformat()
+                        .replace("+00:00", "Z"),
+                        "volume_lots": float(object_value(deal, "volume")),
+                        "exit_price": float(object_value(deal, "price")),
+                        "pnl_usd": sum(
+                            float(object_value(deal, key))
+                            for key in ("profit", "commission", "swap", "fee")
+                        )
+                        / rate,
+                    }
+                )
+            lifecycle_pnl = entry_cost_account / rate + sum(
+                float(fill["pnl_usd"]) for fill in exit_fills
+            )
+            if abs(lifecycle_pnl - float(row["broker_pnl_usd"])) > 1e-8:
+                raise ValueError(
+                    f"Resolved candidate P/L does not reconcile: {candidate_id}"
+                )
+            row["broker_exit_fills"] = exit_fills
 
 
 def build_equity_mark(
@@ -411,6 +550,10 @@ def add_forward_comparison(
     )
     scored_resolved = sum(row.get("causal_rank") is not None for row in resolved)
     rank_coverage = scored_resolved / resolved_count if resolved_count else None
+    detailed_resolved = sum(row.get("broker_execution") is not None for row in resolved)
+    execution_detail_coverage = (
+        detailed_resolved / resolved_count if resolved_count else None
+    )
     comparison = {
         "baseline_v60": baseline,
         "challenger_v2": challenger,
@@ -420,16 +563,23 @@ def add_forward_comparison(
         - float(baseline["closed_drawdown_usd"]),
         "trade_retention": retention,
         "resolved_rank_coverage": rank_coverage,
+        "resolved_execution_detail_coverage": execution_detail_coverage,
     }
     status["forward_comparison"] = comparison
     status["counts"]["resolved_baseline_executions"] = resolved_count
     status["counts"]["resolved_scored_baseline_executions"] = scored_resolved
+    status["counts"]["resolved_detailed_baseline_executions"] = detailed_resolved
     status["gates"].update(
         {
             "minimum_resolved_baseline_executions": resolved_count
             >= int(acceptance["minimum_resolved_baseline_executions"]),
             "complete_resolved_rank_coverage": rank_coverage is not None
             and rank_coverage >= float(acceptance["minimum_resolved_rank_coverage"]),
+            "complete_resolved_execution_detail_coverage": (
+                execution_detail_coverage is not None
+                and execution_detail_coverage
+                >= float(acceptance["minimum_resolved_execution_detail_coverage"])
+            ),
             "minimum_trade_retention": retention is not None
             and retention >= float(acceptance["minimum_trade_retention"]),
             "challenger_net_pnl_not_worse": float(challenger["net_pnl_usd"])

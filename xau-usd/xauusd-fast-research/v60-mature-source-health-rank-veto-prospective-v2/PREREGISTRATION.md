@@ -9,18 +9,23 @@ the deployed V60 policy.
 
 ## Immutable evidence protocol
 
-Each first-seen causal score, baseline execution decision, and resolved broker
-outcome is written to a hash-linked evidence chain. Repeated observations must
-match the original immutable payload exactly. A changed score, rank, source,
-entry time, policy decision, exit time, or broker P/L fails the observer closed.
-The evidence recorder implementation is hash-locked before the clean boundary.
+Each first-seen causal score, baseline execution decision, broker entry fill,
+and resolved broker outcome is written to a hash-linked evidence chain. Entry
+evidence freezes the actual time, side, volume, volume-weighted price, and costs.
+Repeated observations must match the original immutable payload exactly. A
+changed score, rank, source, entry, policy decision, exit, or broker P/L fails
+the observer closed. The evidence recorder implementation is hash-locked before
+the clean boundary, and every resolved execution requires complete fill details.
 
 The observer also records a hash-linked XAU-only equity mark every five-minute
 cycle. The baseline mark includes closed P/L and current MT5 floating P/L; the
 V2 mark removes positions the locked policy would have vetoed. At least 5,000
 marks are required and V2 sampled equity drawdown cannot exceed V60. Before any
-deployment decision, stored prospective ticks must also be replayed to measure
-the exact between-sample equity drawdown.
+deployment decision, the hash-locked exact replay must process stored prospective
+ticks to measure between-sample equity drawdown. It marks longs to bid and shorts
+to ask, handles overlapping positions, reconciles final broker P/L, and records
+the SHA-256 of every immutable daily tick file used. Multiple entry fills and
+partial exit fills are replayed at their actual timestamps and volumes.
 
 ## All-source causal ranking
 

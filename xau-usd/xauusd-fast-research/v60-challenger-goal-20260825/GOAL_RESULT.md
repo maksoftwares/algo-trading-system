@@ -144,6 +144,14 @@ V2 sampled equity drawdown cannot be worse, and the final review must reconstruc
 exact between-sample drawdown from the stored ticks. Passing every gate still
 does not auto-authorize deployment.
 
+The exact replay implementation is now hash-locked. Prospective evidence also
+freezes every broker entry's time, side, volume, volume-weighted price, and entry
+cost. The replay handles overlapping trades, marks longs to bid and shorts to
+ask on every recorded tick, reconciles final broker P/L, and hashes each closed
+daily tick file it uses. It also handles multiple entry fills and partial exits
+at their actual times and volumes. With no post-boundary trades yet, its status is
+`NOT_READY_NO_RESOLVED_TRADES`, as expected.
+
 The runtime supervisor is healthy on demo account 1033030. It supervises six
 workers, both execution feeds pass, and both V1 and V2 observers explicitly
 report `broker_action_authorized=false` and `deployment_authorized=false`.

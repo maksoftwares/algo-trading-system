@@ -43,6 +43,14 @@ def test_v2_observer_is_read_only_and_hash_locked() -> None:
     assert hashlib.sha256(evidence.read_bytes()).hexdigest() == config["lock"][
         "evidence_recorder_sha256"
     ]
+    tick_replay = ROOT / "src" / "tick_replay.py"
+    assert hashlib.sha256(tick_replay.read_bytes()).hexdigest() == config["lock"][
+        "tick_replay_sha256"
+    ]
+    tick_replay_runner = ROOT / "run_exact_tick_equity_replay.py"
+    assert hashlib.sha256(tick_replay_runner.read_bytes()).hexdigest() == config[
+        "lock"
+    ]["tick_replay_runner_sha256"]
     ranker_config = config["observer_ranker"]
     assert ranker_config["observer_only"] is True
     assert ranker_config["broker_action_authorized"] is False
@@ -52,5 +60,6 @@ def test_v2_observer_is_read_only_and_hash_locked() -> None:
     acceptance = config["acceptance"]
     assert acceptance["minimum_resolved_baseline_executions"] >= 100
     assert acceptance["minimum_resolved_rank_coverage"] == 1.0
+    assert acceptance["minimum_resolved_execution_detail_coverage"] == 1.0
     assert acceptance["minimum_trade_retention"] >= 0.95
     assert acceptance["minimum_equity_marks"] >= 5000
