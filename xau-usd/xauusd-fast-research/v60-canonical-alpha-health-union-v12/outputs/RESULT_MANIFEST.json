@@ -1,0 +1,29 @@
+{
+  "schema_version": "v60_canonical_alpha_health_union_v12_result_manifest",
+  "preregistered_code_commit": "4db9a1d268047920ecebc25a1b7f541d4893c751",
+  "decision": "REJECT_V12_KEEP_DEPLOYED_V60",
+  "deployment_authorized": false,
+  "broker_action_authorized": false,
+  "artifacts": {
+    "ANNUAL.csv": {
+      "bytes": 503,
+      "sha256": "0f21c01f5451dc4ce072cc9a41e9022415f473ed8fdcc3c7add634500c44f71a"
+    },
+    "AUGUST_2026_TRADE_AUDIT.csv": {
+      "bytes": 13872,
+      "sha256": "8129603f9a31dd3efb2827f6a7f88217828baf4254cad56a3322b2165c0656d6"
+    },
+    "HISTORICAL_VETOES.csv": {
+      "bytes": 2974,
+      "sha256": "bb361c4223ab6901b7a157621406dc7566dd27c5828ca1cfcad542d5a05bd31a"
+    },
+    "RESULT.json": {
+      "bytes": 38973,
+      "sha256": "6950f58a900ca416a5162380b24af30960588b74416727309bb5a4ccb0e1250d"
+    },
+    "RESULT.md": {
+      "bytes": 762,
+      "sha256": "349426e438e6c0bfc0d158a1f344f146e56e22f415832e159edf8d909d220999"
+    }
+  }
+}
