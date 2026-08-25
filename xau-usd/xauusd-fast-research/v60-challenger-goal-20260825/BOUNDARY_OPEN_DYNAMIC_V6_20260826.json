@@ -1,0 +1,40 @@
+{
+  "broker_action_authorized": false,
+  "checks": {
+    "candidate_snapshot_has_no_preboundary_rows": true,
+    "candidate_snapshot_uses_locked_contract": true,
+    "clock_reached_clean_boundary": false,
+    "contract_hash_matches_observer_status": true,
+    "contract_hash_matches_supervisor_anchor": true,
+    "equity_chain_verified": true,
+    "equity_has_no_preboundary_marks": true,
+    "evidence_chain_verified": true,
+    "evidence_has_no_preboundary_records": true,
+    "first_postboundary_equity_mark_exists": false,
+    "immutable_decisions_use_locked_contract": true,
+    "no_broker_or_risk_change_added": true,
+    "observer_completed_postboundary_cycle": false,
+    "observer_is_strictly_read_only": true,
+    "supervisor_and_dynamic_worker_are_healthy": true,
+    "v60_and_terminal_process_identity_unchanged": true
+  },
+  "decision": "WAIT_FOR_CLEAN_BOUNDARY",
+  "deployment_authorized": false,
+  "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+  "generated_at_utc": "2026-08-25T09:52:53.375091Z",
+  "prospective_contract_sha256": "fdef9c39358a822784aaf0a7aaaac3dcb457e0072fdbb1ab50acb2078ba19ccc",
+  "runtime": {
+    "candidate_rows": 0,
+    "equity_marks": 0,
+    "evidence_records": 0,
+    "terminal_process_ids": [
+      24168
+    ],
+    "v60_process_ids": [
+      4888,
+      19888
+    ],
+    "worker_count": 8
+  },
+  "schema_version": "v60_dynamic_v6_boundary_opening_v1"
+}

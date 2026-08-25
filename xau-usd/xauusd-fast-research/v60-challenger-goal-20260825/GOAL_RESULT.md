@@ -256,6 +256,12 @@ the exact replay contained no trades, the contract matched both runtime and
 supervisor anchors, all eight workers were healthy, and V60/MT5 process
 identities were unchanged. This authorizes clean read-only collection only.
 
+A separate boundary-opening verifier is prepared and currently reports
+`WAIT_FOR_CLEAN_BOUNDARY`. On the first cycle after the boundary it must verify
+the contract hash, both hash chains, post-boundary timestamps, the first equity
+mark, read-only authorization, supervisor health, and unchanged V60/MT5 process
+identities. Any pre-boundary record or unresolved mismatch fails the audit.
+
 The runtime supervisor is healthy on demo account 1033030. It supervises eight
 workers, both execution feeds pass, and all research observers explicitly
 report `broker_action_authorized=false` and `deployment_authorized=false`.

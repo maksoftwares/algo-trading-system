@@ -292,6 +292,15 @@
     "validates_replacement_capacity_trades": false,
     "current_evidence_records": 0,
     "current_status": "KEEP_DEPLOYED_V60_CONTINUE_COLLECTION",
+    "boundary_opening_audit": {
+      "verifier": "verify_dynamic_v6_boundary_open.py",
+      "decision": "WAIT_FOR_CLEAN_BOUNDARY",
+      "generated_at_utc": "2026-08-25T09:52:53.375091Z",
+      "candidate_rows": 0,
+      "evidence_records": 0,
+      "equity_marks": 0,
+      "deployment_authorized": false
+    },
     "pre_boundary_readiness": {
       "decision": "READY_FOR_CLEAN_READ_ONLY_COLLECTION",
       "generated_at_utc": "2026-08-25T09:36:16.602376Z",
