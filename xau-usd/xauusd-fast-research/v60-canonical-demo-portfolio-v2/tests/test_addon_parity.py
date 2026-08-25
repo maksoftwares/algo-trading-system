@@ -9,6 +9,7 @@ import pandas as pd
 
 from addons import (
     REPO_ROOT,
+    _candidate_health_observability,
     _health_snapshot,
     _source_entry_weekday_allowed,
     historical_rule_frames,
@@ -124,6 +125,15 @@ def test_health_snapshot_exposes_recent_degradation_without_policy_action() -> N
     assert snapshot["windows"]["20"]["net_pnl_usd"] == -25.0
     assert snapshot["recent_20_degraded"] is True
     assert snapshot["policy_effect"] == "OBSERVABILITY_ONLY"
+
+    candidate_fields = _candidate_health_observability(
+        {"history": [{"pnl_usd": value} for value in values]}
+    )
+    assert candidate_fields == {
+        "health_recent_20_completed_count": 20,
+        "health_recent_20_profit_factor": 1.0 / 6.0,
+        "health_recent_20_net_usd": -25.0,
+    }
 
 
 def test_v57_source_generation_rejects_weekend_without_global_block() -> None:

@@ -6,7 +6,12 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
+import time
 from typing import Any, Callable, Mapping
+
+import pandas as pd
+
+from r4_bar_cache import load_quote_bars_cached
 
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]
@@ -51,6 +56,16 @@ def _transport(config: Mapping[str, Any], name: str) -> Path:
     path = Path(config["runtime"]["directory"]) / "feeds" / name
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def normalize_utc_datetime_columns(frame: pd.DataFrame) -> pd.DataFrame:
+    result = frame.copy()
+    for column in ("bar_start_utc", "bar_end_utc", "timestamp_utc"):
+        if column in result.columns:
+            result[column] = pd.to_datetime(result[column], utc=True).astype(
+                "datetime64[ns, UTC]"
+            )
+    return result
 
 
 def _patch_frozen_source(
@@ -125,18 +140,65 @@ def run_r4(config: Mapping[str, Any]) -> dict[str, Any]:
     module = _load_module("v60_v2_r4_runner", package / "run_shadow.py")
     module.assert_demo_read_only = _target_guard(config)
     files = Path(config["feeds"]["terminal_files_directory"])
-    _patch_frozen_source(
-        module,
-        {
-            "terminal_exe": str(Path(config["account"]["terminal_exe"])),
-            "runtime_directory": str(_transport(config, "r4")),
-            "tick_directory": str(files),
-            "tick_filename_glob": str(config["feeds"]["tick_filename_glob"]),
-            "account_login": int(config["account"]["expected_login"]),
-            "account_server": str(config["account"]["expected_server"]),
-            "history_days": 200,
-        },
-    )
+    source_overrides = {
+        "terminal_exe": str(Path(config["account"]["terminal_exe"])),
+        "runtime_directory": str(_transport(config, "r4")),
+        "tick_directory": str(files),
+        "tick_filename_glob": str(config["feeds"]["tick_filename_glob"]),
+        "account_login": int(config["account"]["expected_login"]),
+        "account_server": str(config["account"]["expected_server"]),
+        "history_days": 200,
+    }
+    original_load_frozen = module.load_frozen
+
+    def load_frozen(*args: Any, **kwargs: Any) -> Any:
+        frozen = original_load_frozen(*args, **kwargs)
+        frozen.package_config["source"].update(deepcopy(source_overrides))
+        original_tick_loader = frozen.tick_loader_module.load_ticks
+        original_aggregate = module.aggregate_capital_quotes
+        original_overlay = module.overlay_quote_bars
+        cache_directory = _transport(config, "r4") / "bar_cache_v1"
+
+        def cached_tick_loader(paths: Any, loader_config: dict[str, Any]) -> Any:
+            bars, audit, daily = load_quote_bars_cached(
+                paths,
+                loader_config,
+                quality=frozen.package_config["data_quality"],
+                completed_through=pd.Timestamp.now(tz="UTC").floor("5min"),
+                cache_directory=cache_directory,
+                original_loader=original_tick_loader,
+                original_aggregate=original_aggregate,
+            )
+            placeholder = pd.DataFrame(
+                columns=["tick_time_msc", "bid", "ask", "spread_price"]
+            )
+            placeholder.attrs["r4_cached_quote_bars"] = bars
+            return placeholder, audit, daily
+
+        def cached_aggregate(
+            ticks: Any, *, completed_through: Any, quality: Any
+        ) -> Any:
+            bars = ticks.attrs.get("r4_cached_quote_bars")
+            if bars is None:
+                return original_aggregate(
+                    ticks, completed_through=completed_through, quality=quality
+                )
+            return bars.loc[
+                bars["bar_end_utc"] <= pd.Timestamp(completed_through)
+            ].reset_index(drop=True)
+
+        def normalized_overlay(historical: Any, quotes: Any) -> Any:
+            return original_overlay(
+                normalize_utc_datetime_columns(historical),
+                normalize_utc_datetime_columns(quotes),
+            )
+
+        frozen.tick_loader_module.load_ticks = cached_tick_loader
+        module.aggregate_capital_quotes = cached_aggregate
+        module.overlay_quote_bars = normalized_overlay
+        return frozen
+
+    module.load_frozen = load_frozen
     return module.run_cycle(REPO_ROOT, package)
 
 
@@ -276,14 +338,22 @@ def _run_feed_group(
     runners: list[tuple[str, Callable[[Mapping[str, Any]], dict[str, Any]]]],
 ) -> dict[str, Any]:
     results: dict[str, Any] = {}
-    checked_at = datetime.now(UTC).isoformat().replace("+00:00", "Z")
     for name, runner in runners:
+        checked_at = datetime.now(UTC).isoformat().replace("+00:00", "Z")
+        started = time.perf_counter()
         try:
-            results[name] = {"ok": True, "checked_at_utc": checked_at, "status": runner(config)}
+            status = runner(config)
+            results[name] = {
+                "ok": True,
+                "checked_at_utc": checked_at,
+                "duration_seconds": time.perf_counter() - started,
+                "status": status,
+            }
         except Exception as exc:
             results[name] = {
                 "ok": False,
                 "checked_at_utc": checked_at,
+                "duration_seconds": time.perf_counter() - started,
                 "error": f"{type(exc).__name__}: {exc}",
             }
     return {

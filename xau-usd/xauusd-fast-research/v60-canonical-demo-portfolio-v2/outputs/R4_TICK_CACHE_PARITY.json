@@ -1,0 +1,28 @@
+{
+  "bar_cache_build_seconds": 124.64879160001874,
+  "broker_action_added": false,
+  "cache_build_seconds": 41.4050657999469,
+  "completed_through_utc": "2026-08-25T01:55:00+00:00",
+  "discovered_source_files": 36,
+  "excluded_mutable_files": [
+    "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\xau_prospective_1033030_Capital_ComMena_Demo_XAUUSD_ticks_20260825.csv"
+  ],
+  "quote_bar_frame_sha256": "fac126f813397683096146add174b0cbbde7732d63c97462c8d9f0c641e8915b",
+  "quote_m5_rows": 6630,
+  "raw_tick_rows": 8665037,
+  "reference_load_seconds": 111.80457039992325,
+  "result": "PASS_EXACT_PARITY",
+  "schema_version": "xauusd_v60_r4_tick_cache_parity_v1",
+  "source_bytes": 2140275858,
+  "source_files": 35,
+  "strategy_or_risk_parameters_changed": false,
+  "tick_frame_sha256": "0d037b4f4d3241056249d096113bb5974ab9d8f9be24d3111122f2708dcc41f1",
+  "unique_tick_rows": 8574972,
+  "verified_at_utc": "2026-08-25T02:03:36.980825Z",
+  "warm_bar_cache_hits": 35,
+  "warm_bar_cache_load_seconds": 0.2942312000086531,
+  "warm_bar_cache_misses": 0,
+  "warm_cache_hits": 35,
+  "warm_cache_load_seconds": 41.16743749997113,
+  "warm_cache_misses": 0
+}

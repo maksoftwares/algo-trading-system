@@ -15,7 +15,10 @@
       "id": "V60_FEEDS",
       "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
       "script": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_feeds.py",
-      "args": [],
+      "args": [
+        "--poll-seconds",
+        "5"
+      ],
       "command_marker": "v60-canonical-demo-portfolio-v2*run_feeds.py"
     },
     {
@@ -24,6 +27,26 @@
       "script": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/run_research_feeds.py",
       "args": [],
       "command_marker": "v60-canonical-demo-portfolio-v2*run_research_feeds.py"
+    },
+    {
+      "id": "V60_V57_V1_PROSPECTIVE",
+      "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
+      "script": "xau-usd/xauusd-fast-research/v60-v57-executed-health-rank-veto-prospective-v1/run_observer.py",
+      "args": [
+        "--poll-seconds",
+        "300"
+      ],
+      "command_marker": "v60-v57-executed-health-rank-veto-prospective-v1*run_observer.py"
+    },
+    {
+      "id": "V60_MATURE_SOURCE_V2_PROSPECTIVE",
+      "python": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/.venv/Scripts/python.exe",
+      "script": "xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-prospective-v2/run_observer.py",
+      "args": [
+        "--poll-seconds",
+        "300"
+      ],
+      "command_marker": "v60-mature-source-health-rank-veto-prospective-v2*run_observer.py"
     },
     {
       "id": "V60_PORTFOLIO",
@@ -121,6 +144,32 @@
         "tick_transport.filename_day_matches_row": true,
         "strategy_or_risk_parameters_changed": false,
         "broker_action_added": false
+      }
+    },
+    {
+      "id": "V60_V57_V1_PROSPECTIVE_STATUS",
+      "path": "D:/AlgoTradingData/prospective/v60-v57-executed-health-rank-veto-v1/STATUS.json",
+      "timestamp_fields": [
+        "generated_at_utc"
+      ],
+      "maximum_age_seconds": 900,
+      "required_values": {
+        "deployment_authorized": false,
+        "broker_action_authorized": false,
+        "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z"
+      }
+    },
+    {
+      "id": "V60_MATURE_SOURCE_V2_PROSPECTIVE_STATUS",
+      "path": "D:/AlgoTradingData/prospective/v60-mature-source-health-rank-veto-v2/STATUS.json",
+      "timestamp_fields": [
+        "generated_at_utc"
+      ],
+      "maximum_age_seconds": 900,
+      "required_values": {
+        "deployment_authorized": false,
+        "broker_action_authorized": false,
+        "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z"
       }
     }
   ]

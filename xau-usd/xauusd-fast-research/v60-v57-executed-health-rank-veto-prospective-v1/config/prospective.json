@@ -1,0 +1,47 @@
+{
+  "schema_version": "v60_v57_executed_health_rank_veto_prospective_v1",
+  "authorization": {
+    "read_only_mt5": true,
+    "broker_actions": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "lock": {
+    "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+    "challenger_config": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/config/challenger.json",
+    "challenger_config_sha256": "e1e62f0a2ef6ab9770f4ca1dc5d204b16e9ba266c6fa24e8c1a02ec34aff6692",
+    "policy": {
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "state_condition": "ROLLING_PROFIT_FACTOR",
+      "lookback_closed_trades": 20,
+      "maximum_prior_profit_factor_exclusive": 1.0,
+      "maximum_causal_rank_exclusive": 0.1,
+      "missing_rank_action": "RETAIN"
+    }
+  },
+  "account": {
+    "terminal_exe": "C:/MT5PortableTier1BestEA/terminal64.exe",
+    "expected_login": 1033030,
+    "expected_server": "Capital.ComMena-Demo",
+    "expected_trade_mode": 0,
+    "symbol": "XAUUSD",
+    "magic": 965757,
+    "account_currency_per_usd": 3.6725,
+    "history_start_utc": "2026-07-21T00:00:00Z"
+  },
+  "read_only_inputs": {
+    "candidate_ledger": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/feeds/addons/addon_candidates.jsonl",
+    "portfolio_state": "C:/MT5PortableTier1BestEA/MQL5/Files/v60_canonical_demo_v2/state.json"
+  },
+  "outputs": {
+    "runtime_directory": "D:/AlgoTradingData/prospective/v60-v57-executed-health-rank-veto-v1"
+  },
+  "acceptance": {
+    "minimum_elapsed_days": 90,
+    "minimum_scored_executed_candidates": 100,
+    "minimum_resolved_vetoes": 10,
+    "maximum_veto_broker_profit_factor_exclusive": 0.8,
+    "minimum_avoided_broker_pnl_usd_exclusive": 0.0
+  }
+}

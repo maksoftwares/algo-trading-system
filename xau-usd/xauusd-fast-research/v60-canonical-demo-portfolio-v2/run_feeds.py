@@ -65,14 +65,21 @@ def next_slow_deadline(interval_seconds: int) -> float:
     return time.monotonic() + max(0, int(interval_seconds))
 
 
+def effective_poll_seconds(config: dict, override: int | None) -> int:
+    value = config["runtime"]["feed_poll_seconds"] if override is None else override
+    return max(1, int(value))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run deterministic V59/V60 execution feeds"
     )
     parser.add_argument("--config", type=Path, default=CONFIG_PATH)
     parser.add_argument("--once", action="store_true")
+    parser.add_argument("--poll-seconds", type=int)
     args = parser.parse_args()
     config = load_config(args.config.resolve())
+    poll_seconds = effective_poll_seconds(config, args.poll_seconds)
     runtime = Path(config["runtime"]["directory"])
     status_path = runtime / config["runtime"]["feed_status_filename"]
     required = REQUIRED_EXECUTION_FEEDS
@@ -145,7 +152,7 @@ def main() -> int:
             next_slow_at = next_slow_deadline(
                 int(config["runtime"]["slow_feed_poll_seconds"])
             )
-        time.sleep(int(config["runtime"]["feed_poll_seconds"]))
+        time.sleep(poll_seconds)
 
 
 if __name__ == "__main__":

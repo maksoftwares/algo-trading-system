@@ -140,6 +140,8 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
     assert set(workers) == {
         "V60_FEEDS",
         "V60_RESEARCH_FEEDS",
+        "V60_V57_V1_PROSPECTIVE",
+        "V60_MATURE_SOURCE_V2_PROSPECTIVE",
         "V60_PORTFOLIO",
         "V60_DEPLOYED_SPECIALIST_MONITOR",
     }
@@ -147,6 +149,8 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
         "V60_STATUS",
         "V60_FEED_STATUS",
         "V60_DEPLOYED_SPECIALIST_STATUS",
+        "V60_V57_V1_PROSPECTIVE_STATUS",
+        "V60_MATURE_SOURCE_V2_PROSPECTIVE_STATUS",
     }
     assert workers["V60_PORTFOLIO"]["args"][-1].endswith(
         "v60_portable_ml_topup_v4_overlay.json"
@@ -162,6 +166,22 @@ def test_only_deployed_demo_workers_are_supervised() -> None:
     assert workers["V60_RESEARCH_FEEDS"]["script"].endswith(
         "run_research_feeds.py"
     )
+    assert workers["V60_V57_V1_PROSPECTIVE"]["script"].endswith(
+        "run_observer.py"
+    )
+    assert sources["V60_V57_V1_PROSPECTIVE_STATUS"]["required_values"] == {
+        "deployment_authorized": False,
+        "broker_action_authorized": False,
+        "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+    }
+    assert workers["V60_MATURE_SOURCE_V2_PROSPECTIVE"]["script"].endswith(
+        "run_observer.py"
+    )
+    assert sources["V60_MATURE_SOURCE_V2_PROSPECTIVE_STATUS"]["required_values"] == {
+        "deployment_authorized": False,
+        "broker_action_authorized": False,
+        "evidence_start_inclusive_utc": "2026-08-26T00:00:00Z",
+    }
 
 
 def test_v60_health_requires_clear_risk_state_and_no_entry_halt() -> None:

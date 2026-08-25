@@ -45,5 +45,13 @@ xau-usd/xauusd-phase1/docs/A1_XAU_H4_PROFIT_PRESERVING_HEDGE_INDEPENDENT_REVIEW_
 # checkout, which breaks the bundles' own sha256 integrity gate.
 *.ini text eol=lf
 
+# V60 challenger packets hash-lock JSON contracts and evidence.
+xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/**/*.json text eol=lf
+xau-usd/xauusd-fast-research/v60-v57-executed-health-rank-veto-prospective-v1/**/*.json text eol=lf
+xau-usd/xauusd-fast-research/v60-generic-source-health-rank-veto-v1/**/*.json text eol=lf
+xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-v2/**/*.json text eol=lf
+xau-usd/xauusd-fast-research/v60-mature-source-health-rank-veto-prospective-v2/**/*.json text eol=lf
+xau-usd/xauusd-fast-research/v60-mature-virtual-health-rank-veto-v3/**/*.json text eol=lf
+
 # MT5 deployment bundles are hash-addressed evidence; preserve their exact bytes.
 forex/**/mt5/** -text -diff

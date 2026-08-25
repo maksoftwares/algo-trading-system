@@ -1,0 +1,52 @@
+{
+  "schema_version": "v60_generic_source_health_rank_veto_v1",
+  "authorization": {
+    "mt5_access": false,
+    "runtime_changes": false,
+    "demo_deployment": false,
+    "live_deployment": false
+  },
+  "inputs": {
+    "replay_contract": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/config/DRAWDOWN_PROTECTION_V1_REPLAY_CONTRACT.json",
+      "sha256": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0"
+    },
+    "replay_source": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-tick-runtime-replay-v1/src/replay.py",
+      "sha256": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a"
+    },
+    "deployed_config": {
+      "path": "xau-usd/xauusd-fast-research/v60-canonical-demo-portfolio-v2/config/v60_canonical_demo_portfolio_v2.json",
+      "sha256": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120"
+    },
+    "causal_rank_ledger": {
+      "path": "xau-usd/xauusd-fast-research/codex-v60-portable-mature-topup-v2/outputs/PRIMARY_DECISIONS.parquet",
+      "sha256": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17"
+    },
+    "shared_evaluator": {
+      "path": "xau-usd/xauusd-fast-research/v60-v57-degraded-rank-veto-v1/src/evaluate.py",
+      "sha256": "0b2fe113d4791ddd4c5e716eaeac9b0f8167499ba1d81c6aa32d1b07de183732"
+    }
+  },
+  "policy": {
+    "source_id": "*",
+    "source_scope": "EACH_SOURCE_INDEPENDENT",
+    "state_condition": "ROLLING_PROFIT_FACTOR",
+    "lookback_closed_trades": 20,
+    "maximum_prior_profit_factor_exclusive": 1.0,
+    "maximum_causal_rank_exclusive": 0.1,
+    "missing_rank_action": "RETAIN"
+  },
+  "report_title": "V60 Generic Source-Health Rank Veto V1 Result",
+  "benchmark_identity": {
+    "trades_closed": 1390,
+    "net_pnl_usd": 3603.565,
+    "net_tolerance_usd": 0.01
+  },
+  "gates": {
+    "metric_tolerance_usd": 0.000001,
+    "minimum_trade_retention_fraction": 0.99,
+    "minimum_frequency_retention_fraction": 0.95,
+    "minimum_veto_cohort_rows": 10
+  }
+}

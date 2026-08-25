@@ -1,0 +1,2356 @@
+{
+  "generated_at_utc": "2026-08-25T02:42:26.159694Z",
+  "input_sha256": {
+    "deployed_replay_events": "f16e289a9b62df3ad143d72afd68aec705d07ebda00d4d76e472c76c88b44aa6",
+    "historical_result": "efdd4dd9c8471527d54dadf221f579a8f9770fd9ca9a87d4d9530bb03408079c"
+  },
+  "maximum_rows_per_source": 50,
+  "policy": {
+    "lookback_closed_trades": 20,
+    "maximum_causal_rank_exclusive": 0.1,
+    "maximum_prior_profit_factor_exclusive": 1.0,
+    "minimum_prior_source_closed_trades": 50,
+    "missing_rank_action": "RETAIN",
+    "source_id": "*",
+    "source_scope": "EACH_SOURCE_INDEPENDENT",
+    "state_condition": "ROLLING_PROFIT_FACTOR"
+  },
+  "retained_history_counts_by_source": {
+    "R1_BOX": 17,
+    "R1_PULLBACK": 358,
+    "R2_DOWNTREND": 35,
+    "R3_COMPRESSION": 46,
+    "R4_CHOP": 46,
+    "V25_CHOP": 38,
+    "V57_BREAK_SWING_H4ADX_HIGH": 467,
+    "V7_SWING_HEALTH": 371
+  },
+  "rows": [
+    {
+      "candidate_id": "replay:fccef99737874dc201838eb7",
+      "closed_at_utc": "2021-01-14T14:25:00Z",
+      "pnl_usd": 2.941583700163942,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "fccef99737874dc201838eb7"
+    },
+    {
+      "candidate_id": "replay:V25_e91ece46db6d380926f025c5",
+      "closed_at_utc": "2021-02-03T11:15:05Z",
+      "pnl_usd": 2.697845235046092,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_e91ece46db6d380926f025c5"
+    },
+    {
+      "candidate_id": "replay:V25_3c53606f7b7f762be6ec5f93",
+      "closed_at_utc": "2021-02-04T01:52:15Z",
+      "pnl_usd": 8.129046549151566,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_3c53606f7b7f762be6ec5f93"
+    },
+    {
+      "candidate_id": "replay:306f734a3a9525381f56eeb6",
+      "closed_at_utc": "2021-02-04T07:33:55Z",
+      "pnl_usd": -4.939058754950297,
+      "source_id": "R4_CHOP",
+      "trade_id": "306f734a3a9525381f56eeb6"
+    },
+    {
+      "candidate_id": "replay:V25_83e66e8456fc578ebec946d3",
+      "closed_at_utc": "2021-02-24T12:05:05Z",
+      "pnl_usd": 2.696865761048965,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_83e66e8456fc578ebec946d3"
+    },
+    {
+      "candidate_id": "replay:2da7492623773c7fdfc620bb",
+      "closed_at_utc": "2021-03-01T13:52:00Z",
+      "pnl_usd": 3.2296862375036355,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "2da7492623773c7fdfc620bb"
+    },
+    {
+      "candidate_id": "replay:1b0c595a37cd8926f9078e4f",
+      "closed_at_utc": "2021-03-25T13:01:10Z",
+      "pnl_usd": -3.666981316566224,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "1b0c595a37cd8926f9078e4f"
+    },
+    {
+      "candidate_id": "replay:b37b60963b37028811207f17",
+      "closed_at_utc": "2021-03-29T19:00:05Z",
+      "pnl_usd": 12.2370034437479,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "b37b60963b37028811207f17"
+    },
+    {
+      "candidate_id": "replay:d3d947de1456dd95d993743b",
+      "closed_at_utc": "2021-03-30T22:00:05Z",
+      "pnl_usd": 19.008009814821506,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "d3d947de1456dd95d993743b"
+    },
+    {
+      "candidate_id": "replay:caec85551b32c3150d23429a",
+      "closed_at_utc": "2021-04-13T05:37:35Z",
+      "pnl_usd": 6.800473454519648,
+      "source_id": "R4_CHOP",
+      "trade_id": "caec85551b32c3150d23429a"
+    },
+    {
+      "candidate_id": "replay:22512254a7206178c14ab885",
+      "closed_at_utc": "2021-05-03T07:59:35Z",
+      "pnl_usd": -4.202903321550586,
+      "source_id": "R4_CHOP",
+      "trade_id": "22512254a7206178c14ab885"
+    },
+    {
+      "candidate_id": "replay:V25_188d0d5511d106369ec026fc",
+      "closed_at_utc": "2021-05-06T12:32:00Z",
+      "pnl_usd": 1.5698687193034653,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_188d0d5511d106369ec026fc"
+    },
+    {
+      "candidate_id": "replay:175631c80802161eceb0986e",
+      "closed_at_utc": "2021-06-14T01:11:30Z",
+      "pnl_usd": 7.896362083155944,
+      "source_id": "R4_CHOP",
+      "trade_id": "175631c80802161eceb0986e"
+    },
+    {
+      "candidate_id": "replay:V25_ba51eb2c22f4087e4ba3503d",
+      "closed_at_utc": "2021-06-14T08:32:55Z",
+      "pnl_usd": 8.08290613931684,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_ba51eb2c22f4087e4ba3503d"
+    },
+    {
+      "candidate_id": "replay:2daefaaf76544d03481dd830",
+      "closed_at_utc": "2021-06-16T17:59:50Z",
+      "pnl_usd": -7.859653901363026,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "2daefaaf76544d03481dd830"
+    },
+    {
+      "candidate_id": "replay:fa9af9b42574161089902720",
+      "closed_at_utc": "2021-06-17T02:00:05Z",
+      "pnl_usd": 5.398641731595049,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "fa9af9b42574161089902720"
+    },
+    {
+      "candidate_id": "replay:7a2ca9c7582e1cd4afcefb29",
+      "closed_at_utc": "2021-06-21T08:12:40Z",
+      "pnl_usd": -9.191223839953516,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "7a2ca9c7582e1cd4afcefb29"
+    },
+    {
+      "candidate_id": "replay:4095bbeb124fce532383faff",
+      "closed_at_utc": "2021-06-29T09:34:20Z",
+      "pnl_usd": 1.6037379309500803,
+      "source_id": "R4_CHOP",
+      "trade_id": "4095bbeb124fce532383faff"
+    },
+    {
+      "candidate_id": "replay:804a75e19ed0037c31124e48",
+      "closed_at_utc": "2021-07-14T12:05:25Z",
+      "pnl_usd": 7.538488480184919,
+      "source_id": "R4_CHOP",
+      "trade_id": "804a75e19ed0037c31124e48"
+    },
+    {
+      "candidate_id": "replay:a996e072cf684ce67743532d",
+      "closed_at_utc": "2021-07-19T12:00:50Z",
+      "pnl_usd": 6.839955022829352,
+      "source_id": "R4_CHOP",
+      "trade_id": "a996e072cf684ce67743532d"
+    },
+    {
+      "candidate_id": "replay:V25_d0284accca0b7b8971d1be8b",
+      "closed_at_utc": "2021-09-03T01:02:05Z",
+      "pnl_usd": -3.3805629780362305,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_d0284accca0b7b8971d1be8b"
+    },
+    {
+      "candidate_id": "replay:41d0eda3f22d068562cf905d",
+      "closed_at_utc": "2021-09-13T13:59:45Z",
+      "pnl_usd": -6.098782684514347,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "41d0eda3f22d068562cf905d"
+    },
+    {
+      "candidate_id": "replay:dd450d2862b34bb2042ebea4",
+      "closed_at_utc": "2021-10-13T11:55:30Z",
+      "pnl_usd": 5.589665539558015,
+      "source_id": "R4_CHOP",
+      "trade_id": "dd450d2862b34bb2042ebea4"
+    },
+    {
+      "candidate_id": "replay:V25_4195f266adf330da52e51662",
+      "closed_at_utc": "2021-10-21T05:19:05Z",
+      "pnl_usd": -4.378902572204688,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_4195f266adf330da52e51662"
+    },
+    {
+      "candidate_id": "replay:V25_0c18b498e967dad11fe20f40",
+      "closed_at_utc": "2021-10-21T07:03:25Z",
+      "pnl_usd": -4.315369936075698,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_0c18b498e967dad11fe20f40"
+    },
+    {
+      "candidate_id": "replay:4b4ed947fa2eb7efe9b44ac3",
+      "closed_at_utc": "2021-10-22T12:28:35Z",
+      "pnl_usd": 5.759470426220839,
+      "source_id": "R4_CHOP",
+      "trade_id": "4b4ed947fa2eb7efe9b44ac3"
+    },
+    {
+      "candidate_id": "replay:cdc5df58a92ebbadfd1cf78e",
+      "closed_at_utc": "2021-11-26T03:03:05Z",
+      "pnl_usd": -5.4957453245432335,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "cdc5df58a92ebbadfd1cf78e"
+    },
+    {
+      "candidate_id": "replay:7c6dc06e220ed9b1e1cded9e",
+      "closed_at_utc": "2021-12-08T08:17:15Z",
+      "pnl_usd": -3.6918213504488704,
+      "source_id": "R4_CHOP",
+      "trade_id": "7c6dc06e220ed9b1e1cded9e"
+    },
+    {
+      "candidate_id": "replay:2577676dcc60564ebc39a7f4",
+      "closed_at_utc": "2021-12-13T07:00:25Z",
+      "pnl_usd": -3.813044160411536,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "2577676dcc60564ebc39a7f4"
+    },
+    {
+      "candidate_id": "replay:89724b88f9a30e6d6566d9d7",
+      "closed_at_utc": "2021-12-13T13:03:30Z",
+      "pnl_usd": -4.157869788271243,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "89724b88f9a30e6d6566d9d7"
+    },
+    {
+      "candidate_id": "replay:9024b51aa88ec0ca1ccfd5b6",
+      "closed_at_utc": "2021-12-14T14:55:45Z",
+      "pnl_usd": -4.8426572027045545,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "9024b51aa88ec0ca1ccfd5b6"
+    },
+    {
+      "candidate_id": "replay:f34204f4fa5a3a0311317b84",
+      "closed_at_utc": "2021-12-14T15:17:05Z",
+      "pnl_usd": -4.599995124390043,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "f34204f4fa5a3a0311317b84"
+    },
+    {
+      "candidate_id": "replay:7991b82db5c34418bedee1eb",
+      "closed_at_utc": "2021-12-15T13:30:05Z",
+      "pnl_usd": -3.65368935925264,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "7991b82db5c34418bedee1eb"
+    },
+    {
+      "candidate_id": "replay:d5afd0470a67ab2746ff9adf",
+      "closed_at_utc": "2021-12-17T08:00:05Z",
+      "pnl_usd": 18.978814345483467,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "d5afd0470a67ab2746ff9adf"
+    },
+    {
+      "candidate_id": "replay:V25_2caf70bde01b6f2fc7f1af66",
+      "closed_at_utc": "2021-12-27T11:45:05Z",
+      "pnl_usd": -1.4359702590798629,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_2caf70bde01b6f2fc7f1af66"
+    },
+    {
+      "candidate_id": "replay:06742d7131c3644a8bd227d5",
+      "closed_at_utc": "2022-01-18T11:39:50Z",
+      "pnl_usd": 1.2812474620511063,
+      "source_id": "R4_CHOP",
+      "trade_id": "06742d7131c3644a8bd227d5"
+    },
+    {
+      "candidate_id": "replay:V25_c1749ad41aed02c6cfb18b79",
+      "closed_at_utc": "2022-01-20T13:31:40Z",
+      "pnl_usd": 5.882705291848527,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_c1749ad41aed02c6cfb18b79"
+    },
+    {
+      "candidate_id": "replay:cefbada4e04c0cd8f1fb14df",
+      "closed_at_utc": "2022-01-31T11:54:40Z",
+      "pnl_usd": -7.516386017540328,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "cefbada4e04c0cd8f1fb14df"
+    },
+    {
+      "candidate_id": "replay:2e4ae05c6314bef971108bcc",
+      "closed_at_utc": "2022-02-02T10:16:05Z",
+      "pnl_usd": -5.103627889992934,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "2e4ae05c6314bef971108bcc"
+    },
+    {
+      "candidate_id": "replay:ed880c987d51c4b35317efe1",
+      "closed_at_utc": "2022-03-20T22:00:05Z",
+      "pnl_usd": 8.233756018360706,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "ed880c987d51c4b35317efe1"
+    },
+    {
+      "candidate_id": "replay:23a35a1485023595f662bbc8",
+      "closed_at_utc": "2022-03-24T12:22:15Z",
+      "pnl_usd": -7.323937891775888,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "23a35a1485023595f662bbc8"
+    },
+    {
+      "candidate_id": "replay:a81160c9a1800df9c0fc1406",
+      "closed_at_utc": "2022-03-25T12:06:10Z",
+      "pnl_usd": -5.77388728134719,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "a81160c9a1800df9c0fc1406"
+    },
+    {
+      "candidate_id": "replay:7c92bd9521bef6b0491e63b9",
+      "closed_at_utc": "2022-03-28T12:12:20Z",
+      "pnl_usd": -7.910682026174879,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "7c92bd9521bef6b0491e63b9"
+    },
+    {
+      "candidate_id": "replay:1167e5e2ca0b3ec475f74c2f",
+      "closed_at_utc": "2022-03-28T12:16:15Z",
+      "pnl_usd": -6.492768265730185,
+      "source_id": "R4_CHOP",
+      "trade_id": "1167e5e2ca0b3ec475f74c2f"
+    },
+    {
+      "candidate_id": "replay:a79e2ea7bac4499d221f4689",
+      "closed_at_utc": "2022-03-29T19:00:05Z",
+      "pnl_usd": 8.820981395613444,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "a79e2ea7bac4499d221f4689"
+    },
+    {
+      "candidate_id": "replay:58cbb79d0871909853e3928b",
+      "closed_at_utc": "2022-04-10T22:00:05Z",
+      "pnl_usd": 1.586238621172687,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "58cbb79d0871909853e3928b"
+    },
+    {
+      "candidate_id": "replay:8d0727d3596bd79b9821d16f",
+      "closed_at_utc": "2022-04-11T13:10:25Z",
+      "pnl_usd": 2.358234652480837,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "8d0727d3596bd79b9821d16f"
+    },
+    {
+      "candidate_id": "replay:d3fab146e62501b9faf9d3f4",
+      "closed_at_utc": "2022-05-15T22:00:05Z",
+      "pnl_usd": 34.08668903898369,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "d3fab146e62501b9faf9d3f4"
+    },
+    {
+      "candidate_id": "replay:V25_468f918a23ce9e38ab22edf4",
+      "closed_at_utc": "2022-05-30T08:22:30Z",
+      "pnl_usd": -4.341815822720888,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_468f918a23ce9e38ab22edf4"
+    },
+    {
+      "candidate_id": "replay:1e3d0ee7cb5f242b2c40c53d",
+      "closed_at_utc": "2022-05-31T02:45:05Z",
+      "pnl_usd": -5.159725031136246,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "1e3d0ee7cb5f242b2c40c53d"
+    },
+    {
+      "candidate_id": "replay:28fd27107a8ce2e1d0ee6503",
+      "closed_at_utc": "2022-05-31T22:00:05Z",
+      "pnl_usd": 6.4376148880689605,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "28fd27107a8ce2e1d0ee6503"
+    },
+    {
+      "candidate_id": "replay:63ead0c7d09ae3d64fec5c99",
+      "closed_at_utc": "2022-06-01T12:20:05Z",
+      "pnl_usd": -4.772615386473418,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "63ead0c7d09ae3d64fec5c99"
+    },
+    {
+      "candidate_id": "replay:c26df6092461c3ea9b914dda",
+      "closed_at_utc": "2022-06-02T12:34:05Z",
+      "pnl_usd": 1.5384783191930502,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "c26df6092461c3ea9b914dda"
+    },
+    {
+      "candidate_id": "replay:0c5afec903e89f7cd560a024",
+      "closed_at_utc": "2022-06-03T13:31:45Z",
+      "pnl_usd": 1.5691894134001725,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "0c5afec903e89f7cd560a024"
+    },
+    {
+      "candidate_id": "replay:b0cba02cea2d76158c17317f",
+      "closed_at_utc": "2022-06-09T12:23:45Z",
+      "pnl_usd": -3.752414006751229,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "b0cba02cea2d76158c17317f"
+    },
+    {
+      "candidate_id": "replay:3f7714268a34121e5e7687c3",
+      "closed_at_utc": "2022-06-10T12:36:40Z",
+      "pnl_usd": 1.97233348724012,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "3f7714268a34121e5e7687c3"
+    },
+    {
+      "candidate_id": "replay:eb6ce10a732919416adeb261",
+      "closed_at_utc": "2022-06-10T14:25:35Z",
+      "pnl_usd": -5.974937620874393,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "eb6ce10a732919416adeb261"
+    },
+    {
+      "candidate_id": "replay:a1a64ef87b27ca6af501bc8f",
+      "closed_at_utc": "2022-06-12T22:00:05Z",
+      "pnl_usd": 5.92425871872599,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "a1a64ef87b27ca6af501bc8f"
+    },
+    {
+      "candidate_id": "replay:1eeee6e673e0ab2210634e79",
+      "closed_at_utc": "2022-06-14T07:00:05Z",
+      "pnl_usd": 11.746334394236502,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "1eeee6e673e0ab2210634e79"
+    },
+    {
+      "candidate_id": "replay:V25_cb920797a1567146e7633c88",
+      "closed_at_utc": "2022-06-24T07:55:10Z",
+      "pnl_usd": -4.452654632809495,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_cb920797a1567146e7633c88"
+    },
+    {
+      "candidate_id": "replay:b43ffad7697128799d211a89",
+      "closed_at_utc": "2022-06-29T01:56:05Z",
+      "pnl_usd": -4.099818807333082,
+      "source_id": "R4_CHOP",
+      "trade_id": "b43ffad7697128799d211a89"
+    },
+    {
+      "candidate_id": "replay:V25_0475c53a73dc331b38004c62",
+      "closed_at_utc": "2022-06-29T07:03:30Z",
+      "pnl_usd": 1.5396652816310192,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_0475c53a73dc331b38004c62"
+    },
+    {
+      "candidate_id": "replay:b130899996745de3802d4aef",
+      "closed_at_utc": "2022-07-08T14:45:05Z",
+      "pnl_usd": -8.840163242497402,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "b130899996745de3802d4aef"
+    },
+    {
+      "candidate_id": "replay:e263ed2046ddd59d2c6f1890",
+      "closed_at_utc": "2022-07-12T01:29:55Z",
+      "pnl_usd": 2.711113267848789,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "e263ed2046ddd59d2c6f1890"
+    },
+    {
+      "candidate_id": "replay:1b1d10e716a5de33237f5eff",
+      "closed_at_utc": "2022-07-21T12:41:25Z",
+      "pnl_usd": 2.890149469379309,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "1b1d10e716a5de33237f5eff"
+    },
+    {
+      "candidate_id": "replay:299ab8d04eb5af6b1121547e",
+      "closed_at_utc": "2022-08-16T03:03:40Z",
+      "pnl_usd": -4.814581609652947,
+      "source_id": "R4_CHOP",
+      "trade_id": "299ab8d04eb5af6b1121547e"
+    },
+    {
+      "candidate_id": "replay:V25_9a1ba82035834f9a8af309cf",
+      "closed_at_utc": "2022-08-16T08:12:35Z",
+      "pnl_usd": 6.869720981592415,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_9a1ba82035834f9a8af309cf"
+    },
+    {
+      "candidate_id": "replay:V25_c441addc8202804a173bf37e",
+      "closed_at_utc": "2022-08-25T07:12:45Z",
+      "pnl_usd": 6.357756120346405,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_c441addc8202804a173bf37e"
+    },
+    {
+      "candidate_id": "replay:3e501db6c357ce675f0d93d2",
+      "closed_at_utc": "2022-09-01T16:01:05Z",
+      "pnl_usd": 1.540135508300691,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "3e501db6c357ce675f0d93d2"
+    },
+    {
+      "candidate_id": "replay:V25_2ecc9bbf92f3a7083cdf6116",
+      "closed_at_utc": "2022-09-30T07:16:40Z",
+      "pnl_usd": 10.023032510572966,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_2ecc9bbf92f3a7083cdf6116"
+    },
+    {
+      "candidate_id": "replay:9b69c89d0997c808d30fa039",
+      "closed_at_utc": "2022-10-16T22:00:05Z",
+      "pnl_usd": 4.439835833813453,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "9b69c89d0997c808d30fa039"
+    },
+    {
+      "candidate_id": "replay:0903433dd3dd1947913a8d42",
+      "closed_at_utc": "2022-10-17T09:41:35Z",
+      "pnl_usd": -8.682086883521634,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "0903433dd3dd1947913a8d42"
+    },
+    {
+      "candidate_id": "replay:V25_497cdbdb8a566c35708b05ca",
+      "closed_at_utc": "2022-11-25T04:02:10Z",
+      "pnl_usd": 5.4440058410349765,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_497cdbdb8a566c35708b05ca"
+    },
+    {
+      "candidate_id": "replay:V25_fe60d8b6693a70a9591012a1",
+      "closed_at_utc": "2022-11-25T06:06:40Z",
+      "pnl_usd": -3.523698262450954,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_fe60d8b6693a70a9591012a1"
+    },
+    {
+      "candidate_id": "replay:2022-11-24 04:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2022-12-05T17:09:00Z",
+      "pnl_usd": 14.184999999999905,
+      "source_id": "R1_BOX",
+      "trade_id": "2022-11-24 04:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:b3db05c2420ab94a15692780",
+      "closed_at_utc": "2022-12-12T01:06:25Z",
+      "pnl_usd": -5.346788011702428,
+      "source_id": "R4_CHOP",
+      "trade_id": "b3db05c2420ab94a15692780"
+    },
+    {
+      "candidate_id": "replay:2022-12-13 16:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2022-12-15T07:30:20Z",
+      "pnl_usd": -31.53,
+      "source_id": "R1_BOX",
+      "trade_id": "2022-12-13 16:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:V25_bd448118f9a25be389195d4d",
+      "closed_at_utc": "2022-12-20T12:50:25Z",
+      "pnl_usd": -4.95712548288961,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_bd448118f9a25be389195d4d"
+    },
+    {
+      "candidate_id": "replay:2022-12-19 08:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2022-12-21T12:30:50Z",
+      "pnl_usd": 19.34300000000013,
+      "source_id": "R1_BOX",
+      "trade_id": "2022-12-19 08:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:2023-01-03 04:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2023-01-12T12:35:30Z",
+      "pnl_usd": 53.760000000000005,
+      "source_id": "R1_BOX",
+      "trade_id": "2023-01-03 04:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:2023-01-12 20:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2023-01-31T06:06:00Z",
+      "pnl_usd": 14.87300000000003,
+      "source_id": "R1_BOX",
+      "trade_id": "2023-01-12 20:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:3d5125eff04c0bcf75773d1f",
+      "closed_at_utc": "2023-02-22T11:07:45Z",
+      "pnl_usd": -3.869469351582248,
+      "source_id": "R4_CHOP",
+      "trade_id": "3d5125eff04c0bcf75773d1f"
+    },
+    {
+      "candidate_id": "replay:2f00227a3b9df9f52e47b380",
+      "closed_at_utc": "2023-02-24T11:41:35Z",
+      "pnl_usd": 6.722743511075684,
+      "source_id": "R4_CHOP",
+      "trade_id": "2f00227a3b9df9f52e47b380"
+    },
+    {
+      "candidate_id": "replay:7caffe04ae87bbd1e415c926",
+      "closed_at_utc": "2023-02-24T20:00:05Z",
+      "pnl_usd": 3.615720896956746,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "7caffe04ae87bbd1e415c926"
+    },
+    {
+      "candidate_id": "replay:ff827827670aff8a85b85744",
+      "closed_at_utc": "2023-02-27T06:12:15Z",
+      "pnl_usd": -4.075467367910455,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "ff827827670aff8a85b85744"
+    },
+    {
+      "candidate_id": "replay:V25_796a5e50a3776e316680c883",
+      "closed_at_utc": "2023-03-01T06:55:15Z",
+      "pnl_usd": 6.930989879672457,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_796a5e50a3776e316680c883"
+    },
+    {
+      "candidate_id": "replay:V25_5b3ffc59c924bbf3b05bcdf9",
+      "closed_at_utc": "2023-03-01T09:20:55Z",
+      "pnl_usd": -4.259811318506387,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_5b3ffc59c924bbf3b05bcdf9"
+    },
+    {
+      "candidate_id": "replay:a33620edbb8a39c9847388df",
+      "closed_at_utc": "2023-03-31T07:36:15Z",
+      "pnl_usd": -5.15179864259851,
+      "source_id": "R4_CHOP",
+      "trade_id": "a33620edbb8a39c9847388df"
+    },
+    {
+      "candidate_id": "replay:2023-04-12 04:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2023-04-17T14:46:45Z",
+      "pnl_usd": -35.82,
+      "source_id": "R1_BOX",
+      "trade_id": "2023-04-12 04:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:c4a6eab0c3dd027b42056ed4",
+      "closed_at_utc": "2023-04-19T06:40:20Z",
+      "pnl_usd": 1.9056689597952372,
+      "source_id": "R4_CHOP",
+      "trade_id": "c4a6eab0c3dd027b42056ed4"
+    },
+    {
+      "candidate_id": "replay:V25_8a6616f96c9e2db69ce67476",
+      "closed_at_utc": "2023-04-27T12:30:05Z",
+      "pnl_usd": -5.733280285146527,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_8a6616f96c9e2db69ce67476"
+    },
+    {
+      "candidate_id": "replay:58ee51900b2a33e5a8f723b3",
+      "closed_at_utc": "2023-05-19T06:29:15Z",
+      "pnl_usd": -6.5987455347467625,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "58ee51900b2a33e5a8f723b3"
+    },
+    {
+      "candidate_id": "replay:7a5ec692379cc086465bb84e",
+      "closed_at_utc": "2023-06-23T07:48:40Z",
+      "pnl_usd": -6.04985621662087,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "7a5ec692379cc086465bb84e"
+    },
+    {
+      "candidate_id": "replay:2023-07-26 08:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2023-07-27T13:36:25Z",
+      "pnl_usd": -19.24,
+      "source_id": "R1_BOX",
+      "trade_id": "2023-07-26 08:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:a345962015f561e8f7ae7143",
+      "closed_at_utc": "2023-08-21T02:28:40Z",
+      "pnl_usd": -4.7779286844703,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "a345962015f561e8f7ae7143"
+    },
+    {
+      "candidate_id": "replay:1943b9262f00efb344aba4f1",
+      "closed_at_utc": "2023-08-22T10:21:15Z",
+      "pnl_usd": 5.253338033588553,
+      "source_id": "R4_CHOP",
+      "trade_id": "1943b9262f00efb344aba4f1"
+    },
+    {
+      "candidate_id": "replay:30e896233fc12f596b72175d",
+      "closed_at_utc": "2023-09-07T10:04:25Z",
+      "pnl_usd": -4.315930999234932,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "30e896233fc12f596b72175d"
+    },
+    {
+      "candidate_id": "replay:73164e17f1f7ca47d2d7243a",
+      "closed_at_utc": "2023-09-19T04:43:20Z",
+      "pnl_usd": -3.1021160678696003,
+      "source_id": "R4_CHOP",
+      "trade_id": "73164e17f1f7ca47d2d7243a"
+    },
+    {
+      "candidate_id": "replay:f495a94e563cb38d4760d221",
+      "closed_at_utc": "2023-09-29T07:06:35Z",
+      "pnl_usd": -6.799287430879952,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "f495a94e563cb38d4760d221"
+    },
+    {
+      "candidate_id": "replay:00a2cf896a4c66415ecfec44",
+      "closed_at_utc": "2023-10-03T13:44:30Z",
+      "pnl_usd": -6.89322773318211,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "00a2cf896a4c66415ecfec44"
+    },
+    {
+      "candidate_id": "replay:85ceb8585b06c334e63a7606",
+      "closed_at_utc": "2023-11-07T07:03:05Z",
+      "pnl_usd": 6.346512668479859,
+      "source_id": "R4_CHOP",
+      "trade_id": "85ceb8585b06c334e63a7606"
+    },
+    {
+      "candidate_id": "replay:2bc24d9b486f98949276ed16",
+      "closed_at_utc": "2023-11-08T10:20:10Z",
+      "pnl_usd": 6.444760098215022,
+      "source_id": "R4_CHOP",
+      "trade_id": "2bc24d9b486f98949276ed16"
+    },
+    {
+      "candidate_id": "replay:a6677d63c7afc2d257d723ac",
+      "closed_at_utc": "2023-11-13T16:19:00Z",
+      "pnl_usd": -6.086824433445851,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "a6677d63c7afc2d257d723ac"
+    },
+    {
+      "candidate_id": "replay:2023-11-21 04:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2023-11-28T23:42:30Z",
+      "pnl_usd": 53.150000000000006,
+      "source_id": "R1_BOX",
+      "trade_id": "2023-11-21 04:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:2023-12-01 16:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2023-12-03T22:23:40Z",
+      "pnl_usd": 56.59,
+      "source_id": "R1_BOX",
+      "trade_id": "2023-12-01 16:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:03d718e7e778b62005e869fe",
+      "closed_at_utc": "2023-12-12T13:13:00Z",
+      "pnl_usd": -8.62521632784668,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "03d718e7e778b62005e869fe"
+    },
+    {
+      "candidate_id": "replay:559d0c88621ce87d023281d0",
+      "closed_at_utc": "2023-12-13T13:30:05Z",
+      "pnl_usd": -6.488960419885281,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "559d0c88621ce87d023281d0"
+    },
+    {
+      "candidate_id": "replay:2023-12-22 12:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2023-12-22T12:00:05Z",
+      "pnl_usd": -0.4999999999997868,
+      "source_id": "R1_BOX",
+      "trade_id": "2023-12-22 12:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:6e9e4dd6836c35e92b6c8c68",
+      "closed_at_utc": "2024-01-12T12:03:05Z",
+      "pnl_usd": 8.55956069438037,
+      "source_id": "R4_CHOP",
+      "trade_id": "6e9e4dd6836c35e92b6c8c68"
+    },
+    {
+      "candidate_id": "replay:0b8d13e41ecd57ac6d52fa42",
+      "closed_at_utc": "2024-02-20T07:22:15Z",
+      "pnl_usd": 5.270253833445036,
+      "source_id": "R4_CHOP",
+      "trade_id": "0b8d13e41ecd57ac6d52fa42"
+    },
+    {
+      "candidate_id": "replay:2c280022ad371b9c887a5baa",
+      "closed_at_utc": "2024-02-28T13:14:10Z",
+      "pnl_usd": -3.6627445880117935,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "2c280022ad371b9c887a5baa"
+    },
+    {
+      "candidate_id": "replay:060e90305ed0741c214b7a1d",
+      "closed_at_utc": "2024-02-29T17:32:40Z",
+      "pnl_usd": -5.200101408932664,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "060e90305ed0741c214b7a1d"
+    },
+    {
+      "candidate_id": "replay:e88cb070d181d516fe28d15c",
+      "closed_at_utc": "2024-03-01T09:09:15Z",
+      "pnl_usd": -3.4622062931540136,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "e88cb070d181d516fe28d15c"
+    },
+    {
+      "candidate_id": "replay:59754228ca7cb203acd73486",
+      "closed_at_utc": "2024-03-03T23:00:05Z",
+      "pnl_usd": 10.956045400625186,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "59754228ca7cb203acd73486"
+    },
+    {
+      "candidate_id": "replay:6d0d6352629aeef57bcd34e6",
+      "closed_at_utc": "2024-03-21T00:27:25Z",
+      "pnl_usd": -8.790629480708994,
+      "source_id": "R4_CHOP",
+      "trade_id": "6d0d6352629aeef57bcd34e6"
+    },
+    {
+      "candidate_id": "replay:959df17861ed964d6e9de2dc",
+      "closed_at_utc": "2024-03-21T13:30:05Z",
+      "pnl_usd": -2.3604730968352765,
+      "source_id": "R4_CHOP",
+      "trade_id": "959df17861ed964d6e9de2dc"
+    },
+    {
+      "candidate_id": "replay:73b089cb042c772501b2a20a",
+      "closed_at_utc": "2024-03-26T09:27:20Z",
+      "pnl_usd": 6.963966014801572,
+      "source_id": "R4_CHOP",
+      "trade_id": "73b089cb042c772501b2a20a"
+    },
+    {
+      "candidate_id": "replay:82004a24de100c63d9588ee5",
+      "closed_at_utc": "2024-04-19T02:40:30Z",
+      "pnl_usd": -9.842413996482172,
+      "source_id": "R4_CHOP",
+      "trade_id": "82004a24de100c63d9588ee5"
+    },
+    {
+      "candidate_id": "replay:V25_998ee530e82d49db1a3c4991",
+      "closed_at_utc": "2024-04-19T03:17:20Z",
+      "pnl_usd": -10.756076352553816,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_998ee530e82d49db1a3c4991"
+    },
+    {
+      "candidate_id": "replay:edb99749e7b2dde4a38b6fc3",
+      "closed_at_utc": "2024-05-06T13:00:05Z",
+      "pnl_usd": 6.173903336465461,
+      "source_id": "R4_CHOP",
+      "trade_id": "edb99749e7b2dde4a38b6fc3"
+    },
+    {
+      "candidate_id": "replay:7f44e910b2807dff91a96f79",
+      "closed_at_utc": "2024-05-08T09:39:40Z",
+      "pnl_usd": -5.956967768943313,
+      "source_id": "R4_CHOP",
+      "trade_id": "7f44e910b2807dff91a96f79"
+    },
+    {
+      "candidate_id": "replay:6ccf5b018feb9e6f6b30f3cb",
+      "closed_at_utc": "2024-05-10T15:00:05Z",
+      "pnl_usd": 25.946137081944755,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "6ccf5b018feb9e6f6b30f3cb"
+    },
+    {
+      "candidate_id": "replay:V25_418a79b226f14e7800728a5b",
+      "closed_at_utc": "2024-06-19T10:20:05Z",
+      "pnl_usd": -0.6936119126058703,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_418a79b226f14e7800728a5b"
+    },
+    {
+      "candidate_id": "replay:V25_e828bdf4acd7f7db56ca25e4",
+      "closed_at_utc": "2024-06-20T05:21:55Z",
+      "pnl_usd": 7.481695836789024,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_e828bdf4acd7f7db56ca25e4"
+    },
+    {
+      "candidate_id": "replay:178970c1800aacfb42d38c61",
+      "closed_at_utc": "2024-06-26T11:42:10Z",
+      "pnl_usd": 2.53006757266564,
+      "source_id": "R4_CHOP",
+      "trade_id": "178970c1800aacfb42d38c61"
+    },
+    {
+      "candidate_id": "replay:0bd649c8ebeee7941992d118",
+      "closed_at_utc": "2024-07-03T12:15:00Z",
+      "pnl_usd": 4.288997710066365,
+      "source_id": "R4_CHOP",
+      "trade_id": "0bd649c8ebeee7941992d118"
+    },
+    {
+      "candidate_id": "replay:2024-07-05 08:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2024-07-16T09:36:45Z",
+      "pnl_usd": 76.53,
+      "source_id": "R1_BOX",
+      "trade_id": "2024-07-05 08:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:33f97e8757428508e72618bc",
+      "closed_at_utc": "2024-08-30T06:46:40Z",
+      "pnl_usd": -5.593787534351515,
+      "source_id": "R4_CHOP",
+      "trade_id": "33f97e8757428508e72618bc"
+    },
+    {
+      "candidate_id": "replay:82e668b218ba3e9b3b081941",
+      "closed_at_utc": "2024-08-30T10:33:20Z",
+      "pnl_usd": -5.730087324852896,
+      "source_id": "R4_CHOP",
+      "trade_id": "82e668b218ba3e9b3b081941"
+    },
+    {
+      "candidate_id": "replay:62b5d6a4cd59a50c11baecbc",
+      "closed_at_utc": "2024-09-03T06:53:30Z",
+      "pnl_usd": -5.114211071352899,
+      "source_id": "R4_CHOP",
+      "trade_id": "62b5d6a4cd59a50c11baecbc"
+    },
+    {
+      "candidate_id": "replay:2024-08-26 08:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2024-09-03T11:49:35Z",
+      "pnl_usd": -35.29,
+      "source_id": "R1_BOX",
+      "trade_id": "2024-08-26 08:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:a1a42bf04cdc94603df995ed",
+      "closed_at_utc": "2024-09-04T08:55:00Z",
+      "pnl_usd": 10.416934821414612,
+      "source_id": "R4_CHOP",
+      "trade_id": "a1a42bf04cdc94603df995ed"
+    },
+    {
+      "candidate_id": "replay:2024-09-10 16:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2024-09-10T16:00:05Z",
+      "pnl_usd": -1.2370000000002437,
+      "source_id": "R1_BOX",
+      "trade_id": "2024-09-10 16:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:9f2c014d6b70b92198880005",
+      "closed_at_utc": "2024-10-28T08:31:50Z",
+      "pnl_usd": -6.9470582667346354,
+      "source_id": "R4_CHOP",
+      "trade_id": "9f2c014d6b70b92198880005"
+    },
+    {
+      "candidate_id": "replay:b4f9e96f7f3c1d1ac2eeefba",
+      "closed_at_utc": "2024-11-13T01:47:35Z",
+      "pnl_usd": -14.081838201850331,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "b4f9e96f7f3c1d1ac2eeefba"
+    },
+    {
+      "candidate_id": "replay:530c3f7e0a99a912b673c360",
+      "closed_at_utc": "2024-11-17T23:00:05Z",
+      "pnl_usd": -0.3399925109303766,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "530c3f7e0a99a912b673c360"
+    },
+    {
+      "candidate_id": "replay:f0496a27e3d47dbb12fb923b",
+      "closed_at_utc": "2024-12-20T15:00:05Z",
+      "pnl_usd": -14.275541476154215,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "f0496a27e3d47dbb12fb923b"
+    },
+    {
+      "candidate_id": "replay:0aed82e105463bb89f55456e",
+      "closed_at_utc": "2025-01-01T23:00:05Z",
+      "pnl_usd": -2.0595511713754875,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "0aed82e105463bb89f55456e"
+    },
+    {
+      "candidate_id": "replay:V25_b3f3c8e4a665553deddf6404",
+      "closed_at_utc": "2025-01-02T10:19:35Z",
+      "pnl_usd": 9.420015975738933,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_b3f3c8e4a665553deddf6404"
+    },
+    {
+      "candidate_id": "replay:884ae9c1ca008a9a803b5011",
+      "closed_at_utc": "2025-01-02T13:18:25Z",
+      "pnl_usd": 3.432067679165211,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "884ae9c1ca008a9a803b5011"
+    },
+    {
+      "candidate_id": "replay:2025-01-15 20:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2025-01-24T01:56:15Z",
+      "pnl_usd": 78.49000000000001,
+      "source_id": "R1_BOX",
+      "trade_id": "2025-01-15 20:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:2025-01-24 04:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2025-01-27T15:51:20Z",
+      "pnl_usd": -36.84,
+      "source_id": "R1_BOX",
+      "trade_id": "2025-01-24 04:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:2025-01-30 08:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2025-02-05T04:48:30Z",
+      "pnl_usd": 82.52,
+      "source_id": "R1_BOX",
+      "trade_id": "2025-01-30 08:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:a336110cc4cf7d5ba8adf133",
+      "closed_at_utc": "2025-02-20T04:05:10Z",
+      "pnl_usd": -1.415948705993709,
+      "source_id": "R4_CHOP",
+      "trade_id": "a336110cc4cf7d5ba8adf133"
+    },
+    {
+      "candidate_id": "replay:V25_5cbef8425a879f0e07c7edf9",
+      "closed_at_utc": "2025-02-21T01:46:05Z",
+      "pnl_usd": -7.8759013587225954,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_5cbef8425a879f0e07c7edf9"
+    },
+    {
+      "candidate_id": "replay:36bd9ded30a58d7a02cb26b9",
+      "closed_at_utc": "2025-04-30T12:45:10Z",
+      "pnl_usd": -12.154589937187014,
+      "source_id": "R4_CHOP",
+      "trade_id": "36bd9ded30a58d7a02cb26b9"
+    },
+    {
+      "candidate_id": "replay:f93789480ce59db3dd2d7d72",
+      "closed_at_utc": "2025-05-15T14:00:05Z",
+      "pnl_usd": 44.00042338265095,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "f93789480ce59db3dd2d7d72"
+    },
+    {
+      "candidate_id": "replay:3d0f4c1c9afa4659aeccb611",
+      "closed_at_utc": "2025-05-16T12:37:40Z",
+      "pnl_usd": -17.598783321869796,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "3d0f4c1c9afa4659aeccb611"
+    },
+    {
+      "candidate_id": "replay:V7_20250528T082000Z_SHORT",
+      "closed_at_utc": "2025-05-28T13:02:15Z",
+      "pnl_usd": 3.6596372268539055,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250528T082000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V25_b394e95c97edfe48603a2262",
+      "closed_at_utc": "2025-06-02T06:41:00Z",
+      "pnl_usd": 21.28179160751339,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_b394e95c97edfe48603a2262"
+    },
+    {
+      "candidate_id": "replay:V7_20250602T114500Z_SHORT",
+      "closed_at_utc": "2025-06-02T12:30:00Z",
+      "pnl_usd": -7.752995444916593,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250602T114500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20250603T122500Z_LONG",
+      "closed_at_utc": "2025-06-03T13:50:00Z",
+      "pnl_usd": -6.482412861526195,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250603T122500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20250610T082500Z_SHORT",
+      "closed_at_utc": "2025-06-10T11:10:00Z",
+      "pnl_usd": -7.709271461124238,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250610T082500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20250616T111000Z_SHORT",
+      "closed_at_utc": "2025-06-16T13:19:00Z",
+      "pnl_usd": 2.8661238192938754,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250616T111000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20250620T130500Z_LONG",
+      "closed_at_utc": "2025-06-20T13:35:00Z",
+      "pnl_usd": 13.079402535858598,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250620T130500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:6bdb7058d53d70ba06271cc2",
+      "closed_at_utc": "2025-06-24T13:40:10Z",
+      "pnl_usd": 23.86044831945264,
+      "source_id": "R4_CHOP",
+      "trade_id": "6bdb7058d53d70ba06271cc2"
+    },
+    {
+      "candidate_id": "replay:V7_20250625T122000Z_LONG",
+      "closed_at_utc": "2025-06-25T12:45:00Z",
+      "pnl_usd": -5.657231388233232,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250625T122000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20250626T093000Z_LONG",
+      "closed_at_utc": "2025-06-26T11:35:00Z",
+      "pnl_usd": -5.305658790430066,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250626T093000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V25_8856d73487bb090989282a58",
+      "closed_at_utc": "2025-07-02T23:10:40Z",
+      "pnl_usd": -7.937113196579997,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_8856d73487bb090989282a58"
+    },
+    {
+      "candidate_id": "replay:8f176b174147773177ecfc75",
+      "closed_at_utc": "2025-07-03T00:00:50Z",
+      "pnl_usd": -8.045744699982258,
+      "source_id": "R4_CHOP",
+      "trade_id": "8f176b174147773177ecfc75"
+    },
+    {
+      "candidate_id": "replay:V25_47bd827e48f2eb71b2d19431",
+      "closed_at_utc": "2025-07-03T06:03:45Z",
+      "pnl_usd": 14.69275395559476,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_47bd827e48f2eb71b2d19431"
+    },
+    {
+      "candidate_id": "replay:V25_5c0b604ee76318653948b9c3",
+      "closed_at_utc": "2025-07-03T08:21:05Z",
+      "pnl_usd": -8.2574619856726,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_5c0b604ee76318653948b9c3"
+    },
+    {
+      "candidate_id": "replay:V25_985ea9fad1069cdcd9c80fd7",
+      "closed_at_utc": "2025-07-07T14:13:35Z",
+      "pnl_usd": -9.158733042163483,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_985ea9fad1069cdcd9c80fd7"
+    },
+    {
+      "candidate_id": "replay:106e717fd9d04f538a5efaa5",
+      "closed_at_utc": "2025-07-08T20:00:05Z",
+      "pnl_usd": 10.828748426493428,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "106e717fd9d04f538a5efaa5"
+    },
+    {
+      "candidate_id": "replay:ea62ac6ef16718f9f6117366",
+      "closed_at_utc": "2025-07-09T04:26:00Z",
+      "pnl_usd": -9.075498620577097,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "ea62ac6ef16718f9f6117366"
+    },
+    {
+      "candidate_id": "replay:V7_20250710T091000Z_SHORT",
+      "closed_at_utc": "2025-07-10T12:00:00Z",
+      "pnl_usd": 7.744723750837397,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250710T091000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20250710T122500Z_LONG",
+      "closed_at_utc": "2025-07-10T13:50:00Z",
+      "pnl_usd": -5.64144450693671,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250710T122500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:0ceaad778b275a37c4bae639",
+      "closed_at_utc": "2025-07-11T17:01:40Z",
+      "pnl_usd": 4.908555907845086,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "0ceaad778b275a37c4bae639"
+    },
+    {
+      "candidate_id": "replay:7155f1fc8a59aca9d63e6c48",
+      "closed_at_utc": "2025-07-17T13:57:40Z",
+      "pnl_usd": -9.773396754195952,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "7155f1fc8a59aca9d63e6c48"
+    },
+    {
+      "candidate_id": "replay:da03d27d153c27e0f12fbe5a",
+      "closed_at_utc": "2025-07-31T07:45:35Z",
+      "pnl_usd": 5.413441773153807,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "da03d27d153c27e0f12fbe5a"
+    },
+    {
+      "candidate_id": "replay:V7_20250811T092500Z_LONG",
+      "closed_at_utc": "2025-08-11T09:55:00Z",
+      "pnl_usd": -7.545713421108808,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250811T092500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:cabdf210903e3c2e07c74d61",
+      "closed_at_utc": "2025-08-11T12:30:45Z",
+      "pnl_usd": 20.73304709697341,
+      "source_id": "R4_CHOP",
+      "trade_id": "cabdf210903e3c2e07c74d61"
+    },
+    {
+      "candidate_id": "replay:4d93f54e9e73876b5e6697f3",
+      "closed_at_utc": "2025-08-12T01:10:55Z",
+      "pnl_usd": -11.166511572925865,
+      "source_id": "R4_CHOP",
+      "trade_id": "4d93f54e9e73876b5e6697f3"
+    },
+    {
+      "candidate_id": "replay:603fe41194cb5dc98d0c2639",
+      "closed_at_utc": "2025-08-12T11:45:40Z",
+      "pnl_usd": 4.656780584331923,
+      "source_id": "R4_CHOP",
+      "trade_id": "603fe41194cb5dc98d0c2639"
+    },
+    {
+      "candidate_id": "replay:b98fc8981224ff465707ecf9",
+      "closed_at_utc": "2025-08-22T13:37:20Z",
+      "pnl_usd": -6.104043071103782,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "b98fc8981224ff465707ecf9"
+    },
+    {
+      "candidate_id": "replay:855aed9cb331b5d81e34762c",
+      "closed_at_utc": "2025-08-24T22:00:05Z",
+      "pnl_usd": -5.010418482403348,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "855aed9cb331b5d81e34762c"
+    },
+    {
+      "candidate_id": "replay:de671f6624bcb614e1b17046",
+      "closed_at_utc": "2025-08-25T15:07:40Z",
+      "pnl_usd": -10.173788461236434,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "de671f6624bcb614e1b17046"
+    },
+    {
+      "candidate_id": "replay:2025-08-27 20:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "closed_at_utc": "2025-09-01T06:33:05Z",
+      "pnl_usd": 89.64,
+      "source_id": "R1_BOX",
+      "trade_id": "2025-08-27 20:00:00|LONG|h4_d1_long_best_box2_atr80"
+    },
+    {
+      "candidate_id": "replay:2025-09-09 13:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-09T14:08:45Z",
+      "pnl_usd": -18.36,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-09 13:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-15 09:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-15T15:23:40Z",
+      "pnl_usd": 20.16,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-15 09:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-15 13:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-15T15:55:40Z",
+      "pnl_usd": 28.47,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-15 13:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-15 13:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-16T06:44:45Z",
+      "pnl_usd": 35.220000000000006,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-15 13:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-16 14:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-16T15:05:30Z",
+      "pnl_usd": -15.67,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-16 14:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V7_20250919T093000Z_SHORT",
+      "closed_at_utc": "2025-09-19T11:55:00Z",
+      "pnl_usd": 8.248343344744402,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20250919T093000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:2025-09-24 13:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-24T13:33:45Z",
+      "pnl_usd": -8.88,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-24 13:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-24 12:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-24T14:00:15Z",
+      "pnl_usd": -10.5,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-24 12:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-25 11:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-25T12:36:45Z",
+      "pnl_usd": -10.5,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-25 11:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-25 11:45:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-25T12:36:45Z",
+      "pnl_usd": -11.67,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-25 11:45:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-25 12:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-25T12:36:45Z",
+      "pnl_usd": -13.56,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-25 12:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-26 10:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-26T10:40:40Z",
+      "pnl_usd": -5.569999999999999,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-26 10:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-26 12:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-26T14:08:30Z",
+      "pnl_usd": 18.79,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-26 12:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-26 14:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-29T02:21:30Z",
+      "pnl_usd": 33.550000000000004,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-26 14:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-09-26 13:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-09-29T04:37:30Z",
+      "pnl_usd": 37.900000000000006,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-09-26 13:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V7_20251031T081500Z_SHORT",
+      "closed_at_utc": "2025-10-31T10:08:20Z",
+      "pnl_usd": 5.873033143725232,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20251031T081500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V25_865b34ed40e0aa35de9d7b92",
+      "closed_at_utc": "2025-11-03T09:31:15Z",
+      "pnl_usd": -20.54434307088184,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_865b34ed40e0aa35de9d7b92"
+    },
+    {
+      "candidate_id": "replay:V7_20251104T081500Z_SHORT",
+      "closed_at_utc": "2025-11-04T14:05:00Z",
+      "pnl_usd": 19.82348241603016,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20251104T081500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20251105T101000Z_LONG",
+      "closed_at_utc": "2025-11-05T14:49:05Z",
+      "pnl_usd": 4.967942054038836,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20251105T101000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:c51720f96136212a5a9afa4f",
+      "closed_at_utc": "2025-11-10T01:21:05Z",
+      "pnl_usd": 25.4905625118036,
+      "source_id": "R4_CHOP",
+      "trade_id": "c51720f96136212a5a9afa4f"
+    },
+    {
+      "candidate_id": "replay:V7_20251112T081500Z_LONG",
+      "closed_at_utc": "2025-11-12T12:30:00Z",
+      "pnl_usd": 16.970433529867144,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20251112T081500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:2025-11-12 12:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-11-12T15:10:30Z",
+      "pnl_usd": 17.62,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-11-12 12:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-11-12 11:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-11-12T15:10:40Z",
+      "pnl_usd": 22.62,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-11-12 11:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-11-12 11:45:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-11-12T15:10:45Z",
+      "pnl_usd": 23.75,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-11-12 11:45:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-11-12 11:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-11-12T15:13:40Z",
+      "pnl_usd": 29.02,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-11-12 11:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V7_20251120T085500Z_LONG",
+      "closed_at_utc": "2025-11-20T13:05:00Z",
+      "pnl_usd": 27.47122833018889,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20251120T085500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20251125T130500Z_LONG",
+      "closed_at_utc": "2025-11-25T14:40:00Z",
+      "pnl_usd": -12.382004601938844,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20251125T130500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:2025-11-25 13:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-11-25T14:46:40Z",
+      "pnl_usd": -15.99,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-11-25 13:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V7_20251126T083500Z_SHORT",
+      "closed_at_utc": "2025-11-26T11:35:00Z",
+      "pnl_usd": -9.045830241799694,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20251126T083500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:2025-11-26 13:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-11-26T14:08:20Z",
+      "pnl_usd": -17.94,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-11-26 13:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-11-27 09:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-11-27T09:03:40Z",
+      "pnl_usd": -9.79,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-11-27 09:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-11-27 09:45:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-11-28T00:34:30Z",
+      "pnl_usd": 20.57,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-11-27 09:45:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V25_336eb1ade19e1454b8176d07",
+      "closed_at_utc": "2025-12-04T09:44:20Z",
+      "pnl_usd": -15.528962849025374,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_336eb1ade19e1454b8176d07"
+    },
+    {
+      "candidate_id": "replay:V25_e96a924eb3d1994a1566009a",
+      "closed_at_utc": "2025-12-09T07:08:55Z",
+      "pnl_usd": 5.267459742502998,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_e96a924eb3d1994a1566009a"
+    },
+    {
+      "candidate_id": "replay:2025-12-11 13:45:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-11T15:41:35Z",
+      "pnl_usd": 31.56,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-11 13:45:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:4a9a3f3991e53ba202a6376e",
+      "closed_at_utc": "2025-12-12T15:58:15Z",
+      "pnl_usd": 7.607875620339898,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "4a9a3f3991e53ba202a6376e"
+    },
+    {
+      "candidate_id": "replay:V7_20251215T083500Z_SHORT",
+      "closed_at_utc": "2025-12-15T14:05:00Z",
+      "pnl_usd": 12.6407826271464,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20251215T083500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:2025-12-17 10:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-17T10:35:40Z",
+      "pnl_usd": -8.07,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-17 10:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-17 09:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-17T10:38:15Z",
+      "pnl_usd": -12.82,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-17 09:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-17 12:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-17T13:40:25Z",
+      "pnl_usd": 14.84,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-17 12:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-17 11:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-17T13:58:45Z",
+      "pnl_usd": 25.28,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-17 11:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-19 14:45:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-19T14:47:05Z",
+      "pnl_usd": -11.32,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-19 14:45:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-24 11:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-24T13:19:40Z",
+      "pnl_usd": -9.11,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-24 11:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-24 12:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-24T13:19:40Z",
+      "pnl_usd": -11.05,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-24 12:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-24 10:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-24T13:19:45Z",
+      "pnl_usd": -15.010000000000002,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-24 10:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-24 10:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-24T13:19:45Z",
+      "pnl_usd": -14.37,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-24 10:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-26 13:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-26T15:37:30Z",
+      "pnl_usd": 26.36,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-26 13:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2025-12-26 13:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2025-12-26T16:05:15Z",
+      "pnl_usd": 30.91,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2025-12-26 13:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V7_20260102T082000Z_SHORT",
+      "closed_at_utc": "2026-01-02T08:45:00Z",
+      "pnl_usd": -8.386791114407819,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260102T082000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260106T083500Z_SHORT",
+      "closed_at_utc": "2026-01-06T09:50:00Z",
+      "pnl_usd": 17.84494768342948,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260106T083500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260107T122500Z_LONG",
+      "closed_at_utc": "2026-01-07T13:10:00Z",
+      "pnl_usd": -10.9463569920793,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260107T122500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:2026-01-09 09:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-09T12:06:15Z",
+      "pnl_usd": 11.36,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-09 09:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-09 12:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-09T12:31:15Z",
+      "pnl_usd": -9.84,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-09 12:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-09 09:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-09T12:33:35Z",
+      "pnl_usd": -12.34,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-09 09:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-09 13:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-09T13:30:45Z",
+      "pnl_usd": -13.7,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-09 13:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-13 13:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-13T14:45:45Z",
+      "pnl_usd": 33.52,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-13 13:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V7_20260115T103000Z_SHORT",
+      "closed_at_utc": "2026-01-15T10:50:00Z",
+      "pnl_usd": -8.526595185405856,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260115T103000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:2026-01-22 09:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-22T09:32:40Z",
+      "pnl_usd": -10.95,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-22 09:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-22 12:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-22T12:57:45Z",
+      "pnl_usd": -10.19,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-22 12:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-22 11:45:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-22T12:59:30Z",
+      "pnl_usd": -11.49,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-22 11:45:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-22 10:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-22T13:42:40Z",
+      "pnl_usd": -11.24,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-22 10:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-22 10:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-22T13:42:40Z",
+      "pnl_usd": -15.09,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-22 10:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-22 14:00:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-22T15:26:20Z",
+      "pnl_usd": 26.96,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-22 14:00:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-01-22 14:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-01-22T15:53:05Z",
+      "pnl_usd": 41.330000000000005,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-01-22 14:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V7_20260209T091000Z_SHORT",
+      "closed_at_utc": "2026-02-09T10:30:00Z",
+      "pnl_usd": 37.530001022353055,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260209T091000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260209T110500Z_LONG",
+      "closed_at_utc": "2026-02-09T15:35:00Z",
+      "pnl_usd": 42.11294585800773,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260209T110500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20260219T081000Z_LONG",
+      "closed_at_utc": "2026-02-19T09:30:00Z",
+      "pnl_usd": -9.121057880771732,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260219T081000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:2026-02-20 12:45:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-02-20T15:03:05Z",
+      "pnl_usd": 6.8400000000001455,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-02-20 12:45:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V7_20260223T103500Z_SHORT",
+      "closed_at_utc": "2026-02-23T10:55:00Z",
+      "pnl_usd": -12.387179155775383,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260223T103500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260223T111500Z_SHORT",
+      "closed_at_utc": "2026-02-23T12:45:00Z",
+      "pnl_usd": -12.72199191925456,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260223T111500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:2026-02-25 09:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-02-25T10:20:05Z",
+      "pnl_usd": -12.36,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-02-25 09:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:2026-02-25 13:15:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-02-25T14:35:30Z",
+      "pnl_usd": -17.560000000000002,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-02-25 13:15:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:74aecd91b902e0283bb8e307",
+      "closed_at_utc": "2026-03-01T23:00:20Z",
+      "pnl_usd": 106.03887023230963,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "74aecd91b902e0283bb8e307"
+    },
+    {
+      "candidate_id": "replay:c7c66eaa66b3bab3151e8b28",
+      "closed_at_utc": "2026-03-02T14:10:00Z",
+      "pnl_usd": -38.73969110655365,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "c7c66eaa66b3bab3151e8b28"
+    },
+    {
+      "candidate_id": "replay:V7_20260303T081000Z_SHORT",
+      "closed_at_utc": "2026-03-03T09:25:00Z",
+      "pnl_usd": 41.766439972354455,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260303T081000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260305T092500Z_SHORT",
+      "closed_at_utc": "2026-03-05T13:20:00Z",
+      "pnl_usd": 34.24666552143122,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260305T092500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260306T084000Z_LONG",
+      "closed_at_utc": "2026-03-06T09:15:00Z",
+      "pnl_usd": -15.024600499526112,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260306T084000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20260309T081000Z_SHORT",
+      "closed_at_utc": "2026-03-09T09:25:00Z",
+      "pnl_usd": -20.31922567199521,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260309T081000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V25_f1ec6704a9640a26928185a8",
+      "closed_at_utc": "2026-03-10T14:07:45Z",
+      "pnl_usd": 9.954775367439083,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_f1ec6704a9640a26928185a8"
+    },
+    {
+      "candidate_id": "replay:V25_d296b8b4d212ffb815ad5d3a",
+      "closed_at_utc": "2026-03-11T10:15:05Z",
+      "pnl_usd": -0.1933590979586178,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_d296b8b4d212ffb815ad5d3a"
+    },
+    {
+      "candidate_id": "replay:2026-03-12 12:30:00|LONG|r1_h1_pullback_long_v1",
+      "closed_at_utc": "2026-03-12T13:23:05Z",
+      "pnl_usd": -10.46,
+      "source_id": "R1_PULLBACK",
+      "trade_id": "2026-03-12 12:30:00|LONG|r1_h1_pullback_long_v1"
+    },
+    {
+      "candidate_id": "replay:V7_20260312T122500Z_LONG",
+      "closed_at_utc": "2026-03-12T13:25:00Z",
+      "pnl_usd": -11.453583105811363,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260312T122500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260318T030000Z_SHORT",
+      "closed_at_utc": "2026-03-18T05:40:00Z",
+      "pnl_usd": -10.610898505745382,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260318T030000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260319T000500Z_LONG",
+      "closed_at_utc": "2026-03-19T06:00:00Z",
+      "pnl_usd": -19.19997133591127,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260319T000500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260319T074500Z_SHORT",
+      "closed_at_utc": "2026-03-19T10:25:00Z",
+      "pnl_usd": 58.06663073678431,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260319T074500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:3a3865fed7ae231391ec97c5",
+      "closed_at_utc": "2026-03-19T15:00:05Z",
+      "pnl_usd": 387.46748757619,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "3a3865fed7ae231391ec97c5"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260320T000500Z_LONG",
+      "closed_at_utc": "2026-03-20T01:45:00Z",
+      "pnl_usd": 34.45514167276268,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260320T000500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260320T014500Z_LONG",
+      "closed_at_utc": "2026-03-20T03:20:00Z",
+      "pnl_usd": 46.226188110725495,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260320T014500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260324T042000Z_SHORT",
+      "closed_at_utc": "2026-03-24T05:45:00Z",
+      "pnl_usd": -31.668904283161247,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260324T042000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260325T013500Z_LONG",
+      "closed_at_utc": "2026-03-25T05:25:00Z",
+      "pnl_usd": -25.591208720530712,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260325T013500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260325T053000Z_SHORT",
+      "closed_at_utc": "2026-03-25T05:45:00Z",
+      "pnl_usd": -14.014179410782113,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260325T053000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260326T001500Z_LONG",
+      "closed_at_utc": "2026-03-26T03:05:00Z",
+      "pnl_usd": -26.13635432279502,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260326T001500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260326T051500Z_SHORT",
+      "closed_at_utc": "2026-03-26T05:35:00Z",
+      "pnl_usd": 21.87761248600049,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260326T051500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260327T012500Z_LONG",
+      "closed_at_utc": "2026-03-27T03:40:00Z",
+      "pnl_usd": 36.703725720329885,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260327T012500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260327T034000Z_LONG",
+      "closed_at_utc": "2026-03-27T05:58:05Z",
+      "pnl_usd": 8.66154054818881,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260327T034000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260330T000500Z_SHORT",
+      "closed_at_utc": "2026-03-30T00:25:00Z",
+      "pnl_usd": -28.616730548279115,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260330T000500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260330T024500Z_LONG",
+      "closed_at_utc": "2026-03-30T06:50:00Z",
+      "pnl_usd": 52.80702705368607,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260330T024500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20260331T105500Z_LONG",
+      "closed_at_utc": "2026-03-31T11:30:00Z",
+      "pnl_usd": 30.520706182044343,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260331T105500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20260409T093000Z_SHORT",
+      "closed_at_utc": "2026-04-09T10:50:00Z",
+      "pnl_usd": -13.588165357524849,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260409T093000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260414T125000Z_LONG",
+      "closed_at_utc": "2026-04-14T13:40:00Z",
+      "pnl_usd": 26.759567801213542,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260414T125000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:4e949b6bc07d180f201cc608",
+      "closed_at_utc": "2026-04-14T20:00:05Z",
+      "pnl_usd": 48.26795637882408,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "4e949b6bc07d180f201cc608"
+    },
+    {
+      "candidate_id": "replay:V7_20260415T090500Z_SHORT",
+      "closed_at_utc": "2026-04-15T09:13:40Z",
+      "pnl_usd": 5.3817346632289045,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260415T090500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260417T091500Z_SHORT",
+      "closed_at_utc": "2026-04-17T11:50:00Z",
+      "pnl_usd": -11.341621791440804,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260417T091500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260420T094000Z_LONG",
+      "closed_at_utc": "2026-04-20T12:00:00Z",
+      "pnl_usd": 19.272650381594925,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260420T094000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:9697fd829d301579d5da4ad0",
+      "closed_at_utc": "2026-04-21T22:00:15Z",
+      "pnl_usd": 12.361031210915034,
+      "source_id": "R3_COMPRESSION",
+      "trade_id": "9697fd829d301579d5da4ad0"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260427T232000Z_LONG",
+      "closed_at_utc": "2026-04-28T00:27:15Z",
+      "pnl_usd": 2.141010097823392,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260427T232000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260428T015500Z_SHORT",
+      "closed_at_utc": "2026-04-28T02:05:25Z",
+      "pnl_usd": 3.788872740849525,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260428T015500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260428T050500Z_SHORT",
+      "closed_at_utc": "2026-04-28T05:10:00Z",
+      "pnl_usd": 11.967269461378622,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260428T050500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260429T000000Z_LONG",
+      "closed_at_utc": "2026-04-29T00:15:00Z",
+      "pnl_usd": 11.7744555060326,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260429T000000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260429T010500Z_SHORT",
+      "closed_at_utc": "2026-04-29T02:05:00Z",
+      "pnl_usd": -11.978355022995745,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260429T010500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260430T000000Z_LONG",
+      "closed_at_utc": "2026-04-30T01:30:00Z",
+      "pnl_usd": 14.159532182084703,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260430T000000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260430T013000Z_LONG",
+      "closed_at_utc": "2026-04-30T02:35:00Z",
+      "pnl_usd": -11.809433850786409,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260430T013000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260501T000000Z_SHORT",
+      "closed_at_utc": "2026-05-01T01:56:50Z",
+      "pnl_usd": 3.3687584711984746,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260501T000000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260501T043000Z_SHORT",
+      "closed_at_utc": "2026-05-01T06:20:00Z",
+      "pnl_usd": 15.14366088524289,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260501T043000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260505T090500Z_SHORT",
+      "closed_at_utc": "2026-05-05T11:50:00Z",
+      "pnl_usd": -10.832156968367611,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260505T090500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260512T081000Z_SHORT",
+      "closed_at_utc": "2026-05-12T13:20:00Z",
+      "pnl_usd": 21.98512293403085,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260512T081000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260518T224000Z_LONG",
+      "closed_at_utc": "2026-05-19T00:30:00Z",
+      "pnl_usd": -8.626012914367138,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260518T224000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260519T030000Z_SHORT",
+      "closed_at_utc": "2026-05-19T13:10:00Z",
+      "pnl_usd": 25.67270522237343,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260519T030000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260519T132500Z_SHORT",
+      "closed_at_utc": "2026-05-19T13:35:00Z",
+      "pnl_usd": 32.59571588177828,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260519T132500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260520T003000Z_LONG",
+      "closed_at_utc": "2026-05-20T01:10:00Z",
+      "pnl_usd": -14.55379000694329,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260520T003000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260520T013000Z_SHORT",
+      "closed_at_utc": "2026-05-20T09:00:00Z",
+      "pnl_usd": -18.449152256916143,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260520T013000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260521T011500Z_LONG",
+      "closed_at_utc": "2026-05-21T02:20:00Z",
+      "pnl_usd": -13.518752034793804,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260521T011500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260521T023000Z_SHORT",
+      "closed_at_utc": "2026-05-21T06:01:40Z",
+      "pnl_usd": 6.256163248786805,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260521T023000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260526T085500Z_LONG",
+      "closed_at_utc": "2026-05-26T09:45:00Z",
+      "pnl_usd": -11.394473289477846,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260526T085500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20260526T105500Z_SHORT",
+      "closed_at_utc": "2026-05-26T11:40:00Z",
+      "pnl_usd": 21.11328675536101,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260526T105500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260528T110500Z_LONG",
+      "closed_at_utc": "2026-05-28T12:55:00Z",
+      "pnl_usd": 24.70657509447093,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260528T110500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20260601T105500Z_SHORT",
+      "closed_at_utc": "2026-06-01T13:15:00Z",
+      "pnl_usd": 19.132450352860467,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260601T105500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260602T115000Z_LONG",
+      "closed_at_utc": "2026-06-02T12:35:00Z",
+      "pnl_usd": -7.599526332672989,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260602T115000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V7_20260604T083000Z_LONG",
+      "closed_at_utc": "2026-06-04T11:30:00Z",
+      "pnl_usd": 20.100003093063247,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260604T083000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V25_83cae13e3a3e29396436b5fb",
+      "closed_at_utc": "2026-06-05T06:33:20Z",
+      "pnl_usd": 7.916167371940869,
+      "source_id": "V25_CHOP",
+      "trade_id": "V25_83cae13e3a3e29396436b5fb"
+    },
+    {
+      "candidate_id": "replay:V7_20260605T092500Z_SHORT",
+      "closed_at_utc": "2026-06-05T11:55:00Z",
+      "pnl_usd": -9.93255368205199,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260605T092500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V7_20260609T081000Z_LONG",
+      "closed_at_utc": "2026-06-09T13:21:25Z",
+      "pnl_usd": 5.22146466526058,
+      "source_id": "V7_SWING_HEALTH",
+      "trade_id": "V7_20260609T081000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260609T141500Z_SHORT",
+      "closed_at_utc": "2026-06-09T14:50:00Z",
+      "pnl_usd": 35.123175151421684,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260609T141500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260610T003500Z_SHORT",
+      "closed_at_utc": "2026-06-10T04:50:00Z",
+      "pnl_usd": 31.95773506976895,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260610T003500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260610T053000Z_LONG",
+      "closed_at_utc": "2026-06-10T06:05:00Z",
+      "pnl_usd": 22.994919435260847,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260610T053000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260611T012500Z_LONG",
+      "closed_at_utc": "2026-06-11T02:35:00Z",
+      "pnl_usd": -28.50295917640586,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260611T012500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:1091257f5a7ce41b370ab4af",
+      "closed_at_utc": "2026-06-11T04:00:05Z",
+      "pnl_usd": 196.28524078582396,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "1091257f5a7ce41b370ab4af"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260611T023500Z_SHORT",
+      "closed_at_utc": "2026-06-11T04:00:05Z",
+      "pnl_usd": -3.1701958241686405,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260611T023500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:30e21441c916704ddecb88fe",
+      "closed_at_utc": "2026-06-11T17:32:15Z",
+      "pnl_usd": -46.99403654817205,
+      "source_id": "R2_DOWNTREND",
+      "trade_id": "30e21441c916704ddecb88fe"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260612T004500Z_SHORT",
+      "closed_at_utc": "2026-06-12T02:02:15Z",
+      "pnl_usd": 9.1043910469253,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260612T004500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260612T145500Z_LONG",
+      "closed_at_utc": "2026-06-14T22:00:00Z",
+      "pnl_usd": 63.24886605081596,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260612T145500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260615T001500Z_LONG",
+      "closed_at_utc": "2026-06-15T01:05:00Z",
+      "pnl_usd": -12.744480835993402,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260615T001500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260616T002500Z_SHORT",
+      "closed_at_utc": "2026-06-16T01:00:00Z",
+      "pnl_usd": -9.140452131044734,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260616T002500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260619T165000Z_LONG",
+      "closed_at_utc": "2026-06-21T22:00:00Z",
+      "pnl_usd": -19.35772226175153,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260619T165000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260622T004500Z_LONG",
+      "closed_at_utc": "2026-06-22T01:05:00Z",
+      "pnl_usd": 27.06079690360925,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260622T004500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260622T021500Z_SHORT",
+      "closed_at_utc": "2026-06-22T06:25:00Z",
+      "pnl_usd": -18.28427747298503,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260622T021500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260623T080500Z_SHORT",
+      "closed_at_utc": "2026-06-23T08:45:00Z",
+      "pnl_usd": -16.204760108458522,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260623T080500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260624T001000Z_LONG",
+      "closed_at_utc": "2026-06-24T00:25:00Z",
+      "pnl_usd": -14.721266028673842,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260624T001000Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260624T010500Z_SHORT",
+      "closed_at_utc": "2026-06-24T01:15:00Z",
+      "pnl_usd": -17.750410724770084,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260624T010500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260625T003500Z_SHORT",
+      "closed_at_utc": "2026-06-25T00:55:00Z",
+      "pnl_usd": -14.46829008458168,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260625T003500Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260626T022000Z_SHORT",
+      "closed_at_utc": "2026-06-26T03:00:00Z",
+      "pnl_usd": 24.138641862336264,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260626T022000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260626T041500Z_LONG",
+      "closed_at_utc": "2026-06-26T07:30:00Z",
+      "pnl_usd": 24.50110420136692,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260626T041500Z_LONG"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260629T003000Z_SHORT",
+      "closed_at_utc": "2026-06-29T00:40:00Z",
+      "pnl_usd": -13.46486513356358,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260629T003000Z_SHORT"
+    },
+    {
+      "candidate_id": "replay:V9_BREAK_20260629T004500Z_LONG",
+      "closed_at_utc": "2026-06-29T01:15:00Z",
+      "pnl_usd": -14.714549121252402,
+      "source_id": "V57_BREAK_SWING_H4ADX_HIGH",
+      "trade_id": "V9_BREAK_20260629T004500Z_LONG"
+    }
+  ],
+  "schema_version": "v60_mature_source_health_rank_veto_v2_warm_start",
+  "source_cutoff_exclusive_utc": "2026-07-01T00:00:00Z"
+}

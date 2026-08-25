@@ -40,7 +40,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File `
   xau-usd\operations\v60-prospective-supervisor-v1\start_supervisor.ps1
 ```
 
-Stop only the supervisor and its four Python workers:
+Stop only the supervisor and its six Python workers:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File `

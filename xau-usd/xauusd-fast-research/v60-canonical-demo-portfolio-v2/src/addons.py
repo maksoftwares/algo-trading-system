@@ -363,6 +363,15 @@ def _health_snapshot(sleeve: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _candidate_health_observability(sleeve: Mapping[str, Any]) -> dict[str, Any]:
+    recent = _health_snapshot(sleeve)["windows"]["20"]
+    return {
+        "health_recent_20_completed_count": int(recent["completed_count"]),
+        "health_recent_20_profit_factor": recent["profit_factor"],
+        "health_recent_20_net_usd": float(recent["net_pnl_usd"]),
+    }
+
+
 def _source_entry_weekday_allowed(
     config: Mapping[str, Any], source_id: str, entry_time: pd.Timestamp
 ) -> bool:
@@ -502,6 +511,7 @@ def _process_health_events(
                     "health_completed_count": count,
                     "health_profit_factor": pf,
                     "health_net_usd": net,
+                    **_candidate_health_observability(sleeve),
                 }
                 emitted += int(_append_once(output, row))
                 emitted_event.add(sleeve_id)
