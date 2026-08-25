@@ -1,0 +1,29 @@
+{
+  "schema_version": "v60_persistent_source_health_union_v11_result_manifest",
+  "preregistered_code_commit": "283329c793061a52ca45143722060a6942a53067",
+  "decision": "REJECT_V11_KEEP_DEPLOYED_V60",
+  "deployment_authorized": false,
+  "broker_action_authorized": false,
+  "artifacts": {
+    "ANNUAL.csv": {
+      "bytes": 489,
+      "sha256": "c241a8390d5aec87b392ff2caa360732e1233e6ce7c2006f2ccfc00d8952797e"
+    },
+    "AUGUST_2026_TRADE_AUDIT.csv": {
+      "bytes": 13872,
+      "sha256": "8129603f9a31dd3efb2827f6a7f88217828baf4254cad56a3322b2165c0656d6"
+    },
+    "HISTORICAL_VETOES.csv": {
+      "bytes": 2935,
+      "sha256": "00f6ddfa1687b9935b3bd22784f22bc7f171d1376ac4d377cabde91407651e62"
+    },
+    "RESULT.json": {
+      "bytes": 38273,
+      "sha256": "47abe4fe7897339c862a6a7f274e722d33fb7f2e1f1262e2a20c18aa6709392b"
+    },
+    "RESULT.md": {
+      "bytes": 758,
+      "sha256": "e619fc8892f63d9366eb008d592c7015dd84e1e37873ab9894c2a71a9a129f07"
+    }
+  }
+}
