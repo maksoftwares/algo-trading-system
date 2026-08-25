@@ -47,6 +47,37 @@ profitable in every year but have too few vetoes for the locked cohort gate.
 A 30-trade health window, looser health threshold, and looser rank threshold
 each fail at least one risk or annual-stability gate; none replaces V2.
 
+### Independent-feed diagnostic
+
+The exact V60 runtime intervals were also repriced on independent Dukascopy
+bid/ask ticks. Quotes no more than five seconds after each Capital runtime entry
+and exit were accepted; 1,366 of 1,390 trades (98.27%) had common coverage, and
+all 12 V2 vetoes were covered. The remaining 24 rows are explicitly retained as
+uncovered instead of being filled using a wider or hindsight-selected window.
+
+| Metric | V60 on Dukascopy timing | V2 on Dukascopy timing | Change |
+|---|---:|---:|---:|
+| Closed trades | 1,366 | 1,354 | -12 |
+| Net spread-only P/L | $4,330.78 | $4,369.58 | +$38.80 |
+| Profit factor | 2.0013 | 2.0203 | +0.0190 |
+| Win rate | 50.59% | 50.89% | +0.30 pp |
+| Closed drawdown | $180.66 | $180.66 | $0.00 |
+
+The veto cohort lost $38.80 at PF 0.0841 on Dukascopy, with 10 losses and two
+wins. Capital and Dukascopy agreed on the veto outcome sign for 11 of 12 trades
+(91.67%); all-trade P/L correlation was 0.9792. The V2 P/L change was
+nonnegative in every covered calendar year. Every raw hour used is captured in
+a 2,111-file SHA-256 manifest, and each trade records its exact source file and
+row. The result is not driven by the five-second allowance: at 250 ms, all nine
+covered vetoes still lose $30.67; at two seconds, all 11 covered vetoes lose
+$39.48. A descriptive one-sided Fisher test against the other covered,
+degraded-health ranked cohort gives p=0.0256, but remains post-selection.
+
+This supports the cross-broker price-path mechanism, but it is not an
+independent strategy replay: Capital produced the entry and exit timestamps,
+the policy was historically selected, and commission, swap, and independent
+Dukascopy stop triggering are absent. It therefore does not authorize V2.
+
 Among 255 mature, degraded-health, causally ranked baseline executions, the 12
 V2 selections are distributed across 11 entry dates, three specialists, and
 five calendar years. The other 243 trades have PF 1.8727. Descriptive

@@ -1,0 +1,247 @@
+{
+  "annual_comparison": [
+    {
+      "baseline_net_pnl_usd": 327.81199999999876,
+      "baseline_trades": 227,
+      "challenger_net_pnl_usd": 334.87999999999874,
+      "challenger_trades": 225,
+      "delta_net_pnl_usd": 7.067999999999984,
+      "year": 2021
+    },
+    {
+      "baseline_net_pnl_usd": 135.7089999999996,
+      "baseline_trades": 108,
+      "challenger_net_pnl_usd": 141.19699999999966,
+      "challenger_trades": 107,
+      "delta_net_pnl_usd": 5.488000000000056,
+      "year": 2022
+    },
+    {
+      "baseline_net_pnl_usd": 399.9150000000002,
+      "baseline_trades": 231,
+      "challenger_net_pnl_usd": 401.27500000000055,
+      "challenger_trades": 229,
+      "delta_net_pnl_usd": 1.3600000000003547,
+      "year": 2023
+    },
+    {
+      "baseline_net_pnl_usd": 813.8720000000023,
+      "baseline_trades": 322,
+      "challenger_net_pnl_usd": 823.5800000000015,
+      "challenger_trades": 318,
+      "delta_net_pnl_usd": 9.707999999999174,
+      "year": 2024
+    },
+    {
+      "baseline_net_pnl_usd": 1390.2909999999915,
+      "baseline_trades": 347,
+      "challenger_net_pnl_usd": 1405.4679999999917,
+      "challenger_trades": 344,
+      "delta_net_pnl_usd": 15.177000000000135,
+      "year": 2025
+    },
+    {
+      "baseline_net_pnl_usd": 1263.1799999999944,
+      "baseline_trades": 131,
+      "challenger_net_pnl_usd": 1263.1799999999944,
+      "challenger_trades": 131,
+      "delta_net_pnl_usd": 0.0,
+      "year": 2026
+    }
+  ],
+  "capital_common_coverage_baseline": {
+    "closed_drawdown_usd": 233.05544569359637,
+    "losses": 706,
+    "net_pnl_usd": 3452.5035344531707,
+    "profit_factor": 1.6862675966543235,
+    "trades": 1366,
+    "win_rate_percent": 48.31625183016106,
+    "wins": 660
+  },
+  "capital_runtime_baseline": {
+    "closed_drawdown_usd": 223.2793130984756,
+    "losses": 716,
+    "net_pnl_usd": 3603.5653535720144,
+    "profit_factor": 1.7107478072225084,
+    "trades": 1390,
+    "win_rate_percent": 48.489208633093526,
+    "wins": 674
+  },
+  "coverage": {
+    "coverage_fraction": 0.9827338129496402,
+    "covered_trades": 1366,
+    "covered_veto_trades": 12,
+    "maximum_observed_entry_lag_ms": 4986,
+    "maximum_observed_exit_lag_ms": 4886,
+    "missing_source_files": [],
+    "runtime_trades": 1390,
+    "source_files_hashed": 2111,
+    "uncovered_trade_ids": [
+      "V25_3c53606f7b7f762be6ec5f93",
+      "V25_d0284accca0b7b8971d1be8b",
+      "V25_2caf70bde01b6f2fc7f1af66",
+      "299ab8d04eb5af6b1121547e",
+      "2022-12-30 14:30:00|LONG|r1_h1_pullback_long_v1",
+      "V25_796a5e50a3776e316680c883",
+      "a345962015f561e8f7ae7143",
+      "V7_20230919T094500Z_SHORT",
+      "V7_20230926T084500Z_SHORT",
+      "85ceb8585b06c334e63a7606",
+      "V9_BREAK_20231129T124000Z_SHORT",
+      "2023-12-01 16:00:00|LONG|h4_d1_long_best_box2_atr80",
+      "2023-12-19 10:00:00|LONG|r1_h1_pullback_long_v1",
+      "2023-12-21 14:30:00|LONG|r1_h1_pullback_long_v1",
+      "2023-12-27 10:15:00|LONG|r1_h1_pullback_long_v1",
+      "2023-12-27 11:30:00|LONG|r1_h1_pullback_long_v1",
+      "0b8d13e41ecd57ac6d52fa42",
+      "V9_BREAK_20240315T135500Z_LONG",
+      "V25_418a79b226f14e7800728a5b",
+      "2024-07-04 10:30:00|LONG|r1_h1_pullback_long_v1",
+      "2025-01-31 11:15:00|LONG|r1_h1_pullback_long_v1",
+      "2025-03-27 13:15:00|LONG|r1_h1_pullback_long_v1",
+      "2025-08-07 12:30:00|LONG|r1_h1_pullback_long_v1",
+      "V25_d296b8b4d212ffb815ad5d3a"
+    ],
+    "veto_trades": 12
+  },
+  "diagnostics": {
+    "all_trade_outcome_sign_agreement_percent": 96.41288433382138,
+    "capital_dukascopy_all_trade_pnl_correlation": 0.979211355705555,
+    "checks": {
+      "challenger_closed_drawdown_not_above_baseline": true,
+      "challenger_net_not_below_baseline": true,
+      "challenger_profit_factor_not_below_baseline": true,
+      "complete_veto_quote_coverage": true,
+      "every_calendar_year_net_delta_nonnegative": true,
+      "minimum_98_percent_quote_coverage": true,
+      "veto_cohort_net_negative": true,
+      "veto_cohort_profit_factor_below_0_8": true
+    },
+    "crossfeed_mechanism_support": true,
+    "deployment_authorized": false,
+    "eligible_cohort_fisher_exact_one_sided_p": 0.025578482747278048,
+    "post_selection_diagnostic": true,
+    "veto_outcome_sign_agreement_percent": 91.66666666666666
+  },
+  "dukascopy_other_degraded_ranked_cohort": {
+    "closed_drawdown_usd": 54.08599999999956,
+    "losses": 121,
+    "net_pnl_usd": 600.3589999999997,
+    "profit_factor": 2.1784893341787215,
+    "trades": 238,
+    "win_rate_percent": 49.159663865546214,
+    "wins": 117
+  },
+  "dukascopy_same_timing_baseline": {
+    "closed_drawdown_usd": 180.6619999999989,
+    "losses": 675,
+    "net_pnl_usd": 4330.778999999987,
+    "profit_factor": 2.0012861785399796,
+    "trades": 1366,
+    "win_rate_percent": 50.58565153733529,
+    "wins": 691
+  },
+  "dukascopy_same_timing_v2": {
+    "closed_drawdown_usd": 180.6619999999989,
+    "losses": 665,
+    "net_pnl_usd": 4369.579999999986,
+    "profit_factor": 2.020250057671845,
+    "trades": 1354,
+    "win_rate_percent": 50.88626292466765,
+    "wins": 689
+  },
+  "dukascopy_veto_cohort": {
+    "closed_drawdown_usd": 38.8009999999997,
+    "losses": 10,
+    "net_pnl_usd": -38.8009999999997,
+    "profit_factor": 0.084104428288172,
+    "trades": 12,
+    "win_rate_percent": 16.666666666666664,
+    "wins": 2
+  },
+  "generated_at_utc": "2026-08-25T05:29:28Z",
+  "input_sha256": {
+    "cohort_audit": "7ba7102cd77051030357347028d3c6d0c992d062ebe23527e6e32c58758580db",
+    "dukascopy_source_manifest": "5ce278847381024f1e4029aede5aeee2c3a907ecfa8387e7fc499e7fea8aa514",
+    "foundation_decoder": "d43980eb2d8ac5d262706380d483a36c21884981beb2b7f7de87269adcc1baba",
+    "replay_contract": "3b0a833bc1d839d4d4d48d232a7ed14e8e664e8d8df2d563fac60a6d54cc39c0",
+    "replay_source": "d0864a4cb85537e53f4f739c4179860157187a112cb276583f23aff57b48d63a",
+    "runtime_events": "f16e289a9b62df3ad143d72afd68aec705d07ebda00d4d76e472c76c88b44aa6",
+    "veto_audit": "a0b9fe2e0cde80a326ac54513ad9403ea830df4ee1f8b3c4e70fc3666f4bbc8c"
+  },
+  "limitations": [
+    "Entry and exit timestamps were produced by the Capital replay and are therefore historically exposed.",
+    "This does not test whether Dukascopy prices would independently trigger the same entries or exits.",
+    "The policy was selected after observing historical Capital outcomes.",
+    "Dukascopy spread is included, but commission, swap, and broker-specific execution are not.",
+    "Only the preregistered clean prospective broker test can authorize review for deployment."
+  ],
+  "method": {
+    "causal_strategy_replay": false,
+    "deployment_authorized": false,
+    "description": "Exact Capital V60 runtime intervals repriced on the first Dukascopy quote at or after each entry and exit timestamp",
+    "equivalent_lot_size": 0.01,
+    "excluded_costs": [
+      "commission",
+      "swap",
+      "broker-specific stop triggering"
+    ],
+    "included_cost": "Dukascopy bid/ask spread",
+    "maximum_quote_lag_ms": 5000,
+    "untouched_out_of_sample": false,
+    "xau_position_ounces": 1.0
+  },
+  "quote_lag_sensitivity": [
+    {
+      "challenger_delta_closed_drawdown_usd": 0.0,
+      "challenger_delta_net_pnl_usd": 30.66699999999946,
+      "challenger_delta_profit_factor": 0.02187826222267608,
+      "covered_trades": 769,
+      "covered_vetoes": 9,
+      "maximum_lag_ms": 250,
+      "veto_net_pnl_usd": -30.66699999999946,
+      "veto_profit_factor": 0.08593144560358537
+    },
+    {
+      "challenger_delta_closed_drawdown_usd": 0.0,
+      "challenger_delta_net_pnl_usd": 30.66699999999946,
+      "challenger_delta_profit_factor": 0.017737098343679314,
+      "covered_trades": 1013,
+      "covered_vetoes": 9,
+      "maximum_lag_ms": 500,
+      "veto_net_pnl_usd": -30.66699999999946,
+      "veto_profit_factor": 0.08593144560358537
+    },
+    {
+      "challenger_delta_closed_drawdown_usd": 0.0,
+      "challenger_delta_net_pnl_usd": 30.66699999999946,
+      "challenger_delta_profit_factor": 0.016433105402513082,
+      "covered_trades": 1164,
+      "covered_vetoes": 9,
+      "maximum_lag_ms": 1000,
+      "veto_net_pnl_usd": -30.66699999999946,
+      "veto_profit_factor": 0.08593144560358537
+    },
+    {
+      "challenger_delta_closed_drawdown_usd": 0.0,
+      "challenger_delta_net_pnl_usd": 39.48099999999977,
+      "challenger_delta_profit_factor": 0.019727422182476584,
+      "covered_trades": 1289,
+      "covered_vetoes": 11,
+      "maximum_lag_ms": 2000,
+      "veto_net_pnl_usd": -39.48099999999954,
+      "veto_profit_factor": 0.06805306392220467
+    },
+    {
+      "challenger_delta_closed_drawdown_usd": 0.0,
+      "challenger_delta_net_pnl_usd": 38.800999999999476,
+      "challenger_delta_profit_factor": 0.01896387913186537,
+      "covered_trades": 1366,
+      "covered_vetoes": 12,
+      "maximum_lag_ms": 5000,
+      "veto_net_pnl_usd": -38.8009999999997,
+      "veto_profit_factor": 0.084104428288172
+    }
+  ],
+  "schema_version": "v60_v2_dukascopy_crossfeed_veto_audit_v1"
+}

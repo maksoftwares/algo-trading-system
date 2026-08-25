@@ -30,6 +30,57 @@
     "source_year_stratified_permutation_p": 0.0011299887001129988,
     "deployment_authorized": false
   },
+  "independent_crossfeed_diagnostic": {
+    "source": "Dukascopy XAUUSD bid/ask ticks",
+    "method": "Capital runtime intervals repriced on first Dukascopy quote at or after each timestamp, maximum five-second lag",
+    "runtime_trades": 1390,
+    "covered_trades": 1366,
+    "coverage_fraction": 0.9827338129496402,
+    "covered_vetoes": 12,
+    "source_files_hashed": 2111,
+    "v60_common_coverage": {
+      "trades": 1366,
+      "net_pnl_usd": 4330.778999999987,
+      "profit_factor": 2.0012861785399796,
+      "win_rate": 0.5058565153733529,
+      "closed_drawdown_usd": 180.6619999999989
+    },
+    "v2_common_coverage": {
+      "trades": 1354,
+      "net_pnl_usd": 4369.579999999986,
+      "profit_factor": 2.020250057671845,
+      "win_rate": 0.5088626292466765,
+      "closed_drawdown_usd": 180.6619999999989
+    },
+    "veto_cohort": {
+      "trades": 12,
+      "wins": 2,
+      "losses": 10,
+      "net_pnl_usd": -38.8009999999997,
+      "profit_factor": 0.084104428288172
+    },
+    "capital_dukascopy_pnl_correlation": 0.979211355705555,
+    "veto_outcome_sign_agreement": 0.9166666666666666,
+    "eligible_cohort_fisher_exact_one_sided_p": 0.025578482747278048,
+    "quote_lag_sensitivity": {
+      "250ms": {
+        "covered_vetoes": 9,
+        "delta_net_pnl_usd": 30.66699999999946
+      },
+      "2000ms": {
+        "covered_vetoes": 11,
+        "delta_net_pnl_usd": 39.48099999999977
+      },
+      "5000ms": {
+        "covered_vetoes": 12,
+        "delta_net_pnl_usd": 38.800999999999476
+      }
+    },
+    "every_calendar_year_delta_nonnegative": true,
+    "historically_exposed": true,
+    "independent_strategy_replay": false,
+    "deployment_authorized": false
+  },
   "exposed_demo_audit": {
     "start_utc": "2026-07-21T00:00:00Z",
     "candidates": 45,
