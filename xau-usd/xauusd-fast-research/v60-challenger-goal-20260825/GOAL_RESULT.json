@@ -45,6 +45,21 @@
       "V2_SOURCE_HEALTH": 12,
       "V57_WEAK_FOLLOWTHROUGH_ANTICHASE": 1
     },
+    "retrospective_veto_fragility": {
+      "evidence_status": "RETROSPECTIVE_DESCRIPTIVE_NOT_AN_ACCEPTANCE_GATE",
+      "beneficial_vetoes": 12,
+      "executed_vetoes": 13,
+      "active_months": 9,
+      "beneficial_months": 9,
+      "avoided_pnl_usd": 77.77650484879514,
+      "largest_single_share_of_avoided_pnl": 0.32903521147269904,
+      "top_three_share_of_avoided_pnl": 0.49437556948641176,
+      "avoided_pnl_after_removing_largest_benefit_usd": 52.185296128264426,
+      "trade_level_one_sided_sign_p_value": 0.001708984375,
+      "month_level_one_sided_sign_p_value": 0.001953125,
+      "selection_adjusted": false,
+      "deployment_evidence": false
+    },
     "deployment_authorized": false
   },
   "independent_crossfeed_diagnostic": {

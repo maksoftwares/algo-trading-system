@@ -32,6 +32,13 @@ nominal preservation gates pass. Dynamic V6 vetoes 13 baseline executions: 12
 from V2 and one additional weak-followthrough V57 trade. Their baseline-runtime
 PF is 0.028. Trade retention is 99.065%.
 
+The veto benefit is not carried by one event: 12 of 13 vetoes avoid losses and
+the 13 decisions aggregate favorably in all nine active calendar months. The
+largest single avoided loss contributes 32.90% of the total improvement; removing
+it still leaves $52.19 of avoided P/L. Descriptive one-sided sign tests are
+p=0.00171 by trade and p=0.00195 by active month. These values do not adjust for
+post-selection and are explicitly not acceptance or deployment evidence.
+
 | Year | V60 P/L | Dynamic V6 P/L | Change |
 |---|---:|---:|---:|
 | 2021 | $165.93 | $173.92 | +$7.99 |

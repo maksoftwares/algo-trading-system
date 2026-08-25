@@ -640,7 +640,7 @@
     "veto_cohort_large_enough": true,
     "veto_cohort_profit_factor_below_one": true
   },
-  "generated_at_utc": "2026-08-25T08:47:16.618810Z",
+  "generated_at_utc": "2026-08-25T09:47:10.573636Z",
   "input_sha256": {
     "causal_rank_ledger": "1f9003ed3ceffa070a6f53e8dc89ad82b003541b008f0d1a00196b5a49fd2f17",
     "deployed_config": "739024be8beef82253f708bd98e5707666a395439526b7aff3251a77523e3120",
@@ -713,6 +713,39 @@
     "targeted_candidate_rows": 1703
   },
   "report_title": "V60 Dynamic Follow-Through Union V6",
+  "retrospective_veto_fragility": {
+    "active_months": 9,
+    "avoided_pnl_after_removing_largest_benefit_usd": 52.185296128264426,
+    "avoided_pnl_usd": 77.77650484879514,
+    "beneficial_months": 9,
+    "beneficial_vetoes": 12,
+    "evidence_status": "RETROSPECTIVE_DESCRIPTIVE_NOT_AN_ACCEPTANCE_GATE",
+    "executed_vetoes": 13,
+    "harmful_months": 0,
+    "harmful_vetoes": 1,
+    "largest_single_avoided_loss_usd": 25.591208720530712,
+    "largest_single_share_of_avoided_pnl": 0.32903521147269904,
+    "limitations": [
+      "The policy and these outcomes were exposed before this audit.",
+      "Sign-test values are descriptive and do not correct for strategy selection.",
+      "Only clean prospective outcomes can confirm the veto mechanism."
+    ],
+    "month_level_one_sided_sign_p_value": 0.001953125,
+    "monthly_veto_baseline_pnl_usd": {
+      "2021-06": -3.982291666666667,
+      "2021-08": -4.006597222222222,
+      "2022-08": -6.327940880607618,
+      "2023-11": -9.629999999999999,
+      "2024-07": -2.1776415591438765,
+      "2024-10": -8.960800320176542,
+      "2025-07": -4.8879749332363716,
+      "2025-09": -12.212049546211137,
+      "2026-03": -25.591208720530712
+    },
+    "top_three_share_of_avoided_pnl": 0.49437556948641176,
+    "trade_level_one_sided_sign_p_value": 0.001708984375,
+    "zero_pnl_vetoes": 0
+  },
   "schema_version": "v60_dynamic_followthrough_union_v6_result",
   "veto_audit": [
     {

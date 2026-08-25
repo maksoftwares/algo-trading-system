@@ -5,6 +5,7 @@ from datetime import UTC, datetime
 import hashlib
 import importlib.util
 import json
+import math
 from pathlib import Path
 import sys
 import tempfile
@@ -86,6 +87,85 @@ def closed_metrics(values: pd.Series) -> dict:
         "profit_factor": gross_profit / gross_loss if gross_loss else None,
         "win_rate": float(len(wins) / len(pnl)) if len(pnl) else None,
         "closed_drawdown_usd": float(drawdown.max()),
+    }
+
+
+def upper_binomial_tail(successes: int, trials: int) -> float | None:
+    if trials <= 0:
+        return None
+    if not 0 <= successes <= trials:
+        raise ValueError("Successes must be between zero and trials")
+    return sum(math.comb(trials, value) for value in range(successes, trials + 1)) / (
+        2**trials
+    )
+
+
+def veto_fragility_metrics(vetoes: pd.DataFrame) -> dict:
+    executed = vetoes.loc[
+        vetoes["baseline_runtime_executed"].astype(str).str.lower().eq("true")
+    ].copy()
+    if executed["trade_id"].astype(str).duplicated().any():
+        raise ValueError("Executed veto trade IDs must be unique")
+    executed["baseline_runtime_pnl_usd"] = pd.to_numeric(
+        executed["baseline_runtime_pnl_usd"], errors="raise"
+    ).astype(float)
+    if not executed["baseline_runtime_pnl_usd"].map(math.isfinite).all():
+        raise ValueError("Executed veto P/L must be finite")
+    executed["entry_time_utc"] = pd.to_datetime(
+        executed["entry_time_utc"], utc=True, format="mixed", errors="raise"
+    )
+    executed["entry_month"] = executed["entry_time_utc"].dt.strftime("%Y-%m")
+
+    values = executed["baseline_runtime_pnl_usd"]
+    nonzero = values.loc[values.ne(0.0)]
+    beneficial = int(nonzero.lt(0.0).sum())
+    harmful = int(nonzero.gt(0.0).sum())
+    avoided = -values
+    avoided_total = float(avoided.sum())
+    ordered_benefits = avoided.sort_values(ascending=False)
+    largest_benefit = float(ordered_benefits.iloc[0]) if len(ordered_benefits) else 0.0
+    top_three_benefit = float(ordered_benefits.iloc[:3].sum())
+
+    monthly = executed.groupby("entry_month", sort=True)[
+        "baseline_runtime_pnl_usd"
+    ].sum()
+    monthly_nonzero = monthly.loc[monthly.ne(0.0)]
+    beneficial_months = int(monthly_nonzero.lt(0.0).sum())
+    harmful_months = int(monthly_nonzero.gt(0.0).sum())
+    return {
+        "evidence_status": "RETROSPECTIVE_DESCRIPTIVE_NOT_AN_ACCEPTANCE_GATE",
+        "executed_vetoes": int(len(executed)),
+        "beneficial_vetoes": beneficial,
+        "harmful_vetoes": harmful,
+        "zero_pnl_vetoes": int(values.eq(0.0).sum()),
+        "avoided_pnl_usd": avoided_total,
+        "largest_single_avoided_loss_usd": largest_benefit,
+        "largest_single_share_of_avoided_pnl": (
+            largest_benefit / avoided_total if avoided_total > 0.0 else None
+        ),
+        "top_three_share_of_avoided_pnl": (
+            top_three_benefit / avoided_total if avoided_total > 0.0 else None
+        ),
+        "avoided_pnl_after_removing_largest_benefit_usd": (
+            avoided_total - largest_benefit
+        ),
+        "trade_level_one_sided_sign_p_value": upper_binomial_tail(
+            beneficial, beneficial + harmful
+        ),
+        "active_months": int(len(monthly)),
+        "beneficial_months": beneficial_months,
+        "harmful_months": harmful_months,
+        "month_level_one_sided_sign_p_value": upper_binomial_tail(
+            beneficial_months, beneficial_months + harmful_months
+        ),
+        "monthly_veto_baseline_pnl_usd": {
+            str(month): float(value) for month, value in monthly.items()
+        },
+        "limitations": [
+            "The policy and these outcomes were exposed before this audit.",
+            "Sign-test values are descriptive and do not correct for strategy selection.",
+            "Only clean prospective outcomes can confirm the veto mechanism.",
+        ],
     }
 
 
@@ -197,6 +277,7 @@ def main() -> int:
         pd.read_csv(resolve(inputs["crossfeed_priced_runtime"]["path"]), low_memory=False),
         executed_ids,
     )
+    fragility = veto_fragility_metrics(vetoes)
     retention = historical["challenger"]["trades_closed"] / historical["baseline"]["trades_closed"]
     august_gates = {
         "positive_net_pnl": august["challenger"]["net_pnl_usd"] > float(config["acceptance"]["minimum_august_net_pnl_usd_exclusive"]),
@@ -236,6 +317,7 @@ def main() -> int:
             "august_2026_through_25": august,
             "august_gates": august_gates,
             "dukascopy_crossfeed": crossfeed,
+            "retrospective_veto_fragility": fragility,
             "cost_stress": cost_stress,
             "combined_gates": gates,
             "limitations": [
@@ -261,6 +343,8 @@ def main() -> int:
                 f"Historical: {historical['challenger']['trades_closed']} trades, ${historical['challenger']['net_pnl_usd']:.2f} net, PF {historical['challenger']['profit_factor']:.3f}, closed DD ${historical['challenger']['maximum_lifetime_closed_drawdown_usd']:.2f}, equity DD ${historical['challenger']['maximum_lifetime_equity_drawdown_usd']:.2f}.",
                 f"August through 25: ${august['challenger']['net_pnl_usd']:.2f} net, PF {august['challenger']['profit_factor']:.3f}, closed DD ${august['challenger']['closed_drawdown_usd']:.2f}.",
                 f"Trade retention: {retention:.4%}.",
+                f"Veto fragility: {fragility['beneficial_vetoes']}/{fragility['executed_vetoes']} vetoes avoided losses; removing the largest benefit leaves ${fragility['avoided_pnl_after_removing_largest_benefit_usd']:.2f} avoided P/L.",
+                f"Active-month sign diagnostic: {fragility['beneficial_months']}/{fragility['active_months']} months beneficial, one-sided p={fragility['month_level_one_sided_sign_p_value']:.6f} (descriptive only).",
                 "",
                 "Dynamic source health is recomputed independently in every cost scenario.",
                 "This exposed retrospective result cannot authorize deployment.",
